@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2015 at 08:21 AM
+-- Generation Time: Sep 30, 2015 at 08:35 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_iftosi`
 --
-create database db_iftosi;
+create database db_iftosi_test;
 use db_iftosi;
 -- --------------------------------------------------------
 
@@ -335,8 +335,8 @@ CREATE TABLE IF NOT EXISTS `tb_master_prd` (
   `category_id` int(11) DEFAULT NULL,
   `product_warranty` varchar(10) CHARACTER SET utf8 DEFAULT NULL,
   `updatedby` varchar(50) DEFAULT NULL,
-  `updatedon` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `cdt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedon` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `cdt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
