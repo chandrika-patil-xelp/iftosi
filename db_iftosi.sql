@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_iftosi`
 --
-create database db_iftosi_test;
+create database db_iftosi;
 use db_iftosi;
 -- --------------------------------------------------------
 
