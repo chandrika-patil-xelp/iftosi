@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>IFtoSI-Home</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="stylesheet" href="assets/css/main.css">
+        <link rel="stylesheet" href="assets/css/slider/ion.rangeSlider.css">
+        <link rel="stylesheet" href="assets/css/slider/ion.rangeSlider.skinHTML5.css">
+        <link rel="stylesheet" href="assets/css/slider/normalize.css">
+        <link rel="stylesheet" href="assets/css/materialize.css">
+
+        <script type="text/javascript">
+            var min_carats = "<?=$min_carats;?>";
+            var max_carats = "<?=$max_carats;?>";
+            var min_price = "<?=$min_price;?>";
+            var max_price = "<?=$max_price;?>";
+        </script>
+        <script  src="assets/js/jquery1.9.1.min.js"></script>
+        <script  src="assets/js/ion.rangeSlider.js"></script>
+        <script  src="assets/js/jquery-ui.js"></script>
+        <script  src="assets/js/autoSuggests.js"></script>
+        <script  src="assets/js/materialize.js"></script>
+        <script  src="assets/js/results.js"></script>
+    </head>
+    <body>
+        <div class="baseContainer fLeft transition500">
+            <div id='logoCont'  class='fLeft logo_PrdCont transition300'>
+                <div id="logo" class="logo fLeft fmsansb font65 c666 txtCenter transition300"></div>
+                <div id='productCont'  class="productCont fLeft  fmsansl font20 cFF  transition300">
+                    <ul id="scene" class="prllx transition300 txtCenter">
+                        <li class="layer"  data-depth="0.5">
+                            <div id='prdC1' class="prdComm transition100  waves-effect waves-gray bgDiamond" onclick='expandSelection(this.id)'>
+                                <div class="backBtn blockIn pointer waves-effect waves-gray dn backTransit fLeft" onclick="mback(this, 'prdC1')"></div>
+                                <div class="fLeft cityName  clBlue fmsansr hideShow bgDiamond"><span>Diamonds</span><span class="forName"></span></div>
+                            </div>
+                        </li>
+                        <li class="layer"  data-depth="0.4">
+                            <div id='prdC2' class="prdComm transition100  waves-effect waves-gray bgJewellery bgDiamond1" onclick='expandSelection(this.id)'>
+                                <div class="backBtn blockIn pointer waves-effect waves-gray dn backTransit fLeft" onclick="mback(this, 'prdC2')"></div>
+                                <div class="fLeft cityName  clBlue fmsansr hideShow bgJewellery"><span>Jewellery</span><span class="forName"></span></div>
+                            </div>
+                        </li>
+                        <li class="layer"  data-depth="0.6">
+                            <div id='prdC3' class="prdComm transition100  waves-effect waves-gray bgBullion" onclick='expandSelection(this.id)'>
+                                <div class="backBtn blockIn pointer waves-effect waves-gray dn backTransit fLeft" onclick="mback(this, 'prdC3')"></div>
+                                <div class="fLeft cityName  clBlue fmsansr hideShow bgBullion"><span>Bullion</span><span class="forName"></span></div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div id='prdC4' class="cityCont font40 dn txtCenter cityTransit1 op0 transition300">
+                        <div id='selectedType1' class="blockIn c666 font40 selectedType showHide">
+                            <div class="backBtn blockIn pointer waves-effect waves-gray" onclick="back()"></div>
+                            <div id='selectedType' class="blockIn">Diamonds</div>
+                        </div>    
+                        <div class="blockIn c666 m010 showHide">in</div>
+                        <div id='cityCont' class="blockIn c666 bgBorder showHide">
+                            <input id='citySelect' type="text" class="txtInput fmsansr font40 bgLocation txtCap" autofocus="on" placeholder="Select a city">
+                        </div>
+                        <div id='mcityCont' class="c666  hideShow fmsansr font20 mcityContainer">
+                            <a id='dDrop2' class='dropdown-button dropDown font20 waves-effect waves-dblue cFF' href='#' data-activates='dropdown2' onclick="stopScrollEffect()">Select A City</a>
+                            <ul id='dropdown2' class='dropdown-content c666'>
+                                <li onclick="selectThis(this, 'dDrop2')"><a class="waves-effect waves-gray">Ahmedabad</a></li>
+                                <li onclick="selectThis(this, 'dDrop2')"><a class="waves-effect waves-gray">Bengaluru</a></li>
+                                <li onclick="selectThis(this, 'dDrop2')"><a class="waves-effect waves-gray">Chandigarh</a></li>
+                                <li onclick="selectThis(this, 'dDrop2')"><a class="waves-effect waves-gray">Chennai</a></li>
+                                <li onclick="selectThis(this, 'dDrop2')"><a class="waves-effect waves-gray">Cochin</a></li>
+                                <li onclick="selectThis(this, 'dDrop2')"><a class="waves-effect waves-gray">Delhi</a></li>
+                                <li onclick="selectThis(this, 'dDrop2')"><a class="waves-effect waves-gray">GandhiNagar</a></li>
+                                <li onclick="selectThis(this, 'dDrop2')"><a class="waves-effect waves-gray">Hyderabad</a></li>
+                                <li onclick="selectThis(this, 'dDrop2')"><a class="waves-effect waves-gray">Kolkata</a></li>
+                                <li onclick="selectThis(this, 'dDrop2')"><a class="waves-effect waves-gray">Mumbai</a></li>
+                                <li onclick="selectThis(this, 'dDrop2')"><a class="waves-effect waves-gray">Pune</a></li>
+                                <li onclick="selectThis(this, 'dDrop2')"><a class="waves-effect waves-gray">Goa</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id='content' class="contents fLeft transition300 dn" style='background:#f0f0f0'>
+                <div id='filtersDiv' class='fLeft filterCont transition300'>
+                    <div id='fcCont' class="fLeft filChildCont transition300 h0" >
+                        <div class="fLeft fTitle fmsansr c666 font20">
+                            <div class="fLeft">Filter Results</div>
+                            <div  class="waves-effect waves-light btn   font14 fRight filterReset fmsansr c666" onclick="refresh()">
+                                <i class="mdi-action-cached right font20"></i>Clear All
+                            </div>    
+                        </div>
+                        <div class='shapeFilter fLeft fmsansr font12 c666'>
+                            <div class="fLeft fmsansr font20 rangeTitle">Shape <i class="mdi-action-cached right font20 c666 pointer waves-effect waves-gray"></i></div>
+                            <div class='fLeft shapeCont'><input type="checkbox" class='filled-in shpfltr' value="round" id="s1"/><label class='Shape transition300 Round'      for="s1"></label></div>
+                            <div class='fLeft shapeCont'><input type="checkbox" class='filled-in shpfltr' value="pear" id="s2"/><label class='Shape transition300 Pear'       for="s2"></label></div>
+                            <div class='fLeft shapeCont'><input type="checkbox" class='filled-in shpfltr' value="heart" id="s3"/><label class='Shape transition300 Heart'      for="s3"></label></div>
+                            <div class='fLeft shapeCont'><input type="checkbox" class='filled-in shpfltr' value="princess" id="s4"/><label class='Shape transition300 Princess'   for="s4"></label></div>
+                            <div class='fLeft shapeCont'><input type="checkbox" class='filled-in shpfltr' value="asscher" id="s5"/><label class='Shape transition300 Asscher'    for="s5"></label></div>
+                            <div class='fLeft shapeCont'><input type="checkbox" class='filled-in shpfltr' value="marquise" id="s6"/><label class='Shape transition300 Marquise'   for="s6"></label></div>
+                            <div class='fLeft shapeCont'><input type="checkbox" class='filled-in shpfltr' value="oval" id="s7"/><label class='Shape transition300 Oval'       for="s7"></label></div>
+                            <div class='fLeft shapeCont'><input type="checkbox" class='filled-in shpfltr' value="emerald" id="s8"/><label class='Shape transition300 Emerald'    for="s8"></label></div>
+                            <div class='fLeft shapeCont'><input type="checkbox" class='filled-in shpfltr' value="radiant" id="s9"/><label class='Shape transition300 Radiant'    for="s9"></label></div>
+                            <div class='fLeft shapeCont'><input type="checkbox" class='filled-in shpfltr' value="cushion" id="s10"/><label class='Shape transition300 Cushion'    for="s10"></label></div>
+                        </div>                    
+                        <div class='fLeft rangeCont'>
+                            <div class="fLeft fmsansr font20 rangeTitle">Price <i class="mdi-action-cached right font20 c666 pointer waves-effect waves-gray"></i></div>
+                            <div class='fLeft rangeDiv'><input id="priceRange" class="irs-hidden-input fLeft" style="visibility: hidden" readonly=""></div>
+                        </div>
+                        <div class='fLeft rangeCont'>
+                            <div class="fLeft fmsansr font20 rangeTitle">Carats <i class="mdi-action-cached right font20 c666 pointer waves-effect waves-gray"></i></div>
+                            <div id='caratsDiv' class='fLeft rangeDiv'><input id="carats" class="irs-hidden-input" style="visibility: hidden" readonly=""></div>
+                        </div>
+                        <div class='fLeft rangeCont2'>
+                            <div class="fLeft fmsansr font20 rangeTitle">Colour<i class="mdi-action-cached right font20 c666 pointer waves-effect waves-gray"></i></div>
+                            <div class='fLeft rangeDiv col4'>
+                                <input type="checkbox" class='filled-in' id="clD"/><label for="clD">D</label>
+                                <input type="checkbox" class='filled-in' id="clE"/><label for="clE">E</label>
+                                <input type="checkbox" class='filled-in' id="clF"/><label for="clF">F</label>
+                                <input type="checkbox" class='filled-in' id="clG"/><label for="clG">G</label>
+                                <input type="checkbox" class='filled-in' id="clH"/><label for="clH">H</label>
+                                <input type="checkbox" class='filled-in' id="clI"/><label for="clI">I</label>
+                                <input type="checkbox" class='filled-in' id="clJ"/><label for="clJ">J</label>
+                                <input type="checkbox" class='filled-in' id="clK"/><label for="clK">K</label>
+                                <input type="checkbox" class='filled-in' id="clL"/><label for="clL">L</label>
+                            </div>
+                        </div>
+                        <div class='fLeft rangeCont2 col4'>
+                            <div class="fLeft fmsansr font20 rangeTitle">Clarity <i class="mdi-action-cached right font20 c666 pointer waves-effect waves-gray"></i></div>
+                            <div class='fLeft rangeDiv'>
+                                <input type="checkbox" class='filled-in' id="cLIF"/><label for="cLIF">IF</label>
+                                <input type="checkbox" class='filled-in' id="cLVVS1"/><label for="cLVVS1">VVS1</label>
+                                <input type="checkbox" class='filled-in' id="cLVVS2"/><label for="cLVVS2">VVS2</label>
+                                <input type="checkbox" class='filled-in' id="cLVS1"/><label for="cLVS1">VS1</label>
+                                <input type="checkbox" class='filled-in' id="cLVS2"/><label for="cLVS2">VS2</label>
+                                <input type="checkbox" class='filled-in' id="cLSI1"/><label for="cLSI1">SI1</label>
+                                <input type="checkbox" class='filled-in' id="cLSI2"/><label for="cLSI2">SI2</label>
+                                <input type="checkbox" class='filled-in' id="cLSI3"/><label for="cLSI3">SI3</label>
+                                <input type="checkbox" class='filled-in' id="cLI1"/><label for="cLI1">I1</label>
+                            </div>
+                        </div>
+                        <div class='fLeft rangeCont2 col2'>
+                            <div class="fLeft fmsansr font20 rangeTitle">Cut <i class="mdi-action-cached right font20 c666 pointer waves-effect waves-gray"></i></div>
+                            <div class='fLeft rangeDiv'>
+                                <input type="checkbox" class='filled-in' id="cTEx"/><label for="cTEx">Excellent</label>
+                                <input type="checkbox" class='filled-in' id="cTVg"/><label for="cTVg">Very Good</label>
+                                <input type="checkbox" class='filled-in' id="cTGd"/><label for="cTGd">Good</label>
+                                <input type="checkbox" class='filled-in' id="cTGFr"/><label for="cTGFr">Fair</label>
+                            </div>
+                        </div>
+                        <div class='fLeft rangeCont col2'>
+                            <div class="fLeft fmsansr font20 rangeTitle">Polish <i class="mdi-action-cached right font20 c666 pointer waves-effect waves-gray"></i></div>
+                            <div class='fLeft rangeDiv'>
+                                <input type="checkbox" class='filled-in' id="pLEx"/><label for="pLEx">Excellent</label>
+                                <input type="checkbox" class='filled-in' id="pLVg"/><label for="pLVg">Very Good</label>
+                                <input type="checkbox" class='filled-in' id="pLGd"/><label for="pLGd">Good</label>
+                                <input type="checkbox" class='filled-in' id="pLGFr"/><label for="pLGFr">Fair</label>
+                            </div>
+                        </div>
+                        <div class='fLeft rangeCont pB15 col2'>
+                            <div class="fLeft fmsansr font20 rangeTitle">Symmetry <i class="mdi-action-cached right font20 c666 pointer waves-effect waves-gray"></i></div>
+                            <div class='fLeft rangeDiv'>
+                                <input type="checkbox" class='filled-in' id="syEx"/><label for="syEx">Excellent</label>
+                                <input type="checkbox" class='filled-in' id="syVg"/><label for="syVg">Very Good</label>
+                                <input type="checkbox" class='filled-in' id="syGd"/><label for="syGd">Good</label>
+                                <input type="checkbox" class='filled-in' id="syGFr"/><label for="syGFr">Fair</label>
+                            </div>
+                        </div>
+                        <div class="fLeft w100"><div id="fhideShowBtn" class="waves-effect waves-light btn  bgBlue filterRefreshBtn font20 fLeft" onclick='refresh()'><i class="mdi-file-cloud right"></i>Refresh Results</div></div>
+                    </div>
+                </div>    
+                <div id='results' class='results fLeft dn filterTransit transition300'>
+                    <div class="fLeft fTitle fmsansb font25">
+                        <div class="fLeft fmsansr c666 resCnt">2888 results found</div>
+                        <div class="fRight sortingTabs fmsansr">
+                            <div class="fLeft fmsansb font14 c666 sortText">Sort By: </div>
+                            <div id="mFilterBtn" class="fRight mFilterIcon" onclick='showFilters()'></div>
+                            <a id='dDrop1' class='dropdown-button dropDown font12 fLeft waves-effect waves-dblue cFF' href='#' data-activates='dropdown1'>Popularity</a>
+                            <ul id='dropdown1' class='dropdown-content'>
+                                <li onclick="selectThis(this, 'dDrop1')"><a class="waves-effect waves-gray font12" onclick="sortBy('1')">Popularity</a></li>
+                                <li onclick="selectThis(this, 'dDrop1')"><a class="waves-effect waves-gray font12" onclick="sortBy('2')">Price High To Low</a></li>
+                                <li onclick="selectThis(this, 'dDrop1')"><a class="waves-effect waves-gray font12" onclick="sortBy('3')">Price Low To High</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="mainheader" class="resHeader fLeft font14 fmsansb cFF txtCenter showHide">
+                        <div class="dtTitle fLeft">Shape</div>
+                        <div class="dtTitle fLeft">Carats</div>
+                        <div class="dtTitle fLeft">Colour</div>
+                        <div class="dtTitle fLeft">Clarity</div>
+                        <div class="dtTitle fLeft">Cut</div>
+                        <div class="dtTitle fLeft">Certificate</div>
+                        <div class="dtTitle fLeft"></div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class='fLeft whyCont'>
+                <div class="fLeft whyContLeft ">
+                    <div class="wContents">
+                        <div class="fmsansl font55 cFF transition300 txtRight lH60">Why</div>
+                        <div  class="fmsansb font65 c666  transition300  txtRight logoWhy"></div>
+                    </div>
+                </div>
+                <div class="fLeft whyContRight cFF fmsansr font20">
+                    <div class="wContents">
+                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at
+                        its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed
+                        to using 'Content here, content here',making it look like readable English. Many desktop publishing packages and web
+                        page editors now use Lorem Ipsum as their default model text.
+                    </div>
+                </div>
+            </div>
+            <div class="wTabsContainer fLeft fmsansr cFF">
+                <div class="wTabs fLeft">
+                    <div class="wTab1 fLeft"></div>
+                    <div class="wTab2 fLeft"><div class="fLeft font35">Lowest</div><div class="fLeft font30"> price guaranteed</div></div>
+                </div>
+                <div class="wTabs fLeft">
+                    <div class="wTab1 fLeft"></div>
+                    <div class="wTab2 fLeft"><div class="fLeft font35">Services</div><div class="fLeft font30">of a Gemologist</div></div>
+                </div>
+                <div class="wTabs fLeft">
+                    <div class="wTab1 fLeft"></div>
+                    <div class="wTab2 fLeft"><div class="fLeft font35">International</div><div class="fLeft font30">Certification</div></div>
+                </div>
+                <div class="wTabs fLeft">
+                    <div class="wTab1 fLeft"></div>
+                    <div class="wTab2 fLeft"><div class="fLeft font35">Range</div><div class="fLeft font30"> of Solitaires</div></div>
+                </div>
+            </div>
+            <div id='footer' class="footer fLeft fmsansr fLeft font12 c666">
+                <div class="relatedLinkCont">
+                    <div class='cityLinks'>About Us</div>
+                    <div class='cityLinks'>Media</div>
+                    <div class='cityLinks'>Testimonials</div>
+                    <div class='cityLinks'>Feedback</div>
+                    <div>
+                        <figure class="figureImg transition300"><img src="assets/images/socialFacebook.svg" width="35" height="35" alt=""></figure>
+                        <figure class="figureImg transition300"><img src="assets/images/socialTwitter.svg" width="35" height="35" alt=""></figure>
+                        <figure class="figureImg transition300"><img src="assets/images/socialLinkedin.svg" width="35" height="35" alt=""></figure>
+                        <figure class="figureImg transition300"><img src="assets/images/socialMail.svg" width="35" height="35" alt=""></figure>
+                    </div>
+                </div>
+                <div class="cityLinkCont fLeft">
+                    <center>
+                        <div class='cityLinks'>Ahmedabad</div>
+                        <div class='cityLinks'>|</div>
+                        <div class='cityLinks'>Bengaluru</div>
+                        <div class='cityLinks'>|</div>
+                        <div class='cityLinks'>Chandigarh</div>
+                        <div class='cityLinks'>|</div>
+                        <div class='cityLinks'>Chennai</div>
+                        <div class='cityLinks'>|</div>
+                        <div class='cityLinks'>Coimbatore</div>
+                        <div class='cityLinks'>|</div>
+                        <div class='cityLinks'>Delhi / NCR</div>
+                        <div class='cityLinks'>|</div>
+                        <div class='cityLinks'>Ernakulam</div>
+                        <div class='cityLinks'>|</div>
+                        <div class='cityLinks'>Goa</div>
+                        <div class='cityLinks'>|</div>
+                        <div class='cityLinks'>Hyderabad</div>
+                        <div class='cityLinks'>|</div>
+                        <div class='cityLinks'>Indore</div>
+                        <div class='cityLinks'>|</div>
+                        <div class='cityLinks'>Jaipur</div>
+                        <div class='cityLinks'>|</div>
+                        <div class='cityLinks'>Kolkata</div>
+                        <div class='cityLinks'>|</div>
+                        <div class='cityLinks'>Mumbai</div>
+                        <div class='cityLinks'>|</div>
+                        <div class='cityLinks'>Mysore</div>
+                        <div class='cityLinks'>|</div>
+                        <div class='cityLinks'>Nagpur</div>
+                        <div class='cityLinks'>|</div>
+                        <div class='cityLinks'>Nashik</div>
+                        <div class='cityLinks'>|</div>
+                        <div class='cityLinks'>Pune</div>
+                        <div class='cityLinks'>|</div>
+                        <div class='cityLinks'>Surat</div>
+                        <div class='cityLinks'>|</div>
+                        <div class='cityLinks'>Vadodara</div>
+                        <div class='cityLinks'>|</div>
+                        <div class='cityLinks'>Vizag</div>
+                    </center>
+                </div>    
+            </div>
+        </div>
+        <div id='logoLoader' class="progress dn"><div class="indeterminate"></div></div>
+        <div class="logoTop  fmsansb  navbar-fixed txtCenter transition800 logoTransit1 cFF">
+            <nav>
+                <div class="nav-wrapper">
+                    <a  class="brand-logo"></a>
+                    <a  data-activates="mobile-demo" class="button-collapse waves-effect waves-gray"><i class="mdi-navigation-menu"></i></a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a  class="waves-effect waves-dblue">Diamonds</a></li>
+                        <li><a  class="waves-effect waves-dblue">Jewellery</a></li>
+                        <li><a  class="waves-effect waves-dblue">Bullion</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <ul class="side-nav dn" id="mobile-demo">
+            <li><a class="waves-effect waves-dblue">Diamonds</a></li>
+            <li><a class="waves-effect waves-dblue">Jewellery</a></li>
+            <li><a class="waves-effect waves-dblue">Bullion</a></li>
+        </ul>
+        <div id="dataLoader" class="uniLoader dn"></div>
+
+        <script  src="assets/js/parallax.js"></script>
+        <script  src="assets/js/home.js"></script>
+    </body>
+</html>

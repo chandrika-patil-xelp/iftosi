@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>IFtoSI</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="stylesheet"  href="tools/css/home.css">
+        <link rel="stylesheet"  href="tools/css/ripple.css">
+        <script  src="tools/js/jquery1.9.1.min.js"></script>
+    </head>
+    <body>
+        <div id='baseCont' class="container fmOpenR bgWhite resultsPage">
+            <div class="wrapper">
+                <div id='header' class="header transition300">
+                    <div class="wrapperMax poR">
+                        <div class="headCatCont fLeft transition300">
+                            <div id='hbgDiam' class="headCat fLeft bgDiamond transition300 headSelected"><span>Diamonds</span></div>
+                            <div id='hbgJewel' class="headCat fLeft bgJewellery transition300"><span>Jewellery</span></div>
+                            <div id='hbgBull' class="headCat fLeft bgBullion transition300"><span>Bullions</span></div>
+                        </div>
+                        
+                        <div class="headRight fRight">
+                            <div class="compNo fRight fmOpenB">+91 9980051525</div>
+                            <div class="signInUpTab fRight fmOpenR">Sign In / Sign Up</div>
+                            <div class="headDivider fRight"></div>
+                            <div class="wishlist fRight fmOpenR">Wishlist</div>
+                            <div class="wishCount fRight fmOpenR ripplelink">25</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="totalResultsDiv">
+                    <div class="wrapperMax fmOpenL">
+                       <span id='resultCount'> 2,835</span> Diamonds found
+                    </div>
+                </div>
+                <div class='shapesCont'>
+                    <div class="wrapperMax">
+                        <div class="allShapes">
+                            <center>
+                                <div class="shapeComm transition300 ripplelink Round">
+                                </div><div class="shapeComm transition300 ripplelink Pear">
+                                </div><div class="shapeComm transition300 ripplelink Heart">
+                                </div><div class="shapeComm transition300 ripplelink Princess">
+                                </div><div class="shapeComm transition300 ripplelink Asscher">
+                                </div><div class="shapeComm transition300 ripplelink Marquise">
+                                </div><div class="shapeComm transition300 ripplelink Oval">
+                                </div><div class="shapeComm transition300 ripplelink Emerald">
+                                </div><div class="shapeComm transition300 ripplelink Radiant">
+                                </div><div class="shapeComm transition300 ripplelink Cushion"></div>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+                <div class="allResults">
+                    <div class="wrapperMax">
+                        <div class="filterTitleDiv">
+                            <div class='fTitle fLeft fmOpenR'>Filter Results</div>
+                            <div class="fRight sortBox">
+                                <div class="dropdownBox fLeft">
+                                    <div id="drpinp" class="dropInput fmOpenR">Sort by</div>
+                                    <ul id="dropList" class="fmOpenR">
+                                        <li class="transition100">Best Match</li>
+                                        <li class="transition100">Lowest Price</li>
+                                        <li class="transition100">Highest Price</li>
+                                        <li class="transition100">Rating</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='results_Filter'>
+                            <div class='filterList fLeft'>
+                                <div class="filterCont fLeft">
+                                    <div class="fLeft optionTitle fmOpenR">Cut</div>
+                                    <div id='cut' class="filterOptions fLeft fmOpenR">
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="excellent"/>
+                                            <label for="excellent">Excellent</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="vgood"/>
+                                            <label for="vgood">Very Good</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="good"/>
+                                            <label for="good">Good</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="fair"/>
+                                            <label for="fair">Fair</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="filterCont fLeft forClarity">
+                                    <div class="fLeft optionTitle fmOpenR">Clarity</div>
+                                    <div id='cut' class="filterOptions fLeft fmOpenR">
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="if"/>
+                                            <label for="if">IF</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="vs2"/>
+                                            <label for="vs2">VS2</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="vvs1"/>
+                                            <label for="vvs1">VVS1</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="s11"/>
+                                            <label for="s11">S11</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="vvs2"/>
+                                            <label for="vvs2">VVS2</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="s12"/>
+                                            <label for="s12">S12</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="vs1"/>
+                                            <label for="vs1">VS1</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="s13"/>
+                                            <label for="s13">S13</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="filterCont fLeft">
+                                    <div class="fLeft optionTitle fmOpenR">Polish</div>
+                                    <div id='cut' class="filterOptions fLeft fmOpenR">
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="plexcellent"/>
+                                            <label for="plexcellent">Excellent</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="plvgood"/>
+                                            <label for="plvgood">Very Good</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="plgood"/>
+                                            <label for="plgood">Good</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="plfair"/>
+                                            <label for="plfair">Fair</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="filterCont fLeft">
+                                    <div class="fLeft optionTitle fmOpenR">Symmetry</div>
+                                    <div id='cut' class="filterOptions fLeft fmOpenR">
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="syexcellent"/>
+                                            <label for="syexcellent">Excellent</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="syvgood"/>
+                                            <label for="syvgood">Very Good</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="sygood"/>
+                                            <label for="sygood">Good</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="syfair"/>
+                                            <label for="syfair">Fair</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='prdResults fRight'>
+                            <?php while($i<15){?>
+                                <div class='prdComm fLeft transition100'>
+                                    <div class='prdCommDiv fLeft transition100'>
+                                        <div class='prdShape fLeft'>
+                                            <div class='prdShTitle fLeft fmOpenB'>SHAPE</div>
+                                            <div class='prdShType fLeft fmOpenR'>Round</div>
+                                            <div class="Round fRight"></div>
+                                        </div>
+                                        <div class="prdDetails fLeft">
+                                            <div class="detComm">
+                                                <div class="detLabel fmOpenB fLeft">COLOR</div>
+                                                <div class="detValue fmOpenR fLeft">F</div>
+                                            </div>
+                                            <div class="detComm">
+                                                <div class="detLabel fmOpenB fLeft">CARATS</div>
+                                                <div class="detValue fmOpenR fLeft">0.99</div>
+                                            </div>
+                                            <div class="detComm">
+                                                <div class="detLabel fmOpenB fLeft">CLARITY</div>
+                                                <div class="detValue fmOpenR fLeft">Excellent</div>
+                                            </div>
+                                            <div class="detComm">
+                                                <div class="detLabel fmOpenB fLeft">CERTIFICATE</div>
+                                                <div class="detValue fmOpenR fLeft">1199046357</div>
+                                            </div>
+                                        </div>
+                                        <div class='prdPrice fLeft'>
+                                            <div class="detComm">
+                                                <div class="detLabel fmOpenB fLeft">BEST PRICE</div>
+                                                <div class="detValue fmOpenR fLeft"><span>&#8377;</span>8,28,5888</div>
+                                            </div>
+                                        </div>
+                                        <div class='prdActions fLeft'>
+                                            <div class='actionComm fLeft transition100 poR ripplelink'></div>
+                                            <div class='actionComm fLeft transition100 poR ripplelink'></div>
+                                            <div class='actionComm fLeft transition100 poR ripplelink'></div>
+                                            <div class='actionComm fLeft transition100 poR ripplelink'></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php $i++;}?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottmInfo fmOpenR">
+                    <div class="wrapperMax">
+                        <div class="infoComm fLeft">
+                            <div class="infoTxt fLeft">
+                                <div class="infoUpper">Range of</div>
+                                <div class="infoLower">Solitaires</div>
+                            </div>
+                        </div>
+                        <div class="infoComm fLeft">
+                            <div class="infoTxt fLeft">
+                                <div class="infoUpper">Lowest Price</div>
+                                <div class="infoLower">Guaranteed</div>
+                            </div>
+                        </div>
+                        <div class="infoComm fLeft">
+                            <div class="infoTxt fLeft">
+                                <div class="infoUpper">Services of a</div>
+                                <div class="infoLower">Gemologist</div>
+                            </div>
+                        </div>
+                        <div class="infoComm fLeft">
+                            <div class="infoTxt fLeft">
+                                <div class="infoUpper">International</div>
+                                <div class="infoLower">Certification</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php include 'logo.html';?>
+        </div>
+        <script  src="tools/js/velocity.js"></script>
+        <script  src="tools/js/ripple.js"></script>
+        <script  src="tools/js/jquery-numerator.js"></script>
+        <script>
+            
+            var isOpen = false;
+            var lastSc=0;
+            var isStop = false;
+            $(document).ready(function() {
+                $('#drpinp').click(function() {
+                    setTimeout(function(){
+                        isOpen = true;
+                    },150);
+                    toggleDropDown(true);
+                });
+
+                $('#dropList li').click(function() {
+                    var val = $(this).val();
+                    var text = $(this).text();
+                    $('#drpinp').text(text);
+                    isOpen = false;
+                    toggleDropDown(false);
+                });
+
+                $(document).click(function() {
+                    if (isOpen) {
+                        toggleDropDown(false);
+                    }
+                });
+                var count= 255;
+                $('.shapeComm').bind('click',function(){
+                    $(this).toggleClass('shapeSelected');
+                    count+=135;
+                    
+                    $('#resultCount').numerator({
+                        toValue: count, 
+                        delimiter: ',', 
+                        onStart: function() {
+                                isStop = true;
+                        }
+                    });
+                    
+                });
+               
+               
+               $('#resultCount').numerator({
+                        toValue: 2835, 
+                        delimiter: ',', 
+                        onStart: function() {
+                                isStop = true;
+                        }
+                    });
+               
+               
+               
+                $('.headCat').bind('click',function(){
+                    $(this).toggleClass('headSelected');
+                });
+                
+                $(window).scroll(function(){
+                    var sc=$(window).scrollTop();
+                    $('#header,#hbgDiam,#hbgJewel,#hbgBull,#logoTxt').velocity("stop");
+                    $('.headCatCont,.logo').velocity("stop");
+                    if(sc>10){
+                        $('#header').velocity({height: "60px",paddingTop:12+"px",paddingBottom:12+"px"},{duration:0, delay:0,easing:'swing'});
+                        $('#hbgDiam,#hbgJewel,#hbgBull').velocity({backgroundPositionY:-60+"px"},{duration:0, delay:0,easing:'swing'});
+                        $('.headCatCont').velocity({top:-50+"px"},{duration:0, delay:0,easing:'swing'});
+                        $('.headCatCont').addClass('headCatActive');
+                        $('#logoTxt').velocity({opacity:0},{duration:0, delay:0});
+                        $('.logo').velocity({top:20+"px",height:60+"px",width:60+"px"},{duration:0, delay:100});
+                    }else if(lastSc>sc){
+                        $('.logo').velocity({top:30+"px",height:100+"px",width:100+"px"},{duration:0, delay:0});
+                        $('#logoTxt').velocity({opacity:1},{duration:300, delay:400});
+                        $('#header').velocity({height: "100px",paddingTop:32+"px",paddingBottom:32+"px"},{duration:0, delay:0,easing:'swing'});
+                        $('#hbgDiam,#hbgJewel,#hbgBull').velocity({backgroundPositionY:8+"px"},{duration:0, delay:0,easing:'swing'});
+                        $('.headCatCont').velocity({top:-30+"px"},{duration:0, delay:0,easing:'swing'});
+                        $('.headCatCont').removeClass('headCatActive');
+                    }
+                    lastSc=sc;
+                });                
+                
+                
+                
+                
+                
+                
+                
+            }); 
+            
+            function toggleDropDown(flag) {
+                if (flag) {
+                    $("#dropList").velocity({opacity: 1, borderRadius: 0}, {duration: 200, display: "block"});
+                }
+                else {
+                    $("#dropList").velocity({opacity: 0, borderRadius: '100%'}, {duration: 50, display: "none"});
+                }
+
+            }
+        </script>
+    </body>
+</html>
