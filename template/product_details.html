@@ -1,17 +1,146 @@
-<?php include 'bhead.html';?>
-    <body>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <script type="text/javascript" src="<?=$jvs['velocity'];?>"></script>
-        <script type="text/javascript" src="<?=$jvs['ripple'];?>"></script>
-    </body>
+<?php include 'bhead.html'; ?>
+<body>
+    <div id='baseCont' class="container fmOpenR detailsPage bgWhite">
+        <div class="wrapper">
+            <div id='header' class="header transition300">
+                <div class="wrapperMax poR">
+                    <div id="mMenuBtn" class="menuBtn fLeft transition300 ripplelink" onclick="showLeftMenu(true)"></div>
+                    <div id="mFilterBtn" class="filterBtn fRight transition300 ripplelink" onclick="swichFilter();"></div>
+                    <div class="headCatCont fLeft transition300">
+                        <div id='hbgDiam' class="headCat fLeft bgDiamond transition300 headSelected"><span>Diamonds</span></div>
+                        <div id='hbgJewel' class="headCat fLeft bgJewellery transition300"><span>Jewellery</span></div>
+                        <div id='hbgBull' class="headCat fLeft bgBullion transition300"><span>Bullions</span></div>
+                    </div>
+                    <div class="headRight fRight">
+                        <div class="compNo fRight fmOpenB">+91 9980051525</div>
+                        <div class="signInUpTab fRight fmOpenR">Sign In / Sign Up</div>
+                        <div class="headDivider fRight"></div>
+                        <div class="wishlist fRight fmOpenR">Wishlist</div>
+                        <div class="wishCount fRight fmOpenR ripplelink">25</div>
+                    </div>
+                </div>
+            </div>
+            <div class="forBg"></div>
+            <div class='prdMainDetails'>
+                <div class="wrapperMax">
+                    <div class="imgsCont">
+                        <div id='prdImage' class="forImg fLeft" style="background: url(tools/img/common/tumb2.png) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+                        <div class="gallery fLeft">
+                            <div class="thumbnil fLeft" style="background:#fff url(tools/img/common/tumb5.jpg)no-repeat;background-size: contain;background-position: center;"></div>
+                            <div class="thumbnil fLeft" style="background:#fff url(tools/img/common/tumb2.png)no-repeat;background-size: contain;background-position: center;"></div>
+                            <div class="thumbnil fLeft" style="background:#fff url(tools/img/common/tumb3.jpg)no-repeat;background-size: contain;background-position: center;"></div>
+                            <div class="thumbnil fLeft" style="background:#fff url(tools/img/common/tumb4.jpg)no-repeat;background-size: contain;background-position: center;"></div>
+                        </div>
+                    </div>
+                    <div class="detCont">
+                        <div class="btnsCont fLeft">
+                            <div class="prdShape fLeft">
+                                <div class="prdShTitle fLeft fmOpenB">PRICE</div>
+                                <div class="prdShType fLeft fmOpenL"><span>&#8377;</span>8,28,5888</div>
+                            </div>
+                            <div class="prdBtns fLeft">
+                                <div class="btnComm fLeft"></div>
+                                <div class="btnComm fLeft"></div>
+                                <div class="btnComm fLeft"></div>
+                            </div>
+                        </div>
+                        <div class="majorInfoBox fLeft">
+                            <div class="infoCommn fLeft fmOpenR ">
+                                <div class="infoLabel fmOpenB font12 fmOpenB">Cut</div>
+                                <div class="infoValue c666 fmOpenR font25">Round</div>
+
+                            </div>
+                            <div class="infoCommn fLeft fmOpenR ">
+                                <div class="infoLabel fmOpenB font12 fmOpenB">Measurement</div>
+                                <div class="infoValue c666 fmOpenR font25">2196113785</div>
+
+                            </div>
+                            <div class="infoCommn fLeft fmOpenR ">
+                                <div class="infoLabel fmOpenB font12 fmOpenB">Carats</div>
+                                <div class="infoValue c666 fmOpenR font25">0.33</div>
+
+                            </div>
+                            <div class="infoCommn fLeft fmOpenR ">
+                                <div class="infoLabel fmOpenB font12 fmOpenB">Certificate</div>
+                                <div class="infoValue c666 fmOpenR font25">GIA</div>
+
+                            </div>
+                            <div class="infoCommn fLeft fmOpenR ">
+                                <div class="infoLabel fmOpenB font12 fmOpenB">Color</div>
+                                <div class="infoValue c666 fmOpenR font25">D</div>
+
+                            </div>
+                            <div class="infoCommn fLeft fmOpenR ">
+                                <div class="infoLabel fmOpenB font12 fmOpenB">Certificate No.</div>
+                                <div class="infoValue c666 fmOpenR font25">2196113785</div>
+
+                            </div>
+                            <div class="infoCommn fLeft fmOpenR ">
+                                <div class="infoLabel fmOpenB font12 fmOpenB">Clarity</div>
+                                <div class="infoValue c666 fmOpenR font25">IF</div>
+
+                            </div>
+                            <div class="infoCommn fLeft fmOpenR ">
+                                <div class="infoLabel fmOpenB font12 fmOpenB">Barcode</div>
+                                <div class="infoValue c666 fmOpenR font25">CW0H8IE9</div>
+                            </div>
+                            <div class="infoCommn fLeft fmOpenR">
+                                <div class="infoLabel fmOpenB  font12">% DISCOUNT</div>
+                                <div class="infoValue c666 font25 fmOpenR">25%</div>
+                            </div>
+                            <div class="infoCommn fLeft fmOpenR">
+                                <div class="infoLabel fmOpenB  font12">SYMMETRY</div>
+                                <div class="infoValue c666 font25 fmOpenR">Very Good</div>
+                            </div>
+                            <div class="infoCommn fLeft fmOpenR">
+                                <div class="infoLabel fmOpenB  font12">PROPORTION</div>
+                                <div class="infoValue c666 font25 fmOpenR">Very Good</div>
+                            </div>
+                            <div class="infoCommn fLeft fmOpenR">
+                                <div class="infoLabel fmOpenB  font12">FLUORESCENCE</div>
+                                <div class="infoValue c666 font25 fmOpenR">Very Good</div>
+                            </div>
+                            <div class="infoCommn fLeft fmOpenR">
+                                <div class="infoLabel fmOpenB  font12">LOT NUMBER</div>
+                                <div class="infoValue c666 font25 fmOpenR">88888888888</div>
+                            </div>
+                            <div class="infoCommn fLeft fmOpenR">
+                                <div class="infoLabel fmOpenB  font12">TABLE</div>
+                                <div class="infoValue c666 font25 fmOpenR">1365445</div>
+                            </div>
+                            <div class="infoCommn fLeft fmOpenR">
+                                <div class="infoLabel fmOpenB  font12">POLISH</div>
+                                <div class="infoValue c666 font25 fmOpenR">1365445</div>
+                            </div>
+                            <div class="infoCommn fLeft fmOpenR">
+                                <div class="infoLabel fmOpenB  font12">CROWN HEIGHT</div>
+                                <div class="infoValue c666 font25 fmOpenR">1365445</div>
+                            </div>
+                            <div class="infoCommn fLeft fmOpenR">
+                                <div class="infoLabel fmOpenB  font12">BASE</div>
+                                <div class="infoValue c666 font25 fmOpenR">1365445</div>
+                            </div>
+                            <div class="infoCommn fLeft fmOpenR">
+                                <div class="infoLabel fmOpenB  font12">CROWN ANGLE</div>
+                                <div class="infoValue c666 font25 fmOpenR">1365445</div>
+                            </div>
+                            <div class="infoCommn fLeft fmOpenR">
+                                <div class="infoLabel fmOpenB  font12">VALUE</div>
+                                <div class="infoValue c666 font25 fmOpenR">1365445</div>
+                            </div>
+                            <div class="infoCommn fLeft fmOpenR">
+                                <div class="infoLabel fmOpenB  font12">GIRDLE</div>
+                                <div class="infoValue c666 font25 fmOpenR">1365445</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php include 'logo.html';?>    
+        </div>
+    </div>
+    <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
+    <script type="text/javascript" src="<?=$jvs['details'];?>"></script>
+</body>
 </html>

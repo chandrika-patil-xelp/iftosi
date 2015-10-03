@@ -57,6 +57,7 @@ $jvs['hammer'] = DOMAIN.'tools/js/lib/hammer.js?v='.VERSION;
 
 $jvs['home'] = DOMAIN.'tools/js/home.js?v='.VERSION;
 $jvs['result'] = DOMAIN.'tools/js/result.js?v='.VERSION;
+$jvs['details'] = DOMAIN.'tools/js/details.js?v='.VERSION;
 
 // Custom JS End
 
