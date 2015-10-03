@@ -6,13 +6,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link rel="stylesheet"  href="tools/css/home.css">
         <link rel="stylesheet"  href="tools/css/ripple.css">
+        <link rel="stylesheet" href="tools/css/rangeslider/ion.rangeSlider.css">
+        <link rel="stylesheet" href="tools/css/rangeslider/ion.rangeSlider.skinHTML5.css">
+        <link rel="stylesheet" href="tools/css/rangeslider/normalize.css">
         <script  src="tools/js/lib/jquery1.9.1.min.js"></script>
+        <script  src="tools/js/lib/ion.rangeSlider.js"></script>
     </head>
-    <body>
+    <body class="transition300">
         <div id='baseCont' class="container fmOpenR bgWhite resultsPage">
             <div class="wrapper">
                 <div id='header' class="header transition300">
                     <div class="wrapperMax poR">
+                        <div id="mMenuBtn" class="menuBtn fLeft transition300 ripplelink"></div>
+                        <div id="mFilterBtn" class="filterBtn fRight transition300 ripplelink" onclick="swichFilter();"></div>
                         <div class="headCatCont fLeft transition300">
                             <div id='hbgDiam' class="headCat fLeft bgDiamond transition300 headSelected"><span>Diamonds</span></div>
                             <div id='hbgJewel' class="headCat fLeft bgJewellery transition300"><span>Jewellery</span></div>
@@ -33,9 +39,9 @@
                        <span id='resultCount'> 2,835</span> Diamonds found
                     </div>
                 </div>
-                <div class='shapesCont'>
+                <div class='shapesCont resultsPage'>
                     <div class="wrapperMax">
-                        <div class="allShapes">
+                        <div class="allShapes resultsPage">
                             <center>
                                 <div class="shapeComm transition300 ripplelink Round">
                                 </div><div class="shapeComm transition300 ripplelink Pear">
@@ -68,25 +74,84 @@
                             </div>
                         </div>
                         <div class='results_Filter'>
-                            <div class='filterList fLeft'>
+                            <div id='filters' class='filterList fLeft transit-100X transition300'>
+                                <div id='mfHeader' class="mfHeader fLeft fmOpenR">
+                                    <div class="backToRes fLeft ripplelink poR" onclick="swichFilter();">Back to results</div>
+                                    <div class="clearFill fRight ripplelink poR">Clear</div>
+                                </div>
                                 <div class="filterCont fLeft">
-                                    <div class="fLeft optionTitle fmOpenR">Cut</div>
+                                    <div class="fLeft optionTitle fmOpenR">City / Area</div>
+                                    <div class='areaCont fLeft'>
+                                        <input type="text" id='txtArea' class="fliterTxt fLeft fmOpenR" placeholder=" Search city / area here" onkeyup="searchArea(this.value)">
+                                        <div class="autoSuggestOuter fmOpenR dn" id="asug">
+                                            <ul>
+                                                <li class="autoSuggstions transition300 txtCap" onclick="setData(this)">andheri</li>
+                                                <li class="autoSuggstions transition300 txtCap" onclick="setData(this)">andheri west</li>
+                                                <li class="autoSuggstions transition300 txtCap" onclick="setData(this)">andheri east</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div id='subjects' class="filterOptions fLeft fmOpenR">
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="Bangalore"/>
+                                            <label for="Bangalore">Bangalore</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="Mumbai"/>
+                                            <label for="Mumbai">Mumbai</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="Delhi"/>
+                                            <label for="Delhi">Delhi</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="Hyderabad"/>
+                                            <label for="Hyderabad">Hyderabad</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="caratsDiv" class="filterCont fLeft">
+                                    <div class="fLeft optionTitle fmOpenR">Carats</div>
+                                    <div class='fLeft rangeCont'>
+                                        <div class='fLeft rangeDiv'>
+                                            <input id="caratsRange" class="fLeft rngInp" style="visibility: hidden;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="filterCont fLeft forClarity">
+                                    <div class="fLeft optionTitle fmOpenR">Color</div>
                                     <div id='cut' class="filterOptions fLeft fmOpenR">
                                         <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="excellent"/>
-                                            <label for="excellent">Excellent</label>
+                                            <input type="checkbox" class="filled-in" id="clD"/>
+                                            <label for="clD">D</label>
                                         </div>
                                         <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="vgood"/>
-                                            <label for="vgood">Very Good</label>
+                                            <input type="checkbox" class="filled-in" id="clE"/>
+                                            <label for="clE">E</label>
                                         </div>
                                         <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="good"/>
-                                            <label for="good">Good</label>
+                                            <input type="checkbox" class="filled-in" id="clF"/>
+                                            <label for="clF">F</label>
                                         </div>
                                         <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="fair"/>
-                                            <label for="fair">Fair</label>
+                                            <input type="checkbox" class="filled-in" id="clG"/>
+                                            <label for="clG">G</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="clH"/>
+                                            <label for="clH">H</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="clI"/>
+                                            <label for="clI">I</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="clJ"/>
+                                            <label for="clJ">J</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="clK"/>
+                                            <label for="clK">K</label>
                                         </div>
                                     </div>
                                 </div>
@@ -124,6 +189,35 @@
                                         <div class="checkDiv fLeft">
                                             <input type="checkbox" class="filled-in" id="s13"/>
                                             <label for="s13">S13</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="filterCont fLeft">
+                                    <div class="fLeft optionTitle fmOpenR">Price</div>
+                                    <div class='fLeft rangeCont'>
+                                        <div class='fLeft rangeDiv'>
+                                            <input id="priceRange" class="fLeft rngInp" style="visibility: hidden;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="filterCont fLeft">
+                                    <div class="fLeft optionTitle fmOpenR">Cut</div>
+                                    <div id='cut' class="filterOptions fLeft fmOpenR">
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="excellent"/>
+                                            <label for="excellent">Excellent</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="vgood"/>
+                                            <label for="vgood">Very Good</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="good"/>
+                                            <label for="good">Good</label>
+                                        </div>
+                                        <div class="checkDiv fLeft">
+                                            <input type="checkbox" class="filled-in" id="fair"/>
+                                            <label for="fair">Fair</label>
                                         </div>
                                     </div>
                                 </div>
@@ -169,6 +263,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div id='mfFooter' class="mfFooter fLeft fmOpenB ripplelink">
+                                   <div id='resetDbtn'> Reset Filters</div>
+                                   <div id='applyDbtn'> Apply Filters</div>
+                                </div>
                             </div>
                             <div class='prdResults fRight'>
                             <?php while($i<15){?>
@@ -200,7 +298,7 @@
                                         <div class='prdPrice fLeft'>
                                             <div class="detComm">
                                                 <div class="detLabel fmOpenB fLeft">BEST PRICE</div>
-                                                <div class="detValue fmOpenR fLeft"><span>&#8377;</span>8,28,5888</div>
+                                                <div class="detValue fmOpenB fLeft"><span>&#8377;</span>8,28,5888</div>
                                             </div>
                                         </div>
                                         <div class='prdActions fLeft'>
@@ -250,12 +348,32 @@
         <script  src="tools/js/lib/velocity.js"></script>
         <script  src="tools/js/lib/ripple.js"></script>
         <script  src="tools/js/lib/jquery-numerator.js"></script>
+        <script  src="tools/js/lib/hammer.js"></script>
         <script>
             
             var isOpen = false;
             var lastSc=0;
             var isStop = false;
+            var pw=$(window).width();
+            var ph=$(window).height();
+            var isMobile=false;
+            if(pw<768){
+                isMobile=true; 
+               $('#filters').height(ph+"px");
+                $('#filters,#mfHeader,#mfFooter').css({left:(pw)+"px"});
+                $('#mfFooter').css({top:(ph-50)+"px"});
+                setTimeout(function(){
+                    $('#filters').removeClass('transit-100X');
+                },1000);
+            }
+            
+            
             $(document).ready(function() {
+                setTimeout(function(){
+                    $('body').animate({scrollTop:100},300);
+                },100);
+                
+                
                 $('#drpinp').click(function() {
                     setTimeout(function(){
                         isOpen = true;
@@ -293,48 +411,131 @@
                
                
                $('#resultCount').numerator({
-                        toValue: 2835, 
-                        delimiter: ',', 
-                        onStart: function() {
-                                isStop = true;
-                        }
-                    });
-               
+                    toValue: 2835, 
+                    delimiter: ',', 
+                    onStart: function() {
+                            isStop = true;
+                    }
+                });
+                $('#mfFooter').bind('click',function(){
+                    if(!isMobile){
+                        alert('reset filter');
+                    }else{
+                        alert('apply filter');
+                    }
+                });
                
                
                 $('.headCat').bind('click',function(){
-                    $(this).toggleClass('headSelected');
+                    $(this).addClass('headSelected');
+                    //headCA1
+                    var id=$(this).attr('id');
+                    if(id=='hbgDiam'){
+                        $('.headCatCont').addClass('headCA1').removeClass('headCA2 headCA3');
+                        $('#hbgJewel,#hbgBull').removeClass('headSelected');
+                    }
+                    else if(id=='hbgJewel'){
+                        $('.headCatCont').addClass('headCA2').removeClass('headCA1 headCA3');
+                        $('#hbgDiam,#hbgBull').removeClass('headSelected');
+                    }
+                    else if(id=='hbgBull'){
+                        $('.headCatCont').addClass('headCA3').removeClass('headCA1 headCA2');
+                        $('#hbgDiam,#hbgJewel').removeClass('headSelected');
+                    }
+                    
                 });
                 
                 $(window).scroll(function(){
                     var sc=$(window).scrollTop();
                     $('#header,#hbgDiam,#hbgJewel,#hbgBull,#logoTxt').velocity("stop");
                     $('.headCatCont,.logo').velocity("stop");
-                    if(sc>10){
-                        $('#header').velocity({height: "60px",paddingTop:12+"px",paddingBottom:12+"px"},{duration:0, delay:0,easing:'swing'});
-                        $('#hbgDiam,#hbgJewel,#hbgBull').velocity({backgroundPositionY:-60+"px"},{duration:0, delay:0,easing:'swing'});
-                        $('.headCatCont').velocity({top:-50+"px"},{duration:0, delay:0,easing:'swing'});
-                        $('.headCatCont').addClass('headCatActive');
-                        $('#logoTxt').velocity({opacity:0},{duration:0, delay:0});
-                        $('.logo').velocity({top:20+"px",height:60+"px",width:60+"px"},{duration:0, delay:100});
-                    }else if(lastSc>sc){
-                        $('.logo').velocity({top:30+"px",height:100+"px",width:100+"px"},{duration:0, delay:0});
-                        $('#logoTxt').velocity({opacity:1},{duration:300, delay:400});
-                        $('#header').velocity({height: "100px",paddingTop:32+"px",paddingBottom:32+"px"},{duration:0, delay:0,easing:'swing'});
-                        $('#hbgDiam,#hbgJewel,#hbgBull').velocity({backgroundPositionY:8+"px"},{duration:0, delay:0,easing:'swing'});
-                        $('.headCatCont').velocity({top:-30+"px"},{duration:0, delay:0,easing:'swing'});
-                        $('.headCatCont').removeClass('headCatActive');
+                    if(!isMobile){
+                        if(sc>10){
+                            $('#header').velocity({height: "60px",paddingTop:12+"px",paddingBottom:12+"px"},{duration:0, delay:0,easing:'swing'});
+                            $('#hbgDiam,#hbgJewel,#hbgBull').velocity({backgroundPositionY:-60+"px"},{duration:0, delay:0,easing:'swing'});
+                            $('.headCatCont').velocity({top:-50+"px"},{duration:0, delay:0,easing:'swing'});
+                            $('.headCatCont').addClass('headCatActive');
+                            $('#logoTxt').velocity({opacity:0},{duration:0, delay:0});
+                            $('.logo').velocity({top:20+"px",height:60+"px",width:60+"px"},{duration:0, delay:100});
+                        }else if(lastSc>sc){
+                            $('.logo').velocity({top:30+"px",height:100+"px",width:100+"px"},{duration:0, delay:0});
+                            $('#logoTxt').velocity({opacity:1},{duration:300, delay:400});
+                            $('#header').velocity({height: "100px",paddingTop:32+"px",paddingBottom:32+"px"},{duration:0, delay:0,easing:'swing'});
+                            $('#hbgDiam,#hbgJewel,#hbgBull').velocity({backgroundPositionY:8+"px"},{duration:0, delay:0,easing:'swing'});
+                            $('.headCatCont').velocity({top:-30+"px"},{duration:0, delay:0,easing:'swing'});
+                            $('.headCatCont').removeClass('headCatActive');
+                        }
+                    }else{
+                        if(sc>10){
+                            $('.logo').velocity({top:20+"px",height:50+"px",width:50+"px"},{duration:0, delay:000});
+                            $('#logoTxt').velocity({opacity:0},{duration:0, delay:0});
+                            $('#header').velocity({height: "50px"},{duration:0, delay:000,easing:'easeOut'});
+                            $('#mMenuBtn,#mFilterBtn').velocity({marginTop:0+"px"},{duration:0, delay:0});
+                        }else if(lastSc>sc){
+                            $('.logo').velocity({top:20+"px",height:80+"px",width:80+"px"},{duration:0, delay:0});
+                            $('#logoTxt').velocity({opacity:1},{duration:00, delay:000});
+                            $('#header').velocity({height: "60px"},{duration:0, delay:0,easing:'swing'});
+                            $('#mMenuBtn,#mFilterBtn').velocity({marginTop:5+"px"},{duration:0, delay:0});
+                        }
                     }
                     lastSc=sc;
-                });                
+                });        
+                var min_carats = "0.30";
+                var max_carats = "20.11";
+                var min_price = "700.00";
+                var max_price = "9999.99";
+
                 
                 
+                $("#priceRange").ionRangeSlider({
+                    type: "double",
+                    grid: true,
+                    min: min_price,
+                    max: max_price,
+                    from: min_price,
+                    to: max_price,
+                    prefix: "INR: ",
+                    postfix: " ",
+                    decorate_both: false,
+                    prettify_separator: ",",
+                    force_edges: true,
+                    drag_interval: true,
+                    onFinish: function (data) {
+                        
+                    }
+                });
                 
                 
-                
-                
-                
+                $("#caratsRange").ionRangeSlider({
+                    type: "single",
+                    grid: true,
+                    min: 0.3,
+                    max: 20.11,
+                    from: 05,
+                    drag_interval: true,
+                    prefix: "carat: ",
+                    postfix: " ",
+                    decorate_both: false,
+                    force_edges: true,
+                    step: 0.01,
+                    onFinish: function (data) {
+                        
+                    }
+                });
             }); 
+            
+            var areas=new Array("Jakkur","Judicial Layout","M.G Road","Indiranagar");
+        
+            function searchArea(val){
+                $('#asug').removeClass('dn');
+            }
+
+            function setData(obj){
+                var text=$(obj).text();
+                $('#txtArea').val(text);
+                $('#asug').addClass('dn');
+
+            }
             
             function toggleDropDown(flag) {
                 if (flag) {
@@ -345,6 +546,37 @@
                 }
 
             }
+        var switchFlag=true;
+        function showSideNav(flag) {
+            if (flag) {
+                $('body').scrollTop(0);
+                $('body').addClass('move');
+            switchFlag=false;   
+               
+            } else {
+                $('body').removeClass('move');
+                switchFlag=true;
+            }
+        }
+    
+        function swichFilter(){
+            showSideNav(switchFlag);
+            
+        }
+        
+        var styled = 0;
+        function removeStyle() {
+            if (styled < 5) {
+                $('#caratsDiv .irs-bar').css({background: 'none', border: 'none'});
+                $('#caratsDiv .irs-bar-edge').css({background: 'none', border: 'none'});
+                styled++;
+            }
+
+        }
+        setTimeout(function() {
+            removeStyle();
+        }, 1500);
+    
         </script>
     </body>
 </html>
