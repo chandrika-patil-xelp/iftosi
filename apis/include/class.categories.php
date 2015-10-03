@@ -22,7 +22,7 @@ class categories extends DB
                 $ipres=$this->query($ipsql);
                 if($ipres)
                 {
-                    $upsql="UPDATE tb_master_prd set lineage='".$detls['lineage']."' WHERE product_id=".$detls['pid']."";
+                   $upsql="UPDATE tb_master_prd set lineage='".$detls['lineage']."' WHERE product_id=".$detls['pid']."";
                     $upres=$this->query($upsql);
                     if($upres)
                     {
@@ -56,17 +56,17 @@ class categories extends DB
         $dt     = json_decode($params['dt'],1);
         $detls  = $dt['result'];
         
-        $usql="UPDATE tbl_lineage SET p_catid='".$detls['pcatid']."',cat_name='".$detls['catname']."',cat_lvl=".$detls['lvl'].",lineage='".$detls['lineage']."',product_flag=".$detls['pflag']." WHERE category_id=".$detls['catid']."";
+    $usql="UPDATE tbl_lineage SET p_catid='".$detls['pcatid']."',cat_name='".$detls['catname']."',cat_lvl=".$detls['lvl'].",lineage='".$detls['lineage']."',product_flag=".$detls['pflag']." WHERE catid=".$detls['catid']."";
         $ures=$this->query($usql);
         if($ures)
         {
-            $csql="select product_id fro tbl_prd_cat_mapping where category_id=".$detls['catid']."";
+           $csql="select product_id from tbl_prd_cat_mapping where category_id=".$detls['catid']."";
             $cres=$this->query($csql);
             if($cres)
             {
                 while($row=$this->fetchData($cres))
                 {
-                    $pid=$row['product_id'];
+                    $pid[]=$row['product_id'];
                 }
                 $pid=implode(',',$pid);
 

@@ -8,11 +8,19 @@ class attribute extends DB
         
     }
     
-    public function get_attrList()
+    public function get_attrList($params)
     {
         $sql = "SELECT attr_id,attr_name,attr_display_name,attr_unit,attr_type_flag,attr_unit_pos,attr_values,attr_range
                 FROM tb_attribute_master";
-	$res = $this->query($sql); 
+        $page=$params['page'];
+        $limit=$params['limit'];
+        if (!empty($page))
+        {
+            $start = ($page * $limit) - $limit;
+            $sql.=" LIMIT " . $start . ",$limit";
+        }
+        
+        $res = $this->query($sql); 
 	if($res)
         {
             while($row1=$this->mysqlFetchArr($res)) 
@@ -57,7 +65,7 @@ class attribute extends DB
         $sql = "SELECT  attr_id,attr_name,attr_display_name,attr_unit,attr_type_flag,attr_unit_pos,attr_values,attr_range
                 FROM tb_attribute_master WHERE attr_id=".$params['attribid'];
 	$res    = $this->query($sql);
-        $chkres=$this->numRows($sql);
+        $chkres=$this->numRows($res);
         if($chkres>0)
         {
             while($row1 = $this->mysqlFetchArr($res))
@@ -87,9 +95,9 @@ class attribute extends DB
         $chksql="SELECT * from tb_attribute_mapping where attribute_id=".$aid." and category_id=".$catid."";
         $ckres=$this->query($chksql);
         $chkres=$this->numRows($ckres);
-        if($chkres<1)
+        if($chkres==0)
         {
-        $sql = "INSERT INTO tb_attribute_mapping SET attribute_id = ".$aid.",attr_display_flag =".$dflag.",attr_display_position=".$dpos.",attr_filter_flag = ".$fil_flag.",attr_filter_position=".$fil_pos.",active_flag=".$aflag.",category_id=".$catid;
+        $sql = "INSERT INTO tb_attribute_mapping SET attribute_id=".$aid.",attr_display_flag =".$dflag.",attr_display_position=".$dpos.",attr_filter_flag = ".$fil_flag.",attr_filter_position=".$fil_pos.",active_flag=".$aflag.",category_id=".$catid;
         $res = $this->query($sql);
             if($res)
             { 
@@ -113,60 +121,56 @@ class attribute extends DB
     
     public function fetch_category_mapping($params)
     {
-        $mapsql="SELECT attr_id,attr_display_flag,attr_display_position,attr_filter_flag,attr_filter_position,active_flag
-                 FROM tbl_attributes_mapping where category_id=".$params['catid'];
+        $mapsql="SELECT attribute_id FROM tb_attribute_mapping where category_id=".$params['catid'];
         $mapres=$this->query($mapsql);
         $cres=$this->numRows($mapres);
-    if($cres>0)
-    {
-        $i=0;
-        while($row=$this->fetchData($mapres)) 
+        if($cres>0)
         {
-        $attributeMap['attrid'][$i]=$row['attr_id'];
-        $i++;
-        }
-        $atribs=implode(',',$attributeMap['attrid']);
-        $attrsql="SELECT attr_name,attr_display_name,attr_unit,attr_type_flag,attr_unit_pos,attr_values,attr_range
-                  FROM tb_attribute_master where attr_id IN(".$atribs.") ORDER BY attr_id DESC";
-        $res = $this->query($attrsql); 
-	if($res)
-	{   
-            while($row1=$this->fetchData($res)) 
+            $i=0;
+            while($row=$this->fetchData($mapres)) 
             {
-                $attrs['atrribute_Name']=$row1['attr_name'];
-                $attrs['attribute_Disp_Name']=$row1['attr_display_name'];
-                $attrs['attribute_Unit']=$row1['attr_unit'];
-                $attrs['attribute_Num_Flag']=$row1['attr_type_flag'];
-                $attrs['attribtue_Unit_Pos']=$row1['attr_unit_pos'];
-                $attrs['attribute_Values']=$row1['attr_values'];
-                $attrs['attribute_Range']=$row1['attr_range'];
-		$attribute[]=$attrs;
+            $attributeMap['attrid'][$i]=$row['attribute_id'];
+            $i++;
             }
-            $arr=array('attributes'=>$attribute,'attribute_Map'=>$attributeMap);
-            $err=array('Code'=>'0','Msg'=>'Values are Fetched');
-	}
+            $atribs=implode(',',$attributeMap['attrid']);
+            
+            $attrsql="SELECT attr_name,attr_display_name,attr_unit,attr_type_flag,attr_unit_pos,attr_values,attr_range
+                      FROM tb_attribute_master where attr_id IN(".$atribs.") ORDER BY attr_id DESC";
+            $res = $this->query($attrsql); 
+            if($res)
+            {   
+                while($row1=$this->fetchData($res)) 
+                {
+                    $attrs['atrribute_Name']=$row1['attr_name'];
+                    $attrs['attribute_Disp_Name']=$row1['attr_display_name'];
+                    $attrs['attribute_Unit']=$row1['attr_unit'];
+                    $attrs['attribute_Num_Flag']=$row1['attr_type_flag'];
+                    $attrs['attribtue_Unit_Pos']=$row1['attr_unit_pos'];
+                    $attrs['attribute_Values']=$row1['attr_values'];
+                    $attrs['attribute_Range']=$row1['attr_range'];
+                    $attribute[]=$attrs;
+                }
+                $arr=array('attributes'=>$attribute,'attribute_Map'=>$attributeMap);
+                $err=array('Code'=>'0','Msg'=>'Values are Fetched');
+            }
+            else
+            {
+                $arr="There is no attribute detail availed in attribute table";
+                $err=array('Code'=>0,'Msg'=>'Values not found');
+            }
+        }
         else
         {
-            $arr="There is no attribute detail availed in attribute table";
-            $err=array('Code'=>0,'Msg'=>'Values not found');
+            $arr="There is no attribute mapped with category to show result";
+            $err=array('code'=>1,'Msg'=>'Error in fetching data');
         }
-        
-        
-    }
-    
-    else
-    {
-        $arr="There is no attribute mapped with category to show result";
-        $err=array('code'=>1,'Msg'=>'Error in fetching data');
-    }
-    
-    $result=array('results'=>$arr,'error'=>$err);
-    return $result;
+        $result=array('results'=>$arr,'error'=>$err);
+        return $result;
     }
     
     function unset_category_mapping($params) 
     {   
-        $sql = "DELETE FROM tbl_attributes_mapping WHERE category_id=".$params['catid']." AND attr_id=".$params['aid'];
+        $sql = "UPDATE tbl_attributes_mapping SET active_flag=2 WHERE category_id=".$params['catid']." AND attr_id=".$params['aid'];
 	$res = $this->query($sql);
 	if($res) 
         { 

@@ -7,9 +7,12 @@ class vendor extends DB
         parent::DB($db);
     }
     public function addVendorPrdInfo($params)
-    {   
-        $sql="INSERT INTO tbl_vendor_product_mapping(product_id,vendormobile,vendor_price,vendor_quantity,vendor_currency,vendor_remarks,active_flag,updatedby,updatedon,backendupdate)";
-        $sql.="VALUES(".$params['product_id'].",".$params['logmobile'].",".$params['vendor_price'].",".$params['vendor_quantity'].",'".$params['vendor_currency']."','".$params['vendor_remarks']."',".$params['active_flag'].",'vendor',now(),now())";
+    {
+        $dt= json_decode($params['dt'],1);
+        $detls  = $dt['result'];
+        
+        $sql="INSERT INTO tbl_vendor_product_mapping(product_id,vendor_id,vendor_price,vendor_quantity,vendor_currency,vendor_remarks,active_flag,updatedby,updatedon,backendupdate)";
+     echo   $sql.="VALUES(".$detls['pid'].",".$detls['vid'].",".$detls['vp'].",".$detls['vq'].",'".$detls['vc']."','".$detls['vr']."',".$detls['af'].",'vendor',now(),now())";
         $res = $this->query($sql);
         if($res)
         {
@@ -29,10 +32,16 @@ class vendor extends DB
     {      
         $total_products = 0;
         
-        $cnt_sql = "SELECT COUNT(1) as cnt FROM tbl_vendor_product_mapping  WHERE vendormobile =".$params['vendormobile'];
+        $cnt_sql = "SELECT COUNT(1) as cnt FROM tbl_vendor_product_mapping  WHERE vendor_id =".$params['vid'];
         $cnt_res = $this->query($cnt_sql); //checking number of products registered under vendor id provided
-        
-        $vsql="select product_id,vendor_price,vendor_quantity,vendor_currency,active_flag from tbl_vendor_product_mapping where vendormobile=".$params['vendormobile'];
+        $page=$params['page'];
+        $limit=$params['limit'];
+        $vsql="select product_id,vendor_price,vendor_quantity,vendor_currency,active_flag from tbl_vendor_product_mapping where vendor_id=".$params['vid'];
+        if (!empty($page))
+        {
+            $start = ($page * $limit) - $limit;
+            $vsql.=" LIMIT " . $start . ",$limit";
+        }
         $vres=$this->query($vsql);
         $chkcnt=$this->numRows($vres);
              if($chkcnt>0)
@@ -49,18 +58,21 @@ class vendor extends DB
         }
         $vmapProd=implode(',',$vmap[$i]['product_id']);
         
-        $prsql="SELECT product_id,product_name,product_display_name,product_model,product_brand,prd_img 
+        $prsql="SELECT product_id,product_name,product_display_name,product_model,product_brand,prd_img,desname 
                 FROM tb_master_prd WHERE product_id IN(".$vmapProd.")";
+        $prsql.=" LIMIT " . $start . ",$limit";
+        
         $pres=$this->query($prsql);
         $j=-1;
             while ($prow = $this->fetchData($pres)) 
             {       $j++;
                     
-                    $preslt['product_name'][$j]        = $prow['product_name'];
+                    $preslt['product_name'][$j]         = $prow['product_name'];
                     $preslt['product_display_name'][$j] = $prow['product_display_name'];
                     $preslt['product_model'][$j]        = $prow['product_model'];
                     $preslt['product_brand'][$j]        = $prow['product_brand'];
                     $preslt['product_image'][$j]        = $prow['prd_img'];
+                    $preslt['desname'][$j]              = $prow['desname'];
                     $presults[] = $preslt;
             }
             if($cnt_res)
@@ -83,9 +95,19 @@ class vendor extends DB
         return $result;
     }
     
+ /*   
     public function getVproductsByName($params)
     {
-     $sql1="SELECT product_id,product_display_name,product_model,product_brand,prd_img FROM tb_master_prd where product_name LIKE '".$params['prname']."%' ORDER BY product_name DESC";
+        
+     $sql1="SELECT product_id,product_display_name,product_model,product_brand,prd_img,IF(product_name LIKE '".$params['prname']."%',1,0) AS startwith,IF(product_name LIKE '".$params['prname']."%',1,0) AS phrasematch,desname FROM tb_master_prd where MATCH(product_name) AGAINST(\"'" . $params['prname'] . "*'\" IN BOOLEAN MODE) ORDER BY startwith DESC,phrasematch DESC";
+     $page=$params['page'];
+     $limit=$params['limit'];
+     if (!empty($page))
+    {
+        $start = ($page * $limit) - $limit;
+        $sql1.=" LIMIT " . $start . ",$limit";
+    }
+     
      $res1=$this->query($sql1);
      $chkcnt=$this->numRows($res1);
      if($chkcnt>0)
@@ -103,7 +125,8 @@ class vendor extends DB
         }
         $prId=implode(',',$pdet1['pid']);
        
-        $sql2="SELECT vendor_price,vendor_quantity,vendor_currency,active_flag from tbl_vendor_product_mapping WHERE vendormobile =".$params['vendormobile']." and product_id IN(".$prId.")";
+        $sql2="SELECT vendor_price,vendor_quantity,vendor_currency,active_flag from tbl_vendor_product_mapping WHERE vendor_id =".$params['vid']." and product_id IN(".$prId.")";
+        $sql2.=" LIMIT " . $start . ",$limit";
         $res2=$this->query($sql2);
         if($this->numRows($res2)>0)
         {
@@ -135,14 +158,14 @@ class vendor extends DB
         $result = array('results' => $arr,'error' => $err);
         return $result;
         
-    }
+    }*/
     
     public function updateProductInfo($params)
     {        
-        $sql = "UPDATE tbl_vendor_product_mapping SET vendor_price=".$params['vendor_price'].",
-                vendor_quantity=".$params['vendor_quantity'].",updatedby='vendor',updatedon=now(),
-                active_flag=".$params['active_flag']." WHERE vendor_id=".$params['vendor_id']." AND
-                product_id=".$params['product_id']." AND vendormobile=".$params['logmobile'];
+        $sql = "UPDATE tbl_vendor_product_mapping SET vendor_price=".$params['vp'].",
+                vendor_quantity=".$params['vq'].",updatedby='vendor',updatedon=now(),
+                active_flag=".$params['af']." WHERE vendor_id=".$params['vid']." AND
+                product_id=".$params['pid']."";
         $res=$this->query($sql);
         if($res) 
         {   $arr="Vendor Product Map table updated";
@@ -154,25 +177,37 @@ class vendor extends DB
     
     public function getVDetailByPid($params)
     {
-     $sql1="SELECT * FROM tbl_vendor_product_mapping where product_id=".$params['product_id']." ORDER BY updatedon DESC";
+    $sql1="SELECT * FROM tbl_vendor_product_mapping where product_id=".$params['pid']." AND vendor_id=".$params['vid']." ORDER BY updatedon DESC";
+     $page   = $params['page'];
+    $limit  = $params['limit'];
+    if (!empty($page))
+    {
+        $start = ($page * $limit) - $limit;
+        $sql1.=" LIMIT " . $start . ",$limit";
+    }
+     
+     
      $res1=$this->query($sql1);
      $chkcnt=$this->numRows($res1);
      if($chkcnt>0)
      {
-        $i=0;
+        
         while($row=$this->fetchData($res1))
-        {   $vdet='';
-            $vdet1['vmob'][$i]=$row['vendormobile'];
+        {   
             $vdet['vprice']=$row['vendor_price'];
             $vdet['vquant']=$row['vendor_quantity'];
             $vdet['vcur']=$row['vendor_currency'];
             $vdet['vremarks']=$row['vendor_remarks'];
-             $vdetls[]=$vdet;
-        $i++;   
+            $vdetls[]=$vdet;
+           
              }
-
-        $vmob=implode(',',$vdet1['vmob']);        
-        $sql2="SELECT vendor_name,email,contact_mobile,mobile,landline,area,address1,address2,city,postal_code,state,country from tbl_vendor_master WHERE contact_mobile IN(".$vmob.")";
+        $sql2="SELECT * from tbl_vendor_master WHERE vendor_id =".$params['vid']."";
+        if (!empty($page))
+        {
+        $start = ($page * $limit) - $limit;
+   echo     $sql2.=" LIMIT " . $start . ",$limit";
+        }
+        
         $res2=$this->query($sql2);
         if($this->numRows($res2)>0)
         {
@@ -189,13 +224,13 @@ class vendor extends DB
             $err = array('Code' => 1, 'Msg' => 'No Match Found');
         }
      }
-    else
-    {
+     else
+     {
         $arr='No such product with this id';    
         $err = array('Code' => 0, 'Msg' => 'No Match Found');
-    }
-        $result = array('results' => $arr,'error' => $err);
-        return $result;
+     }
+    $result = array('results' => $arr,'error' => $err);
+    return $result;
         
     }
     

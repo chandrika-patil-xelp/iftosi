@@ -6,9 +6,16 @@ class brandInfo extends DB
         {
                 parent::DB($db);
         }
-    public function getBrandList()
+    public function getBrandList($params)
     {
         $sql = "SELECT * FROM tbl_brandid_generator";
+        $page   = $params['page'];
+        $limit  = $params['limit'];
+        if (!empty($page))
+        {
+            $start = ($page * $limit) - $limit;
+            $sql.=" LIMIT " . $start . ",$limit";
+        }
         $res = $this->query($sql);
         
         if($this->numRows($res))
@@ -17,8 +24,6 @@ class brandInfo extends DB
             {
                 if($row && !empty($row['id']))
                     {
-                        $reslt['brand_id'] = $row['id'];
-                        $reslt['brand_name'] = $row['name'];
                         $arr[] = $reslt;
                     }
             }
@@ -31,5 +36,7 @@ class brandInfo extends DB
             $result = array('results'=>$arr,'error'=>$err);
             return $result;
     }
+    
+    
 }
 ?>

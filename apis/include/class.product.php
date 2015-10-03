@@ -12,8 +12,9 @@
             $isInside= 0;
             $dt= json_decode($params['dt'],1);
             $detls  = $dt['result'];
+            $des    = $dt['design'];
             $attr  = $dt['attributes'];
-           $proErr  = $dt['error'];
+            $proErr  = $dt['error'];
             if($proErr['errCode']== 0)
            {
            $csql = "SELECT id,name FROM tbl_brandid_generator WHERE name='".$detls['product_brand']."'";
@@ -32,14 +33,14 @@
                             $catname=$catrow['category_name'];
                         }
                     }
-                    $sql = "INSERT INTO tbl_brandid_generator(name) VALUES('".$detls['product_brand']."')";
+                  $sql = "INSERT INTO tbl_brandid_generator(name,category_name,cdt,udt,aflg) VALUES('".$detls['product_brand']."','".$catname."',now(),now(),1)";
                     $res = $this->query($sql);
                     $bid = $this->lastInsertedId();
                     $brandid = ($bid) ? $bid : $detls['brandid'];
                 }
 		else
                 {
-                    $row     = $this->fetchData($res);
+                   $row     = $this->fetchData($cres);
                    $brandid = ($row['id']) ? $row['id'] : $detls['brandid'];
                 }
                 $sql  = "SELECT product_id,product_name FROM tbl_productid_generator WHERE product_name = '".$detls['product_name']."' AND product_brand = '".$detls['product_brand']."'";
@@ -61,9 +62,29 @@
                 }
 		if($pid)
                 {
+                   $chksql="SELECT designer_id,desname from tbl_designer_product_mapping where product_id=".$pid."";
+                   $chkdes=$this->query($chksql);
+                   $cntres=$this->numRows($chkdes);
+                   if($cntres==0)
+                   {
+                   $dessql="insert into tbl_designer_product_mapping(product_id,desname,active_flag,cdt,udt)
+                            VALUES(".$pid.",".$des['desmobile'].",'".$des['desname']."',1,now(),now())";
+                    $desres = $this->query($dessql);
+                   }
+                   else
+                   {
+                        $row = $this->fetchData($chkdes);
+                   $did=$row['designer_id'];    
+                    $dessql="UPDATE tbl_designer_product_mapping set desname='".$des['desname']."' where designer_id=".$did."";
+                    $desres = $this->query($dessql);
+                   
+                   }
+                    if($desres)
+                    {
+                    
                         $sql="INSERT INTO tb_master_prd(product_id,barcode,lotref,lotno,product_name,product_display_name,
                                                      product_model,product_brand,prd_price,product_currency,product_keyword,                                                     
-                                                     product_desc,prd_wt,prd_img,category_id,brand_id,product_warranty,
+                                                     product_desc,prd_wt,prd_img,category_id,product_warranty,desname,
                                                      updatedby, updatedon, cdt)
                                                 VALUES (
 							".$pid.",'".$detls['barcode']."','".$detls['lotref']."',".$detls['lotno'].",
@@ -71,7 +92,7 @@
                                                       '".$detls['product_model']."', '".$detls['product_brand']."', ".$detls['product_price'].",
                                                       '".$detls['product_currency']."','".$detls['product_keywords']."', 
                                                       '".$detls['product_desc']."',".$detls['product_wt'].",'".$detls['prd_img']."',".$detls['category_id'].",
-                                                      '".$detls['product_warranty']."', 'CMS USER', now(), now())
+                                                      '".$detls['product_warranty']."','".$des['desname']."','CMS USER', now(), now())
 			  ON DUPLICATE KEY UPDATE
                                                     barcode                      = '".$detls['barcode']."', 
                                                     lotref                       = '".$detls['lotref']."', 
@@ -88,7 +109,8 @@
                                                     category_id                  = ".$detls['category_id'].",  
                                                     product_warranty             ='".$detls['product_warranty']."',
                                                     updatedby 			 =   'CMS USER', 
-                                                    updatedon 			 =    now(), 
+                                                    updatedon 			 =    now(),
+                                                    desname                      ='".$des['desname']."',
                                                     cdt                          =    now()";
                     $res = $this->query($sql);
                     if(count($attr))
@@ -110,11 +132,13 @@
                             $res = $this->query($sql);
                         }
                     }
+                    }
+                   }
                     $isInside = 1;
                    // $arr = array('product_id' => $pid);
                         }
             }
-          }
+          
             else
             {
                 $arr="Some error in passing json array";
@@ -135,65 +159,6 @@
                     $result = array('results'=>$arr, 'error' => $err);
                     return $result;
         }
-        
-        
-// Product Add in another way//
-        /*        
-        public function addProduct($params)
-        {
-            $attr = urldecode($params['dt']);
-            $attr = json_decode($attr,true);           
-            $detls=$attr['results'];
-            $pAttr=$attr['attribute'];            
-            $pbarcode=$detls[0]['barcode'];
-            $plotref=$detls[0]['lotref'];
-            $plotno=$detls[0]['lotno'];
-            $pname=$detls[0]['product_name'];
-            $pDisName=$detls[0]['product_display_name'];
-            $pModel=$detls[0]['product_model'];
-            $pBrand=$detls[0]['product_brand'];
-            $pPrice=$detls[0]['prd_price'];
-            $pCurr=$detls[0]['product_currency'];
-            $pKeyword=$detls[0]['product_keyword'];
-            $pDesc=$detls[0]['product_desc'];
-            $pWeight=$detls[0]['prd_wt'];
-            $pImg="tobeUpdate.png";
-            $pCatid=$detls[0]['category_id'];
-            $pBrId=$detls[0]['brand_id'];
-            $pWarranty=$detls[0]['product_warranty'];
-            
-            $sql="INSERT INTO tbl_productid_generator(product_name,product_brand) values('".$pname."','".$pBrand."')";
-            $res = $this->query($sql);
-
-            
-            $ins_id =$this->lastInsertedId();
-            $sql1="INSERT INTO tb_master_prd(product_id,barcode,lotref,lotno,product_name,product_display_name,product_model,product_brand,prd_price,product_currency,product_keyword,product_desc,prd_wt,prd_img,category_id,brand_id,product_warranty,updatedby,updatedon)";
-            $sql1.="VALUES(".$ins_id.",'".$pbarcode."','".$plotref."',".$plotno.",'".$pname."','".$pDisName."','".$pModel."','".$pBrand."',".$pPrice.",'".$pCurr."','".$pKeyword."','".$pDesc."','".$pweight."','".$pImg."',$pCatid,$pBrId,'".$pwarranty."','CMS USER',now(),now())";
-            $res1 = $this->query($sql1);
-            
-            $len=  sizeof($pAttr);
-            $i=0;
-            $insertStr;
-            while($i<$len)
-            {
-                $attr=$pAttr[$i]['attr_id'];
-                $value=$pAttr[$i]['value'];
-                $insertStr.="(".$ins_id.",".$attr.",\"$value\",1,'cms_User',now()),";
-                $i++;
-            }
-               
-            $insertStr= trim($insertStr,",");
-            $insertAttr ="INSERT INTO tbl_product_attributes(product_id,attr_id,value,active_flag,updatedby,updatedon) VALUES ".$insertStr;
-            $res2 = $this->query($insertAttr);
-            if($res2)
-            {
-                $err = array('errCode' => 0, 'errMsg' => 'Product added successfully!');
-            }
-            $result = array('results' => $results, 'error' => $err);
-            return $result;
-        }
-*/  
-        
         
 // Uploading the image method.        
        /* public function imageUpdate($params)
@@ -245,10 +210,9 @@
         
         public function getPrdByName($params)
         { 
-        $page   = 1;
-        $limit  = 50;
-
-            $sql = "SELECT * FROM tb_master_prd WHERE product_name LIKE '%".$params['prname']."%' ORDER BY '".$params['prname']."' DESC ";
+            $page   = $params['page'];
+            $limit  = $params['limit'];
+            $sql = "SELECT *,MATCH(product_name) AGAINST ('".$params['prname']."*' IN BOOLEAN MODE) as startwith FROM tb_master_prd WHERE MATCH(product_name) AGAINST ('".$params['prname']."*' IN BOOLEAN MODE) ORDER BY startwith DESC";
             if (!empty($page))
             {
                 $start = ($page * $limit) - $limit;
@@ -272,6 +236,7 @@
                         $reslt['product_warranty'] = $row['product_warranty'];
                         $reslt['product_desc'] = $row['product_desc'];
                         $reslt['prd_img'] = $row['prd_img'];
+                        $reslt['desname'] = $row['desname'];
                         $arr[] = $reslt;
                     }
                 }
@@ -291,8 +256,8 @@
         
         public function getPrdByCatid($params)
         {
-        $page   = 1;
-        $limit  = 50;
+        $page   = $params['page'];
+        $limit  = $params['limit'];
         
         $sql = "SELECT * FROM tb_master_prd WHERE category_id=".$params['catid'];
         if(!empty($page))
@@ -312,13 +277,14 @@
                     $reslt['product_name'] = $row['product_name'];
                     $reslt['product_display_name'] = $row['product_display_name'];
                     $reslt['product_model'] = $row['product_model'];
-                    $reslt['brand_id'] = $row['brand_id'];
+                    $reslt['product_brand'] = $row['product_brand'];
                     $reslt['product_warranty'] = $row['product_warranty'];
                     $reslt['product_price'] = $row['prd_price'];
                     $reslt['product_currency'] = $row['product_currency'];
                     $reslt['product_barcode'] = $row['barcode'];
                     $reslt['product_desc'] = $row['product_desc'];
                     $reslt['product_image'] = $row['prd_img'];
+                    $reslt['product_desname'] = $row['desname'];
                     $arr[]=$reslt;
                 }
             }
@@ -335,8 +301,16 @@
         
         public function getPrdById($params)
         {
-            $sql = "SELECT * FROM tb_master_prd WHERE product_id=".$params['prdid']." LIMIT 0,1";
-            $sql2 = "SELECT * FROM tbl_product_attributes WHERE product_id=".$params['prdid'];
+            $page   = $params['page'];
+            $limit  = $params['limit'];
+            
+            $sql = "SELECT * FROM tb_master_prd WHERE product_id=".$params['prdid']."";
+            if (!empty($page))
+            {
+                $start = ($page * $limit) - $limit;
+                $sql.=" LIMIT " . $start . ",$limit";
+            }
+            $sql2 = "SELECT * FROM tbl_product_attributes WHERE product_id=".$params['prdid']." AND category_id=".$params['catid']."";
             $res = $this->query($sql);
             $res2 = $this->query($sql2);
 
@@ -375,15 +349,14 @@
                     $reslt['product_display_name'] = $row['product_display_name'];
                     $reslt['product_model'] = $row['product_model'];
                     $reslt['product_brand'] = $row['product_brand'];
-                    
-                    $reslt['attr_details'] =$details;
-                    
                     $reslt['product_price'] = $row['prd_price'];
                     $reslt['product_currency'] = $row['product_currency'];
                     $reslt['product_warranty'] = $row['product_warranty'];
                     $reslt['product_description'] = $row['product_desc'];
                     $reslt['product_image'] = $row['prd_img'];
-
+                    
+                    $reslt['attr_details'] =$details;
+                    
                    $cat_info_sql = "SELECT category_id,category_name FROM tbl_categoryid_generator WHERE category_id=".$row['category_id'];
                     $cat_info_res = $this->query($cat_info_sql);
                     if($cat_info_res)
@@ -412,9 +385,12 @@
             $total_products = 0;
             $cnt_sql = "SELECT COUNT(*) as cnt FROM tb_master_prd";
             $cnt_res = $this->query($cnt_sql);
-            $page   = 1;
-            $limit  = 50;
+            
+            $page   = $params['page'];
+            $limit  = $params['limit'];;
+            
             $sql = "SELECT * FROM tb_master_prd";
+            
             if(!empty($page)) 
             {
                 $start = ($page * $limit) - $limit;
@@ -447,19 +423,22 @@
         }
         
         public function productByCity($params)
-        {
-            $chksql="SELECT contact_mobile from tbl_vendor_master where city='".$params['cityname']."' and active_flag=1";
+        {   
+             $page   = $params['page'];
+             $limit  = $params['limit'];
+            
+            $chksql="SELECT vendor_id from tbl_vendor_master where city='".$params['cityname']."'";
             $chkres=$this->query($chksql);
             $cnt_res1 = $this->numRows($chkres);            
             if($cnt_res1>0)
             {   $i=0;
                 while($row1=$this->fetchData($chkres))
                 {   
-                    $arr1[$i]= $row1['contact_mobile'];
+                    $arr1[$i]= $row1['vendor_id'];
                     $i++;
                 }
                 $mobs=implode(',',$arr1);
-                $getpiddet="SELECT product_id from tbl_vendor_product_mapping where vendormobile IN(".$mobs.")"; 
+                $getpiddet="SELECT product_id from tbl_vendor_product_mapping where vendor_id IN(".$mobs.")"; 
                 $chkres=$this->query($getpiddet);
                 $cnt_res2 = $this->numRows($chkres);
                 if($cnt_res2>0)
@@ -471,6 +450,11 @@
                     }
                     $pid=implode(',',$arr2);
                     $fillpiddet="SELECT * from tb_master_prd where product_id IN(".$pid.")";
+                    if(!empty($page)) 
+                    {
+                        $start = ($page * $limit) - $limit;
+                        $fillpiddet.=" LIMIT " . $start . ",$limit";
+                    }
                      
                     $chkres=$this->query($fillpiddet);
                     $cnt_res3 = $this->numRows($chkres);
@@ -506,7 +490,14 @@
         
         public function productByBrand($params)
         {
+            $page   = $params['page'];
+            $limit  = $params['limit'];
             $chksql="SELECT * from tb_master_prd where product_brand='".$params['bname']."'";
+            if(!empty($page)) 
+            {
+                $start = ($page * $limit) - $limit;
+                $chksql.=" LIMIT " . $start . ",$limit";
+            }
             $chkres=$this->query($chksql);
             $cnt_res1 = $this->numRows($chkres);            
             if($cnt_res1>0)
@@ -525,6 +516,97 @@
             $result=array('result'=>$arr,'error'=>$err);
             return $result;
         }
+        
+        public function productByDesigner($params)
+        {
+            $chksql="SELECT product_id from tbl_designer_product_mapping where desname='".$params['desname']."' and active_flag=1";
+            $chkres=$this->query($chksql);
+            
+             $page   = $params['page'];
+             $limit  = $params['limit'];
+            
+            $cnt_res1 = $this->numRows($chkres);            
+            if($cnt_res1>0)
+            {   $i=0;
+                while($row1=$this->fetchData($chkres))
+                {   
+                    $arr1[$i]= $row1['product_id'];
+                    $i++;
+                }
+                $pid=implode(',',$arr1);
+                $fillpiddet="SELECT * from tb_master_product where product_id IN(".$pid.")";
+                if(!empty($page)) 
+                {
+                    $start = ($page * $limit) - $limit;
+                    $fillpiddet.=" LIMIT " . $start . ",$limit";
+                }
+                $chkres=$this->query($fillpiddet);
+                $cnt_res3 = $this->numRows($chkres);
+                if($cnt_res3>0)
+                {
+                    while($row3=$this->fetchData($chkres))
+                    {   
+                        $arr[]= $row3;
+                        $i++;
+                    }
+                    $err=array('Code'=>0,'Msg'=>'Data fetched successfully');
+                }
+                else
+                {
+                    $arr="There is no active product in records";
+                    $err[]=array('Code'=>1,'Msg'=>'Error in fetching detail');
+                }
+            }
+            else
+            {
+                $arr="There is no product having such kind of design";
+                $err=array('Code'=>1,'Msg'=>'Error in fetching detail');
+            
+            }
+            $result=array('Result'=>$arr,'error'=>$err);
+            return $result;
+        }
+       
+        /*public function getSuggestions($params)
+        {
+        $str=$params['str'];
+        $tblname=$params['tname'];
+        if(!empty($str)) 
+        {
+            $sql = "SELECT *,IF(product_name LIKE '".$str."%',1,0) as startwith FROM $tblname WHERE MATCH(product_name) AGAINST (\"'" . $str . "*'\" IN BOOLEAN MODE) ORDER BY startwith DESC LIMIT 0,15";
+            $res=$this->query($sql);
+        }
+        else
+            {
+        echo  $sql = "SELECT * FROM $tblname LIMIT 0,15";
+              $res=$this->query($sql);
+            }
+        
+        if($res)
+        {
+            while($row = $this->fetchData($res))
+            {  
+                if ($row && !empty($row['product_id'])) 
+                {
+                    
+                    $reslt['id'] = $row['product_id'];
+                    $reslt['name'] = $row['product_name'];
+                    $arr[] = $reslt;
+                }
+            }
+            if(!empty($arr))
+            {
+                $err = array('Code'=>0,'Msg'=>'Details fetched successfully');
+            }
+            else
+            {
+                $err = array('errCode'=>0,'errMsg'=>'No results found');
+            }
+        }
+        $result = array('results' =>$arr,'error'=>$err);
+        return $result;
+    }
+        */
     }
 ?>
         

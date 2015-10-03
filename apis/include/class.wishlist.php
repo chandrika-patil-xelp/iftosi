@@ -31,23 +31,41 @@ class wishlist extends DB
    
    public function viewsh($params)
    {
-       $dt     = json_decode($params['dt'],1);
-       $detls  = $dt['result'];
-       $vsql="SELECT pid from tbl_wishlist where uid=".$detls['uid']."";
+       $vsql="SELECT pid from tbl_wishlist where uid=".$params['uid']."";
+       $page=$params['page'];
+       $limit=$params['limit'];
+       if (!empty($page))
+        {
+            $start = ($page * $limit) - $limit;
+            $vsql.=" LIMIT " . $start . ",$limit";
+        } 
+         $vsql;
        $vres=$this->query($vsql);
-       if($vres)
-       {
+       $chkres=$this->numRows($vres);
+       
+       if($chkres>0)
+       {   $i=0;
+       
            while($row=$this->fetchData($vres))
-           {
-               $pid[]=$row['pid'];
-           }
-            $pid=implode(',',$pid);
+            {
+               
+            $prid[$i]=$row['pid'];
             
-            $pres="SELECT product_name,product_display_name,product_model,prd_price from tbl_product_master where product_id IN(".$pid.")";    
-            $pres=$this->query($pres);
+            }
+
+            $pid=implode(',',$prid);
+            
+           $pres="SELECT product_name,product_display_name,product_model,prd_price,desname from tb_master_prd where product_id IN(".$pid.")";    
+            $pres.=" LIMIT " . $start . ",$limit";
+           
+           $pres=$this->query($pres);
+            
             if($pres)
             {
-                $arr="Product List is shown";
+                while($row=$this->fetchData($pres))
+                {
+                    $arr=$row;
+                }   
                 $err=array('Code'=>0,'Msg'=>'Select operation done');
             }
             else

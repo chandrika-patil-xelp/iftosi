@@ -12,7 +12,15 @@ class filter extends DB
     {
       $sql = "SELECT attribute_id, attr_display_position FROM tb_attribute_mapping WHERE category_id=".$params['category_id']."
                 AND attr_filter_flag=1 ORDER BY attr_filter_position ASC";	
-	$res = $this->query($sql);
+        $page=$params['page'];
+        $limit=$params['limit'];
+        if (!empty($page))
+        {
+            $start = ($page * $limit) - $limit;
+            $sql.=" LIMIT " . $start . ",$limit";
+        }
+      
+      $res = $this->query($sql);
         
         $chkres=$this->numRows($res);
         if($chkres)
@@ -29,6 +37,13 @@ class filter extends DB
             
             $attr_id = implode(",", $aid);
             $sql1="SELECT attr_id,attr_name,attr_display_name,attr_unit,attr_unit_pos from tb_attribute_master WHERE attr_id IN(".$attr_id.") ORDER BY attr_display_name ASC";
+            
+            if (!empty($page))
+            {
+                $start = ($page * $limit) - $limit;
+                $sql1.=" LIMIT " . $start . ",$limit";
+            }
+            
             $res2=$this->query($sql1);
             $chkres2=$this->numRows($res2);
             if($chkres2>0)
@@ -44,7 +59,12 @@ class filter extends DB
                 }
                 
             
-               $sql3 = "SELECT   attribute_id,value, count(1) as cnt FROM tbl_product_attributes WHERE category_id =".$params['category_id']." AND attribute_id IN(".$attr_id.") AND active_flag=1 group by attribute_id,value order by attribute_id, count(1) desc";
+                $sql3 = "SELECT   attribute_id,value, count(1) as cnt FROM tbl_product_attributes WHERE category_id =".$params['category_id']." AND attribute_id IN(".$attr_id.") AND active_flag=1 group by attribute_id,value order by attribute_id, count(1) desc";
+                if (!empty($page))
+                {
+                    $start = ($page * $limit) - $limit;
+                    $sql3.=" LIMIT " . $start . ",$limit";
+                }    
                 $res3 = $this->query($sql3);
                 $chkres3=$this->numRows($res3);
                 if($chkres3>0)
@@ -64,108 +84,23 @@ class filter extends DB
        }       $result=array('results'=>$arr,'error'=>$err);
                return $result;
        }
-       
-       
-
-#   Filtering basic basis are as following:
-#    1=>PRICE RANGE 2=>PURITY 3=>CATEGORY        
-#        
-#   Get price and weight from main product on the basis of category type 
-#   this will be just a condition
-#   However we are about to display product details at the front.
-#   We have attributes (type,metal,color,shape,clarity,sharpness,measurements,stones,designers)                
-#   We have prd details(model,barcode,lotref,product weight,product price,name)
-
-public function refine($params)
-    {  
-
-        $dt     = json_decode($params['dt'],1);
-        $detls  = $dt['result'];
-       $val  = $dt['value'];
-        $psql="SELECT product_id,barcode,lotref,lotno,product_name,product_display_name,product_brand,product_model,prd_img,prd_price AS prc,lineage,prd_wt,category_id,product_currency,product_keyword,product_desc,product_warranty from tb_master_prd";
-        $flg=$detls['filter_flg'];
-        
-        if($flg=0)
-        {
-            $pres=$this->query($psql);
-            $chkres=$this->numRows($pres);
-            if($chkres>0)
-            {   
-                while($row=$this->fetchData($pres))
-                {   
-                    $arr[]=$row;
-                }
-                $err=array('Code'=>0,'Msg'=>'Prodcut result is obtained');
-            }
-        }
-        else if($flg=1)
-        {   
-            $wh=" WHERE ";
-            $sql=$psql.$wh;
-            $aid=explode(',',$detls['aid']);
-            $plsql="SELECT product_id from tbl_product_attributes where ";
-            for($i=0;$i<count($aid);$i++)       /*   Loop for attributes aid segment                 */
-            {   
-               $vals_arr=explode(',',$val[$aid[$i]]);
-               
-               for($j=0;$j<count($vals_arr);$j++)  /* Values of each attribute according to the presence in value array */
-               {
-                   $plsql="SELECT product_id from tbl_product_attributes where attribute_id=".$aid[$i]." AND value IN('".$vals_arr[$j]."')";
-                   $plres=$this->query($plsql);
-                   while($row=$this->fetchData($plres))
-                    {
-                        $pids[]=$row['product_id'];
-                    }
-                }
-            }
-           $prid=implode(',',$pids);
-    
-           $sql.=" product_id IN(".$prid.")";
-           $finalres=$this->query($sql);
-           $chkres=$this->numRows($finalres);
-           if($chkres>0)
-           {
-               while($rows=$this->fetchData($finalres))
-               {
-                   $arr[]=$rows;
-               }
-               $err=array('Code'=>0,'Msg'=>'Product List fetched');
-           }
-           else
-           {
-               $arr=array();
-               $err=array('Code'=>1,'Msg'=>'No records found');
-           }
-        }
-        else
-        {
-            $arr=array();
-            $err=array('Code'=>1,'Msg'=>'Error in passing values');
-        }
-        $result=array('result'=>$arr,'error'=>$err);
-        return $result;
-    }
-       
-       
-       
-/*       
-       
+         
     public function refine($params)
     {  
 
         $dt     = json_decode($params['dt'],1);
         $detls  = $dt['result'];
- When No condition is applied 
+// When No condition is applied 
   
 #   WHEN FILTER FLAG IS NOT SET THEN       
-        $psql="SELECT product_id,barcode,lotref,lotno,product_name,product_display_name,product_brand,product_model,prd_img,prd_price AS prc,lineage,prd_wt,category_id,product_currency,product_keyword,product_desc,product_warranty from tb_master_prd";
+        $sql="SELECT product_id,barcode,lotref,lotno,product_name,product_display_name,product_brand,product_model,prd_img,prd_price AS prc,lineage,prd_wt,category_id,product_currency,product_keyword,product_desc,product_warranty,desname from tb_master_prd WHERE category_id=".$params['catid']."";
 
 //  If filter flag is active/inactive        
         $flg=$detls['filter_flg'];
         
         if($flg==0)
-         {
-            $pres=$this->query($psql);
+        {
+            $pres=$this->query($sql);
            
             $chkres=$this->numRows($pres);
             
@@ -183,28 +118,18 @@ public function refine($params)
 #   psql is the prime query. This will adjoins with several sql variable strings accordingly
         else if($flg==1)
         {
-            $wh=" WHERE ";
-            $sql=$psql.$wh;
-/*            
 #   SHOWS PRODUCT WITH A CERTAIN PRICE ONLY            
             if(!empty($detls['price']))
            {
-            $pr="prd_price=".$detls['price']."";
+            $pr=" AND prd_price=".$detls['price']."";
             $sql.=$pr;
            }
             
 #   ADDS PRICE RANGE  [pfrm]         [pto]        WITH THE PROVIDED QUERY
            if(!empty($detls['pfrm']) || !empty($detls['pto']))
            {
-            $price="prd_price>=".$detls['pfrm']." AND prd_price<= ".$detls['pto']."";
-            $sql.=$price;
-           }
-
-#   GET THE PRODUCT ACCORDING TO CATEGORY ID REQUESTED FROM FILTER PANE                    
-           if(!empty($detls['catid']))
-           {
-            $cat=" AND category_Id IN(".$detls['catid'].")";
-            $sql.=$cat;
+            $price=" AND prd_price>=".$detls['pfrm']." AND prd_price<= ".$detls['pto']."";
+        echo    $sql.=$price;
            }
 
 #   FETCHES PRODUCT ACCORDING TO BRAND NAME                   
@@ -223,10 +148,9 @@ public function refine($params)
                $type= str_replace(',', "','", $detls['type']);
 
                $tsql="SELECT attr_id from tb_attribute_master where attr_name='type'";
-               $tres=$this->query($type);
+               $tres=$this->query($tsql);
                $trow=$this->fetchData($tres);
                $typeid=$trow['attr_id'];
-
                $types="SELECT product_id from tbl_product_attributes WHERE attribute_id=".$typeid." AND value IN('".$type."')";
                $tpres=$this->query($types);
                if($tpres)
@@ -237,7 +161,7 @@ public function refine($params)
                    }
                    $pid['typid']=implode(',',$pid);
                    
-                   $sql.="AND product_id IN(".$pid.")";
+                   $sql.=" AND product_id IN(".$pid.")";
                }
            }
 
@@ -315,7 +239,7 @@ public function refine($params)
                    }
                    $pid['col']=implode(',',$pid);
 #   HANDLE [AND] [OR] [WHERE]
-                   $sql.="AND product_id IN(".$pid.")";
+                   $sql.=" AND product_id IN(".$pid.")";
                }
            }
 
@@ -341,7 +265,7 @@ public function refine($params)
                    }
                    $pid['shpid']=implode(',',$pid);
 #   HANDLE [AND] [OR] [WHERE]
-                   $sql.="AND product_id IN(".$pid.")";
+                   $sql.=" AND product_id IN(".$pid.")";
                }
            }
            
@@ -367,7 +291,7 @@ public function refine($params)
                    }
                    $pid['stlid']=implode(',',$pid);
 #   HANDLE [AND] [OR] [WHERE]
-                   $sql.="AND product_id IN(".$pid.")";
+                   $sql.=" AND product_id IN(".$pid.")";
                }
            }           
 
@@ -393,7 +317,7 @@ public function refine($params)
                    }
                    $pid['prtyid']=implode(',',$pid);
 #   HANDLE [AND] [OR] [WHERE]
-                   $sql.="AND product_id IN(".$pid.")";
+                   $sql.=" AND product_id IN(".$pid.")";
                }
            }
            
@@ -419,7 +343,7 @@ public function refine($params)
                    }
                    $pid['szid']=implode(',',$pid);
 #   HANDLE [AND] [OR] [WHERE]
-                   $sql.="AND product_id IN(".$pid.")";
+                   $sql.=" AND product_id IN(".$pid.")";
                }
            }
            
@@ -431,7 +355,7 @@ public function refine($params)
            {
               // $size= implode(',', $detls['size']);
                $clsql="SELECT attr_id from tb_attribute_master where attr_name='clarity'";
-               $clres=$this->query($szsql);
+               $clres=$this->query($clsql);
                $clrow=$this->fetchData($clres);
                $aid=$clrow['attr_id'];
 
@@ -445,9 +369,62 @@ public function refine($params)
                    }
                    $pid['clid']=implode(',',$pid);
 #   HANDLE [AND] [OR] [WHERE]
-                   $sql.="AND product_id IN(".$pid.")";
+                   $sql.=" AND product_id IN(".$pid.")";
                }
            }
+ 
+           
+#PRODUCT CARATS RANGE
+#  SEARCHES FOR PRODUCT CARATS ATTRIBUTE ID 
+#  FETCHES PRODUCT ID IN CONTEXT OF ATTRIBUTE VALUE AGAINST FETCHED CARATS CATEGORY
+#  GENERALIZED QUERY AGAINST PRODUCT FIELDS QUERY HAVING PRODUCT ID IN OBTAINED PID           
+           
+           if(!empty($detls['mncar']) && !empty($detls['mxcar']))
+           {
+              // $size= implode(',', $detls['size']);
+               $crsql="SELECT attr_id from tb_attribute_master where attr_name='carats'";
+               $crres=$this->query($crsql);
+               $crrow=$this->fetchData($crres);
+               $aid=$crrow['attr_id'];
+
+               $caratsql="SELECT product_id from tbl_product_attribute WHERE attribute_id=".$aid." AND value BETWEEN ".$detls['mncar']." AND ".$detls['mxcar']."";
+               $caratres=$this->query($caratsql);
+               if($caratres)
+               {
+                   while($row=$this->fetchData($caratres))
+                   {
+                       $pid[]=$row['product_id'];
+                   }
+                   $pid['carid']=implode(',',$pid);
+#   HANDLE [AND] [OR] [WHERE]
+                   $sql.=" AND product_id IN(".$pid.")";
+               }
+           }
+           
+#PRODUCT CARATS 
+#  SEARCHES FOR PRODUCT CARATS ATTRIBUTE ID 
+#  FETCHES PRODUCT ID IN CONTEXT OF ATTRIBUTE VALUE AGAINST FETCHED CARATS CATEGORY
+#  GENERALIZED QUERY AGAINST PRODUCT FIELDS QUERY HAVING PRODUCT ID IN OBTAINED PID           
+           
+           if(!empty($detls['carats']))
+           {
+               $crsql="SELECT attr_id from tb_attribute_master where attr_name='carats'";
+               $crres=$this->query($crsql);
+               $crrow=$this->fetchData($crres);
+               $aid=$crrow['attr_id'];
+               $caratsql="SELECT product_id from tbl_product_attribute WHERE attribute_id=".$aid." AND value IN(".$detls['carats'].")";
+               $caratres=$this->query($caratsql);
+               if($caratres)
+               {
+                   while($row=$this->fetchData($caratres))
+                   {
+                       $pid[]=$row['product_id'];
+                   }
+                   $pid['carid']=implode(',',$pid);
+#   HANDLE [AND] [OR] [WHERE]
+                   $sql.=" AND product_id IN(".$pid.")";
+               }
+           }           
            
 #PRODUCT POLISH
 #  SEARCHES FOR PRODUCT POLISH ATTRIBUTE ID 
@@ -471,11 +448,11 @@ public function refine($params)
                    }
                    $pid['clid']=implode(',',$pid);
 #   HANDLE [AND] [OR] [WHERE]
-                   $sql.="AND product_id IN(".$pid.")";
+                   $sql.=" AND product_id IN(".$pid.")";
                }
            }
 
-           for($i=0;$i<=count($detls['aid']);$i++)
+/*           for($i=0;$i<=count($detls['aid']);$i++)
            {
                $plsql="SELECT product_id from tbl_product_attributes where attribute_id IN(".$detls['aid'].")";
                $plres=$this->query($plsql);
@@ -487,7 +464,17 @@ public function refine($params)
                $prid='';
                $prid=implode(',',$pids);
            $sql.=" AND product_id IN(".$pid.")";
-//-----------------------------FINALLY QUERY EXECUTES-------------------------------------------------------------------------------           
+
+ */
+           
+ //-----------------------------FINALLY QUERY EXECUTES-------------------------------------------------------------------------------           
+       $page=$params['page'];
+        $limit=$params['limit'];
+        if (!empty($page))
+        {
+            $start = ($page * $limit) - $limit;
+            $sql.=" LIMIT " . $start . ",$limit";
+        }
            $finalres=$this->query($sql);
            $chkres=$this->numRows($finalres);
            if($chkres>0)
@@ -513,7 +500,87 @@ public function refine($params)
         $result=array('result'=>$arr,'error'=>$err);
         return $result;
     }   
-*/       
+       
+/*     
 
+#   Filtering basic basis are as following:
+#    1=>PRICE RANGE 2=>PURITY 3=>CATEGORY        
+#        
+#   Get price and weight from main product on the basis of category type 
+#   this will be just a condition
+#   However we are about to display product details at the front.
+#   We have attributes (type,metal,color,shape,clarity,sharpness,measurements,stones,designers)                
+#   We have prd details(model,barcode,lotref,product weight,product price,name)
+
+public function refine1($params)
+    {  
+
+        $dt     = json_decode($params['dt'],1);
+        $detls  = $dt['result'];
+       $val  = $dt['value'];
+        $sql="SELECT product_id,barcode,lotref,lotno,product_name,product_display_name,product_brand,product_model,prd_img,prd_price AS prc,lineage,prd_wt,category_id,product_currency,product_keyword,product_desc,product_warranty from tb_master_prd where category_id=".$params['catid']."";
+        $flg=$detls['filter_flg'];
+        
+        if($flg=0)
+        {
+            $pres=$this->query($psql);
+            $chkres=$this->numRows($pres);
+            if($chkres>0)
+            {   
+                while($row=$this->fetchData($pres))
+                {   
+                    $arr[]=$row;
+                }
+                $err=array('Code'=>0,'Msg'=>'Prodcut result is obtained');
+            }
+        }
+        else if($flg=1)
+        {   
+
+            $aid=explode(',',$detls['aid']);
+            $plsql="SELECT product_id from tbl_product_attributes where ";
+            for($i=0;$i<count($aid);$i++)       /*   Loop for attributes aid segment                 
+            {   
+               $vals_arr=explode(',',$val[$aid[$i]]);
+               
+               for($j=0;$j<count($vals_arr);$j++)  /* Values of each attribute according to the presence in value array 
+               {
+                   $plsql="SELECT product_id from tbl_product_attributes where attribute_id=".$aid[$i]." AND value IN('".$vals_arr[$j]."')";
+                   $plres=$this->query($plsql);
+                   while($row=$this->fetchData($plres))
+                    {
+                        $pids[]=$row['product_id'];
+                    }
+                }
+            }
+           $prid=implode(',',$pids);
+    
+           $sql.=" product_id IN(".$prid.")";
+           $finalres=$this->query($sql);
+           $chkres=$this->numRows($finalres);
+           if($chkres>0)
+           {
+               while($rows=$this->fetchData($finalres))
+               {
+                   $arr[]=$rows;
+               }
+               $err=array('Code'=>0,'Msg'=>'Product List fetched');
+           }
+           else
+           {
+               $arr=array();
+               $err=array('Code'=>1,'Msg'=>'No records found');
+           }
+        }
+        else
+        {
+            $arr=array();
+            $err=array('Code'=>1,'Msg'=>'Error in passing values');
+        }
+        $result=array('result'=>$arr,'error'=>$err);
+        return $result;
+    }
+ */      
+       
 }
 ?>

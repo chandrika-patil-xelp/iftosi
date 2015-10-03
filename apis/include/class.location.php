@@ -66,6 +66,14 @@ class location extends DB
     public function viewbyState($params)
     {
         $vsql="SELECT state_name,country_name FROM tbl_city_master WHERE country_name='".$params['cname']."' AND state_name='".$params['sname']."'";
+        $page=$params['page'];
+        $limit=$params['limit'];
+        if (!empty($page))
+        {
+            $start = ($page * $limit) - $limit;
+            $vsql.=" LIMIT " . $start . ",$limit";
+        }
+        
         $vres=$this->query($vsql);
         $chkres=$this->numRows($vres);
         if($chkres>0)
@@ -91,6 +99,13 @@ class location extends DB
     public function viewbyCountry($params)
     {
         $vsql="SELECT state_name,cityname from tbl_city_master where country_name='".$params['cname']."'";
+        $page=$params['page'];
+        $limit=$params['limit'];
+        if (!empty($page))
+        {
+            $start = ($page * $limit) - $limit;
+            $vsql.=" LIMIT " . $start . ",$limit";
+        }
         $vres=$this->query($vsql);
         $cres=$this->numRows($vres);
         if($cres>0)
