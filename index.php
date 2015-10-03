@@ -17,14 +17,18 @@
 		default:
 			switch ($case)
 			{
-				case 'home':
-					include 'template/index.html';
-				break;
 				case 'results':
+                                        $page='results';
 					include 'template/results.html';
 				break;
+				case 'details':
+                                        $page='product_details';
+					include 'template/product_details.html';
+				break;
 				default:
+                                        $page='index';
 					include 'template/index.html';
+                                        
 				break;
 			}
 			break;
