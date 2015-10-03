@@ -12,19 +12,18 @@
         <script  src="tools/js/lib/jquery1.9.1.min.js"></script>
         <script  src="tools/js/lib/ion.rangeSlider.js"></script>
     </head>
-    <body class="transition300">
+    <body>
         <div id='baseCont' class="container fmOpenR bgWhite resultsPage">
             <div class="wrapper">
                 <div id='header' class="header transition300">
                     <div class="wrapperMax poR">
-                        <div id="mMenuBtn" class="menuBtn fLeft transition300 ripplelink"></div>
+                        <div id="mMenuBtn" class="menuBtn fLeft transition300 ripplelink" onclick="showLeftMenu(true)"></div>
                         <div id="mFilterBtn" class="filterBtn fRight transition300 ripplelink" onclick="swichFilter();"></div>
                         <div class="headCatCont fLeft transition300">
                             <div id='hbgDiam' class="headCat fLeft bgDiamond transition300 headSelected"><span>Diamonds</span></div>
                             <div id='hbgJewel' class="headCat fLeft bgJewellery transition300"><span>Jewellery</span></div>
                             <div id='hbgBull' class="headCat fLeft bgBullion transition300"><span>Bullions</span></div>
                         </div>
-                        
                         <div class="headRight fRight">
                             <div class="compNo fRight fmOpenB">+91 9980051525</div>
                             <div class="signInUpTab fRight fmOpenR">Sign In / Sign Up</div>
@@ -39,7 +38,7 @@
                        <span id='resultCount'> 2,835</span> Diamonds found
                     </div>
                 </div>
-                <div class='shapesCont resultsPage'>
+                <div class='shapesCont resultsPage showHide'>
                     <div class="wrapperMax">
                         <div class="allShapes resultsPage">
                             <center>
@@ -78,6 +77,34 @@
                                 <div id='mfHeader' class="mfHeader fLeft fmOpenR">
                                     <div class="backToRes fLeft ripplelink poR" onclick="swichFilter();">Back to results</div>
                                     <div class="clearFill fRight ripplelink poR">Clear</div>
+                                </div>
+                                <div class='shapesCont resultsPage hideShow'>
+                                    <div class="wrapperMax">
+                                        <div class="allShapes resultsPage">
+                                            <div class="fLeft optionTitle fmOpenR">All Shapes</div>
+                                            <center>
+                                                <div class="shapeComm transition300 ripplelink Round">
+                                                </div><div class="shapeComm transition300 ripplelink Pear">
+                                                </div><div class="shapeComm transition300 ripplelink Heart">
+                                                </div><div class="shapeComm transition300 ripplelink Princess">
+                                                </div><div class="shapeComm transition300 ripplelink Asscher">
+                                                </div><div class="shapeComm transition300 ripplelink Marquise">
+                                                </div><div class="shapeComm transition300 ripplelink Oval">
+                                                </div><div class="shapeComm transition300 ripplelink Emerald">
+                                                </div><div class="shapeComm transition300 ripplelink Radiant">
+                                                </div><div class="shapeComm transition300 ripplelink Cushion"></div>
+                                            </center>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="filterCont fLeft hideShow">
+                                    <div class="fLeft optionTitle fmOpenR">Sort By</div>
+                                    <select class="sortSelect fmOpenR">
+                                        <option>Best Match</option>
+                                        <option>Lowest Price</option>
+                                        <option>Highest Price</option>
+                                        <option>Rating</option>
+                                    </select>
                                 </div>
                                 <div class="filterCont fLeft">
                                     <div class="fLeft optionTitle fmOpenR">City / Area</div>
@@ -344,13 +371,24 @@
                 </div>
             </div>
             <?php include 'logo.html';?>
+            <div id='leftMenu' class='leftMenu transition300 leftTransit'>
+                <ul class="fLeft fmOpenR">
+                    <li class='iHome'>Home</li>
+                    <li class='iDiamonds'>Diamonds</li>
+                    <li class='iJewellery'>Jewellery</li>
+                    <li class='iBullions'>Bullions</li>
+                    <li class='iWishlist'>Wishlist <span class="fRight">25</span></li>
+                    <li class='iLogin'>Login</li>
+                    <li class='iLogout'>Logout <span class="fRight">Shubham</span></li>
+                </ul>
+            </div>
         </div>
+        <div id='dragTarget' class="drag-target" style="touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); left: 0px;"></div>
         <script  src="tools/js/lib/velocity.js"></script>
         <script  src="tools/js/lib/ripple.js"></script>
         <script  src="tools/js/lib/jquery-numerator.js"></script>
         <script  src="tools/js/lib/hammer.js"></script>
         <script>
-            
             var isOpen = false;
             var lastSc=0;
             var isStop = false;
@@ -359,18 +397,15 @@
             var isMobile=false;
             if(pw<768){
                 isMobile=true; 
-               $('#filters').height(ph+"px");
-                $('#filters,#mfHeader,#mfFooter').css({left:(pw)+"px"});
-                $('#mfFooter').css({top:(ph-50)+"px"});
-                setTimeout(function(){
-                    $('#filters').removeClass('transit-100X');
-                },1000);
             }
             
             
             $(document).ready(function() {
                 setTimeout(function(){
-                    $('body').animate({scrollTop:100},300);
+                    var samt=100;
+                    if(isMobile){
+                        samt=450;
+                    }$('body').animate({scrollTop:samt},300);
                 },100);
                 
                 
@@ -522,6 +557,12 @@
                         
                     }
                 });
+                
+                $('#dragTarget').click(function(){
+                    showLeftMenu(false);
+                });
+
+
             }); 
             
             var areas=new Array("Jakkur","Judicial Layout","M.G Road","Indiranagar");
@@ -546,37 +587,62 @@
                 }
 
             }
-        var switchFlag=true;
-        function showSideNav(flag) {
-            if (flag) {
-                $('body').scrollTop(0);
-                $('body').addClass('move');
-            switchFlag=false;   
-               
-            } else {
-                $('body').removeClass('move');
-                switchFlag=true;
+            var switchFlag=true;
+            function showSideNav(flag) {
+                if (flag) {
+                    $('#filters').removeClass('transit-100X');
+                    switchFlag=false;   
+                } else {
+                    $('#filters').addClass('transit-100X');
+                    switchFlag=true;
+                }
             }
-        }
-    
-        function swichFilter(){
-            showSideNav(switchFlag);
             
-        }
-        
-        var styled = 0;
-        function removeStyle() {
-            if (styled < 5) {
-                $('#caratsDiv .irs-bar').css({background: 'none', border: 'none'});
-                $('#caratsDiv .irs-bar-edge').css({background: 'none', border: 'none'});
-                styled++;
+    
+            function swichFilter(){
+                showSideNav(switchFlag);
             }
 
-        }
-        setTimeout(function() {
-            removeStyle();
-        }, 1500);
+            var styled = 0;
+            function removeStyle() {
+                if (styled < 5) {
+                    $('#caratsDiv .irs-bar').css({background: 'none', border: 'none'});
+                    $('#caratsDiv .irs-bar-edge').css({background: 'none', border: 'none'});
+                    styled++;
+                }
+
+            }
+            setTimeout(function() {
+                removeStyle();
+            },500);
+            
+            function showLeftMenu(flag){
+                if(flag){
+                    $('#leftMenu').removeClass('leftTransit');
+                    $('body').addClass('pFixed');
+                    $('#dragTarget').css({width: '50%', left: '250px'});
+                    
+                }else{
+                    $('#leftMenu').addClass('leftTransit');
+                    $('body').removeClass('pFixed');
+                     $('#dragTarget').css({width: '20px', left: '0px'});
+                }
+            }
     
+            
+            var ele = document.getElementById('dragTarget');
+            var mc = new Hammer(ele);
+            mc.on("panleft panright tap press", function(ev) {
+                //ele.textContent = ev.type +" gesture detected.";
+                if (ev.type == 'panright') {
+                    showLeftMenu(true);
+                    console.log("right");
+                }
+                else if (ev.type == 'panleft') {
+                    showLeftMenu(false);
+                    console.log("left");
+                }
+            });
         </script>
     </body>
 </html>
