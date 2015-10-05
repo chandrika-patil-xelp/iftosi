@@ -9,15 +9,15 @@
 		<link rel="stylesheet" href="<?=$css['home'];?>">
 		<link rel="stylesheet" href="<?=$css['ripple'];?>">
 		<script type="text/javascript" src="<?=$jvs['jqry'];?>"></script>
-		
+                <script>var pageName='<?php echo $page?>';</script>
 	<?php
 		if ($page == 'results')
 		{
 	?>
-			<link rel="stylesheet" href="<?=$css['rngsld'];?>">
-			<link rel="stylesheet" href="<?=$css['rngsldskin'];?>">
-			<link rel="stylesheet" href="<?=$css['normalize'];?>">
-			<script type="text/javascript" src="<?=$jvs['rngsld'];?>"></script>
+                    <link rel="stylesheet" href="<?=$css['rngsld'];?>">
+                    <link rel="stylesheet" href="<?=$css['rngsldskin'];?>">
+                    <link rel="stylesheet" href="<?=$css['normalize'];?>">
+                    <script type="text/javascript" src="<?=$jvs['rngsld'];?>"></script>
 	<?php
 		}
 	?>    

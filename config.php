@@ -25,7 +25,6 @@ $css = array();
 $jvs = array();
 
 // CSS Libraries Start
-
 $css['ripple'] = DOMAIN.'tools/css/ripple.css?v='.VERSION;
 $css['rngsld'] = DOMAIN.'tools/css/rangeslider/ion.rangeSlider.css?v='.VERSION;
 $css['rngsldskin'] = DOMAIN.'tools/css/rangeslider/ion.rangeSlider.skinHTML5.css?v='.VERSION;
@@ -55,9 +54,11 @@ $jvs['hammer'] = DOMAIN.'tools/js/lib/hammer.js?v='.VERSION;
 
 // Custom JS Start
 
+$jvs['comm'] = DOMAIN.'tools/js/Common.js?v='.VERSION;
 $jvs['home'] = DOMAIN.'tools/js/home.js?v='.VERSION;
 $jvs['result'] = DOMAIN.'tools/js/result.js?v='.VERSION;
 $jvs['details'] = DOMAIN.'tools/js/details.js?v='.VERSION;
+$jvs['head'] = DOMAIN.'tools/js/header.js?v='.VERSION;
 
 // Custom JS End
 
