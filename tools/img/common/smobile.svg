@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X6 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="40px" height="40px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 8963 8964"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil1 {fill:none}
+    .fil0 {fill:#183765}
+    .fil3 {fill:#F49712}
+    .fil2 {fill:white}
+   ]]>
+  </style>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_393064696">
+   <path class="fil0" d="M5807 1793c-69,-68 -162,-106 -255,-112l-2147 0c-100,6 -193,44 -255,112 -68,69 -106,162 -112,261l0 4855c6,93 44,187 112,255 69,69 162,112 261,118l2147 0c93,0 180,-44 249,-106 69,-69 112,-168 118,-268l0 -4855c-6,-100 -50,-193 -118,-261z"/>
+   <rect class="fil1" width="8963" height="8963"/>
+   <path class="fil2" d="M5745 2465c-846,0 -1687,0 -2533,0 0,-137 0,-268 0,-404 0,-106 100,-199 205,-199 697,0 1394,0 2091,0 31,0 62,0 93,12 81,25 143,112 143,199 0,131 0,261 0,392z"/>
+   <path class="fil3" d="M5745 6903c-6,106 -100,199 -205,199 -710,0 -1413,0 -2116,0 -93,0 -180,-62 -205,-150 -6,-31 -6,-68 -6,-100 0,-156 0,-317 0,-473 840,0 1687,0 2533,0 0,174 0,349 0,523z"/>
+   <path class="fil0" d="M4780 2098c-199,0 -398,0 -598,0 -12,0 -19,0 -31,6 -25,12 -44,44 -38,69 6,31 31,50 62,50 199,0 404,0 604,0 37,0 62,-31 62,-62 0,-37 -31,-62 -62,-62z"/>
+   <path class="fil0" d="M4376 6965c56,31 131,31 193,6 56,-25 112,-69 137,-131 25,-56 25,-124 6,-187 -25,-62 -69,-112 -131,-143 -50,-25 -106,-31 -162,-19 -75,12 -137,62 -162,124 -37,69 -43,150 -12,218 25,56 75,106 131,130z"/>
+   <path class="fil2" d="M4338 6722c6,-50 44,-93 93,-106 37,-12 81,-6 112,25 31,25 56,69 50,112 -6,43 -31,87 -75,106 -37,19 -93,19 -131,-12 -37,-25 -56,-75 -50,-125z"/>
+  </g>
+ </g>
+</svg>

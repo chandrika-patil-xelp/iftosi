@@ -88,4 +88,57 @@ $(document).ready(function(){
 
     });
     
+    
+//    $('.signInUpTab').bind('click',function(){
+//        $('#overlay,#loginDiv').removeClass('dn')
+//        setTimeout(function(){
+//            $('#overlay,#loginDiv').removeClass('transit-100Y');
+//            setTimeout(function(){
+//                $('#loginDiv').removeClass('transit-200Y')
+//            },200);
+//        },10);
+//    });
+    
+    
+//    $('#lgCancel').bind('click',function(){
+//        $('#loginDiv').addClass('transit-200Y');
+//        setTimeout(function(){
+//            $('#overlay').addClass('transit-100Y');
+//            setTimeout(function(){
+//                $('#overlay,#loginDiv').addClass('dn');
+//            },200);
+//        },100);
+//    });
+    
+    $('#loginDiv,#overlay').velocity({scale:0},{delay:0,duration:0});
+    $('.signInUpTab,.iLogin').bind('click',function(){
+        $('#overlay,#loginDiv').removeClass('dn');
+        setTimeout(function(){
+            $('#overlay').velocity({scale:1},{delay:0,duration:300,ease:'swing'});
+            $('#loginDiv').velocity({scale:1},{delay:80,duration:300,ease:'swing'});
+        },10);
+    
+    });
+    
+    
+    $('#lgCancel').bind('click',function(){
+        $('#loginDiv').velocity({scale:0},{delay:0,ease:'swing'});
+        $('#overlay').velocity({scale:0},{delay:100,ease:'swing'});
+        setTimeout(function(){
+            $('#overlay,#loginDiv').addClass('dn');
+        },1010);
+    });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 });

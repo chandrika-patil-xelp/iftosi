@@ -17,6 +17,10 @@
 		default:
 			switch ($case)
 			{
+                                case 'signup':
+                                        $page='signup';
+					include 'template/signup.html';
+				break;
 				case 'results':
                                         $page='results';
 					include 'template/results.html';

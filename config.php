@@ -59,6 +59,7 @@ $jvs['home'] = DOMAIN.'tools/js/home.js?v='.VERSION;
 $jvs['result'] = DOMAIN.'tools/js/result.js?v='.VERSION;
 $jvs['details'] = DOMAIN.'tools/js/details.js?v='.VERSION;
 $jvs['head'] = DOMAIN.'tools/js/header.js?v='.VERSION;
+$jvs['signup'] = DOMAIN.'tools/js/signup.js?v='.VERSION;
 
 // Custom JS End
 

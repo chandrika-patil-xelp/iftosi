@@ -1,0 +1,41 @@
+<?php include 'bhead.html'; ?>
+<body>
+    <div id='baseCont' class="container fmOpenR signupPage">
+        <div class="wrapper">
+            <div class='signupDiv'>
+                <div class="wrapperMax">
+                    <div class="signupTitle fLeft">Sign up </div>
+                    
+                    <div class="inputCont fLeft fmOpenR">
+                        <input type="text" id="pr_name" name="pr_name" autocomplete="off" maxlength="10" class="txtInput cOrange fmOpenR font14 mobileIcon">
+                        <label for="pr_name" class="inp-label transition100">NAME</label>
+                        <div id="pr_name_inpText" class="inpText fRight transition300">enter<br>your name</div>
+                    </div>
+                    <div class="inputCont fLeft fmOpenR">
+                        <input type="tel" id="pr_mobile" name="pr_mobile" autocomplete="off" maxlength="10" class="txtInput cOrange fmOpenR font14 mobileIcon">
+                        <label for="pr_mobile" class="inp-label transition100">MOBILE</label>
+                        <div id="pr_mobile_inpText" class="inpText fRight transition300">enter<br>mobile number</div>
+                    </div>
+                    <div class="inputCont fLeft fmOpenR">
+                        <input type="email" id="pr_email" name="pr_email" autocomplete="off" maxlength="10" class="txtInput cOrange fmOpenR font14 mobileIcon">
+                        <label for="pr_email" class="inp-label transition100">EMAIL</label>
+                        <div id="pr_email_inpText" class="inpText fRight transition300">enter<br>email address</div>
+                    </div>
+                    <div class="inputCont fLeft fmOpenR">
+                        <input type="password" id="pr_pass" name="pr_pass" autocomplete="off" maxlength="10" class="txtInput cOrange fmOpenR font14 passwordIcon">
+                        <label for="pr_pass" class="inp-label transition100">PASSWORD</label>
+                        <div id="pr_pass_inpText" class="inpText fRight transition300">enter your<br>password</div>
+                    </div>  
+                    <div class="cancelLgBtn fLeft fmOpenR ripplelink poR" id='signupCancel'> CANCEL</div>
+                    <div class="loginBtn fLeft fmOpenR ripplelink poR">SIGN UP</div>
+                </div>
+            </div>
+        </div>
+        <?php include 'logo.html'?>
+    </div>
+    <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
+    <script type="text/javascript" src="<?=$jvs['signup'];?>"></script>
+    <script type="text/javascript" src="<?=$jvs['comm'];?>"></script>
+</body>
+</html>
