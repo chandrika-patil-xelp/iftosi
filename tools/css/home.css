@@ -200,18 +200,10 @@ body{padding: 0;margin: 0;}
 .st3Middle{width:100%;height: 47%;}
 .st3Lower{width:100%;height: 20%;position: relative;}
 .st3Lower::after {content: '';position: absolute;left: 45%;top: -15px;width: 0;height: 0;border-left: 25px solid transparent;border-right: 25px solid transparent;border-top: 15px solid #8A0044;clear: both;-ms-transform: rotate(180deg);-webkit-transform: rotate(180deg);-moz-transform: rotate(180deg);transform: rotate(180deg);}
-
-
-
 .hPrdComm .infoUpper{font-size: 30px;line-height: 30px}
 .hPrdComm .infoLower{font-size: 40px;line-height: 40px}
 .hPrdComm .infoSingle{font-size: 25px;line-height: 25px;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;height: 25px;text-align: center;color: #fff;}
 .hPrdComm .infoTxt{height: 70px}
-
-
-
-
-
 
 /*Result Page*/
 .bgWhite{background: #fff!important;}
@@ -266,11 +258,6 @@ body{padding: 0;margin: 0;}
 .autoSuggestOuter ul {margin: 0;padding: 0;list-style: none;}
 .autoSuggstions{width: 100%;height: 35px;line-height: 35px;border-bottom: 1px solid #e6e6e6;cursor: pointer;font-size: 14px;color: #666;padding: 0 15px;}
 .autoSuggstions:hover{color:#8A0044;}
-
-
-
-
-
 
 
 
@@ -432,34 +419,24 @@ body{padding: 0;margin: 0;}
 .iconCall{background: #fff url(../img/common/1.svg)no-repeat;background-size: auto 100%;background-position:left center;padding: 0 15px 0 30px;}
 .iconWishlist{background: #fff url(../img/common/3.svg)no-repeat;background-size: auto 90%;background-position:left center;padding: 0 15px 0 30px;}
 .iconMessage{background: #fff url(../img/common/2.svg)no-repeat;background-size: auto 90%;background-position:left center;padding: 0 15px 0 30px;}
-
 .majorInfoBox{width:100%;height:auto;margin-top: 45px;color: #4d4d4d;}
 .infoCommn {width: 25%;text-align: left;padding-left:0px;height: 40px;margin-bottom: 15px;}
 .infoLabel {width: 100%;line-height: 15px;height: 15px;text-transform: uppercase;color:#8A0044}
 .infoValue {width: 100%;line-height: 25px;height: 25px;font-size: 18px;}
-
-  
-    
 .prdInfo{width:100%;height: auto;margin-top: 50px;}
 .prdInfoTitle{width:100%;height: 40px;line-height: 40px;border-bottom: 2px solid #8A0044;font-size: 25px;margin-bottom:20px;}
 .prdInfoDiv{width: 100%;height: auto;line-height: 30px;padding: 0;color: #4d4d4d;font-size: 16px;text-align: justify;margin-bottom: 30px;}
-
-
-
-
-
-
-
 .prdInfoDiv ul{margin: 0;padding: 0;width:100%;height: auto;list-style: none;}    
 .prdInfoDiv ul li{width:100%;height: auto;padding: 0;margin: 0 0 15px 0;}
 .prdInfoDiv ul li div:nth-child(1){width:auto;height: 40px;line-height: 40px;padding:0 25px 0 0;color: #8A0044 ;font-size: 22px;}
 .prdInfoDiv ul li div:nth-child(2){width: 100%;height: auto;line-height: 30px;padding: 0;color: #4d4d4d;font-size: 16px;padding-left: 25px;text-align: justify;}    
 .prdInfoDiv .prdInfoDiv{margin-bottom: 0}
 
-
-
-
-
+/*Wishlist*/
+.wishlistPage{background-color: #fff;padding-bottom: 0;}
+.listCont{width: 100%;height: auto}
+.listCont .prdResults {display: inline-block;margin-top: 30px;}
+.listCont .prdComm {width: 24%;height: auto;border: 5px solid #ebebde;margin: 0 0 1% 1%;}
 
 
 

@@ -1,8 +1,14 @@
 var lastSc=0;
+var pw=$(window).width();
+var ph=$(window).height();
+var isMobile=false;
+if(pw<768){
+    isMobile=true; 
+}
 $(document).ready(function(){
     $(window).scroll(function() {
         var sc = $(window).scrollTop();
-        if(pageName==='index'){
+        if(pageName==='index' || pageName==='wishlist' ){
             var sc=$(window).scrollTop();
             $('#header,#logoTxt,#mMenuBtn').velocity("stop");
             $('.logo').velocity("stop");
@@ -129,16 +135,13 @@ $(document).ready(function(){
         },1010);
     });
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    $('.wishCount,.wishlist').click(function(){
+        var URL=DOMAIN+"?case=wishlist";
+        if(pageName!=='wishlist'){
+            window.open(URL);
+        }else{
+            location.reload(true);
+        }
+    });
     
 });

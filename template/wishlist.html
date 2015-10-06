@@ -1,0 +1,81 @@
+<?php include 'bhead.html'; ?>
+<body>
+    <div id='baseCont' class="container fmOpenR wishlistPage">
+        <div class="wrapper">
+            <div id='header' class="header transition300">
+                <div class="wrapperMax">
+                    <div id="mMenuBtn" class="menuBtn fLeft transition300 ripplelink" onclick=""></div>
+                    <div class="cityName fLeft txtOver">Bangalore</div>
+                    <div class="headRight fRight">
+                        <div class="compNo fRight fmOpenB">+91 9980051525</div>
+                        <div class="signInUpTab fRight fmOpenR">Hello Ankur</div>
+                        <div class="headDivider fRight"></div>
+                        <div class="wishlist fRight fmOpenR">Wishlist</div>
+                        <div class="wishCount fRight fmOpenR ripplelink">25</div>
+                    </div>
+                </div>
+            </div>
+            <div class="totalResultsDiv">
+                <div class="wrapperMax fmOpenL">
+                   <span id="resultCount">25</span> items in your wishlist
+                </div>
+            </div>
+            <div class="listCont">
+                <div class="wrapperMax">
+                    <div class="prdResults ">
+                        <?php while($i<25){?>
+                                <div class='prdComm fLeft transition100'>
+                                    <div class='prdCommDiv fLeft transition100'>
+                                        <div class='prdShape fLeft'>
+                                            <div class='prdShTitle fLeft fmOpenB'>SHAPE</div>
+                                            <div class='prdShType fLeft fmOpenR'>Round</div>
+                                            <div class="Round fRight"></div>
+                                        </div>
+                                        <div class="prdDetails fLeft">
+                                            <div class="detComm">
+                                                <div class="detLabel fmOpenB fLeft">COLOR</div>
+                                                <div class="detValue fmOpenR fLeft">F</div>
+                                            </div>
+                                            <div class="detComm">
+                                                <div class="detLabel fmOpenB fLeft">CARATS</div>
+                                                <div class="detValue fmOpenR fLeft">0.99</div>
+                                            </div>
+                                            <div class="detComm">
+                                                <div class="detLabel fmOpenB fLeft">CLARITY</div>
+                                                <div class="detValue fmOpenR fLeft">Excellent</div>
+                                            </div>
+                                            <div class="detComm">
+                                                <div class="detLabel fmOpenB fLeft">CERTIFICATE</div>
+                                                <div class="detValue fmOpenR fLeft">1199046357</div>
+                                            </div>
+                                        </div>
+                                        <div class='prdPrice fLeft'>
+                                            <div class="detComm">
+                                                <div class="detLabel fmOpenB fLeft">BEST PRICE</div>
+                                                <div class="detValue fmOpenB fLeft"><span>&#8377;</span>8,28,5888</div>
+                                            </div>
+                                        </div>
+                                        <div class='prdActions fLeft'>
+                                            <div class='actionComm fLeft transition100 poR ripplelink'></div>
+                                            <div class='actionComm fLeft transition100 poR ripplelink'></div>
+                                            <div class='actionComm fLeft transition100 poR ripplelink'></div>
+                                            <div class='actionComm fLeft transition100 poR ripplelink'></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php $i++;}?>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <?php include 'logo.html';?>
+    </div>
+    <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['head']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['comm']; ?>"></script>
+    
+</body>
+</html>

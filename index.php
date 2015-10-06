@@ -21,6 +21,10 @@
                                         $page='signup';
 					include 'template/signup.html';
 				break;
+                                case 'wishlist':
+                                        $page='wishlist';
+					include 'template/wishlist.html';
+				break;
 				case 'results':
                                         $page='results';
 					include 'template/results.html';
@@ -32,7 +36,6 @@
 				default:
                                         $page='index';
 					include 'template/index.html';
-                                        
 				break;
 			}
 			break;

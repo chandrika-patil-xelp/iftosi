@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>IFtoSI</title>
+            <title>IFtoSI - <?php echo strtoupper($page)?></title>
 		<link rel='shortcut icon' type='image/x-icon' href='<?php echo FAVICON; ?>' />
 		<meta charset="utf-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -9,7 +9,10 @@
 		<link rel="stylesheet" href="<?=$css['home'];?>">
 		<link rel="stylesheet" href="<?=$css['ripple'];?>">
 		<script type="text/javascript" src="<?=$jvs['jqry'];?>"></script>
-                <script>var pageName='<?php echo $page?>';</script>
+                <script>
+                    var pageName='<?php echo $page?>';
+                    var DOMAIN='<?php echo DOMAIN?>';
+                </script>
 	<?php
 		if ($page == 'results')
 		{
