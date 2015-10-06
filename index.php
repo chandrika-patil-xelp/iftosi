@@ -28,6 +28,9 @@
 				case 'results':
                                         $page='results';
 					include 'template/results.html';
+				case 'jwresults':
+                                        $page='results';
+					include 'template/jewellery_results.html';
 				break;
 				case 'details':
                                         $page='product_details';

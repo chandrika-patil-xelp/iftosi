@@ -2,6 +2,7 @@ var lastSc=0;
 var pw=$(window).width();
 var ph=$(window).height();
 var isMobile=false;
+var isOpen=false;
 if(pw<768){
     isMobile=true; 
 }
@@ -144,4 +145,37 @@ $(document).ready(function(){
         }
     });
     
+    
+    
+    $('#drpinp').click(function() {
+        setTimeout(function() {
+            isOpen = true;
+        }, 150);
+        toggleDropDown(true);
+    });
+
+    $('#hdropList li').click(function() {
+        var val = $(this).val();
+        var text = $(this).text();
+        //$('#drpinp').text(text);
+        isOpen = false;
+        toggleDropDown(false);
+    });
+
+    $(document).click(function() {
+        if (isOpen) {
+            toggleDropDown(false);
+        }
+    });
+    
 });
+
+function toggleDropDown(flag) {
+    if (flag) {
+        $("#hdropList").velocity({opacity: 1, borderRadius: 0}, {duration: 200, display: "block"});
+    }
+    else {
+        $("#hdropList").velocity({opacity: 0, borderRadius: '100%'}, {duration: 50, display: "none"});
+    }
+
+}
