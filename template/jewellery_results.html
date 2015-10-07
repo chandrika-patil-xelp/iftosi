@@ -3,19 +3,22 @@
     <div id='baseCont' class="container fmOpenR bgWhite resultsPage">
         <div class="wrapper">
             <?php include 'header.html'?>
+            <div class="totalResultsDiv">
+                <div class="wrapperMax fmOpenL">
+                    <span id="resultCount">2,835</span> jewellery items found
+                </div>
+            </div>
             <div class='jShapesCont resultsPage showHide'>
-                <div class="wrapperMax">
-                    <div class="allShapes resultsPage">
-                        <center>
-                            <div id='Rings' class="jshapeComm transition300 ripplelink Rings">Rings
-                            </div><div  id='Earrings' class="jshapeComm transition300 ripplelink Earrings">Earrings
-                            </div><div  id='Pendant' class="jshapeComm transition300 ripplelink Pendent">Pendant
-                            </div><div  id='Necklace' class="jshapeComm transition300 ripplelink Necklace">Necklace
-                            </div><div  id='Bracelet' class="jshapeComm transition300 ripplelink Bracelet">Bracelet
-                            </div>
-                        </center>
-                    </div>
-                </div>                        
+                <div class="allShapes resultsPage">
+                    <center>
+                        <div id='Rings' class="jshapeComm transition300 ripplelink Rings">Rings
+                        </div><div  id='Earrings' class="jshapeComm transition300 ripplelink Earrings">Earrings
+                        </div><div  id='Pendant' class="jshapeComm transition300 ripplelink Pendent">Pendant
+                        </div><div  id='Necklace' class="jshapeComm transition300 ripplelink Necklace">Necklace
+                        </div><div  id='Bracelet' class="jshapeComm transition300 ripplelink Bracelet">Bracelet
+                        </div>
+                    </center>
+                </div>
             </div>
             <div class="allResults">
                 <div class="wrapperMax">
@@ -95,5 +98,6 @@
     <script type="text/javascript" src="<?= $jvs['result']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['head']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['comm']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['filter']; ?>"></script>
 </body>
 </html>

@@ -117,6 +117,7 @@ $(document).ready(function(){
 //        },100);
 //    });
     
+    
     $('#loginDiv,#overlay').velocity({scale:0},{delay:0,duration:0});
     $('.signInUpTab,.iLogin').bind('click',function(){
         $('#overlay,#loginDiv').removeClass('dn');

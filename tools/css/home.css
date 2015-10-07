@@ -105,7 +105,8 @@ body{padding: 0;margin: 0;}
 /*.shapeComm::before {position: absolute;top: 0;width:0%;height:5px;background: #8A0044;content: "";-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;left: 0;font-size: 16px;transition: 300ms ease-in-out;-moz-transition: 100ms ease-in-out;-ms-transition: 100ms ease-in-out;-webkit-transition: 100ms ease-in-out;-o-transition: 100ms ease-in-out;opacity: 1;}
 .shapeComm:hover::before {position: absolute;top: 0;width: 100%;height:5px;background: #8A0044;content: "";-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;left: 0;font-size: 16px;transition: 300ms ease-in-out;-moz-transition: 300ms ease-in-out;-ms-transition: 300ms ease-in-out;-webkit-transition: 300ms ease-in-out;-o-transition: 300ms ease-in-out;opacity: 1;}*/
 
-.resultsPage .shapeComm{margin: 0 0.5%;width: 7.5%!important;padding-bottom: 7.5%;height:0!important;border: 2px solid #ebebde;}
+.resultsPage .shapeComm1{margin: 0 0.5%;width: 7.5%!important;padding-bottom: 7.5%;height:0!important;border: 2px solid #ebebde;}
+.resultsPage .shapeComm{margin: 0;width: 10%!important;padding-bottom: 10%;height: 0!important;border: 2px solid #ebebde;}
 .resultsPage .shapeComm:hover{border:2px solid #8A0044;}
 
 .Round{background-position: 0% 0%;}
@@ -146,16 +147,16 @@ body{padding: 0;margin: 0;}
 
 
 
-.shapeSelected.shapeComm.Round{background-color:#ebebde;border:2px solid #ebebde;background-position: 0% 33%;}
-.shapeSelected.shapeComm.Pear{background-color:#ebebde;border:2px solid #ebebde;background-position: 11% 33%;}
-.shapeSelected.shapeComm.Heart{background-color:#ebebde;border:2px solid #ebebde;background-position: 22% 33%;}
-.shapeSelected.shapeComm.Princess{background-color:#ebebde;border:2px solid #ebebde;background-position: 33.5% 33%;}
-.shapeSelected.shapeComm.Asscher{background-color:#ebebde;border:2px solid #ebebde;background-position: 44.5% 33%;}
-.shapeSelected.shapeComm.Marquise{background-color:#ebebde;border:2px solid #ebebde;background-position: 55.5% 33%;}
-.shapeSelected.shapeComm.Oval{background-color:#ebebde;border:2px solid #ebebde;background-position: 66.5% 33%;}
-.shapeSelected.shapeComm.Emerald {background-color:#ebebde;border:2px solid #ebebde;background-position: 78% 33%;}
-.shapeSelected.shapeComm.Radiant{background-color:#ebebde;border:2px solid #ebebde;background-position: 89% 33%;}
-.shapeSelected.shapeComm.Cushion {background-color:#ebebde;border:2px solid #ebebde;background-position: 100% 33%;}
+.shapeSelected.shapeComm.Round{background-color:#fff;border:2px solid #ebebde;background-position: 0% 33%;}
+.shapeSelected.shapeComm.Pear{background-color:#fff;border:2px solid #ebebde;background-position: 11% 33%;}
+.shapeSelected.shapeComm.Heart{background-color:#fff;border:2px solid #ebebde;background-position: 22% 33%;}
+.shapeSelected.shapeComm.Princess{background-color:#fff;border:2px solid #ebebde;background-position: 33.5% 33%;}
+.shapeSelected.shapeComm.Asscher{background-color:#fff;border:2px solid #ebebde;background-position: 44.5% 33%;}
+.shapeSelected.shapeComm.Marquise{background-color:#fff;border:2px solid #ebebde;background-position: 55.5% 33%;}
+.shapeSelected.shapeComm.Oval{background-color:#fff;border:2px solid #ebebde;background-position: 66.5% 33%;}
+.shapeSelected.shapeComm.Emerald {background-color:#fff;border:2px solid #ebebde;background-position: 78% 33%;}
+.shapeSelected.shapeComm.Radiant{background-color:#fff;border:2px solid #ebebde;background-position: 89% 33%;}
+.shapeSelected.shapeComm.Cushion {background-color:#fff;border:2px solid #ebebde;background-position: 100% 33%;}
 
 
 .searchBtn{width:auto;height: 40px;line-height:40px;padding: 0 35px;display: inline-block;border-radius: 5px;background: #8A0044 url(../img/common/gears.gif)no-repeat;background-size: auto 20px;background-position: 120% center;color:#fff;font-size:16px;margin: 30px 0;cursor: pointer;position: relative;}
@@ -251,7 +252,7 @@ body{padding: 0;margin: 0;}
 
 /*Main Results*/
 .results_Filter{width:100%;height:auto;display: inline-block;position: relative;padding: 0 0 0 0px;}
-.filterList{width:25%;height: auto;min-height: 100%;;left:0;background: #fff;    padding-bottom: 25px;}
+.filterList{width:25%;height: auto;min-height: 100%;;left:0;background: #fff;padding-bottom: 25px;}
 .prdResults{width:75%;height: 100%;background: #fff;}
 .prdComm{width:31.5%;height:auto;border:5px solid #ebebde;margin: 0 0 1.83% 1.83%}
 .prdComm:hover{border-color: #d4d4c8}
@@ -416,7 +417,7 @@ body{padding: 0;margin: 0;}
 .prdMainDetails{width:100%;height: 390px;margin-top: -90px;position: relative;}
 .prdMainDetails .wrapperMax{padding-left: 360px;position: relative;}
 .imgsCont{width:360px;height: 390px;position: absolute;left:0;top:0;box-shadow: 0 0 20px 5px rgba(0,0,0,0.2)}
-.forImg{width:100%;height:300px;}
+.forImg{width:100%;height:300px;cursor: pointer;}
 .gallery{width:100%;height: 90px;}
 .thumbnil{width:86px;height: 86px;border: 1px solid #333;margin:2px;cursor: pointer;}
 .detCont{width:100%;height: 390px;padding:15px 15px 0px 25px;}
@@ -442,6 +443,37 @@ body{padding: 0;margin: 0;}
 .prdInfoDiv ul li div:nth-child(1){width:auto;height: 40px;line-height: 40px;padding:0 25px 0 0;color: #8A0044 ;font-size: 22px;}
 .prdInfoDiv ul li div:nth-child(2){width: 100%;height: auto;line-height: 30px;padding: 0;color: #4d4d4d;font-size: 16px;padding-left: 25px;text-align: justify;}    
 .prdInfoDiv .prdInfoDiv{margin-bottom: 0}
+
+/* Vendor Detaisls */
+
+.vendorDetails{width:100%;height:auto;margin-bottom: 20px;}
+.vTitle{width:100%;height: 40px;line-height: 40px;color:#8A0044;font-size: 22px;background-color: #ebebde;margin-bottom: 10px;padding-left: 15px;}
+.vendorDetails .infoCommn{width:100%;padding-left: 25px;}
+.vendorDetails .infoValue {font-size:16px;}
+
+
+/*User Form*/
+.userForm{width: 360px;height: 315px;position: fixed;margin: auto;top: 0px;left: 0;bottom: 0;right: 0;background: #fff;z-index: 116;padding: 25px;border-radius: 5px;box-shadow: 0 0 0px 1000px rgba(0,0,0,0.4);}
+
+
+
+
+
+
+
+/*Gallery*/
+.imgGallery{width: 95%;height: 80%;position: fixed;top: 0;right: 0;bottom: 0;left: 0;margin: auto;background: #fff;z-index: 1000;box-shadow: 0 0 1000px 300px rgba(0,0,0,0.5);padding: 25px;border-radius: 3px;}
+.galleryImg{width:60%;height: 100%;border-right: 1px solid #ebebde;padding:0px;}
+.imgListCont{width:40%;height: 100%;padding:15px;overflow-y: auto;overflow-x: hidden;}
+.galleryClose{width: 30px;height: 30px;background: url(../img/common/close.svg)no-repeat;background-size: auto 20px;background-position: center;position: absolute;top: 5px;right: 5px;cursor: pointer;}
+.imgThumbnil{width: 24%;padding-bottom: 24%;margin: 0.5%;border: 1px solid #ebebde;cursor: pointer;border-radius: 5px;}
+
+
+
+
+
+
+
 
 /*Wishlist*/
 .wishlistPage{background-color: #fff;padding-bottom: 0;}
@@ -479,6 +511,14 @@ body{padding: 0;margin: 0;}
 .brGreen.passwordIcon {padding-left: 45px;background-image: url(../img/common/spassword.svg);background-repeat: no-repeat;background-size: auto 100%;background-position: left center;}
 
 
+.nameIcon {padding-left: 45px;background-image: url(../img/common/name.svg);background-repeat: no-repeat;background-size: auto 100%;background-position: left center;}
+.txtInput:focus.nameIcon {padding-left: 45px;background-image: url(../img/common/sname.svg);background-repeat: no-repeat;background-size: auto 100%;background-position: left center;}
+.brGreen.nameIcon {padding-left: 45px;background-image: url(../img/common/sname.svg);background-repeat: no-repeat;background-size: auto 100%;background-position: left center;}
+
+.emailIcon {padding-left: 45px;background-image: url(../img/common/email.svg);background-repeat: no-repeat;background-size: auto 100%;background-position: left center;}
+.txtInput:focus.emailIcon {padding-left: 45px;background-image: url(../img/common/semail.svg);background-repeat: no-repeat;background-size: auto 100%;background-position: left center;}
+.brGreen.emailIcon {padding-left: 45px;background-image: url(../img/common/semail.svg);background-repeat: no-repeat;background-size: auto 100%;background-position: left center;}
+
 .cancelLgBtn{width:49%;margin: 0 0.5%;height: 40px;line-height: 40px;background: #171334;color:#fff;font-size: 14px;text-align: center;cursor: pointer;border-radius: 5px;margin-top: 15px;}
 .loginBtn{width:49%;margin: 0 0.5%;height: 40px;line-height: 40px;background: #8A0044;color:#fff;font-size: 14px;text-align: center;cursor: pointer;border-radius: 5px;margin-top: 15px;}
 .signuplink{width:100%;height: 40px;line-height: 40px;color:#8A0044;font-size: 14px;text-align: center;margin-top: 20px;}
@@ -498,19 +538,26 @@ body{padding: 0;margin: 0;}
 
 
 /*Jewellery Results Page*/
+.jshapeComm1 {margin: 0;width: 20%;padding-bottom: 0;height: 200px;border: 2px solid #ebebde;position: relative;display: inline-block;cursor: pointer;padding-top: 170px;}
 
-.jShapesCont{width: 100%;height: 305px;background: #ebebde;padding: 100px 0 0px 0;position: relative;z-index: 0;}
-.jshapeComm {margin: 0;width: 20%;padding-bottom: 0;height: 200px;border: 2px solid #ebebde;position: relative;display: inline-block;cursor: pointer;padding-top: 170px;}
-.jshapeComm:hover{border: 2px solid #8A0044;}
 
-.Rings{background: url(../img/common/rings.svg)no-repeat;background-size: auto;background-position:center;}
-.Earrings{background: url(../img/common/earrings.svg)no-repeat;background-size: auto;background-position:center;}
-.Pendent{background: url(../img/common/pendant.svg)no-repeat;background-size: auto;background-position:center;}
-.Necklace{background: url(../img/common/necklace.svg)no-repeat;background-size: auto;background-position: center;}
-.Bracelet{background: url(../img/common/bracelet.svg)no-repeat;background-size: auto;background-position:center;}
+.jShapesCont {width: 100%;height: 250px;background: #fff;padding: 0px 0 0px 0;border-top: 2px solid #fff;position: relative;z-index: 0;}
+.jshapeComm {margin: 0;width: 20%;padding-bottom: 0;height: 250px;border: 0px solid transparent;position: relative;display: inline-block;cursor: pointer;padding-top: 180px;color: #F3EFEF;font-size: 25px;line-height: 70px;box-shadow: inset 0 -70px 70px rgba(0,0,0,0.5);}
+.jshapeComm::after{content: '';position: absolute;right: 0px; left:0px; bottom: 70px;margin: auto; width: 00px;height: 00px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;}
+
+.jshapeComm:hover{border: 0px solid #8A0044;padding-top: 100px;font-size: 30px;box-shadow: inset 0 -300px 100px rgba(42,14,52,0.8);}
+.shapeComm.shapeSelected {background-color: #fff;}
+.shapeComm.shapeSelected::after{content: '';position: absolute;right: 0px;top: 5px;width: 25px;height: 25px;box-shadow: 0 0 20px 5px rgba(0,0,0,0.8);background: url(../img/common/tick.svg)no-repeat;background-position: center;background-size: auto 100%;}
+
+
+.Rings{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;}
+.Earrings{background: url(../img/common/iftosi02.jpg)no-repeat;background-size: cover;background-position:center;}
+.Pendent{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;}
+.Necklace{background: url(../img/common/iftosi02.jpg)no-repeat;background-size: cover;background-position: center;}
+.Bracelet{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;}
 .jshapeComm.shapeSelected span{color:#8A0044;}
-.jshapeComm.shapeSelected{background-color: #fff;}
-.jshapeComm.shapeSelected::after{content: '';position: absolute;right: 5px;top: 5px;width: 25px;height: 25px;background: url(../img/common/tick.svg)no-repeat;background-position: center;background-size: auto 100%;}
+.jshapeComm.shapeSelected{background-color: #fff;border: 0px solid #8A0044;padding-top: 100px;font-size: 30px;box-shadow: inset 0 -300px 100px rgba(42,14,52,0.8);}
+.jshapeComm.shapeSelected::after{content: '';position: absolute;right: 0px; left:0px; bottom: 50px;margin: auto; width: 40px;height: 40px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;}
 
 
 
