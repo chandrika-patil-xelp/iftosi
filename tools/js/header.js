@@ -118,19 +118,20 @@ $(document).ready(function(){
 //    });
     
     
-    $('#loginDiv,#overlay').velocity({scale:0},{delay:0,duration:0});
+    $('#overlay').velocity({scale:0},{delay:0,duration:0});
+    $('#loginDiv').velocity({opacity:0},{delay:0,duration:0});
     $('.signInUpTab,.iLogin').bind('click',function(){
         $('#overlay,#loginDiv').removeClass('dn');
         setTimeout(function(){
             $('#overlay').velocity({scale:1},{delay:0,duration:300,ease:'swing'});
-            $('#loginDiv').velocity({scale:1},{delay:80,duration:300,ease:'swing'});
+            $('#loginDiv').velocity({opacity:1},{delay:80,duration:300,ease:'swing'});
         },10);
     
     });
     
     
     $('#lgCancel').bind('click',function(){
-        $('#loginDiv').velocity({scale:0},{delay:0,ease:'swing'});
+        $('#loginDiv').velocity({opacity:0},{delay:0,ease:'swing'});
         $('#overlay').velocity({scale:0},{delay:100,ease:'swing'});
         setTimeout(function(){
             $('#overlay,#loginDiv').addClass('dn');

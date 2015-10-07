@@ -1,27 +1,26 @@
 <!DOCTYPE html>
 <html>
-	<head>
-        <title>IFtoSI - <?php echo strtoupper($page)?></title>
-		<link rel='shortcut icon' type='image/x-icon' href='<?php echo FAVICON; ?>' />
-		<meta charset="utf-8">
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<link rel="stylesheet" href="<?=$css['home'];?>">
-		<link rel="stylesheet" href="<?=$css['ripple'];?>">
-		<script type="text/javascript" src="<?=$jvs['jqry'];?>"></script>
-                <script>
-                    var pageName='<?php echo $page?>';
-                    var DOMAIN='<?php echo DOMAIN?>';
-                </script>
-	<?php
-		if ($page == 'diamonds' || $page == 'jewellery' )
-		{
-	?>
-                    <link rel="stylesheet" href="<?=$css['rngsld'];?>">
-                    <link rel="stylesheet" href="<?=$css['rngsldskin'];?>">
-                    <link rel="stylesheet" href="<?=$css['normalize'];?>">
-                    <script type="text/javascript" src="<?=$jvs['rngsld'];?>"></script>
-	<?php
-		}
-	?>    
-	</head>
+    <head>
+        <title>IFtoSI - <?php echo strtoupper($page) ?></title>
+        <link rel='shortcut icon' type='image/x-icon' href='<?php echo FAVICON; ?>' />
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="stylesheet" href="<?= $css['home']; ?>">
+        <link rel="stylesheet" href="<?= $css['ripple']; ?>">
+        <script type="text/javascript" src="<?= $jvs['jqry']; ?>"></script>
+        <script>
+            var pageName = '<?php echo $page ?>';
+            var DOMAIN = '<?php echo DOMAIN ?>';
+        </script>
+        <?php
+        if ($page == 'diamonds' || $page == 'jewellery') {
+        ?>
+            <link rel="stylesheet" href="<?= $css['rngsld']; ?>">
+            <link rel="stylesheet" href="<?= $css['rngsldskin']; ?>">
+            <link rel="stylesheet" href="<?= $css['normalize']; ?>">
+            <script type="text/javascript" src="<?= $jvs['rngsld']; ?>"></script>
+        <?php
+        }
+        ?>    
+    </head>
