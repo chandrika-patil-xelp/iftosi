@@ -249,9 +249,9 @@ body{padding: 0;margin: 0;}
 
 
 /*Main Results*/
-.results_Filter{width:100%;height:auto;display: inline-block;position: relative;padding: 0 0 0 300px;}
-.filterList{width:300px;height: auto;min-height: 100%;position: absolute;left:0;background: #fff;    padding-bottom: 25px;}
-.prdResults{width:100%;height: 100%;background: #fff;}
+.results_Filter{width:100%;height:auto;display: inline-block;position: relative;padding: 0 0 0 0px;}
+.filterList{width:25%;height: auto;min-height: 100%;;left:0;background: #fff;    padding-bottom: 25px;}
+.prdResults{width:75%;height: 100%;background: #fff;}
 .prdComm{width:31.5%;height:auto;border:5px solid #ebebde;margin: 0 0 1.83% 1.83%}
 .prdComm:hover{border-color: #d4d4c8}
 .prdComm:hover .actionComm{border-radius:50%}
