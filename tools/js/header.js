@@ -136,14 +136,14 @@ $(document).ready(function(){
         },1010);
     });
     
-    $('.wishCount,.wishlist').click(function(){
+    /*$('.wishCount,.wishlist').click(function(){
         var URL=DOMAIN+"?case=wishlist";
         if(pageName!=='wishlist'){
             window.open(URL);
         }else{
             location.reload(true);
         }
-    });
+    });*/
     
     
     

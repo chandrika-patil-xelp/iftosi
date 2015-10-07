@@ -40,7 +40,8 @@
 			{
 				foreach($d as $k => $v)
 				{
-					$_GET[$k] = str_replace('-',' ',$v);
+					$v 			= str_replace('ct-',' ',$v);
+					$_GET[$k] 	= str_replace('-',' ',$v);
 				}
 			}
 		}
