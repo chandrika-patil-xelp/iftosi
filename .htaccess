@@ -1,0 +1,19 @@
+Options +FollowSymlinks
+
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType image/gif A86400
+ExpiresByType image/jpg A86400
+ExpiresByType image/jpeg A86400
+ExpiresByType application/x-javascript A86400
+</IfModule>
+
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+####################### CMS STARTS ###########################
+
+RewriteRule ^([^/.]*)$	index.php?case=$1 [L]
+#RewriteRule ^([^/.]*)/([^/.]*)/([^/.]*)$	index.php?par=$1&mob=$2&mod=$3 [L]

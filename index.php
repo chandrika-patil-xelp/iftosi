@@ -8,37 +8,39 @@
 	switch($action)
 	{
 		case 'ajx':
-			switch ($case)
-			{
-				case '':
-				break;
-			}
+			
 			break;
+			
 		default:
 			switch ($case)
 			{
-                                case 'signup':
-                                        $page='signup';
+				case 'signup':
+					$page='signup';
 					include 'template/signup.html';
 				break;
-                                case 'wishlist':
-                                        $page='wishlist';
+				
+				case 'wishlist':
+					$page='wishlist';
 					include 'template/wishlist.html';
 				break;
-				case 'results':
-                                        $page='results';
+				
+				case 'diamonds':
+					$page='diamonds';
 					include 'template/results.html';
-                                break;
-				case 'jwresults':
-                                        $page='jwresults';
+				break;
+				
+				case 'jewellery':
+					$page='jewellery';
 					include 'template/jewellery_results.html';
 				break;
+				
 				case 'details':
-                                        $page='product_details';
+					$page='product_details';
 					include 'template/product_details.html';
 				break;
+				
 				default:
-                                        $page='index';
+					$page='index';
 					include 'template/index.html';
 				break;
 			}
