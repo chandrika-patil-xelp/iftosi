@@ -42,6 +42,8 @@ $(document).ready(function() {
     $('.shapeComm').bind('click', function() {
         $(this).toggleClass('shapeSelected');
         count += 135;
+		
+		FR();
 
         $('#resultCount').numerator({
             toValue: count,
@@ -50,7 +52,6 @@ $(document).ready(function() {
                 isStop = true;
             }
         });
-
     });
 
     $('.jshapeComm').bind('click', function() {
@@ -132,6 +133,24 @@ $(document).ready(function() {
 
 
 });
+
+function FR() {
+	var slistarr = new Array();
+	var i = 0;
+	$('.shapeComm').each(function() {
+		if($(this).hasClass('shapeSelected')) {
+			slistarr[i] = $(this).attr('id');
+			i++;
+		}
+	});
+	var slist = slistarr.join('|@|');
+	
+	var params = 'action=ajx&type=filter&shape='+slist;
+	var URL = DOMAIN + "index.php";
+	$.getJSON(URL, params, function(data) {
+		
+	});
+}
 
 var areas = new Array("Jakkur", "Judicial Layout", "M.G Road", "Indiranagar");
 
