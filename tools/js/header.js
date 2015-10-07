@@ -41,7 +41,7 @@ $(document).ready(function(){
             lastSc=sc;
 
         }
-        if(pageName==='results' || pageName==='product_details'){
+        if(pageName==='results' || pageName==='product_details' || pageName==='jwresults'){
             $('#header,#hbgDiam,#hbgJewel,#hbgBull,#logoTxt').velocity("stop");
             $('.headCatCont,.logo').velocity("stop");
             if (!isMobile) {
