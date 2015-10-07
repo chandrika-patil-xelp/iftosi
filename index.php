@@ -8,9 +8,7 @@
 	switch($action)
 	{
 		case 'ajx':
-			
 			break;
-			
 		default:
 			switch ($case)
 			{

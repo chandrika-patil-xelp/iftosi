@@ -14,7 +14,7 @@ $(document).ready(function() {
         if (isMobile) {
             samt = 450;
         }
-        $('body').animate({scrollTop: samt}, 300);
+        //$('body').animate({scrollTop: samt}, 300);
     }, 100);
 
 

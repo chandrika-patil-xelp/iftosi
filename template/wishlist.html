@@ -2,27 +2,7 @@
 <body>
     <div id='baseCont' class="container fmOpenR wishlistPage">
         <div class="wrapper">
-            <div id='header' class="header transition300">
-                <div class="wrapperMax">
-                    <div id="mMenuBtn" class="menuBtn fLeft transition300 ripplelink" onclick=""></div>
-                    <div class="cityName fLeft txtOver">Bangalore</div>
-                    <div class="headRight fRight">
-                        <div class="compNo fRight fmOpenB">+91 9980051525</div>
-                        <div class="fRight sortBox">
-                            <div class="dropdownBox fLeft">
-                                <div id="drpinp" class="dropInput fmOpenR"></div>
-                                <ul id="hdropList" class="fmOpenR">
-                                    <li class="transition100">Log Out</li>
-                                    <li class="transition100">Wishlist (25)</li>
-                                    <li class="transition100">Profile</li>
-                                    <li class="transition100">Orders</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="signInUpTab fRight fmOpenR loggedIn">Hello Ankur</div>
-                    </div>
-                </div>
-            </div>
+            <?php include 'header.html';?>
             <div class="totalResultsDiv">
                 <div class="wrapperMax fmOpenL">
                    <span id="resultCount">25</span> items in your wishlist
@@ -85,6 +65,5 @@
     <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['head']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['comm']; ?>"></script>
-    
 </body>
 </html>
