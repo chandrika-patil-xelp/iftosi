@@ -1,374 +1,127 @@
-<?php include 'bhead.html';?>
-    <body>
-        <div id='baseCont' class="container fmOpenR bgWhite resultsPage">
-            <div class="wrapper">
-                <div id='header' class="header transition300">
-                    <div class="wrapperMax poR">
-                        <div id="mMenuBtn" class="menuBtn fLeft transition300 ripplelink" onclick="showLeftMenu(true)"></div>
-                        <div id="mFilterBtn" class="filterBtn fRight transition300 ripplelink" onclick="swichFilter();"></div>
-                        <div class="headCatCont fLeft transition300">
-                            <div id='hbgDiam' class="headCat fLeft bgDiamond transition300 headSelected"><span>Diamonds</span></div>
-                            <div id='hbgJewel' class="headCat fLeft bgJewellery transition300"><span>Jewellery</span></div>
-                            <div id='hbgBull' class="headCat fLeft bgBullion transition300"><span>Bullions</span></div>
-                        </div>
-                        <div class="headRight fRight">
-                            <div class="compNo fRight fmOpenB">+91 9980051525</div>
-                            <div class="signInUpTab fRight fmOpenR">Sign In / Sign Up</div>
-                            <div class="headDivider fRight"></div>
-                            <div class="wishlist fRight fmOpenR">Wishlist</div>
-                            <div class="wishCount fRight fmOpenR ripplelink">25</div>
-                        </div>
+<?php include 'bhead.html'; ?>
+<body>
+    <div id='baseCont' class="container fmOpenR bgWhite resultsPage">
+        <div class="wrapper">
+            <div id='header' class="header transition300">
+                <div class="wrapperMax poR">
+                    <div id="mMenuBtn" class="menuBtn fLeft transition300 ripplelink" onclick="showLeftMenu(true)"></div>
+                    <div id="mFilterBtn" class="filterBtn fRight transition300 ripplelink" onclick="swichFilter();"></div>
+                    <div class="headCatCont fLeft transition300">
+                        <div id='hbgDiam' class="headCat fLeft bgDiamond transition300 headSelected"><span>Diamonds</span></div>
+                        <div id='hbgJewel' class="headCat fLeft bgJewellery transition300"><span>Jewellery</span></div>
+                        <div id='hbgBull' class="headCat fLeft bgBullion transition300"><span>Bullions</span></div>
+                    </div>
+                    <div class="headRight fRight">
+                        <div class="compNo fRight fmOpenB">+91 9980051525</div>
+                        <div class="signInUpTab fRight fmOpenR">Sign In / Sign Up</div>
+                        <div class="headDivider fRight"></div>
+                        <div class="wishlist fRight fmOpenR">Wishlist</div>
+                        <div class="wishCount fRight fmOpenR ripplelink">25</div>
                     </div>
                 </div>
-                <div class="totalResultsDiv">
-                    <div class="wrapperMax fmOpenL">
-                       <span id='resultCount'> 2,835</span> Diamonds found
+            </div>
+            <div class="totalResultsDiv">
+                <div class="wrapperMax fmOpenL">
+                    <span id='resultCount'> 2,835</span> Diamonds found
+                </div>
+            </div>
+            <div class='shapesCont resultsPage showHide'>
+                <div class="wrapperMax">
+                    <div class="allShapes resultsPage">
+                        <center>
+                            <div class="shapeComm transition300 ripplelink Round">
+                            </div><div class="shapeComm transition300 ripplelink Pear">
+                            </div><div class="shapeComm transition300 ripplelink Heart">
+                            </div><div class="shapeComm transition300 ripplelink Princess">
+                            </div><div class="shapeComm transition300 ripplelink Asscher">
+                            </div><div class="shapeComm transition300 ripplelink Marquise">
+                            </div><div class="shapeComm transition300 ripplelink Oval">
+                            </div><div class="shapeComm transition300 ripplelink Emerald">
+                            </div><div class="shapeComm transition300 ripplelink Radiant">
+                            </div><div class="shapeComm transition300 ripplelink Cushion"></div>
+                        </center>
                     </div>
                 </div>
-                <div class='shapesCont resultsPage showHide'>
-                    <div class="wrapperMax">
-                        <div class="allShapes resultsPage">
-                            <center>
-                                <div class="shapeComm transition300 ripplelink Round">
-                                </div><div class="shapeComm transition300 ripplelink Pear">
-                                </div><div class="shapeComm transition300 ripplelink Heart">
-                                </div><div class="shapeComm transition300 ripplelink Princess">
-                                </div><div class="shapeComm transition300 ripplelink Asscher">
-                                </div><div class="shapeComm transition300 ripplelink Marquise">
-                                </div><div class="shapeComm transition300 ripplelink Oval">
-                                </div><div class="shapeComm transition300 ripplelink Emerald">
-                                </div><div class="shapeComm transition300 ripplelink Radiant">
-                                </div><div class="shapeComm transition300 ripplelink Cushion"></div>
-                            </center>
-                        </div>
-                    </div>
-                </div>
-                <div class="allResults">
-                    <div class="wrapperMax">
-                        <div class="filterTitleDiv">
-                            <div class='fTitle fLeft fmOpenR'>Filter Results</div>
-                            <div class="fRight sortBox">
-                                <div class="dropdownBox fLeft">
-                                    <div id="drpinp" class="dropInput fmOpenR">Sort by</div>
-                                    <ul id="dropList" class="fmOpenR">
-                                        <li class="transition100">Best Match</li>
-                                        <li class="transition100">Lowest Price</li>
-                                        <li class="transition100">Highest Price</li>
-                                        <li class="transition100">Rating</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class='results_Filter'>
-                            <div id='filters' class='filterList fLeft transit-100X transition300'>
-                                <div id='mfHeader' class="mfHeader fLeft fmOpenR">
-                                    <div class="backToRes fLeft ripplelink poR" onclick="swichFilter();">Back to results</div>
-                                    <div class="clearFill fRight ripplelink poR">Clear</div>
-                                </div>
-                                <div class='shapesCont resultsPage hideShow'>
-                                    <div class="wrapperMax">
-                                        <div class="allShapes resultsPage">
-                                            <div class="fLeft optionTitle fmOpenR">All Shapes</div>
-                                            <center>
-                                                <div class="shapeComm transition300 ripplelink Round">
-                                                </div><div class="shapeComm transition300 ripplelink Pear">
-                                                </div><div class="shapeComm transition300 ripplelink Heart">
-                                                </div><div class="shapeComm transition300 ripplelink Princess">
-                                                </div><div class="shapeComm transition300 ripplelink Asscher">
-                                                </div><div class="shapeComm transition300 ripplelink Marquise">
-                                                </div><div class="shapeComm transition300 ripplelink Oval">
-                                                </div><div class="shapeComm transition300 ripplelink Emerald">
-                                                </div><div class="shapeComm transition300 ripplelink Radiant">
-                                                </div><div class="shapeComm transition300 ripplelink Cushion"></div>
-                                            </center>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="filterCont fLeft hideShow">
-                                    <div class="fLeft optionTitle fmOpenR">Sort By</div>
-                                    <select class="sortSelect fmOpenR">
-                                        <option>Best Match</option>
-                                        <option>Lowest Price</option>
-                                        <option>Highest Price</option>
-                                        <option>Rating</option>
-                                    </select>
-                                </div>
-                                <div class="filterCont fLeft">
-                                    <div class="fLeft optionTitle fmOpenR">City / Area</div>
-                                    <div class='areaCont fLeft'>
-                                        <input type="text" id='txtArea' class="fliterTxt fLeft fmOpenR" placeholder=" Search city / area here" onkeyup="searchArea(this.value)">
-                                        <div class="autoSuggestOuter fmOpenR dn" id="asug">
-                                            <ul>
-                                                <li class="autoSuggstions transition300 txtCap" onclick="setData(this)">andheri</li>
-                                                <li class="autoSuggstions transition300 txtCap" onclick="setData(this)">andheri west</li>
-                                                <li class="autoSuggstions transition300 txtCap" onclick="setData(this)">andheri east</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div id='subjects' class="filterOptions fLeft fmOpenR">
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="Bangalore"/>
-                                            <label for="Bangalore">Bangalore</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="Mumbai"/>
-                                            <label for="Mumbai">Mumbai</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="Delhi"/>
-                                            <label for="Delhi">Delhi</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="Hyderabad"/>
-                                            <label for="Hyderabad">Hyderabad</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="caratsDiv" class="filterCont fLeft">
-                                    <div class="fLeft optionTitle fmOpenR">Carats</div>
-                                    <div class='fLeft rangeCont'>
-                                        <div class='fLeft rangeDiv'>
-                                            <input id="caratsRange" class="fLeft rngInp" style="visibility: hidden;">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="filterCont fLeft forClarity">
-                                    <div class="fLeft optionTitle fmOpenR">Color</div>
-                                    <div id='cut' class="filterOptions fLeft fmOpenR">
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="clD"/>
-                                            <label for="clD">D</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="clE"/>
-                                            <label for="clE">E</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="clF"/>
-                                            <label for="clF">F</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="clG"/>
-                                            <label for="clG">G</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="clH"/>
-                                            <label for="clH">H</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="clI"/>
-                                            <label for="clI">I</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="clJ"/>
-                                            <label for="clJ">J</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="clK"/>
-                                            <label for="clK">K</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="filterCont fLeft forClarity">
-                                    <div class="fLeft optionTitle fmOpenR">Clarity</div>
-                                    <div id='cut' class="filterOptions fLeft fmOpenR">
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="if"/>
-                                            <label for="if">IF</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="vs2"/>
-                                            <label for="vs2">VS2</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="vvs1"/>
-                                            <label for="vvs1">VVS1</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="s11"/>
-                                            <label for="s11">S11</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="vvs2"/>
-                                            <label for="vvs2">VVS2</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="s12"/>
-                                            <label for="s12">S12</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="vs1"/>
-                                            <label for="vs1">VS1</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="s13"/>
-                                            <label for="s13">S13</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="filterCont fLeft">
-                                    <div class="fLeft optionTitle fmOpenR">Price</div>
-                                    <div class='fLeft rangeCont'>
-                                        <div class='fLeft rangeDiv'>
-                                            <input id="priceRange" class="fLeft rngInp" style="visibility: hidden;">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="filterCont fLeft">
-                                    <div class="fLeft optionTitle fmOpenR">Cut</div>
-                                    <div id='cut' class="filterOptions fLeft fmOpenR">
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="excellent"/>
-                                            <label for="excellent">Excellent</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="vgood"/>
-                                            <label for="vgood">Very Good</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="good"/>
-                                            <label for="good">Good</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="fair"/>
-                                            <label for="fair">Fair</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="filterCont fLeft">
-                                    <div class="fLeft optionTitle fmOpenR">Polish</div>
-                                    <div id='cut' class="filterOptions fLeft fmOpenR">
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="plexcellent"/>
-                                            <label for="plexcellent">Excellent</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="plvgood"/>
-                                            <label for="plvgood">Very Good</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="plgood"/>
-                                            <label for="plgood">Good</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="plfair"/>
-                                            <label for="plfair">Fair</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="filterCont fLeft">
-                                    <div class="fLeft optionTitle fmOpenR">Symmetry</div>
-                                    <div id='cut' class="filterOptions fLeft fmOpenR">
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="syexcellent"/>
-                                            <label for="syexcellent">Excellent</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="syvgood"/>
-                                            <label for="syvgood">Very Good</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="sygood"/>
-                                            <label for="sygood">Good</label>
-                                        </div>
-                                        <div class="checkDiv fLeft">
-                                            <input type="checkbox" class="filled-in" id="syfair"/>
-                                            <label for="syfair">Fair</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id='mfFooter' class="mfFooter fLeft fmOpenB ripplelink">
-                                   <div id='resetDbtn'> Reset Filters</div>
-                                   <div id='applyDbtn'> Apply Filters</div>
-                                </div>
-                            </div>
-                            <div class='prdResults fRight'>
-                            <?php while($i<15){?>
-								<a href="<?php echo DOMAIN?>Product-Name/pid-1234">
-									<div class='prdComm fLeft transition100'>
-										<div class='prdCommDiv fLeft transition100'>
-											<div class='prdShape fLeft'>
-												<div class='prdShTitle fLeft fmOpenB'>SHAPE</div>
-												<div class='prdShType fLeft fmOpenR'>Round</div>
-												<div class="Round fRight"></div>
-											</div>
-											<div class="prdDetails fLeft">
-												<div class="detComm">
-													<div class="detLabel fmOpenB fLeft">COLOR</div>
-													<div class="detValue fmOpenR fLeft">F</div>
-												</div>
-												<div class="detComm">
-													<div class="detLabel fmOpenB fLeft">CARATS</div>
-													<div class="detValue fmOpenR fLeft">0.99</div>
-												</div>
-												<div class="detComm">
-													<div class="detLabel fmOpenB fLeft">CLARITY</div>
-													<div class="detValue fmOpenR fLeft">Excellent</div>
-												</div>
-												<div class="detComm">
-													<div class="detLabel fmOpenB fLeft">CERTIFICATE</div>
-													<div class="detValue fmOpenR fLeft">1199046357</div>
-												</div>
-											</div>
-											<div class='prdPrice fLeft'>
-												<div class="detComm">
-													<div class="detLabel fmOpenB fLeft">BEST PRICE</div>
-													<div class="detValue fmOpenB fLeft"><span>&#8377;</span>8,28,5888</div>
-												</div>
-											</div>
-											<div class='prdActions fLeft'>
-												<div class='actionComm fLeft transition100 poR ripplelink'></div>
-												<div class='actionComm fLeft transition100 poR ripplelink'></div>
-												<div class='actionComm fLeft transition100 poR ripplelink'></div>
-												<div class='actionComm fLeft transition100 poR ripplelink'></div>
-											</div>
-										</div>
-									</div>
-								</a>
-                            <?php $i++;}?>
+            </div>
+            <div class="allResults">
+                <div class="wrapperMax">
+                    <div class="filterTitleDiv">
+                        <div class='fTitle fLeft fmOpenR'>Filter Results</div>
+                        <div class="fRight sortBox">
+                            <div class="dropdownBox fLeft">
+                                <div id="drpinp" class="dropInput fmOpenR">Sort by</div>
+                                <ul id="dropList" class="fmOpenR">
+                                    <li class="transition100">Best Match</li>
+                                    <li class="transition100">Lowest Price</li>
+                                    <li class="transition100">Highest Price</li>
+                                    <li class="transition100">Rating</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="bottmInfo fmOpenR">
-                    <div class="wrapperMax">
-                        <div class="infoComm fLeft">
-                            <div class="infoTxt fLeft">
-                                <div class="infoUpper">Range of</div>
-                                <div class="infoLower">Solitaires</div>
-                            </div>
-                        </div>
-                        <div class="infoComm fLeft">
-                            <div class="infoTxt fLeft">
-                                <div class="infoUpper">Lowest Price</div>
-                                <div class="infoLower">Guaranteed</div>
-                            </div>
-                        </div>
-                        <div class="infoComm fLeft">
-                            <div class="infoTxt fLeft">
-                                <div class="infoUpper">Services of a</div>
-                                <div class="infoLower">Gemologist</div>
-                            </div>
-                        </div>
-                        <div class="infoComm fLeft">
-                            <div class="infoTxt fLeft">
-                                <div class="infoUpper">International</div>
-                                <div class="infoLower">Certification</div>
-                            </div>
+                    <div class='results_Filter'>
+                        <?php include 'filters.html';?>
+                        <div class='prdResults fRight'>
+                            <?php while ($i < 15) { ?>
+                                <a href="<?php echo DOMAIN ?>Product-Name/pid-1234">
+                                    <div class='prdComm fLeft transition100'>
+                                        <div class='prdCommDiv fLeft transition100'>
+                                            <div class='prdShape fLeft'>
+                                                <div class='prdShTitle fLeft fmOpenB'>SHAPE</div>
+                                                <div class='prdShType fLeft fmOpenR'>Round</div>
+                                                <div class="Round fRight"></div>
+                                            </div>
+                                            <div class="prdDetails fLeft">
+                                                <div class="detComm">
+                                                    <div class="detLabel fmOpenB fLeft">COLOR</div>
+                                                    <div class="detValue fmOpenR fLeft">F</div>
+                                                </div>
+                                                <div class="detComm">
+                                                    <div class="detLabel fmOpenB fLeft">CARATS</div>
+                                                    <div class="detValue fmOpenR fLeft">0.99</div>
+                                                </div>
+                                                <div class="detComm">
+                                                    <div class="detLabel fmOpenB fLeft">CLARITY</div>
+                                                    <div class="detValue fmOpenR fLeft">Excellent</div>
+                                                </div>
+                                                <div class="detComm">
+                                                    <div class="detLabel fmOpenB fLeft">CERTIFICATE</div>
+                                                    <div class="detValue fmOpenR fLeft">1199046357</div>
+                                                </div>
+                                            </div>
+                                            <div class='prdPrice fLeft'>
+                                                <div class="detComm">
+                                                    <div class="detLabel fmOpenB fLeft">BEST PRICE</div>
+                                                    <div class="detValue fmOpenB fLeft"><span>&#8377;</span>8,28,5888</div>
+                                                </div>
+                                            </div>
+                                            <div class='prdActions fLeft'>
+                                                <div class='actionComm fLeft transition100 poR ripplelink'></div>
+                                                <div class='actionComm fLeft transition100 poR ripplelink'></div>
+                                                <div class='actionComm fLeft transition100 poR ripplelink'></div>
+                                                <div class='actionComm fLeft transition100 poR ripplelink'></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <?php $i++;
+                            } ?>
                         </div>
                     </div>
                 </div>
             </div>
-            <?php include 'logo.html';?>
-            <?php include 'leftmenu.html';?>
+        <?php include 'footer.html'; ?>
         </div>
-        <div id='dragTarget' class="drag-target" style="touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); left: 0px;"></div>
-        <script type="text/javascript" src="<?=$jvs['velocity'];?>"></script>
-        <script type="text/javascript" src="<?=$jvs['ripple'];?>"></script>
-        <script type="text/javascript" src="<?=$jvs['jqrynum'];?>"></script>
-        <script type="text/javascript" src="<?=$jvs['hammer'];?>"></script>
-        <script type="text/javascript" src="<?=$jvs['result'];?>"></script>
-        <script type="text/javascript" src="<?=$jvs['head'];?>"></script>
-        <script type="text/javascript" src="<?=$jvs['comm'];?>"></script>
-    </body>
+        <?php include 'logo.html'; ?>
+<?php include 'leftmenu.html'; ?>
+    </div>
+    <div id='dragTarget' class="drag-target" style="touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); left: 0px;"></div>
+    <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['jqrynum']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['hammer']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['result']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['head']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['comm']; ?>"></script>
+</body>
 </html>

@@ -2,7 +2,7 @@ var lastSc=0;
 var pw=$(window).width();
 var ph=$(window).height();
 var isMobile=false;
-var isOpen=false;
+var hisOpen=false;
 if(pw<768){
     isMobile=true; 
 }
@@ -149,28 +149,28 @@ $(document).ready(function(){
     
     $('#drpinp').click(function() {
         setTimeout(function() {
-            isOpen = true;
+            hisOpen = true;
         }, 150);
-        toggleDropDown(true);
+        htoggleDropDown(true);
     });
 
     $('#hdropList li').click(function() {
         var val = $(this).val();
         var text = $(this).text();
         //$('#drpinp').text(text);
-        isOpen = false;
-        toggleDropDown(false);
+        hisOpen = false;
+        htoggleDropDown(false);
     });
 
     $(document).click(function() {
-        if (isOpen) {
-            toggleDropDown(false);
+        if (hisOpen) {
+            htoggleDropDown(false);
         }
     });
     
 });
 
-function toggleDropDown(flag) {
+function htoggleDropDown(flag) {
     if (flag) {
         $("#hdropList").velocity({opacity: 1, borderRadius: 0}, {duration: 200, display: "block"});
     }
