@@ -14,7 +14,7 @@ $(document).ready(function() {
         if (isMobile) {
             samt = 450;
         }
-        //$('body').animate({scrollTop: samt}, 300);
+        $('body').animate({scrollTop: samt}, 300);
     }, 100);
 
 
@@ -56,7 +56,7 @@ $(document).ready(function() {
 
     $('.jshapeComm').bind('click', function() {
         var len=$('.jshapeComm.shapeSelected').size();
-        $('body').animate({scrollTop: 220}, 300);
+        $('body').animate({scrollTop: 280}, 300);
        // if(len<3){
             var id=$(this).attr('id');
             $(this).toggleClass('shapeSelected');
