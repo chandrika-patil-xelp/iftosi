@@ -55,8 +55,8 @@ $(document).ready(function(){
     $('#dragTarget').click(function() {
         showLeftMenu(false);
     });
-    $('#userForm,#loginDiv,#overlay').velocity({scale:0},{delay:0,duration:0});
     
+    $('#userForm,#overlay').velocity({scale:0},{delay:0,duration:0});
     $('.iconCall,.iconMessage').click(function(){
         $('#overlay,#userForm').removeClass('dn');
         setTimeout(function(){
