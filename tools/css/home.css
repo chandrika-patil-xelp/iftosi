@@ -80,9 +80,6 @@ body{padding: 0;margin: 0;}
 .loggedIn{margin-right: 0!important;}
 .header ul {width: 120px!important;left: -100px!important;}
 
-
-
-
 /*Category*/
 .categoryCont{width:100%;height: 560px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding:200px 0 100px 0;}
 .buyTxt{width:100%;color: #fff;line-height: 40px;font-size: 40px;margin-bottom: 50px;}
@@ -144,9 +141,6 @@ body{padding: 0;margin: 0;}
 .shapeSelected:hover.shapeComm::before {position: absolute;top: 0;width: 100%;height:5px;background: #8A0044;content: "";-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;left: 0;font-size: 16px;transition: 300ms ease-in-out;-moz-transition: 300ms ease-in-out;-ms-transition: 300ms ease-in-out;-webkit-transition: 300ms ease-in-out;-o-transition: 300ms ease-in-out;opacity: 1;}*/
 .shapeSelected.shapeComm{}
 .shapeSelected:hover.shapeComm{}
-
-
-
 .shapeSelected.shapeComm.Round{background-color:#fff;border:2px solid #ebebde;background-position: 0% 33%;}
 .shapeSelected.shapeComm.Pear{background-color:#fff;border:2px solid #ebebde;background-position: 11% 33%;}
 .shapeSelected.shapeComm.Heart{background-color:#fff;border:2px solid #ebebde;background-position: 22% 33%;}
@@ -158,6 +152,8 @@ body{padding: 0;margin: 0;}
 .shapeSelected.shapeComm.Radiant{background-color:#fff;border:2px solid #ebebde;background-position: 89% 33%;}
 .shapeSelected.shapeComm.Cushion {background-color:#fff;border:2px solid #ebebde;background-position: 100% 33%;}
 
+.shapeComm.shapeSelected {background-color: #fff;}
+.shapeComm.shapeSelected::after{content: '';position: absolute;right: 5px;top: 5px;width: 20px;height: 20px;background: url(../img/common/tick.svg)no-repeat;background-position: center;background-size: auto 100%;}
 
 .searchBtn{width:auto;height: 40px;line-height:40px;padding: 0 35px;display: inline-block;border-radius: 5px;background: #8A0044 url(../img/common/gears.gif)no-repeat;background-size: auto 20px;background-position: 120% center;color:#fff;font-size:16px;margin: 30px 0;cursor: pointer;position: relative;}
 .searchBtn:hover{background-position: 95% center;}
@@ -189,9 +185,6 @@ body{padding: 0;margin: 0;}
 .img5{background: url(../img/common/if05.jpg)no-repeat;background-position: top center;background-size:cover;}
 .img6{background: url(../img/common/if06.jpg)no-repeat;background-position: top center;background-size:cover;}
 .img7{background-image: url(../img/common/if07.svg);background-repeat: no-repeat;background-position: top center;background-size:cover;}
-
-
-
 
 
 /*Display Style 2*/
@@ -445,21 +438,13 @@ body{padding: 0;margin: 0;}
 .prdInfoDiv .prdInfoDiv{margin-bottom: 0}
 
 /* Vendor Detaisls */
-
 .vendorDetails{width:100%;height:auto;margin-bottom: 20px;}
 .vTitle{width:100%;height: 40px;line-height: 40px;color:#8A0044;font-size: 22px;background-color: #ebebde;margin-bottom: 10px;padding-left: 15px;}
 .vendorDetails .infoCommn{width:100%;padding-left: 25px;}
 .vendorDetails .infoValue {font-size:16px;}
 
-
 /*User Form*/
 .userForm{width: 360px;height: 315px;position: fixed;margin: auto;top: 0px;left: 0;bottom: 0;right: 0;background: #fff;z-index: 116;padding: 25px;border-radius: 5px;box-shadow: 0 0 0px 1000px rgba(0,0,0,0.4);}
-
-
-
-
-
-
 
 /*Gallery*/
 .imgGallery{width: 95%;height: 80%;position: fixed;top: 0;right: 0;bottom: 0;left: 0;margin: auto;background: #fff;z-index: 1000;box-shadow: 0 0 1000px 300px rgba(0,0,0,0.5);padding: 25px;border-radius: 3px;}
@@ -468,13 +453,6 @@ body{padding: 0;margin: 0;}
 .galleryClose{width: 30px;height: 30px;background: url(../img/common/close.svg)no-repeat;background-size: auto 20px;background-position: center;position: absolute;top: 5px;right: 5px;cursor: pointer;}
 .imgThumbnil{width: 24%;padding-bottom: 24%;margin: 0.5%;border: 1px solid #ebebde;cursor: pointer;border-radius: 5px;}
 
-
-
-
-
-
-
-
 /*Wishlist*/
 .wishlistPage{background-color: #fff;padding-bottom: 0;}
 .listCont{width: 100%;height: auto}
@@ -482,16 +460,11 @@ body{padding: 0;margin: 0;}
 .listCont .prdComm {width: 24%;height: auto;border: 5px solid #ebebde;margin: 0 0 1% 1%;}
 
 
-
-
 /*Login*/
 .overlay{width: 100%;height: 100%;position: fixed;background: #fff url(../img/common/background.jpg)no-repeat;background-size: 100% auto;top: 0;left: 0;z-index: 115;}
 .loginDiv {width: 360px;height: 315px;position: fixed;margin: auto;top: 0px;left: 0;bottom: 0;right: 0;background: #fff;z-index: 116;padding: 25px;border-radius: 5px;box-shadow: 0 0 0px 1000px rgba(0,0,0,0.4);}
 .lgTitle{width:100%;height: 40px;line-height: 30px;color:#4d4d4d;font-size:18px;text-align: center;}
 .loginTxt{width:60%;margin: 0 20%;height: 40px;border:1px solid #ccc;padding: 0 15px;margin-bottom: 10px;color:#4d4d4d;border-radius: 5px;}
-
-
-
 .inpText {width: 40%;font-size: 10px;text-align: right;color: #a8b7ce;height: auto;line-height: 13px;padding: 11px 0 8px 0;position: absolute;top: 0;right: 0;opacity: 0;}
 .txtInput:focus ~.inpText{opacity:1}
 .inputCont {width: 100%;height: 45px;margin-bottom: 10px;position: relative;}
@@ -502,6 +475,7 @@ body{padding: 0;margin: 0;}
 .inp-label {color: #a8b7ce;font-size: 14px;display: inline-block;-webkit-transform: translate(0px,15px);-moz-transform: translate(0px,15px);-ms-transform: translate(0px,15px);-o-transform: translate(0px,15px);position: absolute;left: 45px;top: 0;}
 .labelActive {-webkit-transform: translate(0px,7px);-moz-transform: translate(0px,7px);-ms-transform: translate(0px,7px);transform: translate(0px,7px);font-size: 10px;color: #16325B;font-weight: bold;letter-spacing: 0.05em;font-family: openB;}
 
+/*Form Icons*/
 .mobileIcon {padding-left: 45px;background-image: url(../img/common/mobile.svg);background-repeat: no-repeat;background-size: auto 100%;background-position: left center;}
 .txtInput:focus.mobileIcon {padding-left: 45px;background-image: url(../img/common/smobile.svg);background-repeat: no-repeat;background-size: auto 100%;background-position: left center;}
 .brGreen.mobileIcon {padding-left: 45px;background-image: url(../img/common/smobile.svg);background-repeat: no-repeat;background-size: auto 100%;background-position: left center;}
@@ -509,7 +483,6 @@ body{padding: 0;margin: 0;}
 .passwordIcon{padding-left: 45px;background-image: url(../img/common/password.svg);background-repeat: no-repeat;background-size: auto 100%;background-position: left center;}
 .txtInput:focus.passwordIcon {padding-left: 45px;background-image: url(../img/common/spassword.svg);background-repeat: no-repeat;background-size: auto 100%;background-position: left center;}
 .brGreen.passwordIcon {padding-left: 45px;background-image: url(../img/common/spassword.svg);background-repeat: no-repeat;background-size: auto 100%;background-position: left center;}
-
 
 .nameIcon {padding-left: 45px;background-image: url(../img/common/name.svg);background-repeat: no-repeat;background-size: auto 100%;background-position: left center;}
 .txtInput:focus.nameIcon {padding-left: 45px;background-image: url(../img/common/sname.svg);background-repeat: no-repeat;background-size: auto 100%;background-position: left center;}
@@ -535,38 +508,44 @@ body{padding: 0;margin: 0;}
 .signupTitle {width: 100%;height: auto;font-size: 40px;color: #4d4d4d;text-align: center;line-height: 40px;}
 .bgNone{background: none;}
 
-
-
 /*Jewellery Results Page*/
-.jshapeComm1 {margin: 0;width: 20%;padding-bottom: 0;height: 200px;border: 2px solid #ebebde;position: relative;display: inline-block;cursor: pointer;padding-top: 170px;}
-
-
 .jShapesCont {width: 100%;height: 250px;background: #fff;padding: 0px 0 0px 0;border-top: 2px solid #fff;position: relative;z-index: 0;}
-.jshapeComm {margin: 0;width: 20%;padding-bottom: 0;height: 250px;border: 0px solid transparent;position: relative;display: inline-block;cursor: pointer;padding-top: 180px;color: #F3EFEF;font-size: 25px;line-height: 70px;box-shadow: inset 0 -70px 70px rgba(0,0,0,0.5);}
+.jshapeComm {margin: 0;width: 20%;padding-bottom: 0;height: 250px;border: 0px solid transparent;position: relative;display: inline-block;cursor: pointer;padding-top: 180px;color: #F3EFEF;font-size: 25px;line-height: 70px;box-shadow: inset 0 -70px 70px rgba(0,0,0,0.5);border-right:2px solid #fff}
+.jshapeComm:hover {padding-top: 100px;font-size: 30px;}
 .jshapeComm::after{content: '';position: absolute;right: 0px; left:0px; bottom: 70px;margin: auto; width: 00px;height: 00px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;}
 
-.jshapeComm:hover{border: 0px solid #8A0044;padding-top: 100px;font-size: 30px;box-shadow: inset 0 -300px 100px rgba(42,14,52,0.8);}
-.shapeComm.shapeSelected {background-color: #fff;}
-.shapeComm.shapeSelected::after{content: '';position: absolute;right: 5px;top: 5px;width: 20px;height: 20px;background: url(../img/common/tick.svg)no-repeat;background-position: center;background-size: auto 100%;}
+.Rings{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(23, 19, 52,1);}
+.Earrings{background: url(../img/common/iftosi02.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(42, 14, 52,1);}
+.Pendent{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(56, 11, 52,1);}
+.Necklace{background: url(../img/common/iftosi02.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -70px 0px rgba(94, 0, 55,1);}
+.Bracelet{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(138, 0, 68,1);}
 
+.jshapeComm.Rings:hover{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
+.jshapeComm.Earrings:hover{background: url(../img/common/iftosi02.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
+.jshapeComm.Pendent:hover{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(56, 11, 52,0.8);}
+.jshapeComm.Necklace:hover{background: url(../img/common/iftosi02.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
+.jshapeComm.Bracelet:hover{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
 
-.Rings{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;}
-.Earrings{background: url(../img/common/iftosi02.jpg)no-repeat;background-size: cover;background-position:center;}
-.Pendent{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;}
-.Necklace{background: url(../img/common/iftosi02.jpg)no-repeat;background-size: cover;background-position: center;}
-.Bracelet{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;}
+.jshapeComm.shapeSelected.Rings{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
+.jshapeComm.shapeSelected.Earrings{background: url(../img/common/iftosi02.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
+.jshapeComm.shapeSelected.Pendent{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(56, 11, 52,0.8);}
+.jshapeComm.shapeSelected.Necklace{background: url(../img/common/iftosi02.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
+.jshapeComm.shapeSelected.Bracelet{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+
+.jshapeComm.shapeSelected.Rings:hover{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
+.jshapeComm.shapeSelected.Earrings:hover{background: url(../img/common/iftosi02.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
+.jshapeComm.shapeSelected.Pendent:hover{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(56, 11, 52,0.8);}
+.jshapeComm.shapeSelected.Necklace:hover{background: url(../img/common/iftosi02.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
+.jshapeComm.shapeSelected.Bracelet:hover{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+
 .jshapeComm.shapeSelected span{color:#8A0044;}
-.jshapeComm.shapeSelected{background-color: #fff;border: 0px solid #8A0044;padding-top: 100px;font-size: 30px;box-shadow: inset 0 -300px 100px rgba(42,14,52,0.8);}
+.jshapeComm.shapeSelected{background-color: #fff;border-right: 2px solid #FFF;padding-top: 100px;font-size: 30px;}
 .jshapeComm.shapeSelected::after{content: '';position: absolute;right: 0px; left:0px; bottom: 50px;margin: auto; width: 40px;height: 40px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;}
 
 
 
-
-
-
-
 @media only screen and (min-width: 320px) and (max-width: 479px){
-    
+
     .logo {width: 80px;height: 80px;font-size: 22px;top:20px;}
     .header{height:60px;padding: 0 15px;}
     .cityName{display: none;}
@@ -588,7 +567,7 @@ body{padding: 0;margin: 0;}
     .infoComm {width: 100%;height: 100px;border-right: none;position: relative;float: none!important;border-bottom: 1px solid rgba(255,255,255,0.2);}
     .shapeComm {border: 2px solid #fff;position: relative;background-image: url(../img/shapes.svg);background-repeat: no-repeat;margin:1%;width: 23%!important;height:0%!important;padding-bottom: 23%;display: block;float:left;vertical-align: bottom;text-align: center;cursor: pointer;background-size: 1000% auto;}    
     .shapeComm:hover{border:2px solid #FFF;}
-    
+
     .shapeSelected.shapeComm.Round{background-color:#fff;border:2px solid #8A0044;background-position: 0% 33%;}
     .shapeSelected.shapeComm.Pear{background-color:#fff;border:2px solid #8A0044;background-position: 11% 33%;}
     .shapeSelected.shapeComm.Heart{background-color:#fff;border:2px solid #8A0044;background-position: 22% 33%;}
@@ -605,7 +584,7 @@ body{padding: 0;margin: 0;}
     .infoTxt{width:100%;height:41px;}
     .hPrdComm .infoUpper {font-size: 20px;line-height: 20px;}
     .hPrdComm .infoLower {font-size: 30px;line-height: 30px;}
-    
+
     /*Resuls Page*/
     .totalResultsDiv {height: 250px;line-height: 30px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: cover;padding: 150px 0 0 0;font-size: 30px;}
     #resultCount{display: block;font-size: 40px;line-height: 40px;}
@@ -630,8 +609,8 @@ body{padding: 0;margin: 0;}
     .transit-100X{-webkit-transform:translateX(350px);-moz-transform:translateX(350px);;-ms-transform:translateX(350px);-o-transform:translateX(350px);transform:translateX(350px);}
     .showHide{display: none;}
     .hideShow{display: block;}
-    
-    
+
+
     /*Details Page*/
     .prdMainDetails{height:auto;margin-top: -120px;}
     .detCont{width: 100%;height: auto;padding:15px;display: inline-block;}
@@ -650,25 +629,17 @@ body{padding: 0;margin: 0;}
     .forImg {width: 100%;height: 230px;}
     .prdInfo{padding: 0 15px;display: inline-block;margin-top: 0;}
     .prdInfoDiv {margin-bottom: 0;}
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     /*Login*/
     .overlay {background: #fff url(../img/common/background.jpg)no-repeat;background-size: cover;}
     .loginDiv {width: 100%;height: 100%;padding: 25px;border-radius: 0;}
     .lgTitle {height:auto;line-height: 25px;}
-    
+
     /*SignUp page*/
     .signupPage {background: url(../img/common/background.jpg)no-repeat;background-size: cover;padding: 5px 0 0px 0;height: 100vh;}
     .signupDiv .wrapperMax {max-width: 100%;border: 0px solid #333;background: #fff;margin-top: 0;padding: 25px;border-radius: 0;height: 100vH;z-index: 115;position: relative;}
-    
-    
+
+
 }
 
 .drag-target {height: 100%;width: 20px;position: fixed;top: 0;z-index: 1;}
@@ -682,14 +653,14 @@ body{padding: 0;margin: 0;}
 
 
 .move{-webkit-transform: translate3d(-100%,0,0);
-    -moz-transform: translate3d(-100%,0,0);
-    -ms-transform: translate3d(-100%,0,0);
-    -o-transform: translate3d(-100%,0,0);
-    transform: translate3d(-100%,0,0);
-    overflow: hidden;
+      -moz-transform: translate3d(-100%,0,0);
+      -ms-transform: translate3d(-100%,0,0);
+      -o-transform: translate3d(-100%,0,0);
+      transform: translate3d(-100%,0,0);
+      overflow: hidden;
 
 }
 
 .nodeco{
-	text-decoration:none;
+    text-decoration:none;
 }
