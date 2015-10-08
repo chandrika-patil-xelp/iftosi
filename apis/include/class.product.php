@@ -285,8 +285,8 @@
         public function getPrdByCatid($params)
         {
             
-        $page   = $params['page'];
-        $limit  = $params['limit'];
+        $page   = ($params['page'] ? $params['page'] : 1);
+        $limit  = ($params['limit'] ? $params['limit'] : 20);
         
         $sql = "SELECT product_id FROM tbl_prd_cat_mapping WHERE category_id=".$params['catid'];
         if (!empty($page))
@@ -300,7 +300,7 @@
         {
             while ($row = $this->fetchData($res)) 
             {
-                    $pid['product_id'] = $row['product_id'];
+                    $pid[] = $row['product_id'];
             }
             
             $pid=implode(',',$pid);
@@ -309,15 +309,15 @@
             $pres=$this->query($psql);
             while($row1=$this->fetchData($pres))
             {
-                $arr1[]=$row1;
+                $arr1[$row1['product_id']]=$row1;
             }
             
             $patsql="SELECT * from tbl_product_srch where product_id IN(".$pid.")";
-            $patres=$this->query($patres);
+            $patres=$this->query($patsql);
             
             while($row2=$this->fetchData($patres))
             {
-                $arr2[]=$row2;
+                $arr1[$row2['product_id']]['attributes']=$row2;
             }
             $err = array('errCode'=>0,'errMsg'=>'Details fetched successfully');
         }
@@ -326,7 +326,7 @@
             $arr="There is no product within this category";
             $err="No records found";
         }
-            $result = array('products'=>$arr1,'Attributes'=>$arr2,'error'=>$err);
+            $result = array('products'=>$arr1,'error'=>$err);
             return $result;
         }
         
