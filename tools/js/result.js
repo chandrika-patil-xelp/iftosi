@@ -86,6 +86,8 @@ $(document).ready(function() {
 
 function FR() {
 	var slistarr = new Array();
+	var clistarr = new Array();
+	var tlistarr = new Array();
 	var i = 0;
 	$('.shapeComm').each(function() {
 		if($(this).hasClass('shapeSelected')) {
@@ -94,6 +96,26 @@ function FR() {
 		}
 	});
 	var slist = slistarr.join('|@|');
+	
+	$('.filterCont').each(function() {
+		var tempclistarr = new Array();
+		var i = 0;
+		var id = $(this).find('input:checked').parent().parent().attr('id');
+		$(this).find('input:checked').each(function() {
+			tempclistarr[i] = $(this).attr('id');
+			i++;
+		});
+		if(tempclistarr.length)
+			clistarr[id] = tempclistarr;
+	});
+	
+	var i = 0;
+	$('.filterCont .rangeCont :input[type=text]').each(function() {
+		if($(this).val()) {
+			tlistarr[$(this).attr('id')] = $(this).val();
+		}
+	});
+	console.log(tlistarr);
 	
 	var params = 'action=ajx&type=filter&shape='+slist;
 	var URL = DOMAIN + "index.php";
