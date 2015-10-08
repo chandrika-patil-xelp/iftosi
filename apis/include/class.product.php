@@ -289,7 +289,20 @@
 			$limit  = ($params['limit'] ? $params['limit'] : 15);
 			
 			$sql = "SELECT 
-						* 
+						count(1) as cnt 
+					FROM 
+						tbl_product_category_mapping 
+					WHERE 
+						category_id=".$params['catid'];
+			$res = $this->query($sql);
+			if($res)
+			{
+				$row = $this->fetchData($res);
+				$total = $row['cnt'];
+			}
+			
+			$sql = "SELECT 
+						product_id as pid 
 					FROM 
 						tbl_product_category_mapping 
 					WHERE 
@@ -305,7 +318,7 @@
 			{
 				while ($row = $this->fetchData($res)) 
 				{
-						$pid[] = $row['product_id'];
+					$pid[] = $row['pid'];
 				}
 				
 				$pid=implode(',',$pid);
@@ -335,15 +348,17 @@
 				}
 				
 				$patsql="
-						SELECT 
-							product_id, 
+						SELECT
+							product_id,
+							cla as carat,
 							color,
 							cert as certified,
 							cut as shape,
 							cla as clarity,
 							val as price,
 							pol as polish,
-							sym as symmetry
+							sym as symmetry,
+							cert1_no as cno
 						FROM 
 							tbl_product_search 
 						WHERE 
@@ -359,12 +374,13 @@
 					unset($row2['product_id']);
 					$arr1[$pid]['attributes']=$row2;
 				}
+				$arr1 = array('products'=>$arr1,'total'=>$total);
 				$err = array('errCode'=>0,'errMsg'=>'Details fetched successfully');
 			}
 			else
 			{
-				$arr="There is no product within this category";
-				$err="No records found";
+				$arr1 = array();
+				$err = array('errCode'=>1,'errMsg'=>'No records found');
 			}
             $result = array('results'=>$arr1,'error'=>$err);
             return $result;

@@ -10,8 +10,9 @@
         <link rel="stylesheet" href="<?= $css['ripple']; ?>">
         <script type="text/javascript" src="<?= $jvs['jqry']; ?>"></script>
         <script>
-            var pageName = '<?php echo $page ?>';
-            var DOMAIN = '<?php echo DOMAIN ?>';
+            var pageName = '<?php echo $page;?>';
+            var DOMAIN = '<?php echo DOMAIN;?>';
+            var totalCnt = '<?php echo $total;?>';
         </script>
         <?php
         if ($page == 'diamonds' || $page == 'jewellery') {

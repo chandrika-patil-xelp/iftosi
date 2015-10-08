@@ -49,7 +49,7 @@ $(document).ready(function() {
     var count = 255;
     $('.shapeComm').bind('click', function() {
         $(this).toggleClass('shapeSelected');
-        count += 135;
+        //count += 135;
 		
 		FR();
 
@@ -79,7 +79,7 @@ $(document).ready(function() {
     });
 
     $('#resultCount').numerator({
-        toValue: 2835,
+        toValue: totalCnt,
         delimiter: ',',
         onStart: function() {
             isStop = true;

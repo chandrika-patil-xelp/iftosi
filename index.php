@@ -24,9 +24,11 @@
 				
 				case 'diamonds':
 					$page='diamonds';
-					$url = APIDOMAIN.'index.php?action=getPrdByCatid&catid=10004';
-					$res = $comm->executeCurl($url);
-					$data = $res['results'];
+					$pgno 	= ($_GET['pgno'] ? $_GET['pgno'] : 1);
+					$url 	= APIDOMAIN.'index.php?action=getPrdByCatid&catid=10004&page='.$pgno;
+					$res 	= $comm->executeCurl($url);
+					$data 	= $res['results']['products'];
+					$total	= $res['results']['total'];
 					include 'template/results.html';
 				break;
 				
