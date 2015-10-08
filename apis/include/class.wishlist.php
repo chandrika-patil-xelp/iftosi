@@ -55,7 +55,7 @@ class wishlist extends DB
 
             $pid=implode(',',$prid);
             
-           $pres="SELECT product_name,product_display_name,product_model,prd_price,desname from tb_master_prd where product_id IN(".$pid.")";    
+           $pres="SELECT product_name,product_display_name,product_model,prd_price,desname from tbl_product_master where product_id IN(".$pid.")";    
             $pres.=" LIMIT " . $start . ",$limit";
            
            $pres=$this->query($pres);

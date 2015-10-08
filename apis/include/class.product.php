@@ -90,11 +90,11 @@
                     if($desres)
                     {
                     //  For category product mapping
-                        $pcsql="INSERT INTO tbl_prd_cat_mapping(product_id,category_id,pflag,cdt,udt) VALUES(".$pid.",".$catname.",1,now(),now())";
+                        $pcsql="INSERT INTO tbl_product_category_mapping(product_id,category_id,pflag,cdt,udt) VALUES(".$pid.",".$catname.",1,now(),now())";
                         $pcres=$this->query($pcres);
                         
                     //  For product values filling     
-                        $sql="INSERT INTO tb_master_prd(product_id,barcode,lotref,lotno,product_name,product_display_name,
+                        $sql="INSERT INTO tbl_product_master(product_id,barcode,lotref,lotno,product_name,product_display_name,
                                                      product_model,product_brand,prd_price,product_currency,product_keyword,                                                     
                                                      product_desc,prd_wt,prd_img,product_warranty,desname,
                                                      updatedby, updatedon, cdt)
@@ -128,9 +128,9 @@
                     
                     if(count($attr))
                     {
-                            //  For tbl_product_srch
+                            //  For tbl_product_search
         // Few attributes remaining-- type,metal,purity,nofd,dwt,gemwt,quality,goldwt
-                            $sql = "INSERT INTO tbl_product_srch(product_id,color,cert,cut,cla,base,tabl,val,p_disc,prop,pol,sym,fluo,td,measurement,cert1_no,pa,cr_hgt,cr_ang,girdle,pd) VALUES
+                            $sql = "INSERT INTO tbl_product_search(product_id,color,cert,cut,cla,base,tabl,val,p_disc,prop,pol,sym,fluo,td,measurement,cert1_no,pa,cr_hgt,cr_ang,girdle,pd) VALUES
                                     (".$pid.",'".$attr['color']."','".$attr['cert']."','".$attr['cut']."','".$attr['cla']."',".$attr['base'].",".$attr['tabl'].",".$attr['val'].",".$attr['p_disc'].",
                                      '".$attr['prop']."','".$attr['pol']."','".$attr['sym']."','".$attr['fluo']."',".$attr['td'].",'".$attr['measurement']."','".$attr['cert1no']."',".$attr['pa'].",".$attr['cr_hgt'].",
                                      ".$attr['cr_ang'].",".$attr['girdle'].",".$attr['pd'].")
@@ -202,7 +202,7 @@
                 $imgPath = implode('|~|',$imgPatharr);
                 $pid	 = $dt['pid'];
                 $upImg   = '';
-                $sql  	 = "SELECT prd_img FROM tb_master_prd WHERE product_id = ".$pid."";
+                $sql  	 = "SELECT prd_img FROM tbl_product_master WHERE product_id = ".$pid."";
                 $res     = $this->query($sql);
                 if($res)
                 {
@@ -227,7 +227,7 @@
                         }
                     }
 
-                $sql = "UPDATE tb_master_prd SET prd_img='".$upImg."' WHERE product_id = ".$pid."";
+                $sql = "UPDATE tbl_product_master SET prd_img='".$upImg."' WHERE product_id = ".$pid."";
                 $res = $this->query($sql);
                 $err = array('Code' => 0, 'Msg' => 'Product Image Added Successfully');
                 }
@@ -240,7 +240,7 @@
         { 
             $page   = $params['page'];
             $limit  = $params['limit'];
-            $sql = "SELECT *,MATCH(product_name) AGAINST ('".$params['prname']."*' IN BOOLEAN MODE) as startwith FROM tb_master_prd WHERE MATCH(product_name) AGAINST ('".$params['prname']."*' IN BOOLEAN MODE) ORDER BY startwith DESC";
+            $sql = "SELECT *,MATCH(product_name) AGAINST ('".$params['prname']."*' IN BOOLEAN MODE) as startwith FROM tbl_product_master WHERE MATCH(product_name) AGAINST ('".$params['prname']."*' IN BOOLEAN MODE) ORDER BY startwith DESC";
             if (!empty($page))
             {
                 $start = ($page * $limit) - $limit;
@@ -291,7 +291,7 @@
 			$sql = "SELECT 
 						* 
 					FROM 
-						tbl_prd_cat_mapping 
+						tbl_product_category_mapping 
 					WHERE 
 						category_id=".$params['catid'];
 			if (!empty($page))
@@ -322,7 +322,7 @@
 							product_currency as pcur,
 							prd_img as pimg
 						FROM 
-							tb_master_prd 
+							tbl_product_master 
 						WHERE 
 							product_id IN(".$pid.")
 						ORDER BY
@@ -345,7 +345,7 @@
 							pol as polish,
 							sym as symmetry
 						FROM 
-							tbl_product_srch 
+							tbl_product_search 
 						WHERE 
 							product_id IN(".$pid.")
 						ORDER BY
@@ -375,13 +375,13 @@
             $page   = $params['page'];
             $limit  = $params['limit'];
             
-            $sql = "SELECT * FROM tb_master_prd WHERE product_id=".$params['prdid']."";
+            $sql = "SELECT * FROM tbl_product_master WHERE product_id=".$params['prdid']."";
             if (!empty($page))
             {
                 $start = ($page * $limit) - $limit;
                 $sql.=" LIMIT " . $start . ",$limit";
             }
-            $sql2 = "SELECT * FROM tbl_product_srch WHERE product_id=".$params['prdid']."";
+            $sql2 = "SELECT * FROM tbl_product_search WHERE product_id=".$params['prdid']."";
             $res = $this->query($sql);
             $res2 = $this->query($sql2);
             if ($res)
@@ -438,13 +438,13 @@
         public function getList($params)
         {
             $total_products = 0;
-            $cnt_sql = "SELECT COUNT(*) as cnt FROM tb_master_prd";
+            $cnt_sql = "SELECT COUNT(*) as cnt FROM tbl_product_master";
             $cnt_res = $this->query($cnt_sql);
             
             $page   = $params['page'];
             $limit  = $params['limit'];
             
-            $sql = "SELECT * FROM tb_master_prd";
+            $sql = "SELECT * FROM tbl_product_master";
             
             if(!empty($page)) 
             {
@@ -462,7 +462,7 @@
                 
                 $pid=implode(',',$pid);
                 
-                $psql="SELECT * from tbl_product_srch where product_id IN (".$pid.")";
+                $psql="SELECT * from tbl_product_search where product_id IN (".$pid.")";
                 $pres=$this->query($psql);
                 while($row2=$this->fetchData($pres))
                 {
@@ -514,7 +514,7 @@
                         $j++;
                     }
                     $pid=implode(',',$arr2);
-                    $fillpiddet="SELECT * from tb_master_prd where product_id IN(".$pid.")";
+                    $fillpiddet="SELECT * from tbl_product_master where product_id IN(".$pid.")";
                     if(!empty($page)) 
                     {
                         $start = ($page * $limit) - $limit;
@@ -557,7 +557,7 @@
         {
             $page   = $params['page'];
             $limit  = $params['limit'];
-            $chksql="SELECT * from tb_master_prd where product_brand='".$params['bname']."'";
+            $chksql="SELECT * from tbl_product_master where product_brand='".$params['bname']."'";
             if(!empty($page)) 
             {
                 $start = ($page * $limit) - $limit;

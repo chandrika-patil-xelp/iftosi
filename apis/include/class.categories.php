@@ -18,11 +18,11 @@ class categories extends DB
             $catid=$this->lastInsertedId($ires);
             if($ires)
             {
-                $ipsql="INSERT INTO tbl_prd_cat_mapping(product_id,category_id,pflag,cdt,udt) VALUES(".$detls['pid'].",".$catid.",1,now(),now())";
+                $ipsql="INSERT INTO tbl_product_category_mapping(product_id,category_id,pflag,cdt,udt) VALUES(".$detls['pid'].",".$catid.",1,now(),now())";
                 $ipres=$this->query($ipsql);
                 if($ipres)
                 {
-                   $upsql="UPDATE tb_master_prd set lineage='".$detls['lineage']."' WHERE product_id=".$detls['pid']."";
+                   $upsql="UPDATE tbl_product_master set lineage='".$detls['lineage']."' WHERE product_id=".$detls['pid']."";
                     $upres=$this->query($upsql);
                     if($upres)
                     {
@@ -60,7 +60,7 @@ class categories extends DB
         $ures=$this->query($usql);
         if($ures)
         {
-           $csql="select product_id from tbl_prd_cat_mapping where category_id=".$detls['catid']."";
+           $csql="select product_id from tbl_product_category_mapping where category_id=".$detls['catid']."";
             $cres=$this->query($csql);
             if($cres)
             {
@@ -70,7 +70,7 @@ class categories extends DB
                 }
                 $pid=implode(',',$pid);
 
-                $upsql="UPDATE tb_master_prd set lineage='".$detls['lineage']."' WHERE product_id IN(".$pid.")";
+                $upsql="UPDATE tbl_product_master set lineage='".$detls['lineage']."' WHERE product_id IN(".$pid.")";
                 $upres=$this->query($upsql);
                 if($upres)
                 {

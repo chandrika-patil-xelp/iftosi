@@ -59,7 +59,7 @@ class vendor extends DB
         $vmapProd=implode(',',$vmap[$i]['product_id']);
         
         $prsql="SELECT product_id,product_name,product_display_name,product_model,product_brand,prd_img,desname 
-                FROM tb_master_prd WHERE product_id IN(".$vmapProd.")";
+                FROM tbl_product_master WHERE product_id IN(".$vmapProd.")";
         $prsql.=" LIMIT " . $start . ",$limit";
         
         $pres=$this->query($prsql);
@@ -99,7 +99,7 @@ class vendor extends DB
     public function getVproductsByName($params)
     {
         
-     $sql1="SELECT product_id,product_display_name,product_model,product_brand,prd_img,IF(product_name LIKE '".$params['prname']."%',1,0) AS startwith,IF(product_name LIKE '".$params['prname']."%',1,0) AS phrasematch,desname FROM tb_master_prd where MATCH(product_name) AGAINST(\"'" . $params['prname'] . "*'\" IN BOOLEAN MODE) ORDER BY startwith DESC,phrasematch DESC";
+     $sql1="SELECT product_id,product_display_name,product_model,product_brand,prd_img,IF(product_name LIKE '".$params['prname']."%',1,0) AS startwith,IF(product_name LIKE '".$params['prname']."%',1,0) AS phrasematch,desname FROM tbl_product_master where MATCH(product_name) AGAINST(\"'" . $params['prname'] . "*'\" IN BOOLEAN MODE) ORDER BY startwith DESC,phrasematch DESC";
      $page=$params['page'];
      $limit=$params['limit'];
      if (!empty($page))

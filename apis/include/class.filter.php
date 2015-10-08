@@ -10,7 +10,7 @@ class filter extends DB
     
     public function get_filters($params)
     {
-      $sql = "SELECT attribute_id, attr_display_position FROM tb_attribute_mapping WHERE category_id=".$params['category_id']."
+      $sql = "SELECT attribute_id, attr_display_position FROM tbl_attribute_mapping WHERE category_id=".$params['category_id']."
                 AND attr_filter_flag=1 ORDER BY attr_filter_position ASC";	
         $page=$params['page'];
         $limit=$params['limit'];
@@ -36,7 +36,7 @@ class filter extends DB
             }
             
             $attr_id = implode(",", $aid);
-            $sql1="SELECT attr_id,attr_name,attr_display_name,attr_unit,attr_unit_pos from tb_attribute_master WHERE attr_id IN(".$attr_id.") ORDER BY attr_display_name ASC";
+            $sql1="SELECT attr_id,attr_name,attr_display_name,attr_unit,attr_unit_pos from tbl_attribute_master WHERE attr_id IN(".$attr_id.") ORDER BY attr_display_name ASC";
             
             if (!empty($page))
             {
@@ -93,7 +93,7 @@ class filter extends DB
 // When No condition is applied 
   
 #   WHEN FILTER FLAG IS NOT SET THEN       
-        $sql="SELECT product_id,barcode,lotref,lotno,product_name,product_display_name,product_brand,product_model,prd_img,prd_price AS prc,lineage,prd_wt,category_id,product_currency,product_keyword,product_desc,product_warranty,desname from tb_master_prd WHERE category_id=".$params['catid']."";
+        $sql="SELECT product_id,barcode,lotref,lotno,product_name,product_display_name,product_brand,product_model,prd_img,prd_price AS prc,lineage,prd_wt,category_id,product_currency,product_keyword,product_desc,product_warranty,desname from tbl_product_master WHERE category_id=".$params['catid']."";
 
 //  If filter flag is active/inactive        
         $flg=$detls['filter_flg'];
@@ -147,7 +147,7 @@ class filter extends DB
            {
                $type= str_replace(',', "','", $detls['type']);
 
-               $tsql="SELECT attr_id from tb_attribute_master where attr_name='type'";
+               $tsql="SELECT attr_id from tbl_attribute_master where attr_name='type'";
                $tres=$this->query($tsql);
                $trow=$this->fetchData($tres);
                $typeid=$trow['attr_id'];
@@ -171,7 +171,7 @@ class filter extends DB
 #  GENERATES QUERY AGAINST PRODUCT FIELD QUERY HAVING PRODUCT ID IN OBTAINED PID
            if(!empty($detls['pgen']))
            {
-               $gsql="SELECT attr_id from tb_attribute_master where attr_name='gender'";
+               $gsql="SELECT attr_id from tbl_attribute_master where attr_name='gender'";
                $gres=$this->query($gsql);
                $grow=$this->fetchData($gres);
                $aid=$grow['attr_id'];
@@ -198,7 +198,7 @@ class filter extends DB
            if(!empty($detls['metal']))
            {
             //   $met= implode(',', $detls['metal']);
-               $mtsql="SELECT attr_id from tb_attribute_master where attr_name='metal'";
+               $mtsql="SELECT attr_id from tbl_attribute_master where attr_name='metal'";
                $mtres=$this->query($mtsql);
                $mtrow=$this->fetchData($mtres);
                $aid=$mtrow['attr_id'];
@@ -224,7 +224,7 @@ class filter extends DB
            if(!empty($detls['color']))
            {
               // $col= implode(',', $detls['color']);
-               $colsql="SELECT attr_id from tb_attribute_master where attr_name='color'";
+               $colsql="SELECT attr_id from tbl_attribute_master where attr_name='color'";
                $colres=$this->query($colsql);
                $colrow=$this->fetchData($colres);
                $aid=$colrow['attr_id'];
@@ -250,7 +250,7 @@ class filter extends DB
            if(!empty($detls['shape']))
            {
               // $shape= implode(',', $detls['shape']);
-               $shpsql="SELECT attr_id from tb_attribute_master where attr_name='shape'";
+               $shpsql="SELECT attr_id from tbl_attribute_master where attr_name='shape'";
                $shpres=$this->query($shpsql);
                $shprow=$this->fetchData($shpres);
                $aid=$shprow['attr_id'];
@@ -276,7 +276,7 @@ class filter extends DB
            if(!empty($detls['style']))
            {
               // $style= implode(',', $detls['style']);
-               $stsql="SELECT attr_id from tb_attribute_master where attr_name='style'";
+               $stsql="SELECT attr_id from tbl_attribute_master where attr_name='style'";
                $stres=$this->query($stsql);
                $strow=$this->fetchData($stres);
                $aid=$strow['attr_id'];
@@ -302,7 +302,7 @@ class filter extends DB
            if(!empty($detls['purity']))
            {
                //$purity= implode(',', $detls['purity']);
-               $ptysql="SELECT attr_id from tb_attribute_master where attr_name='purity'";
+               $ptysql="SELECT attr_id from tbl_attribute_master where attr_name='purity'";
                $ptyres=$this->query($ptysql);
                $ptyrow=$this->fetchData($ptyres);
                $aid=$ptyrow['attr_id'];
@@ -328,7 +328,7 @@ class filter extends DB
            if(!empty($detls['size']))
            {
               // $size= implode(',', $detls['size']);
-               $szsql="SELECT attr_id from tb_attribute_master where attr_name='size'";
+               $szsql="SELECT attr_id from tbl_attribute_master where attr_name='size'";
                $szres=$this->query($szsql);
                $szrow=$this->fetchData($szres);
                $aid=$szrow['attr_id'];
@@ -354,7 +354,7 @@ class filter extends DB
            if(!empty($detls['clarity']))
            {
               // $size= implode(',', $detls['size']);
-               $clsql="SELECT attr_id from tb_attribute_master where attr_name='clarity'";
+               $clsql="SELECT attr_id from tbl_attribute_master where attr_name='clarity'";
                $clres=$this->query($clsql);
                $clrow=$this->fetchData($clres);
                $aid=$clrow['attr_id'];
@@ -382,7 +382,7 @@ class filter extends DB
            if(!empty($detls['mncar']) && !empty($detls['mxcar']))
            {
               // $size= implode(',', $detls['size']);
-               $crsql="SELECT attr_id from tb_attribute_master where attr_name='carats'";
+               $crsql="SELECT attr_id from tbl_attribute_master where attr_name='carats'";
                $crres=$this->query($crsql);
                $crrow=$this->fetchData($crres);
                $aid=$crrow['attr_id'];
@@ -408,7 +408,7 @@ class filter extends DB
            
            if(!empty($detls['carats']))
            {
-               $crsql="SELECT attr_id from tb_attribute_master where attr_name='carats'";
+               $crsql="SELECT attr_id from tbl_attribute_master where attr_name='carats'";
                $crres=$this->query($crsql);
                $crrow=$this->fetchData($crres);
                $aid=$crrow['attr_id'];
@@ -433,7 +433,7 @@ class filter extends DB
            if(!empty($detls['polish']))
            {
               // $size= implode(',', $detls['size']);
-               $polql="SELECT attr_id from tb_attribute_master where attr_name='clarity'";
+               $polql="SELECT attr_id from tbl_attribute_master where attr_name='clarity'";
                $polres=$this->query($polsql);
                $polrow=$this->fetchData($polres);
                $aid=$polrow['attr_id'];
@@ -518,7 +518,7 @@ public function refine1($params)
         $dt     = json_decode($params['dt'],1);
         $detls  = $dt['result'];
        $val  = $dt['value'];
-        $sql="SELECT product_id,barcode,lotref,lotno,product_name,product_display_name,product_brand,product_model,prd_img,prd_price AS prc,lineage,prd_wt,category_id,product_currency,product_keyword,product_desc,product_warranty from tb_master_prd where category_id=".$params['catid']."";
+        $sql="SELECT product_id,barcode,lotref,lotno,product_name,product_display_name,product_brand,product_model,prd_img,prd_price AS prc,lineage,prd_wt,category_id,product_currency,product_keyword,product_desc,product_warranty from tbl_product_master where category_id=".$params['catid']."";
         $flg=$detls['filter_flg'];
         
         if($flg=0)
