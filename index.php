@@ -26,7 +26,7 @@
 					$page='diamonds';
 					$url = APIDOMAIN.'index.php?action=getPrdByCatid&catid=10004';
 					$res = $comm->executeCurl($url);
-					$data = $res['products'];
+					$data = $res['results'];
 					include 'template/results.html';
 				break;
 				

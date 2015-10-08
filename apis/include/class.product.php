@@ -366,7 +366,7 @@
 				$arr="There is no product within this category";
 				$err="No records found";
 			}
-            $result = array('products'=>$arr1,'error'=>$err);
+            $result = array('results'=>$arr1,'error'=>$err);
             return $result;
         }
         
