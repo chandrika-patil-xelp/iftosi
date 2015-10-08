@@ -39,6 +39,9 @@
 				
 				default:
 					$page='index';
+					$url = APIDOMAIN.'index.php?action=getCatList&page=1&limit=3';
+					$res = $comm->executeCurl($url);
+					$data = $res['results'];
 					include 'template/index.html';
 				break;
 			}

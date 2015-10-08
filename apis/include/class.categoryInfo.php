@@ -9,28 +9,34 @@ class categoryInfo extends DB
     }
         public function getCatList($params)
         { 
-        $sql = "SELECT * FROM tbl_categoryid_generator";
-        $page=$params['page'];
-        $limit=$params['limit'];
-        if (!empty($page))
-        {
-            $start = ($page * $limit) - $limit;
-            $sql.=" LIMIT " . $start . ",$limit";
-        }
-        $res = $this->query($sql);
-        if($res)
-        {
-            while($row =$this->fetchData($res))
-            {
-                if($row && !empty($row['category_id']))
-                    {
-                        $reslt['category_id'] = $row['category_id'];
-                        $reslt['category_name'] = $row['category_name'];
-                        $results[] = $reslt;
-                    }
-                }
-                $err = array('Code' => 0, 'Msg' => 'Details fetched successfully');
-            }
+			$sql = "SELECT category_id, category_name FROM tbl_categoryid_generator order by category_id ASC";
+			$page=$params['page'];
+			$limit=$params['limit'];
+			if (!empty($page))
+			{
+				$start = ($page * $limit) - $limit;
+				$sql.=" LIMIT " . $start . ",$limit";
+			}
+			$res = $this->query($sql);
+			if($res)
+			{
+				$i=0;
+				while($row =$this->fetchData($res))
+				{
+					if($i==0)
+						$dpt = "0.7";
+					if($i==1)
+						$dpt = "0.6";
+					if($i==2)
+						$dpt = "0.8";
+					$reslt['category_id'] = $row['category_id'];
+					$reslt['category_name'] = $row['category_name'];
+					$reslt['depth'] = $dpt;
+					$results[] = $reslt;
+					$i++;
+				}
+					$err = array('Code' => 0, 'Msg' => 'Details fetched successfully');
+			}
             $result = array('results'=> $results,'error'=> $err);
             return $result;
         }

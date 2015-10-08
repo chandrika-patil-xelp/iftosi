@@ -8,21 +8,18 @@
                     <center>
                         <div class="buyTxt fmOpenL">What would you like to buy today?</div>
                         <ul id="scene" class="prllx transition300 txtCenter">
-                            <li class="layer"  data-depth="0.7">
-                                <a href="<?php echo DOMAIN ?>diamonds/ct-1">
-                                    <div id='catDiamond' class="categoryCircle bgDiamond ripplelink" style="transform: scale(0);">Diamonds</div>
-                                </a>
-                            </li>
-                            <li class="layer"  data-depth="0.6">
-                                <a href="<?php echo DOMAIN ?>jewellery/ct-2">
-                                    <div id='catJewellery' class="categoryCircle bgJewellery ripplelink"  style="transform: scale(0);">Jewellery</div>
-                                </a>
-                            </li>
-                            <li class="layer"  data-depth="0.8">
-                                <a href="<?php echo DOMAIN ?>bullions/ct-3">
-                                    <div id='catBullion' class="categoryCircle bgBullion ripplelink"  style="transform: scale(0);">Bullions</div>
-                                </a>
-                            </li>
+							<?php
+							for($i=0;$i<count($data);$i++)
+							{
+							?>
+								<li class="layer"  data-depth="<?php echo $data[$i]['depth'];?>">
+									<a href="<?php echo DOMAIN.strtolower(str_replace(' ','-',$data[$i]['category_name']));?>/ct-<?php echo $data[$i]['category_id'];?>">
+										<div id='cat<?php echo $i;?>' class="categoryCircle bg<?php echo $data[$i]['category_name'];?> ripplelink" style="transform: scale(0);"><?php echo $data[$i]['category_name'];?></div>
+									</a>
+								</li>
+							<?php
+							}
+							?>
                         </ul>
                     </center>
                 </div>

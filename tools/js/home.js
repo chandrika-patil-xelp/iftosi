@@ -53,7 +53,12 @@ $(window).load(function() {
 
 
 function showCategory() {
-    $('#catDiamond').velocity({scale: "1"}, {duration: 800, delay: 0, easing: 'spring'});
-    $('#catJewellery').velocity({scale: "1"}, {duration: 800, delay: 150, easing: 'spring'});
-    $('#catBullion').velocity({scale: "1"}, {duration: 800, delay: 250, easing: 'spring'});
+	
+	$('.categoryCircle').each(function() {
+		$(this).velocity({scale: "1"}, {duration: 800, delay: 0, easing: 'spring'});
+	});
+	
+    //$('#catDiamond').velocity({scale: "1"}, {duration: 800, delay: 0, easing: 'spring'});
+    //$('#catJewellery').velocity({scale: "1"}, {duration: 800, delay: 150, easing: 'spring'});
+    //$('#catBullion').velocity({scale: "1"}, {duration: 800, delay: 250, easing: 'spring'});
 }
