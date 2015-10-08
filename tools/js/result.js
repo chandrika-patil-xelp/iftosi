@@ -16,7 +16,15 @@ $(document).ready(function() {
         }
         $('body').animate({scrollTop: samt}, 300);
     }, 100);
-
+    
+    
+    if(pw<1024 && pw>959){
+        $('.fTitle').click(function(){
+            $('#filters').toggleClass('transit-100X');
+        });
+        
+        
+    }
 
     $('#drpinp').click(function() {
         setTimeout(function() {

@@ -65,7 +65,7 @@ a{text-decoration: none;}
 .header a{text-decoration:none;color:#4d4d4d;}
 .cityName{width: auto;min-width: 250px;max-width: 350px;height:36px;line-height: 36px;color: #333;font-size: 16px;background: url(../img/common/sarea.svg)no-repeat;background-size: auto 25px;background-position: left;padding-left: 25px;}
 .headRight{width:50%;height: 36px;font-size: 13px; color:#333;}
-.compNo{width:auto;height:36px;line-height:36px;background: #8A0044;color:#fff;padding: 0 15px;border-radius: 5px;margin: 0 20px 0 10px;}
+.compNo{width:auto;height:36px;line-height:36px;background: #8A0044;color:#fff;padding: 0 15px;border-radius: 5px;margin:0 0 10px;}
 .signInUpTab{width: auto;height: 36px;line-height: 36px;padding-left: 25px;margin: 0 20px 0 15px;background: url(../img/common/lock.svg)no-repeat;background-position: left 3px;background-size: auto 100%;cursor:pointer;}
 .headDivider{width: 2px;background: #333;height: 16px;margin: 10px 0px;}
 .wishlist{width:auto;height: 36px;line-height: 36px;margin:0 15px;;cursor:pointer;}
@@ -405,7 +405,7 @@ a{text-decoration: none;}
 
 
 /*Details Page*/
-.detailsPage{padding-bottom: 500px;display: inline-block}
+.detailsPage{padding-bottom: 0px;display: inline-block}
 .forBg{width:100%;height:300px;padding-top: 100px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;}
 .prdMainDetails{width:100%;height: 390px;margin-top: -90px;position: relative;}
 .prdMainDetails .wrapperMax{padding-left: 360px;position: relative;}
@@ -542,10 +542,63 @@ a{text-decoration: none;}
 .jshapeComm.shapeSelected{background-color: #fff;border-right: 2px solid #FFF;padding-top: 100px;font-size: 30px;}
 .jshapeComm.shapeSelected::after{content: '';position: absolute;right: 0px; left:0px; bottom: 50px;margin: auto; width: 40px;height: 40px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;}
 
+.drag-target {height: 100%;width: 20px;position: fixed;top: 0;z-index: 1;}
+.pFixed{position: fixed;}
+
+@media only screen and (min-width: 960px) and (max-width: 1024px){
+
+/*Header*/
+.header {padding: 32px 15px;}
+.headRight{width:auto;}
+   
+/*Home Page*/    
+.prllx {width: 100%;}
+    
+/*Diamond Result*/    
+.resultsPage .shapesCont{padding: 10px;}
+.prdResults {width: 100%;}
+.filterTitleDiv{padding:0 10px;}
+.results_Filter{padding: 0 10px;}
+.fTitle{cursor: pointer;}
+.prdComm {width: 31%;height: auto;border: 5px solid #ebebde;margin: 0 1.16% 2.32% 1.16%;}
+
+/*Jewellery Result Page*/
+.jshapeComm {height: 200px;padding-top: 160px;font-size: 20px;line-height: 40px;}
+.jShapesCont {width: 100%;height: 202px;}
+.Rings{box-shadow: inset 0 -40px 0px rgba(23, 19, 52,1);}
+.Earrings{box-shadow: inset 0 -40px 0px rgba(42, 14, 52,1);}
+.Pendent{box-shadow: inset 0 -40px 0px rgba(56, 11, 52,1);}
+.Necklace{box-shadow: inset 0 -40px 0px rgba(94, 0, 55,1);}
+.Bracelet{box-shadow: inset 0 -40px 0px rgba(138, 0, 68,1);}
+.jshapeComm::after {bottom: 50px;width: 0px;height: 0px;}
+.jshapeComm.shapeSelected::after {bottom: 30px;width: 30px;height: 30px;}
+
+/*Filters Page*/
+.filterList {width: 300px;height: auto;min-height: 100%;left: 0;background: #fff;padding-bottom: 25px;position: absolute;box-shadow: 0 0 20px 5px rgba(0,0,0,0.2);z-index: 10;top: -20px;padding: 15px;}
+.filterList.transit-100X{-webkit-transform:translateX(-350px);-moz-transform:translateX(-350px);;-ms-transform:translateX(-350px);-o-transform:translateX(-350px);transform:translateX(-350px);}
+
+/*Details Page*/
+.imgsCont {width: 300px;height: 300px;position: absolute;left: 0;top: 0;box-shadow: 0 0 20px 5px rgba(0,0,0,0.2);}
+.forImg {width: 100%;height: 225px;cursor: pointer;}
+.thumbnil {width: 71px;height: 73pX;border: 1px solid #333;margin: 2px;cursor: pointer;}
+.prdMainDetails .wrapperMax {padding-left: 300px;position: relative;}
+.btnsCont .prdShType {line-height: 35px;font-size: 25px;font-family: openR;}
+.btnComm{margin: 0}
+.btnComm:nth-child(2){margin:0 10px}
+.prdInfo {margin-top: 0;padding: 0 15px;}
+.imgThumbnil{width: 32%;padding-bottom: 32%;margin: 0.5%;}
+
+/*Footer*/    
+.bottmInfo {height: 205px;padding: 30px 0;}    
+    
+}
+
+
+
+
 
 
 @media only screen and (min-width: 320px) and (max-width: 479px){
-
     .logo {width: 80px;height: 80px;font-size: 22px;top:20px;}
     .header{height:60px;padding: 0 15px;}
     .cityName{display: none;}
@@ -567,7 +620,6 @@ a{text-decoration: none;}
     .infoComm {width: 100%;height: 100px;border-right: none;position: relative;float: none!important;border-bottom: 1px solid rgba(255,255,255,0.2);}
     .shapeComm {border: 2px solid #fff;position: relative;background-image: url(../img/shapes.svg);background-repeat: no-repeat;margin:1%;width: 23%!important;height:0%!important;padding-bottom: 23%;display: block;float:left;vertical-align: bottom;text-align: center;cursor: pointer;background-size: 1000% auto;}    
     .shapeComm:hover{border:2px solid #FFF;}
-
     .shapeSelected.shapeComm.Round{background-color:#fff;border:2px solid #8A0044;background-position: 0% 33%;}
     .shapeSelected.shapeComm.Pear{background-color:#fff;border:2px solid #8A0044;background-position: 11% 33%;}
     .shapeSelected.shapeComm.Heart{background-color:#fff;border:2px solid #8A0044;background-position: 22% 33%;}
@@ -641,26 +693,7 @@ a{text-decoration: none;}
 
 
 }
-
-.drag-target {height: 100%;width: 20px;position: fixed;top: 0;z-index: 1;}
-
-.pFixed{position: fixed;}
-
 @media only screen and (min-width: 1025px) and (max-width: 1279px){}
-@media only screen and (min-width: 960px) and (max-width: 1024px){}
+
 @media only screen and (min-width: 768px) and (max-width: 959px){}
 @media only screen and (min-width: 480px) and (max-width: 767px){}
-
-
-.move{-webkit-transform: translate3d(-100%,0,0);
-      -moz-transform: translate3d(-100%,0,0);
-      -ms-transform: translate3d(-100%,0,0);
-      -o-transform: translate3d(-100%,0,0);
-      transform: translate3d(-100%,0,0);
-      overflow: hidden;
-
-}
-
-.nodeco{
-    text-decoration:none;
-}
