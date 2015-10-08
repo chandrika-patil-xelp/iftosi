@@ -18,6 +18,8 @@ $(document).ready(function() {
             //showCategory();
         }, 10);
         showCategory();
+    }else{
+        showCategory();
     }
 
 

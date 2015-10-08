@@ -3,7 +3,7 @@ var pw=$(window).width();
 var ph=$(window).height();
 var isMobile=false;
 var hisOpen=false;
-if(pw<768){
+if(pw<481){
     isMobile=true; 
 }
 $(document).ready(function(){

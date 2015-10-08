@@ -590,9 +590,63 @@ a{text-decoration: none;}
 
 /*Footer*/    
 .bottmInfo {height: 205px;padding: 30px 0;}    
-    
 }
 
+@media only screen and (min-width: 768px) and (max-width: 959px){
+.bottmInfo{display: none;}
+/*Home Page*/    
+.prllx {width: 100%;}
+.prllx li {width: 150px;margin: 0 10px;}
+.categoryCircle {width: 150px;height: 150px;font-size: 16px;padding-top: 95px;}
+.categoryCont {height: 489px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: cover;padding: 200px 0 50px 0;}
+.homePage{}
+.homePage .shapesCont {width: 100%;height: 240px;background: #FFF;padding: 15px 0;position: relative;z-index: 0;}
+.searchBtn {margin: 10px 0 0 0;}
+
+
+.hPrdLeft {width: 100%;height: 100%;}
+.hPrdRight,.st2Right,.st3Upper {display: none;}
+.st2Upper {width: 100%;height: 50%;}
+.st2Lower {width: 100%;height: 50%;position: relative;}
+.st2Left {width: 100%;height: 100%;}
+.homeProd {width: 100%;height: 490px;}
+.st3Middle {width: 100%;height: 47%;}
+.st3Lower {width: 100%;height: 53%;}
+
+/*Diamond Result*/    
+.resultsPage .shapesCont{padding: 10px;}
+.prdResults {width: 100%;}
+.filterTitleDiv{padding:0 10px;}
+.results_Filter{padding: 0 10px;}
+.fTitle{cursor: pointer;}
+.prdComm {width: 48%;height: auto;border: 5px solid #ebebde;margin: 1%;}
+/*Jewellery Result Page*/
+.jshapeComm {height: 200px;padding-top: 160px;font-size: 20px;line-height: 40px;}
+.jShapesCont {width: 100%;height: 202px;}
+.Rings{box-shadow: inset 0 -40px 0px rgba(23, 19, 52,1);}
+.Earrings{box-shadow: inset 0 -40px 0px rgba(42, 14, 52,1);}
+.Pendent{box-shadow: inset 0 -40px 0px rgba(56, 11, 52,1);}
+.Necklace{box-shadow: inset 0 -40px 0px rgba(94, 0, 55,1);}
+.Bracelet{box-shadow: inset 0 -40px 0px rgba(138, 0, 68,1);}
+.jshapeComm::after {bottom: 50px;width: 0px;height: 0px;}
+.jshapeComm.shapeSelected::after {bottom: 30px;width: 30px;height: 30px;}
+
+/*Filters Page*/
+.filterList {width: 300px;height: auto;min-height: 100%;left: 0;background: #fff;padding-bottom: 25px;position: absolute;box-shadow: 0 0 20px 5px rgba(0,0,0,0.2);z-index: 10;top: -20px;padding: 15px;}
+.filterList.transit-100X{-webkit-transform:translateX(-350px);-moz-transform:translateX(-350px);;-ms-transform:translateX(-350px);-o-transform:translateX(-350px);transform:translateX(-350px);}
+
+
+
+
+
+
+
+
+
+
+
+
+}
 
 
 
@@ -695,5 +749,17 @@ a{text-decoration: none;}
 }
 @media only screen and (min-width: 1025px) and (max-width: 1279px){}
 
-@media only screen and (min-width: 768px) and (max-width: 959px){}
-@media only screen and (min-width: 480px) and (max-width: 767px){}
+
+@media only screen and (min-width: 480px) and (max-width: 767px){
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
