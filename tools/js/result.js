@@ -45,7 +45,7 @@ $(document).ready(function() {
 			var html = '';
 			$.each(data.results.products, function(i, vl) {
 				
-				html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'-carat-'+vl.attributes.carat+'/pid-'+vl.pid+'">';
+				html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/pid-'+vl.pid+'">';
 					html += '<div class="prdComm fLeft transition100">';
 						html += '<div class="prdCommDiv fLeft transition100">';
 							html += '<div class="prdShape fLeft">';
