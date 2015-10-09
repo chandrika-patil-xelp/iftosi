@@ -10,8 +10,18 @@ class filter extends DB
     
     public function get_filters($params)
     {
-      $sql = "SELECT attribute_id, attr_display_position FROM tbl_attribute_mapping WHERE category_id=".$params['category_id']."
-                AND attr_filter_flag=1 ORDER BY attr_filter_position ASC";	
+      $sql = "
+			SELECT 
+				attribute_id, 
+				attr_display_position 
+			FROM 
+				tbl_attribute_mapping 
+			WHERE 
+				category_id=".$params['category_id']." 
+			AND 
+				attr_filter_flag=1 
+			ORDER BY 
+				attr_filter_position ASC";	
         $page=$params['page'];
         $limit=$params['limit'];
         if (!empty($page))
@@ -20,7 +30,7 @@ class filter extends DB
             $sql.=" LIMIT " . $start . ",$limit";
         }
       
-      $res = $this->query($sql);
+      $res = $this->query($sql,1);
         
         $chkres=$this->numRows($res);
         if($chkres)

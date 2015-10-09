@@ -187,7 +187,7 @@ function FR() {
 	console.log(clistarr);
 	console.log(tlistarr);
 	
-	var params = 'action=ajx&type=filter&shape='+slist;
+	var params = 'action=ajx&case=filter&slist='+slist;
 	var URL = DOMAIN + "index.php";
 	$.getJSON(URL, params, function(data) {
 		

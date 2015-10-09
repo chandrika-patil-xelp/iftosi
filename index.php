@@ -18,6 +18,15 @@
 					$res 	= $comm->executeCurl($url,1);
 					echo $res;
 				break;
+				
+				case 'filter':
+					$pgno 	= 1;
+					$catid 	= $_GET['catid'];
+					$sortby	= $_GET['sortby'];
+					$slist	= $_GET['slist'];
+					echo $url 	= APIDOMAIN.'index.php?action=getPrdByCatid&catid='.$catid.'&page='.$pgno.'&sortby='.$sortby.'&slist='.$slist;die;
+					$res 	= $comm->executeCurl($url,1);
+				break;
 			}
 			break;
 		default:
@@ -41,6 +50,13 @@
 					$res 	= $comm->executeCurl($url);
 					$data 	= $res['results']['products'];
 					$total	= $res['results']['total'];
+					
+					$url 	= APIDOMAIN.'index.php?action=fetch_category_mapping&catid='.$catid;
+					$res 	= $comm->executeCurl($url);
+					$fil	= $res['results']['attributes'];
+					
+					//echo "<pre>";print_r($fil);die;
+					
 					include 'template/results.html';
 				break;
 				
