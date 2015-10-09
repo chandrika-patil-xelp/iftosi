@@ -32,7 +32,7 @@
         </select>
     </div>
 
-    <?php if ($page == 'jewellery') { ?>
+    <?php //if ($page == 'jewellery') { ?>
         <div class="filterCont fLeft">
             <div class="fLeft optionTitle fmOpenR">Category</div>
             <div id="wrapper" class="fLeft">
@@ -282,7 +282,7 @@
                 </div>
             </div>
         </div>
-    <?php } ?>
+    <?php //} ?>
     <div class="filterCont fLeft">
         <!-- <div class="fLeft optionTitle fmOpenR">City / Area</div>
         <div class='areaCont fLeft'>
@@ -342,13 +342,13 @@
 	?>
 				<div class="filterCont fLeft forClarity">
 					<div class="fLeft optionTitle fmOpenR"><?php echo $val['attribute_disp_name'];?></div>
-					<div id='<?php echo $val['attribute_name'].'-'.$val['attribute_name'];?>' class="filterOptions fLeft fmOpenR">
+					<div id='<?php echo $val['attribute_name'].'-'.$val['atrribute_id'];?>' class="filterOptions fLeft fmOpenR">
 						<?php
 						for($i=0;$i<count($expd);$i++)
 						{
 						?>
 							<div class="checkDiv fLeft">
-								<input type="checkbox" class="filled-in" id="<?php echo $val['attribute_name'].'-'.$expd[$i];?>"/>
+								<input type="checkbox" class="filled-in" id="<?php echo $val['attribute_name'].'-'.$expd[$i];?>" />
 								<label for="<?php echo $val['attribute_name'].'-'.$expd[$i];?>"><?php echo $expd[$i];?></label>
 							</div>
 						<?php

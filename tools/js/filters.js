@@ -2,8 +2,9 @@ $(document).ready(function() {
 	
 	$(".rngInp").each(function () {
 		
-		var min_price = $('#'+$(this).attr('id')+'Min').val()*1;
-		var max_price = $('#'+$(this).attr('id')+'Max').val()*1;
+		var id = $(this).attr('id');
+		var min_price = $('#'+id+'Min').val()*1;
+		var max_price = $('#'+id+'Max').val()*1;
 		
 		if((max_price - min_price) > 100)
 			var step = '';
@@ -23,9 +24,30 @@ $(document).ready(function() {
 			drag_interval: true,
 			step: step,
 			onFinish: function(data) {
-
+				FR();
 			}
 		});
+		
+		$('.filterCont label').each(function() {
+			$(this).bind('click', function(event) {
+				//FR();
+				if (event && event.stopPropagation)
+					event.stopPropagation();
+				else 
+					window.event.cancelBubble=true;
+			});
+		});
+		
+		/*$('.filterCont :input[type=checkbox]').each(function() {
+			$(this).bind('click', function(event) {
+				
+				event.stopPropagation();
+			});
+		});*/
+		
+		/* $('.filterCont label').click(function(){
+			FR();
+		}); */
 	});
 
     /*Mobile Filter Btns*/

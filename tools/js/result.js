@@ -51,7 +51,7 @@ $(document).ready(function() {
 							html += '<div class="prdShape fLeft">';
 								html += '<div class="prdShTitle fLeft fmOpenB">SHAPE</div>';
 								html += '<div class="prdShType fLeft fmOpenR">'+vl.attributes.shape+'</div>';
-								html += '<div class="Round fRight"></div>';
+								html += '<div class="'+vl.attributes.shape+' fRight"></div>';
 							html += '</div>';
 							html += '<div class="prdDetails fLeft">';
 								html += '<div class="detComm">';
@@ -157,6 +157,7 @@ function getRandomInt(min, max) {
 }
 
 function FR() {
+	
 	var slistarr = new Array();
 	var clistarr = new Array();
 	var tlistarr = new Array();
