@@ -1,6 +1,6 @@
 /*
-SQLyog Ultimate v11.11 (64 bit)
-MySQL - 5.6.24 : Database - db_iftosi
+SQLyog Ultimate v11.11 (32 bit)
+MySQL - 5.6.25 : Database - db_iftosi
 *********************************************************************
 */
 
@@ -101,7 +101,7 @@ CREATE TABLE `tbl_category_master` (
   `cat_lvl` tinyint(4) DEFAULT '0' COMMENT 'category depth level',
   `lineage` text COMMENT 'lineage hierarchy',
   `createdon` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updatedon` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedon` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedby` varchar(150) NOT NULL,
   KEY `catid` (`catid`),
   KEY `p_catid` (`p_catid`)
