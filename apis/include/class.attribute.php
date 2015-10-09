@@ -219,7 +219,7 @@ class attribute extends DB
                       WHERE 
                                 attr_id IN(".$atribs.")
                       ORDER BY 
-                                field(attr_id,".$atribs.") DESC";
+                                field(attr_id,".$atribs.")";
             $res = $this->query($attrsql); 
             if($res)
             {   

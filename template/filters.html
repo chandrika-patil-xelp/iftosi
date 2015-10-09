@@ -284,7 +284,7 @@
         </div>
     <?php } ?>
     <div class="filterCont fLeft">
-        <div class="fLeft optionTitle fmOpenR">City / Area</div>
+        <!-- <div class="fLeft optionTitle fmOpenR">City / Area</div>
         <div class='areaCont fLeft'>
             <input type="text" id='txtArea' class="fliterTxt fLeft fmOpenR" placeholder=" Search city / area here" onkeyup="searchArea(this.value)">
             <div class="autoSuggestOuter fmOpenR dn" id="asug">
@@ -312,7 +312,7 @@
                 <input type="checkbox" class="filled-in" id="Hyderabad"/>
                 <label for="Hyderabad">Hyderabad</label>
             </div>
-        </div>
+        </div> -->
     </div>
 	
 	<?php
@@ -322,55 +322,38 @@
 		{
 			if(!empty($val['attribute_range']))
 			{
+				$expd = explode("-",$val['attribute_range']);
 	?>
-			<div id="<?php echo $val['attribute_name'];?>Div" class="filterCont fLeft">
-				<div class="fLeft optionTitle fmOpenR"><?php echo $val['attribute_disp_name'];?></div>
-				<div class='fLeft rangeCont'>
-					<div class='fLeft rangeDiv'>
-						<input type="text" id="<?php echo $val['attribute_name'];?>Range" class="fLeft rngInp" style="visibility: hidden;">
+				<input type="hidden" id="<?php echo $val['attribute_name'];?>RangeMin" value="<?php echo $expd[0];?>">
+				<input type="hidden" id="<?php echo $val['attribute_name'];?>RangeMax" value="<?php echo $expd[1];?>">
+				<div id="<?php echo $val['attribute_name'];?>Div" class="filterCont fLeft">
+					<div class="fLeft optionTitle fmOpenR"><?php echo $val['attribute_disp_name'];?></div>
+					<div class='fLeft rangeCont'>
+						<div class='fLeft rangeDiv'>
+							<input type="text" id="<?php echo $val['attribute_name'];?>Range" class="fLeft rngInp" style="visibility: hidden;">
+						</div>
 					</div>
 				</div>
-			</div>
 	<?php
 			}
 			else if(!empty($val['attribute_values']))
 			{
+				$expd = explode(",",$val['attribute_values']);
 	?>
 				<div class="filterCont fLeft forClarity">
 					<div class="fLeft optionTitle fmOpenR"><?php echo $val['attribute_disp_name'];?></div>
-					<div id='<?php echo $val['attribute_name'];?>' class="filterOptions fLeft fmOpenR">
-						<div class="checkDiv fLeft">
-							<input type="checkbox" class="filled-in" id="clD"/>
-							<label for="clD">D</label>
-						</div>
-						<div class="checkDiv fLeft">
-							<input type="checkbox" class="filled-in" id="clE"/>
-							<label for="clE">E</label>
-						</div>
-						<div class="checkDiv fLeft">
-							<input type="checkbox" class="filled-in" id="clF"/>
-							<label for="clF">F</label>
-						</div>
-						<div class="checkDiv fLeft">
-							<input type="checkbox" class="filled-in" id="clG"/>
-							<label for="clG">G</label>
-						</div>
-						<div class="checkDiv fLeft">
-							<input type="checkbox" class="filled-in" id="clH"/>
-							<label for="clH">H</label>
-						</div>
-						<div class="checkDiv fLeft">
-							<input type="checkbox" class="filled-in" id="clI"/>
-							<label for="clI">I</label>
-						</div>
-						<div class="checkDiv fLeft">
-							<input type="checkbox" class="filled-in" id="clJ"/>
-							<label for="clJ">J</label>
-						</div>
-						<div class="checkDiv fLeft">
-							<input type="checkbox" class="filled-in" id="clK"/>
-							<label for="clK">K</label>
-						</div>
+					<div id='<?php echo $val['attribute_name'].'-'.$val['attribute_name'];?>' class="filterOptions fLeft fmOpenR">
+						<?php
+						for($i=0;$i<count($expd);$i++)
+						{
+						?>
+							<div class="checkDiv fLeft">
+								<input type="checkbox" class="filled-in" id="<?php echo $val['attribute_name'].'-'.$expd[$i];?>"/>
+								<label for="<?php echo $val['attribute_name'].'-'.$expd[$i];?>"><?php echo $expd[$i];?></label>
+							</div>
+						<?php
+						}
+						?>
 					</div>
 				</div>
 	<?php
@@ -378,115 +361,6 @@
 		}
 	}
 	?>
-	
-    <div class="filterCont fLeft forClarity">
-        <div class="fLeft optionTitle fmOpenR">Clarity</div>
-        <div id='clarity' class="filterOptions fLeft fmOpenR">
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="if"/>
-                <label for="if">IF</label>
-            </div>
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="vs2"/>
-                <label for="vs2">VS2</label>
-            </div>
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="vvs1"/>
-                <label for="vvs1">VVS1</label>
-            </div>
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="s11"/>
-                <label for="s11">S11</label>
-            </div>
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="vvs2"/>
-                <label for="vvs2">VVS2</label>
-            </div>
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="s12"/>
-                <label for="s12">S12</label>
-            </div>
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="vs1"/>
-                <label for="vs1">VS1</label>
-            </div>
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="s13"/>
-                <label for="s13">S13</label>
-            </div>
-        </div>
-    </div>
-    <div class="filterCont fLeft">
-        <div class="fLeft optionTitle fmOpenR">Price</div>
-        <div class='fLeft rangeCont'>
-            <div class='fLeft rangeDiv'>
-                <input type="text" id="priceRange" class="fLeft rngInp" style="visibility: hidden;">
-            </div>
-        </div>
-    </div>
-    <div class="filterCont fLeft">
-        <div class="fLeft optionTitle fmOpenR">Cut</div>
-        <div id='cut' class="filterOptions fLeft fmOpenR">
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="excellent"/>
-                <label for="excellent">Excellent</label>
-            </div>
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="vgood"/>
-                <label for="vgood">Very Good</label>
-            </div>
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="good"/>
-                <label for="good">Good</label>
-            </div>
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="fair"/>
-                <label for="fair">Fair</label>
-            </div>
-        </div>
-    </div>
-    <div class="filterCont fLeft">
-        <div class="fLeft optionTitle fmOpenR">Polish</div>
-        <div id='polish' class="filterOptions fLeft fmOpenR">
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="plexcellent"/>
-                <label for="plexcellent">Excellent</label>
-            </div>
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="plvgood"/>
-                <label for="plvgood">Very Good</label>
-            </div>
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="plgood"/>
-                <label for="plgood">Good</label>
-            </div>
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="plfair"/>
-                <label for="plfair">Fair</label>
-            </div>
-        </div>
-    </div>
-    <div class="filterCont fLeft">
-        <div class="fLeft optionTitle fmOpenR">Symmetry</div>
-        <div id='symmetry' class="filterOptions fLeft fmOpenR">
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="syexcellent"/>
-                <label for="syexcellent">Excellent</label>
-            </div>
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="syvgood"/>
-                <label for="syvgood">Very Good</label>
-            </div>
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="sygood"/>
-                <label for="sygood">Good</label>
-            </div>
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="syfair"/>
-                <label for="syfair">Fair</label>
-            </div>
-        </div>
-    </div>
     <div id='mfFooter' class="mfFooter fLeft fmOpenB ripplelink">
         <div id='resetDbtn'> Reset Filters</div>
         <div id='applyDbtn'> Apply Filters</div>

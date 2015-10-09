@@ -1,44 +1,32 @@
-var min_price = "700.00";
-var max_price = "9999.99";
-
-
 $(document).ready(function() {
+	
+	$(".rngInp").each(function () {
+		
+		var min_price = $('#'+$(this).attr('id')+'Min').val()*1;
+		var max_price = $('#'+$(this).attr('id')+'Max').val()*1;
+		
+		if((max_price - min_price) > 100)
+			var step = '';
+		else
+			var step = 0.01;
+		
+		$(this).ionRangeSlider({
+			type: "double",
+			grid: true,
+			min: min_price,
+			max: max_price,
+			from: min_price,
+			to: max_price,
+			decorate_both: false,
+			prettify_separator: ",",
+			force_edges: true,
+			drag_interval: true,
+			step: step,
+			onFinish: function(data) {
 
-    $("#priceRange").ionRangeSlider({
-        type: "double",
-        grid: true,
-        min: min_price,
-        max: max_price,
-        from: min_price,
-        to: max_price,
-        prefix: "INR: ",
-        postfix: " ",
-        decorate_both: false,
-        prettify_separator: ",",
-        force_edges: true,
-        drag_interval: true,
-        onFinish: function(data) {
-
-        }
-    });
-
-
-    $("#caratsRange").ionRangeSlider({
-        type: "double",
-        grid: true,
-        min: 0.3,
-        max: 20.11,
-        from: 05,
-        drag_interval: true,
-        prefix: "carat: ",
-        postfix: " ",
-        decorate_both: false,
-        force_edges: true,
-        step: 0.01,
-        onFinish: function(data) {
-
-        }
-    });
+			}
+		});
+	});
 
     /*Mobile Filter Btns*/
     $('#mfFooter').bind('click', function() {
