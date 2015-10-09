@@ -246,10 +246,10 @@ mc.on("panleft panright tap press", function(ev) {
 
 showPrd();
 function showPrd() {
-        $('.prdComm').each(function() {$(this).velocity({opacity: "0",translateX:1500+"px"}, {duration: 0, delay: 0});});
+        $('.prdComm').each(function() {$(this).velocity({opacity: "0",translateX:50+"px"}, {duration: 0, delay: 0});});
         var time = 0;
         $('.prdComm').each(function() {
-            $(this).velocity({opacity: "1", translateX: "0"}, {duration: 800, delay: time, easing: [60, 10]});
+            $(this).velocity({opacity: "1", translateX: "0"}, {duration: 500, delay: time, easing: "ease-in-out"});
             time += 120;
         });
 	
