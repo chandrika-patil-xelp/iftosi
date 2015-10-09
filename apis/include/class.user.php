@@ -35,7 +35,7 @@
             
             if($params['isvendor']=1)
             {
-            $isql= "INSERT INTO tbl_vendor_master(vendor_id,vendor_name,contact_mobile,email,updatedon,cdt,is_complete) VALUES(".$uid.",'".$params['username']."',".$params['mobile'].",'".$params['email']."',now(),now(),0)";
+            $isql= "INSERT INTO tbl_vendor_master(vendor_id,email,updatedon,cdt,is_complete) VALUES(".$uid.",'".$params['email']."',now(),now(),0)";
             $res=$this->query($isql);
                 if($res)
                 {
@@ -50,20 +50,8 @@
             }
            else if($params['isvendor']=0)
             {
-               $isql = "INSERT INTO tbl_user_info(user_id,userName,cdt,udt)
-                        VALUES(".$uid.",'".$params['username']."',now(),now())";        
-               $ires=$this->query($isql);
-               if($ires)
-               {
-                $arr='Registeration is completed';
-                $err=array('code'=>0,'msg'=>'Insertion is Done');
-               }
-               
-                else
-                {
-                $arr='Error in registering user';
-                $err=array('code'=>1,'msg'=>'Error in insertion ');
-                }
+                $arr="SignUp process Is Complete";
+                $err=array('code'=>0,'msg'=>"Insert Operation Done");            
             }
             else
             {
@@ -87,10 +75,44 @@
           $row=$this->fetchData($res);
           $isv=$row['is_vendor'];
           $uid=$row['user_id'];
-          $isv;
+          
           if($isv==1)
           {
-           $vsql = "UPDATE tbl_vendor_master set vendor_name='".$detls['username']."',gender=".$detls['gen'].",alt_email='".$detls['alt_email']."',dob=STR_TO_DATE('".$detls['dob']."','%Y-%m-%d'),working_phone='".$detls['workphone']."',postal_code=".$detls['pincode'].",area='".$detls['area']."', city='".$detls['cityname']."',state='".$detls['state']."',country='".$detls['country']."',address1='".$detls['address1']."',address2='".$detls['address2']."',contact_mobile=".$detls['logmobile'].",landline=".$detls['landline'].",id_proof_type='".$detls['idtype']."',id_proof='".$detls['idproof']."',lat=".$detls['lat'].",lng=".$detls['lng'].",updatedby='".$detls['username']."',is_complete=is_complete WHERE vendor_id=".$uid."";
+           $vsql = "UPDATE tbl_vendor_master 
+                    SET 
+                                        orgName='".$detls['orgname']."',
+                                        fulladdress=".$detls['fulladd'].",
+                                        address1='".$detls['add1']."',
+                                        area='".$detls['area']."',
+                                        postal_code='".$detls['pincode']."',
+                                        city='".$detls['city']."',
+                                        country='".$detls['country']."',
+                                        state='".$detls['state']."',
+                                        telephones='".$detls['tel']."',
+                                        alt_email='".$detls['altmail']."',
+                                        officecity='".$detls['ofcity']."',
+                                        officecountry='".$detls['ofcountry']."', 
+                                        contact_person='".$detls['cperson']."',
+                                        position='".$detls['position']."',
+                                        contact_mobile=".$detls['cmobile'].",
+                                        email='".$detls['$email']."',
+                                        memship_Cert='".$detls['memcert']."',
+                                        bdbc='".$detls['bdbc']."',
+                                        other_bdbc='".$detls['othbdbc']."',
+                                        vatno=".$detls['vat'].",
+                                        website='".$detls['wbst']."',
+                                        landline='".$detls['landline']."',
+                                        mdbw='".$detls['mdbw']."',
+                                        banker='".$detls['banker']."',
+                                        pancard='".$detls['pan']."',
+                                        turnover='".$detls['tovr']."',
+                                        lat=".$detls['lat'].",
+                                        lng=".$detls['lng'].",
+                                        updatedon=now(),
+                                        updatedby='vendor',
+                                        is_complete=is_complete 
+                WHERE 
+                                                vendor_id=".$uid."";
              $vres=$this->query($vsql);
             if($vres)
             {
@@ -100,7 +122,17 @@
           }
          else if($isv==0)
           {
-          $vsql = "UPDATE tbl_user_info set userName='".$detls['username']."',gender=".$detls['gen'].",alt_email='".$detls['alt_email']."',dob=STR_TO_DATE('".$detls['dob']."','%Y-%m-%d'),working_phone='".$detls['workphone']."',pincode=".$detls['pincode'].",area='".$detls['area']."', cityname='".$detls['cityname']."',state='".$detls['state']."',country='".$detls['country']."',address1='".$detls['address1']."',address2='".$detls['address2']."',logmobile=".$detls['mobile'].",landline=".$detls['landline'].",id_type='".$detls['idtype']."',id_proof_no='".$detls['idproof']."',lat=".$detls['lat'].",lng=".$detls['lng'].",updatedby='".$detls['username']."',is_complete=is_complete WHERE user_id=".$uid."";
+             $vsql = "UPDATE tbl_registration 
+                      SET 
+                                            user_name='".$detls['username']."',
+                                            salutation=".$detls['gen'].",
+                                            email='".$detls['email']."',
+                                            dob=STR_TO_DATE('".$detls['dob']."','%Y-%m-%d'),
+                                            update_time=now(),
+                                            updatedby='".$detls['username']."',
+                                            is_complete=is_complete
+                     WHERE 
+                                            user_id=".$uid."";
              $vres=$this->query($vsql);
              if($vres)
              {
@@ -125,7 +157,12 @@
                 
         public function logUser($params) // USER LOGIN CHECK
         {
-            $vsql="SELECT logmobile,password,is_vendor from tbl_registration where logmobile=".$params['mobile']." AND password=MD5('".$params['password']."') AND is_active=1";
+            $vsql="SELECT logmobile,password,is_vendor from tbl_registration WHERE
+                          logmobile=".$params['mobile']." 
+                   AND 
+                          password=MD5('".$params['password']."')
+                   AND
+                          is_active=1";
             $vres=$this->query($vsql);
             $cntres=$this->numRows($vres);
             if($cntres=1)
@@ -137,18 +174,18 @@
                 $ut=$arr['utype'];
                 if($ut=0)
                 {
-                $arr="Welcome and greetings user";
-                $err['error']=array('code'=>1,'msg'=>'Parameters matched');
+                    $arr="Welcome and greetings user";
+                    $err=array('code'=>1,'msg'=>'Parameters matched');
                 }
-               else if($ut=1)
+                else if($ut=1)
                 {
-                $arr="Welcome and greetings Vendor";
-                $err=array('code'=>1,'msg'=>'Parameters matched');
+                    $arr="Welcome and greetings Vendor";
+                    $err=array('code'=>1,'msg'=>'Parameters matched');
                 }
             }   
             else
             {
-                $arr="User name or password don't exist";
+                $arr=array();
                 $err=array('code'=>1,'msg'=>'Problem in fetching data');
             }
             $result = array('results'=>$arr,'error'=>$err);
@@ -157,11 +194,11 @@
                 
         public function actUser($params) // Activate Status
         {   
-            $vsql="SELECT is_active from tbl_registration where logmobile='".$params['mobile']."'";
+            $vsql="SELECT is_active FROM tbl_registration WHERE logmobile=".$params['mobile']."";
             $vres=$this->query($vsql);
             if($this->numRows($vres)==1) //If user is registered
             {
-                $usql="UPDATE tbl_registration set is_active=1 where logmobile=".$params['mobile'];
+                $usql="UPDATE tbl_registration SET is_active=1 WHERE logmobile=".$params['mobile'];
                 $ures=$this->query($usql);
                 if($ures)
                 {
@@ -185,11 +222,11 @@
 
         public function deactUser($params) // DeActivate Status
         {   
-            $vsql="SELECT is_active from tbl_registration where logmobile=".$params['mobile']."";
+            $vsql="SELECT is_active FROM tbl_registration WHERE logmobile=".$params['mobile']."";
             $vres=$this->query($vsql);
             if($this->numRows($vres)==1) //If user is registered
             {
-            $usql="UPDATE tbl_registration set is_active=0 where logmobile=".$params['mobile'];
+            $usql="UPDATE tbl_registration SET is_active=0 WHERE logmobile=".$params['mobile'];
             $ures=$this->query($usql);
                 if($ures)
                 {
@@ -213,26 +250,34 @@
 
         public function updatePass($params)
         {
-          $vsql="SELECT logmobile,user_name,email from tbl_registration where logmobile=".$params['mobile']." AND is_active=1";
+          $vsql="SELECT logmobile,user_name,email FROM tbl_registration 
+                 WHERE 
+                        logmobile=".$params['mobile']."
+                  AND 
+                        is_active=1";
             $vres=$this->query($vsql);
             if($this->numRows($vres)==1) //If user is registered
             {
-               $usql="UPDATE tbl_registration set password=MD5('".$params['password']."') where logmobile=".$params['mobile'];
+               $usql="UPDATE tbl_registration 
+                      SET 
+                             password=MD5('".$params['password']."')
+                      WHERE 
+                             logmobile=".$params['mobile'];
                 $ures=$this->query($usql);
                 if($ures)
                 {
-                $arr="User profile password is updated";
-                $err=array('code'=>0,'msg'=>'Row has been Updated');
+                    $arr="User profile password is updated";
+                    $err=array('code'=>0,'msg'=>'Row has been Updated');
                 }
                 else
                 {
-                $arr="Password not updated";
+                $arr=array();
                 $err=array('code'=>1,'msg'=>'Error in updating data');
                 }
             }
             else
             {
-                $arr="User Not Exist";
+                $arr=array();
                 $err=array('code'=>1,'msg'=>'Problem in fetching data');
             }  // If user is not registered
             $result = array('results'=>$arr,'error'=>$err);
@@ -241,7 +286,7 @@
         
         public function viewAll($params)
         {
-            $vsql="SELECT is_vendor,user_id from tbl_registration where user_id=".$params['uid']." AND is_active=1";
+            $vsql="SELECT is_vendor,user_id FROM tbl_registration WHERE user_id=".$params['uid']." AND is_active=1";
             $vres=$this->query($vsql);
             $chkres=$this->numRows($vres);
             if($chkres>0)//If user is registered and is customer
@@ -254,7 +299,7 @@
 
                 if($arr1['isv']==0)   // check if it is User
                 {  
-                  $vensql="SELECT * from tbl_user_info where user_id =".$arr1['uid'];
+                  $vensql="SELECT user_name,logmobile,email from tbl_registration where user_id =".$arr1['uid'];
                   $res=$this->query($vensql);
                   while($row=$this->fetchData($res))
                    {
@@ -264,7 +309,7 @@
                 }
                 else if($arr1['isv']==1)    // check if it is Vendor
                 {
-                  $vensql="SELECT * from tbl_vendor_master where vendor_id =".$arr1['uid'];
+                  $vensql="SELECT ordName,email,fulladdress,contact_person,contact_mobile from tbl_vendor_master where vendor_id =".$arr1['uid'];
                   $res=$this->query($vensql);
                   while($row=$this->fetchData($res))
                   {
@@ -274,13 +319,13 @@
                 }
                 else
                 {
-                    $arr="Usertyp not Exist";
+                    $arr=array();
                     $err=array('code'=>1,'msg'=>'Problem in fetching data');
                 }
             }
             else
             {
-                $arr="User Not Exist";
+                $arr=array();
                 $err=array('code'=>1,'msg'=>'Problem in fetching data');
             }  
             $result = array('results'=>$arr,'error'=>$err);

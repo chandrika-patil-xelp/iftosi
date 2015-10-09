@@ -175,9 +175,7 @@ switch($action)
         case 'viewLog':
             include APICLUDE.'class.viewlog.php';
             $vid=(!empty($params['vid'])) ? trim($params['vid']) : '';
-            $page=(!empty($params['page'])) ? trim($params['page']) : '';
-            $limit=(!empty($params['limit'])) ? trim($params['limit']) : '';
-            if(empty($vid) && empty($page) && empty($limit))
+            if(empty($vid))
             {
                 $arr = array();
                 $err = array('Code' => 1, 'Msg' => 'Invalid Parameters');
@@ -213,9 +211,7 @@ switch($action)
         case 'getVproducts':
             include APICLUDE.'class.vendor.php';
             $vid=(!empty($params['vid'])) ? trim($params['vid']) : '';
-            $page=(!empty($params['page'])) ? trim($params['page']) : '';
-            $limit=(!empty($params['limit'])) ? trim($params['limit']) : '';
-            if(empty($vid) && empty($page) && empty($limit))
+            if(empty($vid))
             {
                 $arr = array();
                 $err = array('Code' => 1, 'Msg' => 'Invalid parameters');
@@ -228,13 +224,12 @@ switch($action)
             $res=$result;
             break;
 
-//  localhost/iftosi/apis/index.php?action=getVproductsByName&vid=7&prname=blue&page=1&limit=1        case 'getVproductsByName':
+//  localhost/iftosi/apis/index.php?action=getVproductsByName&vid=7&prname=blue&page=1&limit=1        
+        case 'getVproductsByName':
             include APICLUDE.'class.vendor.php';
             $vid=(!empty($params['vid'])) ? trim($params['vid']) : ''; //user session mobile
             $prname=(!empty($params['prname'])) ? trim(urldecode($params['prname'])) : '';
-            $page=(!empty($params['page'])) ? trim($params['page']) : '';
-            $limit=(!empty($params['limit'])) ? trim($params['limit']) : '';
-            if(empty($vid) && empty($prname) && empty($page) && empty($limit))
+            if(empty($vid) && empty($prname))
             {
                 $arr = array();
                 $err = array('Code' => 1, 'Msg' => 'Invalid parameters');
@@ -273,9 +268,7 @@ switch($action)
             include APICLUDE.'class.vendor.php';
             $product_id=(!empty($params['pid'])) ? trim($params['pid']) : '';
             $vid=(!empty($params['vid'])) ? trim($params['vid']) : '';
-            $page=(!empty($params['page'])) ? trim($params['page']) : '';
-            $limit=(!empty($params['limit'])) ? trim($params['limit']) : '';
-            if(empty($product_id)&&empty($vid) && empty($page) && empty($limit))
+            if(empty($product_id) && empty($vid))
             {
                 $arr=array();
                 $err=array('Code'=>0,'Msg'=>'Invalid Parameter');
@@ -288,9 +281,6 @@ switch($action)
             $res=$result;
             break;
 
-            
-            
-            
 //-------------------------Location---------------------------------               
             
 // localhost/iftosi/apis/index.php?action=addCity&cname=Pakistan&sname=Punjab&cityname=lahore            
@@ -334,9 +324,7 @@ switch($action)
             include APICLUDE.'class.location.php';
             $sname=(!empty($params['sname'])) ? trim(urldecode($params['sname'])) : '';
             $cname=(!empty($params['cname'])) ? trim(urldecode($params['cname'])) : '';
-            $page=(!empty($params['page'])) ? trim($params['page']) : '';
-            $limit=(!empty($params['limit'])) ? trim($params['limit']) : '';
-            if(empty($sname) && empty($cname) && empty($page) && empty($limit))
+            if(empty($sname) && empty($cname))
             {
                 $arr = array();
                 $err = array('Code' => 1, 'Msg' => 'Invalid Parameters');
@@ -353,9 +341,7 @@ switch($action)
         case 'viewbyCountry':
             include APICLUDE.'class.location.php';
             $cname=(!empty($params['cname'])) ? trim(urldecode($params['cname'])) : '';
-            $page=(!empty($params['page'])) ? trim($params['page']) : '';
-            $limit=(!empty($params['limit'])) ? trim($params['limit']) : '';
-            if(empty($cname) && empty($page) && empty($limit))
+            if(empty($cname))
             {
                 $arr = array();
                 $err = array('Code' => 1, 'Msg' => 'Invalid Parameters');
@@ -393,16 +379,6 @@ switch($action)
 //   localhost/iftosi/apis/index.php?action=getCatList&page=1&limit=2        
         case 'getCatList': 
             include APICLUDE.'class.categoryInfo.php';
-            $page=(!empty($params['page'])) ? trim($params['page']) : '';
-            $limit=(!empty($params['limit'])) ? trim($params['limit']) : '';
-            if(empty($page) && empty($limit))
-            {
-                $arr = array();
-                $err = array('Code' => 1, 'Msg' => 'Invalid Parameters');
-                $result = array('results' => $arr, 'error' => $err);
-                $res=$result;
-                break;
-            }
             $obj= new categoryInfo($db['iftosi']);
             $result= $obj->getCatList($params);
             $res=$result;
@@ -412,9 +388,7 @@ switch($action)
         case 'getCatName':
             include APICLUDE.'class.categoryInfo.php';
             $catid=(!empty($params['catid'])) ? trim($params['catid']) : '';
-            $page=(!empty($params['page'])) ? trim($params['page']) : '';
-            $limit=(!empty($params['limit'])) ? trim($params['limit']) : '';
-            if(empty($catid) && empty($page) && empty($limit))
+            if(empty($catid))
             {
                 $arr=array();
                 $err=array('code'=>1,'Invalid Parameter');
@@ -502,16 +476,6 @@ switch($action)
 // localhost/iftosi/apis/index.php?action=getBrandList&page=&limit=                  
         case 'getBrandList':
             include APICLUDE.'class.brandInfo.php';
-            $page=(!empty($params['page'])) ? trim($params['page']) : '';
-            $limit=(!empty($params['limit'])) ? trim($params['limit']) : '';
-            if(empty($page) && empty($limit))
-            {
-                $arr = array();
-                $err = array('Code' => 1, 'Msg' => 'Invalid Parameters');
-                $result = array('results' => $arr, 'error' => $err);
-                $res=$result;
-                break;
-            }
             $obj= new brandInfo($db['iftosi']);
             $result= $obj->getBrandList($params);
             $res=$result;
@@ -523,9 +487,7 @@ switch($action)
         case 'searchbox':
             include APICLUDE.'class.auto.php';
             $srch=(!empty($params['srch'])) ? trim(urldecode($params['srch'])) : '';
-            $page=(!empty($params['page'])) ? trim($params['page']) : '';
-            $limit=(!empty($params['limit'])) ? trim($params['limit']) : '';
-            if(empty($srch) && empty($page) && empty($limit))
+            if(empty($srch))
             {
             $arr=array();
             $err=array('code'=> 1,'Msg'=> 'Invalid parameters');
@@ -542,9 +504,7 @@ switch($action)
         case 'suggestCity':
             include APICLUDE.'class.auto.php';
             $srch=(!empty($params['str'])) ? trim(urldecode($params['str'])) : '';
-            $page=(!empty($params['page'])) ? trim($params['page']) : '';
-            $limit=(!empty($params['limit'])) ? trim($params['limit']) : '';
-            if(empty($srch) && empty($page) && empty($limit))
+            if(empty($srch))
             {
             $arr=array();
             $err=array('code'=> 1,'Msg'=> 'Invalid parameters');
@@ -561,9 +521,7 @@ switch($action)
         case 'suggestBrand':
             include APICLUDE.'class.auto.php';
             $srch=(!empty($params['str'])) ? trim(urldecode($params['str'])) : '';
-            $page=(!empty($params['page'])) ? trim($params['page']) : '';
-            $limit=(!empty($params['limit'])) ? trim($params['limit']) : '';
-            if(empty($srch)  && empty($page) && empty($limit))
+            if(empty($srch))
             {
             $arr=array();
             $err=array('code'=> 1,'Msg'=> 'Invalid parameters');
@@ -580,9 +538,7 @@ switch($action)
         case 'suggestCat':
             include APICLUDE.'class.auto.php';
             $srch=(!empty($params['str'])) ? trim(urldecode($params['str'])) : '';
-            $page=(!empty($params['page'])) ? trim($params['page']) : '';
-            $limit=(!empty($params['limit'])) ? trim($params['limit']) : '';
-            if(empty($srch) && empty($page) && empty($limit))
+            if(empty($srch))
             {
             $arr=array();
             $err=array('code'=> 1,'Msg'=> 'Invalid parameters');
@@ -595,32 +551,11 @@ switch($action)
             $res=$result;
             break;
             
-//  localhost/iftosi/apis/index.php?action=suggestOff&str=p&page=1&limit=2        case 'suggestOff':
-        case 'suggestOff':
-            include APICLUDE.'class.auto.php';
-            $srch=(!empty($params['str'])) ? trim(urldecode($params['str'])) : '';
-            $page=(!empty($params['page'])) ? trim(urldecode($params['page'])) : '';
-            $limit=(!empty($params['limit'])) ? trim(urldecode($params['limit'])) : '';
-            if(empty($srch) && empty($limit) && empty($page))
-            {
-            $arr=array();
-            $err=array('code'=> 1,'Msg'=> 'Invalid parameters');
-            $result=array('results'=> $arr,'error'=>$err);
-            $res=$result;
-            break;
-            }
-            $obj = new auto($db['iftosi']);
-            $result=$obj->suggestOff($params);
-            $res=$result;
-            break;    
-            
 //  localhost/iftosi/apis/index.php?action=suggestVendor&str=p&page=1&limit=1
         case 'suggestVendor':
             include APICLUDE.'class.auto.php';
             $srch=(!empty($params['str'])) ? trim(urldecode($params['str'])) : '';
-            $page=(!empty($params['page'])) ? trim(urldecode($params['page'])) : '';
-            $limit=(!empty($params['limit'])) ? trim(urldecode($params['limit'])) : '';
-            if(empty($srch) && empty($limit) && empty($page))
+            if(empty($srch))
             {
             $arr=array();
             $err=array('code'=> 1,'Msg'=> 'Invalid parameters');
@@ -673,9 +608,7 @@ switch($action)
         case 'getPrdByName':
             include APICLUDE.'class.product.php';
             $prname=(!empty($params['prname'])) ? trim(urldecode($params['prname'])) : '';
-            $page=(!empty($params['page'])) ? trim(urldecode($params['page'])) : '';
-            $limit=(!empty($params['limit'])) ? trim(urldecode($params['limit'])) : '';
-            if(empty($prname) && empty($limit) && empty($page))
+            if(empty($prname))
             {
             $arr=array();
             $err=array('code'=> 1,'Msg'=> 'Invalid parameters');
@@ -691,10 +624,8 @@ switch($action)
 //  localhost/iftosi/apis/index.php?action=getPrdByCatid&catid=1&page=1&limit=1         
         case 'getPrdByCatid':
             include APICLUDE.'class.product.php';
-            $page=(!empty($params['page'])) ? trim(urldecode($params['page'])) : '';
-            $limit=(!empty($params['limit'])) ? trim(urldecode($params['limit'])) : '';
             $catid=(!empty($params['catid'])) ? trim($params['catid']) : '';
-            if(empty($catid)  && empty($limit) && empty($page))
+            if(empty($catid))
             {
             $arr=array();
             $err=array('code'=> 1,'Msg'=> 'Invalid parameter');
@@ -711,9 +642,7 @@ switch($action)
         case 'getPrdById':            //designer name is not feeding up
             include APICLUDE.'class.product.php';
             $prdid=(!empty($params['prdid'])) ? trim($params['prdid']):'';
-            $page=(!empty($params['page'])) ? trim(urldecode($params['page'])) : '';
-            $limit=(!empty($params['limit'])) ? trim(urldecode($params['limit'])) : '';
-            if(empty($prdid) && empty($limit) && empty($page))
+            if(empty($prdid))
             {
             $arr=array();
             $err=array('code'=> 1,'Msg'=> 'Invalid parameters');
@@ -729,16 +658,6 @@ switch($action)
 //  localhost/iftosi/apis/index.php?action=getList&page=1&limit=1
         case 'getList':
             include APICLUDE.'class.product.php';
-            $page=(!empty($params['page'])) ? trim(urldecode($params['page'])) : '';
-            $limit=(!empty($params['limit'])) ? trim(urldecode($params['limit'])) : '';
-            if( empty($limit) && empty($page))
-            {
-            $arr=array();
-            $err=array('code'=> 1,'Msg'=> 'Invalid parameters');
-            $result=array('results'=> $arr,'error'=>$err['error']);
-            $res=$result;
-            break;
-            }
             $obj=new product($db['iftosi']);
             $result=$obj->getList($params);
             $res=$result;
@@ -748,10 +667,7 @@ switch($action)
         case 'productByCity':
             include APICLUDE.'class.product.php';
             $cityname=(!empty($params['cityname'])) ? trim($params['cityname']): "";
-            $page=(!empty($params['page'])) ? trim(urldecode($params['page'])) : '';
-            $limit=(!empty($params['limit'])) ? trim(urldecode($params['limit'])) : '';
-//$pcode=(!empty($params['product_id'])) ? trim($params['product_id']): "";
-            if(empty($cityname) && empty($limit) && empty($page))
+            if(empty($cityname))
             {
                 $arr=array();
                 $err=array('Code'=>1,'Msg'=>'Invalid Parameters');
@@ -768,9 +684,7 @@ switch($action)
         case 'productByBrand':
             include APICLUDE.'class.product.php';
             $bname=(!empty($params['bname'])) ? trim($params['bname']): "";
-            $page=(!empty($params['page'])) ? trim(urldecode($params['page'])) : '';
-            $limit=(!empty($params['limit'])) ? trim(urldecode($params['limit'])) : '';            
-            if(empty($bname) && empty($limit) && empty($page))
+            if(empty($bname))
             {
                 $arr=array();
                 $err=array('Code'=>1,'Msg'=>'Invalid Parameters');
@@ -786,10 +700,8 @@ switch($action)
 //  localhost/iftosi/apis/index.php?action=productByDesigner&desname=shiamak&page=1&limit=1            
         case 'productByDesigner':
             include APICLUDE.'class.product.php';
-            $page=(!empty($params['page'])) ? trim(urldecode($params['page'])) : '';
-            $limit=(!empty($params['limit'])) ? trim(urldecode($params['limit'])) : '';
             $desname=(!empty($params['desname'])) ? trim($params['desname']): "";
-            if(empty($desname) && empty($limit) && empty($page))
+            if(empty($desname))
             {
                 $arr=array();
                 $err=array('Code'=>1,'Msg'=>'Invalid Parameters');
@@ -826,16 +738,6 @@ switch($action)
  // localhost/iftosi/apis/index.php?action=get_attrList&page=1&limit=1            
         case 'get_attrList':
             include APICLUDE.'class.attribute.php';
-            $page=(!empty($params['page'])) ? trim(urldecode($params['page'])) : '';
-            $limit=(!empty($params['limit'])) ? trim(urldecode($params['limit'])) : '';
-            if(empty($limit) && empty($page))
-            {
-                $arr=array();
-                $err=array('Code'=>1,'Msg'=>'Invalid Parameters');
-                $result=array('result'=>$arr,'error'=>$err);
-                $res=$result;
-                break;
-            }            
             $obj = new attribute($db['iftosi']);
             $result=$obj->get_attrList($params);
             $res=$result;
@@ -851,6 +753,7 @@ switch($action)
             $upos=(!empty($params['upos'])) ? trim(urldecode($params['upos'])):'';
             $vals=(!empty($params['vals'])) ? trim($params['vals']) : '';
             $range=(!empty($params['range'])) ? trim(urldecode($params['range'])):'';
+            $list=(!empty($params['list_values'])) ? trim(urldecode($params['list_values'])):'';            
             if(empty($name)  &&  empty($dname)  &&  empty($unit)  &&  empty($flag)  &&  empty($upos)  &&  empty($vals)  &&  empty($range))
             {
             $arr=array();
@@ -943,10 +846,8 @@ switch($action)
 //  localhost/iftosi/apis/index.php?action=get_filters&category_id=3&page=1&limit=1            
         case 'get_filters':
             include APICLUDE.'class.filter.php';
-            $page=(!empty($params['page'])) ? trim(urldecode($params['page'])) : '';
-            $limit=(!empty($params['limit'])) ? trim(urldecode($params['limit'])) : '';
             $category_id=(!empty($params['category_id'])) ? trim($params['category_id']):'';
-            if(empty($category_id) && empty($limit) && empty($page))
+            if(empty($category_id))
             {   
                 $arr = "Parameter is missing";
                 $err = array('Code' => 1, 'Msg' => 'Invalid Parameter');
@@ -960,7 +861,6 @@ switch($action)
             break;
 
 /*  HAve to be changed as per the requirement        */            
-//  localhost/iftosi/apis/index.php?action=get_filters&page=1&limit=1&dt={"result": {"filter_flg": 0,"price": 0,"pfrm": 9975887206,"pto": 12,"catid": 4,"brname": "xyz,abcd,a,b,c,d","type": "jwellery,gold","pgen": "Female","metal": "gold","color": "golden","shape": "3,2,1,2","style": "adaw wqd ","purity": "18k","size": "4,33,21"}}            
         case 'refine': 
             include APICLUDE.'class.filter.php';
             $page=(!empty($params['page'])) ? trim(urldecode($params['page'])) : '';
@@ -978,42 +878,6 @@ switch($action)
             $result=$obj->refine($params);
             $res=$result;
             break;
-            
-//-------------------------Lineage----------------------------------------
-
-//  localhost/iftosi/apis/index.php?action=set_lineage&dt={%22result%22:%20{%22p_catid%22:%200,%22catname%22:%200,%22lvl%22:%209975887206,%22lineage%22:%20%22xyz,abcd,a,b,c,d%22,%22pid%22:%201}}
-        case 'set_lineage':
-            include APICLUDE.'class.categories.php';
-            $dt=(!empty($params['dt']))? trim($params['dt']):'';
-            if(empty($dt))
-            {
-                $arr="Parameters missing";
-                $err=array('Code'=>1,'Msg'=>'Invalid Parameters');
-                $result=array('results'=>$arr,'error'=>$err);
-                $res=$result;
-                break;
-            }
-            $obj=new categories($db['iftosi']);
-            $result=$obj->set_lineage($params);
-            $res=$result;
-            break;
-
-//  localhost/iftosi/apis/index.php?action=upd_prd_lineage&dt={%22result%22:%20{%22pcatid%22:%2012312,%22catname%22:%22bullion%22,%22lvl%22:%209975887206,%22lineage%22:%20%22xyz,abcd,a,b,c,d%22,%22pflag%22:1,%22catid%22:0,%22pid%22:%201}}
-        case 'upd_prd_lineage':
-            include APICLUDE.'class.categories.php';
-            $dt=(!empty($params['dt']))? trim($params['dt']):'';
-            if(empty($dt))
-            {
-                $arr="Parameters missing";
-                $err=array('Code'=>1,'Msg'=>'Invalid Parameters');
-                $result=array('results'=>$arr,'error'=>$err);
-                $res=$result;
-                break;
-            }
-            $obj=new categories($db['iftosi']);
-            $result=$obj->upd_prd_lineage($params);
-            $res=$result;
-            break;    
             
 //------------------------Wishlist-------------------------------------------
 
@@ -1038,9 +902,7 @@ switch($action)
         case 'viewsh':
             include APICLUDE.'class.wishlist.php';
             $dt=(!empty($params['dt']))? trim($params['dt']):'';
-            $page=(!empty($params['page'])) ? trim(urldecode($params['page'])) : '';
-            $limit=(!empty($params['limit'])) ? trim(urldecode($params['limit'])) : '';
-            if(empty($dt)  && empty($limit) && empty($page))
+            if(empty($dt))
             {
                 $arr="Parameters missing";
                 $err=array('Code'=>1,'Msg'=>'Invalid Parameters');
@@ -1052,78 +914,6 @@ switch($action)
             $result=$obj->viewsh($params);
             $res=$result;
             break;    
-                        
-//-----------------------Subscribe and Newsletter---------------------------
-
-//  localhost/iftosi/apis/index.php?action=subscribe&uid=6        
-        case 'subscribe':
-            include APICLUDE.'class.newsletter.php';
-            $uid = (!empty($params['uid'])) ? trim($params['uid']):'';
-            if(empty($uid))
-            {
-                $arr="Invalid Parameter";
-                $err=array('Code'=>1,'Msg'=>'Parameter missing');
-                $result=array('results'=>$arr,'error'=>$err);
-                $res=$result;
-                break;
-            }
-            $obj=new newsletter($db['iftosi']);
-            $result=$obj->subscribe($params);
-            $res=$result;
-            break;
-            
-//  localhost/iftosi/apis/index.php?action=viewSubscribers&page=1&limit=1            
-        case 'viewSubscribers':
-            include APICLUDE.'class.newsletter.php';
-            $dt=(!empty($params['dt'])) ? trim(urldecode($params['dt'])) : '';
-            $page=(!empty($params['page'])) ? trim(urldecode($params['page'])) : '';
-            $limit=(!empty($params['limit'])) ? trim(urldecode($params['limit'])) : '';
-            if(empty($dt) && empty($limit) && empty($page))
-            {   
-                $arr = "Some Parameters are missing";
-                $err = array('Code' => 1, 'Msg' => 'Some Parameters are missing');
-                $result = array('results'=>$arr, 'error' => $err);
-                $res=$result;
-                break;
-            }
-            $obj= new newsletter($db['iftosi']);
-            $result=$obj->viewSubscribers($params);
-            $res=$result;
-            break;
-
-//  localhost/iftosi/apis/index.php?action=addNewsletter&dt=            
-        case 'addNewsletter':
-            include APICLUDE.'class.newsletter.php';
-            $dt=(!empty($params['dt'])) ? trim(urldecode($params['dt'])) : '';
-            if(empty($dt))
-            {   
-                $arr = "Some Parameters are missing";
-                $err = array('Code' => 1, 'Msg' => 'Some Parameters are missing');
-                $result = array('results'=>$arr, 'error' => $err);
-                $res=$result;
-                break;
-            }
-            $obj= new newsletter($db['iftosi']);
-            $result=$obj->addNewsletter($params);
-            $res=$result;
-            break;
-
-//  localhost/iftosi/apis/index.php?action=unsubscribe&uid=6
-        case 'unsubscribe':
-            include APICLUDE.'class.newsletter.php';
-            $uid = (!empty($params['uid'])) ? trim($params['uid']):'';
-            if(empty($uid))
-            {
-                $arr="Invalid Parameter";
-                $err=array('Code'=>1,'Msg'=>'Parameter missing');
-                $result=array('results'=>$arr,'error'=>$err);
-                $res=$result;
-                break;
-            }
-            $obj=new newsletter($db['iftosi']);
-            $result=$obj->unSubscribe($params);
-            $res=$result;
-            break;
                 
 //-------------------------Helpdesk--------------------------------------
 
@@ -1147,132 +937,10 @@ switch($action)
 //  localhost/iftosi/apis/index.php?action=viewhelp&page=1&limit=1          
         case 'viewhelp':
             include APICLUDE.'class.helpdesk.php';
-            $page=(!empty($params['page'])) ? trim(urldecode($params['page'])) : '';
-            $limit=(!empty($params['limit'])) ? trim(urldecode($params['limit'])) : '';
-            if(empty($limit) && empty($page))
-            {
-                $arr="Parameters missing";
-                $err=array('Code'=>1,'Msg'=>'Invalid Parameters');
-                $result=array('results'=>$arr,'error'=>$err);
-                $res=$result;
-                break;
-            }
             $obj= new helpdesk($db['iftosi']);
             $result=$obj->viewhelp($params);
             $res=$result;
             break;
-  
-//---------------------------Offer-----------------------------------------
-
-//  localhost/iftosi/apis/index.php?action=addOffer&offername=diwalidhamaka&des=a well reknown festive offer we are celebrating since ages&amdp=1.1&valid=1 year&vdesc=1123fwhf232
-        case 'addOffer':
-            include APICLUDE.'class.offer.php';
-            $offername = (!empty($params['offername'])) ? trim(urldecode($params['offername'])) : '';
-            $des  = (!empty($params['des'])) ? trim(urldecode($params['des'])) : '';
-            $amdp  = (!empty($params['amdp'])) ? trim(urldecode($params['amdp'])) : '';
-            $valid=(!empty($params['valid'])) ?  trim(urldecode($params['valid'])) : '';
-            $voucherdesc  =   (!empty($params['vdesc'])) ? trim(urldecode($params['vdesc'])) : '';
-            if(empty($offername) && empty($des) && empty($amdp) && empty($valid) && empty($voucherdesc))
-            {
-                $arr = array();
-                $err = array('Code' => 1, 'Msg' => 'Invalid Parameters');
-                $result = array('results' => $res, 'error' => $err);
-                $res=$result;
-                break;
-            }
-            $obj    = new offer($db['iftosi']);
-            $result = $obj->addOffer($params);
-            $res = $result;
-            break;
-
-//  localhost/iftosi/apis/index.php?action=viewOffer&offid=1
-        case 'viewOffer':
-            include APICLUDE.'class.offer.php';
-            $offid  = (!empty($params['offid'])) ?  trim($params['offid']) : '';
-            
-            if(empty($offid))
-            {
-                $arr = array();
-                $err = array('Code' => 1, 'Msg' => 'Please mention the offer id');
-                $result = array('results' => $arr, 'error' => $err);
-                $res=$result;
-                break;
-            }
-            $obj    = new offer($db['iftosi']);
-            $result = $obj->viewOffer($params);
-            $res = $result;
-            break;
-
-//  localhost/iftosi/apis/index.php?action=actOffer&offid=2            
-        case 'actOffer':
-            include APICLUDE.'class.offer.php';
-            $offid  = (!empty($params['offid'])) ?  trim($params['offid']) : '';               
-            if(empty($offid))
-            {
-                $arr = array();
-                $err = array('Code' => 1, 'Msg' => 'Please mention the offer id');
-                $result = array('results' => $arr, 'error' => $err);
-                $res=$result;
-                break;
-            }
-            $obj    = new offer($db['iftosi']);
-            $result = $obj->actOffer($params);
-            $res = $result;
-            break;
-            
-//  localhost/iftosi/apis/index.php?action=deactOffer&offid=2
-        case 'deactOffer':
-            include APICLUDE.'class.offer.php';
-            $offid  = (!empty($params['offid'])) ?  trim($params['offid']) : '';               
-            if(empty($offid))
-            {
-                $arr = array();
-                $err = array('Code' => 1, 'Msg' => 'Please mention the offer id');
-                $result = array('results' => $arr, 'error' => $err);
-                $res=$result;
-                break;
-            }
-            $obj    = new offer($db['iftosi']);
-            $result = $obj->deactOffer($params);
-            $res = $result;
-            break;
-
-//  localhost/iftosi/apis/index.php?action=offerUserBind&offerid=1&uid=6&dispflag=1
-        case 'offerUserBind':
-            include APICLUDE.'class.offer.php';
-            $offid  = (!empty($params['offid'])) ?  trim($params['offid']) : '';               
-            $uid  = (!empty($params['uid'])) ?  trim($params['uid']) : '';
-            $dflag  = (!empty($params['dispflag'])) ?  trim($params['dispflag']) : '';
-            if(empty($offid) && empty($uid) && empty($dflag))
-            {
-                $arr = "Some parameters are missing";
-                $err = array('Code' => 1, 'Msg' => 'Invalid parameters');
-                $result = array('results' => $arr, 'error' => $err);
-                $res=$result;
-                break;
-            }
-            $obj    = new offer($db['iftosi']);
-            $result = $obj->offerUserBind($params);
-            $res = $result;
-            break;
-
-//  localhost/iftosi/apis/index.php?action=offerUserUnBind&offid=2&uid=6
-        case 'offerUserUnBind':
-            include APICLUDE.'class.offer.php';
-            $offid  = (!empty($params['offid'])) ?  trim($params['offid']) : '';               
-            $uid  = (!empty($params['uid'])) ?  trim($params['uid']) : '';
-            if(empty($offid) && empty($uid))
-            {
-                $res = array();
-                $err = array('Code' => 1, 'Msg' => 'Invalid parameters');
-                $result = array('results' => $res, 'error' => $err);
-                break;
-            }
-            $obj    = new offer($db['iftosi']);
-            $result = $obj->offerUserUnBind($params);
-            $res = $result;
-            break;    
-            
 //----------------------Customer Speaks-------------------------------------
             
 //  localhost/jzeva/apis/index.php?action=addCDes&dt=            

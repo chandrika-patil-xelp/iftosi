@@ -12,8 +12,8 @@ class attribute extends DB
     {
         $sql = "SELECT attr_id,attr_name,attr_display_name,attr_unit,attr_type_flag,attr_unit_pos,attr_values,attr_range
                 FROM tbl_attribute_master";
-        $page=$params['page'];
-        $limit=$params['limit'];
+        $page   = ($params['page'] ? $params['page'] : 1);
+        $limit  = ($params['limit'] ? $params['limit'] : 15);
         if (!empty($page))
         {
             $start = ($page * $limit) - $limit;
@@ -33,24 +33,82 @@ class attribute extends DB
 	return $result;
     }
     
+//  name,dname,unit,flag,upos,vals,range,list_values    
     public function set_attributes_details($params)
     {
-	$name 	= $params['name'];
-	$dname 	= $params['dname'];
-	$unit 	= $params['unit'];
-	$flag 	= $params['flag'];
-	$upos 	= $params['upos'];
+	$name 	= $params['name'];  
+	$dname 	= $params['dname']; 
+	$unit 	= $params['unit'];  //  gb,mb,kb
+	$flag 	= $params['flag'];  // type flag 1,2,3,4,5
+	$upos 	= $params['upos'];   //   pre / post
 	$vals 	= $params['vals'];
 	$range 	= $params['range'];
 
-	# INSERTING REQUIRED DATA #
+        # INSERTING REQUIRED DATA #
         $sql = "INSERT INTO tbl_attribute_master SET attr_name='".$name."',attr_display_name='".$dname."',attr_unit='".$unit."',attr_type_flag='".$flag."',attr_unit_pos='".$upos."',attr_values='".$vals."',attr_range=".$range;
 	$res = $this->query($sql);
 	if($res)
         { 
-            $err=array('Code'=>0,'Msg'=>'Data Insertion Successfull');
-            $arr="New Attribute Inserted";
-	}
+            
+            $isql="ALTER TABLE `tbl_product_search` ADD ".$name.""; 
+            
+            if($flag==1 || $flag==6 || $flag==8 )
+            {
+                $isql.=" VARCHAR(50) NOT NULL DEFAULT '' ";
+            }
+            else if($flag==2)
+            {
+                $isql.=" TEXT NOT NULL DEFAULT ''";
+            }
+            else if($flag==3)
+            {
+                $isql.=" BIGINT(20) NOT NULL DEFAULT '0'";
+            }
+            else if($flag==4)
+            {
+                $isql.=" DECIMAL(10,2) NOT NULL DEFAULT '0.0'";
+            }
+           else if($flag==6)
+            {
+                $isql.=" DATE NULL DEFAULT '0000-00-00 00:00:00'";
+            }
+           else if($flag==5)
+            {
+                $crtSql="CREATE TABLE $use_list (`id` BIGINT(20) NOT NULL AUTO_INCREMENT,`name` varchar(64) NOT NULL,`isActive` tinyint(2) NOT NULL DEFAULT '1' COMMENT '1-Active, 0-Not Active', `date_time` datetime NOT NULL COMMENT 'date and time on which it was added', `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'timestamp on which it was updated',`updated_by` varchar(255) NOT NULL COMMENT 'the record was updated by whom',PRIMARY KEY (`id`),KEY `idx_name` (`name`),KEY `idx_isActive` (`isActive`),KEY `idx_date_time` (`date_time`),KEY `idx_update_time` (`update_time`),KEY `idx_updated_by` (`updated_by`))ENGINE=MYISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1";             
+                $crtres = $obj->query($crtSql);
+                $list=$params['list_values'];
+                $listvalue = explode(',', $list);
+                $len=  sizeof($listvalue);
+                $i=0;
+                $insertStr;
+                while($i<$len)
+                { 
+                    $insertStr.="(".$listvalue[$i].",1,NOW(),'CMS Team'),";
+                    $i++;
+                }
+               
+                $insertStr= trim($insertStr,",");
+                $insertSql="INSERT INTO $use_list (name,isActive,date_time,updated_by) VALUES $insertStr";
+                $insertres = $this->query($insertSql);
+                
+                $addsql="INSERT INTO tbl_available_autosuggest_lists (name,display_name,isActive,date_time,updated_by)VALUES(\"$use_list\",\"$tbldname\",1,NOW(),'CMS Team')";
+                $addres = $this->query($addsql);
+
+            }
+            
+            $ires=$this->query($isql);
+
+            if($ires)
+            {
+                $err=array('Code'=>0,'Msg'=>'Data Insertion Successfull');
+                $arr="New Attribute Inserted";
+            }
+            else
+            {
+                $err=array('Code'=>0,'Msg'=>'Data Insertion failed');
+                $arr="No Attribute Inserted";
+            }
+        }
         else
         {
             $err=array('Code'=>0,'Msg'=>'Data Insertion failed');
@@ -59,6 +117,7 @@ class attribute extends DB
         $result=array('result'=>$arr,'error'=>$err);
 	return $result;
     }
+    
     
     public function fetch_attributes_details($params)
     {
@@ -92,7 +151,7 @@ class attribute extends DB
 	$fil_pos 	= $params['fil_pos'];
 	$aflag	 	= $params['aflag'];
 	$catid 		= $params['catid'];
-        $chksql="SELECT * from tbl_attribute_mapping where attribute_id=".$aid." and category_id=".$catid."";
+        $chksql="SELECT count(1) from tbl_attribute_mapping where attribute_id=".$aid." and category_id=".$catid."";
         $ckres=$this->query($chksql);
         $chkres=$this->numRows($ckres);
         if($chkres==0)
@@ -170,7 +229,7 @@ class attribute extends DB
     
     function unset_category_mapping($params) 
     {   
-        $sql = "UPDATE tbl_attributes_mapping SET active_flag=2 WHERE category_id=".$params['catid']." AND attr_id=".$params['aid'];
+        $sql = "UPDATE tb_attribute_mapping SET active_flag=2 WHERE category_id=".$params['catid']." AND attr_id=".$params['aid'];
 	$res = $this->query($sql);
 	if($res) 
         { 
@@ -180,7 +239,7 @@ class attribute extends DB
         $result=array('result'=>$arr,'error'=>$err);
 	return $result;
     }
-    
+
     
 }
 ?>

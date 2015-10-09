@@ -90,14 +90,14 @@
                     if($desres)
                     {
                     //  For category product mapping
-                        $pcsql="INSERT INTO tbl_product_category_mapping(product_id,category_id,pflag,cdt,udt) VALUES(".$pid.",".$catname.",1,now(),now())";
+                        $pcsql="INSERT INTO tbl_product_category_mapping(product_id,category_id,display_flag,cdt,udt) VALUES(".$pid.",".$catname.",1,now(),now())";
                         $pcres=$this->query($pcres);
                         
                     //  For product values filling     
                         $sql="INSERT INTO tbl_product_master(product_id,barcode,lotref,lotno,product_name,product_display_name,
                                                      product_model,product_brand,prd_price,product_currency,product_keyword,                                                     
                                                      product_desc,prd_wt,prd_img,product_warranty,desname,
-                                                     updatedby, updatedon, cdt)
+                                                     updatedby, updatedon)
                                                 VALUES (
 							".$pid.",'".$detls['barcode']."','".$detls['lotref']."',".$detls['lotno'].",
                                                       '".$detls['product_name']."','".$detls['product_display_name']."', 
@@ -121,8 +121,7 @@
                                                     product_warranty             ='".$detls['product_warranty']."',
                                                     updatedby 			 =   'CMS USER', 
                                                     updatedon 			 =    now(),
-                                                    desname                      ='".$des['desname']."',
-                                                    cdt                          =    now()";
+                                                    desname                      ='".$des['desname']."'";
                     $res = $this->query($sql);
                    //----------------------------------------------For product search table--------------------------------------------------- 
                     
@@ -238,8 +237,9 @@
         
         public function getPrdByName($params)
         { 
-            $page   = $params['page'];
-            $limit  = $params['limit'];
+            $page   = ($params['page'] ? $params['page'] : 1);
+            $limit  = ($params['limit'] ? $params['limit'] : 15);
+            
             $sql = "SELECT *,MATCH(product_name) AGAINST ('".$params['prname']."*' IN BOOLEAN MODE) as startwith FROM tbl_product_master WHERE MATCH(product_name) AGAINST ('".$params['prname']."*' IN BOOLEAN MODE) ORDER BY startwith DESC";
             if (!empty($page))
             {
@@ -388,8 +388,8 @@
         
         public function getPrdById($params)
         {
-            $page   = $params['page'];
-            $limit  = $params['limit'];
+          $page   = ($params['page'] ? $params['page'] : 1);
+          $limit  = ($params['limit'] ? $params['limit'] : 15);
             
             $sql = "SELECT * FROM tbl_product_master WHERE product_id=".$params['prdid']."";
             if (!empty($page))
@@ -457,8 +457,8 @@
             $cnt_sql = "SELECT COUNT(*) as cnt FROM tbl_product_master";
             $cnt_res = $this->query($cnt_sql);
             
-            $page   = $params['page'];
-            $limit  = $params['limit'];
+            $page   = ($params['page'] ? $params['page'] : 1);
+            $limit  = ($params['limit'] ? $params['limit'] : 15);
             
             $sql = "SELECT * FROM tbl_product_master";
             
@@ -505,8 +505,8 @@
         
         public function productByCity($params)
         {   
-             $page   = $params['page'];
-             $limit  = $params['limit'];
+            $page   = ($params['page'] ? $params['page'] : 1);
+            $limit  = ($params['limit'] ? $params['limit'] : 15);
             
             $chksql="SELECT vendor_id from tbl_vendor_master where city='".$params['cityname']."'";
             $chkres=$this->query($chksql);
@@ -571,8 +571,9 @@
         
         public function productByBrand($params)
         {
-            $page   = $params['page'];
-            $limit  = $params['limit'];
+            $page   = ($params['page'] ? $params['page'] : 1);
+            $limit  = ($params['limit'] ? $params['limit'] : 15);
+            
             $chksql="SELECT * from tbl_product_master where product_brand='".$params['bname']."'";
             if(!empty($page)) 
             {
@@ -603,8 +604,8 @@
             $chksql="SELECT product_id from tbl_designer_product_mapping where desname='".$params['desname']."' and active_flag=1";
             $chkres=$this->query($chksql);
             
-             $page   = $params['page'];
-             $limit  = $params['limit'];
+            $page   = ($params['page'] ? $params['page'] : 1);
+            $limit  = ($params['limit'] ? $params['limit'] : 15);
             
             $cnt_res1 = $this->numRows($chkres);            
             if($cnt_res1>0)

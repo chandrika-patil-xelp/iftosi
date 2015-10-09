@@ -55,8 +55,8 @@ class viewlog extends DB
     {
         # check the products under the requested vendor
         
-        $page   = $params['page'];
-        $limit  = $params['limit'];
+        $page   = ($params['page'] ? $params['page'] : 1);
+        $limit  = ($params['limit'] ? $params['limit'] : 15);
         $viewprod="SELECT uid,userName,email,cdt,product_id from tbl_viewlog where vid=".$params['vid']."";
         if (!empty($page))
         {

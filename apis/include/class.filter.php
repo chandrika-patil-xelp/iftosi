@@ -129,7 +129,7 @@ class filter extends DB
            if(!empty($detls['pfrm']) || !empty($detls['pto']))
            {
             $price=" AND prd_price>=".$detls['pfrm']." AND prd_price<= ".$detls['pto']."";
-        echo    $sql.=$price;
+            $sql.=$price;
            }
 
 #   FETCHES PRODUCT ACCORDING TO BRAND NAME                   

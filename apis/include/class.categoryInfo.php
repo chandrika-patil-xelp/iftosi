@@ -10,9 +10,10 @@ class categoryInfo extends DB
         public function getCatList($params)
         { 
 			$sql = "SELECT category_id, category_name FROM tbl_categoryid_generator order by category_id ASC";
-			$page=$params['page'];
-			$limit=$params['limit'];
-			if (!empty($page))
+			$page   = ($params['page'] ? $params['page'] : 1);
+                        $limit  = ($params['limit'] ? $params['limit'] : 15);
+			
+                        if (!empty($page))
 			{
 				$start = ($page * $limit) - $limit;
 				$sql.=" LIMIT " . $start . ",$limit";
@@ -43,9 +44,11 @@ class categoryInfo extends DB
     
         public function getCatName($params)
         {
-            $sql = "SELECT * FROM tbl_categoryid_generator WHERE category_id=".$params['catid'];
-            $page   = $params['page'];
-            $limit  = $params['limit'];
+            $sql = "SELECT cat_name FROM tbl_category_master WHERE catid=".$params['catid'];
+            
+            $page   = ($params['page'] ? $params['page'] : 1);
+            $limit  = ($params['limit'] ? $params['limit'] : 15);
+            
             if (!empty($page))
             {
                 $start = ($page * $limit) - $limit;
@@ -58,9 +61,9 @@ class categoryInfo extends DB
             {
                $row = $this->fetchData($res);
                 {
-                    if($row && !empty($row['category_id']))
+                    if($row && !empty($row['catid']))
                         {
-                            $reslt['category_name'] = $row['category_name'];
+                            $reslt['category_name'] = $row['cat_name'];
                             $results[] = $reslt;
                         }
                 }
@@ -68,7 +71,7 @@ class categoryInfo extends DB
             }
             else
             {
-                $results="No record found";
+                $results=array();
                 $err=array('code'=>1,'msg'=>'Error in fetching data');
             }
             $result = array('results' => $results, 'error' => $err);
@@ -77,7 +80,7 @@ class categoryInfo extends DB
         
         public function getCatId($params)
         {
-            $sql = "SELECT * FROM tbl_categoryid_generator WHERE category_name='".$params['catName']."'";
+            $sql = "SELECT category_id FROM tbl_categoryid_generator WHERE category_name='".$params['catName']."'";
             $res = $this->query($sql);
             $chkres=$this->numRows($res);
             if($chkres>0)
@@ -93,7 +96,7 @@ class categoryInfo extends DB
             }
             else
             {
-                $results="No record found";
+                $results=array();
                 $err=array('code'=>1,'msg'=>'Error in fetching data');
             }
             $result = array('results' => $results, 'error' => $err);
@@ -103,32 +106,38 @@ class categoryInfo extends DB
         public function addCat($params)
         {   
           $csql="select category_name from tbl_categoryid_generator where category_name='".$params['catName']."'";
-            $cres=$this->query($csql);
-            $cnt=$this->numRows($cres);
+          $cres=$this->query($csql);
+            
+          $cnt=$this->numRows($cres);
             if($cnt==0)
             {
-               $isql="INSERT INTO tbl_categoryid_generator(category_name,cdt,udt,aflg) values('".$params['catName']."',now(),now(),1)";
-                $ires = $this->query($isql);
+                $isql="INSERT INTO tbl_categoryid_generator(categroy_name,cdt,udt,aflg) VALUES('".$params['catName']."',now(),now(),1)";
+                $ires=$this->query($isql);
+                $catid=$this->lastInsertedId();
                 if($ires)
                 {
-                    $arr="New category is added";
-                    $err=array('Code' =>0,'Msg'=>'Category added successfully!');
-                }
-                else
-                {
-                    $arr="No category is added";
-                    $err=array('Code' =>1,'Msg'=>'Error in adding category!');
+                    $csql="INSERT INTO tbl_category_master(catid,cat_name,p_catid,cat_lvl,lineage,createdon,updatedon,udatedon,updatedby) values(".$catid.",'".$params['catName']."',".$params['lvl'].",'".$params['lineage']."',now(),now(),'CMS_USER')";
+                    $cres = $this->query($csql);
+                
+                    if($cres)
+                    {
+                        $arr="New category is added";
+                        $err=array('Code' =>0,'Msg'=>'Category added successfully!');
+                    }
+                    else
+                    {
+                        $arr="No category is added";
+                        $err=array('Code' =>1,'Msg'=>'Error in adding category!');
+                    }
                 }
             }
             else
             {
-                 $arr="Category already being added";
+                 $arr=array();
                  $err=array('Code' =>0,'Msg'=>'Category not added!');
-                
             }
             $result = array('results'=>$arr,'error'=>$err);
             return $result;
-            
         }
         
         public function deleteCat($params)
@@ -152,17 +161,23 @@ class categoryInfo extends DB
         
         public function updateCat($params)
         {
-         echo $sql = "UPDATE  tbl_categoryid_generator set category_name='".$params['catName']."',udt=now(),aflg=1 WHERE  category_id=".$params['catid'];
-            $res = $this->query($sql);
-            if($res)
-            {   $arr=array();
-                $err = array('Code' => 0, 'Msg' => 'Category name updated successfully!');
-            }
-            else
-            {
+          $sql = "UPDATE  tbl_categoryid_generator set category_name='".$params['catName']."',udt=now(),aflg=1 WHERE  category_id=".$params['catid'];
+          $res = $this->query($sql);
+          if($res)
+          {   
+              $csql="UPDATE tbl_category_master SET cat_name='".$params['catName']."',cat_lvl=".$params['lvl'].",p_catid=".$params['pcatid'].",lineage='".$params['lineage']."',updatedon=now() WHERE catid=".$params['catid']."";
+              $cres=$this->query($csql);
+              if($cres)
+              {
+                    $arr=array();
+                    $err = array('Code' => 0, 'Msg' => 'Category name updated successfully!');
+              }
+          } 
+          else
+          {
                 $arr="No record found";
                 $err=array('code'=>1,'msg'=>'Error in fetching data');
-            }
+          }
             $result = array('results' => $arr, 'error' => $err);
             return $result;
         }

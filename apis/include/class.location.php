@@ -11,7 +11,7 @@ class location extends DB
     
     public function addCity($params)
     {
-        $chksql="select * from tbl_city_master where cityname='".$params['cityname']."' and state_name='".$params['sname']."' and country_name='".$params['cname']."'";
+        $chksql="select count(1) from tbl_city_master where cityname='".$params['cityname']."' and state_name='".$params['sname']."' and country_name='".$params['cname']."'";
         $chkres=$this->query($chksql);
         $res=$this->numRows($chkres);
         if($res<1)
@@ -25,7 +25,7 @@ class location extends DB
         }
         else
         {
-            $arr="Some problem in inserting values";
+            $arr=array();
             $err=array('code'=>1,'msg'=>'error in insert operation');
         }
         }
@@ -54,7 +54,7 @@ class location extends DB
            }
         else
         {
-            $arr="Some problem in fetching values";
+            $arr=array();
             $err= array('code'=>1,'msg'=>'error in fetching data');
         }
         $result = array('results'=>$arr,'error'=>$err);
@@ -65,9 +65,9 @@ class location extends DB
     
     public function viewbyState($params)
     {
-        $vsql="SELECT state_name,country_name FROM tbl_city_master WHERE country_name='".$params['cname']."' AND state_name='".$params['sname']."'";
-        $page=$params['page'];
-        $limit=$params['limit'];
+        $vsql="SELECT state_name,country_name,lat,lng FROM tbl_city_master WHERE country_name='".$params['cname']."' AND state_name='".$params['sname']."' order by cityid ASC";
+        $page   = ($params['page'] ? $params['page'] : 1);
+        $limit  = ($params['limit'] ? $params['limit'] : 15);
         if (!empty($page))
         {
             $start = ($page * $limit) - $limit;
@@ -98,9 +98,9 @@ class location extends DB
     
     public function viewbyCountry($params)
     {
-        $vsql="SELECT state_name,cityname from tbl_city_master where country_name='".$params['cname']."'";
-        $page=$params['page'];
-        $limit=$params['limit'];
+        $vsql="SELECT state_name,cityname,lat,lng from tbl_city_master where country_name='".$params['cname']."'";
+        $page   = ($params['page'] ? $params['page'] : 1);
+        $limit  = ($params['limit'] ? $params['limit'] : 15);
         if (!empty($page))
         {
             $start = ($page * $limit) - $limit;
@@ -118,7 +118,7 @@ class location extends DB
         }
         else
         {
-            $arr="Can't Fetch the values";
+            $arr=array();
             $err=array('code'=>1,'msg'=>'error in fetching data');
         }
         $result=array('results'=>$arr,'error'=>$err);
@@ -137,7 +137,7 @@ class location extends DB
         else
         {
             $err=array('code'=>0,'msg'=>'Value fetched successfully');
-            $arr="City date is not updated";
+            $arr=array();
         }
         $result=array('results'=>$arr,'error'=>$err);
         return $result;
