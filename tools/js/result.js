@@ -46,8 +46,8 @@ $(document).ready(function() {
 			$.each(data.results.products, function(i, vl) {
 				
 				html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/pid-'+vl.pid+'">';
-					html += '<div class="prdComm fLeft transition100">';
-						html += '<div class="prdCommDiv fLeft transition100">';
+					html += '<div class="prdComm fLeft" style="opacity: 0; transform: translateX(1500px);">';
+						html += '<div class="prdCommDiv fLeft">';
 							html += '<div class="prdShape fLeft">';
 								html += '<div class="prdShTitle fLeft fmOpenB">SHAPE</div>';
 								html += '<div class="prdShType fLeft fmOpenR">'+vl.attributes.shape+'</div>';
@@ -91,6 +91,10 @@ $(document).ready(function() {
 			$('.prdResults').html(html);
 			$('.prdResults').offset();
 			$('body').animate({scrollTop: $('.shapesCont').offset().top+50}, 300);
+                        setTimeout(function(){
+                            showPrd();
+                        },10);
+                        
 		});
 
 		
@@ -233,3 +237,24 @@ mc.on("panleft panright tap press", function(ev) {
         showLeftMenu(false);
     }
 });
+
+
+
+
+
+//prdComm 
+
+showPrd();
+function showPrd() {
+        $('.prdComm').each(function() {$(this).velocity({opacity: "0",translateX:1500+"px"}, {duration: 0, delay: 0});});
+        var time = 0;
+        $('.prdComm').each(function() {
+            $(this).velocity({opacity: "1", translateX: "0"}, {duration: 800, delay: time, easing: [60, 10]});
+            time += 120;
+        });
+	
+        setTimeout(function(){
+            $('.prdComm').addClass('transition100');
+        },time);
+    
+}

@@ -221,14 +221,19 @@ a{text-decoration: none;}
 .headCat.bgDiamond{background: #fff url(../img/common/diamond.jpg)no-repeat;background-size: auto 80%;background-position: 8px 0px;}
 .headCat.bgJewellery {background: #fff url(../img/common/jewellery.jpg)no-repeat;background-size: auto 80%;background-position: 8px 0px;}
 .headCat.bgBullion {background: #fff url(../img/common/bullions.jpg)no-repeat;background-size: auto 80%;background-position: 8px 0px;}
-.totalResultsDiv{width:100%;height:350px;line-height: 240px;color: #FFF;text-align: center;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding: 100px 0 0 0;font-size:50px;}
+.totalResultsDiv{width:100%;height:350px;line-height: 240px;color: #FFF;text-align: center;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding: 100px 0 0 0;font-size:50px;position: relative;}
 .resultsPage .shapesCont{}
+.searchCon {width: 40%;height: 60px;position: absolute;top: 155px;bottom: 0;left: 0;right: 0;margin: auto;border-radius: 5px;padding: 5px;}
+.searchCon .fliterTxt {width: 100%;height: 50px;opacity: 0.85;line-height: 50px;text-transform: capitalize;font-size: 15px;border: 1px solid #fff;outline: none;outline-style: none;margin: 0;padding: 0 10px;-webkit-appearance: none;color: #8A0044;background:#fff url(../img/common/location.svg)no-repeat;background-size: auto 80%;background-position: left center;padding-left:35px;}
+.searchCon .fliterTxt:focus{opacity: 1;}
+
 
 /*All Results*/
 .allResults{width:100%;height: auto;background: #fff;}
 .filterTitleDiv{width:100%;height:60px;border-bottom: 1px solid #d4d4d4;margin-bottom: 20px;}
 .fTitle{width:25%;height: 40px;line-height: 40px;padding-left: 30px;color:#4d4d4d;font-size: 25px;margin: 10px 0;background: url(../img/common/filter.svg)no-repeat;background-size: auto 70%;background-position: left 9px;}
 .rCount{width:auto;font-size: 25px;line-height: 40px;margin: 10px 0 10px 1%;color:#4d4d4d;}
+
 /*Sorting Box*/
 .sTitle {width: auto;height: 40px;line-height: 40px;font-size: 16px;color: #4d4d4d;margin: 10px;}
 .sortBox{width:180px;max-width: 25%;height: 40px;line-height: 40px;margin: 10px 0}
@@ -240,10 +245,10 @@ a{text-decoration: none;}
 
 
 /*Main Results*/
-.results_Filter{width:100%;height:auto;display: inline-block;position: relative;padding: 0 0 0 0px;}
+.results_Filter{width:100%;height:auto;display: inline-block;position: relative;padding: 0 0 0 0px;overflow: hidden;}
 .filterList{width:25%;height: auto;min-height: 100%;;left:0;background: #fff;padding-bottom: 25px;}
 .prdResults{width:75%;height: 100%;background: #fff;}
-.prdComm{width:31.5%;height:auto;border:5px solid #ebebde;margin: 0 0 1.83% 1.83%}
+.prdComm{width:31.5%;height:auto;border:5px solid #ebebde;margin: 0 0 1.83% 1.83%;background: #fff;}
 .prdComm:hover{border-color: #d4d4c8}
 .prdComm:hover .actionComm{border-radius:50%}
 .prdComm:hover .actionComm:nth-child(1){-webkit-transition-delay:0.05s;-moz-transition-delay:0.05s;-ms-transition-delay:0.05s;-o-transition-delay:0.05s;transition-delay:0.05s;}
@@ -403,82 +408,16 @@ a{text-decoration: none;}
 
 a{cursor:pointer;}
 .tree ul {list-style: none outside none;margin: 0;padding: 0; }
-.tree li a {
-    line-height: 28px;
-    font-size: 13px;
-    height: 28px;
-    display: block;
-}
-.tree > ul > li > a {
-    color: #4d4d4d;
-    display: block;
-    font-weight: normal;
-    position: relative;
-    text-decoration: none;
-  
-}
-.tree li.parent > a {
-    padding: 0 0 0 28px;
-    color: #8A0044;
-    font-size: 15px;
-    background-image: url("../img/common/detail.svg");
-    background-repeat: no-repeat;
-    background-size: 18px;
-    background-position: 5px 5px;
-}
-.tree li.parent > a:before {
-    background-image: url("../img/common/detail_open.svg");
-    background-repeat: no-repeat;
-    background-size: 18px;
-    transform: rotate(-90deg);
-    background-position: left top;
-    transition: 300ms ease-in-out;-moz-transition: 300ms ease-in-out;-ms-transition: 300ms ease-in-out;-webkit-transition: 300ms ease-in-out;-o-transition: 300ms ease-in-out;
-    content: ""; 
-    display: block;
-    height: 18px;
-    left: 5px;
-    top:5px;
-    position: absolute;
-    vertical-align: middle;
-    width: 18px;
-}
-.tree ul li.active > a:before {
-    transform: rotate(0deg);
-    width: 18px;
-    height:18px;
-    background-size: 18px;
-    background-position: left top;
-    transition: 300ms ease-in-out;-moz-transition: 300ms ease-in-out;-ms-transition: 300ms ease-in-out;-webkit-transition: 300ms ease-in-out;-o-transition: 300ms ease-in-out;
-}
-.tree ul li ul {
-    border-left: 1px dashed #d4d4c8;
-    display: none;
-    margin: 0 0 0 12px;
-    overflow: hidden;
-    padding: 2px 2px 2px 20px;
-}
-.tree ul li ul li {
-    position: relative;
-    line-height: 30px;
-}
-.tree ul li ul li:before {
-    border-bottom: 1px dashed #d4d4c8;
-    content: "";
-    left: -20px;
-    position: absolute;
-    top: 14px;
-    width: 20px;
-}
-#wrapper {
-    margin: 0 auto;
-    width: 100%;
-}
-
+.tree li a {line-height: 28px;font-size: 13px;height: 28px;display: block;}
+.tree > ul > li > a {color: #4d4d4d;display: block;font-weight: normal;position: relative;text-decoration: none;}
+.tree li.parent > a {padding: 0 0 0 28px;color: #8A0044;font-size: 15px;background-image: url("../img/common/detail.svg");background-repeat: no-repeat;background-size: 18px;background-position: 5px 5px;}
+.tree li.parent > a:before {background-image: url("../img/common/detail_open.svg");background-repeat: no-repeat;background-size: 18px;transform: rotate(-90deg);background-position: left top;transition: 300ms ease-in-out;-moz-transition: 300ms ease-in-out;-ms-transition: 300ms ease-in-out;-webkit-transition: 300ms ease-in-out;-o-transition: 300ms ease-in-out;content: ""; display: block;height: 18px;left: 5px;top:5px;position: absolute;vertical-align: middle;width: 18px;}
+.tree ul li.active > a:before {transform: rotate(0deg);width: 18px;height:18px;background-size: 18px;background-position: left top;transition: 300ms ease-in-out;-moz-transition: 300ms ease-in-out;-ms-transition: 300ms ease-in-out;-webkit-transition: 300ms ease-in-out;-o-transition: 300ms ease-in-out;}
+.tree ul li ul {border-left: 1px dashed #d4d4c8;display: none;margin: 0 0 0 12px;overflow: hidden;padding: 2px 2px 2px 20px;}
+.tree ul li ul li {position: relative;line-height: 30px;}
+.tree ul li ul li:before {border-bottom: 1px dashed #d4d4c8;content: "";left: -20px;position: absolute;top: 14px;width: 20px;}
+#wrapper {margin: 0 auto;width: 100%;}
 #wrapper .checkDiv {width: 100%;height: 28px;margin-bottom: 0;}
-
-
-
-
 
 
 
@@ -591,31 +530,31 @@ a{cursor:pointer;}
 .jShapesCont {width: 100%;height: 225px;background: #fff;padding: 0px 0 0px 0;border-top: 2px solid #fff;position: relative;z-index: 0;}
 .jshapeComm {margin: 0;width: 20%;padding-bottom: 0;height: 225px;border: 0px solid transparent;position: relative;display: inline-block;cursor: pointer;padding-top: 155px;color: #F3EFEF;font-size: 25px;line-height: 70px;box-shadow: inset 0 -70px 70px rgba(0,0,0,0.5);border-right:2px solid #fff;vertical-align: top;}
 .jshapeComm:hover {padding-top: 85px;font-size: 30px;}
-.jshapeComm::after{content: '';position: absolute;right: 0px; left:0px; bottom: 70px;margin: auto; width: 00px;height: 00px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;}
+.jshapeComm::after{content: '';position: absolute;right: 0px; left:0px; bottom: 70px;margin: auto; width: 00px;height: 00px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;-moz-transition: 100ms ease-in-out;-ms-transition: 100ms ease-in-out;-webkit-transition: 100ms ease-in-out;-o-transition: 100ms ease-in-out;}
 
-.Rings{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(23, 19, 52,1);}
-.Earrings{background: url(../img/common/iftosi02.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(42, 14, 52,1);}
-.Pendent{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(56, 11, 52,1);}
-.Necklace{background: url(../img/common/iftosi02.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -70px 0px rgba(94, 0, 55,1);}
-.Bracelet{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(138, 0, 68,1);}
+.Rings{background: url(../img/common/ifrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(23, 19, 52,0.9);}
+.Earrings{background: url(../img/common/ifearrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(42, 14, 52,0.9);}
+.Pendent{background: url(../img/common/ifpendent.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(56, 11, 52,0.9);}
+.Necklace{background: url(../img/common/ifnecklace.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -70px 0px rgba(94, 0, 55,0.9);}
+.Bracelet{background: url(../img/common/ifbracelet.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(138, 0, 68,0.9);}
 
-.jshapeComm.Rings:hover{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
-.jshapeComm.Earrings:hover{background: url(../img/common/iftosi02.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
-.jshapeComm.Pendent:hover{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(56, 11, 52,0.8);}
-.jshapeComm.Necklace:hover{background: url(../img/common/iftosi02.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
-.jshapeComm.Bracelet:hover{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+.jshapeComm.Rings:hover{background: url(../img/common/ifrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
+.jshapeComm.Earrings:hover{background: url(../img/common/ifearrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
+.jshapeComm.Pendent:hover{background: url(../img/common/ifpendent.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(56, 11, 52,0.8);}
+.jshapeComm.Necklace:hover{background: url(../img/common/ifnecklace.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
+.jshapeComm.Bracelet:hover{background: url(../img/common/ifbracelet.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
 
-.jshapeComm.shapeSelected.Rings{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
-.jshapeComm.shapeSelected.Earrings{background: url(../img/common/iftosi02.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
-.jshapeComm.shapeSelected.Pendent{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(56, 11, 52,0.8);}
-.jshapeComm.shapeSelected.Necklace{background: url(../img/common/iftosi02.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
-.jshapeComm.shapeSelected.Bracelet{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+.jshapeComm.shapeSelected.Rings{background: url(../img/common/ifrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
+.jshapeComm.shapeSelected.Earrings{background: url(../img/common/ifearrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
+.jshapeComm.shapeSelected.Pendent{background: url(../img/common/ifpendent.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(56, 11, 52,0.8);}
+.jshapeComm.shapeSelected.Necklace{background: url(../img/common/ifnecklace.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
+.jshapeComm.shapeSelected.Bracelet{background: url(../img/common/ifbracelet.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
 
-.jshapeComm.shapeSelected.Rings:hover{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
-.jshapeComm.shapeSelected.Earrings:hover{background: url(../img/common/iftosi02.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
-.jshapeComm.shapeSelected.Pendent:hover{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(56, 11, 52,0.8);}
-.jshapeComm.shapeSelected.Necklace:hover{background: url(../img/common/iftosi02.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
-.jshapeComm.shapeSelected.Bracelet:hover{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+.jshapeComm.shapeSelected.Rings:hover{background: url(../img/common/ifrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
+.jshapeComm.shapeSelected.Earrings:hover{background: url(../img/common/ifearrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
+.jshapeComm.shapeSelected.Pendent:hover{background: url(../img/common/ifpendent.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(56, 11, 52,0.8);}
+.jshapeComm.shapeSelected.Necklace:hover{background: url(../img/common/ifnecklace.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
+.jshapeComm.shapeSelected.Bracelet:hover{background: url(../img/common/ifbracelet.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
 
 .jshapeComm.shapeSelected span{color:#8A0044;}
 .jshapeComm.shapeSelected{background-color: #fff;border-right: 2px solid #FFF;padding-top: 75px;font-size: 30px;}

@@ -4,8 +4,17 @@
         <div class="wrapper">
             <?php include 'header.html'?>
             <div class="totalResultsDiv">
-                <div class="wrapperMax fmOpenL">
-                    <span id="resultCount">2,835</span> jewellery items found
+                <div class="searchCon">
+                    <div class="areaCont fLeft">
+                        <input type="text" id="txtjArea" class="fliterTxt fLeft fmOpenR transition300" placeholder=" Search city / area here" >
+                        <div class="autoSuggestOuter fmOpenR dn" id="jasug">
+                            <ul>
+                                <li class="autoSuggstions transition300 txtCap" onclick="setData(this)">andheri</li>
+                                <li class="autoSuggstions transition300 txtCap" onclick="setData(this)">andheri west</li>
+                                <li class="autoSuggstions transition300 txtCap" onclick="setData(this)">andheri east</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class='jShapesCont resultsPage showHide fmOpenL'>
@@ -24,23 +33,25 @@
                 <div class="wrapperMax">
                     <div class="filterTitleDiv">
                         <div class='fTitle fLeft fmOpenR'>Filter Results</div>
+                        <div class="rCount fLeft fmOpenR"><span id='resultCount'> 2,835</span> Diamonds found</div>
                         <div class="fRight sortBox">
                             <div class="dropdownBox fLeft">
-                                <div id="drpinp" class="dropInput fmOpenR">Sort by</div>
+                                <div id="drpinp" class="dropInput fmOpenR">Best Match</div>
                                 <ul id="dropList" class="fmOpenR">
-                                    <li class="transition100">Best Match</li>
-                                    <li class="transition100">Lowest Price</li>
-                                    <li class="transition100">Highest Price</li>
-                                    <li class="transition100">Rating</li>
+                                    <li class="transition100" id="bmatch">Best Match</li>
+                                    <li class="transition100" id="pasc">Lowest Price</li>
+                                    <li class="transition100" id="pdesc">Highest Price</li>
+                                    <li class="transition100" id="rate">Rating</li>
                                 </ul>
                             </div>
                         </div>
+                        <div class="fRight sTitle">Sort by</div>
                     </div>
                     <div class='results_Filter'>
                         <?php include 'filters.html'; ?>
                         <div class='prdResults fRight'>
                             <?php while ($i < 15) { ?>
-                                <div class='prdComm fLeft transition100'>
+                                <div class='prdComm fLeft' style="opacity: 0; transform: translateX(1000px);">
                                     <div class='prdCommDiv fLeft transition100'>
                                         <div class='prdShape fLeft'>
                                             <div class='prdShTitle fLeft fmOpenB'>METAL</div>
