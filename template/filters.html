@@ -31,6 +31,69 @@
             <option>Rating</option>
         </select>
     </div>
+
+    <?php if ($page == 'jewellery') { ?>
+        <div class="filterCont fLeft">
+            <div class="fLeft optionTitle fmOpenR">Category</div>
+            <div id="wrapper" class="fLeft">
+                <div class="tree transition300">
+                    <ul>
+                        <li><a>Jewellery</a>
+                            <ul>
+                                <li id='ringLi'><a>Rings</a>
+                                    <ul>
+                                        <li><a>Office Wear Rings</a></li>
+                                        <li><a>Daily Wear Rings</a></li>
+                                        <li><a>Party Wear Rings</a></li>
+                                        <li><a>Band Rings</a></li>
+                                        <li><a>Only Diamonds Rings</a></li>
+                                        <li><a>Cocktails Rings</a></li>
+                                        <li><a>White Gold Rings</a></li>
+                                        <li><a>Men's Rings</a></li>
+                                    </ul>
+                                </li>
+                                <li id='earringLi'><a>Earrings</a>
+                                    <ul>
+                                        <li><a>Office Wear Earrings</a></li>
+                                        <li><a>Daily Wear Earrings</a></li>
+                                        <li><a>Party Wear Earrings</a></li>
+                                        <li><a>Only Diamonds Earrings</a></li>
+                                        <li><a>Gemstone Earrings</a></li>
+                                        <li><a>White Gold Earrings</a></li>
+                                    </ul>
+                                </li>
+                                <li id='PendantLi'><a>Pendant</a>
+                                    <ul>
+                                        <li><a>Office Wear Pendant</a></li>
+                                        <li><a>Daily Wear Pendant</a></li>
+                                        <li><a>Party Wear Pendant</a></li>
+                                        <li><a>Only Diamonds Pendant</a></li>
+                                        <li><a>Gemstone Pendant</a></li>
+                                        <li><a>White Gold Pendant</a></li>
+                                    </ul>
+                                </li>
+                                <li id='NecklaceLi'><a>Necklace</a>
+                                    <ul>
+                                        <li><a>Office Wear Necklace</a></li>
+                                        <li><a>Party Wear Necklace</a></li>
+                                    </ul>
+                                </li>
+                                <li id='BraceletLi'><a>Bracelet</a>
+                                    <ul>
+                                        <li><a>Office Wear</a></li>
+                                        <li><a>Party Wear</a></li>
+                                        <li><a>Only Diamonds</a></li>
+                                        <li><a>Gemstone</a></li>
+                                        <li><a>White Gold</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
     <div class="filterCont fLeft">
         <div class="fLeft optionTitle fmOpenR">City / Area</div>
         <div class='areaCont fLeft'>
@@ -220,3 +283,30 @@
         <div id='applyDbtn'> Apply Filters</div>
     </div>
 </div>
+<script type="text/javascript">
+    var lOpen="";
+    $(document).ready(function( ) {
+        $('.tree li').each(function() {
+            if ($(this).children('ul').length > 0) {
+                $(this).addClass('parent');
+            }
+        });
+
+        $('.tree li.parent > a').click(function( ) {
+            var id=$(this).parent().attr('id');
+            if(lOpen!==""  && lOpen!==id){
+                $('#'+lOpen).removeClass('active');
+                $('#'+lOpen).children('ul').slideUp('fast');
+            }
+            $(this).parent().toggleClass('active');
+            $(this).parent().children('ul').slideToggle('fast');
+            lOpen=id;
+            console.log(lOpen);
+        });
+        $('.tree ul:first > li').eq(0).each(function() {
+            $(this).toggleClass('active');
+            $(this).children('ul').slideToggle('fast');
+        });
+
+    });
+</script>

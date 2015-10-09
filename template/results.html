@@ -3,11 +3,7 @@
     <div id='baseCont' class="container fmOpenR bgWhite resultsPage">
         <div class="wrapper">
             <?php include 'header.html'?>
-            <div class="totalResultsDiv">
-                <div class="wrapperMax fmOpenL">
-                    <span id='resultCount'></span> Diamonds found
-                </div>
-            </div>
+            <div class="totalResultsDiv"></div>
             <div class='shapesCont resultsPage showHide'>
                 <div class="wrapperMax">
                     <div class="allShapes resultsPage">
@@ -30,9 +26,10 @@
                 <div class="wrapperMax">
                     <div class="filterTitleDiv">
                         <div class='fTitle fLeft fmOpenR'>Filter Results</div>
+                        <div class="rCount fLeft fmOpenR"><span id='resultCount'> 2,835</span> Diamonds found</div>
                         <div class="fRight sortBox">
                             <div class="dropdownBox fLeft">
-                                <div id="drpinp" class="dropInput fmOpenR">Sort by</div>
+                                <div id="drpinp" class="dropInput fmOpenR">Best Match</div>
                                 <ul id="dropList" class="fmOpenR">
                                     <li class="transition100" id="bmatch">Best Match</li>
                                     <li class="transition100" id="pasc">Lowest Price</li>
@@ -41,6 +38,7 @@
                                 </ul>
                             </div>
                         </div>
+                        <div class="fRight sTitle">Sort by</div>
                     </div>
                     <div class='results_Filter'>
                         <?php include 'filters.html';?>

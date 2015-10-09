@@ -14,16 +14,14 @@ $(document).ready(function() {
         if (isMobile) {
             samt = 450;
         }
-        $('body').animate({scrollTop: samt}, 300);
+       // $('body').animate({scrollTop: samt}, 300);
     }, 100);
     
     
-    if(pw<1024 && pw>959){
+    if(pw<1024 && pw>480){
         $('.fTitle').click(function(){
             $('#filters').toggleClass('transit-100X');
         });
-        
-        
     }
 
     $('#drpinp').click(function() {

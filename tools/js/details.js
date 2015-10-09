@@ -67,7 +67,7 @@ $(document).ready(function(){
     
     $('#userCancel').bind('click',function(){
         $('#userForm').velocity({scale:0},{delay:0,ease:'swing'});
-        $('#overlay').velocity({scale:0},{delay:100,ease:'swing'});
+        $('#overlay').velocity({scale:1},{delay:100,ease:'swing'});
         setTimeout(function(){
             $('#overlay,#userForm').addClass('dn');
         },1010);
