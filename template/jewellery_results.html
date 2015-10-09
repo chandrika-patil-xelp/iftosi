@@ -50,35 +50,26 @@
                     <div class='results_Filter'>
                         <?php include 'filters.html'; ?>
                         <div class='prdResults fRight'>
-                            <?php while ($i < 15) { ?>
-                                <div class='prdComm fLeft' style="opacity: 0; transform: translateX(1000px);">
+                            <?php while ($i < 1) { ?>
+                                <div class='prdComm fLeft jwRes' style="opacity: 0; transform: translateX(1000px);">
                                     <div class='prdCommDiv fLeft transition100'>
-                                        <div class='prdShape fLeft'>
-                                            <div class='prdShTitle fLeft fmOpenB'>METAL</div>
-                                            <div class='prdShType fLeft fmOpenR'>Gold</div>
-                                            <div class="Round fRight"></div>
+                                        <div class="prdCommImg fLeft">
+                                            <?php 
+                                                $cnt=10;
+                                                $wid=  round(273/$cnt);
+                                                for($i=0;$i<$cnt;$i++){?>
+                                                    <div class="test fLeft" style='width:<?php echo $wid."%";?>;height:0;padding-bottom:<?php echo $wid."%";?>'></div>
+                                                <?php }?>
                                         </div>
                                         <div class="prdDetails fLeft">
                                             <div class="detComm">
-                                                <div class="detLabel fmOpenB fLeft">PURITY</div>
-                                                <div class="detValue fmOpenR fLeft">18K</div>
-                                            </div>
-                                            <div class="detComm">
-                                                <div class="detLabel fmOpenB fLeft">WEIGHT</div>
-                                                <div class="detValue fmOpenR fLeft">10Gms</div>
-                                            </div>
-                                            <div class="detComm">
-                                                <div class="detLabel fmOpenB fLeft">DIAMONDS</div>
-                                                <div class="detValue fmOpenR fLeft">20</div>
-                                            </div>
-                                            <div class="detComm">
-                                                <div class="detLabel fmOpenB fLeft">CERTIFIED BY</div>
-                                                <div class="detValue fmOpenR fLeft">IGI</div>
+                                                <div class="detLabel fmOpenB fLeft">DESIGN NO.</div>
+                                                <div class="detValue fmOpenR fLeft">18101</div>
                                             </div>
                                         </div>
                                         <div class='prdPrice fLeft'>
                                             <div class="detComm">
-                                                <div class="detLabel fmOpenB fLeft">BEST PRICE</div>
+                                                <div class="detLabel fmOpenB fLeft">PRICE</div>
                                                 <div class="detValue fmOpenB fLeft"><span>&#8377;</span>50,800</div>
                                             </div>
                                         </div>

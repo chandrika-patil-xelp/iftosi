@@ -253,9 +253,9 @@ function showPrd() {
             $(this).velocity({opacity: "1", translateX: "0"}, {duration: 500, delay: time, easing: "ease-in-out"});
             time += 120;
         });
-	
         setTimeout(function(){
             $('.prdComm').addClass('transition100');
         },time);
     
 }
+

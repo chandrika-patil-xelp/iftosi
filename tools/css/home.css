@@ -303,6 +303,10 @@ a{text-decoration: none;}
 .prdShape .Cushion {position: absolute;top:-7px;right: -15px;width: 70px;height: 50px;background-image: url(../img/shapes.svg);background-repeat: no-repeat;background-size: 1000% auto;}
 .prdShape .Cushion:hover{position: absolute;top:-7px;right: -15px;width: 70px;height: 50px;background-image: url(../img/shapes.svg);background-repeat: no-repeat;background-size: 1000% auto;background-position: 100% 0}
 
+.prdCommImg{width:100%;height: 160px;border:1px solid #333;}
+.test{background: #ccc;}
+
+
 .prdDetails{width:100%;height: auto;border-bottom: 1px solid #ebebde;padding-bottom:5px;}
 .detComm{width: 100%;height: 30px;line-height: 30px;}
 .detLabel{width: 40%;color:#888;font-size: 11px;}
@@ -311,7 +315,7 @@ a{text-decoration: none;}
 .prdPrice{width: 100%;height: 50px;line-height: 50px;}
 .prdPrice .detComm{line-height: 50px;}
 .prdPrice .detLabel{color:#8A0044}
-.prdPrice .detValue{color:#8A0044}
+.prdPrice .detValue{color:#8A0044;font-size: 22px;}
 .detValue span{color:#4d4d4d!important;margin-right: 2px;font-size: 16px;}
 
 .prdActions{width:100%;height:60px;}
@@ -323,6 +327,13 @@ a{text-decoration: none;}
 .actionComm:nth-child(4){background: #5e0037 url(../img/common/4.svg)no-repeat;background-size: auto 100%;background-position: center;;}
 
 .actionComm:hover{background-color: #8A0044;border-radius: 50%;-webkit-transition-delay:0s;-moz-transition-delay:0s;-ms-transition-delay:0s;-o-transition-delay:0s;transition-delay:0s;}
+
+/*Jewellery Res*/
+.jwRes{}
+.jwRes .prdPrice{height:30px;line-height: 30px;margin-bottom: 10px;}
+.jwRes .prdDetails{border:none;padding: 0}
+.jwRes .prdPrice .detComm{height:30px;line-height: 30px;}
+
 
 /*Filters */
 .filters{width: 20%;height: auto;padding:25px 0 25px 25px;background: #fff;}
@@ -527,8 +538,8 @@ a{cursor:pointer;}
 .bgNone{background: none;}
 
 /*Jewellery Results Page*/
-.jShapesCont {width: 100%;height: 225px;background: #fff;padding: 0px 0 0px 0;border-top: 2px solid #fff;position: relative;z-index: 0;}
-.jshapeComm {margin: 0;width: 20%;padding-bottom: 0;height: 225px;border: 0px solid transparent;position: relative;display: inline-block;cursor: pointer;padding-top: 155px;color: #F3EFEF;font-size: 25px;line-height: 70px;box-shadow: inset 0 -70px 70px rgba(0,0,0,0.5);border-right:2px solid #fff;vertical-align: top;}
+.jShapesCont {width: 100%;height: 225px;background: #fff;padding: 0px 0 0px 0;position: relative;z-index: 0;}
+.jshapeComm {margin: 0;width: 20%;padding-bottom: 0;height: 225px;border: 0px solid transparent;position: relative;display: inline-block;cursor: pointer;padding-top: 155px;color: #F3EFEF;font-size: 25px;line-height: 70px;box-shadow: inset 0 -70px 70px rgba(0,0,0,0.5);border-right:2px solid #fff;border-top: 2px solid #fff;vertical-align: top;}
 .jshapeComm:hover {padding-top: 85px;font-size: 30px;}
 .jshapeComm::after{content: '';position: absolute;right: 0px; left:0px; bottom: 70px;margin: auto; width: 00px;height: 00px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;-moz-transition: 100ms ease-in-out;-ms-transition: 100ms ease-in-out;-webkit-transition: 100ms ease-in-out;-o-transition: 100ms ease-in-out;}
 
