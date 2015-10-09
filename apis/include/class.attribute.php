@@ -205,23 +205,101 @@ class attribute extends DB
             }
             $atribs=implode(',',$attributeMap['attrid']);
             
-            $attrsql="SELECT attr_id,attr_name,attr_display_name,attr_unit,attr_type_flag,attr_unit_pos,attr_values,attr_range
-                      FROM tbl_attribute_master where attr_id IN(".$atribs.") ORDER BY field(attr_id,".$atribs.") DESC";
+            $attrsql="SELECT  
+                                attr_id,
+                                attr_name,
+                                attr_display_name,
+                                attr_unit,
+                                attr_type_flag,
+                                attr_unit_pos,
+                                attr_values,
+                                attr_range
+                      FROM 
+                                tbl_attribute_master 
+                      WHERE 
+                                attr_id IN(".$atribs.")
+                      ORDER BY 
+                                field(attr_id,".$atribs.") DESC";
             $res = $this->query($attrsql); 
             if($res)
             {   
                 while($row1=$this->fetchData($res)) 
                 {
                     $attrs['atrribute_id']=$row1['attr_id'];
-                    $attrs['atrribute_name']=$row1['attr_name'];
+                    $attrs['attribute_name']=$row1['attr_name'];
                     $attrs['attribute_disp_name']=$row1['attr_display_name'];
                     $attrs['attribute_unit']=$row1['attr_unit'];
-                    $attrs['attribute_num_flag']=$row1['attr_type_flag'];
+                   
+                    $flag=$row1['attr_type_flag'];       // FOR GIVING THE NAME OF TYPE FILTER
+                 /*   switch($flag)
+                    {
+                        case 1:
+                               $attrs['attribute_num_flag']="textbox";
+                               $sql = "select ".$attrs['attribute_name']." from tbl_product_search group by ".$attrs['attribute_name']."";
+                               $res = $this->query($sql);
+                               break;
+                        case 2:
+                               $attrs['attribute_num_flag']="textarea";
+                               $sql = "select ".$attrs['attribute_name']." from tbl_product_search group by ".$attrs['attribute_name']."";
+                               $res = $this->query($sql,1);
+                               break;
+                        case 3:
+                               $attrs['attribute_num_flag']="Numeric";
+                               $sql = "select ".$attrs['attribute_name']." from tbl_product_search group by ".$attrs['attribute_name']."";
+                               $res = $this->query($sql,1);
+                               break;
+                        case 4:
+                               $attrs['attribute_num_flag']="Decimal";
+                               $sql = "select ".$attrs['attribute_name']." from tbl_product_search group by ".$attrs['attribute_name']."";
+                               $res = $this->query($sql,1);
+                               break;
+                        case 5:
+                               $attrs['attribute_num_flag']="Dropdown";
+                               $sql = "select ".$attrs['attribute_name']." from tbl_product_search group by ".$attrs['attribute_name']."";
+                               $res = $this->query($sql,1);
+                               break;
+                        case 6:
+                               $attrs['attribute_num_flag']="Range";
+                               $sql = "select min(".$attrs['attribute_name'].") as minval, max(".$attrs['attribute_name'].") as maxval from tbl_product_search";
+                               $res = $this->query($sql,1);
+                               break;
+                        case 7:
+                               $attrs['attribute_num_flag']="checkbox";
+                                $sql = "select ".$attrs['attribute_name']." from tbl_product_search group by ".$attrs['attribute_name']."";
+                                $res = $this->query($sql,1);
+                               break;
+                        case 8:
+                               $attrs['attribute_num_flag']="Radiobutton";
+                               $sql = "select ".$attrs['attribute_name']." from tbl_product_search group by ".$attrs['attribute_name']."";
+                               $res = $this->query($sql,1);
+                               break;
+                        case 9:
+                               $attrs['attribute_num_flag']="Pre-Defined List";
+                               break;
+                        default:
+                               break;
+                    }
+                   */ 
                     $attrs['attribtue_unit_pos']=$row1['attr_unit_pos'];
+                    
                     $attrs['attribute_values']=$row1['attr_values'];
+                    
                     $attrs['attribute_range']=$row1['attr_range'];
+                    
                     $attribute[]=$attrs;
+                
+      
                 }
+                    $sql="SELECT * from tbl_prodct_search where ";
+                    
+                    
+                    
+                    $res=$this->query($sql);
+                    
+                    
+                
+                
+                
                 $arr=array('attributes'=>$attribute);
                 $err=array('Code'=>'0','Msg'=>'Values are Fetched');
             }
