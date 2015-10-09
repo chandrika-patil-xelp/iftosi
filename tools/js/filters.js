@@ -30,7 +30,7 @@ $(document).ready(function() {
 		
 		$('.filterCont label').each(function() {
 			$(this).bind('click', function(event) {
-				//FR();
+				FR();
 				if (event && event.stopPropagation)
 					event.stopPropagation();
 				else 
