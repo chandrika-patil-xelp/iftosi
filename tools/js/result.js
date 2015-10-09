@@ -120,19 +120,18 @@ $(document).ready(function() {
     });
 
     $('.jshapeComm').bind('click', function() {
-        var len=$('.jshapeComm.shapeSelected').size();
         $('body').animate({scrollTop: 280}, 300);
-       // if(len<3){
             var id=$(this).attr('id');
             $(this).toggleClass('shapeSelected');
+                    id=id.toLowerCase()+"Li";
+                    $('#'+id+' a').click();
+            console.log(id);
             if(addedFilters.indexOf(id)==-1){
-                addFiltters(id);
+                //addFiltters(id);
             }else{
-                removeFilters(id+"_Filters");
+                //removeFilters(id+"_Filters");
                 addedFilters.pop(id);
             }
-        //}
-        
     });
 
     $('#resultCount').numerator({

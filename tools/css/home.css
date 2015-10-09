@@ -94,7 +94,7 @@ a{text-decoration: none;}
 
 /*Shapes Cont*/
 .shapesCont{width:100%;height:auto;background: #FFF;padding: 30px 0;position: relative;z-index: 0;}
-.resultsPage .shapesCont{padding: 10px 0;background: transparent;margin-top: -144px;}
+.resultsPage .shapesCont{padding: 10px 0;background: transparent;}
 .shapesTitle{width:100%;height:auto;line-height: 40px;padding: 10px 0;color:#4d4d4d;font-size: 40px;text-align: center;margin-bottom: 20px;}
 .allShapes{width:100%;height:auto;}
 .shapeComm {border:2px solid #FFF;border-radius:5px; position: relative;background-image: url(../img/shapes.svg);background-repeat: no-repeat;margin: 0.5%;width: 9%!important;padding-bottom: 9%;height:0!important;display: inline-block;vertical-align: bottom;text-align: center;cursor: pointer;background-size: 1000% auto;}
@@ -222,7 +222,6 @@ a{text-decoration: none;}
 .headCat.bgJewellery {background: #fff url(../img/common/jewellery.jpg)no-repeat;background-size: auto 80%;background-position: 8px 0px;}
 .headCat.bgBullion {background: #fff url(../img/common/bullions.jpg)no-repeat;background-size: auto 80%;background-position: 8px 0px;}
 .totalResultsDiv{width:100%;height:280px;line-height: 240px;color: #FFF;text-align: center;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding: 100px 0 0 0;font-size:50px;}
-.resultsPage .totalResultsDiv{height: 424px;}
 .resultsPage .shapesCont{}
 
 /*All Results*/
@@ -452,7 +451,7 @@ a{cursor:pointer;}
     transition: 300ms ease-in-out;-moz-transition: 300ms ease-in-out;-ms-transition: 300ms ease-in-out;-webkit-transition: 300ms ease-in-out;-o-transition: 300ms ease-in-out;
 }
 .tree ul li ul {
-    border-left: 1px solid #b3b3b3;
+    border-left: 1px dashed #d4d4c8;
     display: none;
     margin: 0 0 0 12px;
     overflow: hidden;
@@ -463,7 +462,7 @@ a{cursor:pointer;}
     line-height: 30px;
 }
 .tree ul li ul li:before {
-    border-bottom: 1px dashed #b3b3b3;
+    border-bottom: 1px dashed #d4d4c8;
     content: "";
     left: -20px;
     position: absolute;
@@ -475,7 +474,7 @@ a{cursor:pointer;}
     width: 100%;
 }
 
-
+#wrapper .checkDiv {width: 100%;height: 28px;margin-bottom: 0;}
 
 
 
