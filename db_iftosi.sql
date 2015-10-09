@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 09, 2015 at 01:21 PM
+-- Generation Time: Oct 09, 2015 at 01:25 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -79,41 +79,6 @@ CREATE TABLE IF NOT EXISTS `tbl_attribute_master` (
 --
 
 INSERT INTO `tbl_attribute_master` (`attr_id`, `attr_name`, `attr_display_name`, `attr_unit`, `attr_type_flag`, `attr_unit_pos`, `attr_values`, `attr_range`, `use_list`, `active_flag`) VALUES
-(1, 'barcode', 'Barcode', '', 1, 1, '', '', NULL, 1),
-(2, 'lotref', 'Lotreference', '', 1, 1, '', '', NULL, 1),
-(3, 'lotno', 'LotNumber', '', 1, 1, '', '', NULL, 1),
-(4, 'cert', 'Certificate', '', 1, 1, '', '', NULL, 1),
-(5, 'cut', 'Cut', '', 1, 1, '', '', NULL, 1),
-(6, 'col', 'Color', '', 1, 1, '', '', NULL, 1),
-(7, 'cla', 'Clarity', '', 1, 1, '', '', NULL, 1),
-(8, 'base', 'Base', '', 1, 1, '', '', NULL, 1),
-(9, 'price', 'Price', '', 1, 1, '', '', NULL, 1),
-(10, 'value', 'Value', '', 1, 1, '', '', NULL, 1),
-(11, 'p_disc', 'Pivot Disc', '', 1, 1, '', '', NULL, 1),
-(12, 'prop', 'Property', '', 1, 1, '', '', NULL, 1),
-(13, 'pol', 'Polish', '', 1, 1, '', '', NULL, 1),
-(14, 'sym', 'Symmetry', '', 1, 1, '', '', NULL, 1),
-(15, 'fluo', 'Fluroscent', '', 1, 1, '', '', NULL, 1),
-(16, 'td', 'Table Dimension', '', 1, 1, '', '', NULL, 1),
-(17, 'table', 'Table', '', 1, 1, '', '', NULL, 1),
-(18, 'measurement', 'Measurement', '', 1, 1, '', '', NULL, 1),
-(19, 'cert1_no', 'Certificate number', '', 1, 1, '', '', NULL, 1),
-(20, 'pa', 'PA', '', 1, 1, '', '', NULL, 1),
-(21, 'cr_hgt', 'Curve Height', '', 1, 1, '', '', NULL, 1),
-(22, 'cr_ang', 'Curve Angle', '', 1, 1, '', '', NULL, 1),
-(23, 'girdle', 'Girdle', '', 1, 1, '', '', NULL, 1),
-(24, 'pd', ' PD', '', 1, 1, '', '', NULL, 1),
-(25, 'type', 'Type', '1', 1, 1, '', NULL, NULL, 1),
-(26, 'metal', 'Metal', '1', 1, 1, '', NULL, NULL, 1),
-(27, 'purity', 'Purity', '1', 1, 1, '', NULL, NULL, 1),
-(28, '', '', '', 0, 0, '', NULL, NULL, 1),
-(29, 'purity', 'Purity', '1', 1, 0, '', NULL, NULL, 1),
-(30, 'metal', 'Metal', '1', 1, 0, '', NULL, NULL, 1),
-(31, 'nofd', 'Number of Diamonds', '1', 1, 0, '', NULL, NULL, 1),
-(32, 'dwt', 'Diamond weight', '1', 1, 0, '', NULL, NULL, 1),
-(33, 'gemwt', 'Gemstone', '1', 1, 0, '', NULL, NULL, 1),
-(34, 'quality', 'Quality', '1', 1, 0, '', NULL, NULL, 1),
-(35, 'goldwt', 'Gold Weight', '1', 1, 0, '', NULL, NULL, 1),
 (36, 'shape', 'Shape', '', 7, 0, 'Round,Pear,Princess,Marquise,Oval,Emerald,Cushion Modified Brilliant,Heart,Radiant,Sq Radiant', '', '', 1),
 (37, 'color', 'Color', '', 7, 0, ' D,E,F,G,H,I,J,K,L,M,N,O,S', '', '', 1),
 (38, 'carats', 'carat', '', 6, 0, '', '0.30-20.11', '', 1),
