@@ -180,7 +180,19 @@ class attribute extends DB
     
     public function fetch_category_mapping($params)
     {
-        $mapsql="SELECT attribute_id FROM tbl_attribute_mapping where category_id=".$params['catid'];
+        $mapsql="SELECT 
+					*,
+					attribute_id 
+				FROM 
+					tbl_attribute_mapping 
+				WHERE 
+					category_id=".$params['catid']." 
+				AND 
+					attr_display_flag = 1 
+				AND 
+					attr_filter_flag = 1 
+				ORDER BY 
+					attr_filter_position ASC ";
         $mapres=$this->query($mapsql);
         $cres=$this->numRows($mapres);
         if($cres>0)
@@ -188,28 +200,29 @@ class attribute extends DB
             $i=0;
             while($row=$this->fetchData($mapres)) 
             {
-            $attributeMap['attrid'][$i]=$row['attribute_id'];
-            $i++;
+				$attributeMap['attrid'][$i]=$row['attribute_id'];
+				$i++;
             }
             $atribs=implode(',',$attributeMap['attrid']);
             
-            $attrsql="SELECT attr_name,attr_display_name,attr_unit,attr_type_flag,attr_unit_pos,attr_values,attr_range
-                      FROM tbl_attribute_master where attr_id IN(".$atribs.") ORDER BY attr_id DESC";
+            $attrsql="SELECT attr_id,attr_name,attr_display_name,attr_unit,attr_type_flag,attr_unit_pos,attr_values,attr_range
+                      FROM tbl_attribute_master where attr_id IN(".$atribs.") ORDER BY field(attr_id,".$atribs.") DESC";
             $res = $this->query($attrsql); 
             if($res)
             {   
                 while($row1=$this->fetchData($res)) 
                 {
-                    $attrs['atrribute_Name']=$row1['attr_name'];
-                    $attrs['attribute_Disp_Name']=$row1['attr_display_name'];
-                    $attrs['attribute_Unit']=$row1['attr_unit'];
-                    $attrs['attribute_Num_Flag']=$row1['attr_type_flag'];
-                    $attrs['attribtue_Unit_Pos']=$row1['attr_unit_pos'];
-                    $attrs['attribute_Values']=$row1['attr_values'];
-                    $attrs['attribute_Range']=$row1['attr_range'];
+                    $attrs['atrribute_id']=$row1['attr_id'];
+                    $attrs['atrribute_name']=$row1['attr_name'];
+                    $attrs['attribute_disp_name']=$row1['attr_display_name'];
+                    $attrs['attribute_unit']=$row1['attr_unit'];
+                    $attrs['attribute_num_flag']=$row1['attr_type_flag'];
+                    $attrs['attribtue_unit_pos']=$row1['attr_unit_pos'];
+                    $attrs['attribute_values']=$row1['attr_values'];
+                    $attrs['attribute_range']=$row1['attr_range'];
                     $attribute[]=$attrs;
                 }
-                $arr=array('attributes'=>$attribute,'attribute_Map'=>$attributeMap);
+                $arr=array('attributes'=>$attribute);
                 $err=array('Code'=>'0','Msg'=>'Values are Fetched');
             }
             else
