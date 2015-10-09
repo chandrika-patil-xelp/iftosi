@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 09, 2015 at 01:33 PM
+-- Generation Time: Oct 09, 2015 at 02:01 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -47,12 +47,12 @@ CREATE TABLE IF NOT EXISTS `tbl_attribute_mapping` (
 
 INSERT INTO `tbl_attribute_mapping` (`category_id`, `attribute_id`, `attr_display_flag`, `attr_display_position`, `attr_filter_flag`, `attr_filter_position`, `active_flag`) VALUES
 (10000, 36, 1, 1, 1, 1, 1),
-(10000, 37, 1, 2, 1, 3, 1),
-(10000, 38, 1, 3, 1, 2, 1),
-(10000, 39, 1, 3, 1, 4, 1),
-(10000, 40, 1, 3, 1, 5, 1),
-(10000, 42, 1, 3, 1, 6, 1),
-(10000, 43, 1, 3, 1, 7, 1);
+(10000, 37, 1, 3, 1, 3, 1),
+(10000, 38, 1, 2, 1, 2, 1),
+(10000, 39, 1, 4, 1, 4, 1),
+(10000, 40, 1, 5, 1, 5, 1),
+(10000, 42, 1, 6, 1, 6, 1),
+(10000, 43, 1, 7, 1, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -81,11 +81,10 @@ CREATE TABLE IF NOT EXISTS `tbl_attribute_master` (
 INSERT INTO `tbl_attribute_master` (`attr_id`, `attr_name`, `attr_display_name`, `attr_unit`, `attr_type_flag`, `attr_unit_pos`, `attr_values`, `attr_range`, `use_list`, `active_flag`) VALUES
 (36, 'shape', 'Shape', '', 7, 0, 'Round,Pear,Princess,Marquise,Oval,Emerald,Cushion Modified Brilliant,Heart,Radiant,Sq Radiant', '', '', 1),
 (37, 'color', 'Color', '', 7, 0, ' D,E,F,G,H,I,J,K,L,M,N,O,S', '', '', 1),
-(38, 'carats', 'carat', '', 6, 0, '', '0.30-20.11', '', 1),
-(39, 'clarity', 'clarity', '', 7, 0, 'IF,VVS1,VVS2,VS1,VS2,SI1,SI2,I1', '', '', 1),
+(38, 'carats', 'Carat', '', 6, 0, '', '0.30-20.11', '', 1),
+(39, 'clarity', 'Clarity', '', 7, 0, 'IF,VVS1,VVS2,VS1,VS2,SI1,SI2,I1', '', '', 1),
 (40, 'price', 'Price', '', 6, 0, '', '210.00-201100.00', '', 1),
-(41, 'cut', 'Cut', '', 7, 0, '', '', '', 1),
-(42, 'polish', 'Pol', '', 7, 0, 'Excellent,Very Good,Good,Fair', '', '', 1),
+(42, 'polish', 'Polish', '', 7, 0, 'Excellent,Very Good,Good,Fair', '', '', 1),
 (43, 'sym', 'Symmetry', '', 7, 0, 'Excellent,Very Good,Good,Fair', '', '', 1);
 
 -- --------------------------------------------------------
