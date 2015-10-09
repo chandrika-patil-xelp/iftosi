@@ -8,6 +8,17 @@
 	switch($action)
 	{
 		case 'ajx':
+			switch($case)
+			{
+				case 'sortby':
+					$pgno 	= 1;
+					$catid 	= $_GET['catid'];
+					$sortby	= $_GET['sortby'];
+					$url 	= APIDOMAIN.'index.php?action=getPrdByCatid&catid='.$catid.'&page='.$pgno.'&sortby='.$sortby;
+					$res 	= $comm->executeCurl($url,1);
+					echo $res;
+				break;
+			}
 			break;
 		default:
 			switch ($case)
@@ -25,7 +36,8 @@
 				case 'diamonds':
 					$page='diamonds';
 					$pgno 	= ($_GET['pgno'] ? $_GET['pgno'] : 1);
-					$url 	= APIDOMAIN.'index.php?action=getPrdByCatid&catid=10004&page='.$pgno;
+					$catid 	= $_GET['catid'];
+					$url 	= APIDOMAIN.'index.php?action=getPrdByCatid&catid='.$catid.'&page='.$pgno;
 					$res 	= $comm->executeCurl($url);
 					$data 	= $res['results']['products'];
 					$total	= $res['results']['total'];

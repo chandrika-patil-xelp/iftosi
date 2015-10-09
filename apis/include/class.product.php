@@ -307,6 +307,38 @@
 						tbl_product_category_mapping 
 					WHERE 
 						category_id=".$params['catid'];
+			
+			switch($params['sortby'])
+			{
+				case 'pasc':
+					$sql.=" 
+							ORDER BY 
+								price ASC 
+						";
+				break;
+				
+				case 'pdesc':
+					$sql.=" 
+							ORDER BY 
+								price DESC 
+						";
+				break;
+				
+				case 'rate':
+					$sql.=" 
+							ORDER BY 
+								rating DESC 
+						";
+				break;
+				
+				default:
+					$sql.=" 
+							ORDER BY 
+								product_id ASC 
+						";
+				break;
+			}
+			
 			if (!empty($page))
 			{
 				$start = ($page * $limit) - $limit;
@@ -350,10 +382,10 @@
 				$patsql="
 						SELECT
 							product_id,
-							cla as carat,
+							carats as carat,
 							color,
 							cert as certified,
-							cut as shape,
+							shape,
 							cla as clarity,
 							val as price,
 							pol as polish,

@@ -9,9 +9,9 @@ class categoryInfo extends DB
     }
         public function getCatList($params)
         { 
-			$sql = "SELECT category_id, category_name FROM tbl_categoryid_generator order by category_id ASC";
+			$sql = "SELECT catid, cat_name FROM tbl_category_master where p_catid=0 order by catid ASC";
 			$page   = ($params['page'] ? $params['page'] : 1);
-                        $limit  = ($params['limit'] ? $params['limit'] : 15);
+                        $limit  = ($params['limit'] ? $params['limit'] : 3);
 			
                         if (!empty($page))
 			{
@@ -30,8 +30,8 @@ class categoryInfo extends DB
 						$dpt = "0.6";
 					if($i==2)
 						$dpt = "0.8";
-					$reslt['category_id'] = $row['category_id'];
-					$reslt['category_name'] = $row['category_name'];
+					$reslt['category_id'] = $row['catid'];
+					$reslt['category_name'] = $row['cat_name'];
 					$reslt['depth'] = $dpt;
 					$results[] = $reslt;
 					$i++;
@@ -111,12 +111,12 @@ class categoryInfo extends DB
           $cnt=$this->numRows($cres);
             if($cnt==0)
             {
-                $isql="INSERT INTO tbl_categoryid_generator(categroy_name,cdt,udt,aflg) VALUES('".$params['catName']."',now(),now(),1)";
+                $isql="INSERT INTO tbl_categoryid_generator(category_name,cdt,udt,aflg) VALUES(\"".$params['catName']."\",now(),now(),1)";
                 $ires=$this->query($isql);
                 $catid=$this->lastInsertedId();
                 if($ires)
                 {
-                    $csql="INSERT INTO tbl_category_master(catid,cat_name,p_catid,cat_lvl,lineage,createdon,updatedon,udatedon,updatedby) values(".$catid.",'".$params['catName']."',".$params['lvl'].",'".$params['lineage']."',now(),now(),'CMS_USER')";
+                    $csql="INSERT INTO tbl_category_master(catid,cat_name,p_catid,cat_lvl,lineage,createdon,updatedon,updatedby) values(\"".$catid."\",\"".$params['catName']."\",\"".$params['pcatid']."\",\"".$params['lvl']."\",\"".$params['lineage']."\",now(),now(),'CMS_USER')";
                     $cres = $this->query($csql);
                 
                     if($cres)

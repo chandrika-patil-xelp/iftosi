@@ -37,6 +37,65 @@ $(document).ready(function() {
         var val = $(this).val();
         var text = $(this).text();
         $('#drpinp').text(text);
+		
+		var sortby = $(this).attr('id');
+		var catid = $("#catid").val();
+		
+		var params = 'action=ajx&case=sortby&catid='+catid+'&sortby='+sortby;
+		var URL = DOMAIN + "index.php";
+		$.getJSON(URL, params, function(data) {
+			var html = '';
+			$.each(data.results.products, function(i, vl) {
+				
+				html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'-carat-'+vl.attributes.carat+'/pid-'+vl.pid+'">';
+					html += '<div class="prdComm fLeft transition100">';
+						html += '<div class="prdCommDiv fLeft transition100">';
+							html += '<div class="prdShape fLeft">';
+								html += '<div class="prdShTitle fLeft fmOpenB">SHAPE</div>';
+								html += '<div class="prdShType fLeft fmOpenR">'+vl.attributes.shape+'</div>';
+								html += '<div class="Round fRight"></div>';
+							html += '</div>';
+							html += '<div class="prdDetails fLeft">';
+								html += '<div class="detComm">';
+									html += '<div class="detLabel fmOpenB fLeft">COLOR</div>';
+									html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.color+'</div>';
+								html += '</div>';
+								html += '<div class="detComm">';
+									html += '<div class="detLabel fmOpenB fLeft">CARATS</div>';
+									html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.carat+'</div>';
+								html += '</div>';
+								html += '<div class="detComm">';
+									html += '<div class="detLabel fmOpenB fLeft">CLARITY</div>';
+									html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.clarity+'</div>';
+								html += '</div>';
+								html += '<div class="detComm">';
+									html += '<div class="detLabel fmOpenB fLeft">CERTIFICATE</div>';
+									html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.cno+'</div>';
+								html += '</div>';
+							html += '</div>';
+							html += '<div class="prdPrice fLeft">';
+								html += '<div class="detComm">';
+									html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
+									html += '<div class="detValue fmOpenB fLeft"><span>₹</span>'+vl.attributes.price+'</div>';
+								html += '</div>';
+							html += '</div>';
+							html += '<div class="prdActions fLeft">';
+								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+							html += '</div>';
+						html += '</div>';
+					html += '</div>';
+				html += '</a>';
+			});
+			
+			$('.prdResults').html(html);
+			$('.prdResults').offset();
+			$('body').animate({scrollTop: $('.shapesCont').offset().top+50}, 300);
+		});
+
+		
         isOpen = false;
         toggleDropDown(false);
     });
@@ -46,15 +105,15 @@ $(document).ready(function() {
             toggleDropDown(false);
         }
     });
-    var count = 255;
     $('.shapeComm').bind('click', function() {
         $(this).toggleClass('shapeSelected');
-        //count += 135;
+		var cnt = getRandomInt(-500,500);
+        totalCnt = (totalCnt*1)+cnt;
 		
 		FR();
 
         $('#resultCount').numerator({
-            toValue: count,
+            toValue: totalCnt,
             delimiter: ',',
             onStart: function() {
                 isStop = true;
@@ -92,6 +151,10 @@ $(document).ready(function() {
 
 });
 
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 function FR() {
 	var slistarr = new Array();
 	var clistarr = new Array();
@@ -123,6 +186,8 @@ function FR() {
 			tlistarr[$(this).attr('id')] = $(this).val();
 		}
 	});
+	console.log(slistarr);
+	console.log(clistarr);
 	console.log(tlistarr);
 	
 	var params = 'action=ajx&type=filter&shape='+slist;
