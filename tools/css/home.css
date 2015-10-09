@@ -33,7 +33,7 @@ body{padding: 0;margin: 0;}
 .font55{font-size: 55px;}
 .font65{font-size: 65px;}
 
-*{box-sizing: border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-ms-box-sizing:border-box;-o-box-sizing:border-box;-webkit-appearance: none;}
+*{box-sizing: border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-ms-box-sizing:border-box;-o-box-sizing:border-box;-webkit-appearance: none;-moz-user-select: none;-webkit-user-select: none;-ms-user-select: none;}
 .dn{display: none!important;}
 .fLeft{float:left!important}
 .fRight{float:right!important}
@@ -221,7 +221,7 @@ a{text-decoration: none;}
 .headCat.bgDiamond{background: #fff url(../img/common/diamond.jpg)no-repeat;background-size: auto 80%;background-position: 8px 0px;}
 .headCat.bgJewellery {background: #fff url(../img/common/jewellery.jpg)no-repeat;background-size: auto 80%;background-position: 8px 0px;}
 .headCat.bgBullion {background: #fff url(../img/common/bullions.jpg)no-repeat;background-size: auto 80%;background-position: 8px 0px;}
-.totalResultsDiv{width:100%;height:280px;line-height: 240px;color: #FFF;text-align: center;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding: 100px 0 0 0;font-size:50px;}
+.totalResultsDiv{width:100%;height:350px;line-height: 240px;color: #FFF;text-align: center;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding: 100px 0 0 0;font-size:50px;}
 .resultsPage .shapesCont{}
 
 /*All Results*/
@@ -483,8 +483,6 @@ a{cursor:pointer;}
 
 
 
-
-
 /*Details Page*/
 .detailsPage{padding-bottom: 0px;display: inline-block}
 .forBg{width:100%;height:300px;padding-top: 100px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;}
@@ -590,9 +588,9 @@ a{cursor:pointer;}
 .bgNone{background: none;}
 
 /*Jewellery Results Page*/
-.jShapesCont {width: 100%;height: 250px;background: #fff;padding: 0px 0 0px 0;border-top: 2px solid #fff;position: relative;z-index: 0;}
-.jshapeComm {margin: 0;width: 20%;padding-bottom: 0;height: 250px;border: 0px solid transparent;position: relative;display: inline-block;cursor: pointer;padding-top: 180px;color: #F3EFEF;font-size: 25px;line-height: 70px;box-shadow: inset 0 -70px 70px rgba(0,0,0,0.5);border-right:2px solid #fff;vertical-align: top;}
-.jshapeComm:hover {padding-top: 100px;font-size: 30px;}
+.jShapesCont {width: 100%;height: 225px;background: #fff;padding: 0px 0 0px 0;border-top: 2px solid #fff;position: relative;z-index: 0;}
+.jshapeComm {margin: 0;width: 20%;padding-bottom: 0;height: 225px;border: 0px solid transparent;position: relative;display: inline-block;cursor: pointer;padding-top: 155px;color: #F3EFEF;font-size: 25px;line-height: 70px;box-shadow: inset 0 -70px 70px rgba(0,0,0,0.5);border-right:2px solid #fff;vertical-align: top;}
+.jshapeComm:hover {padding-top: 85px;font-size: 30px;}
 .jshapeComm::after{content: '';position: absolute;right: 0px; left:0px; bottom: 70px;margin: auto; width: 00px;height: 00px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;}
 
 .Rings{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(23, 19, 52,1);}
@@ -620,7 +618,7 @@ a{cursor:pointer;}
 .jshapeComm.shapeSelected.Bracelet:hover{background: url(../img/common/iftosi01.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
 
 .jshapeComm.shapeSelected span{color:#8A0044;}
-.jshapeComm.shapeSelected{background-color: #fff;border-right: 2px solid #FFF;padding-top: 100px;font-size: 30px;}
+.jshapeComm.shapeSelected{background-color: #fff;border-right: 2px solid #FFF;padding-top: 75px;font-size: 30px;}
 .jshapeComm.shapeSelected::after{content: '';position: absolute;right: 0px; left:0px; bottom: 50px;margin: auto; width: 40px;height: 40px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;}
 
 .drag-target {height: 100%;width: 20px;position: fixed;top: 0;z-index: 1;}
