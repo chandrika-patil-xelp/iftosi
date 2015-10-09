@@ -314,51 +314,71 @@
             </div>
         </div>
     </div>
-    <div id="caratsDiv" class="filterCont fLeft">
-        <div class="fLeft optionTitle fmOpenR">Carats</div>
-        <div class='fLeft rangeCont'>
-            <div class='fLeft rangeDiv'>
-                <input type="text" id="caratsRange" class="fLeft rngInp" style="visibility: hidden;">
-            </div>
-        </div>
-    </div>
-    <div class="filterCont fLeft forClarity">
-        <div class="fLeft optionTitle fmOpenR">Color</div>
-        <div id='color' class="filterOptions fLeft fmOpenR">
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="clD"/>
-                <label for="clD">D</label>
-            </div>
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="clE"/>
-                <label for="clE">E</label>
-            </div>
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="clF"/>
-                <label for="clF">F</label>
-            </div>
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="clG"/>
-                <label for="clG">G</label>
-            </div>
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="clH"/>
-                <label for="clH">H</label>
-            </div>
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="clI"/>
-                <label for="clI">I</label>
-            </div>
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="clJ"/>
-                <label for="clJ">J</label>
-            </div>
-            <div class="checkDiv fLeft">
-                <input type="checkbox" class="filled-in" id="clK"/>
-                <label for="clK">K</label>
-            </div>
-        </div>
-    </div>
+	
+	<?php
+	if(count($fil))
+	{
+		foreach($fil as $key => $val)
+		{
+			if(!empty($val['attribute_range']))
+			{
+	?>
+			<div id="<?php echo $val['attribute_name'];?>Div" class="filterCont fLeft">
+				<div class="fLeft optionTitle fmOpenR"><?php echo $val['attribute_disp_name'];?></div>
+				<div class='fLeft rangeCont'>
+					<div class='fLeft rangeDiv'>
+						<input type="text" id="<?php echo $val['attribute_name'];?>Range" class="fLeft rngInp" style="visibility: hidden;">
+					</div>
+				</div>
+			</div>
+	<?php
+			}
+			else if(!empty($val['attribute_values']))
+			{
+	?>
+				<div class="filterCont fLeft forClarity">
+					<div class="fLeft optionTitle fmOpenR"><?php echo $val['attribute_disp_name'];?></div>
+					<div id='<?php echo $val['attribute_name'];?>' class="filterOptions fLeft fmOpenR">
+						<div class="checkDiv fLeft">
+							<input type="checkbox" class="filled-in" id="clD"/>
+							<label for="clD">D</label>
+						</div>
+						<div class="checkDiv fLeft">
+							<input type="checkbox" class="filled-in" id="clE"/>
+							<label for="clE">E</label>
+						</div>
+						<div class="checkDiv fLeft">
+							<input type="checkbox" class="filled-in" id="clF"/>
+							<label for="clF">F</label>
+						</div>
+						<div class="checkDiv fLeft">
+							<input type="checkbox" class="filled-in" id="clG"/>
+							<label for="clG">G</label>
+						</div>
+						<div class="checkDiv fLeft">
+							<input type="checkbox" class="filled-in" id="clH"/>
+							<label for="clH">H</label>
+						</div>
+						<div class="checkDiv fLeft">
+							<input type="checkbox" class="filled-in" id="clI"/>
+							<label for="clI">I</label>
+						</div>
+						<div class="checkDiv fLeft">
+							<input type="checkbox" class="filled-in" id="clJ"/>
+							<label for="clJ">J</label>
+						</div>
+						<div class="checkDiv fLeft">
+							<input type="checkbox" class="filled-in" id="clK"/>
+							<label for="clK">K</label>
+						</div>
+					</div>
+				</div>
+	<?php
+			}
+		}
+	}
+	?>
+	
     <div class="filterCont fLeft forClarity">
         <div class="fLeft optionTitle fmOpenR">Clarity</div>
         <div id='clarity' class="filterOptions fLeft fmOpenR">
