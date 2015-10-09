@@ -76,7 +76,7 @@ $(document).ready(function() {
 							html += '<div class="prdPrice fLeft">';
 								html += '<div class="detComm">';
 									html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
-									html += '<div class="detValue fmOpenB fLeft"><span>₹</span>'+vl.attributes.price+'</div>';
+									html += '<div class="detValue fmOpenB fLeft"><span>₹</span>'+vl.pprice+'</div>';
 								html += '</div>';
 							html += '</div>';
 							html += '<div class="prdActions fLeft">';

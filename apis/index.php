@@ -636,6 +636,7 @@ switch($action)
             $obj=new product($db['iftosi']);
             $result=$obj->getPrdByCatid($params);
             $res=$result;
+			//print_r($res);die;
             break;
 
 //  localhost/iftosi/apis/index.php?action=getPrdById&prdid=2&catid=3&page=1&limit=1         
@@ -973,6 +974,6 @@ switch($action)
         default :
         break;
     }    
-echo json_encode($res);
+echo json_encode($res,true);
 exit;
 ?>

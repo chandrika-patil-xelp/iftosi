@@ -302,7 +302,8 @@
 			}
 			
 			$sql = "SELECT 
-						product_id as pid 
+						product_id as pid,
+						price						
 					FROM 
 						tbl_product_category_mapping 
 					WHERE 
@@ -406,7 +407,10 @@
 					unset($row2['product_id']);
 					$arr1[$pid]['attributes']=$row2;
 				}
-				$arr1 = array('products'=>$arr1,'total'=>$total);
+				
+				//echo "<pre>";print_r($arr1);die;
+				
+				$arr1 = array('products'=>array_values($arr1),'total'=>$total);
 				$err = array('errCode'=>0,'errMsg'=>'Details fetched successfully');
 			}
 			else
