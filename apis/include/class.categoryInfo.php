@@ -9,7 +9,7 @@ class categoryInfo extends DB
     }
         public function getCatList($params)
         { 
-			$sql = "SELECT catid, cat_name FROM tbl_category_master where p_catid=0 order by catid ASC";
+			$sql = "SELECT catid,cat_name FROM tbl_category_master where p_catid=0 order by catid ASC";
 			$page   = ($params['page'] ? $params['page'] : 1);
                         $limit  = ($params['limit'] ? $params['limit'] : 3);
 			
@@ -80,7 +80,7 @@ class categoryInfo extends DB
         
         public function getCatId($params)
         {
-            $sql = "SELECT category_id FROM tbl_categoryid_generator WHERE category_name='".$params['catName']."'";
+            $sql = "SELECT category_id FROM tbl_categoryid_master WHERE cat_name='".$params['catName']."'";
             $res = $this->query($sql);
             $chkres=$this->numRows($res);
             if($chkres>0)
@@ -88,7 +88,7 @@ class categoryInfo extends DB
                 $row=$this->fetchData($res);
                 if($row && !empty($row['category_id']))
                     {
-                        $reslt['category_id'] = $row['category_id'];
+                        $reslt['category_id'] = $row['catid'];
                         $results[] = $reslt;
                     }
             
@@ -126,7 +126,7 @@ class categoryInfo extends DB
                     }
                     else
                     {
-                        $arr="No category is added";
+                        $arr=array();
                         $err=array('Code' =>1,'Msg'=>'Error in adding category!');
                     }
                 }
@@ -142,7 +142,7 @@ class categoryInfo extends DB
         
         public function deleteCat($params)
         {
-            $sql = "UPDATE tbl_categoryid_generator set aflg=0,udt=now() WHERE category_id=".$params['catid'];
+            $sql = "UPDATE tbl_categoryid_generator set aflg=2,udt=now() WHERE category_id=".$params['catid'];
             $res = $this->query($sql);
             if($res)
             {
@@ -151,7 +151,7 @@ class categoryInfo extends DB
             }
             else
             {
-                $arr="No record found";
+                $arr=array();
                 $err=array('code'=>1,'msg'=>'Error in fetching data');
             }
             
@@ -175,7 +175,7 @@ class categoryInfo extends DB
           } 
           else
           {
-                $arr="No record found";
+                $arr=array();
                 $err=array('code'=>1,'msg'=>'Error in fetching data');
           }
             $result = array('results' => $arr, 'error' => $err);
