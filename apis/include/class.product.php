@@ -25,18 +25,18 @@
 		if(!$cnt1)
 		{
                     // Obtaining the category name from the category table 
-                    $catsql="Select category_name from tbl_categoryid_generator where category_id=".$detls['category_id'];
+                    $catsql="Select cat_name from tbl_category_master where catid=".$detls['category_id'];
                     $catres=$this->query($catsql);
                     if($catres)
                     {
                         while($catrow=$this->fetchData($catres))
                         {
-                            $catname=$catrow['category_name'];
+                            $catname=$catrow['cat_name'];
                         }
                     }
                     
                     //  Inserting the values in brand table
-                  $sql = "INSERT INTO tbl_brandid_generator(name,category_name,cdt,udt,aflg) VALUES('".$detls['product_brand']."','".$catname."',now(),now(),1)";
+                    $sql = "INSERT INTO tbl_brandid_generator(name,category_name,cdt,udt,aflg) VALUES('".$detls['product_brand']."','".$catname."',now(),now(),1)";
                     $res = $this->query($sql);
                     $bid = $this->lastInsertedId();
                     $brandid = ($bid) ? $bid : $detls['brandid'];
@@ -54,15 +54,14 @@
                 
                 if(!$cnt2)
                 {
-                    //  If product not present in generator table new product insertion process starts
-                  $sql = "INSERT INTO tbl_productid_generator(product_name, product_brand) VALUES('".$detls['product_name']."','".$detls['product_brand']."')";
+                  //  If product not present in generator table new product insertion process starts
+                  $sql = "INSERT INTO tbl_productid_generator(product_name,product_brand) VALUES('".$detls['product_name']."','".$detls['product_brand']."')";
                   $res = $this->query($sql);
                   $pid = $this->lastInsertedId();
                 }
                 else
                 {
-                    
-                    $row = $this->fetchData($res);
+                   $row = $this->fetchData($res);
                    $pid = $row['product_id'];
                 }
 		if($pid)
@@ -90,16 +89,22 @@
                     if($desres)
                     {
                     //  For category product mapping
-                        $pcsql="INSERT INTO tbl_product_category_mapping(product_id,category_id,display_flag,cdt,udt) VALUES(".$pid.",".$catname.",1,now(),now())";
-                        $pcres=$this->query($pcres);
+                        $pcsql="INSERT INTO tbl_product_category_mapping(product_id,category_id,price,rating,display_flag,cdt,udt)
+                                VALUES(\"".$pid."\",\"".$detls['category_id']."\",\"".$detls['product_price']."\",\"".$detls['rating']."\",1,now(),now())
+                                ON DUPLICATE KEY UPDATE
+                                                        category_id             = \"".$detls['category_id']."\",
+                                                        price                   = \"".$detls['price']."\",
+                                                        rating                  = \"".$detls['rating']."\",
+                                                        display_flag            = \"".$detls['dflag']."\"
+                                                        udt                     =  now()";
+                        $pcres=$this->query($pcsql);
                         
                     //  For product values filling     
                         $sql="INSERT INTO tbl_product_master(product_id,barcode,lotref,lotno,product_name,product_display_name,
                                                      product_model,product_brand,prd_price,product_currency,product_keyword,                                                     
-                                                     product_desc,prd_wt,prd_img,product_warranty,desname,
-                                                     updatedby, updatedon)
+                                                     product_desc,prd_wt,prd_img,product_warranty,desname,updatedby, updatedon)
                                                 VALUES (
-							".$pid.",'".$detls['barcode']."','".$detls['lotref']."',".$detls['lotno'].",
+						       ".$pid.",'".$detls['barcode']."','".$detls['lotref']."',".$detls['lotno'].",
                                                       '".$detls['product_name']."','".$detls['product_display_name']."', 
                                                       '".$detls['product_model']."', '".$detls['product_brand']."', ".$detls['product_price'].",
                                                       '".$detls['product_currency']."','".$detls['product_keywords']."', 
@@ -130,30 +135,30 @@
                             //  For tbl_product_search
         // Few attributes remaining-- type,metal,purity,nofd,dwt,gemwt,quality,goldwt
                             $sql = "INSERT INTO tbl_product_search(product_id,color,cert,cut,cla,base,tabl,val,p_disc,prop,pol,sym,fluo,td,measurement,cert1_no,pa,cr_hgt,cr_ang,girdle,pd) VALUES
-                                    (".$pid.",'".$attr['color']."','".$attr['cert']."','".$attr['cut']."','".$attr['cla']."',".$attr['base'].",".$attr['tabl'].",".$attr['val'].",".$attr['p_disc'].",
-                                     '".$attr['prop']."','".$attr['pol']."','".$attr['sym']."','".$attr['fluo']."',".$attr['td'].",'".$attr['measurement']."','".$attr['cert1no']."',".$attr['pa'].",".$attr['cr_hgt'].",
-                                     ".$attr['cr_ang'].",".$attr['girdle'].",".$attr['pd'].")
+                                    (\"".$pid."\",\"".$attr['color']."\",\"".$attr['cert']."\",\"".$attr['cut']."\",\"".$attr['cla']."\",\"".$attr['base']."\",\"".$attr['tabl']."\",\"".$attr['val']."\",\"".$attr['p_disc']."\",
+                                     \"".$attr['prop']."\",\"".$attr['pol']."\",\"".$attr['sym']."\",\"".$attr['fluo']."\",\"".$attr['td']."\",\"".$attr['measurement']."\",\"".$attr['cert1no']."\",\"".$attr['pa']."\",\"".$attr['cr_hgt']."\",
+                                     \"".$attr['cr_ang']."\",\"".$attr['girdle']."\",\"".$attr['pd']."\")
                                     ON DUPLICATE KEY UPDATE
-                                                            color       = '".$attr['color']."', 
-                                                            cert        = '".$attr['cert']."',
-                                                            cut         = '".$attr['cut']."',
-                                                            cla         = '".$attr['cla']."',
-                                                            base        =  ".$attr['base'].",
-                                                            tabl        =  ".$attr['tabl'].",
-                                                            val         =  ".$attr['val'].",
-                                                            p_disc      =  ".$attr['p_disc'].",
-                                                            prop        = '".$attr['prop']."',
-                                                            pol         = '".$attr['pol']."',
-                                                            sym         = '".$attr['sym']."',
-                                                            fluo        = '".$attr['fluo']."',
-                                                            td          =  ".$attr['td'].",
-                                                            measurement = '".$attr['measurement']."',
-                                                            cert1_no    = '".$attr['cert1no']."',
-                                                            pa          =  ".$attr['pa'].",
-                                                            cr_hgt      =  ".$attr['cr_hgt'].",
-                                                            cr_ang      =  ".$attr['cr_ang'].",
-                                                            girdle      =  ".$attr['girdle'].",
-                                                            pd          =  ".$attr['pd']."";
+                                                            color       = \"".$attr['color']."\", 
+                                                            cert        = \"".$attr['cert']."\",
+                                                            cut         = \"".$attr['cut']."\",
+                                                            cla         = \"".$attr['cla']."\",
+                                                            base        = \"".$attr['base']."\",
+                                                            tabl        = \"".$attr['tabl']."\",
+                                                            val         = \"".$attr['val']."\",
+                                                            p_disc      = \"".$attr['p_disc']."\",
+                                                            prop        = \"".$attr['prop']."\",
+                                                            pol         = \"".$attr['pol']."\",
+                                                            sym         = \"".$attr['sym']."\",
+                                                            fluo        = \"".$attr['fluo']."\",
+                                                            td          = \"".$attr['td']."\",
+                                                            measurement = \"".$attr['measurement']."\",
+                                                            cert1_no    = \"".$attr['cert1no']."\",
+                                                            pa          = \"".$attr['pa']."\",
+                                                            cr_hgt      = \"".$attr['cr_hgt']."\",
+                                                            cr_ang      = \"".$attr['cr_ang']."\",
+                                                            girdle      = \"".$attr['girdle']."\",
+                                                            pd          = \"".$attr['pd']."\"";
                             $res = $this->query($sql);
                         
                     }
@@ -168,7 +173,7 @@
           
             else
             {
-                $arr="Some error in passing json array";
+                $arr=array();
                 $err = array('Code' => 1, 'Msg' => 'Something Went Wrong.');
             }
             if($isInside=1)
@@ -179,7 +184,7 @@
             }
             else
             {
-                $arr="Product Not Inserted";
+                $arr=array();
                 $err = array('Code' => 1, 'Msg' => 'Something Went Wrong.');
             }
 
@@ -433,7 +438,21 @@
                 $start = ($page * $limit) - $limit;
                 $sql.=" LIMIT " . $start . ",$limit";
             }
-            $sql2 = "SELECT * FROM tbl_product_search WHERE product_id=".$params['prdid']."";
+            $sql2 = "SELECT 
+                            product_id,
+                            carats as carat,
+                            color,
+                            cert as certified,
+                            shape,
+                            cla as clarity,
+                            val as price,
+                            pol as polish,
+                            sym as symmetry,
+                            cert1_no as cno 
+                    FROM 
+                            tbl_product_search
+                    WHERE 
+                            product_id=".$params['prdid']."";
             $res = $this->query($sql);
             $res2 = $this->query($sql2);
             if ($res)
@@ -464,14 +483,14 @@
                     
                     $reslt['attr_details'] =$details;
                     
-                   $cat_info_sql = "SELECT category_id,category_name FROM tbl_categoryid_generator WHERE category_id=".$params['catid']."";
+                   $cat_info_sql = "SELECT catid,cat_name,cat_lvl,p_catid,lineage FROM tbl_category_master WHERE catid=".$params['catid']."";
                    $cat_info_res = $this->query($cat_info_sql);
                     if($cat_info_res)
                     {
                         $cat_info_row = $this->fetchData($cat_info_res);
-                        if($cat_info_row && $cat_info_row['category_id'])
+                        if($cat_info_row && $cat_info_row['catid'])
                         {
-                            $reslt['category_name'] = $cat_info_row['category_name'];
+                            $reslt['category_name'] = $cat_info_row['cat_name'];
                         }
                     }
                     $arr[] = $reslt;
@@ -490,13 +509,27 @@
         public function getList($params)
         {
             $total_products = 0;
-            $cnt_sql = "SELECT COUNT(*) as cnt FROM tbl_product_master";
+            $cnt_sql = "SELECT COUNT(1) as cnt FROM tbl_product_master";
             $cnt_res = $this->query($cnt_sql);
             
             $page   = ($params['page'] ? $params['page'] : 1);
             $limit  = ($params['limit'] ? $params['limit'] : 15);
             
-            $sql = "SELECT * FROM tbl_product_master";
+            $sql = "SELECT 
+                            product_id,
+                            barcode as pcode,
+                            product_name as pname,
+                            product_display_name as pdname,
+                            product_model as pmodel,
+                            product_brand as pbrand,
+                            prd_price as pprice,
+                            product_currency as pcur,
+                            desname as product_designer,
+                            prd_img as pimg
+                    FROM 
+                            tbl_product_master 
+                    ORDER BY 
+                            product_id ASC";
             
             if(!empty($page)) 
             {
@@ -509,26 +542,46 @@
                 while ($row = $this->fetchData($res)) 
                 {
                     $pid[]=$row['product_id'];
-                    $arr1[]=$row;
+                    $arr1[$row['product_id']]=$row;
                 }
                 
                 $pid=implode(',',$pid);
                 
-                $psql="SELECT * from tbl_product_search where product_id IN (".$pid.")";
+                $psql="SELECT 
+                                product_id,
+                                carats as carat,
+                                color,
+                                cert as certified,
+                                shape,
+                                cla as clarity,
+                                val as price,
+                                pol as polish,
+                                sym as symmetry,
+                                cert1_no as cno
+                       FROM 
+                       tbl_product_search 
+                       WHERE 
+                                product_id IN (".$pid.")
+                       ORDER BY 
+                                product_id ASC";
                 $pres=$this->query($psql);
                 while($row2=$this->fetchData($pres))
                 {
-                    $arr2[]=$row2;
+                    $pid = $row2['product_id'];
+                    unset($row2['product_id']);
+                    $arr1[$pid]['attributes']=$row2;
                 }
-                $err = array('errCode' => 0, 'errMsg' => 'Details fetched successfully');
+
                 if($cnt_res)
                 {
                     $cnt_row = $this->fetchData($cnt_res);
                     if($cnt_row && !empty($cnt_row['cnt']))
                     {
-                        $total_products = $cnt_row['cnt'];
+                        $total = $cnt_row['cnt'];
                     }
                 }
+                $arr1 = array('products'=>array_values($arr1),'total'=>$total);
+                $err = array('errCode' => 0, 'errMsg' => 'Details fetched successfully');
             }
             else
             {
@@ -566,7 +619,21 @@
                         $j++;
                     }
                     $pid=implode(',',$arr2);
-                    $fillpiddet="SELECT * from tbl_product_master where product_id IN(".$pid.")";
+                    $fillpiddet="SELECT 
+                                        product_id,
+                                        barcode as pcode,
+                                        product_name as pname,
+                                        product_display_name as pdname,
+                                        product_model as pmodel,
+                                        product_brand as pbrand,
+                                        prd_price as pprice,
+                                        product_currency as pcur,
+                                        desname as product_designer,
+                                        prd_img as pimg 
+                                FROM 
+                                        tbl_product_master
+                                WHERE
+                                        product_id IN(".$pid.")";
                     if(!empty($page)) 
                     {
                         $start = ($page * $limit) - $limit;
@@ -586,19 +653,19 @@
                     }
                 else
                     {
-                    $arr="There is no product yet available with in this city";
+                    $arr=array();
                     $err=array('Code'=>1,'Msg'=>'Data not found');
                     }
                 }
                 else
                 {
-                    $arr="There is no product yet available with vendors in this city";
+                    $arr=array();
                     $err=array('Code'=>1,'Msg'=>'Data not found');
                 }
             }
             else
             {
-                $arr="There is no product yet available with in this city";
+                $arr=array();
                 $err=array('Code'=>1,'Msg'=>'Data not found');
             }
             $result=array('result'=>$arr,'error'=>$err);
@@ -610,7 +677,21 @@
             $page   = ($params['page'] ? $params['page'] : 1);
             $limit  = ($params['limit'] ? $params['limit'] : 15);
             
-            $chksql="SELECT * from tbl_product_master where product_brand='".$params['bname']."'";
+            $chksql="SELECT 
+                            product_id,
+                            barcode as pcode,
+                            product_name as pname,
+                            product_display_name as pdname,
+                            product_model as pmodel,
+                            product_brand as pbrand,
+                            prd_price as pprice,
+                            product_currency as pcur,
+                            desname as product_designer,
+                            prd_img as pimg 
+                      FROM
+                            tbl_product_master 
+                      WHERE 
+                            product_brand='".$params['bname']."'";
             if(!empty($page)) 
             {
                 $start = ($page * $limit) - $limit;
@@ -628,7 +709,7 @@
             }    
             else
             {
-                $arr="There is no product yet available with vendors in this city";
+                $arr=array();
                 $err=array('Code'=>1,'Msg'=>'Data not found');
             }
             $result=array('result'=>$arr,'error'=>$err);
@@ -652,7 +733,21 @@
                     $i++;
                 }
                 $pid=implode(',',$arr1);
-                $fillpiddet="SELECT * from tb_master_product where product_id IN(".$pid.")";
+                $fillpiddet="SELECT 
+                                    product_id,
+                                    barcode as pcode,
+                                    product_name as pname,
+                                    product_display_name as pdname,
+                                    product_model as pmodel,
+                                    product_brand as pbrand,
+                                    prd_price as pprice,
+                                    product_currency as pcur,
+                                    desname as product_designer,
+                                    prd_img as pimg 
+                              FROM 
+                                    tbl_product_master 
+                              WHERE
+                                    product_id IN(".$pid.")";
                 if(!empty($page)) 
                 {
                     $start = ($page * $limit) - $limit;
@@ -671,13 +766,13 @@
                 }
                 else
                 {
-                    $arr="There is no active product in records";
+                    $arr=array();
                     $err[]=array('Code'=>1,'Msg'=>'Error in fetching detail');
                 }
             }
             else
             {
-                $arr="There is no product having such kind of design";
+                $arr=array();
                 $err=array('Code'=>1,'Msg'=>'Error in fetching detail');
             
             }
