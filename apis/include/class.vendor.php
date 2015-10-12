@@ -22,7 +22,7 @@ class vendor extends DB
         else
         {
             $arr=array();
-            $err = array('Code' => 0, 'Msg' => 'Product details Not Added!');            
+            $err = array('Code' => 1, 'Msg' => 'Product details Not Added!');            
         }
         $result = array('results' => $arr, 'error' => $err);
         return $result;
@@ -94,7 +94,7 @@ class vendor extends DB
           }
              else
              {
-                $arr='There is not product mapped with this vendor';
+                $arr=array();
                 $err=array('Code'=>1,'Msg'=>'Error in fetching data');
              }
             $result = array('results'=>$arr,'error'=> $err);
@@ -211,7 +211,7 @@ class vendor extends DB
                 $vdet['vremarks']=$row['vendor_remarks'];
                 $vdetls[]=$vdet;
             }
-            $sql2="SELECT orgName,fulladdress,telephones,alt_email,contact_person,contact_mobile,officecity,turnover,postalcode,website,membership_cert,vatno,pancard from tbl_vendor_master WHERE vendor_id =".$params['vid']."";
+            $sql2="SELECT orgName,fulladdress,telephones,alt_email,contact_person,contact_mobile,officecity,turnover,postalcode,website,membership_cert,vatno,pancard,banker,lat,lng,bdbc,mdbw from tbl_vendor_master WHERE vendor_id =".$params['vid']."";
             if (!empty($page))
             {
             $start = ($page * $limit) - $limit;
