@@ -14,7 +14,7 @@ $(document).ready(function(){
         if (isMobile) {
             samt = 450;
         }
-        $('body').animate({scrollTop: samt}, 300);
+      //  $('body').animate({scrollTop: samt}, 300);
     }, 100);
 
     
@@ -72,10 +72,6 @@ $(document).ready(function(){
             $('#overlay,#userForm').addClass('dn');
         },1010);
     });  
-    
-    
-    
-    
 });
 
 
@@ -99,10 +95,8 @@ mc.on("panleft panright tap press", function(ev) {
     //ele.textContent = ev.type +" gesture detected.";
     if (ev.type == 'panright') {
         showLeftMenu(true);
-        console.log("right");
     }
     else if (ev.type == 'panleft') {
         showLeftMenu(false);
-        console.log("left");
     }
 });

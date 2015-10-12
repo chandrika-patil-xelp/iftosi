@@ -33,7 +33,7 @@ body{padding: 0;margin: 0;}
 .font55{font-size: 55px;}
 .font65{font-size: 65px;}
 
-*{box-sizing: border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-ms-box-sizing:border-box;-o-box-sizing:border-box;-webkit-appearance: none;-moz-user-select: none;-webkit-user-select: none;-ms-user-select: none;}
+*{box-sizing: border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-ms-box-sizing:border-box;-o-box-sizing:border-box;/*-webkit-appearance: none;-moz-user-select: none;-webkit-user-select: none;-ms-user-select: none;*/}
 .dn{display: none!important;}
 .fLeft{float:left!important}
 .fRight{float:right!important}
@@ -303,9 +303,33 @@ a{text-decoration: none;}
 .prdShape .Cushion {position: absolute;top:-7px;right: -15px;width: 70px;height: 50px;background-image: url(../img/shapes.svg);background-repeat: no-repeat;background-size: 1000% auto;}
 .prdShape .Cushion:hover{position: absolute;top:-7px;right: -15px;width: 70px;height: 50px;background-image: url(../img/shapes.svg);background-repeat: no-repeat;background-size: 1000% auto;background-position: 100% 0}
 
-.prdCommImg{width:100%;height: 160px;border:1px solid #333;}
-.test{background: #ccc;}
+.prdCommImg{width:100%;height: 160px;background: red;position: relative;}
 
+/*Prd Gallery Jwellery Result Page*/
+.for-1{width:100%;height: 100%;background: #333;}
+.for-2{width:50%;height: 100%;background: #333;float: left;}
+.for-3{width:33.33%;height: 100%;background: #333;float: left;}
+.for-4{width:50%;height:50%;background: #333;float: left;}
+.for-5Left{width:66.66%;height: 100%;background: red;float: left;}
+.for-5Right{width:33.33%;height: 100%;background: green;float: left;}
+.for-5Left .for-5{width:50%;height:50%;background: #333;float: left;}
+.for-5Right .for-5{width:100%;height:100%;background: #333;float: left;}
+.for-6{width:33.33%;height: 50%;float: left;background: #333;}
+.for-7Upper{width:100%;height: 25%;}
+.for-7Upper .for-7{width:100%;height: 100%;background: #333;}
+.for-7Lower{width:100%;height: 75%;}
+.for-7Lower .for-7{width:33.33%;height: 50%;background: #333;float: left;float: left;}
+.for-8{width:25%;height: 50%;float: left;background: #333;}
+.for-9{width:33.33%;height: 33.5%;float: left;background: #333;}
+.for-10{width:20%;height: 50%;background: #333;float: left;}
+.for-11Left{width:50%;height: 100%;float:left;}
+.for-11Left .for-11{width:33.33%;height: 100%;background: #333;float: left;}
+.for-11Right{width:50%;height: 100%;float:left;}
+.for-11Right .for-11{width:50%;height: 25%;background: #333;float: left;}
+.for-12{width:25%;height: 33.5%;background: #333;float: left;}
+.prox{opacity: 0;position: relative;z-index: 1;cursor: pointer;}
+
+.proxImg{width:100%;height: 100%;position: absolute;top:0;left:0;background: #ebebde;}
 
 .prdDetails{width:100%;height: auto;border-bottom: 1px solid #ebebde;padding-bottom:5px;}
 .detComm{width: 100%;height: 30px;line-height: 30px;}
@@ -457,7 +481,7 @@ a{cursor:pointer;}
 .infoCommn {width: 25%;text-align: left;padding-left:0px;height: 40px;margin-bottom: 15px;}
 .infoLabel {width: 100%;line-height: 15px;height: 15px;text-transform: uppercase;color:#8A0044}
 .infoValue {width: 100%;line-height: 25px;height: 25px;font-size: 18px;}
-.prdInfo{width:100%;height: auto;margin-top: 50px;}
+.prdInfo{width:100%;height: auto;margin-top: 0;}
 .prdInfoTitle{width:100%;height: 40px;line-height: 40px;border-bottom: 2px solid #8A0044;font-size: 25px;margin-bottom:20px;}
 .prdInfoDiv{width: 100%;height: auto;line-height: 30px;padding: 0;color: #4d4d4d;font-size: 16px;text-align: justify;margin-bottom: 30px;}
 .prdInfoDiv ul{margin: 0;padding: 0;width:100%;height: auto;list-style: none;}    
@@ -467,10 +491,39 @@ a{cursor:pointer;}
 .prdInfoDiv .prdInfoDiv{margin-bottom: 0}
 
 /* Vendor Detaisls */
-.vendorDetails{width:100%;height:auto;margin-bottom: 20px;}
-.vTitle{width:100%;height: 40px;line-height: 40px;color:#8A0044;font-size: 22px;background-color: #ebebde;margin-bottom: 10px;padding-left: 15px;}
+.vendorDetails{width:100%;height:480px;margin-bottom: 20px;margin-top: 30px;}
+.vendorDetails .wrapperMax{position: relative;padding-right: 320px;}
+.vTitle {width: 100%;height: 40px;line-height: 40px;color: #666;font-size: 16px;margin-bottom: 10px;border-bottom: 1px solid #fff;}
+.vdLeftCard {width: 50%;height: auto;padding: 20px;}
+.orgName {width: 100%;height: auto;line-height: 25px;padding: 0 0 5px 0;color: #8A0044;font-size: 24px;}
+.orgAdd {width: 100%;height: auto;line-height: 20px;padding: 0 0 5px 0;color: #666;font-size: 14px;margin-bottom: 5px;}
+.orgNo {border-top: 1px dashed #d4d4c8;padding-top: 10px;width: 100%;}
+.vendorDetails .infoLabel {text-transform: capitalize;}
+.commtxt{width:100%;height: auto;padding: 0 0 5px 0;margin-bottom: 5px;}
+.commtxt.tel{font-size: 16px;color: #666}
+.commtxt.email{font-size: 14px;color: #666}
+.commtxt.bankers{font-size: 14px;color: #666}
+.commtxt a{color:#171334;}
+.commLeft{width:70%;}
+.commRight{width:30%;}
+
+/*Contact Card*/
+.vdCenterCard {width: 50%;height:100%;padding: 20px;padding:0px;}
+.cntCard{width:100%;height: 206px;border:1px solid #d4d4c8;padding: 20px;border-radius: 5px;}
+
+.cntName {width: 100%;height: 35px;line-height: 35px;color: #8A0044;font-size: 22px;background: url(../img/common/sname.svg)no-repeat;background-size: auto 35px;background-position: left center;padding: 1px 0 0 40px;}
+.cntName span{font-size: 14px;font-family: openB;}
+.cntMb {width: 100%;height: 20px;line-height: 17px;color: #8A0044;font-size: 14px;background: url(../img/common/smobile.svg)no-repeat;background-size: auto 35px;background-position: left center;padding: 1px 0 0 40px;}
+.cntEmail {width: 100%;height: 25px;line-height: 22px;color: #8A0044;font-size: 14px;background: url(../img/common/semail.svg)no-repeat;background-size: auto 30px;background-position: 5px center;padding: 1px 0 0 40px;margin-top: 5px;}
+
+
+.vdRightCard {width: 300px;height: 400px;position: absolute;top:0;right: 0;padding: 0;}
+
+.mapCont{width:100%;height:300px;}
+
 .vendorDetails .infoCommn{width:100%;padding-left: 25px;}
 .vendorDetails .infoValue {font-size:16px;}
+
 
 /*User Form*/
 .userForm{width: 360px;height: 315px;position: fixed;margin: auto;top: 0px;left: 0;bottom: 0;right: 0;background: #fff;z-index: 116;padding: 25px;border-radius: 5px;box-shadow: 0 0 0px 1000px rgba(0,0,0,0.4);}
