@@ -345,11 +345,7 @@
 				break;
 			}
 			
-			if (!empty($page))
-			{
-				$start = ($page * $limit) - $limit;
-				$sql.=" LIMIT " . $start . ",$limit";
-			}
+			
 			$res = $this->query($sql);
 			$cres=$this->numRows($res);
 			if($cres>0)
@@ -359,7 +355,101 @@
 					$pid[] = $row['pid'];
 				}
 				
+				if(!empty($params['slist']))
+				{
+					$sarr = explode('|@|',$params['slist']);
+					$extn = " AND shape in ('".implode("','",$sarr)."') ";
+				}
+				
+				if(!empty($params['tlist']))
+				{
+					$sarr = explode('|$|',$params['tlist']);
+					foreach($sarr as $key => $val)
+					{
+						$expd = explode('|~|',$val);
+						$exd = explode(';',$expd[1]);
+						$extn .= " AND ".str_replace('Range','',$expd[0])." between \"".$exd[0]."\" AND \"".$exd[1]."\"";
+					}
+					//$extn = " AND shape in ('".implode("','",$sarr)."') ";
+				}
+				
+				if(!empty($params['clist']))
+				{
+					$sarr = explode('|$|',$params['clist']);
+					
+					foreach($sarr as $key => $val)
+					{
+						$expd = explode('|~|',$val);
+						$exd = explode('|@|',$expd[1]);
+						$inarr = array();
+						foreach($exd as $ky => $vl)
+						{
+							$ex = explode('|',$vl);
+							$field = $ex[0];
+							$inarr[] = $ex[1];
+						}
+						$extn .= " AND ".$field." in ('".implode("','",$inarr)."') ";
+					}
+				}
+				
 				$pid=implode(',',$pid);
+				
+				$page   = ($params['page'] ? $params['page'] : 1);
+				$limit  = ($params['limit'] ? $params['limit'] : 15);
+				
+				$sql = "SELECT 
+							count(1) as cnt 
+						FROM 
+							tbl_product_search 
+						WHERE 
+							product_id IN(".$pid.")
+						".$extn."	
+						";
+				$res = $this->query($sql);
+				if($res)
+				{
+					$row = $this->fetchData($res);
+					$total = $row['cnt'];
+				}
+				
+				$patsql="
+						SELECT
+							product_id,
+							carat,
+							color,
+							certified,
+							shape,
+							clarity,
+							price,
+							polish,
+							symmetry,
+							cno
+						FROM 
+							tbl_product_search 
+						WHERE 
+							product_id IN(".$pid.")
+						".$extn."
+						ORDER BY
+							field(product_id,".$pid.")
+						";
+						
+				if (!empty($page))
+				{
+					$start = ($page * $limit) - $limit;
+					$patsql.=" LIMIT " . $start . ",$limit";
+				}
+						
+				$patres=$this->query($patsql);
+				
+				while($row2=$this->fetchData($patres))
+				{
+					$prodid[] = $row2['product_id'];
+					$pid = $row2['product_id'];
+					unset($row2['product_id']);
+					$attr[$pid]['attributes']=$row2;
+				}
+				
+				$pid=implode(',',$prodid);
 				
 				$psql = "
 						SELECT
@@ -382,35 +472,9 @@
 				$pres=$this->query($psql);
 				while($row1=$this->fetchData($pres))
 				{
-					$arr1[$row1['pid']]=$row1;
-				}
-				
-				$patsql="
-						SELECT
-							product_id,
-							carats as carat,
-							color,
-							cert as certified,
-							shape,
-							cla as clarity,
-							val as price,
-							pol as polish,
-							sym as symmetry,
-							cert1_no as cno
-						FROM 
-							tbl_product_search 
-						WHERE 
-							product_id IN(".$pid.")
-						ORDER BY
-							field(product_id,".$pid.")
-						";
-				$patres=$this->query($patsql);
-				
-				while($row2=$this->fetchData($patres))
-				{
-					$pid = $row2['product_id'];
-					unset($row2['product_id']);
-					$arr1[$pid]['attributes']=$row2;
+					$pid = $row1['pid'];
+					$arr1[$pid]=$row1;
+					$arr1[$pid]['attributes'] = $attr[$pid]['attributes'];
 				}
 				
 				//echo "<pre>";print_r($arr1);die;

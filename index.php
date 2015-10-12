@@ -24,8 +24,11 @@
 					$catid 	= $_GET['catid'];
 					$sortby	= $_GET['sortby'];
 					$slist	= $_GET['slist'];
-					echo $url 	= APIDOMAIN.'index.php?action=getPrdByCatid&catid='.$catid.'&page='.$pgno.'&sortby='.$sortby.'&slist='.$slist;die;
+					$clist	= $_GET['clist'];
+					$tlist	= $_GET['tlist'];
+					$url 	= APIDOMAIN.'index.php?action=getPrdByCatid&catid='.$catid.'&page='.$pgno.'&sortby='.$sortby.'&slist='.urlencode($slist).'&clist='.urlencode($clist).'&tlist='.urlencode($tlist);
 					$res 	= $comm->executeCurl($url,1);
+					echo $res;
 				break;
 			}
 			break;

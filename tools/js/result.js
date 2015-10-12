@@ -39,64 +39,8 @@ $(document).ready(function() {
 		var sortby = $(this).attr('id');
 		var catid = $("#catid").val();
 		
-		var params = 'action=ajx&case=sortby&catid='+catid+'&sortby='+sortby;
-		var URL = DOMAIN + "index.php";
-		$.getJSON(URL, params, function(data) {
-			var html = '';
-			$.each(data.results.products, function(i, vl) {
-				
-				html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/pid-'+vl.pid+'">';
-					html += '<div class="prdComm fLeft" style="opacity: 0; transform: translateX(1500px);">';
-						html += '<div class="prdCommDiv fLeft">';
-							html += '<div class="prdShape fLeft">';
-								html += '<div class="prdShTitle fLeft fmOpenB">SHAPE</div>';
-								html += '<div class="prdShType fLeft fmOpenR">'+vl.attributes.shape+'</div>';
-								html += '<div class="'+vl.attributes.shape+' fRight"></div>';
-							html += '</div>';
-							html += '<div class="prdDetails fLeft">';
-								html += '<div class="detComm">';
-									html += '<div class="detLabel fmOpenB fLeft">COLOR</div>';
-									html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.color+'</div>';
-								html += '</div>';
-								html += '<div class="detComm">';
-									html += '<div class="detLabel fmOpenB fLeft">CARATS</div>';
-									html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.carat+'</div>';
-								html += '</div>';
-								html += '<div class="detComm">';
-									html += '<div class="detLabel fmOpenB fLeft">CLARITY</div>';
-									html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.clarity+'</div>';
-								html += '</div>';
-								html += '<div class="detComm">';
-									html += '<div class="detLabel fmOpenB fLeft">CERTIFICATE</div>';
-									html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.cno+'</div>';
-								html += '</div>';
-							html += '</div>';
-							html += '<div class="prdPrice fLeft">';
-								html += '<div class="detComm">';
-									html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
-									html += '<div class="detValue fmOpenB fLeft"><span>₹</span>'+vl.pprice+'</div>';
-								html += '</div>';
-							html += '</div>';
-							html += '<div class="prdActions fLeft">';
-								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
-								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
-								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
-								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
-							html += '</div>';
-						html += '</div>';
-					html += '</div>';
-				html += '</a>';
-			});
-			
-			$('.prdResults').html(html);
-			$('.prdResults').offset();
-			$('body').animate({scrollTop: $('.shapesCont').offset().top+50}, 300);
-                        setTimeout(function(){
-                            showPrd();
-                        },10);
-                        
-		});
-
+		FR(sortby);
+		
 		
         isOpen = false;
         toggleDropDown(false);
@@ -111,16 +55,7 @@ $(document).ready(function() {
         $(this).toggleClass('shapeSelected');
 		var cnt = getRandomInt(-500,500);
         totalCnt = (totalCnt*1)+cnt;
-		
 		FR();
-
-        $('#resultCount').numerator({
-            toValue: totalCnt,
-            delimiter: ',',
-            onStart: function() {
-                isStop = true;
-            }
-        });
     });
 
     $('.jshapeComm').bind('click', function() {
@@ -129,7 +64,6 @@ $(document).ready(function() {
             $(this).toggleClass('shapeSelected');
                     id=id.toLowerCase()+"Li";
                     $('#'+id+' a').click();
-            console.log(id);
             if(addedFilters.indexOf(id)==-1){
                 //addFiltters(id);
             }else{
@@ -156,11 +90,77 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function FR() {
+function getResultsData(data)
+{
+	var html = '';
+	$.each(data.results.products, function(i, vl) {
+		html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/pid-'+vl.pid+'">';
+			html += '<div class="prdComm fLeft" style="opacity: 0; transform: translateX(1500px);">';
+				html += '<div class="prdCommDiv fLeft">';
+					html += '<div class="prdShape fLeft">';
+						html += '<div class="prdShTitle fLeft fmOpenB">SHAPE</div>';
+						html += '<div class="prdShType fLeft fmOpenR">'+vl.attributes.shape+'</div>';
+						html += '<div class="'+vl.attributes.shape+' fRight"></div>';
+					html += '</div>';
+					html += '<div class="prdDetails fLeft">';
+						html += '<div class="detComm">';
+							html += '<div class="detLabel fmOpenB fLeft">COLOR</div>';
+							html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.color+'</div>';
+						html += '</div>';
+						html += '<div class="detComm">';
+							html += '<div class="detLabel fmOpenB fLeft">CARATS</div>';
+							html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.carat+'</div>';
+						html += '</div>';
+						html += '<div class="detComm">';
+							html += '<div class="detLabel fmOpenB fLeft">CLARITY</div>';
+							html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.clarity+'</div>';
+						html += '</div>';
+						html += '<div class="detComm">';
+							html += '<div class="detLabel fmOpenB fLeft">CERTIFICATE</div>';
+							html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.cno+'</div>';
+						html += '</div>';
+					html += '</div>';
+					html += '<div class="prdPrice fLeft">';
+						html += '<div class="detComm">';
+							html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
+							html += '<div class="detValue fmOpenB fLeft"><span>₹</span>'+vl.pprice+'</div>';
+						html += '</div>';
+					html += '</div>';
+					html += '<div class="prdActions fLeft">';
+						html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+						html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+						html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+						html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+					html += '</div>';
+				html += '</div>';
+			html += '</div>';
+		html += '</a>';
+	});
+	
+	$('.prdResults').html(html);
+	$('.prdResults').offset();
+	$('body').animate({scrollTop: $('.shapesCont').offset().top+50}, 300);
+	setTimeout(function(){
+		showPrd();
+	},10);
+	
+	$('#resultCount').numerator({
+		toValue: data.results.total,
+		delimiter: ',',
+		onStart: function() {
+			isStop = true;
+		}
+	});
+}
+
+function FR(sortby) {
 	
 	var slistarr = new Array();
 	var clistarr = new Array();
 	var tlistarr = new Array();
+	
+	var catid = $("#catid").val();
+	
 	var i = 0;
 	$('.shapeComm').each(function() {
 		if($(this).hasClass('shapeSelected')) {
@@ -170,6 +170,7 @@ function FR() {
 	});
 	var slist = slistarr.join('|@|');
 	
+	var j=0;
 	$('.filterCont').each(function() {
 		var tempclistarr = new Array();
 		var i = 0;
@@ -179,24 +180,43 @@ function FR() {
 			i++;
 		});
 		if(tempclistarr.length)
-			clistarr[id] = tempclistarr;
+		{
+			clistarr[j] = id+'|~|'+tempclistarr.join('|@|');
+			j++;
+		}
 	});
+	var clist = clistarr.join('|$|');
 	
 	var i = 0;
 	$('.filterCont .rangeCont :input[type=text]').each(function() {
 		if($(this).val()) {
-			tlistarr[$(this).attr('id')] = $(this).val();
+			//tlistarr[$(this).attr('id')] = $(this).val();
+			tlistarr[i] = $(this).attr('id')+'|~|'+$(this).val();
+			i++;
 		}
 	});
-	console.log(slistarr);
-	console.log(clistarr);
-	console.log(tlistarr);
+	var tlist = tlistarr.join('|$|');
+	//console.log(slistarr);
+	//console.log(clistarr);
+	//console.log(tlistarr);
 	
-	var params = 'action=ajx&case=filter&slist='+slist;
-	var URL = DOMAIN + "index.php";
-	$.getJSON(URL, params, function(data) {
-		
-	});
+	if(sortby)
+	{
+		var params = 'action=ajx&case=filter&catid='+catid+'&sortby='+sortby+'&slist='+slist+'&clist='+clist+'&tlist='+tlist;
+		var URL = DOMAIN + "index.php";
+		$.getJSON(URL, params, function(data) {
+			getResultsData(data);   
+		});
+	}
+	else
+	{
+		$('#drpinp').text('Best Match');
+		var params = 'action=ajx&case=filter&catid='+catid+'&slist='+slist+'&clist='+clist+'&tlist='+tlist;
+		var URL = DOMAIN + "index.php";
+		$.getJSON(URL, params, function(data) {
+			getResultsData(data);
+		});
+	}
 }
 
 var areas = new Array("Jakkur", "Judicial Layout", "M.G Road", "Indiranagar");

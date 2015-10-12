@@ -28,26 +28,15 @@ $(document).ready(function() {
 			}
 		});
 		
-		$('.filterCont label').each(function() {
+		$('.filterCont :input[type=checkbox]').each(function() {
 			$(this).bind('click', function(event) {
 				FR();
-				if (event && event.stopPropagation)
-					event.stopPropagation();
+				if (event && $.isFunction(event.stopImmediatePropagation))
+					event.stopImmediatePropagation();
 				else 
 					window.event.cancelBubble=true;
 			});
 		});
-		
-		/*$('.filterCont :input[type=checkbox]').each(function() {
-			$(this).bind('click', function(event) {
-				
-				event.stopPropagation();
-			});
-		});*/
-		
-		/* $('.filterCont label').click(function(){
-			FR();
-		}); */
 	});
 
     /*Mobile Filter Btns*/
