@@ -202,16 +202,7 @@ function FR(sortby) {
 			i++;
 		}
 	});
-
-//	console.log(slistarr);
-//	console.log(clistarr);
-//	console.log(tlistarr);
-
 	var tlist = tlistarr.join('|$|');
-	//console.log(slistarr);
-	//console.log(clistarr);
-	//console.log(tlistarr);
-
 	
 	if(sortby)
 	{
