@@ -12,7 +12,7 @@ class vendor extends DB
         $detls  = $dt['result'];
         
         $sql="INSERT INTO tbl_vendor_product_mapping(product_id,vendor_id,vendor_price,vendor_quantity,vendor_currency,vendor_remarks,active_flag,updatedby,updatedon,backendupdate)";
-     echo   $sql.="VALUES(".$detls['pid'].",".$detls['vid'].",".$detls['vp'].",".$detls['vq'].",'".$detls['vc']."','".$detls['vr']."',".$detls['af'].",'vendor',now(),now())";
+        $sql.="VALUES(".$detls['pid'].",".$detls['vid'].",".$detls['vp'].",".$detls['vq'].",'".$detls['vc']."','".$detls['vr']."',".$detls['af'].",'vendor',now(),now())";
         $res = $this->query($sql);
         if($res)
         {
@@ -21,7 +21,7 @@ class vendor extends DB
         }
         else
         {
-            $arr="Product mapping is  already done";
+            $arr=array();
             $err = array('Code' => 0, 'Msg' => 'Product details Not Added!');            
         }
         $result = array('results' => $arr, 'error' => $err);
@@ -29,44 +29,50 @@ class vendor extends DB
     }
     
     public function getVproducts($params)
-    {      
-        $total_products = 0;
-        
-        $cnt_sql = "SELECT COUNT(1) as cnt FROM tbl_vendor_product_mapping  WHERE vendor_id =".$params['vid'];
-        $cnt_res = $this->query($cnt_sql); //checking number of products registered under vendor id provided
-        $page=$params['page'];
-        $limit=$params['limit'];
-        $vsql="select product_id,vendor_price,vendor_quantity,vendor_currency,active_flag from tbl_vendor_product_mapping where vendor_id=".$params['vid'];
+    {              
+        $page   = ($params['page'] ? $params['page'] : 1);
+        $limit  = ($params['limit'] ? $params['limit'] : 15);
         if (!empty($page))
         {
             $start = ($page * $limit) - $limit;
             $vsql.=" LIMIT " . $start . ",$limit";
         }
-        $vres=$this->query($vsql);
-        $chkcnt=$this->numRows($vres);
-             if($chkcnt>0)
-            {
-        $i=-1;
-        while($row1=$this->fetchData($vres)) 
-        {   $i++;    
+        
+        $total_products = 0;
+        
+        $cnt_sql = "SELECT COUNT(1) as cnt FROM tbl_vendor_product_mapping  WHERE vendor_id =".$params['vid'];
+        $cnt_res = $this->query($cnt_sql); //checking number of products registered under vendor id provided
+        
+        $chkcnt=$this->numRows($cnt_res);
+         if($chkcnt>0)
+        {
+            $vsql="select product_id,vendor_price,vendor_quantity,vendor_currency,active_flag from tbl_vendor_product_mapping where vendor_id=".$params['vid'];
+            $vres=$this->query($vsql);
+            $prsql.=" LIMIT " . $start . ",$limit";
+            
+            $i=-1;
+            $vpmap=array();
+            while($row1=$this->fetchData($vres)) 
+            {   $i++;    
                 $vpmap['product_id'][$i]=$row1['product_id'];
                 $vpmap['vendor_price'][$i]=$row1['vendor_price'];
                 $vpmap['vendor_quantity'][$i]=$row1['vendor_quantity'];
                 $vpmap['vendor_currency'][$i]=$row1['vendor_currency'];
                 $vpmap['active_flag'][$i]=$row1['active_flag'];
                 $vmap[]=$vpmap;
-        }
-        $vmapProd=implode(',',$vmap[$i]['product_id']);
-        
-        $prsql="SELECT product_id,product_name,product_display_name,product_model,product_brand,prd_img,desname 
-                FROM tbl_product_master WHERE product_id IN(".$vmapProd.")";
-        $prsql.=" LIMIT " . $start . ",$limit";
-        
-        $pres=$this->query($prsql);
-        $j=-1;
+            }
+            $vmapProd=implode(',',$vmap[$i]['product_id']);
+
+            $prsql="SELECT product_id,product_name,product_display_name,product_model,product_brand,prd_img,desname 
+                    FROM tbl_product_master WHERE product_id IN(".$vmapProd.")";
+            $prsql.=" LIMIT " . $start . ",$limit";
+
+            $pres=$this->query($prsql);
+            $j=-1;
+            $preslt=array();
             while ($prow = $this->fetchData($pres)) 
             {       $j++;
-                    
+
                     $preslt['product_name'][$j]         = $prow['product_name'];
                     $preslt['product_display_name'][$j] = $prow['product_display_name'];
                     $preslt['product_model'][$j]        = $prow['product_model'];
@@ -86,16 +92,16 @@ class vendor extends DB
             $arr=array('productdet'=>$presults[$j],'vendor_prod'=>$vmap[$i],'total_products'=>$total_products);    
             $err = array('Code' => 0, 'Msg' => 'Details fetched successfully');
           }
-         else
-         {
-            $arr='There is not product mapped with this vendor';
-            $err=array('Code'=>1,'Msg'=>'Error in fetching data');
-         }
-        $result = array('results'=>$arr,'error'=> $err);
-        return $result;
+             else
+             {
+                $arr='There is not product mapped with this vendor';
+                $err=array('Code'=>1,'Msg'=>'Error in fetching data');
+             }
+            $result = array('results'=>$arr,'error'=> $err);
+            return $result;
     }
     
- /*   
+    /*   
     public function getVproductsByName($params)
     {
         
@@ -167,8 +173,15 @@ class vendor extends DB
                 active_flag=".$params['af']." WHERE vendor_id=".$params['vid']." AND
                 product_id=".$params['pid']."";
         $res=$this->query($sql);
+        
         if($res) 
-        {   $arr="Vendor Product Map table updated";
+        {   
+            $arr="Vendor Product Map table updated";
+            $err = array('Code' => 0, 'Msg' => 'Details updated successfully');
+        }
+        else 
+        {   
+            $arr=array();
             $err = array('Code' => 0, 'Msg' => 'Details updated successfully');
         }
         $result = array('results'=>$arr,'error'=>$err);  
@@ -177,60 +190,57 @@ class vendor extends DB
     
     public function getVDetailByPid($params)
     {
-    $sql1="SELECT * FROM tbl_vendor_product_mapping where product_id=".$params['pid']." AND vendor_id=".$params['vid']." ORDER BY updatedon DESC";
-     $page   = $params['page'];
-    $limit  = $params['limit'];
-    if (!empty($page))
-    {
-        $start = ($page * $limit) - $limit;
-        $sql1.=" LIMIT " . $start . ",$limit";
-    }
-     
-     
-     $res1=$this->query($sql1);
-     $chkcnt=$this->numRows($res1);
-     if($chkcnt>0)
-     {
+        $page   = ($params['page'] ? $params['page'] : 1);
+        $limit  = ($params['limit'] ? $params['limit'] : 15);
         
-        while($row=$this->fetchData($res1))
-        {   
-            $vdet['vprice']=$row['vendor_price'];
-            $vdet['vquant']=$row['vendor_quantity'];
-            $vdet['vcur']=$row['vendor_currency'];
-            $vdet['vremarks']=$row['vendor_remarks'];
-            $vdetls[]=$vdet;
-           
-             }
-        $sql2="SELECT * from tbl_vendor_master WHERE vendor_id =".$params['vid']."";
+        $sql1="SELECT * FROM tbl_vendor_product_mapping where product_id=".$params['pid']." AND vendor_id=".$params['vid']." ORDER BY updatedon DESC";
         if (!empty($page))
         {
-        $start = ($page * $limit) - $limit;
-   echo     $sql2.=" LIMIT " . $start . ",$limit";
+            $start = ($page * $limit) - $limit;
+            $sql1.=" LIMIT " . $start . ",$limit";
         }
-        
-        $res2=$this->query($sql2);
-        if($this->numRows($res2)>0)
+        $res1=$this->query($sql1);
+        $chkcnt=$this->numRows($res1);
+        if($chkcnt>0)
         {
-            while ($row1=$this->fetchData($res2)) 
-            {
-            $vresult[] = $row1;
+            while($row=$this->fetchData($res1))
+            {   
+                $vdet['vprice']=$row['vendor_price'];
+                $vdet['vquant']=$row['vendor_quantity'];
+                $vdet['vcur']=$row['vendor_currency'];
+                $vdet['vremarks']=$row['vendor_remarks'];
+                $vdetls[]=$vdet;
             }
-            $arr=array('Vendor-Detail'=>$vresult,'Vendor-Product'=>$vdetls);    
-            $err = array('Code' => 0, 'Msg' => 'Details fetched successfully');
+            $sql2="SELECT orgName,fulladdress,telephones,alt_email,contact_person,contact_mobile,officecity,turnover,postalcode,website,membership_cert,vatno,pancard from tbl_vendor_master WHERE vendor_id =".$params['vid']."";
+            if (!empty($page))
+            {
+            $start = ($page * $limit) - $limit;
+            $sql2.=" LIMIT " . $start . ",$limit";
+            }
+
+            $res2=$this->query($sql2);
+            if($this->numRows($res2)>0)
+            {
+                while ($row1=$this->fetchData($res2)) 
+                {
+                    $vresult[] = $row1;
+                }
+                $arr=array('Vendor-Detail'=>$vresult,'Vendor-Product'=>$vdetls);    
+                $err = array('Code' => 0, 'Msg' => 'Details fetched successfully');
+            }
+            else
+            {
+                $arr=array();    
+                $err = array('Code' => 1, 'Msg' => 'No Match Found');
+            }
         }
         else
         {
-            $arr=array('there is no product with starting with such name in vendor_product list');    
-            $err = array('Code' => 1, 'Msg' => 'No Match Found');
+            $arr=array();    
+            $err = array('Code' => 0, 'Msg' => 'No Match Found');
         }
-     }
-     else
-     {
-        $arr='No such product with this id';    
-        $err = array('Code' => 0, 'Msg' => 'No Match Found');
-     }
-    $result = array('results' => $arr,'error' => $err);
-    return $result;
+        $result = array('results'=>$arr,'error'=>$err);
+        return $result;
         
     }
     
