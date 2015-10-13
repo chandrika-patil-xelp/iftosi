@@ -17,11 +17,14 @@ $(document).ready(function(){
             if(!isMobile){
                     if(sc>10){
                             $('#header').velocity({height: "60px",paddingTop:12+"px",paddingBottom:12+"px"},{duration:0, delay:0,easing:'swing'});
-                            $('#logoTxt').velocity({opacity:0},{duration:0, delay:0});
-                            $('.logo').velocity({top:20+"px",height:60+"px",width:60+"px"},{duration:0, delay:100});
+                            $('#logoTxt').velocity({left:20+"px",bottom:20+"px"},{duration:0, delay:200});
+                            $('.logo').velocity({top:20+"px",height:60+"px",width:150+"px",backgroundPositionX:15 + "px"},{duration:0, delay:100});
+                    
                     }else if(lastSc>sc){
-                            $('.logo').velocity({top:30+"px",height:100+"px",width:100+"px"},{duration:0, delay:0});
-                            $('#logoTxt').velocity({opacity:1},{duration:300, delay:400});
+//                            $('.logo').velocity({top:30+"px",height:100+"px",width:100+"px"},{duration:0, delay:0});
+//                            $('#logoTxt').velocity({opacity:1},{duration:300, delay:400});
+                            $('.logo').velocity({top: 30 + "px", height: 100 + "px", width: 100 + "px", backgroundPositionX: '50%'}, {duration: 0, delay: 0});
+                            $('#logoTxt').velocity({left:0+"px",bottom:-30+"px"},{duration:300, delay:0});
                             $('#header').velocity({height: "100px",paddingTop:32+"px",paddingBottom:32+"px"},{duration:0, delay:0,easing:'swing'});
                     } 
             }else{
@@ -32,6 +35,7 @@ $(document).ready(function(){
                             $('#mMenuBtn').velocity({marginTop:0+"px"},{duration:0, delay:0});
                     }else if(lastSc>sc){
                             $('.logo').velocity({top:20+"px",height:80+"px",width:80+"px"},{duration:0, delay:0});
+                            $('.logo').removeClass('lactive');
                             $('#logoTxt').velocity({opacity:1},{duration:00, delay:000});
                             $('#header').velocity({height: "60px"},{duration:0, delay:0,easing:'swing'});
                             $('#mMenuBtn').velocity({marginTop:5+"px"},{duration:0, delay:0});
@@ -46,15 +50,21 @@ $(document).ready(function(){
             $('.headCatCont,.logo').velocity("stop");
             if (!isMobile) {
                 if (sc > 10) {
-                    $('#header').velocity({height: "60px", paddingTop: 12 + "px", paddingBottom: 12 + "px"}, {duration: 0, delay: 0, easing: 'swing'});
+                    $('#header').velocity({height: "60px",paddingTop:12+"px",paddingBottom:12+"px"},{duration:0, delay:0,easing:'swing'});
+                    $('#logoTxt').velocity({left:20+"px",bottom:20+"px"},{duration:0, delay:200});
+                    $('.logo').velocity({top:20+"px",height:60+"px",width:150+"px",backgroundPositionX:15 + "px"},{duration:0, delay:100});
+                    
+                   // $('#header').velocity({height: "60px", paddingTop: 12 + "px", paddingBottom: 12 + "px"}, {duration: 0, delay: 0, easing: 'swing'});
                     $('#hbgDiam,#hbgJewel,#hbgBull').velocity({backgroundPositionY: -60 + "px"}, {duration: 0, delay: 0, easing: 'swing'});
                     $('.headCatCont').velocity({top: -50 + "px"}, {duration: 0, delay: 0, easing: 'swing'});
                     $('.headCatCont').addClass('headCatActive');
-                    $('#logoTxt').velocity({opacity: 0}, {duration: 0, delay: 0});
-                    $('.logo').velocity({top: 20 + "px", height: 60 + "px", width: 60 + "px"}, {duration: 0, delay: 100});
+                  //  $('#logoTxt').velocity({opacity: 0}, {duration: 0, delay: 0});
+                  //  $('.logo').velocity({top: 20 + "px", height: 60 + "px", width: 60 + "px"}, {duration: 0, delay: 100});
                 } else if (lastSc > sc) {
-                    $('.logo').velocity({top: 30 + "px", height: 100 + "px", width: 100 + "px"}, {duration: 0, delay: 0});
-                    $('#logoTxt').velocity({opacity: 1}, {duration: 300, delay: 400});
+//                    $('.logo').removeClass('lactive');
+                    $('.logo').velocity({top: 30 + "px", height: 100 + "px", width: 100 + "px", backgroundPositionX: '50%'}, {duration: 0, delay: 0});
+                    //$('#logoTxt').velocity({opacity: 1}, {duration: 300, delay: 400});
+                    $('#logoTxt').velocity({left:0+"px",bottom:-30+"px"},{duration:300, delay:0});
                     $('#header').velocity({height: "100px", paddingTop: 32 + "px", paddingBottom: 32 + "px"}, {duration: 0, delay: 0, easing: 'swing'});
                     $('#hbgDiam,#hbgJewel,#hbgBull').velocity({backgroundPositionY: 8 + "px"}, {duration: 0, delay: 0, easing: 'swing'});
                     $('.headCatCont').velocity({top: -30 + "px"}, {duration: 0, delay: 0, easing: 'swing'});
