@@ -1,4 +1,4 @@
-var delay = 100;
+/*var delay = 100;
 var infowindow = new google.maps.InfoWindow();
 var myCenter = new google.maps.LatLng(20.593684, 78.96288000000004);
 var mapOptions = {
@@ -57,4 +57,4 @@ function theNext() {
         map.fitBounds(bounds);
     }
 }
-theNext();
+theNext();*/

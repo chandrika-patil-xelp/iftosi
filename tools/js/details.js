@@ -101,3 +101,26 @@ mc.on("panleft panright tap press", function(ev) {
         showLeftMenu(false);
     }
 });
+
+
+var len=$('#gallery1 .thumbnil').length;
+var val = 0;
+var moveCount = 0;
+function movePrImg(flag) {
+    var totalThumbs = $('#gallery1 .thumbnil').length;
+    var liWidth = ($('#gallery1 .thumbnil').outerWidth());
+    if (!flag) {
+        if (moveCount < (totalThumbs - 4)) {
+            val = val - liWidth-4;
+            $("#gallery1 .carousel").css({transform: 'translateX(' + val + 'px)'});
+            moveCount++;
+        }
+    }
+    else if (flag) {
+        if (moveCount > 0) {
+            val = val + liWidth+4;
+            $("#gallery1 .carousel").css({transform: 'translateX(' + val + 'px)'});
+            moveCount--;
+        }
+    }
+}

@@ -104,30 +104,6 @@ $(document).ready(function(){
         }
 
     });
-    
-    
-//    $('.signInUpTab').bind('click',function(){
-//        $('#overlay,#loginDiv').removeClass('dn')
-//        setTimeout(function(){
-//            $('#overlay,#loginDiv').removeClass('transit-100Y');
-//            setTimeout(function(){
-//                $('#loginDiv').removeClass('transit-200Y')
-//            },200);
-//        },10);
-//    });
-    
-    
-//    $('#lgCancel').bind('click',function(){
-//        $('#loginDiv').addClass('transit-200Y');
-//        setTimeout(function(){
-//            $('#overlay').addClass('transit-100Y');
-//            setTimeout(function(){
-//                $('#overlay,#loginDiv').addClass('dn');
-//            },200);
-//        },100);
-//    });
-    
-    
     $('#overlay').velocity({opacity:0},{delay:0,duration:0});
     $('#loginDiv').velocity({scale:0},{delay:0,duration:0});
     $('.signInUpTab,.iLogin').bind('click',function(){
