@@ -14,7 +14,7 @@ switch($action)
             $mobile=(!empty($params['mobile'])) ? trim($params['mobile']) : '';
             if(empty($mobile))
             {   
-                $arr = "Some Parameters missing";
+                $arr = array();
                 $err = array('Code' => 1, 'Msg' => 'Some Parameters missing');
                 $result = array('results'=>$arr, 'error' => $err);
                 $res=$result;
@@ -35,7 +35,7 @@ switch($action)
             $isvendor=(!empty($params['isvendor'])) ? trim($params['isvendor']) : '';
             if(empty($username)  &&  empty($password)  &&  empty($mobile)  &&  empty($email)  &&  empty($isvendor))
             {   
-                $arr = "Some Parameters missing";
+                $arr = array();
                 $err = array('Code' => 1, 'Msg' => 'Some Parameters missing');
                 $result = array('results'=>$arr, 'error' => $err);
                 $res=$result;
@@ -723,7 +723,7 @@ switch($action)
             $str=(!empty($params['str']))? trim($params['str']):'';
             if(empty($tblname) && empty($tblname))
             {
-                $arr="Parameters missing";
+                $arr = array();
                 $err=array('Code'=>1,'Msg'=>'Invalid Parameters');
                 $result=array('results'=>$arr,'error'=>$err);
                 $res=$result;
@@ -850,7 +850,7 @@ switch($action)
             $category_id=(!empty($params['category_id'])) ? trim($params['category_id']):'';
             if(empty($category_id))
             {   
-                $arr = "Parameter is missing";
+                $arr = array();
                 $err = array('Code' => 1, 'Msg' => 'Invalid Parameter');
                 $result = array('results'=>$arr, 'error' => $err);
                 $res=$result;
@@ -864,17 +864,21 @@ switch($action)
 /*  HAve to be changed as per the requirement        */            
         case 'refine': 
             include APICLUDE.'class.filter.php';
+echo '<pre>';
+print_r($params);
+echo '</pre>';
             $page=(!empty($params['page'])) ? trim(urldecode($params['page'])) : '';
             $limit=(!empty($params['limit'])) ? trim(urldecode($params['limit'])) : '';
             $dt=(!empty($params['dt'])) ? trim($params['dt']):'';
             if(empty($dt) && empty($limit) && empty($page))
             {   
-                $arr = "Parameter is missing";
+                $arr = array();
                 $err = array('Code' => 1, 'Msg' => 'Invalid Parameter');
                 $result = array('results'=>$arr, 'error' => $err);
                 $res=$result;
                 break;
             }
+
             $obj= new filter($db['iftosi']);
             $result=$obj->refine($params);
             $res=$result;
@@ -888,7 +892,7 @@ switch($action)
             $dt=(!empty($params['dt']))? trim($params['dt']):'';
             if(empty($dt))
             {
-                $arr="Parameters missing";
+                $arr = array();
                 $err=array('Code'=>1,'Msg'=>'Invalid Parameters');
                 $result=array('results'=>$arr,'error'=>$err);
                 $res=$result;
@@ -905,7 +909,7 @@ switch($action)
             $dt=(!empty($params['dt']))? trim($params['dt']):'';
             if(empty($dt))
             {
-                $arr="Parameters missing";
+                $arr = array();
                 $err=array('Code'=>1,'Msg'=>'Invalid Parameters');
                 $result=array('results'=>$arr,'error'=>$err);
                 $res=$result;
@@ -924,7 +928,7 @@ switch($action)
             $dt=(!empty($params['dt'])) ? trim(urldecode($params['dt'])) : '';
             if(empty($dt))
             {   
-                $arr = "Some Parameters are missing";
+                $arr = array();
                 $err = array('Code' => 1, 'Msg' => 'Some Parameters are missing');
                 $result = array('results'=>$arr, 'error' => $err);
                 $res=$result;
@@ -950,7 +954,7 @@ switch($action)
             $dt=(!empty($params['dt'])) ? trim(urldecode($params['dt'])) : '';
             if(empty($dt))
             {   
-                $arr = "Some Parameters are missing";
+                $arr = array();
                 $err = array('Code' => 1, 'Msg' => 'Some Parameters are missing');
                 $result = array('results'=>$arr, 'error' => $err);
                 $res=$result;

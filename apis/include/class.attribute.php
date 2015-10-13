@@ -57,7 +57,7 @@ class attribute extends DB
         $tbldname = $params['tabledname'];
 
         # INSERTING REQUIRED DATA #
-        $sql = "INSERT INTO tbl_attribute_master SET attr_name='".$name."',attr_display_name='".$dname."',attr_unit='".$unit."',attr_type_flag='".$flag."',attr_unit_pos='".$upos."',attr_values='".$vals."',attr_range=".$range;
+        $sql = "INSERT INTO tbl_attribute_master SET attr_name='".$name."',attr_display_name='".$dname."',attr_unit='".$unit."',attr_type_flag='".$flag."',attr_unit_pos='".$upos."',attr_values='".$vals."',attr_range=".$range.", date_time=now()";
 	$res = $this->query($sql);
 	if($res)
         { 
@@ -86,7 +86,7 @@ class attribute extends DB
             }
            else if($flag==5)
             {
-                $crtSql="CREATE TABLE $use_list(`id` BIGINT(20) NOT NULL AUTO_INCREMENT,`name` varchar(64) NOT NULL,`isActive` tinyint(2) NOT NULL DEFAULT '1' COMMENT '1-Active, 0-Not Active', `date_time` datetime NOT NULL COMMENT 'date and time on which it was added', `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'timestamp on which it was updated',`updated_by` varchar(255) NOT NULL COMMENT 'the record was updated by whom',PRIMARY KEY (`id`),KEY `idx_name` (`name`),KEY `idx_isActive` (`isActive`),KEY `idx_date_time` (`date_time`),KEY `idx_update_time` (`update_time`),KEY `idx_updated_by` (`updated_by`))ENGINE=MYISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1";             
+                $crtSql="CREATE TABLE $use_list(`id` BIGINT(20) NOT NULL AUTO_INCREMENT,`name` varchar(64) NOT NULL,`isActive` tinyint(2) NOT NULL DEFAULT '1' COMMENT '1-Active, 0-Not Active', `date_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'date and time on which it was added', `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'timestamp on which it was updated',`updated_by` varchar(255) NOT NULL COMMENT 'the record was updated by whom',PRIMARY KEY (`id`),KEY `idx_name` (`name`),KEY `idx_isActive` (`isActive`),KEY `idx_date_time` (`date_time`),KEY `idx_update_time` (`update_time`),KEY `idx_updated_by` (`updated_by`))ENGINE=MYISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1";             
                 $crtres = $obj->query($crtSql);
                 $list=$params['list_values'];
                 $listvalue = explode(',', $list);
@@ -159,16 +159,16 @@ class attribute extends DB
 	$fil_pos 	= $params['fil_pos'];
 	$aflag	 	= $params['aflag'];
 	$catid 		= $params['catid'];
-        $chksql="SELECT count(1) from tbl_attribute_mapping where attribute_id=".$aid." and category_id=".$catid."";
+        $chksql="SELECT count(1) from tbl_attribute_category_mapping where attribute_id=".$aid." and category_id=".$catid."";
         $ckres=$this->query($chksql);
         $chkres=$this->numRows($ckres);
         if($chkres==0)
         {
         $sql = "INSERT 
                 INTO 
-                        tbl_attribute_mapping
+                        tbl_attribute_category_mapping
                         (attribute_id,attr_display_flag,attr_display_position,
-                         attr_filter_flag,attr_filter_position,active_flag,category_id)
+                         attr_filter_flag,attr_filter_position,active_flag,category_id, date_time)
                 VALUES
                         (".$aid.",
                          ".$dflag.",
@@ -176,7 +176,7 @@ class attribute extends DB
                          ".$fil_flag.",
                          ".$fil_pos.",
                          1,
-                         ".$catid.")";
+                         ".$catid.", now())";
         $res = $this->query($sql);
             if($res)
             { 
@@ -204,7 +204,7 @@ class attribute extends DB
 					*,
 					attribute_id 
 				FROM 
-					tbl_attribute_mapping 
+					tbl_attribute_category_mapping 
 				WHERE 
 					category_id=".$params['catid']." 
 				AND 

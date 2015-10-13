@@ -36,7 +36,7 @@
                     }
                     
                     //  Inserting the values in brand table
-                    $sql = "INSERT INTO tbl_brandid_generator(name,category_name,cdt,udt,aflg) VALUES('".$detls['product_brand']."','".$catname."',now(),now(),1)";
+                    $sql = "INSERT INTO tbl_brandid_generator(name,category_name,date_time,aflg) VALUES('".$detls['product_brand']."','".$catname."',now(),1)";
                     $res = $this->query($sql);
                     $bid = $this->lastInsertedId();
                     $brandid = ($bid) ? $bid : $detls['brandid'];
@@ -55,7 +55,7 @@
                 if(!$cnt2)
                 {
                   //  If product not present in generator table new product insertion process starts
-                  $sql = "INSERT INTO tbl_productid_generator(product_name,product_brand) VALUES('".$detls['product_name']."','".$detls['product_brand']."')";
+                  $sql = "INSERT INTO tbl_productid_generator(product_name,product_brand, date_time) VALUES('".$detls['product_name']."','".$detls['product_brand']."', now())";
                   $res = $this->query($sql);
                   $pid = $this->lastInsertedId();
                 }
@@ -72,8 +72,8 @@
                    if($cntres==0)
                    {
                     //  For product designer tabe insertion   
-                   $dessql="insert into tbl_designer_product_mapping(product_id,desname,active_flag,cdt,udt)
-                            VALUES(".$pid.",'".$des['desname']."',1,now(),now())";
+                   $dessql="insert into tbl_designer_product_mapping(product_id,desname,active_flag,date_time)
+                            VALUES(".$pid.",'".$des['desname']."',1,now())";
                     $desres = $this->query($dessql);
                    }
                    else
@@ -89,27 +89,26 @@
                     if($desres)
                     {
                     //  For category product mapping
-                        $pcsql="INSERT INTO tbl_product_category_mapping(product_id,category_id,price,rating,display_flag,cdt,udt)
-                                VALUES(\"".$pid."\",\"".$detls['category_id']."\",\"".$detls['product_price']."\",\"".$detls['rating']."\",1,now(),now())
+                        $pcsql="INSERT INTO tbl_product_category_mapping(product_id,category_id,price,rating,display_flag,date_time)
+                                VALUES(\"".$pid."\",\"".$detls['category_id']."\",\"".$detls['product_price']."\",\"".$detls['rating']."\",1,now())
                                 ON DUPLICATE KEY UPDATE
                                                         category_id             = \"".$detls['category_id']."\",
                                                         price                   = \"".$detls['price']."\",
                                                         rating                  = \"".$detls['rating']."\",
-                                                        display_flag            = \"".$detls['dflag']."\"
-                                                        udt                     =  now()";
+                                                        display_flag            = \"".$detls['dflag']."\"";
                         $pcres=$this->query($pcsql);
                         
                     //  For product values filling     
                         $sql="INSERT INTO tbl_product_master(product_id,barcode,lotref,lotno,product_name,product_display_name,
                                                      product_model,product_brand,prd_price,product_currency,product_keyword,                                                     
-                                                     product_desc,prd_wt,prd_img,product_warranty,desname,updatedby, updatedon)
+                                                     product_desc,prd_wt,prd_img,product_warranty,desname,updatedby, date_time)
                                                 VALUES (
 						       ".$pid.",'".$detls['barcode']."','".$detls['lotref']."',".$detls['lotno'].",
                                                       '".$detls['product_name']."','".$detls['product_display_name']."', 
                                                       '".$detls['product_model']."', '".$detls['product_brand']."', ".$detls['product_price'].",
                                                       '".$detls['product_currency']."','".$detls['product_keywords']."', 
                                                       '".$detls['product_desc']."',".$detls['product_wt'].",'".$detls['prd_img']."',
-                                                      '".$detls['product_warranty']."','".$des['desname']."','CMS USER', now(), now())
+                                                      '".$detls['product_warranty']."','".$des['desname']."','CMS USER', now())
 			  ON DUPLICATE KEY UPDATE
                                                     barcode                      = '".$detls['barcode']."', 
                                                     lotref                       = '".$detls['lotref']."', 
@@ -125,7 +124,6 @@
                                                     prd_img                      = '".$detls['prd_img']."',  
                                                     product_warranty             ='".$detls['product_warranty']."',
                                                     updatedby 			 =   'CMS USER', 
-                                                    updatedon 			 =    now(),
                                                     desname                      ='".$des['desname']."'";
                     $res = $this->query($sql);
                    //----------------------------------------------For product search table--------------------------------------------------- 
@@ -134,10 +132,10 @@
                     {
                             //  For tbl_product_search
         // Few attributes remaining-- type,metal,purity,nofd,dwt,gemwt,quality,goldwt
-                            $sql = "INSERT INTO tbl_product_search(product_id,color,cert,cut,cla,base,tabl,val,p_disc,prop,pol,sym,fluo,td,measurement,cert1_no,pa,cr_hgt,cr_ang,girdle,pd) VALUES
+                            $sql = "INSERT INTO tbl_product_search(product_id,color,cert,cut,cla,base,tabl,val,p_disc,prop,pol,sym,fluo,td,measurement,cert1_no,pa,cr_hgt,cr_ang,girdle,pd, date_time) VALUES
                                     (\"".$pid."\",\"".$attr['color']."\",\"".$attr['cert']."\",\"".$attr['cut']."\",\"".$attr['cla']."\",\"".$attr['base']."\",\"".$attr['tabl']."\",\"".$attr['val']."\",\"".$attr['p_disc']."\",
                                      \"".$attr['prop']."\",\"".$attr['pol']."\",\"".$attr['sym']."\",\"".$attr['fluo']."\",\"".$attr['td']."\",\"".$attr['measurement']."\",\"".$attr['cert1no']."\",\"".$attr['pa']."\",\"".$attr['cr_hgt']."\",
-                                     \"".$attr['cr_ang']."\",\"".$attr['girdle']."\",\"".$attr['pd']."\")
+                                     \"".$attr['cr_ang']."\",\"".$attr['girdle']."\",\"".$attr['pd']."\", now())
                                     ON DUPLICATE KEY UPDATE
                                                             color       = \"".$attr['color']."\", 
                                                             cert        = \"".$attr['cert']."\",

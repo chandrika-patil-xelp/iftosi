@@ -13,7 +13,7 @@ class wishlist extends DB
    {
        $dt     = json_decode($params['dt'],1);
        $detls  = $dt['result'];
-       $sql="INSERT INTO tbl_wishlist(uid,pid,vid,wf,cdt,udt) VALUES(".$detls['uid'].",".$detls['pid'].",".$detls['vid'].",1,now(),now())";
+       $sql="INSERT INTO tbl_wishlist(uid,pid,vid,wf,date_time) VALUES(".$detls['uid'].",".$detls['pid'].",".$detls['vid'].",1,now())";
        $res=$this->query($sql);
        if($res)
        {

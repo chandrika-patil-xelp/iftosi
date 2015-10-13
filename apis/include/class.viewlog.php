@@ -31,8 +31,8 @@ class viewlog extends DB
                 $udetail['uname']=$row1['user_name'];
                 $udetail['email']=$row1['email'];
             }
-          $isql="INSERT INTO tbl_viewlog(uid,userName,email,product_id,vid,updatedby,udt,cdt)
-                   VALUES(".$uid.",'".$udetail['uname']."','".$udetail['email']."',".$params['pid'].",".$params['vid'].",'customer',now(),now())";
+          $isql="INSERT INTO tbl_viewlog(uid,userName,email,product_id,vid,updatedby,date_time)
+                   VALUES(".$uid.",'".$udetail['uname']."','".$udetail['email']."',".$params['pid'].",".$params['vid'].",'customer',now())";
             $ires=$this->query($isql);
             if($ires)
             {
@@ -57,7 +57,7 @@ class viewlog extends DB
         
         $page   = ($params['page'] ? $params['page'] : 1);
         $limit  = ($params['limit'] ? $params['limit'] : 15);
-        $viewprod="SELECT uid,userName,email,cdt,product_id from tbl_viewlog where vid=".$params['vid']."";
+        $viewprod="SELECT uid,userName,email,date_time,product_id from tbl_viewlog where vid=".$params['vid']."";
         if (!empty($page))
         {
             $start = ($page * $limit) - $limit;

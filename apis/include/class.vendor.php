@@ -11,8 +11,8 @@ class vendor extends DB
         $dt= json_decode($params['dt'],1);
         $detls  = $dt['result'];
         
-        $sql="INSERT INTO tbl_vendor_product_mapping(product_id,vendor_id,vendor_price,vendor_quantity,vendor_currency,vendor_remarks,active_flag,updatedby,updatedon,backendupdate)";
-        $sql.="VALUES(".$detls['pid'].",".$detls['vid'].",".$detls['vp'].",".$detls['vq'].",'".$detls['vc']."','".$detls['vr']."',".$detls['af'].",'vendor',now(),now())";
+        $sql="INSERT INTO tbl_vendor_product_mapping(product_id,vendor_id,vendor_price,vendor_quantity,vendor_currency,vendor_remarks,active_flag,updatedby,date_time)";
+        $sql.="VALUES(".$detls['pid'].",".$detls['vid'].",".$detls['vp'].",".$detls['vq'].",'".$detls['vc']."','".$detls['vr']."',".$detls['af'].",'vendor',now())";
         $res = $this->query($sql);
         if($res)
         {
@@ -169,7 +169,7 @@ class vendor extends DB
     public function updateProductInfo($params)
     {        
         $sql = "UPDATE tbl_vendor_product_mapping SET vendor_price=".$params['vp'].",
-                vendor_quantity=".$params['vq'].",updatedby='vendor',updatedon=now(),
+                vendor_quantity=".$params['vq'].",updatedby='vendor',
                 active_flag=".$params['af']." WHERE vendor_id=".$params['vid']." AND
                 product_id=".$params['pid']."";
         $res=$this->query($sql);
@@ -193,7 +193,7 @@ class vendor extends DB
         $page   = ($params['page'] ? $params['page'] : 1);
         $limit  = ($params['limit'] ? $params['limit'] : 15);
         
-        $sql1="SELECT * FROM tbl_vendor_product_mapping where product_id=".$params['pid']." AND vendor_id=".$params['vid']." ORDER BY updatedon DESC";
+        $sql1="SELECT * FROM tbl_vendor_product_mapping where product_id=".$params['pid']." AND vendor_id=".$params['vid']." ORDER BY date_time DESC";
         if (!empty($page))
         {
             $start = ($page * $limit) - $limit;

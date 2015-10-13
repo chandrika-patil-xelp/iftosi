@@ -15,7 +15,7 @@ class filter extends DB
 				attribute_id, 
 				attr_display_position 
 			FROM 
-				tbl_attribute_mapping 
+				tbl_attribute_category_mapping 
 			WHERE 
 				category_id=".$params['category_id']." 
 			AND 
@@ -96,421 +96,123 @@ class filter extends DB
        }
          
     public function refine($params)
-    {  
+    {
+		$dt = json_decode($params['dt'],1);
+echo '<pre>';
+print_r($dt);
+echo '</pre>';
+		$detls = $dt['result'];
+echo '<pre>';
+print_r($detls);
+echo '</pre>';
 
-        $dt     = json_decode($params['dt'],1);
-        $detls  = $dt['result'];
-// When No condition is applied 
-  
-#   WHEN FILTER FLAG IS NOT SET THEN       
-        $sql="SELECT product_id,barcode,lotref,lotno,product_name,product_display_name,product_brand,product_model,prd_img,prd_price AS prc,lineage,prd_wt,category_id,product_currency,product_keyword,product_desc,product_warranty,desname from tbl_product_master WHERE category_id=".$params['catid']."";
+		foreach($detls as $key => $value)
+		{
+			$detls[$key] = trim($value);
+		}
 
-//  If filter flag is active/inactive        
-        $flg=$detls['filter_flg'];
-        
-        if($flg==0)
-        {
-            $pres=$this->query($sql);
-           
-            $chkres=$this->numRows($pres);
-            
-            if($chkres>0)
-            {   
-                while($row=$this->fetchData($pres))
-                {   
-                    $arr[]=$row;
-                }
-                $err=array('Code'=>0,'Msg'=>'Prodcut result is obtained');
-            }
-        }
-        
-#   Since filter flag valriable is active now so check according to the cases
-#   psql is the prime query. This will adjoins with several sql variable strings accordingly
-        else if($flg==1)
-        {
-#   SHOWS PRODUCT WITH A CERTAIN PRICE ONLY            
-            if(!empty($detls['price']))
-           {
-            $pr=" AND prd_price=".$detls['price']."";
-            $sql.=$pr;
-           }
-            
-#   ADDS PRICE RANGE  [pfrm]         [pto]        WITH THE PROVIDED QUERY
-           if(!empty($detls['pfrm']) || !empty($detls['pto']))
-           {
-            $price=" AND prd_price>=".$detls['pfrm']." AND prd_price<= ".$detls['pto']."";
-            $sql.=$price;
-           }
+		$catSql = "SELECT product_id FROM tbl_product_category_mapping WHERE category_id = " . $params['catid'];
+		$catRes = $this->query($catSql);
 
-#   FETCHES PRODUCT ACCORDING TO BRAND NAME                   
-           if(!empty($detls['bname']))
-           {
-             $bname= str_replace(',', "','", $detls['bname']);
-             $brand=" AND product_brand IN('".$bname."')";  
-             $sql.=$brand;  
-           }
-           
-#PRODUCT Type
-#   get the id of type from attribute master and search for the record
-#   in product_attribute_mapp where value='' and attrid = typeid                   
-           if(!empty($detls['type']))
-           {
-               $type= str_replace(',', "','", $detls['type']);
+		$prdIdArr = array();
 
-               $tsql="SELECT attr_id from tbl_attribute_master where attr_name='type'";
-               $tres=$this->query($tsql);
-               $trow=$this->fetchData($tres);
-               $typeid=$trow['attr_id'];
-               $types="SELECT product_id from tbl_product_attributes WHERE attribute_id=".$typeid." AND value IN('".$type."')";
-               $tpres=$this->query($types);
-               if($tpres)
-               {
-                   while($row=$this->fetchData($tpres))
-                   {
-                       $pid[]=$row['product_id'];
-                   }
-                   $pid['typid']=implode(',',$pid);
-                   
-                   $sql.=" AND product_id IN(".$pid.")";
-               }
-           }
+		if($catRes)
+		{
+			while($catRow = $this->fetchData($catRes))
+			{
+				$prdIdArr[] = $catRow['product_id'];
+			}
+		}
 
-#PRODUCT Gender
-#  SEARCHES FORPRODUCT GENDER ATTRIBUTE ID 
-#  FETCHES PRODUCT ID IN CONTEXT OF ATTRIBUTE VALUE AGAINST FETCHED GENDER TYPE
-#  GENERATES QUERY AGAINST PRODUCT FIELD QUERY HAVING PRODUCT ID IN OBTAINED PID
-           if(!empty($detls['pgen']))
-           {
-               $gsql="SELECT attr_id from tbl_attribute_master where attr_name='gender'";
-               $gres=$this->query($gsql);
-               $grow=$this->fetchData($gres);
-               $aid=$grow['attr_id'];
+		$prdIdStr = implode(',', $prdIdArr);
 
-               $jgsql="SELECT product_id from tbl_product_attributes WHERE attribute_id=".$aid." AND value IN('".$detls['pgen']."')";
-               $jgres=$this->query($jgsql);
-               if($jgres)
-               {
-                   while($row=$this->fetchData($jgres))
-                   {
-                       $pid[]=$row['product_id'];
-                   }
-                   $pid['gid']=implode(',',$pid);
-                   
-#   HANDLE [AND] OR [WHERE]
-                   $sql.="AND product_id IN(".$pid.")";
-               }
-           }
+		if($prdIdStr)
+		{
+			$sql="SELECT product_id,barcode,lotref,lotno,product_name,product_display_name,product_brand,product_model,prd_img,prd_price AS prc,prd_wt,product_currency,product_keyword,product_desc,product_warranty,desname from tbl_product_master WHERE product_id IN (".$prdIdStr.")";
 
-#PRODUCT METAL
-#  SEARCHES FOR PRODUCT METAL ATTRIBUTE ID 
-#  FETCHES PRODUCT ID IN CONTEXT OF ATTRIBUTE VALUE AGAINST FETCHED METAL CATEGORY
-#  GENERALIZED QUERY AGAINST PRODUCT FIELDS QUERY HAVING PRODUCT ID IN OBTAINED PID           
-           if(!empty($detls['metal']))
-           {
-            //   $met= implode(',', $detls['metal']);
-               $mtsql="SELECT attr_id from tbl_attribute_master where attr_name='metal'";
-               $mtres=$this->query($mtsql);
-               $mtrow=$this->fetchData($mtres);
-               $aid=$mtrow['attr_id'];
+			$flg=$detls['filter_flg'];
 
-               $msql="SELECT product_id from tbl_product_attributes WHERE attribute_id=".$aid." AND value IN('".$detls['metal']."')";
-               $mres=$this->query($msql);
-               if($mres)
-               {
-                   while($row=$this->fetchData($mres))
-                   {
-                       $pid[]=$row['product_id'];
-                   }
-                   $pid['mtid']=implode(',',$pid);
-#   HANDLE [AND] OR [WHERE]
-                   $sql.="AND product_id IN(".$pid.")";
-               }
-           }
-           
-#PRODUCT GEMSTONE COLOR
-#  SEARCHES FOR PRODUCT COLOR ATTRIBUTE ID 
-#  FETCHES PRODUCT ID IN CONTEXT OF ATTRIBUTE VALUE AGAINST FETCHED SHAPE CATEGORY
-#  GENERALIZED QUERY AGAINST PRODUCT FIELDS QUERY HAVING PRODUCT ID IN OBTAINED PID
-           if(!empty($detls['color']))
-           {
-              // $col= implode(',', $detls['color']);
-               $colsql="SELECT attr_id from tbl_attribute_master where attr_name='color'";
-               $colres=$this->query($colsql);
-               $colrow=$this->fetchData($colres);
-               $aid=$colrow['attr_id'];
+			if($flg == 0)
+			{
+				$pres = $this->query($sql);
+				$chkres = $this->numRows($pres);
 
-               $clrsql="SELECT product_id from tbl_product_attributes WHERE attribute_id=".$aid." AND value IN('".$detls['color']."')";
-               $clres=$this->query($clrsql);
-               if($clres)
-               {
-                   while($row=$this->fetchData($clres))
-                   {
-                       $pid[]=$row['product_id'];
-                   }
-                   $pid['col']=implode(',',$pid);
-#   HANDLE [AND] [OR] [WHERE]
-                   $sql.=" AND product_id IN(".$pid.")";
-               }
-           }
+				if($chkres > 0)
+				{
+					while($row=$this->fetchData($pres))
+					{
+						$arr[] = $row;
+					}
+					$err = array('Code' => 0, 'Msg' => 'Prodcut result is obtained');
+				}
+			}
+			else if($flg==1)
+			{
+				if(!empty($detls['price']))
+				{
+					$pr = " AND prd_price = " . $detls['price'];
+					$sql .= $pr;
+				}            
+				else
+				{
+					$price = '';
+					if(isset($detls['pfrm']) && isset($detls['pto']))
+					{
+						$price = " AND prd_price >= " . $detls['pfrm'] . " AND prd_price <= " . $detls['pto'];
+					}
 
-#PRODUCT SHAPE
-#  SEARCHES FOR PRODUCT SHAPE ATTRIBUTE ID 
-#  FETCHES PRODUCT ID IN CONTEXT OF ATTRIBUTE VALUE AGAINST FETCHED SHAPE CATEGORY
-#  GENERALIZED QUERY AGAINST PRODUCT FIELDS QUERY HAVING PRODUCT ID IN OBTAINED PID
-           if(!empty($detls['shape']))
-           {
-              // $shape= implode(',', $detls['shape']);
-               $shpsql="SELECT attr_id from tbl_attribute_master where attr_name='shape'";
-               $shpres=$this->query($shpsql);
-               $shprow=$this->fetchData($shpres);
-               $aid=$shprow['attr_id'];
+					$sql .= $price;
+				}
 
-               $spsql="SELECT product_id from tbl_product_attributes WHERE attribute_id=".$aid." AND value IN('".$detls['shape']."')";
-               $spres=$this->query($spsql);
-               if($spres)
-               {
-                   while($row=$this->fetchData($spres))
-                   {
-                       $pid[]=$row['product_id'];
-                   }
-                   $pid['shpid']=implode(',',$pid);
-#   HANDLE [AND] [OR] [WHERE]
-                   $sql.=" AND product_id IN(".$pid.")";
-               }
-           }
-           
-#PRODUCT STYLE
-#  SEARCHES FOR PRODUCT STYLE ATTRIBUTE ID 
-#  FETCHES PRODUCT ID IN CONTEXT OF ATTRIBUTE VALUE AGAINST FETCHED STYLE CATEGORY
-#  GENERALIZED QUERY AGAINST PRODUCT FIELDS QUERY HAVING PRODUCT ID IN OBTAINED PID
-           if(!empty($detls['style']))
-           {
-              // $style= implode(',', $detls['style']);
-               $stsql="SELECT attr_id from tbl_attribute_master where attr_name='style'";
-               $stres=$this->query($stsql);
-               $strow=$this->fetchData($stres);
-               $aid=$strow['attr_id'];
+				if(!empty($detls['brname']))
+				{
+					$brname = str_replace(',', "','", $detls['brname']);
+					$brand = " AND product_brand IN ('".$brname."')";
+					$sql .= $brand;
+				}
 
-               $stlsql="SELECT product_id from tbl_product_attributes WHERE attribute_id=".$aid." AND value IN('".$detls['style']."')";
-               $stlres=$this->query($stlsql);
-               if($stlres)
-               {
-                   while($row=$this->fetchData($stlres))
-                   {
-                       $pid[]=$row['product_id'];
-                   }
-                   $pid['stlid']=implode(',',$pid);
-#   HANDLE [AND] [OR] [WHERE]
-                   $sql.=" AND product_id IN(".$pid.")";
-               }
-           }           
+				$page = $params['page'];
+				$limit=$params['limit'];
 
-#PRODUCT PURITY
-#  SEARCHES FOR PRODUCT PURITY ATTRIBUTE ID 
-#  FETCHES PRODUCT ID IN CONTEXT OF ATTRIBUTE VALUE AGAINST FETCHED PURITY CATEGORY
-#  GENERALIZED QUERY AGAINST PRODUCT FIELDS QUERY HAVING PRODUCT ID IN OBTAINED PID           
-           if(!empty($detls['purity']))
-           {
-               //$purity= implode(',', $detls['purity']);
-               $ptysql="SELECT attr_id from tbl_attribute_master where attr_name='purity'";
-               $ptyres=$this->query($ptysql);
-               $ptyrow=$this->fetchData($ptyres);
-               $aid=$ptyrow['attr_id'];
+				if(!empty($page))
+				{
+					$start = ($page * $limit) - $limit;
+					$sql .= " LIMIT " . $start . ", $limit";
+				}
+echo $sql . "<br/>";
+				$finalres = $this->query($sql);
+				$chkres=$this->numRows($finalres);
+				if($chkres>0)
+				{
+					while($rows=$this->fetchData($finalres))
+					{
+						$arr[] = $rows;
+					}
 
-               $prtysql="SELECT product_id from tbl_product_attributes WHERE attribute_id=".$aid." AND value IN('".$detls['purity']."')";
-               $prtyres=$this->query($prtysql);
-               if($prtyres)
-               {
-                   while($row=$this->fetchData($prtyres))
-                   {
-                       $pid[]=$row['product_id'];
-                   }
-                   $pid['prtyid']=implode(',',$pid);
-#   HANDLE [AND] [OR] [WHERE]
-                   $sql.=" AND product_id IN(".$pid.")";
-               }
-           }
-           
-#PRODUCT SIZE
-#  SEARCHES FOR PRODUCT SIZE ATTRIBUTE ID 
-#  FETCHES PRODUCT ID IN CONTEXT OF ATTRIBUTE VALUE AGAINST FETCHED SIZE CATEGORY
-#  GENERALIZED QUERY AGAINST PRODUCT FIELDS QUERY HAVING PRODUCT ID IN OBTAINED PID           
-           if(!empty($detls['size']))
-           {
-              // $size= implode(',', $detls['size']);
-               $szsql="SELECT attr_id from tbl_attribute_master where attr_name='size'";
-               $szres=$this->query($szsql);
-               $szrow=$this->fetchData($szres);
-               $aid=$szrow['attr_id'];
+					$err=array('Code'=>0,'Msg'=>'Product List fetched');
+				}
+				else
+				{
+					$arr=array();
+					$err=array('Code'=>1,'Msg'=>'No records found');
+				}
+			}
+			else
+			{
+				$arr=array();
+				$err=array('Code'=>1,'Msg'=>'Error in passing values');
+			}
+		}
+		else
+		{
+			$arr=array();
+			$err=array('Code'=>1,'Msg'=>'No product found in the category');
+		}
 
-               $sizesql="SELECT product_id from tbl_product_attributes WHERE attribute_id=".$aid." AND value IN('".$detls['size']."')";
-               $sizeres=$this->query($sizesql);
-               if($sizeres)
-               {
-                   while($row=$this->fetchData($sizeres))
-                   {
-                       $pid[]=$row['product_id'];
-                   }
-                   $pid['szid']=implode(',',$pid);
-#   HANDLE [AND] [OR] [WHERE]
-                   $sql.=" AND product_id IN(".$pid.")";
-               }
-           }
-           
-#PRODUCT CLARITY
-#  SEARCHES FOR PRODUCT CLARITY ATTRIBUTE ID 
-#  FETCHES PRODUCT ID IN CONTEXT OF ATTRIBUTE VALUE AGAINST FETCHED CLARITY CATEGORY
-#  GENERALIZED QUERY AGAINST PRODUCT FIELDS QUERY HAVING PRODUCT ID IN OBTAINED PID           
-           if(!empty($detls['clarity']))
-           {
-              // $size= implode(',', $detls['size']);
-               $clsql="SELECT attr_id from tbl_attribute_master where attr_name='clarity'";
-               $clres=$this->query($clsql);
-               $clrow=$this->fetchData($clres);
-               $aid=$clrow['attr_id'];
-
-               $clasql="SELECT product_id from tbl_product_attribute WHERE attribute_id=".$aid." AND value IN('".$detls['clarity']."')";
-               $clares=$this->query($clasql);
-               if($clares)
-               {
-                   while($row=$this->fetchData($clares))
-                   {
-                       $pid[]=$row['product_id'];
-                   }
-                   $pid['clid']=implode(',',$pid);
-#   HANDLE [AND] [OR] [WHERE]
-                   $sql.=" AND product_id IN(".$pid.")";
-               }
-           }
- 
-           
-#PRODUCT CARATS RANGE
-#  SEARCHES FOR PRODUCT CARATS ATTRIBUTE ID 
-#  FETCHES PRODUCT ID IN CONTEXT OF ATTRIBUTE VALUE AGAINST FETCHED CARATS CATEGORY
-#  GENERALIZED QUERY AGAINST PRODUCT FIELDS QUERY HAVING PRODUCT ID IN OBTAINED PID           
-           
-           if(!empty($detls['mncar']) && !empty($detls['mxcar']))
-           {
-              // $size= implode(',', $detls['size']);
-               $crsql="SELECT attr_id from tbl_attribute_master where attr_name='carats'";
-               $crres=$this->query($crsql);
-               $crrow=$this->fetchData($crres);
-               $aid=$crrow['attr_id'];
-
-               $caratsql="SELECT product_id from tbl_product_attribute WHERE attribute_id=".$aid." AND value BETWEEN ".$detls['mncar']." AND ".$detls['mxcar']."";
-               $caratres=$this->query($caratsql);
-               if($caratres)
-               {
-                   while($row=$this->fetchData($caratres))
-                   {
-                       $pid[]=$row['product_id'];
-                   }
-                   $pid['carid']=implode(',',$pid);
-#   HANDLE [AND] [OR] [WHERE]
-                   $sql.=" AND product_id IN(".$pid.")";
-               }
-           }
-           
-#PRODUCT CARATS 
-#  SEARCHES FOR PRODUCT CARATS ATTRIBUTE ID 
-#  FETCHES PRODUCT ID IN CONTEXT OF ATTRIBUTE VALUE AGAINST FETCHED CARATS CATEGORY
-#  GENERALIZED QUERY AGAINST PRODUCT FIELDS QUERY HAVING PRODUCT ID IN OBTAINED PID           
-           
-           if(!empty($detls['carats']))
-           {
-               $crsql="SELECT attr_id from tbl_attribute_master where attr_name='carats'";
-               $crres=$this->query($crsql);
-               $crrow=$this->fetchData($crres);
-               $aid=$crrow['attr_id'];
-               $caratsql="SELECT product_id from tbl_product_attribute WHERE attribute_id=".$aid." AND value IN(".$detls['carats'].")";
-               $caratres=$this->query($caratsql);
-               if($caratres)
-               {
-                   while($row=$this->fetchData($caratres))
-                   {
-                       $pid[]=$row['product_id'];
-                   }
-                   $pid['carid']=implode(',',$pid);
-#   HANDLE [AND] [OR] [WHERE]
-                   $sql.=" AND product_id IN(".$pid.")";
-               }
-           }           
-           
-#PRODUCT POLISH
-#  SEARCHES FOR PRODUCT POLISH ATTRIBUTE ID 
-#  FETCHES PRODUCT ID IN CONTEXT OF ATTRIBUTE VALUE AGAINST FETCHED POLISH CATEGORY
-#  GENERALIZED QUERY AGAINST PRODUCT FIELDS QUERY HAVING PRODUCT ID IN OBTAINED PID           
-           if(!empty($detls['polish']))
-           {
-              // $size= implode(',', $detls['size']);
-               $polql="SELECT attr_id from tbl_attribute_master where attr_name='clarity'";
-               $polres=$this->query($polsql);
-               $polrow=$this->fetchData($polres);
-               $aid=$polrow['attr_id'];
-
-               $plsql="SELECT product_id from tbl_product_attribute WHERE attribute_id=".$aid." AND value IN('".$detls['polish']."')";
-               $plres=$this->query($plsql);
-               if($plres)
-               {
-                   while($row=$this->fetchData($plres))
-                   {
-                       $pid[]=$row['product_id'];
-                   }
-                   $pid['clid']=implode(',',$pid);
-#   HANDLE [AND] [OR] [WHERE]
-                   $sql.=" AND product_id IN(".$pid.")";
-               }
-           }
-
-/*           for($i=0;$i<=count($detls['aid']);$i++)
-           {
-               $plsql="SELECT product_id from tbl_product_attributes where attribute_id IN(".$detls['aid'].")";
-               $plres=$this->query($plsql);
-               while($row=$this->fetchData($plres))
-               {
-                 $pids=$row['pid']; 
-               }
-           }    
-               $prid='';
-               $prid=implode(',',$pids);
-           $sql.=" AND product_id IN(".$pid.")";
-
- */
-           
- //-----------------------------FINALLY QUERY EXECUTES-------------------------------------------------------------------------------           
-       $page=$params['page'];
-        $limit=$params['limit'];
-        if (!empty($page))
-        {
-            $start = ($page * $limit) - $limit;
-            $sql.=" LIMIT " . $start . ",$limit";
-        }
-           $finalres=$this->query($sql);
-           $chkres=$this->numRows($finalres);
-           if($chkres>0)
-           {
-               while($rows=$this->fetchData($finalres))
-               {
-                   $arr[]=$rows;
-                   
-               }
-               $err=array('Code'=>0,'Msg'=>'Product List fetched');
-           }
-           else
-           {
-               $arr=array();
-               $err=array('Code'=>1,'Msg'=>'No records found');
-           }
-        }
-        else
-        {
-            $arr=array();
-            $err=array('Code'=>1,'Msg'=>'Error in passing values');
-        }
         $result=array('result'=>$arr,'error'=>$err);
         return $result;
     }   
-       
+
 /*     
 
 #   Filtering basic basis are as following:

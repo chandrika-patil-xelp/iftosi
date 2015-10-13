@@ -111,12 +111,12 @@ class categoryInfo extends DB
           $cnt=$this->numRows($cres);
             if($cnt==0)
             {
-                $isql="INSERT INTO tbl_categoryid_generator(category_name,cdt,udt,aflg) VALUES(\"".$params['catName']."\",now(),now(),1)";
+                $isql="INSERT INTO tbl_categoryid_generator(category_name,date_time,aflg) VALUES(\"".$params['catName']."\",now(),1)";
                 $ires=$this->query($isql);
                 $catid=$this->lastInsertedId();
                 if($ires)
                 {
-                    $csql="INSERT INTO tbl_category_master(catid,cat_name,p_catid,cat_lvl,lineage,createdon,updatedon,updatedby) values(\"".$catid."\",\"".$params['catName']."\",\"".$params['pcatid']."\",\"".$params['lvl']."\",\"".$params['lineage']."\",now(),now(),'CMS_USER')";
+                    $csql="INSERT INTO tbl_category_master(catid,cat_name,p_catid,cat_lvl,lineage,date_time,updatedby) values(\"".$catid."\",\"".$params['catName']."\",\"".$params['pcatid']."\",\"".$params['lvl']."\",\"".$params['lineage']."\",now(),'CMS_USER')";
                     $cres = $this->query($csql);
                 
                     if($cres)
@@ -142,7 +142,7 @@ class categoryInfo extends DB
         
         public function deleteCat($params)
         {
-            $sql = "UPDATE tbl_categoryid_generator set aflg=2,udt=now() WHERE category_id=".$params['catid'];
+            $sql = "UPDATE tbl_categoryid_generator set aflg=2 WHERE category_id=".$params['catid'];
             $res = $this->query($sql);
             if($res)
             {
@@ -161,11 +161,11 @@ class categoryInfo extends DB
         
         public function updateCat($params)
         {
-          $sql = "UPDATE  tbl_categoryid_generator set category_name='".$params['catName']."',udt=now(),aflg=1 WHERE  category_id=".$params['catid'];
+          $sql = "UPDATE  tbl_categoryid_generator set category_name='".$params['catName']."',aflg=1 WHERE  category_id=".$params['catid'];
           $res = $this->query($sql);
           if($res)
           {   
-              $csql="UPDATE tbl_category_master SET cat_name='".$params['catName']."',cat_lvl=".$params['lvl'].",p_catid=".$params['pcatid'].",lineage='".$params['lineage']."',updatedon=now() WHERE catid=".$params['catid']."";
+              $csql="UPDATE tbl_category_master SET cat_name='".$params['catName']."',cat_lvl=".$params['lvl'].",p_catid=".$params['pcatid'].",lineage='".$params['lineage']."' WHERE catid=".$params['catid']."";
               $cres=$this->query($csql);
               if($cres)
               {

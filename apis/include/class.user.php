@@ -35,7 +35,7 @@
             
             if($params['isvendor']=1)
             {
-            $isql= "INSERT INTO tbl_vendor_master(vendor_id,email,updatedon,cdt,is_complete) VALUES(".$uid.",'".$params['email']."',now(),now(),0)";
+            $isql= "INSERT INTO tbl_vendor_master(vendor_id,email,date_time,is_complete) VALUES(".$uid.",'".$params['email']."',now(),0)";
             $res=$this->query($isql);
                 if($res)
                 {
@@ -108,7 +108,6 @@
                                         turnover='".$detls['tovr']."',
                                         lat=".$detls['lat'].",
                                         lng=".$detls['lng'].",
-                                        updatedon=now(),
                                         updatedby='vendor',
                                         is_complete=is_complete 
                 WHERE 

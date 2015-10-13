@@ -16,7 +16,7 @@ class location extends DB
         $res=$this->numRows($chkres);
         if($res<1)
         {
-        $isql="INSERT INTO tbl_city_master(cityname,state_name,country_name) VALUES('".$params['cityname']."','".$params['sname']."','".$params['cname']."')";
+        $isql="INSERT INTO tbl_city_master(cityname,state_name,country_name,date_time) VALUES('".$params['cityname']."','".$params['sname']."','".$params['cname']."',now())";
         $ires=$this->query($isql);
         if($ires)
         {

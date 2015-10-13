@@ -14,8 +14,8 @@ class helpdesk extends DB
        $proErr  = $dt['error'];
        if($proErr['errCode']== 0)
        {
-       $sql="INSERT INTO tbl_contactus_master(cemail,uid,logmobile,cname,cquery,dflag,cdt,udt)
-                 VALUES('".$detls['cemail']."',".$detls['logmobile'].",".$detls['uid'].",'".$detls['cname']."','".$detls['cquery']."',1,now(),now())";
+       $sql="INSERT INTO tbl_contactus(cemail,uid,logmobile,cname,cquery,dflag,date_time)
+                 VALUES('".$detls['cemail']."',".$detls['logmobile'].",".$detls['uid'].",'".$detls['cname']."','".$detls['cquery']."',1,now())";
            
            $res=$this->query($sql);
            if($res)
@@ -40,7 +40,7 @@ class helpdesk extends DB
     
     public function viewhelp($params)
     {
-        $chksql="SELECT * from tbl_contactus_master where dflag=1 order by cdt DESC";
+        $chksql="SELECT * from tbl_contactus where dflag=1 order by date_time DESC";
         $page=$params['page'];
         $limit=$params['limit'];
         if (!empty($page))

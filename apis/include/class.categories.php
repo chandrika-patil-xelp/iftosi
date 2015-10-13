@@ -18,7 +18,7 @@ class categories extends DB
             $catid=$this->lastInsertedId($ires);
             if($ires)
             {
-                $ipsql="INSERT INTO tbl_product_category_mapping(product_id,category_id,pflag,cdt,udt) VALUES(".$detls['pid'].",".$catid.",1,now(),now())";
+                $ipsql="INSERT INTO tbl_product_category_mapping(product_id,category_id,pflag,date_time) VALUES(".$detls['pid'].",".$catid.",1,now())";
                 $ipres=$this->query($ipsql);
                 if($ipres)
                 {
