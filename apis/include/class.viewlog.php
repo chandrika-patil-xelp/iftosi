@@ -17,6 +17,7 @@ class viewlog extends DB
          * Fill details using two arrays. 1-- udetail  2-- prod
          * 
          *  */
+
     public function filLog($params)
     {  
         $uid=$params['uid'];

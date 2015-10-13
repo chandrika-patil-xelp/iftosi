@@ -70,14 +70,14 @@ class wishlist extends DB
             }
             else
             {
-                $arr="Error in fetching data";
-                $err=array('Code'=>0,'Msg'=>'Select operation failed');
+                $arr=array();
+                $err=array('Code'=>1,'Msg'=>'Select operation failed');
             }
        }
        else
        {
-            $arr="No record found";
-            $err=array('Code'=>0,'Msg'=>'Select operation failed');
+            $arr=array();
+            $err=array('Code'=>1,'Msg'=>'Select operation failed');
        }       
        $result=array('result'=>$arr,'error'=>$err);
        return $result;

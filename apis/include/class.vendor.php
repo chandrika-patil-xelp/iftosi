@@ -182,7 +182,7 @@ class vendor extends DB
         else 
         {   
             $arr=array();
-            $err = array('Code' => 0, 'Msg' => 'Details updated successfully');
+            $err = array('Code' => 1, 'Msg' => 'Update unsuccessfull');
         }
         $result = array('results'=>$arr,'error'=>$err);  
         return $result;
@@ -211,7 +211,35 @@ class vendor extends DB
                 $vdet['vremarks']=$row['vendor_remarks'];
                 $vdetls[]=$vdet;
             }
-            $sql2="SELECT orgName,fulladdress,telephones,alt_email,contact_person,contact_mobile,officecity,turnover,postalcode,website,membership_cert,vatno,pancard,banker,lat,lng,bdbc,mdbw from tbl_vendor_master WHERE vendor_id =".$params['vid']."";
+            $sql2="SELECT 
+                            orgName,
+                            fulladdress,
+                            postal_code,
+                            telephones,
+                            alt_email,
+                            officecity,
+                            officecountry
+                            contact_person,
+                            position,
+                            contact_mobile,
+                            email
+                            membership_cert,
+                            bdbc,
+                            other_bdbc,
+                            vatno,                            
+                            landline,
+                            mdbw,                            
+                            website,
+                            banker,                            
+                            pancard,
+                            turnover,
+                            lat,
+                            lng
+
+                    FROM 
+                                tbl_vendor_master 
+                    WHERE 
+                                vendor_id =".$params['vid']."";
             if (!empty($page))
             {
             $start = ($page * $limit) - $limit;
@@ -240,9 +268,7 @@ class vendor extends DB
             $err = array('Code' => 0, 'Msg' => 'No Match Found');
         }
         $result = array('results'=>$arr,'error'=>$err);
-        return $result;
-        
-    }
-    
+        return $result;        
+    }    
 }
 ?>

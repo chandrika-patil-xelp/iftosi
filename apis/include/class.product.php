@@ -502,15 +502,15 @@
             }
             $sql2 = "SELECT 
                             product_id,
-                            carats as carat,
+                            carat,
                             color,
-                            cert as certified,
+                            certified,
                             shape,
-                            cla as clarity,
-                            val as price,
-                            pol as polish,
-                            sym as symmetry,
-                            cert1_no as cno 
+                            clarity,
+                            price,
+                            polish,
+                            symmetry,
+                            cno 
                     FROM 
                             tbl_product_search
                     WHERE 
@@ -560,7 +560,7 @@
                 }
                 else
                 {
-                    $arr="There is no such Id yet assigned.";
+                    $arr=array();
                     $err=array('Code'=>0,'Msg'=>'Error in fetching the data');
                 }
             }
@@ -611,15 +611,15 @@
                 
                 $psql="SELECT 
                                 product_id,
-                                carats as carat,
+                                carat,
                                 color,
-                                cert as certified,
+                                certified,
                                 shape,
-                                cla as clarity,
-                                val as price,
-                                pol as polish,
-                                sym as symmetry,
-                                cert1_no as cno
+                                clarity,
+                                price,
+                                polish,
+                                symmetry,
+                                cno
                        FROM 
                        tbl_product_search 
                        WHERE 
@@ -647,10 +647,10 @@
             }
             else
             {
-                $arr='There is no product in table';
+                $arr1=array();
                 $err=array('Code'=>1,'Msg'=>'No record found ');
             }
-            $result = array('product' =>$arr1,'prdAttributes' =>$arr2,'totalProducts'=>$total_products,'error'=>$err);
+            $result = array('results'=>$arr1,'error'=>$err);
             return $result;
         }
         
@@ -683,13 +683,13 @@
                     $pid=implode(',',$arr2);
                     $fillpiddet="SELECT 
                                         product_id,
-                                        barcode as pcode,
+                                        barcode as code,
                                         product_name as pname,
-                                        product_display_name as pdname,
-                                        product_model as pmodel,
-                                        product_brand as pbrand,
-                                        prd_price as pprice,
-                                        product_currency as pcur,
+                                        product_display_name as dname,
+                                        product_model as model,
+                                        product_brand as brand,
+                                        prd_price as price,
+                                        product_currency as cur,
                                         desname as product_designer,
                                         prd_img as pimg 
                                 FROM 
@@ -741,13 +741,15 @@
             
             $chksql="SELECT 
                             product_id,
-                            barcode as pcode,
+                            barcode,
+                            lotref,
+                            lotno,
                             product_name as pname,
                             product_display_name as pdname,
-                            product_model as pmodel,
-                            product_brand as pbrand,
-                            prd_price as pprice,
-                            product_currency as pcur,
+                            product_model as model,
+                            product_brand as brand,
+                            prd_price as price,
+                            product_currency as cur,
                             desname as product_designer,
                             prd_img as pimg 
                       FROM
@@ -780,7 +782,7 @@
         
         public function productByDesigner($params)
         {
-            $chksql="SELECT product_id from tbl_designer_product_mapping where desname='".$params['desname']."' and active_flag=1";
+            $chksql="SELECT product_id from tbl_designer_product_mapping where desname=\"".$params['desname']."\" and active_flag=1";
             $chkres=$this->query($chksql);
             
             $page   = ($params['page'] ? $params['page'] : 1);
@@ -797,7 +799,9 @@
                 $pid=implode(',',$arr1);
                 $fillpiddet="SELECT 
                                     product_id,
-                                    barcode as pcode,
+                                    barcode as bcode,
+                                    lotref,
+                                    lotno,
                                     product_name as pname,
                                     product_display_name as pdname,
                                     product_model as pmodel,
@@ -841,8 +845,8 @@
             $result=array('Result'=>$arr,'error'=>$err);
             return $result;
         }
-       
-        /*public function getSuggestions($params)
+        
+        /* public function getSuggestions($params)
         {
         $str=$params['str'];
         $tblname=$params['tname'];

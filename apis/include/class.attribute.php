@@ -57,7 +57,20 @@ class attribute extends DB
         $tbldname = $params['tabledname'];
 
         # INSERTING REQUIRED DATA #
-        $sql = "INSERT INTO tbl_attribute_master SET attr_name='".$name."',attr_display_name='".$dname."',attr_unit='".$unit."',attr_type_flag='".$flag."',attr_unit_pos='".$upos."',attr_values='".$vals."',attr_range=".$range.", date_time=now()";
+        $sql = "INSERT
+                                        INTO 
+                tbl_attribute_master
+                SET 
+                                        attr_name=\"".$name."\",
+                                        attr_display_name=\"".$dname."\",
+                                        attr_unit=\"".$unit."\",
+                                        attr_type_flag=\"".$flag."\",
+                                        attr_unit_pos=\"".$upos."\",
+                                        attr_values=\"".$vals."\",
+                                        attr_range=\"".$range."\",
+                                        use_list=\"".$use_list."\",
+                                        active_flag=1,
+                                        date_time=now()";                                        
 	$res = $this->query($sql);
 	if($res)
         { 
@@ -129,8 +142,20 @@ class attribute extends DB
     
     public function fetch_attributes_details($params)
     {
-        $sql = "SELECT attr_id,attr_name,attr_display_name,attr_unit,attr_type_flag,attr_unit_pos,attr_values,attr_range,use_list
-                FROM tbl_attribute_master WHERE attr_id=".$params['attribid'];
+        $sql = "SELECT 
+                        attr_id,
+                        attr_name,
+                        attr_display_name,
+                        attr_unit,
+                        attr_type_flag,
+                        attr_unit_pos,
+                        attr_values,
+                        attr_range,
+                        use_list
+                FROM 
+                        tbl_attribute_master
+                WHERE 
+                        attr_id=".$params['attribid'];
 	$res = $this->query($sql);
         $chkres=$this->numRows($res);
         if($chkres>0)
@@ -168,15 +193,17 @@ class attribute extends DB
                 INTO 
                         tbl_attribute_category_mapping
                         (attribute_id,attr_display_flag,attr_display_position,
-                         attr_filter_flag,attr_filter_position,active_flag,category_id, date_time)
+                         attr_filter_flag,attr_filter_position,active_flag,
+                         category_id, date_time)
                 VALUES
                         (".$aid.",
                          ".$dflag.",
                          ".$dpos.",
                          ".$fil_flag.",
                          ".$fil_pos.",
-                         1,
-                         ".$catid.", now())";
+                           1,
+                         ".$catid.",
+                           now())";
         $res = $this->query($sql);
             if($res)
             { 
@@ -331,7 +358,7 @@ class attribute extends DB
     
     function unset_category_mapping($params) 
     {   
-        $sql = "UPDATE tb_attribute_mapping SET active_flag=2 WHERE category_id=".$params['catid']." AND attr_id=".$params['aid'];
+        $sql = "UPDATE tbl_attribute_category_mapping SET active_flag=2 WHERE category_id=".$params['catid']." AND attribute_id=".$params['aid'];
 	$res = $this->query($sql);
 	if($res) 
         { 

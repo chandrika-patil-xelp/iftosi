@@ -9,7 +9,7 @@ class auto extends DB
 
     public function searchbox($params)
     {
-	$sql="SELECT product_name,MATCH(product_name) AGAINST ('" . $params['srch'] . "*' IN BOOLEAN MODE) AS startwith FROM tbl_productid_generator where MATCH(product_name) AGAINST ('".$params['srch']."*' IN BOOLEAN MODE) ORDER BY startwith DESC";
+	$sql="SELECT *,product_name,MATCH(product_name) AGAINST ('" . $params['srch'] . "*' IN BOOLEAN MODE) AS startwith FROM tbl_product_master where MATCH(product_name) AGAINST ('".$params['srch']."*' IN BOOLEAN MODE) ORDER BY startwith ASC";
         $page   = $params['page'];
         $limit  = $params['limit'];
         if (!empty($page))
@@ -26,8 +26,8 @@ class auto extends DB
                 $arrval['name']     = $row['product_display_name'];
                 $arrval['model']    = $row['product_model'];
                 $arrval['brand']    = $row['product_brand'];
-                $arrval['catid']    = $row['category_id'];
-                $arrval['brand']  = $row['product_brand'];
+                $arrval['price']  = $row['prd_price'];
+                $arrval['description']  = $row['product_desc'];
                 $arrval['designer']  = $row['desname'];
                 $arr[]              =$arrval;
             }
@@ -35,7 +35,7 @@ class auto extends DB
         }
         else
         {
-                $arr = "No records matched";
+                $arr = array();
                 $err = array('Code'=> 1,'Msg'=>'Search Query Failed');
         }
     $result=array('results'=>$arr,'error'=>$err);
@@ -63,7 +63,7 @@ class auto extends DB
         }
         else
         {
-                $arr = "No records matched";
+                $arr = array();
                 $err = array('Code'=> 1,'Msg'=>'Search Query Failed');
         }
     $result=array('results'=>$arr,'error'=>$err);
@@ -101,7 +101,7 @@ class auto extends DB
     
     public function suggestCat($params)
     {
-	$sql="SELECT category_name,MATCH(category_name) AGAINST ('" . $params['str'] . "*' IN BOOLEAN MODE) AS startwith FROM tbl_categoryid_generator where MATCH(category_name) AGAINST ('".$params['str']."*' IN BOOLEAN MODE) ORDER BY startwith DESC";
+	$sql="SELECT cat_name,MATCH(cat_name) AGAINST ('" . $params['str'] . "*' IN BOOLEAN MODE) AS startwith FROM tbl_category_master where MATCH(cat_name) AGAINST ('".$params['str']."*' IN BOOLEAN MODE) ORDER BY startwith ASC";
         $page=$params['page'];
         $limit=$params['limit'];
         if (!empty($page))

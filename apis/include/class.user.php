@@ -95,7 +95,7 @@
                                         contact_person='".$detls['cperson']."',
                                         position='".$detls['position']."',
                                         contact_mobile=".$detls['cmobile'].",
-                                        email='".$detls['$email']."',
+                                        email='".$detls['email']."',
                                         memship_Cert='".$detls['memcert']."',
                                         bdbc='".$detls['bdbc']."',
                                         other_bdbc='".$detls['othbdbc']."',
@@ -212,7 +212,7 @@
             }
             else
             {
-                $arr="Data Not Found regarding ur requested parameters";
+                $arr=array();
                 $err=array('code'=>1,'msg'=>'Problem in fetching data');
             }  // If user is not registered
             $result = array('results'=>$arr,'error'=>$err);
