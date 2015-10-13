@@ -56,18 +56,19 @@ $(document).ready(function(){
         showLeftMenu(false);
     });
     
-    $('#userForm,#overlay').velocity({scale:0},{delay:0,duration:0});
+    $('#overlay').velocity({opacity:0},{delay:0,duration:0});
+    $('#userForm').velocity({scale:0},{delay:0,duration:0});
     $('.iconCall,.iconMessage').click(function(){
         $('#overlay,#userForm').removeClass('dn');
         setTimeout(function(){
-            $('#overlay').velocity({scale:1},{delay:0,duration:300,ease:'swing'});
-            $('#userForm').velocity({scale:1},{delay:80,duration:300,ease:'swing'});
+            $('#overlay').velocity({opacity:1},{delay:0,duration:300,ease:'swing'});
+            $('#userForm').velocity({scale:1},{delay:80,duration:100,ease:'swing'});
         },10);
     });
     
     $('#userCancel').bind('click',function(){
         $('#userForm').velocity({scale:0},{delay:0,ease:'swing'});
-        $('#overlay').velocity({scale:1},{delay:100,ease:'swing'});
+        $('#overlay').velocity({opacity:0},{delay:100,ease:'swing'});
         setTimeout(function(){
             $('#overlay,#userForm').addClass('dn');
         },1010);
