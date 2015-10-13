@@ -579,7 +579,7 @@ switch($action)
                 
             $arr=array();
             $err=array('code'=> 1,'Msg'=> 'Invalid parameters');
-            $result=array('results'=> $arr,'error'=>$err['error']);
+            $result=array('results'=> $arr,'error'=>$err);
             $res=$result;
             break;
             }
@@ -612,7 +612,7 @@ switch($action)
             {
             $arr=array();
             $err=array('code'=> 1,'Msg'=> 'Invalid parameters');
-            $result=array('results'=> $arr,'error'=>$err['error']);
+            $result=array('results'=> $arr,'error'=>$err);
             $res=$result;
             break;
             }
@@ -629,7 +629,7 @@ switch($action)
             {
             $arr=array();
             $err=array('code'=> 1,'Msg'=> 'Invalid parameter');
-            $result=array('results'=> $arr,'error'=>$err['error']);
+            $result=array('results'=> $arr,'error'=>$err);
             $res=$result;
             break;
             }
@@ -640,14 +640,15 @@ switch($action)
             break;
 
 //  localhost/iftosi/apis/index.php?action=getPrdById&prdid=2&catid=3&page=1&limit=1         
-        case 'getPrdById':            //designer name is not feeding up
+        case 'getPrdById':            
             include APICLUDE.'class.product.php';
             $prdid=(!empty($params['prdid'])) ? trim($params['prdid']):'';
-            if(empty($prdid))
+            $catid=(!empty($params['prdid'])) ? trim($params['prdid']):'';
+            if(empty($prdid) && empty($catid))
             {
             $arr=array();
             $err=array('code'=> 1,'Msg'=> 'Invalid parameters');
-            $result=array('results'=> $arr,'error'=>$err['error']);
+            $result=array('results'=> $arr,'error'=>$err);
             $res=$result;
             break;
             }
@@ -845,7 +846,7 @@ switch($action)
 //------------------------------Filter--------------------------------------
 
 //  localhost/iftosi/apis/index.php?action=get_filters&category_id=3&page=1&limit=1            
-        case 'get_filters':
+     /*   case 'get_filters':
             include APICLUDE.'class.filter.php';
             $category_id=(!empty($params['category_id'])) ? trim($params['category_id']):'';
             if(empty($category_id))
@@ -860,8 +861,10 @@ switch($action)
             $result=$obj->get_filters($params);
             $res=$result;
             break;
-
-/*  HAve to be changed as per the requirement        */            
+*/
+            
+/*  HAve to be changed as per the requirement        */       
+            /*
         case 'refine': 
             include APICLUDE.'class.filter.php';
 echo '<pre>';
@@ -883,6 +886,7 @@ echo '</pre>';
             $result=$obj->refine($params);
             $res=$result;
             break;
+            */
             
 //------------------------Wishlist-------------------------------------------
 
@@ -972,8 +976,7 @@ echo '</pre>';
             $result=$obj->viewCom();
             $res=$result;
             break;            
-            
- 
+        
 //---------------------------------------------------------------------------            
         default :
         break;
