@@ -68,9 +68,13 @@
 					include 'template/jewellery_results.html';
 				break;
 				
-				case 'details':
-					$page='product_details';
-					include 'template/product_details.html';
+				case 'diamond_details':
+					$page='diamond_details';
+					include 'template/diamond_details.html';
+				break;
+				case 'jewellery_details':
+					$page='jewellery_details';
+					include 'template/jewellery_details.html';
 				break;
 				
 				default:

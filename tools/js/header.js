@@ -19,7 +19,6 @@ $(document).ready(function(){
                             $('#header').velocity({height: "60px",paddingTop:12+"px",paddingBottom:12+"px"},{duration:0, delay:0,easing:'swing'});
                             $('#logoTxt').velocity({left:20+"px",bottom:20+"px"},{duration:0, delay:200});
                             $('.logo').velocity({top:20+"px",height:60+"px",width:150+"px",backgroundPositionX:15 + "px"},{duration:0, delay:100});
-                    
                     }else if(lastSc>sc){
 //                            $('.logo').velocity({top:30+"px",height:100+"px",width:100+"px"},{duration:0, delay:0});
 //                            $('#logoTxt').velocity({opacity:1},{duration:300, delay:400});
@@ -45,7 +44,7 @@ $(document).ready(function(){
             lastSc=sc;
 
         }
-        if(pageName==='diamonds' || pageName==='product_details' || pageName==='jewellery'){
+        if(pageName==='diamonds' || pageName==='diamond_details'  || pageName==='jewellery_details' || pageName==='jewellery'){
             $('#header,#hbgDiam,#hbgJewel,#hbgBull,#logoTxt').velocity("stop");
             $('.headCatCont,.logo').velocity("stop");
             if (!isMobile) {
@@ -53,7 +52,7 @@ $(document).ready(function(){
                     $('#header').velocity({height: "60px",paddingTop:12+"px",paddingBottom:12+"px"},{duration:0, delay:0,easing:'swing'});
                     $('#logoTxt').velocity({left:20+"px",bottom:20+"px"},{duration:0, delay:200});
                     $('.logo').velocity({top:20+"px",height:60+"px",width:150+"px",backgroundPositionX:15 + "px"},{duration:0, delay:100});
-                    
+                    $('#logoTxt').css({color:'#fff'});
                    // $('#header').velocity({height: "60px", paddingTop: 12 + "px", paddingBottom: 12 + "px"}, {duration: 0, delay: 0, easing: 'swing'});
                     $('#hbgDiam,#hbgJewel,#hbgBull').velocity({backgroundPositionY: -60 + "px"}, {duration: 0, delay: 0, easing: 'swing'});
                     $('.headCatCont').velocity({top: -50 + "px"}, {duration: 0, delay: 0, easing: 'swing'});
@@ -64,6 +63,7 @@ $(document).ready(function(){
 //                    $('.logo').removeClass('lactive');
                     $('.logo').velocity({top: 30 + "px", height: 100 + "px", width: 100 + "px", backgroundPositionX: '50%'}, {duration: 0, delay: 0});
                     //$('#logoTxt').velocity({opacity: 1}, {duration: 300, delay: 400});
+                    $('#logoTxt').css({color:'#4d4d4d'});
                     $('#logoTxt').velocity({left:0+"px",bottom:-30+"px"},{duration:300, delay:0});
                     $('#header').velocity({height: "100px", paddingTop: 32 + "px", paddingBottom: 32 + "px"}, {duration: 0, delay: 0, easing: 'swing'});
                     $('#hbgDiam,#hbgJewel,#hbgBull').velocity({backgroundPositionY: 8 + "px"}, {duration: 0, delay: 0, easing: 'swing'});

@@ -1,5 +1,22 @@
-<a href="<?php echo DOMAIN;?>">
-	<div class="logo transition100 fmOpenR">
-		<span id='logoTxt'><b>IF</b>to<b>SI</b></span>
-	</div>
-</a>
+<?php
+switch ($page) {
+    case 'product_details':
+        ?>
+        <a href="<?php echo DOMAIN;?>">
+            <div class="logo transition100 fmOpenR">
+                <span id='logoTxt' style="color:#4d4d4d"><b>IF</b>to<b>SI</b></span>
+            </div>
+        </a>
+        <?php
+    break;
+    default:
+ ?>       
+        <a href="<?php echo DOMAIN;?>">
+            <div class="logo transition100 fmOpenR">
+                <span id='logoTxt' class=""><b>IF</b>to<b>SI</b></span>
+            </div>
+        </a>
+<?php  
+    break;
+}
+?>
