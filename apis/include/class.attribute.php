@@ -349,7 +349,7 @@ class attribute extends DB
         }
         else
         {
-            $arr="There is no attribute mapped with category to show result";
+            $arr=array();
             $err=array('code'=>1,'Msg'=>'Error in fetching data');
         }
         $result=array('results'=>$arr,'error'=>$err);
