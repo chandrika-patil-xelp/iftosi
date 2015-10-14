@@ -80,6 +80,22 @@ a{text-decoration: none;}
 .loggedIn{margin-right: 0!important;}
 .header ul {width: 120px!important;left: -100px!important;}
 
+.upperMenu{width:100%;height: 500px;background: #171334;position: absolute;top:100px;z-index: 10;}
+.menuTittle{width:100%;height: 70px;color: #fff;font-size: 40px;padding: 0 10px;transform: translateY(-400px);}
+.menuListCont{width:100%;height: 400px;padding: 25px;}
+.mItemDiv{width:20%;height: auto;color: #fff;}
+.mItemTitle{width:100%;height:35px;line-height:35px;color: #fff;font-size: 20px;}
+.mItemDiv ul{width: 100%!important;height: auto;margin: 0;padding: 0;list-style: none;float: left}
+.mItemDiv ul li{width:100%;height: 30px;line-height: 30px;margin: 0;padding: 0 15px;font-size: 12px;}
+
+/*
+.headCat.bgJewellery:hover.bgJewellery span{transform: translateY(100px);color:#171334;}
+.headCat.bgJewellery:hover.bgJewellery{background-size: auto 150%;background-position: center;}*/
+
+.jwActive{}
+.jwActive.bgJewellery{background-size: auto 150%!important;background-position: center!important;}
+.jwActive.bgJewellery span{transform: translateY(100px);color:#171334;}
+
 /*Category*/
 .categoryCont{width:100%;height: 560px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding:200px 0 100px 0;}
 .buyTxt{width:100%;color: #fff;line-height: 40px;font-size: 40px;margin-bottom: 50px;}
@@ -219,7 +235,7 @@ a{text-decoration: none;}
 .headCat span{display: block;width: 100%;height: 25px;line-height: 25px;position: absolute;bottom: 0;text-align: center;color: #4d4d4d;}
 
 .headCat.bgDiamond{background: #fff url(../img/common/diamond.jpg)no-repeat;background-size: auto 80%;background-position: 8px 0px;}
-.headCat.bgJewellery {background: #fff url(../img/common/jewellery.jpg)no-repeat;background-size: auto 80%;background-position: 8px 0px;}
+.headCat.bgJewellery {background: #fff url(../img/common/jewellery.jpg)no-repeat;background-size: auto 80%;/*background-position: 8px 0px;*/background-position: top center;}
 .headCat.bgBullion {background: #fff url(../img/common/bullions.jpg)no-repeat;background-size: auto 80%;background-position: 8px 0px;}
 .totalResultsDiv{width:100%;height:350px;line-height: 240px;color: #FFF;text-align: center;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding: 100px 0 0 0;font-size:50px;position: relative;}
 .resultsPage .shapesCont{}
@@ -501,8 +517,17 @@ a{cursor:pointer;}
 .jewellery_details .infoCommn {width: 33.33%!important;}
 .bullion_details .infoCommn {width: 100%!important;}
     
+.bullion_details{}    
+
+.bullion_details .prdMainDetails .wrapperMax {padding-left: 0;position: relative;}
+.bullion_details .imgsCont {width: 45%;height: 393px;position: relative;left: 0;top: 0;border: 1px solid #d4d4c8;float: left;}
     
-    
+.bullion_details .thumbnil {width: 24%;height: 83px;border: 1px solid #d4d4c8;margin: 0.5%;cursor: pointer;display: inline-block;}
+.bullion_details .leftArrow {top: 0px;}
+.bullion_details .rightArrow {top: 0px;}
+.bullion_details .detCont {width: 50%;height: 390px;padding: 15px 15px 0px 25px;float: left;}
+.bullion_details .btnsCont {width: 100%;height: auto;}
+
 
 /* Vendor Detaisls */
 .vendorDetails{width:100%;height:480px;margin-bottom: 20px;margin-top: 30px;overflow: hidden;}
@@ -654,6 +679,30 @@ a{cursor:pointer;}
 
 .drag-target {height: 100%;width: 20px;position: fixed;top: 0;z-index: 1;}
 .pFixed{position: fixed;}
+
+/*Bullion Results*/
+.bresults .jshapeComm{width:25%!important;}
+
+.gCoin{background: url(../img/common/gCoin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(23, 19, 52,0.9);}
+.gBar{background: url(../img/common/gBar.jpeg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(42, 14, 52,0.9);}
+.sCoin{background: url(../img/common/sCoin.png)no-repeat;background-size: cover;background-position:bottom;box-shadow: inset 0 -70px 0px rgba(56, 11, 52,0.9);}
+.sBar{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -70px 0px rgba(94, 0, 55,0.9);}
+
+.jshapeComm.gCoin:hover{background: url(../img/common/gCoin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
+.jshapeComm.gBar:hover{background: url(../img/common/gBar.jpeg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
+.jshapeComm.sCoin:hover{background: url(../img/common/sCoin.png)no-repeat;background-size: cover;background-position: bottom;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
+.jshapeComm.sBar:hover{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+
+.jshapeComm.shapeSelected.gCoin{background: url(../img/common/gCoin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
+.jshapeComm.shapeSelected.gBar{background: url(../img/common/gBar.jpeg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
+.jshapeComm.shapeSelected.sCoin{background: url(../img/common/sCoin.png)no-repeat;background-size: cover;background-position:bottom;box-shadow: inset 0 -300px 100px rgba(56, 11, 52,0.8);}
+.jshapeComm.shapeSelected.sBar{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
+
+.jshapeComm.shapeSelected.gCoin:hover{background: url(../img/common/gCoin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
+.jshapeComm.shapeSelected.gBar:hover{background: url(../img/common/gBar.jpeg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
+.jshapeComm.shapeSelected.sCoin:hover{background: url(../img/common/sCoin.jpg)no-repeat;background-size: cover;background-position:bottom;box-shadow: inset 0 -300px 100px rgba(56, 11, 52,0.8);}
+.jshapeComm.shapeSelected.sBar:hover{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
+
 
 @media only screen and (min-width: 960px) and (max-width: 1024px){
 

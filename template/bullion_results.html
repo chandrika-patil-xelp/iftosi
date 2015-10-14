@@ -1,0 +1,219 @@
+<?php include 'bhead.html'; ?>
+<body>
+    <div id='baseCont' class="container fmOpenR bgWhite resultsPage">
+        <div class="wrapper">
+            <?php include 'header.html'?>
+            <div class="totalResultsDiv">
+                <div class="searchCon">
+                    <div class="areaCont fLeft">
+                        <input type="text" id="txtjArea" class="fliterTxt fLeft fmOpenR transition300" placeholder=" Search city / area here" >
+                        <div class="autoSuggestOuter fmOpenR dn" id="jasug">
+                            <ul>
+                                <li class="autoSuggstions transition300 txtCap" onclick="setData(this)">andheri</li>
+                                <li class="autoSuggstions transition300 txtCap" onclick="setData(this)">andheri west</li>
+                                <li class="autoSuggstions transition300 txtCap" onclick="setData(this)">andheri east</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='jShapesCont resultsPage showHide fmOpenL'>
+                <div class="allShapes resultsPage bresults">
+                    <center>
+                        <div id='gbar' class="jshapeComm transition300 ripplelink gBar">Gold Bar
+                        </div><div  id='sBar' class="jshapeComm transition300 ripplelink sBar">Silver Bar
+                        </div><div  id='gCoin' class="jshapeComm transition300 ripplelink gCoin">Gold Coin
+                        </div><div  id='sCoin' class="jshapeComm transition300 ripplelink sCoin">Silver Coin
+                        </div>
+                    </center>
+                </div>
+            </div>
+            <div class="allResults">
+                <div class="wrapperMax">
+                    <div class="filterTitleDiv">
+                        <div class='fTitle fLeft fmOpenR'>Filter Results</div>
+                        <div class="rCount fLeft fmOpenR"><span id='resultCount'> 2,835</span> Diamonds found</div>
+                        <div class="fRight sortBox">
+                            <div class="dropdownBox fLeft">
+                                <div id="drpinp" class="dropInput fmOpenR">Best Match</div>
+                                <ul id="dropList" class="fmOpenR">
+                                    <li class="transition100" id="bmatch">Best Match</li>
+                                    <li class="transition100" id="pasc">Lowest Price</li>
+                                    <li class="transition100" id="pdesc">Highest Price</li>
+                                    <li class="transition100" id="rate">Rating</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="fRight sTitle">Sort by</div>
+                    </div>
+                    <div class='results_Filter'>
+                        <?php include 'filters.html'; ?>
+                        <div class='prdResults fRight'>
+                            <?php while ($i < 1) { ?>
+                                <div class='prdComm fLeft jwRes' style="opacity: 0; transform: translateX(1000px);">
+                                    <div class='prdCommDiv fLeft transition100'>
+                                        <div class="prdCommImg fLeft">
+                                            <?php 
+                                                $cnt=7;
+                                                switch($cnt){
+                                                    case 1:?>
+                                                        <div class="prox for-1"></div>
+                                                        <?php break;
+                                                    case 2 :?>
+                                                        <div class="prox for-2"></div>
+                                                        <div class="prox for-2"></div>
+                                                        
+                                                        <?php break;
+                                                    case 3: ?>
+                                                        <div class="prox for-3"></div>
+                                                        <div class="prox for-3"></div>
+                                                        <div class="prox for-3"></div>
+                                                        <?php break;
+                                                    case 4: ?>
+                                                        <div class="prox for-4"></div>
+                                                        <div class="prox for-4"></div>
+                                                        <div class="prox for-4"></div>
+                                                        <div class="prox for-4"></div>
+                                                        <?php break;
+                                                    case 5: ?>
+                                                    <div class="prox for-5Left">
+                                                        <div class="prox for-5"></div>
+                                                        <div class="prox for-5"></div>
+                                                        <div class="prox for-5"></div>
+                                                        <div class="prox for-5"></div>
+                                                    </div>
+                                                    <div class="prox for-5Right">
+                                                        <div class="prox for-5"></div>
+                                                    </div>
+                                                    <?php    break;
+                                                    case 6: ?>
+                                                        <div class="prox for-6"></div>
+                                                        <div class="prox for-6"></div>
+                                                        <div class="prox for-6"></div>
+                                                        <div class="prox for-6"></div>
+                                                        <div class="prox for-6"></div>
+                                                        <div class="prox for-6"></div>
+                                                        <?php break;
+                                                    case 7: ?>
+                                                        <div class="for-7Upper">
+                                                            <div class="prox for-7"  style="background: #fff url(../tools/img/product1/1.jpg)no-repeat;background-size: contain;background-position:center"></div>
+                                                        </div>
+                                                        <div class="for-7Lower">
+                                                            <div class="prox for-7" style="background: #fff url(../tools/img/product1/2.jpg)no-repeat;background-size: contain;background-position:center"></div>
+                                                            <div class="prox for-7" style="background: #fff url(../tools/img/product1/3.jpeg)no-repeat;background-size: contain;background-position:center"></div>
+                                                            <div class="prox for-7" style="background: #fff url(../tools/img/product1/4.jpg)no-repeat;background-size: contain;background-position:center"></div>
+                                                            <div class="prox for-7" style="background: #fff url(../tools/img/product1/5.jpg)no-repeat;background-size: contain;background-position:center"></div>
+                                                            <div class="prox for-7" style="background: #fff url(../tools/img/product1/6.jpg)no-repeat;background-size: contain;background-position:center"></div>
+                                                            <div class="prox for-7" style="background: #fff url(../tools/img/product1/7.jpg)no-repeat;background-size: contain;background-position:center"></div>
+                                                        </div>
+                                                        <div class="proxImg fLeft" style="background: #fff url(../tools/img/product1/1.jpg)no-repeat;background-size: contain;background-position:center"></div>
+                                                        <?php break;
+                                                    case 8: ?>
+                                                        <div class="prox for-8"></div>
+                                                        <div class="prox for-8"></div>
+                                                        <div class="prox for-8"></div>
+                                                        <div class="prox for-8"></div>
+                                                        <div class="prox for-8"></div>
+                                                        <div class="prox for-8"></div>
+                                                        <div class="prox for-8"></div>
+                                                        <div class="prox for-8"></div>
+                                                        <?php break;
+                                                    case 9: ?>
+                                                        <div class="prox for-9"></div>
+                                                        <div class="prox for-9"></div>
+                                                        <div class="prox for-9"></div>
+                                                        <div class="prox for-9"></div>
+                                                        <div class="prox for-9"></div>
+                                                        <div class="prox for-9"></div>
+                                                        <div class="prox for-9"></div>
+                                                        <div class="prox for-9"></div>
+                                                        <div class="prox for-9"></div>
+                                                        <?php break;
+                                                    case 10: ?>
+                                                        <div class="prox for-10"></div>
+                                                        <div class="prox for-10"></div>
+                                                        <div class="prox for-10"></div>
+                                                        <div class="prox for-10"></div>
+                                                        <div class="prox for-10"></div>
+                                                        <div class="prox for-10"></div>
+                                                        <div class="prox for-10"></div>
+                                                        <div class="prox for-10"></div>
+                                                        <div class="prox for-10"></div>
+                                                        <div class="prox for-10"></div>
+                                                        <?php break;
+                                                    case 11: ?>
+                                                        <div class="prox for-11Left">
+                                                            <div class="prox for-11"></div>
+                                                            <div class="prox for-11"></div>
+                                                            <div class="prox for-11"></div>
+                                                        </div>
+                                                        <div class="prox for-11Right">
+                                                            <div class="prox for-11"></div>
+                                                            <div class="prox for-11"></div>
+                                                            <div class="prox for-11"></div>
+                                                            <div class="prox for-11"></div>
+                                                            <div class="prox for-11"></div>
+                                                            <div class="prox for-11"></div>
+                                                            <div class="prox for-11"></div>
+                                                            <div class="prox for-11"></div>
+                                                        </div>
+                                                        <?php break;
+                                                    case 12: ?>
+                                                        <div class="prox for-12"></div>
+                                                        <div class="prox for-12"></div>
+                                                        <div class="prox for-12"></div>
+                                                        <div class="prox for-12"></div>
+                                                        <div class="prox for-12"></div>
+                                                        <div class="prox for-12"></div>
+                                                        <div class="prox for-12"></div>
+                                                        <div class="prox for-12"></div>
+                                                        <div class="prox for-12"></div>
+                                                        <div class="prox for-12"></div>
+                                                        <div class="prox for-12"></div>
+                                                        <div class="prox for-12"></div>
+                                                        <?php break;
+                                                }
+                                            ?>
+                                        </div>
+                                        <div class="prdDetails fLeft">
+                                            <div class="detComm">
+                                                <div class="detLabel fmOpenB fLeft">DESIGN NO.</div>
+                                                <div class="detValue fmOpenR fLeft">18101</div>
+                                            </div>
+                                        </div>
+                                        <div class='prdPrice fLeft'>
+                                            <div class="detComm">
+                                                <div class="detLabel fmOpenB fLeft">PRICE</div>
+                                                <div class="detValue fmOpenB fLeft"><span>&#8377;</span>50,800</div>
+                                            </div>
+                                        </div>
+                                        <div class='prdActions fLeft'>
+                                            <div class='actionComm fLeft transition100 poR ripplelink'></div>
+                                            <div class='actionComm fLeft transition100 poR ripplelink'></div>
+                                            <div class='actionComm fLeft transition100 poR ripplelink'></div>
+                                            <div class='actionComm fLeft transition100 poR ripplelink'></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php $i++;
+                            } ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php include 'footer.html'; ?>
+        </div>
+        <?php include 'logo.html'; ?>
+        <?php include 'leftmenu.html'; ?>
+    </div>
+    <div id='dragTarget' class="drag-target" style="touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); left: 0px;"></div>
+    <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['jqrynum']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['hammer']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['result']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['head']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['comm']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['filter']; ?>"></script>
+</body>
+</html>

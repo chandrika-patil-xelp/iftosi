@@ -44,7 +44,7 @@ $(document).ready(function(){
             lastSc=sc;
 
         }
-        if(pageName==='diamonds' || pageName==='diamond_details'  || pageName==='jewellery_details' || pageName==='bullion_details' || pageName==='jewellery'){
+        if(pageName==='diamonds' || pageName==='diamond_details'  || pageName==='jewellery_details' || pageName==='bullion_details' || pageName==='jewellery' || pageName==='bullion'){
             $('#header,#hbgDiam,#hbgJewel,#hbgBull,#logoTxt').velocity("stop");
             $('.headCatCont,.logo').velocity("stop");
             if (!isMobile) {
@@ -156,6 +156,16 @@ $(document).ready(function(){
         if (hisOpen) {
             htoggleDropDown(false);
         }
+    });
+    
+    $('#hbgJewel').bind('mouseover',function(){
+        $(this).addClass('jwActive');
+        $('.menuTittle').velocity({translateY:0},{duration: 0});
+    });
+    
+    $('.header').bind('mouseleave',function(){
+        $('.menuTittle').velocity({translateY:-400+"px"},{duration: 0});
+        $('#hbgJewel').removeClass('jwActive');
     });
     
 });
