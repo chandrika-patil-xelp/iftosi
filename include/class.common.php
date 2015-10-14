@@ -40,6 +40,7 @@
 			{
 				foreach($d as $k => $v)
 				{
+					$v 			= str_replace('pid-','',$v);
 					$v 			= str_replace('ct-','',$v);
 					$v 			= str_replace('page-','',$v);
 					$_GET[$k] 	= str_replace('-',' ',$v);

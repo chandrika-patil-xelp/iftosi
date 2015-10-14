@@ -382,7 +382,7 @@
 						$inarr = array();
 						foreach($exd as $ky => $vl)
 						{
-							$ex = explode('|',$vl);
+							$ex = explode('_',$vl);
 							$field = $ex[0];
 							$inarr[] = $ex[1];
 						}
@@ -390,7 +390,7 @@
 					}
 				}
 				
-				$pid=implode(',',$pid);
+				$allpids = $pid = implode(',',$pid);
 				
 				$page   = ($params['page'] ? $params['page'] : 1);
 				$limit  = ($params['limit'] ? $params['limit'] : 15);
@@ -526,15 +526,17 @@
 										FROM 
 											tbl_product_search
 										WHERE
-											product_id IN(".$pids.")
+											product_id IN(".$allpids.")
 										";
 								$res1 = $this->query($qry);
 								if($res1)
 								{
 									$row1 = $this->fetchData($res1);
-									$data[$i]['range']['name'] = $row['attr_name'];
-									$data[$i]['range']['dname'] = $row['attr_display_name'];
-									$data[$i]['range']['value'] = $row1['minval'].';'.$row1['maxval'];
+									$data[$i]['range']['id'] 		= $row['attr_id'];
+									$data[$i]['range']['name'] 		= $row['attr_name'];
+									$data[$i]['range']['dname'] 	= $row['attr_display_name'];
+									$data[$i]['range']['value'] 	= $row1['minval'].';'.$row1['maxval'];
+									$data[$i]['range']['ovalue'] 	= $row1['attr_values'];
 									$i++;
 								}
 							break;
@@ -546,7 +548,7 @@
 										FROM 
 											tbl_product_search
 										WHERE
-											product_id IN(".$pids.")
+											product_id IN(".$allpids.")
 										";
 								$res1 = $this->query($qry);
 								if($res1)
@@ -561,9 +563,11 @@
 									}
 									ksort($arr);
 									$arr = array_values($arr);
-									$data[$i]['checkbox']['name'] = $row['attr_name'];
-									$data[$i]['checkbox']['dname'] = $row['attr_display_name'];
-									$data[$i]['checkbox']['value'] = implode(',',$arr);
+									$data[$i]['checkbox']['id'] 	= $row['attr_id'];
+									$data[$i]['checkbox']['name'] 	= $row['attr_name'];
+									$data[$i]['checkbox']['dname'] 	= $row['attr_display_name'];
+									$data[$i]['checkbox']['value'] 	= implode(',',$arr);
+									$data[$i]['checkbox']['ovalue'] = $row['attr_values'];
 									$i++;
 								}
 							break;
@@ -654,7 +658,7 @@
                             $reslt['category_name'] = $cat_info_row['cat_name'];
                         }
                     }
-                    $arr[] = $reslt;
+                    $arr = $reslt;
                     $err = array('errCode' => 0, 'errMsg' => 'Details fetched successfully');
                 }
                 else

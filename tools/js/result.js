@@ -101,6 +101,7 @@ function getResultsData(data)
 {
 	var html = '';
 	var fhtml = '';
+	var tfhtml = '';
 	$.each(data.results.products, function(i, vl) {
 		html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/pid-'+vl.pid+'">';
 			html += '<div class="prdComm fLeft" style="opacity: 0; transform: translateX(1500px);">';
@@ -148,10 +149,11 @@ function getResultsData(data)
 	$.each(data.results.filters, function(i, v) {
 		$.each(v, function(k, vl) {
 			
-			var dvl = vl.value.split(';');
 			
-			if(k == 'range')
+			
+			/* if(k == 'range')
 			{
+				var dvl = vl.value.split(';');
 				fhtml += '<input type="hidden" id="'+vl.name+'RangeMin" value="'+dvl[0]+'">';
 				fhtml += '<input type="hidden" id="'+vl.name+'RangeMax" value="'+dvl[1]+'">';
 				fhtml += '<div id="'+vl.name+'Div" class="filterCont fLeft">';
@@ -162,6 +164,53 @@ function getResultsData(data)
 						fhtml += '</div>';
 					fhtml += '</div>';
 				fhtml += '</div>';
+			} */
+			if(k == 'checkbox')
+			{
+				var cidarr = new Array();
+				var dvl = vl.ovalue.split(',');
+				var dvl1 = vl.value.split(',');
+				tfhtml = '';
+				var jid = "#" + vl.name+'_'+vl.id;
+				var k=0;
+				$(jid).find('input:checked').each(function() {
+					cidarr[k] = $(this).attr('id');
+					k++;
+				});
+				
+				for(var i=0;i<dvl.length;i++)
+				{
+					var a = dvl1.indexOf(dvl[i]);
+					if(a == -1)
+					{
+						tfhtml += '<div class="checkDiv fLeft">';
+							tfhtml += '<input type="checkbox" class="filled-in" disabled id="'+vl.name+'_'+dvl[i]+'" />';
+							tfhtml += '<label for="'+vl.name+'_'+dvl[i]+'">'+dvl[i]+'</label>';
+						tfhtml += '</div>';
+					}
+					else
+					{
+						tfhtml += '<div class="checkDiv fLeft">';
+							tfhtml += '<input type="checkbox" class="filled-in" id="'+vl.name+'_'+dvl[i]+'" />';
+							tfhtml += '<label for="'+vl.name+'_'+dvl[i]+'">'+dvl[i]+'</label>';
+						tfhtml += '</div>';
+					}
+				}
+				//$(jid).html(tfhtml);
+				for(var i=0;i<cidarr.length;i++)
+				{
+					$('#'+cidarr[i]).attr('checked',true);
+				}
+				
+				$(jid+' :input[type=checkbox]').each(function() {
+					$(this).bind('click', function(event) {
+						FR();
+						if (event && $.isFunction(event.stopImmediatePropagation))
+							event.stopImmediatePropagation();
+						else 
+							window.event.cancelBubble=true;
+					});
+				});
 			}
 		});
 	});

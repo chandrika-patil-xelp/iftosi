@@ -18,5 +18,5 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([^/.]*)$	index.php?case=$1 [L]
 RewriteRule ^([^/.]*)/(ct-[^/.]*)$	index.php?case=$1&catid=$2 [L]
 RewriteRule ^([^/.]*)/(ct-[^/.]*)/(page-[^/.]*)$	index.php?case=$1&catid=$2&pgno=$3 [L]
-RewriteRule ^([^/.]*)/(pid-[^/.]*)$	index.php?case=details&productname=$1&productid=$2 [L]
+RewriteRule ^([^/.]*)/(pid-[^/.]*)$	index.php?case=diamond_details&productname=$1&productid=$2 [L]
 #RewriteRule ^([^/.]*)/([^/.]*)/([^/.]*)$	index.php?par=$1&mob=$2&mod=$3 [L]

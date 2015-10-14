@@ -53,6 +53,7 @@
 					$res 	= $comm->executeCurl($url);
 					$data 	= $res['results']['products'];
 					$total	= $res['results']['total'];
+					//echo "<pre>";print_r($res);die;
 					
 					$url 	= APIDOMAIN.'index.php?action=fetch_category_mapping&catid='.$catid;
 					$res 	= $comm->executeCurl($url);
@@ -70,6 +71,12 @@
 				
 				case 'diamond_details':
 					$page='diamond_details';
+					$pid 	= $_GET['productid'];
+					$url 	= APIDOMAIN.'index.php?action=getPrdById&prdid='.$pid;
+					$res 	= $comm->executeCurl($url);
+					$data 	= $res['results'];
+					//echo "<pre>";print_r($res);die;
+					//getPrdById
 					include 'template/diamond_details.html';
 				break;
 				case 'bullion_details':

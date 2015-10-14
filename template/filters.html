@@ -342,14 +342,14 @@
 	?>
 				<div class="filterCont fLeft forClarity">
 					<div class="fLeft optionTitle fmOpenR"><?php echo $val['attribute_disp_name'];?></div>
-					<div id='<?php echo $val['attribute_name'].'|'.$val['atrribute_id'];?>' class="filterOptions fLeft fmOpenR">
+					<div id='<?php echo $val['attribute_name'].'_'.$val['atrribute_id'];?>' class="filterOptions fLeft fmOpenR">
 						<?php
 						for($i=0;$i<count($expd);$i++)
 						{
 						?>
 							<div class="checkDiv fLeft">
-								<input type="checkbox" class="filled-in" id="<?php echo $val['attribute_name'].'|'.$expd[$i];?>" />
-								<label for="<?php echo $val['attribute_name'].'|'.$expd[$i];?>"><?php echo $expd[$i];?></label>
+								<input type="checkbox" class="filled-in" id="<?php echo $val['attribute_name'].'_'.$expd[$i];?>" />
+								<label for="<?php echo $val['attribute_name'].'_'.$expd[$i];?>"><?php echo $expd[$i];?></label>
 							</div>
 						<?php
 						}
