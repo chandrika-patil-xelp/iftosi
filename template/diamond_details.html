@@ -32,7 +32,7 @@
                         <div class="btnsCont fLeft">
                             <div class="prdShape fLeft">
                                 <div class="prdShTitle fLeft fmOpenB">PRICE</div>
-                                <div class="prdShType fLeft fmOpenL"><span>&#8377;</span>8,28,5888</div>
+                                <div class="prdShType fLeft fmOpenL"><span>&#8377;</span><?php echo number_format($data['attr_details']['price'], 2);?></div>
                             </div>
                             <div class="prdBtns fLeft">
                                 <div class="btnComm fLeft iconCall ripplelink poR" >Contact Dealer</div>
@@ -43,79 +43,79 @@
                         <div class="majorInfoBox fLeft">
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">Shape</div>
-                                <div class="infoValue c666 fmOpenR font25">Round</div>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['shape'];?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">Carats</div>
-                                <div class="infoValue c666 fmOpenR font25">0.33</div>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['carat'];?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">Color</div>
-                                <div class="infoValue c666 fmOpenR font25">D</div>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['color'];?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">Clarity</div>
-                                <div class="infoValue c666 fmOpenR font25">IF</div>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['clarity'];?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">CUT</div>
-                                <div class="infoValue c666 fmOpenR font25">EX</div>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['cut'];?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR">
                                 <div class="infoLabel fmOpenB  font12">SYMMETRY</div>
-                                <div class="infoValue c666 font25 fmOpenR">Very Good</div>
+                                <div class="infoValue c666 font25 fmOpenR"><?php echo $data['attr_details']['symmetry'];?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR">
                                 <div class="infoLabel fmOpenB  font12">POLISH</div>
-                                <div class="infoValue c666 font25 fmOpenR">G</div>
+                                <div class="infoValue c666 font25 fmOpenR"><?php echo $data['attr_details']['polish'];?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR">
                                 <div class="infoLabel fmOpenB  font12">FLUORESCENCE</div>
-                                <div class="infoValue c666 font25 fmOpenR">None</div>
+                                <div class="infoValue c666 font25 fmOpenR"><?php echo $data['attr_details']['fluorescence'];?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">Measurement</div>
-                                <div class="infoValue c666 fmOpenR font25">20X10X30</div>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['measurement'];?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR">
                                 <div class="infoLabel fmOpenB  font12">TABLE</div>
-                                <div class="infoValue c666 font25 fmOpenR">56</div>
+                                <div class="infoValue c666 font25 fmOpenR"><?php echo $data['attr_details']['tab'];?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR">
                                 <div class="infoLabel fmOpenB  font12">CROWN ANGLE</div>
-                                <div class="infoValue c666 font25 fmOpenR">41</div>
+                                <div class="infoValue c666 font25 fmOpenR"><?php echo $data['attr_details']['crownangle'];?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR">
                                 <div class="infoLabel fmOpenB  font12">GIRDLE</div>
-                                <div class="infoValue c666 font25 fmOpenR">Thin</div>
+                                <div class="infoValue c666 font25 fmOpenR"><?php echo $data['attr_details']['girdle'];?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">Certificate</div>
-                                <div class="infoValue c666 fmOpenR font25">GIA</div>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['certified'];?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">Certificate No.</div>
-                                <div class="infoValue c666 fmOpenR font25">2196113785</div>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['cno'];?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">Barcode</div>
-                                <div class="infoValue c666 fmOpenR font25">CW0H8IE9</div>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo $data['product_barcode'];?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR">
                                 <div class="infoLabel fmOpenB  font12">LOT NUMBER</div>
-                                <div class="infoValue c666 font25 fmOpenR">31</div>
+                                <div class="infoValue c666 font25 fmOpenR"><?php echo $data['product_lotno'];?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR">
                                 <div class="infoLabel fmOpenB  font12">LOT Reference</div>
-                                <div class="infoValue c666 font25 fmOpenR">IFTOSI - 012</div>
+                                <div class="infoValue c666 font25 fmOpenR"><?php echo $data['product_lotref'];?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR">
                                 <div class="infoLabel fmOpenB  font12">BASE Price</div>
-                                <div class="infoValue c666 font25 fmOpenR">200000</div>
+                                <div class="infoValue c666 font25 fmOpenR"><?php echo number_format($data['attr_details']['baseprice'], 2);?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR">
                                 <div class="infoLabel fmOpenB  font12">% DISCOUNT</div>
-                                <div class="infoValue c666 font25 fmOpenR">25%</div>
+                                <div class="infoValue c666 font25 fmOpenR"><?php echo $data['attr_details']['discount'];?>%</div>
                             </div>
                         </div>
                     </div>
