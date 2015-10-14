@@ -18,7 +18,7 @@ $(document).ready(function(){
     }, 100);
 
     
-    $('.thumbnil').click(function(){
+    $('#gallery1 .thumbnil').click(function(){
         var img=$(this).css('background');
         $('#prdImage').css({'background':img});
     });
@@ -124,3 +124,23 @@ function movePrImg(flag) {
         }
     }
 }
+
+function showVendorDetails(){
+    var pos=$('.prdInfo').offset().top-100;
+    $('#vDetails').removeClass('dn');
+    setTimeout(function(){
+        $('#vDetails').removeClass('vTransit');
+        $('body').animate({scrollTop: pos}, 300);
+    },50);
+}
+
+//imgvendorGallery
+
+
+$('#galleryClose2').click(function(){
+    $('#imgvendorGallery').addClass('dn');
+ });
+
+ $('#moreimg').click(function(){
+    $('#imgvendorGallery').removeClass('dn');
+ });
