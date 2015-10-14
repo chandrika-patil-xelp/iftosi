@@ -1,6 +1,6 @@
 /*
-SQLyog Ultimate v11.11 (32 bit)
-MySQL - 5.6.25 : Database - db_iftosi
+SQLyog Ultimate v11.11 (64 bit)
+MySQL - 5.6.24 : Database - db_iftosi
 *********************************************************************
 */
 
@@ -37,7 +37,7 @@ CREATE TABLE `tbl_attribute_category_mapping` (
 
 /*Data for the table `tbl_attribute_category_mapping` */
 
-insert  into `tbl_attribute_category_mapping`(`category_id`,`attribute_id`,`attr_display_flag`,`attr_display_position`,`attr_filter_flag`,`attr_filter_position`,`active_flag`,`date_time`,`update_time`) values (10000,36,1,1,1,1,1,'0000-00-00 00:00:00','2015-10-13 11:04:13'),(10000,37,1,3,1,3,1,'0000-00-00 00:00:00','2015-10-13 11:04:13'),(10000,38,1,2,1,2,1,'0000-00-00 00:00:00','2015-10-13 11:04:13'),(10000,39,1,4,1,4,1,'0000-00-00 00:00:00','2015-10-13 11:04:13'),(10000,40,1,5,1,5,1,'0000-00-00 00:00:00','2015-10-13 11:04:13'),(10000,42,1,6,1,6,1,'0000-00-00 00:00:00','2015-10-13 11:04:13'),(10000,43,1,7,1,7,1,'0000-00-00 00:00:00','2015-10-13 11:04:13');
+insert  into `tbl_attribute_category_mapping`(`category_id`,`attribute_id`,`attr_display_flag`,`attr_display_position`,`attr_filter_flag`,`attr_filter_position`,`active_flag`,`date_time`,`update_time`) values (10000,36,1,8,1,8,1,'0000-00-00 00:00:00','2015-10-14 09:30:44'),(10000,37,1,2,1,2,1,'0000-00-00 00:00:00','2015-10-14 09:30:44'),(10000,38,1,1,1,1,1,'0000-00-00 00:00:00','2015-10-14 09:30:44'),(10000,39,1,3,1,3,1,'0000-00-00 00:00:00','2015-10-14 09:30:44'),(10000,40,1,7,1,7,1,'0000-00-00 00:00:00','2015-10-14 09:30:44'),(10000,42,1,5,1,5,1,'0000-00-00 00:00:00','2015-10-14 09:30:44'),(10000,43,1,6,1,6,1,'0000-00-00 00:00:00','2015-10-14 09:30:44');
 
 /*Table structure for table `tbl_attribute_master` */
 
@@ -61,7 +61,7 @@ CREATE TABLE `tbl_attribute_master` (
 
 /*Data for the table `tbl_attribute_master` */
 
-insert  into `tbl_attribute_master`(`attr_id`,`attr_name`,`attr_display_name`,`attr_unit`,`attr_type_flag`,`attr_unit_pos`,`attr_values`,`attr_range`,`use_list`,`active_flag`,`date_time`,`update_time`) values (36,'shape','Shape','',7,0,'Round,Pear,Princess,Marquise,Oval,Emerald,Cushion,Heart,Radiant','','',1,'0000-00-00 00:00:00','2015-10-13 11:13:42'),(37,'color','Color','',7,0,' D,E,F,G,H,I,J,K,L,M,N,O,S','','',1,'0000-00-00 00:00:00','2015-10-13 11:13:42'),(38,'carat','Carat','',6,0,'','0.30-20.11','',1,'0000-00-00 00:00:00','2015-10-13 11:13:42'),(39,'clarity','Clarity','',7,0,'IF,VVS1,VVS2,VS1,VS2,SI1,SI2,I1','','',1,'0000-00-00 00:00:00','2015-10-13 11:13:42'),(40,'price','Price','',6,0,'','210.00-201100.00','',1,'0000-00-00 00:00:00','2015-10-13 11:13:42'),(42,'polish','Polish','',7,0,'Excellent,Very Good,Good,Fair','','',1,'0000-00-00 00:00:00','2015-10-13 11:13:42'),(43,'sym','Symmetry','',7,0,'Excellent,Very Good,Good,Fair','','',1,'0000-00-00 00:00:00','2015-10-13 11:13:42');
+insert  into `tbl_attribute_master`(`attr_id`,`attr_name`,`attr_display_name`,`attr_unit`,`attr_type_flag`,`attr_unit_pos`,`attr_values`,`attr_range`,`use_list`,`active_flag`,`date_time`,`update_time`) values (36,'shape','Shape','',7,0,'Round,Pear,Princess,Marquise,Oval,Emerald,Cushion,Heart,Radiant','','',1,'0000-00-00 00:00:00','2015-10-13 11:13:42'),(37,'color','Color','',7,0,'D,E,F,G,H,I,J,K,L,M,N,O','','',1,'0000-00-00 00:00:00','2015-10-14 10:31:37'),(38,'carat','Carat','',6,0,'','0.30-20.11','',1,'0000-00-00 00:00:00','2015-10-13 11:13:42'),(39,'clarity','Clarity','',7,0,'IF,VVS1,VVS2,VS1,VS2,SI1,SI2,I1','','',1,'0000-00-00 00:00:00','2015-10-13 11:13:42'),(40,'price','Price','',6,0,'','210.00-201100.00','',1,'0000-00-00 00:00:00','2015-10-13 11:13:42'),(42,'polish','Polish','',7,0,'Excellent,Very Good,Good,Fair','','',1,'0000-00-00 00:00:00','2015-10-13 11:13:42'),(43,'sym','Symmetry','',7,0,'Excellent,Very Good,Good,Fair','','',1,'0000-00-00 00:00:00','2015-10-13 11:13:42');
 
 /*Table structure for table `tbl_available_autosuggest_lists` */
 
