@@ -462,7 +462,7 @@ a{cursor:pointer;}
 .forBg{width:100%;height:300px;padding-top: 100px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;}
 .prdMainDetails{width:100%;height: 393px;margin-top: -90px;position: relative;margin-bottom: 20px;}
 .prdMainDetails .wrapperMax{padding-left: 360px;position: relative;}
-.imgsCont{width:360px;height: 393px;position: absolute;left:0;top:0;box-shadow: 0 0 20px 5px rgba(0,0,0,0.2)}
+.imgsCont{width:360px;height: 393px;position: absolute;left:0;top:0;border: 1px solid #d4d4c8;}
 .forImg{width:100%;height:300px;cursor: pointer;}
 .gallery{width:100%;height: 93px;padding: 2px;white-space: nowrap;overflow: hidden;position: relative;}
 .leftArrow {width: 40px;height: 93px;position: absolute;left: 0px;top: 300px;bottom: 0;margin: auto;background: rgba(0,0,0,0.6) url(../img/common/arrow_black.svg)no-repeat;background-position: 0 center;background-size: auto 50px;cursor: pointer;z-index: 10;}
@@ -498,6 +498,11 @@ a{cursor:pointer;}
 .prdInfoDiv ul li div:nth-child(1){width:auto;height: 40px;line-height: 40px;padding:0 25px 0 0;color: #8A0044 ;font-size: 22px;}
 .prdInfoDiv ul li div:nth-child(2){width: 100%;height: auto;line-height: 30px;padding: 0;color: #4d4d4d;font-size: 16px;padding-left: 25px;text-align: left;}    
 .prdInfoDiv .prdInfoDiv{margin-bottom: 0}
+.jewellery_details .infoCommn {width: 33.33%!important;}
+.bullion_details .infoCommn {width: 100%!important;}
+    
+    
+    
 
 /* Vendor Detaisls */
 .vendorDetails{width:100%;height:480px;margin-bottom: 20px;margin-top: 30px;overflow: hidden;}
@@ -830,7 +835,7 @@ a{cursor:pointer;}
     .prdMainDetails .wrapperMax {padding-left: 0;position: initial;}
     .infoCommn {width: 50%;}
     .majorInfoBox .infoCommn:nth-child(even){padding-left: 30px;}
-    .jewellery_details .infoCommn {width: 33.33%;}
+
     .imgsCont {width: 90%;position: relative;margin: 0 5%;height: 330px;padding: 10px;}
     .thumbnil {width: 24%;height: 0;border: 1px solid #333;margin: 0 0.5%;cursor: pointer;padding-bottom: 25%;}
     .forBg {width: 100%;height: 270px;}

@@ -72,6 +72,10 @@
 					$page='diamond_details';
 					include 'template/diamond_details.html';
 				break;
+				case 'bullion_details':
+					$page='bullion_details';
+					include 'template/bullion_details.html';
+				break;
 				case 'jewellery_details':
 					$page='jewellery_details';
 					include 'template/jewellery_details.html';

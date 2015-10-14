@@ -44,7 +44,7 @@ $(document).ready(function(){
             lastSc=sc;
 
         }
-        if(pageName==='diamonds' || pageName==='diamond_details'  || pageName==='jewellery_details' || pageName==='jewellery'){
+        if(pageName==='diamonds' || pageName==='diamond_details'  || pageName==='jewellery_details' || pageName==='bullion_details' || pageName==='jewellery'){
             $('#header,#hbgDiam,#hbgJewel,#hbgBull,#logoTxt').velocity("stop");
             $('.headCatCont,.logo').velocity("stop");
             if (!isMobile) {
@@ -63,7 +63,7 @@ $(document).ready(function(){
 //                    $('.logo').removeClass('lactive');
                     $('.logo').velocity({top: 30 + "px", height: 100 + "px", width: 100 + "px", backgroundPositionX: '50%'}, {duration: 0, delay: 0});
                     //$('#logoTxt').velocity({opacity: 1}, {duration: 300, delay: 400});
-                    if(pageName==='diamond_details'  || pageName==='jewellery_details'){
+                    if(pageName==='diamond_details'  || pageName==='jewellery_details' || pageName==='bullion_details'){
                         $('#logoTxt').css({color:'#4d4d4d'});
                     }
                     $('#logoTxt').velocity({left:0+"px",bottom:-30+"px"},{duration:300, delay:0});
