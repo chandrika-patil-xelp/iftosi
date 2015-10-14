@@ -100,6 +100,7 @@ function getRandomInt(min, max) {
 function getResultsData(data)
 {
 	var html = '';
+	var fhtml = '';
 	$.each(data.results.products, function(i, vl) {
 		html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/pid-'+vl.pid+'">';
 			html += '<div class="prdComm fLeft" style="opacity: 0; transform: translateX(1500px);">';
@@ -124,7 +125,7 @@ function getResultsData(data)
 						html += '</div>';
 						html += '<div class="detComm">';
 							html += '<div class="detLabel fmOpenB fLeft">CERTIFICATE</div>';
-							html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.cno+'</div>';
+							html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.certified+'</div>';
 						html += '</div>';
 					html += '</div>';
 					html += '<div class="prdPrice fLeft">';
@@ -143,6 +144,68 @@ function getResultsData(data)
 			html += '</div>';
 		html += '</a>';
 	});
+	
+	$.each(data.results.filters, function(i, v) {
+		$.each(v, function(k, vl) {
+			
+			var dvl = vl.value.split(';');
+			
+			if(k == 'range')
+			{
+				fhtml += '<input type="hidden" id="'+vl.name+'RangeMin" value="'+dvl[0]+'">';
+				fhtml += '<input type="hidden" id="'+vl.name+'RangeMax" value="'+dvl[1]+'">';
+				fhtml += '<div id="'+vl.name+'Div" class="filterCont fLeft">';
+					fhtml += '<div class="fLeft optionTitle fmOpenR">'+vl.dname+'</div>';
+					fhtml += '<div class="fLeft rangeCont">';
+						fhtml += '<div class="fLeft rangeDiv">';
+							fhtml += '<input type="text" id="'+vl.name+'Range" class="fLeft rngInp" style="visibility: hidden;">';
+						fhtml += '</div>';
+					fhtml += '</div>';
+				fhtml += '</div>';
+			}
+		});
+	});
+	
+	//$('#filters').html(fhtml);
+	
+	/*$(".rngInp").each(function () {
+		
+		var id = $(this).attr('id');
+		var min_price = $('#'+id+'Min').val()*1;
+		var max_price = $('#'+id+'Max').val()*1;
+		
+		if((max_price - min_price) > 100)
+			var step = '';
+		else
+			var step = 0.01;
+		
+		$(this).ionRangeSlider({
+			type: "double",
+			grid: true,
+			min: min_price,
+			max: max_price,
+			from: min_price,
+			to: max_price,
+			decorate_both: false,
+			prettify_separator: ",",
+			force_edges: true,
+			drag_interval: true,
+			step: step,
+			onFinish: function(data) {
+				FR();
+			}
+		});
+		
+		$('.filterCont :input[type=checkbox]').each(function() {
+			$(this).bind('click', function(event) {
+				FR();
+				if (event && $.isFunction(event.stopImmediatePropagation))
+					event.stopImmediatePropagation();
+				else 
+					window.event.cancelBubble=true;
+			});
+		});
+	}); */
 	
 	$('.prdResults').html(html);
 	$('.prdResults').offset();

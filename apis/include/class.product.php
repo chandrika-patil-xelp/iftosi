@@ -447,7 +447,7 @@
 					$attr[$pid]['attributes']=$row2;
 				}
 				
-				$pid=implode(',',$prodid);
+				$pid = $pids = implode(',',$prodid);
 				
 				$psql = "
 						SELECT
@@ -475,9 +475,108 @@
 					$arr1[$pid]['attributes'] = $attr[$pid]['attributes'];
 				}
 				
-				//echo "<pre>";print_r($arr1);die;
+				/* For filters */
+				$sql = "
+					SELECT 
+						group_concat(attribute_id) AS ids
+					FROM 
+						tbl_attribute_category_mapping 
+					WHERE 
+						category_id=".$params['catid']." 
+					AND 
+						attr_filter_flag=1 
+					ORDER BY 
+						attr_filter_position ASC";
+				$res = $this->query($sql);
+				if($res)
+				{
+					$row 		= $this->fetchData($res);
+					$attrids 	= $row['ids'];
+				}
 				
-				$arr1 = array('products'=>array_values($arr1),'total'=>$total);
+				$sql="
+					SELECT
+						attr_id, 
+						attr_name, 
+						attr_display_name, 
+						attr_unit, 
+						attr_unit_pos,
+						attr_type_flag,
+						attr_values					
+					FROM 
+						tbl_attribute_master 
+					WHERE 
+						attr_id IN(".$attrids.") 
+					ORDER BY 
+						attr_display_name ASC";
+				
+				$res = $this->query($sql);
+				
+				if($res)
+				{
+					$i=0;
+					while($row = $this->fetchData($res))
+					{
+						switch ($row['attr_type_flag'])
+						{
+							case 6: //$pids
+								$qry = "SELECT 
+											MIN(".$row['attr_name'].") AS minval, 
+											MAX(".$row['attr_name'].") AS maxval 
+										FROM 
+											tbl_product_search
+										WHERE
+											product_id IN(".$pids.")
+										";
+								$res1 = $this->query($qry);
+								if($res1)
+								{
+									$row1 = $this->fetchData($res1);
+									$data[$i]['range']['name'] = $row['attr_name'];
+									$data[$i]['range']['dname'] = $row['attr_display_name'];
+									$data[$i]['range']['value'] = $row1['minval'].';'.$row1['maxval'];
+									$i++;
+								}
+							break;
+							
+							case 7:
+								
+								$qry = "SELECT 
+											group_concat(DISTINCT ".$row['attr_name'].") as name 
+										FROM 
+											tbl_product_search
+										WHERE
+											product_id IN(".$pids.")
+										";
+								$res1 = $this->query($qry);
+								if($res1)
+								{
+									$arr = array();
+									$row1 = $this->fetchData($res1);
+									$expd = explode(',',$row['attr_values']);
+									$expd1 = explode(',',$row1['name']);
+									foreach($expd1 as $key=>$val)
+									{
+										$arr[array_search($val,$expd)] = $val;
+									}
+									ksort($arr);
+									$arr = array_values($arr);
+									$data[$i]['checkbox']['name'] = $row['attr_name'];
+									$data[$i]['checkbox']['dname'] = $row['attr_display_name'];
+									$data[$i]['checkbox']['value'] = implode(',',$arr);
+									$i++;
+								}
+							break;
+							
+							case 8:
+							break;
+						}
+					}
+				}
+				
+				/* *********** */
+				
+				$arr1 = array('filters'=>$data,'products'=>array_values($arr1),'total'=>$total,'getdata'=>$params);
 				$err = array('errCode'=>0,'errMsg'=>'Details fetched successfully');
 			}
 			else
