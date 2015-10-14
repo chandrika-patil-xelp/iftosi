@@ -63,7 +63,9 @@ $(document).ready(function(){
 //                    $('.logo').removeClass('lactive');
                     $('.logo').velocity({top: 30 + "px", height: 100 + "px", width: 100 + "px", backgroundPositionX: '50%'}, {duration: 0, delay: 0});
                     //$('#logoTxt').velocity({opacity: 1}, {duration: 300, delay: 400});
-                    $('#logoTxt').css({color:'#4d4d4d'});
+                    if(pageName==='diamond_details'  || pageName==='jewellery_details'){
+                        $('#logoTxt').css({color:'#4d4d4d'});
+                    }
                     $('#logoTxt').velocity({left:0+"px",bottom:-30+"px"},{duration:300, delay:0});
                     $('#header').velocity({height: "100px", paddingTop: 32 + "px", paddingBottom: 32 + "px"}, {duration: 0, delay: 0, easing: 'swing'});
                     $('#hbgDiam,#hbgJewel,#hbgBull').velocity({backgroundPositionY: 8 + "px"}, {duration: 0, delay: 0, easing: 'swing'});
