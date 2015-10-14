@@ -830,6 +830,7 @@ a{cursor:pointer;}
     .prdMainDetails .wrapperMax {padding-left: 0;position: initial;}
     .infoCommn {width: 50%;}
     .majorInfoBox .infoCommn:nth-child(even){padding-left: 30px;}
+    .jewellery_details .infoCommn {width: 33.33%;}
     .imgsCont {width: 90%;position: relative;margin: 0 5%;height: 330px;padding: 10px;}
     .thumbnil {width: 24%;height: 0;border: 1px solid #333;margin: 0 0.5%;cursor: pointer;padding-bottom: 25%;}
     .forBg {width: 100%;height: 270px;}
