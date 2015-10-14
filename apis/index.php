@@ -157,8 +157,9 @@ switch($action)
         case 'filLog':
             include APICLUDE.'class.viewlog.php';
             $uid=(!empty($params['uid'])) ? trim($params['uid']) : '';
-            $product_id=(!empty($params['product_id'])) ? trim($params['product_id']) : '';
-            if(empty($product_id)  &&  empty($uid))
+            $pid=(!empty($params['pid'])) ? trim($params['pid']) : '';
+            $vid=(!empty($params['vid'])) ? trim($params['vid']) : '';
+            if(empty($vid) && empty($pid)  &&  empty($uid))
             {
                 $arr = array();
                 $err = array('Code' => 1, 'Msg' => 'Invalid Parameters');
@@ -430,7 +431,6 @@ switch($action)
                 $res=$result;
                 break;
             }
-
             $obj= new categoryInfo($db['iftosi']);
             $result=$obj->addCat($params);
             $res=$result;
@@ -754,9 +754,8 @@ switch($action)
             $flag=(!empty($params['flag'])) ? trim($params['flag']):'';                
             $upos=(!empty($params['upos'])) ? trim(urldecode($params['upos'])):'';
             $vals=(!empty($params['vals'])) ? trim($params['vals']) : '';
-            $range=(!empty($params['range'])) ? trim(urldecode($params['range'])):'';
-            $list=(!empty($params['list_values'])) ? trim(urldecode($params['list_values'])):'';            
-            if(empty($name)  &&  empty($dname)  &&  empty($unit)  &&  empty($flag)  &&  empty($upos)  &&  empty($vals)  &&  empty($range))
+            
+            if(empty($name)  &&  empty($dname)  &&  empty($unit)  &&  empty($flag)  &&  empty($upos)  &&  empty($vals))
             {
             $arr=array();
             $err=array('code'=> 1,'Msg'=> 'Invalid parameters');
