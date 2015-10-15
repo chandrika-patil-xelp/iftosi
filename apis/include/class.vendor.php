@@ -188,7 +188,7 @@ class vendor extends DB
         return $result;
     }
     
-    public function getVDetailByPid($params)
+    public function getVDetailByVidPid($params)
     {
         $page   = ($params['page'] ? $params['page'] : 1);
         $limit  = ($params['limit'] ? $params['limit'] : 15);
@@ -223,7 +223,7 @@ class vendor extends DB
                             position,
                             contact_mobile,
                             email,
-                            membership_cert as Membership_Certificate,
+                            memship_Cert as Membership_Certificate,
                             bdbc as bharat_Diamond_Bource_Certificate,
                             other_bdbc as other_Bharat_Diamond_Bource_Certificate,
                             vatno as Vat_Number,                            
@@ -269,6 +269,99 @@ class vendor extends DB
         }
         $result = array('results'=>$arr,'error'=>$err);
         return $result;        
-    }    
+    }
+    
+    public function getVDetailByPid($params)
+    {
+        $page   = ($params['page'] ? $params['page'] : 1);
+        $limit  = ($params['limit'] ? $params['limit'] : 15);
+        
+        $sql1="SELECT * FROM tbl_vendor_product_mapping where product_id=".$params['pid']." ORDER BY date_time ASC";
+        if (!empty($page))
+        {
+            $start = ($page * $limit) - $limit;
+            $sql1.=" LIMIT " . $start . ",$limit";
+        }
+        $res1=$this->query($sql1);
+        $chkcnt=$this->numRows($res1);
+        if($chkcnt>0)
+        {
+            while($row=$this->fetchData($res1))
+            {   
+                $vid[] = $row['vendor_id'];
+                $vdet['vendor_id'] = $row['vendor_id'];
+                $vdet['vendor_price']=$row['vendor_price'];
+                $vdet['vendor_quantity']=$row['vendor_quantity'];
+                $vdet['vendor_currency']=$row['vendor_currency'];
+                $vdet['vendor_remarks']=$row['vendor_remarks'];
+                $vdetls[]=$vdet;
+            }
+            
+            $vid = implode(',',$vid);
+            
+            $sql2="SELECT 
+                            vendor_id AS vid,
+                            orgName as OrganisationName,
+                            fulladdress,
+                            postal_code,
+                            telephones,
+                            alt_email,
+                            officecity as office_city,
+                            officecountry as office_country,
+                            contact_person,
+                            position,
+                            contact_mobile,
+                            email,
+                            memship_Cert as Membership_Certificate,
+                            bdbc as bharat_Diamond_Bource_Certificate,
+                            other_bdbc as other_Bharat_Diamond_Bource_Certificate,
+                            vatno as Vat_Number,                            
+                            landline,
+                            mdbw as membership_of_other_diamond_bourses_around_world,                            
+                            website,
+                            banker as bankers,                            
+                            pancard,
+                            turnover,
+                            lat as latitude,
+                            lng as longitude
+
+                    FROM 
+                                tbl_vendor_master 
+                    WHERE 
+                                vendor_id IN(".$vid.")
+                    ORDER BY
+                                field(vendor_id,".$vid.")";
+            if (!empty($page))
+            {
+            $start = ($page * $limit) - $limit;
+            $sql2.=" LIMIT " . $start . ",$limit";
+            }
+
+            $res2=$this->query($sql2);
+            if($this->numRows($res2) > 0)
+            {
+                while ($row2=$this->fetchData($res2)) 
+                {
+                    $arr1[$row2['vid']] = $row2;
+                }
+                $arr=array('Vendor-Detail'=>$arr1,'Vendor-Product'=>$vdetls);    
+                $err = array('Code' => 0, 'Msg' => 'Details fetched successfully');
+            }
+            else
+            {
+                $arr=array();    
+                $err = array('Code' => 1, 'Msg' => 'No Match Found');
+            }
+        }
+        else
+        {
+            $arr=array();    
+            $err = array('Code' => 0, 'Msg' => 'No Match Found');
+        }
+        $result = array('results'=>$arr,'error'=>$err);
+        return $result;        
+    }
+    
+    
 }
 ?>
