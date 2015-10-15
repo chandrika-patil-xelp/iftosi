@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 14, 2015 at 04:35 PM
+-- Generation Time: Oct 15, 2015 at 08:47 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_iftosi`
 --
+CREATE DATABASE IF NOT EXISTS `db_iftosi` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `db_iftosi`;
 
 -- --------------------------------------------------------
 
