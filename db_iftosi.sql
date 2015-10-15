@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 15, 2015 at 02:45 PM
+-- Generation Time: Oct 15, 2015 at 03:07 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -9952,7 +9952,7 @@ CREATE TABLE IF NOT EXISTS `tbl_vendor_master` (
   `telephones` text COMMENT 'telephone numbers of company',
   `alt_email` text COMMENT 'alternate email addresses',
   `officecity` text COMMENT 'offices in different cities',
-  `ofifcecountry` text COMMENT 'offices in different countries',
+  `officecountry` text COMMENT 'offices in different countries',
   `contact_person` varchar(250) DEFAULT NULL COMMENT 'contact person name',
   `position` varchar(15) DEFAULT NULL COMMENT 'person designation',
   `contact_mobile` bigint(15) DEFAULT NULL COMMENT 'person''s mobile number',
@@ -9980,7 +9980,7 @@ CREATE TABLE IF NOT EXISTS `tbl_vendor_master` (
 -- Dumping data for table `tbl_vendor_master`
 --
 
-INSERT INTO `tbl_vendor_master` (`vendor_id`, `orgName`, `fulladdress`, `address1`, `area`, `postal_code`, `city`, `country`, `state`, `telephones`, `alt_email`, `officecity`, `ofifcecountry`, `contact_person`, `position`, `contact_mobile`, `email`, `memship_Cert`, `bdbc`, `other_bdbc`, `vatno`, `website`, `landline`, `mdbw`, `banker`, `pancard`, `turnover`, `lng`, `lat`, `update_time`, `updatedby`, `date_time`, `is_complete`) VALUES
+INSERT INTO `tbl_vendor_master` (`vendor_id`, `orgName`, `fulladdress`, `address1`, `area`, `postal_code`, `city`, `country`, `state`, `telephones`, `alt_email`, `officecity`, `officecountry`, `contact_person`, `position`, `contact_mobile`, `email`, `memship_Cert`, `bdbc`, `other_bdbc`, `vatno`, `website`, `landline`, `mdbw`, `banker`, `pancard`, `turnover`, `lng`, `lat`, `update_time`, `updatedby`, `date_time`, `is_complete`) VALUES
 (1, 'White Fire Jewels', 'GW 9876 Bharat Diamond Bourse,\r\nBandra Kurla Complex,\r\nBandrea East,\r\nMumbai 400051,\r\nMaharastra', NULL, NULL, NULL, NULL, NULL, NULL, '0222-32623263~0222-32623263~0222-32623263~0222-32623263', 'wfj@gmail.com~xyx@hotmail.com', 'Bangalore', 'India', 'Sandipan Chattopadhyay', 'Director', 990051525, 'ankur@xelpmoc.in', 'GJEPC/HO-MUM(M)/G25885/AM/I', 'M-12345', NULL, '1234567890', 'www.whitefirejwels.in', '0222-32623263', 'Russia~London~Hongkong', 'Indus Bank~Kotak Bank~State Bank Of India', 'BOSPB5539L', '100', '12.966700000000000', '77.566700000000000', '2015-10-15 12:44:05', 'VENDOR', '0000-00-00 00:00:00', 2);
 
 -- --------------------------------------------------------
