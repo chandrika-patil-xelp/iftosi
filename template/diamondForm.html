@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Diamond Form</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel='stylesheet' type="text/css" href='tools/css/backend.css'>
+        <script type="text/javascript" src='tools/js//cms/lib/jquery.js'></script>
+        <script type="text/javascript" src='tools/js/cms/Common.js'></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="wrapper">
+                <div class="wrapperMax">
+                    <div class="formContainer fmOpenR">
+                        <div class="formTitle fLeft ">Diamond Details</div>
+                        <div class="divCon  fLeft fmOpenR">
+                            <div  class="titleDiv txtCap fLeft">Diamond Shape</div>
+                            <div class='radioCont fLeft'>    
+                                <div class="checkDiv fLeft Round">
+                                    <input type="radio" class="filled-in" id="round" name="shape">
+                                    <label for="round">Round</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" class="filled-in" id="pear" name="shape">
+                                    <label for="pear">Pear</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" class="filled-in" id="heart" name="shape">
+                                    <label for="heart">Heart</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" class="filled-in" id="princess" name="shape">
+                                    <label for="princess">Princess</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" class="filled-in" id="asscher" name="shape">
+                                    <label for="asscher">Asscher</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" class="filled-in" id="marquise" name="shape">
+                                    <label for="marquise">Marquise</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" class="filled-in" id="oval" name="shape">
+                                    <label for="oval">Oval</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" class="filled-in" id="emerald" name="shape">
+                                    <label for="emerald">Emerald</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" class="filled-in" id="radiant" name="shape">
+                                    <label for="radiant">Radiant</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" class="filled-in" id="cushion" name="shape">
+                                    <label for="cushion">Cushion</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="divCon  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Carat Weight</div>
+                            <input name="carat_weight" type="text" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666" onkeypress="return common.isDecimalKey(event)">
+                        </div>
+                        <div class="divCon  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Color</div>
+                            <div class='radioCont fLeft'> 
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='color' class="filled-in" id="color_ D">
+                                    <label for="color_ D"> D</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='color' class="filled-in" id="color_E" checked="checked">
+                                    <label for="color_E">E</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='color' class="filled-in" id="color_F">
+                                    <label for="color_F">F</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='color' class="filled-in" id="color_G">
+                                    <label for="color_G">G</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='color' class="filled-in" id="color_H">
+                                    <label for="color_H">H</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='color' class="filled-in" id="color_I">
+                                    <label for="color_I">I</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='color' class="filled-in" id="color_J">
+                                    <label for="color_J">J</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='color' class="filled-in" id="color_K">
+                                    <label for="color_K">K</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='color' class="filled-in" id="color_L">
+                                    <label for="color_L">L</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='color' class="filled-in" id="color_M">
+                                    <label for="color_M">M</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='color' class="filled-in" id="color_N">
+                                    <label for="color_N">N</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='color' class="filled-in" id="color_O">
+                                    <label for="color_O">O</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='color' class="filled-in" id="color_S" checked="checked">
+                                    <label for="color_S">S</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="divCon  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Clarity</div>
+                            <div class='radioCont fLeft'> 
+                                <div id="clarity_39" class="filterOptions fLeft fmOpenR">
+                                    <div class="checkDiv fLeft">
+                                        <input type="radio" name='clarity' class="filled-in" id="clarity_IF">
+                                        <label for="clarity_IF">IF</label>
+                                    </div>
+                                    <div class="checkDiv fLeft">
+                                        <input type="radio" name='clarity' class="filled-in" id="clarity_VVS1">
+                                        <label for="clarity_VVS1">VVS1</label>
+                                    </div>
+                                    <div class="checkDiv fLeft">
+                                        <input type="radio" name='clarity' class="filled-in" id="clarity_VVS2">
+                                        <label for="clarity_VVS2">VVS2</label>
+                                    </div>
+                                    <div class="checkDiv fLeft">
+                                        <input type="radio" name='clarity' class="filled-in" id="clarity_VS1">
+                                        <label for="clarity_VS1">VS1</label>
+                                    </div>
+                                    <div class="checkDiv fLeft">
+                                        <input type="radio" name='clarity' class="filled-in" id="clarity_VS2">
+                                        <label for="clarity_VS2">VS2</label>
+                                    </div>
+                                    <div class="checkDiv fLeft">
+                                        <input type="radio" name='clarity' class="filled-in" id="clarity_SI1">
+                                        <label for="clarity_SI1">SI1</label>
+                                    </div>
+                                    <div class="checkDiv fLeft">
+                                        <input type="radio" name='clarity' class="filled-in" id="clarity_SI2">
+                                        <label for="clarity_SI2">SI2</label>
+                                    </div>
+                                    <div class="checkDiv fLeft">
+                                        <input type="radio" name='clarity' class="filled-in" id="clarity_I1">
+                                        <label for="clarity_I1">I1</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="divCon  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Cut</div>
+                            <div class='radioCont fLeft'> 
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='cut' class="filled-in" id="cut_Excellent">
+                                    <label for="cut_Excellent">Excellent</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='cut' class="filled-in" id="cut_Very Good">
+                                    <label for="cut_Very Good">Very Good</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='cut' class="filled-in" id="cut_Good">
+                                    <label for="cut_Good">Good</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='cut' class="filled-in" id="cut_Fair">
+                                    <label for="cut_Fair">Fair</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="divCon  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Symmetry</div>
+                            <div class='radioCont fLeft'> 
+
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='symmetry'class="filled-in" id="sym_Excellent">
+                                    <label for="sym_Excellent">Excellent</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='symmetry'class="filled-in" id="sym_Very Good">
+                                    <label for="sym_Very Good">Very Good</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='symmetry'class="filled-in" id="sym_Good">
+                                    <label for="sym_Good">Good</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='symmetry'class="filled-in" id="sym_Fair">
+                                    <label for="sym_Fair">Fair</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="divCon  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Polish</div>
+                            <div class='radioCont fLeft'> 
+                                <div id="polish_42" class="filterOptions fLeft fmOpenR">
+                                    <div class="checkDiv fLeft">
+                                        <input type="radio" name='polish' class="filled-in" id="polish_Excellent">
+                                        <label for="polish_Excellent">Excellent</label>
+                                    </div>
+                                    <div class="checkDiv fLeft">
+                                        <input type="radio" name='polish' class="filled-in" id="polish_Very Good">
+                                        <label for="polish_Very Good">Very Good</label>
+                                    </div>
+                                    <div class="checkDiv fLeft">
+                                        <input type="radio" name='polish' class="filled-in" id="polish_Good">
+                                        <label for="polish_Good">Good</label>
+                                    </div>
+                                    <div class="checkDiv fLeft">
+                                        <input type="radio" name='polish' class="filled-in" id="polish_Fair">
+                                        <label for="polish_Fair">Fair</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="divCon  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Flourecence</div>
+                            <div class='radioCont fLeft'> 
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='flourecence' class="filled-in" id="flourecence_1">
+                                    <label for="flourecence_1">Excellent</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='flourecence' class="filled-in" id="flourecence_2">
+                                    <label for="flourecence_2">Very Good</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='flourecence' class="filled-in" id="flourecence_3">
+                                    <label for="flourecence_3">Good</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='flourecence' class="filled-in" id="flourecence_4">
+                                    <label for="flourecence_4">Fair</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="divCon  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Measurement</div>
+                            <input name="measurement" type="text" placeholder=" eg. 10X20X30" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="divCon  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Table</div>
+                            <input name="table" type="text" placeholder=" eg. 56" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="divCon  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Crown Angle</div>
+                            <input name="crown_angle" type="text" placeholder=" eg. 41" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="divCon  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Girdle</div>
+                            <input name="girdle" type="text" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="divCon  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Certficate</div>
+                            <div class='radioCont fLeft'> 
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='Certficate' class="filled-in" id="Certficate_GIA">
+                                    <label for="Certficate_GIA">GIA</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='Certficate' class="filled-in" id="Certficate_IGI">
+                                    <label for="Certficate_IGI">IGI</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='Certficate' class="filled-in" id="Certficate_HRD">
+                                    <label for="Certficate_HRD">HRD</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="divCon  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Bar Code</div>
+                            <input name="barcode" type="text" placeholder=" eg. ALXPK12" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="divCon  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Lot Number</div>
+                            <input name="lot_no" type="text" placeholder=" eg. 56" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="divCon  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Lot Reference</div>
+                            <input name="lot_ref" type="text" placeholder=" eg. iftosi -012" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="divCon  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Base Price</div>
+                            <input name="base_price" type="text" placeholder=" eg. 120000" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="divCon  fLeft">
+                            <div  class="titleDiv txtCap fLeft">% Discount</div>
+                            <input name="discount" type="text" placeholder=" eg. 25%" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="divCon  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Price</div>
+                            <input name="price" type="text" placeholder=" eg. 1200000" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+</body>
+</html>

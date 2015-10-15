@@ -64,7 +64,7 @@ a{text-decoration: none;}
 .header{width:100%;height: 100px;background: #fff;line-height: 100px;position: fixed;top:0;z-index: 99;box-shadow: 0 0 35px 0px rgba(0,0,0,0.2);padding: 32px 0;}
 .header a{text-decoration:none;color:#4d4d4d;}
 .cityName{width: auto;min-width: 250px;max-width: 350px;height:36px;line-height: 36px;color: #333;font-size: 16px;background: url(../img/common/sarea.svg)no-repeat;background-size: auto 25px;background-position: left;padding-left: 25px;}
-.headRight{width:50%;height: 36px;font-size: 13px; color:#333;}
+.headRight{width:auto;height: 36px;font-size: 13px; color:#333;}
 .compNo{width:auto;height:36px;line-height:36px;background: #8A0044;color:#fff;padding: 0 15px;border-radius: 5px;margin:0 0 10px;}
 .signInUpTab{width: auto;height: 36px;line-height: 36px;padding-left: 25px;margin: 0 20px 0 15px;background: url(../img/common/lock.svg)no-repeat;background-position: left 3px;background-size: auto 100%;cursor:pointer;}
 .headDivider{width: 2px;background: #333;height: 16px;margin: 10px 0px;}
@@ -79,8 +79,11 @@ a{text-decoration: none;}
 
 .loggedIn{margin-right: 0!important;}
 .header ul {width: 120px!important;left: -100px!important;}
+.upperMenu {width: 100%;height: auto;background: #171334;position: fixed;top: 100px;z-index: 15;display: none;left: 0;}
+.forJwMenu{width:100%;height: auto;display: none;}
+.forDiamond {width:100%;height: auto;display: none;}
 
-.upperMenu{width:100%;height: 500px;background: #171334;position: absolute;top:100px;z-index: 10;}
+
 .menuTittle{width:100%;height: 70px;color: #fff;font-size: 40px;padding: 0 10px;transform: translateY(-400px);}
 .menuListCont{width:100%;height: 400px;padding: 25px;}
 .mItemDiv{width:20%;height: auto;color: #fff;}
@@ -95,6 +98,12 @@ a{text-decoration: none;}
 .jwActive{}
 .jwActive.bgJewellery{background-size: auto 150%!important;background-position: center!important;}
 .jwActive.bgJewellery span{transform: translateY(100px);color:#171334;}
+
+.jwActive.bgJewellery .upperMenu{display: block}
+.jwActive.bgJewellery .upperMenu .forJwMenu{display: block}
+
+.jwActive.bgDiamonds .upperMenu{display: block}
+.jwActive.bgDiamonds .upperMenu .forDiamond{display: block}
 
 /*Category*/
 .categoryCont{width:100%;height: 560px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding:200px 0 100px 0;}
@@ -272,7 +281,9 @@ a{text-decoration: none;}
 .prdComm:hover .actionComm:nth-child(3){-webkit-transition-delay:0.15s;-moz-transition-delay:0.15s;-ms-transition-delay:0.15s;-o-transition-delay:0.15s;transition-delay:0.15s;}
 .prdComm:hover .actionComm:nth-child(4){-webkit-transition-delay:0.02s;-moz-transition-delay:0.02s;-ms-transition-delay:0.02s;-o-transition-delay:0.02s;transition-delay:0.2s;}
 
-
+/*No Results */
+.noresDiv{width:100%;height: 160px;padding: 50px 0;text-align: center;color:#d4d4c8;border:1px solid #d4d4c8;}
+.noresults{width:100%;}
 
 /*Autosuggests*/
 .areaCont{width:100%;position: relative;height: auto;}
@@ -319,7 +330,7 @@ a{text-decoration: none;}
 .prdShape .Cushion {position: absolute;top:-7px;right: -15px;width: 70px;height: 50px;background-image: url(../img/shapes.svg);background-repeat: no-repeat;background-size: 1000% auto;}
 .prdShape .Cushion:hover{position: absolute;top:-7px;right: -15px;width: 70px;height: 50px;background-image: url(../img/shapes.svg);background-repeat: no-repeat;background-size: 1000% auto;background-position: 100% 0}
 
-.prdCommImg{width:100%;height: 160px;background: red;position: relative;}
+.prdCommImg{width:100%;height: 160px;position: relative;}
 
 /*Prd Gallery Jwellery Result Page*/
 .for-1{width:100%;height: 100%;background: #333;}

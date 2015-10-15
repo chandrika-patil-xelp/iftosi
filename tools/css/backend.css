@@ -1,0 +1,84 @@
+html{}
+body{padding: 0;margin: 0;}
+*{outline:none;outline-style: none}
+@font-face{font-family:openR;src: url(../fonts/OpenSans-Regular.ttf);}
+@font-face{font-family:openL;src: url(../fonts/OpenSans-Light.ttf);}
+@font-face{font-family:openB;src: url(../fonts/OpenSans-Bold.ttf);}
+
+.fmOpenR{font-family:openR}
+.fmOpenL{font-family:openL; letter-spacing: -0.03em;}
+.fmOpenB{font-family:openB}
+
+.font12{font-size: 12px!important;}
+.font13{font-size: 13px;}
+.font14{font-size: 14px;}
+.font15{font-size: 15px;}
+.font16{font-size: 16px;}
+.font18{font-size: 18px;}
+.font20{font-size: 20px;}
+.font22{font-size: 22px;}
+.font23{font-size: 23px;}
+.font24{font-size: 24px;}
+.font25{font-size: 25px;}
+.font26{font-size: 26px;}
+.font28{font-size: 28px;}
+.font29{font-size: 29px;}
+.font30{font-size: 30px;}
+.font32{font-size: 32px;}
+.font34{font-size: 34px;}
+.font35{font-size: 35px;}
+.font40{font-size: 40px;}
+.font43{font-size: 43px;}
+.font45{font-size: 45px;}
+.font55{font-size: 55px;}
+.font65{font-size: 65px;}
+
+*{box-sizing: border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-ms-box-sizing:border-box;-o-box-sizing:border-box;/*-webkit-appearance: none;-moz-user-select: none;-webkit-user-select: none;-ms-user-select: none;*/}
+.dn{display: none!important;}
+.fLeft{float:left!important}
+.fRight{float:right!important}
+.txtCenter{text-align: center}
+.txtLeft{text-align: left!important;}
+.txtRight{text-align: right}
+.txtOver{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+a{text-decoration: none;}
+.cBl {color: #4d4d4d !important;}
+
+.poR{position: relative}
+.bNone{border:none!important;}
+.txtCap {text-transform: capitalize;}
+.container{width:100%;height:auto;background: #fff;padding-bottom: 200px}
+.wrapper{width:100%;height:auto;}
+.wrapperMax{width:100%;max-width: 1200px;height:100%;margin: auto;}
+.formContainer{width:100%;height: auto;border: 1px solid #333;padding:15px;display: inline-block;}
+.formTitle{width:100%;height: 50px;border-bottom: 1px solid #ebebde;font-size: 35px;color:#4d4d4d;margin-bottom: 10px;}
+
+/*Contents*/
+.divCon {width: 100%;height: auto;margin-bottom: 10px;}
+.titleDiv {width: 20%;height: auto;line-height: 20px;text-align: right;padding: 0 15px;margin: 10px 0;color:#4d4d4d}
+.txtInput {width: 80%;height: 40px;padding: 0 15px;outline: none;outline-style: none;border: 1px solid #ccc;border-radius: 5px;background: #fff;}
+.radioCont {width: 80%;height: auto;border: 1px solid #ccc;padding: 5px 0;}
+.checkDiv{width:150px;height: 25px;margin-bottom: 10px;margin-right: 10px;}
+
+[type="radio"]:not(:checked), [type="radio"]:checked {position: absolute;left: -9999px;visibility: hidden; }
+[type="radio"]:not(:checked) + label, [type="radio"]:checked + label {position: relative;padding-left: 35px;cursor: pointer;display: inline-block;height: 25px;line-height: 28px;font-size: 18px;-webkit-transition: .28s ease;-moz-transition: .28s ease;-o-transition: .28s ease;-ms-transition: .28s ease;transition: .28s ease;-webkit-user-select: none;-moz-user-select: none;-khtml-user-select: none;-ms-user-select: none;}
+[type="radio"] + label:before, [type="radio"] + label:after {content: '';position: absolute;left: 0;top: 0;margin: 4px;width: 16px;height: 16px;z-index: 0;-webkit-transition: .28s ease;-moz-transition: .28s ease;-o-transition: .28s ease;-ms-transition: .28s ease;transition: .28s ease; }
+[type="radio"]:not(:checked) + label:before {border-radius: 50%;border: 2px solid #5a5a5a; }
+[type="radio"]:not(:checked) + label:after {border-radius: 50%;border: 2px solid #5a5a5a;z-index: -1;-webkit-transform: scale(0);-moz-transform: scale(0);-ms-transform: scale(0);-o-transform: scale(0);transform: scale(0); }
+[type="radio"]:checked + label:before {border-radius: 50%;border: 2px solid transparent; }
+[type="radio"]:checked + label:after {border-radius: 50%;border: 2px solid #26a69a;background-color: #26a69a;z-index: 0;-webkit-transform: scale(1.02);-moz-transform: scale(1.02);-ms-transform: scale(1.02);-o-transform: scale(1.02);transform: scale(1.02); }
+[type="radio"].with-gap:checked + label:before {border-radius: 50%;border: 2px solid #26a69a; }
+[type="radio"].with-gap:checked + label:after {border-radius: 50%;border: 2px solid #26a69a;background-color: #26a69a;z-index: 0;-webkit-transform: scale(.5);-moz-transform: scale(.5);-ms-transform: scale(.5);-o-transform: scale(.5);transform: scale(.5); }
+[type="radio"]:disabled:not(:checked) + label:before, [type="radio"]:disabled:checked + label:before {background-color: transparent;border-color: rgba(0, 0, 0, 0.26); }
+[type="radio"]:disabled + label {color: rgba(0, 0, 0, 0.26); }
+[type="radio"]:disabled:not(:checked) + label:hover:before {border-color: rgba(0, 0, 0, 0.26); }
+
+
+
+
+
+
+
+
+/*Diamond Form*/
+
