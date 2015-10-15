@@ -264,12 +264,11 @@ switch($action)
             $res=$result;
             break;
             
-//  localhost/iftosi/apis/index.php?action=getVDetailByPid&pid=1&vid=7&page=1&limit=1
+//  localhost/iftosi/apis/index.php?action=getVDetailByPid&pid=1&page=1&limit=1
         case 'getVDetailByPid':
             include APICLUDE.'class.vendor.php';
             $product_id=(!empty($params['pid'])) ? trim($params['pid']) : '';
-            $vid=(!empty($params['vid'])) ? trim($params['vid']) : '';
-            if(empty($product_id) && empty($vid))
+            if(empty($product_id))
             {
                 $arr=array();
                 $err=array('Code'=>0,'Msg'=>'Invalid Parameter');
@@ -281,6 +280,25 @@ switch($action)
             $result=$obj->getVDetailByPid($params);
             $res=$result;
             break;
+            
+//  localhost/iftosi/apis/index.php?action=getVDetailByVidPid&pid=1&vid=7&page=1&limit=1
+        case 'getVDetailByVidPid':
+            include APICLUDE.'class.vendor.php';
+            $product_id=(!empty($params['pid'])) ? trim($params['pid']) : '';
+            $vid=(!empty($params['vid'])) ? trim($params['vid']) : '';
+            if(empty($product_id) /*&& empty($vid)*/)
+            {
+                $arr=array();
+                $err=array('Code'=>0,'Msg'=>'Invalid Parameter');
+                $result=array('results'=>$arr,'error'=>$err);
+                $res=$result;
+                break;
+            }
+            $obj=new vendor($db['iftosi']);
+            $result=$obj->getVDetailByVidPid($params);
+            $res=$result;
+            break;            
+            
 
 //-------------------------Location---------------------------------               
             
