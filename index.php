@@ -95,6 +95,14 @@
 					$page='diamond-Form';
 					include 'template/diamondForm.html';
 				break;
+                                case 'jewellery_Form':
+					$page='jewellery-Form';
+					include 'template/jewelleryForm.html';
+				break;
+                                case 'bullion_Form':
+					$page='bullion-Form';
+					include 'template/bullionForm.html';
+				break;
 				
 				default:
 					$page='index';

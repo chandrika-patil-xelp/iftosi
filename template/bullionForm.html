@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bullion Form</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel='stylesheet' type="text/css" href='tools/css/backend.css'>
+        <script type="text/javascript" src='tools/js//cms/lib/jquery.js'></script>
+        <script type="text/javascript" src='tools/js/cms/Common.js'></script>
+    </head>
+    <body>
+        <div class="container">
+            <?php include 'backheader.html';?>
+            <div class="wrapper">
+                <div class="wrapperMax">
+                    <div class="formContainer fmOpenR">
+                        <div class="formTitle fLeft ">Bullion Details</div>
+                        <div class="divCon  fLeft fmOpenR">
+                            <div  class="titleDiv txtCap fLeft">Bullion Type</div>
+                            <div class='radioCont fLeft'>    
+                                <div class="checkDiv fLeft Round">
+                                    <input type="radio" class="filled-in" id="coin" name="btype">
+                                    <label for="coin">Coin</label>
+                                </div>
+                                <div class="checkDiv fLeft Round">
+                                    <input type="radio" class="filled-in" id="bar" name="btype">
+                                    <label for="bar">Bar</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="divCon  fLeft fmOpenR">
+                            <div  class="titleDiv txtCap fLeft">Bullion Type</div>
+                            <div class='radioCont fLeft'>    
+                                <div class="checkDiv fLeft Round">
+                                    <input type="radio" class="filled-in" id="gcoin" name="type">
+                                    <label for="gcoin">Gold Coin</label>
+                                </div>
+                                <div class="checkDiv fLeft Round">
+                                    <input type="radio" class="filled-in" id="gbar" name="type">
+                                    <label for="gbar">Gold Bar</label>
+                                </div>
+                                <div class="checkDiv fLeft Round">
+                                    <input type="radio" class="filled-in" id="scoin" name="type">
+                                    <label for="scoin">Silver Coin</label>
+                                </div>
+                                <div class="checkDiv fLeft Round">
+                                    <input type="radio" class="filled-in" id="sbar" name="type">
+                                    <label for="sbar">Silver Bar</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="divCon2  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Gold Purity</div>
+                            <input name="gold_purity" type="text" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="divCon2  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Gold Weight</div>
+                            <input name="gold_weight" type="text" placeholder=" eg. 10 Gms" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="divCon2  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Silver Purity</div>
+                            <input name="silver_purity" type="text" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="divCon2  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Silver Weight</div>
+                            <input name="silver_weight" type="text" placeholder=" eg. 10 Gms" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="divCon2  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Price</div>
+                            <input name="price" type="text" placeholder=" eg. 1200000" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="btnCont fLeft">
+                            <center>
+                                <div class="submitBtn fmOpenR">SUBMIT</div>
+                                <div class="cancelBtn fmOpenR">CANCEL</div>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

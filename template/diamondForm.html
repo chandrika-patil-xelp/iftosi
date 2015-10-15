@@ -10,6 +10,7 @@
     </head>
     <body>
         <div class="container">
+            <?php include 'backheader.html';?>
             <div class="wrapper">
                 <div class="wrapperMax">
                     <div class="formContainer fmOpenR">
@@ -59,19 +60,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="divCon  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Carat Weight</div>
-                            <input name="carat_weight" type="text" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666" onkeypress="return common.isDecimalKey(event)">
-                        </div>
+
                         <div class="divCon  fLeft">
                             <div  class="titleDiv txtCap fLeft">Color</div>
                             <div class='radioCont fLeft'> 
                                 <div class="checkDiv fLeft">
-                                    <input type="radio" name='color' class="filled-in" id="color_ D">
-                                    <label for="color_ D"> D</label>
+                                    <input type="radio" name='color' class="filled-in" id="color_D">
+                                    <label for="color_D"> D</label>
                                 </div>
                                 <div class="checkDiv fLeft">
-                                    <input type="radio" name='color' class="filled-in" id="color_E" checked="checked">
+                                    <input type="radio" name='color' class="filled-in" id="color_E">
                                     <label for="color_E">E</label>
                                 </div>
                                 <div class="checkDiv fLeft">
@@ -115,7 +113,7 @@
                                     <label for="color_O">O</label>
                                 </div>
                                 <div class="checkDiv fLeft">
-                                    <input type="radio" name='color' class="filled-in" id="color_S" checked="checked">
+                                    <input type="radio" name='color' class="filled-in" id="color_S">
                                     <label for="color_S">S</label>
                                 </div>
                             </div>
@@ -123,39 +121,37 @@
                         <div class="divCon  fLeft">
                             <div  class="titleDiv txtCap fLeft">Clarity</div>
                             <div class='radioCont fLeft'> 
-                                <div id="clarity_39" class="filterOptions fLeft fmOpenR">
-                                    <div class="checkDiv fLeft">
-                                        <input type="radio" name='clarity' class="filled-in" id="clarity_IF">
-                                        <label for="clarity_IF">IF</label>
-                                    </div>
-                                    <div class="checkDiv fLeft">
-                                        <input type="radio" name='clarity' class="filled-in" id="clarity_VVS1">
-                                        <label for="clarity_VVS1">VVS1</label>
-                                    </div>
-                                    <div class="checkDiv fLeft">
-                                        <input type="radio" name='clarity' class="filled-in" id="clarity_VVS2">
-                                        <label for="clarity_VVS2">VVS2</label>
-                                    </div>
-                                    <div class="checkDiv fLeft">
-                                        <input type="radio" name='clarity' class="filled-in" id="clarity_VS1">
-                                        <label for="clarity_VS1">VS1</label>
-                                    </div>
-                                    <div class="checkDiv fLeft">
-                                        <input type="radio" name='clarity' class="filled-in" id="clarity_VS2">
-                                        <label for="clarity_VS2">VS2</label>
-                                    </div>
-                                    <div class="checkDiv fLeft">
-                                        <input type="radio" name='clarity' class="filled-in" id="clarity_SI1">
-                                        <label for="clarity_SI1">SI1</label>
-                                    </div>
-                                    <div class="checkDiv fLeft">
-                                        <input type="radio" name='clarity' class="filled-in" id="clarity_SI2">
-                                        <label for="clarity_SI2">SI2</label>
-                                    </div>
-                                    <div class="checkDiv fLeft">
-                                        <input type="radio" name='clarity' class="filled-in" id="clarity_I1">
-                                        <label for="clarity_I1">I1</label>
-                                    </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='clarity' class="filled-in" id="clarity_IF">
+                                    <label for="clarity_IF">IF</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='clarity' class="filled-in" id="clarity_VVS1">
+                                    <label for="clarity_VVS1">VVS1</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='clarity' class="filled-in" id="clarity_VVS2">
+                                    <label for="clarity_VVS2">VVS2</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='clarity' class="filled-in" id="clarity_VS1">
+                                    <label for="clarity_VS1">VS1</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='clarity' class="filled-in" id="clarity_VS2">
+                                    <label for="clarity_VS2">VS2</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='clarity' class="filled-in" id="clarity_SI1">
+                                    <label for="clarity_SI1">SI1</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='clarity' class="filled-in" id="clarity_SI2">
+                                    <label for="clarity_SI2">SI2</label>
+                                </div>
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='clarity' class="filled-in" id="clarity_I1">
+                                    <label for="clarity_I1">I1</label>
                                 </div>
                             </div>
                         </div>
@@ -206,7 +202,6 @@
                         <div class="divCon  fLeft">
                             <div  class="titleDiv txtCap fLeft">Polish</div>
                             <div class='radioCont fLeft'> 
-                                <div id="polish_42" class="filterOptions fLeft fmOpenR">
                                     <div class="checkDiv fLeft">
                                         <input type="radio" name='polish' class="filled-in" id="polish_Excellent">
                                         <label for="polish_Excellent">Excellent</label>
@@ -223,7 +218,6 @@
                                         <input type="radio" name='polish' class="filled-in" id="polish_Fair">
                                         <label for="polish_Fair">Fair</label>
                                     </div>
-                                </div>
                             </div>
                         </div>
                         <div class="divCon  fLeft">
@@ -248,22 +242,6 @@
                             </div>
                         </div>
                         <div class="divCon  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Measurement</div>
-                            <input name="measurement" type="text" placeholder=" eg. 10X20X30" class="txtInput fLeft fmOpenR font14 c666">
-                        </div>
-                        <div class="divCon  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Table</div>
-                            <input name="table" type="text" placeholder=" eg. 56" class="txtInput fLeft fmOpenR font14 c666">
-                        </div>
-                        <div class="divCon  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Crown Angle</div>
-                            <input name="crown_angle" type="text" placeholder=" eg. 41" class="txtInput fLeft fmOpenR font14 c666">
-                        </div>
-                        <div class="divCon  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Girdle</div>
-                            <input name="girdle" type="text" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666">
-                        </div>
-                        <div class="divCon  fLeft">
                             <div  class="titleDiv txtCap fLeft">Certficate</div>
                             <div class='radioCont fLeft'> 
                                 <div class="checkDiv fLeft">
@@ -280,52 +258,66 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="divCon  fLeft">
+                        <div class="divCon2  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Carat Weight</div>
+                            <input name="carat_weight" type="text" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666" onkeypress="return common.isDecimalKey(event)">
+                        </div>
+                        <div class="divCon2  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Measurement</div>
+                            <div class="mInputDiv fLeft">
+                                <input name="measurement" type="text" placeholder=" eg. 10" class="mtxtInput fLeft fmOpenR font14 c666">
+                                <span class='fLeft'>X</span>
+                                <input name="measurement" type="text" placeholder=" eg. 20" class="mtxtInput fLeft fmOpenR font14 c666">
+                                <span class='fLeft'>X</span>
+                                <input name="measurement" type="text" placeholder=" eg. 30" class="mtxtInput fLeft fmOpenR font14 c666">
+                            </div>
+                        </div>
+                        <div class="divCon2  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Table</div>
+                            <input name="table" type="text" placeholder=" eg. 56" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="divCon2  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Crown Angle</div>
+                            <input name="crown_angle" type="text" placeholder=" eg. 41" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="divCon2  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Girdle</div>
+                            <input name="girdle" type="text" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+
+                        <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Bar Code</div>
                             <input name="barcode" type="text" placeholder=" eg. ALXPK12" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
-                        <div class="divCon  fLeft">
+                        <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Lot Number</div>
                             <input name="lot_no" type="text" placeholder=" eg. 56" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
-                        <div class="divCon  fLeft">
+                        <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Lot Reference</div>
                             <input name="lot_ref" type="text" placeholder=" eg. iftosi -012" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
-                        <div class="divCon  fLeft">
+                        <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Base Price</div>
                             <input name="base_price" type="text" placeholder=" eg. 120000" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
-                        <div class="divCon  fLeft">
+                        <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">% Discount</div>
                             <input name="discount" type="text" placeholder=" eg. 25%" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
-                        <div class="divCon  fLeft">
+                        <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Price</div>
                             <input name="price" type="text" placeholder=" eg. 1200000" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
-
-
-
-
-
-
-
-
-
-
-
+                        <div class="btnCont fLeft">
+                            <center>
+                                <div class="submitBtn fmOpenR">SUBMIT</div>
+                                <div class="cancelBtn fmOpenR">CANCEL</div>
+                            </center>
+                        </div>
                     </div>
-
-
                 </div>
             </div>
-
-
         </div>
-
-
-
-    </div>
-</body>
+    </body>
 </html>
