@@ -193,7 +193,7 @@ class vendor extends DB
         $page   = ($params['page'] ? $params['page'] : 1);
         $limit  = ($params['limit'] ? $params['limit'] : 15);
         
-        $sql1="SELECT * FROM tbl_vendor_product_mapping where product_id=".$params['pid']." AND vendor_id=".$params['vid']." ORDER BY date_time DESC";
+        $sql1="SELECT * FROM tbl_vendor_product_mapping where product_id=".$params['pid']." AND vendor_id=".$params['vid']." ORDER BY date_time ASC";
         if (!empty($page))
         {
             $start = ($page * $limit) - $limit;
@@ -205,36 +205,36 @@ class vendor extends DB
         {
             while($row=$this->fetchData($res1))
             {   
-                $vdet['vprice']=$row['vendor_price'];
-                $vdet['vquant']=$row['vendor_quantity'];
-                $vdet['vcur']=$row['vendor_currency'];
-                $vdet['vremarks']=$row['vendor_remarks'];
+                $vdet['vendor_price']=$row['vendor_price'];
+                $vdet['vendor_quantity']=$row['vendor_quantity'];
+                $vdet['vendor_currency']=$row['vendor_currency'];
+                $vdet['vendor_remarks']=$row['vendor_remarks'];
                 $vdetls[]=$vdet;
             }
             $sql2="SELECT 
-                            orgName,
+                            orgName as OrganisationName,
                             fulladdress,
                             postal_code,
                             telephones,
                             alt_email,
-                            officecity,
-                            officecountry
+                            officecity as office_city,
+                            officecountry as office_country,
                             contact_person,
                             position,
                             contact_mobile,
-                            email
-                            membership_cert,
-                            bdbc,
-                            other_bdbc,
-                            vatno,                            
+                            email,
+                            membership_cert as Membership_Certificate,
+                            bdbc as bharat_Diamond_Bource_Certificate,
+                            other_bdbc as other_Bharat_Diamond_Bource_Certificate,
+                            vatno as Vat_Number,                            
                             landline,
-                            mdbw,                            
+                            mdbw as membership_of_other_diamond_bourses_around_world,                            
                             website,
-                            banker,                            
+                            banker as bankers,                            
                             pancard,
                             turnover,
-                            lat,
-                            lng
+                            lat as latitude,
+                            lng as longitude
 
                     FROM 
                                 tbl_vendor_master 
