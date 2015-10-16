@@ -87,8 +87,7 @@ $(document).ready(function() {
     
     $('.prox').mouseover(function(){
         var img=$(this).css('background');
-        $('.proxImg').css({'background':img});
-        //console.log("rrr");
+        $(this).parent().siblings('.proxImg').css({'background':img});
     });
 
 });

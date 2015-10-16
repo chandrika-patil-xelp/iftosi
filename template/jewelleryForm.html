@@ -1,310 +1,372 @@
-<?php include 'backHead.html'?>
-    <body>
-        <div class="container">
-             <?php include 'backheader.html';?>
-            <div class="wrapper">
-                <div class="wrapperMax">
-                    <div class="formContainer fmOpenR">
-                        <div class="formTitle fLeft fmOpenL">Select a type of jewellery you want to add</div>
-                        
-                        <div class="jShapesCont resultsPage showHide fmOpenL fLeft">
-                            <div class="allShapes resultsPage">
-                                <center>
-                                    <div id="Rings" class="jshapeComm transition300 ripplelink Rings">Rings
-                                    </div><div id="Earrings" class="jshapeComm transition300 ripplelink Earrings">Earrings
-                                    </div><div id="Pendant" class="jshapeComm transition300 ripplelink Pendent">Pendant
-                                    </div><div id="Necklace" class="jshapeComm transition300 ripplelink Necklace"><span class="ink animate" style="height: 270px; width: 270px; top: -48px; left: 41.6094px;"></span>Necklace
-                                    </div><div id="Bracelet" class="jshapeComm transition300 ripplelink Bracelet">Bracelet
-                                    </div>
-                                </center>
-                            </div>
-                        </div>
-                        
-                        
-<!--                        <div class="divCon  fLeft fmOpenR jw5">
-                            <div  class="titleDiv txtCap fLeft">Jewellery Type</div>
-                            <div class='radioCont fLeft'>    
-                                <div class="checkDiv fLeft Round">
-                                    <input type="radio" class="filled-in" id="rings" name="type">
-                                    <label for="rings">Rings</label>
-                                </div>
-                                <div class="checkDiv fLeft Round">
-                                    <input type="radio" class="filled-in" id="earrings" name="type">
-                                    <label for="earrings">Earrings</label>
-                                </div>
-                                <div class="checkDiv fLeft Round">
-                                    <input type="radio" class="filled-in" id="pendant" name="type">
-                                    <label for="pendant">Pendant</label>
-                                </div>
-                                <div class="checkDiv fLeft Round">
-                                    <input type="radio" class="filled-in" id="necklace" name="type">
-                                    <label for="necklace">Necklace</label>
-                                </div>
-                                <div class="checkDiv fLeft Round">
-                                    <input type="radio" class="filled-in" id="bangle" name="type">
-                                    <label for="bangle">Bangle</label>
-                                </div>
-                            </div>
-                        </div>-->
-                        <div class="divCon  fLeft fmOpenR">
-                            <div  class="titleDiv txtCap fLeft">Ring Type</div>
-                            <div class='radioCont fLeft'>    
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='rings_type'class="filled-in" id="Office_Wear_Rings">
-                                    <label for="Office_Wear_Rings">Office Wear Rings</label>
-                                </div>
+<?php include 'backHead.html' ?>
+<body>
+    <div class="container">
+        <?php include 'backheader.html'; ?>
+        <div class="wrapper">
+            <div class="wrapperMax">
+                <div class="formContainer fmOpenR">
+                    <div class="formTitle fLeft fmOpenL">Select a type of jewellery you want to add</div>
 
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='rings_type'class="filled-in" id="Daily_Wear_Rings">
-                                    <label for="Daily_Wear_Rings">Daily Wear Rings</label>
-                                </div>
-
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='rings_type'class="filled-in" id="Party_Wear_Rings">
-                                    <label for="Party_Wear_Rings">Party Wear Rings</label>
-                                </div>
-
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='rings_type'class="filled-in" id="Band_Rings">
-                                    <label for="Band_Rings">Band Rings</label>
-                                </div>
-
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='rings_type'class="filled-in" id="Only_Diamonds_Rings">
-                                    <label for="Only_Diamonds_Rings">Only Diamonds Rings</label>
-                                </div>
-
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='rings_type'class="filled-in" id="Cocktails_Rings">
-                                    <label for="Cocktails_Rings">Cocktails Rings</label>
-                                </div>
-
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='rings_type'class="filled-in" id="White_Gold_Rings">
-                                    <label for="White_Gold_Rings">White Gold Rings</label>
-                                </div>
-
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='rings_type'class="filled-in" id="Men_Rings">
-                                    <label for="Men_Rings">Men's Rings</label>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="divCon  fLeft fmOpenR">
-                            <div  class="titleDiv txtCap fLeft">Earrings Type</div>
-                            <div class='radioCont fLeft'>    
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='earrings_type'class="filled-in" id="Office_Wear_Earrings">
-                                    <label for="Office_Wear_Earrings">Office Wear Earrings</label>
-                                </div>
-
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='earrings_type'class="filled-in" id="Daily_Wear_Earrings">
-                                    <label for="Daily_Wear_Earrings">Daily Wear Earrings</label>
-                                </div>
-
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='earrings_type'class="filled-in" id="Party_Wear_Earrings">
-                                    <label for="Party_Wear_Earrings">Party Wear Earrings</label>
-                                </div>
-
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='earrings_type'class="filled-in" id="Only_Diamonds_Earrings">
-                                    <label for="Only_Diamonds_Earrings">Only Diamonds Earrings</label>
-                                </div>
-
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='earrings_type'class="filled-in" id="Gemstone_Earrings">
-                                    <label for="Gemstone_Earrings">Gemstone Earrings</label>
-                                </div>
-
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='earrings_type'class="filled-in" id="White_Gold_Earrings">
-                                    <label for="White_Gold_Earrings">White Gold Earrings</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="divCon  fLeft fmOpenR">
-                            <div  class="titleDiv txtCap fLeft">Pendant</div>
-                            <div class='radioCont fLeft'> 
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='pendant' class="filled-in" id="Office_Wear_Pendant">
-                                    <label for="Office_Wear_Pendant">Office Wear Pendant</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='pendant' class="filled-in" id="Daily_Wear_Pendant">
-                                    <label for="Daily_Wear_Pendant">Daily Wear Pendant</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='pendant' class="filled-in" id="Party_Wear_Pendant">
-                                    <label for="Party_Wear_Pendant">Party Wear Pendant</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='pendant' class="filled-in" id="Only_Diamonds_Pendant">
-                                    <label for="Only_Diamonds_Pendant">Only Diamonds Pendant</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='pendant' class="filled-in" id="Gemstone_Pendant">
-                                    <label for="Gemstone_Pendant">Gemstone Pendant</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='pendant' class="filled-in" id="White_Gold_Pendant">
-                                    <label for="White_Gold_Pendant">White Gold Pendant</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="divCon  fLeft fmOpenR">
-                            <div  class="titleDiv txtCap fLeft">Necklace</div>
-                            <div class='radioCont fLeft'> 
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='pendant' class="filled-in" id="Office_Wear_Necklace">
-                                    <label for="Office_Wear_Necklace">Office Wear Necklace</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='pendant' class="filled-in" id="Party_Wear_Necklace">
-                                    <label for="Party_Wear_Necklace">Party Wear Necklace</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="divCon  fLeft fmOpenR jw5">
-                            <div  class="titleDiv txtCap fLeft">Bracelet</div>
-                            <div class='radioCont fLeft'> 
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='bracelet'class="filled-in" id="Office_Wear">
-                                    <label for="Office_Wear">Office Wear</label>
-                                </div>
-
-
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='bracelet'class="filled-in" id="Party_Wear">
-                                    <label for="Party_Wear">Party Wear</label>
-                                </div>
-
-
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='bracelet'class="filled-in" id="Only_Diamonds">
-                                    <label for="Only_Diamonds">Only Diamonds</label>
-                                </div>
-
-
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='bracelet'class="filled-in" id="Gemstone">
-                                    <label for="Gemstone">Gemstone</label>
-                                </div>
-
-
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='bracelet'class="filled-in" id="White_Gold">
-                                    <label for="White_Gold">White Gold</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="divCon  fLeft jw3">
-                            <div  class="titleDiv txtCap fLeft">Certficate</div>
-                            <div class='radioCont fLeft'> 
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='Certficate' class="filled-in" id="Certficate_GIA">
-                                    <label for="Certficate_GIA">GIA</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='Certficate' class="filled-in" id="Certficate_IGI">
-                                    <label for="Certficate_IGI">IGI</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='Certficate' class="filled-in" id="Certficate_HRD">
-                                    <label for="Certficate_HRD">HRD</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="divCon  fLeft jw3">
-                            <div  class="titleDiv txtCap fLeft">Metal</div>
-                            <div class='radioCont fLeft'> 
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='metal' class="filled-in" id="gold">
-                                    <label for="gold">Gold</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='metal' class="filled-in" id="silver">
-                                    <label for="silver">Silver</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='metal' class="filled-in" id="platinum">
-                                    <label for="platinum">Platinum</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="divCon  fLeft jw3">
-                            <div  class="titleDiv txtCap fLeft">Diamond Quality</div>
-                            <div class='radioCont fLeft'> 
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='clarity' class="filled-in" id="clarity_IF">
-                                    <label for="clarity_IF">IF</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='clarity' class="filled-in" id="clarity_VVS1">
-                                    <label for="clarity_VVS1">VVS1</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='clarity' class="filled-in" id="clarity_VVS2">
-                                    <label for="clarity_VVS2">VVS2</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='clarity' class="filled-in" id="clarity_VS1">
-                                    <label for="clarity_VS1">VS1</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='clarity' class="filled-in" id="clarity_VS2">
-                                    <label for="clarity_VS2">VS2</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='clarity' class="filled-in" id="clarity_SI1">
-                                    <label for="clarity_SI1">SI1</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='clarity' class="filled-in" id="clarity_SI2">
-                                    <label for="clarity_SI2">SI2</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='clarity' class="filled-in" id="clarity_I1">
-                                    <label for="clarity_I1">I1</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Gold Purity</div>
-                            <input name="gold_purity" type="text" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666">
-                        </div>
-                        <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Gold Weight</div>
-                            <input name="gold_weight" type="text" placeholder=" eg. 10 Gms" class="txtInput fLeft fmOpenR font14 c666">
-                        </div>
-                        <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">No. Of Diamonds</div>
-                            <input name="no_diamonds" type="text" placeholder=" eg. 10" class="txtInput fLeft fmOpenR font14 c666">
-                        </div>
-                        <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Diamond Weight</div>
-                            <input name="diamonds_weight" type="text" placeholder=" eg. 1.25 CTS" class="txtInput fLeft fmOpenR font14 c666">
-                        </div>
-                        
-                        <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Gemstone Weight</div>
-                            <input name="gemstone_weight" type="text" placeholder=" eg. 1.25 CTS" class="txtInput fLeft fmOpenR font14 c666">
-                        </div>
-                        <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Price</div>
-                            <input name="price" type="text" placeholder=" eg. 1200000" class="txtInput fLeft fmOpenR font14 c666">
-                        </div>
-                        <div class="btnCont fLeft">
+                    <div class="jShapesCont resultsPage showHide fmOpenL fLeft">
+                        <div class="allShapes resultsPage">
                             <center>
-                                <div class="submitBtn fmOpenR ripplelink poR">SUBMIT</div>
-                                <div class="cancelBtn fmOpenR ripplelink poR">CANCEL</div>
+                                <div id="Rings" class="jshapeComm transition300 ripplelink Rings">Rings
+                                </div><div id="Earrings" class="jshapeComm transition300 ripplelink Earrings">Earrings
+                                </div><div id="Pendant" class="jshapeComm transition300 ripplelink Pendent">Pendant
+                                </div><div id="Necklace" class="jshapeComm transition300 ripplelink Necklace"><span class="ink animate" style="height: 270px; width: 270px; top: -48px; left: 41.6094px;"></span>Necklace
+                                </div><div id="Bracelet" class="jshapeComm transition300 ripplelink Bracelet">Bangles / Bracelets
+                                </div>
                             </center>
                         </div>
+                    </div>
+
+
+                    <!--                        <div class="divCon  fLeft fmOpenR jw5">
+                                                <div  class="titleDiv txtCap fLeft">Jewellery Type</div>
+                                                <div class='radioCont fLeft'>    
+                                                    <div class="checkDiv fLeft Round">
+                                                        <input type="radio" class="filled-in" id="rings" name="type">
+                                                        <label for="rings">Rings</label>
+                                                    </div>
+                                                    <div class="checkDiv fLeft Round">
+                                                        <input type="radio" class="filled-in" id="earrings" name="type">
+                                                        <label for="earrings">Earrings</label>
+                                                    </div>
+                                                    <div class="checkDiv fLeft Round">
+                                                        <input type="radio" class="filled-in" id="pendant" name="type">
+                                                        <label for="pendant">Pendant</label>
+                                                    </div>
+                                                    <div class="checkDiv fLeft Round">
+                                                        <input type="radio" class="filled-in" id="necklace" name="type">
+                                                        <label for="necklace">Necklace</label>
+                                                    </div>
+                                                    <div class="checkDiv fLeft Round">
+                                                        <input type="radio" class="filled-in" id="bangle" name="type">
+                                                        <label for="bangle">Bangle</label>
+                                                    </div>
+                                                </div>
+                                            </div>-->
+                    <div class="divCon  fLeft fmOpenR">
+                        <div  class="titleDiv txtCap fLeft">Ring Type</div>
+                        <div class='radioCont fLeft'>    
+                            <div class="checkDiv fLeft">
+                                <input type="checkbox" name='rings_type'class="filled-in" id="Office_Wear_Rings">
+                                <label for="Office_Wear_Rings">Office Wear Rings</label>
+                            </div>
+
+                            <div class="checkDiv fLeft">
+                                <input type="checkbox" name='rings_type'class="filled-in" id="Daily_Wear_Rings">
+                                <label for="Daily_Wear_Rings">Daily Wear Rings</label>
+                            </div>
+
+                            <div class="checkDiv fLeft">
+                                <input type="checkbox" name='rings_type'class="filled-in" id="Party_Wear_Rings">
+                                <label for="Party_Wear_Rings">Party Wear Rings</label>
+                            </div>
+
+                            <div class="checkDiv fLeft">
+                                <input type="checkbox" name='rings_type'class="filled-in" id="Band_Rings">
+                                <label for="Band_Rings">Band Rings</label>
+                            </div>
+
+                            <div class="checkDiv fLeft">
+                                <input type="checkbox" name='rings_type'class="filled-in" id="Only_Diamonds_Rings">
+                                <label for="Only_Diamonds_Rings">Only Diamonds Rings</label>
+                            </div>
+
+                            <div class="checkDiv fLeft">
+                                <input type="checkbox" name='rings_type'class="filled-in" id="Cocktails_Rings">
+                                <label for="Cocktails_Rings">Cocktails Rings</label>
+                            </div>
+
+                            <div class="checkDiv fLeft">
+                                <input type="checkbox" name='rings_type'class="filled-in" id="White_Gold_Rings">
+                                <label for="White_Gold_Rings">White Gold Rings</label>
+                            </div>
+
+                            <div class="checkDiv fLeft">
+                                <input type="checkbox" name='rings_type'class="filled-in" id="Men_Rings">
+                                <label for="Men_Rings">Men's Rings</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="divCon  fLeft fmOpenR">
+                        <div  class="titleDiv txtCap fLeft">Earrings Type</div>
+                        <div class='radioCont fLeft'>    
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='earrings_type'class="filled-in" id="Office_Wear_Earrings">
+                                <label for="Office_Wear_Earrings">Office Wear Earrings</label>
+                            </div>
+
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='earrings_type'class="filled-in" id="Daily_Wear_Earrings">
+                                <label for="Daily_Wear_Earrings">Daily Wear Earrings</label>
+                            </div>
+
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='earrings_type'class="filled-in" id="Party_Wear_Earrings">
+                                <label for="Party_Wear_Earrings">Party Wear Earrings</label>
+                            </div>
+
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='earrings_type'class="filled-in" id="Only_Diamonds_Earrings">
+                                <label for="Only_Diamonds_Earrings">Only Diamonds Earrings</label>
+                            </div>
+
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='earrings_type'class="filled-in" id="Gemstone_Earrings">
+                                <label for="Gemstone_Earrings">Gemstone Earrings</label>
+                            </div>
+
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='earrings_type'class="filled-in" id="White_Gold_Earrings">
+                                <label for="White_Gold_Earrings">White Gold Earrings</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divCon  fLeft fmOpenR">
+                        <div  class="titleDiv txtCap fLeft">Pendant</div>
+                        <div class='radioCont fLeft'> 
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='pendant' class="filled-in" id="Office_Wear_Pendant">
+                                <label for="Office_Wear_Pendant">Office Wear Pendant</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='pendant' class="filled-in" id="Daily_Wear_Pendant">
+                                <label for="Daily_Wear_Pendant">Daily Wear Pendant</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='pendant' class="filled-in" id="Party_Wear_Pendant">
+                                <label for="Party_Wear_Pendant">Party Wear Pendant</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='pendant' class="filled-in" id="Only_Diamonds_Pendant">
+                                <label for="Only_Diamonds_Pendant">Only Diamonds Pendant</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='pendant' class="filled-in" id="Gemstone_Pendant">
+                                <label for="Gemstone_Pendant">Gemstone Pendant</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='pendant' class="filled-in" id="White_Gold_Pendant">
+                                <label for="White_Gold_Pendant">White Gold Pendant</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divCon  fLeft fmOpenR">
+                        <div  class="titleDiv txtCap fLeft">Necklace</div>
+                        <div class='radioCont fLeft'> 
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='pendant' class="filled-in" id="casual_Wear_Necklace">
+                                <label for="casual_Wear_Necklace">Casual Wear Necklace</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='pendant' class="filled-in" id="Party_Wear_Necklace">
+                                <label for="Party_Wear_Necklace">Party Wear Necklace</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divCon  fLeft fmOpenR jw5">
+                        <div  class="titleDiv txtCap fLeft">Bracelet</div>
+                        <div class='radioCont fLeft'> 
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='bracelet'class="filled-in" id="Office_Wear">
+                                <label for="Office_Wear">Office Wear</label>
+                            </div>
+
+
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='bracelet'class="filled-in" id="Party_Wear">
+                                <label for="Party_Wear">Party Wear</label>
+                            </div>
+
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='bracelet'class="filled-in" id="Daily_Wear">
+                                <label for="Daily_Wear">Daily Wear</label>
+                            </div>
+
+
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='bracelet'class="filled-in" id="Only_Diamonds">
+                                <label for="Only_Diamonds">Only Diamonds</label>
+                            </div>
+
+
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='bracelet'class="filled-in" id="Gemstone">
+                                <label for="Gemstone">Gemstone</label>
+                            </div>
+
+
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='bracelet'class="filled-in" id="White_Gold">
+                                <label for="White_Gold">White Gold</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divCon  fLeft jw3">
+                        <div  class="titleDiv txtCap fLeft">Certficate</div>
+                        <div class='radioCont fLeft'> 
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='Certficate' class="filled-in" id="Certficate_SGL">
+                                <label for="Certficate_SGL">SGL</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='Certficate' class="filled-in" id="Certficate_DGLA">
+                                <label for="Certficate_DGLA">DGLA</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='Certficate' class="filled-in" id="Certficate_EGL">
+                                <label for="Certficate_EGL">EGL</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divCon  fLeft jw3">
+                        <div  class="titleDiv txtCap fLeft">Metal</div>
+                        <div class='radioCont fLeft'> 
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='metal' class="filled-in" id="gold">
+                                <label for="gold">Gold</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='metal' class="filled-in" id="silver">
+                                <label for="silver">Silver</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='metal' class="filled-in" id="platinum">
+                                <label for="platinum">Platinum</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divCon  fLeft dAuto">
+                        <div  class="titleDiv txtCap fLeft">Diamond Color</div>
+                        <div class='radioCont fLeft'> 
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='color' class="filled-in" id="color_D">
+                                <label for="color_D"> D</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='color' class="filled-in" id="color_E">
+                                <label for="color_E">E</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='color' class="filled-in" id="color_F">
+                                <label for="color_F">F</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='color' class="filled-in" id="color_G">
+                                <label for="color_G">G</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='color' class="filled-in" id="color_H">
+                                <label for="color_H">H</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='color' class="filled-in" id="color_I">
+                                <label for="color_I">I</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='color' class="filled-in" id="color_J">
+                                <label for="color_J">J</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='color' class="filled-in" id="color_K">
+                                <label for="color_K">K</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='color' class="filled-in" id="color_L">
+                                <label for="color_L">L</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='color' class="filled-in" id="color_M">
+                                <label for="color_M">M</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='color' class="filled-in" id="color_N">
+                                <label for="color_N">N</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='color' class="filled-in" id="color_O">
+                                <label for="color_O">O</label>
+                            </div>
+                            <!--                                <div class="checkDiv fLeft">
+                                                                <input type="radio" name='color' class="filled-in" id="color_S">
+                                                                <label for="color_S">S</label>
+                                                            </div>-->
+                        </div>
+                    </div>
+                    <div class="divCon  fLeft jw3">
+                        <div  class="titleDiv txtCap fLeft">Diamond Quality</div>
+                        <div class='radioCont fLeft'> 
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='clarity' class="filled-in" id="clarity_IF">
+                                <label for="clarity_IF">IF</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='clarity' class="filled-in" id="clarity_VVS1">
+                                <label for="clarity_VVS1">VVS1</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='clarity' class="filled-in" id="clarity_VVS2">
+                                <label for="clarity_VVS2">VVS2</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='clarity' class="filled-in" id="clarity_VS1">
+                                <label for="clarity_VS1">VS1</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='clarity' class="filled-in" id="clarity_VS2">
+                                <label for="clarity_VS2">VS2</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='clarity' class="filled-in" id="clarity_SI1">
+                                <label for="clarity_SI1">SI1</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='clarity' class="filled-in" id="clarity_SI2">
+                                <label for="clarity_SI2">SI2</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='clarity' class="filled-in" id="clarity_I1">
+                                <label for="clarity_I1">I1</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divCon2  fLeft">
+                        <div  class="titleDiv txtCap fLeft">Gold Purity</div>
+                        <input name="gold_purity" type="text" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666">
+                    </div>
+                    <div class="divCon2  fLeft">
+                        <div  class="titleDiv txtCap fLeft">Gold Weight</div>
+                        <input name="gold_weight" type="text" placeholder=" eg. 10 Gms" class="txtInput fLeft fmOpenR font14 c666">
+                    </div>
+                    <div class="divCon2  fLeft">
+                        <div  class="titleDiv txtCap fLeft">No. Of Diamonds</div>
+                        <input name="no_diamonds" type="text" placeholder=" eg. 10" class="txtInput fLeft fmOpenR font14 c666">
+                    </div>
+                    <div class="divCon2  fLeft">
+                        <div  class="titleDiv txtCap fLeft">Diamond Weight</div>
+                        <input name="diamonds_weight" type="text" placeholder=" eg. 1.25 CTS" class="txtInput fLeft fmOpenR font14 c666">
+                    </div>
+
+                    <div class="divCon2  fLeft">
+                        <div  class="titleDiv txtCap fLeft">Gemstone Weight</div>
+                        <input name="gemstone_weight" type="text" placeholder=" eg. 1.25 CTS" class="txtInput fLeft fmOpenR font14 c666">
+                    </div>
+                    <div class="divCon2  fLeft">
+                        <div  class="titleDiv txtCap fLeft">Price</div>
+                        <input name="price" type="text" placeholder=" eg. 1200000" class="txtInput fLeft fmOpenR font14 c666">
+                    </div>
+                    <div class="btnCont fLeft">
+                        <center>
+                            <div class="submitBtn fmOpenR ripplelink poR">SUBMIT</div>
+                            <div class="cancelBtn fmOpenR ripplelink poR">CANCEL</div>
+                        </center>
                     </div>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>
