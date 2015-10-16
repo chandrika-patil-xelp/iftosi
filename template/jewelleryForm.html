@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Jewellery Form</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link rel='stylesheet' type="text/css" href='tools/css/backend.css'>
-        <script type="text/javascript" src='tools/js//cms/lib/jquery.js'></script>
-        <script type="text/javascript" src='tools/js/cms/Common.js'></script>
-    </head>
+<?php include 'backHead.html'?>
     <body>
         <div class="container">
              <?php include 'backheader.html';?>
@@ -15,7 +6,7 @@
                 <div class="wrapperMax">
                     <div class="formContainer fmOpenR">
                         <div class="formTitle fLeft ">Jewellery Details</div>
-                        <div class="divCon  fLeft fmOpenR">
+                        <div class="divCon  fLeft fmOpenR jw5">
                             <div  class="titleDiv txtCap fLeft">Jewellery Type</div>
                             <div class='radioCont fLeft'>    
                                 <div class="checkDiv fLeft Round">
@@ -36,7 +27,7 @@
                                 </div>
                                 <div class="checkDiv fLeft Round">
                                     <input type="radio" class="filled-in" id="bangle" name="type">
-                                    <label for="bangle">BANGLE</label>
+                                    <label for="bangle">Bangle</label>
                                 </div>
                             </div>
                         </div>
@@ -161,7 +152,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="divCon  fLeft fmOpenR">
+                        <div class="divCon  fLeft fmOpenR jw5">
                             <div  class="titleDiv txtCap fLeft">Bracelet</div>
                             <div class='radioCont fLeft'> 
                                 <div class="checkDiv fLeft">
@@ -194,7 +185,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="divCon  fLeft">
+                        <div class="divCon  fLeft jw3">
                             <div  class="titleDiv txtCap fLeft">Certficate</div>
                             <div class='radioCont fLeft'> 
                                 <div class="checkDiv fLeft">
@@ -211,7 +202,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="divCon  fLeft">
+                        <div class="divCon  fLeft jw3">
                             <div  class="titleDiv txtCap fLeft">Metal</div>
                             <div class='radioCont fLeft'> 
                                 <div class="checkDiv fLeft">
@@ -228,23 +219,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Gold Purity</div>
-                            <input name="gold_purity" type="text" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666">
-                        </div>
-                        <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Gold Weight</div>
-                            <input name="gold_weight" type="text" placeholder=" eg. 10 Gms" class="txtInput fLeft fmOpenR font14 c666">
-                        </div>
-                        <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">No. Of Diamonds</div>
-                            <input name="no_diamonds" type="text" placeholder=" eg. 10" class="txtInput fLeft fmOpenR font14 c666">
-                        </div>
-                        <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Diamond Weight</div>
-                            <input name="diamonds_weight" type="text" placeholder=" eg. 1.25 CTS" class="txtInput fLeft fmOpenR font14 c666">
-                        </div>
-                        <div class="divCon  fLeft">
+                        <div class="divCon  fLeft jw3">
                             <div  class="titleDiv txtCap fLeft">Diamond Quality</div>
                             <div class='radioCont fLeft'> 
                                 <div class="checkDiv fLeft">
@@ -282,6 +257,23 @@
                             </div>
                         </div>
                         <div class="divCon2  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Gold Purity</div>
+                            <input name="gold_purity" type="text" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="divCon2  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Gold Weight</div>
+                            <input name="gold_weight" type="text" placeholder=" eg. 10 Gms" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="divCon2  fLeft">
+                            <div  class="titleDiv txtCap fLeft">No. Of Diamonds</div>
+                            <input name="no_diamonds" type="text" placeholder=" eg. 10" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="divCon2  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Diamond Weight</div>
+                            <input name="diamonds_weight" type="text" placeholder=" eg. 1.25 CTS" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        
+                        <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Gemstone Weight</div>
                             <input name="gemstone_weight" type="text" placeholder=" eg. 1.25 CTS" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
@@ -291,8 +283,8 @@
                         </div>
                         <div class="btnCont fLeft">
                             <center>
-                                <div class="submitBtn fmOpenR">SUBMIT</div>
-                                <div class="cancelBtn fmOpenR">CANCEL</div>
+                                <div class="submitBtn fmOpenR ripplelink poR">SUBMIT</div>
+                                <div class="cancelBtn fmOpenR ripplelink poR">CANCEL</div>
                             </center>
                         </div>
                     </div>
