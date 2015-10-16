@@ -628,6 +628,8 @@
                         product_id=".$params['prdid']."";
             $res = $this->query($sql);
             $res2 = $this->query($sql2);
+            
+            
             if ($res)
             {
                 $row = $this->fetchData($res);
@@ -635,9 +637,90 @@
                 {
                     if ($row2 && !empty($row2['product_id']))
                     {
+                        $prid[]=$row['product_id'];
                         $details=$row2;
                     }
                 }
+                $pid=implode(',',$prid);
+                
+                $sql3="SELECT 
+                                    product_id,
+                                    vendor_id,
+                                    vendor_price,
+                                    vendor_quantity,
+                                    vendor_currency,
+                                    vendor_remarks 
+                        FROM 
+                                    tbl_vendor_product_mapping
+                        WHERE 
+                                    product_id=".$pid."
+                        ORDER BY
+                                    vendor_id ASC";
+                
+                $res3=$this->query($sql3);
+                
+                while($row3=$this->fetchData($res3))
+                {
+                    $vid[]=$row3['vendor_id'];
+                    $vpdetls[$row3['vendor_id']]=$row3;
+                }
+                
+                $venid=implode(',',$vid);
+                
+                
+                $sql4="SELECT 
+                                vendor_id AS vid,
+                                orgName as OrganisationName,
+                                fulladdress,
+                                postal_code,
+                                telephones,
+                                alt_email,
+                                officecity as office_city,
+                                officecountry as office_country,
+                                contact_person,
+                                position,
+                                contact_mobile,
+                                email,
+                                memship_Cert as Membership_Certificate,
+                                bdbc as bharat_Diamond_Bource_Certificate,
+                                other_bdbc as other_Bharat_Diamond_Bource_Certificate,
+                                vatno as Vat_Number,                            
+                                landline,
+                                mdbw as membership_of_other_diamond_bourses_around_world,                            
+                                website,
+                                banker as bankers,                            
+                                pancard,
+                                turnover,
+                                lat as latitude,
+                                lng as longitude 
+                     FROM 
+                                tbl_vendor_master
+                     WHERE 
+                                        vendor_id IN(".$venid.")
+                            ORDER BY
+                                        field(vendor_id,".$venid.")";
+                
+                $res4=$this->query($sql4);
+                
+                while($row4=$this->fetchData($res4))
+                {
+                    $vid[]=$row4['vid'];
+                    $vdetls[$row4['vid']]=$row4;
+                }
+                
+                
+                $cat_info_sql = "SELECT catid,cat_name,cat_lvl,p_catid,lineage FROM tbl_category_master WHERE catid=".$params['catid']."";
+                $cat_info_res = $this->query($cat_info_sql);
+                if($cat_info_res)
+                {
+                    $cat_info_row = $this->fetchData($cat_info_res);
+                    if($cat_info_row && $cat_info_row['catid'])
+                    {
+                        $reslt1['category_name'] = $cat_info_row['cat_name'];
+                    }
+                }
+           
+                
                 if($row && !empty($row['product_id'])) 
                 {
                     $reslt['product_id'] = $row['product_id'];
@@ -654,18 +737,32 @@
                     $reslt['product_description'] = $row['product_desc'];
                     $reslt['product_image'] = $row['prd_img'];
                     
-                    $reslt['attr_details'] =$details;
+                    $pid = $row['product_id'];
                     
-                   $cat_info_sql = "SELECT catid,cat_name,cat_lvl,p_catid,lineage FROM tbl_category_master WHERE catid=".$params['catid']."";
-                   $cat_info_res = $this->query($cat_info_sql);
-                    if($cat_info_res)
-                    {
-                        $cat_info_row = $this->fetchData($cat_info_res);
-                        if($cat_info_row && $cat_info_row['catid'])
-                        {
-                            $reslt['category_name'] = $cat_info_row['cat_name'];
-                        }
-                    }
+                    
+                    $reslt[$pid]['product_barcode'] = $row['barcode'];
+                    $reslt[$pid]['product_lotref'] = $row['lotref'];
+                    $reslt[$pid]['product_lotno'] = $row['lotno'];
+                    $reslt[$pid]['product_name'] = $row['product_name'];
+                    $reslt[$pid]['product_display_name'] = $row['product_display_name'];
+                    $reslt[$pid]['product_model'] = $row['product_model'];
+                    $reslt[$pid]['product_brand'] = $row['product_brand'];
+                    $reslt[$pid]['product_price'] = $row['prd_price'];
+                    $reslt[$pid]['product_currency'] = $row['product_currency'];
+                    $reslt[$pid]['product_warranty'] = $row['product_warranty'];
+                    $reslt[$pid]['product_description'] = $row['product_desc'];
+                    $reslt[$pid]['product_image'] = $row['prd_img'];
+                    
+                    $reslt[$pid]['category_name'] =$reslt1['category_name'];
+                    
+                    $reslt[$pid]['attr_details'] =$details;
+                    
+                    
+                    $reslt[$pid]['vendor_product_details']=$vpdetls;
+                    
+                    $reslt[$pid]['vendor_details']=$vdetls;
+                   
+                   
                     $arr = $reslt;
                     $err = array('errCode' => 0, 'errMsg' => 'Details fetched successfully');
                 }
