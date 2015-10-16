@@ -11,7 +11,6 @@
 				{
 					if($val['attribute_name'] == 'shape' && !empty($val['attribute_values']))
 					{
-						
 			?>
 						<div class='shapesCont resultsPage showHide'>
 							<div class="wrapperMax">
@@ -58,10 +57,6 @@
                     <div class='results_Filter'>
                         <?php include 'filters.html';?>
                         <div class='prdResults fRight'>
-                            <div class="noresDiv">
-                                <div class="noresults font25 fLeft">There are no results available for your search.</div>
-                                <div class="noresults font18 fLeft">Please try again.</div>
-                            </div>
                             <?php 
 							if(count($data))
 							{

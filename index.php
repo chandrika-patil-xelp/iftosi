@@ -33,6 +33,13 @@
 			}
 			break;
 		default:
+		
+			$url 	= APIDOMAIN.'index.php?action=getSubCat';
+			$res 	= $comm->executeCurl($url);
+			$headcat= $res['results'];
+			
+			//echo "<pre>";print_r($headcat);die;
+		
 			switch ($case)
 			{
 				case 'signup':
@@ -79,8 +86,6 @@
 					$url 	= APIDOMAIN.'index.php?action=getPrdById&prdid='.$pid;
 					$res 	= $comm->executeCurl($url);
 					$data 	= $res['results'];
-					//echo "<pre>";print_r($res);die;
-					//getPrdById
 					include 'template/diamond_details.html';
 				break;
 				case 'bullion_details':

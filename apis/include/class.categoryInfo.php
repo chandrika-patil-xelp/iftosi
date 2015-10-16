@@ -7,6 +7,31 @@ class categoryInfo extends DB
         parent::DB($db);
         
     }
+	
+	public function getSubCat($catid,$arr=array())
+	{
+		if($catid)
+		{
+			$sql = "SELECT p_catid, catid, cat_name FROM tbl_category_master where p_catid=".$catid." order by catid ASC";
+		}
+		else
+		{
+			$sql = "SELECT p_catid, catid, cat_name FROM tbl_category_master where p_catid=0 order by catid ASC";
+		}
+		$res = $this->query($sql);
+		if($res)
+		{
+			while($row = $this->fetchData($res))
+			{
+				if(!empty($arr) && $row['p_catid'] !=0)
+					$arr['subcat'][] = $this->getSubCat($row['catid'],$row);
+				else
+					$arr['root'][] = $this->getSubCat($row['catid'],$row);
+			}
+		}
+		return $arr;
+	}
+	
         public function getCatList($params)
         { 
 			$sql = "SELECT catid,cat_name FROM tbl_category_master where p_catid=0 order by catid ASC";

@@ -604,20 +604,28 @@
                 $sql.=" LIMIT " . $start . ",$limit";
             }
             $sql2 = "SELECT 
-                            product_id,
-                            carat,
-                            color,
-                            certified,
-                            shape,
-                            clarity,
-                            price,
-                            polish,
-                            symmetry,
-                            cno 
+						product_id,
+						carat,
+						color,
+						certified,
+						shape,
+						clarity,
+						price,
+						polish,
+						symmetry,
+						cno, 
+						cut,
+						fluo as fluorescence,
+						measurement,
+						td as tab,
+						cr_ang as crownangle,
+						girdle,
+						base as baseprice,
+						p_disc as discount
                     FROM 
-                            tbl_product_search
+                        tbl_product_search
                     WHERE 
-                            product_id=".$params['prdid']."";
+                        product_id=".$params['prdid']."";
             $res = $this->query($sql);
             $res2 = $this->query($sql2);
             if ($res)
@@ -627,7 +635,7 @@
                 {
                     if ($row2 && !empty($row2['product_id']))
                     {
-                        $details[]=$row2;
+                        $details=$row2;
                     }
                 }
                 if($row && !empty($row['product_id'])) 

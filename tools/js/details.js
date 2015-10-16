@@ -72,7 +72,16 @@ $(document).ready(function(){
         setTimeout(function(){
             $('#overlay,#userForm').addClass('dn');
         },1010);
-    });  
+    }); 
+	
+	$('#userSubmit').bind('click',function() {
+		showVendorDetails();
+		$('#userForm').velocity({scale:0},{delay:0,ease:'swing'});
+		$('#overlay').velocity({opacity:0},{delay:100,ease:'swing'});
+		setTimeout(function(){
+			$('#overlay,#userForm').addClass('dn');
+		},1010);
+	});
 });
 
 

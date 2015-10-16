@@ -97,54 +97,63 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function getResultsData(data)
+function getResultsData(data,sortby)
 {
 	var html = '';
 	var fhtml = '';
 	var tfhtml = '';
-	$.each(data.results.products, function(i, vl) {
-		html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/pid-'+vl.pid+'">';
-			html += '<div class="prdComm fLeft" style="opacity: 0; transform: translateX(1500px);">';
-				html += '<div class="prdCommDiv fLeft">';
-					html += '<div class="prdShape fLeft">';
-						html += '<div class="prdShTitle fLeft fmOpenB">SHAPE</div>';
-						html += '<div class="prdShType fLeft fmOpenR">'+vl.attributes.shape+'</div>';
-						html += '<div class="'+vl.attributes.shape+' fRight"></div>';
-					html += '</div>';
-					html += '<div class="prdDetails fLeft">';
-						html += '<div class="detComm">';
-							html += '<div class="detLabel fmOpenB fLeft">COLOR</div>';
-							html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.color+'</div>';
+	if(data.results.products) {
+		$.each(data.results.products, function(i, vl) {
+			html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/pid-'+vl.pid+'">';
+				html += '<div class="prdComm fLeft" style="opacity: 0; transform: translateX(1500px);">';
+					html += '<div class="prdCommDiv fLeft">';
+						html += '<div class="prdShape fLeft">';
+							html += '<div class="prdShTitle fLeft fmOpenB">SHAPE</div>';
+							html += '<div class="prdShType fLeft fmOpenR">'+vl.attributes.shape+'</div>';
+							html += '<div class="'+vl.attributes.shape+' fRight"></div>';
 						html += '</div>';
-						html += '<div class="detComm">';
-							html += '<div class="detLabel fmOpenB fLeft">CARATS</div>';
-							html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.carat+'</div>';
+						html += '<div class="prdDetails fLeft">';
+							html += '<div class="detComm">';
+								html += '<div class="detLabel fmOpenB fLeft">COLOR</div>';
+								html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.color+'</div>';
+							html += '</div>';
+							html += '<div class="detComm">';
+								html += '<div class="detLabel fmOpenB fLeft">CARATS</div>';
+								html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.carat+'</div>';
+							html += '</div>';
+							html += '<div class="detComm">';
+								html += '<div class="detLabel fmOpenB fLeft">CLARITY</div>';
+								html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.clarity+'</div>';
+							html += '</div>';
+							html += '<div class="detComm">';
+								html += '<div class="detLabel fmOpenB fLeft">CERTIFICATE</div>';
+								html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.certified+'</div>';
+							html += '</div>';
 						html += '</div>';
-						html += '<div class="detComm">';
-							html += '<div class="detLabel fmOpenB fLeft">CLARITY</div>';
-							html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.clarity+'</div>';
+						html += '<div class="prdPrice fLeft">';
+							html += '<div class="detComm">';
+								html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
+								html += '<div class="detValue fmOpenB fLeft"><span>₹</span>'+number_format(vl.pprice,2)+'</div>';
+							html += '</div>';
 						html += '</div>';
-						html += '<div class="detComm">';
-							html += '<div class="detLabel fmOpenB fLeft">CERTIFICATE</div>';
-							html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.certified+'</div>';
+						html += '<div class="prdActions fLeft">';
+							html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+							html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+							html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+							html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
 						html += '</div>';
-					html += '</div>';
-					html += '<div class="prdPrice fLeft">';
-						html += '<div class="detComm">';
-							html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
-							html += '<div class="detValue fmOpenB fLeft"><span>₹</span>'+vl.pprice+'</div>';
-						html += '</div>';
-					html += '</div>';
-					html += '<div class="prdActions fLeft">';
-						html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
-						html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
-						html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
-						html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
 					html += '</div>';
 				html += '</div>';
-			html += '</div>';
-		html += '</a>';
-	});
+			html += '</a>';
+		});
+	}
+	else
+	{
+		html += '<div class="noresDiv">';
+			html += '<div class="noresults font25 fLeft">There are no results available for your search.</div>';
+			html += '<div class="noresults font18 fLeft">Please try again.</div>';
+		html += '</div>';
+	}
 	
 	$.each(data.results.filters, function(i, v) {
 		$.each(v, function(k, vl) {
@@ -258,7 +267,9 @@ function getResultsData(data)
 	
 	$('.prdResults').html(html);
 	$('.prdResults').offset();
-	$('body').animate({scrollTop: $('.shapesCont').offset().top+50}, 300);
+	if(sortby)
+		$('body').animate({scrollTop: $('.shapesCont').offset().top+50}, 300);
+	
 	setTimeout(function(){
 		showPrd();
 	},10);
@@ -270,6 +281,30 @@ function getResultsData(data)
 			isStop = true;
 		}
 	});
+}
+
+function number_format (number, decimals, dec_point, thousands_sep) {
+  
+  number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
+  var n = !isFinite(+number) ? 0 : +number,
+    prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+    sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+    dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+    s = '',
+    toFixedFix = function (n, prec) {
+      var k = Math.pow(10, prec);
+      return '' + Math.round(n * k) / k;
+    };
+  // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+  s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+  if (s[0].length > 3) {
+    s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+  }
+  if ((s[1] || '').length < prec) {
+    s[1] = s[1] || '';
+    s[1] += new Array(prec - s[1].length + 1).join('0');
+  }
+  return s.join(dec);
 }
 
 function FR(sortby) {
@@ -321,7 +356,7 @@ function FR(sortby) {
 		var params = 'action=ajx&case=filter&catid='+catid+'&sortby='+sortby+'&slist='+slist+'&clist='+clist+'&tlist='+tlist;
 		var URL = DOMAIN + "index.php";
 		$.getJSON(URL, params, function(data) {
-			getResultsData(data);   
+			getResultsData(data,sortby);   
 		});
 	}
 	else

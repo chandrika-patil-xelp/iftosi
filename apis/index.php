@@ -402,6 +402,15 @@ switch($action)
             $result= $obj->getCatList($params);
             $res=$result;
             break;
+
+//   localhost/iftosi/apis/index.php?action=getSubCat&catid=10000      
+		 case 'getSubCat': 
+            include APICLUDE.'class.categoryInfo.php';
+            $obj= new categoryInfo($db['iftosi']);
+			$catid = $_GET['catid'];
+            $result= $obj->getSubCat($catid);
+            $res['results'] = $result;
+            break;
         
 // localhost/iftosi/apis/index.php?action=getCatName&catid=1        
         case 'getCatName':
