@@ -166,19 +166,6 @@ $(document).ready(function(){
     } 
     lastSc=sc;
 
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     
     });
     
