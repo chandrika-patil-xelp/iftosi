@@ -205,7 +205,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="divCon  fLeft jw3">
+                    <div class="divCon  fLeft jw3" id='certiicates'>
                         <div  class="titleDiv txtCap fLeft">Certficate</div>
                         <div class='radioCont fLeft'> 
                             <div class="checkDiv fLeft">
@@ -220,6 +220,15 @@
                                 <input type="radio" name='Certficate' class="filled-in" id="Certficate_EGL">
                                 <label for="Certficate_EGL">EGL</label>
                             </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='Certficate' class="filled-in" id="Certficate_other">
+                                <label for="Certficate_other">Other</label>
+                            </div>
+                            <div id='othCert' class="otherBox fLeft dn">
+                               <input name="other_cerificate" type="text" placeholder=" Other Certificate" class="othTxtinp fLeft fmOpenR font14 c666">
+                            </div>
+                            
+                            
                         </div>
                     </div>
                     <div class="divCon  fLeft jw3">
@@ -368,5 +377,29 @@
             </div>
         </div>
     </div>
+    <script>
+        function showOther(id){
+            $('#'+id).removeClass('dn');
+        }
+        
+        function hideOther(id){
+            $('#'+id).addClass('dn');
+        }
+        
+        $(document).ready(function(){
+            $('#certiicates label').click(function(){
+                setTimeout(function(){
+                    var id=$('#certiicates input[type=radio]:checked').attr('id');
+                    if(id==='Certficate_other'){
+                        showOther('othCert');
+                    }else{
+                        hideOther('othCert');
+                    }
+                },10);
+                
+            });
+        });
+    
+    </script>
 </body>
 </html>
