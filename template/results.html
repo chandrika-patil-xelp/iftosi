@@ -2,40 +2,36 @@
 <body>
     <div id='baseCont' class="container fmOpenR bgWhite resultsPage">
         <div class="wrapper">
-            <?php include 'header.html'?>
+            <?php include 'header.html' ?>
             <div class="totalResultsDiv"></div>
-			<?php
-			if(count($fil))
-			{
-				foreach($fil as $key => $val)
-				{
-					if($val['attribute_name'] == 'shape' && !empty($val['attribute_values']))
-					{
-			?>
-						<div class='shapesCont resultsPage showHide'>
-							<div class="wrapperMax">
-								<div class="allShapes resultsPage">
-									<center>
-										<?php
-										$filval = explode(",",$val['attribute_values']);
-										foreach($filval as $ky => $vl)
-										{
-										?>
-											<div id="<?php echo $vl;?>" class="shapeComm transition300 ripplelink <?php echo $vl;?>">
-											</div>
-										<?php
-										}
-										?>
-									</center>
-								</div>
-							</div>
-						</div>
-			<?php
-						unset($fil[$key]);
-					}
-				}
-			}
-			?>
+            <?php
+            if (count($fil)) {
+                foreach ($fil as $key => $val) {
+                    if ($val['attribute_name'] == 'shape' && !empty($val['attribute_values'])) {
+                        ?>
+                        <div class='shapesCont resultsPage showHide'>
+                            <div class="wrapperMax">
+                                <div class="allShapes resultsPage">
+                                    <center>
+            <?php
+            $filval = explode(",", $val['attribute_values']);
+            foreach ($filval as $ky => $vl) {
+                ?>
+                                            <div id="<?php echo $vl; ?>" class="shapeComm transition300 ripplelink <?php echo $vl; ?>">
+                                            </div>
+                                            <?php
+                                        }
+                                        ?>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+            <?php
+            unset($fil[$key]);
+        }
+    }
+}
+?>
             <div class="allResults">
                 <div class="wrapperMax">
                     <div class="filterTitleDiv">
@@ -55,68 +51,81 @@
                         <div class="fRight sTitle">Sort by</div>
                     </div>
                     <div class='results_Filter'>
-                        <?php include 'filters.html';?>
+<?php include 'filters.html'; ?>
                         <div class='prdResults fRight'>
-                            <?php 
-							if(count($data))
-							{
-								foreach($data as $key => $val) 
-								{
-							?>
-									<a href="<?php echo DOMAIN.strtolower($val['attributes']['certified']).'-'.strtolower($val['attributes']['shape']).'-clarity-'.$val['attributes']['clarity'];?>/pid-<?php echo $val['pid'];?>">
-										<div class='prdComm fLeft'>
-											<div class='prdCommDiv fLeft transition100'>
-												<div class='prdShape fLeft'>
-													<div class='prdShTitle fLeft fmOpenB'>SHAPE</div>
-													<div class='prdShType fLeft fmOpenR'><?php echo $val['attributes']['shape'];?></div>
-													<div class="<?php echo $val['attributes']['shape'];?> fRight"></div>
-												</div>
-												<div class="prdDetails fLeft">
-													<div class="detComm">
-														<div class="detLabel fmOpenB fLeft">COLOR</div>
-														<div class="detValue fmOpenR fLeft"><?php echo $val['attributes']['color'];?></div>
-													</div>
-													<div class="detComm">
-														<div class="detLabel fmOpenB fLeft">CARATS</div>
-														<div class="detValue fmOpenR fLeft"><?php echo $val['attributes']['carat'];?></div>
-													</div>
-													<div class="detComm">
-														<div class="detLabel fmOpenB fLeft">CLARITY</div>
-														<div class="detValue fmOpenR fLeft"><?php echo $val['attributes']['clarity'];?></div>
-													</div>
-													<div class="detComm">
-														<div class="detLabel fmOpenB fLeft">CERTIFICATE</div>
-														<div class="detValue fmOpenR fLeft"><?php echo $val['attributes']['certified'];?></div>
-													</div>
-												</div>
-												<div class='prdPrice fLeft'>
-													<div class="detComm">
-														<div class="detLabel fmOpenB fLeft">BEST PRICE</div>
-														<div class="detValue fmOpenB fLeft"><span>&#8377;</span><?php echo number_format($val['pprice'],2);?></div>
-													</div>
-												</div>
-												<div class='prdActions fLeft'>
-													<div class='actionComm fLeft transition100 poR ripplelink'></div>
-													<div class='actionComm fLeft transition100 poR ripplelink'></div>
-													<div class='actionComm fLeft transition100 poR ripplelink'></div>
-													<div class='actionComm fLeft transition100 poR ripplelink'></div>
-												</div>
-											</div>
-										</div>
-									</a>
-                            <?php
-								}
-							} 
-							?>
+<?php
+if (count($data)) {
+    foreach ($data as $key => $val) {
+        ?>
+                                    <a href="<?php echo DOMAIN . strtolower($val['attributes']['certified']) . '-' . strtolower($val['attributes']['shape']) . '-clarity-' . $val['attributes']['clarity']; ?>/pid-<?php echo $val['pid']; ?>">
+                                        <div class='prdComm fLeft'>
+                                            <div class='prdCommDiv fLeft transition100'>
+                                                <div class='prdShape fLeft'>
+                                                    <div class='prdShTitle fLeft fmOpenB'>SHAPE</div>
+                                                    <div class='prdShType fLeft fmOpenR'><?php echo $val['attributes']['shape']; ?></div>
+                                                    <div class="<?php echo $val['attributes']['shape']; ?> fRight"></div>
+                                                </div>
+                                                <div class="prdDetails fLeft">
+                                                    <div class="detComm">
+                                                        <div class="detLabel fmOpenB fLeft">COLOR</div>
+                                                        <div class="detValue fmOpenR fLeft"><?php echo $val['attributes']['color']; ?></div>
+                                                    </div>
+                                                    <div class="detComm">
+                                                        <div class="detLabel fmOpenB fLeft">CARATS</div>
+                                                        <div class="detValue fmOpenR fLeft"><?php echo $val['attributes']['carat']; ?></div>
+                                                    </div>
+                                                    <div class="detComm">
+                                                        <div class="detLabel fmOpenB fLeft">CLARITY</div>
+                                                        <div class="detValue fmOpenR fLeft"><?php echo $val['attributes']['clarity']; ?></div>
+                                                    </div>
+                                                    <div class="detComm">
+                                                        <div class="detLabel fmOpenB fLeft">CERTIFICATE</div>
+                                                        <div class="detValue fmOpenR fLeft"><?php echo $val['attributes']['certified']; ?></div>
+                                                    </div>
+                                                </div>
+                                                <div class='prdPrice fLeft'>
+                                                    <div class="detComm">
+                                                        <div class="detLabel fmOpenB fLeft">BEST PRICE</div>
+                                                        <div class="detValue fmOpenB fLeft"><span>&#8377;</span><?php echo number_format($val['pprice'], 2); ?></div>
+                                                    </div>
+                                                </div>
+                                                <div class='prdActions fLeft'>
+                                                    <div class='actionComm fLeft transition100 poR ripplelink'></div>
+                                                    <div class='actionComm fLeft transition100 poR ripplelink'></div>
+                                                    <div class='actionComm fLeft transition100 poR ripplelink'></div>
+                                                    <div class='actionComm fLeft transition100 poR ripplelink'></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+        <?php
+    }
+}
+?>  
+                            <div class="fLeft pagination fmOpenR">
+                                <center>
+                                    <div class="pPrev poR ripplelink">Previous</div>
+                                    <div class="pgComm poR ripplelink pgActive">1</div>
+                                    <div class="pgComm poR ripplelink">2</div>
+                                    <div class="pgComm poR ripplelink">3</div>
+                                    <div class="pgComm poR ripplelink">4</div>
+                                    <div class="pgEmpty"></div>
+                                    <div class="pgEmpty"></div>
+                                    <div class="pgEmpty"></div>
+                                    <div class="pgEmpty"></div>
+                                    <div class="pgComm poR ripplelink">20</div>
+                                    <div class="pNext poR ripplelink">Next</div>
+                                </center>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        <?php include 'footer.html'; ?>
+                            <?php include 'footer.html'; ?>
         </div>
-        <?php include 'logo.html'; ?>
-		<?php include 'leftmenu.html'; ?>
-		<input type="hidden" id="catid" value=<?php echo $_GET['catid'];?> />
+                            <?php include 'logo.html'; ?>
+<?php include 'leftmenu.html'; ?>
+        <input type="hidden" id="catid" value=<?php echo $_GET['catid']; ?> />
     </div>
     <div id='dragTarget' class="drag-target" style="touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); left: 0px;"></div>
     <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>

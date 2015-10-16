@@ -47,11 +47,11 @@ a{text-decoration: none;}
 .poR{position: relative}
 .bNone{border:none!important;}
 .txtCap {text-transform: capitalize;}
-.container{width:100%;height:auto;background: #fff;padding-bottom: 20px;padding-top:60px;}
+.container{width:100%;height:auto;background: #fff;padding-bottom: 00px;padding-top:50px;}
 .wrapper{width:100%;height:auto;}
 .wrapperMax{width:100%;max-width: 1200px;height:100%;margin: auto;}
 .formContainer{width:100%;height: auto;padding:0px;display: inline-block;}
-.formTitle{width:100%;height: 50px;border-bottom: 1px solid #ebebde;font-size: 35px;color:#4d4d4d;margin-bottom: 10px;}
+.formTitle{width:100%;height: 50px;font-size: 35px;color:#4d4d4d;margin:20px 0;text-align: center;}
 
 /*Contents*/
 .header {width: 100%;height: 50px;background: #8A0044;line-height: 70px;position: fixed;top: 0;z-index: 99;padding: 10px 0;}
@@ -63,8 +63,8 @@ a{text-decoration: none;}
 .headRight{width: auto;height: 100%;}
 
 
-.divCon {width: 100%;height: auto;margin-bottom: 20px;}
-.divCon2 {width: 50%;margin-right: 50%;height: auto;margin-bottom: 20px;}
+.divCon {width: 100%;height: auto;margin-top: 20px;}
+.divCon2 {width: 50%;height: auto;margin-top: 20px;}
 .titleDiv {width: 20%;height: auto;line-height: 20px;text-align: right;padding: 0 15px;color: #4d4d4d;padding: 25px 20px 25px 0;font-weight: bold;}
 .txtInput {width: 80%;height: 40px;padding: 0 15px;outline: none;outline-style: none;border: 1px solid #ccc;border-radius: 5px;background: #fff;}
 .divCon2 .titleDiv {width: 40%;height: auto;line-height: 20px;text-align: right;padding: 0 15px;margin: 10px 0;color:#4d4d4d}
@@ -73,7 +73,7 @@ a{text-decoration: none;}
 .checkDiv {width: 25%;height: 25px;margin: 3px 0;padding-right: 20px;}
 
 .mInputDiv{width:60%;}
-.mtxtInput{width: 90px;height: 40px;padding: 0 15px;outline: none;outline-style: none;border: 1px solid #d4d4c8;border-radius: 0px;background: #fff;}
+.mtxtInput{width: 90px;height: 40px;padding: 0 15px;outline: none;outline-style: none;border: 1px solid #d4d4c8;border-radius: 5px;background: #fff;}
 .mInputDiv span{width:auto;height: 40px;line-height: 40px;padding: 0 15px;color: #4d4d4d}
 
 [type="radio"]:not(:checked), [type="radio"]:checked {position: absolute;left: -9999px;visibility: hidden; }
@@ -88,7 +88,7 @@ a{text-decoration: none;}
 [type="radio"]:disabled + label {color: rgba(0, 0, 0, 0.26); }
 [type="radio"]:disabled:not(:checked) + label:hover:before {border-color: rgba(0, 0, 0, 0.26); }
 
-.btnCont{width:100%;height: 40px;}
+.btnCont{width:100%;height: 40px;margin: 20px 0}
 .submitBtn{width:150px;height: 40px;line-height: 40px;text-align: center;display: inline-block;padding: 0;background: #8A0044;color:#fff;border-radius: 5px;cursor: pointer;-webkit-appearance: none;-moz-user-select: none;-webkit-user-select: none;-ms-user-select: none;}
 .cancelBtn{width:150px;height: 40px;line-height: 40px;text-align: center;display: inline-block;padding: 0;background: #171334;color:#fff;border-radius: 5px;cursor: pointer;-webkit-appearance: none;-moz-user-select: none;-webkit-user-select: none;-ms-user-select: none;}
 
@@ -101,7 +101,124 @@ a{text-decoration: none;}
 .jw3 .checkDiv{width: auto;padding-right: 40px;}
 .jw5 .checkDiv{width:20%!important}
 
+/*Jewellery Results Page*/
+.jShapesCont {width: 100%;height: 225px;background: #fff;padding: 0px 0 0px 0;position: relative;z-index: 0;}
+.jshapeComm {margin: 0;width: 20%;padding-bottom: 0;height: 225px;border: 0px solid transparent;position: relative;display: inline-block;cursor: pointer;padding-top: 155px;color: #F3EFEF;font-size: 25px;line-height: 70px;box-shadow: inset 0 -70px 70px rgba(0,0,0,0.5);border-right:2px solid #fff;border-top: 2px solid #fff;vertical-align: top;}
+.jshapeComm:hover {padding-top: 85px;font-size: 30px;}
+.jshapeComm::after{content: '';position: absolute;right: 0px; left:0px; bottom: 70px;margin: auto; width: 00px;height: 00px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;-moz-transition: 100ms ease-in-out;-ms-transition: 100ms ease-in-out;-webkit-transition: 100ms ease-in-out;-o-transition: 100ms ease-in-out;}
+
+.Rings{background: url(../img/common/ifrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(23, 19, 52,0.9);}
+.Earrings{background: url(../img/common/ifearrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(42, 14, 52,0.9);}
+.Pendent{background: url(../img/common/ifpendent.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(56, 11, 52,0.9);}
+.Necklace{background: url(../img/common/ifnecklace.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -70px 0px rgba(94, 0, 55,0.9);}
+.Bracelet{background: url(../img/common/ifbracelet.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(138, 0, 68,0.9);}
+
+.jshapeComm.Rings:hover{background: url(../img/common/ifrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
+.jshapeComm.Earrings:hover{background: url(../img/common/ifearrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
+.jshapeComm.Pendent:hover{background: url(../img/common/ifpendent.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(56, 11, 52,0.8);}
+.jshapeComm.Necklace:hover{background: url(../img/common/ifnecklace.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
+.jshapeComm.Bracelet:hover{background: url(../img/common/ifbracelet.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+
+.jshapeComm.shapeSelected.Rings{background: url(../img/common/ifrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
+.jshapeComm.shapeSelected.Earrings{background: url(../img/common/ifearrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
+.jshapeComm.shapeSelected.Pendent{background: url(../img/common/ifpendent.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(56, 11, 52,0.8);}
+.jshapeComm.shapeSelected.Necklace{background: url(../img/common/ifnecklace.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
+.jshapeComm.shapeSelected.Bracelet{background: url(../img/common/ifbracelet.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+
+.jshapeComm.shapeSelected.Rings:hover{background: url(../img/common/ifrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
+.jshapeComm.shapeSelected.Earrings:hover{background: url(../img/common/ifearrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
+.jshapeComm.shapeSelected.Pendent:hover{background: url(../img/common/ifpendent.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(56, 11, 52,0.8);}
+.jshapeComm.shapeSelected.Necklace:hover{background: url(../img/common/ifnecklace.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
+.jshapeComm.shapeSelected.Bracelet:hover{background: url(../img/common/ifbracelet.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+
+.jshapeComm.shapeSelected span{color:#8A0044;}
+.jshapeComm.shapeSelected{background-color: #fff;border-right: 2px solid #FFF;padding-top: 75px;font-size: 30px;}
+.jshapeComm.shapeSelected::after{content: '';position: absolute;right: 0px; left:0px; bottom: 50px;margin: auto; width: 40px;height: 40px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;}
+
 
 
 /*Diamond Form*/
+
+.shapeComm {border:2px solid #FFF;border-radius:5px; position: relative;background-image: url(../img/shapes.svg);background-repeat: no-repeat;margin: 0.5%;width: 9%!important;padding-bottom: 9%;height:0!important;display: inline-block;vertical-align: bottom;text-align: center;cursor: pointer;background-size: 1000% auto;}
+.shapeComm:hover{border:2px solid #8A0044;}
+/*.shapeComm::before {position: absolute;top: 0;width:0%;height:5px;background: #8A0044;content: "";-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;left: 0;font-size: 16px;transition: 300ms ease-in-out;-moz-transition: 100ms ease-in-out;-ms-transition: 100ms ease-in-out;-webkit-transition: 100ms ease-in-out;-o-transition: 100ms ease-in-out;opacity: 1;}
+.shapeComm:hover::before {position: absolute;top: 0;width: 100%;height:5px;background: #8A0044;content: "";-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;left: 0;font-size: 16px;transition: 300ms ease-in-out;-moz-transition: 300ms ease-in-out;-ms-transition: 300ms ease-in-out;-webkit-transition: 300ms ease-in-out;-o-transition: 300ms ease-in-out;opacity: 1;}*/
+
+.resultsPage .shapeComm1{margin: 0 0.5%;width: 7.5%!important;padding-bottom: 7.5%;height:0!important;border: 2px solid #ebebde;}
+.resultsPage .shapeComm{margin: 0;width: 10%!important;padding-bottom: 10%;height: 0!important;border: 2px solid transparent;}
+.resultsPage .shapeComm:hover{border:2px solid #8A0044;}
+
+.Round{background-position: 0% 0%;}
+.Round:hover{opacity:1}
+.Pear{width:40px;background-position: 11% 0%;}
+.Pear:hover{opacity: 1;}
+.Heart{background-position: 22% 0%;}
+.Heart:hover{opacity:1}
+.Princess{background-position: 33.5% 0%;}
+.Princess:hover{opacity: 1;}
+.Asscher{background-position: 44.5% 0%;}
+.Asscher:hover{opacity: 1;}
+.Marquise{background-position: 55.5% 0%;}
+.Marquise:hover{opacity: 1;}
+.Oval{background-position: 66.5% 0%;}
+.Oval:hover{opacity: 1;}
+.Emerald {background-position: 78% 0%;}
+.Emerald:hover {opacity: 1;}
+.Radiant {background-position: 89% 0%;}
+.Radiant:hover{opacity: 1;}
+.Cushion {background-position: 100% 0%;}
+.Cushion:hover {opacity: 1;}
+
+.shapeSelected.Round,.shapeSelected:hover.Round{opacity: 1;} 
+.shapeSelected.Pear,.shapeSelected:hover.Pear{opacity: 1;}
+.shapeSelected.Heart,.shapeSelected:hover.Heart{opacity: 1;}
+.shapeSelected.Princess,.shapeSelected:hover.Princess{opacity: 1;}
+.shapeSelected.Asscher,.shapeSelected:hover.Asscher{opacity: 1;}
+.shapeSelected.Marquise,.shapeSelected:hover.Marquise{opacity: 1;}
+.shapeSelected.Oval,.shapeSelected:hover.Oval{opacity: 1;}
+.shapeSelected.Emerald,.shapeSelected:hover.Emerald {opacity: 1;}
+.shapeSelected.Radiant,.shapeSelected:hover.Radiant{opacity: 1;}
+.shapeSelected.Cushion ,.shapeSelected:hover.Cushion {opacity: 1;}
+/*.shapeSelected.shapeComm::before {position: absolute;top: 0;width: 100%;height:5px;background: #8A0044;content: "";-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;left: 0;font-size: 16px;transition: 300ms ease-in-out;-moz-transition: 300ms ease-in-out;-ms-transition: 300ms ease-in-out;-webkit-transition: 300ms ease-in-out;-o-transition: 300ms ease-in-out;opacity: 1;}
+.shapeSelected:hover.shapeComm::before {position: absolute;top: 0;width: 100%;height:5px;background: #8A0044;content: "";-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;left: 0;font-size: 16px;transition: 300ms ease-in-out;-moz-transition: 300ms ease-in-out;-ms-transition: 300ms ease-in-out;-webkit-transition: 300ms ease-in-out;-o-transition: 300ms ease-in-out;opacity: 1;}*/
+.shapeSelected.shapeComm{}
+.shapeSelected:hover.shapeComm{}
+.shapeSelected.shapeComm.Round{background-color:#fff;border:2px solid #ebebde;background-position: 0% 33%;}
+.shapeSelected.shapeComm.Pear{background-color:#fff;border:2px solid #ebebde;background-position: 11% 33%;}
+.shapeSelected.shapeComm.Heart{background-color:#fff;border:2px solid #ebebde;background-position: 22% 33%;}
+.shapeSelected.shapeComm.Princess{background-color:#fff;border:2px solid #ebebde;background-position: 33.5% 33%;}
+.shapeSelected.shapeComm.Asscher{background-color:#fff;border:2px solid #ebebde;background-position: 44.5% 33%;}
+.shapeSelected.shapeComm.Marquise{background-color:#fff;border:2px solid #ebebde;background-position: 55.5% 33%;}
+.shapeSelected.shapeComm.Oval{background-color:#fff;border:2px solid #ebebde;background-position: 66.5% 33%;}
+.shapeSelected.shapeComm.Emerald {background-color:#fff;border:2px solid #ebebde;background-position: 78% 33%;}
+.shapeSelected.shapeComm.Radiant{background-color:#fff;border:2px solid #ebebde;background-position: 89% 33%;}
+.shapeSelected.shapeComm.Cushion {background-color:#fff;border:2px solid #ebebde;background-position: 100% 33%;}
+
+.shapeComm.shapeSelected {background-color: #fff;}
+.shapeComm.shapeSelected::after{content: '';position: absolute;right: 5px;top: 5px;width: 20px;height: 20px;background: url(../img/common/tick.svg)no-repeat;background-position: center;background-size: auto 100%;}
+
+
+/*Bullion*/
+/*Bullion Results*/
+.bresults .jshapeComm{width:25%!important;}
+
+.gCoin{background: url(../img/common/gCoin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(23, 19, 52,0.9);}
+.gBar{background: url(../img/common/gBar.jpeg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(42, 14, 52,0.9);}
+.sCoin{background: url(../img/common/sCoin.png)no-repeat;background-size: cover;background-position:bottom;box-shadow: inset 0 -70px 0px rgba(56, 11, 52,0.9);}
+.sBar{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -70px 0px rgba(94, 0, 55,0.9);}
+
+.jshapeComm.gCoin:hover{background: url(../img/common/gCoin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
+.jshapeComm.gBar:hover{background: url(../img/common/gBar.jpeg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
+.jshapeComm.sCoin:hover{background: url(../img/common/sCoin.png)no-repeat;background-size: cover;background-position: bottom;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
+.jshapeComm.sBar:hover{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+
+.jshapeComm.shapeSelected.gCoin{background: url(../img/common/gCoin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
+.jshapeComm.shapeSelected.gBar{background: url(../img/common/gBar.jpeg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
+.jshapeComm.shapeSelected.sCoin{background: url(../img/common/sCoin.png)no-repeat;background-size: cover;background-position:bottom;box-shadow: inset 0 -300px 100px rgba(56, 11, 52,0.8);}
+.jshapeComm.shapeSelected.sBar{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
+
+.jshapeComm.shapeSelected.gCoin:hover{background: url(../img/common/gCoin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
+.jshapeComm.shapeSelected.gBar:hover{background: url(../img/common/gBar.jpeg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
+.jshapeComm.shapeSelected.sCoin:hover{background: url(../img/common/sCoin.jpg)no-repeat;background-size: cover;background-position:bottom;box-shadow: inset 0 -300px 100px rgba(56, 11, 52,0.8);}
+.jshapeComm.shapeSelected.sBar:hover{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
 

@@ -61,11 +61,14 @@ a{text-decoration: none;}
 .wrapperMax{width:100%;max-width: 1200px;height:100%;margin: auto;}
 
 /*Header*/
-.header{width:100%;height: 100px;background: #fff;line-height: 100px;position: fixed;top:0;z-index: 99;box-shadow: 0 0 35px 0px rgba(0,0,0,0.2);padding: 32px 0;}
+.header1{width:100%;height: 100px;background: #fff;line-height: 100px;position: fixed;top:0;z-index: 99;box-shadow: 0 0 35px 0px rgba(0,0,0,0.2);padding: 32px 0;}
+.header{width:100%;height: 100px;background: #fff;line-height: 100px;position: fixed;top:0;z-index: 99;box-shadow: 0 0 35px 0px rgba(0,0,0,0.2);padding: 0;}
+
+
 .header a{text-decoration:none;color:#4d4d4d;}
 .cityName{width: auto;min-width: 250px;max-width: 350px;height:36px;line-height: 36px;color: #333;font-size: 16px;background: url(../img/common/sarea.svg)no-repeat;background-size: auto 25px;background-position: left;padding-left: 25px;}
-.headRight{width:auto;height: 36px;font-size: 13px; color:#333;}
-.compNo{width:auto;height:36px;line-height:36px;background: #8A0044;color:#fff;padding: 0 15px;border-radius: 5px;margin:0 0 10px;}
+.headRight{width:auto;height: 100%;font-size: 13px; color:#333;padding: 32px 0}
+.compNo{width:auto;height:36px;line-height:36px;background: #8A0044;color:#fff;padding: 0 15px;border-radius: 5px;}
 .signInUpTab{width: auto;height: 36px;line-height: 36px;padding-left: 25px;margin: 0 20px 0 15px;background: url(../img/common/lock.svg)no-repeat;background-position: left 3px;background-size: auto 100%;cursor:pointer;}
 .headDivider{width: 2px;background: #333;height: 16px;margin: 10px 0px;}
 .wishlist{width:auto;height: 36px;line-height: 36px;margin:0 15px;;cursor:pointer;}
@@ -79,12 +82,33 @@ a{text-decoration: none;}
 
 .loggedIn{margin-right: 0!important;}
 .header ul {width: 120px!important;left: -100px!important;}
-.upperMenu {width: 100%;height: auto;background: #171334;position: fixed;top: 100px;z-index: 15;display: none;left: 0;}
+.upperMenu {
+    width: 100%;
+    height: auto;
+    background: #171334;
+    position: fixed;
+    top: 100px;
+    z-index: 15;
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding: 0 20px 40px 20px;
+    overflow: hidden;
+    margin-left: 0;
+}
+
+.upTransit{
+    transform: translateY(-200px);
+    opacity: 0;
+    z-index: -1;
+
+}
+
 .forJwMenu{width:100%;height: auto;display: none;}
 .forDiamond {width:100%;height: auto;display: none;}
 
 
-.menuTittle{width:100%;height: 70px;color: #fff;font-size: 40px;padding: 0 10px;transform: translateY(-400px);}
+.menuTittle{width:100%;height: 70px;color: #fff;font-size: 40px;padding: 0 10px;}
 .menuListCont{width:100%;height: 400px;padding: 25px;}
 .mItemDiv{width:20%;height: auto;color: #fff;}
 .mItemTitle{width:100%;height:35px;line-height:35px;color: #fff;font-size: 20px;}
@@ -97,13 +121,16 @@ a{text-decoration: none;}
 
 .jwActive{}
 .jwActive.bgJewellery{background-size: auto 150%!important;background-position: center!important;}
-.jwActive.bgJewellery span{transform: translateY(100px);color:#171334;}
 
-.jwActive.bgJewellery .upperMenu{display: block}
+.jwActive.bgJewellery span{transform: translateY(100px);color:#171334;opacity:0}
+.mTransit{transform: translateY(-400px);opacity: 0}
+
+
+/*.jwActive.bgJewellery .upperMenu{display: block}
 .jwActive.bgJewellery .upperMenu .forJwMenu{display: block}
 
 .jwActive.bgDiamonds .upperMenu{display: block}
-.jwActive.bgDiamonds .upperMenu .forDiamond{display: block}
+.jwActive.bgDiamonds .upperMenu .forDiamond{display: block}*/
 
 /*Category*/
 .categoryCont{width:100%;height: 560px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding:200px 0 100px 0;}
@@ -237,14 +264,32 @@ a{text-decoration: none;}
 
 /*Result Page*/
 .bgWhite{background: #fff!important;}
-.headCatCont{width:300px;height: 80px;position: absolute;top:-30px;left:0;}
+.headCatCont1{width:300px;height: 80px;position: absolute;top:-30px;left:0;}
+
+.headCatCont {
+    width: 360px;
+    height: 100px;
+    position: absolute;
+    left: 0;
+}
+
+.headCat span {
+    display: block;
+    width: 100%;
+    height: 25px;
+    line-height: 25px;
+    position: absolute;
+    bottom: 15px;
+    text-align: center;
+    color: #4d4d4d;
+}
 .headCatActive{}
 .headSelected span{color:#8A0044!important;font-weight: bold;}
-.headCat{width:80px;height: 100%;;margin: 0 10px;position: relative;cursor: pointer;}
-.headCat span{display: block;width: 100%;height: 25px;line-height: 25px;position: absolute;bottom: 0;text-align: center;color: #4d4d4d;}
+.headCat{width:100px;height: 100%;;margin: 0;position: relative;cursor: pointer;}
+.headCat span1{display: block;width: 100%;height: 25px;line-height: 25px;position: absolute;bottom: 0;text-align: center;color: #4d4d4d;}
 
 .headCat.bgDiamond{background: #fff url(../img/common/diamond.jpg)no-repeat;background-size: auto 80%;background-position: 8px 0px;}
-.headCat.bgJewellery {background: #fff url(../img/common/jewellery.jpg)no-repeat;background-size: auto 80%;/*background-position: 8px 0px;*/background-position: top center;}
+.headCat.bgJewellery {background: #fff url(../img/common/jewellery.jpg)no-repeat;background-size: auto 80%;/*background-position: 8px 0px;*/background-position: 8px 0;}
 .headCat.bgBullion {background: #fff url(../img/common/bullions.jpg)no-repeat;background-size: auto 80%;background-position: 8px 0px;}
 .totalResultsDiv{width:100%;height:350px;line-height: 240px;color: #FFF;text-align: center;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding: 100px 0 0 0;font-size:50px;position: relative;}
 .resultsPage .shapesCont{}
@@ -378,6 +423,17 @@ a{text-decoration: none;}
 .actionComm:nth-child(4){background: #5e0037 url(../img/common/4.svg)no-repeat;background-size: auto 100%;background-position: center;;}
 
 .actionComm:hover{background-color: #8A0044;border-radius: 50%;-webkit-transition-delay:0s;-moz-transition-delay:0s;-ms-transition-delay:0s;-o-transition-delay:0s;transition-delay:0s;}
+
+.pagination{width:100%;height: 70px;background: #fff;padding: 10px 0;color:#666;font-size: 14px;text-align: center;}
+.pPrev{width:auto;height: 40px;border-radius:5px;display: inline-block;line-height: 40px;margin-right: 10px;cursor: pointer;vertical-align: top;padding:0 15px 0 35px;}
+.pPrev::after {content: '';position: absolute;left: 0%;top: 0px;width: 40px;height: 40px;background: url(../img/common/arrow_left_black.svg)no-repeat;background-size: auto 100%;background-position: center;}
+.pNext{width:auto;height: 40px;border-radius: 5px;padding:0 35px 0 15px;display: inline-block;line-height: 40px;cursor: pointer;vertical-align: top;}
+.pNext::after {content: '';position: absolute;right: 0;top: 0px;width: 40px;height: 40px;background: url(../img/common/arrow_left_black.svg)no-repeat;background-size: auto 100%;background-position: center;-ms-transform: rotate(180deg); -webkit-transform: rotate(180deg); -moz-transform: rotate(180deg); transform: rotate(180deg); }
+.pgComm{width:40px;height: 40px;border-radius: 20px;border:1px solid #d4d4c8;color:#666;display: inline-block;line-height: 40px;margin:0 10px 0 0;cursor: pointer;vertical-align: top;}
+.pgComm:hover{background: #8A0044;color:#fff;border-color:  #8A0044;}
+.pgEmpty{width:10px;height: 10px;border-radius: 5px;background: #d4d4c8;display: inline-block;line-height: 20px;margin:0 10px 0 0;vertical-align: bottom;}
+.pgActive{background: #8A0044;color:#fff;border-color:  #8A0044;}
+
 
 /*Jewellery Res*/
 .jwRes{}
@@ -693,26 +749,26 @@ a{cursor:pointer;}
 
 /*Bullion Results*/
 .bresults .jshapeComm{width:25%!important;}
+.gBar{background: url(../img/common/gBar.jpeg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(23, 19, 52,0.9);}
+.sBar{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -70px 0px rgba(42, 14, 52,0.9);}
+.gCoin{background: url(../img/common/gCoin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(56, 11, 52,0.9);}
+.sCoin{background: url(../img/common/sCoin.png)no-repeat;background-size: cover;background-position:bottom;box-shadow: inset 0 -70px 0px rgba(94, 0, 55,0.9);}
 
-.gCoin{background: url(../img/common/gCoin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(23, 19, 52,0.9);}
-.gBar{background: url(../img/common/gBar.jpeg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(42, 14, 52,0.9);}
-.sCoin{background: url(../img/common/sCoin.png)no-repeat;background-size: cover;background-position:bottom;box-shadow: inset 0 -70px 0px rgba(56, 11, 52,0.9);}
-.sBar{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -70px 0px rgba(94, 0, 55,0.9);}
+.jshapeComm.gBar:hover{background: url(../img/common/gBar.jpeg)no-repeat;background-size: cover;background-position:center;box-shadow:inset 0 -300px 100px rgba(23, 19, 52,0.8);}
+.jshapeComm.sBar:hover{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position:center;box-shadow:inset 0 -300px 100px rgba(42, 14, 52,0.8);}
+.jshapeComm.gCoin:hover{background: url(../img/common/gCoin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow:inset 0 -300px 100px rgba(56, 11, 52,0.8);}
+.jshapeComm.sCoin:hover{background: url(../img/common/sCoin.png)no-repeat;background-size: cover;background-position: bottom;box-shadow:inset 0 -300px 100px rgba(94, 0, 55,0.8);}
 
-.jshapeComm.gCoin:hover{background: url(../img/common/gCoin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
-.jshapeComm.gBar:hover{background: url(../img/common/gBar.jpeg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
-.jshapeComm.sCoin:hover{background: url(../img/common/sCoin.png)no-repeat;background-size: cover;background-position: bottom;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
-.jshapeComm.sBar:hover{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+.jshapeComm.shapeSelected.gBar{background: url(../img/common/gBar.jpeg)no-repeat;background-size: cover;background-position:center;box-shadow:inset 0 -300px 100px rgba(23, 19, 52,0.8);}
+.jshapeComm.shapeSelected.sBar{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position: center;box-shadow:inset 0 -300px 100px rgba(42, 14, 52,0.8);}
+.jshapeComm.shapeSelected.gCoin{background: url(../img/common/gCoin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow:inset 0 -300px 100px rgba(56, 11, 52,0.8);}
+.jshapeComm.shapeSelected.sCoin{background: url(../img/common/sCoin.png)no-repeat;background-size: cover;background-position:bottom;box-shadow:inset 0 -300px 100px rgba(94, 0, 55,0.8);}
 
-.jshapeComm.shapeSelected.gCoin{background: url(../img/common/gCoin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
-.jshapeComm.shapeSelected.gBar{background: url(../img/common/gBar.jpeg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
-.jshapeComm.shapeSelected.sCoin{background: url(../img/common/sCoin.png)no-repeat;background-size: cover;background-position:bottom;box-shadow: inset 0 -300px 100px rgba(56, 11, 52,0.8);}
-.jshapeComm.shapeSelected.sBar{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
 
-.jshapeComm.shapeSelected.gCoin:hover{background: url(../img/common/gCoin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
-.jshapeComm.shapeSelected.gBar:hover{background: url(../img/common/gBar.jpeg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
-.jshapeComm.shapeSelected.sCoin:hover{background: url(../img/common/sCoin.jpg)no-repeat;background-size: cover;background-position:bottom;box-shadow: inset 0 -300px 100px rgba(56, 11, 52,0.8);}
-.jshapeComm.shapeSelected.sBar:hover{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
+.jshapeComm.shapeSelected.gBar:hover{background: url(../img/common/gBar.jpeg)no-repeat;background-size: cover;background-position:center;box-shadow:inset 0 -300px 100px rgba(23, 19, 52,0.8);}
+.jshapeComm.shapeSelected.sBar:hover{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position: center;box-shadow:inset 0 -300px 100px rgba(42, 14, 52,0.8);}
+.jshapeComm.shapeSelected.gCoin:hover{background: url(../img/common/gCoin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow:inset 0 -300px 100px rgba(56, 11, 52,0.8);}
+.jshapeComm.shapeSelected.sCoin:hover{background: url(../img/common/sCoin.jpg)no-repeat;background-size: cover;background-position:bottom;box-shadow:inset 0 -300px 100px rgba(94, 0, 55,0.8);}
 
 
 @media only screen and (min-width: 960px) and (max-width: 1024px){
