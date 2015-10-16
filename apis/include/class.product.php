@@ -723,22 +723,7 @@
                 
                 if($row && !empty($row['product_id'])) 
                 {
-                    $reslt['product_id'] = $row['product_id'];
-                    $reslt['product_barcode'] = $row['barcode'];
-                    $reslt['product_lotref'] = $row['lotref'];
-                    $reslt['product_lotno'] = $row['lotno'];
-                    $reslt['product_name'] = $row['product_name'];
-                    $reslt['product_display_name'] = $row['product_display_name'];
-                    $reslt['product_model'] = $row['product_model'];
-                    $reslt['product_brand'] = $row['product_brand'];
-                    $reslt['product_price'] = $row['prd_price'];
-                    $reslt['product_currency'] = $row['product_currency'];
-                    $reslt['product_warranty'] = $row['product_warranty'];
-                    $reslt['product_description'] = $row['product_desc'];
-                    $reslt['product_image'] = $row['prd_img'];
-                    
                     $pid = $row['product_id'];
-                    
                     
                     $reslt[$pid]['product_barcode'] = $row['barcode'];
                     $reslt[$pid]['product_lotref'] = $row['lotref'];
@@ -752,12 +737,11 @@
                     $reslt[$pid]['product_warranty'] = $row['product_warranty'];
                     $reslt[$pid]['product_description'] = $row['product_desc'];
                     $reslt[$pid]['product_image'] = $row['prd_img'];
-                    
+
                     $reslt[$pid]['category_name'] =$reslt1['category_name'];
-                    
+
                     $reslt[$pid]['attr_details'] =$details;
-                    
-                    
+
                     $reslt[$pid]['vendor_product_details']=$vpdetls;
                     
                     $reslt[$pid]['vendor_details']=$vdetls;
