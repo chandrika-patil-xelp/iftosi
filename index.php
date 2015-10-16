@@ -19,6 +19,14 @@
 					echo $res;
 				break;
 				
+				case 'vendor':
+					$pid = $_GET['productid'];
+					$url = APIDOMAIN."index.php?action=getPrdById&prdid=".$pid;
+					$res = $comm->executeCurl($url);
+					$res['results'] = $res['results'][$pid];
+					echo json_encode($res);
+				break;
+				
 				case 'filter':
 					$pgno 	= 1;
 					$catid 	= $_GET['catid'];
@@ -85,7 +93,7 @@
 					$pid 	= $_GET['productid'];
 					$url 	= APIDOMAIN.'index.php?action=getPrdById&prdid='.$pid;
 					$res 	= $comm->executeCurl($url);
-					$data 	= $res['results'];
+					$data 	= $res['results'][$pid];
 					include 'template/diamond_details.html';
 				break;
 				case 'bullion_details':

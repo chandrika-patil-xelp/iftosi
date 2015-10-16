@@ -9,10 +9,12 @@
         <link rel="stylesheet" href="<?= $css['home']; ?>">
         <link rel="stylesheet" href="<?= $css['ripple']; ?>">
         <script type="text/javascript" src="<?= $jvs['jqry']; ?>"></script>
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
         <script>
             var pageName = '<?php echo $page;?>';
             var DOMAIN = '<?php echo DOMAIN;?>';
             var totalCnt = '<?php echo $total;?>';
+            var pid = '<?php echo $pid;?>';
         </script>
         <?php
         if ($page == 'diamonds' || $page == 'jewellery') {
