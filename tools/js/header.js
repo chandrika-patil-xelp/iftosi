@@ -215,8 +215,8 @@ $(document).ready(function(){
         $(this).removeClass('jwActive');
         $('#jwMenu').addClass('upTransit');
          setTimeout(function(){
-            $('#jwMenu').addClass('dn upTransit');
-        },1);
+            $('#jwMenu').addClass('dn');
+        },200);
     });
     
 });

@@ -44,6 +44,9 @@ body{padding: 0;margin: 0;}
 a{text-decoration: none;}
 .poR{position: relative}
 .bNone{border:none!important;}
+
+.bgWhite{background: #fff;}
+
 /*Paddings*/
 .pL25px{padding-left: 25px!important;}
 
@@ -82,27 +85,8 @@ a{text-decoration: none;}
 
 .loggedIn{margin-right: 0!important;}
 .header ul {width: 120px!important;left: -100px!important;}
-.upperMenu {
-    width: 100%;
-    height: auto;
-    background: #171334;
-    position: fixed;
-    top: 100px;
-    z-index: 15;
-    left: 0;
-    right: 0;
-    margin: auto;
-    padding: 0 20px 40px 20px;
-    overflow: hidden;
-    margin-left: 0;
-}
-
-.upTransit{
-    transform: translateY(-200px);
-    opacity: 0;
-    z-index: -1;
-
-}
+.upperMenu {width: 100%;height: auto;background: #171334;position: fixed;top: 100px;z-index: 0;left: 0;right: 0;margin: auto;padding: 0 20px 40px 20px;overflow: hidden;margin-left: 0;}
+.upTransit{-webkit-transform: translateY(50px);-moz-transform: translateY(50px);-ms-transform: translateY(50px);transform: translateY(50px);opacity: 0;}
 
 .forJwMenu{width:100%;height: auto;display: none;}
 .forDiamond {width:100%;height: auto;display: none;}
@@ -120,7 +104,7 @@ a{text-decoration: none;}
 .headCat.bgJewellery:hover.bgJewellery{background-size: auto 150%;background-position: center;}*/
 
 .jwActive{}
-.jwActive.bgJewellery{background-size: auto 150%!important;background-position: center!important;}
+.jwActive.bgJewellery{background-position:8px 15px!important;}
 
 .jwActive.bgJewellery span{transform: translateY(100px);color:#171334;opacity:0}
 .mTransit{transform: translateY(-400px);opacity: 0}
