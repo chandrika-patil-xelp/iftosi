@@ -150,14 +150,13 @@ $(document).ready(function(){
             $('.headCatCont').velocity({top:"-40px"},{duration:0, delay:0,easing:'swing'});
             $('.headRight').velocity({paddingTop:12+"px",paddingBottom:12+"px"},{duration:0, delay:0,easing:'swing'});
             $('#hbgDiam,#hbgJewel,#hbgBull').velocity({backgroundPositionX:8 + "px",backgroundPositionY:-100 + "px"},{duration:0, delay:0});
-            
+            $('#logoTxt').css({color:'#fff'});
             $('#logoTxt').velocity({left:20+"px",bottom:20+"px"},{duration:0, delay:200});
             $('.logo').velocity({top:20+"px",height:60+"px",width:150+"px",backgroundPositionX:15 + "px"},{duration:0, delay:100});
         }else if(lastSc>sc){
             $('.logo').velocity({top: 30 + "px", height: 100 + "px", width: 100 + "px", backgroundPositionX: '50%'}, {duration: 0, delay: 0});
             $('#logoTxt').velocity({left:0+"px",bottom:-30+"px"},{duration:300, delay:0});
-            
-            
+            $('#logoTxt').css({color:'#4d4d4d'});            
             $('#header').velocity({height: "100px"},{duration:0, delay:0,easing:'swing'});
             $('.headCatCont').velocity({top:"0px"},{duration:0, delay:0,easing:'swing'});
             $('.headRight').velocity({paddingTop:32+"px",paddingBottom:32+"px"},{duration:0, delay:0,easing:'swing'});

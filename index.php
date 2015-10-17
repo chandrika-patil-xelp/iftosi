@@ -116,6 +116,16 @@
 					$page='bullion-Form';
 					include 'template/bullionForm.html';
 				break;
+                                
+                                case 'vendor_Form':
+					$page='vendor-Form';
+					include 'template/vendorDetails.html';
+				break;
+                            
+                                case 'vcontact_Form':
+					$page='vcontact-Form';
+					include 'template/vcontactDetails.html';
+				break;
 				
 				default:
 					$page='index';

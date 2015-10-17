@@ -1,0 +1,258 @@
+<?php include 'backHead.html' ?>
+<body>
+    <div class="container">
+        <?php include 'backheader.html'; ?>
+        <div class="wrapper">
+            <div class="wrapperMax vMax">
+                <div class="formContainer fmOpenR vendorDetails">
+                    <div id="stepsDiv" class="fmRoboto uppercase ">
+                        <div id="step1" class="font14 c666 stTextComm fLeft" onclick="common.changeTab(this)"><span class="stepNo">1</span>Business Details </div>
+                        <div id="step2" class="font14 c666 stTextComm fLeft op04" onclick="common.changeTab(this)"><span class="stepNo">2</span>Type Details</div>
+                        <div id="step3" class="font14 c666 stTextComm fLeft op04" onclick="common.changeTab(this)"><span class="stepNo">3</span>Contact Details</div>
+                        <div class="dStepCon fLeft"><div id="disStep" class="disStepComm transition300"></div></div>
+                    </div>
+                    <div id='tabData1' class="tabData fLeft">
+                        <div class="divCon  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Organization Name</div>
+                            <input name="" type="text" placeholder=" eg. White Fire Jewels" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="divCon fLeft c666">
+                            <div class="titleDiv txtCap fLeft"> Address-1 *</div>
+                            <input type="text" id="add1" name="add1" placeholder=" Address-1  " class="txtInput c666 fLeft fmRoboto font14">
+                        </div>
+                        <div class="divCon fLeft c666">
+                            <div class="titleDiv txtCap fLeft"> Address-2&nbsp;</div>
+                            <input type="text" id="add2" name="add2" placeholder="Address-2 " class="txtInput c666 fLeft fmRoboto font14">
+                        </div>
+                        <div class="divCon2 fLeft c666">
+                            <div class="titleDiv txtCap fLeft"> Pin Code *</div>
+                            <input type="text" id="pincode" name="pincode" maxlength="6"  placeholder="Pin Code" class="txtInput c666 fLeft fmRoboto font14">
+                        </div>
+                        <div class="divCon2 fRight c666">
+                            <div class="titleDiv txtCap fLeft"> Area *</div>
+                            <input type="text" id="area" name="area" onkeypress="return common.onlyAlphabets(event)" placeholder=" Area" class="txtInput c666 fLeft fmRoboto font14">
+                        </div>
+                        <div class="divCon2 fLeft c666">
+                            <div class="titleDiv txtCap fLeft"> City *</div>
+                            <input type="text" id="city" name="city" onkeypress="return common.onlyAlphabets(event)" placeholder=" City" class="txtInput c666 fLeft fmRoboto font14">
+                        </div>
+                        <div class="divCon2 fRight c666">
+                            <div class="titleDiv txtCap fLeft"> State *</div>
+                            <input type="text" id="state" name="state" placeholder=" State  " class="txtInput c666 fLeft fmRoboto font14 " autocomplete="off">
+                        </div>
+                        <div class="divCon2 fLeft">
+                            <div  class="titleDiv txtCap fLeft">VAT Number</div>
+                            <input name="" type="text" placeholder=" eg.  12345678901" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="divCon2  fRight">
+                            <div  class="titleDiv txtCap fLeft">PAN Card Number</div>
+                            <input name="" type="text" placeholder=" eg.  ALXPK2999K" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="divCon2  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Turnover</div>
+                            <input name="" type="text" placeholder=" eg.  100 CRORES" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="divCon2  fRight">
+                            <div  class="titleDiv txtCap fLeft">Website</div>
+                            <input name="" type="text" placeholder=" eg.  www.whitefirejewels.in" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="divCon  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Bankers</div>
+                            <input name="" type="text" placeholder=" eg.  INDUS IND BANK, KOTAK BANK, STATE BANK OF INDIA" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+
+                        <div class="formTitle fLeft fmOpenL">Select your business type</div>
+                        <div class="comparisonDiv fLeft">
+                            <div id='forDiamond' class="compComm fLeft">
+                                <div class="compTitle fLeft fmOpenR">Diamond</div>
+                                <div class="compPrice fLeft fmOpenR">
+                                    <span>&#8377;</span>1,055.34 / yr
+                                </div>
+                                Some text goes here
+                            </div>
+                            <div id='forJewellery' class="compComm fLeft">
+                                <div class="compTitle fLeft fmOpenR">Jewellery</div>
+                                <div class="compPrice fLeft fmOpenR">
+                                    <span>&#8377;</span>1,055.34 / yr
+                                </div>
+                                Some text goes here
+                            </div>
+                            <div id='forBullion' class="compComm fLeft">
+                                <div class="compTitle fLeft fmOpenR">Bullion</div>
+                                <div class="compPrice fLeft fmOpenR">
+                                    <span>&#8377;</span>1,055.34 / yr
+                                </div>
+                                Some text goes here
+                            </div>
+                        </div>
+                        <div class="btnCont fLeft">
+                            <center>
+                                <div class="cancelBtn fmOpenR ripplelink poR">CANCEL</div>
+                                <div class="submitBtn fmOpenR ripplelink poR">SUBMIT</div>
+                            </center>
+                        </div>
+                    </div>
+                    <div id='tabData2' class="tabData fLeft dn">
+                        <div id='diamondDet' class='detailsComm dn1 fLeft'>
+                            <div class="formTitle fLeft fmOpenL">Diamond</div>
+                            <div class="divCon  fLeft">
+                                <div  class="titleDiv txtCap fLeft">GJEPC Membership Certificate</div>
+                                <input name="" type="text" placeholder=" eg. GJEPC/HO-MUM(M)/G25885/AM/I" class="txtInput fLeft fmOpenR font14 c666">
+                            </div>
+                            <div class="divCon  fLeft">
+                                <div  class="titleDiv txtCap fLeft">Bharat Diamond Bourse Certificate</div>
+                                <input name="" type="text" placeholder=" eg.  M-12345" class="txtInput fLeft fmOpenR font14 c666">
+                            </div>
+
+                            <div class="divCon  fLeft">
+                                <div  class="titleDiv txtCap fLeft">Details Of Membership Of Other Diamond Bourse Around The World</div>
+                                <input name="" type="text" placeholder=" eg.  RUSSIA, LONDON, HONGKONG" class="txtInput fLeft fmOpenR font14 c666">
+                            </div>
+                            <div class="divCon  fLeft">
+                                <div  class="titleDiv txtCap fLeft">Offices In other Cities</div>
+                                <input name="" type="text" placeholder=" eg.  MUMBAI, KOLKATA, NEW DELHI, CHENNAI, BANGALORE" class="txtInput fLeft fmOpenR font14 c666">
+                            </div>
+                            <div class="divCon  fLeft">
+                                <div  class="titleDiv txtCap fLeft">Offices In other Countries</div>
+                                <input name="" type="text" placeholder=" eg.  HONG KONG, ANTWERP, TOKYO, NEW YORK, TEL AVIV" class="txtInput fLeft fmOpenR font14 c666">
+                            </div>
+                        </div>
+                        <div id='jewelleryDet' class='detailsComm dn1 fLeft'>
+                            <div class="formTitle fLeft fmOpenL">Jewellery</div>
+                            <div class="divCon  fLeft">
+                                <div  class="titleDiv txtCap fLeft">Name Of Showroom</div>
+                                <input name="showroomname" type="text" placeholder=" eg. White Fire Jewels" class="txtInput fLeft fmOpenR font14 c666">
+                            </div>
+                            <div class="divCon  fLeft">
+                                <div  class="titleDiv txtCap fLeft">Number of Showrooms In India</div>
+                                <input name="showroomno" type="text" placeholder=" eg. 20" class="txtInput fLeft fmOpenR font14 c666">
+                            </div>  
+                            <div class="divCon  fLeft">
+                                <div  class="titleDiv txtCap fLeft">Membership Of Council / Jewellers Association</div>
+                                <input name="associationMmembership" type="text" placeholder=" eg. GGT" class="txtInput fLeft fmOpenR font14 c666">
+                            </div> 
+                        </div>
+
+                        <div id='bullionDet' class='detailsComm dn1 fLeft'>
+                            <div class="formTitle fLeft fmOpenL">Bullion</div>
+                            <div class="divCon  fLeft">
+                                <div  class="titleDiv txtCap fLeft">Membership Of Council / Jewellers Association</div>
+                                <input name="associationMmembership" type="text" placeholder=" eg. GGT" class="txtInput fLeft fmOpenR font14 c666">
+                            </div>  
+                        </div>  
+                    </div>
+                    <div id='tabData3' class="tabData fLeft dn">
+                        <div class="formContainer fmOpenR vendorDetails">
+                            <div class="formTitle fLeft fmOpenL">Vendor Contact Details Form</div>
+                            <div class="divCon2 fLeft c666">
+                                <div class="titleDiv fmRoboto fLeft font14">Contact Person Name *</div>
+                                <input type="text" id="conName" name="conName" onkeypress="return common.onlyAlphabets(event)" placeholder=" Contact Person Name  " class="txtInput c666 fLeft fmRoboto font14">
+                            </div>
+                            <div class="divCon2 fRight c666">
+                                <div class="titleDiv fmRoboto fLeft font14">Position *</div>
+                                <input type="text" id="position" name="position" placeholder=" Director  " class="txtInput c666 fLeft fmRoboto font14">
+                            </div>
+
+                            <div class="divCon2 fLeft c666 foraltMb">
+                                <div class="titleDiv fmRoboto fLeft font14">Contact Mobile *</div>
+                                <div class="fLeft falmb">
+                                    <input type="text" name="conMobile" id="conMobile" maxlength="10" onkeypress="return common.isNumberKey(event)" placeholder=" Mobile Number  " class="txtInput c666 fLeft fmRoboto font14">
+                                    <div class="fRight addBtn pointer" onclick="common.addMobileNumber(this)"></div>
+                                </div>
+                            </div>
+                            <div class="divCon2 fRight c666">
+                                <div class="titleDiv fmRoboto fLeft font14">Email *</div>
+                                <input type="text" id="email" name="email" placeholder=" Email  " class="txtInput c666 fLeft fmRoboto font14">
+                            </div>
+                            <div id="altmbNo1" class="divCon2 fLeft c666 foraltMb dn mR50">
+                                <div class="titleDiv fmRoboto fLeft font14">Alternate Mobile *</div>
+                                <div class="fLeft falmb">
+                                    <input type="text" name="conMobile" id="altmbNo1_Mobile" maxlength="10" onkeypress="return common.isNumberKey(event)" placeholder=" Mobile Number  " class="txtInput c666 fLeft fmRoboto font14">
+                                    <div class="fRight delBtn pointer" onclick="common.delmbNumber('altmbNo1')"></div>
+                                </div>
+                            </div>
+                            <div id="altmbNo2" class="divCon2 fLeft c666 foraltMb dn mR50">
+                                <div class="titleDiv fmRoboto fLeft font14">Alternate Mobile *</div>
+                                <div class="fLeft falmb">
+                                    <input type="text" name="conMobile" id="altmbNo2_Mobile" maxlength="10" onkeypress="return common.isNumberKey(event)" placeholder=" Mobile Number  " class="txtInput c666 fLeft fmRoboto font14">
+                                    <div class="fRight delBtn pointer" onclick="common.delmbNumber('altmbNo2')"></div>
+                                </div>
+                            </div>
+                            <div class="divCon fLeft c666">
+                                <div class="titleDiv fmRoboto fLeft font14">Landline Number</div>
+                                <div class="mobileCont fLeft">
+                                    <input type="text" id="lnCode" class="fLeft txtCCode" placeholder=" Code" maxlength="5">
+                                    <input type="text" id="landline" onkeypress="return common.isNumberKey(event)" maxlength="8" placeholder=" Contact No. " class="txtInput c666 fLeft fmRoboto font14 lnNo">
+                                    <div class="fRight addBtn pointer" onclick="common.addNumber(this)"></div>
+                                </div>
+                            </div>
+                            <div id="altNo1" class="divCon fLeft c666 dn">
+                                <div class="titleDiv fmRoboto fLeft font14">Alternate Number</div>
+                                <div class="mobileCont fLeft">
+                                    <input type="text" id="lnCode1" class="fLeft txtCCode" placeholder=" Code" maxlength="5">
+                                    <input type="text" id="landline1" onkeypress="return common.isNumberKey(event)" maxlength="8" placeholder=" Contact No. " class="txtInput c666 fLeft fmRoboto font14 lnNo">
+                                    <div class="fRight delBtn pointer" onclick="common.delNumber('altNo1')"></div>
+                                </div>
+                            </div>
+                            <div id="altNo2" class="divCon fLeft c666 dn">
+                                <div class="titleDiv fmRoboto fLeft font14">Alternate Number</div>
+                                <div class="mobileCont fLeft">
+                                    <input type="text" id="lnCode2" class="fLeft txtCCode" placeholder=" Code" maxlength="5">
+                                    <input type="text" id="landline2" onkeypress="return common.isNumberKey(event)" maxlength="8" placeholder=" Contact No. " class="txtInput c666 fLeft fmRoboto font14 lnNo">
+                                    <div class="fRight delBtn pointer" onclick="common.delNumber('altNo2')"></div>
+                                </div>
+                            </div>
+                            <div id="altNo3" class="divCon fLeft c666 dn">
+                                <div class="titleDiv fmRoboto fLeft font14">Alternate Number</div>
+                                <div class="mobileCont fLeft">
+                                    <input type="text" id="lnCode3" class="fLeft txtCCode" placeholder=" Code" maxlength="5">
+                                    <input type="text" id="landline3" onkeypress="return common.isNumberKey(event)" maxlength="8" placeholder=" Contact No. " class="txtInput c666 fLeft fmRoboto font14 lnNo">
+                                    <div class="fRight delBtn pointer" onclick="common.delNumber('altNo3')"></div>
+                                </div>
+                            </div>
+                            <div class="btnCont fLeft">
+                                <center>
+                                    <div class="cancelBtn fmOpenR ripplelink poR">CANCEL</div>
+                                    <div class="submitBtn fmOpenR ripplelink poR">SUBMIT</div>
+                                </center>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        $(document).ready(function() {
+            $('.compComm').bind('click', function(e) {
+
+                var x = (document.all) ? event.x : e.pageX;
+                var y = (document.all) ? event.y : e.pageY;
+
+                console.log(x + " " + y);
+
+                setTimeout(function() {
+                    x = e.pageX = e.pageX + 100;
+                    y = e.pageY = e.pageY + 100;
+                    console.log(x + " " + y);
+                }, 1000);
+
+                $(this).toggleClass('comSelected');
+                var id = $(this).attr('id');
+                if (id == 'forDiamond') {
+                    $('#diamondDet').toggleClass('dn');
+                }
+                else if (id == 'forJewellery') {
+                    $('#jewelleryDet').toggleClass('dn');
+                }
+                else if (id == 'forBullion') {
+                    $('#bullionDet').toggleClass('dn');
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
