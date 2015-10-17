@@ -51,7 +51,7 @@ a{text-decoration: none;}
 .poR{position: relative}
 .bNone{border:none!important;}
 .txtCap {text-transform: capitalize;}
-.container{width:100%;height:auto;background: #fff;padding-bottom: 00px;padding-top:50px;}
+.container{width:100%;height:auto;background: #fff;padding-bottom: 00px;padding-top:20px;}
 .wrapper{width:100%;height:auto;}
 .wrapperMax{width:100%;max-width: 1200px;height:100%;margin: auto;}
 .formContainer{width:100%;height: auto;padding:0px;display: inline-block;}
@@ -60,6 +60,9 @@ a{text-decoration: none;}
 /*Contents*/
 .header {width: 100%;height: 50px;background: #8A0044;line-height: 70px;position: fixed;top: 0;z-index: 99;padding: 10px 0;}
 .header .wrapperMax{}
+.backLogo{width:100px;height: 100px;background: #8A0044 url(../img/common/logo.svg)no-repeat;background-size: auto 60%;background-position: center;border-radius:5px;font-size: 30px;color: #fff;line-height: 60px;position: relative;margin-bottom: 60px;}
+
+.backLogo div{width:100%;height: 30px;bottom:-30px;position: absolute;color: #4d4d4d;text-align: center;}
 
 .compNo {width: auto;height: 36px;line-height: 36px;background: #8A0044;color: #fff;padding: 0 15px;border-radius: 5px;}
 .signInUpTab {width: auto;height: 36px;line-height: 36px;padding-left: 25px;margin: 0 20px 0 15px;background: url(../img/common/lock.svg)no-repeat;background-position: left 3px;background-size: auto 100%;cursor: pointer;}
@@ -293,5 +296,5 @@ a{text-decoration: none;}
 .stepNo {width: 35px;height: 35px;border-radius: 50%;display: inline-block;line-height: 35px;background: #8A0044;color: #fff;margin-right: 5px;}
 .op04 {opacity: 0.4;cursor: not-allowed !important;}
 .dStepCon {width: 100%;height: 15px;margin: 10px 0 20px 0;background: #ebebde;border-radius: 11px;overflow: hidden;}
-.disStepComm {width: 33%;background: #8A0044 url(../img/common/progress.png)repeat-x;background-size: auto 100%;height: 100%;}
+.disStepComm {width: 33%;background:  url(../img/common/back_repeat.jpg)repeat-y;background-size: 100% auto;height: 100%;}
 .tabData{width:100%;height: auto;}
