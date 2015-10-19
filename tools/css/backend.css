@@ -51,7 +51,7 @@ a{text-decoration: none;}
 .poR{position: relative}
 .bNone{border:none!important;}
 .txtCap {text-transform: capitalize;}
-.container{width:100%;height:auto;background: #fff;padding-bottom: 00px;padding-top:20px;}
+.container{width:100%;height:auto;background: #fff;padding-bottom: 00px;padding-top:20px;display: inline-block}
 .wrapper{width:100%;height:auto;}
 .wrapperMax{width:100%;max-width: 1200px;height:100%;margin: auto;}
 .formContainer{width:100%;height: auto;padding:0px;display: inline-block;}
@@ -298,3 +298,48 @@ a{text-decoration: none;}
 .dStepCon {width: 100%;height: 15px;margin: 10px 0 20px 0;background: #ebebde;border-radius: 11px;overflow: hidden;}
 .disStepComm {width: 33%;background:  url(../img/common/back_repeat.jpg)repeat-y;background-size: 100% auto;height: 100%;}
 .tabData{width:100%;height: auto;}
+
+
+/*Vendor Products*/
+.vProducts{}
+.vProducts .wrapperMax{max-width: 1200px;}
+.prdResults {width: 100%;height: 100%;background: #fff;padding-bottom: 100px;}
+
+.prdListHeader{width:100%;height: 45px;background: #ebebde;border:1px solid #d4d4c8;}
+.prdListHeader div{border-right:1px solid #d4d4c8;height: 100%;line-height: 43px;padding: 0 15px;font-size: 13px;}
+
+
+.sno{width:6%;}
+.barcode{width:12%;}
+.shape{width:10%;} 
+.color {width:6%;}
+.carats{width:8%;}
+.clarity{width:6%;}
+.cert{width:12%;}
+.price {width:13%;}
+.acct{width:27%;border-right: none!important;text-align: center;}
+
+
+.degno{width:10%;}
+.metal{width:7%;}
+.catg {width:10%;}
+.subType {width:15%;}
+
+
+.btype{width:11%;}
+.purity{width:11%;}
+.weight{width:12%;}
+
+
+.oYh{overflow: hidden;}
+
+.prdul{width:100%;height: auto;margin: 0;padding: 0;list-style: none;}
+.prdul li{width:100%;height: 50px;line-height: 50px;float:left;color:#666;font-size: 14px;border: 1px solid #d4d4c8;border-top:none;}
+.prdul li div{padding: 0 15px;border-right:1px solid #d4d4c8;height: 50px;}
+.deltBtn {vertical-align:top;display: inline-block;width: 36px;height: 36px!important;line-height: 40px;color: #fff;background: url(../img/common/delete.svg)no-repeat;background-size: auto 80%;background-position: center;padding: 0!important;margin: 7px;cursor: pointer;border:none!important;}
+.editBtn {vertical-align:top;display: inline-block;width: 36px;height: 36px!important;line-height: 40px;color: #fff;background: url(../img/common/edit.svg)no-repeat;background-size: auto 80%;background-position: center;padding: 0!important;margin: 7px;cursor: pointer;border:none!important;}
+.soldBtn {vertical-align: top;display: inline-block;width: auto;height: 36px!important;line-height: 40px;color: #fff;background: #8A0044 url(../img/common/sold.svg)no-repeat;background-size: auto 80%;background-position: 5px bottom;padding: 0!important;margin: 7px;cursor: pointer;border: none!important;font-size: 14px;padding: 0 30px 0 40px!important;border-radius: 5px;}
+
+
+.prdSearchDiv{width:100%;height: 45px;background: #fff;padding:5px 0px}
+.prdSeachTxt{width:200px;height: 35px;border:1px solid #d4d4c8;outline: none;outline-style: none;padding: 0 15px;border-radius: 5px;}

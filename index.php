@@ -148,6 +148,18 @@
 					$page='vcontact-Form';
 					include 'template/vcontactDetails.html';
 				break;
+                                case 'vProduct_diamonds':
+					$page='Products-Diamond';
+					include 'template/vProducts_Diamond.html';
+				break;
+                                case 'vProduct_jewellery':
+					$page='Products-Jewellery';
+					include 'template/vProducts_jewellery.html';
+				break;
+                                case 'vProduct_bullion':
+					$page='Products-Bullion';
+					include 'template/vProducts_bullion.html';
+				break;
 				
 				default:
 					$page='index';

@@ -1,0 +1,44 @@
+<?php include 'backHead.html' ?>
+<body class="">
+    <div class="container vProducts">
+        <center><div class="backLogo fmOpenR"><div><b>IF</b>to<b>SI</b></div></div></center>
+        <div class="wrapper">
+            <div class="wrapperMax">
+                <div class="formTitle fLeft fmOpenL dn">Your listed diamond products</div>
+                <div class="prdResults fRight">
+                    <div class="prdListHeader fLeft fmOpenR">
+                        <div class="sno fLeft">Sr No.</div>
+                        <div class="barcode fLeft">Barcode</div>
+                        <div class="degno fLeft">Design No.</div>
+                        <div class="metal fLeft">Metal</div>
+                        <div class="catg fLeft">Category</div>
+                        <div class="subType fLeft">Sub Category</div>
+                        <div class="price fLeft">Price</div>
+                        <div class="acct fLeft">Action</div>
+                    </div>
+                    <ul class='prdul fLeft fmOpenR'>
+                        <?php for($i=1;$i<15;$i++){ ?>
+                            <li>
+                                <div class="sno fLeft"><?php echo $i?></div>
+                                <div class="barcode fLeft">CW0H8IE9</div>
+                                <div class="degno fLeft">RG-212<?php echo $i?></div>
+                                <div class="metal fLeft">Gold</div>
+                                <div class="catg fLeft">Rings</div>
+                                <div class="subType fLeft">Office Wear Earrings</div>
+                                <div class="price fLeft">&#8377;1,000,000,000</div>
+                                <div class="acct fLeft">
+                                    <center>
+                                        <div class="deltBtn poR ripplelink"></div>
+                                        <div class="editBtn poR ripplelink"></div>
+                                        <div class="soldBtn poR ripplelink fmOpenR">SOLD</div>
+                                    </center>
+                                </div>
+                            </li>
+                        <?php }?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
