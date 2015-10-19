@@ -26,7 +26,7 @@
 						{
 							$exp = explode('/',$val['cat_name']);
 							$scat = trim($exp[0]);
-							$html .= '<div id="'.$scat.'" class="jshapeComm transition300 ripplelink '.$scat.'">'.$val['cat_name'].'</div>';
+							$html .= '<div id="'.$val['catid'].'_'.$scat.'" class="jshapeComm transition300 ripplelink '.$scat.'">'.$val['cat_name'].'</div>';
 						}
 						echo $html;
 						?>

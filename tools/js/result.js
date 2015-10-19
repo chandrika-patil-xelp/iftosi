@@ -59,18 +59,12 @@ $(document).ready(function() {
     });
 
     $('.jshapeComm').bind('click', function() {
-        $('body').animate({scrollTop: 280}, 300);
-            var id=$(this).attr('id');
-            $(this).toggleClass('shapeSelected');
-                    id=id.toLowerCase()+"Li";
-                    $('#'+id+' a').click();
-
-            if(addedFilters.indexOf(id)==-1){
-                //addFiltters(id);
-            }else{
-                //removeFilters(id+"_Filters");
-                addedFilters.pop(id);
-            }
+        $(this).toggleClass('shapeSelected');
+		var cnt = getRandomInt(-500,500);
+        totalCnt = (totalCnt*1)+cnt;
+		var idsp = $(this).attr('id').split('_');
+		$('#'+idsp[0]+' a').click();
+		FR();
     });
 
     $('#resultCount').numerator({
@@ -352,8 +346,10 @@ function number_format (number, decimals, dec_point, thousands_sep) {
 function FR(sortby) {
 	
 	var slistarr = new Array();
+	var jlistarr = new Array();
 	var clistarr = new Array();
 	var tlistarr = new Array();
+	var ilistarr = new Array();
 	
 	var catid = $("#catid").val();
 	
@@ -366,22 +362,53 @@ function FR(sortby) {
 	});
 	var slist = slistarr.join('|@|');
 	
+	var i = 0;
+	$('.jshapeComm').each(function() {
+		if($(this).hasClass('shapeSelected')) {
+			jlistarr[i] = $(this).attr('id');
+			i++;
+		}
+	});
+	var jlist = jlistarr.join('|@|');
+	
+	var idlist = '';
+	
 	var j=0;
+	var k = 0;
 	$('.filterCont').each(function() {
 		var tempclistarr = new Array();
+		var tempilistarr = new Array();
 		var i = 0;
+		
 		var id = $(this).find('input:checked').parent().parent().attr('id');
-		$(this).find('input:checked').each(function() {
-			tempclistarr[i] = $(this).attr('id');
-			i++;
-		});
+		if(typeof id === 'undefined')
+		{
+			$(this).find('input:checked').each(function() {
+				tempilistarr[k] = $(this).attr('id');
+				k++;
+			});
+		}
+		else
+		{
+			$(this).find('input:checked').each(function() {
+				tempclistarr[i] = $(this).attr('id');
+				i++;
+			});
+		}
 		if(tempclistarr.length)
 		{
 			clistarr[j] = id+'|~|'+tempclistarr.join('|@|');
 			j++;
 		}
+		if(tempilistarr.length)
+		{
+			ilistarr[j] = tempilistarr.join('|@|');
+			j++;
+		}
+		
 	});
 	var clist = clistarr.join('|$|');
+	var ilist = ilistarr.join('|$|');
 	
 	var i = 0;
 	$('.filterCont .rangeCont :input[type=text]').each(function() {
@@ -395,7 +422,7 @@ function FR(sortby) {
 	
 	if(sortby)
 	{
-		var params = 'action=ajx&case=filter&catid='+catid+'&sortby='+sortby+'&slist='+slist+'&clist='+clist+'&tlist='+tlist;
+		var params = 'action=ajx&case=filter&catid='+catid+'&sortby='+sortby+'&slist='+slist+'&clist='+clist+'&tlist='+tlist+'&ilist='+ilist+'&jlist='+jlist;
 		var URL = DOMAIN + "index.php";
 		$.getJSON(URL, params, function(data) {
 			getResultsData(data,sortby);   
@@ -404,7 +431,7 @@ function FR(sortby) {
 	else
 	{
 		$('#drpinp').text('Best Match');
-		var params = 'action=ajx&case=filter&catid='+catid+'&slist='+slist+'&clist='+clist+'&tlist='+tlist;
+		var params = 'action=ajx&case=filter&catid='+catid+'&slist='+slist+'&clist='+clist+'&tlist='+tlist+'&ilist='+ilist+'&jlist='+jlist;
 		var URL = DOMAIN + "index.php";
 		$.getJSON(URL, params, function(data) {
 			getResultsData(data);

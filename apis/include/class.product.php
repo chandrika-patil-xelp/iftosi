@@ -363,16 +363,39 @@
         
         public function getPrdByCatid($params)
         {
-            
+			
 			$page   = ($params['page'] ? $params['page'] : 1);
 			$limit  = ($params['limit'] ? $params['limit'] : 15);
+			
+			if(!empty($params['jlist']))
+			{
+				$expd = explode('|@|',$params['jlist']);
+				foreach($expd as $key => $val)
+				{
+					$exd = explode('_',$val);
+					$ids[] = $exd[0];
+				}
+				$ilist = implode(',',$ids);
+				$where = " WHERE category_id in (".$ilist.") ";
+			}
+			else if(!empty($params['ilist']))
+			{
+				$ilist = str_replace('|@|',',',$params['ilist']);
+				$where = " WHERE category_id in (".$ilist.") ";
+			}
+			else
+			{
+				$where = " WHERE category_id in (".$params['catid'].") ";
+			}
 			
 			$sql = "SELECT 
 						count(1) as cnt 
 					FROM 
-						tbl_product_category_mapping 
-					WHERE 
-						category_id=".$params['catid'];
+						tbl_product_category_mapping
+					".$where."
+					";
+			
+			
 			$res = $this->query($sql);
 			if($res)
 			{
@@ -385,8 +408,8 @@
 						price						
 					FROM 
 						tbl_product_category_mapping 
-					WHERE 
-						category_id=".$params['catid'];
+					".$where."
+					";
 			
 			switch($params['sortby'])
 			{

@@ -34,7 +34,9 @@
 					$slist	= $_GET['slist'];
 					$clist	= $_GET['clist'];
 					$tlist	= $_GET['tlist'];
-					$url 	= APIDOMAIN.'index.php?action=getPrdByCatid&catid='.$catid.'&page='.$pgno.'&sortby='.$sortby.'&slist='.urlencode($slist).'&clist='.urlencode($clist).'&tlist='.urlencode($tlist);
+					$ilist	= $_GET['ilist'];
+					$jlist	= $_GET['jlist'];
+					$url 	= APIDOMAIN.'index.php?action=getPrdByCatid&catid='.$catid.'&page='.$pgno.'&sortby='.$sortby.'&slist='.urlencode($slist).'&clist='.urlencode($clist).'&tlist='.urlencode($tlist).'&ilist='.urlencode($ilist).'&jlist='.urlencode($jlist);
 					$res 	= $comm->executeCurl($url,1);
 					echo $res;
 				break;

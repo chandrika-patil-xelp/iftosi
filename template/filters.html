@@ -33,249 +33,39 @@
     </div>
 
     <?php if ($page == 'jewellery') { ?>
-        <div class="filterCont fLeft">
+        <div class="filterCont fLeft" id="idlist">
             <div class="fLeft optionTitle fmOpenR">Category</div>
             <div id="wrapper" class="fLeft">
                 <div class="tree transition300">
                     <ul>
-                        <li><a>Jewellery</a>
+                        <li><a><?php echo $showcat['cat_name'];?></a>
                             <ul>
-                                <li id='ringsLi'><a>Rings</a>
+								<?php
+								foreach($showcat['subcat'] as $ky => $vl)
+								{
+								?>
+                                <li id='<?php echo $vl['catid'];?>'><a><?php echo $vl['cat_name'];?></a>
                                     <ul>
+										<?php
+										foreach($vl['subcat'] as $k => $v)
+										{
+										?>
                                         <li>
                                             <a>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="Office_Wear_Rings"/>
-                                                    <label for="Office_Wear_Rings">Office Wear Rings</label>
+                                                    <input type="checkbox" class="filled-in" id="<?php echo $v['catid'];?>"/>
+                                                    <label for="<?php echo $v['catid'];?>"><?php echo $v['cat_name'];?></label>
                                                 </div>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="Daily_Wear_Rings"/>
-                                                    <label for="Daily_Wear_Rings">Daily Wear Rings</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="Party_Wear_Rings"/>
-                                                    <label for="Party_Wear_Rings">Party Wear Rings</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="Band_Rings"/>
-                                                    <label for="Band_Rings">Band Rings</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="Only_Diamonds_Rings"/>
-                                                    <label for="Only_Diamonds_Rings">Only Diamonds Rings</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="Cocktails_Rings"/>
-                                                    <label for="Cocktails_Rings">Cocktails Rings</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="White_Gold_Rings"/>
-                                                    <label for="White_Gold_Rings">White Gold Rings</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="Men_Rings"/>
-                                                    <label for="Men_Rings">Men's Rings</label>
-                                                </div>
-                                            </a>
-                                        </li>
+										<?php
+										}
+										?>
                                     </ul>
                                 </li>
-                                <li id='earringLi'><a>Earrings</a>
-                                    <ul>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="Office_Wear_Earrings"/>
-                                                    <label for="Office_Wear_Earrings">Office Wear Earrings</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="Daily_Wear_Earrings"/>
-                                                    <label for="Daily_Wear_Earrings">Daily Wear Earrings</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="Party_Wear_Earrings"/>
-                                                    <label for="Party_Wear_Earrings">Party Wear Earrings</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="Only_Diamonds_Earrings"/>
-                                                    <label for="Only_Diamonds_Earrings">Only Diamonds Earrings</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="Gemstone_Earrings"/>
-                                                    <label for="Gemstone_Earrings">Gemstone Earrings</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="White_Gold_Earrings"/>
-                                                    <label for="White_Gold_Earrings">White Gold Earrings</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li id='PendantLi'><a>Pendant</a>
-                                    <ul>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="Office_Wear_Pendant"/>
-                                                    <label for="Office_Wear_Pendant">Office Wear Pendant</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="Daily_Wear_Pendant"/>
-                                                    <label for="Daily_Wear_Pendant">Daily Wear Pendant</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="Party_Wear_Pendant"/>
-                                                    <label for="Party_Wear_Pendant">Party Wear Pendant</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="Only_Diamonds_Pendant"/>
-                                                    <label for="Only_Diamonds_Pendant">Only Diamonds Pendant</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="Gemstone_Pendant"/>
-                                                    <label for="Gemstone_Pendant">Gemstone Pendant</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="White_Gold_Pendant"/>
-                                                    <label for="White_Gold_Pendant">White Gold Pendant</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li id='NecklaceLi'><a>Necklace</a>
-                                    <ul>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="Office_Wear_Necklace"/>
-                                                    <label for="Office_Wear_Necklace">Office Wear Necklace</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="Party_Wear_Necklace"/>
-                                                    <label for="Party_Wear_Necklace">Party Wear Necklace</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li id='BraceletLi'><a>Bracelet</a>
-                                    <ul>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="Office_Wear"/>
-                                                    <label for="Office_Wear">Office Wear</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="Party_Wear"/>
-                                                    <label for="Party_Wear">Party Wear</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="Only_Diamonds"/>
-                                                    <label for="Only_Diamonds">Only Diamonds</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="Gemstone"/>
-                                                    <label for="Gemstone">Gemstone</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="checkbox" class="filled-in" id="White_Gold"/>
-                                                    <label for="White_Gold">White Gold</label>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+								<?php
+								}
+								?>
                             </ul>
                         </li>
                     </ul>
@@ -374,12 +164,11 @@
             }
         });
 
-        $('.tree li.parent > a').click(function( ) {
+        $('.tree li.parent > a').bind('click',function( ) {
             var id = $(this).parent().attr('id');
             $(this).parent().toggleClass('active');
             $(this).parent().children('ul').slideToggle('fast');
             lOpen = id;
-            console.log(lOpen);
         });
         $('.tree ul:first > li').eq(0).each(function() {
             $(this).toggleClass('active');
