@@ -459,8 +459,9 @@
 						foreach($exd as $ky => $vl)
 						{
 							$ex = explode('_',$vl);
-							$field = $ex[0];
-							$inarr[] = $ex[1];
+							$inarr[] = $ex[count($ex)-1];
+							unset($ex[count($ex)-1]);
+							$field = implode('_',$ex);
 						}
 						$extn .= " AND ".$field." in ('".implode("','",$inarr)."') ";
 					}
@@ -552,9 +553,14 @@
 				}
 				
 				/* For filters */
+				
 				$sql = "
 					SELECT 
-						group_concat(attribute_id) AS ids
+						attribute_id,
+						attr_values,
+						attr_range,
+						attr_unit,
+						attr_unit_pos
 					FROM 
 						tbl_attribute_category_mapping 
 					WHERE 
@@ -566,19 +572,22 @@
 				$res = $this->query($sql);
 				if($res)
 				{
-					$row 		= $this->fetchData($res);
-					$attrids 	= $row['ids'];
+					while($row 		= $this->fetchData($res))
+					{
+						$attrid[] = $row['attribute_id'];
+						$attrmap[$row['attribute_id']] = $row;
+					}
+					$attrids 	= implode(',',$attrid);
 				}
+				
+				//echo "<pre>";print_r($attrmap);die;
 				
 				$sql="
 					SELECT
 						attr_id, 
 						attr_name, 
-						attr_display_name, 
-						attr_unit, 
-						attr_unit_pos,
-						attr_type_flag,
-						attr_values					
+						attr_display_name,
+						attr_type_flag				
 					FROM 
 						tbl_attribute_master 
 					WHERE 
@@ -612,7 +621,7 @@
 									$data[$i]['range']['name'] 		= $row['attr_name'];
 									$data[$i]['range']['dname'] 	= $row['attr_display_name'];
 									$data[$i]['range']['value'] 	= $row1['minval'].';'.$row1['maxval'];
-									$data[$i]['range']['ovalue'] 	= $row1['attr_values'];
+									$data[$i]['range']['ovalue'] 	= $attrmap[$row['attr_id']]['attr_range'];
 									$i++;
 								}
 							break;
@@ -631,7 +640,7 @@
 								{
 									$arr = array();
 									$row1 = $this->fetchData($res1);
-									$expd = explode(',',$row['attr_values']);
+									$expd = explode(',',$attrmap[$row['attr_id']]['attr_values']);
 									$expd1 = explode(',',$row1['name']);
 									foreach($expd1 as $key=>$val)
 									{
@@ -643,7 +652,7 @@
 									$data[$i]['checkbox']['name'] 	= $row['attr_name'];
 									$data[$i]['checkbox']['dname'] 	= $row['attr_display_name'];
 									$data[$i]['checkbox']['value'] 	= implode(',',$arr);
-									$data[$i]['checkbox']['ovalue'] = $row['attr_values'];
+									$data[$i]['checkbox']['ovalue'] = $attrmap[$row['attr_id']]['attr_values'];
 									$i++;
 								}
 							break;

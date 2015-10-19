@@ -20,13 +20,17 @@
             <div class='jShapesCont resultsPage showHide fmOpenL'>
                 <div class="allShapes resultsPage">
                     <center>
-                        <div id='Rings' class="jshapeComm transition300 ripplelink Rings">Rings
-                        </div><div  id='Earrings' class="jshapeComm transition300 ripplelink Earrings">Earrings
-                        </div><div  id='Pendant' class="jshapeComm transition300 ripplelink Pendent">Pendant
-                        </div><div  id='Necklace' class="jshapeComm transition300 ripplelink Necklace">Necklace
-                        </div><div  id='Bracelet' class="jshapeComm transition300 ripplelink Bracelet">Bracelet
-                        </div>
-                    </center>
+						<?php
+						$html = '';
+						foreach($showcat['subcat'] as $key => $val)
+						{
+							$exp = explode('/',$val['cat_name']);
+							$scat = trim($exp[0]);
+							$html .= '<div id="'.$scat.'" class="jshapeComm transition300 ripplelink '.$scat.'">'.$val['cat_name'].'</div>';
+						}
+						echo $html;
+						?>
+						</center>
                 </div>
             </div>
             <div class="allResults">

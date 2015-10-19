@@ -340,9 +340,9 @@
 			{
 				$expd = explode(",",$val['attribute_values']);
 	?>
-				<div class="filterCont fLeft forClarity">
+				<div class="filterCont fLeft <?php echo ($page == 'diamonds') ? 'halfSize' : '';?>">
 					<div class="fLeft optionTitle fmOpenR"><?php echo $val['attribute_disp_name'];?></div>
-					<div id='<?php echo $val['attribute_name'].'_'.$val['atrribute_id'];?>' class="filterOptions fLeft fmOpenR">
+					<div id='<?php echo $val['attribute_name'].'_'.str_replace(' ','-',$val['atrribute_id']);?>' class="filterOptions fLeft fmOpenR">
 						<?php
 						for($i=0;$i<count($expd);$i++)
 						{

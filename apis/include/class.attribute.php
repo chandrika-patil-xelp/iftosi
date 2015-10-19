@@ -228,8 +228,11 @@ class attribute extends DB
     public function fetch_category_mapping($params)
     {
         $mapsql="SELECT 
-					*,
-					attribute_id 
+					attribute_id,
+					attr_unit,
+					attr_unit_pos,
+					attr_values,
+					attr_range
 				FROM 
 					tbl_attribute_category_mapping 
 				WHERE 
@@ -247,20 +250,17 @@ class attribute extends DB
             $i=0;
             while($row=$this->fetchData($mapres)) 
             {
-				$attributeMap['attrid'][$i]=$row['attribute_id'];
+				$attrid[] = $row['attribute_id'];
+				$attributeMap[$row['attribute_id']] = $row;
 				$i++;
             }
-            $atribs=implode(',',$attributeMap['attrid']);
-            
+            $atribs=implode(',',$attrid);
+            //echo "<pre>";print_r($attributeMap);die;
             $attrsql="SELECT  
                                 attr_id,
                                 attr_name,
                                 attr_display_name,
-                                attr_unit,
                                 attr_type_flag,
-                                attr_unit_pos,
-                                attr_values,
-                                attr_range,
                                 use_list
                       FROM 
                                 tbl_attribute_master 
@@ -273,12 +273,15 @@ class attribute extends DB
             {   
                 while($row1=$this->fetchData($res)) 
                 {
-                    $attrs['atrribute_id']=$row1['attr_id'];
-                    $attrs['attribute_name']=$row1['attr_name'];
-                    $attrs['attribute_disp_name']=$row1['attr_display_name'];
-                    $attrs['attribute_unit']=$row1['attr_unit'];
-                   
-                    $flag=$row1['attr_type_flag'];       // FOR GIVING THE NAME OF TYPE FILTER
+                    $attrs['atrribute_id']			= $row1['attr_id'];
+                    $attrs['attribute_name']		= $row1['attr_name'];
+                    $attrs['attribute_disp_name']	= $row1['attr_display_name'];
+                    $attrs['attribute_unit']		= $attributeMap[$row1['attr_id']]['attr_unit'];
+					$attrs['attribtue_unit_pos']	= $attributeMap[$row1['attr_id']]['attr_unit_pos'];
+                    $attrs['attribute_values']		= $attributeMap[$row1['attr_id']]['attr_values'];
+                    $attrs['attribute_range']		= $attributeMap[$row1['attr_id']]['attr_range'];
+                    $attribute[]					= $attrs;
+                    $flag							= $row1['attr_type_flag'];       // FOR GIVING THE NAME OF TYPE FILTER
                  /*   switch($flag)
                     {
                         case 1:
@@ -328,15 +331,6 @@ class attribute extends DB
                                break;
                     }
                    */ 
-                    $attrs['attribtue_unit_pos']=$row1['attr_unit_pos'];
-                    
-                    $attrs['attribute_values']=$row1['attr_values'];
-                    
-                    $attrs['attribute_range']=$row1['attr_range'];
-                    
-                    $attribute[]=$attrs;
-                
-      
                 }
                 $arr=array('attributes'=>$attribute);
                 $err=array('Code'=>'0','Msg'=>'Values are Fetched');

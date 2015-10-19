@@ -45,9 +45,18 @@
 			$url 	= APIDOMAIN.'index.php?action=getSubCat';
 			$res 	= $comm->executeCurl($url);
 			$headcat= $res['results'];
+			//print_r($headcat);die;
 			
-			//echo "<pre>";print_r($headcat);die;
-		
+			if(count($headcat))
+			{
+				foreach($headcat['root'] as $key => $val)
+				{
+					if($val['catid'] == $_GET['catid'])
+					{
+						$showcat = $val;
+					}
+				}
+			}
 			switch ($case)
 			{
 				case 'signup':
@@ -81,6 +90,17 @@
 				
 				case 'jewellery':
 					$page='jewellery';
+					$pgno 	= ($_GET['pgno'] ? $_GET['pgno'] : 1);
+					$catid 	= $_GET['catid'];
+					$url 	= APIDOMAIN.'index.php?action=getPrdByCatid&catid='.$catid.'&page='.$pgno;
+					$res 	= $comm->executeCurl($url);
+					$data 	= $res['results']['products'];
+					$total	= $res['results']['total'];
+					
+					$url 	= APIDOMAIN.'index.php?action=fetch_category_mapping&catid='.$catid;
+					$res 	= $comm->executeCurl($url);
+					$fil	= $res['results']['attributes'];
+					
 					include 'template/jewellery_results.html';
 				break;
 				case 'bullion':

@@ -259,7 +259,7 @@ function initMap(lat,lng,contentString) {
 	var infowindow = new google.maps.InfoWindow();
 
 	var map = new google.maps.Map(document.getElementById('googleMap'), {
-		zoom: 4,
+		zoom: 16,
 		center: myLatLng
 	});
 

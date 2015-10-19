@@ -102,37 +102,80 @@ function getResultsData(data,sortby)
 	var fhtml = '';
 	var tfhtml = '';
 	if(data.results.products) {
-		$.each(data.results.products, function(i, vl) {
-			html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/pid-'+vl.pid+'">';
-				html += '<div class="prdComm fLeft" style="opacity: 0; transform: translateX(1500px);">';
-					html += '<div class="prdCommDiv fLeft">';
-						html += '<div class="prdShape fLeft">';
-							html += '<div class="prdShTitle fLeft fmOpenB">SHAPE</div>';
-							html += '<div class="prdShType fLeft fmOpenR">'+vl.attributes.shape+'</div>';
-							html += '<div class="'+vl.attributes.shape+' fRight"></div>';
+		
+		if(pageName == 'diamonds') {
+			$.each(data.results.products, function(i, vl) {
+				html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/pid-'+vl.pid+'">';
+					html += '<div class="prdComm fLeft" style="opacity: 0; transform: translateX(1500px);">';
+						html += '<div class="prdCommDiv fLeft">';
+							html += '<div class="prdShape fLeft">';
+								html += '<div class="prdShTitle fLeft fmOpenB">SHAPE</div>';
+								html += '<div class="prdShType fLeft fmOpenR">'+vl.attributes.shape+'</div>';
+								html += '<div class="'+vl.attributes.shape+' fRight"></div>';
+							html += '</div>';
+							html += '<div class="prdDetails fLeft">';
+								html += '<div class="detComm">';
+									html += '<div class="detLabel fmOpenB fLeft">COLOR</div>';
+									html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.color+'</div>';
+								html += '</div>';
+								html += '<div class="detComm">';
+									html += '<div class="detLabel fmOpenB fLeft">CARATS</div>';
+									html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.carat+'</div>';
+								html += '</div>';
+								html += '<div class="detComm">';
+									html += '<div class="detLabel fmOpenB fLeft">CLARITY</div>';
+									html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.clarity+'</div>';
+								html += '</div>';
+								html += '<div class="detComm">';
+									html += '<div class="detLabel fmOpenB fLeft">CERTIFICATE</div>';
+									html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.certified+'</div>';
+								html += '</div>';
+							html += '</div>';
+							html += '<div class="prdPrice fLeft">';
+								html += '<div class="detComm">';
+									html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
+									html += '<div class="detValue fmOpenB fLeft"><span>₹</span>'+number_format(vl.pprice,2)+'</div>';
+								html += '</div>';
+							html += '</div>';
+							html += '<div class="prdActions fLeft">';
+								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+							html += '</div>';
+						html += '</div>';
+					html += '</div>';
+				html += '</a>';
+			});
+		}
+		else if(pageName == 'jewellery') {
+			$.each(data.results.products, function(i, vl) {
+				html += '<div class="prdComm fLeft jwRes transition100" style="opacity: 1; transform: translateX(0px);">';
+					html += '<div class="prdCommDiv fLeft transition100">';
+						html += '<div class="prdCommImg fLeft">';
+							html += '<div class="for-7Upper">';
+								html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/1.jpg)no-repeat;background-size: contain;background-position:center"></div>';
+							html += '</div>';
+							html += '<div class="for-7Lower">';
+								html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/2.jpg)no-repeat;background-size: contain;background-position:center"></div>';
+								html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/3.jpeg)no-repeat;background-size: contain;background-position:center"></div>';
+								html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/4.jpg)no-repeat;background-size: contain;background-position:center"></div>';
+								html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/5.jpg)no-repeat;background-size: contain;background-position:center"></div>';
+								html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/6.jpg)no-repeat;background-size: contain;background-position:center"></div>';
+								html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/7.jpg)no-repeat;background-size: contain;background-position:center"></div>';
+							html += '</div>';
+							html += '<div class="proxImg fLeft" style="background: url(http://localhost/iftosi/tools/img/product1/2.jpg) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>';
 						html += '</div>';
 						html += '<div class="prdDetails fLeft">';
 							html += '<div class="detComm">';
-								html += '<div class="detLabel fmOpenB fLeft">COLOR</div>';
-								html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.color+'</div>';
-							html += '</div>';
-							html += '<div class="detComm">';
-								html += '<div class="detLabel fmOpenB fLeft">CARATS</div>';
-								html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.carat+'</div>';
-							html += '</div>';
-							html += '<div class="detComm">';
-								html += '<div class="detLabel fmOpenB fLeft">CLARITY</div>';
-								html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.clarity+'</div>';
-							html += '</div>';
-							html += '<div class="detComm">';
-								html += '<div class="detLabel fmOpenB fLeft">CERTIFICATE</div>';
-								html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.certified+'</div>';
+								html += '<div class="detLabel fmOpenB fLeft">DESIGN NO.</div>';
+								html += '<div class="detValue fmOpenR fLeft">18101</div>';
 							html += '</div>';
 						html += '</div>';
 						html += '<div class="prdPrice fLeft">';
 							html += '<div class="detComm">';
-								html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
-								html += '<div class="detValue fmOpenB fLeft"><span>₹</span>'+number_format(vl.pprice,2)+'</div>';
+								html += '<div class="detLabel fmOpenB fLeft">PRICE</div>';
+								html += '<div class="detValue fmOpenB fLeft"><span>₹</span>50,800</div>';
 							html += '</div>';
 						html += '</div>';
 						html += '<div class="prdActions fLeft">';
@@ -143,8 +186,8 @@ function getResultsData(data,sortby)
 						html += '</div>';
 					html += '</div>';
 				html += '</div>';
-			html += '</a>';
-		});
+			});
+		}
 	}
 	else
 	{
