@@ -47,5 +47,37 @@
             </div>
         </div>
     </div>
+    <div class="prdHeader fLeft transition100 pLHtransit">
+        <div class="wrapperMax">
+            <div class="prdListHeader fLeft fmOpenR">
+                <div class="sno fLeft">Sr No.</div>
+                <div class="barcode fLeft">Barcode</div>
+                <div class="btype fLeft">Type</div>
+                <div class="metal fLeft">Metal</div>
+                <div class="purity fLeft">Purity</div>
+                <div class="weight fLeft">Weight</div>
+                <div class="price fLeft">Price</div>
+                <div class="acct fLeft">Action</div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
+    
+    <script>
+        var lastSc=0;
+        $(document).ready(function(){
+            $(window).scroll(function() {
+                var sc = $(window).scrollTop();
+                if(sc>50){
+                    $('.prdHeader').removeClass('pLHtransit dn');
+                }else if(lastSc>sc){
+                    $('.prdHeader').addClass('pLHtransit');
+                } 
+                lastSc=sc;
+            });
+        });
+    
+    </script>
+    
 </body>
 </html>

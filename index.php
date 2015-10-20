@@ -188,6 +188,10 @@
 					$page='Products-Bullion';
 					include 'template/vProducts_bullion.html';
 				break;
+                                case 'vendor_landing':
+					$page='Vendor-Landing';
+					include 'template/vendor_landing_page.html';
+				break;
 				
 				default:
 					$page='index';
@@ -199,4 +203,4 @@
 			}
 			break;
 	}
-?>
+?>  

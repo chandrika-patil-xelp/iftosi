@@ -301,7 +301,7 @@ a{text-decoration: none;}
 
 
 /*Vendor Products*/
-.vProducts{}
+.vProducts{padding-top: 70px}
 .vProducts .wrapperMax{max-width: 1200px;}
 .prdResults {width: 100%;height: 100%;background: #fff;padding-bottom: 100px;}
 
@@ -345,7 +345,54 @@ a{text-decoration: none;}
 .prdSeachTxt{width:200px;height: 35px;border:1px solid #d4d4c8;outline: none;outline-style: none;padding: 0 15px;border-radius: 5px;}
 
 
-.vHeader{width:100%;height: 60px;background: #8A0044}
+.vHeader{width:100%;height: 60px;background: #8A0044;position: fixed;z-index: 15;top:0;}
 .vLogo{width:60px;height: 60px;background: #8A0044 url(../img/common/logo.svg)no-repeat;background-size: auto 60%;background-position:left center;border-radius:5px;font-size: 30px;color: #fff;line-height: 60px;position: relative;padding-left: 40px;}
 .vLogo div{width:100%;height: 30px;color: #fff;text-align: center;}
-.p020{padding: 0 0px!important;}
+
+
+.prdHeader{width: 100%;position: fixed;height:45px;top: 60px;z-index: 10;background: #ebebde;overflow: hidden;}
+.pLHtransit{height: 0!important;}
+
+
+/*Vendor Landing Page*/
+
+.mainContainer{width:100%;height: 650px;padding:0 0 50px 0;}
+.topFixedCont{width:100%;height:100px;position: fixed;top:0;z-index: 10;}
+.vndHeader{width:100%;height:60px;background: #8A0044;}
+.vndLogo {width: auto;height: 100%;color: #fff;padding: 0 25px 0 35px;font-size: 30px;line-height: 60px;background: #8A0044 url(../img/common/logo.svg)no-repeat;background-size: auto 50%;background-position: left center;}
+.vndInfo{width:auto;height: 100%;line-height: 60px;color:#fff;font-size: 13px;}
+
+
+.vndTabs{width:100%;height: 40px;background: #8A0044}
+.vTabs {width: 150px;text-align: center;max-width: 25%;height: 40px;line-height: 40px;margin: 0;color:#fff;font-size: 14px;cursor: pointer;margin: 0 10px 0 0;}
+.vTabs:hover{background: rgba(0,0,0,0.2)}
+.vSelected{background: #fff;color:#4d4d4d!important;}
+
+.dropdownBox {width: 100%;position: relative;z-index: 10;padding: 10px;}
+.dropInput {width: 100%;height: 40px;position: absolute;top: 0;left: 0;cursor: pointer;outline: none;background-size: auto 100%;background-position: right center;border-radius: 0;padding: 0;font-size: 14px;}
+.dropdownBox ul {margin: 0;padding: 0;border-radius: 100%;width: 100%;height: auto;overflow: hidden;list-style: none;position: absolute;top: 0;left: 0;background-color: #fff;box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);opacity: 0;display: none;}
+.dropdownBox ul li {margin: 0;padding: 0;width: 100%;height: 45px;line-height: 45px;padding: 0 15px;font-size: 13px;color: #4d4d4d;border-bottom: 1px solid #ccc;cursor: pointer;}
+.dropdownBox ul li:hover {background: #171334;color: #fff;border-bottom: transparent;}
+.dropdownBox ul li a{width:100%;height: 100%;display: block;color:#4d4d4d;text-decoration: none;}
+.dropdownBox ul li:hover a{color:#fff;text-decoration: none;}
+/*Contents*/
+
+.contentCont{width:100%;height: auto;background: #fff;padding:120px 15px 50px 15px}
+
+.forEnq{width:100%;height: 100%;}
+.date{width:15%;}
+.name{width:20%;}
+.mobile{width:10%;}
+.email{width:20%;}
+.viewBtn{width:10%;}
+.bNone{border-right: none!important}
+
+
+
+
+
+
+
+
+
+
