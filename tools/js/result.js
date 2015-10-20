@@ -199,13 +199,13 @@ function getResultsData(data,sortby,showtree)
 						html += '<div class="prdDetails fLeft">';
 							html += '<div class="detComm">';
 								html += '<div class="detLabel fmOpenB fLeft">DESIGN NO.</div>';
-								html += '<div class="detValue fmOpenR fLeft">18101</div>';
+								html += '<div class="detValue fmOpenR fLeft">'+vl.pcode+'</div>';
 							html += '</div>';
 						html += '</div>';
 						html += '<div class="prdPrice fLeft">';
 							html += '<div class="detComm">';
 								html += '<div class="detLabel fmOpenB fLeft">PRICE</div>';
-								html += '<div class="detValue fmOpenB fLeft"><span>₹</span>50,800</div>';
+								html += '<div class="detValue fmOpenB fLeft"><span>₹</span>'+vl.attributes.price+'</div>';
 							html += '</div>';
 						html += '</div>';
 						html += '<div class="prdActions fLeft">';
@@ -335,75 +335,77 @@ function getResultsData(data,sortby,showtree)
 	}
 	//else
 		//$('#idlist').html('');
-	
-	$.each(data.results.filters, function(i, v) {
-		$.each(v, function(k, vl) {
-			
-			
-			
-			/* if(k == 'range')
-			{
-				var dvl = vl.value.split(';');
-				fhtml += '<input type="hidden" id="'+vl.name+'RangeMin" value="'+dvl[0]+'">';
-				fhtml += '<input type="hidden" id="'+vl.name+'RangeMax" value="'+dvl[1]+'">';
-				fhtml += '<div id="'+vl.name+'Div" class="filterCont fLeft">';
-					fhtml += '<div class="fLeft optionTitle fmOpenR">'+vl.dname+'</div>';
-					fhtml += '<div class="fLeft rangeCont">';
-						fhtml += '<div class="fLeft rangeDiv">';
-							fhtml += '<input type="text" id="'+vl.name+'Range" class="fLeft rngInp" style="visibility: hidden;">';
+	if(data.results.filters)
+	{
+		$.each(data.results.filters, function(i, v) {
+			$.each(v, function(k, vl) {
+				
+				
+				
+				/* if(k == 'range')
+				{
+					var dvl = vl.value.split(';');
+					fhtml += '<input type="hidden" id="'+vl.name+'RangeMin" value="'+dvl[0]+'">';
+					fhtml += '<input type="hidden" id="'+vl.name+'RangeMax" value="'+dvl[1]+'">';
+					fhtml += '<div id="'+vl.name+'Div" class="filterCont fLeft">';
+						fhtml += '<div class="fLeft optionTitle fmOpenR">'+vl.dname+'</div>';
+						fhtml += '<div class="fLeft rangeCont">';
+							fhtml += '<div class="fLeft rangeDiv">';
+								fhtml += '<input type="text" id="'+vl.name+'Range" class="fLeft rngInp" style="visibility: hidden;">';
+							fhtml += '</div>';
 						fhtml += '</div>';
 					fhtml += '</div>';
-				fhtml += '</div>';
-			} */
-			if(k == 'checkbox')
-			{
-				var cidarr = new Array();
-				var dvl = vl.ovalue.split(',');
-				var dvl1 = vl.value.split(',');
-				tfhtml = '';
-				var jid = "#" + vl.name+'_'+vl.id;
-				var k=0;
-				$(jid).find('input:checked').each(function() {
-					cidarr[k] = $(this).attr('id');
-					k++;
-				});
-				
-				for(var i=0;i<dvl.length;i++)
+				} */
+				if(k == 'checkbox')
 				{
-					var a = dvl1.indexOf(dvl[i]);
-					if(a == -1)
-					{
-						tfhtml += '<div class="checkDiv fLeft">';
-							tfhtml += '<input type="checkbox" class="filled-in" disabled id="'+vl.name+'_'+dvl[i]+'" />';
-							tfhtml += '<label for="'+vl.name+'_'+dvl[i]+'">'+dvl[i]+'</label>';
-						tfhtml += '</div>';
-					}
-					else
-					{
-						tfhtml += '<div class="checkDiv fLeft">';
-							tfhtml += '<input type="checkbox" class="filled-in" id="'+vl.name+'_'+dvl[i]+'" />';
-							tfhtml += '<label for="'+vl.name+'_'+dvl[i]+'">'+dvl[i]+'</label>';
-						tfhtml += '</div>';
-					}
-				}
-				//$(jid).html(tfhtml);
-				for(var i=0;i<cidarr.length;i++)
-				{
-					$('#'+cidarr[i]).attr('checked',true);
-				}
-				
-				$(jid+' :input[type=checkbox]').each(function() {
-					$(this).bind('click', function(event) {
-						FR();
-						if (event && $.isFunction(event.stopImmediatePropagation))
-							event.stopImmediatePropagation();
-						else 
-							window.event.cancelBubble=true;
+					var cidarr = new Array();
+					var dvl = vl.ovalue.split(',');
+					var dvl1 = vl.value.split(',');
+					tfhtml = '';
+					var jid = "#" + vl.name+'_'+vl.id;
+					var k=0;
+					$(jid).find('input:checked').each(function() {
+						cidarr[k] = $(this).attr('id');
+						k++;
 					});
-				});
-			}
+					
+					for(var i=0;i<dvl.length;i++)
+					{
+						var a = dvl1.indexOf(dvl[i]);
+						if(a == -1)
+						{
+							tfhtml += '<div class="checkDiv fLeft">';
+								tfhtml += '<input type="checkbox" class="filled-in" disabled id="'+vl.name+'_'+dvl[i]+'" />';
+								tfhtml += '<label for="'+vl.name+'_'+dvl[i]+'">'+dvl[i]+'</label>';
+							tfhtml += '</div>';
+						}
+						else
+						{
+							tfhtml += '<div class="checkDiv fLeft">';
+								tfhtml += '<input type="checkbox" class="filled-in" id="'+vl.name+'_'+dvl[i]+'" />';
+								tfhtml += '<label for="'+vl.name+'_'+dvl[i]+'">'+dvl[i]+'</label>';
+							tfhtml += '</div>';
+						}
+					}
+					//$(jid).html(tfhtml);
+					for(var i=0;i<cidarr.length;i++)
+					{
+						$('#'+cidarr[i]).attr('checked',true);
+					}
+					
+					$(jid+' :input[type=checkbox]').each(function() {
+						$(this).bind('click', function(event) {
+							FR();
+							if (event && $.isFunction(event.stopImmediatePropagation))
+								event.stopImmediatePropagation();
+							else 
+								window.event.cancelBubble=true;
+						});
+					});
+				}
+			});
 		});
-	});
+	}
 	
 	//$('#filters').html(fhtml);
 	
@@ -449,7 +451,10 @@ function getResultsData(data,sortby,showtree)
 	$('.prdResults').html(html);
 	$('.prdResults').offset();
 	if(sortby)
-		$('body').animate({scrollTop: $('.shapesCont').offset().top+50}, 300);
+	{
+		$('body').animate({scrollTop: $('.allResults').offset().top-60}, 300);
+	}
+		
 	
 	setTimeout(function(){
 		showPrd();

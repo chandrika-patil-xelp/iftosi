@@ -37,7 +37,7 @@
                 <div class="wrapperMax">
                     <div class="filterTitleDiv">
                         <div class='fTitle fLeft fmOpenR'>Filter Results</div>
-                        <div class="rCount fLeft fmOpenR"><span id='resultCount'> 2,835</span> Diamonds found</div>
+                        <div class="rCount fLeft fmOpenR"><span id='resultCount'> 2,835</span> Results Found</div>
                         <div class="fRight sortBox">
                             <div class="dropdownBox fLeft">
                                 <div id="drpinp" class="dropInput fmOpenR">Best Match</div>
@@ -54,7 +54,8 @@
                     <div class='results_Filter'>
                         <?php include 'filters.html'; ?>
                         <div class='prdResults fRight'>
-                            <?php while ($i < 15) { ?>
+                            <?php 
+							foreach($data as $key=>$val) { ?>
                                 <div class='prdComm fLeft jwRes' style="opacity: 0; transform: translateX(1000px);">
                                     <div class='prdCommDiv fLeft transition100'>
                                         <div class="prdCommImg fLeft">
@@ -112,7 +113,7 @@
                                                             <div class="prox for-7" style="background: #fff url(../tools/img/product1/6.jpg)no-repeat;background-size: contain;background-position:center"></div>
                                                             <div class="prox for-7" style="background: #fff url(../tools/img/product1/7.jpg)no-repeat;background-size: contain;background-position:center"></div>
                                                         </div>
-                                                        <div class="proxImg fLeft" style="background: #fff url(../tools/img/product1/<?php echo ($i+1);?>.jpg)no-repeat;background-size: contain;background-position:center"></div>
+                                                        <div class="proxImg fLeft" style="background: #fff url(../tools/img/product1/<?php echo ($key+1);?>.jpg)no-repeat;background-size: contain;background-position:center"></div>
                                                         <?php break;
                                                     case 8: ?>
                                                         <div class="prox for-8"></div>
@@ -184,13 +185,13 @@
                                         <div class="prdDetails fLeft">
                                             <div class="detComm">
                                                 <div class="detLabel fmOpenB fLeft">DESIGN NO.</div>
-                                                <div class="detValue fmOpenR fLeft">18101</div>
+                                                <div class="detValue fmOpenR fLeft"><?php echo $val['pcode'];?></div>
                                             </div>
                                         </div>
                                         <div class='prdPrice fLeft'>
                                             <div class="detComm">
                                                 <div class="detLabel fmOpenB fLeft">PRICE</div>
-                                                <div class="detValue fmOpenB fLeft"><span>&#8377;</span>50,800</div>
+                                                <div class="detValue fmOpenB fLeft"><span>&#8377;</span><?php echo $val['attributes']['price'];?></div>
                                             </div>
                                         </div>
                                         <div class='prdActions fLeft'>
