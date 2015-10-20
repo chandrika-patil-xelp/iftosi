@@ -91,7 +91,7 @@ $(document).ready(function() {
 		if ($(this).attr('id') == 'txtjArea')
 		{
 			var params = 'action=ajx&type=auto&cases=cAuto&str=' + escape($(this).val());
-			new Autosuggest($(this).val(), '#txtjArea', '#jasug', WEBROOT + "index.php", params, true, '', '', event);
+			new Autosuggest($(this).val(), '#txtjArea', '#jasug', DOMAIN + "index.php", params, true, '', '', event);
 		}
 	});
 
