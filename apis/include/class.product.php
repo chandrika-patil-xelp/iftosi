@@ -954,7 +954,7 @@
             return $result;
         }
         
-        public function productByCity($params)
+     /*   public function productByCity($params)
         {   
             $page   = ($params['page'] ? $params['page'] : 1);
             $limit  = ($params['limit'] ? $params['limit'] : 15);
@@ -1033,6 +1033,213 @@
             $result=array('result'=>$arr,'error'=>$err);
             return $result;
         }
+       */ 
+        
+        public function productByCity($params)
+        {
+            $page   = ($params['page'] ? $params['page'] : 1);
+            $limit  = ($params['limit'] ? $params['limit'] : 15);
+            
+            $sql="SELECT 
+                                product_id,
+                                vendor_id,
+                                vendor_price,
+                                vendor_quantity,
+                                vendor_currency,
+                                vendor_remarks
+                  FROM  
+                                tbl_vendor_product_mapping
+                  WHERE 
+                                city=\"".$params['cityname']."\"
+                  ORDER BY
+                                product_id ASC"; 
+            
+             if(!empty($page)) 
+            {
+                $start = ($page * $limit) - $limit;
+                $sql.=" LIMIT " . $start . ",$limit";
+            }
+            $chkres=$this->query($sql);
+            $cnt_res2 = $this->numRows($chkres);
+            
+            
+             
+            
+            if($cnt_res2>0)
+            {   $j=0;
+                while($row2=$this->fetchData($chkres))
+                {           
+                    $arr1['product_id'][$j]= $row2['product_id'];
+                    $arr3[$j]=$row2;
+                    $j++;
+                    $vid[]=$row2['vendor_id'];
+                }
+                
+                
+                $venid=implode(',',$vid);
+                
+                
+                $sql6="SELECT 
+                                vendor_id AS vid,
+                                orgName as OrganisationName,
+                                fulladdress,
+                                postal_code,
+                                telephones,
+                                alt_email,
+                                officecity as office_city,
+                                officecountry as office_country,
+                                contact_person,
+                                position,
+                                contact_mobile,
+                                email,
+                                memship_Cert as Membership_Certificate,
+                                bdbc as diamond_certificate,
+                                other_bdbc as other_Certificate,
+                                vatno as Vat_Number,                            
+                                landline,
+                                mdbw as membership_around_world,                            
+                                website,
+                                banker as bankers,                            
+                                pancard,
+                                turnover,
+                                lat as latitude,
+                                lng as longitude 
+                     FROM 
+                                tbl_vendor_master
+                     WHERE 
+                                        vendor_id IN(".$venid.")
+                            ORDER BY
+                                        field(vendor_id,".$venid.")";
+                
+                $res6=$this->query($sql6);
+                
+                while($row6=$this->fetchData($res6))
+                {
+                    $vid[]=$row6['vid'];
+                    $vdetls[$row6['vid']]=$row6;
+                }
+                
+                
+                $pid=implode(',',$arr1['product_id']);
+                $fillpiddet="SELECT 
+                                    product_id,
+                                    barcode as code,
+                                    product_name as pname,
+                                    product_display_name as dname,
+                                    product_model as model,
+                                    product_brand as brand,
+                                    prd_price as price,
+                                    product_currency as cur,
+                                    desname as product_designer,
+                                    prd_img as pimg 
+                            FROM 
+                                    tbl_product_master
+                            WHERE
+                                    product_id IN(".$pid.")";
+                
+                $chkres=$this->query($fillpiddet);
+                $cnt_res3 = $this->numRows($chkres);
+                if($cnt_res3>0)
+                {
+                    while($row3=$this->fetchData($chkres))
+                    {   
+
+                        $arr4= $row3;
+                    }
+                    
+                    if(!empty($params['catid']))
+                    {
+                        $sql="SELECT
+                                                attribute_id,
+                                                attr_values,
+                                                attr_filter_flag,
+                                                attr_filter_position,
+                                                attr_display_position,
+                                                attr_range
+                            FROM 
+                                                tbl_attribute_category_mapping
+                            WHERE
+                                                category_id=".$params['catid']."";
+                        $res=$this->query($sql);
+                        
+                        if($res)
+                        {
+                            $i=0;
+                            while($row4=$this->fetchData($res))
+                            {
+                                $atr1['aid'][]=$row4['attribute_id'];
+                                $atr['filter_flag']=$row4['attr_filter_flag'];
+                                $atr['display_position']=$row4['attr_display_position'];
+                                $atr['attribute_values']=$row4['attr_values'];
+                                $atr['filter_position']=$row4['attr_filter_position'];
+                                $fil[$row4['attribute_id']]=$atr;
+                                $i++;
+                            }
+                            
+                            $aid=implode(',',$atr1['aid']);
+                            
+                            $sql2="SELECT
+                                                attr_display_name 
+                                   FROM 
+                                                tbl_attribute_master
+                                   WHERE attr_id IN(".$aid.") ORDER BY field(attr_id,".$aid.")";
+                            
+                            $res2=$this->query($sql2);
+                            $j=0;
+                            while($row5=$this->fetchData($res2))
+                            {
+                            $aname['attributes'][]=$row5['attr_display_name'];
+                            $j++;
+                            
+                            }
+
+                            $aname=implode(',',$aname['attributes']);
+                            
+                            $prdattrs="SELECT product_id,";
+                            $prdattrs.=$aname." FROM tbl_product_search WHERE product_id IN(".$pid.") ORDER BY product_id ASC";
+                        
+                            $finalres=$this->query($prdattrs);
+                            
+                            if($finalres)
+                            {$i=0;
+                                while($rows=$this->fetchData($finalres))
+                                {
+                                    $arr['attributes']=$aname;
+                                    $arr['filters']=$fil;
+                                    $prid=$rows['product_id'];
+                                    
+                                    $arr[$prid]=$arr4;
+                                    $arr[$prid]['attr_details']=$rows;
+                                    $arr[$prid]['vendor_product_details']=$arr3[$i];
+                                    $arr[$prid]['vendor_details']=$vdetls;
+                                    
+  
+                                $i++;
+                                    
+                                }
+                                
+                            }  
+                        }
+
+                    }
+                    $err=array('Code'=>0,'Msg'=>'Data fetched successfully');
+                }
+            else
+                {
+                $arr=array();
+                $err=array('Code'=>1,'Msg'=>'Data not found');
+                }
+            }
+                else
+                {
+                    $arr=array();
+                    $err=array('Code'=>1,'Msg'=>'Data not found');
+                }
+            $result=array('results'=>$arr,'error'=>$err);
+            return $result;
+        }    
+        
+        
         
         public function productByBrand($params)
         {
