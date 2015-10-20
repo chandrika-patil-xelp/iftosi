@@ -37,8 +37,28 @@
 					$ilist	= $_GET['ilist'];
 					$jlist	= $_GET['jlist'];
 					$url 	= APIDOMAIN.'index.php?action=getPrdByCatid&catid='.$catid.'&page='.$pgno.'&sortby='.$sortby.'&slist='.urlencode($slist).'&clist='.urlencode($clist).'&tlist='.urlencode($tlist).'&ilist='.urlencode($ilist).'&jlist='.urlencode($jlist);
-					$res 	= $comm->executeCurl($url,1);
-					echo $res;
+					$res 	= $comm->executeCurl($url);
+					
+					if(!empty($jlist))
+					{
+						$url 	= APIDOMAIN.'index.php?action=getSubCat';
+						$res1 	= $comm->executeCurl($url);
+						$headcat= $res1['results'];
+						
+						if(count($headcat))
+						{
+							foreach($headcat['root'] as $key => $val)
+							{
+								if($val['catid'] == $_GET['catid'])
+								{
+									$showcat = $val;
+								}
+							}
+						}
+						$res['results']['treedata'] = $showcat;
+					}
+					
+					echo json_encode($res);
 				break;
 			}
 			break;

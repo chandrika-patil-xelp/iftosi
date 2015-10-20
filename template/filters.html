@@ -163,17 +163,28 @@
                 $(this).addClass('parent');
             }
         });
-
         $('.tree li.parent > a').bind('click',function( ) {
             var id = $(this).parent().attr('id');
             $(this).parent().toggleClass('active');
             $(this).parent().children('ul').slideToggle('fast');
-            lOpen = id;
+			if($(this).parent().hasClass('active'))
+			{
+				var idexd = $(this).text().split('/');
+				console.log(idexd);
+				$('#'+id+'_'+idexd[0]).addClass('shapeSelected');
+			}
+			else
+			{
+				$('#'+id+'_'+$(this).text()).removeClass('shapeSelected');
+				$('#'+id+' :input[type=checkbox]').each(function() {
+					$(this).attr('checked',false);
+				});
+			}
+			FR();
         });
         $('.tree ul:first > li').eq(0).each(function() {
             $(this).toggleClass('active');
             $(this).children('ul').slideToggle('fast');
         });
-
     });
 </script>

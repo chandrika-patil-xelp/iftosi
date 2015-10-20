@@ -83,6 +83,17 @@ $(document).ready(function() {
         var img=$(this).css('background');
         $(this).parent().siblings('.proxImg').css({'background':img});
     });
+	
+	var inputField = 'input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=number], input[type=search], textarea, input[type=radio]';
+	
+	$(inputField).bind('keyup focus', inputField, function(event) {
+		/* Autocomplete code */
+		if ($(this).attr('id') == 'txtjArea')
+		{
+			var params = 'action=ajx&type=auto&cases=cAuto&str=' + escape($(this).val());
+			new Autosuggest($(this).val(), '#txtjArea', '#jasug', WEBROOT + "index.php", params, true, '', '', event);
+		}
+	});
 
 });
 
@@ -90,7 +101,7 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function getResultsData(data,sortby)
+function getResultsData(data,sortby,showtree)
 {
 	var html = '';
 	var fhtml = '';
@@ -190,6 +201,115 @@ function getResultsData(data,sortby)
 			html += '<div class="noresults font18 fLeft">Please try again.</div>';
 		html += '</div>';
 	}
+	
+	var treedata = data.results.treedata;
+	treedata = '';
+	if(treedata)
+	{
+		var thtml = '';
+		var getdata = data.results.getdata.jlist;
+		var gdarr = getdata.split('|@|');
+		
+		if($('#idlist').html().trim()) {
+			
+			$.each(treedata.subcat, function(i,v) {					
+				for(var k=0;k<gdarr.length;k++)
+				{
+					var igdarr = gdarr[k].split('_');
+					if(igdarr[0] == v.catid && $("#" + v.catid).length == 0)
+					{
+						thtml += '<li id="'+v.catid+'"><a>'+v.cat_name+'</a>';
+							thtml += '<ul>';
+								$.each(v.subcat, function(j,vl) {
+									thtml += '<li>';
+										thtml += '<a>';
+											thtml += '<div class="checkDiv fLeft">';
+												thtml += '<input type="checkbox" class="filled-in" id="'+vl.catid+'"/>';
+												thtml += '<label for="'+vl.catid+'">'+vl.cat_name+'</label>';
+											thtml += '</div>';
+										thtml += '</a>';
+									thtml += '</li>';
+								});
+							thtml += '</ul>';
+						thtml += '</li>';
+					}
+				}
+			});
+			
+			$('#mainCat').append(thtml);
+		}
+		else {
+			
+			thtml += '<div class="fLeft optionTitle fmOpenR">Category</div>';
+			thtml += '<div id="wrapper" class="fLeft">';
+				thtml += '<div class="tree transition300">';
+					thtml += '<ul>';
+						thtml += '<li><a>'+treedata.cat_name+'</a>';
+							thtml += '<ul id="mainCat">';
+								$.each(treedata.subcat, function(i,v) {
+									
+									for(var k=0;k<gdarr.length;k++)
+									{
+										var igdarr = gdarr[k].split('_');
+										if(igdarr[0] == v.catid)
+										{
+											thtml += '<li id="'+v.catid+'"><a>'+v.cat_name+'</a>';
+												thtml += '<ul>';
+													$.each(v.subcat, function(j,vl) {
+														thtml += '<li>';
+															thtml += '<a>';
+																thtml += '<div class="checkDiv fLeft">';
+																	thtml += '<input type="checkbox" class="filled-in" id="'+vl.catid+'"/>';
+																	thtml += '<label for="'+vl.catid+'">'+vl.cat_name+'</label>';
+																thtml += '</div>';
+															thtml += '</a>';
+														thtml += '</li>';
+													});
+												thtml += '</ul>';
+											thtml += '</li>';
+										}
+									}
+								});
+							thtml += '</ul>';
+						thtml += '</li>';
+					thtml += '</ul>';
+				thtml += '</div>';
+			thtml += '</div>';
+			
+			$('#idlist').html(thtml);
+		}
+		
+		$('.tree li').each(function() {
+            if ($(this).children('ul').length > 0) {
+                $(this).addClass('parent');
+            }
+        });
+        $('.tree li.parent > a').bind('click',function() {
+            var id = $(this).parent().attr('id');
+            $(this).parent().addClass('active');
+            $(this).parent().children('ul').slideToggle('fast');
+            lOpen = id;
+        });
+        $('.tree ul:first > li').eq(0).each(function() {
+            $(this).addClass('active');
+            $(this).children('ul').slideToggle('fast');
+        });
+		$('.jshapeComm').each(function() {
+			var idsp = $(this).attr('id').split('_');
+			$('#'+idsp[0]+' a').click();
+		});
+		$('.filterCont :input[type=checkbox]').each(function() {
+			$(this).bind('click', function(event) {
+				FR('',1);
+				if (event && $.isFunction(event.stopImmediatePropagation))
+					event.stopImmediatePropagation();
+				else 
+					window.event.cancelBubble=true;
+			});
+		});
+	}
+	//else
+		//$('#idlist').html('');
 	
 	$.each(data.results.filters, function(i, v) {
 		$.each(v, function(k, vl) {
@@ -343,7 +463,7 @@ function number_format (number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 
-function FR(sortby) {
+function FR(sortby,showtree) {
 	
 	var slistarr = new Array();
 	var jlistarr = new Array();

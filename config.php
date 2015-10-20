@@ -41,27 +41,28 @@ $css['home'] = DOMAIN.'tools/css/home.css?v='.VERSION;
 
 
 // JS Libraries Start
-$jvs['jqry'] = DOMAIN.'tools/js/lib/jquery.js?v='.VERSION;
-$jvs['parlx'] = DOMAIN.'tools/js/lib/parallax.js?v='.VERSION;
-$jvs['velocity'] = DOMAIN.'tools/js/lib/velocity.js?v='.VERSION;
-$jvs['ripple'] = DOMAIN.'tools/js/lib/ripple.js?v='.VERSION;
-$jvs['rngsld'] = DOMAIN.'tools/js/lib/ion.rangeSlider.js?v='.VERSION;
-$jvs['jqrynum'] = DOMAIN.'tools/js/lib/jquery-numerator.js?v='.VERSION;
-$jvs['hammer'] = DOMAIN.'tools/js/lib/hammer.js?v='.VERSION;
+$jvs['jqry'] 		= DOMAIN.'tools/js/lib/jquery.js?v='.VERSION;
+$jvs['parlx'] 		= DOMAIN.'tools/js/lib/parallax.js?v='.VERSION;
+$jvs['velocity'] 	= DOMAIN.'tools/js/lib/velocity.js?v='.VERSION;
+$jvs['ripple'] 		= DOMAIN.'tools/js/lib/ripple.js?v='.VERSION;
+$jvs['rngsld'] 		= DOMAIN.'tools/js/lib/ion.rangeSlider.js?v='.VERSION;
+$jvs['jqrynum'] 	= DOMAIN.'tools/js/lib/jquery-numerator.js?v='.VERSION;
+$jvs['hammer'] 		= DOMAIN.'tools/js/lib/hammer.js?v='.VERSION;
+$jvs['auto'] 		= DOMAIN.'tools/js/lib/autosuggest.js?v='.VERSION;
 
 // JS Libraries End
 
 
 // Custom JS Start
 
-$jvs['comm'] = DOMAIN.'tools/js/Common.js?v='.VERSION;
-$jvs['home'] = DOMAIN.'tools/js/home.js?v='.VERSION;
-$jvs['result'] = DOMAIN.'tools/js/result.js?v='.VERSION;
-$jvs['details'] = DOMAIN.'tools/js/details.js?v='.VERSION;
-$jvs['head'] = DOMAIN.'tools/js/header.js?v='.VERSION;
-$jvs['signup'] = DOMAIN.'tools/js/signup.js?v='.VERSION;
-$jvs['filter'] = DOMAIN.'tools/js/filters.js?v='.VERSION;
-$jvs['dmap'] = DOMAIN.'tools/js/detailsMap.js?v='.VERSION;
+$jvs['comm'] 		= DOMAIN.'tools/js/Common.js?v='.VERSION;
+$jvs['home'] 		= DOMAIN.'tools/js/home.js?v='.VERSION;
+$jvs['result'] 		= DOMAIN.'tools/js/result.js?v='.VERSION;
+$jvs['details'] 	= DOMAIN.'tools/js/details.js?v='.VERSION;
+$jvs['head'] 		= DOMAIN.'tools/js/header.js?v='.VERSION;
+$jvs['signup'] 		= DOMAIN.'tools/js/signup.js?v='.VERSION;
+$jvs['filter'] 		= DOMAIN.'tools/js/filters.js?v='.VERSION;
+$jvs['dmap'] 		= DOMAIN.'tools/js/detailsMap.js?v='.VERSION;
 
 // Custom JS End
 
