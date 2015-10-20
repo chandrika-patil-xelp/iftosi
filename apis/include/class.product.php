@@ -442,7 +442,6 @@
 				break;
 			}
 			
-			
 			$res = $this->query($sql);
 			$cres=$this->numRows($res);
 			if($cres>0)
@@ -451,6 +450,8 @@
 				{
 					$pid[] = $row['pid'];
 				}
+				
+				
 				
 				if(!empty($params['slist']))
 				{
@@ -491,6 +492,37 @@
 				}
 				
 				$allpids = $pid = implode(',',$pid);
+				
+				if($params['ctid'])
+				{
+					$sqlct = "SELECT cityname
+							FROM tbl_city_master
+							WHERE cityid = ".$params['ctid'];
+					$resct = $this->query($sqlct);
+					if($resct)
+					{
+						$rowct = $this->fetchData($resct);
+						
+						$sqlpct = "
+									SELECT 
+										product_id as pid
+									FROM 
+										tbl_vendor_product_mapping 
+									WHERE 
+										product_id in (".$allpids.") 
+									AND 
+										city=\"".$rowct['cityname']."\"";
+						$respct = $this->query($sqlpct);
+						if($respct)
+						{
+							while ($rowpct = $this->fetchData($respct))
+							{
+								$pids[] = $rowpct['pid'];
+							}
+							$allpids = $pid = implode(',',$pids);
+						}
+					}
+				}
 				
 				$page   = ($params['page'] ? $params['page'] : 1);
 				$limit  = ($params['limit'] ? $params['limit'] : 15);

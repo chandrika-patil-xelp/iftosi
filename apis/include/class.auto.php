@@ -44,14 +44,24 @@ class auto extends DB
     
     public function suggestCity($params)
     {
-	$sql="SELECT MATCH(cityname) AGAINST ('" . $params['str'] . "*' IN BOOLEAN MODE) AS startwith,cityname FROM tbl_city_master where MATCH(cityname) AGAINST ('".$params['str']."*' IN BOOLEAN MODE) ORDER BY startwith DESC";
-        $page=$params['page'];
+		$sql="SELECT 
+				cityid as id,
+				if(cityname = '".$params['str']."',1,0) AS exact,
+				if(cityname like '".$params['str']."%',1,0) AS startwith,
+				MATCH(cityname) AGAINST ('" . $params['str'] . "*' IN BOOLEAN MODE) AS score,
+				cityname AS name,
+				'' AS city,
+				cityid AS cid
+			FROM 
+				tbl_city_master 
+			WHERE 
+				MATCH(cityname) AGAINST ('".$params['str']."*' IN BOOLEAN MODE) 
+			ORDER BY 
+				exact DESC, startwith DESC, score DESC";
+				
         $limit=$params['limit'];
-        if (!empty($page))
-        {
-            $start = ($page * $limit) - $limit;
-            $sql.=" LIMIT " . $start . ",$limit";
-        }
+        $sql.=" LIMIT $limit";
+		
         $res=$this->query($sql);
         if($this->numRows($res)>0)
         {
@@ -59,8 +69,45 @@ class auto extends DB
             {
                 $arr[]= $row;
             }
-            $err=array('Code'=> 0,'Msg'=>'Values are fetched');
         }
+		
+		$sql="SELECT
+				a.id, 
+				if(a.area = '".$params['str']."',1,0) AS exact,
+				if(a.area like '".$params['str']."%',1,0) AS startwith,
+				MATCH(a.area) AGAINST ('" . $params['str'] . "*' IN BOOLEAN MODE) AS score,
+				a.area AS name,
+				a.dcity AS city,
+				b.cityid AS cid
+			FROM 
+				tbl_area_master a
+			JOIN
+				tbl_city_master b
+			ON
+				a.dcity = b.cityname
+			WHERE 
+				MATCH(a.area) AGAINST ('".$params['str']."*' IN BOOLEAN MODE)
+			AND
+				display_flag = 0
+			ORDER BY 
+				exact DESC, startwith DESC, score DESC";
+		
+        $limit = $params['limit']-count($arr);
+        $sql.=" LIMIT $limit";
+		
+        $res=$this->query($sql);
+        if($this->numRows($res)>0)
+        {
+            while($row=$this->fetchData($res))
+            {
+                $arr[]= $row;
+            }
+        }
+		
+		if(count($arr))
+		{
+			 $err=array('Code'=> 0,'Msg'=>'Values are fetched');
+		}
         else
         {
                 $arr = array();

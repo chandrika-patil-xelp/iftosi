@@ -19,6 +19,13 @@
 					echo $res;
 				break;
 				
+				case 'auto':
+					$str = $_GET['str'];
+					$url 	= APIDOMAIN.'index.php?action=suggestCity&str='.urlencode($str).'&page=1&limit=5';
+					$res 	= $comm->executeCurl($url,1);
+					echo $res;
+				break;
+				
 				case 'vendor':
 					$pid = $_GET['productid'];
 					$url = APIDOMAIN."index.php?action=getPrdById&prdid=".$pid;
@@ -36,7 +43,8 @@
 					$tlist	= $_GET['tlist'];
 					$ilist	= $_GET['ilist'];
 					$jlist	= $_GET['jlist'];
-					$url 	= APIDOMAIN.'index.php?action=getPrdByCatid&catid='.$catid.'&page='.$pgno.'&sortby='.$sortby.'&slist='.urlencode($slist).'&clist='.urlencode($clist).'&tlist='.urlencode($tlist).'&ilist='.urlencode($ilist).'&jlist='.urlencode($jlist);
+					$ctid	= $_GET['ctid'];
+					$url 	= APIDOMAIN.'index.php?action=getPrdByCatid&catid='.$catid.'&page='.$pgno.'&sortby='.$sortby.'&slist='.urlencode($slist).'&clist='.urlencode($clist).'&tlist='.urlencode($tlist).'&ilist='.urlencode($ilist).'&jlist='.urlencode($jlist).'&ctid='.$ctid;
 					$res 	= $comm->executeCurl($url);
 					
 					if(!empty($jlist))

@@ -90,8 +90,8 @@ $(document).ready(function() {
 		/* Autocomplete code */
 		if ($(this).attr('id') == 'txtjArea')
 		{
-			var params = 'action=ajx&type=auto&cases=cAuto&str=' + escape($(this).val());
-			new Autosuggest($(this).val(), '#txtjArea', '#jasug', DOMAIN + "index.php", params, true, '', '', event);
+			var params = 'action=ajx&case=auto&str=' + escape($(this).val());
+			new Autosuggest($(this).val(), '#txtjArea', '#jasug', DOMAIN + "index.php", params, false, '', '#ctid', event);
 		}
 	});
 
@@ -99,6 +99,31 @@ $(document).ready(function() {
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function arrangeData(adata, id, divHolder, nextxt)
+{
+    if (adata.results)
+    {
+		var html = '<ul>';
+        $.each(adata.results, function(i, vl) {
+            if (id == '#txtjArea')
+			{
+				var dtval = (vl.city) ? vl.name+' ('+vl.city+')' : vl.name;
+				var dtid = (vl.city) ? vl.id+'_area' : vl.id;
+				html += '<li class="autoSuggstions transition300 txtCap" onmousedown="setAutoData(\'' + dtid + '\',\'' + dtval + '\',\'' + id + '\',\'' + divHolder + '\',\'\',\'#ctid\');" id="' + dtid + '">'+dtval+'</li>';
+			}
+        });
+        html += '</ul>';
+        return html;
+    }
+    else
+        return '';
+}
+
+function makeCall(id, cid) {
+	FR();
+	$('body').animate({scrollTop: $('.allShapes').offset().top-60}, 300);
 }
 
 function getResultsData(data,sortby,showtree)
@@ -540,9 +565,11 @@ function FR(sortby,showtree) {
 	});
 	var tlist = tlistarr.join('|$|');
 	
+	var ctid = $('#ctid').val();
+	
 	if(sortby)
 	{
-		var params = 'action=ajx&case=filter&catid='+catid+'&sortby='+sortby+'&slist='+slist+'&clist='+clist+'&tlist='+tlist+'&ilist='+ilist+'&jlist='+jlist;
+		var params = 'action=ajx&case=filter&catid='+catid+'&sortby='+sortby+'&slist='+slist+'&clist='+clist+'&tlist='+tlist+'&ilist='+ilist+'&jlist='+jlist+'&ctid='+ctid;
 		var URL = DOMAIN + "index.php";
 		$.getJSON(URL, params, function(data) {
 			getResultsData(data,sortby);   
@@ -551,7 +578,7 @@ function FR(sortby,showtree) {
 	else
 	{
 		$('#drpinp').text('Best Match');
-		var params = 'action=ajx&case=filter&catid='+catid+'&slist='+slist+'&clist='+clist+'&tlist='+tlist+'&ilist='+ilist+'&jlist='+jlist;
+		var params = 'action=ajx&case=filter&catid='+catid+'&slist='+slist+'&clist='+clist+'&tlist='+tlist+'&ilist='+ilist+'&jlist='+jlist+'&ctid='+ctid;
 		var URL = DOMAIN + "index.php";
 		$.getJSON(URL, params, function(data) {
 			getResultsData(data);

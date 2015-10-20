@@ -99,13 +99,13 @@ function timout() {
 	timeauto = null;
 }
 
-function setData(cid,cval,id,divHolder,nextxt,hiddenid)
+function setAutoData(cid,cval,id,divHolder,nextxt,hiddenid)
 {
-	common.addToStorage(id.replace('#',''),cval);
+	//common.addToStorage(id.replace('#',''),cval);
 	$(id).val(cval);
 	if(typeof(hiddenid) !== "undefined") {
 		$(hiddenid).val(cid);
-		common.addToStorage(hiddenid.replace('#',''),cid);
+		//common.addToStorage(hiddenid.replace('#',''),cid);
 	}	
 	setTimeout(function (){
 		focusfn();
@@ -144,7 +144,7 @@ var handleKeys = function(evt,txt,divHolder,nextxt,divSelection,hiddenid,params)
 		$(divHolder+' ul li').each(function(index,data) {
 				var dtxt = $(divSelection).text();
 				var id = $(divSelection).attr('id');
-				setData(id,dtxt,txt,divHolder,nextxt,hiddenid);
+				setAutoData(id,dtxt,txt,divHolder,nextxt,hiddenid);
 				return true;
 		});
 		return true;
