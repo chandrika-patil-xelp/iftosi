@@ -151,15 +151,19 @@ switch($action)
             $res=$result;
             break;
 
-//-----------------------------ViewLog----------------------------                
+//-----------------------------Product Enquiry----------------------------                
 
-//  localhost/iftosi/apis/index.php?action=filLog&uid=7&pid=7&vid=6            
+            
+            # IP address is optionall
+//  localhost/iftosi/apis/index.php?action=filLog&uid=7&pid=7&vid=6&ipaddress=192.168.1.1&dflag=1            
         case 'filLog':
-            include APICLUDE.'class.viewlog.php';
+            include APICLUDE.'class.enquiry.php';
             $uid=(!empty($params['uid'])) ? trim($params['uid']) : '';
             $pid=(!empty($params['pid'])) ? trim($params['pid']) : '';
             $vid=(!empty($params['vid'])) ? trim($params['vid']) : '';
-            if(empty($vid) && empty($pid)  &&  empty($uid))
+            $dflg=(!empty($params['dflg'])) ? trim(urldecode($params['dflg'])) : '';
+            
+            if(empty($vid) && empty($pid)  &&  empty($uid) &&  empty($dflg))
             {
                 $arr = array();
                 $err = array('Code' => 1, 'Msg' => 'Invalid Parameters');
@@ -167,14 +171,14 @@ switch($action)
                 $res=$result;
                 break;
             }
-            $obj= new viewlog($db['iftosi']);
+            $obj= new enquiry($db['iftosi']);
             $result= $obj->filLog($params);
             $res = $result;
             break;
 
 //  localhost/iftosi/apis/index.php?action=viewLog&vid=7878787878&page=&limit=                        
         case 'viewLog':
-            include APICLUDE.'class.viewlog.php';
+            include APICLUDE.'class.enquiry.php';
             $vid=(!empty($params['vid'])) ? trim($params['vid']) : '';
             if(empty($vid))
             {
@@ -184,7 +188,7 @@ switch($action)
                 $res=$result;
                 break;
             }
-            $obj= new viewlog($db['iftosi']);
+            $obj= new enquiry($db['iftosi']);
             $result= $obj->viewLog($params);
             $res = $result;
             break;
