@@ -133,7 +133,7 @@
 					
 					include 'template/jewellery_results.html';
 				break;
-				case 'bullion':
+				case 'bullions':
 					$page='bullion';
 					include 'template/bullion_results.html';
 				break;

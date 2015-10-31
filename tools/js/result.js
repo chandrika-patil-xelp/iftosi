@@ -94,7 +94,14 @@ $(document).ready(function() {
 			new Autosuggest($(this).val(), '#txtjArea', '#jasug', DOMAIN + "index.php", params, false, '', '#ctid', event);
 		}
 	});
-
+	
+	$('.pgComm').bind('click', function() {
+		var pgval = $(this).text();
+		$('#pgno').val(pgval);
+		$('.pgComm').removeClass('pgActive');
+		$(this).addClass('pgActive');
+		FR();
+	});
 });
 
 function getRandomInt(min, max) {
@@ -407,6 +414,45 @@ function getResultsData(data,sortby,showtree)
 		});
 	}
 	
+	/* For Pagintion */
+	var pgno = $('#pgno').val()*1;
+	var lastpg = Math.ceil(totalCnt/15);
+	lastpg = 10;
+	
+	html += '<div class="fLeft pagination fmOpenR">';
+		html += '<center>';
+			html += '<div class="pPrev poR ripplelink">Previous</div>';
+			
+			console.log(pgno+' -- '+lastpg);
+			
+			if(pgno < lastpg - 4)
+			{
+				html += '<div class="pgComm poR ripplelink pgActive">'+pgno+'</div>';
+				for(i=pgno+1;i<pgno+4;i++)
+				{
+					html += '<div class="pgComm poR ripplelink">'+i+'</div>';
+				}
+				html += '<div class="pgEmpty"></div>';
+				html += '<div class="pgEmpty"></div>';
+				html += '<div class="pgEmpty"></div>';
+			}
+			else
+			{
+				html += '<div class="pgComm poR ripplelink pgActive">1</div>';
+				html += '<div class="pgEmpty"></div>';
+				html += '<div class="pgEmpty"></div>';
+				html += '<div class="pgEmpty"></div>';
+				for(i=lastpg-3;i<lastpg;i++)
+				{
+					html += '<div class="pgComm poR ripplelink">'+i+'</div>';
+				}
+			}
+			html += '<div class="pgComm poR ripplelink">'+lastpg+'</div>';
+			html += '<div class="pNext poR ripplelink">Next</div>';
+		html += '</center>';
+	html += '</div>';
+	/* ************* */
+	
 	//$('#filters').html(fhtml);
 	
 	/*$(".rngInp").each(function () {
@@ -459,6 +505,14 @@ function getResultsData(data,sortby,showtree)
 	setTimeout(function(){
 		showPrd();
 	},10);
+	
+	$('.pgComm').bind('click', function() {
+		var pgval = $(this).text();
+		$('#pgno').val(pgval);
+		$('.pgComm').removeClass('pgActive');
+		$(this).addClass('pgActive');
+		FR();
+	});
 	
 	$('#resultCount').numerator({
 		toValue: data.results.total,
@@ -572,9 +626,11 @@ function FR(sortby,showtree) {
 	
 	var ctid = $('#ctid').val();
 	
+	var pgno = $('#pgno').val();
+	
 	if(sortby)
 	{
-		var params = 'action=ajx&case=filter&catid='+catid+'&sortby='+sortby+'&slist='+slist+'&clist='+clist+'&tlist='+tlist+'&ilist='+ilist+'&jlist='+jlist+'&ctid='+ctid;
+		var params = 'action=ajx&case=filter&catid='+catid+'&sortby='+sortby+'&slist='+slist+'&clist='+clist+'&tlist='+tlist+'&ilist='+ilist+'&jlist='+jlist+'&ctid='+ctid+'&pgno='+pgno;
 		var URL = DOMAIN + "index.php";
 		$.getJSON(URL, params, function(data) {
 			getResultsData(data,sortby);   
@@ -583,7 +639,7 @@ function FR(sortby,showtree) {
 	else
 	{
 		$('#drpinp').text('Best Match');
-		var params = 'action=ajx&case=filter&catid='+catid+'&slist='+slist+'&clist='+clist+'&tlist='+tlist+'&ilist='+ilist+'&jlist='+jlist+'&ctid='+ctid;
+		var params = 'action=ajx&case=filter&catid='+catid+'&slist='+slist+'&clist='+clist+'&tlist='+tlist+'&ilist='+ilist+'&jlist='+jlist+'&ctid='+ctid+'&pgno='+pgno;
 		var URL = DOMAIN + "index.php";
 		$.getJSON(URL, params, function(data) {
 			getResultsData(data);
