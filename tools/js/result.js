@@ -96,11 +96,14 @@ $(document).ready(function() {
 	});
 	
 	$('.pgComm').bind('click', function() {
-		var pgval = $(this).text();
-		$('#pgno').val(pgval);
-		$('.pgComm').removeClass('pgActive');
-		$(this).addClass('pgActive');
-		FR();
+		if(!$(this).hasClass('pgActive'))
+		{
+			var pgval = $(this).text();
+			$('#pgno').val(pgval);
+			$('.pgComm').removeClass('pgActive');
+			$(this).addClass('pgActive');
+			FR(1);
+		}
 	});
 });
 
@@ -186,6 +189,7 @@ function getResultsData(data,sortby,showtree)
 			});
 		}
 		else if(pageName == 'jewellery') {
+			
 			$.each(data.results.products, function(i, vl) {
 				html += '<div class="prdComm fLeft jwRes transition100" style="opacity: 1; transform: translateX(0px);">';
 					html += '<div class="prdCommDiv fLeft transition100">';
@@ -415,42 +419,96 @@ function getResultsData(data,sortby,showtree)
 	}
 	
 	/* For Pagintion */
+	totalCount = data.results.total;
 	var pgno = $('#pgno').val()*1;
-	var lastpg = Math.ceil(totalCnt/15);
-	lastpg = 10;
+	var lastpg = Math.ceil(totalCount/15);
+	//lastpg = 10;
+	var adjacents = 2;
 	
-	html += '<div class="fLeft pagination fmOpenR">';
-		html += '<center>';
-			html += '<div class="pPrev poR ripplelink">Previous</div>';
-			
-			console.log(pgno+' -- '+lastpg);
-			
-			if(pgno < lastpg - 4)
-			{
-				html += '<div class="pgComm poR ripplelink pgActive">'+pgno+'</div>';
-				for(i=pgno+1;i<pgno+4;i++)
+	if(totalCount > 15)
+	{
+		html += '<div class="fLeft pagination fmOpenR">';
+			html += '<center>';
+				html += '<div class="pPrev poR ripplelink">Previous</div>';
+				if(lastpg < 7 + (adjacents * 2))
 				{
-					html += '<div class="pgComm poR ripplelink">'+i+'</div>';
+					for(var i = 1; i <= lastpg; i++)
+					{
+						if(i == pgno)
+						{
+							html += '<div class="pgComm poR ripplelink pgActive">'+i+'</div>';
+						}
+						else
+						{
+							html += '<div class="pgComm poR ripplelink">'+i+'</div>';
+						}
+					}
 				}
-				html += '<div class="pgEmpty"></div>';
-				html += '<div class="pgEmpty"></div>';
-				html += '<div class="pgEmpty"></div>';
-			}
-			else
-			{
-				html += '<div class="pgComm poR ripplelink pgActive">1</div>';
-				html += '<div class="pgEmpty"></div>';
-				html += '<div class="pgEmpty"></div>';
-				html += '<div class="pgEmpty"></div>';
-				for(i=lastpg-3;i<lastpg;i++)
+				else if(lastpg > 5 + (adjacents * 2))
 				{
-					html += '<div class="pgComm poR ripplelink">'+i+'</div>';
+					if(pgno < 1 + (adjacents * 2))
+					{
+						for (var i = 1; i < 4 + (adjacents * 2); i++)
+						{
+							if(i == pgno)
+							{
+								html += '<div class="pgComm poR ripplelink pgActive">'+i+'</div>';
+							}
+							else
+							{
+								html += '<div class="pgComm poR ripplelink">'+i+'</div>';
+							}
+						}
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgComm poR ripplelink">'+lastpg+'</div>';
+					}
+					else if(lastpg - (adjacents * 2) > pgno && pgno > (adjacents * 2))
+					{
+						html += '<div class="pgComm poR ripplelink">1</div>';
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgEmpty"></div>';
+						for (var i = pgno - adjacents; i <= pgno + adjacents; i++)
+						{
+							if(i == pgno)
+							{
+								html += '<div class="pgComm poR ripplelink pgActive">'+i+'</div>';
+							}
+							else
+							{
+								html += '<div class="pgComm poR ripplelink">'+i+'</div>';
+							}
+						}
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgComm poR ripplelink">'+lastpg+'</div>';
+					}
+					else
+					{
+						html += '<div class="pgComm poR ripplelink">1</div>';
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgEmpty"></div>';
+						for (var i = lastpg - (2 + (adjacents * 2)); i <= lastpg; i++)
+						{
+							if(i == pgno)
+							{
+								html += '<div class="pgComm poR ripplelink pgActive">'+i+'</div>';
+							}
+							else
+							{
+								html += '<div class="pgComm poR ripplelink">'+i+'</div>';
+							}
+						}
+					}
 				}
-			}
-			html += '<div class="pgComm poR ripplelink">'+lastpg+'</div>';
-			html += '<div class="pNext poR ripplelink">Next</div>';
-		html += '</center>';
-	html += '</div>';
+				html += '<div class="pNext poR ripplelink">Next</div>';
+			html += '</center>';
+		html += '</div>';
+	}
 	/* ************* */
 	
 	//$('#filters').html(fhtml);
@@ -507,11 +565,14 @@ function getResultsData(data,sortby,showtree)
 	},10);
 	
 	$('.pgComm').bind('click', function() {
-		var pgval = $(this).text();
-		$('#pgno').val(pgval);
-		$('.pgComm').removeClass('pgActive');
-		$(this).addClass('pgActive');
-		FR();
+		if(!$(this).hasClass('pgActive'))
+		{
+			var pgval = $(this).text();
+			$('#pgno').val(pgval);
+			$('.pgComm').removeClass('pgActive');
+			$(this).addClass('pgActive');
+			FR(1);
+		}
 	});
 	
 	$('#resultCount').numerator({

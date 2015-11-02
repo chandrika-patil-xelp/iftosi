@@ -367,6 +367,14 @@
 			$page   = ($params['page'] ? $params['page'] : 1);
 			$limit  = ($params['limit'] ? $params['limit'] : 15);
 			
+			$sql = "select cat_name as name from tbl_category_master where catid=\"".$params['catid']."\"";
+			$res = $this->query($sql);
+			if($res)
+			{
+				$row = $this->fetchData($res);
+				$catname = $row['name'];
+			}
+			
 			if(!empty($params['jlist']))
 			{
 				$expd = explode('|@|',$params['jlist']);
@@ -389,7 +397,7 @@
 			}
 			
 			$sql = "SELECT 
-						count(1) as cnt 
+						count(distinct product_id) as cnt 
 					FROM 
 						tbl_product_category_mapping
 					".$where."
@@ -404,7 +412,7 @@
 			}
 			
 			$sql = "SELECT 
-						product_id as pid,
+						distinct product_id as pid,
 						price						
 					FROM 
 						tbl_product_category_mapping 
@@ -528,7 +536,7 @@
 				$limit  = ($params['limit'] ? $params['limit'] : 15);
 				
 				$sql = "SELECT 
-							count(1) as cnt 
+							count(distinct product_id) as cnt 
 						FROM 
 							tbl_product_search 
 						WHERE 
@@ -544,7 +552,7 @@
 				
 				$patsql="
 						SELECT
-							product_id,
+							distinct product_id,
 							carat,
 							color,
 							certified,
@@ -718,9 +726,11 @@
 					}
 				}
 				
+				
+				
 				/* *********** */
 				
-				$arr1 = array('filters'=>$data,'products'=>array_values($arr1),'total'=>$total,'getdata'=>$params);
+				$arr1 = array('filters'=>$data,'products'=>array_values($arr1),'total'=>$total,'getdata'=>$params,'catname'=>$catname);
 				$err = array('errCode'=>0,'errMsg'=>'Details fetched successfully');
 			}
 			else

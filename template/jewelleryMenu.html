@@ -1,8 +1,34 @@
 <div id='jwMenu' class="upperMenu dn transition300 upTransit">
     <div class="wrapperMax">
-        <div id='mTitle' class="menuTittle fmOpenL transition300">Jewellery</div>
+        <div id='mTitle' class="menuTittle fmOpenL transition300"><?php echo $showcat['cat_name'];?></div>
         <div class="menuListCont">
-            <div class="mItemDiv fLeft">
+			<?
+			foreach($showcat['subcat'] as $key => $val)
+			{
+				$dname = preg_replace('/[^a-zA-Z0-9]+/', ' ', $val['cat_name']);
+				$dname = ereg_replace("[ \t\n\r]+", " ", $dname);
+				$dname = strtolower(str_replace(" ", "-", $dname));
+			?>
+				<div class="mItemDiv fLeft">
+					<a href="<?php echo DOMAIN.strtolower($showcat['cat_name']).'/'.$dname.'/ct-'.$val['catid'];?>"><div class="mItemTitle fLeft fmOpenL"><?php echo $val['cat_name'];?></div></a>
+					<ul class="fmOpenR">
+					<?
+					foreach($val['subcat'] as $ky => $vl)
+					{
+						$cname = preg_replace('/[^a-zA-Z0-9]+/', ' ', $vl['cat_name']);
+						$cname = ereg_replace("[ \t\n\r]+", " ", $cname);
+						$cname = strtolower(str_replace(" ", "-", $cname));
+					?>
+						<li><a href="<?php echo DOMAIN.strtolower($showcat['cat_name']).'/'.$dname.'/'.$cname.'/ct-'.$vl['catid'];?>"><?php echo $vl['cat_name'];?></a></li>
+					<?
+					}
+					?>
+					</ul>
+				</div>
+			<?
+			}
+			?>
+            <!-- <div class="mItemDiv fLeft">
                 <div class="mItemTitle fLeft fmOpenL">Rings</div>
                 <ul class="fmOpenR">
                     <li>Office Wear Rings</li>
@@ -55,7 +81,7 @@
                     <li>Gemstones</li>
                     <li>White Gold</li>
                 </ul>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

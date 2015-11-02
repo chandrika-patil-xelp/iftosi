@@ -35,7 +35,7 @@
 				break;
 				
 				case 'filter':
-					$pgno 	= 1;
+					$pgno 	= $_GET['pgno'];
 					$catid 	= $_GET['catid'];
 					$sortby	= $_GET['sortby'];
 					$slist	= $_GET['slist'];
@@ -75,18 +75,19 @@
 			$url 	= APIDOMAIN.'index.php?action=getSubCat';
 			$res 	= $comm->executeCurl($url);
 			$headcat= $res['results'];
-			//print_r($headcat);die;
 			
 			if(count($headcat))
 			{
 				foreach($headcat['root'] as $key => $val)
 				{
-					if($val['catid'] == $_GET['catid'])
+					if($val['catid'] == $_GET['catid'] || strtolower($case) == strtolower($val['cat_name']))
 					{
 						$showcat = $val;
 					}
 				}
 			}
+			//echo "<pre>";print_r($showcat);die;
+			
 			switch ($case)
 			{
 				case 'signup':
@@ -107,13 +108,16 @@
 					$res 	= $comm->executeCurl($url);
 					$data 	= $res['results']['products'];
 					$total	= $res['results']['total'];
+					$catname= $res['results']['catname'];
 					//echo "<pre>";print_r($res);die;
 					
 					$url 	= APIDOMAIN.'index.php?action=fetch_category_mapping&catid='.$catid;
 					$res 	= $comm->executeCurl($url);
 					$fil	= $res['results']['attributes'];
 					
-					//echo "<pre>";print_r($fil);die;
+					$totalCnt = $total;
+					$lastpg = ceil($total/15);
+					$adjacents = 2;
 					
 					include 'template/results.html';
 				break;
@@ -126,10 +130,15 @@
 					$res 	= $comm->executeCurl($url);
 					$data 	= $res['results']['products'];
 					$total	= $res['results']['total'];
+					$catname= $res['results']['catname'];
 					
 					$url 	= APIDOMAIN.'index.php?action=fetch_category_mapping&catid='.$catid;
 					$res 	= $comm->executeCurl($url);
 					$fil	= $res['results']['attributes'];
+					
+					$totalCnt = $total;
+					$lastpg = ceil($total/15);
+					$adjacents = 2;
 					
 					include 'template/jewellery_results.html';
 				break;

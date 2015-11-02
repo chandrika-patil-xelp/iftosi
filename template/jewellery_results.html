@@ -17,6 +17,10 @@
                     </div>
                 </div>
             </div>
+			<?php
+			if(count($showcat['subcat']))
+			{
+			?>
             <div class='jShapesCont resultsPage showHide fmOpenL'>
                 <div class="allShapes resultsPage">
                     <center>
@@ -33,11 +37,14 @@
 						</center>
                 </div>
             </div>
+			<?php
+			}
+			?>
             <div class="allResults">
                 <div class="wrapperMax">
                     <div class="filterTitleDiv">
                         <div class='fTitle fLeft fmOpenR'>Filter Results</div>
-                        <div class="rCount fLeft fmOpenR"><span id='resultCount'> 2,835</span> Results Found</div>
+                        <div class="rCount fLeft fmOpenR"><span id='resultCount'> 2,835</span> Results Found For <?php echo $catname;?></div>
                         <div class="fRight sortBox">
                             <div class="dropdownBox fLeft">
                                 <div id="drpinp" class="dropInput fmOpenR">Best Match</div>
@@ -204,6 +211,7 @@
                                 </div>
                                 <?php $i++;
                             } ?>
+							<?php include 'pagination.html';?>
                         </div>
                     </div>
                 </div>
