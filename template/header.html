@@ -38,7 +38,7 @@ switch ($page) {
 						{
 						?>
 							
-							<div id='hbgDiam' class="headCat fLeft bgDiamond transition300 <?php echo $selected;?>">
+							<div id='hbgDiam' class="headCat fLeft bg<?php echo $val['cat_name'];?> transition300 <?php echo $selected;?>">
 								<a href="<?php echo DOMAIN.strtolower($val['cat_name']).'/ct-'.$val['catid'];?>">
 									<span><?php echo $val['cat_name'];?></span>
 								</a>
@@ -50,7 +50,7 @@ switch ($page) {
 						{
 							$showcat = $val;
 						?>
-							<div id='hbgJewel' class="headCat fLeft bgJewellery transition300 <?php echo $selected;?>">
+							<div id='hbgJewel' class="headCat fLeft bg<?php echo $val['cat_name'];?> transition300 <?php echo $selected;?>">
 								<a href="<?php echo DOMAIN.strtolower($val['cat_name']).'/ct-'.$val['catid'];?>" class="fLeft">
 								<span class="transition300"><?php echo $val['cat_name'];?></span>
 								</a>
@@ -62,7 +62,7 @@ switch ($page) {
 						{
 						?>
 							
-							<div id='hbgBull' class="headCat fLeft bgBullion transition300 <?php echo $selected;?>">
+							<div id='hbgBull' class="headCat fLeft bg<?php echo $val['cat_name'];?> transition300 <?php echo $selected;?>">
 								<a href="<?php echo DOMAIN.strtolower($val['cat_name']).'/ct-'.$val['catid'];?>">
 									<span><?php echo $val['cat_name'];?></span>
 								</a>
