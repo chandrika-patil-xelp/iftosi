@@ -1,12 +1,12 @@
-<?php include 'backHead.html' ?>
-<body>
-    <div class="container">
-        <?php include 'backheader.html'; ?>
-        <div class="wrapper">
+<?php include 'vendorHead.html'; ?>
+<div class="mainContainer fLeft">
+    <?php include 'HeaderVendor.html'; ?>
+    <div class="contentCont fLeft">
+        <form id='jwAddForm'>
+            <div class="wrapper">
             <div class="wrapperMax">
+                <div class="vCommTitle fLeft fmOpenL">Select a jewellery you want to add</div>
                 <div class="formContainer fmOpenR">
-                    <div class="formTitle fLeft fmOpenL">Select a type of jewellery you want to add</div>
-
                     <div class="jShapesCont resultsPage showHide fmOpenL fLeft">
                         <div class="allShapes resultsPage">
                             <center>
@@ -20,32 +20,6 @@
                         </div>
                     </div>
 
-
-                    <!--                        <div class="divCon  fLeft fmOpenR jw5">
-                                                <div  class="titleDiv txtCap fLeft">Jewellery Type</div>
-                                                <div class='radioCont fLeft'>    
-                                                    <div class="checkDiv fLeft Round">
-                                                        <input type="radio" class="filled-in" id="rings" name="type">
-                                                        <label for="rings">Rings</label>
-                                                    </div>
-                                                    <div class="checkDiv fLeft Round">
-                                                        <input type="radio" class="filled-in" id="earrings" name="type">
-                                                        <label for="earrings">Earrings</label>
-                                                    </div>
-                                                    <div class="checkDiv fLeft Round">
-                                                        <input type="radio" class="filled-in" id="pendant" name="type">
-                                                        <label for="pendant">Pendant</label>
-                                                    </div>
-                                                    <div class="checkDiv fLeft Round">
-                                                        <input type="radio" class="filled-in" id="necklace" name="type">
-                                                        <label for="necklace">Necklace</label>
-                                                    </div>
-                                                    <div class="checkDiv fLeft Round">
-                                                        <input type="radio" class="filled-in" id="bangle" name="type">
-                                                        <label for="bangle">Bangle</label>
-                                                    </div>
-                                                </div>
-                                            </div>-->
                     <div class="divCon  fLeft fmOpenR">
                         <div  class="titleDiv txtCap fLeft">Ring Type</div>
                         <div class='radioCont fLeft'>    
@@ -298,11 +272,6 @@
                             <div class="checkDiv fLeft">
                                 <input type="radio" name='color' class="filled-in" id="color_O">
                                 <label for="color_O">O</label>
-                            </div>
-                            <!--                                <div class="checkDiv fLeft">
-                                                                <input type="radio" name='color' class="filled-in" id="color_S">
-                                                                <label for="color_S">S</label>
-                                                            </div>-->
                         </div>
                     </div>
                     <div class="divCon  fLeft jw3">
@@ -376,8 +345,13 @@
                 </div>
             </div>
         </div>
+        </form>
     </div>
-    <script>
+</div>
+    <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['jqryUi']; ?>"></script>
+    <script type="text/javascript" src='tools/js/cms/vendor_landing.js'></script>
+        <script>
         function showOther(id){
             $('#'+id).removeClass('dn');
         }

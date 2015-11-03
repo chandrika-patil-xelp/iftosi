@@ -1,13 +1,12 @@
-<?php include 'backHead.html'?>
-    <body>
-        <div class="container">
-            <?php include 'backheader.html';?>
+<?php include 'vendorHead.html'; ?>
+<div class="mainContainer fLeft">
+    <?php include 'HeaderVendor.html'; ?>
+    <div class="contentCont fLeft">
+        <form id='jwAddForm'>
             <div class="wrapper">
                 <div class="wrapperMax">
+                    <div class="vCommTitle fLeft fmOpenL">Select a bullion you want to add</div>
                     <div class="formContainer fmOpenR">
-                        <div class="formTitle fLeft fmOpenL">Select a bullion you want to add</div>
-                        
-                        
                         <div class="jShapesCont resultsPage showHide fmOpenL fLeft">
                             <div class="allShapes resultsPage bresults">
                                 <center>
@@ -20,49 +19,6 @@
                             </div>
                         </div>
 
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-<!--                        <div class="divCon  fLeft fmOpenR dAuto">
-                            <div  class="titleDiv txtCap fLeft">Bullion Type</div>
-                            <div class='radioCont fLeft'>    
-                                <div class="checkDiv fLeft Round">
-                                    <input type="radio" class="filled-in" id="coin" name="btype">
-                                    <label for="coin">Coin</label>
-                                </div>
-                                <div class="checkDiv fLeft Round">
-                                    <input type="radio" class="filled-in" id="bar" name="btype">
-                                    <label for="bar">Bar</label>
-                                </div>
-                            </div>
-                        </div>-->
-<!--                        <div class="divCon  fLeft fmOpenR dAuto">
-                            <div  class="titleDiv txtCap fLeft">Bullion Type</div>
-                            <div class='radioCont fLeft'>    
-                                <div class="checkDiv fLeft Round">
-                                    <input type="radio" class="filled-in" id="gcoin" name="type">
-                                    <label for="gcoin">Gold Coin</label>
-                                </div>
-                                <div class="checkDiv fLeft Round">
-                                    <input type="radio" class="filled-in" id="gbar" name="type">
-                                    <label for="gbar">Gold Bar</label>
-                                </div>
-                                <div class="checkDiv fLeft Round">
-                                    <input type="radio" class="filled-in" id="scoin" name="type">
-                                    <label for="scoin">Silver Coin</label>
-                                </div>
-                                <div class="checkDiv fLeft Round">
-                                    <input type="radio" class="filled-in" id="sbar" name="type">
-                                    <label for="sbar">Silver Bar</label>
-                                </div>
-                            </div>
-                        </div>-->
                         <div class="divCon2  fLeft ">
                             <div  class="titleDiv txtCap fLeft">Gold Purity</div>
                             <input name="gold_purity" type="text" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666">
@@ -92,6 +48,10 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </body>
+    </div>
+</div>
+<script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
+<script type="text/javascript" src="<?= $jvs['jqryUi']; ?>"></script>
+<script type="text/javascript" src='tools/js/cms/vendor_landing.js'></script>
+</body>
 </html>

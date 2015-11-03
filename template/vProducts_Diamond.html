@@ -1,54 +1,46 @@
-<?php include 'backHead.html' ?>
-<body class="">
-    <div class="container vProducts p020">
-<!--        <center><div class="backLogo fmOpenR"><div><b>IF</b>to<b>SI</b></div></div></center>-->
-        <div class="wrapper">
-            <div class="vHeader">
-                <div class="wrapperMax">
-                   <div class="vLogo fmOpenR"><div><b>IF</b>to<b>SI</b></div></div>
-                </div>
-            </div>
-            <div class="wrapperMax">
-                <div class="formTitle fLeft fmOpenL dn">Your listed diamond products</div>
-                <div class="prdResults fRight">
-                    <div class='prdSearchDiv fLeft'>.
-                        <input type="text" class="prdSeachTxt fRight fmOpenR" placeholder=" Search your Product">
-                    </div>
-                    <div class="prdListHeader fLeft fmOpenR">
-                        <div class="sno fLeft">Sr No.</div>
-                        <div class="barcode fLeft">Barcode</div>
-                        <div class="shape fLeft">Shape</div>
-                        <div class="color fLeft">Color</div>
-                        <div class="carats fLeft">Carats</div>
-                        <div class="clarity fLeft">Clarity</div>
-                        <div class="cert fLeft">Certificate</div>
-                        <div class="price fLeft">Price</div>
-                        <div class="acct fLeft">Action</div>
-                    </div>    
-                    <ul class='prdul fLeft fmOpenR'>
-                        <?php for($i=1;$i<15;$i++){ ?>
-                        <li>
-                            <div class="sno fLeft"><?php echo $i?></div>
-                            <div class="barcode fLeft">CW0H8IE9</div>
-                            <div class="shape fLeft">Round</div>
-                            <div class="color fLeft">F</div>
-                            <div class="carats fLeft">0.33</div>
-                            <div class="clarity fLeft">IF</div>
-                            <div class="cert fLeft">GIA</div>
-                            <div class="price fLeft">&#8377;1,000,000,000</div>
-                            <div class="acct fLeft">
-                                <center>
-                                    <div class="deltBtn poR ripplelink"></div>
-                                    <div class="editBtn poR ripplelink"></div>
-                                    <div class="soldBtn poR ripplelink fmOpenR">SOLD</div>
-                                </center>
-                            </div>
-                        </li>
-                        <?php }?>
-                    </ul>
-                </div>
-            </div>
-        </div>
+<div class="prdResults fRight">
+    <div id='dmdS' class='prdSearchDiv fLeft'>
+        <div class="formTitle fLeft fmOpenR m0">2050 diamonds listed</div>
+        <a href='<?php echo DOMAIN?>?case=diamond_Form'><div class="addPrdBtn fRight poR ripplelink">Add Diamond</div></a>
+        <input type="text" class="prdSeachTxt fRight fmOpenR" placeholder=" Search your Product">
+        <div class="vFilBtn fRight poR ripplelink"></div>
     </div>
-</body>
-</html>
+    <div class="prdListHeader fLeft fmOpenR">
+        <div class="date fLeft">Date</div>
+        <div class="barcode fLeft">Barcode</div>
+        <div class="shape fLeft">Shape</div>
+        <div class="color fLeft">Color</div>
+        <div class="carats fLeft">Carats</div>
+        <div class="clarity fLeft">Clarity</div>
+        <div class="cert fLeft">Certificate</div>
+        <div class="price fLeft">Price</div>
+        <div class="acct fLeft">Action</div>
+    </div>    
+    <ul class='prdul fLeft fmOpenR'>
+        <?php for ($i = 1; $i < 15; $i++) { ?>
+            <li>
+                <div class="date fLeft"> 
+                    <span class="upSpan">20/10/2015</span>
+                    <span class="lwSpan">8:10 Pm</span>
+                </div>
+                <div class="barcode fLeft">
+                    <span class="upSpan">CW0H8IE9</span>
+                    <span class="lwSpan"><a href="http://localhost/iftosi//gia-round-clarity-IF/pid-10000">View Details</a></span>
+                </div>
+                <div class="shape fLeft">Round</div>
+                <div class="color fLeft">F</div>
+                <div class="carats fLeft">0.33</div>
+                <div class="clarity fLeft">IF</div>
+                <div class="cert fLeft">GIA</div>
+                <div class="price fLeft fmOpenB">&#8377;1,000,000,000</div>
+                <div class="acct fLeft">
+                    <center>
+                        <div class="deltBtn poR ripplelink"></div>
+                        <div class="editBtn poR ripplelink"></div>
+                        <div class="soldBtn poR ripplelink fmOpenR">SOLD</div>
+                    </center>
+                </div>
+            </li>
+        <?php } ?>
+    </ul>
+</div>

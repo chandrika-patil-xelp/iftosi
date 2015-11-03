@@ -590,13 +590,6 @@ a{cursor:pointer;}
 .cardComm {width: 100%;height: 25px;line-height: 25px;font-size:18px;padding: 0;margin-top: 10px;color:#4d4d4d;}
 
 
-
-
-
-
-
-
-
 /*Contact Card*/
 .vdCenterCard {width: 50%;height:100%;padding:0px;}
 .cntCard {width: 100%;height: auto;padding: 0;border-radius: 5px;margin-bottom: 15px;box-shadow: 3px 3px 1px 0 rgba(235,235,222,0.9);color: #4d4d4d;overflow: hidden;}
@@ -742,6 +735,63 @@ a{cursor:pointer;}
 .jshapeComm.shapeSelected.sBar:hover{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position: center;box-shadow:inset 0 -300px 100px rgba(42, 14, 52,0.8);}
 .jshapeComm.shapeSelected.gCoin:hover{background: url(../img/common/gCoin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow:inset 0 -300px 100px rgba(56, 11, 52,0.8);}
 .jshapeComm.shapeSelected.sCoin:hover{background: url(../img/common/sCoin.jpg)no-repeat;background-size: cover;background-position:bottom;box-shadow:inset 0 -300px 100px rgba(94, 0, 55,0.8);}
+
+
+
+
+/*About Us Page*/
+.aboutus{}
+.aboutus .logo {position: absolute;}
+
+
+.bgHolder{width:100%;height: 300px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding:220px 0 35px 0;}
+.heading{width:100%;height:auto; max-width:1200px; margin:auto;color:#fff;padding:0 10px 0 10px;}
+.abTex{ color:#333;height:600px ;padding:30px;}
+.texHolder{width:100%;height:auto;padding:20px;}
+.wrapperA{width:100%;height:auto; display:inline-block;}
+.underLn{border-bottom:1px solid #EBEBDE;}
+.row{width:100%;height:auto;}
+.containerA{width:100%;height:auto;float:left;}
+.containerB{width:50%;height:auto;float:left;}
+.containerC{width:33.3%;height:auto;float:left;}
+/*Contact Us Page*/
+.contLeft{width:60%; height:auto;border-right:1px solid #EBEBDE;padding:0 10px 0 10px ;}
+.contRight{width:40%; height:auto;padding:10% 10px 0 50px ;}
+.texBlk{width:100%;height:auto;padding:10px 0 10px 0;}
+.inp1{width:100%; height:50px; border:1px solid #EBEBDE; border-radius:5px;margin-bottom:20px;padding-left:60px;}
+.iconName{background-image:url(../img/common/iconName.svg);background-repeat:no-repeat;background-position:center left;}
+.iconEmail{background-image:url(../img/common/iconEmail.svg);background-repeat:no-repeat;background-position:center left;}
+.iconMobile{background-image:url(../img/common/iconMobileNumber.svg);background-repeat:no-repeat;background-position:center left;}
+textarea[name=feedback] {resize: none;}
+.feedback{width:100%;height:150px;padding:10px; border:1px solid #EBEBDE; border-radius:5px;margin-bottom:20px;}
+
+
+/*FAQ Page*/
+.faqs{width:100%;height:auto;padding:20px 0px;}
+.faq{}
+.faq .logo {position: absolute;}
+.ques{width:100%; height:auto;padding:10px 20px;  margin-bottom:10px;  border-bottom:1px solid #EBEBDE; position:relative;cursor:pointer;background-color:#EBEBDE ;border-radius:5px;}
+.ans{width:100%; height:auto;padding:0px 20px 0px 20px; border-bottom:1px solid #EBEBDE; position:relative; display:none;font-size:16px;}
+
+.dnArrow{height:50px;width:50px;position:absolute;top:0;left:0;}
+.padLeft{padding-left:50px !important;}
+.para{padding-bottom: 10px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @media only screen and (min-width: 960px) and (max-width: 1024px){

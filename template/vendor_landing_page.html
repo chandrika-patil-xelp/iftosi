@@ -1,162 +1,148 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Vendor</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link rel='stylesheet' type="text/css" href='tools/css/backend.css'>
-        <link rel='stylesheet' type="text/css" href='tools/css/ripple.css'>
-        <script type="text/javascript" src='tools/js/cms/lib/jquery.js'></script>
-        <script type="text/javascript" src='tools/js/cms/Common.js'></script>
-        <script type="text/javascript" src='tools/js/cms/lib/ripple.js'></script>
-    </head>
-    <body>
-        <div class="mainContainer fLeft">
-            <div class="topFixedCont">
-                <div class="vndHeader fLeft">
-                    <div class="wrapperMax">
-                        <div class="vndLogo fLeft fmOpenR"><b>IF</b>to<b>SI</b></div>
-                        <div class="vndInfo fRight fmOpenR">
-                            Hi, White Fire Jewels 
-                            Logout
-                        </div>
-                    </div>
+<?php include 'vendorHead.html'; ?>
+<div class="mainContainer fLeft">
+    <?php include 'HeaderVendor.html'; ?>
+    
+    <!------Dashboard Content------>
+    <div id='dashboard' class="contentCont fLeft dn dashboard">
+        <div class="wrapperMax">Dashboard</div>
+    </div>
+    <!------Dashboard Content End------>
+    
+    
+    
+    
+    <!------Product Content------>
+    <div id='product' class="contentCont fLeft dn">
+        <div class="wrapperMax">
+            <div id='diamondPrds' class="forPrds fLeft fmOpenR">
+                <?php include 'vProducts_Diamond.html'; ?>
+            </div>
+            <div id='jewelleryPrds' class="forPrds fLeft fmOpenR dn">
+                <?php include 'vProducts_jewellery.html'; ?>
+            </div>
+            <div id='bullionPrds' class="forPrds fLeft fmOpenR dn">
+                <?php include 'vProducts_bullion.html'; ?>
+            </div>
+        </div>
+    </div>
+    <!------Product Content End------>
+
+
+    <!------Enquiry Contents ------>
+    <?php include 'vendor_enquiries.html'; ?>
+
+    <div class="v_Filters transition300 transit100X">
+        <div class="closeFilter poR ripplelink" onclick="showEnqFilter()"></div>
+        <div class="filterCont fLeft halfSize">
+            <div class="fLeft optionTitle fmOpenR">Date</div>
+            <div class="filterByDate fLeft fmOpenRs">
+                <div class="datadiv fLeft">
+                    <div class="toorTxt fLeft">From Date</div>
+                    <input type="text" id="dateFrom" class="fLeft prdSeachTxt" readonly value="2015-09-15" onfocus="showCalander('dateFrom')" onkeyup="checkToHide(event);"></div>
+                <div class="datadiv fRight">                            
+                    <div class="toorTxt fLeft">To Date</div>
+                    <input type="text" id="dateTo"  class="fLeft prdSeachTxt" readonly value="2015-10-15" onfocus="showCalander('dateTo')" onkeyup="checkToHide(event);">
                 </div>
-                <div class="vndTabs fLeft fmOpenR">
-                    <div class="wrapperMax">
-                        <div class="vndTabs fLeft fmOpenR">
-                            <div class="wrapperMax">
-                                <div  class="fLeft vTabs  transition300">Dashboard</div>
-                                <div class="fLeft vTabs">
-                                    <div class="dropdownBox fLeft">
-                                        <div id='productsTab'  class="dropInput fmOpenR">Products</div>
-                                        <ul id='productsTabList' class="dropList fmOpenR">
-                                            <li class="transition100" id=""><a href='<?php echo DOMAIN; ?>?case=vProduct_diamond'>Diamond</a></li>
-                                            <li class="transition100" id=""><a href='<?php echo DOMAIN; ?>?case=vProduct_jewellery'>Jewellery</a></li>
-                                            <li class="transition100" id=""><a href='<?php echo DOMAIN; ?>?case=vProduct_bullion'>Bullions</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div  class="fLeft vTabs transition300 vSelected">Enquiries</div>
-                                <div  class="fLeft vTabs transition300">Reports</div>
-                                <div  class="fLeft vTabs transition300">Settings</div>
-                            </div>
-                        </div>
-                    </div>
+                <div id="datepicker" class="dn"></div>
+            </div>
+        </div>
+        <div class="filterCont fLeft halfSize">
+            <div class="fLeft optionTitle fmOpenR">Price</div>
+            <div class="fLeft rangeCont">
+                <div class="fLeft rangeDiv">
+                    <input type="text" id="priceRange" class="fLeft rngInp irs-hidden-input" style="visibility: hidden;" readonly="">
                 </div>
             </div>
-            <div class="contentCont fLeft">
-                <div class="wrapperMax">
-                    <div class="forEnq fLeft fmOpenR">
-                        <div class="prdResults fLeft">
-                            <div class='prdSearchDiv fLeft'>.
-                                <input type="text" class="prdSeachTxt fRight fmOpenR" placeholder=" Search your Product">
-                            </div>
-                            <div class="prdListHeader fLeft fmOpenR">
-                                <div class="date fLeft">Date</div>
-                                <div class="name fLeft">Name</div>
-                                <div class="mobile fLeft">Mobile</div>
-                                <div class="email fLeft">Email</div>
-                                <div class="barcode fLeft">Barcode</div>
-                                <div class="viewBtn fLeft">Details</div>
-                                <div class="price fLeft bNone">Price</div>
-                            </div>
-
-                            <ul class='prdul fLeft fmOpenR'>
-                                <?php for ($i = 1; $i < 15; $i++) { ?>
-                                    <li>
-                                        <div class="date fLeft">20/10/2015 &nbsp; 8:10 Pm</div>
-                                        <div class="name fLeft">Shubham Gupta</div>
-                                        <div class="mobile fLeft">8767194608</div>
-                                        <div class="email fLeft">shubham@xelpmoc.in</div>
-                                        <div class="barcode fLeft">CW0H8IE9</div>
-                                        <div class="viewBtn fLeft"><a href='<?php echo DOMAIN;?>/gia-round-clarity-IF/pid-10000'>View Details</a></div>
-                                        <div class="price fLeft bNone">&#8377;1,000,000,000</div>
-                                    </li>
-                                <?php } ?>
-                            </ul>
-                        </div>
-                    </div>
+        </div>
+        <div class="filterCont fLeft ">
+            <div class="fLeft optionTitle fmOpenR">Category</div>
+            <div class="filterOptions fLeft fmOpenR">
+                <div class="checkDiv fLeft">
+                    <input type="checkbox" class="filled-in" id="diamonds">
+                    <label for="diamonds">Diamonds</label>
+                </div>
+                <div class="checkDiv fLeft">
+                    <input type="checkbox" class="filled-in" id="jewellery">
+                    <label for="jewellery">Jewellery</label>
+                </div>
+                <div class="checkDiv fLeft">
+                    <input type="checkbox" class="filled-in" id="bullions">
+                    <label for="bullions">Bullions</label>
                 </div>
             </div>
-            <div class="prdHeader fLeft transition100 pLHtransit">
-                <div class="wrapperMax">
-                    <div class="prdListHeader fLeft fmOpenR">
-                        <div class="date fLeft">Date</div>
-                        <div class="name fLeft">Name</div>
-                        <div class="mobile fLeft">Mobile</div>
-                        <div class="email fLeft">Email</div>
-                        <div class="barcode fLeft">Barcode</div>
-                        <div class="viewBtn fLeft">Details</div>
-                        <div class="price fLeft bNone">Price</div>
-                    </div>
-                </div>
+        </div>
+        <div class="filterCont fLeft c666 pointer">Clear All</div>
+    </div>
+
+    <div id='enqFheader' class="prdHeader fLeft transition100 pLHtransit dn">
+        <div class="wrapperMax">
+            <div class="prdListHeader fLeft fmOpenR">
+                <div class="date fLeft">Date</div>
+                <div class="name fLeft">Name</div>
+                <div class="email fLeft">Email</div>
+                <div class="type fLeft">Category</div>
+                <div class="barcode fLeft">Barcode</div>
+                <div class="price fLeft bNone">Price</div>
             </div>
-        <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
+        </div>
+    </div>
+    <!------Enquiry Contents End------>
 
-            
+    
+    <!------Product Headers------>
+    <div id='diamondFheader' class="prdHeader fLeft transition100 pLHtransit dn">
+        <div class="wrapperMax">
+            <div class="prdListHeader fLeft fmOpenR">
+                <div class="date fLeft">Date</div>
+                <div class="barcode fLeft">Barcode</div>
+                <div class="shape fLeft">Shape</div>
+                <div class="color fLeft">Color</div>
+                <div class="carats fLeft">Carats</div>
+                <div class="clarity fLeft">Clarity</div>
+                <div class="cert fLeft">Certificate</div>
+                <div class="price fLeft">Price</div>
+                <div class="acct fLeft">Action</div>
+            </div>
+        </div>
+    </div>
+    <div id='jewelleryFheader' class="prdHeader fLeft transition100 pLHtransit dn">
+        <div class="wrapperMax">
+            <div class="prdListHeader fLeft fmOpenR">
+                <div class="date fLeft">Date</div>
+                <div class="barcode fLeft">Barcode</div>
+                <div class="degno fLeft">Design No.</div>
+                <div class="metal fLeft">Metal</div>
+                <div class="catg fLeft">Category</div>
+                <div class="subType fLeft">Sub Category</div>
+                <div class="price fLeft">Price</div>
+                <div class="acct fLeft">Action</div>
+            </div>  
+        </div>
+    </div>
+    <div id='bullionFheader' class="prdHeader fLeft transition100 pLHtransit">
+        <div class="wrapperMax">
+            <div class="prdListHeader fLeft fmOpenR">
+                <div class="date fLeft">Date</div>
+                <div class="barcode fLeft">Barcode</div>
+                <div class="btype fLeft">Type</div>
+                <div class="metal fLeft">Metal</div>
+                <div class="purity fLeft">Purity</div>
+                <div class="weight fLeft">Weight</div>
+                <div class="price fLeft">Price</div>
+                <div class="acct fLeft">Action</div>
+            </div>
+        </div>
+    </div>
+    <!------Product Headers------>
 
-            <script>
-                
-                var lastSc=0;
-                $(document).ready(function(){
-                    $(window).scroll(function() {
-                        var sc = $(window).scrollTop();
-                        if(sc>60){
-                            $('.prdHeader').removeClass('pLHtransit dn');
-                        }else if(lastSc>sc){
-                            $('.prdHeader').addClass('pLHtransit');
-                        } 
-                        lastSc=sc;
-                    });
-                });
-        
-        
-        
-        
-        
-        
-                var isOpen = false;
-                var id = "";
-                $('.dropInput').mouseover(function() {
-                    id = $(this).attr('id');
-                    setTimeout(function() {
-                        isOpen = true;
-                    }, 150);
-                    toggleDropDown(true, id);
-                });
-
-
-                $('.dropList').mouseleave(function() {
-                    toggleDropDown(false, id);
-                });
-
-
-    //            $('.vndTabs li').click(function() {
-    //                isOpen = false;
-    //                toggleDropDown(false,id);
-    //            });
-
-                $(document).click(function() {
-                    if (isOpen) {
-                        toggleDropDown(false, id);
-                    }
-                });
-
-                $('.vTabs').click(function() {
-                    $(this).addClass('vSelected');
-                });
-
-                function toggleDropDown(flag, id) {
-                    if (flag) {
-                        $("#" + id + "List").velocity({opacity: 1, borderRadius: 0}, {duration: 200, display: "block"});
-                    }
-                    else {
-                        $("#" + id + "List").velocity({opacity: 0, borderRadius: '100%'}, {duration: 50, display: "none"});
-                    }
-
-                }
-
-            </script>
-    </body>
+    <!------Settings Content------>
+    <div id='settings' class="contentCont fLeft dn settings dn">
+        <div class="wrapperMax">Settings</div>
+    </div>
+    <!------Settings Content End------>
+</div>
+<script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
+<script type="text/javascript" src="<?= $jvs['jqryUi']; ?>"></script>
+<script type="text/javascript" src='tools/js/cms/vendor_landing.js'></script>
+</body>
 </html>

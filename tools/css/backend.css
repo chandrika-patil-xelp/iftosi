@@ -55,7 +55,7 @@ a{text-decoration: none;}
 .wrapper{width:100%;height:auto;}
 .wrapperMax{width:100%;max-width: 1200px;height:100%;margin: auto;}
 .formContainer{width:100%;height: auto;padding:0px;display: inline-block;}
-.formTitle{width:100%;height: 50px;font-size: 35px;color:#4d4d4d;margin:20px 0;text-align: center;}
+.formTitle{width:auto;height: 35px;font-size: 25px;color:#4d4d4d;margin:20px 0;text-align: center;}
 
 /*Contents*/
 .header {width: 100%;height: 50px;background: #8A0044;line-height: 70px;position: fixed;top: 0;z-index: 99;padding: 10px 0;}
@@ -132,8 +132,8 @@ a{text-decoration: none;}
 
 /*Jewellery Results Page*/
 .jShapesCont {width: 100%;height: 225px;background: #fff;padding: 0px 0 0px 0;position: relative;z-index: 0;}
-.jshapeComm {margin: 0;width: 20%;padding-bottom: 0;height: 225px;border: 0px solid transparent;position: relative;display: inline-block;cursor: pointer;padding-top: 155px;color: #F3EFEF;font-size: 25px;line-height: 70px;box-shadow: inset 0 -70px 70px rgba(0,0,0,0.5);border-right:2px solid #fff;border-top: 2px solid #fff;vertical-align: top;}
-.jshapeComm:hover {padding-top: 85px;font-size: 30px;}
+.jshapeComm {margin: 0;width: 20%;padding-bottom: 0;height: 225px;border: 0px solid transparent;position: relative;display: inline-block;cursor: pointer;padding-top: 155px;color: #F3EFEF;font-size: 20px;line-height: 70px;box-shadow: inset 0 -70px 70px rgba(0,0,0,0.5);border-right:2px solid #fff;border-top: 2px solid #fff;vertical-align: top;}
+.jshapeComm:hover {padding-top: 85px;font-size: 25px;}
 .jshapeComm::after{content: '';position: absolute;right: 0px; left:0px; bottom: 70px;margin: auto; width: 00px;height: 00px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;-moz-transition: 100ms ease-in-out;-ms-transition: 100ms ease-in-out;-webkit-transition: 100ms ease-in-out;-o-transition: 100ms ease-in-out;}
 
 .Rings{background: url(../img/common/ifrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(23, 19, 52,0.9);}
@@ -161,7 +161,7 @@ a{text-decoration: none;}
 .jshapeComm.shapeSelected.Bracelet:hover{background: url(../img/common/ifbracelet.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
 
 .jshapeComm.shapeSelected span{color:#8A0044;}
-.jshapeComm.shapeSelected{background-color: #fff;border-right: 2px solid #FFF;padding-top: 75px;font-size: 30px;}
+.jshapeComm.shapeSelected{background-color: #fff;border-right: 2px solid #FFF;padding-top: 75px;font-size: 25px;}
 .jshapeComm.shapeSelected::after{content: '';position: absolute;right: 0px; left:0px; bottom: 50px;margin: auto; width: 40px;height: 40px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;}
 
 
@@ -251,6 +251,7 @@ a{text-decoration: none;}
 .jshapeComm.shapeSelected.sCoin:hover{background: url(../img/common/sCoin.jpg)no-repeat;background-size: cover;background-position:bottom;box-shadow: inset 0 -300px 100px rgba(56, 11, 52,0.8);}
 .jshapeComm.shapeSelected.sBar:hover{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
 
+
 .otherBox{width:300px;height:35px;margin-top: -5px;}
 .othTxtinp{width:300px;height: 100%;border:1px solid #d4d4c8;outline: none;padding: 0 15px;border-radius: 5px}
 
@@ -308,6 +309,7 @@ a{text-decoration: none;}
 .prdListHeader{width:100%;height: 45px;background: #ebebde;border:1px solid #d4d4c8;}
 .prdListHeader div{border-right:1px solid #d4d4c8;height: 100%;line-height: 43px;padding: 0 15px;font-size: 13px;}
 
+.prdListHeader_ div{border-right:1px solid #d4d4c8;height: 100%;line-height: 43px;padding: 0 15px;font-size: 13px;background: transparent url(../img/common/sorting.svg)no-repeat;background-size: auto 50%;background-position: 90% center;}
 
 .sno{width:6%;}
 .barcode{width:12%;}
@@ -317,7 +319,7 @@ a{text-decoration: none;}
 .clarity{width:6%;}
 .cert{width:12%;}
 .price {width:13%;}
-.acct{width:27%;border-right: none!important;text-align: center;}
+.acct{width:24%;border-right: none!important;text-align: center;}
 
 
 .degno{width:10%;}
@@ -341,8 +343,8 @@ a{text-decoration: none;}
 .soldBtn {vertical-align: top;display: inline-block;width: auto;height: 36px!important;line-height: 40px;color: #fff;background: #8A0044 url(../img/common/sold.svg)no-repeat;background-size: auto 80%;background-position: 5px bottom;padding: 0!important;margin: 7px;cursor: pointer;border: none!important;font-size: 14px;padding: 0 30px 0 40px!important;border-radius: 5px;}
 
 
-.prdSearchDiv{width:100%;height: 45px;background: #fff;padding:5px 0px;margin-top: 15px;}
-.prdSeachTxt{width:200px;height: 35px;border:1px solid #d4d4c8;outline: none;outline-style: none;padding: 0 15px;border-radius: 5px;}
+.prdSearchDiv{width:100%;height: 55px;background: #fff;padding:10px 0px;margin-top: 0px;}
+.prdSeachTxt{width:200px;height: 35px;border:1px solid #d4d4c8;outline: none;outline-style: none;padding: 0 15px;border-radius: 5px;font-size: 14px;}
 
 
 .vHeader{width:100%;height: 60px;background: #8A0044;position: fixed;z-index: 15;top:0;}
@@ -350,49 +352,106 @@ a{text-decoration: none;}
 .vLogo div{width:100%;height: 30px;color: #fff;text-align: center;}
 
 
-.prdHeader{width: 100%;position: fixed;height:45px;top: 60px;z-index: 10;background: #ebebde;overflow: hidden;}
+.prdHeader{width: 100%;position: fixed;height:45px;top: 100px;z-index:10;background: #ebebde;overflow: hidden;}
 .pLHtransit{height: 0!important;}
 
 
 /*Vendor Landing Page*/
 
-.mainContainer{width:100%;height: 650px;padding:0 0 50px 0;}
+.mainContainer{width:100%;height:auto;padding:0 0 0px 0;}
 .topFixedCont{width:100%;height:100px;position: fixed;top:0;z-index: 10;}
 .vndHeader{width:100%;height:60px;background: #8A0044;}
 .vndLogo {width: auto;height: 100%;color: #fff;padding: 0 25px 0 35px;font-size: 30px;line-height: 60px;background: #8A0044 url(../img/common/logo.svg)no-repeat;background-size: auto 50%;background-position: left center;}
 .vndInfo{width:auto;height: 100%;line-height: 60px;color:#fff;font-size: 13px;}
-
-
 .vndTabs{width:100%;height: 40px;background: #8A0044}
-.vTabs {width: 150px;text-align: center;max-width: 25%;height: 40px;line-height: 40px;margin: 0;color:#fff;font-size: 14px;cursor: pointer;margin: 0 10px 0 0;}
-.vTabs:hover{background: rgba(0,0,0,0.2)}
+.vTabs {width: 150px;text-align: center;max-width: 25%;height: 40px;line-height: 40px;margin: 0;color:#fff;font-size: 14px;cursor: pointer;margin: 0 10px 0 0;    border-radius: 5px 5px 0 0;}
+.vTabs:hover{background: rgba(0,0,0,0.2);color:#fff;}
 .vSelected{background: #fff;color:#4d4d4d!important;}
-
+.vSelected:hover{background: #fff;color:#4d4d4d!important;}
 .dropdownBox {width: 100%;position: relative;z-index: 10;padding: 10px;}
 .dropInput {width: 100%;height: 40px;position: absolute;top: 0;left: 0;cursor: pointer;outline: none;background-size: auto 100%;background-position: right center;border-radius: 0;padding: 0;font-size: 14px;}
-.dropdownBox ul {margin: 0;padding: 0;border-radius: 100%;width: 100%;height: auto;overflow: hidden;list-style: none;position: absolute;top: 0;left: 0;background-color: #fff;box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);opacity: 0;display: none;}
+.dropdownBox ul {margin: 0;padding: 0;border-radius: 100%;width: 100%;height: auto;overflow: hidden;list-style: none;position: absolute;top: 40px;left: 0;background-color: #fff;box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);opacity: 0;display: none;}
 .dropdownBox ul li {margin: 0;padding: 0;width: 100%;height: 45px;line-height: 45px;padding: 0 15px;font-size: 13px;color: #4d4d4d;border-bottom: 1px solid #ccc;cursor: pointer;}
 .dropdownBox ul li:hover {background: #171334;color: #fff;border-bottom: transparent;}
 .dropdownBox ul li a{width:100%;height: 100%;display: block;color:#4d4d4d;text-decoration: none;}
 .dropdownBox ul li:hover a{color:#fff;text-decoration: none;}
+
 /*Contents*/
-
-.contentCont{width:100%;height: auto;background: #fff;padding:120px 15px 50px 15px}
-
-.forEnq{width:100%;height: 100%;}
-.date{width:15%;}
+.contentCont{width:100%;height: auto;background: #fff;padding:100px 15px 50px 15px;position: relative;z-index: 0;}
+.forEnq{width:100%;height: auto;}
+.date{width:9%;}
 .name{width:20%;}
 .mobile{width:10%;}
-.email{width:20%;}
+.type{width:20%;}
+.email{width:26%;}
 .viewBtn{width:10%;}
 .bNone{border-right: none!important}
 
+.enqUL .email{padding:7px 15px;}
+.enqUL .date{padding:7px 15px;font-size: 12px;}
+.enqUL .type{padding:7px 15px;}
+.enqUL .barcode{padding:7px 15px;}
+.enqUL .barcode .lwSpan{font-size: 12px;color:#5e0037}
+.enqUL .barcode .lwSpan a{color:#0090A5}
+
+.prdul .email{padding:7px 15px;}
+.prdul .date{padding:7px 15px;font-size: 12px;}
+.prdul .type{padding:7px 15px;}
+.prdul .barcode{padding:7px 15px;}
+.prdul .barcode .lwSpan{font-size: 12px;color:#5e0037}
+.prdul .barcode .lwSpan a{color:#0090A5}
 
 
 
+.upSpan{display: block;width:100%;line-height: 20px}
+.lwSpan{display: block;width:100%;color: #5e0037;line-height: 15px}
+.fTitle {width: auto;height: 35px;cursor:pointer;line-height: 35px;padding:0 15px 0 30px;color: #4d4d4d;font-size: 25px;background: url(../img/common/filter.svg)no-repeat;background-size: auto 70%;background-position: 5px 9px;}
+
+
+.v_Filters{width:350px;height: 100%;position: fixed;right:0;top:0;background: #fff;box-shadow: 0 0 20px 5px rgba(0,0,0,0.2);padding: 110px 20px 20px 20px;z-index: 9}
+
+.filterCont {width: 100%;height: auto;padding: 0 5px 15px 5px;border: 0px solid #333;}
+.optionTitle {width: 100%;font-size: 25px;letter-spacing: -0.05em;color: #4d4d4d;margin-bottom: 10px;}
+
+.rangeCont {width: 100%;background: #fff;border-radius: 5px;padding: 0;}
+.rangeDiv {width: 100%;padding: 10px 10px 0 10px;}
+.rngInp {height: 0;border: 0px solid #fff;padding: 0;}
+
+.v_Filters .checkDiv{width:100%;}
+
+/*Calander*/
+.hasDatepicker{width:260px !important;font-size: 12px;height:auto;position: absolute;z-index: 111;font-family:openR;box-shadow: 5px 5px 20px 0 rgba(0,0,0,0.3);-webkit-box-shadow: 5px 5px 20px 0 rgba(0,0,0,0.3);-moz-box-shadow: 5px 5px 20px 0 rgba(0,0,0,0.3);-ms-box-shadow: 5px 5px 20px 0 rgba(0,0,0,0.3);-o-box-shadow: 5px 5px 20px 0 rgba(0,0,0,0.3);}
+.ui-datepicker{background: #fff;width: 260px!important;padding: 15px;}
+.ui-datepicker-calendar{width:100%;}
+.ui-datepicker-calendar a{text-decoration: none;color:#666}
+.ui-datepicker-calendar td{width:14%;height: 30px;text-align: center;margin:0;padding:0;}
+.ui-datepicker-calendar th{width:14%;height: 30px;background: #f0f0f0;color:#8A0044;font-weight: normal;}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{width:100%;height: 30px;display: block;border:0px solid #e6e6e6;line-height: 30px;box-sizing: border-box}
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus{background: #8A0044;color:#fff}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active{background: #333;color:#fff}
+.ui-datepicker-title{width: 70%;height: 30px;line-height: 30px;font-size: 16px;text-align: center;float: left;color:#333;}
+.ui-datepicker-header.ui-widget-header.ui-helper-clearfix.ui-corner-all{width: 100%;height: 30px;line-height: 30px;}    
+a.ui-datepicker-prev.ui-corner-all {width: 15%;height: 30px;line-height: 30px;text-align: center;display: block;float: left;cursor: pointer;font-size: 12px}
+a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;text-align: center;display: block;float: right;cursor: pointer;font-size: 12px }
+.ui-state-disabled {color: #b3b3b3;}
+
+
+.datadiv{width:49%;}
+.filterByDate .prdSeachTxt{width:100%;color:#666;font-size: 14px;cursor:pointer;}
+.toorTxt{width:auto;height: 20px;font-size: 14px;line-height: 20px;color:#666;padding-left: 5px;}
+.pointer{cursor: pointer;}
+.closeFilter{width: 30px;height: 30px;background: url(../img/common/close.svg)no-repeat;background-size: auto 20px;background-position: center;position: absolute;top: 105px;right: 5px;cursor: pointer;}
+
+.transit-100X{-webkit-transform:translateX(-350px);-moz-transform:translateX(-350px);;-ms-transform:translateX(-350px);-o-transform:translateX(-350px);transform:translateX(-350px);}
+.transit100X{-webkit-transform:translateX(350px);-moz-transform:translateX(350px);;-ms-transform:translateX(350px);-o-transform:translateX(350px);transform:translateX(350px);}
 
 
 
+/*Vendor Landing Products*/
+.forPrds{width:100%;height: auto;}
+.forPrds .prdSearchDiv{}
+.m0{margin: 0!important;}
+.addPrdBtn{width:auto;background: #5e0037;margin-left: 10px;color: #fff;height: 35px;line-height: 35px;font-size: 14px;padding: 0 25px;border-radius: 5px;cursor: pointer;}
+.vFilBtn{width:35px;height: 35px;margin-right:5px;background:url(../img/common/filter2.svg)no-repeat;background-size: auto 80%;background-position: center 8px;cursor: pointer;}
 
-
-
+.vCommTitle{width:100%;height:50px;line-height: 50px;font-size:40px;text-align: center; margin: 20px 0;}

@@ -953,6 +953,10 @@ echo '</pre>';
             $result=$obj->viewsh($params);
             $res=$result;
             break;    
+            
+        case 'bullionDet':
+            include 'bullions_details.html';
+            break;
                 
 //-------------------------Helpdesk--------------------------------------
 
@@ -1009,6 +1013,7 @@ echo '</pre>';
         
 //---------------------------------------------------------------------------            
         default :
+            
         break;
     }    
 echo json_encode($res,true);

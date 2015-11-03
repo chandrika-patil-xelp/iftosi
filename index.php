@@ -201,8 +201,27 @@
 					$page='Vendor-Landing';
 					include 'template/vendor_landing_page.html';
 				break;
+				case 'about_us':
+					$page='about_us';
+					include 'template/about_us.html';
+				break;
+
+				case 'contact_us':
+					$page='contact_us';
+					include 'template/contact_us.html';
+				break;
+                            
+				case 'terms_conditions':
+                                        $page='terms_conditions';
+                                        include 'template/terms_conditions.html';
+                                break;
+                            
+                                case 'faq':
+                                       $page='faq';
+                                       include 'template/faq.html';
+                                break;
 				
-				default:
+                                default:
 					$page='index';
 					$url = APIDOMAIN.'index.php?action=getCatList&page=1&limit=3';
 					$res = $comm->executeCurl($url);

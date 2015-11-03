@@ -1,0 +1,80 @@
+<?php include 'bhead.html'; ?>
+<body>
+    <div id='baseCont' class=" fmOpenR faq">
+        <div class="wrapper">
+            <?php include 'header.html'; ?>
+            <div class='bgHolder'>
+                <div class="heading font40 fmOpenL">FAQs</div>
+            </div>
+            <div class="wrapperA">
+                <div class="wrapperMax">
+                    <div class="faqs">
+                        <div class="ques font20 "><div class="dnArrow"></div>1. How does one save time and money when sourcing diamonds, jewellery and bullion on IFtoSI ?</div>
+                        <div class="ans">
+                            <div class="para"><b>Diamond solitaires:</b><br> IFtoSI connects the buyer directly with the diamond dealers / importers who have offices in the diamond bourse.
+                                Solitaires change at least two to three hands before it reaches the final buyer. IFtoSI eliminates this scope of
+                                involving any middlemen in these transactions thus saving the buyer money and time.
+                            </div>
+                            <div class="para">
+                                <b>Jewellery:</b><br> Sitting in the comfort of one’s home and office, one can select jewellery and block it for a limited period. Normally, a person goes shop hopping to decide and make a purchase. Once the jewellery has been blocked, you can visit the store at the appointed time and make your purchase. This process helps you save time.
+                                Also, one gets to view jewellery of other stores where you would very unlikely to visit. 
+                            </div>
+                            <div class="para">
+                                <b>Bullion:IFtoSI</b><br> connects you directly with the bullion manufacturers having offices / shops in the jewellery market in the respective cities. There are no middlemen involved. One can visit their office /shop or
+                                have the coins delivered at home. Gold coins are hallmarked for authenticity. 
+                            </div>
+                        </div>
+                        <div class="ques font20 "><div class="dnArrow"></div>2.My family has been buying solitaires and jewellery since many years from our trusted jeweller. How can I trust the diamond company and other jewellers listed on IFtoSI? What is the credibility of these diamond companies, jewellers and bullion merchants?</div>
+                        <div class="ans">
+                            <div class="para">At IFtoSI you are introduced to genuine dealers of diamonds, jewellery and bullion. They are all well established companies with vat nos and registered with their respective
+                                trade bodies and councils. Many of them have multiple offices in India and abroad and listed with respective trade bodies and councils in those countries. All companies and dealers registered with IFtoSI are scrutinized before
+                                listing. Upon registering on IFtoSI, a buyer can also get access to these details for their own satisfaction.
+                            </div>
+                            <div class="para">Solitaires are traded worldwide based on the diamond certificate. A diamond certificate issued by
+                                GIA, IGI and HRD are based on very stringent checks and measures. Each diamond has a unique number
+                                lazor engraved on the girdle of the diamond which cannot be replicated. One can also check
+                                certificates on the websites of the laboratories or www.checkcerts.com
+                            </div>
+                        </div>
+                        <div class="ques font20 "><div class="dnArrow"></div>3. At any point of time, I may wish to return / sell my solitaire. How can this be possible? What is the procedure?</div>
+                        <div class="ans">
+                            <div class="para>Return / Exchange procedures are according to the individual diamond dealer / jeweller’s terms and conditions. This can be ascertained with the merchant at the time of making the purchase. Bullion can be sold at the prevalent market rates anywhere.
+                            </div>                       
+                         </div>
+                        
+                        <div class="ques font20 "><div class="dnArrow"></div>4.If by chance I receive a solitaire with a wrong certificate, then what?</div>
+                        <div class="ans">This is unlikely but in a rare case if this happens, you can inform the seller immediately and also send IFtoSI an email. We will also assist in the follow up and get the mistake rectified as soon as possible.
+                        </div>
+                        <div class="ques font20 "><div class="dnArrow"></div>5. What is a diamond certificate?</div>
+                        <div class="ans">A diamond certificate, also known as a diamond report, is issued by an accredited independent gemmological laboratory like GIA, IGI or HRD. In addition to the diamond’s carat weight and measurements, a certificate includes grades for the diamond’s cut, color and clarity. These grades are the opinion of the individual at the lab who graded the diamond, based on the lab’s own subjective grading standards. Certificates also include other information about the diamond’s polish, symmetry and fluorescence, and also a graphical depiction of the diamond showing the location of the diamond’s inclusions.
+                        </div>
+                        <div class="ques font20 "><div class="dnArrow"></div>6.What is a jewellery certificate?</div>
+                        <div class="ans">A jewellery certificate is issued by accredited independent gemmological laboratories that specialize in grading the quality of diamonds used in the jewellery. These grades are the opinion of the individual at the lab who graded the jeweller and are based on the lab’s own subjective grading standards. The jewellery certificate mentions the quality of diamonds, weight of diamonds, colour stones details and the gold weight.
+                        </div>
+                        <div class="ques font20 "><div class="dnArrow"></div>7.What is a hallmark?</div>
+                        <div class="ans">Hallmark has been acting as a safeguard to purchasers of gold and gold articles for centuries in various countries. In simple terms, Hallmark is a purity certification of gold articles. In accordance with Indian standard specifications,
+                            gold articles are evaluated and tested at an official Assaying and Hallmarking centre and then certified that the metal used conforms to the national and international standard of fineness and purity.
+                            The BIS hallmark, a mark of conformity widely accepted by the consumer, it bestows the additional confidence to the consumer on the purity of gold jewellery. 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php include 'logo.html';?>
+    </div>
+    <?php include 'footer.html'; ?>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+        var last="";
+        $(document).ready(function() {
+            $(".ques").click(function() {
+                if(last!==""){
+                    last.next(".ans").slideToggle();
+                }
+                last=$(this);
+                $(this).next(".ans").slideToggle();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -42,6 +42,7 @@ $css['home'] = DOMAIN.'tools/css/home.css?v='.VERSION;
 
 // JS Libraries Start
 $jvs['jqry'] 		= DOMAIN.'tools/js/lib/jquery.js?v='.VERSION;
+$jvs['jqryUi'] 		= DOMAIN.'tools/js/lib/jquery-ui.js?v='.VERSION;
 $jvs['parlx'] 		= DOMAIN.'tools/js/lib/parallax.js?v='.VERSION;
 $jvs['velocity'] 	= DOMAIN.'tools/js/lib/velocity.js?v='.VERSION;
 $jvs['ripple'] 		= DOMAIN.'tools/js/lib/ripple.js?v='.VERSION;
