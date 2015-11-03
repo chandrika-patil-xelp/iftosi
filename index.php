@@ -88,6 +88,18 @@
 				}
 			}
 			
+			//echo "<pre>";print_r($showcat);die;
+			
+			if(count($headcat))
+			{
+				foreach($headcat['root'] as $key => $val)
+				{
+					$showhead[$val['catid']] = $val;
+				}
+			}
+			
+			//echo "<pre>";print_r($showhead);die;
+			
 			switch ($case)
 			{
 				case 'signup':

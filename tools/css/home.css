@@ -257,9 +257,9 @@ a{text-decoration: none;}
 .headCat{width:100px;height: 100%;;margin: 0;position: relative;cursor: pointer;}
 .headCat span1{display: block;width: 100%;height: 25px;line-height: 25px;position: absolute;bottom: 0;text-align: center;color: #4d4d4d;}
 
-.headCat.bgDiamond{background: #fff url(../img/common/diamond.jpg)no-repeat;background-size: auto 80%;background-position: 8px 0px;}
+.headCat.bgDiamonds{background: #fff url(../img/common/diamond.jpg)no-repeat;background-size: auto 80%;background-position: 8px 0px;}
 .headCat.bgJewellery {background: #fff url(../img/common/jewellery.jpg)no-repeat;background-size: auto 80%;/*background-position: 8px 0px;*/background-position: 8px 0;}
-.headCat.bgBullion {background: #fff url(../img/common/bullions.jpg)no-repeat;background-size: auto 80%;background-position: 8px 0px;}
+.headCat.bgBullions {background: #fff url(../img/common/bullions.jpg)no-repeat;background-size: auto 80%;background-position: 8px 0px;}
 .totalResultsDiv{width:100%;height:350px;line-height: 240px;color: #FFF;text-align: center;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding: 100px 0 0 0;font-size:50px;position: relative;}
 .resultsPage .shapesCont{}
 .searchCon {width: 40%;height: 60px;position: absolute;top: 155px;bottom: 0;left: 0;right: 0;margin: auto;border-radius: 5px;padding: 5px;}
@@ -910,9 +910,9 @@ textarea[name=feedback] {resize: none;}
     .prllx {margin: 0;padding: 15px;width: 100%;list-style: none;}
     .prllx li {width: 100%;display: inline-block !important;position: relative!important;margin: 10px 0;height: 60px;}
     .categoryCircle {-webkit-transform:scale(1)!important;-moz-transform:scale(1)!important;-ms-transform:scale(1)!important;transform:scale(1)!important;width: 100%;position: relative;height: 100%;font-size: 20px;color: #8A0044;letter-spacing: -0.05em;padding-top: 0;border-radius: 5px;display: inline-block;vertical-align: middle;cursor: pointer;border-width: 0;border-style: solid;border-color: #42c1b9;box-shadow: 0 0 0 0 rgba(105,0,79,0.6);line-height: 60px;text-align: left;padding-left: 65px;}    
-    .bgDiamond {background: #fff url(../img/common/diamond.jpg)no-repeat;background-size: auto 100%;background-position: left center;}
+    .bgDiamonds {background: #fff url(../img/common/diamond.jpg)no-repeat;background-size: auto 100%;background-position: left center;}
     .bgJewellery {background: #fff url(../img/common/jewellery.jpg)no-repeat;background-size: auto 100%;background-position: left center;}
-    .bgBullion{background: #fff url(../img/common/bullions.jpg)no-repeat;background-size: auto 100%;background-position: left center;}
+    .bgBullions{background: #fff url(../img/common/bullions.jpg)no-repeat;background-size: auto 100%;background-position: left center;}
     .allShapes{width: 100%;height:auto;padding: 0 15px;}
     .homeProd{width: 100%;height: auto;padding: 10px 0;}
     .hPrdComm{width: 100%;height: 320px;padding: 10px 0;float: none!important;}
