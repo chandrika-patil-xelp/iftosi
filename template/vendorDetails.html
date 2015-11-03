@@ -88,7 +88,7 @@
                         <div class="btnCont fLeft">
                             <center>
                                 <div class="cancelBtn fmOpenR ripplelink poR">CANCEL</div>
-                                <div class="submitBtn fmOpenR ripplelink poR">SUBMIT</div>
+                                <div class="submitBtn fmOpenR ripplelink poR" onclick="clickThis('step2');">SUBMIT</div>
                             </center>
                         </div>
                     </div>
@@ -140,10 +140,16 @@
                                 <input name="associationMmembership" type="text" placeholder=" eg. GGT" class="txtInput fLeft fmOpenR font14 c666">
                             </div>  
                         </div>  
+                        <div class="btnCont fLeft">
+                            <center>
+                                <div class="cancelBtn fmOpenR ripplelink poR">CANCEL</div>
+                                <div class="submitBtn fmOpenR ripplelink poR" onclick="clickThis('step3');">SUBMIT</div>
+                            </center>
+                        </div>
                     </div>
                     <div id='tabData3' class="tabData fLeft dn">
                         <div class="formContainer fmOpenR vendorDetails">
-                            <div class="formTitle fLeft fmOpenL">Vendor Contact Details Form</div>
+                            <div class="formTitle fLeft fmOpenL" style="width:100%;">Vendor Contact Details Form</div>
                             <div class="divCon2 fLeft c666">
                                 <div class="titleDiv fmRoboto fLeft font14">Contact Person Name *</div>
                                 <input type="text" id="conName" name="conName" onkeypress="return common.onlyAlphabets(event)" placeholder=" Contact Person Name  " class="txtInput c666 fLeft fmRoboto font14">
@@ -213,7 +219,7 @@
                             <div class="btnCont fLeft">
                                 <center>
                                     <div class="cancelBtn fmOpenR ripplelink poR">CANCEL</div>
-                                    <div class="submitBtn fmOpenR ripplelink poR">SUBMIT</div>
+                                    <a href="<?php echo DOMAIN ?>?case=vendor_landing"><div class="submitBtn fmOpenR ripplelink poR">SUBMIT</div></a>
                                 </center>
                             </div>
                         </div>    
@@ -252,7 +258,13 @@
                 }
             });
         });
-
+        
+        
+        function clickThis(id){
+            $('#'+id).click();
+        }
+        
+        
     </script>
 </body>
 </html>

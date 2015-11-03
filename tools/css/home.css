@@ -98,6 +98,7 @@ a{text-decoration: none;}
 .mItemTitle{width:100%;height:35px;line-height:35px;color: #fff;font-size: 20px;}
 .mItemDiv ul{width: 100%!important;height: auto;margin: 0;padding: 0;list-style: none;float: left}
 .mItemDiv ul li{width:100%;height: 30px;line-height: 30px;margin: 0;padding: 0 15px;font-size: 12px;}
+.mItemDiv ul li a{color:#fff;}
 
 /*
 .headCat.bgJewellery:hover.bgJewellery span{transform: translateY(100px);color:#171334;}
@@ -259,7 +260,7 @@ a{text-decoration: none;}
 
 .headCat.bgDiamonds{background: #fff url(../img/common/diamond.jpg)no-repeat;background-size: auto 80%;background-position: 8px 0px;}
 .headCat.bgJewellery {background: #fff url(../img/common/jewellery.jpg)no-repeat;background-size: auto 80%;/*background-position: 8px 0px;*/background-position: 8px 0;}
-.headCat.bgBullions {background: #fff url(../img/common/bullions.jpg)no-repeat;background-size: auto 80%;background-position: 8px 0px;}
+.headCat.bgBullions {background: transparent url(../img/common/bullions.jpg)no-repeat;background-size: auto 80%;background-position: 8px 0px;}
 .totalResultsDiv{width:100%;height:350px;line-height: 240px;color: #FFF;text-align: center;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding: 100px 0 0 0;font-size:50px;position: relative;}
 .resultsPage .shapesCont{}
 .searchCon {width: 40%;height: 60px;position: absolute;top: 155px;bottom: 0;left: 0;right: 0;margin: auto;border-radius: 5px;padding: 5px;}
@@ -644,9 +645,9 @@ a{cursor:pointer;}
 .txtInput:focus.mobileIcon {padding-left: 45px;background-image: url(../img/common/smobile.svg);background-repeat: no-repeat;background-size: auto 100%;background-position: left center;}
 .brGreen.mobileIcon {padding-left: 45px;background-image: url(../img/common/smobile.svg);background-repeat: no-repeat;background-size: auto 100%;background-position: left center;}
 
-.passwordIcon{padding-left: 45px;background-image: url(../img/common/password.svg);background-repeat: no-repeat;background-size: auto 100%;background-position: left center;}
-.txtInput:focus.passwordIcon {padding-left: 45px;background-image: url(../img/common/spassword.svg);background-repeat: no-repeat;background-size: auto 100%;background-position: left center;}
-.brGreen.passwordIcon {padding-left: 45px;background-image: url(../img/common/spassword.svg);background-repeat: no-repeat;background-size: auto 100%;background-position: left center;}
+.passwordIcon{padding-left: 45px;background-image: url(../img/common/password.svg);background-repeat: no-repeat;background-size: auto 80%;background-position: left center;}
+.txtInput:focus.passwordIcon {padding-left: 45px;background-image: url(../img/common/spassword.svg);background-repeat: no-repeat;background-size: auto 100%;background-position: 10px center;}
+.brGreen.passwordIcon {padding-left: 45px;background-image: url(../img/common/spassword.svg);background-repeat: no-repeat;background-size: auto 80%;background-position: 10px center;}
 
 .nameIcon {padding-left: 45px;background-image: url(../img/common/name.svg);background-repeat: no-repeat;background-size: auto 100%;background-position: left center;}
 .txtInput:focus.nameIcon {padding-left: 45px;background-image: url(../img/common/sname.svg);background-repeat: no-repeat;background-size: auto 100%;background-position: left center;}

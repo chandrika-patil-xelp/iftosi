@@ -174,7 +174,7 @@ function getResultsData(data,sortby,showtree)
 							html += '<div class="prdPrice fLeft">';
 								html += '<div class="detComm">';
 									html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
-									html += '<div class="detValue fmOpenB fLeft"><span>₹</span>'+number_format(vl.pprice,2)+'</div>';
+									html += '<div class="detValue fmOpenB fLeft"><span>$</span>'+number_format(vl.pprice,2)+'</div>';
 								html += '</div>';
 							html += '</div>';
 							html += '<div class="prdActions fLeft">';

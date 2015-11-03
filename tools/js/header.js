@@ -143,7 +143,7 @@ $(document).ready(function(){
 $(document).ready(function(){
     $(window).scroll(function() {
         $('#header,#logoTxt,#mMenuBtn,#hbgDiam,#hbgJewel,#hbgBull').velocity("stop");
-        $('.logo,.headCatCont,.headRight').velocity("stop");
+        $('.logo,.headCatCont,.headRight,.upperMenu').velocity("stop");
         var sc = $(window).scrollTop();
         if(sc>10){
             $('#header').velocity({height: "60px"},{duration:0, delay:0,easing:'swing'});
@@ -153,11 +153,22 @@ $(document).ready(function(){
             $('#logoTxt').css({color:'#fff'});
             $('#logoTxt').velocity({left:20+"px",bottom:20+"px"},{duration:0, delay:200});
             $('.logo').velocity({top:20+"px",height:60+"px",width:150+"px",backgroundPositionX:15 + "px"},{duration:0, delay:100});
+            $('.upperMenu').removeClass('transition300');
+            $('.upperMenu').velocity({top:60+"px"},{duration:100,delay:0});
+            setTimeout(function(){$('.upperMenu').addClass('transition300');},110);
+
+            
         }else if(lastSc>sc){
             $('.logo').velocity({top: 30 + "px", height: 100 + "px", width: 100 + "px", backgroundPositionX: '50%'}, {duration: 0, delay: 0});
             $('#logoTxt').velocity({left:0+"px",bottom:-30+"px"},{duration:300, delay:0});
-            $('#logoTxt').css({color:'#4d4d4d'});            
+            
+            if(pageName==='diamond_details'  || pageName==='jewellery_details' || pageName==='bullion_details'){
+                $('#logoTxt').css({color:'#4d4d4d'});            
+            }
             $('#header').velocity({height: "100px"},{duration:0, delay:0,easing:'swing'});
+            $('.upperMenu').velocity({top:100+"px"},{duration:100,delay:0,easing:'swing'});
+            $('.upperMenu').addClass('transition300');
+            
             $('.headCatCont').velocity({top:"0px"},{duration:0, delay:0,easing:'swing'});
             $('.headRight').velocity({paddingTop:32+"px",paddingBottom:32+"px"},{duration:0, delay:0,easing:'swing'});
             $('#hbgDiam,#hbgJewel,#hbgBull').velocity({backgroundPositionX:8 + "px",backgroundPositionY:0 + "px"},{duration:0, delay:0});

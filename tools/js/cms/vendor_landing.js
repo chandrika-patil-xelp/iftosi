@@ -187,6 +187,9 @@ function showEnqFilter() {
 
 
 function submitDForm(){
+    window.location.href='http://localhost/iftosi/?case=vendor_landing';
+    
+    /*
     values={};
     values['shape']=$('.shapeSelected').attr('id');
     
@@ -195,5 +198,5 @@ function submitDForm(){
         values[y[i].name]=y[i].value;
     });
     console.log(values);
-    alert('submit ' +values);
+    alert('submit ' +values);*/
 }
