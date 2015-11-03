@@ -70,6 +70,7 @@
 				break;
 			}
 			break;
+			
 		default:
 		
 			$url 	= APIDOMAIN.'index.php?action=getSubCat';
@@ -86,7 +87,6 @@
 					}
 				}
 			}
-			//echo "<pre>";print_r($showcat);die;
 			
 			switch ($case)
 			{

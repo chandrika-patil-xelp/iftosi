@@ -18,7 +18,8 @@
                 </div>
             </div>
 			<?php
-			if(count($showcat['subcat']))
+			
+			if(count($showcat['subcat']) && ($showcat['catid'] == $_GET['catid']))
 			{
 			?>
             <div class='jShapesCont resultsPage showHide fmOpenL'>

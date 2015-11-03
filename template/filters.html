@@ -32,7 +32,7 @@
         </select>
     </div>
 
-    <?php if ($page == 'jewellery' && count($showcat['subcat'])) { ?>
+    <?php if ($page == 'jewellery' && count($showcat['subcat']) && ($showcat['catid'] == $_GET['catid'])) { ?>
         <div class="filterCont fLeft" id="idlist">
             <div class="fLeft optionTitle fmOpenR">Category</div>
             <div id="wrapper" class="fLeft">
