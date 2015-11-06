@@ -2,7 +2,7 @@
 <div class="mainContainer fLeft">
     <?php include 'HeaderVendor.html'; ?>
     <div class="contentCont fLeft">
-        <form id='jwAddForm'>
+        <form id='bAddForm'>
             <div class="wrapper">
                 <div class="wrapperMax">
                     <div class="vCommTitle fLeft fmOpenL">Select a bullion you want to add</div>
@@ -10,39 +10,64 @@
                         <div class="jShapesCont resultsPage showHide fmOpenL fLeft">
                             <div class="allShapes resultsPage bresults">
                                 <center>
-                                    <div id="gbar" class="jshapeComm transition300 ripplelink gBar"><span class="ink animate" style="height: 337px; width: 337px; top: -73.5px; left: 114.5px;"></span>Gold Bar
+<?php
+                        foreach($fil['attributes'] as $key=>$values)
+                        {
+                            if(strtolower($values['attribute_disp_name'])=='type')
+                            {
+                                $attr_values = $values['attribute_values'];
+                                $attr_values = explode(',', $attr_values);
+                                
+                                foreach($attr_values as $shape)
+                                {
+                                    $a=explode(' ',$shape);
+                                    $firstval=  strtolower(substr($a[0],0,1));
+                                    $typeid= $firstval.$a[1];
+                                    $shapename=ucwords(strtolower($shape));
+                                  echo "<div id='".$typeid."' class='jshapeComm transition300 ripplelink SubCaType ".$typeid."'>".$shapename."</div>"; }}}?>
+                                </center>
+                            </div>
+                        </div>                                        
+<!--                                    <div id="gbar" class="jshapeComm transition300 ripplelink gBar"><span class="ink animate" style="height: 337px; width: 337px; top: -73.5px; left: 114.5px;"></span>Gold Bar    
                                     </div><div id="sBar" class="jshapeComm transition300 ripplelink sBar">Silver Bar
                                     </div><div id="gCoin" class="jshapeComm transition300 ripplelink gCoin">Gold Coin
                                     </div><div id="sCoin" class="jshapeComm transition300 ripplelink sCoin">Silver Coin
+                                    </div>-->
+<?php                        
+                        foreach($fil['attributes'] as $key=>$values)
+                        {
+                            if(strtolower($values['attribute_disp_name'])=='type')
+                            {
+                                $attr_values = $values['attribute_values'];
+                                $attr_values = explode(',', $attr_values);
+                                foreach($attr_values as $shape)
+                                {
+                        }}}
+?>
+                                    <div class="divCon2  fLeft goldprop allprop">
+                                    <div  class="titleDiv txtCap fLeft">Gold Purity</div>
+                                    <input name="gold_purity" type="text" placeholder=" eg. 1.33" value="<?=$attr['gold_purity'];?>" class="txtInput fLeft fmOpenR font14 c666">
                                     </div>
-                                </center>
-                            </div>
-                        </div>
-
-                        <div class="divCon2  fLeft ">
-                            <div  class="titleDiv txtCap fLeft">Gold Purity</div>
-                            <input name="gold_purity" type="text" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666">
-                        </div>
-                        <div class="divCon2  fLeft">
+                        <div class="divCon2  fLeft goldprop allprop">
                             <div  class="titleDiv txtCap fLeft">Gold Weight</div>
-                            <input name="gold_weight" type="text" placeholder=" eg. 10 Gms" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="gold_weight" type="text" placeholder=" eg. 10 Gms" value="<?=$attr['gold_weight'];?>" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
-                        <div class="divCon2  fLeft">
+                        <div class="divCon2  fLeft silverprop allprop">
                             <div  class="titleDiv txtCap fLeft">Silver Purity</div>
-                            <input name="silver_purity" type="text" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="silver_purity" type="text" placeholder=" eg. 1.33" value="<?=$attr['silver_purity'];?>" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
-                        <div class="divCon2  fLeft">
+                        <div class="divCon2  fLeft silverprop allprop">
                             <div  class="titleDiv txtCap fLeft">Silver Weight</div>
-                            <input name="silver_weight" type="text" placeholder=" eg. 10 Gms" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="silver_weight" type="text" placeholder=" eg. 10 Gms" value="<?=$attr['silver_weight'];?>" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Price</div>
-                            <input name="price" type="text" placeholder=" eg. 1200000" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="price" type="text" placeholder=" eg. 1200000" value="<?=$attr['price'];?>" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="btnCont fLeft">
                             <center>
-                                <a href="<?php echo DOMAIN ?>index.php?case=vendor_landing"><div class="cancelBtn fmOpenR ripplelink poR">CANCEL</div></a>
-                                <a href="<?php echo DOMAIN?>index.php?case=vendor_landing"><div class="submitBtn fmOpenR ripplelink poR">SUBMIT</div></a>
+                            <!--    <a href="<?php echo DOMAIN ?>index.php?case=vendor_landing">--> <div class="cancelBtn fmOpenR ripplelink poR">CANCEL</div></a>
+                            <!--    <a href="<?php echo DOMAIN?>index.php?case=vendor_landing"> --> <div class="submitBtn fmOpenR ripplelink poR" onclick="submitForm("bAddForm')">SUBMIT</div></a>
                             </center>
                         </div>
                     </div>
@@ -53,5 +78,8 @@
 <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['jqryUi']; ?>"></script>
 <script type="text/javascript" src='tools/js/cms/vendor_landing.js'></script>
+<script type="text/javascript" src='tools/js/pForm.js'></script>
+<script type="text/javascript">var DOMAIN = '<?php echo DOMAIN;?>';</script>
+
 </body>
 </html>
