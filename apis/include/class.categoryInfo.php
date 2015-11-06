@@ -31,7 +31,8 @@ class categoryInfo extends DB
 		}
 		return $arr;
 	}
-	
+	 
+                                        
         public function getCatList($params)
         { 
 			$sql = "SELECT catid,cat_name FROM tbl_category_master where p_catid=0 order by catid ASC";
@@ -69,7 +70,13 @@ class categoryInfo extends DB
     
         public function getCatName($params)
         {
-            $sql = "SELECT cat_name FROM tbl_category_master WHERE catid=".$params['catid'];
+            $sql = "SELECT
+                                                    cat_name,
+                                                    catid
+                    FROM
+                                tbl_category_master
+                    WHERE
+                                                    catid=".$params['catid'];
             
             $page   = ($params['page'] ? $params['page'] : 1);
             $limit  = ($params['limit'] ? $params['limit'] : 15);
@@ -85,13 +92,45 @@ class categoryInfo extends DB
             if($chkres>0)
             {
                $row = $this->fetchData($res);
-                {
+                
                     if($row && !empty($row['catid']))
                         {
-                            $reslt['category_name'] = $row['cat_name'];
-                            $results[] = $reslt;
+                            $reslt1['category_name'] = $row['cat_name'];
+                            }
+                
+               $pkey=  strtolower($row['cat_name']);
+               $pkey=  str_replace(' ','_', $pkey);
+                
+                $pcatsql = "SELECT
+                                                            catid,
+                                                            cat_name
+                            FROM 
+                                    tbl_category_master
+                            WHERE
+                                                            p_catid=".$params['catid']." 
+                            Order BY
+                                                            catid
+                            ASC";
+			$page   = ($params['page'] ? $params['page'] : 1);
+                        $limit  = ($params['limit'] ? $params['limit'] : 10);
+			
+                        if (!empty($page))
+			{
+				$start = ($page * $limit) - $limit;
+				$pcatsql.=" LIMIT " . $start . ",$limit";
+			}
+			$pcatres = $this->query($pcatsql);
+			if($pcatres)
+			{
+                            while($subrow=$this->fetchData($pcatres))
+                            {
+                                $reslt['subcatid']=$subrow['catid'];
+                                $reslt['subname']=$subrow['cat_name'];
+                                $results[$pkey][]=$reslt;
+                            }
                         }
-                }
+                
+                
                 $err = array('Code' => 0, 'Msg' => 'Details fetched successfully');
             }
             else
