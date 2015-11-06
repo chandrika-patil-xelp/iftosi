@@ -229,7 +229,7 @@ a{text-decoration: none;}
 
 /*Bullion*/
 /*Bullion Results*/
-.bresults .jshapeComm{width:25%!important;}
+.bresults .jshapeComm{width:50%!important;}
 
 .gCoin{background: url(../img/common/gCoin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(23, 19, 52,0.9);}
 .gBar{background: url(../img/common/gBar.jpeg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(42, 14, 52,0.9);}

@@ -715,7 +715,7 @@ a{cursor:pointer;}
 .pFixed{position: fixed;}
 
 /*Bullion Results*/
-.bresults .jshapeComm{width:25%!important;}
+.bresults .jshapeComm{width:50%!important;}
 .gBar{background: url(../img/common/gBar.jpeg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(23, 19, 52,0.9);}
 .sBar{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -70px 0px rgba(42, 14, 52,0.9);}
 .gCoin{background: url(../img/common/gCoin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(56, 11, 52,0.9);}
