@@ -9,127 +9,200 @@
 
         public function addNewproduct($params)
         {  
-            $isInside= 0;
-            $dt= json_decode($params['dt'],1);
-            $detls  = $dt['result'];
-            $des    = $dt['design'];
-            $attr  = $dt['attributes'];
-            $proErr  = $dt['error'];
-            if($proErr['errCode']== 0)
-           {
-           $csql = "SELECT id,name FROM tbl_brandid_generator WHERE name='".$detls['product_brand']."'";
-            $cres = $this->query($csql);
-	    if($cres)
+             $detl=$params['dt'];
+            $len=strlen($detl);
+
+            
+            $detls1=explode('|~|',$params['dt']);
+
+            
+            for($i=0;$i<count($detls1);$i++)
             {
-                $cnt1 = $this->numRows($cres);
-		if(!$cnt1)
-		{
-                    // Obtaining the category name from the category table 
-                    $catsql="Select cat_name from tbl_category_master where catid=".$detls['category_id'];
-                    $catres=$this->query($catsql);
-                    if($catres)
-                    {
-                        while($catrow=$this->fetchData($catres))
-                        {
-                            $catname=$catrow['cat_name'];
-                        }
-                    }
-                    
+                $expd = explode('|@|',$detls1[$i]);
+                $detls[$expd[0]] = $expd[1];
+            }
+            
+            $catids=explode(',',$detls['subcatid']);
+            $detls['measurement']=$detls['measurement1'].'*'.$detls['measurement2'].'*'.$detls['measurement3'];
                     //  Inserting the values in brand table
-                    $sql = "INSERT INTO tbl_brandid_generator(name,category_name,date_time,aflg) VALUES('".$detls['product_brand']."','".$catname."',now(),1)";
+                    $sql = "INSERT
+                            INTO 
+                                        tbl_brandid_generator
+                                                                (name,
+                                                                category_id,
+                                                                date_time,
+                                                                aflg) 
+                            VALUES
+                                                            (\"".$detls['brand']."\",
+                                                             \"".$params['category_id']."\",
+                                                                 now(),
+                                                                 1)";
+
                     $res = $this->query($sql);
-                    $bid = $this->lastInsertedId();
-                    $brandid = ($bid) ? $bid : $detls['brandid'];
-                }
-		else
+                    if(!empty($params['prdid']))
                 {
-                   $row     = $this->fetchData($cres);
-                   $brandid = ($row['id']) ? $row['id'] : $detls['brandid'];
-                }
-                
-                //  Obtaining the product id key from the product generator table
-                $sql  = "SELECT product_id,product_name FROM tbl_productid_generator WHERE product_name = '".$detls['product_name']."' AND product_brand = '".$detls['product_brand']."'";
-                $res  = $this->query($sql);
-                $cnt2 = $this->numRows($res);
-                
-                if(!$cnt2)
-                {
-                  //  If product not present in generator table new product insertion process starts
-                  $sql = "INSERT INTO tbl_productid_generator(product_name,product_brand, date_time) VALUES('".$detls['product_name']."','".$detls['product_brand']."', now())";
-                  $res = $this->query($sql);
-                  $pid = $this->lastInsertedId();
+                    $sql  = "SELECT
+                                                            product_id
+                             FROM
+                                        tbl_product_master
+                             WHERE
+                                                            product_id =\"".$params['prdid']."\"
+                             ORDER BY
+                                                            update_time
+                             DESC
+                             LIMIT 10";
+                    $res  = $this->query($sql);
+                    $cnt2 = $this->numRows($res);
+                       $row=$this->fetchData($res);
+                        $pid=$row['product_id'];
                 }
                 else
                 {
-                   $row = $this->fetchData($res);
-                   $pid = $row['product_id'];
+                  //  If product not present in generator table new product insertion process starts
+                  $sql = "INSERT
+                          INTO 
+                                  tbl_productid_generator
+                                                                  (product_name,
+                                                                  product_brand,
+                                                                  date_time)
+                          VALUES
+                                                              (\"".$detls['product_name']."\",
+                                                               \"".$detls['product_brand']."\",
+                                                                   now())";
+                  $res = $this->query($sql);
+                  $pid = $this->lastInsertedId();
                 }
-		if($pid)
+                if(!empty($pid))
                 {   // Checks for the designer name along with product id
-                   $chksql="SELECT designer_id,desname from tbl_designer_product_mapping where product_id=".$pid."";
+                   $chksql="SELECT
+                                                           designer_id,
+                                                           desname
+                            FROM 
+                                   tbl_designer_product_mapping 
+                            WHERE 
+                                                            product_id=".$pid."";
+                   
                    $chkdes=$this->query($chksql);
                    $cntres=$this->numRows($chkdes);
                    if($cntres==0)
                    {
                     //  For product designer tabe insertion   
-                   $dessql="insert into tbl_designer_product_mapping(product_id,desname,active_flag,date_time)
-                            VALUES(".$pid.",'".$des['desname']."',1,now())";
-                    $desres = $this->query($dessql);
+                   $dessql="INSERT
+                            INTO
+                            tbl_designer_product_mapping
+                                                                    (product_id,
+                                                                    desname,
+                                                                    active_flag,
+                                                                    date_time)
+                            VALUES
+                                                                (\"".$pid."\",
+                                                                 \"".$detls['desname']."\",
+                                                                     1,
+                                                                     now())";
+                  
+                   $desres = $this->query($dessql);
                    }
                    else
                    {
-                        $row = $this->fetchData($chkdes);
-                   $did=$row['designer_id'];    
+                       
+                       $row = $this->fetchData($chkdes);
+                       $did=$row['designer_id'];    
                    
                    //   designer product table value updating if product already present
-                    $dessql="UPDATE tbl_designer_product_mapping set desname='".$des['desname']."' where designer_id=".$did."";
+                    $dessql="UPDATE
+                                        tbl_designer_product_mapping
+                            SET
+                                                                        desname=\"".$detls['desname']."\"
+                            WHERE 
+                                                                        designer_id=\"".$did."\"";
                     $desres = $this->query($dessql);
                    
                    }
-                    if($desres)
-                    {
                     //  For category product mapping
-                        $pcsql="INSERT INTO tbl_product_category_mapping(product_id,category_id,price,rating,display_flag,date_time)
-                                VALUES(\"".$pid."\",\"".$detls['category_id']."\",\"".$detls['product_price']."\",\"".$detls['rating']."\",1,now())
+                   
+                   for($i=0;$i<count($catids);$i++)
+                   {
+                        $pcsql="INSERT
+                                INTO 
+                                            tbl_product_category_mapping
+                                                                           (product_id,
+                                                                            category_id,
+                                                                            price,
+                                                                            rating,
+                                                                            display_flag,
+                                                                            date_time)
+                                VALUES
+                                                                       (\"".$pid."\",
+                                                                        \"".$catids[$i]."\",
+                                                                        \"".$detls['product_price']."\",
+                                                                        \"".$detls['rating']."\",
+                                                                        1,
+                                                                        now())
                                 ON DUPLICATE KEY UPDATE
-                                                        category_id             = \"".$detls['category_id']."\",
+                                                        category_id             = \"".$catids[$i]."\",
                                                         price                   = \"".$detls['price']."\",
                                                         rating                  = \"".$detls['rating']."\",
                                                         display_flag            = \"".$detls['dflag']."\"";
-                        $pcres=$this->query($pcsql);
-                        
-                    //  For product values filling     
-                        $sql="INSERT INTO tbl_product_master(product_id,barcode,lotref,lotno,product_name,product_display_name,
-                                                     product_model,product_brand,prd_price,product_currency,product_keyword,                                                     
-                                                     product_desc,prd_wt,prd_img,product_warranty,desname,updatedby, date_time)
-                                                VALUES (
-						       ".$pid.",'".$detls['barcode']."','".$detls['lotref']."',".$detls['lotno'].",
-                                                      '".$detls['product_name']."','".$detls['product_display_name']."', 
-                                                      '".$detls['product_model']."', '".$detls['product_brand']."', ".$detls['product_price'].",
-                                                      '".$detls['product_currency']."','".$detls['product_keywords']."', 
-                                                      '".$detls['product_desc']."',".$detls['product_wt'].",'".$detls['prd_img']."',
-                                                      '".$detls['product_warranty']."','".$des['desname']."','CMS USER', now())
-			  ON DUPLICATE KEY UPDATE
-                                                    barcode                      = '".$detls['barcode']."', 
-                                                    lotref                       = '".$detls['lotref']."', 
-                                                    lotno                        =  ".$detls['lotno'].", 
-                                                    product_display_name         = '".$detls['product_display_name']."', 
-                                                    product_model 		 = '".$detls['product_model']."', 
-                                                    product_brand 		 = '".$detls['product_brand']."', 
-                                                    prd_price 		         =  ".$detls['product_price'].",  
-                                                    product_currency             = '".$detls['product_currency']."', 
-                                                    product_keyword              = '".$detls['product_keywords']."', 
-                                                    product_desc                 = '".$detls['product_desc']."', 
-                                                    prd_wt                       = ".$detls['product_wt'].", 
-                                                    prd_img                      = '".$detls['prd_img']."',  
-                                                    product_warranty             ='".$detls['product_warranty']."',
-                                                    updatedby 			 =   'CMS USER', 
-                                                    desname                      ='".$des['desname']."'";
-                    $res = $this->query($sql);
-                   //----------------------------------------------For product search table--------------------------------------------------- 
                     
-                    if(count($attr))
-                    {
+                        $pcres=$this->query($pcsql);
+                   }   
+                    //  For product values filling     
+                        $sql="  INSERT
+                                INTO 
+                                                tbl_product_master
+                                                                        (product_id,
+                                                                        barcode,
+                                                                        lotref,
+                                                                        lotno,
+                                                                        product_name,
+                                                                        product_display_name,
+                                                                        product_model,
+                                                                        product_brand,
+                                                                        prd_price,
+                                                                        product_currency,
+                                                                        product_keyword,                                                     
+                                                                        product_desc,
+                                                                        prd_wt,
+                                                                        prd_img,
+                                                                        product_warranty,
+                                                                        desname,
+                                                                        date_time)
+                                                VALUES
+                                                                 ( \"".$pid."\",
+                                                                   \"".$detls['barcode']."\",
+                                                                   \"".$detls['lot_ref']."\",
+                                                                   \"".$detls['lot_no']."\",
+                                                                   \"".$detls['product_name']."\",
+                                                                   \"".$detls['product_display_name']."\", 
+                                                                   \"".$detls['product_model']."\",
+                                                                   \"".$detls['product_brand']."\",
+                                                                   \"".$detls['price']."\",
+                                                                   \"".$detls['product_currency']."\",
+                                                                   \"".$detls['product_keywords']."\", 
+                                                                   \"".$detls['product_desc']."\",
+                                                                   \"".$detls['product_wt']."\",
+                                                                   \"".$detls['prd_img']."\",
+                                                                   \"".$detls['product_warranty']."\",
+                                                                   \"".$detls['desname']."\",
+                                                                       now())
+                                ON DUPLICATE KEY UPDATE
+                                                    barcode                      = \"".$detls['barcode']."\", 
+                                                    lotref                       = \"".$detls['lot_ref']."\", 
+                                                    lotno                        = \"".$detls['lot_no']."\", 
+                                                    product_display_name         = \"".$detls['product_display_name']."\", 
+                                                    product_model 		 = \"".$detls['product_model']."\", 
+                                                    product_brand 		 = \"".$detls['product_brand']."\", 
+                                                    prd_price 		         = \"".$detls['price']."\",  
+                                                    product_currency             = \"".$detls['product_currency']."\", 
+                                                    product_keyword              = \"".$detls['product_keywords']."\", 
+                                                    product_desc                 = \"".$detls['product_desc']."\", 
+                                                    prd_wt                       = \"".$detls['product_wt']."\", 
+                                                    prd_img                      = \"".$detls['prd_img']."\",  
+                                                    product_warranty             = \"".$detls['product_warranty']."\",
+                                                    desname                      = \"".$detls['desname']."\"";
+                    $res = $this->query($sql);
+                    
+                   //----------------------------------------------For product search table---------------------------------------------------                              
                             //  For tbl_product_search
         // Few attributes remaining-- type,metal,purity,nofd,dwt,gemwt,quality,goldwt
                             $sql = "INSERT 
@@ -137,6 +210,8 @@
                                                     tbl_product_search
                                                     (product_id,
                                                      color,
+                                                     carat,
+                                                     shape,
                                                      certified,
                                                      cut,
                                                      clarity,
@@ -165,103 +240,128 @@
                                                      quality,
                                                      gold_weight,
                                                      gemstone_color,
-                                                     combination
+                                                     combination,
                                                      rating,
                                                      date_time)
                                     VALUES
                                                  (\"".$pid."\",
-                                                  \"".$attr['color']."\",
-                                                  \"".$attr['cert']."\",
-                                                  \"".$attr['cut']."\",
-                                                  \"".$attr['cla']."\",
-                                                  \"".$attr['base']."\",
-                                                  \"".$attr['tabl']."\",
-                                                  \"".$attr['val']."\",
-                                                  \"".$attr['p_disc']."\",
-                                                  \"".$attr['prop']."\",
-                                                  \"".$attr['pol']."\",
-                                                  \"".$attr['sym']."\",
-                                                  \"".$attr['fluo']."\",
-                                                  \"".$attr['td']."\",
-                                                  \"".$attr['measurement']."\",
-                                                  \"".$attr['cert1no']."\",
-                                                  \"".$attr['pa']."\",
-                                                  \"".$attr['cr_hgt']."\",
-                                                  \"".$attr['cr_ang']."\",
-                                                  \"".$attr['girdle']."\",
-                                                  \"".$attr['pd']."\",
-                                                  \"".$attr['type']."\",
-                                                  \"".$attr['metal']."\",
-                                                  \"".$attr['purity']."\",
-                                                  \"".$attr['nofd']."\",
-                                                  \"".$attr['dwt']."\",
-                                                  \"".$attr['gemwt']."\",
-                                                  \"".$attr['quality']."\",
-                                                  \"".$attr['goldwt']."\",
-                                                  \"".$attr['gemstone_color']."\",
-                                                  \"".$attr['combination']."\",
-                                                  \"".$attr['rating']."\",    
+                                                  \"".$detls['color']."\",
+                                                  \"".$detls['carat_weight']."\",
+                                                  \"".$detls['shape']."\",
+                                                  \"".$detls['Certficate']."\",    
+                                                  \"".$detls['cut']."\",
+                                                  \"".$detls['clarity']."\",
+                                                  \"".$detls['base_price']."\",
+                                                  \"".$detls['table']."\",
+                                                  \"".$detls['price']."\",
+                                                  \"".$detls['discount']."\",
+                                                  \"".$detls['prop']."\",
+                                                  \"".$detls['polish']."\",
+                                                  \"".$detls['symmetry']."\",
+                                                  \"".$detls['flourecence']."\",
+                                                  \"".$detls['td']."\",
+                                                  \"".$detls['measurement']."\",
+                                                  \"".$detls['Certficate']."\",
+                                                  \"".$detls['pa']."\",
+                                                  \"".$detls['crown_height']."\",
+                                                  \"".$detls['crown_angle']."\",
+                                                  \"".$detls['girdle']."\",
+                                                  \"".$detls['pd']."\",
+                                                  \"".$detls['rings_type']."\",
+                                                  \"".$detls['metal']."\",
+                                                  \"".$detls['gold purity']."\",
+                                                  \"".$detls['no_diamonds']."\",
+                                                  \"".$detls['diamonds_weight']."\",
+                                                  \"".$detls['gemstone_weight']."\",
+                                                  \"".$detls['quality']."\",
+                                                  \"".$detls['gold_weight']."\",
+                                                  \"".$detls['gemstone_color']."\",
+                                                  \"".$detls['combination']."\",
+                                                  \"".$detls['rating']."\",    
                                                   now())
                                     ON DUPLICATE KEY UPDATE
-                                                            color       = \"".$attr['color']."\", 
-                                                            certified        = \"".$attr['cert']."\",
-                                                            cut         = \"".$attr['cut']."\",
-                                                            clarity         = \"".$attr['cla']."\",
-                                                            base        = \"".$attr['base']."\",
-                                                            tabl        = \"".$attr['tabl']."\",
-                                                            price         = \"".$attr['val']."\",
-                                                            p_disc      = \"".$attr['p_disc']."\",
-                                                            prop        = \"".$attr['prop']."\",
-                                                            polish         = \"".$attr['pol']."\",
-                                                            symmetry         = \"".$attr['sym']."\",
-                                                            fluo        = \"".$attr['fluo']."\",
-                                                            td          = \"".$attr['td']."\",
-                                                            measurement = \"".$attr['measurement']."\",
-                                                            cno    = \"".$attr['cert1no']."\",
-                                                            pa          = \"".$attr['pa']."\",
-                                                            cr_hgt      = \"".$attr['cr_hgt']."\",
-                                                            cr_ang      = \"".$attr['cr_ang']."\",
-                                                            girdle      = \"".$attr['girdle']."\",
-                                                            pd          = \"".$attr['pd']."\",
-                                                            metal=\"".$attr['pd']."\",
-                                                            gold_purity=\"".$attr['pd']."\",
-                                                            nofd=\"".$attr['pd']."\",
-                                                            dwt=\"".$attr['pd']."\",
-                                                            gemwt=\"".$attr['pd']."\",
-                                                            quality=\"".$attr['pd']."\",
-                                                            goldwt=\"".$attr['pd']."\",
-                                                            combination=\"".$attr['combination']."\",
-                                                            gemstone_color=\"".$attr['gemstone_color']."\",
-                                                            rating=\"".$attr['pd']."\",";    
+                                                            color       = \"".$detls['color']."\",
+                                                            carat       = \"".$detls['carat_weight']."\",
+                                                            certified   = \"".$detls['Certficate']."\",
+                                                            shape       = \"".$detls['shape']."\",
+                                                            cut         = \"".$detls['cut']."\",
+                                                            clarity     = \"".$detls['clarity']."\",
+                                                            base        = \"".$detls['base_price']."\",
+                                                            tabl        = \"".$detls['table']."\",
+                                                            price       = \"".$detls['price']."\",
+                                                            p_disc      = \"".$detls['discount']."\",
+                                                            prop        = \"".$detls['prop']."\",
+                                                            polish      = \"".$detls['polish']."\",
+                                                            symmetry    = \"".$detls['symmetry']."\",
+                                                            fluo        = \"".$detls['flourecence']."\",
+                                                            td          = \"".$detls['td']."\",
+                                                            measurement = \"".$detls['measurement']."\",
+                                                            cno         = \"".$detls['cert1no']."\",
+                                                            pa          = \"".$detls['pa']."\",
+                                                            cr_hgt      = \"".$detls['cr_height']."\",
+                                                            cr_ang      = \"".$detls['crown_angle']."\",
+                                                            girdle      = \"".$detls['girdle']."\",
+                                                            pd          = \"".$detls['pd']."\",
+                                                            metal       = \"".$detls['metal']."\",
+                                                            type        = \"".$detls['rings_type']."\",
+                                                            gold_purity = \"".$detls['gold_purity']."\",
+                                                            nofd        = \"".$detls['no_diamonds']."\",
+                                                            dwt         = \"".$detls['diamonds_weight']."\",
+                                                            gemwt       = \"".$detls['gemstone_weight']."\",
+                                                            quality     = \"".$detls['quality']."\",
+                                                            gold_weight = \"".$detls['gold_weight']."\",
+                                                            combination = \"".$detls['combination']."\",
+                                                            gemstone_color=\"".$detls['gemstone_color']."\",
+                                                            rating      = \"".$detls['rating']."\"";    
                             $res = $this->query($sql);
                         
-                    }
-                    
-                 //-----------------------------------------------------------------------------------------------------------------------------   
-                    }
+                            $vensql="  SELECT
+                                                            city
+                                    FROM
+                                        tbl_vendor_master
+                                    WHERE
+                                                            vendor_id=\"".$detls['vid']."\"";
+                            $venres=$this->query($vensql);
+                            $venrow=$this->fetchData($venres);
+                            $city=$row['city'];
+
+
+                            $vendsql="  INSERT
+                                        INTO 
+                                                tbl_vendor_product_mapping
+                                                                            (product_id,
+                                                                            vendor_id,
+                                                                            vendor_price,
+                                                                            vendor_quantity,
+                                                                            vendor_currency,
+                                                                            vendor_remarks,
+                                                                            city,
+                                                                            active_flag,
+                                                                            updatedby,
+                                                                            date_time)";
+                            $vendsql.=  "VALUES
+                                                                       (\"".$pid."\",
+                                                                        \"".$detls['vid']."\",
+                                                                        \"".$detls['price']."\",
+                                                                        \"".$detls['vendor_quantity']."\",
+                                                                        \"".$detls['vendor_curr']."\",
+                                                                        \"".$detls['vendor_remarks']."\",
+                                                                        \"".$city."\",
+                                                                            1,
+                                                                           'vendor',
+                                                                            now())";
+                            $vendres = $this->query($vendsql);
+                            if($vendres)
+                            {
+                                $arr = array();
+                                $err=array('code'=>0,'msg'=>'Product added successfully');
+                            }
                 }
-                    $isInside = 1;
-                   // $arr = array('product_id' => $pid);
-            }
-            }
-          
-            else
-            {
-                $arr=array();
-                $err = array('Code' => 1, 'Msg' => 'Something Went Wrong.');
-            }
-            if($isInside=1)
-            {   
-                $arr="product inserted";
-                $err = array('Code' => 0, 'Msg' => 'Product added successfully'); 
-
-            }
-            else
-            {
-                $arr=array();
-                $err = array('Code' => 1, 'Msg' => 'Something Went Wrong.');
-            }
-
+                else
+                {
+                    $arr=array();
+                    $err = array('Code' => 1, 'Msg' => 'Something Went Wrong.');
+                }
                     $result = array('results'=>$arr, 'error' => $err);
                     return $result;
         }
@@ -758,6 +858,7 @@
 						carat,
 						color,
 						certified,
+                                                metal,
 						shape,
 						clarity,
 						price,
@@ -765,13 +866,20 @@
 						symmetry,
 						cno, 
 						cut,
+                                                nofd,
+                                                gemwt,
+                                                gold_purity,
+                                                dwt,
 						fluo as fluorescence,
 						measurement,
 						td as tab,
+                                                gold_weight,
+                                                gemstone_color,
+                                                quality,
 						cr_ang as crownangle,
 						girdle,
 						base as baseprice,
-						p_disc as discount
+                   				p_disc as discount
                     FROM 
                         tbl_product_search
                     WHERE 
