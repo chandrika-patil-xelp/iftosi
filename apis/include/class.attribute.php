@@ -231,8 +231,8 @@ class attribute extends DB
 					attribute_id,
 					attr_unit,
 					attr_unit_pos,
-					attr_values,
-					attr_range
+					trim(attr_values) as attr_values,
+					trim(attr_range) as attr_range
 				FROM 
 					tbl_attribute_category_mapping 
 				WHERE 

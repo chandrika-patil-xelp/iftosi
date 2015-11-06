@@ -191,21 +191,52 @@ function getResultsData(data,sortby,showtree)
 		else if(pageName == 'jewellery') {
 			
 			$.each(data.results.products, function(i, vl) {
-				html += '<div class="prdComm fLeft jwRes transition100" style="opacity: 1; transform: translateX(0px);">';
+				html += '<a href="'+DOMAIN+vl.pbrand.toLowerCase()+'-'+vl.pname.toLowerCase()+'-'+vl.pcode.toLowerCase()+'/jid-'+vl.pid+'">';
+					html += '<div class="prdComm fLeft jwRes transition100" style="opacity: 1; transform: translateX(0px);">';
+						html += '<div class="prdCommDiv fLeft transition100">';
+							html += '<div class="prdCommImg fLeft">';
+								html += '<div class="for-7Upper">';
+									html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/1.jpg)no-repeat;background-size: contain;background-position:center"></div>';
+								html += '</div>';
+								html += '<div class="for-7Lower">';
+									html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/2.jpg)no-repeat;background-size: contain;background-position:center"></div>';
+									html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/3.jpeg)no-repeat;background-size: contain;background-position:center"></div>';
+									html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/4.jpg)no-repeat;background-size: contain;background-position:center"></div>';
+									html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/5.jpg)no-repeat;background-size: contain;background-position:center"></div>';
+									html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/6.jpg)no-repeat;background-size: contain;background-position:center"></div>';
+									html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/7.jpg)no-repeat;background-size: contain;background-position:center"></div>';
+								html += '</div>';
+								html += '<div class="proxImg fLeft" style="background: url(http://localhost/iftosi/tools/img/product1/2.jpg) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>';
+							html += '</div>';
+							html += '<div class="prdDetails fLeft">';
+								html += '<div class="detComm">';
+									html += '<div class="detLabel fmOpenB fLeft">DESIGN NO.</div>';
+									html += '<div class="detValue fmOpenR fLeft">'+vl.pcode+'</div>';
+								html += '</div>';
+							html += '</div>';
+							html += '<div class="prdPrice fLeft">';
+								html += '<div class="detComm">';
+									html += '<div class="detLabel fmOpenB fLeft">PRICE</div>';
+									html += '<div class="detValue fmOpenB fLeft"><span>₹</span>'+vl.attributes.price+'</div>';
+								html += '</div>';
+							html += '</div>';
+							html += '<div class="prdActions fLeft">';
+								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+							html += '</div>';
+						html += '</div>';
+					html += '</div>';
+				html += '</a>';
+			});
+		}
+		else {
+			$.each(data.results.products, function(i, vl) {
+				html += '<div class="prdComm fLeft jwRes" style="opacity: 0; transform: translateX(1000px);">';
 					html += '<div class="prdCommDiv fLeft transition100">';
 						html += '<div class="prdCommImg fLeft">';
-							html += '<div class="for-7Upper">';
-								html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/1.jpg)no-repeat;background-size: contain;background-position:center"></div>';
-							html += '</div>';
-							html += '<div class="for-7Lower">';
-								html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/2.jpg)no-repeat;background-size: contain;background-position:center"></div>';
-								html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/3.jpeg)no-repeat;background-size: contain;background-position:center"></div>';
-								html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/4.jpg)no-repeat;background-size: contain;background-position:center"></div>';
-								html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/5.jpg)no-repeat;background-size: contain;background-position:center"></div>';
-								html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/6.jpg)no-repeat;background-size: contain;background-position:center"></div>';
-								html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/7.jpg)no-repeat;background-size: contain;background-position:center"></div>';
-							html += '</div>';
-							html += '<div class="proxImg fLeft" style="background: url(http://localhost/iftosi/tools/img/product1/2.jpg) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>';
+							html += '<div class="proxImg fLeft" style="background: #fff url(tools/img/product1/b1.jpg)no-repeat;background-size: contain;background-position:center"></div>';
 						html += '</div>';
 						html += '<div class="prdDetails fLeft">';
 							html += '<div class="detComm">';
@@ -216,7 +247,7 @@ function getResultsData(data,sortby,showtree)
 						html += '<div class="prdPrice fLeft">';
 							html += '<div class="detComm">';
 								html += '<div class="detLabel fmOpenB fLeft">PRICE</div>';
-								html += '<div class="detValue fmOpenB fLeft"><span>₹</span>'+vl.attributes.price+'</div>';
+								html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+vl.attributes.price+'</div>';
 							html += '</div>';
 						html += '</div>';
 						html += '<div class="prdActions fLeft">';

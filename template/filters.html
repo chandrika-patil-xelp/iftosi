@@ -112,7 +112,10 @@
 		{
 			if(!empty($val['attribute_range']))
 			{
-				$expd = explode("-",$val['attribute_range']);
+				if(stristr($val['attribute_range'],'-'))
+					$expd = explode("-",$val['attribute_range']);
+				else
+					$expd = explode(",",$val['attribute_range']);
 	?>
 				<input type="hidden" id="<?php echo $val['attribute_name'];?>RangeMin" value="<?php echo $expd[0];?>">
 				<input type="hidden" id="<?php echo $val['attribute_name'];?>RangeMax" value="<?php echo $expd[1];?>">

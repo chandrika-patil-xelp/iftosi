@@ -23,4 +23,5 @@ RewriteRule ^([^/.]*)/([^/.]*)/(ct-[^/.]*)/(page-[^/.]*)$	index.php?case=$1&cati
 RewriteRule ^([^/.]*)/([^/.]*)/([^/.]*)/(ct-[^/.]*)$	index.php?case=$1&catid=$4 [L]
 RewriteRule ^([^/.]*)/([^/.]*)/([^/.]*)/(ct-[^/.]*)/(page-[^/.]*)$	index.php?case=$1&catid=$3&pgno=$5 [L]
 RewriteRule ^([^/.]*)/(pid-[^/.]*)$	index.php?case=diamond_details&productname=$1&productid=$2 [L]
+RewriteRule ^([^/.]*)/(jid-[^/.]*)$	index.php?case=jewellery_details&productname=$1&productid=$2 [L]
 #RewriteRule ^([^/.]*)/([^/.]*)/([^/.]*)$	index.php?par=$1&mob=$2&mod=$3 [L]

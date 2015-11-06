@@ -155,7 +155,24 @@
 					include 'template/jewellery_results.html';
 				break;
 				case 'bullions':
-					$page='bullion';
+					$page='bullions';
+					$pgno 	= ($_GET['pgno'] ? $_GET['pgno'] : 1);
+					$catid 	= $_GET['catid'];
+					$url 	= APIDOMAIN.'index.php?action=getPrdByCatid&catid='.$catid.'&page='.$pgno;
+					$res 	= $comm->executeCurl($url);
+					$data 	= $res['results']['products'];
+					$total	= $res['results']['total'];
+					$catname= $res['results']['catname'];
+					
+					$url 	= APIDOMAIN.'index.php?action=fetch_category_mapping&catid='.$catid;
+					$res 	= $comm->executeCurl($url);
+					$fil	= $res['results']['attributes'];
+					
+					//echo "<pre>";print_r($fil);die;
+					
+					$totalCnt = $total;
+					$lastpg = ceil($total/15);
+					$adjacents = 2;
 					include 'template/bullion_results.html';
 				break;
 				

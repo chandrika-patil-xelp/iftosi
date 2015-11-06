@@ -25,8 +25,8 @@
                         </div><div  id='gCoin' class="jshapeComm transition300 ripplelink gCoin">Gold Coin
                         </div><div  id='sCoin' class="jshapeComm transition300 ripplelink sCoin">Silver Coin
                         </div>-->
-                        <div id='gbar' class="jshapeComm transition300 ripplelink gBar">Bar
-                        </div><div  id='gCoin' class="jshapeComm transition300 ripplelink gCoin">Coin
+                        <div id='gCoin' class="jshapeComm transition300 ripplelink gCoins">Coins
+                        </div><div  id='gbar' class="jshapeComm transition300 ripplelink gBars">Bars
                         </div>
                     </center>
                 </div>
@@ -35,7 +35,7 @@
                 <div class="wrapperMax">
                     <div class="filterTitleDiv">
                         <div class='fTitle fLeft fmOpenR'>Filter Results</div>
-                        <div class="rCount fLeft fmOpenR"><span id='resultCount'> 2,835</span> Diamonds found</div>
+                        <div class="rCount fLeft fmOpenR"><span id='resultCount'> 2,835</span> Results Found For <?php echo $catname;?></div>
                         <div class="fRight sortBox">
                             <div class="dropdownBox fLeft">
                                 <div id="drpinp" class="dropInput fmOpenR">Best Match</div>
@@ -52,7 +52,7 @@
                     <div class='results_Filter'>
                         <?php include 'filters.html'; ?>
                         <div class='prdResults fRight'>
-                            <?php while ($i < 1) { ?>
+                            <?php foreach($data as $key=>$val) { ?>
                                 <div class='prdComm fLeft jwRes' style="opacity: 0; transform: translateX(1000px);">
                                     <div class='prdCommDiv fLeft transition100'>
                                         <div class="prdCommImg fLeft">
@@ -61,13 +61,13 @@
                                         <div class="prdDetails fLeft">
                                             <div class="detComm">
                                                 <div class="detLabel fmOpenB fLeft">DESIGN NO.</div>
-                                                <div class="detValue fmOpenR fLeft">18101</div>
+                                                <div class="detValue fmOpenR fLeft"><?php echo $val['pcode'];?></div>
                                             </div>
                                         </div>
                                         <div class='prdPrice fLeft'>
                                             <div class="detComm">
                                                 <div class="detLabel fmOpenB fLeft">PRICE</div>
-                                                <div class="detValue fmOpenB fLeft"><span>&#8377;</span>50,800</div>
+                                                <div class="detValue fmOpenB fLeft"><span>&#8377;</span><?php echo $val['attributes']['price'];?></div>
                                             </div>
                                         </div>
                                         <div class='prdActions fLeft'>

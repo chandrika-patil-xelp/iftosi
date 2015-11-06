@@ -635,203 +635,210 @@
 				$page   = ($params['page'] ? $params['page'] : 1);
 				$limit  = ($params['limit'] ? $params['limit'] : 15);
 				
-				$sql = "SELECT 
-							count(distinct product_id) as cnt 
-						FROM 
-							tbl_product_search 
-						WHERE 
-							product_id IN(".$pid.")
-						".$extn."	
-						";
-				$res = $this->query($sql);
-				if($res)
+				if($pid)
 				{
-					$row = $this->fetchData($res);
-					$total = $row['cnt'];
-				}
-				
-				$patsql="
-						SELECT
-							distinct product_id,
-							carat,
-							color,
-							certified,
-							shape,
-							clarity,
-							price,
-							polish,
-							symmetry,
-							cno
-						FROM 
-							tbl_product_search 
-						WHERE 
-							product_id IN(".$pid.")
-						".$extn."
-						ORDER BY
-							field(product_id,".$pid.")
-						";
 						
-				if (!empty($page))
-				{
-					$start = ($page * $limit) - $limit;
-					$patsql.=" LIMIT " . $start . ",$limit";
-				}
-						
-				$patres=$this->query($patsql);
-				
-				while($row2=$this->fetchData($patres))
-				{
-					$prodid[] = $row2['product_id'];
-					$pid = $row2['product_id'];
-					unset($row2['product_id']);
-					$attr[$pid]['attributes']=$row2;
-				}
-				
-				$pid = $pids = implode(',',$prodid);
-				
-				$psql = "
-						SELECT
-							product_id as pid,
-							barcode as pcode,
-							product_name as pname,
-							product_display_name as pdname,
-							product_model as pmodel,
-							product_brand as pbrand,
-							prd_price as pprice,
-							product_currency as pcur,
-							prd_img as pimg
-						FROM 
-							tbl_product_master 
-						WHERE 
-							product_id IN(".$pid.")
-						ORDER BY
-							field(product_id,".$pid.");
-						";
-				$pres=$this->query($psql);
-				while($row1=$this->fetchData($pres))
-				{
-					$pid = $row1['pid'];
-					$arr1[$pid]=$row1;
-					$arr1[$pid]['attributes'] = $attr[$pid]['attributes'];
-				}
-				
-				/* For filters */
-				
-				$sql = "
-					SELECT 
-						attribute_id,
-						attr_values,
-						attr_range,
-						attr_unit,
-						attr_unit_pos
-					FROM 
-						tbl_attribute_category_mapping 
-					WHERE 
-						category_id=".$params['catid']." 
-					AND 
-						attr_filter_flag=1 
-					ORDER BY 
-						attr_filter_position ASC";
-				$res = $this->query($sql);
-				if($res)
-				{
-					while($row 		= $this->fetchData($res))
+					$sql = "SELECT 
+								count(distinct product_id) as cnt 
+							FROM 
+								tbl_product_search 
+							WHERE 
+								product_id IN(".$pid.")
+							".$extn."	
+							";
+					$res = $this->query($sql);
+					if($res)
 					{
-						$attrid[] = $row['attribute_id'];
-						$attrmap[$row['attribute_id']] = $row;
+						$row = $this->fetchData($res);
+						$total = $row['cnt'];
 					}
-					$attrids 	= implode(',',$attrid);
-				}
-				
-				//echo "<pre>";print_r($attrmap);die;
-				
-				$sql="
-					SELECT
-						attr_id, 
-						attr_name, 
-						attr_display_name,
-						attr_type_flag				
-					FROM 
-						tbl_attribute_master 
-					WHERE 
-						attr_id IN(".$attrids.") 
-					ORDER BY 
-						attr_display_name ASC";
-				
-				$res = $this->query($sql);
-				
-				if($res)
-				{
-					$i=0;
-					while($row = $this->fetchData($res))
+					
+					$patsql="
+							SELECT
+								distinct product_id,
+								carat,
+								color,
+								certified,
+								shape,
+								clarity,
+								price,
+								polish,
+								symmetry,
+								cno
+							FROM 
+								tbl_product_search 
+							WHERE 
+								product_id IN(".$pid.")
+							".$extn."
+							ORDER BY
+								field(product_id,".$pid.")
+							";
+							
+					if (!empty($page))
 					{
-						switch ($row['attr_type_flag'])
+						$start = ($page * $limit) - $limit;
+						$patsql.=" LIMIT " . $start . ",$limit";
+					}
+							
+					$patres=$this->query($patsql);
+					
+					while($row2=$this->fetchData($patres))
+					{
+						$prodid[] = $row2['product_id'];
+						$pid = $row2['product_id'];
+						unset($row2['product_id']);
+						$attr[$pid]['attributes']=$row2;
+					}
+					
+					$pid = $pids = implode(',',$prodid);
+					
+					$psql = "
+							SELECT
+								product_id as pid,
+								barcode as pcode,
+								product_name as pname,
+								product_display_name as pdname,
+								product_model as pmodel,
+								product_brand as pbrand,
+								prd_price as pprice,
+								product_currency as pcur,
+								prd_img as pimg
+							FROM 
+								tbl_product_master 
+							WHERE 
+								product_id IN(".$pid.")
+							ORDER BY
+								field(product_id,".$pid.");
+							";
+					$pres=$this->query($psql);
+					while($row1=$this->fetchData($pres))
+					{
+						$pid = $row1['pid'];
+						$arr1[$pid]=$row1;
+						$arr1[$pid]['attributes'] = $attr[$pid]['attributes'];
+					}
+					
+					/* For filters */
+					
+					$sql = "
+						SELECT 
+							attribute_id,
+							attr_values,
+							attr_range,
+							attr_unit,
+							attr_unit_pos
+						FROM 
+							tbl_attribute_category_mapping 
+						WHERE 
+							category_id=".$params['catid']." 
+						AND 
+							attr_filter_flag=1 
+						ORDER BY 
+							attr_filter_position ASC";
+					$res = $this->query($sql);
+					if($res)
+					{
+						while($row 		= $this->fetchData($res))
 						{
-							case 6: //$pids
-								$qry = "SELECT 
-											MIN(".$row['attr_name'].") AS minval, 
-											MAX(".$row['attr_name'].") AS maxval 
-										FROM 
-											tbl_product_search
-										WHERE
-											product_id IN(".$allpids.")
-										";
-								$res1 = $this->query($qry);
-								if($res1)
-								{
-									$row1 = $this->fetchData($res1);
-									$data[$i]['range']['id'] 		= $row['attr_id'];
-									$data[$i]['range']['name'] 		= $row['attr_name'];
-									$data[$i]['range']['dname'] 	= $row['attr_display_name'];
-									$data[$i]['range']['value'] 	= $row1['minval'].';'.$row1['maxval'];
-									$data[$i]['range']['ovalue'] 	= $attrmap[$row['attr_id']]['attr_range'];
-									$i++;
-								}
-							break;
-							
-							case 7:
-								
-								$qry = "SELECT 
-											group_concat(DISTINCT ".$row['attr_name'].") as name 
-										FROM 
-											tbl_product_search
-										WHERE
-											product_id IN(".$allpids.")
-										";
-								$res1 = $this->query($qry);
-								if($res1)
-								{
-									$arr = array();
-									$row1 = $this->fetchData($res1);
-									$expd = explode(',',$attrmap[$row['attr_id']]['attr_values']);
-									$expd1 = explode(',',$row1['name']);
-									foreach($expd1 as $key=>$val)
+							$attrid[] = $row['attribute_id'];
+							$attrmap[$row['attribute_id']] = $row;
+						}
+						$attrids 	= implode(',',$attrid);
+					}
+					
+					//echo "<pre>";print_r($attrmap);die;
+					
+					$sql="
+						SELECT
+							attr_id, 
+							attr_name, 
+							attr_display_name,
+							attr_type_flag				
+						FROM 
+							tbl_attribute_master 
+						WHERE 
+							attr_id IN(".$attrids.") 
+						ORDER BY 
+							attr_display_name ASC";
+					
+					$res = $this->query($sql);
+					
+					if($res)
+					{
+						$i=0;
+						while($row = $this->fetchData($res))
+						{
+							switch ($row['attr_type_flag'])
+							{
+								case 6: //$pids
+									$qry = "SELECT 
+												MIN(".$row['attr_name'].") AS minval, 
+												MAX(".$row['attr_name'].") AS maxval 
+											FROM 
+												tbl_product_search
+											WHERE
+												product_id IN(".$allpids.")
+											";
+									$res1 = $this->query($qry);
+									if($res1)
 									{
-										$arr[array_search($val,$expd)] = $val;
+										$row1 = $this->fetchData($res1);
+										$data[$i]['range']['id'] 		= $row['attr_id'];
+										$data[$i]['range']['name'] 		= $row['attr_name'];
+										$data[$i]['range']['dname'] 	= $row['attr_display_name'];
+										$data[$i]['range']['value'] 	= $row1['minval'].';'.$row1['maxval'];
+										$data[$i]['range']['ovalue'] 	= $attrmap[$row['attr_id']]['attr_range'];
+										$i++;
 									}
-									ksort($arr);
-									$arr = array_values($arr);
-									$data[$i]['checkbox']['id'] 	= $row['attr_id'];
-									$data[$i]['checkbox']['name'] 	= $row['attr_name'];
-									$data[$i]['checkbox']['dname'] 	= $row['attr_display_name'];
-									$data[$i]['checkbox']['value'] 	= implode(',',$arr);
-									$data[$i]['checkbox']['ovalue'] = $attrmap[$row['attr_id']]['attr_values'];
-									$i++;
-								}
-							break;
-							
-							case 8:
-							break;
+								break;
+								
+								case 7:
+									
+									$qry = "SELECT 
+												group_concat(DISTINCT ".$row['attr_name'].") as name 
+											FROM 
+												tbl_product_search
+											WHERE
+												product_id IN(".$allpids.")
+											";
+									$res1 = $this->query($qry);
+									if($res1)
+									{
+										$arr = array();
+										$row1 = $this->fetchData($res1);
+										$expd = explode(',',$attrmap[$row['attr_id']]['attr_values']);
+										$expd1 = explode(',',$row1['name']);
+										foreach($expd1 as $key=>$val)
+										{
+											$arr[array_search($val,$expd)] = $val;
+										}
+										ksort($arr);
+										$arr = array_values($arr);
+										$data[$i]['checkbox']['id'] 	= $row['attr_id'];
+										$data[$i]['checkbox']['name'] 	= $row['attr_name'];
+										$data[$i]['checkbox']['dname'] 	= $row['attr_display_name'];
+										$data[$i]['checkbox']['value'] 	= implode(',',$arr);
+										$data[$i]['checkbox']['ovalue'] = $attrmap[$row['attr_id']]['attr_values'];
+										$i++;
+									}
+								break;
+								
+								case 8:
+								break;
+							}
 						}
 					}
+					
+					/* *********** */
+					
+					$arr1 = array('filters'=>$data,'products'=>array_values($arr1),'total'=>$total,'getdata'=>$params,'catname'=>$catname);
+					$err = array('errCode'=>0,'errMsg'=>'Details fetched successfully');
 				}
-				
-				
-				
-				/* *********** */
-				
-				$arr1 = array('filters'=>$data,'products'=>array_values($arr1),'total'=>$total,'getdata'=>$params,'catname'=>$catname);
-				$err = array('errCode'=>0,'errMsg'=>'Details fetched successfully');
+				else
+				{
+					$arr1 = array();
+					$err = array('errCode'=>1,'errMsg'=>'No records found');
+				}
 			}
 			else
 			{
