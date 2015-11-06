@@ -177,15 +177,94 @@
 				break;
                                 case 'diamond_Form':
 					$page='diamond-Form';
+                                        $vid   =  $_GET['vid'];
+                                        $catid =  $_GET['catid'];
+                                        $pid   =  $_GET['prdid'];
+                                        $dt    =  $_POST['dt'];
+                                        
+                                        if(!empty($catid) && !empty($dt) && !empty($vid))
+                                        {  
+                                        $url   = APIDOMAIN.'index.php?action=addNewproduct&category_id='.$catid.'&dt='.$dt.'&vid='.$vid;
+                                        $res   = $comm->executeCurl($url);
+                                        $data  = $res['results'][$dt];
+                                        }
+                                        if(!empty($catid)&& !empty($pid))
+                                        {
+                                            $url   = APIDOMAIN.'index.php?action=getPrdById&category_id='.$catid.'&prdid='.$pid;
+                                            $res   = $comm->executeCurl($url);
+                                            $result  = $res['results'];
+                                        }
+
+                                        $url 	= APIDOMAIN.'index.php?action=fetch_category_mapping&catid='.$catid;
+					$res 	= $comm->executeCurl($url);
+					$fil 	= $res['results'];
+
+                                        $attr   = $result[$pid]['attr_details'];
+                                        $pdet   = $result[$pid];
+                                        //echo "<pre>";print_r($attr);die;
 					include 'template/diamondForm.html';
 				break;
+                               
+                            
                                 case 'jewellery_Form':
 					$page='jewellery-Form';
+                                        $vid   =  $_GET['vid'];
+                                        $catid =  $_GET['catid'];
+                                        $pid   =  $_GET['prdid'];
+                                        $dt    =  $_POST['dt'];
+                                        
+                                        if(!empty($catid) && !empty($dt) && !empty($vid))
+                                        {
+                                            $url   = APIDOMAIN.'index.php?action=addNewproduct&category_id='.$catid.'&dt='.$dt.'&vid='.$vid;
+                                            $res   = $comm->executeCurl($url);
+                                            $data  = $res['results'][$dt];
+                                        }
+                                        if(!empty($catid) && !empty($pid))
+                                        {
+                                            $url   = APIDOMAIN.'index.php?action=getPrdById&category_id='.$catid.'&prdid='.$pid;
+                                            $res   = $comm->executeCurl($url);
+                                            $result  = $res['results'];
+                                        }
+                                        
+                                        $url 	= APIDOMAIN.'index.php?action=categoryHeir&catid='.$catid;
+					$res 	= $comm->executeCurl($url);
+					$cat 	= $res['result'];
+                                        
+                                        $attr   = $result[$pid]['attr_details'];
+                                        $pdet   = $result[$pid];
+//                                        echo "<pre>";print_r($pdet);die;
 					include 'template/jewelleryForm.html';
 				break;
+                            
                                 case 'bullion_Form':
-					$page='bullion-Form';
-					include 'template/bullionForm.html';
+                                        $page='bullion-Form';
+                                        $vid   =  $_GET['vid'];
+                                        $catid =  $_GET['catid'];
+                                        $pid   =  $_GET['prdid'];
+                                        $dt    =  $_POST['dt'];
+                                        
+                                        if(!empty($catid) && !empty($dt) && !empty($vid))
+                                        {
+                                            $url   = APIDOMAIN.'index.php?action=addNewproduct&category_id=10002&dt='.$dt.'&vid='.$vid;
+                                            $res   = $comm->executeCurl($url);
+                                            $data  = $res['results'][$dt];
+                                        }
+
+                                        if(!empty($catid) && !empty($pid))
+                                        {
+                                            $url   = APIDOMAIN.'index.php?action=getPrdById&category_id='.$catid.'&prdid='.$pid.'&vid='.$vid;
+                                            $res   = $comm->executeCurl($url);
+                                            $result  = $res['results'];
+                                        }
+                                        
+                                        $url 	= APIDOMAIN.'index.php?action=fetch_category_mapping&catid='.$catid;
+                                        $res 	= $comm->executeCurl($url);
+                                        $fil 	= $res['results'];
+                                        $attr   = $result[$pid]['attr_details'];
+                                        $pdet   = $result[$pid];
+                                        //echo "<pre>";print_r($attr);die;
+                                        //echo "<pre>";print_r($pdet);die;
+                                        include 'template/bullionForm.html';
 				break;
                                 
                                 case 'vendor_Form':
