@@ -76,17 +76,71 @@ $(document).ready(function() {
    $('.vFilBtn').click(function(){ showEnqFilter();});
    
    
-   $('.shapeComm').bind('click', function() {
+   $('.shapeComm').bind('click', function() 
+   {
+        var uthis = $(this);
+        $('.shapeComm').each(function(){
+            if($(this).hasClass('shapeSelected') && $(this).attr('id') != uthis.attr('id'))
+               $(this).removeClass('shapeSelected');
+            });
         $(this).toggleClass('shapeSelected');
     });
+    
+       $('.jshapeComm').bind('click', function() 
+       {
+            var uthis = $(this);
+            $('.jshapeComm').each(function(){
+               if($(this).hasClass('shapeSelected') && $(this).attr('id') != uthis.attr('id'))
+                   $(this).removeClass('shapeSelected');
+            });
+            $(this).toggleClass('shapeSelected');
+            if($(this).hasClass('shapeSelected'))
+            {
+                var tmpId = $(this).attr('id');
+                tmpId = tmpId.toLowerCase();
+                $('.subCatType').addClass('dn');
+                $('#' + tmpId + 'Type').removeClass('dn');
+            }
+            else
+            {
+                var tmpId = $(this).attr('id');
+                tmpId = tmpId.toLowerCase();
+                $('#' + tmpId + 'Type').addClass('dn');
+            }
+            
+            var bthis = $(this);
+            
+            if($(this).hasClass('shapeSelected'))
+            {
+                var id=$(this).attr('id');
+                var tmpId = id.toLowerCase();
+                
+                if((tmpId=='gbar')||(tmpId=='gcoin'))
+                {
+                    $('.allprop').addClass('dn');
+                    $('.goldprop').removeClass('dn');
+                }
+                else if((tmpId=='sbar')||(tmpId=='scoin'))
+                {
+                    $('.allprop').addClass('dn');
+                    $('.silverprop').removeClass('dn');
+                }
+            }
+            else
+            {
+                $('.goldprop').addClass('dn');
+                $('.silverprop').addClass('dn');
+                $('.allprop').removeClass('dn');
+            }
+       });   
+           
+        //$(this).toggleClass('shapeSelected');
+    
+       });
 
-    $('.jshapeComm').bind('click', function() {
-        $(this).toggleClass('shapeSelected');
-    });
 
 
 
-});
 
 var isOpen = false;
 var id = "";
