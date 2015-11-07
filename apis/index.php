@@ -1048,7 +1048,15 @@ echo '</pre>';
             
             $result=$obj->categoryHeir($params);
             $res=$result;
-            break;    
+            break;
+            
+        case 'product_category_mapping':
+            include APICLUDE.'class.prdInsert.php';
+            $obj= new prdInsert($db['iftosi']);
+            $result=$obj->product_category_mapping();
+            $res=$result;
+            break;
+            
 //---------------------------------------------------------------------------            
         default :
             
