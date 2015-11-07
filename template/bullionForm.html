@@ -17,14 +17,16 @@
                             {
                                 $attr_values = $values['attribute_values'];
                                 $attr_values = explode(',', $attr_values);
-                                
+                                $i=0;
                                 foreach($attr_values as $shape)
                                 {
                                     $a=explode(' ',$shape);
-                                    $firstval=  strtolower(substr($a[0],0,1));
-                                    $typeid= $firstval.$a[1];
-                                    $shapename=ucwords(strtolower($shape));
-                                  echo "<div id='".$typeid."' class='jshapeComm transition300 ripplelink SubCaType ".$typeid."'>".$shapename."</div>"; }}}?>
+                                    $firstval=  explode(',','g,s');
+                                    $typeid= $firstval[$i].$a[1];
+                                    $shapename=ucwords(strtolower(substr($shape,0,-1)));
+                                    $i++;
+                                    $idtemp=$typeid.$shapename;
+                                  echo "<div id='".$idtemp."' class='jshapeComm transition300 ripplelink SubCaTtype ".$idtemp."'>".$shapename."</div>"; }}}?>
                                 </center>
                             </div>
                         </div>                                        
@@ -67,7 +69,7 @@
                         <div class="btnCont fLeft">
                             <center>
                             <!--    <a href="<?php echo DOMAIN ?>index.php?case=vendor_landing">--> <div class="cancelBtn fmOpenR ripplelink poR">CANCEL</div></a>
-                            <!--    <a href="<?php echo DOMAIN?>index.php?case=vendor_landing"> --> <div class="submitBtn fmOpenR ripplelink poR" onclick="submitForm("bAddForm')">SUBMIT</div></a>
+                            <!--    <a href="<?php echo DOMAIN?>index.php?case=vendor_landing"> --> <div class="submitBtn fmOpenR ripplelink poR" onclick="submitForm('bAddForm')">SUBMIT</div></a>
                             </center>
                         </div>
                     </div>
@@ -79,7 +81,7 @@
 <script type="text/javascript" src="<?= $jvs['jqryUi']; ?>"></script>
 <script type="text/javascript" src='tools/js/cms/vendor_landing.js'></script>
 <script type="text/javascript" src='tools/js/pForm.js'></script>
-<script type="text/javascript">var DOMAIN = '<?php echo DOMAIN;?>';</script>
+
 
 </body>
 </html>
