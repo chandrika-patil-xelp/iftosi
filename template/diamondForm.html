@@ -11,10 +11,33 @@
                             <div class="wrapperMax">
                                 <div class="allShapes resultsPage">
                                     <center>
-                                        <div id="Round" class="shapeComm transition300 ripplelink Round">
+<?php
+                                        foreach($fil['attributes'] as $key=>$values)
+                                        {
+                                            if(strtolower($values['attribute_disp_name'])=='shape')
+                                            {
+                                                $attr_values = $values['attribute_values'];
+                                                $attr_values = explode(',', $attr_values);
+                                                foreach($attr_values as $shape)
+                                                {
+?>
+                                                    <div id="<?=ucwords(strtolower($shape));?>" class="shapeComm transition300 <?=($attr['shape'] == $shape) ? 'shapeSelected' : '';?> ripplelink <?=$shape;?>">
+                                                    </div>
+<?php
+                                                }                                                
+                                            }
+                                        }
+?>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                                      <!--  <div id="Round" class="shapeComm transition300 ripplelink Round">
                                         </div>
+                                        
                                         <div id="Pear" class="shapeComm transition300 ripplelink Pear">
                                         </div>
+                                        
                                         <div id="Princess" class="shapeComm transition300 ripplelink Princess">
                                         </div>
                                         <div id="Marquise" class="shapeComm transition300 ripplelink Marquise">
@@ -29,261 +52,249 @@
                                         </div>
                                         <div id="Radiant" class="shapeComm transition300 ripplelink Radiant">
                                         </div>
-                                    </center>
-                                </div>
-                            </div>
-                        </div>
+                                      -->
+                                    
                         <div class="divCon  fLeft dAuto">
                             <div  class="titleDiv txtCap fLeft">Color</div>
                             <div class='radioCont fLeft'> 
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" value='D' name='color' class="filled-in"  value='color_D'  id="color_D"/>
-                                    <label for="color_D"> D</label>
+<?php
+                                        foreach($fil['attributes'] as $key=>$values)
+                                        {
+                                            if(strtolower($values['attribute_disp_name'])=='colour')
+                                            {
+                                                $attr_values = $values['attribute_values'];
+                                                $attr_values = explode(',', $attr_values);
+                                                foreach($attr_values as $color)
+                                                {
+?>                                                  <div class="checkDiv fLeft">
+                                                        <input type="radio" value='<?=$color?>' name='color' class="filled-in" <?=($attr['color'] == $color) ? 'checked' : '';?> id="color_<?=ucwords(strtolower($color));?>"/>
+                                                        <label for="color_<?=ucwords(strtolower($color));?>"><?=$color?></label>
+                                                    </div>
+<?php
+                                                }
+                                            }
+                                        }
+?>
+
                                 </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='color' class="filled-in" value='color_E'  id="color_E"/>
-                                    <label for="color_E">E</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='color' class="filled-in" value='color_F'  id="color_F"/>
-                                    <label for="color_F">F</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='color' class="filled-in" value='color_G'  id="color_G"/>
-                                    <label for="color_G">G</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='color' class="filled-in" value='color_H'  id="color_H"/>
-                                    <label for="color_H">H</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='color' class="filled-in" value='color_I'  id="color_I"/>
-                                    <label for="color_I">I</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='color' class="filled-in" value='color_J'  id="color_J"/>
-                                    <label for="color_J">J</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='color' class="filled-in" value='color_K'  id="color_K"/>
-                                    <label for="color_K">K</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='color' class="filled-in" value='color_L'  id="color_L"/>
-                                    <label for="color_L">L</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='color' class="filled-in" value='color_M'  id="color_M"/>
-                                    <label for="color_M">M</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='color' class="filled-in" value='color_N'  id="color_N"/>
-                                    <label for="color_N">N</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='color' class="filled-in" value='color_O'  id="color_O"/>
-                                    <label for="color_O">O</label>
-                                </div>
-                            </div>
-                        </div>
+                         </div>
                         <div class="divCon  fLeft dAuto">
                             <div  class="titleDiv txtCap fLeft">Clarity</div>
                             <div class='radioCont fLeft'> 
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='clarity' class="filled-in" value="clarity_IF" id="clarity_IF">
-                                    <label for="clarity_IF">IF</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='clarity' class="filled-in" value="clarity_VVSI" id="clarity_VVS1">
-                                    <label for="clarity_VVS1">VVS1</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='clarity' class="filled-in"  value="clarity_VVS2" id="clarity_VVS2">
-                                    <label for="clarity_VVS2">VVS2</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='clarity' class="filled-in"  value="clarity_VS1" id="clarity_VS1">
-                                    <label for="clarity_VS1">VS1</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='clarity' class="filled-in"  value="clarity_VS2" id="clarity_VS2">
-                                    <label for="clarity_VS2">VS2</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='clarity' class="filled-in"  value="clarity_SI1" id="clarity_SI1">
-                                    <label for="clarity_SI1">SI1</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='clarity' class="filled-in"  value="clarity_SI2" id="clarity_SI2">
-                                    <label for="clarity_SI2">SI2</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='clarity' class="filled-in"  value="clarity_I1" id="clarity_I1">
-                                    <label for="clarity_I1">I1</label>
-                                </div>
+<?php
+                                        foreach($fil['attributes'] as $key=>$values)
+                                        {
+                                            if(strtolower($values['attribute_disp_name'])=='clarity')
+                                            {
+                                                $attr_values = $values['attribute_values'];
+                                                $attr_values = explode(',', $attr_values);
+                                                foreach($attr_values as $clarity)
+                                                {
+                                                                                                    
+?>                                               
+                                                <div class="checkDiv fLeft">
+                                                    <input type="radio" name='clarity' class="filled-in" value="<?=$clarity?>" <?=($attr['clarity'] == $clarity) ? 'checked' : '';?> id="clarity_<?=ucwords(strtolower($clarity));?>">
+                                                    <label for="clarity_<?=ucwords(strtolower($clarity));?>"><?=$clarity?></label>
+                                                 </div>
+<?php                                           }
+                                            }
+                                        }
+?>     
+                          
                             </div>
                         </div>
-                        <div class="divCon  fLeft d5">
-                            <div  class="titleDiv txtCap fLeft">Cut</div>
-                            <div class='radioCont fLeft'> 
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='cut' class="filled-in" value="cut_Excellent" id="cut_Excellent">
-                                    <label for="cut_Excellent">Excellent</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='cut' class="filled-in" value="cut_Very_Good" id="cut_Very_Good">
-                                    <label for="cut_Very_Good">Very Good</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='cut' class="filled-in" value="cut_Good" id="cut_Good">
-                                    <label for="cut_Good">Good</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='cut' class="filled-in" value="cut_Fair" id="cut_Fair">
-                                    <label for="cut_Fair">Fair</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="divCon  fLeft d5">
-                            <div  class="titleDiv txtCap fLeft">Symmetry</div>
-                            <div class='radioCont fLeft'> 
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='symmetry'class="filled-in" value="sym_Excellent" id="sym_Excellent">
-                                    <label for="sym_Excellent">Excellent</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='symmetry'class="filled-in" value="sym_Very_Good" id="sym_Very_Good">
-                                    <label for="sym_Very_Good">Very Good</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='symmetry'class="filled-in" value="sym_Good" id="sym_Good">
-                                    <label for="sym_Good">Good</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='symmetry'class="filled-in" value="sym_Fair" id="sym_Fair">
-                                    <label for="sym_Fair">Fair</label>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="divCon  fLeft d5">
-                            <div  class="titleDiv txtCap fLeft">Polish</div>
-                            <div class='radioCont fLeft'> 
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='polish' class="filled-in" value="polish_Excellent" id="polish_Excellent">
-                                    <label for="polish_Excellent">Excellent</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='polish' class="filled-in" value="polish_Very_Good" id="polish_Very_Good">
-                                    <label for="polish_Very_Good">Very Good</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='polish' class="filled-in" value="polish_Good" id="polish_Good">
-                                    <label for="polish_Good">Good</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='polish' class="filled-in" value="polish_Fair" id="polish_Fair">
-                                    <label for="polish_Fair">Fair</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="divCon  fLeft d5">
-                            <div  class="titleDiv txtCap fLeft">Florescence</div>
-                            <div class='radioCont fLeft'> 
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='flourecence' class="filled-in" id="flourecence_1" value="flourecence_1">
-                                    <label for="flourecence_1">None</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='flourecence' class="filled-in" id="flourecence_2" value="flourecence_2">
-                                    <label for="flourecence_2">Faint</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='flourecence' class="filled-in" id="flourecence_3" value="flourecence_3">
-                                    <label for="flourecence_3">Medium</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='flourecence' class="filled-in" id="flourecence_4" value="flourecence_4">
-                                    <label for="flourecence_4">Strong</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='flourecence' class="filled-in" id="flourecence_5" value="flourecence_5">
-                                    <label for="flourecence_5">Very Strong</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="divCon  fLeft dAuto">
-                            <div  class="titleDiv txtCap fLeft">Certficate</div>
-                            <div class='radioCont fLeft'> 
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='Certficate' class="filled-in" id="Certficate_GIA" value="Certficate_GIA">
-                                    <label for="Certficate_GIA">GIA</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='Certficate' class="filled-in" id="Certficate_IGI" value="Certficate_IGI">
-                                    <label for="Certficate_IGI">IGI</label>
-                                </div>
-                                <div class="checkDiv fLeft">
-                                    <input type="radio" name='Certficate' class="filled-in" id="Certficate_HRD" value="Certficate_HRD">
-                                    <label for="Certficate_HRD">HRD</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Carat Weight</div>
-                            <input name="carat_weight" type="text" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666" onkeypress="return common.isDecimalKey(event)">
-                        </div>
+<?php
+                                        foreach($fil['attributes'] as $key=>$values)
+                                        {
+                                            if(strtolower($values['attribute_disp_name'])=='cut')
+                                            {
+?>
+                                            <div class="divCon  fLeft d5">
+                                             <div  class="titleDiv txtCap fLeft">Cut</div>
+                                                <div class='radioCont fLeft'>    
+<?php
+                                                    $attr_values = $values['attribute_values'];
+                                                $attr_values = explode(',', $attr_values);
+                                                foreach($attr_values as $cut)
+                                                {
+                                                                                                    
+?>                                                      <div class="checkDiv fLeft">
+                                                            <input type="radio" name='cut' class="filled-in" <?=($attr['cut'] == $cut) ? 'checked' : '';?> value="<?=$cut;?>" id="cut_<?=ucwords(strtolower($cut)); ?>">
+                                                            <label for="cut_<?=ucwords(strtolower($cut));?>"> <?=$cut; ?></label>
+                                                        </div>       
+<?php                                           }
+?>
+                                                </div>
+                                            </div>
+<?php                                             
+                                            }
+                                        }
+                                        foreach($fil['attributes'] as $key=>$values)
+                                        {
+                                            if(strtolower($values['attribute_disp_name'])=='symmetry')
+                                            {
+?>                        
+                                            <div class="divCon  fLeft d5">
+                                                <div  class="titleDiv txtCap fLeft"><?=$values['attribute_disp_name'];?></div>
+                                                        <div class='radioCont fLeft'> 
+<?php
+                                                $attr_values = $values['attribute_values'];
+                                                $attr_values = explode(',', $attr_values);
+                                                foreach($attr_values as $sym)
+                                                {                                                                                                    
+?>                                                              
+                                                                <div class="checkDiv fLeft">
+                                                                    <input type="radio" name='symmetry' class="filled-in" <?=($attr['symmetry'] == $sym) ? 'checked' : '';?> value="<?=$sym;?>" id="sym_<?=ucwords(strtolower($sym)); ?>">
+                                                                    <label for="sym_<?=ucwords(strtolower($sym));?>"> <?=$sym; ?></label>
+                                                                </div>                                                               
+<?php                                           }
+?>
+                                                         </div>
+                                            </div>
+<?php                                             
+                                            }
+                                        }
+                                        foreach($fil['attributes'] as $key=>$values)
+                                        {
+                                            if(strtolower($values['attribute_disp_name'])=='polish')
+                                            {
+?>                  
+                                                <div class="divCon  fLeft d5">
+                                                    <div  class="titleDiv txtCap fLeft">Polish</div>
+                                                        <div class='radioCont fLeft'> 
+<?php
+                                                            $attr_values = $values['attribute_values'];
+                                                            $attr_values = explode(',', $attr_values);
+                                                            foreach($attr_values as $polish)
+                                                            {                                                                                                    
+?>                                                          
+                                                                <div class="checkDiv fLeft">
+                                                                    <input type="radio" name='polish' class="filled-in" value="<?=$polish;?>" <?=($attr['polish'] == $polish) ? 'checked' : '';?> id="polish_<?=ucwords(strtolower($polish)); ?>">
+                                                                    <label for="polish_<?=ucwords(strtolower($polish));?>"> <?=$polish; ?></label>
+                                                                </div>
+<?php                                                       }
+?>
+                                                        </div>
+                                                </div>
+<?php                                             
+                                            }
+                                        }
+                                        foreach($fil['attributes'] as $key=>$values)
+                                        {
+                                            if(strtolower($values['attribute_disp_name'])=='fluoresence')
+                                            {
+?>                               
+                                                <div class="divCon  fLeft d5">
+                                                    <div  class="titleDiv txtCap fLeft">Fluorescence</div>
+                                                        <div class='radioCont fLeft'> 
+<?php
+                                                            $attr_values = $values['attribute_values'];
+                                                            $attr_values = explode(',', $attr_values);
+                                                            foreach($attr_values as $fluoresence)
+                                                            {                                                                                                    
+?>
+                                                                <div class="checkDiv fLeft">
+                                                                    <input type="radio" name='flourecence' class="filled-in" <?=($attr['flourecence'] == $fluoresence) ? 'checked' : '';?> value="<?=$fluoresence;?>" id="flourecence_<?=ucwords(strtolower($fluoresence)); ?>">
+                                                                    <label for="flourecence_<?=ucwords(strtolower($fluoresence));?>"> <?=$fluoresence; ?></label>
+                                                                </div>
+<?php                                                       }
+?>
+                                                        </div>
+                                                </div>
+<?php                                             
+                                            }
+                                        }
+                                        foreach($fil['attributes'] as $key=>$values)
+                                        {
+                                            if(strtolower($values['attribute_disp_name'])=='certificate')
+                                            {
+?>                              
+                                                <div class="divCon  fLeft dAuto">
+                                                    <div  class="titleDiv txtCap fLeft">Certificate</div>
+                                                        <div class='radioCont fLeft'> 
+<?php
+                                                            $attr_values = $values['attribute_values'];
+                                                            $attr_values = explode(',', $attr_values);
+                                                            foreach($attr_values as $certificate)
+                                                            {                                                                                                    
+?>
+                                                                <div class="checkDiv fLeft">
+                                                                    <input type="radio" name='Certificate' <?=($attr['cerified'] == $certificate) ? 'checked' : '';?> class="filled-in"  value="<?=$flourecense;?>" id="Certificate_<?=ucwords(strtolower($certificate)); ?>">
+                                                                    <label for="Certificate_<?=ucwords(strtolower($certificate));?>"> <?=$certificate; ?></label>
+                                                                </div>
+<?php                                                       }
+?>
+                                                        </div>
+                                                </div>
+<?php                                             
+                                            }
+                                        }                                     
+                                        foreach($fil['attributes'] as $key=>$values)
+                                        {
+                                            if(strtolower($values['attribute_disp_name'])=='carat')
+                                            {    
+?>
+                                                <div class="divCon2  fLeft">
+                                                    <div  class="titleDiv txtCap fLeft">Carat Weight</div>
+                                                        <input name="carat_weight" id="caratweight" type="text" placeholder="Between <?=$values['attribute_range'];?>" class="txtInput fLeft fmOpenR font14 c666" value="<?=$attr['carat'];?>" onkeypress="return common.isDecimalKey(event)">
+                                                </div>
+<?php                                            }
+                                        }
+?>                                            
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Measurement</div>
                             <div class="mInputDiv fLeft">
-                                <input name="measurement1" type="text" placeholder=" eg. 10" class="mtxtInput fLeft fmOpenR font14 c666">
+<?php
+                                    $measurement=explode('*',$attr['measurement']);
+?>                                    
+                                <input name="measurement1" id="measure1" type="text" placeholder=" eg. 10" class="mtxtInput fLeft fmOpenR font14 c666" value="<?php echo $measurement[0];?>">
                                 <span class='fLeft'>X</span>
-                                <input name="measurement2" type="text" placeholder=" eg. 20" class="mtxtInput fLeft fmOpenR font14 c666">
+                                <input name="measurement2" id="measure2" type="text" id="measure2" placeholder=" eg. 20" class="mtxtInput fLeft fmOpenR font14 c666" value="<?php echo $measurement[1]; ?>">
                                 <span class='fLeft'>X</span>
-                                <input name="measurement3" type="text" placeholder=" eg. 30" class="mtxtInput fLeft fmOpenR font14 c666">
+                                <input name="measurement3" id="measure3" type="text" id="measure3" placeholder=" eg. 30" class="mtxtInput fLeft fmOpenR font14 c666" value="<?php echo $measurement[2]; ?>">
                             </div>
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Table</div>
-                            <input name="table" type="text" placeholder=" eg. 56" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="table" id="table" type="text" placeholder=" eg. 56" class="txtInput fLeft fmOpenR font14 c666" value="<?=$attr['tab'];?>">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Crown Angle</div>
-                            <input name="crown_angle" type="text" placeholder=" eg. 41" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="crown_angle" id="crownangle" type="text" placeholder=" eg. 41" class="txtInput fLeft fmOpenR font14 c666" value="<?=$attr['crownangle'];?>">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Girdle</div>
-                            <input name="girdle" type="text" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="girdle" id="girdle" type="text" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666" value="<?=$attr['girdle'];?>">
                         </div>
 
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Bar Code</div>
-                            <input name="barcode" type="text" placeholder=" eg. ALXPK12" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="barcode" id="barcode" type="text" placeholder=" eg. ALXPK12" class="txtInput fLeft fmOpenR font14 c666" value="<?=$pdet['product_barcode'];?>">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Lot Number</div>
-                            <input name="lot_no" type="text" placeholder=" eg. 56" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="lot_no" id="lotnumber" type="text" placeholder=" eg. 56" class="txtInput fLeft fmOpenR font14 c666" value="<?=$pdet['product_lotno'];?>">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Lot Reference</div>
-                            <input name="lot_ref" type="text" placeholder=" eg. iftosi -012" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="lot_ref" id="lotreference" type="text" placeholder=" eg. iftosi -012" class="txtInput fLeft fmOpenR font14 c666" value="<?=$pdet['product_lotref'];?>">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Base Price</div>
-                            <input name="base_price" type="text" placeholder=" eg. 120000" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="base_price" id="baseprice" type="text" placeholder=" eg. 120000" class="txtInput fLeft fmOpenR font14 c666" value="<?=$attr['baseprice'];?>">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">% Discount</div>
-                            <input name="discount" type="text" placeholder=" eg. 25%" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="discount" id="discount" type="text" placeholder=" eg. 25%"  class="txtInput fLeft fmOpenR font14 c666" value="<?=$attr['discount'];?>">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Price</div>
-                            <input name="price" type="text" placeholder=" eg. 1200000" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="price" id="prdprice" type="text" placeholder=" eg. 1200000" class="txtInput fLeft fmOpenR font14 c666" value="<?=$pdet['product_price'];?>">
                         </div>
                         <div class="btnCont fLeft">
                             <center>
-                                <a href="<?php echo DOMAIN ?>index.php?case=vendor_landing"><div class="cancelBtn fmOpenR ripplelink poR">CANCEL</div></a>
-                                <a href="<?php echo DOMAIN?>index.php?case=vendor_landing"><div class="submitBtn fmOpenR ripplelink poR">SUBMIT</div></a>
+                                <div class="cancelBtn fmOpenR ripplelink poR" id='backBtnDiv'>CANCEL</div>
+                                <div class="submitBtn fmOpenR ripplelink poR" onclick='validateDForm()' id='Submitdiv'>SUBMIT</div>
                             </center>
                         </div>
                     </div>
@@ -295,5 +306,7 @@
 <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['jqryUi']; ?>"></script>
 <script type="text/javascript" src='tools/js/cms/vendor_landing.js'></script>
+<script type="text/javascript" src='tools/js/pForm.js'></script>
+<script type="text/javascript">var DOMAIN = '<?php echo DOMAIN;?>';</script>
 </body>
 </html>
