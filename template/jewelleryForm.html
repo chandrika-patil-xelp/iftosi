@@ -15,13 +15,18 @@
                                         {   
                                             if(strtolower($val)!=='')
                                                 {
-                                                    if($val['catname']=="Bangle/Bracelet")
+                                                    if($val['catname']=="Bangles/Bracelets")
                                                     {
                                                         echo "<div id='Bracelet' class='jshapeComm transition300 ripplelink Bracelet'>".$val['catname']."</div>";
                                                     }
+                                                    else if(($val['catname']=="Pendents")||($val['catname']=="Necklaces"))
+                                                    {
+                                                        echo "<div id='".$val['catname']."' class='jshapeComm transition300 ripplelink ".ucwords(strtolower(substr($val['catname'],0,-1)))."'>".$val['catname']."</div>";   
+                                                    
+                                                    }
                                                     else
                                                     {
-                                                    echo "<div id='".$val['catname']."' class='jshapeComm transition300 ripplelink ".ucwords(strtolower($val['catname']))."'>".$val['catname']."</div>";   
+                                                        echo "<div id='".$val['catname']."' class='jshapeComm transition300 ripplelink ".ucwords(strtolower($val['catname']))."'>".$val['catname']."</div>";   
                                                     }
                                                 }
                                         }
@@ -49,8 +54,8 @@
                                                         {
 ?>
                                                             <div class="checkDiv fLeft">
-                                                            <input type="checkbox" name='subcat_type' class="filled-in" value="<?=$val['subcatid'];?>" id="<?php echo(str_replace(' ','_',$val['subcatname']));?>_<?=ucwords(strtolower($values['catname']));?>">
-                                                            <label for="<?php echo str_replace(' ','_',$val['subcatname']);?>_<?=ucwords(strtolower($values['catname']));?>"><?php echo $val['subcatname'];?> <?=ucwords(strtolower($values['catname']));?></label>
+                                                            <input type="checkbox" name='subcat_type' class="filled-in" value="<?=$val['subcatid'];?>" id="<?php echo(str_replace(' ','_',$val['subcatname']));?>">
+                                                            <label for="<?=str_replace(' ','_',$val['subcatname']);?>"><?php echo $val['subcatname'];?></label>
                                                         </div>
 <?php
                                                         }
@@ -315,7 +320,7 @@
                                 <label for="Certficate_EGL">EGL</label>
                             </div>
                             <div class="checkDiv fLeft">
-                                <input type="radio" name='Certficate' class="filled-in" id="Certficate_other"  <?=(($attr['certified'] !== 'SGL')&&($attr['certified'] !== 'DGLA')&&($attr['certified'] !== 'EGL')&&($attr['certified'] !== '')) ? 'checked' : '';?>>
+                                <input type="radio" name='Certficate' class="filled-in" id="Certficate_other" value="<?=$attr['certified'];?>"  <?=(($attr['certified'] !== 'SGL')&&($attr['certified'] !== 'DGLA')&&($attr['certified'] !== 'EGL')) ? 'checked' : '';?>>
                                 <label for="Certficate_other">Other</label>
                             </div>
                             <div id='othCert' class="otherBox fLeft <?=(($attr['certified'] !== 'SGL')&&($attr['certified'] !== 'DGLA')&&($attr['certified'] !== 'EGL')) ? '' : 'dn';?>">
@@ -443,7 +448,7 @@
 ?>                        
                                                 <div class="divCon2  fLeft">
                                                     <div  class="titleDiv txtCap fLeft"><?php echo $values['attr'][$key]['attr_display_name']; ?></div>
-                                                    <input name="<?php echo strtolower($goldpurity); ?>" type="text" value="<?=$attr['gold_purity'];?>" placeholder="<?php echo $values['attr'][$key]['attr_values'];?>" class="txtInput fLeft fmOpenR font14 c666">
+                                                    <input name="<?php echo strtolower($goldpurity); ?>" id="goldpurity" type="text" value="<?=$attr['gold_purity'];?>" placeholder="<?php echo $values['attr'][$key]['attr_values'];?>" class="txtInput fLeft fmOpenR font14 c666">
                                                 </div>
 <?php
                                             }
@@ -451,22 +456,22 @@
 ?>                        
                     <div class="divCon2  fLeft">
                         <div  class="titleDiv txtCap fLeft">Gold Weight</div>
-                        <input name="gold_weight" type="text" placeholder=" eg. 10 Gms" value="<?=$attr['gold_weight'];?>" class="txtInput fLeft fmOpenR font14 c666">
+                        <input id="goldweight" name="gold_weight" type="text" placeholder=" eg. 10 Gms" value="<?=$attr['gold_weight'];?>" class="txtInput fLeft fmOpenR font14 c666">
                     </div>
                         
                     <div class="divCon2  fLeft">
                         <div  class="titleDiv txtCap fLeft">No. Of Diamonds</div>
-                        <input name="no_diamonds" type="text" placeholder=" eg. 10" value="<?=$attr['nofd'];?>" class="txtInput fLeft fmOpenR font14 c666">
+                        <input name="no_diamonds" id="no_diamonds" type="text" placeholder=" eg. 10" value="<?=$attr['nofd'];?>" class="txtInput fLeft fmOpenR font14 c666">
                     </div>
                         
                     <div class="divCon2  fLeft">
                         <div  class="titleDiv txtCap fLeft">Diamond Weight</div>
-                        <input name="diamonds_weight" type="text" placeholder=" eg. 1.25 CTS" value="<?=$attr['dwt'];?>" class="txtInput fLeft fmOpenR font14 c666">
+                        <input name="diamonds_weight" id="diamondweight" type="text" placeholder=" eg. 1.25 CTS" value="<?=$attr['dwt'];?>" class="txtInput fLeft fmOpenR font14 c666">
                     </div>
 
                     <div class="divCon2  fLeft">
                         <div  class="titleDiv txtCap fLeft">Gemstone Weight</div>
-                        <input name="gemstone_weight" type="text" placeholder=" eg. 1.25 CTS" value="<?=$attr['gemwt'];?>" class="txtInput fLeft fmOpenR font14 c666">
+                        <input name="gemstone_weight" type="text" id="gemweight" placeholder=" eg. 1.25 CTS" value="<?=$attr['gemwt'];?>" class="txtInput fLeft fmOpenR font14 c666">
                     </div>
  <?php                
                                         foreach($cat['subcat'] as $key=>$values)
@@ -476,7 +481,7 @@
 ?>                       
                                                 <div class="divCon2  fLeft">
                                                     <div  class="titleDiv txtCap fLeft"><?php echo $values['attr'][$key]['attr_display_name']; ?></div>
-                                                    <input name="<?php echo strtolower($values['attr'][$key]['attr_display_name']); ?>" type="text" placeholder="Between <?php echo $values['attr'][$key]['attr_range'];?>" value="<?=$attr['price'];?>" class="txtInput fLeft fmOpenR font14 c666">
+                                                    <input name="<?php echo strtolower($values['attr'][$key]['attr_display_name']); ?>" id="prdprice" type="text" placeholder="Between <?php echo $values['attr'][$key]['attr_range'];?>" value="<?=$attr['price'];?>" class="txtInput fLeft fmOpenR font14 c666">
                                                 </div>
 <?php                                       }
                                         }
@@ -484,7 +489,7 @@
                     <div class="btnCont fLeft">
                         <center>
                             <div class="cancelBtn fmOpenR ripplelink poR">CANCEL</div>
-                            <div class="submitBtn fmOpenR ripplelink poR" onclick="submitForm('jwAddForm')" id="Submitdiv">SUBMIT</div>
+                            <div class="submitBtn fmOpenR ripplelink poR" onclick="validateJForm()" id="Submitdiv">SUBMIT</div>
                         </center>
                     </div>
                 </div>
