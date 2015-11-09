@@ -154,8 +154,8 @@
 					
 					include 'template/jewellery_results.html';
 				break;
-				case 'bullions':
-					$page='bullions';
+				case 'bullion':
+					$page='bullion';
 					$pgno 	= ($_GET['pgno'] ? $_GET['pgno'] : 1);
 					$catid 	= $_GET['catid'];
 					$url 	= APIDOMAIN.'index.php?action=getPrdByCatid&catid='.$catid.'&page='.$pgno;

@@ -123,7 +123,7 @@ a{text-decoration: none;}
 .categoryCircle{width:210px; position: relative; height:210px;font-size: 25px; color:#8A0044;letter-spacing: -0.05em; padding-top: 130px;border-radius:50%;display: inline-block;vertical-align: middle;cursor: pointer;border-width:0;border-style: solid;border-color: #42c1b9;box-shadow: 0 0 0 0 rgba(105,0,79,0.6)}
 .bgDiamonds {background: #fff url(../img/common/diamond.jpg)no-repeat;background-size: auto 80%;background-position: top center;}
 .bgJewellery {background:#fff url(../img/common/jewellery.jpg)no-repeat;background-size: auto 80%;background-position: top center;}
-.bgBullions {background:#fff url(../img/common/bullions.jpg)no-repeat;background-size: auto 80%;background-position: top center;}
+.bgBullion {background:#fff url(../img/common/bullions.jpg)no-repeat;background-size: auto 80%;background-position: top center;}
 
 /*Parallax*/
 .prllx{margin:0;padding: 0;width:1000px;list-style: none;}
@@ -260,7 +260,7 @@ a{text-decoration: none;}
 
 .headCat.bgDiamonds{background: #fff url(../img/common/diamond.jpg)no-repeat;background-size: auto 80%;background-position: 8px 0px;}
 .headCat.bgJewellery {background: #fff url(../img/common/jewellery.jpg)no-repeat;background-size: auto 80%;/*background-position: 8px 0px;*/background-position: 8px 0;}
-.headCat.bgBullions {background: transparent url(../img/common/bullions.jpg)no-repeat;background-size: auto 80%;background-position: 8px 0px;}
+.headCat.bgBullion {background: transparent url(../img/common/bullions.jpg)no-repeat;background-size: auto 80%;background-position: 8px 0px;}
 .totalResultsDiv{width:100%;height:350px;line-height: 240px;color: #FFF;text-align: center;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding: 100px 0 0 0;font-size:50px;position: relative;}
 .resultsPage .shapesCont{}
 .searchCon {width: 40%;height: 60px;position: absolute;top: 155px;bottom: 0;left: 0;right: 0;margin: auto;border-radius: 5px;padding: 5px;}
@@ -446,7 +446,7 @@ a{text-decoration: none;}
 .iLogout{background: url(../img/common/logout.svg)no-repeat;background-size: auto 35px;background-position: 10px center;}
 .iDiamonds{background:  url(../img/common/diamond.jpg)no-repeat;background-size: auto 40px;background-position: 5px center;}
 .iJewellery{background: url(../img/common/jewellery.jpg)no-repeat;background-size: auto 35px;background-position: 5px center;}
-.iBullions{background: url(../img/common/bullions.jpg)no-repeat;background-size: auto 35px;background-position: 5px center;}
+.iBullion{background: url(../img/common/bullions.jpg)no-repeat;background-size: auto 35px;background-position: 5px center;}
 
 .showHide{display: block;}
 .hideShow{display: none;}
@@ -913,7 +913,7 @@ textarea[name=feedback] {resize: none;}
     .categoryCircle {-webkit-transform:scale(1)!important;-moz-transform:scale(1)!important;-ms-transform:scale(1)!important;transform:scale(1)!important;width: 100%;position: relative;height: 100%;font-size: 20px;color: #8A0044;letter-spacing: -0.05em;padding-top: 0;border-radius: 5px;display: inline-block;vertical-align: middle;cursor: pointer;border-width: 0;border-style: solid;border-color: #42c1b9;box-shadow: 0 0 0 0 rgba(105,0,79,0.6);line-height: 60px;text-align: left;padding-left: 65px;}    
     .bgDiamonds {background: #fff url(../img/common/diamond.jpg)no-repeat;background-size: auto 100%;background-position: left center;}
     .bgJewellery {background: #fff url(../img/common/jewellery.jpg)no-repeat;background-size: auto 100%;background-position: left center;}
-    .bgBullions{background: #fff url(../img/common/bullions.jpg)no-repeat;background-size: auto 100%;background-position: left center;}
+    .bgBullion{background: #fff url(../img/common/bullions.jpg)no-repeat;background-size: auto 100%;background-position: left center;}
     .allShapes{width: 100%;height:auto;padding: 0 15px;}
     .homeProd{width: 100%;height: auto;padding: 10px 0;}
     .hPrdComm{width: 100%;height: 320px;padding: 10px 0;float: none!important;}
