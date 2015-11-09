@@ -43,8 +43,9 @@ function submitForm(formid)
     values[cnt+1]='subcatid'+'|@|'+optionValue.toString();
 
     data = values.join('|~|');
+    console.log(data);
     //var JsonString = JSON.stringify(values);
-    if(pid!=='')
+    if((pid!==null)&&(pid!==undefined)&&(pid!==''))
     {
     var params = 'action=addNewproduct&category_id='+catid+'&dt='+data;
     }
@@ -57,7 +58,7 @@ function submitForm(formid)
     $.getJSON(URL, params, function(data) {
     console.log(data);    
     });
-    return false;
+    
 }
 
  function validateJForm(){
@@ -99,7 +100,7 @@ function submitForm(formid)
             }
 
             else if(goldweight=='') {
-                str ='Gold weight is not Required';
+                str ='Gold weight is Required';
                 $('#goldweight').focus();
             }
             else if(no_diamonds=='') {
@@ -119,8 +120,9 @@ function submitForm(formid)
                 $('#prdprice').focus();
             }
             else {
-                return  true;
+               
                 submitForm('jwAddForm');
+                return  true;
             }
             alert(str);
             return false;
@@ -220,8 +222,57 @@ function submitForm(formid)
                 $('#prdprice').focus();
             }
             else {
-                return  true;
                 submitForm('dAddForm');
+                return  true;
+            }
+            alert(str);
+            return false;
+}
+
+ function validateBForm(){
+            var purity = $('#goldpurity').val();
+            var spurity = $('#silverpurity').val();
+            var goldweight = $('#goldweight').val();
+            var sweight= $('#silverweight').val();
+            var prprice = $('#prprice').val();
+            var shape = $('.jshapeComm');
+            var a = $('shapeSelected').attr('id');
+            var str = '';
+
+         
+            if(!shape.hasClass('shapeSelected')) {
+                str ='category is not Selected';
+            }
+            else if(a=='gCoin')
+            {
+                 if(purity=='') {
+                    str ='Gold Purity field is Empty';
+                     $('#goldpurity').focus();
+                }
+                else if(goldweight=='') {
+                    str ='Gold weight is Required';
+                    $('#goldweight').focus();
+                }
+            }
+            else if(a=='sBar')
+            {
+                if(spurity=='') {
+                    str ='Silver Purity field is Empty';
+                    $('#silverpurity').focus();
+                }
+                else if(sweight=='') {
+                    str ='Silver Weight field is Empty';
+                     $('#silverweight').focus();
+                }
+            }
+            else if(prprice=='') {
+                str ='Product Price is important to fill';
+                $('#prprice').focus();
+            }
+            else {
+                
+                submitForm('bAddForm');
+                return  true;
             }
             alert(str);
             return false;
