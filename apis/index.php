@@ -225,7 +225,7 @@ switch($action)
                 break;
             }
             $obj=new vendor($db['iftosi']);
-            $result=$obj->getVproducts($params);
+            $result=$obj->getVProductsByCatid($params);
             $res=$result;
             break;
 
@@ -1012,6 +1012,51 @@ echo '</pre>';
             break;            
 //-------------------------Product Details------------------------------------
 
+        case 'productInsert':
+            include APICLUDE.'class.prdInsert.php';
+            
+            $catid=(!empty($params['category_id'])) ? trim(urldecode($params['category_id'])) : '';
+            if(empty($catid))
+            {   
+                $arr = array();
+                $err = array('Code' => 1, 'Msg' => 'Some Parameters are missing');
+                $result = array('results'=>$arr, 'error' => $err);
+                $res=$result;
+                break;
+            }
+           
+            $obj= new prdInsert($db['iftosi']);
+            
+            $result=$obj->productInsert($params);
+            $res=$result;
+            break;
+            
+        case 'categoryHeir':
+            include APICLUDE.'class.prdInsert.php';
+            
+            $catid=(!empty($params['catid'])) ? trim(urldecode($params['catid'])) : '';
+            if(empty($catid))
+            {   
+                $arr = array();
+                $err = array('Code' => 1, 'Msg' => 'Some Parameters are missing');
+                $result = array('results'=>$arr, 'error' => $err);
+                $res=$result;
+                break;
+            }
+           
+            $obj= new prdInsert($db['iftosi']);
+            
+            $result=$obj->categoryHeir($params);
+            $res=$result;
+            break;
+            
+        case 'product_category_mapping':
+            include APICLUDE.'class.prdInsert.php';
+            $obj= new prdInsert($db['iftosi']);
+            $result=$obj->product_category_mapping();
+            $res=$result;
+            break;
+            
         case 'productInsert':
             include APICLUDE.'class.prdInsert.php';
             

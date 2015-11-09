@@ -370,7 +370,37 @@ class vendor extends DB
         $result = array('results'=>$arr,'error'=>$err);
         return $result;        
     }
-    
-    
+
+    public function getVProductsByCatid($params) {
+        $page = ($params['page'] ? $params['page'] : 1);
+        $catid = ($params['catid'] ? $params['catid'] : 10000);
+        $limit = ($params['limit'] ? $params['limit'] : 15);
+        $total_pages = $chkcnt = $total_products = 0;
+
+        $sql = "select a.product_id AS id, a.vendor_price AS price, c.barcode, c.date_time, d.color, d.carat, d.shape, d.certified AS cert, d.clarity from tbl_vendor_product_mapping as a, tbl_product_category_mapping as b, tbl_product_master as c, tbl_product_search as d where a.product_id=b.product_id and b.product_id=c.product_id and c.product_id=d.product_id and b.category_id=" . $catid . " and a.vendor_id=" . $params['vid'] . " order by a.product_id asc ";
+        $res = $this->query($sql);
+        $total_products = $this->numRows($res);
+        
+        if (!empty($params['page'])) {
+            $start = ($page * $limit) - $limit;
+            $total_pages = $total_products/$limit;
+            $sql.=" LIMIT " . $start . ",$limit";
+            $res = $this->query($sql);
+            $chkcnt = $this->numRows($res);
+        }
+        //echo $sql;
+        if ($chkcnt > 0) {
+            while ($row = $this->fetchData($res)) {
+                $arr1[] = $row;
+            }
+            $arr = array('total_products' => $total_products, 'total_pages' => $total_pages, 'products' => $arr1);
+            $err = array('Code' => 0, 'Msg' => 'Details fetched successfully');
+        } else {
+            $arr = array();
+            $err = array('Code' => 1, 'Msg' => 'No Match Found');
+        }
+        $result = array('results' => $arr, 'error' => $err);
+        return $result;
+    }
 }
 ?>

@@ -1,6 +1,6 @@
 <div class="prdResults fRight">
     <div id='dmdS' class='prdSearchDiv fLeft'>
-        <div class="formTitle fLeft fmOpenR m0">2050 diamonds listed</div>
+        <div class="formTitle fLeft fmOpenR m0">250 diamonds listed</div>
         <a href='<?php echo DOMAIN?>index.php?case=diamond_Form'><div class="addPrdBtn fRight poR ripplelink">Add Diamond</div></a>
         <input type="text" class="prdSeachTxt fRight fmOpenR" placeholder=" Search your Product">
         <div class="vFilBtn fRight poR ripplelink"></div>
@@ -16,9 +16,8 @@
         <div class="price fLeft">Price</div>
         <div class="acct fLeft">Action</div>
     </div>    
-    <ul class='prdul fLeft fmOpenR'>
-        <?php for ($i = 1; $i < 15; $i++) { ?>
-            <li>
+    <ul class='prdul fLeft fmOpenR' id="diamondList">
+            <!--<li>
                 <div class="date fLeft"> 
                     <span class="upSpan">20/10/2015</span>
                     <span class="lwSpan">8:10 Pm</span>
@@ -40,7 +39,6 @@
                         <div class="soldBtn poR ripplelink fmOpenR">SOLD</div>
                     </center>
                 </div>
-            </li>
-        <?php } ?>
+            </li>-->
     </ul>
 </div>
