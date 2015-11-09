@@ -21,14 +21,49 @@
                 $expd = explode('|@|',$detls1[$i]);
                 $detls[$expd[0]] = $expd[1];
             }
+            if(($detls['shape']=='gBar')||($detls['shape']=='sBar')||($detls['shape']=='gCoin')||($detls['shape']=='sCoin'))
+            {
+                $type=substr($detls['shape'],1);
+                $temp=$detls['shape'];
+                
+                if(($temp=='gBar')||($temp=='gCoin'))
+                {
+                    $detls['metal']='Gold';
+                }
+                else if(($temp=='sBar')||($temp=='sCoin'))
+                {
+                    $detls['metal']='Silver';
+                }
+                
+                $catname=substr($detls['shape'],1);
+                $catname=$catname.'s';
+                $catidsql="Select catid from tbl_category_master where cat_name='".$catname."'";
+                $catidres=$this->query($catidsql);
+                $catidrow=$this->fetchData($catidres);
+                $catids1=$catidrow['catid'];
+            }
+            else
+            {
+                $shape=$detls['shape'];
+                $catids1=$detls['subcatid'];                
+            }
+            $maincatsql="SELECT p_catid from tbl_category_master where catid IN(\"".$catids1."\")";
+            $maincatres=$this->query($maincatsql);
+            $maincatrow=$this->fetchData($maincatres);
             
-            $catids=explode(',',$detls['subcatid']);
+            $temp=count($catids);
+            $catids1.=','.$maincatrow['p_catid'];
+            $catids1.=','.$params['category_id'];
+            
+            $catids=explode(',',$catids1);
+            
+
             $detls['measurement']=$detls['measurement1'].'*'.$detls['measurement2'].'*'.$detls['measurement3'];
                     //  Inserting the values in brand table
                     $sql = "INSERT
                             INTO 
                                         tbl_brandid_generator
-                                                                (name,
+                                                               (name,
                                                                 category_id,
                                                                 date_time,
                                                                 aflg) 
@@ -119,9 +154,13 @@
                    
                    }
                     //  For category product mapping
-                   
+                                   
                    for($i=0;$i<count($catids);$i++)
                    {
+                        
+                       
+                        if(!empty($catids[$i]))
+                        {
                         $pcsql="INSERT
                                 INTO 
                                             tbl_product_category_mapping
@@ -134,7 +173,7 @@
                                 VALUES
                                                                        (\"".$pid."\",
                                                                         \"".$catids[$i]."\",
-                                                                        \"".$detls['product_price']."\",
+                                                                        \"".$detls['price']."\",
                                                                         \"".$detls['rating']."\",
                                                                         1,
                                                                         now())
@@ -145,7 +184,8 @@
                                                         display_flag            = \"".$detls['dflag']."\"";
                     
                         $pcres=$this->query($pcsql);
-                   }   
+                   }
+               }   
                     //  For product values filling     
                         $sql="  INSERT
                                 INTO 
@@ -247,7 +287,7 @@
                                                  (\"".$pid."\",
                                                   \"".$detls['color']."\",
                                                   \"".$detls['carat_weight']."\",
-                                                  \"".$detls['shape']."\",
+                                                  \"".$shape."\",
                                                   \"".$detls['Certficate']."\",    
                                                   \"".$detls['cut']."\",
                                                   \"".$detls['clarity']."\",
@@ -267,9 +307,9 @@
                                                   \"".$detls['crown_angle']."\",
                                                   \"".$detls['girdle']."\",
                                                   \"".$detls['pd']."\",
-                                                  \"".$detls['rings_type']."\",
+                                                  \"".$type."\",
                                                   \"".$detls['metal']."\",
-                                                  \"".$detls['gold purity']."\",
+                                                  \"".$detls['gold_purity']."\",
                                                   \"".$detls['no_diamonds']."\",
                                                   \"".$detls['diamonds_weight']."\",
                                                   \"".$detls['gemstone_weight']."\",
@@ -283,7 +323,7 @@
                                                             color       = \"".$detls['color']."\",
                                                             carat       = \"".$detls['carat_weight']."\",
                                                             certified   = \"".$detls['Certficate']."\",
-                                                            shape       = \"".$detls['shape']."\",
+                                                            shape       = \"".$shape."\",
                                                             cut         = \"".$detls['cut']."\",
                                                             clarity     = \"".$detls['clarity']."\",
                                                             base        = \"".$detls['base_price']."\",
@@ -303,7 +343,7 @@
                                                             girdle      = \"".$detls['girdle']."\",
                                                             pd          = \"".$detls['pd']."\",
                                                             metal       = \"".$detls['metal']."\",
-                                                            type        = \"".$detls['rings_type']."\",
+                                                            type        = \"".$type."\",
                                                             gold_purity = \"".$detls['gold_purity']."\",
                                                             nofd        = \"".$detls['no_diamonds']."\",
                                                             dwt         = \"".$detls['diamonds_weight']."\",
