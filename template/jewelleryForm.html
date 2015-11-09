@@ -43,18 +43,19 @@
 <?php
                                         foreach($cat['subcat'] as $key=>$values)
                                         {
-                                            if(strtolower($values['catid'])!==10007)
-                                            {
-?>                    
+                                            if($values['catid']!=10007)
+                                            {   
+                                            
+?>                                              
                                                 <div class="divCon  fLeft fmOpenR subCatType dn " id="<?=strtolower($values['catname']);?>Type">
                                                     <div  class="titleDiv txtCap fLeft"><?=ucwords(strtolower($values['catname']));?> Type</div>
                                                     <div class='radioCont fLeft'>
 <?php                                                        
                                                         foreach($values['subcats'] as $ky=>$val)
-                                                        {
+                                                        {   
 ?>
                                                             <div class="checkDiv fLeft">
-                                                            <input type="checkbox" name='subcat_type' class="filled-in" value="<?=$val['subcatid'];?>" id="<?php echo(str_replace(' ','_',$val['subcatname']));?>">
+                                                            <input type="checkbox" name='subcat_type' class="filled-in" value="<?=$val['subcatid'];?>" id="<?php echo(str_replace(' ','_',$val['subcatname']));?>" <?=($attr['type'] == $val['subcatname']) ? 'checked' : '';?> /> 
                                                             <label for="<?=str_replace(' ','_',$val['subcatname']);?>"><?php echo $val['subcatname'];?></label>
                                                         </div>
 <?php
@@ -62,6 +63,27 @@
 ?>                                                  
                                                     </div>
                                                 </div>
+<?php                                             
+                                            }
+                                            if($values['catid']==10007)
+                                            { 
+?>                    
+                                                <div class="divCon  fLeft fmOpenR jw5 subCatType dn" id="braceletType">
+                                                <div  class="titleDiv txtCap fLeft">Bracelet Type</div>
+                                                <div class='radioCont fLeft'> 
+<?php                                                        
+                                                foreach($values['subcats'] as $ky=>$val)
+                                                {
+?>                            
+                                                    <div class="checkDiv fLeft">
+                                                    <input type="checkbox" name='subcat_Type' class="filled-in"  value="<?=$val['subcatid'];?>" id="<?php echo(str_replace(' ','_',$val['subcatname']));?>" <?=($attr['type'] == $val['subcatname']) ? 'checked' : '';?> />
+                                                    <label for="<?php echo str_replace(' ','_',$val['subcatname']);?>"><?php echo $val['subcatname'];?></label>
+                                                    </div>
+<?php
+                                                }
+?>                        
+                                            </div>
+                                            </div>
 <?php                                             
                                             }
                                         }
@@ -138,6 +160,7 @@
 =======
                                 </div>
                             </center>
+
                         </div>
                     </div>
 
@@ -161,7 +184,7 @@
 <?php                                             
                     }
                 }
-*/?>               
+*/?>
  
                   <!--  <div class="divCon  fLeft fmOpenR subCatType dn" id="earringsType">
                         <div  class="titleDiv txtCap fLeft">Earrings Type</div>
@@ -243,36 +266,11 @@
                         </div>
                     </div>
                     -->
-<?php
-                    foreach($cat['subcat'] as $key=>$values)
-                    {
-                        if(strtolower($values['catid'])==10007)
-                        {
-?>                    
-                        <div class="divCon  fLeft fmOpenR jw5 subCatType dn" id="braceletType">
-                            <div  class="titleDiv txtCap fLeft">Bracelet Type</div>
-                                <div class='radioCont fLeft'> 
-<?php                                                        
-                                foreach($values['subcats'] as $ky=>$val)
-                            {
-?>                            
-                                <div class="checkDiv fLeft">
-                                    <input type="checkbox" name='bracelet'class="filled-in"  value="<?=$val['subcatid'];?>" <?=($attr['type'] == $val['subcatname']) ? 'checked' : '';?> id="<?php echo(str_replace(' ','_',$val['subcatname']));?>">
-                                    <label for="<?php echo str_replace(' ','_',$val['subcatname']);?>"><?php echo $val['subcatname'];?></label>
-                                </div>
-<?php
-                            }
-?>                        
-                            </div>
-                        </div>
-<?php                                             
-                        }
-                    }
-?>
+
 
                     <!--
                             <div class="checkDiv fLeft">
-                                <input type="radio" name='bracelet'class="filled-in" id="Party_Wear">
+                                <input type="radio" name='bracelet' class="filled-in" id="Party_Wear">
                                 <label for="Party_Wear">Party Wear</label>
                             </div>
 
@@ -320,10 +318,10 @@
                                 <label for="Certficate_EGL">EGL</label>
                             </div>
                             <div class="checkDiv fLeft">
-                                <input type="radio" name='Certficate' class="filled-in" id="Certficate_other" value="<?=$attr['certified'];?>"  <?=(($attr['certified'] !== 'SGL')&&($attr['certified'] !== 'DGLA')&&($attr['certified'] !== 'EGL')) ? 'checked' : '';?>>
+                                <input type="radio" name='Certficate' class="filled-in" id="Certficate_other" value="<?=$attr['certified'];?>"  <?=(($attr['certified'] !== 'SGL')&&($attr['certified'] !== 'DGLA')&&($attr['certified'] !== 'EGL')&&(!empty($attr['certified']))) ? 'checked' : '';?>>
                                 <label for="Certficate_other">Other</label>
                             </div>
-                            <div id='othCert' class="otherBox fLeft <?=(($attr['certified'] !== 'SGL')&&($attr['certified'] !== 'DGLA')&&($attr['certified'] !== 'EGL')) ? '' : 'dn';?>">
+                            <div id='othCert' class="otherBox fLeft <?=(($attr['certified'] !== 'SGL')&&($attr['certified'] !== 'DGLA')&&($attr['certified'] !== 'EGL')&&(!empty($attr['certified']))) ? '' : 'dn';?>">
                                <input name="other_cerificate" type="text" placeholder=" Other Certificate" value="<?=$attr['certified'];?>" class="othTxtinp fLeft fmOpenR font14 c666">
                             </div>
                         </div>
@@ -443,8 +441,8 @@
                                         {
                                                 if(strtolower($values['attr'][$key]['attr_name'])=='gold_purity')
                                             {
-                                                    $attr_value=explode(' ',$values['attr'][$key]['attr_display_name']);
-                                                    $goldpurity=$attr_value[0].'_'.$attr_value[1];
+                                                    $goldpurity=$values['attr'][$key]['attr_name'];
+                                                    
 ?>                        
                                                 <div class="divCon2  fLeft">
                                                     <div  class="titleDiv txtCap fLeft"><?php echo $values['attr'][$key]['attr_display_name']; ?></div>
