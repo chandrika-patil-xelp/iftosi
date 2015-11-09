@@ -286,6 +286,10 @@
                                 
                                 case 'vendor_Form':
 					$page='vendor-Form';
+					$uid 	= $_GET['uid'];
+					$url 	= APIDOMAIN.'index.php?action=viewAll&uid='.$uid;
+					$res 	= $comm->executeCurl($url);
+                                        $data = $res['results'][1];
 					include 'template/vendorDetails.html';
 				break;
                             

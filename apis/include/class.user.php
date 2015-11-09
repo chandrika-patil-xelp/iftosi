@@ -67,14 +67,15 @@
             $dt= json_decode($params['dt'],1);
             $detls  = $dt['result'];
             
-         $sql="SELECT is_vendor,user_id from tbl_registration where logmobile=".$detls['logmobile']."";
-          $res=$this->query($sql);
-          $row=$this->fetchData($res);
-          $isv=$row['is_vendor'];
-          $uid=$row['user_id'];
+            $sql="SELECT is_vendor,user_id from tbl_registration where user_id=".$detls['uid']."";
+            $res=$this->query($sql);
+            $row=$this->fetchData($res);
+            $isv=$row['is_vendor'];
+            $uid=$row['user_id'];
           
-          if($isv==1)
-          {
+            if($isv==1)
+            {
+              /*
            $vsql = "UPDATE 
                                         tbl_vendor_master 
                     SET 
@@ -110,14 +111,122 @@
                                         is_complete=is_complete 
                 WHERE 
                                                 vendor_id=".$uid."";
-             $vres=$this->query($vsql);
-            if($vres)
-            {
-                $arr="Vendor table is updated";
-                $err=array('code'=>0,'msg'=>'Update operation is done successfully');
+               
+               */
+            $vsql='UPDATE tbl_vendor_master SET ';
+            if (!empty($detls['orgname'])) {
+                $vsql .= " orgName = '".$detls['orgname']."', ";
             }
-          }
-         else if($isv==0)
+
+            if (!empty($detls['fulladd'])) {
+                $vsql .= " fulladdress = '".$detls['fulladd']."',";
+            }
+            if (!empty($detls['add1'])) {
+                $vsql .= " address1 = '".$detls['add1']."',";
+            }
+            if (!empty($detls['area'])) {
+                $vsql .= " area = '".$detls['area']."',";
+            }
+            if (!empty($detls['pincode'])) {
+                $vsql .= " postal_code = '".$detls['pincode']."',";
+            }
+            if (!empty($detls['city'])) {
+                $vsql .= " city = '".$detls['city']."',";
+            }
+            if (!empty($detls['country'])) {
+                $vsql .= " country = '".$detls['country']."',";
+            }
+            if (!empty($detls['state'])) {
+                $vsql .= " state = '".$detls['state']."',";
+            }
+            if (!empty($detls['tel'])) {
+                $vsql .= " telephones = '".$detls['tel']."',";
+            }
+            if (!empty($detls['altmail'])) {
+                $vsql .= " alt_email = '".$detls['altmail']."',";
+            }
+            if (!empty($detls['ofcity'])) {
+                $vsql .= " officecity = '".$detls['ofcity']."',";
+            }
+            if (!empty($detls['ofcountry'])) {
+                $vsql .= " officecountry = '".$detls['ofcountry']."',";
+            }
+            if (!empty($detls['cperson'])) {
+                $vsql .= " contact_person = '".$detls['cperson']."',";
+            }
+            if (!empty($detls['position'])) {
+                $vsql .= " position = '".$detls['position']."',";
+            }
+            if (!empty($detls['cmobile'])) {
+                $vsql .= " contact_mobile = '".$detls['cmobile']."',";
+            }
+            if (!empty($detls['alt_cmobile'])) {
+                $vsql .= " alt_cmobile = '".$detls['alt_cmobile']."',";
+            }
+            if (!empty($detls['email'])) {
+                $vsql .= " email = '".$detls['email']."',";
+            }
+            if (!empty($detls['memcert'])) {
+                $vsql .= " memship_Cert = '".$detls['memcert']."',";
+            }
+            if (!empty($detls['bdbc'])) {
+                $vsql .= " bdbc = '".$detls['bdbc']."',";
+            }
+            if (!empty($detls['othdbaw'])) {
+                $vsql .= " other_dbaw = '".$detls['othdbaw']."',";
+            }
+            if (!empty($detls['showroomname'])) {
+                $vsql .= " showroom_name = '".$detls['showroomname']."',";
+            }
+            if (!empty($detls['showroomno'])) {
+                $vsql .= " no_showrooms = '".$detls['showroomno']."',";
+            }
+            if (!empty($detls['vat'])) {
+                $vsql .= " vatno = '".$detls['vat']."',";
+            }
+            if (!empty($detls['wbst'])) {
+                $vsql .= " website = '".$detls['wbst']."',";
+            }
+            if (!empty($detls['landline'])) {
+                $landline=str_replace(' ', '-', $detls['landline']);
+                $vsql .= " landline = '".$landline."',";
+            }
+            if (!empty($detls['mdbw'])) {
+                $vsql .= " mdbw = '".$detls['mdbw']."',";
+            }
+            if (!empty($detls['bul_mdbw'])) {
+                $vsql .= " bullion_mdbw = '".$detls['bul_mdbw']."',";
+            }
+            if (!empty($detls['banker'])) {
+                $vsql .= " banker = '".$detls['banker']."',";
+            }
+            if (!empty($detls['pan'])) {
+                $vsql .= " pancard = '".$detls['pan']."',";
+            }
+            if (!empty($detls['tovr'])) {
+                $vsql .= " turnover = '".$detls['tovr']."',";
+            }
+            if (!empty($detls['busiType'])) {
+                $vsql .= " business_type = '".$detls['busiType']."',";
+            }
+            if (!empty($detls['lat'])) {
+                $vsql .= " lat = '".$detls['lat']."',";
+            }
+            if (!empty($detls['lng'])) {
+                $vsql .= " lng = '".$detls['lng']."',";
+            }
+            $vsql.=" updatedby='vendor', is_complete=is_complete  WHERE vendor_id=".$uid."";
+
+            $vres = $this->query($vsql);
+            if ($vres) {
+                $arr = "Vendor table is updated";
+                $err = array('code' => 0, 'msg' => 'Update operation is done successfully');
+            } else {
+                $arr = array();
+                $err = array('code' => 1, 'msg' => 'Update operation unsuccessfull');
+            }
+        }
+        else if($isv==0)
           {
              $vsql = "UPDATE tbl_registration 
                       SET 
@@ -310,76 +419,115 @@
             return $result;
         }
         
-        public function viewAll($params)
-        {
-            $vsql="SELECT 
+//        public function viewAll($params)
+//        {
+//            $vsql="SELECT 
+//                                    is_vendor,
+//                                    user_id 
+//                   FROM 
+//                                    tbl_registration 
+//                   WHERE 
+//                                    user_id=".$params['uid']." 
+//                   AND
+//                                    is_active=1";
+//            $vres=$this->query($vsql);
+//            $chkres=$this->numRows($vres);
+//            if($chkres>0)//If user is registered and is customer
+//            {
+//                while($row1=$this->fetchData($vres))
+//                {
+//                    $arr1['isv']=$row1['is_vendor'];
+//                    $arr1['uid']=$row1['user_id'];
+//                }
+//
+//                if($arr1['isv']==0)   // check if it is User
+//                {  
+//                  $vensql="SELECT 
+//                                            user_name,
+//                                            logmobile,
+//                                            email 
+//                           FROM 
+//                                            tbl_registration
+//                           WHERE 
+//                                            user_id =".$arr1['uid'];
+//                  $res=$this->query($vensql);
+//                  while($row=$this->fetchData($res))
+//                   {
+//                      $arr[]=$row;
+//                  }
+//                  $err=array('code'=>0,'msg'=>'Values fetched');
+//                }
+//                else if($arr1['isv']==1)    // check if it is Vendor
+//                {
+//                  $vensql="SELECT 
+//                                            orgName,
+//                                            email,
+//                                            fulladdress,
+//                                            contact_person,
+//                                            contact_mobile 
+//                           FROM 
+//                                            tbl_vendor_master 
+//                           WHERE
+//                                            vendor_id =".$arr1['uid'];
+//                  $res=$this->query($vensql);
+//                  while($row=$this->fetchData($res))
+//                  {
+//                      $arr[]=$row;
+//                  }
+//                  $err=array('code'=>0,'msg'=>'Data fetched successfully');
+//                }
+//                else
+//                {
+//                    $arr=array();
+//                    $err=array('code'=>1,'msg'=>'Problem in fetching data');
+//                }
+//            }
+//            else
+//            {
+//                $arr=array();
+//                $err=array('code'=>1,'msg'=>'Problem in fetching data');
+//            }  
+//            $result = array('results'=>$arr,'error'=>$err);
+//            return $result;
+//        }
+    public function viewAll($params) {
+        $vsql = "SELECT 
                                     is_vendor,
-                                    user_id 
+                                    user_id,
+                                    user_name,
+                                    logmobile,
+                                    email 
                    FROM 
                                     tbl_registration 
                    WHERE 
-                                    user_id=".$params['uid']." 
+                                    user_id=" . $params['uid'] . " 
                    AND
                                     is_active=1";
-            $vres=$this->query($vsql);
-            $chkres=$this->numRows($vres);
-            if($chkres>0)//If user is registered and is customer
-            {  
-                while($row1=$this->fetchData($vres))
-                {
-                    $arr1['isv']=$row1['is_vendor'];
-                    $arr1['uid']=$row1['user_id'];
-                }
-
-                if($arr1['isv']==0)   // check if it is User
-                {  
-                  $vensql="SELECT 
-                                            user_name,
-                                            logmobile,
-                                            email 
-                           FROM 
-                                            tbl_registration
-                           WHERE 
-                                            user_id =".$arr1['uid'];
-                  $res=$this->query($vensql);
-                  while($row=$this->fetchData($res))
-                   {
-                      $arr[]=$row;
-                  }
-                  $err=array('code'=>0,'msg'=>'Values fetched');
-                }
-                else if($arr1['isv']==1)    // check if it is Vendor
-                {
-                  $vensql="SELECT 
-                                            orgName,
-                                            email,
-                                            fulladdress,
-                                            contact_person,
-                                            contact_mobile 
-                           FROM 
-                                            tbl_vendor_master 
-                           WHERE
-                                            vendor_id =".$arr1['uid'];
-                  $res=$this->query($vensql);
-                  while($row=$this->fetchData($res))
-                  {
-                      $arr[]=$row;
-                  }
-                  $err=array('code'=>0,'msg'=>'Data fetched successfully');
-                }
-                else
-                {
-                    $arr=array();
-                    $err=array('code'=>1,'msg'=>'Problem in fetching data');
-                }
+        $vres = $this->query($vsql);
+        $chkres = $this->numRows($vres);
+        if ($chkres > 0) {//If user is registered and is customer
+            while ($row1 = $this->fetchData($vres)) {
+                $arr1['isv'] = $row1['is_vendor'];
+                $arr1['uid'] = $row1['user_id'];
+                $arr[] = $row1;
+                $err = array('code' => 0, 'msg' => 'Values fetched');
             }
-            else
-            {
-                $arr=array();
-                $err=array('code'=>1,'msg'=>'Problem in fetching data');
-            }  
-            $result = array('results'=>$arr,'error'=>$err);
-            return $result;
+
+            if ($arr1['isv'] == 1) {    // check if it is Vendor
+                $vensql = "SELECT * FROM tbl_vendor_master WHERE vendor_id =" . $arr1['uid'];
+                $res = $this->query($vensql);
+                while ($row = $this->fetchData($res)) {
+                    //$arr[] = $row;
+                    array_push($arr, $row);
+                }
+                $err = array('code' => 0, 'msg' => 'Data fetched successfully');
+            }
+        } else {
+            $arr = array();
+            $err = array('code' => 1, 'msg' => 'Problem in fetching data');
         }
+        $result = array('results' => $arr, 'error' => $err);
+        return $result;
     }
-    ?>
+}
+?>

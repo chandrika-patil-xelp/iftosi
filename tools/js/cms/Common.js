@@ -1,6 +1,9 @@
 var common=new Common();
 function Common(){
     var _this=this;
+    this.APIWebPath = function () {
+        return 'http://localhost/iftosi/apis/';
+    };
     this.eSubmit = function (evt, btnId) {
         var charCode = (evt.which) ? evt.which : evt.keyCode;
         if (charCode === 13) {
@@ -55,11 +58,11 @@ function Common(){
                 var ln=$(this).siblings('.lnNo').val();
                 if(landlineNos == '')
                 {
-                    landlineNos += val + ln;
+                    landlineNos += val + '-' + ln;
                 }
                 else
                 {
-                    landlineNos += "|~|" + val + ln;
+                    landlineNos += "|~|" + val + '-' + ln;
                 }
             }
         });
@@ -107,6 +110,9 @@ function Common(){
     
     _this.nmbCount=1;
     this.addMobileNumber = function() {
+        if(_this.nmbCount==0){
+            _this.nmbCount++;
+        }
         if(_this.nmbCount==2){
             $('.falmb .addBtn').addClass('dn');
         }
@@ -122,7 +128,8 @@ function Common(){
                 $('#altmbNo' + _this.nmbCount).removeClass('dn');
                 if(_this.nmbCount!==2)
                 _this.nmbCount++;
-                
+            } else {
+                $('.falmb .addBtn').removeClass('dn');
             }
         }
     };
@@ -134,7 +141,7 @@ function Common(){
         $('#' + id + ' input').val('');
     };
     
-    this.checkMobile= function(id) {return true;
+    this.checkMobile= function(id) {
         var num=$('#'+id).val();
         var len=num.length;
         if((num.charAt(0)=='9')&& (len==10) || (num.charAt(0)=='8')&& (len==10) || (num.charAt(0)=='7')&& (len==10)){
@@ -144,6 +151,24 @@ function Common(){
             return false;
         }
         
+    };
+    this.validateEmail= function (id) {
+        var email=$('#'+id).val();
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    };
+    
+    this.validateUrl = function (id) {
+        var web=$('#'+id).val();
+        var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+        var regex = new RegExp(expression);
+        if (web.match(regex))
+        {
+            return true;
+        } else {
+            alert("Please enter valid URL");
+            return false;
+        }
     };
     
     this.changeTab = function(obj){
