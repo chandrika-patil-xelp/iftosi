@@ -249,7 +249,7 @@
                                         
                                         $attr   = $result[$pid]['attr_details'];
                                         $pdet   = $result[$pid];
-//                                        echo "<pre>";print_r($pdet);die;
+//                                        echo "<pre>";print_r($cat);die;
 					include 'template/jewelleryForm.html';
 				break;
                             
