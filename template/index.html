@@ -98,27 +98,78 @@
             <div class='shapesCont bgGray'>
                 <div class="wrapperMax">
                     <div class="shapesTitle fmOpenL">Find your perfect jewellery match!</div>
-                    <div class="allShapes resultsPage">
-                        <center>
-                            <div id="10003_Rings" class="jshapeComm transition300 ripplelink Rings">Rings
-                            </div><div id="10004_Earrings" class="jshapeComm transition300 ripplelink Earrings">Earrings
-                            </div><div id="10005_Pendants" class="jshapeComm transition300 ripplelink Pendants">Pendants
-                            </div><div id="10006_Necklaces" class="jshapeComm transition300 ripplelink Necklaces">Necklaces
-                            </div><div id="10007_Bangles" class="jshapeComm transition300 ripplelink Bangles">Bangles/Bracelets</div>
-                        </center>
-                    </div>
+                    <?php
+					//echo "here<pre>";print_r($showcat['subcat']);die;
+					foreach($headcat['root'] as $key => $v)
+					{
+						if(count($v['subcat']) && ($v['catid'] == 10001))
+						{
+						?>
+						<div class='jShapesCont resultsPage showHide fmOpenL'>
+							<div class="allShapes resultsPage">
+								<center>
+									<?php
+									$html = '';
+									foreach($v['subcat'] as $key => $val)
+									{
+										$exp = explode('/',$val['cat_name']);
+										$scat = trim($exp[0]);
+										
+										$cname = preg_replace('/[^a-zA-Z0-9]+/', ' ', $val['cat_name']);
+										$cname = ereg_replace("[ \t\n\r]+", " ", $cname);
+										$cname = strtolower(str_replace(" ", "-", $cname));
+										
+										$html .= '<a href="'.DOMAIN.strtolower($v['cat_name']).'/'.$cname.'/ct-'.$val['catid'].'">';
+										$html .= '<div id="'.$val['catid'].'_'.$scat.'" class="jshapeComm transition300 ripplelink '.$scat.'">'.$val['cat_name'].'</div>';
+										$html .= '</a>';
+									}
+									echo $html;
+									?>
+									</center>
+							</div>
+						</div>
+						<?php
+						}
+					}
+					?>  
                 </div>
             </div>  
             <div class='shapesCont'>
                 <div class="wrapperMax">
                     <div class="shapesTitle fmOpenL">Lowest prices guaranteed for bullion!</div>
-                    <div class="allShapes resultsPage bresults">
-                        <center>
-                            <div id="10003_Rings" class="jshapeComm transition300 ripplelink Rings">Rings
-                            </div><div id="10004_Earrings" class="jshapeComm transition300 ripplelink Earrings">Earrings
-                            </div>
-                        </center>
-                    </div>
+                    <?php
+					foreach($headcat['root'] as $key => $v)
+					{
+						if(count($v['subcat']) && ($v['catid'] == 10002))
+						{
+						?>
+						<div class='jShapesCont resultsPage showHide fmOpenL'>
+							<div class="allShapes resultsPage bresults">
+								<center>
+									<?php
+									$html = '';
+									foreach($v['subcat'] as $key => $val)
+									{
+										$exp = explode('/',$val['cat_name']);
+										$scat = trim($exp[0]);
+										
+										$cname = preg_replace('/[^a-zA-Z0-9]+/', ' ', $val['cat_name']);
+										$cname = ereg_replace("[ \t\n\r]+", " ", $cname);
+										$cname = strtolower(str_replace(" ", "-", $cname));
+										
+										$html .= '<a href="'.DOMAIN.strtolower($v['cat_name']).'/'.$cname.'/ct-'.$val['catid'].'">';
+										$html .= '<div id="'.$val['catid'].'_'.$scat.'" class="jshapeComm transition300 ripplelink g'.$scat.'">'.$val['cat_name'].'</div>';
+										$html .= '</a>';
+									}
+									echo $html;
+									?>
+									</center>
+							</div>
+						</div>
+						<?php
+						}
+					}
+					?>
                 </div>
             </div>  
             <?php include 'footer.html'; ?>
