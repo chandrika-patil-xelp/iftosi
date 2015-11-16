@@ -929,7 +929,8 @@
 						cr_ang as crownangle,
 						girdle,
 						base as baseprice,
-                   				p_disc as discount
+                   				p_disc as discount,
+                                                type
                     FROM 
                         tbl_product_search
                     WHERE 
