@@ -59,7 +59,7 @@ a{text-decoration: none;}
 .transition300 {transition: 300ms ease-in-out;-moz-transition: 300ms ease-in-out;-ms-transition: 300ms ease-in-out;-webkit-transition: 300ms ease-in-out;-o-transition: 300ms ease-in-out;}
 .transition3000 {transition: 200ms ease-in-out;-moz-transition: 200ms ease-in-out;-ms-transition: 200ms ease-in-out;-webkit-transition: 200ms ease-in-out;-o-transition: 200ms ease-in-out;}
 
-.container{width:100%;height:auto;background: #ebebde;padding-bottom: 200px}
+.container{width:100%;height:auto;background: #ebebde;padding-bottom: 50px}
 .wrapper{width:100%;height:auto;}
 .wrapperMax{width:100%;max-width: 1200px;height:100%;margin: auto;}
 
@@ -756,7 +756,7 @@ a{cursor:pointer;}
 .containerB{width:50%;height:auto;float:left;}
 .containerC{width:33.3%;height:auto;float:left;}
 /*Contact Us Page*/
-.contLeft{width:60%; height:auto;border-right:1px solid #EBEBDE;padding:0 10px 0 10px ;}
+.contLeft{width:60%; height:auto;padding:0 10px 0 10px ;margin: 0 20%;}
 .contRight{width:40%; height:auto;padding:10% 10px 0 50px ;}
 .texBlk{width:100%;height:auto;padding:10px 0 10px 0;}
 .inp1{width:100%; height:50px; border:1px solid #EBEBDE; border-radius:5px;margin-bottom:20px;padding-left:60px;}
@@ -771,14 +771,17 @@ textarea[name=feedback] {resize: none;}
 .faqs{width:100%;height:auto;padding:20px 0px;}
 .faq{}
 .faq .logo {position: absolute;}
-.ques{width:100%; height:auto;padding:10px 20px;  margin-bottom:10px;  border-bottom:1px solid #EBEBDE; position:relative;cursor:pointer;background-color:#EBEBDE ;border-radius:5px;}
+.ques{width:100%; height:auto;padding:10px 40px 10px 20px;margin-bottom:10px;  border-bottom:1px solid #EBEBDE; position:relative;cursor:pointer;background:#EBEBDE url(../img/common/down_arrow.svg)no-repeat;background-position: right center;border-radius:5px;}
 .ans{width:100%; height:auto;padding:0px 20px 0px 20px; border-bottom:1px solid #EBEBDE; position:relative; display:none;font-size:16px;}
 
 .dnArrow{height:50px;width:50px;position:absolute;top:0;left:0;}
 .padLeft{padding-left:50px !important;}
 .para{padding-bottom: 10px;}
-
-
+/*Footer*/
+.pageLinks{height: auto;width: 100%;background:#8A0044;margin: 0;padding: 15px;border-top: 1px solid #fff;}
+.lowerFooterTab { width: auto;  height: 35px;  line-height: 35px;  cursor: pointer;  display: inline-block;  padding: 0 10px;  color: #fff;  font-size: 12px;    margin: 0 0 0 10px;
+    
+}
 
 
 
@@ -798,7 +801,7 @@ textarea[name=feedback] {resize: none;}
 @media only screen and (min-width: 960px) and (max-width: 1024px){
 
 /*Header*/
-.header {padding: 32px 15px;}
+.header {padding-right:15px;}
 .headRight{width:auto;}
    
 /*Home Page*/    
@@ -840,7 +843,8 @@ textarea[name=feedback] {resize: none;}
 .imgThumbnil{width: 32%;padding-bottom: 32%;margin: 0.5%;}
 
 /*Footer*/    
-.bottmInfo {height: 205px;padding: 30px 0;}    
+.bottmInfo {height: 205px;padding: 30px 0;}   
+
 }
 
 @media only screen and (min-width: 768px) and (max-width: 959px){
@@ -1004,9 +1008,12 @@ textarea[name=feedback] {resize: none;}
     /*SignUp page*/
     .signupPage {background: url(../img/common/background.jpg)no-repeat;background-size: cover;padding: 5px 0 0px 0;height: 100vh;}
     .signupDiv .wrapperMax {max-width: 100%;border: 0px solid #333;background: #fff;margin-top: 0;padding: 25px;border-radius: 0;height: 100vH;z-index: 115;position: relative;}
+    .bgHolder {width: 100%;height: 190px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding: 0px 0 35px 0;}    
+    .bgHolder .heading {width: 100%;height: auto;max-width: 1200px;margin: auto;color: #fff;padding: 150px 0px 0 0px;text-align: center;}
+    .heading.font40 {font-size: 22px;}
+    .faqs {padding: 20px;}
+    .texHolder {padding: 0 20px;}
     
-    
-
 }
 @media only screen and (min-width: 1025px) and (max-width: 1279px){}
 

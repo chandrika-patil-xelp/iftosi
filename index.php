@@ -332,6 +332,14 @@
                                        $page='faq';
                                        include 'template/faq.html';
                                 break;
+                                case 'education':
+                                       $page='faq';
+                                       include 'template/education.html';
+                                break;
+                                case 'membership':
+                                       $page='faq';
+                                       include 'template/membership.html';
+                                break;
 				
                                 default:
 					$page='index';
