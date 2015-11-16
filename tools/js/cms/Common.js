@@ -2,7 +2,7 @@ var common = new Common();
 function Common() {
     var _this = this;
     this.APIWebPath = function () {
-        return 'http://localhost/iftosi/apis/';
+        return 'http://beta.xelpmoc.in/iftosi/apis/';
     };
     this.eSubmit = function (evt, btnId) {
         var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -78,7 +78,7 @@ function Common() {
         if ((num.charAt(0) == '0') && (len == 11) || (num.charAt(0) != '0') && (len == 10)) {
             return true;
         } else {
-            alert('Please enter correct lanline number.')
+            this.toast(0,'Please enter correct lanline number.')
             return false;
         }
     }
@@ -147,7 +147,7 @@ function Common() {
         if ((num.charAt(0) == '9') && (len == 10) || (num.charAt(0) == '8') && (len == 10) || (num.charAt(0) == '7') && (len == 10)) {
             return true;
         } else {
-            alert('Please enter correct mobile number.')
+            this.toast(0,'Please enter correct mobile number.')
             return false;
         }
 
@@ -166,7 +166,7 @@ function Common() {
         {
             return true;
         } else {
-            alert("Please enter valid URL");
+            this.toast(0,"Please enter valid URL");
             return false;
         }
     };
@@ -216,6 +216,20 @@ function Common() {
         }
         return dateFormat;
     };
+
+    this.toast = function (mType, msg) {
+        $('.close').click();
+        $.toast.config.width = 400;
+        $.toast.config.closeForStickyOnly = false;
+        if (mType == 0) {
+            $.toast(msg, {duration: 5000, type: "danger"});
+        } else if (mType == 1) {
+            $.toast(msg, {duration: 5000, type: "success"});
+        }
+        setTimeout(function () {
+            $('.close').click();
+        }, 5000);
+    }
 
     this.readFromStorage = function (id)
     {

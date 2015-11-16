@@ -1,3 +1,4 @@
+var uid = common.readFromStorage('uid');
 
 $(document).ready(function () {
     $('.compComm').bind('click', function (e) {
@@ -38,7 +39,7 @@ function validateForm() {
     var state = $('#state').val();
     var wbst = $('#wbst').val();
     var str = '';
-    if (orgname == '' || orgname.length < 10) {
+    if (orgname == '') {
         str = 'Organization Name is Required\n';
         $('#orgname').focus();
     }
@@ -65,15 +66,15 @@ function validateForm() {
     else if (!$("#forDiamond").hasClass("comSelected") && !$("#forJewellery").hasClass("comSelected") && !$("#forBullion").hasClass("comSelected")) {
         str = 'Select business type';
     }
-    else if (wbst != '') {
-        if (!common.validateUrl('wbst')) {
-            return false;
-        }
-    }
     else {
+        if (wbst != '') {
+            if (!common.validateUrl('wbst')) {
+                return false;
+            } else { return  true;}
+        }
         return  true;
     }
-    alert(str);
+    common.toast(0,str);
     return false;
 }
 
@@ -87,48 +88,63 @@ function validateStep2Form() {
         var ofcountry = $('#ofcountry').val();
         if (memcert == '') {
             $('#memcert').focus();
+            common.toast(0,'Enter GJEPC Membership Certificate');
+            return false;
         }
         else if (bdbc == '') {
+            common.toast(0,'Enter Bharat Diamond Bourse Certificate');
             $('#bdbc').focus();
+            return false;
         }
         else if (othdbaw == '') {
+            common.toast(0,'Enter Details Of Membership Of Other Diamond Bourse Around The World');
             $('#othdbaw').focus();
+            return false;
         }
         else if (ofcity == '') {
+            common.toast(0,'Enter Offices In other Cities');
             $('#ofcity').focus();
+            return false;
         }
         else if (ofcountry == '') {
+            common.toast(0,'Enter Offices In other Countries');
             $('#ofcountry').focus();
-        } else {
-            return  true;
+            return false;
         }
-    } else if (/2/.test(busiType)) {
+    }  
+    if (/2/.test(busiType)) {
         var showroomname = $('#showroomname').val();
         var showroomno = $('#showroomno').val();
         var mdbw = $('#mdbw').val();
         if (showroomname == '') {
             $('#showroomname').focus();
+            common.toast(0,'Show Room Name is Required');
+            return false;
         }
         else if (showroomno == '') {
+            common.toast(0,'Enter Number of Showrooms');
             $('#showroomno').focus();
+            return false;
         }
         else if (mdbw == '') {
+            common.toast(0,'Membership Of Council / Jewellers Association is Required');
             $('#mdbw').focus();
-        } else {
-            return  true;
+            return false;
         }
-    } else if (/3/.test(busiType)) {
+    } 
+    if (/3/.test(busiType)) {
         var bul_mdbw = $('#bul_mdbw').val();
         if (bul_mdbw == '') {
+            common.toast(0,'Membership Of Council / Jewellers Association is Required');
             $('#bul_mdbw').focus();
-        } else {
-            return  true;
-        }
-    } else {
-        str = 'Select business type';
+            return false;
+        } 
+    } 
+    if (!(/1/.test(busiType)) && !(/2/.test(busiType)) && !(/3/.test(busiType))) {
+        common.toast(0,'Select business type');
+        return false;
     }
-    alert(str);
-    return false;
+    return true;
 }
 
 function validateStep3Form() {
@@ -138,13 +154,13 @@ function validateStep3Form() {
     var email = $('#email').val();
     var landline = $('#landline').val();
     var str = '';
-    if (cperson == '' || cperson.length < 10) {
-        alert('Contact Person Name is Required');
+    if (cperson == '') {
+        common.toast(0,'Contact Person Name is Required');
         $('#cperson').focus();
         return false;
     }
     else if (position == '') {
-        alert('Position is Required');
+        common.toast(0,'Position is Required');
         $('#position').focus();
         return false;
     }
@@ -153,7 +169,7 @@ function validateStep3Form() {
         return false;
     }
     if (!common.validateEmail('email')) {
-        alert('Contact Email is Required');
+        common.toast(0,'Contact Email is Required');
         $('#email').focus();
         return false;
     }
@@ -201,10 +217,10 @@ function submitForm() {
             var errCode = obj['error']['code'];
             var errMsg = obj['error']['msg'];
             if (errCode == 0) {
-                alert(errMsg);
+                common.toast(1,errMsg);
                 changeTab('step2');
             } else {
-                alert(errMsg);
+                common.toast(0,errMsg);
             }
         }});
 }
@@ -238,10 +254,10 @@ function submitStep2Form() {
             var errCode = obj['error']['code'];
             var errMsg = obj['error']['msg'];
             if (errCode == 0) {
-                alert(errMsg);
+                common.toast(1,errMsg);
                 changeTab('step3');
             } else {
-                alert(errMsg);
+                common.toast(0,errMsg);
             }
         }});
 
@@ -296,10 +312,10 @@ function submitStep3Form() {
             var errCode = obj['error']['code'];
             var errMsg = obj['error']['msg'];
             if (errCode == 0) {
-                alert(errMsg);
-                window.location.assign('<?php echo DOMAIN ?>index.php?case=vendor_landing');
+                common.toast(1,errMsg);
+                window.location.assign('index.php?case=vendor_landing');
             } else {
-                alert(errMsg);
+                common.toast(0,errMsg);
             }
         }});
 }
