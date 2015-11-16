@@ -233,15 +233,23 @@ function getResultsData(data,sortby,showtree)
 		}
 		else {
 			$.each(data.results.products, function(i, vl) {
+				html += '<a href="'+DOMAIN+vl.pbrand.toLowerCase()+'-'+vl.pname.toLowerCase()+'-'+vl.pcode.toLowerCase()+'/jid-'+vl.pid+'">';
 				html += '<div class="prdComm fLeft jwRes" style="opacity: 0; transform: translateX(1000px);">';
 					html += '<div class="prdCommDiv fLeft transition100">';
-						html += '<div class="prdCommImg fLeft">';
-							html += '<div class="proxImg fLeft" style="background: #fff url(tools/img/product1/b1.jpg)no-repeat;background-size: contain;background-position:center"></div>';
+					
+						html += '<div class="prdShape fLeft">';
+							html += '<div class="prdShTitle fLeft fmOpenB">TYPE</div>';
+							html += '<div class="prdShType fLeft fmOpenR">'+vl.attributes.type+'</div>';
+							html += '<div class="'+vl.attributes.type.toLowerCase()+'Ic fRight"></div>';
 						html += '</div>';
 						html += '<div class="prdDetails fLeft">';
 							html += '<div class="detComm">';
-								html += '<div class="detLabel fmOpenB fLeft">DESIGN NO.</div>';
-								html += '<div class="detValue fmOpenR fLeft">'+vl.pcode+'</div>';
+								html += '<div class="detLabel fmOpenB fLeft">METAL</div>';
+								html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.metal+'</div>';
+							html += '</div>';
+							html += '<div class="detComm">';
+								html += '<div class="detLabel fmOpenB fLeft">WEIGHT</div>';
+								html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.gold_weight+' Grams</div>';
 							html += '</div>';
 						html += '</div>';
 						html += '<div class="prdPrice fLeft">';
@@ -250,6 +258,24 @@ function getResultsData(data,sortby,showtree)
 								html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+vl.attributes.price+'</div>';
 							html += '</div>';
 						html += '</div>';
+					
+						/* html += '<div class="prdCommImg fLeft">';
+							html += '<div class="proxImg fLeft" style="background: #fff url(tools/img/product1/b1.jpg)no-repeat;background-size: contain;background-position:center"></div>';
+						html += '</div>';
+						html += '<div class="prdDetails fLeft">';
+							html += '<div class="detComm">';
+								html += '<div class="detLabel fmOpenB fLeft">WEIGHT</div>';
+								html += '<div class="detValue fmOpenR fLeft">'+Math.round(vl.attributes.gold_weight,2)+' Grams</div>';
+							html += '</div>';
+						html += '</div>';
+						html += '<div class="prdPrice fLeft">';
+							html += '<div class="detComm">';
+								html += '<div class="detLabel fmOpenB fLeft">PRICE</div>';
+								html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+vl.attributes.price+'</div>';
+							html += '</div>';
+						html += '</div>'; */
+						
+						
 						html += '<div class="prdActions fLeft">';
 							html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
 							html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
@@ -258,6 +284,7 @@ function getResultsData(data,sortby,showtree)
 						html += '</div>';
 					html += '</div>';
 				html += '</div>';
+				html += '</a>';
 			});
 		}
 	}

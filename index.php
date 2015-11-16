@@ -84,6 +84,7 @@
 					if($val['catid'] == $_GET['catid'] || strtolower($case) == strtolower($val['cat_name']))
 					{
 						$showcat = $val;
+						$bulcat = $val;
 					}
 				}
 			}

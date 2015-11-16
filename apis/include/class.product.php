@@ -704,7 +704,10 @@
 								price,
 								polish,
 								symmetry,
-								cno
+								cno,
+								gold_weight,
+								type,
+								metal
 							FROM 
 								tbl_product_search 
 							WHERE 
