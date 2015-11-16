@@ -58,7 +58,7 @@
                 $arr=array();
                 $err=array('code'=>1,'msg'=>'Error in insertion ');
             }
-            $result = array('results' =>$arr,'error'=>$err);
+            $result = array('results' =>$arr, 'userid' => $uid,'error'=>$err);
             return $result;
         }
         
@@ -529,5 +529,24 @@
         $result = array('results' => $arr, 'error' => $err);
         return $result;
     }
+
+	public function generatePassword($params)
+	{
+		$pwdLen = $params['length'];
+		$pwd = '';
+		if(empty($pwdLen))
+		{
+			$pwdLen = 6;
+		}
+
+		$i = 0;
+		while($i < $pwdLen)
+		{
+			$pwd .= mt_rand(1, 9);
+			$i++;
+		}
+
+		return $pwd;
+	}
 }
 ?>

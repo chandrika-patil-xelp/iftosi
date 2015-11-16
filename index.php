@@ -68,6 +68,35 @@
 					
 					echo json_encode($res);
 				break;
+				case 'userCheck':
+					$regResp = array();
+					$mobile = (!empty($_GET['mobile'])) ? trim($_GET['mobile']) : '';
+					$name = (!empty($_GET['name'])) ? trim(urldecode($_GET['name'])) : '';
+					$email = (!empty($_GET['email'])) ? trim(urldecode($_GET['email'])) : '';
+
+					$userUrl = APIDOMAIN . 'index.php?action=checkUser&mobile='.$mobile;
+					$resp = $comm->executeCurl($userUrl);
+					if(!empty($resp) && !empty($resp['error']) && !empty($resp['results']) && empty($resp['error']['Code']))
+					{
+						if($resp['results'] == 'User Not yet Registered')
+						{
+							$regUserUrl = APIDOMAIN . 'index.php?action=userReg&mobile='.$mobile.'&username='.urlencode($name).'&email='.urlencode($email);
+							$regResp = $comm->executeCurl($regUserUrl);
+						}
+					}
+					echo json_encode($regResp);
+				break;
+				case 'addToWishList':
+					$userid = (!empty($_GET['userid'])) ? trim($_GET['userid']) : '';
+					$vid = (!empty($_GET['vid'])) ? trim(urldecode($_GET['vid'])) : '';
+					$prdid = (!empty($_GET['prdid'])) ? trim(urldecode($_GET['prdid'])) : '';
+
+					$dt = array('result' => array('uid' => $userid, 'pid' => $prdid, 'vid' => $vid));
+					$dt = json_encode($dt);
+					$userUrl = APIDOMAIN . 'index.php?action=addtowsh&dt='.$dt;
+					$resp = $comm->executeCurl($userUrl, TRUE);
+					echo $resp;
+				break;
 			}
 			break;
 			
@@ -182,15 +211,68 @@
 					$pid 	= $_GET['productid'];
 					$url 	= APIDOMAIN.'index.php?action=getPrdById&prdid='.$pid;
 					$res 	= $comm->executeCurl($url);
-					$data 	= $res['results'][$pid];
+					$data = $prdInfo = $res['results'][$pid];
+					$vndrInfo = $prdInfo['vendor_details'];
+					foreach($vndrInfo as $key => $value)
+					{
+						$vndrId = $key;
+						$vndrDtls = $value;
+					}
+					$vndrAddr = explode(',', $vndrDtls['fulladdress']);
 					include 'template/diamond_details.html';
 				break;
 				case 'bullion_details':
 					$page='bullion_details';
+					$prdInfo = array();
+
+					$prdId = $orgPrdId = (!empty($_GET['productid'])) ? $_GET['productid'] : '';
+
+					if(!empty($prdId))
+					{
+						$prdId = explode(' ', $prdId);
+						$prdId = $pid = $prdId[1];
+						$prdInfoUrl = APIDOMAIN . 'index.php?action=getPrdById&prdid='.$prdId;
+						$prdInfo = $comm->executeCurl($prdInfoUrl);
+						if(!empty($prdInfo) && !empty($prdInfo['results']) && !empty($prdInfo['error']) && empty($prdInfo['error']['errCode']))
+						{
+							$prdInfo = $prdInfo['results'][$prdId];
+							$vndrInfo = $prdInfo['vendor_details'];
+							foreach($vndrInfo as $key => $value)
+							{
+								$vndrId = $key;
+								$vndrDtls = $value;
+							}
+							$vndrAddr = explode(',', $vndrDtls['fulladdress']);
+						}
+					}
 					include 'template/bullion_details.html';
 				break;
 				case 'jewellery_details':
 					$page='jewellery_details';
+					$prdInfo = array();
+
+					$prdName = (!empty($_GET['productname'])) ? $_GET['productname'] : '';
+					$prdId = $orgPrdId = (!empty($_GET['productid'])) ? $_GET['productid'] : '';
+
+					if(!empty($prdId))
+					{
+						$prdId = explode(' ', $prdId);
+						$prdId = $pid = $prdId[1];
+						$prdInfoUrl = APIDOMAIN . 'index.php?action=getPrdById&prdid='.$prdId;
+						$prdInfo = $comm->executeCurl($prdInfoUrl);
+						if(!empty($prdInfo) && !empty($prdInfo['results']) && !empty($prdInfo['error']) && empty($prdInfo['error']['errCode']))
+						{
+							$prdInfo = $prdInfo['results'][$prdId];
+							$vndrInfo = $prdInfo['vendor_details'];
+							foreach($vndrInfo as $key => $value)
+							{
+								$vndrId = $key;
+								$vndrDtls = $value;
+							}
+							$vndrAddr = explode(',', $vndrDtls['fulladdress']);
+						}
+					}
+
 					include 'template/jewellery_details.html';
 				break;
                                 case 'diamond_Form':

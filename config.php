@@ -29,6 +29,7 @@ $css['ripple'] = DOMAIN.'tools/css/ripple.css?v='.VERSION;
 $css['rngsld'] = DOMAIN.'tools/css/rangeslider/ion.rangeSlider.css?v='.VERSION;
 $css['rngsldskin'] = DOMAIN.'tools/css/rangeslider/ion.rangeSlider.skinHTML5.css?v='.VERSION;
 $css['normalize'] = DOMAIN.'tools/css/rangeslider/normalize.css?v='.VERSION;
+$css['jquery_toast'] = DOMAIN.'tools/css/jquery.toast.min.css?v='.VERSION;
 
 // CSS Libraries End
 
@@ -50,6 +51,8 @@ $jvs['rngsld'] 		= DOMAIN.'tools/js/lib/ion.rangeSlider.js?v='.VERSION;
 $jvs['jqrynum'] 	= DOMAIN.'tools/js/lib/jquery-numerator.js?v='.VERSION;
 $jvs['hammer'] 		= DOMAIN.'tools/js/lib/hammer.js?v='.VERSION;
 $jvs['auto'] 		= DOMAIN.'tools/js/lib/autosuggest.js?v='.VERSION;
+$jvs['customStorage'] 		= DOMAIN.'tools/js/lib/CustomStorage.js?v='.VERSION;
+$jvs['jquery_toast'] 		= DOMAIN.'tools/js/lib/jquery.toast.min.js?v='.VERSION;
 
 // JS Libraries End
 

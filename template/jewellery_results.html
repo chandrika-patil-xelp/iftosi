@@ -64,6 +64,7 @@
                         <div class='prdResults fRight'>
                             <?php 
 							foreach($data as $key=>$val) { ?>
+								<a href="<?php echo DOMAIN.str_replace(' ', '-', $val['pbrand']).'-' . str_replace(' ' , '-', $val['pname']) . '-' . $val['pcode'] . '/jid-' . $val['pid']; ?>">
                                 <div class='prdComm fLeft jwRes' style="opacity: 0; transform: translateX(1000px);">
                                     <div class='prdCommDiv fLeft transition100'>
                                         <div class="prdCommImg fLeft">
@@ -210,6 +211,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                </a>
                                 <?php $i++;
                             } ?>
 							<?php include 'pagination.html';?>

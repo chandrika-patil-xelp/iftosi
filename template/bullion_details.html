@@ -28,7 +28,7 @@
                         <div class="btnsCont fLeft">
                             <div class="prdShape fLeft">
                                 <div class="prdShTitle fLeft fmOpenB">PRICE</div>
-                                <div class="prdShType fLeft fmOpenL"><span>&#8377;</span>8,28,5888</div>
+                                <div class="prdShType fLeft fmOpenL"><span>&#8377;</span><?php echo number_format($prdInfo['attr_details']['price']); ?></div>
                             </div>
                             <div class="prdBtns fLeft">
                                 <div class="btnComm fLeft iconCall ripplelink poR" >Contact Dealer</div>
@@ -39,19 +39,19 @@
                         <div class="majorInfoBox fLeft bullion_details">
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">TYPE</div>
-                                <div class="infoValue c666 fmOpenR font25">COIN OR BAR</div>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo $prdInfo['attr_details']['type']; ?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">METAL</div>
-                                <div class="infoValue c666 fmOpenR font25">Gold</div>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo $prdInfo['attr_details']['metal']; ?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">GOLD PURITY</div>
-                                <div class="infoValue c666 fmOpenR font25"> 995 / 999</div>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo $prdInfo['attr_details']['gold_purity']; ?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">GOLD WEIGHT</div>
-                                <div class="infoValue c666 fmOpenR font25">50 Gms</div>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo number_format($prdInfo['attr_details']['gold_weight'], 2); ?> Gms</div>
                             </div>
                         </div>
                     </div>
@@ -60,65 +60,64 @@
             <div id='vDetails' class="vendorDetails fLeft transition300 dn vTransit">
                 <div class="wrapperMax ">
                     <div class="vdLeftCard fLeft">
-                        <div class="orgName fLeft fmOpenR">White Fire Jewels</div>
+                        <div class="orgName fLeft fmOpenR"><?php echo $vndrDtls['OrganisationName']; ?></div>
                         <div class="orgAdd fLeft fmOpenR">
-                            GW 9876 Bharat Diamond Bourse,<br>
-                            Bandra Kurla Complex,<br>Bandrea East,<br>Mumbai 400051.<br>Maharastra
+                            <?php echo trim($vndrAddr[0]); ?>,<br><?php echo trim($vndrAddr[1]); ?>,<br><?php echo trim($vndrAddr[2]); ?>,<br><?php echo trim($vndrAddr[3]); ?>.<br><?php echo trim($vndrAddr[4]); ?>
                         </div>
                         <div class="orgNo fLeft">
                             <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Telephone No.</div>
-                            <div class="commtxt tel fmOpenR fLeft">0222 - 32623263, 0222 - 32623263,<br>0222 - 32623263, 0222 - 32623263</div>
+                            <div class="commtxt tel fmOpenR fLeft"><?php echo str_replace('~', ', ', $vndrDtls['telephones']); ?></div>
                         </div>
                         <div class="orgNo fLeft">
                             <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Email Address</div>
-                            <div class="commtxt email fmOpenR fLeft">wfj@gmail.com, xyx@hotmail.com</div>
+                            <div class="commtxt email fmOpenR fLeft"><?php echo str_replace('~', ', ', $vndrDtls['alt_email']); ?></div>
                         </div>
                         <div class="orgNo fLeft">
                             <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Website</div>
-                            <div class="commtxt email fmOpenR fLeft"><a href="#">www.whitefirejwels.in</a></div>
+                            <div class="commtxt email fmOpenR fLeft"><a href="<?php echo 'http://' . str_replace('http://' , '' , $vndrDtls['website']) ;?>"><?php echo $vndrDtls['website']; ?></a></div>
                         </div>
                         <div class="orgNo fLeft">
                             <div class="commLeft fLeft">
                                 <div class="infoLabel fmOpenB font12 fmOpenB fLeft">VAT Number</div>
-                                <div class="commtxt email fmOpenR fLeft">124564897879</div>
+                                <div class="commtxt email fmOpenR fLeft"><?php echo $vndrDtls['Vat_Number']; ?></div>
                             </div>
                             <div class="commRight fLeft">
                                 <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Turnover (cr)</div>
-                                <div class="commtxt email fmOpenR fLeft">100</div>
+                                <div class="commtxt email fmOpenR fLeft"><?php echo $vndrDtls['turnover']; ?></div>
                             </div>
                         </div>
 
                         <div class="orgNo fLeft">
                             <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Bankers</div>
-                            <div class="commtxt bankers fmOpenR fLeft">Indus Bank, Kotak Bank, State Bank Of India</div>
+                            <div class="commtxt bankers fmOpenR fLeft"><?php echo str_replace('~', ', ', $vndrDtls['bankers']); ?></div>
                         </div>
                     </div>
                     <div class="vdCenterCard fLeft">
                         <div class="cntCard fLeft">
                             <div class="vTitle fLeft fmOpenR" style="background-color: #5e0037;">Contact Person</div>
-                            <div class="cardCommCont"><div class="cardComm cntName orgName fLeft fmOpenR">Sandipan Chattopadhyay</div>
-                                <div class="fmOpenB desig">(Director)</div>
-                                <div class="cardComm cntMb fmOpenB fLeft">990051525</div>
-                                <div class="cardComm cntEmail fmOpenB fLeft">ankur@xelpmoc.in</div>
+                            <div class="cardCommCont"><div class="cardComm cntName orgName fLeft fmOpenR"><?php echo $vndrDtls['contact_person']; ?></div>
+                                <div class="fmOpenB desig">(<?php echo $vndrDtls['position']; ?>)</div>
+                                <div class="cardComm cntMb fmOpenB fLeft"><?php echo str_replace('~', ', ', $vndrDtls['contact_mobile']); ?></div>
+                                <div class="cardComm cntEmail fmOpenB fLeft"><?php echo str_replace('~', ', ', $vndrDtls['email']); ?></div>
                             </div>
                         </div>
                         <div class="cntCard fLeft">
                             <div class="vTitle fLeft fmOpenR" style="background-color: #380B34;">Bharat Diamond Bourse Certificate</div>
                             <div class='cardCommCont'>
-                                <div class="cardComm fLeft fmOpenR">M-12345</div>
+                                <div class="cardComm fLeft fmOpenR"><?php echo $vndrDtls['diamond_certificate']; ?></div>
                             </div>
                         </div>
 
                         <div class="cntCard fLeft">
                             <div class="vTitle fLeft fmOpenR" style="background-color: #2A0E34;">GJEPC Membership Certificate</div>
                             <div class='cardCommCont'>
-                                <div class="cardComm fLeft fmOpenR">GJEPC/HO-MUM(M)/G25885/AM/I</div>
+                                <div class="cardComm fLeft fmOpenR"><?php echo $vndrDtls['Membership_Certificate']; ?></div>
                             </div>
                         </div>
                         <div class="cntCard fLeft">
                             <div class="vTitle fLeft fmOpenR" style="background-color: #171334;">Membership Of Other Diamond Bourses</div>
                             <div class='cardCommCont'>
-                                <div class="cardComm fLeft fmOpenR">Russia, London, Hongkong</div>
+                                <div class="cardComm fLeft fmOpenR"><?php echo str_replace('~', ', ', $vndrDtls['membership_around_world']); ?></div>
                             </div>
                         </div>
                     </div>
@@ -251,12 +250,12 @@
                 <div id="ur_name_inpText" class="inpText fRight transition300">enter<br>your name</div>
             </div> 
             <div class="inputCont fLeft fmOpenR">
-                <input type="text" id="ur_name" name="ur_email" autocomplete="off"  class="txtInput cOrange fmOpenR font14 emailIcon">
+                <input type="text" id="ur_email" name="ur_email" autocomplete="off"  class="txtInput cOrange fmOpenR font14 emailIcon">
                 <label for="ur_email" class="inp-label transition100">EMAIL</label>
                 <div id="ur_email_inpText" class="inpText fRight transition300">enter<br>your email</div>
             </div> 
             <div class="cancelLgBtn fLeft fmOpenR" id='userCancel'> CANCEL</div>
-            <div class="loginBtn fLeft fmOpenR">SUMBIT</div>
+            <div class="loginBtn fLeft fmOpenR" id='userSubmit'>SUMBIT</div>
         </div>
     </div>
     <div id='imgGallery' class="imgGallery dn">
@@ -291,9 +290,9 @@
 <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['hammer']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
+<script type="text/javascript" src="<?= $jvs['comm']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['details']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['head']; ?>"></script>
-<script type="text/javascript" src="<?= $jvs['comm']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['dmap']; ?>"></script>
 </body>
 </html>

@@ -22,15 +22,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link rel="stylesheet" href="<?= $css['home']; ?>">
         <link rel="stylesheet" href="<?= $css['ripple']; ?>">
+        <link rel="stylesheet" href="<?= $css['jquery_toast']; ?>">
         <script type="text/javascript" src="<?= $jvs['jqry']; ?>"></script>
-<!--        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>-->
+        <script type="text/javascript" src="<?= $jvs['jquery_toast']; ?>"></script>
+        <script type="text/javascript" src="<?= $jvs['customStorage']; ?>"></script>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
         <script>
             var pageName = '<?php echo $page;?>';
             var DOMAIN = '<?php echo DOMAIN;?>';
             var APIDOMAIN = '<?php echo APIDOMAIN;?>';
             var totalCnt = '<?php echo $total;?>';
             var pid = '<?php echo $pid;?>';
+            var vendor_id = '<?php echo $vndrId;?>';
             var catid = '<?php echo $catid;?>';
+            var vndrFullAddr = '<?php echo $vndrDtls['fulladdress'];?>';
+            var vndrLat = '<?php echo $vndrDtls['latitude'];?>';
+            var vndrLng = '<?php echo $vndrDtls['longitude'];?>';
         </script>
         <?php
         if ($page == 'diamonds' || $page == 'jewellery' || $page == 'bullion') {
@@ -43,7 +50,7 @@
         }
         if ($page == 'bullion_details') {
         ?>
-<!--            <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script> -->
+<!--            <script type="text/javascript" src="http://maps.google.com/maps/api/js"></script> -->
         <?php
         }
         ?>    

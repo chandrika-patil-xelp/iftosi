@@ -122,7 +122,87 @@
                 </div>
             </div>
             <div id='vDetails' class="vendorDetails fLeft transition300 dn vTransit">
+				<div class="wrapperMax ">
+                    <div class="vdLeftCard fLeft">
+                        <div class="orgName fLeft fmOpenR"><?php echo $vndrDtls['OrganisationName']; ?></div>
+                        <div class="orgAdd fLeft fmOpenR">
+                            <?php echo trim($vndrAddr[0]); ?>,<br><?php echo trim($vndrAddr[1]); ?>,<br><?php echo trim($vndrAddr[2]); ?>,<br><?php echo trim($vndrAddr[3]); ?>.<br><?php echo trim($vndrAddr[4]); ?>
+                        </div>
+                        <div class="orgNo fLeft">
+                            <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Telephone No.</div>
+                            <div class="commtxt tel fmOpenR fLeft"><?php echo str_replace('~', ', ', $vndrDtls['telephones']); ?></div>
+                        </div>
+                        <div class="orgNo fLeft">
+                            <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Email Address</div>
+                            <div class="commtxt email fmOpenR fLeft"><?php echo str_replace('~', ', ', $vndrDtls['alt_email']); ?></div>
+                        </div>
+                        <div class="orgNo fLeft">
+                            <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Website</div>
+                            <div class="commtxt email fmOpenR fLeft"><a href="<?php echo 'http://' . str_replace('http://' , '' , $vndrDtls['website']) ;?>"><?php echo $vndrDtls['website']; ?></a></div>
+                        </div>
+                        <div class="orgNo fLeft">
+                            <div class="commLeft fLeft">
+                                <div class="infoLabel fmOpenB font12 fmOpenB fLeft">VAT Number</div>
+                                <div class="commtxt email fmOpenR fLeft"><?php echo $vndrDtls['Vat_Number']; ?></div>
+                            </div>
+                            <div class="commRight fLeft">
+                                <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Turnover (cr)</div>
+                                <div class="commtxt email fmOpenR fLeft"><?php echo $vndrDtls['turnover']; ?></div>
+                            </div>
+                        </div>
 
+                        <div class="orgNo fLeft">
+                            <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Bankers</div>
+                            <div class="commtxt bankers fmOpenR fLeft"><?php echo str_replace('~', ', ', $vndrDtls['bankers']); ?></div>
+                        </div>
+                    </div>
+                    <div class="vdCenterCard fLeft">
+                        <div class="cntCard fLeft">
+                            <div class="vTitle fLeft fmOpenR" style="background-color: #5e0037;">Contact Person</div>
+                            <div class="cardCommCont"><div class="cardComm cntName orgName fLeft fmOpenR"><?php echo $vndrDtls['contact_person']; ?></div>
+                                <div class="fmOpenB desig">(<?php echo $vndrDtls['position']; ?>)</div>
+                                <div class="cardComm cntMb fmOpenB fLeft"><?php echo str_replace('~', ', ', $vndrDtls['contact_mobile']); ?></div>
+                                <div class="cardComm cntEmail fmOpenB fLeft"><?php echo str_replace('~', ', ', $vndrDtls['email']); ?></div>
+                            </div>
+                        </div>
+                        <div class="cntCard fLeft">
+                            <div class="vTitle fLeft fmOpenR" style="background-color: #380B34;">Bharat Diamond Bourse Certificate</div>
+                            <div class='cardCommCont'>
+                                <div class="cardComm fLeft fmOpenR"><?php echo $vndrDtls['diamond_certificate']; ?></div>
+                            </div>
+                        </div>
+
+                        <div class="cntCard fLeft">
+                            <div class="vTitle fLeft fmOpenR" style="background-color: #2A0E34;">GJEPC Membership Certificate</div>
+                            <div class='cardCommCont'>
+                                <div class="cardComm fLeft fmOpenR"><?php echo $vndrDtls['Membership_Certificate']; ?></div>
+                            </div>
+                        </div>
+                        <div class="cntCard fLeft">
+                            <div class="vTitle fLeft fmOpenR" style="background-color: #171334;">Membership Of Other Diamond Bourses</div>
+                            <div class='cardCommCont'>
+                                <div class="cardComm fLeft fmOpenR"><?php echo str_replace('~', ', ', $vndrDtls['membership_around_world']); ?></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div  class="vdRightCard fLeft">
+                        <div class="cntCard fLeft shadoNone">
+                            <div class="vTitle fLeft fmOpenR" style="background-color: #ebebde;color:#666;">Office Locations</div>
+                            <div class='cardCommCont' style="padding: 10px;"><div id='googleMap' class="mapCont fLeft"></div></div>
+                        </div>
+                        
+                        <div class="cntCard fLeft shadoNone">
+                            <div class="vTitle fLeft fmOpenR" style="background-color: #ebebde;color:#666;">Gallery</div>
+                            <div class='cardCommCont' style="padding: 10px;">
+                                <div class="gallery fLeft">
+                                    <div class="thumbnil fLeft" style="background:#fff url(http://localhost/iftosi/tools/img/common/tumb5.jpg)no-repeat;background-size: contain;background-position: center;"></div><div class="thumbnil fLeft" style="background:#fff url(http://localhost/iftosi/tools/img/common/tumb2.png)no-repeat;background-size: contain;background-position: center;"></div>
+                                    <div class="thumbnil fLeft" style="background:#fff url(http://localhost/iftosi/tools/img/common/tumb3.jpg)no-repeat;background-size: contain;background-position: center;"></div>
+                                    <div id='moreimg' class="thumbnil fLeft poR" style="background:#8A0044"><span>+5 More</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class='prdInfo fLeft'>
@@ -234,7 +314,7 @@
                 <div id="ur_name_inpText" class="inpText fRight transition300">enter<br>your name</div>
             </div> 
             <div class="inputCont fLeft fmOpenR">
-                <input type="text" id="ur_name" name="ur_email" autocomplete="off"  class="txtInput cOrange fmOpenR font14 emailIcon">
+                <input type="text" id="ur_email" name="ur_email" autocomplete="off"  class="txtInput cOrange fmOpenR font14 emailIcon">
                 <label for="ur_email" class="inp-label transition100">EMAIL</label>
                 <div id="ur_email_inpText" class="inpText fRight transition300">enter<br>your email</div>
             </div> 
@@ -271,9 +351,9 @@
     <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['hammer']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['comm']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['details']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['head']; ?>"></script>
-    <script type="text/javascript" src="<?= $jvs['comm']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['dmap']; ?>"></script>
 </body>
 </html>

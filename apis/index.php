@@ -28,12 +28,18 @@ switch($action)
 // localhost/iftosi/apis/index.php?action=userReg&username=Shushrut Kumar&password=mishra1.234&mobile=7309290529&email=shubham.bajpai@xelpmoc.in&isvendor=1                                        
         case 'userReg':
             include APICLUDE.'class.user.php';
+            $obj= new user($db['iftosi']);
             $username=(!empty($params['username'])) ? trim(urldecode($params['username'])) : '';
             $password=(!empty($params['password'])) ? trim(urldecode($params['password'])) : '';
             $mobile=(!empty($params['mobile'])) ? trim($params['mobile']) : '';
             $email=(!empty($params['email'])) ?  trim(urldecode($params['email'])) : '';
-            $isvendor=(!empty($params['isvendor'])) ? trim($params['isvendor']) : '';
-            if(empty($username)  &&  empty($password)  &&  empty($mobile)  &&  empty($email)  &&  empty($isvendor))
+            $isvendor = $params['isvendor'] =(!empty($params['isvendor'])) ? trim($params['isvendor']) : 0;
+            if(empty($password))
+            {
+				$tmp_params = array('length' => 6, 'mobile' => $mobile);
+				$password = $obj->generatePassword($tmp_params);	// Password Length. Numeric.
+			}
+            if(empty($username)  ||  empty($password)  ||  empty($mobile)  ||  empty($email))
             {   
                 $arr = array();
                 $err = array('Code' => 1, 'Msg' => 'Some Parameters missing');
@@ -41,7 +47,6 @@ switch($action)
                 $res=$result;
                 break;
             }
-            $obj= new user($db['iftosi']);
             $result= $obj->userReg($params);
             $res= $result;
             break;

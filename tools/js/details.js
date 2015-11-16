@@ -7,6 +7,9 @@ var input_selector = 'input[type=text], input[type=password], input[type=email],
 if(pw<768){
     isMobile=true; 
 }
+var mobile = customStorage.readFromStorage('mobile');
+var name = customStorage.readFromStorage('name');
+var email = customStorage.readFromStorage('email');
 
 $(document).ready(function(){
      setTimeout(function() {
@@ -58,12 +61,23 @@ $(document).ready(function(){
     
     $('#overlay').velocity({opacity:0},{delay:0,duration:0});
     $('#userForm').velocity({scale:0},{delay:0,duration:0});
-    $('.iconCall,.iconMessage').click(function(){
-        $('#overlay,#userForm').removeClass('dn');
-        setTimeout(function(){
-            $('#overlay').velocity({opacity:1},{delay:0,duration:300,ease:'swing'});
-            $('#userForm').velocity({scale:1},{delay:80,duration:100,ease:'swing'});
-        },10);
+    $('.iconCall, .iconWishlist, .iconMessage').click(function(){
+		mobile = customStorage.readFromStorage('mobile');
+		name = customStorage.readFromStorage('name');
+		email = customStorage.readFromStorage('email');
+
+		if(mobile == '' || mobile == null || mobile == undefined)
+		{
+			$('#overlay,#userForm').removeClass('dn');
+			setTimeout(function(){
+				$('#overlay').velocity({opacity:1},{delay:0,duration:300,ease:'swing'});
+				$('#userForm').velocity({scale:1},{delay:80,duration:100,ease:'swing'});
+			},10);
+		}
+		else
+		{
+			showVendorDetails(this);
+		}
     });
     
     $('#userCancel').bind('click',function(){
@@ -82,6 +96,19 @@ $(document).ready(function(){
 			$('#overlay,#userForm').addClass('dn');
 		},1010);
 	});
+
+	if(mobile !== '' && mobile !== null && mobile !== undefined && mobile !== 'null' && mobile !== 'undefined' && typeof mobile !== 'undefined')
+	{
+		$('#ur_mobile').val(mobile);
+	}
+	if(name !== '' && name !== null && name !== undefined && name !== 'null' && name !== 'undefined' && typeof name !== 'undefined')
+	{
+		$('#ur_name').val(name);
+	}
+	if(email !== '' && email !== null && email !== undefined && email !== 'null' && email !== 'undefined' && typeof email !== 'undefined')
+	{
+		$('#ur_email').val(email);
+	}
 });
 
 
@@ -138,9 +165,78 @@ function replaceAll(find, replace, str) {
 	return str.replace(new RegExp(find, 'g'), replace);
 }
 
-function showVendorDetails(){
-	
-	var params = 'action=ajx&case=vendor&productid='+pid;
+function showVendorDetails(obj)
+{
+	var mobile = customStorage.readFromStorage('mobile');
+	var name = customStorage.readFromStorage('name');
+	var email = customStorage.readFromStorage('email');
+
+	if(mobile == '' || mobile == null || mobile == undefined)
+	{
+		var mobile = $('#ur_mobile').val();
+		var name = $('#ur_name').val();
+		var email = $('#ur_email').val();
+
+		var mobCond = (mobile !== '' && mobile !== null && mobile !== undefined) ? true : false;
+		var nmCond = (name !== '' && name !== null && name !== undefined) ? true : false;
+		var emCond = (email !== '' && email !== null && email !== undefined) ? true : false;
+
+		if(mobCond && nmCond && emCond)
+		{
+			customStorage.addToStorage('mobile', mobile);
+			customStorage.addToStorage('name', name);
+			customStorage.addToStorage('email', email);
+
+			var params = 'action=ajx&case=userCheck&mobile='+mobile+'&name='+encodeURIComponent(name)+'&email='+encodeURIComponent(email);
+			var URL = DOMAIN + "index.php";
+			$.getJSON(URL, params, function(data) {
+				if(data !== null && data !== undefined && data !== '') {
+					if(data.error !== '' && data.error !== null && data.error !== undefined && data.error.code == 0)
+					{
+						customStorage.addToStorage('userid', data.userid);
+						if(obj !== undefined && $(obj).hasClass('iconWishlist'))
+						{
+							addToWishList();
+						}
+						else
+						{
+							setTimeout(function () {
+								initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
+							},100);
+							var pos=$('.prdInfo').offset().top-100;
+							setTimeout(function(){
+								$('#vDetails').removeClass('vTransit');
+								$('#vDetails').removeClass('dn');
+								$('body').animate({scrollTop: pos}, 300);
+							},200);
+						}
+					}
+				}
+			});
+		}
+	}
+	else
+	{
+		if(obj !== undefined && $(obj).hasClass('iconWishlist'))
+		{
+			addToWishList();
+		}
+		else
+		{
+			setTimeout(function () {
+				initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
+			},100);
+
+			var pos=$('.prdInfo').offset().top-100;
+			setTimeout(function(){
+				$('#vDetails').removeClass('vTransit');
+				$('#vDetails').removeClass('dn');
+				$('body').animate({scrollTop: pos}, 300);
+			},200);
+		}
+	}
+
+	/*var params = 'action=ajx&case=vendor&productid='+pid;
 	var URL = DOMAIN + "index.php";
 	$.getJSON(URL, params, function(data) {
 		if(data.results.vendor_details) {
@@ -238,20 +334,12 @@ function showVendorDetails(){
 					vhtml += '</div>';
 					
 					$('#vDetails').html(vhtml);
-					setTimeout(function () {
-						initMap(dt.latitude*1,dt.longitude*1,dt.fulladdress);
-					},1000);
+					
 				}
 				j++;
 			});
 		}
-	});
-    var pos=$('.prdInfo').offset().top-100;
-    setTimeout(function(){
-        $('#vDetails').removeClass('vTransit');
-		$('#vDetails').removeClass('dn');
-        $('body').animate({scrollTop: pos}, 300);
-    },50);
+	});*/
 }
 
 function initMap(lat,lng,contentString) {
@@ -285,3 +373,21 @@ $('#galleryClose2').click(function(){
  $('#moreimg').click(function(){
     $('#imgvendorGallery').removeClass('dn');
  });
+
+
+function addToWishList()
+{
+	var userid = customStorage.readFromStorage('userid');
+	var params = 'action=ajx&case=addToWishList&userid='+userid+'&vid='+vendor_id+'&prdid='+pid;
+	var URL = DOMAIN + "index.php";
+
+	$.getJSON(URL, params, function(data) {
+		if(data !== null && data !== undefined && data !== '' && data !== 'null' && data !== 'undefined' && typeof data !== 'undefined')
+		{
+			if(data.error !== '' && data.error !== null && data.error !== undefined && data.error !== 'undefined' && typeof data.error !== 'undefined' && data.error.Code == 0)
+			{
+				customStorage.toast(0, 'Added to wishlist');
+			}
+		}
+	});
+}
