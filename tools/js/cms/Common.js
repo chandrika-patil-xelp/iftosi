@@ -2,7 +2,7 @@ var common = new Common();
 function Common() {
     var _this = this;
     this.APIWebPath = function () {
-        return 'http://beta.xelpmoc.in/iftosi/apis/';
+        return DOMAIN + 'apis/';
     };
     this.eSubmit = function (evt, btnId) {
         var charCode = (evt.which) ? evt.which : evt.keyCode;
