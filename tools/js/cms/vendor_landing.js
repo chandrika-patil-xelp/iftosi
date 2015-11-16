@@ -308,7 +308,7 @@ function generateDiamondList(obj) {
     str += '</div>';
     str += '<div class="barcode fLeft">';
     str += '<span class="upSpan">' + obj['barcode'] + '</span>';
-    str += '<span class="lwSpan"><a href="http://localhost/iftosi//gia-round-clarity-IF/pid-'+ obj['id'] +'">View Details</a></span>';
+    str += '<span class="lwSpan"><a href="http://localhost/iftosi//gia-round-clarity-IF/did-'+ obj['id'] +'">View Details</a></span>';
     str += '</div>';
     str += '<div class="shape fLeft">' + obj['shape'] + '</div>';
     str += '<div class="color fLeft">' + obj['color'] + '</div>';

@@ -145,7 +145,7 @@ function getResultsData(data,sortby,showtree)
 		
 		if(pageName == 'diamonds') {
 			$.each(data.results.products, function(i, vl) {
-				html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/pid-'+vl.pid+'">';
+				html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/did-'+vl.pid+'">';
 					html += '<div class="prdComm fLeft" style="opacity: 0; transform: translateX(1500px);">';
 						html += '<div class="prdCommDiv fLeft">';
 							html += '<div class="prdShape fLeft">';
