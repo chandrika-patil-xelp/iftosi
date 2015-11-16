@@ -1,6 +1,6 @@
 <div class="prdResults fRight">
     <div class='prdSearchDiv fLeft'>
-        <div class="formTitle fLeft fmOpenR m0">2050 jewellery listed</div>
+        <div class="formTitle fLeft fmOpenR m0"><span id="totalJewells">0</span> jewellery listed</div>
         <a href='<?php echo DOMAIN?>index.php?case=jewellery_Form'><div class="addPrdBtn fRight poR ripplelink">Add Jewellery</div></a>
         <input type="text" class="prdSeachTxt fRight fmOpenR" placeholder=" Search your Product">
         <div class="vFilBtn fRight poR ripplelink"></div>
@@ -15,9 +15,8 @@
         <div class="price fLeft">Price</div>
         <div class="acct fLeft">Action</div>
     </div>
-    <ul class='prdul fLeft fmOpenR'>
-        <?php for ($i = 1; $i < 15; $i++) { ?>
-            <li>
+    <ul class='prdul fLeft fmOpenR' id="JewellList">
+            <!--<li>
                 <div class="date fLeft"> 
                     <span class="upSpan">20/10/2015</span>
                     <span class="lwSpan">8:10 Pm</span>
@@ -38,7 +37,6 @@
                         <div class="soldBtn poR ripplelink fmOpenR">SOLD</div>
                     </center>
                 </div>
-            </li>
-        <?php } ?>
+            </li>-->
     </ul>
 </div>

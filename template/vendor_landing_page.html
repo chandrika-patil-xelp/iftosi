@@ -150,8 +150,14 @@
     var diamondPage=1;
     $(window).scroll(function () {        	
         if ($(window).scrollTop() == ( $(document).height() - $(window).height())) {
-            if(loadDiamont) {
+            if(active=='diamondFheader' && loadDiamont) {
                 loadDiamonts();
+            }
+            if(active=='jewelleryFheader' && loadJewel) {
+                loadJewels();
+            }
+            if(active=='bullionFheader' && loadBullion) {
+                loadBullions();
             }
         }
     });
@@ -165,6 +171,7 @@
         var obj = jQuery.parseJSON(res);
         if(obj['results']!='') {
             var total = obj['results']['total_products'];
+            $('#totalDiamonds').text(total);
             var total_pages = obj['results']['total_pages'];
             var len = obj['results']['products'].length;
             var i = 0;
@@ -180,31 +187,144 @@
         }
     }
     function generateDiamondList(obj) {
-        var str='<li>';
-            str +='<div class="date fLeft"> ';
-                str +='<span class="upSpan">20/10/2015</span>';
-                str +='<span class="lwSpan">8:10 Pm</span>';
-            str +='</div>';
-            str +='<div class="barcode fLeft">';
-                str +='<span class="upSpan">'+ obj['barcode'] +'</span>';
-                str +='<span class="lwSpan"><a href="http://localhost/iftosi//gia-round-clarity-IF/pid-10000">View Details</a></span>';
-            str +='</div>';
-            str +='<div class="shape fLeft">'+ obj['shape'] +'</div>';
-            str +='<div class="color fLeft">'+ obj['color'] +'</div>';
-            str +='<div class="carats fLeft">'+ obj['carat'] +'</div>';
-            str +='<div class="clarity fLeft">'+ obj['clarity'] +'</div>';
-            str +='<div class="cert fLeft">'+ obj['cert'] +'</div>';
-            str +='<div class="price fLeft fmOpenB">&#8377;'+ obj['price'] +'</div>';
-            str +='<div class="acct fLeft">';
-                str +='<center>';
-                    str +='<div class="deltBtn poR ripplelink"></div>';
-                    str +='<div class="editBtn poR ripplelink"></div>';
-                    str +='<div class="soldBtn poR ripplelink fmOpenR">SOLD</div>';
-                str +='</center>';
-            str +='</div>';
-        str +='</li>';
-    str +='';
-    return str;
+            var date=obj['update_time'].split(' ');
+            var str='<li>';
+                str +='<div class="date fLeft"> ';
+                    str +='<span class="upSpan">'+ date[0] +'</span>';
+                    str +='<span class="lwSpan">'+ date[1] +'</span>';
+                str +='</div>';
+                str +='<div class="barcode fLeft">';
+                    str +='<span class="upSpan">'+ obj['barcode'] +'</span>';
+                    str +='<span class="lwSpan"><a href="http://localhost/iftosi//gia-round-clarity-IF/pid-10000">View Details</a></span>';
+                str +='</div>';
+                str +='<div class="shape fLeft">'+ obj['shape'] +'</div>';
+                str +='<div class="color fLeft">'+ obj['color'] +'</div>';
+                str +='<div class="carats fLeft">'+ obj['carat'] +'</div>';
+                str +='<div class="clarity fLeft">'+ obj['clarity'] +'</div>';
+                str +='<div class="cert fLeft">'+ obj['cert'] +'</div>';
+                str +='<div class="price fLeft fmOpenB">&#8377;'+ obj['price'] +'</div>';
+                str +='<div class="acct fLeft">';
+                    str +='<center>';
+                        str +='<div class="deltBtn poR ripplelink"></div>';
+                        str +='<div class="editBtn poR ripplelink"></div>';
+                        str +='<div class="soldBtn poR ripplelink fmOpenR">SOLD</div>';
+                    str +='</center>';
+                str +='</div>';
+            str +='</li>';
+        str +='';
+        return str;
+    }
+    
+    var loadJewel = true;
+    var jewellPage=1;
+    
+    loadJewels();
+    function loadJewels() {
+        $.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=2&page="+ jewellPage +"&limit=15&catid=10001", success: function (result) {
+            loadJewellCallback(result);
+        }});
+    }
+    function loadJewellCallback(res) {
+        var obj = jQuery.parseJSON(res);
+        if(obj['results']!='') {
+            var total = obj['results']['total_products'];
+            $('#totalJewells').text(total);
+            var total_pages = obj['results']['total_pages'];
+            var len = obj['results']['products'].length;
+            var i = 0;
+            var str = '';
+            while(i<len) {
+                str += generateJewellList(obj['results']['products'][i]);
+                i++;
+            }
+            $('#JewellList').append(str);
+            jewellPage++;
+        } else {
+            loadJewel = false;
+        }
+    }
+    function generateJewellList(obj) {
+            var date=obj['update_time'].split(' ');
+            var str='<li>';
+                str +='<div class="date fLeft"> ';
+                    str +='<span class="upSpan">'+ date[0] +'</span>';
+                    str +='<span class="lwSpan">8:10 Pm</span>';
+                str +='</div>';
+                str +='<div class="barcode fLeft">';
+                    str +='<span class="upSpan">'+ obj['barcode'] +'</span>';
+                    str +='<span class="lwSpan"><a href="http://localhost/iftosi//gia-round-clarity-IF/pid-10000">View Details</a></span>';
+                str +='</div>';
+                str +='<div class="degno fLeft">'+ obj['lotref'] +'</div>';
+                str +='<div class="metal fLeft">'+ obj['metal'].split('~')[0] +'</div>';
+                str +='<div class="catg fLeft">'+ obj['category'][1]['cat_name'] +'</div>';
+                str +='<div class="subType fLeft">'+ obj['category'][0]['cat_name'] +'</div>';
+                str +='<div class="price fLeft fmOpenB">&#8377;'+ obj['price'] +'</div>';
+                str +='<div class="acct fLeft">';
+                    str +='<center>';
+                        str +='<div class="deltBtn poR ripplelink"></div>';
+                        str +='<div class="editBtn poR ripplelink"></div>';
+                        str +='<div class="soldBtn poR ripplelink fmOpenR">SOLD</div>';
+                    str +='</center>';
+                str +='</div>';
+            str +='</li>';
+        str +='';
+        return str;
+    }
+    
+    var loadBullion = true;
+    var bullionPage=1;
+    
+    loadBullions();
+    function loadBullions() {
+        $.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=2&page="+ bullionPage +"&limit=15&catid=10002", success: function (result) {
+            loadBullionsCallback(result);
+        }});
+    }
+    function loadBullionsCallback(res) {
+        var obj = jQuery.parseJSON(res);
+        if(obj['results']!='') {
+            var total = obj['results']['total_products'];
+            $('#totalBullions').text(total);
+            var total_pages = obj['results']['total_pages'];
+            var len = obj['results']['products'].length;
+            var i = 0;
+            var str = '';
+            while(i<len) {
+                str += generatBullionsList(obj['results']['products'][i]);
+                i++;
+            }
+            $('#bullionsList').append(str);
+            bullionPage++;
+        } else {
+            loadBullion = false;
+        }
+    }
+    function generatBullionsList(obj) {
+            var date=obj['update_time'].split(' ');
+            var str='<li>';
+                str +='<div class="date fLeft"> ';
+                    str +='<span class="upSpan">'+ date[0] +'</span>';
+                    str +='<span class="lwSpan">8:10 Pm</span>';
+                str +='</div>';
+                str +='<div class="barcode fLeft">';
+                    str +='<span class="upSpan">'+ obj['barcode'] +'</span>';
+                    str +='<span class="lwSpan"><a href="http://localhost/iftosi//gia-round-clarity-IF/pid-10000">View Details</a></span>';
+                str +='</div>';
+                str +='<div class="btype fLeft">'+ obj['type'] +'</div>';
+                str +='<div class="metal fLeft">'+ obj['metal'].split('~')[0] +'</div>';
+                str +='<div class="purity fLeft">'+ obj['gold_purity'] +'</div>';
+                str +='<div class="weight fLeft">'+ obj['gold_weight'] +'</div>';
+                str +='<div class="price fLeft fmOpenB">&#8377;'+ obj['price'] +'</div>';
+                str +='<div class="acct fLeft">';
+                    str +='<center>';
+                        str +='<div class="deltBtn poR ripplelink"></div>';
+                        str +='<div class="editBtn poR ripplelink"></div>';
+                        str +='<div class="soldBtn poR ripplelink fmOpenR">SOLD</div>';
+                    str +='</center>';
+                str +='</div>';
+            str +='</li>';
+        str +='';
+        return str;
     }
 </script>
 

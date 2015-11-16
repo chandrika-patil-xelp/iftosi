@@ -376,23 +376,73 @@ class vendor extends DB
         $catid = ($params['catid'] ? $params['catid'] : 10000);
         $limit = ($params['limit'] ? $params['limit'] : 15);
         $total_pages = $chkcnt = $total_products = 0;
-
-        $sql = "select a.product_id AS id, a.vendor_price AS price, c.barcode, c.date_time, d.color, d.carat, d.shape, d.certified AS cert, d.clarity from tbl_vendor_product_mapping as a, tbl_product_category_mapping as b, tbl_product_master as c, tbl_product_search as d where a.product_id=b.product_id and b.product_id=c.product_id and c.product_id=d.product_id and b.category_id=" . $catid . " and a.vendor_id=" . $params['vid'] . " order by a.product_id asc ";
+        
+       // $cate_ids=  $this->getSubCat($catid);
+        $psql='';
+        if($catid == 10000) {
+            $psql='d.color, d.carat, d.shape, d.certified AS cert, d.clarity';
+        } else if($catid == 10001) {
+            $psql='d.metal,c.lotref';
+        } else if($catid == 10002) {
+            $psql='d.type, d.metal, d.gold_purity, d.gold_weight';
+        }
+        $sql = "select
+                                    DISTINCT a.product_id 
+                AS id, 
+                                    a.vendor_price 
+                AS price, 
+                                    c.barcode,
+                                    c.update_time,
+                                    ".$psql."
+                FROM
+                                    tbl_vendor_product_mapping
+                AS a,
+                                    tbl_product_category_mapping
+                AS b, 
+                                    tbl_product_master
+                AS c,
+                                    tbl_product_search
+                AS d 
+                where
+                                    a.product_id=b.product_id 
+                AND 
+                                    b.product_id=c.product_id
+                AND 
+                                    c.product_id=d.product_id
+                AND 
+                                    b.category_id = " . $catid . "
+                AND 
+                                    a.vendor_id=" . $params['vid'] . " 
+                ORDER BY 
+                                    a.product_id
+                asc ";
         $res = $this->query($sql);
         $total_products = $this->numRows($res);
         
         if (!empty($params['page'])) {
             $start = ($page * $limit) - $limit;
-            $total_pages = $total_products/$limit;
+            $total_pages = ceil($total_products/$limit);
             $sql.=" LIMIT " . $start . ",$limit";
             $res = $this->query($sql);
             $chkcnt = $this->numRows($res);
         }
         //echo $sql;
         if ($chkcnt > 0) {
-            while ($row = $this->fetchData($res)) {
-                $arr1[] = $row;
+            while ($row = $this->fetchData($res)) {        
+                if ($catid == 10001) {
+                    $csql="SELECT p_catid,cat_name FROM tbl_category_master WHERE catid in (SELECT category_id FROM `tbl_product_category_mapping` WHERE `product_id`=".$row['id']." ) ORDER BY p_catid DESC";
+                    $cres = $this->query($csql);
+                    if($this->numRows($cres)>0) {
+                        $row1=array();
+                        while ($crow = $this->fetchData($cres)) {
+                            array_push($row1, $crow);
+                        }
+                        $row['category']=$row1;
+                    }
+                }
+                $arr1[] = $row;    
             }
+
             $arr = array('total_products' => $total_products, 'total_pages' => $total_pages, 'products' => $arr1);
             $err = array('Code' => 0, 'Msg' => 'Details fetched successfully');
         } else {
@@ -402,5 +452,21 @@ class vendor extends DB
         $result = array('results' => $arr, 'error' => $err);
         return $result;
     }
+    
+    
+    private function getSubCat($catid, $catarr = array()) {
+        $sql = "SELECT p_catid, catid FROM tbl_category_master where p_catid in (" . $catid . ") order by catid ASC";
+        
+        $res = $this->query($sql);
+        if ($res) {
+            while ($row = $this->fetchData($res)) {
+                if ($row['p_catid'] != 0) {
+                    $catid .= ','.$this->getSubCat($row['catid']);
+                }
+            }
+        }
+        return $catid;
+    }
+
 }
 ?>

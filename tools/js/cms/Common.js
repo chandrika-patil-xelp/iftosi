@@ -2,7 +2,7 @@ var common=new Common();
 function Common(){
     var _this=this;
     this.APIWebPath = function () {
-        return 'http://localhost/iftosi/apis/';
+        return 'http://beta.xelpmoc.in/iftosi/apis/';
     };
     this.eSubmit = function (evt, btnId) {
         var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -199,4 +199,22 @@ function Common(){
         }
         
     };
+    
+    this.formatDate = function (date,type) {
+        var sDate=date.split('-');
+        var year = sDate[0];
+        var day = sDate[2];
+        var month = sDate[1]-1;
+        var monthList = new Array('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
+        var dateFormat = '';
+        if(type==1) {  // 01/01/2015
+            dateFormat = day+'/'+month+'/'+year;
+        } else if(type==2) {  // 01 Jan, 2015
+            dateFormat = day+' '+monthList[month]+', '+year;
+        } else if(type==2) {  // 01 Jan, 2015
+            dateFormat = day+' '+monthList[month]+', '+year;
+        }
+        return dateFormat;
+    };
+    
 }
