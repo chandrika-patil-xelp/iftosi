@@ -674,7 +674,7 @@ switch($action)
         case 'getPrdById':            
             include APICLUDE.'class.product.php';
             $prdid=(!empty($params['prdid'])) ? trim($params['prdid']):'';
-            $catid=(!empty($params['prdid'])) ? trim($params['prdid']):'';
+            $catid=(!empty($params['prdid'])) ? trim($params['catid']):'';
             if(empty($prdid) && empty($catid))
             {
             $arr=array();

@@ -239,7 +239,7 @@
                                         }
                                         if(!empty($catid) && !empty($pid))
                                         {
-                                            $url   = APIDOMAIN.'index.php?action=getPrdById&category_id='.$catid.'&prdid='.$pid;
+                                            $url   = APIDOMAIN.'index.php?action=getPrdById&catid='.$catid.'&prdid='.$pid;
                                             $res   = $comm->executeCurl($url);
                                             $result  = $res['results'];
                                         }
