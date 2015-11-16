@@ -124,7 +124,7 @@ function submitForm(formid)
                 submitForm('jwAddForm');
                 return  true;
             }
-            alert(str);
+            common.toast(0,str);
             return false;
 }
 
@@ -225,7 +225,7 @@ function submitForm(formid)
                 submitForm('dAddForm');
                 return  true;
             }
-            alert(str);
+            common.toast(0,str);
             return false;
 }
 
@@ -274,6 +274,6 @@ function submitForm(formid)
                 submitForm('bAddForm');
                 return  true;
             }
-            alert(str);
+            common.toast(0,str);
             return false;
 }
