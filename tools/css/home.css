@@ -46,6 +46,7 @@ a{text-decoration: none;}
 .bNone{border:none!important;}
 
 .bgWhite{background: #fff;}
+.bgGray{background: #f0f0f0!important;}
 
 /*Paddings*/
 .pL25px{padding-left: 25px!important;}
@@ -271,8 +272,8 @@ a{text-decoration: none;}
 /*All Results*/
 .allResults{width:100%;height: auto;background: #fff;}
 .filterTitleDiv{width:100%;height:60px;border-bottom: 1px solid #d4d4d4;margin-bottom: 20px;}
-.fTitle{width:25%;height: 40px;line-height: 40px;padding-left: 30px;color:#4d4d4d;font-size: 25px;margin: 10px 0;background: url(../img/common/filter.svg)no-repeat;background-size: auto 70%;background-position: left 9px;}
-.rCount{width:auto;font-size: 25px;line-height: 40px;margin: 10px 0 10px 1%;color:#4d4d4d;}
+.fTitle{width:25%;height: 40px;line-height: 40px;padding-left: 30px;color:#4d4d4d;font-size: 16px;margin: 10px 0;background: url(../img/common/filter.svg)no-repeat;background-size: auto 70%;background-position: left 9px;}
+.rCount{width:auto;font-size: 25px;line-height: 40px;margin: 10px 0 10px 1%;color:#4d4d4d;text-transform: lowercase;}
 
 /*Sorting Box*/
 .sTitle {width: auto;height: 40px;line-height: 40px;font-size: 16px;color: #4d4d4d;margin: 10px;}
@@ -410,6 +411,9 @@ a{text-decoration: none;}
 .jwRes .prdPrice{height:30px;line-height: 30px;margin-bottom: 10px;}
 .jwRes .prdDetails{border:none;padding: 0}
 .jwRes .prdPrice .detComm{height:30px;line-height: 30px;}
+
+.coinIc{position: absolute;top: -7px;right: -15px;width: 70px;height: 50px;background-image: url(../img/coinIcon.svg);background-repeat: no-repeat;background-size:auto 100%;}
+.barIc{position: absolute;top: -7px;right: -15px;width: 70px;height: 50px;background-image: url(../img/barIcon.svg);background-repeat: no-repeat;background-size:auto 100%;}
 
 
 /*Filters */

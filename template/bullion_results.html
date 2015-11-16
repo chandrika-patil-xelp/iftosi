@@ -70,14 +70,20 @@
                         <?php include 'filters.html'; ?>
                         <div class='prdResults fRight'>
                             <?php foreach($data as $key=>$val) { ?>
-                                <div class='prdComm fLeft jwRes' style="opacity: 0; transform: translateX(1000px);">
+                                <div class='prdComm fLeft' style="opacity: 0; transform: translateX(1000px);">
                                     <div class='prdCommDiv fLeft transition100'>
-                                        <div class="prdCommImg fLeft">
-                                            <div class="proxImg fLeft" style="background: #fff url(tools/img/product1/b1.jpg)no-repeat;background-size: contain;background-position:center"></div>
+                                        <div class="prdShape fLeft">
+                                            <div class="prdShTitle fLeft fmOpenB">TYPE</div>
+                                            <div class="prdShType fLeft fmOpenR">Coin</div>
+                                            <div class="coinIc fRight"></div>
                                         </div>
                                         <div class="prdDetails fLeft">
                                             <div class="detComm">
-                                                <div class="detLabel fmOpenB fLeft">DESIGN NO.</div>
+                                                <div class="detLabel fmOpenB fLeft">METAL</div>
+                                                <div class="detValue fmOpenR fLeft"><?php echo "Gold";?></div>
+                                            </div>
+                                            <div class="detComm">
+                                                <div class="detLabel fmOpenB fLeft">WEIGHT</div>
                                                 <div class="detValue fmOpenR fLeft"><?php echo $val['pcode'];?></div>
                                             </div>
                                         </div>
