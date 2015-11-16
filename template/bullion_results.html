@@ -25,9 +25,26 @@
                         </div><div  id='gCoin' class="jshapeComm transition300 ripplelink gCoin">Gold Coin
                         </div><div  id='sCoin' class="jshapeComm transition300 ripplelink sCoin">Silver Coin
                         </div>-->
-                        <div id='gCoin' class="jshapeComm transition300 ripplelink gCoins">Coins
-                        </div><div  id='gbar' class="jshapeComm transition300 ripplelink gBars">Bars
-                        </div>
+						<?
+						if(count($fil))
+						{
+							foreach ($fil as $key => $val) 
+							{
+								if($val['attribute_name'] == 'type')
+								{
+									$filval = explode(",", $val['attribute_values']);
+									$html = '';
+									foreach ($filval as $ky => $vl) 
+									{
+										$html .= "<div id='g".$vl."' class='jshapeComm transition300 ripplelink g".$vl."'>".$vl."</div>";
+									}
+									echo $html;
+									unset($fil[$key]);
+								}
+							}
+						}
+						?>
+                        
                     </center>
                 </div>
             </div>

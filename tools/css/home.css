@@ -59,7 +59,7 @@ a{text-decoration: none;}
 .transition300 {transition: 300ms ease-in-out;-moz-transition: 300ms ease-in-out;-ms-transition: 300ms ease-in-out;-webkit-transition: 300ms ease-in-out;-o-transition: 300ms ease-in-out;}
 .transition3000 {transition: 200ms ease-in-out;-moz-transition: 200ms ease-in-out;-ms-transition: 200ms ease-in-out;-webkit-transition: 200ms ease-in-out;-o-transition: 200ms ease-in-out;}
 
-.container{width:100%;height:auto;background: #ebebde;padding-bottom: 50px}
+.container{width:100%;height:auto;background: #ebebde;padding-bottom: 0px}
 .wrapper{width:100%;height:auto;}
 .wrapperMax{width:100%;max-width: 1200px;height:100%;margin: auto;}
 
