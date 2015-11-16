@@ -22,7 +22,6 @@
                                                     else if(($val['catname']=="Pendents")||($val['catname']=="Necklaces"))
                                                     {
                                                         echo "<div id='".$val['catname']."' class='jshapeComm transition300 ripplelink ".ucwords(strtolower(substr($val['catname'],0,-1)))."'>".$val['catname']."</div>";   
-                                                    
                                                     }
                                                     else
                                                     {
@@ -55,8 +54,8 @@
                                                         {   
 ?>
                                                             <div class="checkDiv fLeft">
-                                                            <input type="checkbox" name='subcat_type' class="filled-in" value="<?=$val['subcatid'];?>" id="<?php echo(str_replace(' ','_',$val['subcatname']));?>" <?=($attr['type'] == $val['subcatname']) ? 'checked' : '';?> /> 
-                                                            <label for="<?=str_replace(' ','_',$val['subcatname']);?>"><?php echo $val['subcatname'];?></label>
+                                                            <input type="checkbox" name='<?=$val['subcatid'];?>' class="filled-in" value="<?=$val['subcatid'];?>" id="<?=$val['subcatid'];?>" <?=($attr['type'] == $val['subcatname']) ? 'checked' : '';?> /> 
+                                                            <label for="<?=$val['subcatid'];?>"><?php echo $val['subcatname'];?></label>
                                                         </div>
 <?php
                                                         }
@@ -76,8 +75,8 @@
                                                 {
 ?>                            
                                                     <div class="checkDiv fLeft">
-                                                    <input type="checkbox" name='subcat_Type' class="filled-in"  value="<?=$val['subcatid'];?>" id="<?php echo(str_replace(' ','_',$val['subcatname']));?>" <?=($attr['type'] == $val['subcatname']) ? 'checked' : '';?> />
-                                                    <label for="<?php echo str_replace(' ','_',$val['subcatname']);?>"><?php echo $val['subcatname'];?></label>
+                                                    <input type="checkbox" name='<?=$val['subcatid'];?>' class="filled-in"  value="<?=$val['subcatid'];?>" id="<?=$val['subcatid'];?>" <?=($attr['type'] == $val['subcatname']) ? 'checked' : '';?> />
+                                                    <label for="<?=$val['subcatid'];?>"><?php echo $val['subcatname'];?></label>
                                                     </div>
 <?php
                                                 }
@@ -184,7 +183,8 @@
 <?php                                             
                     }
                 }
-*/?>
+*/
+?>
  
                   <!--  <div class="divCon  fLeft fmOpenR subCatType dn" id="earringsType">
                         <div  class="titleDiv txtCap fLeft">Earrings Type</div>
@@ -266,8 +266,6 @@
                         </div>
                     </div>
                     -->
-
-
                     <!--
                             <div class="checkDiv fLeft">
                                 <input type="radio" name='bracelet' class="filled-in" id="Party_Wear">
