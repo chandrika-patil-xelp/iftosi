@@ -26,8 +26,9 @@
                                     $shapename=ucwords(strtolower(substr($shape,0,-1)));
                                     $i++;
                                     $idtemp=$typeid.$shapename;
-                                    
-                                  echo "<div id='".$idtemp."' class='jshapeComm transition300 ripplelink SubCaTtype ".$idtemp."'>".$shapename."</div>"; }}}?>
+                                    $type=$result[$pid]['attr_details']['type'];
+                                    $check=($shapename==$type) ? 'shapeSelected' :'';
+                                  echo "<div id='".$idtemp."' class='jshapeComm transition300 ripplelink SubCaTtype ".$check." ".$idtemp."'>".$shapename."</div>"; }}}?>
                                 </center>
                             </div>
                         </div>                                        
