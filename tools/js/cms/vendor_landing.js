@@ -94,6 +94,7 @@ $(document).ready(function () {
         $('.jshapeComm').each(function () {
             if ($(this).hasClass('shapeSelected') && $(this).attr('id') != uthis.attr('id'))
                 $(this).removeClass('shapeSelected');
+                $("input[type=checkbox]").prop("checked", false);
         });
         $(this).toggleClass('shapeSelected');
         if ($(this).hasClass('shapeSelected'))
