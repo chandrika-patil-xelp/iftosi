@@ -47,11 +47,11 @@ function submitForm(formid)
     //var JsonString = JSON.stringify(values);
     if((pid!==null)&&(pid!==undefined)&&(pid!==''))
     {
-    var params = 'action=addNewproduct&category_id='+catid+'&dt='+data;
+    var params = 'action=addNewproduct&category_id='+catid+'&dt='+data+'&prdid='+pid;
     }
     else
     {
-    var params = 'action=addNewproduct&category_id='+catid+'&dt='+data+'&prdid='+pid;
+    var params = 'action=addNewproduct&category_id='+catid+'&dt='+data;
     }
     var URL = DOMAIN+"apis/index.php";
 
@@ -66,7 +66,7 @@ function submitForm(formid)
             var color =  $('input[name=color]:checked').val();
             var certificate =  $('input[name=Certficate]:checked').val();
             var clarity = $("input[name='clarity']:checked").val();
-            var subcat = $("input[name='subcat_type']").is(':checked');
+            var subcat = $("input[type='checkbox']").is(':checked');
             var purity = $('#goldpurity').val();
             var dweight = $('#diamondweight').val();
             var goldweight=$('#goldweight').val();
