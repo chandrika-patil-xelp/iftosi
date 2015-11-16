@@ -308,7 +308,7 @@ function generateDiamondList(obj) {
     str += '</div>';
     str += '<div class="barcode fLeft">';
     str += '<span class="upSpan">' + obj['barcode'] + '</span>';
-    str += '<span class="lwSpan"><a href="http://localhost/iftosi//gia-round-clarity-IF/pid-10000">View Details</a></span>';
+    str += '<span class="lwSpan"><a href="http://localhost/iftosi//gia-round-clarity-IF/pid-'+ obj['id'] +'">View Details</a></span>';
     str += '</div>';
     str += '<div class="shape fLeft">' + obj['shape'] + '</div>';
     str += '<div class="color fLeft">' + obj['color'] + '</div>';
@@ -319,7 +319,7 @@ function generateDiamondList(obj) {
     str += '<div class="acct fLeft">';
     str += '<center>';
     str += '<div class="deltBtn poR ripplelink"></div>';
-    str += '<div class="editBtn poR ripplelink"></div>';
+    str += '<a href="http://localhost/iftosi/index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'"><div class="editBtn poR ripplelink"></div></a>';
     str += '<div class="soldBtn poR ripplelink fmOpenR">SOLD</div>';
     str += '</center>';
     str += '</div>';
@@ -361,11 +361,11 @@ function generateJewellList(obj) {
     var str = '<li>';
     str += '<div class="date fLeft"> ';
     str += '<span class="upSpan">' + date[0] + '</span>';
-    str += '<span class="lwSpan">8:10 Pm</span>';
+    str += '<span class="lwSpan">'+ date[1] +'</span>';
     str += '</div>';
     str += '<div class="barcode fLeft">';
     str += '<span class="upSpan">' + obj['barcode'] + '</span>';
-    str += '<span class="lwSpan"><a href="http://localhost/iftosi//gia-round-clarity-IF/pid-10000">View Details</a></span>';
+    str += '<span class="lwSpan"><a href="http://localhost/iftosi//gia-round-clarity-IF/jid-'+ obj['id'] +'">View Details</a></span>';
     str += '</div>';
     str += '<div class="degno fLeft">' + obj['lotref'] + '</div>';
     str += '<div class="metal fLeft">' + obj['metal'].split('~')[0] + '</div>';
@@ -375,7 +375,7 @@ function generateJewellList(obj) {
     str += '<div class="acct fLeft">';
     str += '<center>';
     str += '<div class="deltBtn poR ripplelink"></div>';
-    str += '<div class="editBtn poR ripplelink"></div>';
+    str += '<a href="http://localhost/iftosi/index.php?case=jewellery_Form&catid=10001&prdid='+ obj['id'] +'"><div class="editBtn poR ripplelink"></div></a>';
     str += '<div class="soldBtn poR ripplelink fmOpenR">SOLD</div>';
     str += '</center>';
     str += '</div>';
@@ -417,11 +417,11 @@ function generatBullionsList(obj) {
     var str = '<li>';
     str += '<div class="date fLeft"> ';
     str += '<span class="upSpan">' + date[0] + '</span>';
-    str += '<span class="lwSpan">8:10 Pm</span>';
+    str += '<span class="lwSpan">'+ date[1] +'</span>';
     str += '</div>';
     str += '<div class="barcode fLeft">';
     str += '<span class="upSpan">' + obj['barcode'] + '</span>';
-    str += '<span class="lwSpan"><a href="http://localhost/iftosi//gia-round-clarity-IF/pid-10000">View Details</a></span>';
+    str += '<span class="lwSpan"><a href="http://localhost/iftosi//gia-round-clarity-IF/bid-'+ obj['id'] +'">View Details</a></span>';
     str += '</div>';
     str += '<div class="btype fLeft">' + obj['type'] + '</div>';
     str += '<div class="metal fLeft">' + obj['metal'].split('~')[0] + '</div>';
@@ -431,7 +431,7 @@ function generatBullionsList(obj) {
     str += '<div class="acct fLeft">';
     str += '<center>';
     str += '<div class="deltBtn poR ripplelink"></div>';
-    str += '<div class="editBtn poR ripplelink"></div>';
+    str += '<a href="http://localhost/iftosi/index.php?case=bullion_Form&catid=10002&prdid='+ obj['id'] +'"><div class="editBtn poR ripplelink"></div></a>';
     str += '<div class="soldBtn poR ripplelink fmOpenR">SOLD</div>';
     str += '</center>';
     str += '</div>';
