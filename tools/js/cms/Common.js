@@ -1,8 +1,8 @@
-var common=new Common();
-function Common(){
-    var _this=this;
+var common = new Common();
+function Common() {
+    var _this = this;
     this.APIWebPath = function () {
-        return 'http://beta.xelpmoc.in/iftosi/apis/';
+        return 'http://localhost/iftosi/apis/';
     };
     this.eSubmit = function (evt, btnId) {
         var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -15,23 +15,23 @@ function Common(){
         if (charCode > 31 && (charCode < 48 || charCode > 57)) {
             return false;
         }
-		else if (charCode == 13) {
+        else if (charCode == 13) {
             return false;
         }
         return true;
     };
-	this.avoidEnter = function (evt) {
-		var charCode = (evt.which) ? evt.which : evt.keyCode;
-		if (charCode == 13) {
+    this.avoidEnter = function (evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode == 13) {
             return false;
         }
-	};
+    };
     this.isDecimalKey = function (evt) {
         var charCode = (evt.which) ? evt.which : evt.keyCode;
         if (charCode == 46) {
             return true;
         }
-		else if (charCode == 13) {
+        else if (charCode == 13) {
             return false;
         }
         else if (charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -50,13 +50,13 @@ function Common(){
         }
         return false;
     };
-    this.getLandlineNo=function(){
-        var landlineNos="";
-        $('.txtCCode').each(function(){
-            var val=$(this).val();
-            if(val!==""){
-                var ln=$(this).siblings('.lnNo').val();
-                if(landlineNos == '')
+    this.getLandlineNo = function () {
+        var landlineNos = "";
+        $('.txtCCode').each(function () {
+            var val = $(this).val();
+            if (val !== "") {
+                var ln = $(this).siblings('.lnNo').val();
+                if (landlineNos == '')
                 {
                     landlineNos += val + '-' + ln;
                 }
@@ -66,100 +66,100 @@ function Common(){
                 }
             }
         });
-       return landlineNos;
+        return landlineNos;
     };
 
 
-    this.checkLandline=function(stdid,landlineid){
-        var stdcode=$('#'+stdid).val();
-        var lnum=$('#'+landlineid).val();
-        var num=stdcode+lnum;
-        var len=num.length;
-        if((num.charAt(0)=='0')&& (len==11) || (num.charAt(0)!='0')&& (len==10)){
+    this.checkLandline = function (stdid, landlineid) {
+        var stdcode = $('#' + stdid).val();
+        var lnum = $('#' + landlineid).val();
+        var num = stdcode + lnum;
+        var len = num.length;
+        if ((num.charAt(0) == '0') && (len == 11) || (num.charAt(0) != '0') && (len == 10)) {
             return true;
-        }else{
+        } else {
             alert('Please enter correct lanline number.')
             return false;
         }
     }
 
 
-    _this.nCount=1;
-    this.addNumber = function() {
-        if(_this.nCount==1){
-            var flag=this.checkLandline('lnCode','landline');
-            if(flag){
+    _this.nCount = 1;
+    this.addNumber = function () {
+        if (_this.nCount == 1) {
+            var flag = this.checkLandline('lnCode', 'landline');
+            if (flag) {
                 $('#altNo' + _this.nCount).removeClass('dn');
                 _this.nCount++;
             }
-        }else{
-            var flag=this.checkLandline('lnCode'+(_this.nCount-1),'landline'+(_this.nCount-1));
-            if(flag){
+        } else {
+            var flag = this.checkLandline('lnCode' + (_this.nCount - 1), 'landline' + (_this.nCount - 1));
+            if (flag) {
                 $('#altNo' + _this.nCount).removeClass('dn');
                 _this.nCount++;
             }
         }
     };
 
-    this.delNumber = function(id) {
+    this.delNumber = function (id) {
         $('#' + id).addClass('dn');
         $('#' + id + ' input').val('');
         _this.nCount--;
     };
 
-    
-    _this.nmbCount=1;
-    this.addMobileNumber = function() {
-        if(_this.nmbCount==0){
+
+    _this.nmbCount = 1;
+    this.addMobileNumber = function () {
+        if (_this.nmbCount == 0) {
             _this.nmbCount++;
         }
-        if(_this.nmbCount==2){
+        if (_this.nmbCount == 2) {
             $('.falmb .addBtn').addClass('dn');
         }
-        if(_this.nmbCount==1){
-            var flag=this.checkMobile('conMobile');
-            if(flag){
+        if (_this.nmbCount == 1) {
+            var flag = this.checkMobile('conMobile');
+            if (flag) {
                 $('#altmbNo' + _this.nmbCount).removeClass('dn');
                 _this.nmbCount++;
             }
-        }else{
-            var flag=this.checkMobile('altmbNo'+(_this.nmbCount-1)+"_Mobile");
-            if(flag){
+        } else {
+            var flag = this.checkMobile('altmbNo' + (_this.nmbCount - 1) + "_Mobile");
+            if (flag) {
                 $('#altmbNo' + _this.nmbCount).removeClass('dn');
-                if(_this.nmbCount!==2)
-                _this.nmbCount++;
+                if (_this.nmbCount !== 2)
+                    _this.nmbCount++;
             } else {
                 $('.falmb .addBtn').removeClass('dn');
             }
         }
     };
-    
-    this.delmbNumber = function(id) {
+
+    this.delmbNumber = function (id) {
         _this.nmbCount--;
         $('.falmb .addBtn').removeClass('dn');
         $('#' + id).addClass('dn');
         $('#' + id + ' input').val('');
     };
-    
-    this.checkMobile= function(id) {
-        var num=$('#'+id).val();
-        var len=num.length;
-        if((num.charAt(0)=='9')&& (len==10) || (num.charAt(0)=='8')&& (len==10) || (num.charAt(0)=='7')&& (len==10)){
+
+    this.checkMobile = function (id) {
+        var num = $('#' + id).val();
+        var len = num.length;
+        if ((num.charAt(0) == '9') && (len == 10) || (num.charAt(0) == '8') && (len == 10) || (num.charAt(0) == '7') && (len == 10)) {
             return true;
-        }else{
+        } else {
             alert('Please enter correct mobile number.')
             return false;
         }
-        
+
     };
-    this.validateEmail= function (id) {
-        var email=$('#'+id).val();
+    this.validateEmail = function (id) {
+        var email = $('#' + id).val();
         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
     };
-    
+
     this.validateUrl = function (id) {
-        var web=$('#'+id).val();
+        var web = $('#' + id).val();
         var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
         var regex = new RegExp(expression);
         if (web.match(regex))
@@ -170,51 +170,56 @@ function Common(){
             return false;
         }
     };
-    
-    this.changeTab = function(obj){
-        var id=$(obj).attr('id');
+
+    this.changeTab = function (obj) {
+        var id = $(obj).attr('id');
         console.log(id);
-        $('#'+id).removeClass('op04');
-        switch(id){
-            case 'step1':                
+        $('#' + id).removeClass('op04');
+        switch (id) {
+            case 'step1':
                 $('#tabData2,#tabData3').addClass('dn');
                 $('#step2,#step3').addClass('op04');
                 $('#tabData1').removeClass('dn');
-                $('#disStep').css({width:33+"%"});
+                $('#disStep').css({width: 33 + "%"});
                 break;
             case 'step2':
                 $('#tabData1,#tabData3').addClass('dn');
                 $('#tabData2').removeClass('dn');
                 $('#step1,#step3').addClass('op04');
-                $('#disStep').css({width:66+"%"});
+                $('#disStep').css({width: 66 + "%"});
                 break;
             case 'step3':
                 $('#tabData1,#tabData2').addClass('dn');
                 $('#tabData3').removeClass('dn');
                 $('#step1,#step2').addClass('op04');
-                $('#disStep').css({width:100+"%"});
+                $('#disStep').css({width: 100 + "%"});
                 break;
             default :
                 break;
         }
-        
+
     };
-    
-    this.formatDate = function (date,type) {
-        var sDate=date.split('-');
+
+    this.formatDate = function (date, type) {
+        var sDate = date.split('-');
         var year = sDate[0];
         var day = sDate[2];
-        var month = sDate[1]-1;
-        var monthList = new Array('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
+        var month = sDate[1] - 1;
+        var monthList = new Array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
         var dateFormat = '';
-        if(type==1) {  // 01/01/2015
-            dateFormat = day+'/'+month+'/'+year;
-        } else if(type==2) {  // 01 Jan, 2015
-            dateFormat = day+' '+monthList[month]+', '+year;
-        } else if(type==2) {  // 01 Jan, 2015
-            dateFormat = day+' '+monthList[month]+', '+year;
+        if (type == 1) {  // 01/01/2015
+            dateFormat = day + '/' + month + '/' + year;
+        } else if (type == 2) {  // 01 Jan, 2015
+            dateFormat = day + ' ' + monthList[month] + ', ' + year;
+        } else if (type == 2) {  // 01 Jan, 2015
+            dateFormat = day + ' ' + monthList[month] + ', ' + year;
         }
         return dateFormat;
     };
-    
+
+    this.readFromStorage = function (id)
+    {
+        return 2;
+    }
+
 }
