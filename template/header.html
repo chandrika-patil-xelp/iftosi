@@ -37,12 +37,11 @@ switch ($page) {
 						if($val['cat_name'] == 'Diamonds')
 						{
 						?>
-							
-							<div id='hbgDiam' class="headCat fLeft bg<?php echo $val['cat_name'];?> transition300 <?php echo $selected;?>">
-								<a href="<?php echo DOMAIN.strtolower($val['cat_name']).'/ct-'.$val['catid'];?>">
-									<span><?php echo $val['cat_name'];?></span>
-								</a>
-							</div>
+							<a href="<?php echo DOMAIN.strtolower($val['cat_name']).'/ct-'.$val['catid'];?>">
+                                                            <div id='hbgDiam' class="headCat fLeft bg<?php echo $val['cat_name'];?> transition300 <?php echo $selected;?>">
+                                                                    <span><?php echo $val['cat_name'];?></span>
+                                                            </div>
+                                                        </a>
 							
 						<?php
 						}
@@ -50,23 +49,25 @@ switch ($page) {
 						{
 							$showcat = $val;
 						?>
+                                                    <a href="<?php echo DOMAIN.strtolower($val['cat_name']).'/ct-'.$val['catid'];?>" class="fLeft">
 							<div id='hbgJewel' class="headCat fLeft bg<?php echo $val['cat_name'];?> transition300 <?php echo $selected;?>">
-								<a href="<?php echo DOMAIN.strtolower($val['cat_name']).'/ct-'.$val['catid'];?>" class="fLeft">
+								
 								<span class="transition300"><?php echo $val['cat_name'];?></span>
-								</a>
+								
 								<?php include 'jewelleryMenu.html'; ?>
 							</div>
+                                                    </a>
 						<?php
 						}
 						else
 						{
 						?>
-							
-							<div id='hbgBull' class="headCat fLeft bg<?php echo $val['cat_name'];?> transition300 <?php echo $selected;?>">
-								<a href="<?php echo DOMAIN.strtolower($val['cat_name']).'/ct-'.$val['catid'];?>">
-									<span><?php echo $val['cat_name'];?></span>
-								</a>
-							</div>
+							<a href="<?php echo DOMAIN.strtolower($val['cat_name']).'/ct-'.$val['catid'];?>">
+                                                            <div id='hbgBull' class="headCat fLeft bg<?php echo $val['cat_name'];?> transition300 <?php echo $selected;?>">
+                                                                <span><?php echo $val['cat_name'];?></span>
+
+                                                            </div>
+                                                        </a>
 							
 						<?php
 						}
