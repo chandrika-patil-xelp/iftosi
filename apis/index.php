@@ -382,6 +382,24 @@ switch($action)
             $res=$result;
             break;    
             
+        
+//  localhost/iftosi/apis/index.php?action=viewbyPincode&code=380001              
+        case 'viewbyPincode':
+            include APICLUDE.'class.location.php';
+            $cname=(!empty($params['code'])) ? trim(urldecode($params['code'])) : '';
+            if(empty($cname))
+            {
+                $arr = array();
+                $err = array('Code' => 1, 'Msg' => 'Invalid Parameters');
+                $result = array('results' => $arr, 'error' => $err);
+                $res=$result;
+                break;
+            }
+            $obj= new location($db['iftosi']);
+            $result= $obj->viewbyPincode($params);
+            $res=$result;
+            break;    
+            
 //  localhost/iftosi/apis/index.php?action=updatecity&newcityname=Delhi&oldcityname=lahore&sname=delhi&cname=India            
         case 'updatecity':
             include APICLUDE.'class.location.php';

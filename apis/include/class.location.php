@@ -125,6 +125,29 @@ class location extends DB
         return $result;
     }
     
+    
+    public function viewbyPincode($params)
+    {
+        $vsql="SELECT area,city,state,country,latitude,longitude from tbl_area_master where pincode='".$params['code']."' LIMIT 1";
+        $vres=$this->query($vsql);
+        $cres=$this->numRows($vres);
+        if($cres>0)
+        {
+            while($row=$this->fetchData($vres))
+            {
+                $arr=$row;
+            }
+            $err=array('code'=>0,'msg'=>'Value fetched successfully');
+        }
+        else
+        {
+            $arr=array();
+            $err=array('code'=>1,'msg'=>'no records found');
+        }
+        $result=array('results'=>$arr,'error'=>$err);
+        return $result;
+    }
+    
     public function updatecity($params)
     {
         $vsql="UPDATE tbl_city_master SET country_name='".$params['cname']."',state_name='".$params['sname']."',cityname='".$params['newcityname']."' where cityname='".$params['oldcityname']."'";

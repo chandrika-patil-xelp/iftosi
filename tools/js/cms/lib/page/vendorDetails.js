@@ -1,4 +1,4 @@
-var uid = common.readFromStorage('uid');
+var uid = common.readFromStorage('userid');
 
 $(document).ready(function () {
     $('.compComm').bind('click', function (e) {
@@ -206,6 +206,9 @@ function submitForm() {
     }
     busiType = busiTypeVal.join(',');
     res['busiType'] = busiType;
+    res['country'] = country;
+    res['lng'] = lng;
+    res['lat'] = lat;
     res['uid'] = uid;
     data['result'] = res;
     data = JSON.stringify(data);
@@ -328,6 +331,27 @@ function changeTab(id) {
     var obj = document.getElementById(id);
     common.changeTab(obj);
 }
+
+var country='';
+var lng='';
+var lat='';
+$('#pincode').keyup(function () {
+    var pincode = $(this).val();
+    if(pincode.length==6) {
+        $.ajax({url: common.APIWebPath() + "index.php?action=viewbyPincode&code=" + pincode, success: function (result) {
+            var obj = jQuery.parseJSON(result);
+            var results = obj['results'];
+            if ( results!= '') {
+                $('#area').val(results['area']);
+                $('#city').val(results['city']);
+                $('#state').val(results['state']);
+                country=results['country'];
+                lat=results['latitude'];
+                lng=results['longitude'];
+            }
+        }});
+    }
+});
 
 /*    
  function ValidateNumber(val,minLen,maxLen) {
