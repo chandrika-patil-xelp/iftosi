@@ -614,7 +614,7 @@
 					{
 						$expd = explode('|~|',$val);
 						$exd = explode(';',$expd[1]);
-						if($expd[0] == 'priceRange')
+						if($expd[0] == 'priceRange' && $params['catid'] == 10000)
 						{
 							$exd[0] = $exd[0]/dollarValue;
 							$exd[1] = $exd[1]/dollarValue;
