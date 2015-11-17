@@ -1112,6 +1112,6 @@ echo '</pre>';
             
         break;
     }    
-echo json_encode($res,true);
+echo json_encode($res);
 exit;
 ?>
