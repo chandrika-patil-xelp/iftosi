@@ -116,6 +116,12 @@
 					$expd = explode("-",$val['attribute_range']);
 				else
 					$expd = explode(",",$val['attribute_range']);
+
+				if(strtolower($val['attribute_name']) == 'price' && $page == 'diamonds')
+				{
+					$expd[0] = $expd[0] * $dollarValue;
+					$expd[1] = $expd[1] * $dollarValue;
+				}
 	?>
 				<input type="hidden" id="<?php echo $val['attribute_name'];?>RangeMin" value="<?php echo $expd[0];?>">
 				<input type="hidden" id="<?php echo $val['attribute_name'];?>RangeMax" value="<?php echo $expd[1];?>">
