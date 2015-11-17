@@ -30,6 +30,8 @@ else
 }
 /*define('SMSAPI','http://alerts.sinfini.com/api/web2sms.php?workingkey=Aacffda7db60ac1a8470709273bea3bfe&to=+91_MOBILE&sender=NAFEXC&message=_MESSAGE');*/
 
+$dollarValue = 66.03;
+define('dollarValue',$dollarValue);
 
 define('FAVICON', DOMAIN . 'tools/img/common/favicon.ico');
 
@@ -94,7 +96,7 @@ $jvs['dmap'] 		= DOMAIN.'tools/js/detailsMap.js?v='.VERSION;
 
 // Custom JS End
 
-$dollarValue = 66.03;
+
 
 include INCLUDES.'class.common.php';
 $comm = new Common();

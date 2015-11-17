@@ -12,9 +12,7 @@ MySQL - 5.6.24 : Database - db_iftosi
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_iftosi` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
-USE `db_iftosi`;
 
 /*Table structure for table `tbl_attribute_category_mapping` */
 
@@ -61,7 +59,7 @@ CREATE TABLE `tbl_attribute_master` (
 
 /*Data for the table `tbl_attribute_master` */
 
-insert  into `tbl_attribute_master`(`attr_id`,`attr_name`,`attr_display_name`,`attr_type_flag`,`use_list`,`active_flag`,`date_time`,`update_time`) values (36,'shape','Shape',7,'',1,'0000-00-00 00:00:00','2015-10-13 11:13:42'),(37,'color','Colour',7,'',1,'0000-00-00 00:00:00','2015-11-07 09:56:14'),(38,'carat','Carat',6,'',1,'0000-00-00 00:00:00','2015-10-13 11:13:42'),(39,'clarity','Clarity',7,'',1,'0000-00-00 00:00:00','2015-10-13 11:13:42'),(40,'price','Price',6,'',1,'0000-00-00 00:00:00','2015-10-13 11:13:42'),(42,'polish','Polish',7,'',1,'0000-00-00 00:00:00','2015-10-14 15:30:40'),(43,'sym','Symmetry',7,'',1,'0000-00-00 00:00:00','2015-10-13 11:13:42'),(44,'combination','Combination',7,'',1,'2015-10-16 18:11:55','2015-10-16 18:11:55'),(45,'gold_purity','Purity',7,'',1,'2015-10-16 18:11:55','2015-11-06 12:57:59'),(46,'gemstone_color','Gemstone Colour',7,'',1,'2015-10-16 18:11:55','2015-11-07 09:56:23'),(48,'metal','Metal',7,'',1,'2015-10-21 10:58:02','2015-10-21 10:58:21'),(49,'gold_weight','Weight',7,'',1,'2015-10-21 10:58:02','2015-11-06 12:58:05'),(50,'bullion_design','Design',7,NULL,1,'2015-11-13 09:23:32','2015-11-06 13:00:13'),(51,'cut','Cut',7,NULL,1,'2015-11-07 06:38:26','2015-11-06 20:12:21'),(52,'fluo','Fluorescence',7,NULL,1,'2015-11-14 09:35:12','2015-11-17 14:40:46'),(53,'budget','Budget',7,NULL,1,'2015-11-14 08:36:37','2015-11-14 13:51:30');
+insert  into `tbl_attribute_master`(`attr_id`,`attr_name`,`attr_display_name`,`attr_type_flag`,`use_list`,`active_flag`,`date_time`,`update_time`) values (36,'shape','Shape',7,'',1,'0000-00-00 00:00:00','2015-10-13 11:13:42'),(37,'color','Colour',7,'',1,'0000-00-00 00:00:00','2015-11-07 09:56:14'),(38,'carat','Carat',6,'',1,'0000-00-00 00:00:00','2015-10-13 11:13:42'),(39,'clarity','Clarity',7,'',1,'0000-00-00 00:00:00','2015-10-13 11:13:42'),(40,'price','Price',6,'',1,'0000-00-00 00:00:00','2015-10-13 11:13:42'),(42,'polish','Polish',7,'',1,'0000-00-00 00:00:00','2015-10-14 15:30:40'),(43,'symmetry','Symmetry',7,'',1,'0000-00-00 00:00:00','2015-11-17 16:03:38'),(44,'combination','Combination',7,'',1,'2015-10-16 18:11:55','2015-10-16 18:11:55'),(45,'gold_purity','Purity',7,'',1,'2015-10-16 18:11:55','2015-11-06 12:57:59'),(46,'gemstone_color','Gemstone Colour',7,'',1,'2015-10-16 18:11:55','2015-11-07 09:56:23'),(48,'metal','Metal',7,'',1,'2015-10-21 10:58:02','2015-10-21 10:58:21'),(49,'gold_weight','Weight',7,'',1,'2015-10-21 10:58:02','2015-11-06 12:58:05'),(50,'bullion_design','Design',7,NULL,1,'2015-11-13 09:23:32','2015-11-06 13:00:13'),(51,'cut','Cut',7,NULL,1,'2015-11-07 06:38:26','2015-11-06 20:12:21'),(52,'fluo','Fluorescence',7,NULL,1,'2015-11-14 09:35:12','2015-11-17 14:40:46'),(53,'price','Budget',7,NULL,1,'2015-11-14 08:36:37','2015-11-17 14:45:19');
 
 /*Table structure for table `tbl_available_autosuggest_lists` */
 

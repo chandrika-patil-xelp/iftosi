@@ -614,6 +614,11 @@
 					{
 						$expd = explode('|~|',$val);
 						$exd = explode(';',$expd[1]);
+						if($expd[0] == 'priceRange')
+						{
+							$exd[0] = $exd[0]/dollarValue;
+							$exd[1] = $exd[1]/dollarValue;
+						}
 						$extn .= " AND ".str_replace('Range','',$expd[0])." between \"".$exd[0]."\" AND \"".$exd[1]."\"";
 					}
 					//$extn = " AND shape in ('".implode("','",$sarr)."') ";
