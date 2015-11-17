@@ -733,7 +733,14 @@
 						$attr[$pid]['attributes']=$row2;
 					}
 					
-					$pid = $pids = implode(',',$prodid);
+					if(!empty($prodid))
+					{
+						$pid = $pids = implode(',',$prodid);
+					}
+					else
+					{
+						$pid = $pids = '';
+					}
 					
 					$psql = "
 							SELECT
@@ -874,7 +881,8 @@
 					
 					/* *********** */
 					
-					$arr1 = array('filters'=>$data,'products'=>array_values($arr1),'total'=>$total,'getdata'=>$params,'catname'=>$catname);
+					$tmp_arr1 = (!empty($arr1)) ? (array_values($arr1)) : null;
+					$arr1 = array('filters'=>$data,'products'=>$tmp_arr1,'total'=>$total,'getdata'=>$params,'catname'=>$catname);
 					$err = array('errCode'=>0,'errMsg'=>'Details fetched successfully');
 				}
 				else
