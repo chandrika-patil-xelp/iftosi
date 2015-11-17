@@ -389,6 +389,7 @@ class vendor extends DB
         $sql = "select
                                     DISTINCT a.product_id 
                 AS id, 
+                                    c.product_name,
                                     a.vendor_price 
                 AS price, 
                                     c.barcode,

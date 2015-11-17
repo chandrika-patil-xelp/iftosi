@@ -1,3 +1,4 @@
+var uid = customStorage.readFromStorage('userid');
 var forDate;
 $('#datepicker').datepicker({
     onSelect: function (dateText, inst) {
@@ -257,8 +258,38 @@ function submitDForm() {
      alert('submit ' +values);*/
 }
 
-var uid = common.readFromStorage('uid');
-var loadDiamont = true;
+var loadDiamont = false;
+var loadJewel = false;
+var loadBullion = false;
+$.ajax({url: common.APIWebPath() + "index.php?action=viewAll&uid="+uid, success: function (result) {
+    var obj = jQuery.parseJSON(result);
+    var busiType = obj['results'][1]['business_type'];
+    if (/1/.test(busiType)) {
+        $('#dmdTab').removeClass('dn');
+        loadDiamonts();
+        loadDiamont = true;
+    }
+    if (/2/.test(busiType)) {
+        $('#jewTab').removeClass('dn');
+        loadJewels();
+        loadJewel = true;
+    }
+    if (/3/.test(busiType)) {
+        $('#bullTab').removeClass('dn');
+        loadBullion = true;
+        loadBullions();
+    }
+    if (/1/.test(busiType)) {
+        $('#diamondPrds').removeClass('dn');
+    }
+    else if (/2/.test(busiType)) {
+        $('#jewelleryPrds').removeClass('dn');
+    }
+    else if (/3/.test(busiType)) {
+        $('#bullionPrds').removeClass('dn');
+    }
+}});
+
 var diamondPage = 1;
 $(window).scroll(function () {
     if ($(window).scrollTop() == ($(document).height() - $(window).height())) {
@@ -273,7 +304,6 @@ $(window).scroll(function () {
         }
     }
 });
-loadDiamonts();
 function loadDiamonts() {
     $.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + diamondPage + "&limit=15&catid=10000", success: function (result) {
             loadDiamondCallback(result);
@@ -299,6 +329,10 @@ function loadDiamondCallback(res) {
     }
 }
 function generateDiamondList(obj) {
+    var pro_name = obj['product_name'];
+    if(pro_name == null) {
+        pro_name = '';
+    }
     var date = obj['update_time'].split(' ');
     var str = '<li>';
     str += '<div class="date fLeft"> ';
@@ -307,7 +341,7 @@ function generateDiamondList(obj) {
     str += '</div>';
     str += '<div class="barcode fLeft">';
     str += '<span class="upSpan">' + obj['barcode'] + '</span>';
-    str += '<span class="lwSpan"><a href="http://localhost/iftosi//gia-round-clarity-IF/did-'+ obj['id'] +'">View Details</a></span>';
+    str += '<span class="lwSpan"><a href="'+ DOMAIN + pro_name.replace(" ", "+").toLowerCase() +'/did-'+ obj['id'] +'">View Details</a></span>';
     str += '</div>';
     str += '<div class="shape fLeft">' + obj['shape'] + '</div>';
     str += '<div class="color fLeft">' + obj['color'] + '</div>';
@@ -318,7 +352,7 @@ function generateDiamondList(obj) {
     str += '<div class="acct fLeft">';
     str += '<center>';
     str += '<div class="deltBtn poR ripplelink"></div>';
-    str += '<a href="http://localhost/iftosi/index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'"><div class="editBtn poR ripplelink"></div></a>';
+    str += '<a href="'+ DOMAIN +'index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'"><div class="editBtn poR ripplelink"></div></a>';
     str += '<div class="soldBtn poR ripplelink fmOpenR">SOLD</div>';
     str += '</center>';
     str += '</div>';
@@ -327,10 +361,8 @@ function generateDiamondList(obj) {
     return str;
 }
 
-var loadJewel = true;
 var jewellPage = 1;
 
-loadJewels();
 function loadJewels() {
     $.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + jewellPage + "&limit=15&catid=10001", success: function (result) {
             loadJewellCallback(result);
@@ -356,6 +388,10 @@ function loadJewellCallback(res) {
     }
 }
 function generateJewellList(obj) {
+    var pro_name = obj['product_name'];
+    if(pro_name == null) {
+        pro_name = '';
+    }
     var date = obj['update_time'].split(' ');
     var str = '<li>';
     str += '<div class="date fLeft"> ';
@@ -364,7 +400,7 @@ function generateJewellList(obj) {
     str += '</div>';
     str += '<div class="barcode fLeft">';
     str += '<span class="upSpan">' + obj['barcode'] + '</span>';
-    str += '<span class="lwSpan"><a href="http://localhost/iftosi//gia-round-clarity-IF/jid-'+ obj['id'] +'">View Details</a></span>';
+    str += '<span class="lwSpan"><a href="'+ DOMAIN + pro_name.replace(" ", "+").toLowerCase() +'/jid-'+ obj['id'] +'">View Details</a></span>';
     str += '</div>';
     str += '<div class="degno fLeft">' + obj['lotref'] + '</div>';
     str += '<div class="metal fLeft">' + obj['metal'].split('~')[0] + '</div>';
@@ -374,7 +410,7 @@ function generateJewellList(obj) {
     str += '<div class="acct fLeft">';
     str += '<center>';
     str += '<div class="deltBtn poR ripplelink"></div>';
-    str += '<a href="http://localhost/iftosi/index.php?case=jewellery_Form&catid=10001&prdid='+ obj['id'] +'"><div class="editBtn poR ripplelink"></div></a>';
+    str += '<a href="'+ DOMAIN +'index.php?case=jewellery_Form&catid=10001&prdid='+ obj['id'] +'"><div class="editBtn poR ripplelink"></div></a>';
     str += '<div class="soldBtn poR ripplelink fmOpenR">SOLD</div>';
     str += '</center>';
     str += '</div>';
@@ -383,10 +419,8 @@ function generateJewellList(obj) {
     return str;
 }
 
-var loadBullion = true;
 var bullionPage = 1;
 
-loadBullions();
 function loadBullions() {
     $.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + bullionPage + "&limit=15&catid=10002", success: function (result) {
             loadBullionsCallback(result);
@@ -412,6 +446,10 @@ function loadBullionsCallback(res) {
     }
 }
 function generatBullionsList(obj) {
+    var pro_name = obj['product_name'];
+    if(pro_name == null) {
+        pro_name = '';
+    }
     var date = obj['update_time'].split(' ');
     var str = '<li>';
     str += '<div class="date fLeft"> ';
@@ -420,7 +458,7 @@ function generatBullionsList(obj) {
     str += '</div>';
     str += '<div class="barcode fLeft">';
     str += '<span class="upSpan">' + obj['barcode'] + '</span>';
-    str += '<span class="lwSpan"><a href="http://localhost/iftosi//gia-round-clarity-IF/bid-'+ obj['id'] +'">View Details</a></span>';
+    str += '<span class="lwSpan"><a href="'+ DOMAIN + pro_name.replace(" ", "+").toLowerCase() +'/bid-'+ obj['id'] +'">View Details</a></span>';
     str += '</div>';
     str += '<div class="btype fLeft">' + obj['type'] + '</div>';
     str += '<div class="metal fLeft">' + obj['metal'].split('~')[0] + '</div>';
@@ -430,7 +468,7 @@ function generatBullionsList(obj) {
     str += '<div class="acct fLeft">';
     str += '<center>';
     str += '<div class="deltBtn poR ripplelink"></div>';
-    str += '<a href="http://localhost/iftosi/index.php?case=bullion_Form&catid=10002&prdid='+ obj['id'] +'"><div class="editBtn poR ripplelink"></div></a>';
+    str += '<a href="'+ DOMAIN +'index.php?case=bullion_Form&catid=10002&prdid='+ obj['id'] +'"><div class="editBtn poR ripplelink"></div></a>';
     str += '<div class="soldBtn poR ripplelink fmOpenR">SOLD</div>';
     str += '</center>';
     str += '</div>';

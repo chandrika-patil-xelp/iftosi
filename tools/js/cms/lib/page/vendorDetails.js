@@ -1,4 +1,4 @@
-var uid = common.readFromStorage('userid');
+var uid = customStorage.readFromStorage('userid');
 
 $(document).ready(function () {
     $('.compComm').bind('click', function (e) {
