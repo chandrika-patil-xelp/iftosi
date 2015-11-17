@@ -8,10 +8,10 @@
                     <div class="vCommTitle fLeft fmOpenL">Select a bullion you want to add</div>
                     <div class="formContainer fmOpenR">
                         <div class="jShapesCont resultsPage showHide fmOpenL fLeft">
-                            <div class="allShapes resultsPage bresults">
+                            <div class="allShapes resultsPage">
                                 <center>
 <?php
-                        foreach($fil['attributes'] as $key=>$values)
+                        /*foreach($fil['attributes'] as $key=>$values)
                         {
                             if(strtolower($values['attribute_disp_name'])=='type')
                             {
@@ -28,7 +28,26 @@
                                     $idtemp=$typeid.$shapename;
                                     $type=$result[$pid]['attr_details']['type'];
                                     $check=($shapename==$type) ? 'shapeSelected' :'';
-                                  echo "<div id='".$idtemp."' class='jshapeComm transition300 ripplelink SubCaTtype ".$check." ".$idtemp."'>".$shapename."</div>"; }}}?>
+                                  echo "<div id='".$idtemp."' class='jshapeComm transition300 ripplelink SubCaTtype ".$check." ".$idtemp."'>".$shapename."</div>";
+                                 }}}
+                                 */
+                                 //var_dump($cat); die;
+                                foreach($cat['subcat'] as $ky=>$val)
+								{   
+									if(strtolower($val)!=='')
+									{
+										echo "<div id='g".$val['catname']."' class='jshapeComm transition300 ripplelink g".ucwords(strtolower($val['catname']))."'>".$val['catname']."</div>";
+									}
+								}
+
+								foreach($cat['subcat'] as $ky=>$val)
+								{   
+									if(strtolower($val)!=='')
+									{
+										echo "<div id='s".$val['catname']."' class='jshapeComm transition300 ripplelink s".ucwords(strtolower($val['catname']))."'>".$val['catname']."</div>";
+									}
+								}
+?>
                                 </center>
                             </div>
                         </div>                                        
@@ -37,17 +56,7 @@
                                     </div><div id="gCoin" class="jshapeComm transition300 ripplelink gCoin">Gold Coin
                                     </div><div id="sCoin" class="jshapeComm transition300 ripplelink sCoin">Silver Coin
                                     </div>-->
-<?php                        
-                        foreach($fil['attributes'] as $key=>$values)
-                        {
-                            if(strtolower($values['attribute_disp_name'])=='type')
-                            {
-                                $attr_values = $values['attribute_values'];
-                                $attr_values = explode(',', $attr_values);
-                                foreach($attr_values as $shape)
-                                {
-                        }}}
-?>
+
                                     <div class="divCon2  fLeft goldprop allprop">
                                     <div  class="titleDiv txtCap fLeft">Gold Purity</div>
                                     <input name="gold_purity" id="goldpurity" type="text" placeholder=" eg. 1.33" value="<?=$attr['gold_purity'];?>" class="txtInput fLeft fmOpenR font14 c666">

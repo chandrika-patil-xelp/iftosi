@@ -363,7 +363,7 @@
                                         
                                         if(!empty($catid) && !empty($dt) && !empty($vid))
                                         {
-                                            $url   = APIDOMAIN.'index.php?action=addNewproduct&category_id=10002&dt='.$dt.'&vid='.$vid;
+                                            $url   = APIDOMAIN.'index.php?action=addNewproduct&category_id='.$catid.'&dt='.$dt.'&vid='.$vid;
                                             $res   = $comm->executeCurl($url);
                                             $data  = $res['results'][$dt];
                                         }
@@ -374,7 +374,9 @@
                                             $res   = $comm->executeCurl($url);
                                             $result  = $res['results'];
                                         }
-                                        
+                                        $url 	= APIDOMAIN.'index.php?action=categoryHeir&catid='.$catid;
+										$res 	= $comm->executeCurl($url);
+										$cat 	= $res['result'];
                                         $url 	= APIDOMAIN.'index.php?action=fetch_category_mapping&catid='.$catid;
                                         $res 	= $comm->executeCurl($url);
                                         $fil 	= $res['results'];

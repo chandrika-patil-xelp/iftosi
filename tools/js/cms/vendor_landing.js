@@ -119,12 +119,12 @@ $(document).ready(function () {
             var id = $(this).attr('id');
             var tmpId = id.toLowerCase();
 
-            if ((tmpId == 'gbar') || (tmpId == 'gcoin'))
+            if ((tmpId == 'gbars') || (tmpId == 'gcoins'))
             {
                 $('.allprop').addClass('dn');
                 $('.goldprop').removeClass('dn');
             }
-            else if ((tmpId == 'sbar') || (tmpId == 'scoin'))
+            else if ((tmpId == 'sbars') || (tmpId == 'scoins'))
             {
                 $('.allprop').addClass('dn');
                 $('.silverprop').removeClass('dn');

@@ -238,7 +238,7 @@ function submitForm(formid)
             if(!shape.hasClass('shapeSelected')) {
                 str ='category is not Selected';
             }
-            else if(a=='gCoin')
+            else if(a=='gCoins')
             {
                  if(purity=='') {
                     str ='Gold Purity field is Empty';
@@ -249,7 +249,7 @@ function submitForm(formid)
                     $('#goldweight').focus();
                 }
             }
-            else if(a=='sBar')
+            else if(a=='sBars')
             {
                 if(spurity=='') {
                     str ='Silver Purity field is Empty';
