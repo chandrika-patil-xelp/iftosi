@@ -249,7 +249,7 @@ function getResultsData(data,sortby,showtree)
 								html += '</div>';
 								html += '<div class="detComm">';
 									html += '<div class="detLabel fmOpenB fLeft">WEIGHT</div>';
-									html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.gold_weight+' Grams</div>';
+									html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.gold_weight+' Gms</div>';
 								html += '</div>';
 							html += '</div>';
 							html += '<div class="prdPrice fLeft">';
@@ -265,7 +265,7 @@ function getResultsData(data,sortby,showtree)
 							html += '<div class="prdDetails fLeft">';
 								html += '<div class="detComm">';
 									html += '<div class="detLabel fmOpenB fLeft">WEIGHT</div>';
-									html += '<div class="detValue fmOpenR fLeft">'+Math.round(vl.attributes.gold_weight,2)+' Grams</div>';
+									html += '<div class="detValue fmOpenR fLeft">'+Math.round(vl.attributes.gold_weight,2)+' Gms</div>';
 								html += '</div>';
 							html += '</div>';
 							html += '<div class="prdPrice fLeft">';

@@ -173,7 +173,6 @@ function Common() {
 
     this.changeTab = function (obj) {
         var id = $(obj).attr('id');
-        console.log(id);
         $('#' + id).removeClass('op04');
         switch (id) {
             case 'step1':

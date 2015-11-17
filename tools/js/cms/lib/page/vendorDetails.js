@@ -6,12 +6,9 @@ $(document).ready(function () {
         var x = (document.all) ? event.x : e.pageX;
         var y = (document.all) ? event.y : e.pageY;
 
-        console.log(x + " " + y);
-
         setTimeout(function () {
             x = e.pageX = e.pageX + 100;
             y = e.pageY = e.pageY + 100;
-            console.log(x + " " + y);
         }, 1000);
 
 //                $('#forDiamond,#forJewellery,#forBullion').removeClass('comSelected');

@@ -399,7 +399,6 @@
   Parallax.prototype.setPosition = function(element, x, y) {
     x += 'px';
     y += 'px';
-   // console.log(element);
     if (this.transform3DSupport) {
       this.css(element, 'transform', 'translate3d('+x+','+y+',0)');
     } else if (this.transform2DSupport) {

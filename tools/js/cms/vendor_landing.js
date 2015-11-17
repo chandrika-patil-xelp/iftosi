@@ -254,7 +254,6 @@ function submitDForm() {
      $(y).each(function(i){
      values[y[i].name]=y[i].value;
      });
-     console.log(values);
      alert('submit ' +values);*/
 }
 

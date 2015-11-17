@@ -25,10 +25,7 @@ function submitForm(formid)
     });
     
    // var i=1;
-   //console.log(y);
     $(y).each(function(i,val){
-       // console.log(val.name);
-       // console.log(val.value);
         if(val.value)
         {  
             if(val[(y[i].name)]!=='subcat_type')
@@ -43,7 +40,6 @@ function submitForm(formid)
     values[cnt+1]='subcatid'+'|@|'+optionValue.toString();
 
     data = values.join('|~|');
-    console.log(data);
     //var JsonString = JSON.stringify(values);
     if((pid!==null)&&(pid!==undefined)&&(pid!==''))
     {
@@ -56,7 +52,6 @@ function submitForm(formid)
     var URL = DOMAIN+"apis/index.php";
 
     $.getJSON(URL, params, function(data) {
-    console.log(data);    
     });
     
 }
