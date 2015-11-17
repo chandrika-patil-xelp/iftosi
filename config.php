@@ -6,20 +6,44 @@ if(!stristr($_SERVER['HTTP_HOST'], '.iftosi.com') && !stristr($_SERVER['HTTP_HOS
 }
 */
 
-define('DOMAIN','http://'.$_SERVER['HTTP_HOST'].'/iftosi/');
-define('APIDOMAIN','http://'.$_SERVER['HTTP_HOST'].'/iftosi/apis/');
-define('WEBROOT',$_SERVER['DOCUMENT_ROOT'].'/iftosi/');
-define('TEMPLATE',WEBROOT.'template/');
-define('INCLUDES',WEBROOT.'include/');
-define('APICLUDE',WEBROOT.'apis/include/');
-define('VERSION',0.1);
+if(stristr($_SERVER['HTTP_HOST'],'iftosi.com'))
+{
+
+	define('DOMAIN','http://'.$_SERVER['HTTP_HOST'].'/');
+	define('APIDOMAIN','http://'.$_SERVER['HTTP_HOST'].'/apis/');
+	define('WEBROOT',$_SERVER['DOCUMENT_ROOT'].'/');
+	define('TEMPLATE',WEBROOT.'template/');
+	define('INCLUDES',WEBROOT.'include/');
+	define('APICLUDE',WEBROOT.'apis/include/');
+	define('VERSION',0.4);
+
+}
+else
+{
+	define('DOMAIN','http://'.$_SERVER['HTTP_HOST'].'/iftosi/');
+	define('APIDOMAIN','http://'.$_SERVER['HTTP_HOST'].'/iftosi/apis/');
+	define('WEBROOT',$_SERVER['DOCUMENT_ROOT'].'/iftosi/');
+	define('TEMPLATE',WEBROOT.'template/');
+	define('INCLUDES',WEBROOT.'include/');
+	define('APICLUDE',WEBROOT.'apis/include/');
+	define('VERSION',0.4);
+}
 /*define('SMSAPI','http://alerts.sinfini.com/api/web2sms.php?workingkey=Aacffda7db60ac1a8470709273bea3bfe&to=+91_MOBILE&sender=NAFEXC&message=_MESSAGE');*/
 
 
 define('FAVICON', DOMAIN . 'tools/img/common/favicon.ico');
 
 
-$db['iftosi'] = array('localhost','root','','db_iftosi');
+if(stristr($_SERVER['HTTP_HOST'],'iftosi.com'))
+{
+	//$db['iftosi'] = array('54.213.106.43','nafexdb','nafexdb','db_iftosi');
+	//$db['iftosi'] = array('10.123.0.91','xelpmoc_iftosi','iftosi','xelpmoc_iftosi');
+	$db['iftosi'] = array('localhost','xelpmoc_dbiftosi','1234567890','xelpmoc_dbiftosi');
+}
+else
+{
+	$db['iftosi'] = array('localhost','root','','db_iftosi');
+}
 
 $css = array();
 $jvs = array();
