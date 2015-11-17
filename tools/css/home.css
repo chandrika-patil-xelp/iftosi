@@ -784,19 +784,18 @@ textarea[name=feedback] {resize: none;}
 /*Footer*/
 .pageLinks{height: auto;width: 100%;background:#8A0044;margin: 0;padding: 15px;border-top: 1px solid #fff;}
 .lowerFooterTab { width: auto;  height: 35px;  line-height: 35px;  cursor: pointer;  display: inline-block;  padding: 0 10px;  color: #fff;  font-size: 12px;    margin: 0 0 0 10px;}
-
 .texHolder  a{text-decoration: none;color:#8A0044;}
-
-
 
 h1,h2,h3,h4,h5{font-family: openB;color: #000;margin: 10px 0;}
 
-
-
-
-
-
-
+/*Shapes Page*/
+.shapesPage{}
+.shapesComm{width:100%;height: auto;min-height: 104px;box-shadow: 2px 2px 8px 0 rgba(0,0,0,0.2);padding: 20px;border-radius: 5px;margin-top: 20px;background: #fff;position: relative;}
+.shapesPage .texHolder{padding: 0;padding-left: 9%;line-height: 24px;color:#000;}
+.shapesPage .wrapperA {background: #ebebde;padding-bottom: 20px;}
+.shapesPage .wrapper{background: #ebebde;}
+.shapesPage .shapeComm:hover {border: 2px solid #fff;}
+.shapesPage .shapeComm {position: absolute;left: 0;top: 0;width: 100px;height: 100px;padding-bottom: 100px;margin: 0;bottom: 0;margin: auto;}
 
 
 

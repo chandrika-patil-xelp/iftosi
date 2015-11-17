@@ -416,12 +416,16 @@
                                        include 'template/faq.html';
                                 break;
                                 case 'education':
-                                       $page='faq';
+                                       $page='education';
                                        include 'template/education.html';
                                 break;
                                 case 'membership':
-                                       $page='faq';
+                                       $page='membership';
                                        include 'template/membership.html';
+                                break;
+                                case 'shapes':
+                                       $page='shapes';
+                                       include 'template/shapes.html';
                                 break;
 				
                                 default:
