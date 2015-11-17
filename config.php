@@ -70,6 +70,8 @@ $jvs['dmap'] 		= DOMAIN.'tools/js/detailsMap.js?v='.VERSION;
 
 // Custom JS End
 
+$dollarValue = 66.03;
+
 include INCLUDES.'class.common.php';
 $comm = new Common();
 $comm->clearParam($_GET);

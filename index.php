@@ -218,6 +218,12 @@
 						$vndrId = $key;
 						$vndrDtls = $value;
 					}
+					$vndrDtls['fulladdress'] = explode(",", $vndrDtls['fulladdress']);
+					foreach($vndrDtls['fulladdress'] as $key => $value)
+					{
+						$vndrDtls['fulladdress'][$key] = trim($value);
+					}
+					$vndrDtls['fulladdress'] = implode(', ', $vndrDtls['fulladdress']);
 					$vndrAddr = explode(',', $vndrDtls['fulladdress']);
 					include 'template/diamond_details.html';
 				break;
@@ -242,6 +248,12 @@
 								$vndrId = $key;
 								$vndrDtls = $value;
 							}
+							$vndrDtls['fulladdress'] = explode(",", $vndrDtls['fulladdress']);
+							foreach($vndrDtls['fulladdress'] as $key => $value)
+							{
+								$vndrDtls['fulladdress'][$key] = trim($value);
+							}
+							$vndrDtls['fulladdress'] = implode(', ', $vndrDtls['fulladdress']);
 							$vndrAddr = explode(',', $vndrDtls['fulladdress']);
 						}
 					}
@@ -269,6 +281,12 @@
 								$vndrId = $key;
 								$vndrDtls = $value;
 							}
+							$vndrDtls['fulladdress'] = explode(",", $vndrDtls['fulladdress']);
+							foreach($vndrDtls['fulladdress'] as $key => $value)
+							{
+								$vndrDtls['fulladdress'][$key] = trim($value);
+							}
+							$vndrDtls['fulladdress'] = implode(', ', $vndrDtls['fulladdress']);
 							$vndrAddr = explode(',', $vndrDtls['fulladdress']);
 						}
 					}

@@ -178,7 +178,8 @@
 			}
 			else
 			{
-				$('#'+id+'_'+$(this).text()).removeClass('shapeSelected');
+				var idexd = $(this).text().split('/');
+				$('#'+id+'_'+idexd[0]).removeClass('shapeSelected');
 				$('#'+id+' :input[type=checkbox]').each(function() {
 					$(this).attr('checked',false);
 				});

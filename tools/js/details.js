@@ -10,6 +10,7 @@ if(pw<768){
 var mobile = customStorage.readFromStorage('mobile');
 var name = customStorage.readFromStorage('name');
 var email = customStorage.readFromStorage('email');
+var isWishList = false;
 
 $(document).ready(function(){
      setTimeout(function() {
@@ -76,6 +77,14 @@ $(document).ready(function(){
 		}
 		else
 		{
+			if($(this).hasClass('iconWishlist'))
+			{
+				isWishList = true;
+			}
+			else
+			{
+				isWishList = false;
+			}
 			showVendorDetails(this);
 		}
     });
@@ -194,7 +203,7 @@ function showVendorDetails(obj)
 					if(data.error !== '' && data.error !== null && data.error !== undefined && data.error.code == 0)
 					{
 						customStorage.addToStorage('userid', data.userid);
-						if(obj !== undefined && $(obj).hasClass('iconWishlist'))
+						if((obj !== undefined && $(obj).hasClass('iconWishlist')) || isWishList)
 						{
 							addToWishList();
 						}
@@ -217,7 +226,7 @@ function showVendorDetails(obj)
 	}
 	else
 	{
-		if(obj !== undefined && $(obj).hasClass('iconWishlist'))
+		if((obj !== undefined && $(obj).hasClass('iconWishlist')) || isWishList)
 		{
 			addToWishList();
 		}
