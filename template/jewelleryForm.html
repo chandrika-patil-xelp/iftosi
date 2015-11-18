@@ -15,18 +15,27 @@
                                         {   
                                             if(strtolower($val)!=='')
                                                 {
+                                                    $typeClass='';
+                                                    $typeId=$val['catname'];
                                                     if($val['catname']=="Bangles/Bracelets")
                                                     {
-                                                        echo "<div id='Bracelet' class='jshapeComm transition300 ripplelink Bracelet'>".$val['catname']."</div>";
+                                                        //echo "<div id='Bracelet' class='jshapeComm transition300 ripplelink Bracelet'>".$val['catname']."</div>";
+                                                        $typeId=$typeClass='Bracelet';
                                                     }
                                                     else if(($val['catname']=="Pendents")||($val['catname']=="Necklaces"))
                                                     {
-                                                        echo "<div id='".$val['catname']."' class='jshapeComm transition300 ripplelink ".ucwords(strtolower(substr($val['catname'],0,-1)))."'>".$val['catname']."</div>";   
+                                                        //echo "<div id='".$val['catname']."' class='jshapeComm transition300 ripplelink ".ucwords(strtolower(substr($val['catname'],0,-1)))."'>".$val['catname']."</div>";   
+                                                        $typeClass=ucwords(strtolower(substr($val['catname'],0,-1)));
                                                     }
                                                     else
                                                     {
-                                                        echo "<div id='".$val['catname']."' class='jshapeComm transition300 ripplelink ".ucwords(strtolower($val['catname']))."'>".$val['catname']."</div>";   
+                                                        //echo "<div id='".$val['catname']."' class='jshapeComm transition300 ripplelink ".ucwords(strtolower($val['catname']))."'>".$val['catname']."</div>";   
+                                                        $typeClass=ucwords(strtolower($val['catname']));
                                                     }
+                                                    if($typeId==$attr['shape']) {
+                                                        $typeClass .=' shapeSelected';
+                                                    }
+                                                    echo "<div id='".$typeId."' class='jshapeComm transition300 ripplelink ".$typeClass."'>".$val['catname']."</div>";   
                                                 }
                                         }
 ?>                          
@@ -44,9 +53,13 @@
                                         {
                                             if($values['catid']!=10007)
                                             {   
+                                                /*$mainCatId=$values['catname'];
+                                                if($mainCatId=='Bangles/Bracelets') [
+                                                    $mainCatId='Bracelet';
+                                                }*/
                                             
 ?>                                              
-                                                <div class="divCon  fLeft fmOpenR subCatType dn " id="<?=strtolower($values['catname']);?>Type">
+                                                <div class="divCon  fLeft fmOpenR subCatType <?php if($attr['shape']!=$values['catname']) { echo 'dn'; } ?> " id="<?=strtolower($values['catname']);?>Type">
                                                     <div  class="titleDiv txtCap fLeft"><?=ucwords(strtolower($values['catname']));?> Type</div>
                                                     <div class='radioCont fLeft'>
 <?php                                                        
@@ -54,8 +67,8 @@
                                                         {   
 ?>
                                                             <div class="checkDiv fLeft">
-                                                            <input type="checkbox" name='<?=$val['subcatid'];?>' class="filled-in" value="<?=$val['subcatid'];?>" id="<?=$val['subcatid'];?>" <?=($attr['type'] == $val['subcatname']) ? 'checked' : '';?> /> 
-                                                            <label for="<?=$val['subcatid'];?>"><?php echo $val['subcatname'];?></label>
+                                                            <input type="checkbox" name='subcat_type' class="filled-in" value="<?=$val['subcatid'];?>" id="<?php echo $values['catname'].'_'.$val['subcatid'];?>" <?=(in_array($val['subcatid'],$pdet['catid'])) ? 'checked="true"' : '';?> /> 
+                                                            <label for="<?=$values['catname'].'_'.$val['subcatid'];?>"><?php echo $val['subcatname'];?></label>
                                                         </div>
 <?php
                                                         }
@@ -67,7 +80,7 @@
                                             if($values['catid']==10007)
                                             { 
 ?>                    
-                                                <div class="divCon  fLeft fmOpenR jw5 subCatType dn" id="braceletType">
+                                                <div class="divCon  fLeft fmOpenR jw5 subCatType " id="braceletType">
                                                 <div  class="titleDiv txtCap fLeft">Bracelet Type</div>
                                                 <div class='radioCont fLeft'> 
 <?php                                                        
@@ -75,7 +88,7 @@
                                                 {
 ?>                            
                                                     <div class="checkDiv fLeft">
-                                                    <input type="checkbox" name='<?=$val['subcatid'];?>' class="filled-in"  value="<?=$val['subcatid'];?>" id="<?=$val['subcatid'];?>" <?=($attr['type'] == $val['subcatname']) ? 'checked' : '';?> />
+                                                    <input type="checkbox" name='<?=$val['subcatid'];?>' class="filled-in"  value="<?=$val['subcatid'];?>" id="<?=$val['subcatid'];?>" <?=(in_array($val['subcatid'],$pdet['catid'])) ? 'checked="true"' : '';?> />
                                                     <label for="<?=$val['subcatid'];?>"><?php echo $val['subcatname'];?></label>
                                                     </div>
 <?php

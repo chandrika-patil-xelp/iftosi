@@ -1029,21 +1029,6 @@
                     $vid[]=$row4['vid'];
                     $vdetls[$row4['vid']]=$row4;
                 }
-                
-                
-                $sql5="SELECT category_id
-                     FROM 
-                                tbl_product_category_mapping
-                     WHERE 
-                                        product_id =".$params['prdid']." AND category_id!=".$params['catid']."";
-                
-                $res5=$this->query($sql5);
-                if ($res5) {
-                    while ($row5 = $this->fetchData($res5)) {
-                        $reslt[$pid]['catid'][] = $row5['category_id'];
-                    }
-                }
-
 
             $cat_info_sql = "SELECT catid,cat_name,cat_lvl,p_catid,lineage FROM tbl_category_master WHERE catid=".$params['catid']."";
                 $cat_info_res = $this->query($cat_info_sql);
@@ -1082,7 +1067,19 @@
                     
                     $reslt[$pid]['vendor_details']=$vdetls;
                    
-                   
+                
+                        $sql5="SELECT category_id
+                             FROM 
+                                        tbl_product_category_mapping
+                             WHERE 
+                                                product_id =".$params['prdid']." AND category_id!=".$params['catid']."";
+                        $res5=$this->query($sql5);
+                        if ($res5) {
+                            while ($row5 = $this->fetchData($res5)) {
+                                $reslt[$pid]['catid'][] = $row5['category_id'];
+                            }
+                        }
+                        
                     $arr = $reslt;
                     $err = array('errCode' => 0, 'errMsg' => 'Details fetched successfully');
                 }
