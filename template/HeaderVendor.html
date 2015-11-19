@@ -3,7 +3,7 @@
         <div class="wrapperMax">
             <div class="vndLogo fLeft fmOpenR"><b>IF</b>to<b>SI</b></div>
             <div class="vndInfo fRight fmOpenR">
-                Hi, White Fire Jewels 
+                Hi, <span id="userName"></span> 
                 Logout
             </div>
         </div>
@@ -17,13 +17,13 @@
                         <div class="dropdownBox fLeft">
                             <div id='productsTab'  class="dropInput fmOpenR">Products</div>
                             <ul id='productsTabList' class="dropList fmOpenR">
-                                <li class="transition100 dn" id="dmdTab">Diamonds</li>
-                                <li class="transition100 dn" id="jewTab">Jewellery</li>
-                                <li class="transition100 dn" id="bullTab">Bullion</li>
+                                <li class="transition100 dn" id="dmdTab"><a href="<?php echo DOMAIN; ?>index.php?case=vendor_landing&catid=10000">Diamonds</a></li>
+                                <li class="transition100 dn" id="jewTab"><a href="<?php echo DOMAIN; ?>index.php?case=vendor_landing&catid=10001">Jewellery</a></li>
+                                <li class="transition100 dn" id="bullTab"><a href="<?php echo DOMAIN; ?>index.php?case=vendor_landing&catid=10002">Bullion</a></li>
                             </ul>
                         </div>
                     </div>
-                    <div id='enqTab' class="fLeft vTabs transition300">Enquiries</div>
+                    <div id='enqTab' class="fLeft vTabs transition300"><a href="<?php echo DOMAIN; ?>index.php?case=vendor_enquiries">Enquiries</a></div>
                     <div id='setTab' class="fLeft vTabs transition300">Settings</div>
                 </div>
             </div>

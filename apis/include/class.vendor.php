@@ -449,8 +449,7 @@ class vendor extends DB
             $arr = array('total_products' => $total_products, 'total_pages' => $total_pages, 'products' => $arr1);
             $err = array('Code' => 0, 'Msg' => 'Details fetched successfully');
         } else {
-            $arr = array();
-            //$arr = array('total_products' => $total_products, 'total_pages' => $total_pages);
+            $arr = array('total_products' => $total_products, 'total_pages' => $total_pages);
             $err = array('Code' => 1, 'Msg' => 'No Match Found');
         }
         $result = array('results' => $arr, 'error' => $err);

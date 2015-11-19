@@ -95,13 +95,21 @@ class enquiry extends DB
                                    product_id,
                                    vendor_id,
                                    user_ip_address,
-                                   display_flag,
+                                   type_flag,
                                    updatedby,
-                                   date_time
+                                   update_time
                    FROM
                                     tbl_product_enquiry
                    WHERE
                                     vendor_id=".$params['vid']."";
+        
+        
+        $viewres=$this->query($viewprod);
+        $totalEnqs=$this->numRows($viewres);
+        $arr['total_enqs']=$totalEnqs;
+        $total_pages = ceil($totalEnqs/$limit);
+        $arr['total_pages']=$total_pages;
+        
         if (!empty($page))
         {
             $start = ($page * $limit) - $limit;
@@ -113,16 +121,35 @@ class enquiry extends DB
         {   
             while($row=$this->fetchData($viewres))
             {   
-                $arr[]=$row;
+                $csql='SELECT barcode, product_name, prd_price FROM tbl_product_master WHERE product_id='.$row['product_id'].'';
+                $cres=$this->query($csql);
+                if($this->numRows($cres)>0) {
+                    while($crow=$this->fetchData($cres))
+                    {
+                        $row['pro_dtls']=$crow;
+                    }
+                }
+                $csql='SELECT b.cat_name,b.catid FROM tbl_product_category_mapping AS a, tbl_category_master AS b WHERE a.product_id='.$row['product_id'].' AND b.catid=a.category_id AND b.p_catid in (0,10000,10001,10002)';
+                $cres=$this->query($csql);
+                if($this->numRows($cres)>0) {
+                    while($crow=$this->fetchData($cres))
+                    {
+                        $row['pro_dtls']['cat_name'][]=$crow['cat_name'];
+                        if($crow['catid']==10000 || $crow['catid']==10001 || $crow['catid']==10002) {
+                            $row['pro_dtls']['mCatid']=$crow['catid'];
+                        }
+                    }
+                }
+                $arr['enq'][]=$row;
             }
             $err=array('Code'=>0,'Msg'=>'Values fetched successfully');
         }
         else
         {
-            $arr="No one has viewed your products yet";
+            $arr=array('total_enqs' => $totalEnqs, 'total_pages' => $total_pages);
             $err=array('Code'=>0,'Msg'=>'No Values fetched');
         }
-        $result=array('result'=>$arr,'error'=>$err);
+        $result=array('results'=>$arr,'error'=>$err);
         return $result;
     }    
 }

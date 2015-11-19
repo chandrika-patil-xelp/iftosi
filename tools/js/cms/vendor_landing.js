@@ -1,4 +1,35 @@
+customStorage.readFromStorage('userid',2);
+customStorage.readFromStorage('busiType','1,2,3');
+customStorage.readFromStorage('username','White Fire Jewels');
 var uid = customStorage.readFromStorage('userid');
+var busiType = customStorage.readFromStorage('busiType');
+var username = customStorage.readFromStorage('username');
+document.getElementById('userName').innerHTML = username;
+
+if (/1/.test(busiType)) {
+    $('#dmdTab').removeClass('dn');
+}
+if (/2/.test(busiType)) {
+    $('#jewTab').removeClass('dn');
+}
+if (/3/.test(busiType)) {
+    $('#bullTab').removeClass('dn');
+}
+
+var activeVTab='';
+switch(activePage) {
+    case 'vendor_landing':
+        activeVTab ='prdTab';
+    break;
+    case 'vendor_enquiries':
+        activeVTab ='enqTab';
+    break;
+    default :
+        activeVTab ='';
+    break;
+}
+$('#'+activeVTab).addClass('vSelected');
+
 var forDate;
 $('#datepicker').datepicker({
     onSelect: function (dateText, inst) {
@@ -148,7 +179,7 @@ $(document).ready(function () {
 
 var isOpen = false;
 var id = "";
-$('.dropInput').mouseover(function () {
+$('.dropInput').on('mouseover',function () {
     id = $(this).attr('id');
     setTimeout(function () {
         isOpen = true;
@@ -177,40 +208,40 @@ $('.vTabs').mouseover(function () {
 });
 
 
-$('.vTabs').click(function () {
-    var id = $(this).attr('id');
-    $('.vTabs').removeClass('vSelected');
-    $(this).addClass('vSelected');
-
-    switch (id) {
-        case 'dashTab':
-            active = '';
-            $('#product,#enquiry,#settings').addClass('dn');
-            $('#dashboard').removeClass('dn');
-            break;
-        case 'prdTab':
-            $('#dashboard,#enquiry,#settings').addClass('dn');
-            $('#product').removeClass('dn');
-            break;
-        case 'enqTab':
-            active = 'enqFheader';
-            $('#dashboard,#product,#settings').addClass('dn');
-            $('#enquiry').removeClass('dn');
-            break;
-        case 'setTab':
-            active = '';
-            $('#dashboard,#product,#enquiry').addClass('dn');
-            $('#settings').removeClass('dn');
-            break;
-    }
-});
+//$('.vTabs').click(function () {
+//    var id = $(this).attr('id');
+//    $('.vTabs').removeClass('vSelected');
+//    $(this).addClass('vSelected');
+//
+//    switch (id) {
+//        case 'dashTab':
+//            active = '';
+//            $('#product,#enquiry,#settings').addClass('dn');
+//            $('#dashboard').removeClass('dn');
+//            break;
+//        case 'prdTab':
+//            $('#dashboard,#enquiry,#settings').addClass('dn');
+//            $('#product').removeClass('dn');
+//            break;
+//        case 'enqTab':
+//            active = 'enqFheader';
+//            $('#dashboard,#product,#settings').addClass('dn');
+//            $('#enquiry').removeClass('dn');
+//            break;
+//        case 'setTab':
+//            active = '';
+//            $('#dashboard,#product,#enquiry').addClass('dn');
+//            $('#settings').removeClass('dn');
+//            break;
+//    }
+//});
 
 function toggleDropDown(flag, id) {
     if (flag) {
         $("#" + id + "List").velocity({opacity: 1, borderRadius: 0}, {duration: 200, display: "block"});
     }
     else {
-        $("#" + id + "List").velocity({opacity: 0, borderRadius: '100%'}, {duration: 50, display: "none"});
+        $("#" + id + "List").velocity({opacity: 0, borderRadius: '0%'}, {duration: 10, display: "none"});
     }
 
 }
@@ -256,223 +287,4 @@ function submitDForm() {
      values[y[i].name]=y[i].value;
      });
      alert('submit ' +values);*/
-}
-
-var loadDiamont = false;
-var loadJewel = false;
-var loadBullion = false;
-$.ajax({url: common.APIWebPath() + "index.php?action=viewAll&uid="+uid, success: function (result) {
-    var obj = jQuery.parseJSON(result);
-    var busiType = obj['results'][1]['business_type'];
-    if (/1/.test(busiType)) {
-        $('#dmdTab').removeClass('dn');
-        loadDiamonts();
-        loadDiamont = true;
-    }
-    if (/2/.test(busiType)) {
-        $('#jewTab').removeClass('dn');
-        loadJewels();
-        loadJewel = true;
-    }
-    if (/3/.test(busiType)) {
-        $('#bullTab').removeClass('dn');
-        loadBullion = true;
-        loadBullions();
-    }
-    if (/1/.test(busiType)) {
-        $('#diamondPrds').removeClass('dn');
-    }
-    else if (/2/.test(busiType)) {
-        $('#jewelleryPrds').removeClass('dn');
-    }
-    else if (/3/.test(busiType)) {
-        $('#bullionPrds').removeClass('dn');
-    }
-}});
-
-var diamondPage = 1;
-$(window).scroll(function () {
-    if ($(window).scrollTop() == ($(document).height() - $(window).height())) {
-        if (active == 'diamondFheader' && loadDiamont) {
-            loadDiamonts();
-        }
-        if (active == 'jewelleryFheader' && loadJewel) {
-            loadJewels();
-        }
-        if (active == 'bullionFheader' && loadBullion) {
-            loadBullions();
-        }
-    }
-});
-function loadDiamonts() {
-    $.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + diamondPage + "&limit=15&catid=10000", success: function (result) {
-            loadDiamondCallback(result);
-        }});
-}
-function loadDiamondCallback(res) {
-    var obj = jQuery.parseJSON(res);
-    if (obj['results'] != '') {
-        var total = obj['results']['total_products'];
-        $('#totalDiamonds').text(total);
-        var total_pages = obj['results']['total_pages'];
-        var len = obj['results']['products'].length;
-        var i = 0;
-        var str = '';
-        while (i < len) {
-            str += generateDiamondList(obj['results']['products'][i]);
-            i++;
-        }
-        $('#diamondList').append(str);
-        diamondPage++;
-    } else {
-        loadDiamont = false;
-    }
-}
-function generateDiamondList(obj) {
-    var pro_name = obj['product_name'];
-    if(pro_name == null) {
-        pro_name = '';
-    }
-    var date = obj['update_time'].split(' ');
-    var str = '<li>';
-    str += '<div class="date fLeft"> ';
-    str += '<span class="upSpan">' + date[0] + '</span>';
-    str += '<span class="lwSpan">' + date[1] + '</span>';
-    str += '</div>';
-    str += '<div class="barcode fLeft">';
-    str += '<span class="upSpan">' + obj['barcode'] + '</span>';
-    str += '<span class="lwSpan"><a href="'+ DOMAIN + pro_name.replace(" ", "+").toLowerCase() +'/did-'+ obj['id'] +'">View Details</a></span>';
-    str += '</div>';
-    str += '<div class="shape fLeft">' + obj['shape'] + '</div>';
-    str += '<div class="color fLeft">' + obj['color'] + '</div>';
-    str += '<div class="carats fLeft">' + obj['carat'] + '</div>';
-    str += '<div class="clarity fLeft">' + obj['clarity'] + '</div>';
-    str += '<div class="cert fLeft">' + obj['cert'] + '</div>';
-    str += '<div class="price fLeft fmOpenB">&#8377;' + obj['price'] + '</div>';
-    str += '<div class="acct fLeft">';
-    str += '<center>';
-    str += '<div class="deltBtn poR ripplelink"></div>';
-    str += '<a href="'+ DOMAIN +'index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'"><div class="editBtn poR ripplelink"></div></a>';
-    str += '<div class="soldBtn poR ripplelink fmOpenR">SOLD</div>';
-    str += '</center>';
-    str += '</div>';
-    str += '</li>';
-    str += '';
-    return str;
-}
-
-var jewellPage = 1;
-
-function loadJewels() {
-    $.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + jewellPage + "&limit=15&catid=10001", success: function (result) {
-            loadJewellCallback(result);
-        }});
-}
-function loadJewellCallback(res) {
-    var obj = jQuery.parseJSON(res);
-    if (obj['results'] != '') {
-        var total = obj['results']['total_products'];
-        $('#totalJewells').text(total);
-        var total_pages = obj['results']['total_pages'];
-        var len = obj['results']['products'].length;
-        var i = 0;
-        var str = '';
-        while (i < len) {
-            str += generateJewellList(obj['results']['products'][i]);
-            i++;
-        }
-        $('#JewellList').append(str);
-        jewellPage++;
-    } else {
-        loadJewel = false;
-    }
-}
-function generateJewellList(obj) {
-    var pro_name = obj['product_name'];
-    if(pro_name == null) {
-        pro_name = '';
-    }
-    var date = obj['update_time'].split(' ');
-    var str = '<li>';
-    str += '<div class="date fLeft"> ';
-    str += '<span class="upSpan">' + date[0] + '</span>';
-    str += '<span class="lwSpan">'+ date[1] +'</span>';
-    str += '</div>';
-    str += '<div class="barcode fLeft">';
-    str += '<span class="upSpan">' + obj['barcode'] + '</span>';
-    str += '<span class="lwSpan"><a href="'+ DOMAIN + pro_name.replace(" ", "+").toLowerCase() +'/jid-'+ obj['id'] +'">View Details</a></span>';
-    str += '</div>';
-    str += '<div class="degno fLeft">' + obj['lotref'] + '</div>';
-    str += '<div class="metal fLeft">' + obj['metal'].split('~')[0] + '</div>';
-    str += '<div class="catg fLeft">' + obj['category'][1]['cat_name'] + '</div>';
-    str += '<div class="subType fLeft">' + obj['category'][0]['cat_name'] + '</div>';
-    str += '<div class="price fLeft fmOpenB">&#8377;' + obj['price'] + '</div>';
-    str += '<div class="acct fLeft">';
-    str += '<center>';
-    str += '<div class="deltBtn poR ripplelink"></div>';
-    str += '<a href="'+ DOMAIN +'index.php?case=jewellery_Form&catid=10001&prdid='+ obj['id'] +'"><div class="editBtn poR ripplelink"></div></a>';
-    str += '<div class="soldBtn poR ripplelink fmOpenR">SOLD</div>';
-    str += '</center>';
-    str += '</div>';
-    str += '</li>';
-    str += '';
-    return str;
-}
-
-var bullionPage = 1;
-
-function loadBullions() {
-    $.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + bullionPage + "&limit=15&catid=10002", success: function (result) {
-            loadBullionsCallback(result);
-        }});
-}
-function loadBullionsCallback(res) {
-    var obj = jQuery.parseJSON(res);
-    if (obj['results'] != '') {
-        var total = obj['results']['total_products'];
-        $('#totalBullions').text(total);
-        var total_pages = obj['results']['total_pages'];
-        var len = obj['results']['products'].length;
-        var i = 0;
-        var str = '';
-        while (i < len) {
-            str += generatBullionsList(obj['results']['products'][i]);
-            i++;
-        }
-        $('#bullionsList').append(str);
-        bullionPage++;
-    } else {
-        loadBullion = false;
-    }
-}
-function generatBullionsList(obj) {
-    var pro_name = obj['product_name'];
-    if(pro_name == null) {
-        pro_name = '';
-    }
-    var date = obj['update_time'].split(' ');
-    var str = '<li>';
-    str += '<div class="date fLeft"> ';
-    str += '<span class="upSpan">' + date[0] + '</span>';
-    str += '<span class="lwSpan">'+ date[1] +'</span>';
-    str += '</div>';
-    str += '<div class="barcode fLeft">';
-    str += '<span class="upSpan">' + obj['barcode'] + '</span>';
-    str += '<span class="lwSpan"><a href="'+ DOMAIN + pro_name.replace(" ", "+").toLowerCase() +'/bid-'+ obj['id'] +'">View Details</a></span>';
-    str += '</div>';
-    str += '<div class="btype fLeft">' + obj['type'] + '</div>';
-    str += '<div class="metal fLeft">' + obj['metal'].split('~')[0] + '</div>';
-    str += '<div class="purity fLeft">' + obj['gold_purity'] + '</div>';
-    str += '<div class="weight fLeft">' + obj['gold_weight'] + '</div>';
-    str += '<div class="price fLeft fmOpenB">&#8377;' + obj['price'] + '</div>';
-    str += '<div class="acct fLeft">';
-    str += '<center>';
-    str += '<div class="deltBtn poR ripplelink"></div>';
-    str += '<a href="'+ DOMAIN +'index.php?case=bullion_Form&catid=10002&prdid='+ obj['id'] +'"><div class="editBtn poR ripplelink"></div></a>';
-    str += '<div class="soldBtn poR ripplelink fmOpenR">SOLD</div>';
-    str += '</center>';
-    str += '</div>';
-    str += '</li>';
-    str += '';
-    return str;
 }

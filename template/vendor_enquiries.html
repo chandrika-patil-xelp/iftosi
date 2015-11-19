@@ -1,45 +1,131 @@
-<div id='enquiry' class="contentCont fLeft dn">
-    <div class="wrapperMax">
-        <div class="forEnq fLeft fmOpenR">
-            <div class="prdResults fLeft">
-                <div class='prdSearchDiv fLeft'>
-                    <div class="formTitle fLeft fmOpenR m0">2050 Enquiries</div>
-                    <input type="text" class="prdSeachTxt fRight fmOpenR" placeholder=" Search your Product">
-                    <div class="vFilBtn fRight poR ripplelink" onclick="showEnqFilter()"></div>
+<?php include 'vendorHead.html'; ?>
+<div class="mainContainer fLeft">
+    <?php include 'HeaderVendor.html'; ?>
+    
+    <div id='enquiry' class="contentCont fLeft">
+        <div class="wrapperMax">
+            <div class="forEnq fLeft fmOpenR">
+                <div class="prdResults fLeft">
+                    <div class='prdSearchDiv fLeft'>
+                        <div class="formTitle fLeft fmOpenR m0"><span id="totalEnqs">0</span> Enquirie(s) Listed</div>
+                        <input type="text" class="prdSeachTxt fRight fmOpenR" placeholder=" Search your Product">
+                        <div class="vFilBtn fRight poR ripplelink" onclick="showEnqFilter()"></div>
+                    </div>
+                    <div class="prdListHeader fLeft fmOpenR">
+                        <div class="date fLeft">Date</div>
+                        <div class="name fLeft">Name</div>
+                        <div class="email fLeft">Email</div>
+                        <div class="type fLeft">Category</div>
+                        <div class="barcode fLeft">Barcode</div>
+                        <div class="price fLeft bNone">Price</div>
+                    </div>
+                    <ul class='prdul fLeft fmOpenR enqUL' id='enqList'>
+                        <!--
+                            <li>
+                                <div class="date fLeft"> 
+                                    <span class="upSpan">20/10/2015</span>
+                                    <span class="lwSpan">8:10 Pm</span>
+                                </div>
+                                <div class="name fLeft">Shubham Gupta</div>
+                                <div class="email fLeft">
+                                    <span class="upSpan">shubham@xelpmoc.in</span>
+                                    <span class="lwSpan">8767194608</span>
+                                </div>
+                                <div class="type fLeft">
+                                    <span class="upSpan">Diamond</span>
+                                    <span class="lwSpan">Round</span>
+                                </div>
+                                <div class="barcode fLeft">
+                                    <span class="upSpan">CW0H8IE9</span>
+                                    <span class="lwSpan"><a href='<?php echo DOMAIN; ?>/gia-round-clarity-IF/did-10000'>View Details</a></span>
+                                </div>
+                                <div class="price fLeft bNone fmOpenB">&#8377;1,000,000,000</div>
+                            </li>-->
+                    </ul>
                 </div>
-                <div class="prdListHeader fLeft fmOpenR">
-                    <div class="date fLeft">Date</div>
-                    <div class="name fLeft">Name</div>
-                    <div class="email fLeft">Email</div>
-                    <div class="type fLeft">Category</div>
-                    <div class="barcode fLeft">Barcode</div>
-                    <div class="price fLeft bNone">Price</div>
-                </div>
-                <ul class='prdul fLeft fmOpenR enqUL'>
-                    <?php for ($i = 1; $i < 15; $i++) { ?>
-                        <li>
-                            <div class="date fLeft"> 
-                                <span class="upSpan">20/10/2015</span>
-                                <span class="lwSpan">8:10 Pm</span>
-                            </div>
-                            <div class="name fLeft">Shubham Gupta</div>
-                            <div class="email fLeft">
-                                <span class="upSpan">shubham@xelpmoc.in</span>
-                                <span class="lwSpan">8767194608</span>
-                            </div>
-                            <div class="type fLeft">
-                                <span class="upSpan">Diamond</span>
-                                <span class="lwSpan">Round</span>
-                            </div>
-                            <div class="barcode fLeft">
-                                <span class="upSpan">CW0H8IE9</span>
-                                <span class="lwSpan"><a href='<?php echo DOMAIN; ?>/gia-round-clarity-IF/did-10000'>View Details</a></span>
-                            </div>
-                            <div class="price fLeft bNone fmOpenB">&#8377;1,000,000,000</div>
-                        </li>
-                    <?php } ?>
-                </ul>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
+<script type="text/javascript" src="<?= $jvs['jqryUi']; ?>"></script>
+<script type="text/javascript" src='tools/js/cms/vendor_landing.js'></script>
+<script>
+var uid = customStorage.readFromStorage('userid');
+var loadEnq = true;
+var enqPage = 1;
+$(window).scroll(function () {
+    if ($(window).scrollTop() == ($(document).height() - $(window).height())) {
+        if(loadEnq) {
+           loadEnqs();
+        }
+    }
+});
+loadEnqs();
+function loadEnqs() {
+    $.ajax({url: common.APIWebPath() + "index.php?action=viewLog&vid=" + uid + "&page=" + enqPage + "&limit=15", success: function (result) {
+            loadEnqCallback(result);
+    }});
+}
+function loadEnqCallback(res) {
+    var obj = jQuery.parseJSON(res);
+    if (obj['results'] != '') {
+        var total = obj['results']['total_enqs'];
+        $('#totalEnqs').text(total);
+        var total_pages = obj['results']['total_pages'];
+        
+        var str = '';
+        if(total!=0) {
+            if(total_pages==enqPage) {
+                loadEnq = false;
+            }
+            var len = obj['results']['enq'].length;
+            var i = 0;
+            while (i < len) {
+                str += generateEnqList(obj['results']['enq'][i]);
+                i++;
+            }
+            enqPage++;
+        } else {
+            str = '<p class="noRecords"><span>Sorry! No Enquiries Found!</span></p>';
+            loadEnq = false;
+        }
+        $('#enqList').append(str);
+    } else {
+        loadEnq = false;
+    }
+}
+function generateEnqList(obj) {
+    var date = obj['update_time'].split(' ');
+    var pro_dtls=obj['pro_dtls'];
+    var pro_name = pro_dtls['product_name'];
+    if(pro_name == null) {
+        pro_name = '';
+    }
+    var str='';
+    str += '<li>';
+        str += '<div class="date fLeft"> ';
+            str += '<span class="upSpan">' + date[0] + '</span>';
+            str += '<span class="lwSpan">' + date[1] + '</span>';
+        str += '</div>';
+        str += '<div class="name fLeft">' + obj['user_name'] + '</div>';
+        str += '<div class="email fLeft">';
+            str += '<span class="upSpan">' + obj['user_email'] + '</span>';
+            str += '<span class="lwSpan">' + obj['user_mobile'] + '</span>';
+        str += '</div>';
+        str += '<div class="type fLeft">';
+            str += '<span class="upSpan">' + pro_dtls['cat_name'][0] + '</span>';
+            str += '<span class="lwSpan">' + pro_dtls['cat_name'][1] + '</span>';
+        str += '</div>';
+        str += '<div class="barcode fLeft">';
+            str += '<span class="upSpan">' + pro_dtls['barcode'] + '</span>';
+            str += '<span class="lwSpan"><a href="'+ DOMAIN + pro_name.replace(" ", "+").toLowerCase() +'/did-'+ obj['product_id'] +'">View Details</a></span>';
+        str += '</div>';
+        str += '<div class="price fLeft bNone fmOpenB">&#8377;' + pro_dtls['prd_price'] + '</div>';
+    str += '</li>';
+    return str;
+}
+
+</script>
+</body>
+</html>

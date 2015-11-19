@@ -8,28 +8,25 @@
     </div>
     <!------Dashboard Content End------>
     
-    
-    
-    
     <!------Product Content------>
-    <div id='product' class="contentCont fLeft dn">
+    <div id='product' class="contentCont fLeft">
         <div class="wrapperMax">
-            <div id='diamondPrds' class="forPrds fLeft fmOpenR dn">
+            <?php if($catid==10000) { ?>
+            <div id='diamondPrds' class="forPrds fLeft fmOpenR">
                 <?php include 'vProducts_Diamond.html'; ?>
             </div>
-            <div id='jewelleryPrds' class="forPrds fLeft fmOpenR dn">
+            <?php } else if($catid==10001) { ?>
+            <div id='jewelleryPrds' class="forPrds fLeft fmOpenR">
                 <?php include 'vProducts_jewellery.html'; ?>
             </div>
-            <div id='bullionPrds' class="forPrds fLeft fmOpenR dn">
+            <?php } else if($catid==10002) { ?>
+            <div id='bullionPrds' class="forPrds fLeft fmOpenR">
                 <?php include 'vProducts_bullion.html'; ?>
             </div>
+            <?php } ?>
         </div>
     </div>
     <!------Product Content End------>
-
-
-    <!------Enquiry Contents ------>
-    <?php include 'vendor_enquiries.html'; ?>
 
     <div class="v_Filters transition300 transit100X">
         <div class="closeFilter poR ripplelink" onclick="showEnqFilter()"></div>
@@ -144,6 +141,8 @@
 <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['jqryUi']; ?>"></script>
 <script type="text/javascript" src='tools/js/cms/vendor_landing.js'></script>
+<script type="text/javascript" src="tools/js/cms/page/vendorProductListings.js"></script>
+<script type="text/javascript" src='tools/js/cms/lib/jquery.toast.min.js'></script>
 
 </body>
 </html>

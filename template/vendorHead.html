@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Vendor Landing</title>
+        <title><?= $page; ?></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link rel='stylesheet' type="text/css" href='tools/css/backend.css?v=<?php echo VERSION; ?>'>
@@ -19,8 +19,13 @@
             var catid = "<?php echo $catid;?>";
             var DOMAIN = "<?php echo DOMAIN;?>";
             var pid = '<?php echo $pid;?>';
-            var catid = '<?php echo $catid;?>';
+            var activePage = '<?php echo $case;?>';
             var uid = customStorage.readFromStorage('userid');
         </script>
+        <style>
+            a { color: inherit; }
+            .vTabs a { display: block; }
+            p.noRecords { border: 1px solid #d6d6d6; color: #4d4d4d; margin: 0; padding: 10px; text-align: center; font-size: 14px; }
+        </style>
     </head>
     <body>

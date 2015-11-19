@@ -413,8 +413,13 @@
 					include 'template/vProducts_bullion.html';
 				break;
 				case 'vendor_landing':
-					$page='Vendor-Landing';
+					$page='Products';
+					$catid 	= $_GET['catid'];
 					include 'template/vendor_landing_page.html';
+				break;
+				case 'vendor_enquiries':
+					$page='Enquiries';
+					include 'template/vendor_enquiries.html';
 				break;
 				case 'about_us':
 					$page='about_us';
