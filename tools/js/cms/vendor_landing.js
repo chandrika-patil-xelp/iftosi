@@ -1,6 +1,3 @@
-customStorage.readFromStorage('userid',2);
-customStorage.readFromStorage('busiType','1,2,3');
-customStorage.readFromStorage('username','White Fire Jewels');
 var uid = customStorage.readFromStorage('userid');
 var busiType = customStorage.readFromStorage('busiType');
 var username = customStorage.readFromStorage('username');
