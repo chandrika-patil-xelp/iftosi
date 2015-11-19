@@ -82,6 +82,8 @@
                                         tbl_product_master
                              WHERE
                                                             product_id =\"".$params['prdid']."\"
+                             AND                                   
+                                                            active_flag=1
                              ORDER BY
                                                             update_time
                              DESC
@@ -114,7 +116,9 @@
                                                            desname
                             FROM 
                                    tbl_designer_product_mapping 
-                            WHERE 
+                            WHERE
+                                                            active_flag=1
+                            AND                                
                                                             product_id=".$pid."";
                    
                    $chkdes=$this->query($chksql);
@@ -465,7 +469,7 @@
             $page   = ($params['page'] ? $params['page'] : 1);
             $limit  = ($params['limit'] ? $params['limit'] : 15);
             
-            $sql = "SELECT *,MATCH(product_name) AGAINST ('".$params['prname']."*' IN BOOLEAN MODE) as startwith FROM tbl_product_master WHERE MATCH(product_name) AGAINST ('".$params['prname']."*' IN BOOLEAN MODE) ORDER BY startwith DESC";
+            $sql = "SELECT *,MATCH(product_name) AGAINST ('".$params['prname']."*' IN BOOLEAN MODE) as startwith FROM tbl_product_master WHERE MATCH(product_name) AGAINST ('".$params['prname']."*' IN BOOLEAN MODE) and active_flag=1 ORDER BY startwith DESC";
             if (!empty($page))
             {
                 $start = ($page * $limit) - $limit;
@@ -695,6 +699,8 @@
 								tbl_product_search 
 							WHERE 
 								product_id IN(".$pid.")
+                                                        AND
+                                                                active_flag=1
 							".$extn."	
 							";
 					$res = $this->query($sql);
@@ -723,6 +729,8 @@
 								tbl_product_search 
 							WHERE 
 								product_id IN(".$pid.")
+                                                        AND            
+                                                                active_flag=1    
 							".$extn."
 							ORDER BY
 								field(product_id,".$pid.")
@@ -768,6 +776,8 @@
 								tbl_product_master 
 							WHERE 
 								product_id IN(".$pid.")
+                                                        AND
+                                                                active_flag=1
 							ORDER BY
 								field(product_id,".$pid.");
 							";
@@ -839,6 +849,8 @@
 												tbl_product_search
 											WHERE
 												product_id IN(".$allpids.")
+                                                                                        AND
+                                                                                                active_flag=1
 											";
 									$res1 = $this->query($qry);
 									if($res1)
@@ -860,7 +872,9 @@
 											FROM 
 												tbl_product_search
 											WHERE
-												product_id IN(".$allpids.")
+												product_id IN(".$allpids.") 
+                                                                                        AND
+                                                                                                active_flag=1
 											";
 									$res1 = $this->query($qry);
 									if($res1)
@@ -916,7 +930,7 @@
           $page   = ($params['page'] ? $params['page'] : 1);
           $limit  = ($params['limit'] ? $params['limit'] : 15);
             
-            $sql = "SELECT * FROM tbl_product_master WHERE product_id=".$params['prdid']."";
+            $sql = "SELECT * FROM tbl_product_master WHERE product_id=".$params['prdid']." AND active_flag=1";
             if (!empty($page))
             {
                 $start = ($page * $limit) - $limit;
@@ -953,7 +967,10 @@
                     FROM 
                         tbl_product_search
                     WHERE 
-                        product_id=".$params['prdid']."";
+                        product_id=".$params['prdid']." 
+                    AND        
+                        active_flag=1";
+                        
             $res = $this->query($sql);
             $res2 = $this->query($sql2);
             
@@ -982,6 +999,8 @@
                                     tbl_vendor_product_mapping
                         WHERE 
                                     product_id=".$pid."
+                        AND                
+                                    active_flag=1
                         ORDER BY
                                     vendor_id ASC";
                 
@@ -1102,7 +1121,7 @@
         public function getList($params)
         {
             $total_products = 0;
-            $cnt_sql = "SELECT COUNT(1) as cnt FROM tbl_product_master";
+            $cnt_sql = "SELECT COUNT(1) as cnt FROM tbl_product_master AND active_flag=1";
             $cnt_res = $this->query($cnt_sql);
             
             $page   = ($params['page'] ? $params['page'] : 1);
@@ -1121,6 +1140,8 @@
                             prd_img as pimg
                     FROM 
                             tbl_product_master 
+                    WHERE
+                            active_flag=1
                     ORDER BY 
                             product_id ASC";
             
@@ -1155,6 +1176,8 @@
                        tbl_product_search 
                        WHERE 
                                 product_id IN (".$pid.")
+                       AND             
+                                active_flag=1    
                        ORDER BY 
                                 product_id ASC";
                 $pres=$this->query($psql);
@@ -1282,6 +1305,8 @@
                                 tbl_vendor_product_mapping
                   WHERE 
                                 city=\"".$params['cityname']."\"
+                  AND
+                                active_flag=1
                   ORDER BY
                                 product_id ASC"; 
             
@@ -1366,7 +1391,9 @@
                             FROM 
                                     tbl_product_master
                             WHERE
-                                    product_id IN(".$pid.")";
+                                    product_id IN(".$pid.")
+                            AND            
+                                    active_flag=1";
                 
                 $chkres=$this->query($fillpiddet);
                 $cnt_res3 = $this->numRows($chkres);
@@ -1427,7 +1454,7 @@
                             $aname=implode(',',$aname['attributes']);
                             
                             $prdattrs="SELECT product_id,";
-                            $prdattrs.=$aname." FROM tbl_product_search WHERE product_id IN(".$pid.") ORDER BY product_id ASC";
+                            $prdattrs.=$aname." FROM tbl_product_search WHERE product_id IN(".$pid.") AND active_flag=1 ORDER BY product_id ASC";
                         
                             $finalres=$this->query($prdattrs);
                             
@@ -1443,12 +1470,8 @@
                                     $arr[$prid]['attr_details']=$rows;
                                     $arr[$prid]['vendor_product_details']=$arr3[$i];
                                     $arr[$prid]['vendor_details']=$vdetls;
-                                    
-  
                                 $i++;
-                                    
                                 }
-                                
                             }  
                         }
 
@@ -1493,7 +1516,9 @@
                       FROM
                             tbl_product_master 
                       WHERE 
-                            product_brand='".$params['bname']."'";
+                            product_brand='".$params['bname']."'
+                      AND
+                            active_flag=1";
             if(!empty($page)) 
             {
                 $start = ($page * $limit) - $limit;
@@ -1551,7 +1576,9 @@
                               FROM 
                                     tbl_product_master 
                               WHERE
-                                    product_id IN(".$pid.")";
+                                    product_id IN(".$pid.")
+                              AND
+                                    active_flag=1";
                 if(!empty($page)) 
                 {
                     $start = ($page * $limit) - $limit;
