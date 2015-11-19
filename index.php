@@ -350,7 +350,7 @@
                                         
                                         $attr   = $result[$pid]['attr_details'];
                                         $pdet   = $result[$pid];
-//                                        echo "<pre>";print_r($cat);die;
+                                        //echo "<pre>";print_r($pdet);die;
 					include 'template/jewelleryForm.html';
 				break;
                             
@@ -382,7 +382,7 @@
                                         $fil 	= $res['results'];
                                         $attr   = $result[$pid]['attr_details'];
                                         $pdet   = $result[$pid];
-                                        //echo "<pre>";print_r($attr);die;
+                                        //echo "<pre>";print_r($pdet);die;
                                        //echo "<pre>";print_r($result[$pid]['attr_details']['type']);die;
                                         include 'template/bullionForm.html';
 				break;
