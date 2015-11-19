@@ -266,7 +266,7 @@ function deleteProduct(proId,ele) {
             }
             var count = $("#"+catName+"List li").length;
             if(count<15) {
-                $("#"+catName+"List").html();
+                $("#"+catName+"List").html('');
                 if(catid==10000) {
                     diamondPage = 1;
                     loadDiamonds();
