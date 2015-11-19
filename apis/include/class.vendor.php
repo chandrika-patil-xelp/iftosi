@@ -11,7 +11,7 @@ class vendor extends DB
         $dt= json_decode($params['dt'],1);
         $detls  = $dt['result'];
         
-        $sql="SELECT city from tbl_vendor_master where vendor_id=\"".$detls['vid']."\"";
+        $sql="SELECT city from tbl_vendor_master where active_flag=1 and vendor_id=\"".$detls['vid']."\"";
         $res=$this->query($sql);
         $row=$this->fetchData($res);
         $city=$row['city'];
@@ -46,13 +46,13 @@ class vendor extends DB
         
         $total_products = 0;
         
-        $cnt_sql = "SELECT COUNT(1) as cnt FROM tbl_vendor_product_mapping  WHERE vendor_id =".$params['vid'];
+        $cnt_sql = "SELECT COUNT(1) as cnt FROM tbl_vendor_product_mapping  WHERE active_flag=1 and vendor_id =".$params['vid'];
         $cnt_res = $this->query($cnt_sql); //checking number of products registered under vendor id provided
         
         $chkcnt=$this->numRows($cnt_res);
          if($chkcnt>0)
         {
-            $vsql="select product_id,vendor_price,vendor_quantity,vendor_currency,city,active_flag from tbl_vendor_product_mapping where vendor_id=".$params['vid'];
+            $vsql="select product_id,vendor_price,vendor_quantity,vendor_currency,city,active_flag from tbl_vendor_product_mapping where active_flag=1 and vendor_id=".$params['vid'];
             $vres=$this->query($vsql);
             $prsql.=" LIMIT " . $start . ",$limit";
             
@@ -71,7 +71,7 @@ class vendor extends DB
             $vmapProd=implode(',',$vmap[$i]['product_id']);
 
             $prsql="SELECT product_id,product_name,product_display_name,product_model,product_brand,prd_img,desname 
-                    FROM tbl_product_master WHERE product_id IN(".$vmapProd.")";
+                    FROM tbl_product_master WHERE product_id IN(".$vmapProd.") AND active_flag=1";
             $prsql.=" LIMIT " . $start . ",$limit";
 
             $pres=$this->query($prsql);
@@ -200,7 +200,7 @@ class vendor extends DB
         $page   = ($params['page'] ? $params['page'] : 1);
         $limit  = ($params['limit'] ? $params['limit'] : 15);
         
-        $sql1="SELECT * FROM tbl_vendor_product_mapping where product_id=".$params['pid']." AND vendor_id=".$params['vid']." ORDER BY date_time ASC";
+        $sql1="SELECT * FROM tbl_vendor_product_mapping where product_id=".$params['pid']." AND vendor_id=".$params['vid']." AND active_flag=1 ORDER BY date_time ASC";
         if (!empty($page))
         {
             $start = ($page * $limit) - $limit;
@@ -284,7 +284,7 @@ class vendor extends DB
         $page   = ($params['page'] ? $params['page'] : 1);
         $limit  = ($params['limit'] ? $params['limit'] : 15);
         
-        $sql1="SELECT * FROM tbl_vendor_product_mapping where product_id=".$params['pid']." ORDER BY date_time ASC";
+        $sql1="SELECT * FROM tbl_vendor_product_mapping where product_id=".$params['pid']." active_flag=1 and ORDER BY date_time ASC";
         if (!empty($page))
         {
             $start = ($page * $limit) - $limit;
@@ -413,7 +413,9 @@ class vendor extends DB
                 AND 
                                     b.category_id = " . $catid . "
                 AND 
-                                    a.vendor_id=" . $params['vid'] . " 
+                                    a.vendor_id=" . $params['vid'] . "
+                AND
+                                    a.active_flag=1
                 ORDER BY 
                                     a.product_id
                 asc ";
@@ -473,12 +475,28 @@ class vendor extends DB
     public function deletePrd($params) {
         $sql = "UPDATE tbl_vendor_product_mapping SET active_flag=2 WHERE product_id=" . $params['prdid']." AND vendor_id=" . $params['vid'];
         $res = $this->query($sql);
+        if($res){
+        $sql = "UPDATE tbl_product_search SET active_flag=2 WHERE product_id=" . $params['prdid'];
+        $res1 = $this->query($sql);}
+        if($res1){
+        $sql = "UPDATE tbl_product_master SET active_flag=2 WHERE product_id=" . $params['prdid'];
+        $res2 = $this->query($sql);}
+        if($res2){
+        $sql = "UPDATE tbl_productid_generator SET active_flag=2 WHERE product_id=" . $params['prdid'];
+        $res3 = $this->query($sql);}
+        if($res3){
+        $sql = "UPDATE tbl_product_category_mapping SET display_flag=2 WHERE product_id=" . $params['prdid'];
+        $res = $this->query($sql);}
+        if($res4){
+        $sql = "UPDATE tbl_designer_product_mapping SET active_flag=2 WHERE product_id=".$params['prdid'];
+        $res = $this->query($sql);
         if ($res) {
             $arr = array();
             $err = array('Code' => 0, 'Msg' => 'Product deleted successfully!');
         } else {
             $arr = array();
             $err = array('code' => 1, 'msg' => 'Error in fetching data');
+        }
         }
         $result = array('results' => $arr, 'error' => $err);
         return $result;
