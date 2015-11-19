@@ -448,6 +448,7 @@ class vendor extends DB
             $err = array('Code' => 0, 'Msg' => 'Details fetched successfully');
         } else {
             $arr = array();
+            //$arr = array('total_products' => $total_products, 'total_pages' => $total_pages);
             $err = array('Code' => 1, 'Msg' => 'No Match Found');
         }
         $result = array('results' => $arr, 'error' => $err);
@@ -467,6 +468,20 @@ class vendor extends DB
             }
         }
         return $catid;
+    }
+    
+    public function deletePrd($params) {
+        $sql = "UPDATE tbl_vendor_product_mapping SET active_flag=2 WHERE product_id=" . $params['prdid']." AND vendor_id=" . $params['vid'];
+        $res = $this->query($sql);
+        if ($res) {
+            $arr = array();
+            $err = array('Code' => 0, 'Msg' => 'Product deleted successfully!');
+        } else {
+            $arr = array();
+            $err = array('code' => 1, 'msg' => 'Error in fetching data');
+        }
+        $result = array('results' => $arr, 'error' => $err);
+        return $result;
     }
 
 }

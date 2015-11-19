@@ -308,6 +308,23 @@ switch($action)
             $res=$result;
             break;            
             
+//  localhost/iftosi/apis/index.php?action=vDeletePrd&prdid=1&vid=2
+        case 'vDeletePrd':
+            include APICLUDE.'class.vendor.php';
+            $prdid=(!empty($params['prdid'])) ? trim($params['prdid']) : '';
+            $vid=(!empty($params['vid'])) ? trim($params['vid']) : '';
+            if(empty($prdid) && empty($vid))
+            {
+                $arr=array();
+                $err=array('code'=>1,'Invalid Parameter');
+                $result=array('result'=>$arr,'error'=>$err);
+                $res=$result;
+                break;
+            }
+            $obj= new vendor($db['iftosi']);
+            $result= $obj->deletePrd($params);
+            $res= $result;
+            break;
 
 //-------------------------Location---------------------------------               
             
