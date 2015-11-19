@@ -21,25 +21,25 @@
                 $expd = explode('|@|',$detls1[$i]);
                 $detls[$expd[0]] = $expd[1];
             }
-            if(($detls['shape']=='gBar')||($detls['shape']=='sBar')||($detls['shape']=='gCoin')||($detls['shape']=='sCoin'))
+            if(($detls['shape']=='gBars')||($detls['shape']=='sBars')||($detls['shape']=='gCoins')||($detls['shape']=='sCoins'))
             {
-                $type=substr($detls['shape'],1);
+                $type=substr($detls['shape'],1,-1);
                 $temp=$detls['shape'];
-                
-                if(($temp=='gBar')||($temp=='gCoin'))
+                $shape=$detls['shape'];
+                if(($temp=='gBars')||($temp=='gCoins'))
                 {
                     $detls['metal']='Gold';
                 }
-                else if(($temp=='sBar')||($temp=='sCoin'))
+                else if(($temp=='sBars')||($temp=='sCoins'))
                 {
                     $detls['metal']='Silver';
                 }
                 
-                $catname=substr($detls['shape'],1);
-                $catname=$catname.'s';
-                $catidsql="Select catid from tbl_category_master where cat_name='".$catname."'";
+                $catname=substr($detls['shape'],1); 
+                $catname=$catname;
+               $catidsql="Select catid from tbl_category_master where cat_name='".$catname."'";
                 $catidres=$this->query($catidsql);
-                $catidrow=$this->fetchData($catidres);
+               $catidrow=$this->fetchData($catidres);
                 $catids1=$catidrow['catid'];
             }
             else
@@ -69,7 +69,7 @@
                                                                 aflg) 
                             VALUES
                                                             (\"".$detls['brand']."\",
-                                                             \"".$params['category_id']."\",
+                                                             \"".$params['catid']."\",
                                                                  now(),
                                                                  1)";
 
@@ -91,7 +91,7 @@
                        $row=$this->fetchData($res);
                         $pid=$row['product_id'];
                 }
-                else
+                else if(empty($params['prdid']))
                 {
                   //  If product not present in generator table new product insertion process starts
                   $sql = "INSERT
@@ -154,38 +154,43 @@
                    
                    }
                     //  For category product mapping
-                                   
-                   for($i=0;$i<count($catids);$i++)
-                   {
                         
+                   
                        
-                        if(!empty($catids[$i]))
+                            $updtcatsql="UPDATE tbl_product_category_mapping set display_flag=0 where category_id NOT IN(".$catids1.") and product_id=\"".$pid."\"";    
+                            $updtcatres=$this->query($updtcatsql);
+                        
+                        for($i=0;$i<count($catids);$i++)
                         {
-                        $pcsql="INSERT
-                                INTO 
-                                            tbl_product_category_mapping
-                                                                           (product_id,
-                                                                            category_id,
-                                                                            price,
-                                                                            rating,
-                                                                            display_flag,
-                                                                            date_time)
-                                VALUES
-                                                                       (\"".$pid."\",
-                                                                        \"".$catids[$i]."\",
-                                                                        \"".$detls['price']."\",
-                                                                        \"".$detls['rating']."\",
-                                                                        1,
-                                                                        now())
+                            if(!empty($catids[$i]))
+                            {
+                                
+                                
+                                
+                                $pcsql="INSERT
+                                        INTO 
+                                                    tbl_product_category_mapping
+                                                                                   (product_id,
+                                                                                    category_id,
+                                                                                    price,
+                                                                                    rating,
+                                                                                    display_flag,
+                                                                                    date_time)
+                                        VALUES
+                                                                               (\"".$pid."\",
+                                                                                \"".$catids[$i]."\",
+                                                                                \"".$detls['price']."\",
+                                                                                \"".$detls['rating']."\",
+                                                                                    1,
+                                                                                    now())
                                 ON DUPLICATE KEY UPDATE
                                                         category_id             = \"".$catids[$i]."\",
                                                         price                   = \"".$detls['price']."\",
                                                         rating                  = \"".$detls['rating']."\",
-                                                        display_flag            = \"".$detls['dflag']."\"";
-                    
-                        $pcres=$this->query($pcsql);
-                   }
-               }   
+                                                        display_flag            =     1";
+                                $pcres=$this->query($pcsql);
+                           }
+                        }
                     //  For product values filling     
                         $sql="  INSERT
                                 INTO 
@@ -365,7 +370,7 @@
                             $venrow=$this->fetchData($venres);
                             $city=$row['city'];
 
-
+//------------------------------------------------------------------------------------------------------------------------
                             $vendsql="  INSERT
                                         INTO 
                                                 tbl_vendor_product_mapping
@@ -396,11 +401,12 @@
                                 $arr = array();
                                 $err=array('code'=>0,'msg'=>'Product added successfully');
                             }
+//------------------------------------------------------------------------------------------------------------                            
                 }
                 else
                 {
                     $arr=array();
-                    $err = array('Code' => 1, 'Msg' => 'Something Went Wrong.');
+                    $err = array('Code' => 1, 'Msg' => 'Product Id is not found');
                 }
                     $result = array('results'=>$arr, 'error' => $err);
                     return $result;
@@ -515,7 +521,12 @@
 				$catname = $row['name'];
 			}
 			
-			if(!empty($params['jlist']))
+                        if(!empty($params['ilist']))
+			{
+				$ilist = str_replace('|@|',',',$params['ilist']);
+				$where = " WHERE category_id in (".$ilist.") ";
+			}
+			else if(!empty($params['jlist']))
 			{
 				$expd = explode('|@|',$params['jlist']);
 				foreach($expd as $key => $val)
@@ -525,12 +536,7 @@
 				}
 				$ilist = implode(',',$ids);
 				$where = " WHERE category_id in (".$ilist.") ";
-			}
-			else if(!empty($params['ilist']))
-			{
-				$ilist = str_replace('|@|',',',$params['ilist']);
-				$where = " WHERE category_id in (".$ilist.") ";
-			}
+			} 
 			else
 			{
 				$where = " WHERE category_id in (".$params['catid'].") ";
@@ -541,7 +547,7 @@
 					FROM 
 						tbl_product_category_mapping
 					".$where."
-					";
+					and display_flag=1";
 			
 			
 			$res = $this->query($sql);
@@ -557,7 +563,7 @@
 					FROM 
 						tbl_product_category_mapping 
 					".$where."
-					";
+					AND display_flag=1";
 			
 			switch($params['sortby'])
 			{
@@ -1072,7 +1078,7 @@
                              FROM 
                                         tbl_product_category_mapping
                              WHERE 
-                                                product_id =".$params['prdid']." AND category_id!=".$params['catid']."";
+                                                product_id =".$params['prdid']." AND display_flag=1 AND category_id!=".$params['catid']."";
                         $res5=$this->query($sql5);
                         if ($res5) {
                             while ($row5 = $this->fetchData($res5)) {

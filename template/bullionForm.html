@@ -11,6 +11,7 @@
                             <div class="allShapes resultsPage">
                                 <center>
 <?php
+                        $catIds =  explode(',', $pdet['catid']);    
                         /*foreach($fil['attributes'] as $key=>$values)
                         {
                             if(strtolower($values['attribute_disp_name'])=='type')
@@ -32,20 +33,52 @@
                                  }}}
                                  */
                                  //var_dump($cat); die;
-                                foreach($cat['subcat'] as $ky=>$val)
+                                                                $shapes= $attr['shape'];
+                                                                $type=$val['catname'];
+                                                                $shows='';
+                                                                $showg='';
+                                                                 if(!empty($params['prdid']))
+                                                                {
+                                                                    if(($shapes=='gCoins')||($shapes=='gBars'))
+                                                                    {
+                                                                        $showg='';
+                                                                        $shows='dn';
+                                                                    }
+                                                                   else if(($shapes=='sBars')||($shapes=='sCoins'))
+                                                                    {
+                                                                        $shows='';
+                                                                        $showg='dn';
+                                                                    }
+                                                                }
+                                                                 
+                                                                foreach($cat['subcat'] as $ky=>$val)
 								{   
-									if(strtolower($val)!=='')
+                                                                    if(strtolower($val)!=='')
 									{
-										echo "<div id='g".$val['catname']."' class='jshapeComm transition300 ripplelink g".ucwords(strtolower($val['catname']))."'>".$val['catname']."</div>";
-									}
-								}
+                                                                            if(($shapes=='gCoins')||($shapes=='gBars'))
+                                                                            {
+                                                                                echo "<div id='g".$val['catname']."' class='jshapeComm transition300 ripplelink g".ucwords(strtolower($val['catname']))." ".(('g'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>".$val['catname']."</div>";
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                echo "<div id='g".$val['catname']."' class='jshapeComm transition300 ripplelink g".ucwords(strtolower($val['catname']))." ".(('g'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>".$val['catname']."</div>";
+                                                                            }
+                                                                        }    
+                                                                }
 
 								foreach($cat['subcat'] as $ky=>$val)
 								{   
 									if(strtolower($val)!=='')
 									{
-										echo "<div id='s".$val['catname']."' class='jshapeComm transition300 ripplelink s".ucwords(strtolower($val['catname']))."'>".$val['catname']."</div>";
-									}
+                                                                            if(($shapes=='sCoins')||($shapes=='sBars'))
+                                                                            {
+                                                                            	echo "<div id='s".$val['catname']."' class=' jshapeComm transition300 ripplelink s".ucwords(strtolower($val['catname']))." ".(('s'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>".$val['catname']."</div>";
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                            	echo "<div id='s".$val['catname']."' class=' jshapeComm transition300 ripplelink s".ucwords(strtolower($val['catname']))." ".(('s'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>".$val['catname']."</div>";
+                                                                            }
+                                                                        }
 								}
 ?>
                                 </center>
@@ -57,21 +90,21 @@
                                     </div><div id="sCoin" class="jshapeComm transition300 ripplelink sCoin">Silver Coin
                                     </div>-->
 
-                                    <div class="divCon2  fLeft goldprop allprop">
+                                    <div class="divCon2  fLeft goldprop allprop <?=$showg;?>">
                                     <div  class="titleDiv txtCap fLeft">Gold Purity</div>
                                     <input name="gold_purity" id="goldpurity" type="text" placeholder=" eg. 1.33" value="<?=$attr['gold_purity'];?>" class="txtInput fLeft fmOpenR font14 c666">
                                     </div>
-                        <div class="divCon2  fLeft goldprop allprop">
+                        <div class="divCon2  fLeft goldprop allprop <?=$showg;?>">
                             <div  class="titleDiv txtCap fLeft">Gold Weight</div>
                             <input name="gold_weight" id="goldweight" type="text" placeholder=" eg. 10 Gms" value="<?=$attr['gold_weight'];?>" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
-                        <div class="divCon2  fLeft silverprop allprop">
+                        <div class="divCon2  fLeft silverprop allprop <?=$shows;?> ">
                             <div  class="titleDiv txtCap fLeft">Silver Purity</div>
-                            <input name="silver_purity" id="silverpurity" type="text" placeholder=" eg. 1.33" value="<?=$attr['silver_purity'];?>" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="silver_purity" id="silverpurity" type="text" placeholder=" eg. 1.33" value="<?=$attr['gold_purity'];?>" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
-                        <div class="divCon2  fLeft silverprop allprop">
+                        <div class="divCon2  fLeft silverprop allprop <?=$shows;?>">
                             <div  class="titleDiv txtCap fLeft">Silver Weight</div>
-                            <input name="silver_weight" id="silverweight" type="text" placeholder=" eg. 10 Gms" value="<?=$attr['silver_weight'];?>" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="silver_weight" id="silverweight" type="text" placeholder=" eg. 10 Gms" value="<?=$attr['gold_weight'];?>" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Price</div>
