@@ -52,6 +52,7 @@ function submitForm(formid)
     var URL = DOMAIN+"apis/index.php";
 
     $.getJSON(URL, params, function(data) {
+      window.location.href = DOMAIN+'?case=vendor_landing';
     });
     
 }
