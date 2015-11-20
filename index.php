@@ -44,7 +44,8 @@
 					$ilist	= $_GET['ilist'];
 					$jlist	= $_GET['jlist'];
 					$ctid	= $_GET['ctid'];
-					$url 	= APIDOMAIN.'index.php?action=getPrdByCatid&catid='.$catid.'&page='.$pgno.'&sortby='.$sortby.'&slist='.urlencode($slist).'&clist='.urlencode($clist).'&tlist='.urlencode($tlist).'&ilist='.urlencode($ilist).'&jlist='.urlencode($jlist).'&ctid='.$ctid;
+					$uid	= $_GET['uid'];
+					$url 	= APIDOMAIN.'index.php?action=getPrdByCatid&catid='.$catid.'&page='.$pgno.'&sortby='.$sortby.'&slist='.urlencode($slist).'&clist='.urlencode($clist).'&tlist='.urlencode($tlist).'&ilist='.urlencode($ilist).'&jlist='.urlencode($jlist).'&ctid='.$ctid.'&uid='.$uid;
 					$res 	= $comm->executeCurl($url);
 					
 					if(!empty($jlist))
@@ -139,17 +140,18 @@
 				
 				case 'wishlist':
 					$page='wishlist';
-                                        $uid 	= $_GET['uid'];
-                                        $pgno 	= ($_GET['pgno'] ? $_GET['pgno'] : 1);
-                                        $url 	= APIDOMAIN.'index.php?action=viewsh&uid=2&page='.$pgno;
-                                        $res 	= $comm->executeCurl($url);
-					$prdsrch= $res['result']['productsearch'];
-					$prddata= $res['result']['productmaster'];
-					$total  = $res['result']['totalcount'];
-                                        $totalCnt = $total;
-					$lastpg = ceil($total/15);
-					$adjacents = 2;
-                                        echo "<pre>";print_r($res['result']);die;
+					
+					$uid 		= $_GET['uid'];
+					$pgno 		= ($_GET['pgno'] ? $_GET['pgno'] : 1);
+					$url 		= APIDOMAIN.'index.php?action=getPrdByCatid&uid='.$uid.'&page='.$pgno;
+					$res 		= $comm->executeCurl($url);
+					$data 		= $res['results']['products'];
+					$total		= $res['results']['total'];
+					$catname	= $res['results']['catname'];
+					$totalCnt 	= $total;
+					$lastpg 	= ceil($total/16);
+					$adjacents 	= 2;
+					
 					include 'template/wishlist.html';
 				break;
 				
@@ -443,28 +445,28 @@
 				break;
                             
 				case 'terms_conditions':
-                                        $page='terms_conditions';
-                                        include 'template/terms_conditions.html';
-                                break;
-                            
-                                case 'faq':
-                                       $page='faq';
-                                       include 'template/faq.html';
-                                break;
-                                case 'education':
-                                       $page='education';
-                                       include 'template/education.html';
-                                break;
-                                case 'membership':
-                                       $page='membership';
-                                       include 'template/membership.html';
-                                break;
-                                case 'shapes':
-                                       $page='shapes';
-                                       include 'template/shapes.html';
-                                break;
-				
-                                default:
+						$page='terms_conditions';
+						include 'template/terms_conditions.html';
+				break;
+			
+				case 'faq':
+					   $page='faq';
+					   include 'template/faq.html';
+				break;
+				case 'education':
+					   $page='education';
+					   include 'template/education.html';
+				break;
+				case 'membership':
+					   $page='membership';
+					   include 'template/membership.html';
+				break;
+				case 'shapes':
+					   $page='shapes';
+					   include 'template/shapes.html';
+				break;
+
+				default:
 					$page='index';
 					$url = APIDOMAIN.'index.php?action=getCatList&page=1&limit=3';
 					$res = $comm->executeCurl($url);

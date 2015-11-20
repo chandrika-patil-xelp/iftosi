@@ -512,10 +512,141 @@
         }
         
         public function getPrdByCatid($params)
-        {
-			
+        {	
 			$page   = ($params['page'] ? $params['page'] : 1);
 			$limit  = ($params['limit'] ? $params['limit'] : 15);
+			
+			if($params['uid'])
+			{
+				$page   = ($params['page'] ? $params['page'] : 1);
+				$limit  = ($params['limit'] ? $params['limit'] : 16);
+				
+				$sql = "SELECT 
+							group_concat(pid) as pid 
+						FROM 
+							tbl_wishlist 
+						WHERE 
+							uid = ".$params['uid']." 
+						ORDER BY 
+							date_time DESC ";
+				$res = $this->query($sql);
+				
+				if($res)
+				{
+					$row = $this->fetchData($res);
+					$pid = $row['pid'];
+				}
+					
+				if($pid)
+				{
+						
+					$sql = "SELECT 
+								count(distinct product_id) as cnt 
+							FROM 
+								tbl_product_search 
+							WHERE 
+								product_id IN(".$pid.")
+							AND
+								active_flag=1
+							";
+					$res = $this->query($sql);
+					if($res)
+					{
+						$row = $this->fetchData($res);
+						$total = $row['cnt'];
+					}
+					
+					$patsql="
+							SELECT
+								distinct product_id,
+								carat,
+								color,
+								certified,
+								shape,
+								clarity,
+								price,
+								polish,
+								symmetry,
+								cno,
+								gold_weight,
+								type,
+								metal
+							FROM 
+								tbl_product_search 
+							WHERE 
+								product_id IN(".$pid.")
+                                                        AND            
+                                                                active_flag=1    
+							".$extn."
+							ORDER BY
+								field(product_id,".$pid.")
+							";
+							
+					if (!empty($page))
+					{
+						$start = ($page * $limit) - $limit;
+						$patsql.=" LIMIT " . $start . ",$limit";
+					}
+							
+					$patres=$this->query($patsql);
+					
+					while($row2=$this->fetchData($patres))
+					{
+						$prodid[] = $row2['product_id'];
+						$pid = $row2['product_id'];
+						unset($row2['product_id']);
+						$attr[$pid]['attributes']=$row2;
+					}
+					
+					if(!empty($prodid))
+					{
+						$pid = $pids = implode(',',$prodid);
+					}
+					else
+					{
+						$pid = $pids = '';
+					}
+					
+					$psql = "
+							SELECT
+								product_id as pid,
+								barcode as pcode,
+								product_name as pname,
+								product_display_name as pdname,
+								product_model as pmodel,
+								product_brand as pbrand,
+								prd_price as pprice,
+								product_currency as pcur,
+								prd_img as pimg
+							FROM 
+								tbl_product_master 
+							WHERE 
+								product_id IN(".$pid.")
+                                                        AND
+                                                                active_flag=1
+							ORDER BY
+								field(product_id,".$pid.");
+							";
+					$pres=$this->query($psql);
+					while($row1=$this->fetchData($pres))
+					{
+						$pid = $row1['pid'];
+						$arr1[$pid]=$row1;
+						$arr1[$pid]['attributes'] = $attr[$pid]['attributes'];
+					}
+					
+					$tmp_arr1 = (!empty($arr1)) ? (array_values($arr1)) : null;
+					$arr1 = array('filters'=>$data,'products'=>$tmp_arr1,'total'=>$total,'getdata'=>$params,'catname'=>'Wishlist');
+					$err = array('errCode'=>0,'errMsg'=>'Details fetched successfully');
+				}
+				else
+				{
+					$arr1 = array();
+					$err = array('errCode'=>1,'errMsg'=>'No records found');
+				}
+				$result = array('results'=>$arr1,'error'=>$err);
+				return $result;
+			}
 			
 			$sql = "select cat_name as name from tbl_category_master where catid=\"".$params['catid']."\"";
 			$res = $this->query($sql);

@@ -231,6 +231,49 @@ function getResultsData(data,sortby,showtree)
 				html += '</a>';
 			});
 		}
+		else if(pageName == 'wishlist') {
+			$.each(data.results.products, function(i, vl) {
+				html += '<div class="prdComm fLeft transition100">';
+					html += '<div class="prdCommDiv fLeft transition100">';
+						html += '<div class="prdShape fLeft">';
+							html += '<div class="prdShTitle fLeft fmOpenB">SHAPE</div>';
+							html += '<div class="prdShType fLeft fmOpenR">Round</div>';
+							html += '<div class="Round fRight"></div>';
+						html += '</div>';
+						html += '<div class="prdDetails fLeft">';
+							html += '<div class="detComm">';
+								html += '<div class="detLabel fmOpenB fLeft">COLOR</div>';
+								html += '<div class="detValue fmOpenR fLeft">F</div>';
+							html += '</div>';
+							html += '<div class="detComm">';
+								html += '<div class="detLabel fmOpenB fLeft">CARATS</div>';
+								html += '<div class="detValue fmOpenR fLeft">0.99</div>';
+							html += '</div>';
+							html += '<div class="detComm">';
+								html += '<div class="detLabel fmOpenB fLeft">CLARITY</div>';
+								html += '<div class="detValue fmOpenR fLeft">Excellent</div>';
+							html += '</div>';
+							html += '<div class="detComm">';
+								html += '<div class="detLabel fmOpenB fLeft">CERTIFICATE</div>';
+								html += '<div class="detValue fmOpenR fLeft">1199046357</div>';
+							html += '</div>';
+						html += '</div>';
+						html += '<div class="prdPrice fLeft">';
+							html += '<div class="detComm">';
+								html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
+								html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>8,28,5888</div>';
+							html += '</div>';
+						html += '</div>';
+						html += '<div class="prdActions fLeft">';
+							html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+							html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+							html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+							html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+						html += '</div>';
+					html += '</div>';
+				html += '</div>';
+			});
+		}
 		else {
 			$.each(data.results.products, function(i, vl) {
 				html += '<a href="'+DOMAIN+vl.attributes.metal.toLowerCase()+'-'+vl.attributes.type.toLowerCase()+'-'+Math.round(vl.attributes.gold_weight)+'-grams/bid-'+vl.pid+'">';
@@ -258,24 +301,6 @@ function getResultsData(data,sortby,showtree)
 									html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+vl.attributes.price+'</div>';
 								html += '</div>';
 							html += '</div>';
-						
-							/* html += '<div class="prdCommImg fLeft">';
-								html += '<div class="proxImg fLeft" style="background: #fff url(tools/img/product1/b1.jpg)no-repeat;background-size: contain;background-position:center"></div>';
-							html += '</div>';
-							html += '<div class="prdDetails fLeft">';
-								html += '<div class="detComm">';
-									html += '<div class="detLabel fmOpenB fLeft">WEIGHT</div>';
-									html += '<div class="detValue fmOpenR fLeft">'+Math.round(vl.attributes.gold_weight,2)+' Gms</div>';
-								html += '</div>';
-							html += '</div>';
-							html += '<div class="prdPrice fLeft">';
-								html += '<div class="detComm">';
-									html += '<div class="detLabel fmOpenB fLeft">PRICE</div>';
-									html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+vl.attributes.price+'</div>';
-								html += '</div>';
-							html += '</div>'; */
-							
-							
 							html += '<div class="prdActions fLeft">';
 								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
 								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
@@ -614,7 +639,12 @@ function getResultsData(data,sortby,showtree)
 	$('.prdResults').offset();
 	if(sortby)
 	{
-		$('body').animate({scrollTop: $('.allResults').offset().top-60}, 300);
+		if(typeof $('.allResults').offset() !== 'undefined')
+		{
+			$('body').animate({scrollTop: $('.allResults').offset().top-60}, 300);
+		}
+		else
+			$('body').animate({scrollTop: $('.listCont').offset().top-120}, 300);
 	}
 		
 	
@@ -746,10 +776,13 @@ function FR(sortby,showtree) {
 	var ctid = $('#ctid').val();
 	
 	var pgno = $('#pgno').val();
+	var uid = $('#uid').val();
+	
+	console.log('here');
 	
 	if(sortby)
 	{
-		var params = 'action=ajx&case=filter&catid='+catid+'&sortby='+sortby+'&slist='+slist+'&clist='+clist+'&tlist='+tlist+'&ilist='+ilist+'&jlist='+jlist+'&ctid='+ctid+'&pgno='+pgno;
+		var params = 'action=ajx&case=filter&catid='+catid+'&sortby='+sortby+'&slist='+slist+'&clist='+clist+'&tlist='+tlist+'&ilist='+ilist+'&jlist='+jlist+'&ctid='+ctid+'&pgno='+pgno+"&uid="+uid;
 		var URL = DOMAIN + "index.php";
 		$.getJSON(URL, params, function(data) {
 			getResultsData(data,sortby);   
@@ -758,7 +791,7 @@ function FR(sortby,showtree) {
 	else
 	{
 		$('#drpinp').text('Best Match');
-		var params = 'action=ajx&case=filter&catid='+catid+'&slist='+slist+'&clist='+clist+'&tlist='+tlist+'&ilist='+ilist+'&jlist='+jlist+'&ctid='+ctid+'&pgno='+pgno;
+		var params = 'action=ajx&case=filter&catid='+catid+'&slist='+slist+'&clist='+clist+'&tlist='+tlist+'&ilist='+ilist+'&jlist='+jlist+'&ctid='+ctid+'&pgno='+pgno+"&uid="+uid;
 		var URL = DOMAIN + "index.php";
 		$.getJSON(URL, params, function(data) {
 			getResultsData(data);
@@ -795,17 +828,19 @@ function showLeftMenu(flag) {
 
 
 var ele = document.getElementById('dragTarget');
-var mc = new Hammer(ele);
-mc.on("panleft panright tap press", function(ev) {
-    //ele.textContent = ev.type +" gesture detected.";
-    if (ev.type == 'panright') {
-        showLeftMenu(true);
-    }
-    else if (ev.type == 'panleft') {
-        showLeftMenu(false);
-    }
-});
-
+if(ele !== null)
+{
+	var mc = new Hammer(ele);
+	mc.on("panleft panright tap press", function(ev) {
+		//ele.textContent = ev.type +" gesture detected.";
+		if (ev.type == 'panright') {
+			showLeftMenu(true);
+		}
+		else if (ev.type == 'panleft') {
+			showLeftMenu(false);
+		}
+	});
+}
 
 //prdComm 
 

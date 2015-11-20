@@ -695,14 +695,15 @@ switch($action)
 //  localhost/iftosi/apis/index.php?action=getPrdByCatid&catid=1&page=1&limit=1         
         case 'getPrdByCatid':
             include APICLUDE.'class.product.php';
-            $catid=(!empty($params['catid'])) ? trim($params['catid']) : '';
-            if(empty($catid))
+            $catid	=(!empty($params['catid'])) ? trim($params['catid']) : '';
+            $uid	=(!empty($params['uid'])) ? trim($params['uid']) : '';
+            if(empty($catid) && empty($uid))
             {
-            $arr=array();
-            $err=array('code'=> 1,'Msg'=> 'Invalid parameter');
-            $result=array('results'=> $arr,'error'=>$err);
-            $res=$result;
-            break;
+				$arr=array();
+				$err=array('code'=> 1,'Msg'=> 'Invalid parameter');
+				$result=array('results'=> $arr,'error'=>$err);
+				$res=$result;
+				break;
             }
             $obj=new product($db['iftosi']);
             $result=$obj->getPrdByCatid($params);
