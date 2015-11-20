@@ -31,56 +31,107 @@ class wishlist extends DB
    
    public function viewsh($params)
    {
-       $vsql="SELECT pid from tbl_wishlist where uid=".$params['uid']."";
-       $page=$params['page'];
-       $limit=$params['limit'];
-       if (!empty($page))
+        $page   = ($params['page'] ? $params['page'] : 1);
+        $limit  = ($params['limit'] ? $params['limit'] : 15);
+        $vsql="SELECT distinct pid from tbl_wishlist where uid=".$params['uid']."";
+        if (!empty($page))
         {
             $start = ($page * $limit) - $limit;
             $vsql.=" LIMIT " . $start . ",$limit";
         } 
-         $vsql;
-       $vres=$this->query($vsql);
-       $chkres=$this->numRows($vres);
-       
-       if($chkres>0)
-       {   $i=0;
-       
-           while($row=$this->fetchData($vres))
+        $vres=$this->query($vsql);
+        $chkres=$this->numRows($vres);
+        if($chkres>0)
+        {    $i=0;
+            while($row=$this->fetchData($vres))
             {
-               
-            $prid[$i]=$row['pid'];
-            
-            }
+                $prid[$i]=$row['pid'];
 
-            $pid=implode(',',$prid);
-            
-           $pres="SELECT product_name,product_display_name,product_model,prd_price,desname from tbl_product_master where product_id IN(".$pid.")";    
-            $pres.=" LIMIT " . $start . ",$limit";
+            }
+            $totalwishproduct=  count($prid);
            
-           $pres=$this->query($pres);
-            
-            if($pres)
+            $pid=implode(',',$prid);
+            $patsql="
+                    SELECT
+                            distinct product_id,
+                            carat,
+                            color,
+                            certified,
+                            shape,
+                            clarity,
+                            price,
+                            polish,
+                            symmetry,
+                            cno,
+                            gold_weight,
+                            type,
+                            metal
+                    FROM 
+                            tbl_product_search 
+                    WHERE 
+                            product_id IN(".$pid.")
+                    AND            
+                            active_flag=1
+                    ORDER BY
+                            field(product_id,".$pid.")
+                    ";
+
+            if (!empty($page))
             {
-                while($row=$this->fetchData($pres))
-                {
-                    $arr=$row;
-                }   
-                $err=array('Code'=>0,'Msg'=>'Select operation done');
+                    $start = ($page * $limit) - $limit;
+                    $patsql.=" LIMIT " . $start . ",$limit";
+            }
+            $patres=$this->query($patsql);
+            while($row2=$this->fetchData($patres))
+            {
+                    $prodid[] = $row2['product_id'];
+                    $pid = $row2['product_id'];
+                    $arr[$pid]['productsearch']=$row2;
+            }
+            if(!empty($prodid))
+            {
+                    $pid = $pids = implode(',',$prodid);
             }
             else
             {
-                $arr=array();
-                $err=array('Code'=>1,'Msg'=>'Select operation failed');
+                    $pid = $pids = '';
             }
-       }
-       else
-       {
+
+            $psql = "
+                            SELECT
+                                    product_id as pid,
+                                    barcode as pcode,
+                                    product_name as pname,
+                                    product_display_name as pdname,
+                                    product_model as pmodel,
+                                    product_brand as pbrand,
+                                    prd_price as pprice,
+                                    product_currency as pcur,
+                                    prd_img as pimg
+                            FROM 
+                                    tbl_product_master 
+                            WHERE 
+                                    product_id IN(".$pid.")
+                            AND
+                                    active_flag=1
+                            ORDER BY
+                                    field(product_id,".$pid.");
+                            ";
+            $pres=$this->query($psql);
+            while($row1=$this->fetchData($pres))
+            {
+                    $pid = $row1['pid'];
+                    $arr[$pid]['productmaster']=$row1;
+                    $arr[$pid]['totalcount'] = $totalwishproduct;
+            }
+        }
+        else
+        {
             $arr=array();
             $err=array('Code'=>1,'Msg'=>'Select operation failed');
-       }       
-       $result=array('result'=>$arr,'error'=>$err);
-       return $result;
+        }
+        $result=array('result'=>$arr,'error'=>$err);
+        return $result;
    }
     
 }
