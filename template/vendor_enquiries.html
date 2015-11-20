@@ -115,7 +115,11 @@ function generateEnqList(obj) {
         str += '</div>';
         str += '<div class="type fLeft">';
             str += '<span class="upSpan">' + pro_dtls['cat_name'][0] + '</span>';
-            str += '<span class="lwSpan">' + pro_dtls['cat_name'][1] + '</span>';
+            var subCatName = pro_dtls['cat_name'][1];
+            if(subCatName == undefined) {
+                subCatName='';
+            }
+            str += '<span class="lwSpan">' + subCatName + '</span>';
         str += '</div>';
         str += '<div class="barcode fLeft">';
             str += '<span class="upSpan">' + pro_dtls['barcode'] + '</span>';
