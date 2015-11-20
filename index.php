@@ -319,7 +319,7 @@
 
                                         $attr   = $result[$pid]['attr_details'];
                                         $pdet   = $result[$pid];
-                                        //echo "<pre>";print_r($attr);die;
+                                        echo "<pre>";print_r($pdet);die;
 					include 'template/diamondForm.html';
 				break;
                                
