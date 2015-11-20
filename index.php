@@ -139,6 +139,17 @@
 				
 				case 'wishlist':
 					$page='wishlist';
+                                        $uid 	= $_GET['uid'];
+                                        $pgno 	= ($_GET['pgno'] ? $_GET['pgno'] : 1);
+                                        $url 	= APIDOMAIN.'index.php?action=viewsh&uid=2&page='.$pgno;
+                                        $res 	= $comm->executeCurl($url);
+					$prdsrch= $res['result']['productsearch'];
+					$prddata= $res['result']['productmaster'];
+					$total  = $res['result']['totalcount'];
+                                        $totalCnt = $total;
+					$lastpg = ceil($total/15);
+					$adjacents = 2;
+                                        echo "<pre>";print_r($res['result']);die;
 					include 'template/wishlist.html';
 				break;
 				
