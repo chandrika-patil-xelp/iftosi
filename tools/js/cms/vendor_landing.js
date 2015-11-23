@@ -2,7 +2,6 @@ var uid = customStorage.readFromStorage('userid');
 var busiType = customStorage.readFromStorage('busiType');
 var username = customStorage.readFromStorage('username');
 document.getElementById('userName').innerHTML = username;
-
 if (/1/.test(busiType)) {
     $('#dmdTab').removeClass('dn');
 }
@@ -115,6 +114,15 @@ $(document).ready(function () {
                 $(this).removeClass('shapeSelected');
         });
         $(this).toggleClass('shapeSelected');
+        if ($(this).hasClass('shapeSelected'))
+        {
+            $('#allcontent').removeClass('dn');
+        }
+        else
+        {
+            $('#allcontent').addClass('dn');
+        }
+        
     });
 
     $('.jshapeComm').bind('click', function ()
@@ -132,15 +140,19 @@ $(document).ready(function () {
             tmpId = tmpId.toLowerCase();
             $('.subCatType').addClass('dn');
             $('#' + tmpId + 'Type').removeClass('dn');
+            $('#allcontent').removeClass('dn');
         }
         else
         {
             var tmpId = $(this).attr('id');
             tmpId = tmpId.toLowerCase();
             $('#' + tmpId + 'Type').addClass('dn');
+            $('#allcontent').addClass('dn');
         }
 
         var bthis = $(this);
+
+
 
         if ($(this).hasClass('shapeSelected'))
         {
