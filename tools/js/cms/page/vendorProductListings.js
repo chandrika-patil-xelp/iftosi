@@ -105,7 +105,7 @@ function generateDiamondList(obj) {
     str += '<center>';
     str += '<div class="deltBtn poR ripplelink" onclick="deleteProduct(' + obj['id'] + ',this)"></div>';
     str += '<a href="'+ DOMAIN +'index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'"><div class="editBtn poR ripplelink"></div></a>';
-    str += '<div class="soldBtn poR ripplelink fmOpenR">SOLD</div>';
+    str += '<div class="soldBtn poR ripplelink fmOpenR" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==1) ? "SOLD" : "IN STOCK");+'</div>';
     str += '</center>';
     str += '</div>';
     str += '</li>';
@@ -149,6 +149,11 @@ function loadJewellCallback(res) {
 }
 function generateJewellList(obj) {
     var pro_name = obj['product_name'];
+    var category= obj['category'][1]['cat_name'];
+    if(category == 'Bangles/Bracelets')
+    {
+        category = '<span class="upSpan">Bangles / Bracelets</span>';
+    }
     if(pro_name == null) {
         pro_name = '';
     }
@@ -162,16 +167,16 @@ function generateJewellList(obj) {
     str += '<span class="upSpan">' + obj['barcode'] + '</span>';
     str += '<span class="lwSpan"><a href="'+ DOMAIN + pro_name.replace(" ", "+").toLowerCase() +'/jid-'+ obj['id'] +'">View Details</a></span>';
     str += '</div>';
-    str += '<div class="degno fLeft">' + obj['lotref'] + '</div>';
     str += '<div class="metal fLeft">' + obj['metal'].split('~')[0] + '</div>';
-    str += '<div class="catg fLeft">' + obj['category'][1]['cat_name'] + '</div>';
-    str += '<div class="subType fLeft">' + obj['category'][0]['cat_name'] + '</div>';
+    str += '<div class="catg fLeft">' + category + '</div>';
+    str += '<div class="degno fLeft">' + obj['dwt'] + '</div>';
+    str += '<div class="subType fLeft">' + obj['gold_weight'] + '</div>';
     str += '<div class="price fLeft fmOpenB">&#8377;' + obj['price'] + '</div>';
     str += '<div class="acct fLeft">';
     str += '<center>';
     str += '<div class="deltBtn poR ripplelink" onclick="deleteProduct(' + obj['id'] + ',this)"></div>';
     str += '<a href="'+ DOMAIN +'index.php?case=jewellery_Form&catid=10001&prdid='+ obj['id'] +'"><div class="editBtn poR ripplelink"></div></a>';
-    str += '<div class="soldBtn poR ripplelink fmOpenR">SOLD</div>';
+    str += '<div class="soldBtn poR ripplelink fmOpenR" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==1) ? "SOLD" : "IN STOCK");+'</div>';
     str += '</center>';
     str += '</div>';
     str += '</li>';
@@ -236,7 +241,7 @@ function generatBullionsList(obj) {
     str += '<center>';
     str += '<div class="deltBtn poR ripplelink" onclick="deleteProduct(' + obj['id'] + ',this)"></div>';
     str += '<a href="'+ DOMAIN +'index.php?case=bullion_Form&catid=10002&prdid='+ obj['id'] +'"><div class="editBtn poR ripplelink"></div></a>';
-    str += '<div class="soldBtn poR ripplelink fmOpenR">SOLD</div>';
+    str += '<div class="soldBtn poR ripplelink fmOpenR" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==1) ? "SOLD" : "IN STOCK");+'</div>';
     str += '</center>';
     str += '</div>';
     str += '</li>';
@@ -258,6 +263,48 @@ function deleteProduct(proId,ele) {
             }
             var total=$('#total'+catName).text();
             total--;
+            $('#total'+catName).text(total);
+            console.log(total);
+            console.log(catName);
+            if(total==0) {
+                loadBullion = false;
+            }
+            var count = $("#"+catName+"List li").length;
+            if(count<15) {
+                $("#"+catName+"List").html('');
+                if(catid==10000) {
+                    diamondPage = 1;
+                    loadDiamonds();
+                } else if(catid==10001) {
+                    jewellPage = 1;
+                    loadJewels();
+                } else if(catid==10002) {
+                    bullionPage = 1;
+                    loadBullions();
+                }
+            }
+            console.log("#"+catName+"List");
+            common.toast(1,obj['error']['Msg']);
+        } else {
+            common.toast(0,obj['error']['Msg']);
+        }
+    }});
+}
+
+function inStock(proId,ele) {
+    console.log(proId);
+    $.ajax({url: common.APIWebPath() + "index.php?action=togglePrdstatus&vid=" + uid + "&prdid=" + proId, success: function (result) {
+    var obj = jQuery.parseJSON(result);
+        if(obj['error']['Code']==0) {
+            $(ele).parent().parent().parent().remove();
+            if(catid==10000) {
+                catName='Diamonds';
+            } else if(catid==10001) {
+                catName='Jewells';
+            } else if(catid==10002) {
+                catName='Bullions';
+            }
+            var total=$('#total'+catName).text();
             $('#total'+catName).text(total);
             console.log(total);
             console.log(catName);
