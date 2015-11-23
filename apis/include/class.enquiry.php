@@ -39,7 +39,13 @@ class enquiry extends DB
                 $udetail['uname']=$row1['user_name'];
                 $udetail['uemail']=$row1['email'];
             }
-          $isql="INSERT
+            
+            $chksql="SELECT user_id FROM tbl_product_enquiry where user_id=".$uid." AND product_id=".$params['pid']." and vendor_id=".$params['pid'].""; 
+            $chkres=$this->query($chksql);
+            $numchk=$this->numRows($chkres);
+                if($numchk<1)
+                 {
+                 $isql="INSERT
                  INTO 
                                     tbl_product_enquiry
                                    (user_id,
@@ -48,32 +54,31 @@ class enquiry extends DB
                                    user_email,
                                    product_id,
                                    vendor_id,
-                                   user_ip_address,
-                                   display_flag,
+                                   type_flag,
                                    updatedby,
                                    date_time)
                    VALUES
                                 (".$uid.",
-                                '".$udetail['uname']."',
-                                '".$udetail['umobile']."',    
-                                '".$udetail['uemail']."',
-                                ".$params['pid'].",
-                                ".$params['vid'].",
-                               '".$params['ipaddress']."',
-                               '".$params['dflag']."',
+                                \"".$udetail['uname']."\",
+                                \"".$udetail['umobile']."\",    
+                                \"".$udetail['uemail']."\",
+                                \"".$params['pid']."\",
+                                \"".$params['vid']."\",
+                                  1,
                                  'customer',
                                   now())";
-            $ires=$this->query($isql);
-            if($ires)
-            {
-                $arr="Log Entry is successfully completed";
-                $err=array('Code'=>0,'Msg'=>'Data inserted');
+                $ires=$this->query($isql);
+                if($ires)
+                {
+                    $arr="Log Entry is successfully completed";
+                    $err=array('Code'=>0,'Msg'=>'Data inserted');
+                }
+                    else
+                {
+                    $arr=array();
+                    $err=array('Code'=>0,'Msg'=>'Error in completing the operation');
+                }
             }
-        else
-        {
-            $arr=array();
-            $err=array('Code'=>0,'Msg'=>'Error in completing the operation');
-        }
         }
         $result=array('results'=>$arr,'error'=>$err);
         return $result;

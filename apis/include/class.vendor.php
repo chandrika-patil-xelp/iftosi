@@ -46,13 +46,13 @@ class vendor extends DB
         
         $total_products = 0;
         
-        $cnt_sql = "SELECT COUNT(1) as cnt FROM tbl_vendor_product_mapping  WHERE active_flag=1 and vendor_id =".$params['vid'];
+        $cnt_sql = "SELECT COUNT(1) as cnt FROM tbl_vendor_product_mapping  WHERE active_flag!=2 and vendor_id =".$params['vid'];
         $cnt_res = $this->query($cnt_sql); //checking number of products registered under vendor id provided
         
         $chkcnt=$this->numRows($cnt_res);
          if($chkcnt>0)
         {
-            $vsql="select product_id,vendor_price,vendor_quantity,vendor_currency,city,active_flag from tbl_vendor_product_mapping where active_flag=1 and vendor_id=".$params['vid'];
+            $vsql="select product_id,vendor_price,vendor_quantity,vendor_currency,city,active_flag from tbl_vendor_product_mapping where active_flag=1 or active_flag=0 and vendor_id=".$params['vid'];
             $vres=$this->query($vsql);
             $prsql.=" LIMIT " . $start . ",$limit";
             
@@ -71,7 +71,7 @@ class vendor extends DB
             $vmapProd=implode(',',$vmap[$i]['product_id']);
 
             $prsql="SELECT product_id,product_name,product_display_name,product_model,product_brand,prd_img,desname 
-                    FROM tbl_product_master WHERE product_id IN(".$vmapProd.") AND active_flag=1";
+                    FROM tbl_product_master WHERE product_id IN(".$vmapProd.") AND active_flag=1 or active_flag=0";
             $prsql.=" LIMIT " . $start . ",$limit";
 
             $pres=$this->query($prsql);
@@ -382,7 +382,7 @@ class vendor extends DB
         if($catid == 10000) {
             $psql='d.color, d.carat, d.shape, d.certified AS cert, d.clarity';
         } else if($catid == 10001) {
-            $psql='d.metal,c.lotref';
+            $psql='d.metal,c.lotref,d.gold_weight,d.dwt';
         } else if($catid == 10002) {
             $psql='d.type, d.metal, d.gold_purity, d.gold_weight';
         }
@@ -394,6 +394,7 @@ class vendor extends DB
                 AS price, 
                                     c.barcode,
                                     c.update_time,
+                                    c.active_flag,
                                     ".$psql."
                 FROM
                                     tbl_vendor_product_mapping
@@ -415,7 +416,7 @@ class vendor extends DB
                 AND 
                                     a.vendor_id=" . $params['vid'] . "
                 AND
-                                    a.active_flag=1
+                                    a.active_flag!=2
                 ORDER BY 
                                     a.product_id
                 asc ";
@@ -500,6 +501,493 @@ class vendor extends DB
         $result = array('results' => $arr, 'error' => $err);
         return $result;
     }
-
+    
+        public function toggleactive($params) {
+        $chkact="SELECT active_flag from tbl_product_search WHERE product_id=".$params['prdid']."";
+        $chkactres=$this->query($chkact);
+        $chkrow=$this->fetchData($chkactres);
+        $params['flag']=$chkrow['active_flag'];
+        
+        if($params['flag']==1)
+        {
+            $sql = "UPDATE tbl_vendor_product_mapping SET active_flag=0 WHERE product_id=" . $params['prdid']." AND vendor_id=" . $params['vid'];
+            $res = $this->query($sql);
+        if($res){
+            $sql = "UPDATE tbl_product_search SET active_flag=0 WHERE product_id=" . $params['prdid'];
+            $res1 = $this->query($sql);}
+        if($res1){
+            $sql = "UPDATE tbl_product_master SET active_flag=0 WHERE product_id=" . $params['prdid'];
+            $res2 = $this->query($sql);}
+        if($res2){
+            $sql = "UPDATE tbl_productid_generator SET active_flag=0 WHERE product_id=" . $params['prdid'];
+            $res3 = $this->query($sql);}
+        if($res3){
+            $sql = "UPDATE tbl_product_category_mapping SET display_flag=0 WHERE product_id=" . $params['prdid'];
+            $res = $this->query($sql);}
+        if($res4){
+            $sql = "UPDATE tbl_designer_product_mapping SET active_flag=0 WHERE product_id=".$params['prdid'];
+            $res = $this->query($sql);}
+        }
+        
+        if($params['flag']==0)
+        {
+            $sql = "UPDATE tbl_vendor_product_mapping SET active_flag=1 WHERE product_id=" . $params['prdid']." AND vendor_id=" . $params['vid'];
+            $res = $this->query($sql);
+        if($res){
+            $sql = "UPDATE tbl_product_search SET active_flag=1 WHERE product_id=" . $params['prdid'];
+            $res1 = $this->query($sql);}
+        if($res1){
+            $sql = "UPDATE tbl_product_master SET active_flag=1 WHERE product_id=" . $params['prdid'];
+            $res2 = $this->query($sql);}
+        if($res2){
+            $sql = "UPDATE tbl_productid_generator SET active_flag=1 WHERE product_id=" . $params['prdid'];
+            $res3 = $this->query($sql);}
+        if($res3){
+            $sql = "UPDATE tbl_product_category_mapping SET display_flag=1 WHERE product_id=" . $params['prdid'];
+            $res = $this->query($sql);}
+        if($res4){
+            $sql = "UPDATE tbl_designer_product_mapping SET active_flag=1 WHERE product_id=".$params['prdid'];
+            $res = $this->query($sql);}
+        }
+        if ($res) {
+            $arr = array();
+            $err = array('Code' => 0, 'Msg' => 'Product status changed!');
+        } else {
+            $arr = array();
+            $err = array('code' => 1, 'msg' => 'Error in fetching data');
+        }
+        $result = array('results' => $arr, 'error' => $err);
+        return $result;
+    }
+    
+    public function getVPrdByCatid($params)
+        {
+			
+			$page   = ($params['page'] ? $params['page'] : 1);
+			$limit  = ($params['limit'] ? $params['limit'] : 15);
+			
+			$sql = "select cat_name as name from tbl_category_master where catid=\"".$params['catid']."\"";
+			$res = $this->query($sql);
+			if($res)
+			{
+				$row = $this->fetchData($res);
+				$catname = $row['name'];
+			}
+			
+                        if(!empty($params['ilist']))
+			{
+				$ilist = str_replace('|@|',',',$params['ilist']);
+				$where = " WHERE category_id in (".$ilist.") ";
+			}
+			else if(!empty($params['jlist']))
+			{
+				$expd = explode('|@|',$params['jlist']);
+				foreach($expd as $key => $val)
+				{
+					$exd = explode('_',$val);
+					$ids[] = $exd[0];
+				}
+				$ilist = implode(',',$ids);
+				$where = " WHERE category_id in (".$ilist.") ";
+			} 
+			else
+			{
+				$where = " WHERE category_id in (".$params['catid'].") ";
+			}
+			
+			$sql = "SELECT 
+						count(distinct product_id) as cnt 
+					FROM 
+						tbl_product_category_mapping
+					".$where."
+					AND
+                                                display_flag=1
+                                        OR
+                                                display_flag=0
+                                ";
+			
+			
+			$res = $this->query($sql);
+			if($res)
+			{
+				$row = $this->fetchData($res);
+				$total = $row['cnt'];
+			}
+			
+			$sql = "SELECT 
+						distinct product_id as pid,
+						price						
+					FROM 
+						tbl_product_category_mapping 
+					".$where."
+					AND display_flag=1 OR display_flag=0";
+			
+			switch($params['sortby'])
+			{
+				case 'pasc':
+					$sql.=" 
+							ORDER BY 
+								price ASC 
+						";
+				break;
+				
+				case 'pdesc':
+					$sql.=" 
+							ORDER BY 
+								price DESC 
+						";
+				break;
+				
+				case 'rate':
+					$sql.=" 
+							ORDER BY 
+								rating DESC 
+						";
+				break;
+				
+				default:
+					$sql.=" 
+							ORDER BY 
+								product_id ASC 
+						";
+				break;
+			}
+			
+			$res = $this->query($sql);
+			$cres=$this->numRows($res);
+			if($cres>0)
+			{
+				while ($row = $this->fetchData($res)) 
+				{
+					$pid[] = $row['pid'];
+				}
+				
+				
+				
+				if(!empty($params['slist']))
+				{
+					$sarr = explode('|@|',$params['slist']);
+					$extn = " AND shape in ('".implode("','",$sarr)."') ";
+				}
+				
+				if(!empty($params['tlist']))
+				{
+					$sarr = explode('|$|',$params['tlist']);
+					foreach($sarr as $key => $val)
+					{
+						$expd = explode('|~|',$val);
+						$exd = explode(';',$expd[1]);
+						if($expd[0] == 'priceRange' && $params['catid'] == 10000)
+						{
+							$exd[0] = $exd[0]/dollarValue;
+							$exd[1] = $exd[1]/dollarValue;
+						}
+						$extn .= " AND ".str_replace('Range','',$expd[0])." between \"".$exd[0]."\" AND \"".$exd[1]."\"";
+					}
+					//$extn = " AND shape in ('".implode("','",$sarr)."') ";
+				}
+				
+				if(!empty($params['clist']))
+				{
+					$sarr = explode('|$|',$params['clist']);
+					
+					foreach($sarr as $key => $val)
+					{
+						$expd = explode('|~|',$val);
+						$exd = explode('|@|',$expd[1]);
+						$inarr = array();
+						foreach($exd as $ky => $vl)
+						{
+							$ex = explode('_',$vl);
+							$inarr[] = $ex[count($ex)-1];
+							unset($ex[count($ex)-1]);
+							$field = implode('_',$ex);
+						}
+						$extn .= " AND ".$field." in ('".implode("','",$inarr)."') ";
+					}
+				}
+				
+				$allpids = $pid = implode(',',$pid);
+				
+				if($params['ctid'])
+				{
+					$sqlct = "SELECT cityname
+							FROM tbl_city_master
+							WHERE cityid = ".$params['ctid'];
+					$resct = $this->query($sqlct);
+					if($resct)
+					{
+						$rowct = $this->fetchData($resct);
+						
+						$sqlpct = "
+									SELECT 
+										product_id as pid
+									FROM 
+										tbl_vendor_product_mapping 
+									WHERE 
+										product_id in (".$allpids.") 
+									AND
+                                                                                active_flag=1 OR active_flag=0
+										city=\"".$rowct['cityname']."\"";
+						$respct = $this->query($sqlpct);
+						if($respct)
+						{
+							while ($rowpct = $this->fetchData($respct))
+							{
+								$pids[] = $rowpct['pid'];
+							}
+							$allpids = $pid = implode(',',$pids);
+						}
+					}
+				}
+				
+				$page   = ($params['page'] ? $params['page'] : 1);
+				$limit  = ($params['limit'] ? $params['limit'] : 15);
+				
+				if($pid)
+				{
+						
+					$sql = "SELECT 
+								count(distinct product_id) as cnt 
+							FROM 
+								tbl_product_search 
+							WHERE 
+								product_id IN(".$pid.")
+                                                        AND
+                                                                active_flag=1
+                                                        OR
+                                                                active_flag=0
+							".$extn."	
+							";
+					$res = $this->query($sql);
+					if($res)
+					{
+						$row = $this->fetchData($res);
+						$total = $row['cnt'];
+					}
+					
+					$patsql="
+							SELECT
+								distinct product_id,
+								carat,
+								color,
+								certified,
+								shape,
+								clarity,
+								price,
+								polish,
+								symmetry,
+								cno,
+								gold_weight,
+								type,
+								metal,
+                                                                bullion_design
+							FROM 
+								tbl_product_search 
+							WHERE 
+								product_id IN(".$pid.")
+                                                        AND            
+                                                                active_flag=1
+                                                        OR
+                                                                active_flag=0
+							".$extn."
+							ORDER BY
+								field(product_id,".$pid.")
+							";
+							
+					if (!empty($page))
+					{
+						$start = ($page * $limit) - $limit;
+						$patsql.=" LIMIT " . $start . ",$limit";
+					}
+							
+					$patres=$this->query($patsql);
+					
+					while($row2=$this->fetchData($patres))
+					{
+						$prodid[] = $row2['product_id'];
+						$pid = $row2['product_id'];
+						unset($row2['product_id']);
+						$attr[$pid]['attributes']=$row2;
+					}
+					
+					if(!empty($prodid))
+					{
+						$pid = $pids = implode(',',$prodid);
+					}
+					else
+					{
+						$pid = $pids = '';
+					}
+					
+					$psql = "
+							SELECT
+								product_id as pid,
+								barcode as pcode,
+								product_name as pname,
+								product_display_name as pdname,
+								product_model as pmodel,
+								product_brand as pbrand,
+								prd_price as pprice,
+								product_currency as pcur,
+								prd_img as pimg
+							FROM 
+								tbl_product_master 
+							WHERE 
+								product_id IN(".$pid.")
+                                                        AND
+                                                                active_flag=1
+                                                        OR
+                                                                active_flag=0
+							ORDER BY
+								field(product_id,".$pid.");
+							";
+					$pres=$this->query($psql);
+					while($row1=$this->fetchData($pres))
+					{
+						$pid = $row1['pid'];
+						$arr1[$pid]=$row1;
+						$arr1[$pid]['attributes'] = $attr[$pid]['attributes'];
+					}
+					
+					/* For filters */
+					
+					$sql = "
+						SELECT 
+							attribute_id,
+							attr_values,
+							attr_range,
+							attr_unit,
+							attr_unit_pos
+						FROM 
+							tbl_attribute_category_mapping 
+						WHERE 
+							category_id=".$params['catid']." 
+						AND 
+							attr_filter_flag=1 
+						ORDER BY 
+							attr_filter_position ASC";
+					$res = $this->query($sql);
+					if($res)
+					{
+						while($row 		= $this->fetchData($res))
+						{
+							$attrid[] = $row['attribute_id'];
+							$attrmap[$row['attribute_id']] = $row;
+						}
+						$attrids 	= implode(',',$attrid);
+					}
+					
+					//echo "<pre>";print_r($attrmap);die;
+					
+					$sql="
+						SELECT
+							attr_id, 
+							attr_name, 
+							attr_display_name,
+							attr_type_flag				
+						FROM 
+							tbl_attribute_master 
+						WHERE 
+							attr_id IN(".$attrids.") 
+						ORDER BY 
+							attr_display_name ASC";
+					
+					$res = $this->query($sql);
+					
+					if($res)
+					{
+						$i=0;
+						while($row = $this->fetchData($res))
+						{
+							switch ($row['attr_type_flag'])
+							{
+								case 6: //$pids
+									$qry = "SELECT 
+												MIN(".$row['attr_name'].") AS minval, 
+												MAX(".$row['attr_name'].") AS maxval 
+											FROM 
+												tbl_product_search
+											WHERE
+												product_id IN(".$allpids.")
+                                                                                        AND
+                                                                                                active_flag=1
+                                                                                        OR
+                                                                                                active_flag=0
+											";
+									$res1 = $this->query($qry);
+									if($res1)
+									{
+										$row1 = $this->fetchData($res1);
+										$data[$i]['range']['id'] 		= $row['attr_id'];
+										$data[$i]['range']['name'] 		= $row['attr_name'];
+										$data[$i]['range']['dname'] 	= $row['attr_display_name'];
+										$data[$i]['range']['value'] 	= $row1['minval'].';'.$row1['maxval'];
+										$data[$i]['range']['ovalue'] 	= $attrmap[$row['attr_id']]['attr_range'];
+										$i++;
+									}
+								break;
+								
+								case 7:
+									
+									$qry = "SELECT 
+												group_concat(DISTINCT ".$row['attr_name'].") as name 
+											FROM 
+												tbl_product_search
+											WHERE
+												product_id IN(".$allpids.") 
+                                                                                        AND
+                                                                                                active_flag=1 OR active_flag=0
+											";
+									$res1 = $this->query($qry);
+									if($res1)
+									{
+										$arr = array();
+										$row1 = $this->fetchData($res1);
+										$expd = explode(',',$attrmap[$row['attr_id']]['attr_values']);
+										$expd1 = explode(',',$row1['name']);
+										foreach($expd1 as $key=>$val)
+										{
+											$arr[array_search($val,$expd)] = $val;
+										}
+										ksort($arr);
+										$arr = array_values($arr);
+										$data[$i]['checkbox']['id'] 	= $row['attr_id'];
+										$data[$i]['checkbox']['name'] 	= $row['attr_name'];
+										$data[$i]['checkbox']['dname'] 	= $row['attr_display_name'];
+										$data[$i]['checkbox']['value'] 	= implode(',',$arr);
+										$data[$i]['checkbox']['ovalue'] = $attrmap[$row['attr_id']]['attr_values'];
+										$i++;
+									}
+								break;
+								
+								case 8:
+								break;
+							}
+						}
+					}
+					
+					/* *********** */
+					
+					$tmp_arr1 = (!empty($arr1)) ? (array_values($arr1)) : null;
+					$arr1 = array('filters'=>$data,'products'=>$tmp_arr1,'total'=>$total,'getdata'=>$params,'catname'=>$catname);
+					$err = array('errCode'=>0,'errMsg'=>'Details fetched successfully');
+				}
+				else
+				{
+					$arr1 = array();
+					$err = array('errCode'=>1,'errMsg'=>'No records found');
+				}
+			}
+			else
+			{
+				$arr1 = array();
+				$err = array('errCode'=>1,'errMsg'=>'No records found');
+			}
+            $result = array('results'=>$arr1,'error'=>$err);
+            return $result;
+        }
+    
+    
 }
 ?>

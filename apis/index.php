@@ -166,9 +166,7 @@ switch($action)
             $uid=(!empty($params['uid'])) ? trim($params['uid']) : '';
             $pid=(!empty($params['pid'])) ? trim($params['pid']) : '';
             $vid=(!empty($params['vid'])) ? trim($params['vid']) : '';
-            $dflg=(!empty($params['dflg'])) ? trim(urldecode($params['dflg'])) : '';
-            
-            if(empty($vid) && empty($pid)  &&  empty($uid) &&  empty($dflg))
+            if(empty($vid) && empty($pid)  &&  empty($uid))
             {
                 $arr = array();
                 $err = array('Code' => 1, 'Msg' => 'Invalid Parameters');
@@ -325,6 +323,24 @@ switch($action)
             $result= $obj->deletePrd($params);
             $res= $result;
             break;
+            
+//  localhost/iftosi/apis/index.php?action=vDeletePrd&prdid=1&vid=2
+        case 'togglePrdstatus':
+            include APICLUDE.'class.vendor.php';
+            $prdid=(!empty($params['prdid'])) ? trim($params['prdid']) : '';
+            $vid=(!empty($params['vid'])) ? trim($params['vid']) : '';
+            if(empty($prdid) && empty($vid))
+            {
+                $arr=array();
+                $err=array('code'=>1,'Invalid Parameter');
+                $result=array('result'=>$arr,'error'=>$err);
+                $res=$result;
+                break;
+            }
+            $obj= new vendor($db['iftosi']);
+            $result= $obj->toggleactive($params);
+            $res= $result;
+            break;            
 
 //-------------------------Location---------------------------------               
             
@@ -981,8 +997,8 @@ echo '</pre>';
 //  localhost/iftosi/apis/index.php?action=viewsh&page=1&limit=1&uid=7              
         case 'viewsh':
             include APICLUDE.'class.wishlist.php';
-            $dt=(!empty($params['dt']))? trim($params['dt']):'';
-            if(empty($dt))
+            $uid=(!empty($params['uid']))? trim($params['uid']):'';
+            if(empty($uid))
             {
                 $arr = array();
                 $err=array('Code'=>1,'Msg'=>'Invalid Parameters');
@@ -992,6 +1008,42 @@ echo '</pre>';
             }
             $obj=new wishlist($db['iftosi']);
             $result=$obj->viewsh($params);
+            $res=$result;
+            break;    
+        
+        case 'checklist':    
+            include APICLUDE.'class.wishlist.php';
+            $uid=(!empty($params['uid']))? trim($params['uid']):'';
+            $vid=(!empty($params['vid']))? trim($params['vid']):'';
+            $pid=(!empty($params['prdid']))? trim($params['prdid']):'';
+            if(empty($uid) && empty($vid) && empty($pid))
+            {
+                $arr = array();
+                $err=array('Code'=>1,'Msg'=>'Invalid Parameters');
+                $result=array('results'=>$arr,'error'=>$err);
+                $res=$result;
+                break;
+            }
+            $obj=new wishlist($db['iftosi']);
+            $result=$obj->checklist($params);
+            $res=$result;
+            break;
+            
+        case 'removeFromWishlist':    
+            include APICLUDE.'class.wishlist.php';
+            $uid=(!empty($params['uid']))? trim($params['uid']):'';
+            $vid=(!empty($params['vid']))? trim($params['vid']):'';
+            $pid=(!empty($params['prdid']))? trim($params['prdid']):'';
+            if(empty($uid) && empty($vid) && empty($pid))
+            {
+                $arr = array();
+                $err=array('Code'=>1,'Msg'=>'Invalid Parameters');
+                $result=array('results'=>$arr,'error'=>$err);
+                $res=$result;
+                break;
+            }
+            $obj=new wishlist($db['iftosi']);
+            $result=$obj->removeFromWishlist($params);
             $res=$result;
             break;    
             
@@ -1055,7 +1107,6 @@ echo '</pre>';
 
         case 'productInsert':
             include APICLUDE.'class.prdInsert.php';
-            
             $catid=(!empty($params['category_id'])) ? trim(urldecode($params['category_id'])) : '';
             if(empty($catid))
             {   
@@ -1143,7 +1194,25 @@ echo '</pre>';
             $res=$result;
             break;
             
-//---------------------------------------------------------------------------            
+//--------------------vendor landing page----------------------------------------
+        //  localhost/iftosi/apis/index.php?action=getPrdByCatid&catid=1&page=1&limit=1         
+        case 'getVPrdByCatid':
+            include APICLUDE.'class.vendor.php';
+            $catid=(!empty($params['catid'])) ? trim($params['catid']) : '';
+            if(empty($catid))
+            {
+            $arr=array();
+            $err=array('code'=> 1,'Msg'=> 'Invalid parameter');
+            $result=array('results'=> $arr,'error'=>$err);
+            $res=$result;
+            break;
+            }
+            $obj=new vendor($db['iftosi']);
+            $result=$obj->getVPrdByCatid($params);
+            $res=$result;
+			//print_r($res);die;
+            break;
+//---------------------------------------------------------------------------        
         default :
             
         break;

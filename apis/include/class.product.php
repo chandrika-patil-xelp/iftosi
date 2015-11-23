@@ -290,6 +290,7 @@
                                                      gold_weight,
                                                      gemstone_color,
                                                      combination,
+                                                     bullion_design,
                                                      rating,
                                                      date_time)
                                     VALUES
@@ -326,6 +327,7 @@
                                                   \"".$detls['gold_weight']."\",
                                                   \"".$detls['gemstone_color']."\",
                                                   \"".$detls['combination']."\",
+                                                  \"".$detls['design']."\",
                                                   \"".$detls['rating']."\",    
                                                   now())
                                     ON DUPLICATE KEY UPDATE
@@ -361,6 +363,7 @@
                                                             gold_weight = \"".$detls['gold_weight']."\",
                                                             combination = \"".$detls['combination']."\",
                                                             gemstone_color=\"".$detls['gemstone_color']."\",
+                                                            bullion_design=\"".$detls['design']."\",    
                                                             rating      = \"".$detls['rating']."\"";    
                             $res = $this->query($sql);
                         
@@ -855,7 +858,8 @@
 								cno,
 								gold_weight,
 								type,
-								metal
+								metal,
+                                                                bullion_design
 							FROM 
 								tbl_product_search 
 							WHERE 
@@ -1094,7 +1098,8 @@
 						girdle,
 						base as baseprice,
                    				p_disc as discount,
-                                                type
+                                                type,
+                                                bullion_design
                     FROM 
                         tbl_product_search
                     WHERE 

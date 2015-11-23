@@ -13,7 +13,7 @@ class wishlist extends DB
    {
        $dt     = json_decode($params['dt'],1);
        $detls  = $dt['result'];
-       $sql="INSERT INTO tbl_wishlist(uid,pid,vid,wf,date_time) VALUES(".$detls['uid'].",".$detls['pid'].",".$detls['vid'].",1,now())";
+       $sql="INSERT INTO tbl_wishlist(uid,pid,vid,wf,date_time) VALUES(\"".$detls['uid']."\",\"".$detls['pid']."\",\"".$detls['vid']."\",1,now())";
        $res=$this->query($sql);
        if($res)
        {
@@ -22,8 +22,8 @@ class wishlist extends DB
        }
        else
        {
-           $arr="Product inserted into wishlist";
-           $err=array('Code'=>0,'Msg'=>'Insert operation done');
+           $arr="Product not inserted in wishlist";
+           $err=array('Code'=>0,'Msg'=>'Insert operation Failed');
        }
        $result=array('results'=>$arr,'error'=>$err);
        return $result;
@@ -134,4 +134,68 @@ class wishlist extends DB
         return $result;
    }
     
+   public function checklist($params)
+   {
+       $sql="SELECT wid,wf FROM tbl_wishlist WHERE uid=".$params['uid']." AND pid=".$params['prdid']."&vid=".$params['vid']."";
+       $res=$this->query($sql);
+       if($res)
+       {
+           while($row=$this->fetchData($res))
+           {
+               $wid=$row['wid'];
+               $wf=$row['wf'];
+           }
+           if(($wf==0)||($wf==2))
+           {
+               $upsql="UPDATE tbl_wishlist set wf=1 WHERE uid=".$params['uid']." AND pid=".$params['prdid']."";
+               $upres=$this->query($upsql);
+               $arr="Product is now in wishlist";
+               $err=array('Code'=>0,'Msg'=>'True');
+           }
+           else
+           {
+               $arr="Product is already in wishlist";
+           }
+           $err=array('Code'=>0,'Msg'=>'True');
+       }
+       else
+       {
+           $arr="Product is not in wishlist";
+           $err=array('Code'=>0,'Msg'=>'False');
+       }
+       $result=array('results'=>$arr,'error'=>$err);
+       return $result;
+   }
+   public function removeFromWishlist($params)
+   {
+       $sql="SELECT wid,wf FROM tbl_wishlist WHERE uid=".$params['uid']." AND vid=".$params['vid']." AND pid=".$params['prdid']."";
+       $res=$this->query($sql);
+       if($res)
+       {
+           while($row=$this->fetchData($res))
+           {
+               $wid=$row['wid'];
+               $wf=$row['wf'];
+           }
+           if($wf==1)
+           {
+               $upsql="UPDATE tbl_wishlist SET wf=2 WHERE uid=".$params['uid']." AND vid=".$params['vid']." AND pid=".$params['prdid']."";
+               $upres=$this->query($upsql);
+               $arr="Product is removed from wishlist";
+           }
+           else
+           {
+               $arr="Product is not in wishlist";
+           }
+           $err=array('Code'=>0,'Msg'=>'Product removal from wishlist complete');
+       }
+       else
+       {
+           $arr="Product is not in wishlist";
+           $err=array('Code'=>0,'Msg'=>'False');
+       }
+       $result=array('results'=>$arr,'error'=>$err);
+       return $result;
+   }
+   
 }
