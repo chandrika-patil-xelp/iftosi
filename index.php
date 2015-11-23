@@ -98,7 +98,15 @@
 					$resp = $comm->executeCurl($userUrl, TRUE);
 					echo $resp;
 				break;
-			}
+                                case 'addToEnquiry':
+					$userid = (!empty($_GET['uid'])) ? trim($_GET['uid']) : '';
+					$vid = (!empty($_GET['vid'])) ? trim(urldecode($_GET['vid'])) : '';
+					$prdid = (!empty($_GET['pid'])) ? trim(urldecode($_GET['pid'])) : '';
+					$userUrl = APIDOMAIN . 'index.php?action=filLog&uid='.$userid.'&pid='.$prdid.'&vid='.$vid;
+					$resp = $comm->executeCurl($userUrl, TRUE);
+					echo $resp;
+                                        break;
+                        }
 			break;
 			
 		default:
@@ -222,6 +230,8 @@
 				case 'diamond_details':
 					$page='diamond_details';
 					$pid 	= $_GET['productid'];
+                                        $uid 	= $_GET['userid'];
+                                        
 					$url 	= APIDOMAIN.'index.php?action=getPrdById&prdid='.$pid;
 					$res 	= $comm->executeCurl($url);
 					$data = $prdInfo = $res['results'][$pid];
@@ -236,6 +246,13 @@
 					{
 						$vndrDtls['fulladdress'][$key] = trim($value);
 					}
+                                        if(!empty($uid))
+                                        {
+                                            $url 	= APIDOMAIN.'index.php?action=checklist&uid='.$uid.'&vid='.$vndrId.'&prdid='.$pid;
+                                            $res 	= $comm->executeCurl($url);
+                                            $wish = $res['error'];
+                                            //echo "<pre>$uid ";print_r($wish); die;
+                                        }
 					$vndrDtls['fulladdress'] = implode(', ', $vndrDtls['fulladdress']);
 					$vndrAddr = explode(',', $vndrDtls['fulladdress']);
 					include 'template/diamond_details.html';
@@ -393,9 +410,10 @@
                                         $url 	= APIDOMAIN.'index.php?action=fetch_category_mapping&catid='.$catid;
                                         $res 	= $comm->executeCurl($url);
                                         $fil 	= $res['results'];
+                                        
                                         $attr   = $result[$pid]['attr_details'];
                                         $pdet   = $result[$pid];
-                                        //echo "<pre>";print_r($pdet);die;
+//                                        echo "<pre>";print_r($fil);die;
                                        //echo "<pre>";print_r($result[$pid]['attr_details']['type']);die;
                                         include 'template/bullionForm.html';
 				break;
@@ -427,7 +445,23 @@
 				break;
 				case 'vendor_landing':
 					$page='Products';
+                                        $pgno 	= ($_GET['pgno'] ? $_GET['pgno'] : 1);
 					$catid 	= $_GET['catid'];
+					$url 	= APIDOMAIN.'index.php?action=getVPrdByCatid&catid='.$catid.'&page='.$pgno;
+					$res 	= $comm->executeCurl($url);
+					$data 	= $res['results']['products'];
+					$total	= $res['results']['total'];
+					$catname= $res['results']['catname'];
+					
+					$url 	= APIDOMAIN.'index.php?action=fetch_category_mapping&catid='.$catid;
+					$res 	= $comm->executeCurl($url);
+					$fil	= $res['results']['attributes'];
+					
+					//echo "<pre>";print_r($fil);die;
+					
+					$totalCnt = $total;
+					$lastpg = ceil($total/15);
+					$adjacents = 2;
 					include 'template/vendor_landing_page.html';
 				break;
 				case 'vendor_enquiries':
