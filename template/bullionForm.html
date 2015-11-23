@@ -57,11 +57,11 @@
 									{
                                                                             if(($shapes=='gCoins')||($shapes=='gBars'))
                                                                             {
-                                                                                echo "<div id='g".$val['catname']."' class='jshapeComm transition300 ripplelink g".ucwords(strtolower($val['catname']))." ".(('g'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>".$val['catname']."</div>";
+                                                                                echo "<div id='g".$val['catname']."' class='jshapeComm transition300 ripplelink g".ucwords(strtolower($val['catname']))." ".(('g'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Gold ".$val['catname']."</div>";
                                                                             }
                                                                             else
                                                                             {
-                                                                                echo "<div id='g".$val['catname']."' class='jshapeComm transition300 ripplelink g".ucwords(strtolower($val['catname']))." ".(('g'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>".$val['catname']."</div>";
+                                                                                echo "<div id='g".$val['catname']."' class='jshapeComm transition300 ripplelink g".ucwords(strtolower($val['catname']))." ".(('g'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Gold ".$val['catname']."</div>";
                                                                             }
                                                                         }    
                                                                 }
@@ -72,11 +72,11 @@
 									{
                                                                             if(($shapes=='sCoins')||($shapes=='sBars'))
                                                                             {
-                                                                            	echo "<div id='s".$val['catname']."' class=' jshapeComm transition300 ripplelink s".ucwords(strtolower($val['catname']))." ".(('s'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>".$val['catname']."</div>";
+                                                                            	echo "<div id='s".$val['catname']."' class=' jshapeComm transition300 ripplelink s".ucwords(strtolower($val['catname']))." ".(('s'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Silver ".$val['catname']."</div>";
                                                                             }
                                                                             else
                                                                             {
-                                                                            	echo "<div id='s".$val['catname']."' class=' jshapeComm transition300 ripplelink s".ucwords(strtolower($val['catname']))." ".(('s'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>".$val['catname']."</div>";
+                                                                            	echo "<div id='s".$val['catname']."' class=' jshapeComm transition300 ripplelink s".ucwords(strtolower($val['catname']))." ".(('s'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Silver ".$val['catname']."</div>";
                                                                             }
                                                                         }
 								}
@@ -84,13 +84,41 @@
                                 </center>
                             </div>
                         </div>                                        
+ <div class="dn" id="allcontent">                       
 <!--                                    <div id="gbar" class="jshapeComm transition300 ripplelink gBar"><span class="ink animate" style="height: 337px; width: 337px; top: -73.5px; left: 114.5px;"></span>Gold Bar    
                                     </div><div id="sBar" class="jshapeComm transition300 ripplelink sBar">Silver Bar
                                     </div><div id="gCoin" class="jshapeComm transition300 ripplelink gCoin">Gold Coin
                                     </div><div id="sCoin" class="jshapeComm transition300 ripplelink sCoin">Silver Coin
                                     </div>-->
+<?php                        
+                                        foreach($fil['attributes'] as $key=>$values)
+                                        {
+                                            if(strtolower($values['attribute_disp_name'])=='design')
+                                            {
+?>                              
+                                                <div class="divCon  fLeft dAuto">
+                                                    <div  class="titleDiv txtCap fLeft">Bullion Design</div>
+                                                        <div class='radioCont fLeft'> 
+<?php
+                                                            $attr_values = $values['attribute_values'];
+                                                            $attr_values = explode(',', $attr_values);
+                                                            foreach($attr_values as $design)
+                                                            {                                                                                                    
+?>
+                                                                <div class="checkDiv fLeft">
+                                                                    <input type="radio" name='design' <?=($attr['bullion_design'] == $design) ? 'checked' : '';?> class="filled-in"  value="<?=$design;?>" id="<?=ucwords(strtolower($design)); ?>">
+                                                                    <label for="<?=ucwords(strtolower($design));?>"> <?=$design; ?></label>
+                                                                </div>
+<?php                                                       }
+?>
+                                                        </div>
+                                                </div>
+<?php                                             
+                                            }
+                                        }
+?>
 
-                                    <div class="divCon2  fLeft goldprop allprop <?=$showg;?>">
+                        <div class="divCon2  fLeft goldprop allprop <?=$showg;?>">
                                     <div  class="titleDiv txtCap fLeft">Gold Purity</div>
                                     <input name="gold_purity" id="goldpurity" type="text" placeholder=" eg. 1.33" value="<?=$attr['gold_purity'];?>" class="txtInput fLeft fmOpenR font14 c666">
                                     </div>
@@ -107,15 +135,21 @@
                             <input name="silver_weight" id="silverweight" type="text" placeholder=" eg. 10 Gms" value="<?=$attr['gold_weight'];?>" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon2  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Design Number</div>
+                            <input name="barcode" id="barcode" type="text" placeholder=" eg. ALXPK12" class="txtInput fLeft fmOpenR font14 c666" value="<?=$pdet['product_barcode'];?>">
+                        </div>
+                        
+                        <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Price</div>
                             <input name="price" id="prprice" type="text"  placeholder=" eg. 1200000" value="<?=$attr['price'];?>" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="btnCont fLeft">
                             <center>
-                            <!--    <a href="<?php echo DOMAIN ?>index.php?case=vendor_landing">--> <div class="cancelBtn fmOpenR ripplelink poR">CANCEL</div></a>
+                            <!--    <a href="<?php echo DOMAIN ?>index.php?case=vendor_landing">--> <div class="cancelBtn fmOpenR ripplelink poR" onclick="backbtn();" id='backBtnDiv'>CANCEL</div></a>
                             <!--    <a href="<?php echo DOMAIN?>index.php?case=vendor_landing"> --> <div class="submitBtn fmOpenR ripplelink poR" onclick="validateBForm()">SUBMIT</div></a>
                             </center>
                         </div>
+                     </div>   
                     </div>
                 </div>
             </div>
