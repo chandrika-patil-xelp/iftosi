@@ -311,7 +311,7 @@
                         </div>
                     </div>
                    -->
-                     
+<div class="dn" id="allcontent">                     
                     <div class="divCon  fLeft jw3" id='certiicates'>
                         <div  class="titleDiv txtCap fLeft">Certficate</div>
                         <div class='radioCont fLeft'> 
@@ -483,6 +483,10 @@
                         <div  class="titleDiv txtCap fLeft">Gemstone Weight</div>
                         <input name="gemstone_weight" type="text" id="gemweight" placeholder=" eg. 1.25 CTS" value="<?=$attr['gemwt'];?>" class="txtInput fLeft fmOpenR font14 c666">
                     </div>
+                    <div class="divCon2  fLeft">
+                            <div  class="titleDiv txtCap fLeft">Design Number</div>
+                            <input name="barcode" id="barcode" type="text" placeholder=" eg. ALXPK12" class="txtInput fLeft fmOpenR font14 c666" value="<?=$pdet['product_barcode'];?>">
+                    </div>
  <?php                
                                         foreach($cat['subcat'] as $key=>$values)
                                         {
@@ -498,10 +502,11 @@
 ?>                         
                     <div class="btnCont fLeft">
                         <center>
-                            <div class="cancelBtn fmOpenR ripplelink poR">CANCEL</div>
+                            <div class="cancelBtn fmOpenR ripplelink poR" onclick="backbtn();">CANCEL</div>
                             <div class="submitBtn fmOpenR ripplelink poR" onclick="validateJForm()" id="Submitdiv">SUBMIT</div>
                         </center>
                     </div>
+                  </div> 
                 </div>
             </div>
         </div>

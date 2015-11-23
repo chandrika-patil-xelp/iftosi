@@ -9,7 +9,7 @@
                     <div class='prdSearchDiv fLeft'>
                         <div class="formTitle fLeft fmOpenR m0"><span id="totalEnqs">0</span> Enquirie(s) Listed</div>
                         <input type="text" class="prdSeachTxt fRight fmOpenR" placeholder=" Search your Product">
-                        <div class="vFilBtn fRight poR ripplelink" onclick="showEnqFilter()"></div>
+                       <!-- <div class="vFilBtn fRight poR ripplelink" onclick="showEnqFilter()"></div> -->
                     </div>
                     <div class="prdListHeader fLeft fmOpenR">
                         <div class="date fLeft">Date</div>
@@ -123,7 +123,7 @@ function generateEnqList(obj) {
         str += '</div>';
         str += '<div class="barcode fLeft">';
             str += '<span class="upSpan">' + pro_dtls['barcode'] + '</span>';
-            str += '<span class="lwSpan"><a href="'+ DOMAIN + pro_name.replace(" ", "+").toLowerCase() +'/did-'+ obj['product_id'] +'">View Details</a></span>';
+            str += '<span class="lwSpan"><a href="'+ DOMAIN + pro_dtls['barcode'].replace(" ", "+").toLowerCase() +'/did-'+ obj['product_id'] +'">View Details</a></span>';
         str += '</div>';
         str += '<div class="price fLeft bNone fmOpenB">&#8377;' + pro_dtls['prd_price'] + '</div>';
     str += '</li>';

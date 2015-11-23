@@ -2,7 +2,7 @@
     <div class="wrapperMax">
         <div id='mTitle' class="menuTittle fmOpenL transition300"><a href="<?php echo DOMAIN.strtolower($showcat['cat_name']).'/ct-'.$showcat['catid'];?>"><?php echo $showcat['cat_name'];?></a></div>
         <div class="menuListCont">
-			<?
+			<?php
 			foreach($showcat['subcat'] as $key => $val)
 			{
 				$dname = preg_replace('/[^a-zA-Z0-9]+/', ' ', $val['cat_name']);
@@ -12,7 +12,7 @@
 				<div class="mItemDiv fLeft">
 					<a href="<?php echo DOMAIN.strtolower($showcat['cat_name']).'/'.$dname.'/ct-'.$val['catid'];?>"><div class="mItemTitle fLeft fmOpenL"><?php echo $val['cat_name'];?></div></a>
 					<ul class="fmOpenR">
-					<?
+					<?php
 					foreach($val['subcat'] as $ky => $vl)
 					{
 						$cname = preg_replace('/[^a-zA-Z0-9]+/', ' ', $vl['cat_name']);
@@ -20,12 +20,12 @@
 						$cname = strtolower(str_replace(" ", "-", $cname));
 					?>
 						<li><a href="<?php echo DOMAIN.strtolower($showcat['cat_name']).'/'.$dname.'/'.$cname.'/ct-'.$vl['catid'];?>"><?php echo $vl['cat_name'];?></a></li>
-					<?
+					<?php
 					}
 					?>
 					</ul>
 				</div>
-			<?
+			<?php
 			}
 			?>
         </div>
