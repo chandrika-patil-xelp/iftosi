@@ -218,6 +218,7 @@ function showVendorDetails(obj)
 								$('#vDetails').removeClass('dn');
 								$('body').animate({scrollTop: pos}, 300);
 							},200);
+                                                        addToEnquiry();
 						}
 					}
 				}
@@ -242,6 +243,7 @@ function showVendorDetails(obj)
 				$('#vDetails').removeClass('dn');
 				$('body').animate({scrollTop: pos}, 300);
 			},200);
+                        addToEnquiry();                        
 		}
 	}
 
@@ -383,20 +385,52 @@ $('#galleryClose2').click(function(){
     $('#imgvendorGallery').removeClass('dn');
  });
 
+function addToEnquiry()
+{
+	var userid = customStorage.readFromStorage('userid');
+        if(userid !== null && vendor_id !== null && pid !== null)
+        {
+            var params = 'action=ajx&case=addToEnquiry&uid='+userid+'&vid='+vendor_id+'&pid='+pid;
+            var URL = DOMAIN + "index.php";
+           
+            $.getJSON(URL, params, function(data) {
+                    if(data !== null && data !== undefined && data !== '' && data !== 'null' && data !== 'undefined' && typeof data !== 'undefined')
+                    {
+			if(data.error !== '' && data.error !== null && data.error !== undefined && data.error !== 'undefined' && typeof data.error !== 'undefined' && data.error.Code == 0)
+			{
+				 console.log(userid);
+			}
+                    }
+            });
+        }
+        else
+        {
+            showVendorDetails($obj);
+        }
+}
 
 function addToWishList()
 {
-	var userid = customStorage.readFromStorage('userid');
-	var params = 'action=ajx&case=addToWishList&userid='+userid+'&vid='+vendor_id+'&prdid='+pid;
-	var URL = DOMAIN + "index.php";
 
-	$.getJSON(URL, params, function(data) {
-		if(data !== null && data !== undefined && data !== '' && data !== 'null' && data !== 'undefined' && typeof data !== 'undefined')
-		{
+	var userid = customStorage.readFromStorage('userid');
+        if(userid !== null && vendor_id !== null && pid !== null)
+        {
+            var params = 'action=ajx&case=addToWishList&userid='+userid+'&vid='+vendor_id+'&prdid='+pid;
+            var URL = DOMAIN + "index.php";
+
+            $.getJSON(URL, params, function(data) {
+                    if(data !== null && data !== undefined && data !== '' && data !== 'null' && data !== 'undefined' && typeof data !== 'undefined')
+                    {
 			if(data.error !== '' && data.error !== null && data.error !== undefined && data.error !== 'undefined' && typeof data.error !== 'undefined' && data.error.Code == 0)
 			{
-				customStorage.toast(0, 'Added to wishlist');
-			}
-		}
-	});
+                                $('#addtowishlist').html('Added To Wishlist');
+				customStorage.toast(1,'Added to wishlist');
+                        }
+                    }
+            });
+        }
+        else
+        {
+            showVendorDetails($obj);
+        }
 }
