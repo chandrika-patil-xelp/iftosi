@@ -66,6 +66,7 @@ function submitForm(formid)
             var purity = $('#goldpurity').val();
             var dweight = $('#diamondweight').val();
             var goldweight=$('#goldweight').val();
+            var barcode=$('#barcode').val();
             var no_diamonds=$('#no_diamonds').val();
             var gemweight=$('#gemweight').val();
             var prdprice=$('#prdprice').val();
@@ -78,59 +79,64 @@ function submitForm(formid)
             else if(subcat<=false){
                 str ='Checkbox button is empty';                
             }
-            else if((certificate=='')||(certificate==null)||(certificate==undefined)) {
+            else if((certificate=='') || (certificate==null) || (certificate==undefined)) {
                 str ='Certificate field is Empty';
             }
-            else if((metal=='')||(metal==null)||(metal==undefined)) {
+            else if((metal=='') || (metal==null) || (metal==undefined)) {
                 str ='Metal field is Empty';
             }
-            else if((color=='')||(color==null)||(color==undefined)) {
-                str ='Color field is Empty';
+            else if((color=='') || (color==null) || (color==undefined)) {
+                str ='Diamond Color field is Empty';
             }
-            else if((clarity=='')||(clarity==null)||(clarity==undefined)) {
-                str ='Clarity field is Empty';
+            else if((clarity=='') || (clarity==null) || (clarity==undefined)) {
+                str ='Diamond Quality field is Empty';
             }
-            else if(purity=='') {
-                str ='Gold Purity field is Empty';
+            else if(purity == '' || isNaN(purity)) {
+                str ='Purity field is Empty';
                  $('#goldpurity').focus();
             }
-
-            else if(goldweight=='') {
+            else if(goldweight == '' || isNaN(goldweight)) {
                 str ='Gold weight is Required';
                 $('#goldweight').focus();
             }
-            else if(no_diamonds=='') {
+            else if(isNaN(no_diamonds)) {
                 str ='Number of diamonds have to be Selected';
                  $('#no_diamonds').focus();
             }
-            else if(dweight=='') {
+            else if(dweight == '' || isNaN(dweight)) {
                 str ='Diamond weight is Required';
                 $('#diamondweight').focus();
             }
-            else if(gemweight=='') {
+            else if(gemweight == '' || isNaN(gemweight)) {
                 str ='Gemstone weight is important to fill';
                  $('#gemweight').focus();
             }
-            else if(prdprice=='') {
+            else if(barcode=='') {
+                str ='Design Number field is Required';
+                $('#barcode').focus();
+            }
+            else if(prdprice == '' || isNaN(prdprice)) {
                 str ='Product Price is important to fill';
                 $('#prdprice').focus();
             }
+            if(str != '')
+            {
+                common.toast(0,str);
+            }
             else {
-               
                 submitForm('jwAddForm');
                 return  true;
             }
-            common.toast(0,str);
             return false;
 }
 
  function validateDForm(){
             var shape=$('.shapeComm');
             var metal = $("input[name='metal']:checked").val();
-            var color = $('input[name=color]:checked').val();
-            var cut = $('input[name=cut]:checked').val();
-            var symmetry = $('input[name=symmetry]:checked').val();
-            var polish = $('input[name=polish]:checked').val();
+            var color = $("input[name='color']:checked").val();
+            var cut = $("input[name='cut']:checked").val();
+            var symmetry = $("input[name='symmetry']:checked").val();
+            var polish = $("input[name='polish']:checked").val();
             var clarity = $("input[name='clarity']:checked").val();
             var carat = $('#caratweight').val();
             var measure1 = $('#measure1').val();
@@ -146,7 +152,8 @@ function submitForm(formid)
             var discount=$('#discount').val();
             var prdprice=$('#prdprice').val();
             var str = '';
-           
+            carat = parseFloat(carat);
+            crown = parseFloat(crown);
             if(!shape.hasClass('shapeSelected')) {
                 str ='Shape is not Selected';
             }
@@ -165,31 +172,31 @@ function submitForm(formid)
             else if((polish=='')||(polish==null)||(polish==undefined)) {
                 str ='Polish field is Empty';
             }
-            else if(carat=='') {
+            else if(carat == '' || isNaN(carat)) {
                 str ='Carat Weight field is Empty';
                  $('#caratweight').focus();
             }
-            else if(measure1=='') {
+            else if(measure1 == '' || isNaN(measure1)) {
                 str ='Measurement column1 is Required';
                 $('#measure1').focus();
             }
-            else if(measure2=='') {
+            else if(measure2 == '' || isNaN(measure2)) {
                 str ='Measurement column2 is Required';
                 $('#measure2').focus();
             }
-            else if(measure3=='') {
+            else if(measure3 == '' || isNaN(measure3)) {
                 str ='Measurement column3 is Required';
                 $('#measure3').focus();
             }
-            else if(table=='') {
+            else if(table == '' || isNaN(table)) {
                 str ='Table field is Required';
                 $('#table').focus();
             }
-            else if(crown=='') {
+            else if(crown == '' || isNaN(crown)) {
                 str ='Crown field is Required';
                 $('#crownangle').focus();
             }
-            else if(girdle=='') {
+            else if(girdle == '' || isNaN(girdle)) {
                 str ='Girdle field is Required';
                 $('#girdle').focus();
             }
@@ -197,7 +204,7 @@ function submitForm(formid)
                 str ='Barcode field is Required';
                 $('#barcode').focus();
             }
-            else if(lotnumber=='') {
+            else if(lotnumber == '' || isNaN(lotnumber)) {
             str ='Lot number field is Required';
             $('#lotnumber').focus();
             }
@@ -205,7 +212,7 @@ function submitForm(formid)
             str ='Lot reference field is Required';
                 $('#lotreference').focus();
             }
-            else if(baseprice=='') {
+            else if(baseprice == '' || isNaN(baseprice)) {
             str ='Baseprice field is Required';
                 $('#baseprice').focus();
             }
@@ -213,63 +220,75 @@ function submitForm(formid)
             str ='Discount field is Required';
                 $('#discount').focus();
             }
-            else if(prdprice=='') {
+            else if(prdprice == '' || isNaN(prdprice)) {
             str ='Price field is Required';
                 $('#prdprice').focus();
+            }
+            if(str != '')
+            {
+                common.toast(0,str);
             }
             else {
                 submitForm('dAddForm');
                 return  true;
             }
-            common.toast(0,str);
             return false;
 }
 
  function validateBForm(){
+            var design =  $('input[name=design]:checked').val();
             var purity = $('#goldpurity').val();
+            var barcode=$('#barcode').val();
             var spurity = $('#silverpurity').val();
             var goldweight = $('#goldweight').val();
             var sweight= $('#silverweight').val();
             var prprice = $('#prprice').val();
             var shape = $('.jshapeComm');
-            var a = $('shapeSelected').attr('id');
+            var a = $('.jshapeComm').attr('id');
             var str = '';
-
-         
             if(!shape.hasClass('shapeSelected')) {
                 str ='category is not Selected';
             }
-            else if(a=='gCoins')
+            else if((design=='')||(design==null)||(design==undefined)) {
+                str ='Design field is Empty';
+            }
+            else if(barcode=='') {
+                str ='Design Number field is Required';
+            }
+            else if(prprice == '' || isNaN(prprice)) {
+                str ='Product Price is important to fill';
+            }
+            else if(a=='gCoins' || a=='gBars')
             {
-                 if(purity=='') {
+                if(purity == '' || isNaN(purity)) {
                     str ='Gold Purity field is Empty';
-                     $('#goldpurity').focus();
                 }
                 else if(goldweight=='') {
                     str ='Gold weight is Required';
-                    $('#goldweight').focus();
                 }
             }
-            else if(a=='sBars')
+            else if(a=='sBars' || a=='sCoins')
             {
-                if(spurity=='') {
+                if(spurity == '' || isNaN(spurity)) {
                     str ='Silver Purity field is Empty';
-                    $('#silverpurity').focus();
                 }
-                else if(sweight=='') {
+                else if(sweight == '' || isNaN(sweight)) {
                     str ='Silver Weight field is Empty';
-                     $('#silverweight').focus();
                 }
             }
-            else if(prprice=='') {
-                str ='Product Price is important to fill';
-                $('#prprice').focus();
+            if(str != '')
+            {
+                common.toast(0,str);
             }
             else {
-                
                 submitForm('bAddForm');
                 return  true;
             }
-            common.toast(0,str);
+            
             return false;
 }
+function backbtn()
+        {
+            window.history.back();
+            return true;
+        }
