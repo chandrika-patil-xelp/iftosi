@@ -241,15 +241,15 @@ a{text-decoration: none;}
 .jshapeComm.sCoins:hover{background: url(../img/common/sCoin.png)no-repeat;background-size: cover;background-position: bottom;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
 .jshapeComm.sBars:hover{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
 
-.jshapeComm.shapeSelected.gCoin{background: url(../img/common/gCoin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
-.jshapeComm.shapeSelected.gBar{background: url(../img/common/gBar.jpeg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
-.jshapeComm.shapeSelected.sCoin{background: url(../img/common/sCoin.png)no-repeat;background-size: cover;background-position:bottom;box-shadow: inset 0 -300px 100px rgba(56, 11, 52,0.8);}
-.jshapeComm.shapeSelected.sBar{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
+.jshapeComm.shapeSelected.gCoins{background: url(../img/common/gCoin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
+.jshapeComm.shapeSelected.gBars{background: url(../img/common/gBar.jpeg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
+.jshapeComm.shapeSelected.sCoins{background: url(../img/common/sCoin.png)no-repeat;background-size: cover;background-position:bottom;box-shadow: inset 0 -300px 100px rgba(56, 11, 52,0.8);}
+.jshapeComm.shapeSelected.sBars{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
 
-.jshapeComm.shapeSelected.gCoin:hover{background: url(../img/common/gCoin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
-.jshapeComm.shapeSelected.gBar:hover{background: url(../img/common/gBar.jpeg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
-.jshapeComm.shapeSelected.sCoin:hover{background: url(../img/common/sCoin.jpg)no-repeat;background-size: cover;background-position:bottom;box-shadow: inset 0 -300px 100px rgba(56, 11, 52,0.8);}
-.jshapeComm.shapeSelected.sBar:hover{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
+.jshapeComm.shapeSelected.gCoins:hover{background: url(../img/common/gCoin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
+.jshapeComm.shapeSelected.gBars:hover{background: url(../img/common/gBar.jpeg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
+.jshapeComm.shapeSelected.sCoins:hover{background: url(../img/common/sCoin.png)no-repeat;background-size: cover;background-position:bottom;box-shadow: inset 0 -300px 100px rgba(56, 11, 52,0.8);}
+.jshapeComm.shapeSelected.sBars:hover{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
 
 
 .otherBox{width:300px;height:35px;margin-top: -5px;}
