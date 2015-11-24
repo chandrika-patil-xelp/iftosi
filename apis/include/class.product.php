@@ -418,6 +418,90 @@
                     $result = array('results'=>$arr, 'error' => $err);
                     return $result;
         }
+		
+		public function imageUpdate($params)
+		{
+			$pid = $params['pid'];
+			$sql = "SELECT prd_img FROM tbl_product_master WHERE product_id = ".$pid."";
+			$res = $this->query($sql);
+			if($res)
+			{
+				$row = $this->fetchData($res);
+				
+				$expd 		= explode('|~|',trim($row['prd_img'],'|~|'));
+				$expd[] 	= IMGPATH.$params['imgpath'];
+				$imgpath 	= implode("|~|",$expd);
+				if($imgpath)
+				{
+					$sql = "UPDATE tbl_product_master SET prd_img=\"".$imgpath."\" WHERE product_id = ".$pid."";
+					$res = $this->query($sql);
+					$err = array('errCode' => 0, 'errMsg' => 'Details updated successfully');
+				}
+				else
+					$err = array('errCode' => 1, 'errMsg' => 'No results updated');
+				
+				$arr = array();
+				$result = array('results' => $arr, 'error' => $err);
+				return $result;
+			}
+		}
+		
+		public function imageRemove($params)
+		{
+			$pid = $params['pid'];
+			$sql = "SELECT prd_img FROM tbl_product_master WHERE product_id = ".$pid."";
+			$res = $this->query($sql);
+			if($res)
+			{
+				$row = $this->fetchData($res);
+				$expd 		= explode('|~|',trim($row['prd_img'],'|~|'));
+				//echo "<pre>";print_r($expd);die;
+				foreach($expd as $key => $val)
+				{
+					if(stristr($val, $params['file']) !== FALSE)
+					{
+						//echo "here";
+						unset($expd[$key]);
+					}
+				}
+				$imgpath 	= implode("|~|",$expd);
+				$sql = "UPDATE tbl_product_master SET prd_img=\"".$imgpath."\" WHERE product_id = ".$pid."";
+				$res = $this->query($sql);
+				if($res)
+					$err = array('errCode' => 0, 'errMsg' => 'Details updated successfully');
+				else
+					$err = array('errCode' => 1, 'errMsg' => 'No results updated');
+				
+				$arr = array();
+				$result = array('results' => $arr, 'error' => $err);
+				return $result;
+			}
+		}
+		
+		public function imageDisplay($params)
+		{
+			$arr = array();
+			$pid = $params['pid'];
+			$sql = "SELECT prd_img FROM tbl_product_master WHERE product_id = ".$pid."";
+			$res = $this->query($sql);
+			if($res)
+			{
+				$row = $this->fetchData($res);
+				if(trim($row['prd_img'],'|~|'))
+					$arr 		= explode('|~|',trim($row['prd_img'],'|~|'));
+			}
+			
+			if(!empty($arr))
+			{
+				$err = array('errCode' => 0, 'errMsg' => 'Details fetched successfully');
+			}
+			else
+			{
+				$err = array('errCode' => 1, 'errMsg' => 'No results found');
+			}
+			$result = array('results' => $arr, 'error' => $err);
+			return $result;
+		}
         
 // Uploading the image method.        
        /* public function imageUpdate($params)

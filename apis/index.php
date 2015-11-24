@@ -8,7 +8,27 @@ switch($action)
     {        
 //----------------------------User--------------------------------
 
-//  localhost/iftosi/apis/index.php?action=checkUser&mobile=9987867578                
+//  localhost/iftosi/apis/index.php?action=checkUser&mobile=9987867578
+
+		case 'imageupdate':
+			include APICLUDE.'class.product.php';
+			$obj	= new product($db['iftosi']);
+			$result	= $obj->imageUpdate($params);
+		break;
+		
+		case 'imageremove':
+			include APICLUDE.'class.product.php';
+			$obj	= new product($db['iftosi']);
+			$result	= $obj->imageRemove($params);
+		break;
+		
+		case 'imagedisplay':
+			include APICLUDE.'class.product.php';
+			$obj	= new product($db['iftosi']);
+			$result	= $obj->imageDisplay($params);
+			$res= $result;
+		break;
+   
         case 'checkUser':
             include APICLUDE.'class.user.php';
             $mobile=(!empty($params['mobile'])) ? trim($params['mobile']) : '';

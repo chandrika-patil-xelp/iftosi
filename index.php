@@ -146,6 +146,12 @@
 					include 'template/signup.html';
 				break;
 				
+				case 'upload':
+					$pid = $_GET['pid'];
+					$page='upload';
+					include 'image-upload/index.html';
+				break;
+				
 				case 'wishlist':
 					$page='wishlist';
 					
