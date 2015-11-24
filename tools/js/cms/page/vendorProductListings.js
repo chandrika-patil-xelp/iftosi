@@ -175,6 +175,7 @@ function generateJewellList(obj) {
     str += '<div class="price fLeft fmOpenB">&#8377;' + obj['price'] + '</div>';
     str += '<div class="acct fLeft">';
     str += '<center>';
+    str += '<div class="uploadBtn poR ripplelink" onclick=""></div>';
     str += '<div class="deltBtn poR ripplelink" onclick="deleteProduct(' + obj['id'] + ',this)"></div>';
     str += '<a href="'+ DOMAIN +'index.php?case=jewellery_Form&catid=10001&prdid='+ obj['id'] +'"><div class="editBtn poR ripplelink"></div></a>';
     str += '<div class="soldBtn poR ripplelink fmOpenR" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==1) ? "SOLD" : "IN STOCK");+'</div>';
@@ -240,6 +241,7 @@ function generatBullionsList(obj) {
     str += '<div class="price fLeft fmOpenB">&#8377;' + obj['price'] + '</div>';
     str += '<div class="acct fLeft">';
     str += '<center>';
+    str += '<div class="uploadBtn poR ripplelink" onclick=""></div>';
     str += '<div class="deltBtn poR ripplelink" onclick="deleteProduct(' + obj['id'] + ',this)"></div>';
     str += '<a href="'+ DOMAIN +'index.php?case=bullion_Form&catid=10002&prdid='+ obj['id'] +'"><div class="editBtn poR ripplelink"></div></a>';
     str += '<div class="soldBtn poR ripplelink fmOpenR" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==1) ? "SOLD" : "IN STOCK");+'</div>';
