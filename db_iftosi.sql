@@ -1,6 +1,6 @@
 /*
-SQLyog Ultimate v11.11 (64 bit)
-MySQL - 5.6.24 : Database - db_iftosi
+SQLyog Ultimate v11.11 (32 bit)
+MySQL - 5.6.16 : Database - db_iftosi
 *********************************************************************
 */
 
@@ -242,6 +242,21 @@ CREATE TABLE `tbl_product_enquiry` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tbl_product_enquiry` */
+
+/*Table structure for table `tbl_product_image_mapping` */
+
+DROP TABLE IF EXISTS `tbl_product_image_mapping`;
+
+CREATE TABLE `tbl_product_image_mapping` (
+  `product_id` bigint(20) NOT NULL COMMENT 'product_id filled by vendor',
+  `product_image` text COMMENT 'product_images',
+  `active_flag` tinyint(2) NOT NULL DEFAULT '0' COMMENT '0-Inactive,1-Active,2-Deleted',
+  `image_sequence` text COMMENT 'sequence of images',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `tbl_product_image_mapping` */
 
 /*Table structure for table `tbl_product_master` */
 
