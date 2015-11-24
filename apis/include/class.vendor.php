@@ -38,11 +38,7 @@ class vendor extends DB
     {              
         $page   = ($params['page'] ? $params['page'] : 1);
         $limit  = ($params['limit'] ? $params['limit'] : 15);
-        if (!empty($page))
-        {
-            $start = ($page * $limit) - $limit;
-            $vsql.=" LIMIT " . $start . ",$limit";
-        }
+        
         
         $total_products = 0;
         
@@ -53,6 +49,11 @@ class vendor extends DB
          if($chkcnt>0)
         {
             $vsql="select product_id,vendor_price,vendor_quantity,vendor_currency,city,active_flag from tbl_vendor_product_mapping where active_flag=1 or active_flag=0 and vendor_id=".$params['vid'];
+            if (!empty($page))
+            {
+                $start = ($page * $limit) - $limit;
+                $vsql.=" LIMIT " . $start . ",$limit";
+            }
             $vres=$this->query($vsql);
             $prsql.=" LIMIT " . $start . ",$limit";
             
@@ -108,70 +109,142 @@ class vendor extends DB
             return $result;
     }
     
-    /*   
-    public function getVproductsByName($params)
-    {
-        
-     $sql1="SELECT product_id,product_display_name,product_model,product_brand,prd_img,IF(product_name LIKE '".$params['prname']."%',1,0) AS startwith,IF(product_name LIKE '".$params['prname']."%',1,0) AS phrasematch,desname FROM tbl_product_master where MATCH(product_name) AGAINST(\"'" . $params['prname'] . "*'\" IN BOOLEAN MODE) ORDER BY startwith DESC,phrasematch DESC";
-     $page=$params['page'];
-     $limit=$params['limit'];
-     if (!empty($page))
-    {
-        $start = ($page * $limit) - $limit;
-        $sql1.=" LIMIT " . $start . ",$limit";
-    }
      
-     $res1=$this->query($sql1);
-     $chkcnt=$this->numRows($res1);
-     if($chkcnt>0)
-     {
-        $i=-1;
-        while($row=$this->fetchData($res1))
-        {   $i++;
-            $pdet='';
-            $pdet1['pid'][$i]=$row['product_id'];
-            $pdet['prod_display_name']=$row['product_display_name'];
-            $pdet['prod_model']=$row['product_model'];
-            $pdet['prod_brand']=$row['product_brand'];
-            $pdet['prod_img']=$row['prd_img'];
-            $prDetails[]=$pdet;
-        }
-        $prId=implode(',',$pdet1['pid']);
-       
-        $sql2="SELECT vendor_price,vendor_quantity,vendor_currency,active_flag from tbl_vendor_product_mapping WHERE vendor_id =".$params['vid']." and product_id IN(".$prId.")";
-        $sql2.=" LIMIT " . $start . ",$limit";
-        $res2=$this->query($sql2);
-        if($this->numRows($res2)>0)
+    public function getVProductsBYBcode($params)
+    {
+        $page   = ($params['page'] ? $params['page'] : 1);
+        $limit  = ($params['limit'] ? $params['limit'] : 15);
+        $catid = ($params['catid'] ? $params['catid'] : 10000);
+        $total_pages = $chkcnt = $total_products = 0;
+        $chkpidsinvid="SELECT product_id FROM tbl_vendor_product_mapping WHERE vendor_id=".$params['vid']."";
+        $respidsinvid=$this->query($chkpidsinvid);
+        $chkcnt=$this->numRows($respidsinvid);
+        if($chkcnt>0)
         {
-        $j=-1;
-            while ($row1=$this->fetchData($res2)) 
+            $k=0;
+            while($row=$this->fetchData($respidsinvid))
             {
-            $j++;
-            $vreslt='';
-            $vreslt['vendor_price'] = $row1['vendor_price'];
-            $vreslt['vendor_currency'] = $row1['vendor_currency'];
-            $vreslt['vendor_quantity'] = $row1['vendor_quantity'];
-            $vreslt['vendor_status'] = $row1['active_flag'];
-            $vresults[] = $vreslt;
+                $k++;
+                $pdet='';
+                $pdet1['pid'][$k]=$row['product_id'];
+                $prDetails[]=$pdet;
             }
-            $arr=array('productdet'=>$prDetails,'vendorProduct'=>$vresults);    
+            $prIds=implode(',',$pdet1['pid']);
+        
+        $sql1=" SELECT 
+                                        product_id,
+                                        barcode as product_barcode,
+                                        product_name,
+                                        product_display_name,
+                                        lotref as product_lotref,
+                                        prd_img as product_image,
+                                        prd_price
+                FROM
+                                        tbl_product_master
+                                        
+                WHERE
+                                        MATCH(barcode) AGAINST(\"'" . $params['bcode'] . "*'\" IN BOOLEAN MODE)
+                AND
+                                        product_id IN(".$prIds.")
+                ORDER BY
+                                        field(product_id,\"".$prIds."\")
+                ASC";
+        if (!empty($page))
+        {
+            $start = ($page * $limit) - $limit;
+            $sql1.=" LIMIT " . $start . ",$limit";
+        }
+     
+        $res1=$this->query($sql1);
+        $chkcnt=$this->numRows($res1);
+        if($chkcnt>0)
+        {
+            $i=-1;
+            while($row=$this->fetchData($res1))
+            {   $i++;
+                $pdet='';
+                $pdet1s['pid'][$i]=$row['product_id'];
+                $prDetails[]=$pdet;
+            }
+            $prId=implode(',',$pdet1s['pid']);
+            $psql='';
+            if($catid == 10000) {
+                $psql='d.color, d.carat, d.shape, d.certified AS cert, d.clarity';
+            } else if($catid == 10001) {
+                $psql='d.metal,c.lotref,d.gold_weight,d.dwt';
+            } else if($catid == 10002) {
+                $psql='d.type, d.metal, d.gold_purity, d.gold_weight';
+            }
+        $sql = "select
+                                    DISTINCT a.product_id 
+                AS id, 
+                                    c.product_name,
+                                    a.vendor_price 
+                AS price, 
+                                    c.barcode,
+                                    c.update_time,
+                                    c.active_flag,
+                                    ".$psql."
+                FROM
+                                    tbl_vendor_product_mapping
+                AS a,
+                                    tbl_product_category_mapping
+                AS b, 
+                                    tbl_product_master
+                AS c,
+                                    tbl_product_search
+                AS d 
+                where
+                                    a.product_id=b.product_id 
+                AND 
+                                    b.product_id=c.product_id
+                AND 
+                                    c.product_id=d.product_id
+                AND 
+                                    b.category_id = " . $catid . "
+                AND 
+                                    a.vendor_id=" . $params['vid'] . "
+                AND
+                                    a.active_flag!=2
+                AND
+                                    C.product_id IN(".$prId.")
+                ORDER BY 
+                                    field(c.product_id,".$prId.")";
+        
+        $res = $this->query($sql);
+        $total_products = $this->numRows($res);
+
+        if($total_products>0)
+        {
+            $j=0;
+            while ($row1=$this->fetchData($res)) 
+            {
+                $arr1[]=$row1;
+            }
+            $arr = array('total_products' => $total_products, 'total_pages' => $total_pages, 'products' => $arr1);    
             $err = array('Code' => 0, 'Msg' => 'Details fetched successfully');
         }
         else
         {
-            $arr=array('there is no product with starting with such name in vendor_product list');    
+            $arr=array('there is no product starting with such name in vendor_product list');    
             $err = array('Code' => 0, 'Msg' => 'No Match Found');
         }
+        
      }
     else
     {
-        $arr='No product with this name in list';    
+        $arr = array('total_products' => $total_products, 'total_pages' => $total_pages);
         $err = array('Code' => 0, 'Msg' => 'No Match Found');
+    }
+        }
+        else
+    {
+        $arr = array('total_products' => $total_products, 'total_pages' => $total_pages);
+        $err = array('Code' => 0, 'Msg' => 'No Products Yet');
     }
         $result = array('results' => $arr,'error' => $err);
         return $result;
-        
-    }*/
+    }
     
     public function updateProductInfo($params)
     {        
@@ -528,7 +601,6 @@ class vendor extends DB
             $sql = "UPDATE tbl_designer_product_mapping SET active_flag=0 WHERE product_id=".$params['prdid'];
             $res = $this->query($sql);}
         }
-        
         if($params['flag']==0)
         {
             $sql = "UPDATE tbl_vendor_product_mapping SET active_flag=1 WHERE product_id=" . $params['prdid']." AND vendor_id=" . $params['vid'];
