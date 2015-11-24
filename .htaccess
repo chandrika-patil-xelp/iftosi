@@ -15,8 +15,8 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 ####################### CMS STARTS ###########################
 
-RewriteRule ^(upload-image)/(pid-[^/.]*)$	index.php?case=upload&pid=$2 [L]
 RewriteRule ^([^/.]*)$	index.php?case=$1 [L]
+RewriteRule ^(upload-image)/(pid-[^/.]*)$	index.php?case=upload&pid=$2 [L]
 RewriteRule ^([^/.]*)/(ct-[^/.]*)$	index.php?case=$1&catid=$2 [L]
 RewriteRule ^([^/.]*)/(ct-[^/.]*)/(page-[^/.]*)$	index.php?case=$1&catid=$2&pgno=$3 [L]
 RewriteRule ^([^/.]*)/([^/.]*)/(ct-[^/.]*)$	index.php?case=$1&catid=$3 [L]
