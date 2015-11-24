@@ -93,7 +93,7 @@ function generateDiamondList(obj) {
     str += '</div>';
     str += '<div class="barcode fLeft">';
     str += '<span class="upSpan">' + obj['barcode'] + '</span>';
-    str += '<span class="lwSpan"><a href="'+ DOMAIN + pro_name.replace(" ", "+").toLowerCase() +'/did-'+ obj['id'] +'">View Details</a></span>';
+    str += '<span class="lwSpan"><a href="'+ DOMAIN + '-' + obj['shape'] +'-clarity-'+ obj['clarity'] +'/did-'+ obj['id'] +'" target="_blank">View Details</a></span>';
     str += '</div>';
     str += '<div class="shape fLeft">' + obj['shape'] + '</div>';
     str += '<div class="color fLeft">' + obj['color'] + '</div>';
@@ -166,7 +166,7 @@ function generateJewellList(obj) {
     str += '</div>';
     str += '<div class="barcode fLeft">';
     str += '<span class="upSpan">' + obj['barcode'] + '</span>';
-    str += '<span class="lwSpan"><a href="'+ DOMAIN + pro_name.replace(" ", "+").toLowerCase() +'/jid-'+ obj['id'] +'">View Details</a></span>';
+    str += '<span class="lwSpan"><a href="'+ DOMAIN + obj['barcode'] +'/jid-'+ obj['id'] +'" target="_blank">View Details</a></span>';
     str += '</div>';
     str += '<div class="metal fLeft">' + obj['metal'].split('~')[0] + '</div>';
     str += '<div class="catg fLeft">' + category + '</div>';
@@ -232,7 +232,7 @@ function generatBullionsList(obj) {
     str += '</div>';
     str += '<div class="barcode fLeft">';
     str += '<span class="upSpan">' + obj['barcode'] + '</span>';
-    str += '<span class="lwSpan"><a href="'+ DOMAIN + pro_name.replace(" ", "+").toLowerCase() +'/bid-'+ obj['id'] +'">View Details</a></span>';
+    str += '<span class="lwSpan"><a href="'+ DOMAIN + obj['barcode'] +'/bid-'+ obj['id'] +'" target="_blank">View Details</a></span>';
     str += '</div>';
     str += '<div class="btype fLeft">' + obj['type'] + '</div>';
     str += '<div class="metal fLeft">' + obj['metal'].split('~')[0] + '</div>';
