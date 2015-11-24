@@ -220,7 +220,7 @@ class Uploader {
                 $metas['size'] = $field['size'][$i];
                 $metas['size2'] = $this->formatSize($metas['size']);
                 $metas['name'] = $this->generateFileName($this->options['title'], array('name'=>$metas['old_name'], 'size'=>$metas['size'])) . (!empty($metas['extension']) ? "." . $metas['extension'] : "");
-                $metas['file'] = $this->options['uploadDir'] . time(). $metas['name'];
+                $metas['file'] = $this->options['uploadDir'] . time(). str_replace(' ','',$metas['name']);
                 $metas['replaced'] = file_exists($metas['file']);
                 $metas['date'] = date('r');
                 
