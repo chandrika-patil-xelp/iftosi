@@ -324,7 +324,23 @@ switch($action)
             $res= $result;
             break;
             
-//  localhost/iftosi/apis/index.php?action=vDeletePrd&prdid=1&vid=2
+        case 'getVProductsByBcode':
+            include APICLUDE.'class.vendor.php';
+            $barcode=(!empty($params['bcode'])) ? trim(urldecode($params['bcode'])):'';
+            if(empty($barcode))
+            {
+                $arr=array();
+                $err=array('Code'=>1,'Invalid Parameter');
+                $result=array('result'=>$arr,'error'=>$err);
+                $res=$result;
+                break;
+           }
+           $obj = new vendor($db['iftosi']);
+           $result= $obj->getVProductsByBcode($params);
+           $res=$result;
+           break;
+
+//  localhost/iftosi/apis/index.php?action=togglePrdstatus&prdid=1&vid=2
         case 'togglePrdstatus':
             include APICLUDE.'class.vendor.php';
             $prdid=(!empty($params['prdid'])) ? trim($params['prdid']) : '';
