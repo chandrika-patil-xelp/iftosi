@@ -55,7 +55,7 @@ $(document).ready(function() {
 											<div class="jFiler-item-status"></div>\
 											<div class="jFiler-item-info">\
 												<span class="jFiler-item-title"><b title="{{fi-name}}">{{fi-name | limitTo: 25}}</b></span>\
-												<span class="jFiler-item-others">{{fi-size2}}</span>\
+												<span class="jFiler-item-others"></span>\
 											</div>\
 											{{fi-image}}\
 										</div>\
