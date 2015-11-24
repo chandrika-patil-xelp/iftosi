@@ -32,6 +32,7 @@
                                 </div>
                             </div>
                         </div>
+                        </div>
                                       <!--  <div id="Round" class="shapeComm transition300 ripplelink Round">
                                         </div>
                                         
@@ -53,7 +54,7 @@
                                         <div id="Radiant" class="shapeComm transition300 ripplelink Radiant">
                                         </div>
                                       -->
-<div class="dn" id="allcontent">                                    
+<div class="<?=(!empty($attr['product_id']) == True) ? '' : 'dn';?>" id="allcontent">                                    
                         <div class="divCon  fLeft dAuto">
                             <div  class="titleDiv txtCap fLeft">Color</div>
                             <div class='radioCont fLeft'> 
@@ -298,7 +299,7 @@
                             </center>
                         </div>
                     </div>
-                </div>
+               
             </div>
         </form>
     </div>
