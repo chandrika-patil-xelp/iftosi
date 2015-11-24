@@ -49,10 +49,12 @@ function submitForm(formid)
     {
     var params = 'action=addNewproduct&category_id='+catid+'&dt='+data+'&vid='+uid;
     }
-    var URL = DOMAIN+"apis/index.php";
-
+    console.log(params);
+    var URL   = DOMAIN+"apis/index.php?";
     $.getJSON(URL, params, function(data) {
-      window.location.href = DOMAIN+'?case=vendor_landing&catid='+catid+'&vid='+uid;
+        console.log(data.results.pid);
+      window.location.href = DOMAIN+'upload-image/pid-'+data.results.pid;
+      
     });
     
 }
