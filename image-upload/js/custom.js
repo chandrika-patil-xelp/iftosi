@@ -25,7 +25,7 @@ $(document).ready(function() {
 			showThumbs: true,
 			theme: "dragdropbox",
 			templates: {
-				box: '<ul class="jFiler-items-list jFiler-items-grid"></ul>',
+				box: '<center><ul class="jFiler-items-list jFiler-items-grid"></ul></center>',
 				item: '<li class="jFiler-item">\
 							<div class="jFiler-item-container">\
 								<div class="jFiler-item-inner">\
