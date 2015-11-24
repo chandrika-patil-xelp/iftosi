@@ -252,7 +252,6 @@ function toggleDropDown(flag, id) {
     else {
         $("#" + id + "List").velocity({opacity: 0, borderRadius: '0%'}, {duration: 10, display: "none"});
     }
-
 }
 
 $('#priceRange').ionRangeSlider({
@@ -296,4 +295,77 @@ function submitDForm() {
      values[y[i].name]=y[i].value;
      });
      alert('submit ' +values);*/
+}
+
+
+$('#overlay').velocity({opacity:0},{delay:0,duration:0});
+$('#uploadDiv').velocity({scale: 0}, {delay: 0, duration: 0});
+$('#upProds').click(function () {
+    $('#overlay,#uploadDiv').removeClass('dn');
+    setTimeout(function () {
+        $('#overlay').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
+        $('#uploadDiv').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
+    }, 10);
+    loadDiamont = false;
+});
+
+$('#overlay,#upCancel').bind('click', function () {
+    closeAllForms();
+});
+
+function closeAllForms() {
+    $('#uploadDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
+    $('#overlay').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
+    setTimeout(function () {
+        $('#overlay,#uploadDiv').addClass('dn');
+    }, 1010);
+    loadDiamont = true;
+}
+
+
+$("#upSubmit").on('click',(function(e) {
+    if($("#up_file").val()=='' || ValidateFile()==false) {
+        common.toast(0,'Please Select Valid CSV File');
+    } else {
+        $.ajax({url: DOMAIN + "/apis/index.php?action=bulkInsertProducts&vid="+uid,
+            type: "POST",             
+            data: new FormData($('form')[0]), 
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function(result) {
+                var obj = jQuery.parseJSON(result);
+                $("#up_file").val('');
+                var errCode = obj['error']['Code'];
+                if(errCode==0) {
+                    $("#DiamondsList").html('');
+                    diamondPage = 1;
+                    loadDiamonds();
+                    loadDiamond = false;
+                    errCode=1;
+                    closeAllForms();
+                } else if(errCode==1) {
+                    errCode=0;
+                }
+                common.toast(errCode,obj['error']['Msg']);
+//                if(obj['error']['Code']==0) {
+//                    common.toast(1,'Products are updated Successfully');
+//                }
+//                else {
+//                    common.toast(0,'Products are Failed to Update');
+//                }
+            }
+        });
+    }
+}));
+
+
+function ValidateFile() {
+    var allowedFiles = [".csv"];
+    var fileUpload = document.getElementById("up_file").value;
+    var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+    if (fileUpload.split('.').pop()=="csv") {
+        return true;
+    }
+    return false;
 }

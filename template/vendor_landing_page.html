@@ -137,7 +137,30 @@
         <div class="wrapperMax">Settings</div>
     </div>
     <!------Settings Content End------>
+    
+    
+        <div id='overlay' class="overlay transition300 transit-100Y1 dn"></div>
+        <div id='uploadDiv' class="uploadDiv transition300 transit-200Y1 dn">
+            <form class="" action="" method="post" enctype="multipart/form-data">
+                <div class="downSampleBtn"><a class="commBtn uploadBtn">Download Sample Format</a></div>
+                <div class="upTitle fLeft fmOpenR">Choose files to Upload Products </div>
+                <div class="inputCont fLeft fmOpenR">
+                    <input type="file" id="up_file" name="up_file" class="">
+                    <label for="up_file" style="border: 1px solid #999;" class="dn"><span class="commBtn cancelBtn">BROWSE</span></label>
+                </div>
+                <div class="commBtn cancelBtn fLeft fmOpenR" id='upCancel'> CANCEL</div>
+                <div class="commBtn uploadBtn fLeft fmOpenR" id='upSubmit'>UPLOAD</div>
+                <div class="downloadLink fmOpenB fLeft">
+                    <center>
+                        <span><strong>Note: </strong>Upload file format should same as sample format</span>
+                        <a href="#">Download Sample File</a>
+                    </center>
+                </div>
+            </form>
+        </div>
+    
 </div>
+<script type="text/javascript" src="tools/js/cms/Common.js"></script>
 <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['jqryUi']; ?>"></script>
 <script type="text/javascript" src='tools/js/cms/vendor_landing.js'></script>

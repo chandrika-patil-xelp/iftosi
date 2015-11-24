@@ -1,8 +1,9 @@
 var common = new Common();
+common.checkLogin();
 function Common() {
     var _this = this;
     this.APIWebPath = function () {
-        return DOMAIN + 'apis/';
+        return 'http://localhost/iftosi/apis/';
     };
     this.eSubmit = function (evt, btnId) {
         var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -230,9 +231,22 @@ function Common() {
         }, 5000);
     }
 
-    this.readFromStorage = function (id)
-    {
-        return 2;
-    }
+    this.checkLogin = function () {
+        var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
+        var mob = customStorage.readFromStorage('tf_mobile');
+        var nm = customStorage.readFromStorage('username');
 
+        if (isLoggedIn === 'true')
+        {
+            
+        } else {
+            window.location.href = DOMAIN + "index.php";
+        }
+    };
+
+    this.doLogout = function () {
+        customStorage.removeFromStorage('isLoggedIn');
+        customStorage.addToStorage('isLoggedIn', false);
+        window.location.href = DOMAIN + "index.php?a=logout";
+    };
 }

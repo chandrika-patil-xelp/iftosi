@@ -9,7 +9,7 @@
 
         public function checkUser($params)
         {
-            $csql="select logmobile from tbl_registration where mobile=".$params['mobile']."";
+            $csql="select logmobile from tbl_registration where logmobile=".$params['mobile']."";
             $cres=$this->query($csql);
             $cnt1 = $this->numRows($cres);
             if($cnt1==0)
@@ -20,7 +20,7 @@
             else 
             {
             $arr='User is already Registered';
-            $err=array('Code'=>0,'Msg'=>'No Data matched');
+            $err=array('Code'=>1,'Msg'=>'Data matched');
             }
             $result = array('results' => $arr, 'error' => $err);
             return $result;
@@ -29,11 +29,11 @@
         public function userReg($params) // USER LOGIN PROCESS
         {   
            $isql = "INSERT INTO tbl_registration(user_name,password,logmobile,email,is_vendor,is_active,date_time,update_time,updated_by)
-                    VALUES('".$params['username']."',MD5('".$params['password']."'),".$params['mobile'].",'".$params['email']."',".$params['isvendor'].",0,now(),now(),'".$params['username']."')";
+                    VALUES('".$params['username']."',MD5('".$params['password']."'),".$params['mobile'].",'".$params['email']."',".$params['isvendor'].",1,now(),now(),'".$params['username']."')";
             $ires=$this->query($isql);
             $uid=$this->lastInsertedId();
             
-            if($params['isvendor']=1)
+            if($params['isvendor']==1)
             {
             $isql= "INSERT INTO tbl_vendor_master(vendor_id,email,date_time,is_complete) VALUES(".$uid.",'".$params['email']."',now(),0)";
             $res=$this->query($isql);
@@ -48,7 +48,7 @@
                     $err=array('code'=>1,'msg'=>"Error in insert operation");
                 }
             }
-           else if($params['isvendor']=0)
+           else if($params['isvendor']==0)
             {
                 $arr="SignUp process Is Complete";
                 $err=array('code'=>0,'msg'=>"Insert Operation Done");            
@@ -261,6 +261,8 @@
         public function logUser($params) // USER LOGIN CHECK
         {
             $vsql="SELECT 
+                          user_id,
+                          user_name,
                           logmobile,
                           password,
                           is_vendor
@@ -274,24 +276,37 @@
                           is_active=1";
             $vres=$this->query($vsql);
             $cntres=$this->numRows($vres);
-            if($cntres=1)
+            if($cntres==1)
             {
                 while($row=$this->fetchData($vres))
                 {
+                    $arr['uid']=$row['user_id'];
                     $arr['utype']=$row['is_vendor'];
+                    $arr['username']=$row['user_name'];
                 }
                 $ut=$arr['utype'];
-                if($ut=0)
+                if($ut==0)
                 {
-                    $arr="Welcome and greetings user";
-                    $err=array('code'=>1,'msg'=>'Parameters matched');
                 }
-                else if($ut=1)
+                else if($ut==1)
                 {
-                    $arr="Welcome and greetings Vendor";
-                    $err=array('code'=>1,'msg'=>'Parameters matched');
+                      $sql="SELECT 
+                              business_type
+                       FROM 
+                              tbl_vendor_master
+                       WHERE
+                              vendor_id=".$arr['uid'];
+                    $res=$this->query($sql);
+                    if($this->numRows($res)==1)
+                    {
+                        while($vrow=$this->fetchData($res))
+                        {
+                            $arr['busiType']=$vrow['business_type'];
+                        }
+                    }
                 }
-            }   
+                $err=array('code'=>0,'msg'=>'Parameters matched');
+            }
             else
             {
                 $arr=array();

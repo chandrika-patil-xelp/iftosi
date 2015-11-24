@@ -492,7 +492,7 @@ class vendor extends DB
                                     a.active_flag!=2
                 ORDER BY 
                                     a.product_id
-                asc ";
+                desc ";
         $res = $this->query($sql);
         $total_products = $this->numRows($res);
         
@@ -530,6 +530,59 @@ class vendor extends DB
         return $result;
     }
     
+    public function bulkInsertProducts($params) {
+        $vid=$params['vid'];
+        $data=$params['data'];
+        
+        $sql="SELECT city from tbl_vendor_master where vendor_id=\"".$vid."\"";
+        $res=$this->query($sql);
+        $row=$this->fetchData($res);
+        $city=$row['city'];
+        
+        $rdv = explode("\n", $data);
+        $len = count($rdv) - 1;
+        $i = $totlIns = 0;
+        while ($i < $len) {
+            $value = explode(",", $rdv[$i]);
+            $colName = explode(",", $rdv[0]);
+            if ($i != 0) {
+                $ts = date('Y-m-d H:i');
+                $query = "INSERT INTO `tbl_productid_generator` (`product_name`, date_time) VALUES ('Diamond','" . $ts . "')";
+                $res = $this->query($query);
+                if ($res) {
+                    $pro_id = mysql_insert_id();
+                    $sql = "INSERT INTO `tbl_product_category_mapping` (product_id, category_id, price, date_time) VALUES ('" . $pro_id . "','10000','" . $value[3] . "','". $ts ."')";
+                    //echo $sql.'<br>';
+                    $res = $this->query($sql);
+                    $sql = "INSERT INTO `tbl_product_master` (product_id, barcode, lotref, lotno, prd_price, date_time) VALUES ('" . $pro_id . "','". $value[0] ."','". $value[1] ."','". $value[2] ."','". $value[3] ."','". $ts ."')";
+                    //echo $sql.'<br>';
+                    $res = $this->query($sql);
+                    $sql = "INSERT INTO `tbl_vendor_product_mapping` (product_id, vendor_id, vendor_price, city, vendor_currency, date_time) VALUES ('" . $pro_id . "','" . $vid . "','" . $value[3] . "','". $city ."','USD', '". $ts ."')";
+                    //echo $sql.'<br>';
+                    $res = $this->query($sql);
+                    $srch_val="'" . $pro_id . "', ";
+                    for ($j = 3; $j < count($value); $j++) {
+                        $srch_val .= "'".$value[$j]."', ";
+                    }
+                    $sql = "INSERT INTO `tbl_product_search` (product_id, price, shape, certified, cut, carat, color, clarity, base, value, p_disc, prop, polish, symmetry, fluo, td, tabl, measurement, cno, pa, cr_hgt, cr_ang, girdle, pd) VALUES (".rtrim($srch_val,', ').")";
+                    //echo $sql.'<br>';
+                    $res = $this->query($sql);
+                    $totlIns++;
+                }
+            }
+            $i++;
+        }
+        if ($res) {
+            $totlRecrds = $len-1;
+            $arr = array('suc'=>$totlIns,'fail'=>$totlRecrds-$totlIns);
+            $err = array('Code' => 0, 'Msg' => 'Products are updated Successfully');
+        } else {
+            $arr = array();
+            $err = array('Code' => 1, 'Msg' => 'Products are Failed to Update');
+        }
+        $result = array('results' => $arr, 'error' => $err);
+        return $result;
+    }
     
     private function getSubCat($catid, $catarr = array()) {
         $sql = "SELECT p_catid, catid FROM tbl_category_master where p_catid in (" . $catid . ") order by catid ASC";

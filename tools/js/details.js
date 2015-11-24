@@ -85,7 +85,7 @@ $(document).ready(function(){
 			{
 				isWishList = false;
 			}
-			showVendorDetails(this);
+			F(this);
 		}
     });
     
@@ -433,4 +433,82 @@ function addToWishList()
         {
             showVendorDetails($obj);
         }
+}
+
+$('#loginDiv').velocity({scale: 0}, {delay: 0, duration: 0});
+$('#signInUpTab').click(function () {
+    mobile = customStorage.readFromStorage('mobile');
+    name = customStorage.readFromStorage('name');
+    email = customStorage.readFromStorage('email');
+
+    if (mobile == '' || mobile == null || mobile == undefined)
+    {
+        $('#overlay,#loginDiv').removeClass('dn');
+        setTimeout(function () {
+            $('#overlay').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
+            $('#loginDiv').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
+        }, 10);
+    }
+    else
+    {
+
+    }
+});
+    
+$('#overlay').bind('click', function () {
+    closeAllForms();
+});
+$('#lgSubmit, #lgCancel').bind('click', function () {
+    if(this.id=='lgSubmit') {
+        submitLoginForm();
+    } else {
+        closeAllForms();
+    }
+    
+});
+
+function closeAllForms() {
+    $('#loginDiv,#userForm').velocity({scale: 0}, {delay: 0, ease: 'swing'});
+    $('#overlay').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
+    setTimeout(function () {
+        $('#overlay,#loginDiv,#userForm').addClass('dn');
+    }, 1010);
+}
+function submitLoginForm() {
+    var pr_mobile = $('#pr_mobile').val();
+    var pr_pass = $('#pr_pass').val();
+    if(pr_mobile=='') {
+        customStorage.toast(0, 'Mobile Number Should Be Enpty');
+        $('#pr_mobile').focus();
+        return;
+    } else if(pr_pass=='') {
+        customStorage.toast(0, 'Login Password Should Be Enpty');
+        $('#pr_pass').focus();
+        return;
+    } else {
+        $.ajax({url: DOMAIN + "apis/index.php?action=logUser&mobile=" + pr_mobile + "&password=" + pr_pass, success: function (result) {
+            var obj = jQuery.parseJSON(result);
+            var errCode = obj['error']['code'];
+            if(errCode==0) {
+                var userid=obj['results']['uid'];
+                var username=obj['results']['username'];
+                var is_vendor=obj['results']['utype'];
+                customStorage.addToStorage('isLoggedIn', true);
+                customStorage.addToStorage('l', pr_mobile);
+                customStorage.addToStorage('p', pr_pass);
+                customStorage.addToStorage('userid', userid);
+                customStorage.addToStorage('username', username);
+                customStorage.addToStorage('is_vendor', is_vendor);
+                if(is_vendor==1) {
+                    var busiType = obj['results']['busiType'];;
+                    customStorage.addToStorage('busiType', busiType);
+                    var catid=busiType.charAt(0)-1;
+                    window.location.assign(DOMAIN+'index.php?case=vendor_landing&catid=1000'+catid);
+                }
+            } else {
+                customStorage.toast(0, 'Invalid Login Credentials');
+            }
+        }});
+        
+    }
 }

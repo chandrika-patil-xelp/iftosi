@@ -1,5 +1,7 @@
 var uid = customStorage.readFromStorage('userid');
-
+if(vid!=uid || uid=='') {
+    window.location.assign(DOMAIN+'index.php');
+}
 $(document).ready(function () {
     $('.compComm').bind('click', function (e) {
 
@@ -213,16 +215,17 @@ function submitForm() {
     data['result'] = res;
     data = JSON.stringify(data);
     $.ajax({url: common.APIWebPath() + "index.php?action=udtProfile&dt=" + encodeURIComponent(data), success: function (result) {
-            var obj = jQuery.parseJSON(result);
-            var errCode = obj['error']['code'];
-            var errMsg = obj['error']['msg'];
-            if (errCode == 0) {
-                common.toast(1,errMsg);
-                changeTab('step2');
-            } else {
-                common.toast(0,errMsg);
-            }
-        }});
+        var obj = jQuery.parseJSON(result);
+        customStorage.addToStorage('busiType',busiType);
+        var errCode = obj['error']['code'];
+        var errMsg = obj['error']['msg'];
+        if (errCode == 0) {
+            common.toast(1,errMsg);
+            changeTab('step2');
+        } else {
+            common.toast(0,errMsg);
+        }
+    }});
 }
 
 function submitStep2Form() {
@@ -313,7 +316,7 @@ function submitStep3Form() {
             var errMsg = obj['error']['msg'];
             if (errCode == 0) {
                 common.toast(1,errMsg);
-                window.location.assign('index.php?case=vendor_landing');
+                window.location.assign('index.php?case=vendor_landing&catid=1000'+busiType.charAt(0));
             } else {
                 common.toast(0,errMsg);
             }

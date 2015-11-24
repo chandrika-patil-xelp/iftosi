@@ -378,6 +378,40 @@ switch($action)
             $res= $result;
             break;            
 
+//  localhost/iftosi/apis/index.php?action=bulkInsertProducts&vid=2
+        case 'bulkInsertProducts':
+            include APICLUDE.'class.vendor.php';
+            $file=(!empty($_FILES['file'])) ? trim($_FILES['file']) : '';
+            $vid=(!empty($params['vid'])) ? trim($params['vid']) : '';
+            $path = $_SERVER["DOCUMENT_ROOT"].'/iftosi/';
+            $filename = $path.$vid.'-'.date('d-m-Y').'.csv';
+            $upload = move_uploaded_file($_FILES['up_file']['tmp_name'], $filename);
+            print_r($upload);
+            if($upload) {
+                echo 'sd';
+                echo $params['data'] = file_get_contents($_FILES['up_file']['tmp_name']);
+            }
+            $arr=array();
+            if(empty($file) && empty($vid))
+            {
+                $err=array('Code'=>1,'Msg' => 'Invalid Parameter');
+                $result=array('result'=>$arr,'error'=>$err);
+            }
+            else if($_FILES['up_file']['size']>3145728) {
+                $err=array('Code'=>1,'Msg' => 'Max File Size 3MB');
+                $result=array('result'=>$arr,'error'=>$err);
+                
+            } else if($_FILES['up_file']['type']!='text/csv') {
+                $err=array('Code'=>1,'Msg' => 'File Type not Valid');
+                $result=array('result'=>$arr,'error'=>$err);
+            } else {
+                $params['data'] = file_get_contents($_FILES['up_file']['tmp_name']);
+                $obj = new vendor($db['iftosi']);
+                $result = $obj->bulkInsertProducts($params);
+            }
+            $res= $result;
+            break;
+
 //-------------------------Location---------------------------------               
             
 // localhost/iftosi/apis/index.php?action=addCity&cname=Pakistan&sname=Punjab&cityname=lahore            

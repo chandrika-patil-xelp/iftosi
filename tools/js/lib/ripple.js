@@ -1,12 +1,14 @@
 $(function() {
-    var useragent = navigator.userAgent;
-    if(useragent.toLowerCase().indexOf('firefox') !== -1)
-    {
-        var ink, d, x, y;
-        $(".ripplelink").bind('mousedown ontouchstart tap', function(e) {
-            if ($(this).find(".ink").length === 0) {
-                $(this).prepend("<span class='ink'></span>");
-            }
+
+		var uagent = navigator.userAgent.toLowerCase();
+
+		if(uagent.indexOf('firefox') === -1)
+		{
+    var ink, d, x, y;
+    $(".ripplelink").bind('mousedown ontouchstart tap', function(e) {
+        if ($(this).find(".ink").length === 0) {
+            $(this).prepend("<span class='ink'></span>");
+        }
 
             ink = $(this).find(".ink");
             ink.removeClass("animate");

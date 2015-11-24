@@ -8,7 +8,18 @@ switch ($page) {
 <!--                <div class="cityName fLeft txtOver">Bangalore</div>-->
                 <div class="headRight fRight transition300">
                     <div class="compNo fRight fmOpenB">+91 9980051525</div>
-                    <div class="signInUpTab fRight fmOpenR">Sign In / <a href="<?php echo DOMAIN; ?>index.php?case=signup">Sign Up</a></div>
+                    <div class="fRight sortBox dn" id="userMenu">
+                        <div class="dropdownBox fLeft">
+                            <div id="drpinp" class="dropInput fmOpenR"></div>
+                            <ul id="hdropList" class="fmOpenR">
+                                <li class="transition100">Profile</li>
+                                <li class="transition100">Orders</li>
+                                <li class="transition100" onclick="window.location.assign('<?php echo DOMAIN; ?>index.php?case=wishlist');">Wishlist (25)</li>
+                                <li class="transition100" onclick="common.doLogout();">Log Out</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="signInUpTab fRight fmOpenR"><span onclick="common.showLoginForm();">Sign In</span> / <a href="<?php echo DOMAIN; ?>index.php?case=signup">Sign Up</a></div>
                     <!--                    <div class="headDivider fRight"></div>
                                         <div class="wishlist fRight fmOpenR"><a href="<?php echo DOMAIN ?>wishlist">Wishlist</a></div>
                                         <div class="wishCount fRight fmOpenR ripplelink">25</div>-->
@@ -79,7 +90,18 @@ switch ($page) {
                 </div>
                 <div class="headRight fRight transition300">
                     <div class="compNo fRight fmOpenB">+91 9980051525</div>
-                    <div class="signInUpTab fRight fmOpenR">Sign In / Sign Up</div>
+                    <div class="fRight sortBox dn" id="userMenu">
+                        <div class="dropdownBox fLeft">
+                            <div id="drpinp" class="dropInput fmOpenR"></div>
+                            <ul id="hdropList" class="fmOpenR">
+                                <li class="transition100">Profile</li>
+                                <li class="transition100">Orders</li>
+                                <li class="transition100" onclick="window.location.assign('<?php echo DOMAIN; ?>index.php?case=wishlist');">Wishlist (25)</li>
+                                <li class="transition100" onclick="common.doLogout();">Log Out</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="signInUpTab fRight fmOpenR"><span onclick="common.showLoginForm();">Sign In</span> / <a href="<?php echo DOMAIN; ?>index.php?case=signup">Sign Up</a></div>
                     <!--                    <div class="headDivider fRight"></div>
                                         <div class="wishlist fRight fmOpenR">Wishlist</div>
                                         <div class="wishCount fRight fmOpenR ripplelink">25</div>-->
@@ -97,18 +119,18 @@ switch ($page) {
                 <div class="cityName fLeft txtOver">Bangalore</div>
                 <div class="headRight fRight">
                     <div class="compNo fRight fmOpenB">+91 9980051525</div>
-                    <div class="fRight sortBox">
+                    <div class="fRight sortBox dn" id="userMenu">
                         <div class="dropdownBox fLeft">
                             <div id="drpinp" class="dropInput fmOpenR"></div>
                             <ul id="hdropList" class="fmOpenR">
-                                <li class="transition100">Log Out</li>
-                                <li class="transition100">Wishlist (25)</li>
                                 <li class="transition100">Profile</li>
                                 <li class="transition100">Orders</li>
+                                <li class="transition100" onclick="window.location.assign('<?php echo DOMAIN; ?>index.php?case=wishlist');">Wishlist (25)</li>
+                                <li class="transition100" onclick="common.doLogout();">Log Out</li>
                             </ul>
                         </div>
                     </div>
-                    <div class="signInUpTab fRight fmOpenR loggedIn">Hello Ankur</div>
+                    <div class="signInUpTab fRight fmOpenR " id="signInUpTab">Hello Ankur</div>
                 </div>
             </div>
         </div>
