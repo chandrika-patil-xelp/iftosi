@@ -175,7 +175,7 @@ class vendor extends DB
             } else if($catid == 10002) {
                 $psql='d.type, d.metal, d.gold_purity, d.gold_weight';
             }
-        $sql = "select
+            $sql = "select
                                     DISTINCT a.product_id 
                 AS id, 
                                     c.product_name,
@@ -207,7 +207,7 @@ class vendor extends DB
                 AND
                                     a.active_flag!=2
                 AND
-                                    C.product_id IN(".$prId.")
+                                    c.product_id IN(".$prId.")
                 ORDER BY 
                                     field(c.product_id,".$prId.")";
         
