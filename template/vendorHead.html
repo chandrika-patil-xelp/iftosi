@@ -15,9 +15,9 @@
         <link rel="stylesheet" href="tools/css/jquery.toast.min.css?v=<?php echo VERSION; ?>" />
         <script type="text/javascript" src="tools/js/lib/CustomStorage.js?v=<?php echo VERSION; ?>"></script>
         <script>
-            var catid = "<?php echo $catid;?>";
             var DOMAIN = "<?php echo DOMAIN;?>";
-            var pid = '<?php echo $pid;?>';
+            var catid = "<?php echo (!empty($catid)) ? trim($catid) : '' ?>";
+            var pid = '<?php echo (!empty($pid)) ? trim($pid) : ''?>';
             var activePage = '<?php echo $case;?>';
         </script>
         <script type="text/javascript" src='tools/js/cms/Common.js?v=<?php echo VERSION; ?>'></script>
@@ -29,7 +29,7 @@
             .uploadDiv { background: #fff none repeat scroll 0 0; border-radius: 5px; bottom: 0; box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.4); height: 330px; left: 0; margin: auto; padding: 35px 25px; position: fixed; right: 0; top: 0; width: 360px; z-index: 116; }
             .commBtn { border-radius: 5px; color: #fff; cursor: pointer; font-size: 14px; height: 40px; line-height: 40px; margin: 28px 0.5% 0; text-align: center; width: 49%; }
             .cancelBtn { background: #171334; }
-            #uploadDiv .uploadBtn { background: #8a0044; }
+            #uploadDiv .upBtn { background: #8a0044; }
             .upTitle { color: #4d4d4d; font-size: 20px; height: 60px; line-height: 40px; padding-bottom: 30px; text-align: center; width: 100%; }
             .downSampleBtn { margin: 10px auto; display: none; }
             .downloadLink { border-top: 1px solid; margin-top: 25px; padding-top: 14px; text-align: center; width: 100%; }

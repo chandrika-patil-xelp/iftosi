@@ -451,7 +451,7 @@
 				break;
 				case 'vendor_landing':
 					$page='Products';
-                                        $pgno 	= ($_GET['pgno'] ? $_GET['pgno'] : 1);
+                    $pgno 	= (!empty($_GET['pgno']) ? $_GET['pgno'] : 1);
 					$catid 	= $_GET['catid'];
 					$url 	= APIDOMAIN.'index.php?action=getVPrdByCatid&catid='.$catid.'&page='.$pgno;
 					$res 	= $comm->executeCurl($url);
