@@ -1,10 +1,13 @@
 <?php include TEMPLATE.'backHead.html';?>
-
-	<body>
+    <body>
 	<?php include TEMPLATE.'backheader.html';?>
-		<div id="content">
-			<input type="file" name="files[]" id="filer_input2" multiple="multiple">
-			<input type="hidden" name="pid" id="pid" value="<?php echo $pid;?>">
-		</div>
+            <div id="content">
+                <input type="file" name="files[]" id="filer_input2" multiple="multiple">
+                <input type="hidden" name="pid" id="pid" value="<?php echo $pid;?>">
+            </div>
+        <div class="btnConta fmOpenR">
+            <div class="skipBtn btnComm fRight">SKIP</div>
+            <div class="finishBtn btnComm fRight">PROCEED</div>
+        </div>
     </body>
 </html>
