@@ -48,6 +48,7 @@ $('#pr_mobile').keyup(function () {
     $('#signupCancel').click(function () {
         $("input").val('');
         $("#isVendor").removeAttr('checked');
+        window.history.back();
     });
     $('#signupSubmit').bind('click', function () {
         var pr_name = $('#pr_name').val();
