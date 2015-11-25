@@ -385,12 +385,12 @@ switch($action)
             $vid=(!empty($params['vid'])) ? trim($params['vid']) : '';
             $path = $_SERVER["DOCUMENT_ROOT"].'/iftosi/';
             $filename = $path.$vid.'-'.date('d-m-Y').'.csv';
-            $upload = move_uploaded_file($_FILES['up_file']['tmp_name'], $filename);
-            print_r($upload);
-            if($upload) {
-                echo 'sd';
-                echo $params['data'] = file_get_contents($_FILES['up_file']['tmp_name']);
-            }
+//            $upload = move_uploaded_file($_FILES['up_file']['tmp_name'], $filename);
+//            print_r($upload);
+//            if($upload) {
+//                echo 'sd';
+            $params['data'] = file_get_contents($_FILES['up_file']['tmp_name']);
+            //}
             $arr=array();
             if(empty($file) && empty($vid))
             {

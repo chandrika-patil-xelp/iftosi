@@ -2,41 +2,42 @@
     <div class='prdSearchDiv fLeft'>
         <div class="formTitle fLeft fmOpenR m0"><span id="totalJewells">0</span> jewellery listed</div>
         <a href='<?php echo DOMAIN?>index.php?case=jewellery_Form&catid=10001'><div class="addPrdBtn fRight poR ripplelink">Add Jewellery</div></a>
-        <input type="text" class="prdSeachTxt fRight fmOpenR" placeholder=" Search your Product">
-		<div class="vFilBtn fRight poR ripplelink"></div>
+        <input type="text" onkeyup="searchBarcode(this.value);" class="prdSeachTxt fRight fmOpenR" placeholder=" Search your Product">
+        <div class="vFilBtn fRight poR ripplelink"></div>
     </div>
     <div class="prdListHeader fLeft fmOpenR">
         <div class="date fLeft">Date</div>
         <div class="barcode fLeft">Design Number</div>
-      <div class="metal fLeft">Metal</div>
+        <div class="metal fLeft">Metal</div>
         <div class="catg fLeft">Category</div>
-          <div class="degno fLeft">Diamond Wt</div>
+        <div class="degno fLeft">Diamond Wt</div>
         <div class="subType fLeft">Gold Wt</div>
         <div class="price fLeft">Price</div>
         <div class="acct fLeft">Action</div>
     </div>
     <ul class='prdul fLeft fmOpenR' id="JewellsList">
-            <!--<li>
-                <div class="date fLeft"> 
-                    <span class="upSpan">20/10/2015</span>
-                    <span class="lwSpan">8:10 Pm</span>
-                </div>
-                <div class="barcode fLeft">
-                    <span class="upSpan">CW0H8IE9</span>
-                    <span class="lwSpan"><a href="http://localhost/iftosi//gia-round-clarity-IF/did-10000">View Details</a></span>
-                </div>
-                <div class="degno fLeft">RG-212<?php echo $i ?></div>
-                <div class="metal fLeft">Gold</div>
-                <div class="catg fLeft">Rings</div>
-                <div class="subType fLeft">Office Wear Earrings</div>
-                <div class="price fLeft fmOpenB">&#8377;1,000,000,000</div>
-                <div class="acct fLeft">
-                    <center>
-                        <div class="deltBtn poR ripplelink"></div>
-                        <div class="editBtn poR ripplelink"></div>
-                        <div class="soldBtn poR ripplelink fmOpenR">SOLD</div>
-                    </center>
-                </div>
-            </li>-->
+        <!--<li>
+            <div class="date fLeft"> 
+                <span class="upSpan">20/10/2015</span>
+                <span class="lwSpan">8:10 Pm</span>
+            </div>
+            <div class="barcode fLeft">
+                <span class="upSpan">CW0H8IE9</span>
+                <span class="lwSpan"><a href="http://localhost/iftosi//gia-round-clarity-IF/did-10000">View Details</a></span>
+            </div>
+            <div class="degno fLeft">RG-212<?php echo $i ?></div>
+            <div class="metal fLeft">Gold</div>
+            <div class="catg fLeft">Rings</div>
+            <div class="subType fLeft">Office Wear Earrings</div>
+            <div class="price fLeft fmOpenB">&#8377;1,000,000,000</div>
+            <div class="acct fLeft">
+                <center>
+                    <div class="deltBtn poR ripplelink"></div>
+                    <div class="editBtn poR ripplelink"></div>
+                    <div class="soldBtn poR ripplelink fmOpenR">SOLD</div>
+                </center>
+            </div>
+        </li>-->
     </ul>
+    <ul class='prdul fLeft fmOpenR dn' id="sJewellsList"></ul>
 </div>

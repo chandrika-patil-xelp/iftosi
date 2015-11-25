@@ -5,6 +5,7 @@ body{padding: 0;margin: 0;}
 @font-face{font-family:openL;src: url(../fonts/OpenSans-Light.ttf);}
 @font-face{font-family:openB;src: url(../fonts/OpenSans-Bold.ttf);}
 
+a { color: inherit; }
 .fmOpenR{font-family:openR}
 .fmOpenL{font-family:openL; letter-spacing: -0.03em;}
 .fmOpenB{font-family:openB}
@@ -56,6 +57,9 @@ a{text-decoration: none;}
 .wrapperMax{width:100%;max-width: 1200px;height:100%;margin: auto;}
 .formContainer{width:100%;height: auto;padding:0px;display: inline-block;}
 .formTitle{width:auto;height: 35px;font-size: 25px;color:#4d4d4d;margin:20px 0;text-align: center;}
+
+/*  Background colors  */
+.bgBlack { background: #000 !important; }
 
 /*Contents*/
 .header {width: 100%;height: 50px;background: #8A0044;line-height: 70px;position: fixed;top: 0;z-index: 99;padding: 10px 0;}
@@ -336,6 +340,7 @@ a{text-decoration: none;}
 .oYh{overflow: hidden;}
 
 .prdul{width:100%;height: auto;margin: 0;padding: 0;list-style: none;}
+.prdul .noRecords { border: 1px solid #d6d6d6; color: #4d4d4d; margin: 0; padding: 10px; text-align: center; font-size: 14px; }
 .prdul li{width:100%;height: 50px;line-height: 50px;float:left;color:#666;font-size: 14px;border: 1px solid #d4d4c8;border-top:none;}
 .prdul li div{padding: 0 15px;border-right:1px solid #d4d4c8;height: 50px;}
 
@@ -370,6 +375,7 @@ a{text-decoration: none;}
 .vndTabs{width:100%;height: 40px;background: #8A0044}
 .vTabs {width: 150px;text-align: center;max-width: 25%;height: 40px;line-height: 40px;margin: 0;color:#fff;font-size: 14px;cursor: pointer;margin: 0 10px 0 0;    border-radius: 5px 5px 0 0;}
 .vTabs:hover{background: rgba(0,0,0,0.2);color:#fff;}
+.vTabs a { display: block; }
 .vSelected{background: #fff;color:#4d4d4d!important;}
 .vSelected:hover{background: #fff;color:#4d4d4d!important;}
 .dropdownBox {width: 100%;position: relative;z-index: 10;padding: 10px;}
@@ -459,3 +465,18 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 .vFilBtn{width:35px;height: 35px;margin-right:5px;background:url(../img/common/filter2.svg)no-repeat;background-size: auto 80%;background-position: center 8px;cursor: pointer;}
 
 .vCommTitle{width:100%;height:50px;line-height: 50px;font-size:40px;text-align: center; margin: 20px 0;}
+
+
+
+/* Bulk Upload Products */
+
+.overlay { background: #fff url("../img/common/background.jpg") no-repeat scroll 0 0 / 100% auto; height: 100%; left: 0; position: fixed; top: 0; width: 100%; z-index: 115; }
+.uploadDiv { background: #fff none repeat scroll 0 0; border-radius: 5px; bottom: 0; box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.4); height: 330px; left: 0; margin: auto; padding: 35px 25px; position: fixed; right: 0; top: 0; width: 360px; z-index: 116; }
+#uploadDiv .commBtn { border-radius: 5px; color: #fff; cursor: pointer; font-size: 14px; height: 40px; line-height: 40px; margin: 28px 0.5% 0; text-align: center; width: 49%; }
+#uploadDiv .cancelBtn { background: #171334; }
+#uploadDiv .upBtn { background: #8a0044; }
+#uploadDiv .upTitle { color: #4d4d4d; font-size: 20px; height: 60px; line-height: 40px; padding-bottom: 30px; text-align: center; width: 100%; }
+#uploadDiv .downSampleBtn { margin: 10px auto; display: none; }
+#uploadDiv .downloadLink { border-top: 1px solid; margin-top: 25px; padding-top: 14px; text-align: center; width: 100%; }
+#uploadDiv .downloadLink a { cursor: pointer; color: #8a0044; font-size: 16px; padding: 5px 5px; }
+#uploadDiv .downloadLink span { color: #666; font-size: 12px; display: block; margin-bottom: 8px; }

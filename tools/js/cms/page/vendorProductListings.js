@@ -50,7 +50,7 @@ $(window).scroll(function () {
 function loadDiamonds() {
     $.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + diamondPage + "&limit=15&catid=10000", success: function (result) {
             loadDiamondCallback(result);
-        }});
+    }});
 }
 function loadDiamondCallback(res) {
     var obj = jQuery.parseJSON(res);
@@ -118,7 +118,7 @@ function generateDiamondList(obj) {
 function loadJewels() {
     $.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + jewellPage + "&limit=15&catid=10001", success: function (result) {
             loadJewellCallback(result);
-        }});
+    }});
 }
 function loadJewellCallback(res) {
     var obj = jQuery.parseJSON(res);
@@ -334,4 +334,59 @@ function inStock(proId,ele) {
             common.toast(0,obj['error']['Msg']);
         }
     }});
+}
+
+var searchIDName='';
+function searchBarcode(val) {
+    if(catid==10000) {
+        searchIDName='Diamonds';
+    }else if(catid==10001) {
+        searchIDName='Jewells';
+    } else if(catid==10002) {
+        searchIDName='Bullions';
+    }
+    if(val!='') {
+        $.ajax({url: common.APIWebPath() + "index.php?action=getVProductsByBcode&bcode="+ val +"&page=1&limit=15&vid="+ uid +"&catid="+catid, success: function (result) {
+            searchBarcodeCallback(result);
+        }});
+    } else {
+        $('#'+searchIDName+'List').removeClass('dn');
+        $('#s'+searchIDName+'List').html('').addClass('dn');
+    }
+}
+function searchBarcodeCallback(res) {
+    var obj = jQuery.parseJSON(res);
+    if (obj['results'] != '') {
+        var total = obj['results']['total_products'];
+        if(total!=0) {
+            var len = obj['results']['products'].length;
+            var i = 0;
+            var catName;
+            if(catid==10000) {
+                var str = '';
+                while (i < len) {
+                    str += generateDiamondList(obj['results']['products'][i]);
+                    i++;
+                }
+            } else if(catid==10001) {
+                var str = '';
+                while (i < len) {
+                    str += generateJewellList(obj['results']['products'][i]);
+                    i++;
+                }
+            } else if(catid==10002) {
+                var str = '';
+                while (i < len) {
+                    str += generateBullionsList(obj['results']['products'][i]);
+                    i++;
+                }
+            }
+        } else {
+            var str = '<p class="noRecords"><span>Sorry! No Products Found!</span></p>';
+        }
+    } else {
+       var str = '<p class="noRecords"><span>Sorry! No Products Found!</span></p>';
+    }
+    $('#'+searchIDName+'List').addClass('dn');
+    $('#s'+searchIDName+'List').html(str).removeClass('dn');
 }
