@@ -132,23 +132,32 @@ class vendor extends DB
             $prIds=implode(',',$pdet1['pid']);
         
         $sql1=" SELECT 
-                                        product_id,
-                                        barcode as product_barcode,
-                                        product_name,
-                                        product_display_name,
-                                        lotref as product_lotref,
-                                        prd_img as product_image,
-                                        prd_price
+                    a.product_id,
+                    a.barcode as product_barcode,
+                    b.shape as product_shape,
+                    b.clarity,
+                    b.certified,
+                    b.color
                 FROM
-                                        tbl_product_master
-                                        
+                    tbl_product_master AS a join 
+                    tbl_product_search AS b
+                ON
+                    a.product_id = b.product_id
                 WHERE
-                                        MATCH(barcode) AGAINST(\"'" . $params['bcode'] . "*'\" IN BOOLEAN MODE)
+                    a.product_id in (".$prIds.")
                 AND
-                                        product_id IN(".$prIds.")
-                ORDER BY
-                                        field(product_id,\"".$prIds."\")
-                ASC";
+                    (
+                    MATCH(a.barcode) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
+                        OR
+                    MATCH(b.shape) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
+                        OR
+                                            b.color LIKE '" . $params['bcode'] . "%'
+                    OR
+                                            MATCH(b.clarity) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
+                    OR
+                                            b.certified LIKE '" . $params['bcode'] . "%'
+                    )
+                ";
         if (!empty($page))
         {
             $start = ($page * $limit) - $limit;
@@ -237,7 +246,7 @@ class vendor extends DB
         }
         else
         {
-            $arr=array('there is no product starting with such name in vendor_product list');    
+            $arr=array('total_products' => $total_products, 'total_pages' => $total_pages);    
             $err = array('Code' => 0, 'Msg' => 'No Match Found');
         }
         
