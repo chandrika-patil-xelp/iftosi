@@ -15,7 +15,7 @@ $(document).ready(function() {
 		$(".wishTabComm").removeClass('sel');
 		$(this).addClass('sel');
 		var catid 	= $(this).attr("id");
-		var pgno 	= $('#pgno').val()*1;
+		var pgno 	= 1;
 		var uid 	= $('#uid').val();
 		$('#catid').val(catid);
 		showWish(catid,pgno,uid,1);
@@ -153,6 +153,8 @@ $(document).ready(function() {
 
 function showWish(catid,pgno,uid,nojump,pid)
 {
+	if(typeof pid === 'undefined')
+		pid = '';
 	if(!nojump)
 		$('body').animate({scrollTop: $('.wishTabsCont').offset().top-60}, 300);
 	
@@ -160,6 +162,10 @@ function showWish(catid,pgno,uid,nojump,pid)
 	var URL 	= DOMAIN + "index.php";
 	$.getJSON(URL, params, function(data) {
 		
+		console.log(data);
+		
+		if(data.results.length == 0)
+			data.results.total = 0;
 		if(data.results.total === null)
 			data.results.total = 0;
 		$('#count_'+catid).text('('+data.results.total+')');
@@ -171,6 +177,13 @@ function showWish(catid,pgno,uid,nojump,pid)
 		else
 			pageName = 'wishlist-bullion';
 		getResultsData(data);
+		
+		$(".wisgDel").bind('click',function(){
+			var catid 	= $('#catid').val();
+			var pgno 	= $('#pgno').val()*1;
+			var uid 	= $('#uid').val();
+			showWish(catid,pgno,uid,1,$(this).attr('id'));
+		});
 	});
 }
 
@@ -699,11 +712,14 @@ function getResultsData(data,sortby,showtree)
 	/* For Pagintion */
 	totalCount = data.results.total;
 	var pgno = $('#pgno').val()*1;
-	var lastpg = Math.ceil(totalCount/15);
+	if(pageName.indexOf("wishlist") !== -1)
+		var lastpg = Math.ceil(totalCount/16);
+	else
+		var lastpg = Math.ceil(totalCount/15);
 	//lastpg = 10;
 	var adjacents = 2;
 	
-	if(totalCount > 15)
+	if(lastpg > 1)
 	{
 		html += '<div class="fLeft pagination fmOpenR">';
 			html += '<center>';
