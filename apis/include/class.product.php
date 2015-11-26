@@ -45,7 +45,8 @@
             else
             {
                 $shape=$detls['shape'];
-                $catids1=$detls['subcatid'];                
+                $catids1=$detls['subcatid'];
+                
             }
             $maincatsql="SELECT p_catid from tbl_category_master where catid IN(\"".$catids1."\")";
             $maincatres=$this->query($maincatsql);
@@ -161,7 +162,7 @@
                         
                    
                        
-                            $updtcatsql="UPDATE tbl_product_category_mapping set display_flag=0 where category_id NOT IN(".$catids1.") and product_id=\"".$pid."\"";    
+                            $updtcatsql="UPDATE tbl_product_category_mapping set display_flag=0 where category_id NOT IN(\"".$catids1."\") and product_id=\"".$pid."\"";    
                             $updtcatres=$this->query($updtcatsql);
                         
                         for($i=0;$i<count($catids);$i++)
@@ -372,7 +373,7 @@
                                     FROM
                                         tbl_vendor_master
                                     WHERE
-                                                            vendor_id=\"".$detls['vid']."\"";
+                                                            vendor_id=\"".$params['vid']."\"";
                             $venres=$this->query($vensql);
                             $venrow=$this->fetchData($venres);
                             $city=$row['city'];
@@ -393,7 +394,7 @@
                                                                             date_time)";
                             $vendsql.=  "VALUES
                                                                        (\"".$pid."\",
-                                                                        \"".$detls['vid']."\",
+                                                                        \"".$params['vid']."\",
                                                                         \"".$detls['price']."\",
                                                                         \"".$detls['vendor_quantity']."\",
                                                                         \"".$detls['vendor_curr']."\",
@@ -403,11 +404,9 @@
                                                                            'vendor',
                                                                             now())";
                             $vendres = $this->query($vendsql);
-                            if($vendres)
-                            {
-                                $arr = array();
+                            
+                                $arr = array('pid'=>$pid);
                                 $err=array('code'=>0,'msg'=>'Product added successfully');
-                            }
 //------------------------------------------------------------------------------------------------------------                            
                 }
                 else

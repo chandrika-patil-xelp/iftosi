@@ -344,6 +344,7 @@ switch($action)
             $res= $result;
             break;
             
+//  localhost/iftosi/apis/index.php?action=getVProductsByBcode&bcode=q&page=1&limit=15&vid=1&catid=10000            
         case 'getVProductsByBcode':
             include APICLUDE.'class.vendor.php';
             $barcode=(!empty($params['bcode'])) ? trim(urldecode($params['bcode'])):'';

@@ -137,11 +137,13 @@ class vendor extends DB
                     b.shape as product_shape,
                     b.clarity,
                     b.certified,
-                    b.color
+                    b.color,
+                    b.metal,
+                    b.type
                 FROM
                     tbl_product_master AS a join 
                     tbl_product_search AS b
-                ON
+               ON
                     a.product_id = b.product_id
                 WHERE
                     a.product_id in (".$prIds.")
@@ -154,6 +156,10 @@ class vendor extends DB
                                             b.color LIKE '" . $params['bcode'] . "%'
                     OR
                                             MATCH(b.clarity) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
+                    OR
+                                            MATCH(b.metal) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
+                    OR
+                                            b.type LIKE '" . $params['bcode'] . "%'   
                     OR
                                             b.certified LIKE '" . $params['bcode'] . "%'
                     )

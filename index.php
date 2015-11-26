@@ -355,7 +355,7 @@
 
                                         $attr   = $result[$pid]['attr_details'];
                                         $pdet   = $result[$pid];
-                                        //echo "<pre>";print_r($attr);die;
+                                        //echo "<pre>";print_r($attr['product_id']);die;
 					include 'template/diamondForm.html';
 				break;
                                
@@ -451,8 +451,11 @@
 				break;
 				case 'vendor_landing':
 					$page='Products';
-                                        $pgno 	= (!empty($_GET['pgno']) ? $_GET['pgno'] : 1);
-					$catid 	= $_GET['catid'];
+                    $pgno 	= (!empty($_GET['pgno']) ? $_GET['pgno'] : 1);
+					$catid 	= (!empty($_GET['catid']) ? $_GET['catid']:'');
+					$vid    =  $_GET['uid'];
+                    $url 	= APIDOMAIN.'index.php?action=getVPrdByCatid&catid='.$catid.'&page='.$pgno;
+      				$catid 	= $_GET['catid'];
 					$url 	= APIDOMAIN.'index.php?action=getVPrdByCatid&catid='.$catid.'&page='.$pgno;
 					$res 	= $comm->executeCurl($url);
 					$data 	= $res['results']['products'];
@@ -463,7 +466,7 @@
 					$res 	= $comm->executeCurl($url);
 					$fil	= $res['results']['attributes'];
 					
-					//echo "<pre>";print_r($fil);die;
+					//echo "<pre>";print_r($catid);die;
 					
 					$totalCnt = $total;
 					$lastpg = ceil($total/15);
@@ -472,7 +475,8 @@
 				break;
 				case 'vendor_enquiries':
 					$page='Enquiries';
-					include 'template/vendor_enquiries.html';
+                    $catid 	= (!empty($_GET['catid']) ? $_GET['catid']:'');
+                    include 'template/vendor_enquiries.html';
 				break;
 				case 'about_us':
 					$page='about_us';

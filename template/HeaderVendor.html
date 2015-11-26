@@ -1,7 +1,7 @@
 <div class="topFixedCont">
     <div class="vndHeader fLeft">
         <div class="wrapperMax">
-            <div class="vndLogo fLeft fmOpenR"><b>IF</b>to<b>SI</b></div>
+            <a href="<?php echo DOMAIN; ?>index.php?case=vendor_landing&catid=<?=$catid;?>"><div class="vndLogo fLeft fmOpenR"><b>IF</b>to<b>SI</b></div></a>
             <div class="vndInfo fRight fmOpenR">
                 Hi, <span id="userName"></span> | 
                 <div class="fRight pointer" onclick="common.doLogout();"><span>Logout</span></div>
@@ -12,10 +12,10 @@
         <div class="wrapperMax">
             <div class="vndTabs fLeft fmOpenR">
                 <div class="wrapperMax">
-                    <div id='dashTab'  class="fLeft vTabs  transition300">Dashboard</div>
+                   <!-- <div id='dashTab'  class="fLeft vTabs  transition300">Dashboard</div> -->
                     <div id='prdTab' class="fLeft vTabs">
                         <div class="dropdownBox fLeft">
-                            <div id='productsTab'  class="dropInput fmOpenR">Products</div>
+                            <a href="<?php echo DOMAIN; ?>index.php?case=vendor_landing&catid=<?=$catid;?>"><div id='productsTab'  class="dropInput fmOpenR">Products</div></a>
                             <ul id='productsTabList' class="dropList fmOpenR">
                                 <li class="transition100 dn" id="dmdTab"><a href="<?php echo DOMAIN; ?>index.php?case=vendor_landing&catid=10000">Diamonds</a></li>
                                 <li class="transition100 dn" id="jewTab"><a href="<?php echo DOMAIN; ?>index.php?case=vendor_landing&catid=10001">Jewellery</a></li>
@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div id='enqTab' class="fLeft vTabs transition300"><a href="<?php echo DOMAIN; ?>index.php?case=vendor_enquiries">Enquiries</a></div>
-                    <div id='setTab' class="fLeft vTabs transition300">Settings</div>
+                   <!-- <div id='setTab' class="fLeft vTabs transition300">Settings</div>-->
                 </div>
             </div>
         </div>

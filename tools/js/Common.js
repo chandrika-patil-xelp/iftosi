@@ -35,7 +35,7 @@ function Common() {
         if ((num.charAt(0) == '9') && (len == 10) || (num.charAt(0) == '8') && (len == 10) || (num.charAt(0) == '7') && (len == 10)) {
             return true;
         } else {
-            this.toast(0,'Please enter correct mobile number.')
+            this.toast(0,'Please Enter Correct Mobile Number.')
             return false;
         }
     };
@@ -54,23 +54,42 @@ function Common() {
     this.checkLogin = function () {
         var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
         var mob = customStorage.readFromStorage('tf_mobile');
+        var uid = customStorage.readFromStorage('userid');
         var nm = customStorage.readFromStorage('username');
         var is_vendor = customStorage.readFromStorage('is_vendor');
-        
+        var type = customStorage.readFromStorage('busiType');
+        if(is_vendor == 1)
+        {
+            if((type != null) && (type != undefined))
+            {
+                type=type.charAt(0);
+                switch(type)
+                {
+                    case '1':var catid=10000;
+                    break;
+                    case '2':var catid=10002;
+                    break;        
+                    case '3':var catid=10003;
+                    break;
+                    default: break;
+                }
+            }
+        }
         var userMenuStr='';
         if (isLoggedIn === 'true') {
             $('.signInUpTab').html('Hello ' + nm).addClass('loggedIn');
             $('#userMenu').removeClass('dn');
             if (is_vendor == 0)
-            {
-                userMenuStr += '<li class="transition100">Profile</li>';
-                userMenuStr += '<li class="transition100">Orders</li>';
-                userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=wishlist\');">Wishlist (25)</li>';
-            } else {
-                userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_dashboard\');">Dashboard</li>';
-                userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_enquiries\');">Enquires</li>';
-                userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_setting\');">Setting</li>';
-            }
+        {
+                //userMenuStr += '<li class="transition100">Profile</li>';
+                //userMenuStr += '<li class="transition100">Orders</li>';
+                userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=wishlist&uid='+uid+'\');">Wishlist (25)</li>';
+        } else {
+                //userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_dashboard\');">Dashboard</li>';
+                userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_landing&catid='+catid+'\');">Products</li>';
+                userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_enquiries\');">Enquiry</li>';
+                //userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_setting\');">Setting</li>';
+        }
             userMenuStr += '<li class="transition100" onclick="common.doLogout();">Log Out</li>';
             $('#hdropList').html(userMenuStr);
         }
@@ -79,7 +98,7 @@ function Common() {
     this.doLogout = function () {
         customStorage.removeFromStorage('isLoggedIn');
         customStorage.addToStorage('isLoggedIn', false);
-        window.location.href = DOMAIN + "index.php?a=logout";
+        window.location.href = DOMAIN + "index.php";
     };
     this.closeLoginForm = function () {
         $('#loginDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
@@ -149,11 +168,11 @@ function Common() {
         var pr_mobile = $('#pr_mobile').val();
         var pr_pass = $('#pr_pass').val();
         if (pr_mobile == '') {
-            customStorage.toast(0, 'Mobile Number Should Be Enpty');
+            customStorage.toast(0, 'Mobile Number Should Not Be Empty');
             $('#pr_mobile').focus();
             return;
         } else if (pr_pass == '') {
-            customStorage.toast(0, 'Login Password Should Be Enpty');
+            customStorage.toast(0, 'Login Password Should Not Be Empty');
             $('#pr_pass').focus();
             return;
         } else {
@@ -172,12 +191,16 @@ function Common() {
                     customStorage.addToStorage('is_vendor', is_vendor);
                     if (is_vendor == 1) {
                         var busiType = obj['results']['busiType'];
-                        if(busiType == null || busiType == '' || busiType == undefined) {
-                            window.location.assign(DOMAIN + 'index.php?case=vendor_landing&catid=1000' + catid);
-                        } else {
-                            customStorage.addToStorage('busiType', busiType);
-                            var catid = busiType.charAt(0) - 1;
-                            window.location.assign(DOMAIN + 'index.php?case=vendor_landing&catid=1000' + catid);
+                        var busitype = customStorage.addToStorage('busiType', busiType);
+                        if(busitype !== null || busitype !== undefined || busitype !== '')
+                        {
+                        var catid = busiType.charAt(0) - 1;
+                        window.location.assign(DOMAIN + 'index.php?case=vendor_landing&catid=1000' + catid);
+                        }
+                        else
+                        {
+                            window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid='+userid);
+                            console.log('vendor Form');
                         }
                     } else {
                         customStorage.addToStorage('busiType', '');

@@ -10,6 +10,7 @@ if(pw<768){
 var mobile = customStorage.readFromStorage('mobile');
 var name = customStorage.readFromStorage('name');
 var email = customStorage.readFromStorage('email');
+var uid = customStorage.readFromStorage('userid');
 var isWishList = false;
 
 $(document).ready(function(){
@@ -66,8 +67,9 @@ $(document).ready(function(){
 		mobile = customStorage.readFromStorage('mobile');
 		name = customStorage.readFromStorage('name');
 		email = customStorage.readFromStorage('email');
-
-		if(mobile == '' || mobile == null || mobile == undefined)
+                uid = customStorage.readFromStorage('userid');
+                console.log(uid);
+		if(uid == '' || uid == null || uid == undefined)
 		{
 			$('#overlay,#userForm').removeClass('dn');
 			setTimeout(function(){
@@ -85,7 +87,7 @@ $(document).ready(function(){
 			{
 				isWishList = false;
 			}
-			F(this);
+			showVendorDetails(this);
 		}
     });
     
@@ -179,8 +181,8 @@ function showVendorDetails(obj)
 	var mobile = customStorage.readFromStorage('mobile');
 	var name = customStorage.readFromStorage('name');
 	var email = customStorage.readFromStorage('email');
-
-	if(mobile == '' || mobile == null || mobile == undefined)
+        var uid = customStorage.readFromStorage('userid');
+	if(uid == '' || uid == null || uid == undefined)
 	{
 		var mobile = $('#ur_mobile').val();
 		var name = $('#ur_name').val();
@@ -189,6 +191,7 @@ function showVendorDetails(obj)
 		var mobCond = (mobile !== '' && mobile !== null && mobile !== undefined) ? true : false;
 		var nmCond = (name !== '' && name !== null && name !== undefined) ? true : false;
 		var emCond = (email !== '' && email !== null && email !== undefined) ? true : false;
+                
 
 		if(mobCond && nmCond && emCond)
 		{
@@ -202,7 +205,8 @@ function showVendorDetails(obj)
 				if(data !== null && data !== undefined && data !== '') {
 					if(data.error !== '' && data.error !== null && data.error !== undefined && data.error.code == 0)
 					{
-						customStorage.addToStorage('userid', data.userid);
+						var uid = customStorage.addToStorage('userid', data.userid);
+                                                console.log(uid)
 						if((obj !== undefined && $(obj).hasClass('iconWishlist')) || isWishList)
 						{
 							addToWishList();
@@ -478,11 +482,11 @@ function submitLoginForm() {
     var pr_mobile = $('#pr_mobile').val();
     var pr_pass = $('#pr_pass').val();
     if(pr_mobile=='') {
-        customStorage.toast(0, 'Mobile Number Should Be Enpty');
+        customStorage.toast(0, 'Mobile Number Should Not Be Empty');
         $('#pr_mobile').focus();
         return;
     } else if(pr_pass=='') {
-        customStorage.toast(0, 'Login Password Should Be Enpty');
+        customStorage.toast(0, 'Login Password Should Not Be Empty');
         $('#pr_pass').focus();
         return;
     } else {

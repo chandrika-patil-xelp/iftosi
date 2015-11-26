@@ -7,7 +7,7 @@
             <div class="forEnq fLeft fmOpenR">
                 <div class="prdResults fLeft">
                     <div class='prdSearchDiv fLeft'>
-                        <div class="formTitle fLeft fmOpenR m0"><span id="totalEnqs">0</span> Enquirie(s) Listed</div>
+                        <div class="formTitle fLeft fmOpenR m0"><span id="totalEnqs">0 Enquiries Listed</span></div>
                         <input type="text" class="prdSeachTxt fRight fmOpenR" placeholder=" Search your Product">
                        <!-- <div class="vFilBtn fRight poR ripplelink" onclick="showEnqFilter()"></div> -->
                     </div>
@@ -70,7 +70,7 @@ function loadEnqs() {
 function loadEnqCallback(res) {
     var obj = jQuery.parseJSON(res);
     if (obj['results'] != '') {
-        var total = obj['results']['total_enqs'];
+        var total = (obj['results']['total_enqs'] == 1 ? obj['results']['total_enqs']+ ' Enquiry Listed' : obj['results']['total_enqs']+ ' Enquiries Listed');
         $('#totalEnqs').text(total);
         var total_pages = obj['results']['total_pages'];
         
@@ -123,8 +123,19 @@ function generateEnqList(obj) {
         str += '</div>';
         str += '<div class="barcode fLeft">';
             str += '<span class="upSpan">' + pro_dtls['barcode'] + '</span>';
-            str += '<span class="lwSpan"><a href="'+ DOMAIN + '-' +  pro_dtls['cat_name'][0] +'-/pid-'+ obj['product_id'] +'" target="_blank">View Details</a></span>';
-        str += '</div>';
+            if(pro_dtls['cat_name'][0] == 'Diamonds')
+            {
+                str += '<span class="lwSpan"><a href="'+ DOMAIN + '-' +  pro_dtls['cat_name'][0] +'-/did-'+ obj['product_id'] +'" target="_blank">View Details</a></span>';
+            }
+            else if(pro_dtls['cat_name'][0] == 'Bullion')
+            {
+                str += '<span class="lwSpan"><a href="'+ DOMAIN + '-' +  pro_dtls['cat_name'][0] +'-/bid-'+ obj['product_id'] +'" target="_blank">View Details</a></span>';
+            }
+            else if(pro_dtls['cat_name'][0] == 'Jewellery')
+            {
+                str += '<span class="lwSpan"><a href="'+ DOMAIN + '-' +  pro_dtls['cat_name'][0] +'-/jid-'+ obj['product_id'] +'" target="_blank">View Details</a></span>';
+            }
+    str += '</div>';
         str += '<div class="price fLeft bNone fmOpenB">&#8377;' + pro_dtls['prd_price'] + '</div>';
     str += '</li>';
     return str;

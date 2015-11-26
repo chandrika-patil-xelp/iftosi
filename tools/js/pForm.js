@@ -38,9 +38,10 @@ function submitForm(formid)
     });
     var cnt = values.length;
     values[cnt+1]='subcatid'+'|@|'+optionValue.toString();
-
+    
     data = values.join('|~|');
     //var JsonString = JSON.stringify(values);
+    console.log(uid);
     if((pid!==null)&&(pid!==undefined)&&(pid!==''))
     {
     var params = 'action=addNewproduct&category_id='+catid+'&dt='+data+'&prdid='+pid+'&vid='+uid;
@@ -126,6 +127,7 @@ function submitForm(formid)
                 common.toast(0,str);
             }
             else {
+                
                 submitForm('jwAddForm');
                 return  true;
             }
