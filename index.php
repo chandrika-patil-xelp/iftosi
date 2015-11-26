@@ -98,15 +98,35 @@
 					$resp = $comm->executeCurl($userUrl, TRUE);
 					echo $resp;
 				break;
-                                case 'addToEnquiry':
+				case 'addToEnquiry':
 					$userid = (!empty($_GET['uid'])) ? trim($_GET['uid']) : '';
 					$vid = (!empty($_GET['vid'])) ? trim(urldecode($_GET['vid'])) : '';
 					$prdid = (!empty($_GET['pid'])) ? trim(urldecode($_GET['pid'])) : '';
 					$userUrl = APIDOMAIN . 'index.php?action=filLog&uid='.$userid.'&pid='.$prdid.'&vid='.$vid;
 					$resp = $comm->executeCurl($userUrl, TRUE);
 					echo $resp;
-                                        break;
-                        }
+				break;
+
+				case 'checkWish':
+					$uid = (!empty($_GET['userid'])) ? trim(urldecode($_GET['userid'])) : '';
+					$vid = (!empty($_GET['vid'])) ? trim(urldecode($_GET['vid'])) : '';
+					$prdid = (!empty($_GET['prdid'])) ? trim(urldecode($_GET['prdid'])) : '';
+
+					if(!empty($uid))
+					{
+						$url = APIDOMAIN.'index.php?action=checkWish&uid='.$uid.'&vid='.$vid.'&prdid='.$prdid;
+						$res = $comm->executeCurl($url, TRUE);
+						echo $res;
+					}
+					else
+					{
+						$res = array();
+						$error = array('Code' => 1, 'Msg' => 'Error fetching wishlist');
+						$resp = array('results' => $res, 'error' => $error);
+						echo json_encode($resp);
+					}
+				break;
+			}
 			break;
 			
 		default:
@@ -236,29 +256,32 @@
 				case 'diamond_details':
 					$page='diamond_details';
 					$pid 	= $_GET['productid'];
-                                        $uid 	= $_GET['userid'];
+					$uid 	= $_GET['userid'];
                                         
 					$url 	= APIDOMAIN.'index.php?action=getPrdById&prdid='.$pid;
 					$res 	= $comm->executeCurl($url);
 					$data = $prdInfo = $res['results'][$pid];
 					$vndrInfo = $prdInfo['vendor_details'];
+
 					foreach($vndrInfo as $key => $value)
 					{
 						$vndrId = $key;
 						$vndrDtls = $value;
 					}
+
 					$vndrDtls['fulladdress'] = explode(",", $vndrDtls['fulladdress']);
 					foreach($vndrDtls['fulladdress'] as $key => $value)
 					{
 						$vndrDtls['fulladdress'][$key] = trim($value);
 					}
-                                        if(!empty($uid))
-                                        {
-                                            $url 	= APIDOMAIN.'index.php?action=checklist&uid='.$uid.'&vid='.$vndrId.'&prdid='.$pid;
-                                            $res 	= $comm->executeCurl($url);
-                                            $wish = $res['error'];
-                                            //echo "<pre>$uid ";print_r($wish); die;
-                                        }
+
+					if(!empty($uid))
+					{
+						$url = APIDOMAIN.'index.php?action=checklist&uid='.$uid.'&vid='.$vndrId.'&prdid='.$pid;
+						$res = $comm->executeCurl($url);
+						$wish = $res['error'];
+					}
+
 					$vndrDtls['fulladdress'] = implode(', ', $vndrDtls['fulladdress']);
 					$vndrAddr = explode(',', $vndrDtls['fulladdress']);
 					include 'template/diamond_details.html';

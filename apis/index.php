@@ -1128,6 +1128,25 @@ echo '</pre>';
             $result=$obj->checklist($params);
             $res=$result;
             break;
+
+		case 'checkWish':
+			include APICLUDE.'class.wishlist.php';
+            $uid=(!empty($params['uid']))? trim($params['uid']):'';
+            $vid=(!empty($params['vid']))? trim($params['vid']):'';
+            $pid=(!empty($params['prdid']))? trim($params['prdid']):'';
+            if(empty($uid) && empty($vid) && empty($pid))
+            {
+                $arr = array();
+                $err=array('Code'=>1,'Msg'=>'Invalid Parameters');
+                $result=array('results'=>$arr,'error'=>$err);
+                $res=$result;
+                break;
+            }
+            $obj = new wishlist($db['iftosi']);
+            $result = $obj->checkWish($params);
+            $res=$result;
+            break;
+		break;
             
         case 'removeFromWishlist':    
             include APICLUDE.'class.wishlist.php';

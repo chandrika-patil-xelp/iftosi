@@ -147,7 +147,7 @@ class wishlist extends DB
            }
            if(($wf==0)||($wf==2))
            {
-               $upsql="UPDATE tbl_wishlist set wf=1 WHERE uid=".$params['uid']." AND pid=".$params['prdid']."";
+               $upsql="UPDATE tbl_wishlist set wf=1 WHERE uid=".$params['uid']." AND pid=".$params['prdid'];
                $upres=$this->query($upsql);
                $arr="Product is now in wishlist";
                $err=array('Code'=>0,'Msg'=>'True');
@@ -155,8 +155,8 @@ class wishlist extends DB
            else
            {
                $arr="Product is already in wishlist";
+               $err=array('Code'=>0,'Msg'=>'True');
            }
-           $err=array('Code'=>0,'Msg'=>'True');
        }
        else
        {
@@ -197,5 +197,51 @@ class wishlist extends DB
        $result=array('results'=>$arr,'error'=>$err);
        return $result;
    }
-   
+
+	public function checkWish($params)
+	{
+		$uid = (!empty($params['uid'])) ? trim(urldecode($params['uid'])) : '';
+		$prdid = (!empty($params['prdid'])) ? trim(urldecode($params['prdid'])) : '';
+		$vid = (!empty($params['vid'])) ? trim(urldecode($params['vid'])) : '';
+
+		if(empty($uid))
+		{
+			$results = array();
+			$error = array('Code' => 1, 'Msg' => 'user id is missing');
+			$results = array('results' => $result, 'error' => $error);
+			return $results;
+		}
+
+		$sql = "SELECT * FROM tbl_wishlist WHERE uid='$uid'";
+
+		if(!empty($prdid))
+		{
+			$sql .= " AND pid='$prdid'";
+		}
+
+		if(!empty($vid))
+		{
+			$sql .= " AND vid='$vid'";
+		}
+
+		$res = $this->query($sql);
+
+		$results = array();
+		if($res)
+		{
+			while($row = $this->fetchData($res))
+			{
+				$results[] = $row;
+			}
+			$error = array('Code' => 0, 'Msg' => 'Wishlist fetched successfully');
+		}
+		else
+		{
+			$error = array('Code' => 1, 'Msg' => 'Error fetching wishlist');
+		}
+
+		$result = array('results' => $results, 'error' => $error);
+
+		return $result;
+	}
 }

@@ -12,6 +12,7 @@ var name = customStorage.readFromStorage('name');
 var email = customStorage.readFromStorage('email');
 var uid = customStorage.readFromStorage('userid');
 var isWishList = false;
+var isPidInWishlist = false;
 
 $(document).ready(function(){
      setTimeout(function() {
@@ -67,8 +68,7 @@ $(document).ready(function(){
 		mobile = customStorage.readFromStorage('mobile');
 		name = customStorage.readFromStorage('name');
 		email = customStorage.readFromStorage('email');
-                uid = customStorage.readFromStorage('userid');
-                console.log(uid);
+		uid = customStorage.readFromStorage('userid');
 		if(uid == '' || uid == null || uid == undefined)
 		{
 			$('#overlay,#userForm').removeClass('dn');
@@ -119,6 +119,11 @@ $(document).ready(function(){
 	if(email !== '' && email !== null && email !== undefined && email !== 'null' && email !== 'undefined' && typeof email !== 'undefined')
 	{
 		$('#ur_email').val(email);
+	}
+
+	if(pageName == 'diamond_details' || pageName == 'bullion_details' || pageName == 'jewellery_details')
+	{
+		getWishList();
 	}
 });
 
@@ -181,7 +186,7 @@ function showVendorDetails(obj)
 	var mobile = customStorage.readFromStorage('mobile');
 	var name = customStorage.readFromStorage('name');
 	var email = customStorage.readFromStorage('email');
-        var uid = customStorage.readFromStorage('userid');
+	var uid = customStorage.readFromStorage('userid');
 	if(uid == '' || uid == null || uid == undefined)
 	{
 		var mobile = $('#ur_mobile').val();
@@ -206,7 +211,6 @@ function showVendorDetails(obj)
 					if(data.error !== '' && data.error !== null && data.error !== undefined && data.error.code == 0)
 					{
 						var uid = customStorage.addToStorage('userid', data.userid);
-                                                console.log(uid)
 						if((obj !== undefined && $(obj).hasClass('iconWishlist')) || isWishList)
 						{
 							addToWishList();
@@ -222,7 +226,7 @@ function showVendorDetails(obj)
 								$('#vDetails').removeClass('dn');
 								$('body').animate({scrollTop: pos}, 300);
 							},200);
-                                                        addToEnquiry();
+							addToEnquiry();
 						}
 					}
 				}
@@ -415,28 +419,31 @@ function addToEnquiry()
 
 function addToWishList()
 {
+	if(isPidInWishlist == false)
+	{
+		var userid = customStorage.readFromStorage('userid');
+		if(userid !== null && vendor_id !== null && pid !== null)
+		{
+			var params = 'action=ajx&case=addToWishList&userid='+userid+'&vid='+vendor_id+'&prdid='+pid;
+			var URL = DOMAIN + "index.php";
 
-	var userid = customStorage.readFromStorage('userid');
-        if(userid !== null && vendor_id !== null && pid !== null)
-        {
-            var params = 'action=ajx&case=addToWishList&userid='+userid+'&vid='+vendor_id+'&prdid='+pid;
-            var URL = DOMAIN + "index.php";
-
-            $.getJSON(URL, params, function(data) {
-                    if(data !== null && data !== undefined && data !== '' && data !== 'null' && data !== 'undefined' && typeof data !== 'undefined')
-                    {
-			if(data.error !== '' && data.error !== null && data.error !== undefined && data.error !== 'undefined' && typeof data.error !== 'undefined' && data.error.Code == 0)
-			{
-                                $('#addtowishlist').html('Added To Wishlist');
-				customStorage.toast(1,'Added to wishlist');
-                        }
-                    }
-            });
-        }
-        else
-        {
-            showVendorDetails($obj);
-        }
+			$.getJSON(URL, params, function(data) {
+				if(data !== null && data !== undefined && data !== '' && data !== 'null' && data !== 'undefined' && typeof data !== 'undefined')
+				{
+					if(data.error !== '' && data.error !== null && data.error !== undefined && data.error !== 'undefined' && typeof data.error !== 'undefined' && data.error.Code == 0)
+					{
+						isPidInWishlist = true;
+						$('#addtowishlist').html('Added To Wishlist');
+						customStorage.toast(1,'Added to wishlist');
+					}
+				}
+			});
+		}
+	}
+	else
+	{
+		customStorage.toast(0, 'Product is already present in wishlist');
+	}
 }
 
 $('#loginDiv').velocity({scale: 0}, {delay: 0, duration: 0});
@@ -515,4 +522,40 @@ function submitLoginForm() {
         }});
         
     }
+}
+
+function getWishList()
+{
+	var userid = customStorage.readFromStorage('userid');
+	if(vendor_id !== '' && pid !== '' && userid !== '' && userid !== undefined && userid !== null)
+	{
+		var params = 'action=ajx&case=checkWish&userid='+userid+'&vid='+vendor_id+'&prdid='+pid;
+		var URL = DOMAIN + "index.php";
+
+		$.getJSON(URL, params, function(data) {
+			if(data !== null && data !== undefined && data !== '' && data !== 'null' && data !== 'undefined' && typeof data !== 'undefined')
+			{
+				isPidInWishlist = false;
+				if(data.error !== '' && data.error !== null && data.error !== undefined && data.error !== 'undefined' && typeof data.error !== 'undefined' && data.error.Code == 0)
+				{
+					if(data.results !== '' && data.results.length > 0)
+					{
+						for(i = 0 ; i < data.results.length; i++)
+						{
+							if(data.results[i].pid == pid)
+							{
+								isPidInWishlist = true;
+								break;
+							}
+						}
+					}
+
+					if(isPidInWishlist == true)
+					{
+						$('#addtowishlist').html('Added To Wishlist');
+					}
+				}
+			}
+		});
+	}
 }
