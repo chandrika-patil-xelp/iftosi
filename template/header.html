@@ -13,31 +13,14 @@ switch ($page) {
                         <div class="dropdownBox fLeft">
                             <div id="drpinp" class="dropInput fmOpenR"></div>
                             <ul id="hdropList" class="fmOpenR">
-                                <script>
-                                if(is_vendor==1)
-                                {
-                                    </script>
-                                 <div id='productsTab'  class="dropInput fmOpenR">Products</div>
-                               <!-- <li class="transition100">Profile</li>
-                               <!-- <li class="transition100">Orders</li> -->
-                                <a href="<?php echo DOMAIN; ?>index.php?case=vendor_enquiries&catid=<?=$catid;?>"> <li class="transition100">Enquiry</li></a>
-                               <script>
-                                   }
-                               else
-                               { 
-                                </script>
-                                    
-                                   <li class="transition100" onclick="window.location.assign('<?php echo DOMAIN; ?>index.php?case=wishlist');">Wishlist (25)</li>
-                              <script> }
-                               </script>
-                                 <li class="transition100" onclick="common.doLogout();">Log Out</li>
+								<div id='productsTab' class="dropInput fmOpenR dn">Products</div>
+								<li id="enqHeader" class="transition100 dn"><a href="<?php echo DOMAIN; ?>index.php?case=vendor_enquiries&catid=<?=$catid;?>">Enquiry</a></li>
+								<li id="wishHeader" class="transition100 dn" onclick="window.location.assign('<?php echo DOMAIN; ?>index.php?case=wishlist');">Wishlist (25)</li>
+								<li class="transition100" onclick="common.doLogout();">Log Out</li>
                             </ul>
                         </div>
                     </div>
                     <div class="signInUpTab fRight fmOpenR"><span onclick="common.showLoginForm();">Sign In</span> / <a href="<?php echo DOMAIN; ?>index.php?case=signup">Sign Up</a></div>
-                    <!--                    <div class="headDivider fRight"></div>
-                                        <div class="wishlist fRight fmOpenR"><a href="<?php echo DOMAIN ?>wishlist">Wishlist</a></div>
-                                        <div class="wishCount fRight fmOpenR ripplelink">25</div>-->
                 </div>
             </div>
         </div>

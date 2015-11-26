@@ -216,7 +216,23 @@ $(document).ready(function(){
             $('#jwMenu').addClass('dn');
         },200);
     });
-    
+
+	var isVendor = customStorage.readFromStorage('is_vendor');
+	var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
+
+	if(isLoggedIn == 'true' || isLoggedIn == true)
+	{
+		if(isVendor == 1 || isVendor == '1')
+		{
+			$('#productsTab').removeClass('dn');
+			$('#enqHeader').removeClass('dn');
+		}
+		else
+		{
+			$('#wishHeader').removeClass('dn');
+		}
+	}
+
 });
 
 function htoggleDropDown(flag) {
