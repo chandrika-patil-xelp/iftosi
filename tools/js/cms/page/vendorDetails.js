@@ -252,7 +252,7 @@ function submitStep2Form() {
     data['result'] = res;
 
     data = JSON.stringify(data);
-    $.ajax({url: common.APIWebPath() + "index.php?action=udtProfile&dt=" + encodeURIComponent(data), success: function (result) {
+    $.ajax({url: common.APIWebPath() + "index.php?action=udtProfile&isC=1&dt=" + encodeURIComponent(data), success: function (result) {
             var obj = jQuery.parseJSON(result);
             var errCode = obj['error']['code'];
             var errMsg = obj['error']['msg'];
@@ -310,7 +310,7 @@ function submitStep3Form() {
     data['result'] = res;
     data = JSON.stringify(data);
 
-    $.ajax({url: common.APIWebPath() + "index.php?action=udtProfile&dt=" + encodeURIComponent(data), success: function (result) {
+    $.ajax({url: common.APIWebPath() + "index.php?action=udtProfile&isC=2&dt=" + encodeURIComponent(data), success: function (result) {
             var obj = jQuery.parseJSON(result);
             var errCode = obj['error']['code'];
             var errMsg = obj['error']['msg'];

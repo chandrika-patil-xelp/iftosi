@@ -175,6 +175,23 @@ switch($action)
             $result=$obj->viewAll($params);
             $res=$result;
             break;
+            
+//      localhost/iftosi/apis/index.php?action=profileComplete&uid=3        
+        case 'profileComplete':
+            include APICLUDE.'class.user.php';
+            $uid=(!empty($params['uid']))?trim($params['uid']) : '';
+            if(empty($uid))
+            {
+                $arr=array();
+                $err=array('code'=>1,'Msg'=>'Some Parameters missing');
+                $result=array('results'=>$arr,'error'=>$err);
+                $res=$result;
+                break;
+            }
+            $obj=new user($db['iftosi']);
+            $result=$obj->profileComplete($params);
+            $res=$result;
+            break;       
 
 //-----------------------------Product Enquiry----------------------------                
 

@@ -77,7 +77,7 @@ function Common() {
         }
         var userMenuStr='';
         if (isLoggedIn === 'true') {
-            $('.signInUpTab').html('Hello ' + nm).addClass('loggedIn');
+            $('.signInUpTab').html('Hello ' + nm.split(' ')[0]).addClass('loggedIn');
             $('#userMenu').removeClass('dn');
             if (is_vendor == 0)
         {
@@ -86,7 +86,8 @@ function Common() {
                 userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=wishlist&uid='+uid+'\');">Wishlist (25)</li>';
         } else {
                 //userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_dashboard\');">Dashboard</li>';
-                userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_landing&catid='+catid+'\');">Products</li>';
+                var catid=customStorage.readFromStorage('busiType').charAt(0);
+                userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_landing&catid=1000'+ catid+'\');">Products</li>';
                 userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_enquiries\');">Enquiry</li>';
                 //userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_setting\');">Setting</li>';
         }
@@ -183,6 +184,7 @@ function Common() {
                     var userid = obj['results']['uid'];
                     var username = obj['results']['username'];
                     var is_vendor = obj['results']['utype'];
+                    var isComp = obj['results']['isC'];
                     customStorage.addToStorage('isLoggedIn', true);
                     customStorage.addToStorage('l', pr_mobile);
                     customStorage.addToStorage('p', pr_pass);
@@ -192,10 +194,11 @@ function Common() {
                     if (is_vendor == 1) {
                         var busiType = obj['results']['busiType'];
                         var busitype = customStorage.addToStorage('busiType', busiType);
-                        if(busitype !== null || busitype !== undefined || busitype !== '')
+                        if(isComp == 2)
                         {
-                        var catid = busiType.charAt(0) - 1;
-                        window.location.assign(DOMAIN + 'index.php?case=vendor_landing&catid=1000' + catid);
+                            var catid = busiType.charAt(0) - 1;
+                            console.log(catid);
+                            window.location.assign(DOMAIN + 'index.php?case=vendor_landing&catid=1000' + catid);
                         }
                         else
                         {

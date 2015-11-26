@@ -4,7 +4,7 @@ var username = customStorage.readFromStorage('username');
 if(busiType==null || busiType=='' || busiType==undefined) {
     window.location.assign(DOMAIN+'index.php?case=vendor_Form&uid='+uid);
 }
-document.getElementById('userName').innerHTML = username;
+document.getElementById('userName').innerHTML = username.split(' ')[0];
 if (/1/.test(busiType)) {
     $('#dmdTab').removeClass('dn');
 }
@@ -341,7 +341,8 @@ function closeAllForms() {
 
 function updateDollarRate() {
     var dollar_rate = $("#dollar_rate").val();
-    if(dollar_rate=='') {
+    dollar_rate=parseFloat(dollar_rate);
+    if(dollar_rate=='' || dollar_rate <= 0 || dollar_rate == undefined) {
         common.toast(0,'Invaild Rate');
     } else {
         $.ajax({url: DOMAIN + "/apis/index.php?action=updateDollerRate&vid="+uid+"&dolRate="+dollar_rate, success: function(result) {
@@ -403,4 +404,13 @@ function ValidateFile() {
         return true;
     }
     return false;
+}
+
+function getcatid() {
+    var btype = customStorage.readFromStorage('busiType');
+    
+    if (btype !=='' || btype !== undefined || btype !== null ) {
+        var catid = btype.charAt(0);
+    }
+    return 1000+ catid;
 }

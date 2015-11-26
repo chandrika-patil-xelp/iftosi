@@ -474,22 +474,26 @@
 				break;
 				case 'vendor_landing':
 					$page='Products';
-                    $pgno 	= (!empty($_GET['pgno']) ? $_GET['pgno'] : 1);
+                                        $pgno 	= (!empty($_GET['pgno']) ? $_GET['pgno'] : 1);
 					$catid 	= (!empty($_GET['catid']) ? $_GET['catid']:'');
-					$vid    =  $_GET['uid'];
-                    $url 	= APIDOMAIN.'index.php?action=getVPrdByCatid&catid='.$catid.'&page='.$pgno;
-      				$catid 	= $_GET['catid'];
+					$vid    =  $_GET['userid'];
+                                        
+                                        $url 	= APIDOMAIN.'index.php?action=getVPrdByCatid&catid='.$catid.'&page='.$pgno;
+                                        $catid 	= $_GET['catid'];
 					$url 	= APIDOMAIN.'index.php?action=getVPrdByCatid&catid='.$catid.'&page='.$pgno;
 					$res 	= $comm->executeCurl($url);
 					$data 	= $res['results']['products'];
 					$total	= $res['results']['total'];
 					$catname= $res['results']['catname'];
 					
-					$url 	= APIDOMAIN.'index.php?action=fetch_category_mapping&catid='.$catid;
+					$url 	= APIDOMAIN.'index.php?action=profileComplete&uid='.$vid;
+					$res1 	= $comm->executeCurl($url);
+					$isC	= $res1;
+					
+                                        $url 	= APIDOMAIN.'index.php?action=fetch_category_mapping&catid='.$catid;
 					$res 	= $comm->executeCurl($url);
 					$fil	= $res['results']['attributes'];
-					
-					//echo "<pre>";print_r($catid);die;
+                                        //echo "<pre>";print_r($isC);die;
 					
 					$totalCnt = $total;
 					$lastpg = ceil($total/15);

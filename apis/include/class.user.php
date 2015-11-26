@@ -215,7 +215,10 @@
             if (!empty($detls['lng'])) {
                 $vsql .= " lng = '".$detls['lng']."',";
             }
-            $vsql.=" updatedby='vendor', is_complete=is_complete  WHERE vendor_id=".$uid."";
+            if (!empty($params['isC'])) {
+                $vsql .= " is_complete = ".$params['isC'].",";
+            }
+            $vsql.=" updatedby='vendor' WHERE vendor_id=".$uid."";
 
             $vres = $this->query($vsql);
             if ($vres) {
@@ -233,7 +236,7 @@
                                             user_name='".$detls['username']."',
                                             email='".$detls['email']."',
                                             updatedby='".$detls['username']."',
-                                            is_complete=is_complete
+                                            is_complete=2
                      WHERE 
                                             user_id=".$uid."";
              $vres=$this->query($vsql);
@@ -291,7 +294,8 @@
                 else if($ut==1)
                 {
                       $sql="SELECT 
-                              business_type
+                              business_type,
+                              is_complete
                        FROM 
                               tbl_vendor_master
                        WHERE
@@ -302,6 +306,7 @@
                         while($vrow=$this->fetchData($res))
                         {
                             $arr['busiType']=$vrow['business_type'];
+                            $arr['isC']=$vrow['is_complete'];
                         }
                     }
                 }
@@ -544,6 +549,34 @@
         $result = array('results' => $arr, 'error' => $err);
         return $result;
     }
+    
+    public function profileComplete($params)
+   {
+        $sql="SELECT 
+                              business_type,
+                              is_complete
+                       FROM 
+                              tbl_vendor_master
+                       WHERE
+                              vendor_id=".$params['uid'];
+        $res=$this->query($sql);
+        if($this->numRows($res)==1)
+        {
+            while($vrow=$this->fetchData($res))
+            {
+                $arr['busiType']=$vrow['business_type'];
+                $arr['isC']=$vrow['is_complete'];
+            }
+            $err=array('code'=>0,'msg'=>'data fetched');
+        }
+        else
+        {
+            $arr = array();
+            $err = array('code' => 1, 'msg' => 'Problem in fetching data');
+        }
+        $result = array('results' => $arr, 'error' => $err);
+        return $result;
+    }
 
 	public function generatePassword($params)
 	{
@@ -562,6 +595,6 @@
 		}
 
 		return $pwd;
-	}
+	}       
 }
 ?>

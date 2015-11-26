@@ -220,13 +220,13 @@ class vendor extends DB
                 AND 
                                     a.vendor_id=" . $params['vid'] . "
                 AND
-                                    a.active_flag!=2
+                                    a.active_flag=1
                 AND
                                     c.product_id IN(".$prId.")
                 ORDER BY 
                                     field(c.product_id,".$prId.")";
         
-        $res = $this->query($sql);
+        $res = $this->query($sql,1);
         $total_products = $this->numRows($res);
 
         if($total_products>0)
