@@ -636,9 +636,9 @@ a{cursor:pointer;}
 
 
 .wishTabComm span{width:auto;font-size: 15px;font-family: openL;}
-.dimWish{background: #8A0044;}
-.jwWish{background: #380B34;}
-.bulWish{background: #2A0E34;}
+.DiamondsWish{background: #8A0044;}
+.JewelleryWish{background: #380B34;}
+.BullionWish{background: #2A0E34;}
 .wConBtn{width: 100%;height: 40px;line-height: 40px;border-radius: 5px;cursor: pointer;color: #fff;font-size: 14px;padding: 0 40px;position: relative;background: #8A0044}
 .wConBtn::after{content:'';position:absolute;left:0;margin:auto;width:40px;height:40px;background:url(../img/common/1.svg)no-repeat;background-size: auto 100%;background-position:center;}
 .wishlistPage .prdActions {height: 40px;}

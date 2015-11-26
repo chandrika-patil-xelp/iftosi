@@ -75,26 +75,38 @@
                     </div>
                 </div>
             </div>--->
-            <div class='shapesCont'>
-                <div class="wrapperMax">
-                    <div class="shapesTitle fmOpenL">What's your perfect solitaire?</div>
-                    <div class="allShapes">
-                        <center>
-                            <div class="shapeComm transition300 ripplelink Round">
-                            </div><div class="shapeComm transition300 ripplelink Pear">
-                            </div><div class="shapeComm transition300 ripplelink Heart">
-                            </div><div class="shapeComm transition300 ripplelink Princess">
-                            </div><div class="shapeComm transition300 ripplelink Asscher">
-                            </div><div class="shapeComm transition300 ripplelink Marquise">
-                            </div><div class="shapeComm transition300 ripplelink Oval">
-                            </div><div class="shapeComm transition300 ripplelink Emerald">
-                            </div><div class="shapeComm transition300 ripplelink Radiant">
-                            </div><div class="shapeComm transition300 ripplelink Cushion"></div>
-                        </center>
-                    </div>
-                    <center><div class="searchBtn fmOpenR ripplelink">Search my diamond</div></center>
-                </div>
-            </div>  
+			<?php
+			if(count($fil))
+			{
+				foreach($fil as $key => $val)
+				{
+					if($val['attribute_name'] == 'shape')
+					{
+						?>
+						<div class='shapesCont'>
+							<div class="wrapperMax">
+								<div class="shapesTitle fmOpenL">What's your perfect solitaire?</div>
+								<div class="allShapes">
+									<center>
+										<?php
+										$filval = explode(",", $val['attribute_values']);
+										foreach ($filval as $ky => $vl)
+										{
+											?>
+											<div id="<?php echo $vl; ?>" class="shapeComm transition300 ripplelink <?php echo $vl; ?>">
+											</div><?php
+										}
+										?>
+									</center>
+								</div>
+								<center><a id="dialink" href="<?php echo DOMAIN;?>diamonds/ct-10000"><div class="searchBtn fmOpenR ripplelink">Search my diamond</div></a></center>
+							</div>
+						</div>
+						<?php
+					}
+				}
+			}
+			?>
             <div class='shapesCont bgGray'>
                 <div class="wrapperMax">
                     <div class="shapesTitle fmOpenL">Find your perfect jewellery match!</div>

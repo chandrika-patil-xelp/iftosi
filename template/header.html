@@ -1,6 +1,7 @@
 <?php
 switch ($page) {
     case 'index':
+    case 'wishlist':
         ?>
         <div id='header' class="header transition300">
             <div class="wrapperMax">
@@ -125,31 +126,7 @@ switch ($page) {
         <?php
         break;
 
-    case 'wishlist':
-        ?>
-        <div id='header' class="header transition300">
-            <div class="wrapperMax">
-                <div id="mMenuBtn" class="menuBtn fLeft transition300 ripplelink" onclick=""></div>
-                <div class="cityName fLeft txtOver">Bangalore</div>
-                <div class="headRight fRight">
-                    <div class="compNo fRight fmOpenB">+91 9980051525</div>
-                    <div class="fRight sortBox dn" id="userMenu">
-                        <div class="dropdownBox fLeft">
-                            <div id="drpinp" class="dropInput fmOpenR"></div>
-                            <ul id="hdropList" class="fmOpenR">
-                                <li class="transition100">Profile</li>
-                                <li class="transition100">Orders</li>
-                                <li class="transition100" onclick="window.location.assign('<?php echo DOMAIN; ?>index.php?case=wishlist');">Wishlist (25)</li>
-                                <li class="transition100" onclick="common.doLogout();">Log Out</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="signInUpTab fRight fmOpenR " id="signInUpTab">Hello Ankur</div>
-                </div>
-            </div>
-        </div>
-        <?php
-        break;
+    
     default:
         break;
 }

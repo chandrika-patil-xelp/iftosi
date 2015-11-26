@@ -8,6 +8,65 @@ class wishlist extends DB
     {
         parent::DB($db);
     }
+	
+	public function catCountWish($uid)
+	{
+		$arr = array();
+		$sql = "SELECT 
+					group_concat(pid) AS pid
+				FROM
+					tbl_wishlist 
+				WHERE 
+					uid = ".$uid."
+				AND
+					wf=1";
+		$res = $this->query($sql);
+		if($res)
+		{
+			$row = $this->fetchData($res);
+			if($row['pid'])
+			{
+				$sql = "SELECT 
+							group_concat(catid) AS catid 
+						FROM 
+							tbl_category_master 
+						WHERE 
+							p_catid = 0
+						ORDER BY 
+							catid";
+				$res = $this->query($sql);
+				if($res)
+				{
+					$crow = $this->fetchData($res);
+					if($crow['catid'])
+					{
+						$sql = "SELECT 
+									category_id,
+									COUNT(category_id) AS cnt
+								FROM 
+									tbl_product_category_mapping
+								WHERE 
+									product_id IN (".$row['pid'].")
+								AND
+									category_id IN (".$crow['catid'].")
+								GROUP BY 
+									category_id
+								ORDER BY
+									FIELD(category_id,".$crow['catid'].")";
+						$res = $this->query($sql);
+						if($res)
+						{
+							while($row = $this->fetchData($res))
+							{
+								$arr[$row['category_id']] = $row['cnt'];
+							}
+						}
+					}
+				}
+			}
+		}
+		return $arr;
+	}
     
    public function addtowsh($params)
    {

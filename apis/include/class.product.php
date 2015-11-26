@@ -607,12 +607,15 @@
 				$page   = ($params['page'] ? $params['page'] : 1);
 				$limit  = ($params['limit'] ? $params['limit'] : 16);
 				
+
 				$sql = "SELECT 
 							group_concat(pid) as pid 
 						FROM 
 							tbl_wishlist 
 						WHERE 
 							uid = ".$params['uid']." 
+						AND
+							wf = 1
 						ORDER BY 
 							date_time DESC ";
 				$res = $this->query($sql);
@@ -625,7 +628,25 @@
 					
 				if($pid)
 				{
-						
+					if($params['catid'])
+					{
+						$sql = "SELECT 
+								group_concat(product_id) as pid 
+							FROM 
+								tbl_product_category_mapping 
+							WHERE 
+								category_id = ".$params['catid']." 
+							AND 
+								product_id in (".$pid.") 
+							";
+						$res = $this->query($sql);
+						if($res)
+						{
+							$row = $this->fetchData($res);
+							$pid = $row['pid'];
+						}
+					}
+					
 					$sql = "SELECT 
 								count(distinct product_id) as cnt 
 							FROM 

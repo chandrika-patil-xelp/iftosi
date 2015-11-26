@@ -44,7 +44,7 @@ $(document).ready(function() {
         if (!isMobile) {
             alert('reset filter');
         } else {
-            alert('apply filter');
+            swichFilter();
         }
     });
 

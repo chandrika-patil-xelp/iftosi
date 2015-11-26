@@ -1094,7 +1094,14 @@ echo '</pre>';
             
 //------------------------Wishlist-------------------------------------------
 
-//  localhost/iftosi/apis/index.php?action=addtowsh&page=1&limit=1&dt={"result": {"uid": 0,"pid": 0,"vid": 9975887206,"wf": 12}}            
+//  localhost/iftosi/apis/index.php?action=addtowsh&page=1&limit=1&dt={"result": {"uid": 0,"pid": 0,"vid": 9975887206,"wf": 12}}
+        case 'catCountWish':
+			include APICLUDE.'class.wishlist.php';
+			$uid	= $_GET['uid'];
+			$obj	= new wishlist($db['iftosi']);
+            $result	= $obj->catCountWish($uid);
+			$res=$result;
+		break;
         case 'addtowsh':
             include APICLUDE.'class.wishlist.php';
             $dt=(!empty($params['dt']))? trim($params['dt']):'';

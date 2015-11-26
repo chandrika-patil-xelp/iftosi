@@ -12,53 +12,78 @@
                 <div class="wrapperMax">
                     <div class="wishTabsCont fLeft">
                         <center>
-                            <div class="wishTabComm dimWish">Diamonds <span>(25)</span></div>
-                            <div class="wishTabComm jwWish">Jewellery <span>(05)</span></div>
-                            <div class="wishTabComm bulWish">Bullion <span>(0)</span></div>
+							<?php
+                            foreach($cdata as $k => $v) 
+							{
+                            ?>
+								<div id="<?php echo $v['category_id'];?>" class="wishTabComm <?php echo $v['category_name'];?>Wish <?php echo ($firstid == $v['category_id'] ? 'sel' : '');?>"><?php echo $v['category_name'];?> <span id="count_<?php echo $v['category_id'];?>">(<?php echo ($carr[$v['category_id']] ? $carr[$v['category_id']] : 0);?>)</span></div>
+							<?php
+                            }
+                            ?>
                         </center>
                     </div>
                     <div class="prdResults ">
-                        <?php// foreach($data as $key=>$val) { ?>
-                                <div class='prdComm fLeft transition100'>
-                                    <div class="wisgDel"></div>
-                                    <div class='prdCommDiv fLeft transition100'>
-                                        <div class='prdShape fLeft'>
-                                            <div class='prdShTitle fLeft fmOpenB'>SHAPE</div>
-                                            <div class='prdShType fLeft fmOpenR'>Round</div>
-                                            <div class="Round fRight"></div>
-                                        </div>
-                                        <div class="prdDetails fLeft">
-                                            <div class="detComm">
-                                                <div class="detLabel fmOpenB fLeft">COLOR</div>
-                                                <div class="detValue fmOpenR fLeft">F</div>
-                                            </div>
-                                            <div class="detComm">
-                                                <div class="detLabel fmOpenB fLeft">CARATS</div>
-                                                <div class="detValue fmOpenR fLeft">0.99</div>
-                                            </div>
-                                            <div class="detComm">
-                                                <div class="detLabel fmOpenB fLeft">CLARITY</div>
-                                                <div class="detValue fmOpenR fLeft">Excellent</div>
-                                            </div>
-                                            <div class="detComm">
-                                                <div class="detLabel fmOpenB fLeft">CERTIFICATE</div>
-                                                <div class="detValue fmOpenR fLeft">1199046357</div>
-                                            </div>
-                                        </div>
-                                        <div class='prdPrice fLeft'>
-                                            <div class="detComm">
-                                                <div class="detLabel fmOpenB fLeft">BEST PRICE</div>
-                                                <div class="detValue fmOpenB fLeft"><span>&#8377;</span>8,28,5888</div>
-                                            </div>
-                                        </div>
-                                        <div class='prdActions fLeft'>
-                                            <div class='wConBtn fLeft'>Contact Dealer</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php// $i++;}?>
+                        <?php
+							if(count($data))
+							{
+								foreach($data as $key=>$val)
+								{
+							?>
+									<a href="<?php echo DOMAIN . strtolower($val['attributes']['certified']) . '-' . strtolower($val['attributes']['shape']) . '-clarity-' . $val['attributes']['clarity']; ?>/did-<?php echo $val['pid']; ?>">
+										<div class='prdComm fLeft transition100'>
+											<a class="wisgDel" id="<?php echo $val['pid'];?>"></a>
+											<div class='prdCommDiv fLeft transition100'>
+												<div class='prdShape fLeft'>
+													<div class='prdShTitle fLeft fmOpenB'>SHAPE</div>
+													<div class='prdShType fLeft fmOpenR'><?php echo $val['attributes']['shape']; ?></div>
+													<div class="<?php echo $val['attributes']['shape']; ?> fRight"></div>
+												</div>
+												<div class="prdDetails fLeft">
+													<div class="detComm">
+														<div class="detLabel fmOpenB fLeft">COLOR</div>
+														<div class="detValue fmOpenR fLeft"><?php echo $val['attributes']['color']; ?></div>
+													</div>
+													<div class="detComm">
+														<div class="detLabel fmOpenB fLeft">CARATS</div>
+														<div class="detValue fmOpenR fLeft"><?php echo $val['attributes']['carat']; ?></div>
+													</div>
+													<div class="detComm">
+														<div class="detLabel fmOpenB fLeft">CLARITY</div>
+														<div class="detValue fmOpenR fLeft"><?php echo $val['attributes']['clarity']; ?></div>
+													</div>
+													<div class="detComm">
+														<div class="detLabel fmOpenB fLeft">CERTIFICATE</div>
+														<div class="detValue fmOpenR fLeft"><?php echo $val['attributes']['certified']; ?></div>
+													</div>
+												</div>
+												<div class='prdPrice fLeft'>
+													<div class="detComm">
+														<div class="detLabel fmOpenB fLeft">BEST PRICE</div>
+														<div class="detValue fmOpenB fLeft"><span>&#8377;</span><?php echo number_format(($val['pprice'] * $dollarValue), 2); ?></div>
+													</div>
+												</div>
+												<div class='prdActions fLeft'>
+													<div class='wConBtn fLeft'>Contact Dealer</div>
+												</div>
+											</div>
+										</div>
+									</a>
+								<?php 
+								$i++;
+								}
+							}
+							else
+							{
+							?>
+								<div class="noresDiv">
+									<div class="noresults font25 fLeft">There are no products to display.</div>
+									<div class="noresults font18 fLeft">Please add products to your wishlist.</div>
+								</div>
+							<?php
+							}
+							?>
                         
-                        <div class="tempDiv fLeft">Jewellery</div>
+                        <!-- <div class="tempDiv fLeft">Jewellery</div>
                             <div class="prdComm fLeft jwRes transition100" style="opacity: 1; transform: translateX(0px);">
                                 <div class="wisgDel"></div>
                                 <div class="prdCommDiv fLeft transition100">
@@ -123,7 +148,7 @@
                                     <div class='wConBtn fLeft'>Contact Dealer</div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         
                         
                         <?php include 'pagination.html';?>

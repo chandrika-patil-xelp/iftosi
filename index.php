@@ -34,6 +34,13 @@
 					echo json_encode($res);
 				break;
 				
+				case 'refine':
+					$str 	= $_GET['str'];
+					$catid 	= $_GET['catid'];
+					$url = APIDOMAIN."index.php?action=getPrdByCatid&str=".$str."&catid=".$catid;
+					//$res = $comm->executeCurl($url);
+				break;
+				
 				case 'filter':
 					$pgno 	= $_GET['pgno'];
 					$catid 	= $_GET['catid'];
@@ -45,6 +52,14 @@
 					$jlist	= $_GET['jlist'];
 					$ctid	= $_GET['ctid'];
 					$uid	= $_GET['uid'];
+					$pid	= $_GET['pid'];
+					
+					if($pid)
+					{
+						$url 	= APIDOMAIN.'index.php?action=removeFromWishlist&uid='.$uid.'&pid='.$pid;
+						$res 	= $comm->executeCurl($url);
+					}
+					
 					$url 	= APIDOMAIN.'index.php?action=getPrdByCatid&catid='.$catid.'&page='.$pgno.'&sortby='.$sortby.'&slist='.urlencode($slist).'&clist='.urlencode($clist).'&tlist='.urlencode($tlist).'&ilist='.urlencode($ilist).'&jlist='.urlencode($jlist).'&ctid='.$ctid.'&uid='.$uid;
 					$res 	= $comm->executeCurl($url);
 					
@@ -177,7 +192,16 @@
 					
 					$uid 		= $_GET['uid'];
 					$pgno 		= ($_GET['pgno'] ? $_GET['pgno'] : 1);
-					$url 		= APIDOMAIN.'index.php?action=getPrdByCatid&uid='.$uid.'&page='.$pgno;
+					
+					$curl = APIDOMAIN.'index.php?action=getCatList&page=1&limit=3';
+					$cres = $comm->executeCurl($curl);
+					$cdata = $cres['results'];
+					$firstid = $_GET['catid'] = $cdata[0]['category_id'];
+					
+					$curl = APIDOMAIN.'index.php?action=catCountWish&uid='.$uid;
+					$carr = $comm->executeCurl($curl);
+					
+					$url 		= APIDOMAIN.'index.php?action=getPrdByCatid&uid='.$uid.'&page='.$pgno.'&catid='.$firstid;
 					$res 		= $comm->executeCurl($url);
 					$data 		= $res['results']['products'];
 					$total		= $res['results']['total'];
@@ -186,14 +210,17 @@
 					$lastpg 	= ceil($total/16);
 					$adjacents 	= 2;
 					
+					//echo "<pre>";print_r($data);die;
+					
 					include 'template/wishlist.html';
 				break;
 				
 				case 'diamonds':
 					$page='diamonds';
+					$slist	= $_GET['slist'];
 					$pgno 	= ($_GET['pgno'] ? $_GET['pgno'] : 1);
 					$catid 	= $_GET['catid'];
-					$url 	= APIDOMAIN.'index.php?action=getPrdByCatid&catid='.$catid.'&page='.$pgno;
+					$url 	= APIDOMAIN.'index.php?action=getPrdByCatid&catid='.$catid.'&page='.$pgno.'&slist='.$slist;
 					$res 	= $comm->executeCurl($url);
 					$data 	= $res['results']['products'];
 					$total	= $res['results']['total'];
@@ -539,6 +566,11 @@
 
 				default:
 					$page='index';
+					
+					$url 	= APIDOMAIN.'index.php?action=fetch_category_mapping&catid=10000';
+					$res 	= $comm->executeCurl($url);
+					$fil	= $res['results']['attributes'];
+					
 					$url = APIDOMAIN.'index.php?action=getCatList&page=1&limit=3';
 					$res = $comm->executeCurl($url);
 					$data = $res['results'];

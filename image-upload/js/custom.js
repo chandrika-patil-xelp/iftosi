@@ -90,7 +90,6 @@ $(document).ready(function() {
 				data: null,
 				type: 'POST',
 				enctype: 'multipart/form-data',
-				async: false,
 				beforeSend: function(){},
 				success: function(data, el){
 					var parent = el.find(".jFiler-jProgressBar").parent();
