@@ -65,29 +65,37 @@ $(document).ready(function(){
     $('#overlay').velocity({opacity:0},{delay:0,duration:0});
     $('#userForm').velocity({scale:0},{delay:0,duration:0});
     $('.iconCall, .iconWishlist, .iconMessage').click(function(){
-		mobile = customStorage.readFromStorage('mobile');
-		name = customStorage.readFromStorage('name');
-		email = customStorage.readFromStorage('email');
-		uid = customStorage.readFromStorage('userid');
-		if(uid == '' || uid == null || uid == undefined)
+		var isVendor = customStorage.readFromStorage('is_vendor');
+		if(isVendor !== '1' && isVendor !== 1)
 		{
-			$('#overlay,#userForm').removeClass('dn');
-			setTimeout(function(){
-				$('#overlay').velocity({opacity:1},{delay:0,duration:300,ease:'swing'});
-				$('#userForm').velocity({scale:1},{delay:80,duration:100,ease:'swing'});
-			},10);
-		}
-		else
-		{
-			if($(this).hasClass('iconWishlist'))
+			mobile = customStorage.readFromStorage('mobile');
+			name = customStorage.readFromStorage('name');
+			email = customStorage.readFromStorage('email');
+			uid = customStorage.readFromStorage('userid');
+			if(uid == '' || uid == null || uid == undefined)
 			{
-				isWishList = true;
+				$('#overlay,#userForm').removeClass('dn');
+				setTimeout(function(){
+					$('#overlay').velocity({opacity:1},{delay:0,duration:300,ease:'swing'});
+					$('#userForm').velocity({scale:1},{delay:80,duration:100,ease:'swing'});
+				},10);
 			}
 			else
 			{
-				isWishList = false;
+				if($(this).hasClass('iconWishlist'))
+				{
+					isWishList = true;
+				}
+				else
+				{
+					isWishList = false;
+				}
+				showVendorDetails(this);
 			}
-			showVendorDetails(this);
+		}
+		else
+		{
+			customStorage.toast(0, 'This feature is not available for vendors');
 		}
     });
     
