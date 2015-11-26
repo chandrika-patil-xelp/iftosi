@@ -10,9 +10,17 @@
             </div>
             <div class="listCont">
                 <div class="wrapperMax">
+                    <div class="wishTabsCont fLeft">
+                        <center>
+                            <div class="wishTabComm dimWish">Diamonds <span>(25)</span></div>
+                            <div class="wishTabComm jwWish">Jewellery <span>(05)</span></div>
+                            <div class="wishTabComm bulWish">Bullion <span>(0)</span></div>
+                        </center>
+                    </div>
                     <div class="prdResults ">
-                        <?php foreach($data as $key=>$val) { ?>
+                        <?php// foreach($data as $key=>$val) { ?>
                                 <div class='prdComm fLeft transition100'>
+                                    <div class="wisgDel"></div>
                                     <div class='prdCommDiv fLeft transition100'>
                                         <div class='prdShape fLeft'>
                                             <div class='prdShTitle fLeft fmOpenB'>SHAPE</div>
@@ -44,15 +52,81 @@
                                             </div>
                                         </div>
                                         <div class='prdActions fLeft'>
-                                            <div class='actionComm fLeft transition100 poR ripplelink'></div>
-                                            <div class='actionComm fLeft transition100 poR ripplelink'></div>
-                                            <div class='actionComm fLeft transition100 poR ripplelink'></div>
-                                            <div class='actionComm fLeft transition100 poR ripplelink'></div>
+                                            <div class='wConBtn fLeft'>Contact Dealer</div>
                                         </div>
                                     </div>
                                 </div>
-                            <?php $i++;}?>
-							<?php include 'pagination.html';?>
+                            <?php// $i++;}?>
+                        
+                        <div class="tempDiv fLeft">Jewellery</div>
+                            <div class="prdComm fLeft jwRes transition100" style="opacity: 1; transform: translateX(0px);">
+                                <div class="wisgDel"></div>
+                                <div class="prdCommDiv fLeft transition100">
+                                    <div class="prdCommImg fLeft">
+                                        <div class="for-7Upper">
+                                            <div class="prox for-7" style="background: #fff url(../tools/img/product1/1.jpg)no-repeat;background-size: contain;background-position:center"></div>
+                                        </div>
+                                        <div class="for-7Lower">
+                                            <div class="prox for-7" style="background: #fff url(../tools/img/product1/2.jpg)no-repeat;background-size: contain;background-position:center"></div>
+                                            <div class="prox for-7" style="background: #fff url(../tools/img/product1/3.jpeg)no-repeat;background-size: contain;background-position:center"></div>
+                                            <div class="prox for-7" style="background: #fff url(../tools/img/product1/4.jpg)no-repeat;background-size: contain;background-position:center"></div>
+                                            <div class="prox for-7" style="background: #fff url(../tools/img/product1/5.jpg)no-repeat;background-size: contain;background-position:center"></div>
+                                            <div class="prox for-7" style="background: #fff url(../tools/img/product1/6.jpg)no-repeat;background-size: contain;background-position:center"></div>
+                                            <div class="prox for-7" style="background: #fff url(../tools/img/product1/7.jpg)no-repeat;background-size: contain;background-position:center"></div>
+                                        </div>
+                                        <div class="proxImg fLeft" style="background: url(http://localhost/iftosi/tools/img/product1/7.jpg) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+                                    </div>
+                                    <div class="prdDetails fLeft">
+                                        <div class="detComm">
+                                            <div class="detLabel fmOpenB fLeft">DESIGN NO.</div>
+                                            <div class="detValue fmOpenR fLeft">QW0H8IE9</div>
+                                        </div>
+                                    </div>
+                                    <div class="prdPrice fLeft">
+                                        <div class="detComm">
+                                            <div class="detLabel fmOpenB fLeft">PRICE</div>
+                                            <div class="detValue fmOpenB fLeft"><span>₹</span>218445.01</div>
+                                        </div>
+                                    </div>
+                                    <div class="prdActions fLeft">
+                                        <div class='wConBtn fLeft'>Contact Dealer</div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        <div class="tempDiv fLeft">Bullion</div>
+                        <div class="prdComm fLeft transition100" style="opacity: 1; transform: translateX(0px);">
+                            <div class="wisgDel"></div>
+                            <div class="prdCommDiv fLeft transition100">
+                                <div class="prdShape fLeft">
+                                    <div class="prdShTitle fLeft fmOpenB">TYPE</div>
+                                    <div class="prdShType fLeft fmOpenR">Coin</div>
+                                    <div class="coinIc fRight"></div>
+                                </div>
+                                <div class="prdDetails fLeft">
+                                    <div class="detComm">
+                                        <div class="detLabel fmOpenB fLeft">METAL</div>
+                                        <div class="detValue fmOpenR fLeft">Gold</div>
+                                    </div>
+                                    <div class="detComm">
+                                        <div class="detLabel fmOpenB fLeft">WEIGHT</div>
+                                        <div class="detValue fmOpenR fLeft">10.000 Gms</div>
+                                    </div>
+                                </div>
+                                <div class="prdPrice fLeft">
+                                    <div class="detComm">
+                                        <div class="detLabel fmOpenB fLeft">PRICE</div>
+                                        <div class="detValue fmOpenB fLeft"><span>₹</span>47847.40</div>
+                                    </div>
+                                </div>
+                                <div class="prdActions fLeft">
+                                    <div class='wConBtn fLeft'>Contact Dealer</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <?php include 'pagination.html';?>
                     </div>
                 </div>
             </div>
