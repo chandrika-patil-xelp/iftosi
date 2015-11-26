@@ -182,8 +182,11 @@ class wishlist extends DB
            }
            if($wf==1)
            {
-               $upsql="UPDATE tbl_wishlist SET wf=2 WHERE uid=".$params['uid']." AND vid=".$params['vid']." AND pid=".$params['pid']."";
-               $upres=$this->query($upsql);
+                if(!$params['vid'])
+                $upsql="UPDATE tbl_wishlist SET wf=2 WHERE uid=".$params['uid']."  AND pid=".$params['pid']."";
+                else
+                $upsql="UPDATE tbl_wishlist SET wf=2 WHERE uid=".$params['uid']." AND vid=".$params['vid']." AND pid=".$params['pid']."";
+               $upres=$this->query($upsql,1);
                $arr="Product is removed from wishlist";
            }
            else
