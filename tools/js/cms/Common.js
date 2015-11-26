@@ -235,8 +235,9 @@ function Common() {
         var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
         var mob = customStorage.readFromStorage('tf_mobile');
         var nm = customStorage.readFromStorage('username');
+        var is_vendor = customStorage.readFromStorage('is_vendor');
 
-        if (isLoggedIn === 'true')
+        if (isLoggedIn === 'true' && is_vendor==1)
         {
             
         } else {

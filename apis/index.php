@@ -389,8 +389,8 @@ switch($action)
 //            print_r($upload);
 //            if($upload) {
 //                echo 'sd';
-            $params['data'] = file_get_contents($_FILES['up_file']['tmp_name']);
-            //}
+//            $params['data'] = file_get_contents($_FILES['up_file']['tmp_name']);
+//            }
             $arr=array();
             if(empty($file) && empty($vid))
             {
@@ -411,6 +411,35 @@ switch($action)
             }
             $res= $result;
             break;
+            
+// localhost/iftosi/apis/index.php?action=updateDollerRate&vid=2&dolRate=50.50
+        case 'updateDollerRate':
+            include APICLUDE.'class.vendor.php';
+            $vid=(!empty($params['vid'])) ? trim($params['vid']) : '';
+            $dolRate=(!empty($params['dolRate'])) ? trim($params['dolRate']) : '';
+            if(!empty($vid) && !empty($dolRate)) {
+                $obj = new vendor($db['iftosi']);
+                $result = $obj->updateDollerRate($params);
+            } else {
+                $err = array('Code' => 1, 'Msg' => 'Invalid Parameters');
+                $result = array('results' => array(), 'error' => $err);
+            }
+            $res= $result;
+        break;
+        
+// localhost/iftosi/apis/index.php?action=getDollerRate&vid=2
+        case 'getDollerRate':
+            include APICLUDE.'class.vendor.php';
+            $vid=(!empty($params['vid'])) ? trim($params['vid']) : '';
+            if(!empty($vid)) {
+                $obj = new vendor($db['iftosi']);
+                $result = $obj->getDollerRate($params);
+            } else {
+                $err = array('Code' => 1, 'Msg' => 'Invalid Parameters');
+                $result = array('results' => array(), 'error' => $err);
+            }
+            $res= $result;
+        break;
 
 //-------------------------Location---------------------------------               
             

@@ -471,12 +471,13 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 /* Bulk Upload Products */
 
 .overlay { background: #fff url("../img/common/background.jpg") no-repeat scroll 0 0 / 100% auto; height: 100%; left: 0; position: fixed; top: 0; width: 100%; z-index: 115; }
-.uploadDiv { background: #fff none repeat scroll 0 0; border-radius: 5px; bottom: 0; box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.4); height: 330px; left: 0; margin: auto; padding: 35px 25px; position: fixed; right: 0; top: 0; width: 360px; z-index: 116; }
-#uploadDiv .commBtn { border-radius: 5px; color: #fff; cursor: pointer; font-size: 14px; height: 40px; line-height: 40px; margin: 28px 0.5% 0; text-align: center; width: 49%; }
-#uploadDiv .cancelBtn { background: #171334; }
-#uploadDiv .upBtn { background: #8a0044; }
-#uploadDiv .upTitle { color: #4d4d4d; font-size: 20px; height: 60px; line-height: 40px; padding-bottom: 30px; text-align: center; width: 100%; }
-#uploadDiv .downSampleBtn { margin: 10px auto; display: none; }
-#uploadDiv .downloadLink { border-top: 1px solid; margin-top: 25px; padding-top: 14px; text-align: center; width: 100%; }
-#uploadDiv .downloadLink a { cursor: pointer; color: #8a0044; font-size: 16px; padding: 5px 5px; }
-#uploadDiv .downloadLink span { color: #666; font-size: 12px; display: block; margin-bottom: 8px; }
+.popDiv { background: #fff none repeat scroll 0 0; border-radius: 5px; bottom: 0; box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.4); height: 330px; left: 0; margin: auto; padding: 35px 25px; position: fixed; right: 0; top: 0; width: 360px; z-index: 116; }
+.popDiv .commBtn { border-radius: 5px; color: #fff; cursor: pointer; font-size: 14px; height: 40px; line-height: 40px; margin: 28px 0.5% 0; text-align: center; width: 49%; }
+.popDiv .cancelBtn { background: #171334; }
+.popDiv .upBtn { background: #8a0044; }
+.popDiv .upTitle { color: #4d4d4d; font-size: 20px; height: 60px; line-height: 40px; padding-bottom: 30px; text-align: center; width: 100%; }
+.popDiv .downSampleBtn { margin: 10px auto; display: none; }
+.popDiv .downloadLink { border-top: 1px solid; margin-top: 25px; padding-top: 14px; text-align: center; width: 100%; }
+.popDiv .downloadLink a { cursor: pointer; color: #8a0044; font-size: 16px; padding: 5px 5px; }
+.popDiv .downloadLink span { color: #666; font-size: 12px; display: block; margin-bottom: 8px; }
+.popDiv .inpTxt { border: 1px solid #d4d4c8; border-radius: 5px; font-size: 14px; height: 35px; outline: medium none; padding: 0 15px; width: 200px; }

@@ -140,7 +140,7 @@
     
     
         <div id='overlay' class="overlay transition300 transit-100Y1 dn"></div>
-        <div id='uploadDiv' class="uploadDiv transition300 transit-200Y1 dn">
+        <div id='uploadDiv' class="popDiv transition300 transit-200Y1 dn">
             <form class="" action="" method="post" enctype="multipart/form-data">
                 <div class="downSampleBtn"><a class="commBtn uploadBtn">Download Sample Format</a></div>
                 <div class="upTitle fLeft fmOpenR">Choose files to Upload Products </div>
@@ -156,6 +156,17 @@
                         <a href="SampleDiamondsFile.csv">Download Sample File</a>
                     </center>
                 </div>
+            </form>
+        </div>
+        <div id='dollarRateDiv' class="popDiv transition300 transit-200Y1 dn" style="height: 250px;">
+            <form class="" action="" method="post" enctype="multipart/form-data">
+                <div class="upTitle fLeft fmOpenR">Update Dollar Rate </div>
+                <div class="inputCont fLeft fmOpenR">
+                    <input type="text" id="dollar_rate" name="dollar_rate" class="inpTxt fRight fmOpenR" placeholder="eg. 60.45">
+                    <label for="dollar_rate" class="dn">BROWSE</label>
+                </div>
+                <div class="commBtn cancelBtn fLeft fmOpenR" id='upCancel' onclick="closeAllForms();"> CANCEL</div>
+                <div class="commBtn upBtn fLeft fmOpenR" onclick="updateDollarRate();">UPDATE</div>
             </form>
         </div>
     

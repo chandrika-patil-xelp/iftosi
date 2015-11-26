@@ -96,7 +96,9 @@ $('#pr_mobile').keyup(function () {
                     customStorage.addToStorage('userid',userid);
                     customStorage.addToStorage('tf_mobile',pr_mobile);
                     customStorage.addToStorage('username',pr_name);
+                    customStorage.addToStorage('is_vendor',isVendor);
                     if(isVendor==1) {
+                        customStorage.removeFromStorage('busiType');
                         window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid='+uid);
                     } else {
                         customStorage.toast(1,'Registration Successfull Done');

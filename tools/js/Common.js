@@ -55,13 +55,24 @@ function Common() {
         var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
         var mob = customStorage.readFromStorage('tf_mobile');
         var nm = customStorage.readFromStorage('username');
-
-        if (isLoggedIn === 'true')
-        {
-            $('.signInUpTab').html('Hello '+nm).addClass('loggedIn');
+        var is_vendor = customStorage.readFromStorage('is_vendor');
+        
+        var userMenuStr='';
+        if (isLoggedIn === 'true') {
+            $('.signInUpTab').html('Hello ' + nm).addClass('loggedIn');
             $('#userMenu').removeClass('dn');
-        } else {
-
+            if (is_vendor == 0)
+            {
+                userMenuStr += '<li class="transition100">Profile</li>';
+                userMenuStr += '<li class="transition100">Orders</li>';
+                userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=wishlist\');">Wishlist (25)</li>';
+            } else {
+                userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_dashboard\');">Dashboard</li>';
+                userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_enquiries\');">Enquires</li>';
+                userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_setting\');">Setting</li>';
+            }
+            userMenuStr += '<li class="transition100" onclick="common.doLogout();">Log Out</li>';
+            $('#hdropList').html(userMenuStr);
         }
     };
 
@@ -96,7 +107,7 @@ function Common() {
         str += '<div class="cancelLgBtn fLeft fmOpenR" id="lgCancel" onclick="common.closeLoginForm();"> CANCEL</div>';
         str += '<div class="loginBtn fLeft fmOpenR" id="lgSubmit" onclick="common.submitLoginForm();">LOGIN</div>';
         str += '<div class="signuplink fmOpenB fLeft">';
-        str += '<center><span><a href="">Sign Up with Us</a></span></center>';
+        str += '<center><a href="'+ DOMAIN +'index.php?case=signup"><span>Sign Up with Us</span></a></center>';
         str += '</div>';
         str += '</div>';
         $('body').append(str);
@@ -161,10 +172,15 @@ function Common() {
                     customStorage.addToStorage('is_vendor', is_vendor);
                     if (is_vendor == 1) {
                         var busiType = obj['results']['busiType'];
-                        customStorage.addToStorage('busiType', busiType);
-                        var catid = busiType.charAt(0) - 1;
-                        window.location.assign(DOMAIN + 'index.php?case=vendor_landing&catid=1000' + catid);
+                        if(busiType == null || busiType == '' || busiType == undefined) {
+                            window.location.assign(DOMAIN + 'index.php?case=vendor_landing&catid=1000' + catid);
+                        } else {
+                            customStorage.addToStorage('busiType', busiType);
+                            var catid = busiType.charAt(0) - 1;
+                            window.location.assign(DOMAIN + 'index.php?case=vendor_landing&catid=1000' + catid);
+                        }
                     } else {
+                        customStorage.addToStorage('busiType', '');
                         _this.checkLogin();
                         _this.closeLoginForm();
                     }

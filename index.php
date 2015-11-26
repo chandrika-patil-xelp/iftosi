@@ -193,9 +193,9 @@
 				
 				case 'jewellery':
 					$page='jewellery';
-					$pgno 	= ($_GET['pgno'] ? $_GET['pgno'] : 1);
+					$pgno 	= (!empty($_GET['pgno']) ? $_GET['pgno'] : 1);
 					$catid 	= $_GET['catid'];
-					$url 	= APIDOMAIN.'index.php?action=getPrdByCatid&catid='.$catid.'&page='.$pgno;
+					 $url 	= APIDOMAIN.'index.php?action=getPrdByCatid&catid='.$catid.'&page='.$pgno;
 					$res 	= $comm->executeCurl($url);
 					$data 	= $res['results']['products'];
 					$total	= $res['results']['total'];
@@ -451,7 +451,7 @@
 				break;
 				case 'vendor_landing':
 					$page='Products';
-                    $pgno 	= (!empty($_GET['pgno']) ? $_GET['pgno'] : 1);
+                                        $pgno 	= (!empty($_GET['pgno']) ? $_GET['pgno'] : 1);
 					$catid 	= $_GET['catid'];
 					$url 	= APIDOMAIN.'index.php?action=getVPrdByCatid&catid='.$catid.'&page='.$pgno;
 					$res 	= $comm->executeCurl($url);

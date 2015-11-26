@@ -1,6 +1,9 @@
 var uid = customStorage.readFromStorage('userid');
 var busiType = customStorage.readFromStorage('busiType');
 var username = customStorage.readFromStorage('username');
+if(busiType==null || busiType=='' || busiType==undefined) {
+    window.location.assign(DOMAIN+'index.php?case=vendor_Form&uid='+uid);
+}
 document.getElementById('userName').innerHTML = username;
 if (/1/.test(busiType)) {
     $('#dmdTab').removeClass('dn');
@@ -299,7 +302,7 @@ function submitDForm() {
 
 
 $('#overlay').velocity({opacity:0},{delay:0,duration:0});
-$('#uploadDiv').velocity({scale: 0}, {delay: 0, duration: 0});
+$('#uploadDiv,#dollarRateDiv').velocity({scale: 0}, {delay: 0, duration: 0});
 $('#upProds').click(function () {
     $('#overlay,#uploadDiv').removeClass('dn');
     setTimeout(function () {
@@ -308,20 +311,52 @@ $('#upProds').click(function () {
     }, 10);
     loadDiamont = false;
 });
+$('#upDolRt').click(function () {
+    $('#overlay,#dollarRateDiv').removeClass('dn');
+    setTimeout(function () {
+        $('#overlay').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
+        $('#dollarRateDiv').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
+    }, 10);
+    $.ajax({url: common.APIWebPath() + "index.php?action=getDollerRate&vid="+ uid, success: function (result) {
+        var obj = jQuery.parseJSON(result);
+        var errCode = obj['error']['Code'];
+        if(errCode==0) {
+            $('#dollar_rate').val(obj['results']['dollar_rate']);
+        }
+    }});
+});
 
 $('#overlay,#upCancel').bind('click', function () {
     closeAllForms();
 });
 
 function closeAllForms() {
-    $('#uploadDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
+    $('#uploadDiv,#dollarRateDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
     $('#overlay').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
     setTimeout(function () {
-        $('#overlay,#uploadDiv').addClass('dn');
+        $('#overlay,#uploadDiv,#dollarRateDiv').addClass('dn');
     }, 1010);
     loadDiamont = true;
 }
 
+function updateDollarRate() {
+    var dollar_rate = $("#dollar_rate").val();
+    if(dollar_rate=='') {
+        common.toast(0,'Invaild Rate');
+    } else {
+        $.ajax({url: DOMAIN + "/apis/index.php?action=updateDollerRate&vid="+uid+"&dolRate="+dollar_rate, success: function(result) {
+                var obj = jQuery.parseJSON(result);
+                var errCode = obj['error']['Code'];
+                if(errCode==0) {
+                    common.toast(1,obj['error']['Msg']);
+                    closeAllForms();
+                } else if(errCode==1) {
+                    common.toast(0,obj['error']['Msg']);
+                }
+            }
+        });
+    }
+}
 
 $("#upSubmit").on('click',(function(e) {
     if($("#up_file").val()=='' || ValidateFile()==false) {

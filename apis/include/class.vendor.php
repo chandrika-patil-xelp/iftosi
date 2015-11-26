@@ -674,7 +674,7 @@ class vendor extends DB
             $res3 = $this->query($sql);}
         if($res3){
             $sql = "UPDATE tbl_product_category_mapping SET display_flag=0 WHERE product_id=" . $params['prdid'];
-            $res = $this->query($sql);}
+            $res4 = $this->query($sql);}
         if($res4){
             $sql = "UPDATE tbl_designer_product_mapping SET active_flag=0 WHERE product_id=".$params['prdid'];
             $res = $this->query($sql);}
@@ -694,7 +694,7 @@ class vendor extends DB
             $res3 = $this->query($sql);}
         if($res3){
             $sql = "UPDATE tbl_product_category_mapping SET display_flag=1 WHERE product_id=" . $params['prdid'];
-            $res = $this->query($sql);}
+            $res4 = $this->query($sql);}
         if($res4){
             $sql = "UPDATE tbl_designer_product_mapping SET active_flag=1 WHERE product_id=".$params['prdid'];
             $res = $this->query($sql);}
@@ -1138,6 +1138,34 @@ class vendor extends DB
             return $result;
         }
     
+    public function updateDollerRate($params) {
+        $sql="UPDATE tbl_vendor_master SET dollar_rate='".$params['dolRate']."' WHERE vendor_id='".$params['vid']."'";
+        $res=$this->query($sql);
+        if ($res) {
+            $arr = array();
+            $err = array('Code' => 0, 'Msg' => 'Dollar Rate Updated successfully!');
+        } else {
+            $arr = array();
+            $err = array('code' => 1, 'msg' => 'Error in Updating Dollar Rate');
+        }
+        $result = array('results' => $arr, 'error' => $err);
+        return $result;
+    }    
+    
+    public function getDollerRate($params) {
+        $sql="SELECT dollar_rate FROM tbl_vendor_master WHERE vendor_id='".$params['vid']."'";
+        $res=$this->query($sql);
+        if ($res) {
+            $row = $this->fetchData($res);
+            $arr = $row;
+            $err = array('Code' => 0, 'Msg' => 'Dollar Rate Updated successfully!');
+        } else {
+            $arr = array();
+            $err = array('code' => 1, 'msg' => 'Error in Updating Dollar Rate');
+        }
+        $result = array('results' => $arr, 'error' => $err);
+        return $result;
+    }
     
 }
 ?>
