@@ -168,7 +168,10 @@ class wishlist extends DB
    }
    public function removeFromWishlist($params)
    {
-       $sql="SELECT wid,wf FROM tbl_wishlist WHERE uid=".$params['uid']." AND vid=".$params['vid']." AND pid=".$params['prdid']."";
+       if(!$params['vid'])
+           $sql="SELECT wid,wf FROM tbl_wishlist WHERE uid=".$params['uid']." AND pid=".$params['pid']."";
+       else
+           $sql="SELECT wid,wf FROM tbl_wishlist WHERE uid=".$params['uid']." AND vid=".$params['vid']." AND pid=".$params['pid']."";
        $res=$this->query($sql);
        if($res)
        {
@@ -179,7 +182,7 @@ class wishlist extends DB
            }
            if($wf==1)
            {
-               $upsql="UPDATE tbl_wishlist SET wf=2 WHERE uid=".$params['uid']." AND vid=".$params['vid']." AND pid=".$params['prdid']."";
+               $upsql="UPDATE tbl_wishlist SET wf=2 WHERE uid=".$params['uid']." AND vid=".$params['vid']." AND pid=".$params['pid']."";
                $upres=$this->query($upsql);
                $arr="Product is removed from wishlist";
            }

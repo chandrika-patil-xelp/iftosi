@@ -1164,13 +1164,13 @@ echo '</pre>';
             $res=$result;
             break;
 		break;
-            
+//  localhost/iftosi/apis/index.php?action=removeFromWishlist&uid=4&pid=100003           
         case 'removeFromWishlist':    
             include APICLUDE.'class.wishlist.php';
             $uid=(!empty($params['uid']))? trim($params['uid']):'';
             $vid=(!empty($params['vid']))? trim($params['vid']):'';
-            $pid=(!empty($params['prdid']))? trim($params['prdid']):'';
-            if(empty($uid) && empty($vid) && empty($pid))
+            $pid=(!empty($params['prdid']))? trim($params['pid']):'';
+            if(empty($uid) && empty($pid))
             {
                 $arr = array();
                 $err=array('Code'=>1,'Msg'=>'Invalid Parameters');
