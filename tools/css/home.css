@@ -630,7 +630,11 @@ a{cursor:pointer;}
 .listCont .prdComm {width: 24%;height: auto;border: 5px solid #ebebde;margin: 0 0 1% 1%;}
 
 .wishTabsCont{width:100%;height: 50px;padding: 5px 0;}
-.wishTabComm{width:auto;padding: 0 35px;height: 40px;line-height: 40px;color:#fff;display:inline-block;margin: 0 5px;border-radius: 5px;cursor: pointer;}
+.wishTabComm{width:auto;padding: 0 35px;height: 40px;line-height: 40px;color:#fff;display:inline-block;margin: 0 5px;border-radius: 5px;cursor: pointer;position: relative;}
+.wishTabComm::after{content:'';width:40px;height:40px;background:url(../img/common/tickCircle.svg)no-repeat;background-size: auto 25px;background-position: center 10px;position: absolute;right:-100px;top:0;transition: 300ms ease-in-out;-moz-transition: 300ms ease-in-out;-ms-transition: 300ms ease-in-out;-webkit-transition: 300ms ease-in-out;-o-transition: 300ms ease-in-out;}
+.sel.wishTabComm::after{right:0}
+
+
 .wishTabComm span{width:auto;font-size: 15px;font-family: openL;}
 .dimWish{background: #8A0044;}
 .jwWish{background: #380B34;}
