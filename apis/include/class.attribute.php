@@ -232,7 +232,8 @@ class attribute extends DB
 					attr_unit,
 					attr_unit_pos,
 					trim(attr_values) as attr_values,
-					trim(attr_range) as attr_range
+					trim(attr_range) as attr_range,
+					display_type
 				FROM 
 					tbl_attribute_category_mapping 
 				WHERE 
@@ -280,6 +281,7 @@ class attribute extends DB
 					$attrs['attribtue_unit_pos']	= $attributeMap[$row1['attr_id']]['attr_unit_pos'];
                     $attrs['attribute_values']		= $attributeMap[$row1['attr_id']]['attr_values'];
                     $attrs['attribute_range']		= $attributeMap[$row1['attr_id']]['attr_range'];
+                    $attrs['attribute_display_type']		= $attributeMap[$row1['attr_id']]['display_type'];
                     $attribute[]					= $attrs;
                     $flag							= $row1['attr_type_flag'];       // FOR GIVING THE NAME OF TYPE FILTER
                  /*   switch($flag)
