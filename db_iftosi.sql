@@ -1,6 +1,6 @@
 /*
-SQLyog Ultimate v11.11 (64 bit)
-MySQL - 5.6.24 : Database - db_iftosi
+SQLyog Ultimate v11.11 (32 bit)
+MySQL - 5.6.16 : Database - db_iftosi
 *********************************************************************
 */
 
