@@ -42,7 +42,7 @@ $(document).ready(function() {
     /*Mobile Filter Btns*/
     $('#mfFooter').bind('click', function() {
         if (!isMobile) {
-            alert('reset filter');
+            resetFilters();
         } else {
             swichFilter();
         }
@@ -146,4 +146,64 @@ function removeFilters(id) {
     $('#filters,.results_Filter').css({height: ''});
     var ht = $('#filters').height() + 25;
     $('.results_Filter').height(ht + "px");
+}
+
+function resetFilters()
+{
+	var catid = $('#catid').val();
+	var params = 'action=ajx&case=filter&catid='+catid+'&slist=&clist=&tlist=&ilist=&jlist=';
+	var URL = DOMAIN + "index.php";
+	$.getJSON(URL, params, function(data) {
+		getResultsData(data);
+		resetFiltersMenu(data);
+	});
+}
+
+function resetFiltersMenu(data)
+{
+	var fhtml = '';
+	var tfhtml = '';
+	if(data.results.filters)
+	{
+		$.each(data.results.filters, function(i, v) {
+			$.each(v, function(k, vl) {
+				
+				if(k == 'range')
+				{
+					var id = vl.name+'Range';
+					var min_price = $('#'+id+'Min').val()*1;
+					var max_price = $('#'+id+'Max').val()*1;
+					
+					console.log(min_price+'-'+max_price);
+					
+					if((max_price - min_price) > 100)
+						var step = '';
+					else
+						var step = 0.01;
+						
+					var slider = $('#'+id).data("ionRangeSlider");
+					slider.update({
+						from: Math.floor(min_price),
+						to: Math.ceil(max_price),
+					});
+				}
+				
+				if(k == 'checkbox')
+				{
+					$('.filterCont :input[type=checkbox]').each(function() {
+						$(this).attr('checked',false);
+					});
+				}
+			});
+		});
+		$('.shapeComm').removeClass('shapeSelected');
+		$('.jshapeComm').each(function() {
+			if($(this).hasClass('shapeSelected'))
+			{
+				$(this).click();
+				$(this).removeClass('shapeSelected');
+			}
+		})
+		FR(1);
+	}
 }
