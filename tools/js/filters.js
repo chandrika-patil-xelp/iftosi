@@ -1,5 +1,7 @@
 $(document).ready(function() {
 	
+	
+	
 	$(".rngInp").each(function () {
 		
 		var id = $(this).attr('id');
@@ -27,15 +29,15 @@ $(document).ready(function() {
 				FR();
 			}
 		});
-		
-		$('.filterCont :input[type=checkbox]').each(function() {
-			$(this).bind('click', function(event) {
-				FR();
-				if (event && $.isFunction(event.stopImmediatePropagation))
-					event.stopImmediatePropagation();
-				else 
-					window.event.cancelBubble=true;
-			});
+	});
+	
+	$('.filterCont :input[type=checkbox]').each(function() {
+		$(this).bind('click', function(event) {
+			FR();
+			if (event && $.isFunction(event.stopImmediatePropagation))
+				event.stopImmediatePropagation();
+			else 
+				window.event.cancelBubble=true;
 		});
 	});
 

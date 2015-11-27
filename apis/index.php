@@ -14,12 +14,14 @@ switch($action)
 			include APICLUDE.'class.product.php';
 			$obj	= new product($db['iftosi']);
 			$result	= $obj->imageUpdate($params);
+			$res= $result;
 		break;
 		
 		case 'imageremove':
 			include APICLUDE.'class.product.php';
 			$obj	= new product($db['iftosi']);
 			$result	= $obj->imageRemove($params);
+			$res= $result;
 		break;
 		
 		case 'imagedisplay':

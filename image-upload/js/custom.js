@@ -13,9 +13,11 @@ $(document).ready(function() {
 			var vlu = vl.split('/');
 			ar['name'] = vlu[vlu.length - 1];
 			ar['type'] = 'image/jpg';
-			ar['file'] = DOMAIN+vl;
+			ar['file'] = IMGDOMAIN+vl;
 			mar[i] = ar;
 		});
+		
+		console.log(mar);
 		
 		$("#filer_input2").filer({
 			limit: null,

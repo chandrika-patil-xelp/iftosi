@@ -184,6 +184,7 @@
 				case 'upload':
 					$pid = $_GET['pid'];
 					$page='upload';
+					setcookie("back", $_SERVER['HTTP_REFERER']);
 					include 'image-upload/index.html';
 				break;
 				

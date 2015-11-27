@@ -420,57 +420,84 @@
 		
 		public function imageUpdate($params)
 		{
+			$err = array('errCode' => 0, 'errMsg' => 'Details updated successfully');
 			$pid = $params['pid'];
-			$sql = "SELECT prd_img FROM tbl_product_master WHERE product_id = ".$pid."";
+			$img = $params['imgpath'];
+			
+			$sql = "SELECT product_image, image_sequence FROM tbl_product_image_mapping WHERE product_id = ".$pid." AND active_flag = 1 order by image_sequence asc";
 			$res = $this->query($sql);
-			if($res)
+			$cnt = $this->numRows($res);
+			$flag = true;
+			if($cnt)
 			{
-				$row = $this->fetchData($res);
-				
-				$expd 		= explode('|~|',trim($row['prd_img'],'|~|'));
-				$expd[] 	= IMGPATH.$params['imgpath'];
-				$imgpath 	= implode("|~|",$expd);
-				if($imgpath)
+				while($row = $this->fetchData($res))
 				{
-					$sql = "UPDATE tbl_product_master SET prd_img=\"".$imgpath."\" WHERE product_id = ".$pid."";
-					$res = $this->query($sql);
-					$err = array('errCode' => 0, 'errMsg' => 'Details updated successfully');
+					if(strtolower($row['product_image']) ==  strtolower($img))
+					{
+						$err = array('errCode' => 1, 'errMsg' => 'No results updated');
+						$flag = false;
+					}
+					$image_sequence = $row['image_sequence'];
 				}
-				else
-					$err = array('errCode' => 1, 'errMsg' => 'No results updated');
-				
-				$arr = array();
-				$result = array('results' => $arr, 'error' => $err);
-				return $result;
 			}
+			$sequence = ($image_sequence ? $image_sequence+1 : 1);
+			if($flag)
+			{
+				$sql = "INSERT INTO 
+							tbl_product_image_mapping 
+							(
+								product_id,
+								product_image,
+								active_flag,
+								image_sequence,
+								update_date
+							)
+							VALUES
+							(
+								".$pid.",
+								\"".$img."\",
+								1,
+								".$sequence.",
+								NOW()
+							)";
+				$res2 = $this->query($sql);
+			}
+			
+			$arr = array();
+			$result = array('results' => $arr, 'error' => $err);
+			return $result;
 		}
 		
 		public function imageRemove($params)
 		{
 			$pid = $params['pid'];
-			$sql = "SELECT prd_img FROM tbl_product_master WHERE product_id = ".$pid."";
+			
+			$sql = "SELECT product_image FROM tbl_product_image_mapping WHERE product_id = ".$pid." AND active_flag = 1";
 			$res = $this->query($sql);
+			$cnt = $this->numRows($res);
+			
 			if($res)
 			{
-				$row = $this->fetchData($res);
-				$expd 		= explode('|~|',trim($row['prd_img'],'|~|'));
-				//echo "<pre>";print_r($expd);die;
-				foreach($expd as $key => $val)
+				while($row = $this->fetchData($res))
 				{
-					if(stristr($val, $params['file']) !== FALSE)
+					if(stristr($row['product_image'], $params['file']) !== FALSE)
 					{
-						//echo "here";
-						unset($expd[$key]);
+						$sql = "UPDATE 
+									tbl_product_image_mapping 
+								SET 
+									active_flag = 0 
+								WHERE 
+									product_id = ".$pid." 
+								AND 
+									product_image = \"".$row['product_image']."\"";
+						$res = $this->query($sql);
+						$err = array('errCode' => 0, 'errMsg' => 'Details updated successfully');
+					}
+					else
+					{
+						$err = array('errCode' => 1, 'errMsg' => 'No results updated');
 					}
 				}
-				$imgpath 	= implode("|~|",$expd);
-				$sql = "UPDATE tbl_product_master SET prd_img=\"".$imgpath."\" WHERE product_id = ".$pid."";
-				$res = $this->query($sql);
-				if($res)
-					$err = array('errCode' => 0, 'errMsg' => 'Details updated successfully');
-				else
-					$err = array('errCode' => 1, 'errMsg' => 'No results updated');
-				
 				$arr = array();
 				$result = array('results' => $arr, 'error' => $err);
 				return $result;
@@ -479,15 +506,17 @@
 		
 		public function imageDisplay($params)
 		{
+			
 			$arr = array();
 			$pid = $params['pid'];
-			$sql = "SELECT prd_img FROM tbl_product_master WHERE product_id = ".$pid."";
+			$sql = "SELECT product_image FROM tbl_product_image_mapping WHERE product_id = ".$pid." AND active_flag = 1 ORDER BY image_sequence ASC";
 			$res = $this->query($sql);
 			if($res)
 			{
-				$row = $this->fetchData($res);
-				if(trim($row['prd_img'],'|~|'))
-					$arr 		= explode('|~|',trim($row['prd_img'],'|~|'));
+				while($row = $this->fetchData($res))
+				{
+					$arr[] = $row['product_image'];
+				}
 			}
 			
 			if(!empty($arr))

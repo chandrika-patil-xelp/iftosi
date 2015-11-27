@@ -472,7 +472,7 @@ function getResultsData(data,sortby,showtree)
 				html += '</div>';
 			});
 		}
-		else if(pageName == 'bullion'){
+		else {
 			$.each(data.results.products, function(i, vl) {
 				html += '<a href="'+DOMAIN+vl.attributes.metal.toLowerCase()+'-'+vl.attributes.type.toLowerCase()+'-'+Math.round(vl.attributes.gold_weight)+'-grams/bid-'+vl.pid+'">';
 					html += '<div class="prdComm fLeft jwRes" style="opacity: 0; transform: translateX(1000px);">';
