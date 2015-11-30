@@ -3,7 +3,7 @@ common.checkLogin();
 function Common() {
     var _this = this;
     this.APIWebPath = function () {
-        return 'http://localhost/iftosi/apis/';
+        return APIDOMAIN;
     };
     this.eSubmit = function (evt, btnId) {
         var charCode = (evt.which) ? evt.which : evt.keyCode;
