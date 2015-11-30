@@ -84,6 +84,7 @@
 					
 					echo json_encode($res);
 				break;
+                                
 				case 'userCheck':
 					$regResp = array();
 					$mobile = (!empty($_GET['mobile'])) ? trim($_GET['mobile']) : '';
@@ -103,6 +104,7 @@
 					}
 					echo json_encode($resp);
 				break;
+                                
 				case 'addToWishList':
 					$userid = (!empty($_GET['userid'])) ? trim($_GET['userid']) : '';
 					$vid = (!empty($_GET['vid'])) ? trim(urldecode($_GET['vid'])) : '';
@@ -114,6 +116,7 @@
 					$resp = $comm->executeCurl($userUrl, TRUE);
 					echo $resp;
 				break;
+                            
 				case 'addToEnquiry':
 					$userid = (!empty($_GET['uid'])) ? trim($_GET['uid']) : '';
 					$vid = (!empty($_GET['vid'])) ? trim(urldecode($_GET['vid'])) : '';
@@ -142,6 +145,7 @@
 						echo json_encode($resp);
 					}
 				break;
+                                
                                 case 'getUserDet':
 					$regResp = array();
 					$uid = (!empty($_GET['uid'])) ? trim($_GET['uid']) : '';
@@ -271,12 +275,21 @@
 					$url 	= APIDOMAIN.'index.php?action=fetch_category_mapping&catid='.$catid;
 					$res 	= $comm->executeCurl($url);
 					$fil	= $res['results']['attributes'];
-					
-					$totalCnt = $total;
+                                        
+                                        $totalCnt = $total;
 					$lastpg = ceil($total/15);
 					$adjacents = 2;
-					
-					include 'template/jewellery_results.html';
+                                        for($i=0;$i<count($data);$i++)
+                                        {
+                                            $pid        = $data[$i]['pid']; //die;
+                                            $url1 	= APIDOMAIN.'index.php?action=imagedisplay&pid='.$pid;
+                                            $res1 	= $comm->executeCurl($url1);
+                                            $data1      = $res1['results'];
+                                            $datacnt    = $res1['count'];
+                                            //echo '<pre>';print_r($data1);
+                                        }
+                                        //echo "<pre>";print_r($data[4]['images']);die;
+                                        include 'template/jewellery_results.html';
 				break;
 				case 'bullion':
 					$page='bullion';
@@ -308,6 +321,14 @@
                                         $url 	= APIDOMAIN.'index.php?action=getPrdById&prdid='.$pid;
 					$res 	= $comm->executeCurl($url);
 					$data = $prdInfo = $res['results'][$pid];
+                                        
+                                        $url1 	= APIDOMAIN.'index.php?action=imagedisplay&pid='.$pid;
+					$res1 	= $comm->executeCurl($url1);
+					$data1  =$res1['results'];
+                                        $datacnt= $res1['count'];
+                                        
+                                        
+                                        
 					$vndrInfo = $prdInfo['vendor_details'];
 
 					foreach($vndrInfo as $key => $value)
@@ -331,7 +352,7 @@
                                           
 					$vndrDtls['fulladdress'] = implode(', ', $vndrDtls['fulladdress']);
 					$vndrAddr = explode(',', $vndrDtls['fulladdress']);
-                                        //echo "<pre>";print_r($wish);die; 
+                                        //echo "<pre>";print_r($datacnt);die; 
 					include 'template/diamond_details.html';
 				break;
 				case 'bullion_details':
@@ -339,7 +360,7 @@
 					$prdInfo= array();
                                         $prdId = $orgPrdId = (!empty($_GET['productid'])) ? $_GET['productid'] : '';
 
-					if(!empty($prdId))
+                                        if(!empty($prdId))
 					{
 						$prdId = explode(' ', $prdId);
 						$prdId = $pid = $prdId[1];
@@ -363,14 +384,17 @@
 							$vndrAddr = explode(',', $vndrDtls['fulladdress']);
 						}
 					}
-                                        //echo "<pre>".print_r($prdInfo); die;
+                                        $url1 	= APIDOMAIN.'index.php?action=imagedisplay&pid='.$pid;
+					$res1 	= $comm->executeCurl($url1);
+					$data1  =$res1['results'];
+                                        //echo "<pre>".print_r($data1); die;
 					include 'template/bullion_details.html';
 				break;
 				case 'jewellery_details':
 					$page='jewellery_details';
 					$prdInfo = array();
-
-					$prdName = (!empty($_GET['productname'])) ? $_GET['productname'] : '';
+                                        
+                                        $prdName = (!empty($_GET['productname'])) ? $_GET['productname'] : '';
 					$prdId = $orgPrdId = (!empty($_GET['productid'])) ? $_GET['productid'] : '';
 
 					if(!empty($prdId))
@@ -397,7 +421,10 @@
 							$vndrAddr = explode(',', $vndrDtls['fulladdress']);
 						}
 					}
-
+                                        $url1 	= APIDOMAIN.'index.php?action=imagedisplay&pid='.$pid;
+					$res1 	= $comm->executeCurl($url1);
+					$data1  =$res1['results'];
+                                        //echo "<pre>".print_r($prdInfo); die;
 					include 'template/jewellery_details.html';
 				break;
                                 case 'diamond_Form':
@@ -549,11 +576,13 @@
 					$adjacents = 2;
 					include 'template/vendor_landing_page.html';
 				break;
+                            
 				case 'vendor_enquiries':
 					$page='Enquiries';
-                    $catid 	= (!empty($_GET['catid']) ? $_GET['catid']:'');
-                    include 'template/vendor_enquiries.html';
+                                        $catid 	= (!empty($_GET['catid']) ? $_GET['catid']:'');
+                                        include 'template/vendor_enquiries.html';
 				break;
+                            
 				case 'about_us':
 					$page='about_us';
 					include 'template/about_us.html';

@@ -126,12 +126,7 @@ $(document).ready(function(){
 			else
 			{
                             
-				if($(this).hasClass('iconWishlist'))
-				{
-					isWishList = true;
-                                        isMail = false;
-				}
-                                if($(this).hasClass('iconMessage'))
+				if($(this).hasClass('iconMessage'))
 				{
                                     isMail = true;
                                     isWishList = false;
@@ -312,12 +307,13 @@ function showVendorDetails(obj)
 		}
                 else if(isMail==true)
 		{
-                    getUserDetails();
+                    
                         $('#overlay,#userForm').removeClass('dn');
                         setTimeout(function(){
                         $('#overlay').velocity({opacity:1},{delay:0,duration:300,ease:'swing'});
                         $('#userForm').velocity({scale:1},{delay:80,duration:100,ease:'swing'});
                         },10);
+                        getUserDetails();
                 }
                 else if((isMail==false)&&(isWishList==false))
 		{

@@ -1340,7 +1340,7 @@ echo '</pre>';
             break;
             
 //--------------------vendor landing page----------------------------------------
-        //  localhost/iftosi/apis/index.php?action=getPrdByCatid&catid=1&page=1&limit=1         
+        //  localhost/iftosi/apis/index.php?action=getVPrdByCatid&catid=1&page=1&limit=1         
         case 'getVPrdByCatid':
             include APICLUDE.'class.vendor.php';
             $catid=(!empty($params['catid'])) ? trim($params['catid']) : '';

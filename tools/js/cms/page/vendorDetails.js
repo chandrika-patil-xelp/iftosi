@@ -31,23 +31,7 @@ $(document).ready(function () {
 function fnValidatePAN() {
         var Obj = $conv('#pan').val();
         var str = '';
-        if (Obj.value != "") {
-            ObjVal = Obj.value;
-            var panPat = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
-            var code = /([C,P,H,F,A,T,B,L,J,G])/;
-            var code_chk = ObjVal.substring(3,4);
-            if (ObjVal.search(panPat) == -1) {
-                str = "Invalid Pan No";
-                Obj.focus();
-                return false;
-            }
-            if (code.test(code_chk) == false) {
-                str = "Invaild PAN Card No.";
-                return false;
-            }
-            else
-               return true;
-        }
+        
    }
 function validateForm() {
     var orgname = $('#orgname').val();
@@ -85,6 +69,34 @@ function validateForm() {
         str = 'State is Required';
         $('#state').focus();
     }
+    else if (pancard !== "" || pancard == null || pancard === 'undefined' || pancard == undefined){
+        var panPat =/^([A-Z]){5}([0-9]){4}([A-Z]){1}?$/;
+        var code = /([C,P,H,F,A,T,B,L,J,G,K])/;
+        var code_chk = pancard.substring(3,4);
+        if(pancard.match(panPat) == null)
+        {
+            str='Pancard is Invalid';
+            $('#pan').focus();
+        }
+        else if(pancard === ' ')
+        {
+            str='Pancard is Invalid';
+            $('#pan').focus();
+        }
+        else if(pancard.search(panPat) == -1) {
+            str='Invalid Pan No';
+            $('#pan').focus();
+            }
+        else if(code.test(code_chk) == false) {
+            str='Invaild PAN Card No.';
+            $('#pan').focus();
+        }
+        else
+        {
+            return true;
+        }
+        
+    }
     else if (!$("#forDiamond").hasClass("comSelected") && !$("#forJewellery").hasClass("comSelected") && !$("#forBullion").hasClass("comSelected")) {
         str = 'Select business type';
     }
@@ -94,10 +106,7 @@ function validateForm() {
                 return false;
             } else { return  true;}
         }
-        else if(pancard)
-        {
-            fnValidatePAN();
-        }
+        
         return  true;
     }
     common.toast(0,str);

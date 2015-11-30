@@ -9,22 +9,18 @@
                     <div class="imgsCont">
                         <div class="leftArrow transition300" onclick="movePrImg(true)"></div>
                         <div class="rightArrow  transition300" onclick="movePrImg(false)"></div>
-                        <div id='prdImage' class="forImg fLeft" style="background: url(<?php echo DOMAIN; ?>tools/img/common/tumb2.png) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+                        <div id='prdImage' class="forImg fLeft" style="background: url(<?php echo IMGDOMAIN.$data1[0];?>) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
                         <div id='gallery1' class="gallery fLeft transition300">
                             <div class="carousel transition300">
-                                <div class="thumbnil fLeft transition300" style="background:#fff url(<?php echo DOMAIN; ?>tools/img/common/tumb5.jpg)no-repeat;background-size: contain;background-position: center;">
-                                </div><div class="thumbnil transition300" style="background:#fff url(<?php echo DOMAIN; ?>tools/img/common/tumb2.png)no-repeat;background-size: contain;background-position: center;">
-                                </div><div class="thumbnil transition300" style="background:#fff url(<?php echo DOMAIN; ?>tools/img/common/tumb3.jpg)no-repeat;background-size: contain;background-position: center;">
-                                </div><div class="thumbnil transition300" style="background:#fff url(<?php echo DOMAIN; ?>tools/img/common/tumb4.jpg)no-repeat;background-size: contain;background-position: center;">
-                                </div><div class="thumbnil transition300" style="background:#fff url(<?php echo DOMAIN; ?>tools/img/common/tumb5.jpg)no-repeat;background-size: contain;background-position: center;">
-                                </div><div class="thumbnil transition300" style="background:#fff url(<?php echo DOMAIN; ?>tools/img/common/tumb2.png)no-repeat;background-size: contain;background-position: center;">
-                                </div><div class="thumbnil transition300" style="background:#fff url(<?php echo DOMAIN; ?>tools/img/common/tumb3.jpg)no-repeat;background-size: contain;background-position: center;">
-                                </div><div class="thumbnil transition300" style="background:#fff url(<?php echo DOMAIN; ?>tools/img/common/tumb4.jpg)no-repeat;background-size: contain;background-position: center;">
-                                </div><div class="thumbnil transition300" style="background:#fff url(<?php echo DOMAIN; ?>tools/img/common/tumb5.jpg)no-repeat;background-size: contain;background-position: center;">
-                                </div><div class="thumbnil transition300" style="background:#fff url(<?php echo DOMAIN; ?>tools/img/common/tumb2.png)no-repeat;background-size: contain;background-position: center;">
-                                </div><div class="thumbnil transition300" style="background:#fff url(<?php echo DOMAIN; ?>tools/img/common/tumb3.jpg)no-repeat;background-size: contain;background-position: center;">
-                                </div><div class="thumbnil transition300" style="background:#fff url(<?php echo DOMAIN; ?>tools/img/common/tumb4.jpg)no-repeat;background-size: contain;background-position: center;">
-                                </div>
+<?php
+                                for($i=0;$i<count($data1);$i++)
+{
+?>
+                                    <div class="thumbnil transition300" style="background:#fff url(<?php echo IMGDOMAIN.$data1[$i];?>)no-repeat;background-size: contain;background-position: center;">
+                                    </div>
+<?php
+}
+?>
                             </div>
                         </div>
                     </div>
@@ -227,6 +223,8 @@
                 <div class="prdInfoDiv fLeft">
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                 </div>
+<<<<<<< .mine
+=======
                 <!--<div class="prdInfoTitle fLeft">More Infor</div>
                 <div class="prdInfoDiv fLeft">
                     <ul>
@@ -272,6 +270,7 @@
                         </li>
                     </ul>
                 </div>-->
+>>>>>>> .r363
             </div>
         </div>
         <div class="wrapper fLeft">
@@ -306,18 +305,16 @@
     </div>
     <div id='imgGallery' class="imgGallery dn">
         <div id='galleryClose' class="galleryClose ripplelink"></div>
-        <div class="galleryImg fLeft" style="background: url(<?php echo DOMAIN; ?>tools/img/common/tumb1.png) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+        <div class="galleryImg fLeft" style="background: url(<?php echo IMGDOMAIN.$data1[0];?>) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
         <div class="imgListCont fLeft">
-            <div class="imgThumbnil fLeft" style="background: url(<?php echo DOMAIN; ?>tools/img/common/tumb1.png) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
-            <div class="imgThumbnil fLeft" style="background: url(<?php echo DOMAIN; ?>tools/img/common/tumb2.png) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
-            <div class="imgThumbnil fLeft" style="background: url(<?php echo DOMAIN; ?>tools/img/common/tumb3.jpg) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
-            <div class="imgThumbnil fLeft" style="background: url(<?php echo DOMAIN; ?>tools/img/common/tumb4.jpg) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
-            <div class="imgThumbnil fLeft" style="background: url(<?php echo DOMAIN; ?>tools/img/common/tumb5.jpg) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
-            <div class="imgThumbnil fLeft" style="background: url(<?php echo DOMAIN; ?>tools/img/common/tumb1.png) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
-            <div class="imgThumbnil fLeft" style="background: url(<?php echo DOMAIN; ?>tools/img/common/tumb2.png) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
-            <div class="imgThumbnil fLeft" style="background: url(<?php echo DOMAIN; ?>tools/img/common/tumb3.jpg) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
-            <div class="imgThumbnil fLeft" style="background: url(<?php echo DOMAIN; ?>tools/img/common/tumb4.jpg) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
-            <div class="imgThumbnil fLeft" style="background: url(<?php echo DOMAIN; ?>tools/img/common/tumb5.jpg) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+<?php
+                                for($i=0;$i<count($data1);$i++)
+{
+?>            
+            <div class="imgThumbnil fLeft" style="background: url(<?php echo IMGDOMAIN.$data1[$i];?>) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+<?php
+}
+?>        
         </div>
     </div>
 

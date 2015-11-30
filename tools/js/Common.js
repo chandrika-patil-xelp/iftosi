@@ -81,13 +81,14 @@ function Common() {
             $('.signInUpTab').html('Hello ' + nm.split(' ')[0]).addClass('loggedIn');
             $('#userMenu').removeClass('dn');
             if (is_vendor == 0)
-        {
+            {
                 //userMenuStr += '<li class="transition100">Profile</li>';
                 //userMenuStr += '<li class="transition100">Orders</li>';
                 userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=wishlist&uid='+uid+'\');">Wishlist (25)</li>';
-        } else {
+            }
+            else
+            {
                 //userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_dashboard\');">Dashboard</li>';
-                
                 if(isComp==='2')
                 {
                     var catid1=customStorage.readFromStorage('busiType').charAt(0);
@@ -100,7 +101,8 @@ function Common() {
                 {
                     userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_Form&uid='+uid+'\');">Profile</li>';
                 }
-        }
+                
+            }
             userMenuStr += '<li class="transition100" onclick="common.doLogout();">Log Out</li>';
             $('#hdropList').html(userMenuStr);
         }

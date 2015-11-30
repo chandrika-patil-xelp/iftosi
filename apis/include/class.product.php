@@ -743,6 +743,28 @@
 						$pid = $pids = '';
 					}
 					
+                                        $pimgsql = "
+							SELECT
+                                                                product_id,
+								group_concat(product_image separator '|~|') AS images
+							FROM 
+								tbl_product_image_mapping 
+							WHERE 
+								product_id IN(".$pids.")
+                                                        AND
+                                                                active_flag=1
+                                                        GROUP BY
+                                                                product_id
+							ORDER BY
+								field(product_id,".$pids.");
+							";
+					$pimgres=$this->query($pimgsql);
+					while($row2=$this->fetchData($pimgres))
+					{
+                                            $prid                  = $row2['product_id'];
+                                            $arr1[$prid]['images'] = explode('|~|',$row2['images']);
+					}
+                                        
 					$psql = "
 							SELECT
 								product_id as pid,
@@ -769,9 +791,10 @@
 						$pid = $row1['pid'];
 						$arr1[$pid]=$row1;
 						$arr1[$pid]['attributes'] = $attr[$pid]['attributes'];
+                                                $arr1[$pid]['images'] = $pimg[$pid]['image'];
 					}
 					
-					$tmp_arr1 = (!empty($arr1)) ? (array_values($arr1)) : null;
+                                        $tmp_arr1 = (!empty($arr1)) ? (array_values($arr1)) : null;
 					$arr1 = array('filters'=>$data,'products'=>$tmp_arr1,'total'=>$total,'getdata'=>$params,'catname'=>'Wishlist');
 					$err = array('errCode'=>0,'errMsg'=>'Details fetched successfully');
 				}
@@ -1029,6 +1052,7 @@
 						$pid = $pids = '';
 					}
 					
+                                     
 					$psql = "
 							SELECT
 								product_id as pid,
@@ -1055,9 +1079,32 @@
 						$pid = $row1['pid'];
 						$arr1[$pid]=$row1;
 						$arr1[$pid]['attributes'] = $attr[$pid]['attributes'];
+                                                $arr1[$pid]['images'] = $pimg[$row1['pid']]['images'];
 					}
-					
-					/* For filters */
+                                        
+                                        $pimgsql = "
+							SELECT
+                                                                product_id,
+								group_concat(product_image separator '|~|') AS images
+							FROM 
+								tbl_product_image_mapping 
+							WHERE 
+								product_id IN(".$pids.")
+                                                        AND
+                                                                active_flag=1
+                                                        GROUP BY
+                                                                product_id
+							ORDER BY
+								field(product_id,".$pids.");
+							";
+					$pimgres=$this->query($pimgsql);
+					while($row2=$this->fetchData($pimgres))
+					{
+                                            $prid                  = $row2['product_id'];
+                                            $arr1[$prid]['images'] = explode('|~|',$row2['images']);
+					}
+                                        
+                                        /* For filters */
 					
 					$sql = "
 						SELECT 
