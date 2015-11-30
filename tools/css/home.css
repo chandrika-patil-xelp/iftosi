@@ -532,7 +532,7 @@ a{cursor:pointer;}
 .thumbnil{width:85px;height: 85px;border: 1px solid #d4d4c8;margin:2px;cursor: pointer;display: inline-block;}
 .detCont{width:100%;height: 390px;padding:15px 15px 0px 25px;}
 .detCont .prdCommDiv{border:none;border-right:1px solid #ebebde;}
-.btnsCont{width:100%;height: 55px;}
+.btnsCont{width:100%;height: auto;}
 .btnsCont .prdShape{border: none;width:auto;max-width: 252px;}
 .btnsCont .prdShType {width: 100%;height: auto;line-height: 35px;font-size: 35px;letter-spacing:initial;}
 .btnsCont .prdShTitle{color: #8A0044;}
@@ -562,12 +562,12 @@ a{cursor:pointer;}
 .bullion_details{}
 
 .bullion_details .prdMainDetails .wrapperMax {padding-left: 0;position: relative;}
-.bullion_details .imgsCont {width: 45%;height: 393px;position: relative;left: 0;top: 0;border: 1px solid #d4d4c8;float: left;}
+.bullion_details .imgsCont {width: 40%;height: 393px;position: relative;left: 0;top: 0;border: 1px solid #d4d4c8;float: left;}
 
 .bullion_details .thumbnil {width: 24%;height: 83px;border: 1px solid #d4d4c8;margin: 0.5%;cursor: pointer;display: inline-block;}
 .bullion_details .leftArrow {top: 0px;}
 .bullion_details .rightArrow {top: 0px;}
-.bullion_details .detCont {width: 50%;height: 390px;padding: 15px 15px 0px 25px;float: left;}
+.bullion_details .detCont {width: 60%;height: 390px;padding: 15px 15px 0px 25px;float: left;}
 .bullion_details .btnsCont {width: 100%;height: auto;}
 
 
@@ -810,7 +810,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 
 /*Shapes Page*/
 .shapesPage{padding-bottom: 20px;}
-.shapesComm{width:100%;height: auto;min-height: 104px;box-shadow: 2px 2px 8px 0 rgba(0,0,0,0.2);padding: 20px;border-radius: 5px;margin-top: 20px;background: #fff;position: relative;}
+.shapesComm{width:100%;height: auto;min-height: 104px;box-shadow: 2px 2px 8px 0 rgba(0,0,0,0.2);padding: 20px;border-radius: 5px;margin-top: 10px;background: #fff;position: relative;}
 .shapesPage .texHolder{padding: 0;padding-left: 9%;line-height: 24px;color:#000;}
 .shapesPage .wrapperA {background: #ebebde;padding-bottom: 20px;}
 .shapesPage .wrapper{background: #ebebde;}
@@ -866,7 +866,10 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 
 /*Footer*/
 .bottmInfo {height: 205px;padding: 30px 0;}
-
+/*education*/
+ .shapeComm{width: 82px!important;}
+ .shapesPage{padding: 0 20px;}
+.shapesPage .shapeComm {margin-top: 15px; padding-bottom: 85px;}
 }
 
 @media only screen and (min-width: 768px) and (max-width: 959px){
@@ -880,7 +883,6 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .homePage .shapesCont {width: 100%;height: 240px;background: #FFF;padding: 15px 0;position: relative;z-index: 0;}
 .searchBtn {margin: 10px 0 0 0;}
 
-
 .hPrdLeft {width: 100%;height: 100%;}
 .hPrdRight,.st2Right,.st3Upper {display: none;}
 .st2Upper {width: 100%;height: 50%;}
@@ -890,6 +892,15 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .st3Middle {width: 100%;height: 47%;}
 .st3Lower {width: 100%;height: 53%;}
 
+     /*education*/
+     .shapesPage .shapeComm {margin: 0px; padding-bottom: 65px;}
+    .shapesPage .texHolder{padding-left: 0px;padding-top: 45px;}
+    .shapesPage{padding: 0 20px;}
+    .shapesComm{margin-top: 6px;}
+    .shapeComm{width: 72px!important;}
+    .infoComm {width: 100%;height: 100px;border-right: none;position: relative;float: none!important;border-bottom: 1px solid rgba(255,255,255,0.2);}
+     .bottmInfo{width: 100%;height: auto;padding: 0px 0;float:left}
+    .heading{text-align: center;}
 /*Diamond Result*/
 .resultsPage .shapesCont{padding: 10px;}
 .prdResults {width: 100%;}
@@ -914,22 +925,28 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .Bangles{box-shadow: inset 0 -40px 0px rgba(138, 0, 68,1);}
 .jshapeComm::after {bottom: 50px;width: 0px;height: 0px;}
 .jshapeComm.shapeSelected::after {bottom: 30px;width: 30px;height: 30px;}
-
+/*Education*/
+.shapeComm{width: 82px!important;}
+.shapesPage .shapeComm {margin-top: 15px; padding-bottom: 85px;}
+.shapesPage{padding: 0 20px;}
+.shapesComm{margin-top: 6px;}
+.heading{text-align: center;}
 /*Filters Page*/
 .filterList {width: 300px;height: auto;min-height: 100%;left: 0;background: #fff;padding-bottom: 25px;position: absolute;box-shadow: 0 0 20px 5px rgba(0,0,0,0.2);z-index: 10;top: -20px;padding: 15px;}
 .filterList.transit-100X{-webkit-transform:translateX(-350px);-moz-transform:translateX(-350px);;-ms-transform:translateX(-350px);-o-transform:translateX(-350px);transform:translateX(-350px);}
-
-
+/*Diamonds Details Page */
+.btnsCont .prdShType {line-height: 35px; font-size: 25px;font-family: openR;}
+.prdBtns{height:auto;}
+.prdBtns .btnComm{margin:0 10px 5px 0;}
+.majorInfoBox{margin-top:20px;}
+.prdMainDetails .wrapperMax{padding-left: 300px; position: relative;}
+.imgsCont{width: 300px; height: 300px; position: absolute; left: 0; top: 0;  box-shadow: 0 0 20px 5px rgba(0,0,0,0.2);}
 }
-
-
-
-
-
-@media only screen and (min-width: 320px) and (max-width: 479px){
+@media only screen and (min-width: 320px) and (max-width: 679px){
     .logo {width: 80px;height: 80px;font-size: 22px;top:20px;}
     .header{height:60px;padding: 0 15px;}
     .cityName{display: none;}
+  .gallery{height: 150px;}
     .menuBtn,.filterBtn{display: block;}
     .headRight{display: none;}
     .categoryCont{height: auto;background-size: auto 100%;padding: 180px 10px 50px 10px;}
@@ -946,7 +963,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
     .hPrdComm:nth-child(2) {width:100%;margin: 0%;}
     .bottmInfo{width: 100%;height: auto;padding: 0px 0;float:left}
     .infoComm {width: 100%;height: 100px;border-right: none;position: relative;float: none!important;border-bottom: 1px solid rgba(255,255,255,0.2);}
-    .shapeComm {border: 2px solid #fff;position: relative;background-image: url(../img/shapes.svg);background-repeat: no-repeat;margin:1%;width: 23%!important;height:0%!important;padding-bottom: 23%;display: block;float:left;vertical-align: bottom;text-align: center;cursor: pointer;background-size: 1000% auto;}
+    .shapeComm {border: 2px solid #fff;position: relative;background-image: url(../img/shapes.svg);background-repeat: no-repeat;margin:1%;width: 28%!important;height:0%!important;padding-bottom: 23%;display: block;float:left;vertical-align: bottom;text-align: center;cursor: pointer;background-size: 1000% auto;}
     .shapeComm:hover{border:2px solid #FFF;}
     .shapeSelected.shapeComm.Round{background-color:#fff;border:2px solid #8A0044;background-position: 0% 33%;}
     .shapeSelected.shapeComm.Pear{background-color:#fff;border:2px solid #8A0044;background-position: 11% 33%;}
@@ -964,8 +981,14 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
     .infoTxt{width:100%;height:41px;}
     .hPrdComm .infoUpper {font-size: 20px;line-height: 20px;}
     .hPrdComm .infoLower {font-size: 30px;line-height: 30px;}
-
-    /*Resuls Page*/
+    /*education*/
+       .shapesPage .shapeComm {margin: 0px; padding-bottom: 65px;}
+       .shapesPage .texHolder{padding-left: 0px;padding-top: 45px;}
+       .shapesPage{padding: 0 20px;}
+       .shapesComm{margin-top: 6px;}
+       .shapeComm{width: 72px!important;}
+    /*Results Page*/
+    .pgComm{display: none;}
     .totalResultsDiv {height: 250px;line-height: 30px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: cover;padding: 150px 0 0 0;font-size: 30px;}
     #resultCount{display: block;font-size: 40px;line-height: 40px;text-align: center;}
     .headCatCont{display: none;}
@@ -1050,22 +1073,51 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
     .prdResults{width: 100%;}
     .sortBox,.sTitle{display: none;}
     .searchCon {width: 90%;}
-
+    /*education*/
+    .shapesPage .shapeComm {margin: 0px; padding-bottom: 65px;}
+    .shapesPage .texHolder{padding-left: 0px;padding-top: 45px;}
+    .shapesPage{padding: 0 20px;}
+    .shapeComm{margin-top: 6px;}
+    .shapeComm{width: 72px!important;}
 
 }
 @media only screen and (min-width: 1025px) and (max-width: 1279px){}
 
 
-@media only screen and (min-width: 480px) and (max-width: 767px){
-
-
-
-
-
-
-
-
-
-
-
+@media only screen and (min-width: 680px) and (max-width: 767px){
+  /*Details Page*/
+.diamond_mod .infoCommn{width:33% }
+.btnsCont{  height: 160px;}
+.btnComm{width:100%;margin-bottom:5px;}
+.btnsCont .prdShType {line-height: 35px; font-size: 25px; font-family: openR;}
+.diamond_mod.wrapperMax{padding-left:308px}
+.imgsCont{width: 300px; height: 300px; position: absolute;left: 0;top: 0; box-shadow: 0 0 20px 5px rgba(0,0,0,0.2);}
+    /*.prdMainDetails .wrapperMax {padding-left: 300px; position: relative;}*/
+.jewellery_details .infoCommn { width: 50%!important;}
+.gallery{height: 150px;}
+.prdComm{width:47%}
+/*.filterList {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0px;
+    top: 0;
+    z-index: 115;
+    background: #fff;
+    padding: 50px 15px 50px 15px;
+    overflow: scroll;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+}*/
+.pgComm:nth-of-type(7) {
+    display:none;
 }
+.pgComm:nth-of-type(8) {
+    display:none;
+}
+.pgComm:nth-of-type(9) {
+    display:none;
+}
+.pgComm:nth-of-type(10) {
+    display:none;
+}
+  }

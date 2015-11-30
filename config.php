@@ -5,7 +5,7 @@ if(!stristr($_SERVER['HTTP_HOST'], '.iftosi.com') && !stristr($_SERVER['HTTP_HOS
     $inival = parse_ini_file($_SERVER['DOCUMENT_ROOT'].'/iftosi_con.ini',true);
 }
 */
-
+error_reporting(0);
 if(stristr($_SERVER['HTTP_HOST'],'iftosi.com'))
 {
 
