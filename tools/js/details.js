@@ -12,6 +12,8 @@ var name = customStorage.readFromStorage('name');
 var email = customStorage.readFromStorage('email');
 var uid = customStorage.readFromStorage('userid');
 var isWishList = false;
+var isMail = false;
+var isContact = false;
 var isPidInWishlist = false;
 
 $(document).ready(function(){
@@ -62,9 +64,7 @@ $(document).ready(function(){
         showLeftMenu(false);
     });
     
-    $('#overlay').velocity({opacity:0},{delay:0,duration:0});
-    $('#userForm').velocity({scale:0},{delay:0,duration:0});
-    $('.iconCall, .iconWishlist, .iconMessage').click(function(){
+    $('.iconWishlist').click(function(){
 		var isVendor = customStorage.readFromStorage('is_vendor');
 		if(isVendor !== '1' && isVendor !== 1)
 		{
@@ -74,12 +74,16 @@ $(document).ready(function(){
 			uid = customStorage.readFromStorage('userid');
 			if(uid == '' || uid == null || uid == undefined)
 			{
-				$('#overlay,#userForm').removeClass('dn');
-				setTimeout(function(){
-					$('#overlay').velocity({opacity:1},{delay:0,duration:300,ease:'swing'});
-					$('#userForm').velocity({scale:1},{delay:80,duration:100,ease:'swing'});
-				},10);
-			}
+                            if($(this).hasClass('iconWishlist'))
+                            {
+                                isWishList = true;
+                            }
+                            else
+                            {
+                                isWishList = false;
+                            }
+                            common.showLoginForm(1);
+                        }
 			else
 			{
 				if($(this).hasClass('iconWishlist'))
@@ -98,6 +102,53 @@ $(document).ready(function(){
 			customStorage.toast(0, 'This feature is not available for vendors');
 		}
     });
+    $('#overlay').velocity({opacity:0},{delay:0,duration:0});
+    $('#userForm').velocity({scale:0},{delay:0,duration:0});
+    $('.iconCall,.iconMessage').click(function(){
+		var isVendor = customStorage.readFromStorage('is_vendor');
+		if(isVendor !== '1' && isVendor !== 1)
+		{
+			mobile = customStorage.readFromStorage('mobile');
+			name = customStorage.readFromStorage('name');
+			email = customStorage.readFromStorage('email');
+			uid = customStorage.readFromStorage('userid');
+                        islog = customStorage.readFromStorage('isLoggedIn');
+                        if(uid == '' || uid == null || uid == undefined || islog == false)
+			{
+                            	$('#overlay,#userForm').removeClass('dn');
+				setTimeout(function(){
+					$('#overlay').velocity({opacity:1},{delay:0,duration:300,ease:'swing'});
+					$('#userForm').velocity({scale:1},{delay:80,duration:100,ease:'swing'});
+				},10); 
+                                isWishList = false;
+                                //common.showLoginForm(1);
+                        }
+			else
+			{
+                            
+				if($(this).hasClass('iconWishlist'))
+				{
+					isWishList = true;
+                                        isMail = false;
+				}
+                                if($(this).hasClass('iconMessage'))
+				{
+                                    isMail = true;
+                                    isWishList = false;
+                                }
+				if($(this).hasClass('iconCall'))
+				{
+					isWishList = false;
+                                        isMail = false;
+				}
+                                showVendorDetails(this);
+			}
+		}
+		else
+		{
+			customStorage.toast(0, 'This feature is not available for vendors');
+		}
+    });
     
     $('#userCancel').bind('click',function(){
         $('#userForm').velocity({scale:0},{delay:0,ease:'swing'});
@@ -107,7 +158,7 @@ $(document).ready(function(){
         },1010);
     }); 
 	
-	$('#userSubmit').bind('click',function() {
+        $('#userSubmit').bind('click',function() {
 		showVendorDetails();
 		$('#userForm').velocity({scale:0},{delay:0,ease:'swing'});
 		$('#overlay').velocity({opacity:0},{delay:100,ease:'swing'});
@@ -195,37 +246,49 @@ function showVendorDetails(obj)
 	var name = customStorage.readFromStorage('name');
 	var email = customStorage.readFromStorage('email');
 	var uid = customStorage.readFromStorage('userid');
+        
 	if(uid == '' || uid == null || uid == undefined)
 	{
+            
 		var mobile = $('#ur_mobile').val();
 		var name = $('#ur_name').val();
 		var email = $('#ur_email').val();
-
-		var mobCond = (mobile !== '' && mobile !== null && mobile !== undefined) ? true : false;
+                var mobCond = (mobile !== '' && mobile !== null && mobile !== undefined) ? true : false;
 		var nmCond = (name !== '' && name !== null && name !== undefined) ? true : false;
 		var emCond = (email !== '' && email !== null && email !== undefined) ? true : false;
                 
 
 		if(mobCond && nmCond && emCond)
 		{
-			customStorage.addToStorage('mobile', mobile);
-			customStorage.addToStorage('name', name);
+                    
+			customStorage.addToStorage('l', mobile);
+			customStorage.addToStorage('username', name);
 			customStorage.addToStorage('email', email);
-
+                        customStorage.addToStorage('isLoggedIn',true);
+                        customStorage.addToStorage('is_vendor','0');
+                        common.checkLogin();
+			//var params = "apis/index.php?action=userReg&username="+encodeURIComponent(name)+"&mobile="+mobile+"&email="+encodeURIComponent(email)+'&isvendor=0';
+                        
 			var params = 'action=ajx&case=userCheck&mobile='+mobile+'&name='+encodeURIComponent(name)+'&email='+encodeURIComponent(email);
 			var URL = DOMAIN + "index.php";
+                        
 			$.getJSON(URL, params, function(data) {
-				if(data !== null && data !== undefined && data !== '') {
+                          if(data !== null && data !== undefined && data !== '') {
+                             
 					if(data.error !== '' && data.error !== null && data.error !== undefined && data.error.code == 0)
-					{
-						var uid = customStorage.addToStorage('userid', data.userid);
-						if((obj !== undefined && $(obj).hasClass('iconWishlist')) || isWishList)
+					{       
+                                            var uid = customStorage.addToStorage('userid', data.userid);
+                                                if((obj !== undefined && $(obj).hasClass('iconWishlist')) || isWishList)
 						{
 							addToWishList();
 						}
+                                                if((obj !== undefined && $(obj).hasClass('iconMessage')) || isWishList)
+						{
+                                                    getUserDetails();
+						}
 						else
 						{
-							setTimeout(function () {
+                                                    setTimeout(function () {
 								initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
 							},100);
 							var pos=$('.prdInfo').offset().top-100;
@@ -243,16 +306,24 @@ function showVendorDetails(obj)
 	}
 	else
 	{
-		if((obj !== undefined && $(obj).hasClass('iconWishlist')) || isWishList)
+                if(isWishList==true)
 		{
-			addToWishList();
+                        addToWishList();
 		}
-		else
+                else if(isMail==true)
 		{
-			setTimeout(function () {
+                    getUserDetails();
+                        $('#overlay,#userForm').removeClass('dn');
+                        setTimeout(function(){
+                        $('#overlay').velocity({opacity:1},{delay:0,duration:300,ease:'swing'});
+                        $('#userForm').velocity({scale:1},{delay:80,duration:100,ease:'swing'});
+                        },10);
+                }
+                else if((isMail==false)&&(isWishList==false))
+		{
+                    setTimeout(function () {
 				initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
 			},100);
-
 			var pos=$('.prdInfo').offset().top-100;
 			setTimeout(function(){
 				$('#vDetails').removeClass('vTransit');
@@ -368,7 +439,6 @@ function showVendorDetails(obj)
 		}
 	});*/
 }
-
 function initMap(lat,lng,contentString) {
 	var myLatLng = {lat: lat, lng: lng};
 	var infowindow = new google.maps.InfoWindow();
@@ -414,7 +484,7 @@ function addToEnquiry()
                     {
 			if(data.error !== '' && data.error !== null && data.error !== undefined && data.error !== 'undefined' && typeof data.error !== 'undefined' && data.error.Code == 0)
 			{
-				 console.log(userid);
+				 //customStorage.toast(0, 'Product is already present in wishlist');
 			}
                     }
             });
@@ -514,14 +584,14 @@ function submitLoginForm() {
                 var is_vendor=obj['results']['utype'];
                 customStorage.addToStorage('isLoggedIn', true);
                 customStorage.addToStorage('l', pr_mobile);
-                customStorage.addToStorage('p', pr_pass);
+                //customStorage.addToStorage('p', pr_pass);
                 customStorage.addToStorage('userid', userid);
                 customStorage.addToStorage('username', username);
                 customStorage.addToStorage('is_vendor', is_vendor);
                 if(is_vendor==1) {
                     var busiType = obj['results']['busiType'];;
                     customStorage.addToStorage('busiType', busiType);
-                    var catid=busiType.charAt(0)-1;
+                    var catid=parseInt(busiType.charAt(0))-1;
                     window.location.assign(DOMAIN+'index.php?case=vendor_landing&catid=1000'+catid);
                 }
             } else {
@@ -566,4 +636,45 @@ function getWishList()
 			}
 		});
 	}
+}
+
+function getUserDetails()
+{
+        var userid = customStorage.readFromStorage('userid');
+        if(userid !== '' && userid !== undefined && userid !== null)
+	{
+                var params = 'action=ajx&case=getUserDet&uid='+userid;
+		var URL = DOMAIN + "index.php";
+                $.getJSON(URL, params, function(data) {
+                     
+                    	if(data !== null && data !== undefined && data !== '' && data !== 'null' && data !== 'undefined' && typeof data !== undefined)
+			{
+                           
+				if(data.error !== '' && data.error !== null && data.error !== undefined || data.error !== 'undefined')
+				{
+                                     
+					if(data.results !== '' && data.results.length > 0)
+					{
+                                            	$('#ur_mobile').val(data.results[0].logmobile);
+                                                $('#ur_name').val(data.results[0].user_name);
+                                                $('#ur_email').val(data.results[0].email);
+                                                console.log('send message');
+                                        }
+                                        else
+                                        {
+                                            customStorage.toast(0,'error');
+                                        }
+
+				}
+			}
+                        else
+                        {
+                            customStorage.toast(0,'error');
+                        }
+		});
+	}
+        else
+        {
+            
+        }
 }

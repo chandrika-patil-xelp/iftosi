@@ -141,7 +141,10 @@ function submitForm(formid)
             var cut = $("input[name='cut']:checked").val();
             var symmetry = $("input[name='symmetry']:checked").val();
             var polish = $("input[name='polish']:checked").val();
+            var flourecence = $("input[name='flourecence']:checked").val();
+            var certificate = $("input[name='Certficate']:checked").val();
             var clarity = $("input[name='clarity']:checked").val();
+            var certno = $('#certno').val();
             var carat = $('#caratweight').val();
             var measure1 = $('#measure1').val();
             var measure2 = $('#measure2').val();
@@ -175,6 +178,15 @@ function submitForm(formid)
             }
             else if((polish=='')||(polish==null)||(polish==undefined)) {
                 str ='Polish field is Empty';
+            }
+            else if((flourecence=='')||(flourecence==null)||(flourecence==undefined)) {
+                str ='Flourecence field is Empty';
+            }
+            else if((certificate=='')||(certificate==null)||(certificate==undefined)) {
+                str ='Certificate field is Empty';
+            }
+            else if((certno=='')) {
+                str ='Certificate Number field is Empty';
             }
             else if(carat == '' || isNaN(carat)) {
                 str ='Carat Weight field is Empty';

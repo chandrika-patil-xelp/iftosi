@@ -92,15 +92,16 @@
 
 					$userUrl = APIDOMAIN . 'index.php?action=checkUser&mobile='.$mobile;
 					$resp = $comm->executeCurl($userUrl);
+                                        
 					if(!empty($resp) && !empty($resp['error']) && !empty($resp['results']) && empty($resp['error']['Code']))
 					{
 						if($resp['results'] == 'User Not yet Registered')
 						{
 							$regUserUrl = APIDOMAIN . 'index.php?action=userReg&mobile='.$mobile.'&username='.urlencode($name).'&email='.urlencode($email);
-							$regResp = $comm->executeCurl($regUserUrl);
+							$resp = $comm->executeCurl($regUserUrl);
 						}
 					}
-					echo json_encode($regResp);
+					echo json_encode($resp);
 				break;
 				case 'addToWishList':
 					$userid = (!empty($_GET['userid'])) ? trim($_GET['userid']) : '';
@@ -130,6 +131,23 @@
 					if(!empty($uid))
 					{
 						$url = APIDOMAIN.'index.php?action=checkWish&uid='.$uid.'&vid='.$vid.'&prdid='.$prdid;
+						$res = $comm->executeCurl($url, TRUE);
+						echo $res;
+					}
+					else
+					{
+						$res = array();
+						$error = array('Code' => 1, 'Msg' => 'Error fetching wishlist');
+						$resp = array('results' => $res, 'error' => $error);
+						echo json_encode($resp);
+					}
+				break;
+                                case 'getUserDet':
+					$regResp = array();
+					$uid = (!empty($_GET['uid'])) ? trim($_GET['uid']) : '';
+					if(!empty($uid))
+					{
+						$url = APIDOMAIN.'index.php?action=viewAll&uid='.$uid;
 						$res = $comm->executeCurl($url, TRUE);
 						echo $res;
 					}
@@ -185,6 +203,7 @@
 					$pid = $_GET['pid'];
 					$page='upload';
 					setcookie("back", $_SERVER['HTTP_REFERER']);
+                                        //echo "<pre>";print_r($_SERVER);die;
 					include 'image-upload/index.html';
 				break;
 				
@@ -243,7 +262,7 @@
 					$page='jewellery';
 					$pgno 	= (!empty($_GET['pgno']) ? $_GET['pgno'] : 1);
 					$catid 	= $_GET['catid'];
-					 $url 	= APIDOMAIN.'index.php?action=getPrdByCatid&catid='.$catid.'&page='.$pgno;
+					$url 	= APIDOMAIN.'index.php?action=getPrdByCatid&catid='.$catid.'&page='.$pgno;
 					$res 	= $comm->executeCurl($url);
 					$data 	= $res['results']['products'];
 					$total	= $res['results']['total'];
@@ -286,7 +305,7 @@
 					$pid 	= $_GET['productid'];
 					$uid 	= $_GET['userid'];
                                         
-					$url 	= APIDOMAIN.'index.php?action=getPrdById&prdid='.$pid;
+                                        $url 	= APIDOMAIN.'index.php?action=getPrdById&prdid='.$pid;
 					$res 	= $comm->executeCurl($url);
 					$data = $prdInfo = $res['results'][$pid];
 					$vndrInfo = $prdInfo['vendor_details'];
@@ -309,16 +328,16 @@
 						$res = $comm->executeCurl($url);
 						$wish = $res['error'];
 					}
-
+                                          
 					$vndrDtls['fulladdress'] = implode(', ', $vndrDtls['fulladdress']);
 					$vndrAddr = explode(',', $vndrDtls['fulladdress']);
+                                        //echo "<pre>";print_r($wish);die; 
 					include 'template/diamond_details.html';
 				break;
 				case 'bullion_details':
-					$page='bullion_details';
-					$prdInfo = array();
-
-					$prdId = $orgPrdId = (!empty($_GET['productid'])) ? $_GET['productid'] : '';
+					$page   ='bullion_details';
+					$prdInfo= array();
+                                        $prdId = $orgPrdId = (!empty($_GET['productid'])) ? $_GET['productid'] : '';
 
 					if(!empty($prdId))
 					{
@@ -344,6 +363,7 @@
 							$vndrAddr = explode(',', $vndrDtls['fulladdress']);
 						}
 					}
+                                        //echo "<pre>".print_r($prdInfo); die;
 					include 'template/bullion_details.html';
 				break;
 				case 'jewellery_details':
@@ -406,7 +426,7 @@
 
                                         $attr   = $result[$pid]['attr_details'];
                                         $pdet   = $result[$pid];
-                                        //echo "<pre>";print_r($attr['product_id']);die;
+                                       //echo "<pre>";print_r($attr);die;
 					include 'template/diamondForm.html';
 				break;
                                
@@ -513,6 +533,7 @@
 					$data 	= $res['results']['products'];
 					$total	= $res['results']['total'];
 					$catname= $res['results']['catname'];
+                                        $vdet   = $res['results'];
 					
 					$url 	= APIDOMAIN.'index.php?action=profileComplete&uid='.$vid;
 					$res1 	= $comm->executeCurl($url);
@@ -521,7 +542,7 @@
                                         $url 	= APIDOMAIN.'index.php?action=fetch_category_mapping&catid='.$catid;
 					$res 	= $comm->executeCurl($url);
 					$fil	= $res['results']['attributes'];
-                                        //echo "<pre>";print_r($isC);die;
+                                        //echo "<pre>";print_r($vdet);die;
 					
 					$totalCnt = $total;
 					$lastpg = ceil($total/15);

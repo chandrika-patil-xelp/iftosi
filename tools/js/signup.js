@@ -102,7 +102,8 @@ $('#pr_mobile').keyup(function () {
                         window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid='+uid);
                     } else {
                         customStorage.toast(1,'Registration Successfull Done');
-                        setTimeout(function () {window.location.assign(DOMAIN + 'index.php'); },3000);
+                        window.history.back();
+                        //setTimeout(function () {window.location.assign(DOMAIN + 'index.php'); },3000);
                     }
                 } else {
                     customStorage.toast(0,'Registration Unsuccessfull');

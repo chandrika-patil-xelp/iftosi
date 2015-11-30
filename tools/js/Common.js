@@ -58,6 +58,7 @@ function Common() {
         var nm = customStorage.readFromStorage('username');
         var is_vendor = customStorage.readFromStorage('is_vendor');
         var type = customStorage.readFromStorage('busiType');
+        var isComp = customStorage.readFromStorage('isComp');
         if(is_vendor == 1)
         {
             if((type != null) && (type != undefined))
@@ -86,10 +87,19 @@ function Common() {
                 userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=wishlist&uid='+uid+'\');">Wishlist (25)</li>';
         } else {
                 //userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_dashboard\');">Dashboard</li>';
-                var catid=customStorage.readFromStorage('busiType').charAt(0);
-                userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_landing&catid=1000'+ catid+'\');">Products</li>';
-                userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_enquiries\');">Enquiry</li>';
-                //userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_setting\');">Setting</li>';
+                
+                if(isComp==='2')
+                {
+                    var catid1=customStorage.readFromStorage('busiType').charAt(0);
+                    catid=parseInt(catid1)-1;
+                    userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_landing&catid=1000'+ catid+'\');">Products</li>';
+                    userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_enquiries\');">Enquiry</li>';
+                    //userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_setting\');">Setting</li>';
+                }
+                else
+                {
+                    userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_Form&uid='+uid+'\');">Profile</li>';
+                }
         }
             userMenuStr += '<li class="transition100" onclick="common.doLogout();">Log Out</li>';
             $('#hdropList').html(userMenuStr);
@@ -98,8 +108,10 @@ function Common() {
 
     this.doLogout = function () {
         customStorage.removeFromStorage('isLoggedIn');
+        localStorage.clear();
         customStorage.addToStorage('isLoggedIn', false);
-        window.location.href = DOMAIN + "index.php";
+        //window.location.href = DOMAIN + "index.php";
+        window.location.href = window.location;
     };
     this.closeLoginForm = function () {
         $('#loginDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
@@ -109,7 +121,7 @@ function Common() {
             $("#loginDiv,#overlay1").remove();
         }, 1010);
     }
-    this.showLoginForm = function () {
+    this.showLoginForm = function (vd) {
         
         var str = '<div id="overlay1" class="overlay transition300" style="opacity: 0;" onclick="common.closeLoginForm();"></div>';
         str += '<div id="loginDiv" class="loginDiv transition300" style="transform: scale(0);">';
@@ -120,12 +132,12 @@ function Common() {
         str += '<div id="pr_mobile_inpText" class="inpText fRight transition300">enter<br>mobile number</div>';
         str += '</div>  ';
         str += ' <div class="inputCont fLeft fmOpenR">';
-        str += '<input type="password" id="pr_pass" name="pr_pass" autocomplete="off" maxlength="10" class="txtInput cOrange fmOpenR font14 passwordIcon">';
+        str += '<input type="password" id="pr_pass" name="pr_pass" autocomplete="off" maxlength="10" onKeyPress="common.eSubmit(event,\'lgSubmit\');" class="txtInput cOrange fmOpenR font14 passwordIcon">';
         str += '<label for="pr_pass" class="inp-label transition100">PASSWORD</label>';
         str += '<div id="pr_pass_inpText" class="inpText fRight transition300">enter your<br>password</div>';
         str += '</div>  ';
         str += '<div class="cancelLgBtn fLeft fmOpenR" id="lgCancel" onclick="common.closeLoginForm();"> CANCEL</div>';
-        str += '<div class="loginBtn fLeft fmOpenR" id="lgSubmit" onclick="common.submitLoginForm();">LOGIN</div>';
+        str += '<div class="loginBtn fLeft fmOpenR" id="lgSubmit" onclick="common.submitLoginForm('+vd+');">LOGIN</div>';
         str += '<div class="signuplink fmOpenB fLeft">';
         str += '<center><a href="'+ DOMAIN +'index.php?case=signup"><span>Sign Up with Us</span></a></center>';
         str += '</div>';
@@ -136,7 +148,7 @@ function Common() {
             $(this).addClass('brOrange');//.removeClass('brRed');
             $('.bsText').addClass('op0');
         });
-
+        
         $('input[type=tel], input[type=password]').bind('blur',function() {
             if ($(this).val().length === 0 && $(this).attr('placeholder') === undefined) {
                 $(this).siblings('label, i').removeClass('labelActive');
@@ -165,7 +177,7 @@ function Common() {
 
         }
     }
-    this.submitLoginForm = function () {
+    this.submitLoginForm = function (vd) {
         var pr_mobile = $('#pr_mobile').val();
         var pr_pass = $('#pr_pass').val();
         if (pr_mobile == '') {
@@ -185,30 +197,43 @@ function Common() {
                     var username = obj['results']['username'];
                     var is_vendor = obj['results']['utype'];
                     var isComp = obj['results']['isC'];
+                    
                     customStorage.addToStorage('isLoggedIn', true);
                     customStorage.addToStorage('l', pr_mobile);
-                    customStorage.addToStorage('p', pr_pass);
+                    customStorage.addToStorage('isComp',isComp);
+                    //customStorage.addToStorage('p', pr_pass);
                     customStorage.addToStorage('userid', userid);
                     customStorage.addToStorage('username', username);
                     customStorage.addToStorage('is_vendor', is_vendor);
-                    if (is_vendor == 1) {
+                    if (is_vendor == 1)
+                    {
                         var busiType = obj['results']['busiType'];
                         var busitype = customStorage.addToStorage('busiType', busiType);
-                        if(isComp == 2)
+                        if(isComp === '2')
                         {
-                            var catid = busiType.charAt(0) - 1;
-                            console.log(catid);
-                            window.location.assign(DOMAIN + 'index.php?case=vendor_landing&catid=1000' + catid);
+                            var catid = parseInt(busiType.charAt(0))-1;
+                            window.location.assign(DOMAIN + 'index.php?case=vendor_landing&catid=1000'+catid);
                         }
                         else
                         {
                             window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid='+userid);
-                            console.log('vendor Form');
                         }
-                    } else {
+                    }
+                    else
+                    {
                         customStorage.addToStorage('busiType', '');
                         _this.checkLogin();
                         _this.closeLoginForm();
+                        if(vd)
+                        {
+                            var dthis = $('#userSubmit');
+                            showVendorDetails();
+                            $('#userForm').velocity({scale:0},{delay:0,ease:'swing'});
+                            $('#overlay').velocity({opacity:0},{delay:100,ease:'swing'});
+                            setTimeout(function(){
+                                    $('#overlay,#userForm').addClass('dn');
+                            },1010);
+                        }
                     }
                 } else {
                     customStorage.toast(0, 'Invalid Login Credentials');
@@ -216,4 +241,10 @@ function Common() {
             }});
         }
     }
-}
+    this.eSubmit = function (evt, btnId) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode === 13) {
+            $('#' + btnId).click();
+        }
+    };
+  }

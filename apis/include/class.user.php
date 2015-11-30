@@ -525,24 +525,30 @@
                                     is_active=1";
         $vres = $this->query($vsql);
         $chkres = $this->numRows($vres);
-        if ($chkres > 0) {//If user is registered and is customer
-            while ($row1 = $this->fetchData($vres)) {
+        if ($chkres > 0)
+        {//If user is registered and is customer
+            while ($row1 = $this->fetchData($vres)) 
+            {
                 $arr1['isv'] = $row1['is_vendor'];
                 $arr1['uid'] = $row1['user_id'];
                 $arr[] = $row1;
                 $err = array('code' => 0, 'msg' => 'Values fetched');
             }
 
-            if ($arr1['isv'] == 1) {    // check if it is Vendor
+            if ($arr1['isv'] == 1)
+            {    // check if it is Vendor
                 $vensql = "SELECT * FROM tbl_vendor_master WHERE vendor_id =" . $arr1['uid'];
                 $res = $this->query($vensql);
-                while ($row = $this->fetchData($res)) {
+                while ($row = $this->fetchData($res))
+                {
                     //$arr[] = $row;
                     array_push($arr, $row);
                 }
                 $err = array('code' => 0, 'msg' => 'Data fetched successfully');
             }
-        } else {
+        } 
+        else 
+        {
             $arr = array();
             $err = array('code' => 1, 'msg' => 'Problem in fetching data');
         }
@@ -575,7 +581,7 @@
             $err = array('code' => 1, 'msg' => 'Problem in fetching data');
         }
         $result = array('results' => $arr, 'error' => $err);
-        return $result;
+        return $result['results'];
     }
 
 	public function generatePassword($params)

@@ -228,9 +228,9 @@ class wishlist extends DB
    public function removeFromWishlist($params)
    {
        if(!$params['vid'])
-           $sql="SELECT wid,wf FROM tbl_wishlist WHERE uid=".$params['uid']." AND pid=".$params['pid']."";
+           $sql="SELECT wid,wf FROM tbl_wishlist WHERE uid=".$params['uid']." AND pid=".$params['pid']." AND wf=1";
        else
-           $sql="SELECT wid,wf FROM tbl_wishlist WHERE uid=".$params['uid']." AND vid=".$params['vid']." AND pid=".$params['pid']."";
+           $sql="SELECT wid,wf FROM tbl_wishlist WHERE uid=".$params['uid']." AND vid=".$params['vid']." AND pid=".$params['pid']." AND wf=1";
        $res=$this->query($sql);
        if($res)
        {

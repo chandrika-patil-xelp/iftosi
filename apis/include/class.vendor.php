@@ -112,8 +112,8 @@ class vendor extends DB
      
     public function getVProductsBYBcode($params)
     {
-        $page   = ($params['page'] ? $params['page'] : 1);
-        $limit  = ($params['limit'] ? $params['limit'] : 15);
+//        $page   = ($params['page'] ? $params['page'] : 1);
+//        $limit  = ($params['limit'] ? $params['limit'] : 15);
         $catid = ($params['catid'] ? $params['catid'] : 10000);
         $total_pages = $chkcnt = $total_products = 0;
         $chkpidsinvid="SELECT product_id FROM tbl_vendor_product_mapping WHERE vendor_id=".$params['vid']."";
@@ -153,15 +153,15 @@ class vendor extends DB
                         OR
                     MATCH(b.shape) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
                         OR
-                                            b.color LIKE '" . $params['bcode'] . "%'
+                    b.color LIKE '" . $params['bcode'] . "%'
                     OR
-                                            MATCH(b.clarity) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
+                    MATCH(b.clarity) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
                     OR
-                                            MATCH(b.metal) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
+                    MATCH(b.metal) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
                     OR
-                                            b.type LIKE '" . $params['bcode'] . "%'   
+                    b.type LIKE '" . $params['bcode'] . "%'   
                     OR
-                                            b.certified LIKE '" . $params['bcode'] . "%'
+                    b.certified LIKE '" . $params['bcode'] . "%'
                     )
                 ";
         if (!empty($page))
@@ -226,7 +226,7 @@ class vendor extends DB
                 ORDER BY 
                                     field(c.product_id,".$prId.")";
         
-        $res = $this->query($sql,1);
+        $res = $this->query($sql);
         $total_products = $this->numRows($res);
 
         if($total_products>0)
@@ -518,7 +518,7 @@ class vendor extends DB
                                     a.active_flag!=2
                 ORDER BY 
                                     a.product_id
-                desc ";
+                asc ";
         $res = $this->query($sql);
         $total_products = $this->numRows($res);
         
@@ -877,7 +877,9 @@ class vendor extends DB
 						
 						$sqlpct = "
 									SELECT 
-										product_id as pid
+										product_id as pid,
+                                                                                vendor_id as vid
+                                                                                
 									FROM 
 										tbl_vendor_product_mapping 
 									WHERE 
@@ -891,6 +893,7 @@ class vendor extends DB
 							while ($rowpct = $this->fetchData($respct))
 							{
 								$pids[] = $rowpct['pid'];
+                                                                $vid=$rowpct['vid'];
 							}
 							$allpids = $pid = implode(',',$pids);
 						}
@@ -1126,7 +1129,7 @@ class vendor extends DB
 					/* *********** */
 					
 					$tmp_arr1 = (!empty($arr1)) ? (array_values($arr1)) : null;
-					$arr1 = array('filters'=>$data,'products'=>$tmp_arr1,'total'=>$total,'getdata'=>$params,'catname'=>$catname);
+					$arr1 = array('filters'=>$data,'products'=>$tmp_arr1,'total'=>$total,'getdata'=>$params,'catname'=>$catname,'vid'=>$vid);
 					$err = array('errCode'=>0,'errMsg'=>'Details fetched successfully');
 				}
 				else

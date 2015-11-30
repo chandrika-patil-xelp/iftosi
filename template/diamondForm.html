@@ -182,7 +182,7 @@
                                         }
                                         foreach($fil['attributes'] as $key=>$values)
                                         {
-                                            if(strtolower($values['attribute_disp_name'])=='fluoresence')
+                                            if(strtolower($values['attribute_disp_name'])=='fluorescence')
                                             {
 ?>                               
                                                 <div class="divCon  fLeft d5">
@@ -195,8 +195,8 @@
                                                             {                                                                                                    
 ?>
                                                                 <div class="checkDiv fLeft">
-                                                                    <input type="radio" name='flourecence' class="filled-in" <?=($attr['flourecence'] == $fluoresence) ? 'checked' : '';?> value="<?=$fluoresence;?>" id="flourecence_<?=ucwords(strtolower($fluoresence)); ?>">
-                                                                    <label for="flourecence_<?=ucwords(strtolower($fluoresence));?>"> <?=$fluoresence; ?></label>
+                                                                    <input type="radio" name='flourecence' class="filled-in" <?=($attr['fluorescence'] == $fluoresence) ? 'checked' : '';?> value="<?=$fluoresence;?>" id="flourecence_<?=ucwords(strtolower($fluoresence)); ?>">
+                                                                    <label for="flourecence_<?=ucwords(strtolower($fluoresence));?>"> <?php echo $fluoresence; ?></label>
                                                                 </div>
 <?php                                                       }
 ?>
@@ -205,31 +205,29 @@
 <?php                                             
                                             }
                                         }
-                                        foreach($fil['attributes'] as $key=>$values)
-                                        {
-                                            if(strtolower($values['attribute_disp_name'])=='certificate')
-                                            {
-?>                              
-                                                <div class="divCon  fLeft dAuto">
-                                                    <div  class="titleDiv txtCap fLeft">Certificate</div>
-                                                        <div class='radioCont fLeft'> 
-<?php
-                                                            $attr_values = $values['attribute_values'];
-                                                            $attr_values = explode(',', $attr_values);
-                                                            foreach($attr_values as $certificate)
-                                                            {                                                                                                    
-?>
-                                                                <div class="checkDiv fLeft">
-                                                                    <input type="radio" name='Certificate' <?=($attr['cerified'] == $certificate) ? 'checked' : '';?> class="filled-in"  value="<?=$flourecense;?>" id="Certificate_<?=ucwords(strtolower($certificate)); ?>">
-                                                                    <label for="Certificate_<?=ucwords(strtolower($certificate));?>"> <?=$certificate; ?></label>
-                                                                </div>
-<?php                                                       }
-?>
-                                                        </div>
+                                        ?>
+                                         <div class="divCon  fLeft dAuto">
+                                            <div  class="titleDiv txtCap fLeft">Certificate</div>
+                                                <div class='radioCont fLeft'> 
+                                                    <div class="checkDiv fLeft">
+                                                        <input type="radio" name='Certficate' <?=($attr['certified'] == 'GIA') ? 'checked' : '';?> class="filled-in" id="Certficate_GIA" value="GIA">
+                                                            <label for="Certficate_GIA">GIA</label>
+                                                    </div>
+                                                    <div class="checkDiv fLeft">
+                                                        <input type="radio" name='Certficate' <?=($attr['certified'] == 'IGI') ? 'checked' : '';?> class="filled-in" id="Certficate_IGI" value="IGI">
+                                                            <label for="Certficate_IGI">IGI</label>
+                                                    </div>
+                                                    <div class="checkDiv fLeft">
+                                                        <input type="radio" name='Certficate' <?=($attr['certified'] == 'HRD') ? 'checked' : '';?> class="filled-in" id="Certficate_HRD" value="HRD">
+                                                            <label for="Certficate_HRD">HRD</label>
+                                                    </div>
                                                 </div>
-<?php                                             
-                                            }
-                                        }                                     
+                                        </div>
+                                        <div class="divCon2  fLeft">
+                                                                <div  class="titleDiv txtCap fLeft">Certificate No.</div>
+                                                                <input name="certno" id="certno" type="text" placeholder="eg A1B23456" class="txtInput fLeft fmOpenR font14 c666" value="<?=$attr['cno'];?>">
+                                                            </div>
+    <?php                                    
                                         foreach($fil['attributes'] as $key=>$values)
                                         {
                                             if(strtolower($values['attribute_disp_name'])=='carat')

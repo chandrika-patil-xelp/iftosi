@@ -100,7 +100,7 @@ function generateDiamondList(obj) {
     str += '<div class="carats fLeft">' + obj['carat'] + '</div>';
     str += '<div class="clarity fLeft">' + obj['clarity'] + '</div>';
     str += '<div class="cert fLeft">' + obj['cert'] + '</div>';
-    str += '<div class="price fLeft fmOpenB">&#8377;' + obj['price'] + '</div>';
+    str += '<div class="price fLeft fmOpenB">&#36;' + obj['price'] + '</div>';
     str += '<div class="acct fLeft">';
     str += '<center>';
     str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'" target="_blank"><div class="uploadBtn poR ripplelink"></div></a>';
@@ -346,7 +346,7 @@ function searchBarcode(val) {
         searchIDName='Bullions';
     }
     if(val!='') {
-        $.ajax({url: common.APIWebPath() + "index.php?action=getVProductsByBcode&bcode="+ val +"&page=1&limit=15&vid="+ uid +"&catid="+catid, success: function (result) {
+        $.ajax({url: common.APIWebPath() + "index.php?action=getVProductsByBcode&bcode="+ val +"&vid="+ uid +"&catid="+catid, success: function (result) {
             searchBarcodeCallback(result);
         }});
     } else {

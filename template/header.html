@@ -13,7 +13,7 @@ switch ($page) {
                         <div class="dropdownBox fLeft">
                             <div id="drpinp" class="dropInput fmOpenR"></div>
                             <ul id="hdropList" class="fmOpenR">
-								<div id='productsTab' class="dropInput fmOpenR dn">Products</div>
+								<li id='prdHeader' class="transition100 dn"><a href="<?php echo DOMAIN; ?>index.php?case=vendor_landing&catid=<?=$catid;?>">Products</a></li>
 								<li id="enqHeader" class="transition100 dn"><a href="<?php echo DOMAIN; ?>index.php?case=vendor_enquiries&catid=<?=$catid;?>">Enquiry</a></li>
 								<li id="wishHeader" class="transition100 dn" onclick="window.location.assign('<?php echo DOMAIN; ?>index.php?case=wishlist');">Wishlist (25)</li>
 								<li class="transition100" onclick="common.doLogout();">Log Out</li>

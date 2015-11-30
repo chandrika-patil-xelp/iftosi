@@ -92,7 +92,7 @@ class enquiry extends DB
         
         $page   = ($params['page'] ? $params['page'] : 1);
         $limit  = ($params['limit'] ? $params['limit'] : 15);
-        $viewprod="SELECT
+        $viewprod=" SELECT
                                    user_id,
                                    user_name,
                                    user_mobile,
@@ -103,10 +103,13 @@ class enquiry extends DB
                                    type_flag,
                                    updatedby,
                                    update_time
-                   FROM
+                    FROM
                                     tbl_product_enquiry
-                   WHERE
-                                    vendor_id=".$params['vid']."";
+                    WHERE
+                                    vendor_id=".$params['vid']."
+                    ORDER BY
+                                    update_time
+                ";
         
         
         $viewres=$this->query($viewprod);

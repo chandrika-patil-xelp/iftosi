@@ -28,7 +28,27 @@ $(document).ready(function () {
         }
     });
 });
-
+function fnValidatePAN() {
+        var Obj = $conv('#pan').val();
+        var str = '';
+        if (Obj.value != "") {
+            ObjVal = Obj.value;
+            var panPat = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
+            var code = /([C,P,H,F,A,T,B,L,J,G])/;
+            var code_chk = ObjVal.substring(3,4);
+            if (ObjVal.search(panPat) == -1) {
+                str = "Invalid Pan No";
+                Obj.focus();
+                return false;
+            }
+            if (code.test(code_chk) == false) {
+                str = "Invaild PAN Card No.";
+                return false;
+            }
+            else
+               return true;
+        }
+   }
 function validateForm() {
     var orgname = $('#orgname').val();
     var fulladd = $('#fulladd').val();
@@ -37,6 +57,8 @@ function validateForm() {
     var city = $('#city').val();
     var state = $('#state').val();
     var wbst = $('#wbst').val();
+    var pancard = $('#pan').val();
+    
     var str = '';
     if (orgname == '') {
         str = 'Organization Name is Required\n';
@@ -58,6 +80,7 @@ function validateForm() {
         str = 'City is Required';
         $('#city').focus();
     }
+    
     else if (state == '') {
         str = 'State is Required';
         $('#state').focus();
@@ -70,6 +93,10 @@ function validateForm() {
             if (!common.validateUrl('wbst')) {
                 return false;
             } else { return  true;}
+        }
+        else if(pancard)
+        {
+            fnValidatePAN();
         }
         return  true;
     }
@@ -193,6 +220,7 @@ function clickThis(id) {
     }
 }
 function submitForm() {
+    customStorage.removeFromStorage('isComp');
     var val = new Array("orgname", "fulladd", "add1", "pincode", "area", "city", "state", "vat", "pan", "tovr", "wbst", "banker");
     var data = new Object;
     var res = formatData(val);
@@ -252,6 +280,7 @@ function submitStep2Form() {
     data['result'] = res;
 
     data = JSON.stringify(data);
+    customStorage.addToStorage('isComp',1);
     $.ajax({url: common.APIWebPath() + "index.php?action=udtProfile&isC=1&dt=" + encodeURIComponent(data), success: function (result) {
             var obj = jQuery.parseJSON(result);
             var errCode = obj['error']['code'];
@@ -309,13 +338,14 @@ function submitStep3Form() {
     res['uid'] = uid;
     data['result'] = res;
     data = JSON.stringify(data);
-
     $.ajax({url: common.APIWebPath() + "index.php?action=udtProfile&isC=2&dt=" + encodeURIComponent(data), success: function (result) {
             var obj = jQuery.parseJSON(result);
             var errCode = obj['error']['code'];
             var errMsg = obj['error']['msg'];
             if (errCode == 0) {
                 common.toast(1,errMsg);
+                var isComp=2;
+                customStorage.addToStorage('isComp',isComp);
                 window.location.assign('index.php?case=vendor_landing&catid=1000'+busiType.charAt(0));
             } else {
                 common.toast(0,errMsg);

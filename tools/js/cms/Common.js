@@ -248,6 +248,8 @@ function Common() {
     this.doLogout = function () {
         customStorage.removeFromStorage('isLoggedIn');
         customStorage.addToStorage('isLoggedIn', false);
-        window.location.href = DOMAIN + "index.php?a=logout";
+        localStorage.clear();
+        window.location.href = window.location;
+        //window.location.href = DOMAIN + "index.php";
     };
 }

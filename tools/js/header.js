@@ -138,8 +138,6 @@ $(document).ready(function(){
         }
     });*/
     
-    
-    
 $(document).ready(function(){
     $(window).scroll(function() {
         $('#header,#logoTxt,#mMenuBtn,#hbgDiam,#hbgJewel,#hbgBull').velocity("stop");
@@ -224,7 +222,7 @@ $(document).ready(function(){
 	{
 		if(isVendor == 1 || isVendor == '1')
 		{
-			$('#productsTab').removeClass('dn');
+			$('#prdHeader').removeClass('dn');
 			$('#enqHeader').removeClass('dn');
 		}
 		else
