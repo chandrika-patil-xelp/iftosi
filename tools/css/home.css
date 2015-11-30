@@ -986,7 +986,8 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
     .filterTitleDiv {width: 100%;height: 60px;border-bottom: 0px solid #d4d4d4;margin-bottom: 0;}
     .prdComm:hover{border-color: #ebebde;}
     .prdComm:hover .actionComm{border-radius:0}
-    .transit-100X{-webkit-transform:translateX(350px);-moz-transform:translateX(350px);;-ms-transform:translateX(350px);-o-transform:translateX(350px);transform:translateX(350px);}
+    /*.transit-100X{-webkit-transform:translateX(350px);-moz-transform:translateX(350px);;-ms-transform:translateX(350px);-o-transform:translateX(350px);transform:translateX(350px);}
+    */.transit-100X{-webkit-transform:translateX(100%)}
     .showHide{display: none;}
     .hideShow{display: block;}
 
