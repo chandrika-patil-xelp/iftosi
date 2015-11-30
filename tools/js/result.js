@@ -47,7 +47,7 @@ $(document).ready(function() {
     $('#drpinp').click(function() {
         setTimeout(function() {
             isOpen = true;
-        }, 150);
+        }, 50);
         toggleDropDown(true);
     });
 
@@ -66,11 +66,22 @@ $(document).ready(function() {
         toggleDropDown(false);
     });
 
-    $(document).click(function() {
+//    $(document).click(function() {
+//        if (isOpen) {
+//           // toggleDropDown(false);
+//        }
+//    });
+    
+    $('#dropList').mouseleave(function(){
+        
         if (isOpen) {
-            toggleDropDown(false);
+            console.log("from heree");
+           toggleDropDown(false);
         }
+        
     });
+    
+    
 	
 	if($('#slist').val())
 	{
@@ -1030,10 +1041,13 @@ var areas = new Array("Jakkur", "Judicial Layout", "M.G Road", "Indiranagar");
 
 
 function toggleDropDown(flag) {
+    console.log(flag);
     if (flag) {
+        console.log("here");
         $("#dropList").velocity({opacity: 1, borderRadius: 0}, {duration: 200, display: "block"});
     }
     else {
+        console.log("here1");
         $("#dropList").velocity({opacity: 0, borderRadius: '100%'}, {duration: 50, display: "none"});
     }
 
