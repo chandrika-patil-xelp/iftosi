@@ -80,7 +80,7 @@ a{text-decoration: none;}
 .menuBtn {display: none;position: relative;width: 50px;height: 50px;background: url(../img/common/menu.svg)no-repeat;background-position: left center;background-size: auto 100%;margin-top: 5px;margin-left: -10px;}
 .filterBtn{display: none;position: relative;width: 50px;height: 50px;background: url(../img/common/filter2.svg)no-repeat;background-position: center 12px;background-size: auto 85%;margin-top: 5px;margin-left: 0;margin-right: -10px;}
 
-.header .sortBox{width: 36px;max-width: 25%;height: 36px;line-height: 36px;margin: 0;}    
+.header .sortBox{width: 36px;max-width: 25%;height: 36px;line-height: 36px;margin: 0;}
 .dropdownBox {height: 36px;padding: 0;}
 .header .dropInput {width: 100%;height: 36px;position: absolute;top: 0;left: 0;cursor: pointer;outline: none;background: #fff url(../img/common/down_arrow.svg)no-repeat;background-size: auto 100%;background-position: right center;border: none;border-radius: 0;padding: 0;font-size: 16px;color: #4d4d4d;}
 
@@ -166,7 +166,7 @@ a{text-decoration: none;}
 .Cushion {background-position: 100% 0%;}
 .Cushion:hover {opacity: 1;}
 
-.shapeSelected.Round,.shapeSelected:hover.Round{opacity: 1;} 
+.shapeSelected.Round,.shapeSelected:hover.Round{opacity: 1;}
 .shapeSelected.Pear,.shapeSelected:hover.Pear{opacity: 1;}
 .shapeSelected.Heart,.shapeSelected:hover.Heart{opacity: 1;}
 .shapeSelected.Princess,.shapeSelected:hover.Princess{opacity: 1;}
@@ -551,19 +551,19 @@ a{cursor:pointer;}
 .prdInfo{width:100%;height: auto;margin-top: 0;}
 .prdInfoTitle{width:100%;height: 40px;line-height: 40px;border-bottom: 2px solid #8A0044;font-size: 25px;margin-bottom:20px;}
 .prdInfoDiv{width: 100%;height: auto;line-height: 30px;padding: 0;color: #4d4d4d;font-size: 16px;text-align: left;margin-bottom: 30px;}
-.prdInfoDiv ul{margin: 0;padding: 0;width:100%;height: auto;list-style: none;}    
+.prdInfoDiv ul{margin: 0;padding: 0;width:100%;height: auto;list-style: none;}
 .prdInfoDiv ul li{width:100%;height: auto;padding: 0;margin: 0 0 15px 0;}
 .prdInfoDiv ul li div:nth-child(1){width:auto;height: 40px;line-height: 40px;padding:0 25px 0 0;color: #8A0044 ;font-size: 22px;}
-.prdInfoDiv ul li div:nth-child(2){width: 100%;height: auto;line-height: 30px;padding: 0;color: #4d4d4d;font-size: 16px;padding-left: 25px;text-align: left;}    
+.prdInfoDiv ul li div:nth-child(2){width: 100%;height: auto;line-height: 30px;padding: 0;color: #4d4d4d;font-size: 16px;padding-left: 25px;text-align: left;}
 .prdInfoDiv .prdInfoDiv{margin-bottom: 0}
 .jewellery_details .infoCommn {width: 33.33%!important;}
 .bullion_details .infoCommn {width: 100%!important;}
-    
-.bullion_details{}    
+
+.bullion_details{}
 
 .bullion_details .prdMainDetails .wrapperMax {padding-left: 0;position: relative;}
 .bullion_details .imgsCont {width: 45%;height: 393px;position: relative;left: 0;top: 0;border: 1px solid #d4d4c8;float: left;}
-    
+
 .bullion_details .thumbnil {width: 24%;height: 83px;border: 1px solid #d4d4c8;margin: 0.5%;cursor: pointer;display: inline-block;}
 .bullion_details .leftArrow {top: 0px;}
 .bullion_details .rightArrow {top: 0px;}
@@ -825,11 +825,11 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 /*Header*/
 .header {padding-right:15px;}
 .headRight{width:auto;}
-   
-/*Home Page*/    
+
+/*Home Page*/
 .prllx {width: 100%;}
-    
-/*Diamond Result*/    
+
+/*Diamond Result*/
 .resultsPage .shapesCont{padding: 10px;}
 .prdResults {width: 100%;}
 .filterTitleDiv{padding:0 10px;}
@@ -864,14 +864,14 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .prdInfo {margin-top: 0;padding: 0 15px;}
 .imgThumbnil{width: 32%;padding-bottom: 32%;margin: 0.5%;}
 
-/*Footer*/    
-.bottmInfo {height: 205px;padding: 30px 0;}   
+/*Footer*/
+.bottmInfo {height: 205px;padding: 30px 0;}
 
 }
 
 @media only screen and (min-width: 768px) and (max-width: 959px){
 .bottmInfo{display: none;}
-/*Home Page*/    
+/*Home Page*/
 .prllx {width: 100%;}
 .prllx li {width: 150px;margin: 0 10px;}
 .categoryCircle {width: 150px;height: 150px;font-size: 16px;padding-top: 95px;}
@@ -890,7 +890,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .st3Middle {width: 100%;height: 47%;}
 .st3Lower {width: 100%;height: 53%;}
 
-/*Diamond Result*/    
+/*Diamond Result*/
 .resultsPage .shapesCont{padding: 10px;}
 .prdResults {width: 100%;}
 .filterTitleDiv{padding:0 10px;}
@@ -936,7 +936,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
     .buyTxt {width: 80%;color: #fff;line-height: 30px;font-size: 30px;margin-bottom: 15px;}
     .prllx {margin: 0;padding: 15px;width: 100%;list-style: none;}
     .prllx li {width: 100%;display: inline-block !important;position: relative!important;margin: 10px 0;height: 60px;}
-    .categoryCircle {-webkit-transform:scale(1)!important;-moz-transform:scale(1)!important;-ms-transform:scale(1)!important;transform:scale(1)!important;width: 100%;position: relative;height: 100%;font-size: 20px;color: #8A0044;letter-spacing: -0.05em;padding-top: 0;border-radius: 5px;display: inline-block;vertical-align: middle;cursor: pointer;border-width: 0;border-style: solid;border-color: #42c1b9;box-shadow: 0 0 0 0 rgba(105,0,79,0.6);line-height: 60px;text-align: left;padding-left: 65px;}    
+    .categoryCircle {-webkit-transform:scale(1)!important;-moz-transform:scale(1)!important;-ms-transform:scale(1)!important;transform:scale(1)!important;width: 100%;position: relative;height: 100%;font-size: 20px;color: #8A0044;letter-spacing: -0.05em;padding-top: 0;border-radius: 5px;display: inline-block;vertical-align: middle;cursor: pointer;border-width: 0;border-style: solid;border-color: #42c1b9;box-shadow: 0 0 0 0 rgba(105,0,79,0.6);line-height: 60px;text-align: left;padding-left: 65px;}
     .bgDiamonds {background: #fff url(../img/common/diamond.jpg)no-repeat;background-size: auto 100%;background-position: left center;}
     .bgJewellery {background: #fff url(../img/common/jewellery.jpg)no-repeat;background-size: auto 100%;background-position: left center;}
     .bgBullion{background: #fff url(../img/common/bullions.jpg)no-repeat;background-size: auto 100%;background-position: left center;}
@@ -946,7 +946,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
     .hPrdComm:nth-child(2) {width:100%;margin: 0%;}
     .bottmInfo{width: 100%;height: auto;padding: 0px 0;float:left}
     .infoComm {width: 100%;height: 100px;border-right: none;position: relative;float: none!important;border-bottom: 1px solid rgba(255,255,255,0.2);}
-    .shapeComm {border: 2px solid #fff;position: relative;background-image: url(../img/shapes.svg);background-repeat: no-repeat;margin:1%;width: 23%!important;height:0%!important;padding-bottom: 23%;display: block;float:left;vertical-align: bottom;text-align: center;cursor: pointer;background-size: 1000% auto;}    
+    .shapeComm {border: 2px solid #fff;position: relative;background-image: url(../img/shapes.svg);background-repeat: no-repeat;margin:1%;width: 23%!important;height:0%!important;padding-bottom: 23%;display: block;float:left;vertical-align: bottom;text-align: center;cursor: pointer;background-size: 1000% auto;}
     .shapeComm:hover{border:2px solid #FFF;}
     .shapeSelected.shapeComm.Round{background-color:#fff;border:2px solid #8A0044;background-position: 0% 33%;}
     .shapeSelected.shapeComm.Pear{background-color:#fff;border:2px solid #8A0044;background-position: 11% 33%;}
@@ -969,7 +969,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
     .totalResultsDiv {height: 250px;line-height: 30px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: cover;padding: 150px 0 0 0;font-size: 30px;}
     #resultCount{display: block;font-size: 40px;line-height: 40px;text-align: center;}
     .headCatCont{display: none;}
-    .filterList {width: 100%;height: 100%;position: fixed;left: 0;top: 0;z-index: 115;background: #fff;padding:50px 15px 50px 15px;overflow: scroll;box-shadow: inset 0 0 20px rgba(0,0,0,0.3);}
+    .filterList {width: 100%;height: 100%;position: fixed;left: 0px;top: 0;z-index: 115;background: #fff;padding:50px 15px 50px 15px;overflow: scroll;box-shadow: inset 0 0 20px rgba(0,0,0,0.3);}
     .mfHeader{display: block;margin-left: -15px;}
     .mfFooter{position: fixed;width: 100%;height: 50px;line-height: 50px;padding:0;border-radius: 0;margin-left: -15px;}
     #resetDbtn{display: none;}
@@ -995,6 +995,9 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
     /*Details Page*/
     .prdMainDetails{height:auto;margin-top: -90px;}
     .detCont{width: 100%;height: auto;padding:15px;display: inline-block;}
+    .bullion_details .detCont {width:100%;height:auto;}
+    .bullion_details .infoCommn {width:50%!important;}
+    .bullion_details .imgsCont{width:100%}
     .btnsCont .prdShape {border: none;width: 100%;}
     .btnsCont{height:auto;}
     .prdBtns {width: 100%;height: auto;}
@@ -1003,7 +1006,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
     .btnsCont .prdShType{color: #4d4d4d;}
     .prdMainDetails .wrapperMax {padding-left: 0;position: initial;}
     .infoCommn {width: 50%;}
-    .majorInfoBox .infoCommn:nth-child(even){padding-left: 30px;}
+    /*.majorInfoBox .infoCommn:nth-child(even){padding-left: 30px;}*/
 
     .imgsCont {width: 90%;position: relative;margin: 0 5%;height: 330px;padding: 10px;}
     .thumbnil {width: 24%;height: 0;border: 1px solid #333;margin: 0 0.5%;cursor: pointer;padding-bottom: 25%;}
@@ -1015,11 +1018,11 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
     .vendorDetails .wrapperMax {padding-right: 0;position: initial;}
     .vdLeftCard {width: 100%;}
     .vdCenterCard {width: 100%;height: auto;padding:0 15px;}
-    .vdRightCard {width: 100%;height: auto;position:initial;padding:0 15px;}    
+    .vdRightCard {width: 100%;height: auto;position:initial;padding:0 15px;}
     .cardComm {width: 100%;height: auto;line-height: 25px;font-size: 14px;margin-top: 10px;color: #4d4d4d;}
     .prdInfoDiv ul li div:nth-child(2) {width: 100%;height: auto;line-height: 22px;font-size: 13px;padding-left: 0px;}
     .userForm {width: 100%;height: 100%;border-radius: 0;}
-    
+
     .cntEmail {width: 100%;}
     .cntEmail {width: 100%;}
 
@@ -1031,17 +1034,17 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
     /*SignUp page*/
     .signupPage {background: url(../img/common/background.jpg)no-repeat;background-size: cover;padding: 5px 0 0px 0;height: 100vh;}
     .signupDiv .wrapperMax {max-width: 100%;border: 0px solid #333;background: #fff;margin-top: 0;padding: 25px;border-radius: 0;height: 100vH;z-index: 115;position: relative;}
-    .bgHolder {width: 100%;height: 190px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding: 0px 0 35px 0;}    
+    .bgHolder {width: 100%;height: 190px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding: 0px 0 35px 0;}
     .bgHolder .heading {width: 100%;height: auto;max-width: 1200px;margin: auto;color: #fff;padding: 150px 0px 0 0px;text-align: center;}
     .heading.font40 {font-size: 22px;}
     .faqs {padding: 20px;}
     .texHolder {padding: 0 20px;}
-    
-    
+
+
     /*For Home*/
     .jshapeComm{width:100%;}
     .bresults .jshapeComm{width:100%!important;}
-    
+
     /*Diamond page*/
     .rCount {width: 100%;font-size: 16px;text-align: center;}
     .prdResults{width: 100%;}
@@ -1054,15 +1057,15 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 
 
 @media only screen and (min-width: 480px) and (max-width: 767px){
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
 }
