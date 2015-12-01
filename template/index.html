@@ -117,7 +117,7 @@
 						if(count($v['subcat']) && ($v['catid'] == 10001))
 						{
 						?>
-						<div class='jShapesCont resultsPage showHide fmOpenL'>
+						<div class='jShapesCont resultsPage fmOpenL'>
 							<div class="allShapes resultsPage">
 								<center>
 									<?php
@@ -126,11 +126,11 @@
 									{
 										$exp = explode('/',$val['cat_name']);
 										$scat = trim($exp[0]);
-										
+
 										$cname = preg_replace('/[^a-zA-Z0-9]+/', ' ', $val['cat_name']);
 										$cname = ereg_replace("[ \t\n\r]+", " ", $cname);
 										$cname = strtolower(str_replace(" ", "-", $cname));
-										
+
 										$html .= '<a href="'.DOMAIN.strtolower($v['cat_name']).'/'.$cname.'/ct-'.$val['catid'].'">';
 										$html .= '<div id="'.$val['catid'].'_'.$scat.'" class="jshapeComm transition300 ripplelink '.$scat.'">'.$val['cat_name'].'</div>';
 										$html .= '</a>';
@@ -143,9 +143,9 @@
 						<?php
 						}
 					}
-					?>  
+					?>
                 </div>
-            </div>  
+            </div>
             <div class='shapesCont'>
                 <div class="wrapperMax">
                     <div class="shapesTitle fmOpenL">Lowest prices guaranteed for bullion!</div>
@@ -155,7 +155,7 @@
 						if(count($v['subcat']) && ($v['catid'] == 10002))
 						{
 						?>
-						<div class='jShapesCont resultsPage showHide fmOpenL'>
+						<div class='jShapesCont resultsPage  fmOpenL'>
 							<div class="allShapes resultsPage bresults">
 								<center>
 									<?php
@@ -164,11 +164,11 @@
 									{
 										$exp = explode('/',$val['cat_name']);
 										$scat = trim($exp[0]);
-										
+
 										$cname = preg_replace('/[^a-zA-Z0-9]+/', ' ', $val['cat_name']);
 										$cname = ereg_replace("[ \t\n\r]+", " ", $cname);
 										$cname = strtolower(str_replace(" ", "-", $cname));
-										
+
 										$html .= '<a href="'.DOMAIN.strtolower($v['cat_name']).'/'.$cname.'/ct-'.$val['catid'].'">';
 										$html .= '<div id="'.$val['catid'].'_'.$scat.'" class="jshapeComm transition300 ripplelink g'.$scat.'">'.$val['cat_name'].'</div>';
 										$html .= '</a>';
@@ -183,7 +183,7 @@
 					}
 					?>
                 </div>
-            </div>  
+            </div>
             <?php include 'footer.html'; ?>
         </div>
         <?php include 'logo.html'; ?>
