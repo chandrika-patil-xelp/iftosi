@@ -407,10 +407,10 @@ $("#upSubmit").on('click',(function(e) {
 
 
 function ValidateFile() {
-    var allowedFiles = [".csv"];
+    var allowedFiles = ["csv","xls","xlsx"];
     var fileUpload = document.getElementById("up_file").value;
-    var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
-    if (fileUpload.split('.').pop()=="csv") {
+    var fileExt = fileUpload.split('.').pop();
+    if (allowedFiles.indexOf(fileExt)!=-1) {
         return true;
     }
     return false;

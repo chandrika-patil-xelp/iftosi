@@ -401,16 +401,20 @@ switch($action)
 //  localhost/iftosi/apis/index.php?action=bulkInsertProducts&vid=2
         case 'bulkInsertProducts':
             include APICLUDE.'class.vendor.php';
-            $file=(!empty($_FILES['file'])) ? trim($_FILES['file']) : '';
+            require APICLUDE . 'PHPExcelReader/excel_reader2.php';
+            require APICLUDE . 'PHPExcelReader/SpreadsheetReader.php';
+            $file=(!empty($_FILES['up_file'])) ? $_FILES['up_file'] : '';
             $vid=(!empty($params['vid'])) ? trim($params['vid']) : '';
-            $path = $_SERVER["DOCUMENT_ROOT"].'/iftosi/';
-            $filename = $path.$vid.'-'.date('d-m-Y').'.csv';
 //            $upload = move_uploaded_file($_FILES['up_file']['tmp_name'], $filename);
 //            print_r($upload);
 //            if($upload) {
 //                echo 'sd';
 //            $params['data'] = file_get_contents($_FILES['up_file']['tmp_name']);
 //            }
+//            
+            $alloweExt=array('xlsx','xls','csv');
+            $up_file =$file['name'];
+            $fileExt=end((explode('.',$up_file)));
             $arr=array();
             if(empty($file) && empty($vid))
             {
@@ -421,11 +425,31 @@ switch($action)
                 $err=array('Code'=>1,'Msg' => 'Max File Size 3MB');
                 $result=array('result'=>$arr,'error'=>$err);
                 
-            } else if($_FILES['up_file']['type']!='text/csv') {
+            } else if (!in_array($fileExt, $alloweExt)) {
                 $err=array('Code'=>1,'Msg' => 'File Type not Valid');
                 $result=array('result'=>$arr,'error'=>$err);
             } else {
-                $params['data'] = file_get_contents($_FILES['up_file']['tmp_name']);
+                if($fileExt=='csv') {
+                    $params['data'] = file_get_contents($_FILES['up_file']['tmp_name']);
+                } else {
+                    $path = WEBROOT.'upload/';
+                    $filename = $path.$vid.'-'.date('d-m-Y').'.'.$fileExt;
+                    $upload = move_uploaded_file($_FILES['up_file']['tmp_name'], $filename);
+                    
+                    if ($upload) {
+                        $Reader = new SpreadsheetReader($filename);
+                        $Sheets = $Reader->Sheets();
+
+                        $Reader->ChangeSheet(0);
+                        foreach ($Reader as $Key => $Row) {
+                            $params['data'][] = $Row;
+                        }
+                    } else {
+                        $err = array('Code' => 1, 'Msg' => 'File Upload Failed');
+                        $result = array('result' => $arr, 'error' => $err);
+                    }
+                }
+                $params['type']=$fileExt;
                 $obj = new vendor($db['iftosi']);
                 $result = $obj->bulkInsertProducts($params);
             }

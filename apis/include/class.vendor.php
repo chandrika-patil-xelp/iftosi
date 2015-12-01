@@ -559,19 +559,44 @@ class vendor extends DB
     public function bulkInsertProducts($params) {
         $vid=$params['vid'];
         $data=$params['data'];
-        
+        $type=$params['type'];
+        $defaultColNames = array('Barcode','Lot Ref','Lot No','Price','Shape','Cert1','Cut','Carats','Col','Cla','Base','Value','P(Disc)','Prop','Pol','Sym','Fluo','T.D','Table','Measurement','Cert1 No','P.A','Cr Hgt','Cr Ang','Girdle','P.D');
+
         $sql="SELECT city from tbl_vendor_master where vendor_id=\"".$vid."\"";
         $res=$this->query($sql);
         $row=$this->fetchData($res);
         $city=$row['city'];
-        
-        $rdv = explode("\n", $data);
-        $len = count($rdv) - 1;
+        if($type=='csv') {
+            $rdv = explode("\n", $data);
+            $colName = explode(",", $rdv[0]);  
+            $len = count($rdv) - 1;
+        } else {
+            $rdv=$data;
+            $colName=$data[0];
+            $len = count($rdv);
+        }
+        $validFormat=TRUE;
+        if (count($colName) == count($defaultColNames)) {
+            for ($i = 0; $i < count($defaultColNames); $i++) {
+                if ($defaultColNames[$i] != $colName[$i]) {
+                    $validFormat = FALSE;
+                }
+            }
+        } else {
+            $validFormat = FALSE;
+        }
+//        echo '<pre>';
+//        print_r($defaultColNames);
+//        print_r($colName);
+//        die();
         $i = $totlIns = 0;
-        $colName = explode(",", $rdv[0]);
-        if (count($colName) == 26) {
+        if ($validFormat) {
             while ($i < $len) {
-                $value = explode(",", $rdv[$i]);
+                if($type=='csv') {
+                    $value = explode(",", $rdv[$i]);
+                } else {
+                    $value=$rdv[$i];
+                }
                 if ($i != 0) {
                     $ts = date('Y-m-d H:i');
                     $query = "INSERT INTO `tbl_productid_generator` (`product_name`, date_time) VALUES ('Diamond','" . $ts . "')";
