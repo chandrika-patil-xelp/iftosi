@@ -156,7 +156,7 @@ function validateStep2Form() {
             common.toast(0,'Show Room Name is Required');
             return false;
         }
-        else if (showroomno == '') {
+        else if (showroomno == '' || isNaN(showroomno) || showroomno == 0) {
             common.toast(0,'Enter Number of Showrooms');
             $('#showroomno').focus();
             return false;
