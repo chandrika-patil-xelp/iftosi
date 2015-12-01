@@ -57,7 +57,6 @@ $(document).ready(function() {
 		else{
 			$('#dialink').attr("href",dlink[0]);
 		}
-		console.log($('#dialink').attr("href"));
     });
 
     $('.searchBtn ').bind('click', function() {

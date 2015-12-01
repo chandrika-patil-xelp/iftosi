@@ -198,10 +198,14 @@ function Common() {
                     var userid = obj['results']['uid'];
                     var username = obj['results']['username'];
                     var is_vendor = obj['results']['utype'];
+                    var email = obj['results']['email'];
                     var isComp = obj['results']['isC'];
                     
                     customStorage.addToStorage('isLoggedIn', true);
                     customStorage.addToStorage('l', pr_mobile);
+                    customStorage.addToStorage('mobile', pr_mobile);
+                    customStorage.addToStorage('name', username);
+                    customStorage.addToStorage('email', email);
                     customStorage.addToStorage('isComp',isComp);
                     //customStorage.addToStorage('p', pr_pass);
                     customStorage.addToStorage('userid', userid);
@@ -210,7 +214,7 @@ function Common() {
                     if (is_vendor == 1)
                     {
                         var busiType = obj['results']['busiType'];
-                        var busitype = customStorage.addToStorage('busiType', busiType);
+                        customStorage.addToStorage('busiType', busiType);
                         if(isComp === '2')
                         {
                             var catid = parseInt(busiType.charAt(0))-1;
@@ -223,9 +227,12 @@ function Common() {
                     }
                     else
                     {
-                        customStorage.addToStorage('busiType', '');
+                        customStorage.removeFromStorage('busiType');
                         _this.checkLogin();
                         _this.closeLoginForm();
+
+						changeStyle('all');
+
                         if(vd)
                         {
                             var dthis = $('#userSubmit');

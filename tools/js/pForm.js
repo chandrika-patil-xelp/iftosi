@@ -41,7 +41,6 @@ function submitForm(formid)
     
     data = values.join('|~|');
     //var JsonString = JSON.stringify(values);
-    console.log(uid);
     if((pid!==null)&&(pid!==undefined)&&(pid!==''))
     {
     var params = 'action=addNewproduct&category_id='+catid+'&dt='+data+'&prdid='+pid+'&vid='+uid;
@@ -50,10 +49,8 @@ function submitForm(formid)
     {
     var params = 'action=addNewproduct&category_id='+catid+'&dt='+data+'&vid='+uid;
     }
-    console.log(params);
     var URL   = DOMAIN+"apis/index.php?";
     $.getJSON(URL, params, function(data) {
-        console.log(data.results.pid);
       window.location.href = DOMAIN+'upload-image/pid-'+data.results.pid;
       
     });

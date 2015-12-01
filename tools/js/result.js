@@ -75,7 +75,6 @@ $(document).ready(function() {
     $('#dropList').mouseleave(function(){
         
         if (isOpen) {
-            console.log("from heree");
            toggleDropDown(false);
         }
         
@@ -173,7 +172,6 @@ function showWish(catid,pgno,uid,nojump,pid)
 	var URL 	= DOMAIN + "index.php";
 	$.getJSON(URL, params, function(data) {
 		
-		console.log(data);
 		
 		if(data.results.length == 0)
 			data.results.total = 0;
@@ -1041,13 +1039,10 @@ var areas = new Array("Jakkur", "Judicial Layout", "M.G Road", "Indiranagar");
 
 
 function toggleDropDown(flag) {
-    console.log(flag);
     if (flag) {
-        console.log("here");
         $("#dropList").velocity({opacity: 1, borderRadius: 0}, {duration: 200, display: "block"});
     }
     else {
-        console.log("here1");
         $("#dropList").velocity({opacity: 0, borderRadius: '100%'}, {duration: 50, display: "none"});
     }
 

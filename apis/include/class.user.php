@@ -268,7 +268,8 @@
                           user_name,
                           logmobile,
                           password,
-                          is_vendor
+                          is_vendor,
+						  email
                    FROM 
                           tbl_registration
                    WHERE
@@ -286,6 +287,8 @@
                     $arr['uid']=$row['user_id'];
                     $arr['utype']=$row['is_vendor'];
                     $arr['username']=$row['user_name'];
+                    $arr['mobile']=$row['logmobile'];
+                    $arr['email']=$row['email'];
                 }
                 $ut=$arr['utype'];
                 if($ut==0)

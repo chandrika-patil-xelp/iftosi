@@ -112,25 +112,24 @@ $(document).ready(function(){
 			name = customStorage.readFromStorage('name');
 			email = customStorage.readFromStorage('email');
 			uid = customStorage.readFromStorage('userid');
-                        islog = customStorage.readFromStorage('isLoggedIn');
-                        if(uid == '' || uid == null || uid == undefined || islog == false)
+			islog = customStorage.readFromStorage('isLoggedIn');
+			if(uid == '' || uid == null || uid == undefined || islog == false)
 			{
-                            	$('#overlay,#userForm').removeClass('dn');
+				$('#overlay,#userForm').removeClass('dn');
 				setTimeout(function(){
 					$('#overlay').velocity({opacity:1},{delay:0,duration:300,ease:'swing'});
 					$('#userForm').velocity({scale:1},{delay:80,duration:100,ease:'swing'});
 				},10); 
-                                isWishList = false;
-                                //common.showLoginForm(1);
-                        }
+				isWishList = false;
+			}
 			else
 			{
                             
 				if($(this).hasClass('iconMessage'))
 				{
-                                    isMail = true;
-                                    isWishList = false;
-                                }
+					isMail = true;
+					isWishList = false;
+				}
 				if($(this).hasClass('iconCall'))
 				{
 					isWishList = false;
@@ -165,14 +164,17 @@ $(document).ready(function(){
 	if(mobile !== '' && mobile !== null && mobile !== undefined && mobile !== 'null' && mobile !== 'undefined' && typeof mobile !== 'undefined')
 	{
 		$('#ur_mobile').val(mobile);
+		changeStyle('mobile');
 	}
 	if(name !== '' && name !== null && name !== undefined && name !== 'null' && name !== 'undefined' && typeof name !== 'undefined')
 	{
 		$('#ur_name').val(name);
+		changeStyle('name');
 	}
 	if(email !== '' && email !== null && email !== undefined && email !== 'null' && email !== 'undefined' && typeof email !== 'undefined')
 	{
 		$('#ur_email').val(email);
+		changeStyle('email');
 	}
 
 	if(pageName == 'diamond_details' || pageName == 'bullion_details' || pageName == 'jewellery_details')
@@ -544,9 +546,7 @@ $('#overlay').bind('click', function () {
     closeAllForms();
 });
 $('#lgSubmit, #lgCancel').bind('click', function () {
-    if(this.id=='lgSubmit') {
-        submitLoginForm();
-    } else {
+    if(this.id=='lgCancel') {
         closeAllForms();
     }
     
@@ -558,44 +558,6 @@ function closeAllForms() {
     setTimeout(function () {
         $('#overlay,#loginDiv,#userForm').addClass('dn');
     }, 1010);
-}
-function submitLoginForm() {
-    var pr_mobile = $('#pr_mobile').val();
-    var pr_pass = $('#pr_pass').val();
-    if(pr_mobile=='') {
-        customStorage.toast(0, 'Mobile Number Should Not Be Empty');
-        $('#pr_mobile').focus();
-        return;
-    } else if(pr_pass=='') {
-        customStorage.toast(0, 'Login Password Should Not Be Empty');
-        $('#pr_pass').focus();
-        return;
-    } else {
-        $.ajax({url: DOMAIN + "apis/index.php?action=logUser&mobile=" + pr_mobile + "&password=" + pr_pass, success: function (result) {
-            var obj = jQuery.parseJSON(result);
-            var errCode = obj['error']['code'];
-            if(errCode==0) {
-                var userid=obj['results']['uid'];
-                var username=obj['results']['username'];
-                var is_vendor=obj['results']['utype'];
-                customStorage.addToStorage('isLoggedIn', true);
-                customStorage.addToStorage('l', pr_mobile);
-                //customStorage.addToStorage('p', pr_pass);
-                customStorage.addToStorage('userid', userid);
-                customStorage.addToStorage('username', username);
-                customStorage.addToStorage('is_vendor', is_vendor);
-                if(is_vendor==1) {
-                    var busiType = obj['results']['busiType'];;
-                    customStorage.addToStorage('busiType', busiType);
-                    var catid=parseInt(busiType.charAt(0))-1;
-                    window.location.assign(DOMAIN+'index.php?case=vendor_landing&catid=1000'+catid);
-                }
-            } else {
-                customStorage.toast(0, 'Invalid Login Credentials');
-            }
-        }});
-        
-    }
 }
 
 function getWishList()
@@ -654,7 +616,6 @@ function getUserDetails()
                                             	$('#ur_mobile').val(data.results[0].logmobile);
                                                 $('#ur_name').val(data.results[0].user_name);
                                                 $('#ur_email').val(data.results[0].email);
-                                                console.log('send message');
                                         }
                                         else
                                         {
@@ -673,4 +634,47 @@ function getUserDetails()
         {
             
         }
+}
+
+function changeStyle(fr)
+{
+	if(fr == 'all')
+	{
+		$('#ur_mobile').addClass('mobileIcon');
+		$('#ur_name').addClass('nameIcon');
+		$('#ur_email').addClass('emailIcon');
+
+		$('#ur_mobile').addClass('brOrange');
+		$('#ur_mobile').addClass('brGreen');
+		$('#ur_mobile').siblings('label').addClass('labelActive');
+
+		$('#ur_name').addClass('brOrange');
+		$('#ur_name').addClass('brGreen');
+		$('#ur_name').siblings('label').addClass('labelActive');
+
+		$('#ur_email').addClass('brOrange');
+		$('#ur_email').addClass('brGreen');
+		$('#ur_email').siblings('label').addClass('labelActive');
+	}
+	else if (fr == 'mobile')
+	{
+		$('#ur_mobile').addClass('mobileIcon');
+		$('#ur_mobile').addClass('brOrange');
+		$('#ur_mobile').addClass('brGreen');
+		$('#ur_mobile').siblings('label').addClass('labelActive');
+	}
+	else if(fr == 'name')
+	{
+		$('#ur_name').addClass('nameIcon');
+		$('#ur_name').addClass('brOrange');
+		$('#ur_name').addClass('brGreen');
+		$('#ur_name').siblings('label').addClass('labelActive');
+	}
+	else if(fr == 'email')
+	{
+		$('#ur_email').addClass('emailIcon');
+		$('#ur_email').addClass('brOrange');
+		$('#ur_email').addClass('brGreen');
+		$('#ur_email').siblings('label').addClass('labelActive');
+	}
 }
