@@ -697,7 +697,6 @@ function getUserDetails()
             
         }
 }
-
 function changeStyle(fr)
 {
 	if(fr == 'all')
@@ -740,3 +739,19 @@ function changeStyle(fr)
 		$('#ur_email').siblings('label').addClass('labelActive');
 	}
 }
+
+$('.wishProduct').bind('click',function(){
+    console.log('wishProduct');
+});
+
+$('.msgProduct').bind('click',function(){
+    console.log('msgProduct');
+});
+
+$('.callProduct').bind('click',function(){
+    console.log('callProduct');
+});
+
+$('.viewProduct').bind('click',function(){
+    console.log('viewProduct');
+});
