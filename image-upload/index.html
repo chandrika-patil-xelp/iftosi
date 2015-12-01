@@ -6,8 +6,24 @@
                 <input type="hidden" name="pid" id="pid" value="<?php echo $pid;?>">
             </div>
         <div class="btnConta fmOpenR">
-            <?phpecho $catid; ?>
-            <a href="<?php echo ($_SERVER['HTTP_REFERER'] ? $_SERVER['HTTP_REFERER'] : $_COOKIE['back']++);?>"><div class="finishBtn btnComm fRight">PROCEED</div></a>
+<?php
+            $catid=$_GET['c'];
+            
+            $vendor_landing = DOMAIN.'?case=vendor_landing&catid='.$catid;
+            if( !empty($catid))
+            {
+?>
+                <a href="<?php echo $vendor_landing;?>"><div class="finishBtn btnComm fRight">PROCEED</div></a>
+<?php
+            }
+            else
+            {
+?>
+                <a href="<?php echo ($_SERVER['HTTP_REFERER'] ? $_SERVER['HTTP_REFERER'] : $_COOKIE['back']);?>"><div class="finishBtn btnComm fRight">PROCEED</div></a>
+            
+<?php
+            }
+?>
         </div>
     </body>
 </html>

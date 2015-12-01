@@ -16,6 +16,23 @@ var isMail = false;
 var isContact = false;
 var isPidInWishlist = false;
 
+var validMob = true;
+$('#ur_mobile').keyup(function () {
+    var mobile = $(this).val();
+    if(mobile.length==10) {
+        $.ajax({url: DOMAIN + "apis/index.php?action=checkUser&mobile=" + mobile, success: function (result) {
+            var obj = jQuery.parseJSON(result);
+            var errCode = obj['error']['Code'];
+            if(errCode == 1) {
+                validMob = false;
+                customStorage.toast(0,'This Mobile Number Already Registered!'); 
+            } else {
+                validMob = true;
+            }
+        }});
+    }
+});
+
 $(document).ready(function(){
      setTimeout(function() {
         var samt = 100;
@@ -144,6 +161,7 @@ $(document).ready(function(){
 		}
     });
     
+    
     $('#userCancel').bind('click',function(){
         $('#userForm').velocity({scale:0},{delay:0,ease:'swing'});
         $('#overlay').velocity({opacity:0},{delay:100,ease:'swing'});
@@ -151,15 +169,56 @@ $(document).ready(function(){
             $('#overlay,#userForm').addClass('dn');
         },1010);
     }); 
+    
+        //console.log(isNaN(ur_name));return false;
 	
         $('#userSubmit').bind('click',function() {
-		showVendorDetails();
-		$('#userForm').velocity({scale:0},{delay:0,ease:'swing'});
-		$('#overlay').velocity({opacity:0},{delay:100,ease:'swing'});
-		setTimeout(function(){
-			$('#overlay,#userForm').addClass('dn');
-		},1010);
+        var ur_name = $('#ur_name').val();
+        var ur_mobile = $('#ur_mobile').val();
+        var ur_email = $('#ur_email').val();
+        if(!validMob) {
+            customStorage.toast(0,'This Mobile Number Already Registered!'); 
+            $('#ur_mobile').focus();
+            return false;
+        }
+        else if(ur_mobile=='' || ur_mobile.length!=10 || isNaN(ur_mobile)) {
+            customStorage.toast(0,'Invalid Format for Mobile'); 
+            $('#ur_mobile').focus();
+            return false;
+        }
+        else if(ur_name.length==0 || isNaN(ur_name)!==true) {
+            customStorage.toast(0,'Invalid Format for Name'); 
+            $('#ur_name').focus();
+            return false;
+        }
+        else if(ur_email=='') {
+            customStorage.toast(0,'Email is Required!'); 
+            $('#ur_email').focus();
+            return false;
+        } 
+        else if(!common.validateEmail('ur_email')) {
+            customStorage.toast(0,'Email is Not Valid!'); 
+            $('#ur_email').focus();
+            return false;
+        }
+        else 
+        {
+            showVendorDetails();
+            $('#userForm').velocity({scale:0},{delay:0,ease:'swing'});
+            $('#overlay').velocity({opacity:0},{delay:100,ease:'swing'});
+            setTimeout(function(){
+                    $('#overlay,#userForm').addClass('dn');
+            },1010);
+            return true;
+        }
 	});
+        
+        function eSubmit(evt, btnId) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode === 13) {
+            $('#' + btnId).click();
+        }
+    };
 
 	if(mobile !== '' && mobile !== null && mobile !== undefined && mobile !== 'null' && mobile !== 'undefined' && typeof mobile !== 'undefined')
 	{
@@ -288,7 +347,7 @@ function showVendorDetails(obj)
                                                     setTimeout(function () {
 								initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
 							},100);
-							var pos=$('.prdInfo').offset().top-100;
+							var pos=$('.wrapper').height()-50;
 							setTimeout(function(){
 								$('#vDetails').removeClass('vTransit');
 								$('#vDetails').removeClass('dn');
@@ -322,7 +381,10 @@ function showVendorDetails(obj)
                     setTimeout(function () {
 				initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
 			},100);
-			var pos=$('.prdInfo').offset().top-100;
+			//var pos=$('.wrapper').offset().height+50;
+                        var pos=$('.wrapper').height()-50;
+                        //console.log(pos);
+                        
 			setTimeout(function(){
 				$('#vDetails').removeClass('vTransit');
 				$('#vDetails').removeClass('dn');

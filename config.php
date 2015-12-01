@@ -16,6 +16,7 @@ if(stristr($_SERVER['HTTP_HOST'],'iftosi.com'))
 	define('INCLUDES',WEBROOT.'include/');
 	define('APICLUDE',WEBROOT.'apis/include/');
 	define('IMGDOMAIN','http://'.$_SERVER['HTTP_HOST'].'/image-upload/');
+        define('IMGUPLOAD','http://'.$_SERVER['HTTP_HOST'].'/iftosi/upload-image/');
 	define('VERSION',0.4);
 	define('IMGPATH','image-upload/');
 }
@@ -28,6 +29,7 @@ else
 	define('INCLUDES',WEBROOT.'include/');
 	define('APICLUDE',WEBROOT.'apis/include/');
 	define('IMGDOMAIN','http://'.$_SERVER['HTTP_HOST'].'/iftosi/image-upload/');
+        define('IMGUPLOAD','http://'.$_SERVER['HTTP_HOST'].'/iftosi/upload-image/');
 	define('VERSION',0.4);
 	define('IMGPATH','image-upload/');
 }

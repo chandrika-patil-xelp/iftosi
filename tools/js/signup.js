@@ -61,12 +61,12 @@ $('#pr_mobile').keyup(function () {
         else 
             isVendor=0;
         
-        if(pr_name=='') {
-            customStorage.toast(0,'Name is Required!'); 
+        if(pr_name.length==0 || isNaN(pr_name)!==true) {
+            customStorage.toast(0,'Invalide format for Name'); 
             $('#pr_name').focus();
             return false;
-        } else if(pr_mobile=='' || pr_mobile.length!=10) {
-            customStorage.toast(0,'Mobile is Required!'); 
+        } else if(pr_mobile=='' || pr_mobile.length!=10 || isNaN(pr_mobile)) {
+            customStorage.toast(0,'Invalid format for Mobile'); 
             $('#pr_mobile').focus();
             return false;
         } else if(pr_email=='') {

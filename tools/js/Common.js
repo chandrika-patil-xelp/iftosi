@@ -182,7 +182,7 @@ function Common() {
     this.submitLoginForm = function (vd) {
         var pr_mobile = $('#pr_mobile').val();
         var pr_pass = $('#pr_pass').val();
-        if (pr_mobile == '') {
+        if (pr_mobile=='' || pr_mobile.length!=10 || isNaN(pr_mobile)) {
             customStorage.toast(0, 'Mobile Number Should Not Be Empty');
             $('#pr_mobile').focus();
             return;
