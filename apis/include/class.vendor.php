@@ -112,8 +112,8 @@ class vendor extends DB
      
     public function getVProductsBYBcode($params)
     {
-//        $page   = ($params['page'] ? $params['page'] : 1);
-//        $limit  = ($params['limit'] ? $params['limit'] : 15);
+        $page   = ($params['page'] ? $params['page'] : 1);
+        $limit  = ($params['limit'] ? $params['limit'] : 15);
         $catid = ($params['catid'] ? $params['catid'] : 10000);
         $total_pages = $chkcnt = $total_products = 0;
         $chkpidsinvid="SELECT product_id FROM tbl_vendor_product_mapping WHERE vendor_id=".$params['vid']."";

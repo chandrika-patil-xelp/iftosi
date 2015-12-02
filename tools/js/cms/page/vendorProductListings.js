@@ -36,14 +36,19 @@ var bullionPage = 1;
 
 $(window).scroll(function () {
     if ($(window).scrollTop() == ($(document).height() - $(window).height())) {
-        if (catid == 10000 && loadDiamont) {
-            loadDiamonds();
-        }
-        if (catid == 10001 && loadJewel) {
-            loadJewels();
-        }
-        if (catid == 10002 && loadBullion) {
-            loadBullions();
+        if(!searchScroll) {
+            if (catid == 10000 && loadDiamont) {
+                loadDiamonds();
+            }
+            if (catid == 10001 && loadJewel) {
+                loadJewels();
+            }
+            if (catid == 10002 && loadBullion) {
+                loadBullions();
+            }
+        } else {
+            searchPage++;
+            searchBarcode(searchScrollValue);
         }
     }
 });
@@ -336,7 +341,11 @@ function inStock(proId,ele) {
     }});
 }
 
-var searchIDName='';
+var searchScrollValue= '';
+var searchScroll= false;
+var searchIDName = '';
+var searchPage = 1;
+$('.prdSeachTxt').val('');
 function searchBarcode(val) {
     if(catid==10000) {
         searchIDName='Diamonds';
@@ -346,9 +355,10 @@ function searchBarcode(val) {
         searchIDName='Bullions';
     }
     if(val!='') {
-        $.ajax({url: common.APIWebPath() + "index.php?action=getVProductsByBcode&bcode="+ val +"&vid="+ uid +"&catid="+catid, success: function (result) {
+        $.ajax({url: common.APIWebPath() + "index.php?action=getVProductsByBcode&bcode="+ val +"&vid="+ uid +"&catid="+catid+"&page="+searchPage+"&limit=15", success: function (result) {
             searchBarcodeCallback(result);
         }});
+        searchScrollValue = val;
     } else {
         $('#'+searchIDName+'List').removeClass('dn');
         $('#s'+searchIDName+'List').html('').addClass('dn');
@@ -358,7 +368,12 @@ function searchBarcodeCallback(res) {
     var obj = jQuery.parseJSON(res);
     if (obj['results'] != '') {
         var total = obj['results']['total_products'];
+        //$('#total'+searchIDName).text(total);
+        
+        $('#'+searchIDName+'List').addClass('dn');
+        $('#s'+searchIDName+'List').removeClass('dn');
         if(total!=0) {
+            searchScroll = true;
             var len = obj['results']['products'].length;
             var i = 0;
             var catName;
@@ -381,12 +396,15 @@ function searchBarcodeCallback(res) {
                     i++;
                 }
             }
-        } else {
+            $('#s'+searchIDName+'List').append(str);
+        } else if(searchPage==1) {
+            searchScroll = false;
             var str = '<p class="noRecords"><span>Sorry! No Products Found!</span></p>';
+            $('#s'+searchIDName+'List').html(str);
         }
     } else {
-       var str = '<p class="noRecords"><span>Sorry! No Products Found!</span></p>';
+        searchScroll = false;
+        var str = '<p class="noRecords"><span>Sorry! No Products Found!</span></p>';
+        $('#s' + searchIDName + 'List').html(str);
     }
-    $('#'+searchIDName+'List').addClass('dn');
-    $('#s'+searchIDName+'List').html(str).removeClass('dn');
 }

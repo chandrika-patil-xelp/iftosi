@@ -369,6 +369,42 @@ function updateDollarRate() {
     }
 }
 
+function isValidFloatKey(obj, e, allowDecimal)
+{
+    var key;
+    var isCtrl = false;
+    var keychar;
+    var reg;
+
+    if (window.event) {
+        key = e.keyCode;
+        isCtrl = window.event.ctrlKey
+    }
+    else if (e.which) {
+        key = e.which;
+        isCtrl = e.ctrlKey;
+    }
+
+    if (isNaN(key))
+        return true;
+
+    keychar = String.fromCharCode(key);
+
+    // check for backspace or delete, or if Ctrl was pressed
+    if (key == 8 || isCtrl)
+    {
+        return true;
+    }
+    if(key == 13) {
+        updateDollarRate();
+    }
+    reg = /\d/;
+    var isFirstD = allowDecimal ? keychar == '.' && obj.value.indexOf('.') == -1 : false;
+
+    return isFirstD || reg.test(keychar);
+}
+
+
 $("#upSubmit").on('click',(function(e) {
     if($("#up_file").val()=='' || ValidateFile()==false) {
         common.toast(0,'Please Select Valid CSV File');

@@ -480,4 +480,5 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 .popDiv .downloadLink { border-top: 1px solid; margin-top: 25px; padding-top: 14px; text-align: center; width: 100%; }
 .popDiv .downloadLink a { cursor: pointer; color: #8a0044; font-size: 16px; padding: 5px 5px; }
 .popDiv .downloadLink span { color: #666; font-size: 12px; display: block; margin-bottom: 8px; }
-.popDiv .inpTxt { border: 1px solid #d4d4c8; border-radius: 5px; font-size: 14px; height: 35px; outline: medium none; padding: 0 15px; width: 200px; }
+.popDiv .inputCont { width: 100%; }
+.popDiv .inpTxt { border: 1px solid #d4d4c8; border-radius: 5px; font-size: 14px; height: 35px; outline: medium none; padding: 0 15px; width: 100%; }

@@ -162,8 +162,7 @@
             <form class="" action="" method="post" enctype="multipart/form-data">
                 <div class="upTitle fLeft fmOpenR">Update Dollar Rate </div>
                 <div class="inputCont fLeft fmOpenR">
-                    <input type="text" id="dollar_rate" name="dollar_rate" class="inpTxt fRight fmOpenR" placeholder="eg. 60.45">
-                    <label for="dollar_rate" class="dn">BROWSE</label>
+                    <input type="text" id="dollar_rate" name="dollar_rate" class="inpTxt fRight fmOpenR" maxlength="5" onkeypress="return isValidFloatKey(this, event, true);" placeholder="eg. 60.45" autofocus="">
                 </div>
                 <div class="commBtn cancelBtn fLeft fmOpenR" id='upCancel' onclick="closeAllForms();"> CANCEL</div>
                 <div class="commBtn upBtn fLeft fmOpenR" onclick="updateDollarRate();">UPDATE</div>
