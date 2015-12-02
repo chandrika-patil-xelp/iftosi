@@ -2042,6 +2042,10 @@
 						{
 							$prdPolish = $value['polish'];
 						}
+						else if($ky == 'certified')
+						{
+							$prdCert = $value['certified'];
+						}
 					}
 				}
 
@@ -2080,6 +2084,9 @@
 					$emailContent .= "<th>";
 						$emailContent .= "Polish";
 					$emailContent .= "</th>";
+					$emailContent .= "<th>";
+						$emailContent .= "Certificate";
+					$emailContent .= "</th>";
 				$emailContent .= "</tr>";
 				$emailContent .= "<td>";
 					$emailContent .= $prdid;
@@ -2098,6 +2105,9 @@
 				$emailContent .= "</td>";
 				$emailContent .= "<td>";
 					$emailContent .= $prdPolish;
+				$emailContent .= "</td>";
+				$emailContent .= "<td>";
+					$emailContent .= $prdCert;
 				$emailContent .= "</td>";
 			$emailContent .= "</table>";
 

@@ -238,10 +238,10 @@ function submitForm() {
         busiTypeVal.push(1);
     }
     if ($("#forJewellery").hasClass("comSelected")) {
-        busiTypeVal.push('2');
+        busiTypeVal.push(2);
     }
     if ($("#forBullion").hasClass("comSelected")) {
-        busiTypeVal.push('3');
+        busiTypeVal.push(3);
     }
     busiType = busiTypeVal.join(',');
     res['busiType'] = busiType;
@@ -355,7 +355,9 @@ function submitStep3Form() {
                 common.toast(1,errMsg);
                 var isComp=2;
                 customStorage.addToStorage('isComp',isComp);
-                window.location.assign('index.php?case=vendor_landing&catid=1000'+busiType.charAt(0));
+				var bsType = parseInt(busiType.charAt(0));
+				bsType = bsType - 1;
+                window.location.assign('index.php?case=vendor_landing&catid=1000'+bsType);
             } else {
                 common.toast(0,errMsg);
             }
