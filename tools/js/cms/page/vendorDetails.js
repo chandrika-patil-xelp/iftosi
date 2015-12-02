@@ -3,6 +3,12 @@ if(vid!=uid || uid=='') {
     window.location.assign(DOMAIN+'index.php');
 }
 $(document).ready(function () {
+    if($('#cperson').val()=='') {
+        $('#cperson').val(customStorage.readFromStorage('username'));
+    }
+    if($('#conMobile').val()=='') {
+        $('#conMobile').val(customStorage.readFromStorage('mobile'));
+    }
     $('.compComm').bind('click', function (e) {
 
         var x = (document.all) ? event.x : e.pageX;
@@ -43,6 +49,10 @@ function validateForm() {
     var wbst = $('#wbst').val();
     var pancard = $('#pan').val();
     
+    var panPat =/^([A-Z]){5}([0-9]){4}([A-Z]){1}?$/;
+    var code = /([C,P,H,F,A,T,B,L,J,G,K])/;
+    var code_chk = pancard.substring(3,4);
+    
     var str = '';
     if (orgname == '') {
         str = 'Organization Name is Required\n';
@@ -69,34 +79,26 @@ function validateForm() {
         str = 'State is Required';
         $('#state').focus();
     }
-    else if (pancard !== "" || pancard == null || pancard === 'undefined' || pancard == undefined){
-        var panPat =/^([A-Z]){5}([0-9]){4}([A-Z]){1}?$/;
-        var code = /([C,P,H,F,A,T,B,L,J,G,K])/;
-        var code_chk = pancard.substring(3,4);
-        if(pancard.match(panPat) == null)
-        {
-            str='Pancard is Invalid';
-            $('#pan').focus();
-        }
-        else if(pancard === ' ')
-        {
-            str='Pancard is Invalid';
-            $('#pan').focus();
-        }
-        else if(pancard.search(panPat) == -1) {
-            str='Invalid Pan No';
-            $('#pan').focus();
-            }
-        else if(code.test(code_chk) == false) {
-            str='Invaild PAN Card No.';
-            $('#pan').focus();
-        }
-        else
-        {
-            return true;
-        }
-        
+    else if (pancard.match(panPat) == null)
+    {
+        str = 'Pancard is Invalid';
+        $('#pan').focus();
     }
+    else if (pancard === ' ')
+    {
+        str = 'Pancard is Invalid';
+        $('#pan').focus();
+    }
+    else if (pancard.search(panPat) == -1) {
+        str = 'Invalid Pan No';
+        $('#pan').focus();
+    }
+    else if (code.test(code_chk) == false) {
+        str = 'Invaild PAN Card No.';
+        $('#pan').focus();
+    }
+
+
     else if (!$("#forDiamond").hasClass("comSelected") && !$("#forJewellery").hasClass("comSelected") && !$("#forBullion").hasClass("comSelected")) {
         str = 'Select business type';
     }
@@ -354,12 +356,12 @@ function submitStep3Form() {
             if (errCode == 0) {
                 common.toast(1,errMsg);
                 var isComp=2;
-                customStorage.addToStorage('isComp',isComp);
-				var bsType = parseInt(busiType.charAt(0));
-				bsType = bsType - 1;
-                window.location.assign('index.php?case=vendor_landing&catid=1000'+bsType);
+                customStorage.addToStorage('isComp', isComp);
+                var bsType = parseInt(busiType.charAt(0));
+                bsType = bsType - 1;
+                window.location.assign('index.php?case=vendor_landing&catid=1000' + bsType);
             } else {
-                common.toast(0,errMsg);
+                common.toast(0, errMsg);
             }
         }});
 }

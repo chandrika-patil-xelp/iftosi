@@ -94,7 +94,7 @@ $('#pr_mobile').keyup(function () {
                     var userid = obj['userid'];
                     customStorage.addToStorage('isLoggedIn',true);
                     customStorage.addToStorage('userid',userid);
-                    customStorage.addToStorage('tf_mobile',pr_mobile);
+                    customStorage.addToStorage('mobile',pr_mobile);
                     customStorage.addToStorage('username',pr_name);
                     customStorage.addToStorage('is_vendor',isVendor);
                     if(isVendor==1) {

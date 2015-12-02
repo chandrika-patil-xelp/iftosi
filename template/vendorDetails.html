@@ -67,7 +67,7 @@ if(!empty($data['mdbw'])) {
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Turnover</div>
-                            <input name="" type="text" id="tovr" value="<?php echo $data['turnover']; ?>" placeholder=" eg.  100 CRORES" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="" type="text" id="tovr" value="<?php echo $data['turnover']; ?>" placeholder=" eg.  100 CRORES" maxlength="10" onkeypress="return common.isNumberKey(event)" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon2  fRight">
                             <div  class="titleDiv txtCap fLeft">Website</div>
