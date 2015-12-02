@@ -54,65 +54,94 @@ function validateForm() {
     var code_chk = pancard.substring(3,4);
     
     var str = '';
-    if (orgname == '') {
+    if (orgname == '')
+	{
         str = 'Organization Name is Required\n';
         $('#orgname').focus();
     }
-    else if (fulladd == '') {
+
+	if (str == '' && fulladd == '')
+	{
         str = 'Address is Required';
         $('#fulladd').focus();
     }
-    else if (pincode == '' || pincode.length < 6 || isNaN(pincode)) {
+
+	if (str == '' && (pincode == '' || pincode.length < 6 || isNaN(pincode)))
+	{
         str = 'Pincode is Required';
         $('#pincode').focus();
     }
-    else if (area == '') {
+
+	if (str == '' && area == '')
+	{
         str = 'Area is Required';
         $('#area').focus();
     }
-    else if (city == '') {
+
+	if (str == '' && city == '')
+	{
         str = 'City is Required';
         $('#city').focus();
     }
     
-    else if (state == '') {
+    if (str == '' && state == '')
+	{
         str = 'State is Required';
         $('#state').focus();
     }
-    else if (pancard.match(panPat) == null)
+
+	if (str == '' && pancard.match(panPat) == null)
     {
         str = 'Pancard is Invalid';
         $('#pan').focus();
     }
-    else if (pancard === ' ')
+
+    if (str == '' && pancard === ' ')
     {
         str = 'Pancard is Invalid';
         $('#pan').focus();
     }
-    else if (pancard.search(panPat) == -1) {
+
+    if (str == '' && pancard.search(panPat) == -1) {
         str = 'Invalid Pan No';
         $('#pan').focus();
     }
-    else if (code.test(code_chk) == false) {
+
+	if (str == '' && code.test(code_chk) == false) {
         str = 'Invaild PAN Card No.';
         $('#pan').focus();
     }
 
 
-    else if (!$("#forDiamond").hasClass("comSelected") && !$("#forJewellery").hasClass("comSelected") && !$("#forBullion").hasClass("comSelected")) {
+    if (str == '' && !$("#forDiamond").hasClass("comSelected") && !$("#forJewellery").hasClass("comSelected") && !$("#forBullion").hasClass("comSelected")) {
         str = 'Select business type';
     }
-    else {
-        if (wbst != '') {
-            if (!common.validateUrl('wbst')) {
+    else if(str == '')
+	{
+        if (wbst != '')
+		{
+            if (!common.validateUrl('wbst'))
+			{
                 return false;
-            } else { return  true;}
+            }
+			else
+			{
+				return  true;
+			}
         }
         
         return  true;
     }
-    common.toast(0,str);
-    return false;
+
+	if(str !== '')
+	{
+		common.toast(0,str);
+		return false;
+	}
+	else
+	{
+		return true;
+	}
 }
 
 function validateStep2Form() {
