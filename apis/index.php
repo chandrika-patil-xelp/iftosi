@@ -1362,6 +1362,12 @@ echo '</pre>';
             $result=$obj->product_category_mapping();
             $res=$result;
             break;
+
+		case 'sendDetailsToUser':
+			include_once APICLUDE . 'class.product.php';
+			$obj = new product($db['iftosi']);
+			$res = $obj->sendDetailsToUser($params);
+		break;
             
 //--------------------vendor landing page----------------------------------------
         //  localhost/iftosi/apis/index.php?action=getVPrdByCatid&catid=1&page=1&limit=1         

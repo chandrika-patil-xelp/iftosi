@@ -146,7 +146,7 @@
 					}
 				break;
                                 
-                                case 'getUserDet':
+				case 'getUserDet':
 					$regResp = array();
 					$uid = (!empty($_GET['uid'])) ? trim($_GET['uid']) : '';
 					if(!empty($uid))
@@ -162,6 +162,32 @@
 						$resp = array('results' => $res, 'error' => $error);
 						echo json_encode($resp);
 					}
+				break;
+
+				case 'sendDetailsToUser':
+					$resp = array();
+					$usrName = (!empty($params['usrName']) && $params['usrName'] !== 'null' && $params['usrName'] !== 'undefined') ? trim(urldecode($params['usrName'])) : '';
+					$usrMobile = (!empty($params['usrMobile']) && $params['usrMobile'] !== 'null' && $params['usrMobile'] !== 'undefined') ? trim(urldecode($params['usrMobile'])) : '';
+					$usrEmail = (!empty($params['usrEmail']) && $params['usrEmail'] !== 'null' && $params['usrEmail'] !== 'undefined') ? trim(urldecode($params['usrEmail'])) : '';
+					$prdid = (!empty($params['prdid']) && $params['prdid'] !== 'null' && $params['prdid'] !== 'undefined') ? trim(urldecode($params['prdid'])) : '';
+					$vid = (!empty($params['vid']) && $params['vid'] !== 'null' && $params['vid'] !== 'undefined') ? trim(urldecode($params['vid'])) : '';
+					$uid = (!empty($params['uid']) && $params['uid'] !== 'null' && $params['uid'] !== 'undefined') ? trim(urldecode($params['uid'])) : '';
+
+					if(!empty($usrName) && !empty($usrMobile) && !empty($usrEmail) && !empty($prdid))
+					{
+						$apiUrl = APIDOMAIN . 'index.php?action=sendDetailsToUser';
+						$params = array('usrName' => $usrName, 'usrMobile' => $usrMobile, 'usrEmail' => $usrEmail, 'prdid' => $prdid, 'vid' => $vid, 'uid' => $uid);
+						$resp = $comm->executeCurl($apiUrl, false, false, $params);
+						if(empty($resp))
+						{
+							$resp = array('results' => array(), 'error' => array('Code' => 1, 'Msg' => 'Some error occured while sending details'));
+						}
+					}
+					else
+					{
+						$resp = array('results' => array(), 'error' => array('Code' => 1, 'Msg' => 'Some parameters are missing'));
+					}
+					echo json_encode($resp);
 				break;
 			}
 			break;

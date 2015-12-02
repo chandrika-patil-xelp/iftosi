@@ -1371,16 +1371,23 @@
                     $vdetls[$row4['vid']]=$row4;
                 }
 
-            $cat_info_sql = "SELECT catid,cat_name,cat_lvl,p_catid,lineage FROM tbl_category_master WHERE catid=".$params['catid']."";
-                $cat_info_res = $this->query($cat_info_sql);
-                if($cat_info_res)
-                {
-                    $cat_info_row = $this->fetchData($cat_info_res);
-                    if($cat_info_row && $cat_info_row['catid'])
-                    {
-                        $reslt1['category_name'] = $cat_info_row['cat_name'];
-                    }
-                }
+				if(!empty($params['catid']))
+				{
+					$cat_info_sql = "SELECT catid,cat_name,cat_lvl,p_catid,lineage FROM tbl_category_master WHERE catid=".$params['catid']."";
+					$cat_info_res = $this->query($cat_info_sql);
+					if($cat_info_res)
+					{
+						$cat_info_row = $this->fetchData($cat_info_res);
+						if($cat_info_row && $cat_info_row['catid'])
+						{
+							$reslt1['category_name'] = $cat_info_row['cat_name'];
+						}
+					}
+				}
+				else
+				{
+					$reslt1['category_name'] = '';
+				}
            
                 
                 if($row && !empty($row['product_id'])) 
@@ -1411,9 +1418,9 @@
                 
                         $sql5="SELECT category_id
                              FROM 
-                                        tbl_product_category_mapping
+								tbl_product_category_mapping
                              WHERE 
-                                                product_id =".$params['prdid']." AND display_flag=1 AND category_id!=".$params['catid']."";
+								product_id =".$params['prdid']." AND display_flag=1 AND category_id!=".$params['catid']."";
                         $res5=$this->query($sql5);
                         if ($res5) {
                             while ($row5 = $this->fetchData($res5)) {
@@ -1967,6 +1974,137 @@
         return $result;
     }
         */
+
+		public function sendDetailsToUser($params)
+		{
+			$usrEmail = (!empty($params['usrEmail'])) ? trim(urldecode($params['usrEmail'])) : '';
+			$usrMobile = (!empty($params['usrMobile'])) ? trim(urldecode($params['usrMobile'])) : '';
+			$usrName = (!empty($params['usrName'])) ? trim(urldecode($params['usrName'])) : '';
+			$prdid = (!empty($params['prdid'])) ? trim(urldecode($params['prdid'])) : '';
+			$vid = (!empty($params['vid'])) ? trim(urldecode($params['vid'])) : '';
+			$uid = (!empty($params['uid'])) ? trim(urldecode($params['uid'])) : '';
+
+			if(empty($usrEmail) || empty($usrMobile) || empty($usrName) || empty($prdid))
+			{
+				$resp = array();
+				$error = array('Code' => 1, 'Msg' => 'Some parameters are missing');
+				$results = array('results' => $resp, 'error' => $error);
+				return $results;
+			}
+
+			$tmp_params = array('prdid' => $prdid);
+			$prdDetails = $this->getPrdById($tmp_params);
+			$prdRes = $prdDetails['results'][$prdid];
+
+			$vndrId = '';
+			foreach($prdRes as $key => $value)
+			{
+				if(is_array($value) && $key == 'vendor_details')
+				{
+					foreach($value as $ky => $vl)
+					{
+						$vndrName = $vl['OrganisationName'];
+						$vndrLL = $vl['telephones'];
+						$vndrAltEmail = $vl['alt_email'];
+						$vndrCity = $vl['office_city'];
+						$vndrDesig = $vl['position'];
+						$vndrMobile = $vl['contact_mobile'];
+						$vndrEmail = $vl['email'];
+						$vndrWebsite = $vl['website'];
+					}
+				}
+
+				if(is_array($value) && $key == 'vendor_product_details')
+				{
+					foreach($value as $ky => $vl)
+					{
+						$prdPrice = $vl['vendor_price'];
+					}
+				}
+
+				if(is_array($value) && $key == 'attr_details')
+				{
+					foreach($value as $ky => $vl)
+					{
+						$prdCarat = $vl['carat'];
+						$prdColor = $vl['color'];
+						$prdShape = $vl['shape'];
+						$prdPolish = $vl['polish'];
+					}
+				}
+
+				$prdName = $value['product_display_name'];
+			}
+
+			$emailContent = "Dear $usrName,";
+			$emailContent .= "<br/><br/>";
+			if(!empty($prdName))
+			{
+				$emailContent .= "You have enquired for $prdName, please find below he details of Product";
+			}
+			else
+			{
+				$emailContent .= "You have enquired for a product, please find below he details";
+			}
+			$emailContent .= "<br/><br/>";
+
+			$emailContent .= "<table>";
+				$emailContent .= "<tr>";
+					$emailContent .= "<th>";
+						$emailContent .= "Product Id";
+					$emailContent .= "</th>";
+					$emailContent .= "<th>";
+						$emailContent .= "Price";
+					$emailContent .= "</th>";
+					$emailContent .= "<th>";
+						$emailContent .= "Carats";
+					$emailContent .= "</th>";
+					$emailContent .= "<th>";
+						$emailContent .= "Color";
+					$emailContent .= "</th>";
+					$emailContent .= "<th>";
+						$emailContent .= "Shape";
+					$emailContent .= "</th>";
+					$emailContent .= "<th>";
+						$emailContent .= "Polish";
+					$emailContent .= "</th>";
+				$emailContent .= "</tr>";
+				$emailContent .= "<td>";
+					$emailContent .= $prdid;
+				$emailContent .= "</td>";
+				$emailContent .= "<td>";
+					$emailContent .= $prdPrice;
+				$emailContent .= "</td>";
+				$emailContent .= "<td>";
+					$emailContent .= $prdCarat;
+				$emailContent .= "</td>";
+				$emailContent .= "<td>";
+					$emailContent .= $prdColor;
+				$emailContent .= "</td>";
+				$emailContent .= "<td>";
+					$emailContent .= $prdShape;
+				$emailContent .= "</td>";
+				$emailContent .= "<td>";
+					$emailContent .= $prdPolish;
+				$emailContent .= "</td>";
+			$emailContent .= "</table>";
+
+			$mailHeaders = "Content-type:text/html;charset=UTF-8" . "\r\n";
+			$mailHeaders .= "From: noreply@xelpmoc.in \r\n";
+
+			if(mail('rishi@xelpmoc.in', 'Product Details', $emailContent, $mailHeaders))
+			{
+				$resp = array();
+				$error = array('Code' => 0, 'Msg' => 'SMS / Email sent');
+			}
+			else
+			{
+				$resp = array();
+				$error = array('Code' => 1, 'Msg' => 'Error sending SMS / Email');
+			}
+
+			$results = array('results' => $resp, 'error' => $error);
+			return $results;
+		}
     }
 ?>
-        

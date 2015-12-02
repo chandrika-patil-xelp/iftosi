@@ -256,4 +256,41 @@ function Common() {
             $('#' + btnId).click();
         }
     };
+
+	this.validate_mobile = function(mobno) {
+		var mobExp = /^[7,8,9]{1}[0-9]{9}$/;
+		var flag = true;
+		if(mobno == '' || mobno == null || mobno == undefined) {
+			flag = false;
+		} else if(mobExp.test(mobno) == false) {
+			flag = false;
+		}
+
+		return flag;
+	};
+
+	this.validate_email = function(email, isFortigo) {
+		var flag = true;
+		if(email == '' || email == null || email == undefined) {
+			flag = false;
+		} else if(isFortigo && email.indexOf('4tigo') == -1) {
+			flag = false;
+		} else {
+			flag = _this.isValidEmail(email);
+		}
+		return flag;
+	};
+
+	this.isValidEmail = function (email) {
+		var flag = true;
+		var atpos = email.indexOf("@");
+		var dotpos = email.lastIndexOf(".");
+		var isSpace = email.indexOf(" ");
+
+		if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= email.length || isSpace != -1) {
+			flag = false;
+		}
+
+		return flag;
+	};
   }

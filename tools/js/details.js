@@ -150,9 +150,9 @@ $(document).ready(function(){
 				if($(this).hasClass('iconCall'))
 				{
 					isWishList = false;
-                                        isMail = false;
+					isMail = false;
 				}
-                                showVendorDetails(this);
+				showVendorDetails(this);
 			}
 		}
 		else
@@ -172,7 +172,7 @@ $(document).ready(function(){
     
         //console.log(isNaN(ur_name));return false;
 	
-        $('#userSubmit').bind('click',function() {
+	$('#userSubmit').bind('click',function() {
         var ur_name = $('#ur_name').val();
         var ur_mobile = $('#ur_mobile').val();
         var ur_email = $('#ur_email').val();
@@ -309,7 +309,7 @@ function showVendorDetails(obj)
 		var mobile = $('#ur_mobile').val();
 		var name = $('#ur_name').val();
 		var email = $('#ur_email').val();
-                var mobCond = (mobile !== '' && mobile !== null && mobile !== undefined) ? true : false;
+		var mobCond = (mobile !== '' && mobile !== null && mobile !== undefined) ? true : false;
 		var nmCond = (name !== '' && name !== null && name !== undefined) ? true : false;
 		var emCond = (email !== '' && email !== null && email !== undefined) ? true : false;
                 
@@ -320,11 +320,10 @@ function showVendorDetails(obj)
 			customStorage.addToStorage('l', mobile);
 			customStorage.addToStorage('username', name);
 			customStorage.addToStorage('email', email);
-                        customStorage.addToStorage('isLoggedIn',true);
-                        customStorage.addToStorage('is_vendor','0');
-                        common.checkLogin();
-			//var params = "apis/index.php?action=userReg&username="+encodeURIComponent(name)+"&mobile="+mobile+"&email="+encodeURIComponent(email)+'&isvendor=0';
-                        
+			customStorage.addToStorage('isLoggedIn',true);
+			customStorage.addToStorage('is_vendor','0');
+			common.checkLogin();
+
 			var params = 'action=ajx&case=userCheck&mobile='+mobile+'&name='+encodeURIComponent(name)+'&email='+encodeURIComponent(email);
 			var URL = DOMAIN + "index.php";
                         
@@ -333,21 +332,22 @@ function showVendorDetails(obj)
                              
 					if(data.error !== '' && data.error !== null && data.error !== undefined && data.error.code == 0)
 					{       
-                                            var uid = customStorage.addToStorage('userid', data.userid);
-                                                if((obj !== undefined && $(obj).hasClass('iconWishlist')) || isWishList)
+						var uid = customStorage.addToStorage('userid', data.userid);
+						if((obj !== undefined && $(obj).hasClass('iconWishlist')) || isWishList)
 						{
 							addToWishList();
 						}
-                                                if((obj !== undefined && $(obj).hasClass('iconMessage')) || isWishList)
+
+						if((obj !== undefined && $(obj).hasClass('iconMessage')) || isMail)
 						{
-                                                    getUserDetails();
+							sendDetailsToUser();
 						}
 						else
 						{
-                                                    setTimeout(function () {
+							setTimeout(function () {
 								initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
 							},100);
-							var pos=$('.wrapper').height()-50;
+							var pos=$('.wrapper').height()-100;
 							setTimeout(function(){
 								$('#vDetails').removeClass('vTransit');
 								$('#vDetails').removeClass('dn');
@@ -362,23 +362,23 @@ function showVendorDetails(obj)
 	}
 	else
 	{
-                if(isWishList==true)
+		if(isWishList==true)
 		{
-                        addToWishList();
+			addToWishList();
 		}
-                else if(isMail==true)
+		else if(isMail==true)
 		{
                     
-                        $('#overlay,#userForm').removeClass('dn');
-                        setTimeout(function(){
-                        $('#overlay').velocity({opacity:1},{delay:0,duration:300,ease:'swing'});
-                        $('#userForm').velocity({scale:1},{delay:80,duration:100,ease:'swing'});
-                        },10);
-                        getUserDetails();
-                }
-                else if((isMail==false)&&(isWishList==false))
+			$('#overlay,#userForm').removeClass('dn');
+			setTimeout(function(){
+			$('#overlay').velocity({opacity:1},{delay:0,duration:300,ease:'swing'});
+			$('#userForm').velocity({scale:1},{delay:80,duration:100,ease:'swing'});
+			},10);
+			//getUserDetails();
+		}
+		else if((isMail==false)&&(isWishList==false))
 		{
-                    setTimeout(function () {
+			setTimeout(function () {
 				initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
 			},100);
 			//var pos=$('.wrapper').offset().height+50;
@@ -390,7 +390,7 @@ function showVendorDetails(obj)
 				$('#vDetails').removeClass('dn');
 				$('body').animate({scrollTop: pos}, 300);
 			},200);
-                        addToEnquiry();                        
+			addToEnquiry();                        
 		}
 	}
 
@@ -660,14 +660,13 @@ function getWishList()
 
 function getUserDetails()
 {
-        var userid = customStorage.readFromStorage('userid');
-        if(userid !== '' && userid !== undefined && userid !== null)
+	var userid = customStorage.readFromStorage('userid');
+	if(userid !== '' && userid !== undefined && userid !== null)
 	{
-                var params = 'action=ajx&case=getUserDet&uid='+userid;
+		var params = 'action=ajx&case=getUserDet&uid='+userid;
 		var URL = DOMAIN + "index.php";
-                $.getJSON(URL, params, function(data) {
-                     
-                    	if(data !== null && data !== undefined && data !== '' && data !== 'null' && data !== 'undefined' && typeof data !== undefined)
+		$.getJSON(URL, params, function(data) {
+			if(data !== null && data !== undefined && data !== '' && data !== 'null' && data !== 'undefined' && typeof data !== undefined)
 			{
                            
 				if(data.error !== '' && data.error !== null && data.error !== undefined || data.error !== 'undefined')
@@ -675,27 +674,23 @@ function getUserDetails()
                                      
 					if(data.results !== '' && data.results.length > 0)
 					{
-                                            	$('#ur_mobile').val(data.results[0].logmobile);
-                                                $('#ur_name').val(data.results[0].user_name);
-                                                $('#ur_email').val(data.results[0].email);
-                                        }
-                                        else
-                                        {
-                                            customStorage.toast(0,'error');
-                                        }
+						$('#ur_mobile').val(data.results[0].logmobile);
+						$('#ur_name').val(data.results[0].user_name);
+						$('#ur_email').val(data.results[0].email);
+					}
+					else
+					{
+						customStorage.toast(0,'error');
+					}
 
 				}
 			}
-                        else
-                        {
-                            customStorage.toast(0,'error');
-                        }
+			else
+			{
+				customStorage.toast(0,'error');
+			}
 		});
 	}
-        else
-        {
-            
-        }
 }
 function changeStyle(fr)
 {
@@ -737,6 +732,36 @@ function changeStyle(fr)
 		$('#ur_email').addClass('brOrange');
 		$('#ur_email').addClass('brGreen');
 		$('#ur_email').siblings('label').addClass('labelActive');
+	}
+}
+
+function sendDetailsToUser()
+{
+	var usrName = $('#ur_name').val();
+	var usrMobile = $('#ur_mobile').val();
+	var usrEmail = $('#ur_email').val();
+
+	var isValidName = (usrName !== '' && usrName !== null && usrName !== undefined) ? true : false;
+	var isValidMobile = (usrMobile !== '' && usrMobile !== null && usrMobile !== undefined) ? true : false;
+	var isValidEmail = (usrEmail !== '' && usrEmail !== null && usrEmail !== undefined) ? true : false;
+
+	if(isValidMobile)
+	{
+		isValidMobile = common.validate_mobile(usrMobile);
+	}
+
+	if(isValidEmail)
+	{
+		isValidEmail = common.validate_email(usrEmail);
+	}
+
+	if(isValidName && isValidMobile && isValidEmail)
+	{
+		var params = 'action=ajx&case=sendDetailsToUser&usrName='+encodeURIComponent(usrName)+'&usrMobile='+encodeURIComponent(usrMobile)+'&usrEmail='+encodeURIComponent(usrEmail)+'&prdid='+encodeURIComponent(pid);
+		var URL = DOMAIN + "index.php";
+		$.getJSON(URL, params, function(data) {
+			
+		});
 	}
 }
 
