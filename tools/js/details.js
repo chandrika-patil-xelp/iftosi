@@ -316,8 +316,8 @@ function showVendorDetails(obj)
 			$.getJSON(URL, params, function(data) {
 				if(data !== null && data !== undefined && data !== '')
 				{
-					if(data.error !== '' && data.error !== null && data.error !== undefined && data.error.code == 0)
-					{       
+					if((data.error !== '' && data.error !== null && data.error !== undefined && data.error.Code == 0) || (data.error.Code == 1 && data.results == 'User is already Registered'))
+					{
 						var uid = customStorage.addToStorage('userid', data.userid);
 						if((obj !== undefined && $(obj).hasClass('iconWishlist')) || isWishList)
 						{
