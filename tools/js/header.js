@@ -139,6 +139,16 @@ if (pw < 481) {
  });*/
 
 $(document).ready(function() {
+
+	if(pageName == 'wishlist')
+	{
+		var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
+		if(isLoggedIn == 'false' || isLoggedIn == false || isLoggedIn == '' || isLoggedIn == null || isLoggedIn == undefined)
+		{
+			window.location.href = DOMAIN;
+		}
+	}
+
     $(window).scroll(function() {
         $('#header,#logoTxt,#mMenuBtn,#hbgDiam,#hbgJewel,#hbgBull').velocity("stop");
         $('.logo,.headCatCont,.headRight,.upperMenu').velocity("stop");

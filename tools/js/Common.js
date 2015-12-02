@@ -112,8 +112,14 @@ function Common() {
         customStorage.removeFromStorage('isLoggedIn');
         localStorage.clear();
         customStorage.addToStorage('isLoggedIn', false);
-        //window.location.href = DOMAIN + "index.php";
-        window.location.href = window.location;
+		if(pageName == 'wishlist')
+		{
+			window.location.href = DOMAIN + "index.php";
+		}
+		else
+		{
+			window.location.href = window.location;
+		}
     };
     this.closeLoginForm = function () {
         $('#loginDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});

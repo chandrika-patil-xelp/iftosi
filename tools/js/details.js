@@ -16,23 +16,6 @@ var isMail = false;
 var isContact = false;
 var isPidInWishlist = false;
 
-var validMob = true;
-$('#ur_mobile').keyup(function () {
-    var mobile = $(this).val();
-    if(mobile.length==10) {
-        $.ajax({url: DOMAIN + "apis/index.php?action=checkUser&mobile=" + mobile, success: function (result) {
-            var obj = jQuery.parseJSON(result);
-            var errCode = obj['error']['Code'];
-            if(errCode == 1) {
-                validMob = false;
-                customStorage.toast(0,'This Mobile Number Already Registered!'); 
-            } else {
-                validMob = true;
-            }
-        }});
-    }
-});
-
 $(document).ready(function(){
      setTimeout(function() {
         var samt = 100;
@@ -91,16 +74,16 @@ $(document).ready(function(){
 			uid = customStorage.readFromStorage('userid');
 			if(uid == '' || uid == null || uid == undefined)
 			{
-                            if($(this).hasClass('iconWishlist'))
-                            {
-                                isWishList = true;
-                            }
-                            else
-                            {
-                                isWishList = false;
-                            }
-                            common.showLoginForm(1);
-                        }
+				if($(this).hasClass('iconWishlist'))
+				{
+					isWishList = true;
+				}
+				else
+				{
+					isWishList = false;
+				}
+				common.showLoginForm(1);
+			}
 			else
 			{
 				if($(this).hasClass('iconWishlist'))
@@ -119,8 +102,10 @@ $(document).ready(function(){
 			customStorage.toast(0, 'This feature is not available for vendors');
 		}
     });
+
     $('#overlay').velocity({opacity:0},{delay:0,duration:0});
     $('#userForm').velocity({scale:0},{delay:0,duration:0});
+
     $('.iconCall,.iconMessage').click(function(){
 		var isVendor = customStorage.readFromStorage('is_vendor');
 		if(isVendor !== '1' && isVendor !== 1)
@@ -137,7 +122,16 @@ $(document).ready(function(){
 					$('#overlay').velocity({opacity:1},{delay:0,duration:300,ease:'swing'});
 					$('#userForm').velocity({scale:1},{delay:80,duration:100,ease:'swing'});
 				},10); 
-				isWishList = false;
+				if($(this).hasClass('iconMessage'))
+				{
+					isMail = true;
+					isWishList = false;
+				}
+				if($(this).hasClass('iconCall'))
+				{
+					isWishList = false;
+					isMail = false;
+				}
 			}
 			else
 			{
@@ -176,12 +170,7 @@ $(document).ready(function(){
         var ur_name = $('#ur_name').val();
         var ur_mobile = $('#ur_mobile').val();
         var ur_email = $('#ur_email').val();
-        if(!validMob) {
-            customStorage.toast(0,'This Mobile Number Already Registered!'); 
-            $('#ur_mobile').focus();
-            return false;
-        }
-        else if(ur_mobile=='' || ur_mobile.length!=10 || isNaN(ur_mobile)) {
+        if(ur_mobile=='' || ur_mobile.length!=10 || isNaN(ur_mobile)) {
             customStorage.toast(0,'Invalid Format for Mobile'); 
             $('#ur_mobile').focus();
             return false;
@@ -305,18 +294,15 @@ function showVendorDetails(obj)
         
 	if(uid == '' || uid == null || uid == undefined)
 	{
-            
 		var mobile = $('#ur_mobile').val();
 		var name = $('#ur_name').val();
 		var email = $('#ur_email').val();
 		var mobCond = (mobile !== '' && mobile !== null && mobile !== undefined) ? true : false;
 		var nmCond = (name !== '' && name !== null && name !== undefined) ? true : false;
 		var emCond = (email !== '' && email !== null && email !== undefined) ? true : false;
-                
 
 		if(mobCond && nmCond && emCond)
 		{
-                    
 			customStorage.addToStorage('l', mobile);
 			customStorage.addToStorage('username', name);
 			customStorage.addToStorage('email', email);
@@ -328,8 +314,8 @@ function showVendorDetails(obj)
 			var URL = DOMAIN + "index.php";
                         
 			$.getJSON(URL, params, function(data) {
-                          if(data !== null && data !== undefined && data !== '') {
-                             
+				if(data !== null && data !== undefined && data !== '')
+				{
 					if(data.error !== '' && data.error !== null && data.error !== undefined && data.error.code == 0)
 					{       
 						var uid = customStorage.addToStorage('userid', data.userid);
@@ -368,23 +354,21 @@ function showVendorDetails(obj)
 		}
 		else if(isMail==true)
 		{
-                    
 			$('#overlay,#userForm').removeClass('dn');
 			setTimeout(function(){
-			$('#overlay').velocity({opacity:1},{delay:0,duration:300,ease:'swing'});
-			$('#userForm').velocity({scale:1},{delay:80,duration:100,ease:'swing'});
+				$('#overlay').velocity({opacity:1},{delay:0,duration:300,ease:'swing'});
+				$('#userForm').velocity({scale:1},{delay:80,duration:100,ease:'swing'});
 			},10);
-			//getUserDetails();
+			sendDetailsToUser();
 		}
 		else if((isMail==false)&&(isWishList==false))
 		{
 			setTimeout(function () {
 				initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
 			},100);
-			//var pos=$('.wrapper').offset().height+50;
-                        var pos=$('.wrapper').height()-50;
-                        //console.log(pos);
-                        
+
+			var pos=$('.wrapper').height()-50;
+
 			setTimeout(function(){
 				$('#vDetails').removeClass('vTransit');
 				$('#vDetails').removeClass('dn');
@@ -393,111 +377,6 @@ function showVendorDetails(obj)
 			addToEnquiry();                        
 		}
 	}
-
-	/*var params = 'action=ajx&case=vendor&productid='+pid;
-	var URL = DOMAIN + "index.php";
-	$.getJSON(URL, params, function(data) {
-		if(data.results.vendor_details) {
-			var vhtml = '';
-			var j=0;
-			$.each(data.results.vendor_details, function(i, dt) {
-				if(j==0) {
-					var add = dt.fulladdress.split(',');
-					vhtml += '<div class="wrapperMax ">';
-						vhtml += '<div class="vdLeftCard fLeft">';
-							vhtml += '<div class="orgName fLeft fmOpenR">'+dt.OrganisationName+'</div>';
-							vhtml += '<div class="orgAdd fLeft fmOpenR">';
-								for(var i=0;i<add.length;i++)
-								{
-									if(i == (add.length - 1))
-										vhtml += add[i];
-									else
-										vhtml += add[i]+',<br>';
-								}
-							vhtml += '</div>';
-							vhtml += '<div class="orgNo fLeft">';
-								vhtml += '<div class="infoLabel fmOpenB font12 fmOpenB fLeft">Telephone No.</div>';
-								vhtml += '<div class="commtxt tel fmOpenR fLeft">'+replaceAll('~',', ',dt.telephones)+'</div>';
-							vhtml += '</div>';
-							vhtml += '<div class="orgNo fLeft">';
-								vhtml += '<div class="infoLabel fmOpenB font12 fmOpenB fLeft">Email Address</div>';
-								vhtml += '<div class="commtxt email fmOpenR fLeft">'+replaceAll('~',', ',dt.alt_email)+'</div>';
-							vhtml += '</div>';
-							vhtml += '<div class="orgNo fLeft">';
-								vhtml += '<div class="infoLabel fmOpenB font12 fmOpenB fLeft">Website</div>';
-								vhtml += '<div class="commtxt email fmOpenR fLeft"><a href="#">'+dt.website+'</a></div>';
-							vhtml += '</div>';
-							vhtml += '<div class="orgNo fLeft">';
-								vhtml += '<div class="commLeft fLeft">';
-									vhtml += '<div class="infoLabel fmOpenB font12 fmOpenB fLeft">VAT Number</div>';
-									vhtml += '<div class="commtxt email fmOpenR fLeft">'+dt.Vat_Number+'</div>';
-								vhtml += '</div>';
-								vhtml += '<div class="commRight fLeft">';
-									vhtml += '<div class="infoLabel fmOpenB font12 fmOpenB fLeft">Turnover (cr)</div>';
-									vhtml += '<div class="commtxt email fmOpenR fLeft">'+dt.turnover+'</div>';
-								vhtml += '</div>';
-							vhtml += '</div>';
-
-							vhtml += '<div class="orgNo fLeft">';
-								vhtml += '<div class="infoLabel fmOpenB font12 fmOpenB fLeft">Bankers</div>';
-								vhtml += '<div class="commtxt bankers fmOpenR fLeft">'+replaceAll('~',', ',dt.bankers)+'</div>';
-							vhtml += '</div>';
-						vhtml += '</div>';
-						vhtml += '<div class="vdCenterCard fLeft">';
-							vhtml += '<div class="cntCard fLeft">';
-								vhtml += '<div class="vTitle fLeft fmOpenR" style="background-color: #5e0037;">Contact Person</div>';
-								vhtml += '<div class="cardCommCont"><div class="cardComm cntName orgName fLeft fmOpenR">'+dt.contact_person+'</div>';
-									vhtml += '<div class="fmOpenB desig">('+dt.position+')</div>';
-									vhtml += '<div class="cardComm cntMb fmOpenB fLeft">'+dt.contact_mobile+'</div>';
-									vhtml += '<div class="cardComm cntEmail fmOpenB fLeft">'+dt.email+'</div>';
-								vhtml += '</div>';
-							vhtml += '</div>';
-							vhtml += '<div class="cntCard fLeft">';
-								vhtml += '<div class="vTitle fLeft fmOpenR" style="background-color: #380B34;">Bharat Diamond Bourse Certificate</div>';
-								vhtml += '<div class="cardCommCont">';
-									vhtml += '<div class="cardComm fLeft fmOpenR">'+dt.bharat_Diamond_Bource_Certificate+'</div>';
-								vhtml += '</div>';
-							vhtml += '</div>';
-
-							vhtml += '<div class="cntCard fLeft">';
-								vhtml += '<div class="vTitle fLeft fmOpenR" style="background-color: #2A0E34;">GJEPC Membership Certificate</div>';
-								vhtml += '<div class="cardCommCont">';
-									vhtml += '<div class="cardComm fLeft fmOpenR">'+dt.Membership_Certificate+'</div>';
-								vhtml += '</div>';
-							vhtml += '</div>';
-							vhtml += '<div class="cntCard fLeft">';
-								vhtml += '<div class="vTitle fLeft fmOpenR" style="background-color: #171334;">Membership Of Other Diamond Bourses</div>';
-								vhtml += '<div class="cardCommCont">';
-									vhtml += '<div class="cardComm fLeft fmOpenR">'+replaceAll('~',', ',dt.membership_of_other_diamond_bourses_around_world)+'</div>';
-								vhtml += '</div>';
-							vhtml += '</div>';
-						vhtml += '</div>';
-						vhtml += '<div  class="vdRightCard fLeft">';
-							vhtml += '<div class="cntCard fLeft shadoNone">';
-								vhtml += '<div class="vTitle fLeft fmOpenR" style="background-color: #ebebde;color:#666;">Office Locations</div>';
-								vhtml += '<div class="cardCommCont" style="padding: 10px;"><div id="googleMap" class="mapCont fLeft"></div></div>';
-							vhtml += '</div>';
-							
-							vhtml += '<div class="cntCard fLeft shadoNone">';
-								vhtml += '<div class="vTitle fLeft fmOpenR" style="background-color: #ebebde;color:#666;">Gallery</div>';
-								vhtml += '<div class="cardCommCont" style="padding: 10px;">';
-									vhtml += '<div class="gallery fLeft">';
-										vhtml += '<div class="thumbnil fLeft" style="background:#fff url(http://localhost/iftosi/tools/img/common/tumb5.jpg)no-repeat;background-size: contain;background-position: center;"></div><div class="thumbnil fLeft" style="background:#fff url(http://localhost/iftosi/tools/img/common/tumb2.png)no-repeat;background-size: contain;background-position: center;"></div>';
-										vhtml += '<div class="thumbnil fLeft" style="background:#fff url(http://localhost/iftosi/tools/img/common/tumb3.jpg)no-repeat;background-size: contain;background-position: center;"></div>';
-										vhtml += '<div id="moreimg" class="thumbnil fLeft poR" style="background:#8A0044"><span>+5 More</span></div>';
-									vhtml += '</div>';
-								vhtml += '</div>';
-							vhtml += '</div>';
-						vhtml += '</div>';
-					vhtml += '</div>';
-					
-					$('#vDetails').html(vhtml);
-					
-				}
-				j++;
-			});
-		}
-	});*/
 }
 function initMap(lat,lng,contentString) {
 	var myLatLng = {lat: lat, lng: lng};
