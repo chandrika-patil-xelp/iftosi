@@ -212,17 +212,17 @@ $(document).ready(function(){
 	if(mobile !== '' && mobile !== null && mobile !== undefined && mobile !== 'null' && mobile !== 'undefined' && typeof mobile !== 'undefined')
 	{
 		$('#ur_mobile').val(mobile);
-		changeStyle('mobile');
+		common.changeStyle('mobile');
 	}
 	if(name !== '' && name !== null && name !== undefined && name !== 'null' && name !== 'undefined' && typeof name !== 'undefined')
 	{
 		$('#ur_name').val(name);
-		changeStyle('name');
+		common.changeStyle('name');
 	}
 	if(email !== '' && email !== null && email !== undefined && email !== 'null' && email !== 'undefined' && typeof email !== 'undefined')
 	{
 		$('#ur_email').val(email);
-		changeStyle('email');
+		common.changeStyle('email');
 	}
 
 	if(pageName == 'diamond_details' || pageName == 'bullion_details' || pageName == 'jewellery_details')
@@ -569,48 +569,6 @@ function getUserDetails()
 				customStorage.toast(0,'error');
 			}
 		});
-	}
-}
-function changeStyle(fr)
-{
-	if(fr == 'all')
-	{
-		$('#ur_mobile').addClass('mobileIcon');
-		$('#ur_name').addClass('nameIcon');
-		$('#ur_email').addClass('emailIcon');
-
-		$('#ur_mobile').addClass('brOrange');
-		$('#ur_mobile').addClass('brGreen');
-		$('#ur_mobile').siblings('label').addClass('labelActive');
-
-		$('#ur_name').addClass('brOrange');
-		$('#ur_name').addClass('brGreen');
-		$('#ur_name').siblings('label').addClass('labelActive');
-
-		$('#ur_email').addClass('brOrange');
-		$('#ur_email').addClass('brGreen');
-		$('#ur_email').siblings('label').addClass('labelActive');
-	}
-	else if (fr == 'mobile')
-	{
-		$('#ur_mobile').addClass('mobileIcon');
-		$('#ur_mobile').addClass('brOrange');
-		$('#ur_mobile').addClass('brGreen');
-		$('#ur_mobile').siblings('label').addClass('labelActive');
-	}
-	else if(fr == 'name')
-	{
-		$('#ur_name').addClass('nameIcon');
-		$('#ur_name').addClass('brOrange');
-		$('#ur_name').addClass('brGreen');
-		$('#ur_name').siblings('label').addClass('labelActive');
-	}
-	else if(fr == 'email')
-	{
-		$('#ur_email').addClass('emailIcon');
-		$('#ur_email').addClass('brOrange');
-		$('#ur_email').addClass('brGreen');
-		$('#ur_email').siblings('label').addClass('labelActive');
 	}
 }
 

@@ -237,7 +237,7 @@ function Common() {
                         _this.checkLogin();
                         _this.closeLoginForm();
 
-						changeStyle('all');
+						_this.changeStyle('all');
 
                         if(vd)
                         {
@@ -299,4 +299,64 @@ function Common() {
 
 		return flag;
 	};
-  }
+
+	this.changeStyle = function(fr)
+	{
+		if(fr == 'all')
+		{
+			if($('#ur_mobile') !== undefined && $('#ur_mobile') !== null && $('#ur_mobile') !== 'undefined' && typeof $('#ur_mobile') !== 'undefined')
+			{
+				$('#ur_mobile').addClass('mobileIcon');
+				$('#ur_mobile').addClass('brOrange');
+				$('#ur_mobile').addClass('brGreen');
+				$('#ur_mobile').siblings('label').addClass('labelActive');
+			}
+
+			if($('#ur_name') !== undefined && $('#ur_name') !== null && $('#ur_name') !== 'undefined' && typeof $('#ur_name') !== 'undefined')
+			{
+				$('#ur_name').addClass('nameIcon');
+				$('#ur_name').addClass('brOrange');
+				$('#ur_name').addClass('brGreen');
+				$('#ur_name').siblings('label').addClass('labelActive');
+			}
+
+			if($('#ur_email') !== undefined && $('#ur_email') !== null && $('#ur_email') !== 'undefined' && typeof $('#ur_email') !== 'undefined')
+			{
+				$('#ur_email').addClass('emailIcon');
+				$('#ur_email').addClass('brOrange');
+				$('#ur_email').addClass('brGreen');
+				$('#ur_email').siblings('label').addClass('labelActive');
+			}
+		}
+		else if (fr == 'mobile')
+		{
+			if($('#ur_mobile') !== undefined && $('#ur_mobile') !== null && $('#ur_mobile') !== 'undefined' && typeof $('#ur_mobile') !== 'undefined')
+			{
+				$('#ur_mobile').addClass('mobileIcon');
+				$('#ur_mobile').addClass('brOrange');
+				$('#ur_mobile').addClass('brGreen');
+				$('#ur_mobile').siblings('label').addClass('labelActive');
+			}
+		}
+		else if(fr == 'name')
+		{
+			if($('#ur_name') !== undefined && $('#ur_name') !== null && $('#ur_name') !== 'undefined' && typeof $('#ur_name') !== 'undefined')
+			{
+				$('#ur_name').addClass('nameIcon');
+				$('#ur_name').addClass('brOrange');
+				$('#ur_name').addClass('brGreen');
+				$('#ur_name').siblings('label').addClass('labelActive');
+			}
+		}
+		else if(fr == 'email')
+		{
+			if($('#ur_email') !== undefined && $('#ur_email') !== null && $('#ur_email') !== 'undefined' && typeof $('#ur_email') !== 'undefined')
+			{
+				$('#ur_email').addClass('emailIcon');
+				$('#ur_email').addClass('brOrange');
+				$('#ur_email').addClass('brGreen');
+				$('#ur_email').siblings('label').addClass('labelActive');
+			}
+		}
+	};
+}
