@@ -2026,10 +2026,22 @@
 				{
 					foreach($value as $ky => $vl)
 					{
-						$prdCarat = $vl['carat'];
-						$prdColor = $vl['color'];
-						$prdShape = $vl['shape'];
-						$prdPolish = $vl['polish'];
+						if($ky == 'carat')
+						{
+							$prdCarat = $value['carat'];
+						}
+						else if($ky == 'color')
+						{
+							$prdColor = $value['color'];
+						}
+						else if($ky == 'shape')
+						{
+							$prdShape = $value['shape'];
+						}
+						else if($ky == 'polish')
+						{
+							$prdPolish = $value['polish'];
+						}
 					}
 				}
 
@@ -2040,15 +2052,15 @@
 			$emailContent .= "<br/><br/>";
 			if(!empty($prdName))
 			{
-				$emailContent .= "You have enquired for $prdName, please find below he details of Product";
+				$emailContent .= "You have enquired for $prdName, please find below the details of Product";
 			}
 			else
 			{
-				$emailContent .= "You have enquired for a product, please find below he details";
+				$emailContent .= "You have enquired for a product, please find below the details";
 			}
 			$emailContent .= "<br/><br/>";
 
-			$emailContent .= "<table>";
+			$emailContent .= "<table border='2'>";
 				$emailContent .= "<tr>";
 					$emailContent .= "<th>";
 						$emailContent .= "Product Id";
@@ -2089,12 +2101,18 @@
 				$emailContent .= "</td>";
 			$emailContent .= "</table>";
 
+			$emailContent .= "<br/><br/>";
+
+			$emailContent .= "Regards,";
+			$emailContent .= "<br/>";
+			$emailContent .= "IFtoSI Team";
+
 			$mailHeaders = "Content-type:text/html;charset=UTF-8" . "\r\n";
 			$mailHeaders .= "From: noreply@xelpmoc.in \r\n";
 
-			if(mail('rishi@xelpmoc.in', 'Product Details', $emailContent, $mailHeaders))
+			if(mail($usrEmail, 'Product Details', $emailContent, $mailHeaders))
 			{
-				$resp = array();
+				$resp = $prdRes;
 				$error = array('Code' => 0, 'Msg' => 'SMS / Email sent');
 			}
 			else
