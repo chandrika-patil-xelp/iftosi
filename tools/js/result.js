@@ -7,7 +7,6 @@ if (pw < 768) {
     isMobile = true;
 }
 
-
 $(document).ready(function() {
 	
 	$(".wishTabComm").bind('click',function(){
@@ -157,6 +156,58 @@ $(document).ready(function() {
 			}
 			else
 				FR(1);
+		}
+	});
+
+	$('.pPrev').bind('click', function() {
+		var curpgno = parseInt($('#pgno').val());
+		var pgval = curpgno - 1;
+		if(curpgno > 1)
+		{
+			$('#pgno').val(pgval);
+			var uid = $('#uid').val();
+			if(pageName.indexOf("wishlist") !== -1)
+			{
+				if(typeof $('.wishTabComm') !== 'undefined')
+				{
+					$(".wishTabComm").each(function(){
+						if($(this).hasClass('sel'))
+						{
+							showWish($(this).attr('id'),pgval,uid);
+						}
+					});
+				}
+			}
+			else
+			{
+				FR(1);
+			}
+		}
+	});
+
+	$('.pNext').bind('click', function() {
+		var curpgno = parseInt($('#pgno').val());
+		var pgval = curpgno + 1;
+		if(curpgno < parseInt($('#total_pageno').val()))
+		{
+			$('#pgno').val(pgval);
+			var uid = $('#uid').val();
+			if(pageName.indexOf("wishlist") !== -1)
+			{
+				if(typeof $('.wishTabComm') !== 'undefined')
+				{
+					$(".wishTabComm").each(function(){
+						if($(this).hasClass('sel'))
+						{
+							showWish($(this).attr('id'),pgval,uid);
+						}
+					});
+				}
+			}
+			else
+			{
+				FR(1);
+			}
 		}
 	});
 });
@@ -727,6 +778,7 @@ function getResultsData(data,sortby,showtree)
 		var lastpg = Math.ceil(totalCount/15);
 	//lastpg = 10;
 	var adjacents = 2;
+	$('#total_pageno').val(lastpg);
 	
 	if(lastpg > 1)
 	{
@@ -894,6 +946,58 @@ function getResultsData(data,sortby,showtree)
 			}
 			else
 			FR(1);
+		}
+	});
+
+	$('.pPrev').bind('click', function() {
+		var curpgno = parseInt($('#pgno').val());
+		var pgval = curpgno - 1;
+		if(curpgno > 1)
+		{
+			$('#pgno').val(pgval);
+			var uid = $('#uid').val();
+			if(pageName.indexOf("wishlist") !== -1)
+			{
+				if(typeof $('.wishTabComm') !== 'undefined')
+				{
+					$(".wishTabComm").each(function(){
+						if($(this).hasClass('sel'))
+						{
+							showWish($(this).attr('id'),pgval,uid);
+						}
+					});
+				}
+			}
+			else
+			{
+				FR(1);
+			}
+		}
+	});
+
+	$('.pNext').bind('click', function() {
+		var curpgno = parseInt($('#pgno').val());
+		var pgval = curpgno + 1;
+		if(curpgno < parseInt($('#total_pageno').val()))
+		{
+			$('#pgno').val(pgval);
+			var uid = $('#uid').val();
+			if(pageName.indexOf("wishlist") !== -1)
+			{
+				if(typeof $('.wishTabComm') !== 'undefined')
+				{
+					$(".wishTabComm").each(function(){
+						if($(this).hasClass('sel'))
+						{
+							showWish($(this).attr('id'),pgval,uid);
+						}
+					});
+				}
+			}
+			else
+			{
+				FR(1);
+			}
 		}
 	});
 	
