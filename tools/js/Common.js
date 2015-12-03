@@ -110,7 +110,6 @@ function Common() {
 
     this.doLogout = function () {
         customStorage.removeFromStorage('isLoggedIn');
-        localStorage.clear();
         customStorage.addToStorage('isLoggedIn', false);
 		if(pageName == 'wishlist')
 		{
@@ -130,7 +129,6 @@ function Common() {
         }, 1010);
     }
     this.showLoginForm = function (vd) {
-        
         var str = '<div id="overlay1" class="overlay transition300" style="opacity: 0;" onclick="common.closeLoginForm();"></div>';
         str += '<div id="loginDiv" class="loginDiv transition300" style="transform: scale(0);">';
         str += '<div class="lgTitle fLeft fmOpenR">One account. All about Diamonds</div>';
@@ -171,8 +169,8 @@ function Common() {
         var mobile = customStorage.readFromStorage('mobile');
         var name = customStorage.readFromStorage('name');
         var email = customStorage.readFromStorage('email');
-
-        if (mobile == '' || mobile == null || mobile == undefined)
+        var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
+        if (isLoggedIn == undefined || isLoggedIn == '' || isLoggedIn == null || isLoggedIn == false)
         {
             $('#overlay1,#loginDiv').removeClass('dn');
             setTimeout(function () {
@@ -213,7 +211,6 @@ function Common() {
                     customStorage.addToStorage('name', username);
                     customStorage.addToStorage('email', email);
                     customStorage.addToStorage('isComp',isComp);
-                    //customStorage.addToStorage('p', pr_pass);
                     customStorage.addToStorage('userid', userid);
                     customStorage.addToStorage('username', username);
                     customStorage.addToStorage('is_vendor', is_vendor);

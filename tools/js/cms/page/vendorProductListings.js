@@ -87,8 +87,8 @@ function loadDiamondCallback(res) {
 }
 function generateDiamondList(obj) {
     var pro_name = obj['product_name'];
-    if(pro_name == null) {
-        pro_name = '';
+    if(pro_name == null || pro_name == '' || pro_name == 'null') {
+        pro_name = obj['barcode'];
     }
     var date = obj['update_time'].split(' ');
     var str = '<li>';
@@ -160,8 +160,8 @@ function generateJewellList(obj) {
     {
         category = '<span class="upSpan">Bangles / Bracelets</span>';
     }
-    if(pro_name == null) {
-        pro_name = '';
+    if(pro_name == null || pro_name == '' || pro_name == 'null') {
+        pro_name = obj['barcode'];
     }
     var date = obj['update_time'].split(' ');
     var str = '<li>';
@@ -226,7 +226,7 @@ function loadBullionsCallback(res) {
 }
 function generatBullionsList(obj) {
     var pro_name = obj['product_name'];
-    if(pro_name == null) {
+    if(pro_name == null || pro_name == '' || pro_name == 'null') {
         pro_name = '';
     }
     var date = obj['update_time'].split(' ');
@@ -355,6 +355,11 @@ function searchBarcode(val) {
         searchIDName='Bullions';
     }
     if(val!='') {
+        if(searchPage == 1)
+        {
+            $('#'+searchIDName+'List').removeClass('dn');
+            $('#s'+searchIDName+'List').html('').addClass('dn');
+        }
         $.ajax({url: common.APIWebPath() + "index.php?action=getVProductsByBcode&bcode="+ val +"&vid="+ uid +"&catid="+catid+"&page="+searchPage+"&limit=15", success: function (result) {
             searchBarcodeCallback(result);
         }});
@@ -366,7 +371,7 @@ function searchBarcode(val) {
 }
 function searchBarcodeCallback(res) {
     var obj = jQuery.parseJSON(res);
-    if (obj['results'] != '') {
+    if (obj['results'] !== '') {
         var total = obj['results']['total_products'];
         //$('#total'+searchIDName).text(total);
         
@@ -397,7 +402,8 @@ function searchBarcodeCallback(res) {
                 }
             }
             $('#s'+searchIDName+'List').append(str);
-        } else if(searchPage==1) {
+        }
+        else if(searchPage==1) {
             searchScroll = false;
             var str = '<p class="noRecords"><span>Sorry! No Products Found!</span></p>';
             $('#s'+searchIDName+'List').html(str);

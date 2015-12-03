@@ -484,7 +484,66 @@ switch($action)
             }
             $res= $result;
         break;
+        
+// localhost/iftosi/apis/index.php?action=updateSilverRate&vid=2&dolRate=50.50
+        case 'updateSilverRate':
+            include APICLUDE.'class.vendor.php';
+            $vid=(!empty($params['vid'])) ? trim($params['vid']) : '';
+            $silverRate=(!empty($params['silRate'])) ? trim($params['silRate']) : '';
+            if(!empty($vid) && !empty($silverRate)) {
+                $obj = new vendor($db['iftosi']);
+                $result = $obj->updateSilverRate($params);
+            } else {
+                $err = array('Code' => 1, 'Msg' => 'Invalid Parameters');
+                $result = array('results' => array(), 'error' => $err);
+            }
+            $res= $result;
+        break;
+        
+// localhost/iftosi/apis/index.php?action=getSilverRate&vid=2
+        case 'getSilverRate':
+            include APICLUDE.'class.vendor.php';
+            $vid=(!empty($params['vid'])) ? trim($params['vid']) : '';
+            if(!empty($vid)) {
+                $obj = new vendor($db['iftosi']);
+                $result = $obj->getSilverRate($params);
+            } else {
+                $err = array('Code' => 1, 'Msg' => 'Invalid Parameters');
+                $result = array('results' => array(), 'error' => $err);
+            }
+            $res= $result;
+        break;
 
+// localhost/iftosi/apis/index.php?action=updateGoldRate&vid=2&dolRate=50.50
+        case 'updateGoldRate':
+            include APICLUDE.'class.vendor.php';
+            $vid=(!empty($params['vid'])) ? trim($params['vid']) : '';
+            $goldRate=(!empty($params['goldRate'])) ? trim($params['goldRate']) : '';
+            if(!empty($vid) && !empty($goldRate)) {
+                $obj = new vendor($db['iftosi']);
+                $result = $obj->updateGoldRate($params);
+            } else {
+                $err = array('Code' => 1, 'Msg' => 'Invalid Parameters');
+                $result = array('results' => array(), 'error' => $err);
+            }
+            $res= $result;
+        break;
+        
+// localhost/iftosi/apis/index.php?action=getGoldRate&vid=2
+        case 'getGoldRate':
+            include APICLUDE.'class.vendor.php';
+            $vid=(!empty($params['vid'])) ? trim($params['vid']) : '';
+            if(!empty($vid)) {
+                $obj = new vendor($db['iftosi']);
+                $result = $obj->getGoldRate($params);
+            } else {
+                $err = array('Code' => 1, 'Msg' => 'Invalid Parameters');
+                $result = array('results' => array(), 'error' => $err);
+            }
+            $res= $result;
+        break;
+        
+        
 //-------------------------Location---------------------------------               
             
 // localhost/iftosi/apis/index.php?action=addCity&cname=Pakistan&sname=Punjab&cityname=lahore            

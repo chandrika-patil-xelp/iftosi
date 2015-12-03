@@ -1203,5 +1203,63 @@ class vendor extends DB
         return $result;
     }
     
+        public function updateSilverRate($params) {
+        $sql="UPDATE tbl_vendor_master SET silver_rate='".$params['silRate']."' WHERE vendor_id='".$params['vid']."'";
+        $res=$this->query($sql);
+        if ($res) {
+            $arr = array();
+            $err = array('code' => 0, 'Msg' => 'Silver Rate Updated successfully!');
+        } else {
+            $arr = array();
+            $err = array('code' => 1, 'msg' => 'Error in Updating Silver Rate');
+        }
+        $result = array('results' => $arr, 'error' => $err);
+        return $result;
+        }    
+    
+        public function getSilverRate($params) {
+        $sql="SELECT silver_rate FROM tbl_vendor_master WHERE vendor_id='".$params['vid']."'";
+        $res=$this->query($sql);
+        if ($res) {
+            $row = $this->fetchData($res);
+            $arr = $row;
+            $err = array('Code' => 0, 'Msg' => 'Silver Rate Updated successfully!');
+        } else {
+            $arr = array();
+            $err = array('code' => 1, 'msg' => 'Error in Updating Silver Rate');
+        }
+        $result = array('results' => $arr, 'error' => $err);
+        return $result;
+        }
+        
+        public function updateGoldRate($params) {
+        $sql="UPDATE tbl_vendor_master SET gold_rate='".$params['goldRate']."' WHERE vendor_id='".$params['vid']."'";
+        $res=$this->query($sql);
+        if ($res) {
+            $arr = array();
+            $err = array('code' => 0, 'Msg' => 'Gold Rate Updated successfully!');
+        } else {
+            $arr = array();
+            $err = array('code' => 1, 'msg' => 'Error in Updating Gold Rate');
+        }
+        $result = array('results' => $arr, 'error' => $err);
+        return $result;
+        }    
+    
+        public function getGoldRate($params) {
+        $sql="SELECT gold_rate FROM tbl_vendor_master WHERE vendor_id='".$params['vid']."'";
+        $res=$this->query($sql);
+        if ($res) {
+            $row = $this->fetchData($res);
+            $arr = $row;
+            $err = array('Code' => 0, 'Msg' => 'Gold Rate Updated successfully!');
+        } else {
+            $arr = array();
+            $err = array('code' => 1, 'msg' => 'Error in Updating Gold Rate');
+        }
+        $result = array('results' => $arr, 'error' => $err);
+        return $result;
+        }
+    
 }
 ?>

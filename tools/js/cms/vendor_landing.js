@@ -301,7 +301,6 @@ function submitDForm() {
      alert('submit ' +values);*/
 }
 
-
 $('#overlay').velocity({opacity:0},{delay:0,duration:0});
 $('#uploadDiv,#dollarRateDiv').velocity({scale: 0}, {delay: 0, duration: 0});
 $('#upProds').click(function () {
@@ -359,6 +358,125 @@ function updateDollarRate() {
         });
     }
 }
+
+/* For bullion silver rate of vendor */
+$('#overlay').velocity({opacity:0},{delay:0,duration:0});
+$('#uploadDiv,#silverRateDiv').velocity({scale: 0}, {delay: 0, duration: 0});
+$('#upProds').click(function () {
+    $('#overlay,#uploadDiv').removeClass('dn');
+    setTimeout(function () {
+        $('#overlay').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
+        $('#uploadDiv').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
+    }, 10);
+    loadBullion = false;
+});
+$('#upSilRt').click(function () {
+    $('#overlay,#silverRateDiv').removeClass('dn');
+    setTimeout(function () {
+        $('#overlay').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
+        $('#silverRateDiv').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
+    }, 10);
+    $.ajax({url: common.APIWebPath() + "index.php?action=getSilverRate&vid="+ uid, success: function (result) {
+        var obj = jQuery.parseJSON(result);
+        var errCode = obj['error']['Code'];
+        if(errCode==0) {
+            $('#silver_rate').val(obj['results']['silver_rate']);
+        }
+    }});
+});
+$('#overlay,#upCancel').bind('click', function () {
+    closeAllForms2();
+});
+
+function closeAllForms2() {
+    $('#uploadDiv,#silverRateDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
+    $('#overlay').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
+    setTimeout(function () {
+        $('#overlay,#uploadDiv,#silverRateDiv').addClass('dn');
+    }, 1010);
+    loadBullion = true;
+}
+
+function updateSilverRate() {
+    var silver_rate = $("#silver_rate").val();
+    silver_rate=parseFloat(silver_rate);
+    if(silver_rate=='' || silver_rate <= 0 || silver_rate == undefined) {
+        common.toast(0,'Invaild Rate');
+    } else {
+        $.ajax({url: DOMAIN + "/apis/index.php?action=updateSilverRate&vid="+uid+"&silRate="+silver_rate, success: function(result) {
+                var obj = jQuery.parseJSON(result);
+                var errCode = obj['error']['code'];
+                if(errCode==0) {
+                    common.toast(1,obj['error']['Msg']);
+                    closeAllForms2();
+                } else if(errCode==1) {
+                    common.toast(0,obj['error']['Msg']);
+                }
+            }
+        });
+    }
+}
+
+
+/* for bullion gold  rate of vendor */
+$('#overlay').velocity({opacity:0},{delay:0,duration:0});
+$('#uploadDiv,#goldRateDiv').velocity({scale: 0}, {delay: 0, duration: 0});
+$('#upProds').click(function () {
+    $('#overlay,#uploadDiv').removeClass('dn');
+    setTimeout(function () {
+        $('#overlay').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
+        $('#uploadDiv').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
+    }, 10);
+    loadBullion = false;
+});
+$('#upGoldRt').click(function () {
+    $('#overlay,#goldRateDiv').removeClass('dn');
+    setTimeout(function () {
+        $('#overlay').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
+        $('#goldRateDiv').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
+    }, 10);
+    $.ajax({url: common.APIWebPath() + "index.php?action=getGoldRate&vid="+ uid, success: function (result) {
+        var obj = jQuery.parseJSON(result);
+        var errCode = obj['error']['Code'];
+        if(errCode==0) {
+            $('#gold_rate').val(obj['results']['gold_rate']);
+        }
+    }});
+});
+$('#overlay,#upCancel').bind('click', function () {
+    closeAllForms3();
+});
+
+function closeAllForms3() {
+    $('#uploadDiv,#goldRateDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
+    $('#overlay').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
+    setTimeout(function () {
+        $('#overlay,#uploadDiv,#goldRateDiv').addClass('dn');
+    }, 1010);
+    loadBullion = true;
+}
+
+function updateGoldRate() {
+    var gold_rate = $("#gold_rate").val();
+    gold_rate=parseFloat(gold_rate);
+    if(gold_rate=='' || gold_rate <= 0 || gold_rate == undefined) {
+        common.toast(0,'Invaild Rate');
+    } else {
+        $.ajax({url: DOMAIN + "/apis/index.php?action=updateGoldRate&vid="+uid+"&goldRate="+gold_rate, success: function(result) {
+                var obj = jQuery.parseJSON(result);
+                var errCode = obj['error']['code'];
+                if(errCode==0) {
+                    common.toast(1,obj['error']['Msg']);
+                    closeAllForms3();
+                } else if(errCode==1) {
+                    common.toast(0,obj['error']['Msg']);
+                }
+            }
+        });
+    }
+}
+
+
 
 function isValidFloatKey(obj, e, allowDecimal)
 {
