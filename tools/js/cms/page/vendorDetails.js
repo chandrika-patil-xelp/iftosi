@@ -1,12 +1,12 @@
 var uid = customStorage.readFromStorage('userid');
-if(vid!=uid || uid=='') {
-    window.location.assign(DOMAIN+'index.php');
+if (vid != uid || uid == '') {
+    window.location.assign(DOMAIN + 'index.php');
 }
 $(document).ready(function () {
-    if($('#cperson').val()=='') {
+    if ($('#cperson').val() == '') {
         $('#cperson').val(customStorage.readFromStorage('username'));
     }
-    if($('#conMobile').val()=='') {
+    if ($('#conMobile').val() == '') {
         $('#conMobile').val(customStorage.readFromStorage('mobile'));
     }
     $('.compComm').bind('click', function (e) {
@@ -35,10 +35,10 @@ $(document).ready(function () {
     });
 });
 function fnValidatePAN() {
-        var Obj = $conv('#pan').val();
-        var str = '';
-        
-   }
+    var Obj = $conv('#pan').val();
+    var str = '';
+
+}
 function validateForm() {
     var orgname = $('#orgname').val();
     var fulladd = $('#fulladd').val();
@@ -48,49 +48,49 @@ function validateForm() {
     var state = $('#state').val();
     var wbst = $('#wbst').val();
     var pancard = $('#pan').val();
-    
-    var panPat =/^([A-Z]){5}([0-9]){4}([A-Z]){1}?$/;
+
+    var panPat = /^([A-Z]){5}([0-9]){4}([A-Z]){1}?$/;
     var code = /([C,P,H,F,A,T,B,L,J,G,K])/;
-    var code_chk = pancard.substring(3,4);
-    
+    var code_chk = pancard.substring(3, 4);
+
     var str = '';
     if (orgname == '')
-	{
+    {
         str = 'Organization Name is Required\n';
         $('#orgname').focus();
     }
 
-	if (str == '' && fulladd == '')
-	{
+    if (str == '' && fulladd == '')
+    {
         str = 'Address is Required';
         $('#fulladd').focus();
     }
 
-	if (str == '' && (pincode == '' || pincode.length < 6 || isNaN(pincode)))
-	{
+    if (str == '' && (pincode == '' || pincode.length < 6 || isNaN(pincode)))
+    {
         str = 'Pincode is Required';
         $('#pincode').focus();
     }
 
-	if (str == '' && area == '')
-	{
+    if (str == '' && area == '')
+    {
         str = 'Area is Required';
         $('#area').focus();
     }
 
-	if (str == '' && city == '')
-	{
+    if (str == '' && city == '')
+    {
         str = 'City is Required';
         $('#city').focus();
     }
-    
+
     if (str == '' && state == '')
-	{
+    {
         str = 'State is Required';
         $('#state').focus();
     }
 
-	if (str == '' && pancard.match(panPat) == null)
+    if (str == '' && pancard.match(panPat) == null)
     {
         str = 'Pancard is Invalid';
         $('#pan').focus();
@@ -107,39 +107,39 @@ function validateForm() {
         $('#pan').focus();
     }
 
-	if (str == '' && code.test(code_chk) == false) {
+    if (str == '' && code.test(code_chk) == false) {
         str = 'Invaild PAN Card No.';
         $('#pan').focus();
     }
     if (str == '' && !$("#forDiamond").hasClass("comSelected") && !$("#forJewellery").hasClass("comSelected") && !$("#forBullion").hasClass("comSelected")) {
         str = 'Select business type';
     }
-    else if(str == '')
-	{
+    else if (str == '')
+    {
         if (wbst != '')
-		{
+        {
             if (!common.validateUrl('wbst'))
-			{
+            {
                 return false;
             }
-			else
-			{
-				return  true;
-			}
+            else
+            {
+                return  true;
+            }
         }
-        
+
         return  true;
     }
 
-	if(str !== '')
-	{
-		common.toast(0,str);
-		return false;
-	}
-	else
-	{
-		return true;
-	}
+    if (str !== '')
+    {
+        common.toast(0, str);
+        return false;
+    }
+    else
+    {
+        return true;
+    }
 }
 
 function validateStep2Form() {
@@ -152,60 +152,60 @@ function validateStep2Form() {
         var ofcountry = $('#ofcountry').val();
         if (memcert == '') {
             $('#memcert').focus();
-            common.toast(0,'Enter GJEPC Membership Certificate');
+            common.toast(0, 'Enter GJEPC Membership Certificate');
             return false;
         }
         else if (bdbc == '') {
-            common.toast(0,'Enter Bharat Diamond Bourse Certificate');
+            common.toast(0, 'Enter Bharat Diamond Bourse Certificate');
             $('#bdbc').focus();
             return false;
         }
         else if (othdbaw == '') {
-            common.toast(0,'Enter Details Of Membership Of Other Diamond Bourse Around The World');
+            common.toast(0, 'Enter Details Of Membership Of Other Diamond Bourse Around The World');
             $('#othdbaw').focus();
             return false;
         }
         else if (ofcity == '') {
-            common.toast(0,'Enter Offices In other Cities');
+            common.toast(0, 'Enter Offices In other Cities');
             $('#ofcity').focus();
             return false;
         }
         else if (ofcountry == '') {
-            common.toast(0,'Enter Offices In other Countries');
+            common.toast(0, 'Enter Offices In other Countries');
             $('#ofcountry').focus();
             return false;
         }
-    }  
+    }
     if (/2/.test(busiType)) {
         var showroomname = $('#showroomname').val();
         var showroomno = $('#showroomno').val();
         var mdbw = $('#mdbw').val();
         if (showroomname == '') {
             $('#showroomname').focus();
-            common.toast(0,'Show Room Name is Required');
+            common.toast(0, 'Show Room Name is Required');
             return false;
         }
         else if (showroomno == '' || isNaN(showroomno) || showroomno == 0) {
-            common.toast(0,'Enter Number of Showrooms');
+            common.toast(0, 'Enter Number of Showrooms');
             $('#showroomno').focus();
             return false;
         }
         else if (mdbw == '') {
-            common.toast(0,'Membership Of Council / Jewellers Association is Required');
+            common.toast(0, 'Membership Of Council / Jewellers Association is Required');
             $('#mdbw').focus();
             return false;
         }
-    } 
+    }
     if (/3/.test(busiType)) {
         var bul_mdbw = $('#bul_mdbw').val();
         if (bul_mdbw == '') {
-            common.toast(0,'Membership Of Council / Jewellers Association is Required');
+            common.toast(0, 'Membership Of Council / Jewellers Association is Required');
             $('#bul_mdbw').focus();
             return false;
-        } 
-    } 
+        }
+    }
     if (!(/1/.test(busiType)) && !(/2/.test(busiType)) && !(/3/.test(busiType))) {
-        common.toast(0,'Select business type');
+        common.toast(0, 'Select business type');
         return false;
     }
     return true;
@@ -219,12 +219,12 @@ function validateStep3Form() {
     var landline = $('#landline').val();
     var str = '';
     if (cperson == '') {
-        common.toast(0,'Contact Person Name is Required');
+        common.toast(0, 'Contact Person Name is Required');
         $('#cperson').focus();
         return false;
     }
     else if (position == '') {
-        common.toast(0,'Position is Required');
+        common.toast(0, 'Position is Required');
         $('#position').focus();
         return false;
     }
@@ -233,7 +233,7 @@ function validateStep3Form() {
         return false;
     }
     if (!common.validateEmail('email')) {
-        common.toast(0,'Contact Email is Required');
+        common.toast(0, 'Contact Email is Required');
         $('#email').focus();
         return false;
     }
@@ -281,17 +281,17 @@ function submitForm() {
     data['result'] = res;
     data = JSON.stringify(data);
     $.ajax({url: common.APIWebPath() + "index.php?action=udtProfile&dt=" + encodeURIComponent(data), success: function (result) {
-        var obj = jQuery.parseJSON(result);
-        customStorage.addToStorage('busiType',busiType);
-        var errCode = obj['error']['code'];
-        var errMsg = obj['error']['msg'];
-        if (errCode == 0) {
-            common.toast(1,errMsg);
-            changeTab('step2');
-        } else {
-            common.toast(0,errMsg);
-        }
-    }});
+            var obj = jQuery.parseJSON(result);
+            customStorage.addToStorage('busiType', busiType);
+            var errCode = obj['error']['code'];
+            var errMsg = obj['error']['msg'];
+            if (errCode == 0) {
+                common.toast(1, errMsg);
+                changeTab('step2');
+            } else {
+                common.toast(0, errMsg);
+            }
+        }});
 }
 
 function submitStep2Form() {
@@ -318,16 +318,16 @@ function submitStep2Form() {
     data['result'] = res;
 
     data = JSON.stringify(data);
-    customStorage.addToStorage('isComp',1);
+    customStorage.addToStorage('isComp', 1);
     $.ajax({url: common.APIWebPath() + "index.php?action=udtProfile&isC=1&dt=" + encodeURIComponent(data), success: function (result) {
             var obj = jQuery.parseJSON(result);
             var errCode = obj['error']['code'];
             var errMsg = obj['error']['msg'];
             if (errCode == 0) {
-                common.toast(1,errMsg);
+                common.toast(1, errMsg);
                 changeTab('step3');
             } else {
-                common.toast(0,errMsg);
+                common.toast(0, errMsg);
             }
         }});
 
@@ -381,12 +381,12 @@ function submitStep3Form() {
             var errCode = obj['error']['code'];
             var errMsg = obj['error']['msg'];
             if (errCode == 0) {
-                common.toast(1,errMsg);
-                var isComp=2;
-                customStorage.addToStorage('isComp',isComp);
+                common.toast(1, errMsg);
+                var isComp = 2;
+                customStorage.addToStorage('isComp', isComp);
                 var bsType = parseInt(busiType.charAt(0));
                 bsType = bsType - 1;
-                window.location.href='index.php?case=vendor_landing&catid=1000'+bsType;
+                window.location.href = 'index.php?case=vendor_landing&catid=1000' + bsType;
             } else {
                 common.toast(0, errMsg);
             }
@@ -405,26 +405,26 @@ function changeTab(id) {
     common.changeTab(obj);
 }
 
-var country='';
-var lng='';
-var lat='';
+var country = '';
+var lng = '';
+var lat = '';
 function loadAreaList() {
     var pincode = $('#pincode').val();
-    if(pincode.length==6) {
+    if (pincode.length == 6) {
         $.ajax({url: common.APIWebPath() + "index.php?action=viewbyPincode&code=" + pincode, success: function (result) {
-            var obj = jQuery.parseJSON(result);
-            //var results = new Object;
-            var results = obj['results'];
-            if ( results!= '') {
-                areaList = results;
+                var obj = jQuery.parseJSON(result);
+                //var results = new Object;
+                var results = obj['results'];
+                if (results != '') {
+                    areaList = results;
 //                $('#area').val(results['area']);
-                $('#city').val(results[0]['city']);
-                $('#state').val(results[0]['state']);
-                country=results[0]['country'];
-                lat=results[0]['latitude'];
-                lng=results[0]['longitude'];
-            }
-        }});
+                    $('#city').val(results[0]['city']);
+                    $('#state').val(results[0]['state']);
+                    country = results[0]['country'];
+                    lat = results[0]['latitude'];
+                    lng = results[0]['longitude'];
+                }
+            }});
     }
 }
 loadAreaList();
@@ -451,12 +451,11 @@ searchArea.setMinimumSearchChar(1);
 searchArea.setId("areaSuggestDiv", "area", searchAreaCallBack, searchAreaDivOutput);
 searchArea.setAppId("searchArea");
 searchArea.arrayResult = true;
-var areaList =[{"area":"Jakkur","city":"Bangalore","state":"Karnataka","country":"India","latitude":"13.078057000000"
-,"longitude":"77.603974000000"}];
+var areaList = '';
 var tmpAreaList = new Array();
 
 function searchAreaCallBack(res) {
-    searchArea.setData=true;
+    searchArea.setData = true;
     $("#area").val(res["area"]);
     document.getElementById("areaSuggestDiv").innerHTML = "";
 }
@@ -527,7 +526,7 @@ function matchValue(val, list, type) {
         var text = (list[i].area).toLowerCase();
         var ind = text.indexOf(val);
         if ((ind != -1)) {
-                $('#area').val(list[i].area);
+            $('#area').val(list[i].area);
             break;
         }
     }
@@ -544,8 +543,123 @@ function onlyAlphabets(evt, t) {
     return false;
 }
 function clearVal(id) {
-    $('#'+id).val('');
+    $('#' + id).val('');
 }
-function closeSuggest() {
-    $('#areaSuggestDiv').html('');
+function closeSuggest(id) {
+    setTimeout(function () {
+        $('#' + id).html('');
+    }, 500);
 }
+
+var searchCity = new Search();
+searchCity.setMinimumSearchChar(1);
+searchCity.setId("citySuggestDiv", "prName", searchCityCallBack, searchCityDivOutput);
+searchCity.setAppId("searchCity");
+searchCity.setPath(APIDOMAIN + "apis/index.php?action=citySuggest&name=ban");
+
+function searchCityCallBack(res) {
+    searchCity.setData = true;
+    document.getElementById("citySuggestDiv").innerHTML = "";
+}
+
+
+function searchCityDivOutput(res) {
+    if (res != null) {
+        searchCity.suggestionList = res;
+        var obj = res;
+        var len = obj.length;
+        var i = 0;
+        if (len > 0)
+        {
+            searchCity.suggestLen = len;
+            var i = 0;
+            var suggest = "<div class='smallField w100 fmRoboto transition300 font14 pointer border1' >";
+            while (i < len) {
+                suggest += "<div id='suggest" + i + "' class='autoSuggestRow w100 transition300 txtCaCase' onclick='setSuggestValue(\"" + obj[i].n + "\",\"city\")'>&nbsp;&nbsp;" + obj[i].n + "</div>";
+                i++;
+            }
+            suggest += "</div>";
+            searchCity.suggestLen = searchCity.suggestLen - 1;
+            document.getElementById("citySuggestDiv").innerHTML = suggest;
+        }
+
+    } else {
+        document.getElementById("citySuggestDiv").innerHTML = "";
+    }
+}
+
+var searchState = new Search();
+searchState.setMinimumSearchChar(1);
+searchState.setId("stateSuggestDiv", "prName", searchStateCallBack, searchStateDivOutput);
+searchState.setAppId("searchState");
+
+function searchStateCallBack(res) {
+    searchCity.setData = true;
+    document.getElementById("stateSuggestDiv").innerHTML = "";
+}
+
+function searchStateDivOutput(res) {
+    if (res != null) {
+        searchState.suggestionList = res;
+        var obj = res;
+        var len = obj.length;
+        var i = 0;
+        if (len > 0)
+        {
+            searchState.suggestLen = len;
+            var i = 0;
+            var suggest = "<div class='smallField w100 fmRoboto transition300 font14 pointer border1' >";
+            while (i < len) {
+                suggest += "<div id='suggest" + i + "' class='autoSuggestRow w100 transition300 txtCaCase' onclick='setSuggestValue(\"" + obj[i].n + "\",\"state\")'>&nbsp;&nbsp;" + obj[i].n + "</div>";
+                i++;
+            }
+            suggest += "</div>";
+            searchState.suggestLen = searchState.suggestLen - 1;
+            document.getElementById("stateSuggestDiv").innerHTML = suggest;
+        }
+
+    } else {
+        document.getElementById("stateSuggestDiv").innerHTML = "";
+    }
+}
+function setSuggestValue(val, id) {
+    $('#' + id).val(val);
+    closeSuggest(id + 'SuggestDiv');
+}
+
+$('#pincode').keyup(function () {
+    loadAreaList();
+    clearVal('area')
+});
+
+$('#city').keyup(function () {
+    var city = $(this).val();
+    if (city != '') {
+        $.ajax({url: common.APIWebPath() + "index.php?action=citySuggest&name=" + city, success: function (result) {
+                var obj = jQuery.parseJSON(result);
+                //var results = new Object;
+                var results = obj['results'];
+                if (results != '') {
+                    searchCityDivOutput(results);
+                }
+            }});
+    } else {
+        closeSuggest('citySuggestDiv')
+    }
+});
+
+$('#state').keyup(function () {
+    var state = $(this).val();
+    if (state != '') {
+        $.ajax({url: common.APIWebPath() + "index.php?action=stateSuggest&name=" + state, success: function (result) {
+                var obj = jQuery.parseJSON(result);
+                //var results = new Object;
+                var results = obj['results'];
+                if (results != '') {
+                    searchStateDivOutput(results);
+                }
+            }});
+    } else {
+        closeSuggest('stateSuggestDiv')
+    }
+});

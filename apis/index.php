@@ -1388,6 +1388,24 @@ echo '</pre>';
 			//print_r($res);die;
             break;
 //---------------------------------------------------------------------------        
+            
+            
+//  localhost/iftosi/apis/index.php?action=citySuggest&name=bangalo
+        case 'citySuggest':
+            include APICLUDE.'class.location.php';
+            $obj=new location($db['iftosi']);
+            $result=$obj->suggestCity($params);
+            $res=$result;
+            break;
+            
+//  localhost/iftosi/apis/index.php?action=stateSuggest&name=tami
+        case 'stateSuggest':
+            include APICLUDE.'class.location.php';
+            $obj=new location($db['iftosi']);
+            $result=$obj->suggestState($params);
+            $res=$result;
+            break;
+
         default :
             
         break;
