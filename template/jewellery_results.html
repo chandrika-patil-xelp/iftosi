@@ -69,126 +69,139 @@
                                     <div class='prdCommDiv fLeft transition100'>
                                         <div class="prdCommImg fLeft">
                                             <?php 
-                                                switch(count($data[$key]['images'])){
+												$imgCount = count($data[$key]['images']);
+												if($imgCount > 12)
+												{
+													$imgCount = 12;
+												}
+                                                switch($imgCount)
+												{
                                                     case 0:?>
                                                         <div class="for-1 noImage"></div>
                                                         <?php break;
-                                                    case 1:?>
-                                                        <div class="prox for-1"></div>
-                                                        <?php break;
-                                                    case 2 :?>
-                                                        <div class="prox for-2"></div>
-                                                        <div class="prox for-2"></div>
-                                                        
-                                                        <?php break;
-                                                    case 3: ?>
-                                                        <div class="prox for-3"></div>
-                                                        <div class="prox for-3"></div>
-                                                        <div class="prox for-3"></div>
-                                                        <?php break;
-                                                    case 4: ?>
-                                                        <div class="prox for-4"></div>
-                                                        <div class="prox for-4"></div>
-                                                        <div class="prox for-4"></div>
-                                                        <div class="prox for-4"></div>
-                                                        <?php break;
-                                                    case 5: ?>
-                                                    <div class="prox for-5Left">
-                                                        <div class="prox for-5"></div>
-                                                        <div class="prox for-5"></div>
-                                                        <div class="prox for-5"></div>
-                                                        <div class="prox for-5"></div>
-                                                    </div>
-                                                    <div class="prox for-5Right">
-                                                        <div class="prox for-5"></div>
-                                                    </div>
+                                                    case 1:
+													case 2:
+													case 3:
+													case 4:
+													case 6:
+													case 8:
+													case 9:
+													case 10:
+													case 12:
+															for($imgi = 0 ; $imgi < $imgCount ; $imgi++)
+															{
+?>
+																<div class="prox for-<?php echo $imgCount;?>" style="background: #ccc url(<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>)no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
+<?php
+															}
+?>
+															<div class="proxImg fLeft" style="background: #fff url(<?php echo IMGDOMAIN . $data[$key]['images'][0]; ?>)no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
+<?php
+														break;
+                                                    case 5:
+?>
+														<div class="prox for-<?php echo $imgCount;?>Left">
+<?php
+														for($imgi = 0 ; $imgi < $imgCount ; $imgi++)
+														{
+															if($imgi == $imgCount - 1)
+															{
+?>
+																</div>
+																<div class="prox for-<?php echo $imgCount;?>Right">
+																	<div class="prox for-<?php echo $imgCount;?>" style="background: #ccc url(<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>)no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
+																</div>
+<?php
+															}
+															else
+															{
+?>
+																<div class="prox for-<?php echo $imgCount;?>" style="background: #ccc url(<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>)no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
+<?php
+															}
+														}
+?>
+														<div class="proxImg fLeft" style="background: #fff url(<?php echo IMGDOMAIN . $data[$key]['images'][0]; ?>)no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
+
                                                     <?php    break;
-                                                    case 6: ?>
-                                                        <div class="prox for-6"></div>
-                                                        <div class="prox for-6"></div>
-                                                        <div class="prox for-6"></div>
-                                                        <div class="prox for-6"></div>
-                                                        <div class="prox for-6"></div>
-                                                        <div class="prox for-6"></div>
+                                                    case 7:
+														$curi = 0;
+														for($imgi = 0 ; $imgi < $imgCount ; $imgi++)
+														{
+															if($imgi == 0)
+															{
+?>
+																<div class="for-<?php echo $imgCount;?>Upper">
+																	<div class="prox for-<?php echo $imgCount;?>"  style="background: #ccc url(<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>)no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
+																</div>
+<?php
+															}
+															else
+															{
+																if($curi == 0)
+																{
+?>
+																	<div class="for-<?php echo $imgCount;?>Lower">
+<?php
+																}
+?>
+																	<div class="prox for-<?php echo $imgCount;?>" style="background: #fff url(<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>)no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
+<?php
+																if($curi == $imgCount - 2)
+																{
+?>
+																	</div>
+<?php
+																}
+																$curi++;
+															}
+														}
+?>
+                                                        <div class="proxImg fLeft" style="background: #fff url(<?php echo IMGDOMAIN . $data[$key]['images'][0]; ?>)no-repeat;background-size:contain;background-position:center;background-color:#FFF;"></div>
                                                         <?php break;
-                                                    case 7: 
-														?>
-                                                        <div class="for-7Upper">
-                                                            <div class="prox for-7"  style="background: #ccc url(../tools/img/product1/1.jpg)no-repeat;background-size: contain;background-position:center"></div>
-                                                        </div>
-                                                        <div class="for-7Lower">
-                                                            <div class="prox for-7" style="background: #fff url(../tools/img/product1/2.jpg)no-repeat;background-size: contain;background-position:center"></div>
-                                                            <div class="prox for-7" style="background: #fff url(../tools/img/product1/3.jpeg)no-repeat;background-size: contain;background-position:center"></div>
-                                                            <div class="prox for-7" style="background: #fff url(../tools/img/product1/4.jpg)no-repeat;background-size: contain;background-position:center"></div>
-                                                            <div class="prox for-7" style="background: #fff url(../tools/img/product1/5.jpg)no-repeat;background-size: contain;background-position:center"></div>
-                                                            <div class="prox for-7" style="background: #fff url(../tools/img/product1/6.jpg)no-repeat;background-size: contain;background-position:center"></div>
-                                                            <div class="prox for-7" style="background: #fff url(../tools/img/product1/7.jpg)no-repeat;background-size: contain;background-position:center"></div>
-                                                        </div>
-                                                        <div class="proxImg fLeft" style="background: #fff url(../tools/img/product1/<?php echo ($key+1);?>.jpg)no-repeat;background-size: contain;background-position:center"></div>
-                                                        <?php break;
-                                                    case 8: ?>
-                                                        <div class="prox for-8"></div>
-                                                        <div class="prox for-8"></div>
-                                                        <div class="prox for-8"></div>
-                                                        <div class="prox for-8"></div>
-                                                        <div class="prox for-8"></div>
-                                                        <div class="prox for-8"></div>
-                                                        <div class="prox for-8"></div>
-                                                        <div class="prox for-8"></div>
-                                                        <?php break;
-                                                    case 9: ?>
-                                                        <div class="prox for-9"></div>
-                                                        <div class="prox for-9"></div>
-                                                        <div class="prox for-9"></div>
-                                                        <div class="prox for-9"></div>
-                                                        <div class="prox for-9"></div>
-                                                        <div class="prox for-9"></div>
-                                                        <div class="prox for-9"></div>
-                                                        <div class="prox for-9"></div>
-                                                        <div class="prox for-9"></div>
-                                                        <?php break;
-                                                    case 10: ?>
-                                                        <div class="prox for-10"></div>
-                                                        <div class="prox for-10"></div>
-                                                        <div class="prox for-10"></div>
-                                                        <div class="prox for-10"></div>
-                                                        <div class="prox for-10"></div>
-                                                        <div class="prox for-10"></div>
-                                                        <div class="prox for-10"></div>
-                                                        <div class="prox for-10"></div>
-                                                        <div class="prox for-10"></div>
-                                                        <div class="prox for-10"></div>
-                                                        <?php break;
-                                                    case 11: ?>
-                                                        <div class="prox for-11Left">
-                                                            <div class="prox for-11"></div>
-                                                            <div class="prox for-11"></div>
-                                                            <div class="prox for-11"></div>
-                                                        </div>
-                                                        <div class="prox for-11Right">
-                                                            <div class="prox for-11"></div>
-                                                            <div class="prox for-11"></div>
-                                                            <div class="prox for-11"></div>
-                                                            <div class="prox for-11"></div>
-                                                            <div class="prox for-11"></div>
-                                                            <div class="prox for-11"></div>
-                                                            <div class="prox for-11"></div>
-                                                            <div class="prox for-11"></div>
-                                                        </div>
-                                                        <?php break;
-                                                    case 12: ?>
-                                                        <div class="prox for-12"></div>
-                                                        <div class="prox for-12"></div>
-                                                        <div class="prox for-12"></div>
-                                                        <div class="prox for-12"></div>
-                                                        <div class="prox for-12"></div>
-                                                        <div class="prox for-12"></div>
-                                                        <div class="prox for-12"></div>
-                                                        <div class="prox for-12"></div>
-                                                        <div class="prox for-12"></div>
-                                                        <div class="prox for-12"></div>
-                                                        <div class="prox for-12"></div>
-                                                        <div class="prox for-12"></div>
+
+                                                    case 11:
+														$curi = 0;
+?>
+														<div class="prox for-<?php echo $imgCount;?>Left">
+<?php
+														for($imgi = 0 ; $imgi < $imgCount ; $imgi++)
+														{
+															if($curi == 0)
+															{
+																if($imgi < 3)
+																{
+?>
+																	<div class="prox for-<?php echo $imgCount;?>" style="background: #fff url(<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>)no-repeat;background-size:contain;background-position:center;background-color:#FFF;"></div>
+<?php
+																	if($imgi == 2)
+																	{
+																		$curi++;
+																	}
+																}
+															}
+															else
+															{
+																if($imgi == 3)
+																{
+?>
+																	</div>
+																	<div class="prox for-<?php echo $imgCount;?>Right">
+<?php
+																}
+?>
+																	<div class="prox for-<?php echo $imgCount;?>" style="background: #fff url(<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>)no-repeat;background-size:contain;background-position:center;background-color:#FFF;"></div>
+<?php
+																if($imgi == $imgCount - 1)
+																{
+?>
+																	</div>
+<?php
+																}
+															}
+														}
+?>
+														<div class="proxImg fLeft" style="background: #fff url(<?php echo IMGDOMAIN . $data[$key]['images'][0]; ?>)no-repeat;background-size:contain;background-position:center;background-color:#FFF;"></div>
                                                         <?php break;
                                                 }
                                             ?>

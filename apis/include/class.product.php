@@ -759,11 +759,6 @@
 								field(product_id,".$pids.");
 							";
 					$pimgres=$this->query($pimgsql);
-					while($row2=$this->fetchData($pimgres))
-					{
-                                            $prid                  = $row2['product_id'];
-                                            $arr1[$prid]['images'] = explode('|~|',$row2['images']);
-					}
                                         
 					$psql = "
 							SELECT
@@ -791,9 +786,15 @@
 						$pid = $row1['pid'];
 						$arr1[$pid]=$row1;
 						$arr1[$pid]['attributes'] = $attr[$pid]['attributes'];
-                                                $arr1[$pid]['images'] = $pimg[$pid]['image'];
+						$arr1[$pid]['images'] = $pimg[$pid]['image'];
 					}
-					
+
+					while($row2=$this->fetchData($pimgres))
+					{
+						$prid = $row2['product_id'];
+						$arr1[$prid]['images'] = explode('|~|',$row2['images']);
+					}
+
                                         $tmp_arr1 = (!empty($arr1)) ? (array_values($arr1)) : null;
 					$arr1 = array('filters'=>$data,'products'=>$tmp_arr1,'total'=>$total,'getdata'=>$params,'catname'=>'Wishlist');
 					$err = array('errCode'=>0,'errMsg'=>'Details fetched successfully');

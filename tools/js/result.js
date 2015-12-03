@@ -118,9 +118,32 @@ $(document).ready(function() {
         showLeftMenu(false);
     });
     
-    $('.prox').mouseover(function(){
-        var img=$(this).css('background');
-        $(this).parent().siblings('.proxImg').css({'background':img});
+    $('.prox').mouseover(function()
+	{
+		var tmpClass = $(this).attr('class');
+		tmpClass = tmpClass.split(' ');
+		var actClassNm = 'for-1';
+		for(var i = 0 ; i < tmpClass.length; i++)
+		{
+			if(tmpClass[i].indexOf('for-') !== -1)
+			{
+				actClassNm = tmpClass[i];
+				break;
+			}
+		}
+
+		var classInd = actClassNm.split('-');
+		classInd = classInd[1];
+
+		var img=$(this).css('background');
+		if(classInd == 1 || classInd == 2 || classInd == 3 || classInd == 4 || classInd == 6 || classInd == 8 || classInd == 9 || classInd == 10 || classInd == 12)
+		{
+			$(this).siblings('.proxImg').css({'background':img});
+		}
+		else
+		{
+			$(this).parent().siblings('.proxImg').css({'background':img});
+		}
     });
 	
 	var inputField = 'input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=number], input[type=search], textarea, input[type=radio]';
@@ -336,18 +359,7 @@ function getResultsData(data,sortby,showtree)
 					html += '<div class="prdComm fLeft jwRes transition100" style="opacity: 1; transform: translateX(0px);">';
 						html += '<div class="prdCommDiv fLeft transition100">';
 							html += '<div class="prdCommImg fLeft">';
-								html += '<div class="for-7Upper">';
-									html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/1.jpg)no-repeat;background-size: contain;background-position:center"></div>';
-								html += '</div>';
-								html += '<div class="for-7Lower">';
-									html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/2.jpg)no-repeat;background-size: contain;background-position:center"></div>';
-									html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/3.jpeg)no-repeat;background-size: contain;background-position:center"></div>';
-									html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/4.jpg)no-repeat;background-size: contain;background-position:center"></div>';
-									html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/5.jpg)no-repeat;background-size: contain;background-position:center"></div>';
-									html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/6.jpg)no-repeat;background-size: contain;background-position:center"></div>';
-									html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/7.jpg)no-repeat;background-size: contain;background-position:center"></div>';
-								html += '</div>';
-								html += '<div class="proxImg fLeft" style="background: url(http://localhost/iftosi/tools/img/product1/2.jpg) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>';
+								html += getImageData(vl.images);
 							html += '</div>';
 							html += '<div class="prdDetails fLeft">';
 								html += '<div class="detComm">';
@@ -458,18 +470,7 @@ function getResultsData(data,sortby,showtree)
 						html += '<a class="wisgDel" id="'+vl.pid+'"></a>';
 						html += '<div class="prdCommDiv fLeft transition100">';
 							html += '<div class="prdCommImg fLeft">';
-								html += '<div class="for-7Upper">';
-									html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/1.jpg)no-repeat;background-size: contain;background-position:center"></div>';
-								html += '</div>';
-								html += '<div class="for-7Lower">';
-									html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/2.jpg)no-repeat;background-size: contain;background-position:center"></div>';
-									html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/3.jpeg)no-repeat;background-size: contain;background-position:center"></div>';
-									html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/4.jpg)no-repeat;background-size: contain;background-position:center"></div>';
-									html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/5.jpg)no-repeat;background-size: contain;background-position:center"></div>';
-									html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/6.jpg)no-repeat;background-size: contain;background-position:center"></div>';
-									html += '<div class="prox for-7" style="background: #fff url(../tools/img/product1/7.jpg)no-repeat;background-size: contain;background-position:center"></div>';
-								html += '</div>';
-								html += '<div class="proxImg fLeft" style="background: url(http://localhost/iftosi/tools/img/product1/7.jpg) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>';
+								html += getImageData(vl.images);
 							html += '</div>';
 							html += '<div class="prdDetails fLeft">';
 								html += '<div class="detComm">';
@@ -1002,6 +1003,34 @@ function getResultsData(data,sortby,showtree)
 			}
 		}
 	});
+
+	$('.prox').mouseover(function()
+	{
+		var tmpClass = $(this).attr('class');
+		tmpClass = tmpClass.split(' ');
+		var actClassNm = 'for-1';
+		for(var i = 0 ; i < tmpClass.length; i++)
+		{
+			if(tmpClass[i].indexOf('for-') !== -1)
+			{
+				actClassNm = tmpClass[i];
+				break;
+			}
+		}
+
+		var classInd = actClassNm.split('-');
+		classInd = classInd[1];
+
+		var img=$(this).css('background');
+		if(classInd == 1 || classInd == 2 || classInd == 3 || classInd == 4 || classInd == 6 || classInd == 8 || classInd == 9 || classInd == 10 || classInd == 12)
+		{
+			$(this).siblings('.proxImg').css({'background':img});
+		}
+		else
+		{
+			$(this).parent().siblings('.proxImg').css({'background':img});
+		}
+    });
 	
 	if(data.results.total === null)
 		data.results.total = 0;
@@ -1199,3 +1228,121 @@ function showPrd() {
     
 }
 
+
+function getImageData(imgData)
+{
+	var imgLen = 0;
+	var tmpHtml = "<div class='for-1 noImage'></div>";
+	if(imgData !== undefined && imgData !== null && imgData !== '')
+	{
+		imgLen = imgData.length;
+		if(imgLen > 12)
+		{
+			imgLen = 12;
+		}
+
+		switch(imgLen)
+		{
+			case 0:
+				tmpHtml = "<div class='for-1 noImage'></div>";
+			break;
+			case 1:
+			case 2:
+			case 3:
+			case 4:
+			case 6:
+			case 8:
+			case 9:
+			case 10:
+			case 12:
+				tmpHtml = '';
+				for(imgi = 0; imgi < imgLen; imgi++)
+				{
+					tmpHtml += "<div class='prox for-"+imgLen+"' style='background: #ccc url(" + IMGDOMAIN + imgData[imgi] + ") no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div>";
+				}
+				tmpHtml += "<div class='proxImg fLeft' style='background: #fff url(" + IMGDOMAIN + imgData[0] + ")no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div>";
+			break;
+			case 5:
+				tmpHtml = "<div class='prox for-"+imgLen+"Left'>";
+				for(imgi = 0; imgi < imgLen; imgi++)
+				{
+					if(imgi == imgLen - 1)
+					{
+						tmpHtml += "</div>";
+						tmpHtml += "<div class='prox for-"+imgLen+"Right'><div class='prox for-"+imgLen+"' style='background: #ccc url(" + IMGDOMAIN + imgData[imgi] + ")no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div></div>";
+					}
+					else
+					{
+						tmpHtml += "<div class='prox for-"+imgLen+"' style='background: #ccc url(" + IMGDOMAIN + imgData[imgi] + ")no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div>";
+					}
+				}
+				tmpHtml += "<div class='proxImg fLeft' style='background: #fff url(" + IMGDOMAIN + imgData[0] + ")no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div>";
+			break;
+			case 7:
+				tmpHtml = "";
+				var curi = 0;
+				for(imgi = 0; imgi < imgLen; imgi++)
+				{
+					if(imgi == 0)
+					{
+						tmpHtml += "<div class='for-" + imgLen + "Upper'><div class='prox for-" + imgLen + "' style='background: #ccc url(" + IMGDOMAIN + imgData[imgi] + ")no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div></div>";
+					}
+					else
+					{
+						if(curi == 0)
+						{
+							tmpHtml += "<div class='for-" + imgLen + "Lower'>";
+						}
+						tmpHtml += "<div class='prox for-" + imgLen + "' style='background: #fff url(" + IMGDOMAIN + imgData[imgi] + ")no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div>";
+
+						if(curi == imgLen - 2)
+						{
+							tmpHtml += "</div>";
+						}
+
+						curi++;
+					}
+				}
+				tmpHtml += "<div class='proxImg fLeft' style='background: #fff url(" + IMGDOMAIN + imgData[0] + ")no-repeat;background-size:contain;background-position:center;background-color:#FFF;'></div>";
+			break;
+			case 11:
+				var curi = 0;
+				tmpHtml = "<div class='prox for-" + imgLen + "Left'>";
+
+				for(imgi = 0; imgi < imgLen; imgi++)
+				{
+					if(curi == 0)
+					{
+						if(imgi < 3)
+						{
+							tmpHtml += "<div class='prox for-"+imgLen+"' style='background: #fff url(" + IMGDOMAIN + imgData[imgi] + ")no-repeat;background-size:contain;background-position:center;background-color:#FFF;'></div>";
+
+							if(imgi == 2)
+							{
+								curi++;
+							}
+						}
+					}
+					else
+					{
+						if(imgi == 3)
+						{
+							tmpHtml += "</div>";
+							tmpHtml += "<div class='prox for-"+imgLen+"Right'>";
+						}
+
+						tmpHtml += "<div class='prox for-"+imgLen+"' style='background: #fff url(" + IMGDOMAIN + imgData[imgi] + ")no-repeat;background-size:contain;background-position:center;background-color:#FFF;'></div>";
+
+						if(imgi == imgLen - 1)
+						{
+							tmpHtml += "</div>";
+						}
+					}
+				}
+				tmpHtml += "<div class='proxImg fLeft' style='background: #fff url(" + IMGDOMAIN + imgData[0] + ")no-repeat;background-size:contain;background-position:center;background-color:#FFF;'></div>";
+			break;
+		}
+	}
+
+	return tmpHtml;
+}
