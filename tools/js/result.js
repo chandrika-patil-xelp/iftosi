@@ -314,7 +314,8 @@ function getResultsData(data,sortby,showtree)
 							html += '<div class="prdPrice fLeft">';
 								html += '<div class="detComm">';
 									html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
-									html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+number_format((vl.pprice*dollarValue),2)+'</div>';
+                                                                        if(vl.dollar_rate!=0) { dollarValue=vl.dollar_rate; }
+									html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+number_format((vl.pprice*vl.dollarValue),2)+'</div>';
 								html += '</div>';
 							html += '</div>';
 							html += '<div class="prdActions fLeft">';
@@ -403,6 +404,7 @@ function getResultsData(data,sortby,showtree)
 							html += '<div class="prdPrice fLeft">';
 								html += '<div class="detComm">';
 									html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
+                                                                        if(vl.dollar_rate!=0) { dollarValue=vl.dollar_rate; }
 									html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+number_format((vl.pprice*dollarValue),2)+'</div>';
 								html += '</div>';
 							html += '</div>';
