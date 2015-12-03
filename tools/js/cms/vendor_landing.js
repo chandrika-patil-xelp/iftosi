@@ -456,7 +456,7 @@ function getcatid() {
     var btype = customStorage.readFromStorage('busiType');
     
     if (btype !=='' || btype !== undefined || btype !== null ) {
-        var catid = btype.charAt(0);
+        var catid = parseInt(btype.charAt(0))-1;
     }
-    return 1000+ catid;
+    return 1000+catid.toString();
 }

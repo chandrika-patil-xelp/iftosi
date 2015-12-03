@@ -4,7 +4,7 @@
         <div class="addPrdBtn fRight poR ripplelink bgBlack" id="upDolRt">$</div>
         <div class="addPrdBtn fRight poR ripplelink bgBlack" id="upProds">Upload Products</div>
         
-        <div class="addPrdBtn fRight poR ripplelink" onclick='window.location.assign(DOMAIN+"index.php?case=diamond_Form&catid=10000&vid="+uid);'>Add Diamond</div>
+        <div class="addPrdBtn fRight poR ripplelink" onclick='window.location.assign(DOMAIN+"index.php?case=diamond_Form&catid="+getcatid()+"&vid="+uid);'>Add Diamond</div>
         <input type="text" onkeyup="searchBarcode(this.value);" class="prdSeachTxt fRight fmOpenR" placeholder="Search your Product">
       <!--  <div class="vFilBtn fRight poR ripplelink"></div>
       -->

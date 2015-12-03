@@ -111,8 +111,6 @@ function validateForm() {
         str = 'Invaild PAN Card No.';
         $('#pan').focus();
     }
-
-
     if (str == '' && !$("#forDiamond").hasClass("comSelected") && !$("#forJewellery").hasClass("comSelected") && !$("#forBullion").hasClass("comSelected")) {
         str = 'Select business type';
     }
@@ -385,10 +383,10 @@ function submitStep3Form() {
             if (errCode == 0) {
                 common.toast(1,errMsg);
                 var isComp=2;
-                customStorage.addToStorage('isComp', isComp);
+                customStorage.addToStorage('isComp',isComp);
                 var bsType = parseInt(busiType.charAt(0));
                 bsType = bsType - 1;
-                window.location.assign('index.php?case=vendor_landing&catid=1000' + bsType);
+                window.location.href='index.php?case=vendor_landing&catid=1000'+bsType;
             } else {
                 common.toast(0, errMsg);
             }

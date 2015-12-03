@@ -6,6 +6,16 @@
             <div class="forBg bgWhite"></div>
             <div class='prdMainDetails'>
                 <div class="wrapperMax">
+<?php
+                    if(count($data1) == 0)
+                    {
+?>
+                    <div class="imgsCont noImage"></div>
+<?php                    
+                    }
+                    else
+                    {
+?>                    
                     <div class="imgsCont">
                         <div class="leftArrow transition300" onclick="movePrImg(true)"></div>
                         <div class="rightArrow  transition300" onclick="movePrImg(false)"></div>
@@ -24,6 +34,9 @@ for($i=0;$i<count($data1);$i++)
                             </div>
                         </div>
                     </div>
+<?php
+}
+?>                    
                     <div class="detCont">
                         <div class="btnsCont fLeft">
                             <div class="prdShape fLeft">

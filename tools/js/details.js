@@ -304,6 +304,7 @@ function showVendorDetails(obj)
 		if(mobCond && nmCond && emCond)
 		{
 			customStorage.addToStorage('l', mobile);
+                        
 			customStorage.addToStorage('username', name);
 			customStorage.addToStorage('email', email);
 			customStorage.addToStorage('isLoggedIn',true);

@@ -70,6 +70,9 @@
                                         <div class="prdCommImg fLeft">
                                             <?php 
                                                 switch(count($data[$key]['images'])){
+                                                    case 0:?>
+                                                        <div class="for-1 noImage"></div>
+                                                        <?php break;
                                                     case 1:?>
                                                         <div class="prox for-1"></div>
                                                         <?php break;
@@ -111,7 +114,7 @@
                                                     case 7: 
 														?>
                                                         <div class="for-7Upper">
-                                                            <div class="prox for-7"  style="background: #fff url(../tools/img/product1/1.jpg)no-repeat;background-size: contain;background-position:center"></div>
+                                                            <div class="prox for-7"  style="background: #ccc url(../tools/img/product1/1.jpg)no-repeat;background-size: contain;background-position:center"></div>
                                                         </div>
                                                         <div class="for-7Lower">
                                                             <div class="prox for-7" style="background: #fff url(../tools/img/product1/2.jpg)no-repeat;background-size: contain;background-position:center"></div>

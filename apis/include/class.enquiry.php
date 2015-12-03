@@ -76,7 +76,7 @@ class enquiry extends DB
                     else
                 {
                     $arr=array();
-                    $err=array('Code'=>0,'Msg'=>'Error in completing the operation');
+                    $err=array('Code'=>1,'Msg'=>'Error in completing the operation');
                 }
             }
         }

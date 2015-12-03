@@ -58,9 +58,9 @@ $('#pr_mobile').keyup(function () {
         var isVendor = $('#isVendor').is(':checked');
         if(isVendor)
             isVendor=1;
-        else 
-            isVendor=0;
         
+        else 
+            isVendor=-1;
         if(pr_name.length==0 || isNaN(pr_name)!==true) {
             customStorage.toast(0,'Invalide format for Name'); 
             $('#pr_name').focus();
@@ -87,23 +87,22 @@ $('#pr_mobile').keyup(function () {
             return false;
         } else {
             $.ajax({url: DOMAIN + "apis/index.php?action=userReg&username=" + pr_name +"&password=" + pr_pass +"&mobile=" + pr_mobile + "&email="+pr_email+'&isvendor='+isVendor, success: function (result) {
-                var obj = jQuery.parseJSON(result);
-                var errCode = obj['error']['code']
-                var uid = obj['userid'];
+                var obj = eval('('+result+')');
+                var errCode = obj.error.code;
                 if(errCode == 0) {
-                    var userid = obj['userid'];
+                    var userid = obj.userid;
                     customStorage.addToStorage('isLoggedIn',true);
                     customStorage.addToStorage('userid',userid);
                     customStorage.addToStorage('mobile',pr_mobile);
                     customStorage.addToStorage('username',pr_name);
                     customStorage.addToStorage('is_vendor',isVendor);
-                    if(isVendor==1) {
+                    if(isVendor===1) {
                         customStorage.removeFromStorage('busiType');
-                        window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid='+uid);
+                        window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid='+userid);
                     } else {
                         customStorage.toast(1,'Registration Successfull Done');
-                        window.history.back();
-                        //setTimeout(function () {window.location.assign(DOMAIN + 'index.php'); },3000);
+                        //window.history.back();
+                        setTimeout(function () {window.location.assign(DOMAIN + 'index.php'); },1500);
                     }
                 } else {
                     customStorage.toast(0,'Registration Unsuccessfull');
