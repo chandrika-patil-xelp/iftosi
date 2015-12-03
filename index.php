@@ -97,6 +97,15 @@ switch ($action) {
                 }
                 echo json_encode($resp);
                 break;
+                
+                case 'updateStatus':
+                
+                $vid = (!empty($_GET['uid'])) ? trim($_GET['uid']) : '';
+                $af = (!empty($_GET['af'])) ? trim($_GET['af']) : 0;    
+                $userUrl = APIDOMAIN . 'index.php?action=actUser&userid='.$vid.'&active_flag='.$af;
+                $resp = $comm->executeCurl($userUrl);
+                echo json_encode($resp);
+                break;
 
             case 'addToWishList':
                 $userid = (!empty($_GET['userid'])) ? trim($_GET['userid']) : '';

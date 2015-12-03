@@ -137,8 +137,8 @@ switch($action)
 // localhost/iftosi/apis/index.php?action=deactUser&mobile=9975887206
         case 'deactUser':
             include APICLUDE.'class.user.php';
-            $mobile=(!empty($params['mobile'])) ?  trim($params['mobile']) : '';
-            if(empty($params['mobile']))
+            $userid=(!empty($params['userid'])) ?  trim($params['userid']) : '';
+            if(empty($userid))
             {
             $arr=array();
             $err=array('code'=>1,'Msg'=>'Invalid Parameters');
@@ -154,8 +154,8 @@ switch($action)
 // localhost/iftosi/apis/index.php?action=actUser&mobile=9975887206
         case 'actUser':
             include APICLUDE.'class.user.php';
-            $mobile=(!empty($params['mobile'])) ?  trim($params['mobile']) : '';
-            if(empty($params['mobile']))
+            $userid=(!empty($params['userid'])) ?  trim($params['userid']) : '';
+            if(empty($userid))
             {
             $arr=array();
             $err=array('code'=>1,'Msg'=>'Invalid Parameter');
@@ -883,6 +883,24 @@ switch($action)
             $result=$obj->addNewproduct($params);
             $res=$result;
             break;
+        
+        case 'Vpactive':
+            include APICLUDE.'class.vendor.php';
+            $vid=(!empty($params['vid'])) ? trim(urldecode($params['vid'])) : '';
+            $af=(!empty($params['af'])) ? trim(urldecode($params['af'])) : '';
+            
+            if(empty($vid) && empty($af))
+            {
+                $arr=array();
+                $err=array('code'=> 1,'Msg'=> 'Invalid parameters');
+                $result=array('results'=> $arr,'error'=>$err);
+                $res=$result;
+                break;
+            }
+            $obj=new vendor($db['iftosi']);
+            $result=$obj->Vpactive($params);
+            $res=$result;
+            break;    
 
         /*case 'imageUpdate':
             include APICLUDE.'class.product.php';

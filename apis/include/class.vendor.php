@@ -1279,6 +1279,49 @@ class vendor extends DB
         $result = array('results' => $arr, 'error' => $err);
         return $result;
         }
-    
+        
+        public function Vpactive($params) {
+            
+        $vprds="SELECT product_id from tbl_vendor_product_mapping where vendor_id=".$params['vid'];
+        $vprdsres=$this->query($vprds);
+        $cntvpres=$this->numRows($vprdsres);
+        
+        if($cntvpres>0)
+        {
+            while($chkrow=$this->fetchData($chkactres))
+            {
+                $pid[] = $chkrow['product_id'];
+            }
+            $prid=implode(',',$pid);
+            
+            $sql = "UPDATE tbl_vendor_product_mapping SET active_flag=".$params['af']." WHERE product_id IN(\"".$prid."\") AND vendor_id=".$params['vid'];
+            $res = $this->query($sql);
+            if($res){
+            $sql = "UPDATE tbl_product_search SET active_flag=".$params['af']." WHERE product_id IN(".$prid.")";
+            $res1 = $this->query($sql);}
+            if($res1){
+            $sql = "UPDATE tbl_product_master SET active_flag=".$params['af']." WHERE product_id IN(".$prid.")";
+            $res2 = $this->query($sql);}
+            if($res2){
+            $sql = "UPDATE tbl_productid_generator SET active_flag=".$params['af']." WHERE product_id IN(".$prid.")";
+            $res3 = $this->query($sql);}
+            if($res3){
+            $sql = "UPDATE tbl_product_category_mapping SET display_flag=".$params['af']." WHERE product_id IN(".$prid.")";
+            $res4 = $this->query($sql);}
+            if($res4){
+            $sql = "UPDATE tbl_designer_product_mapping SET active_flag=".$params['af']." WHERE product_id IN(".$prid."))";
+            $res = $this->query($sql);}
+        
+            $arr=array();
+            $err=array('code'=>0,'msg'=>'Product status changed too');
+        }
+        else
+        {
+            $arr=array();
+            $err=array('code'=>0,'msg'=>'Product status changed too');
+        }
+        $result=array('result'=>$arr,'error'=>$err);
+        return $result;
+        }
 }
 ?>

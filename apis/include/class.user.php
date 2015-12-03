@@ -40,7 +40,7 @@
             
             if($params['isvendor']==1)
             {
-            $isql= "INSERT INTO tbl_vendor_master(vendor_id,email,date_time,is_complete) VALUES(".$uid.",'".$params['email']."',now(),0)";
+            $isql= "INSERT INTO tbl_vendor_master(vendor_id,email,date_time,is_complete,is_active) VALUES(".$uid.",'".$params['email']."',now(),0,0)";
             $res=$this->query($isql);
                 if($res)
                 {
@@ -334,18 +334,18 @@
             $vsql="SELECT
                                 is_active 
                    FROM 
-                                tbl_registration 
+                                tbl_vendor_master  
                    WHERE 
-                                logmobile=".$params['mobile']."";
+                                vendor_id=".$params['userid']."";
             $vres=$this->query($vsql);
             if($this->numRows($vres)==1) //If user is registered
             {
                 $usql="UPDATE
-                                    tbl_registration 
+                                    tbl_vendor_master
                        SET
-                                    is_active=1 
+                                    is_active=\"".$params['active_flag']."\" 
                        WHERE 
-                                    logmobile=".$params['mobile'];
+                                    vendor_id=".$params['userid'];
                 $ures=$this->query($usql);
                 if($ures)
                 {
@@ -354,15 +354,15 @@
                 }
                 else
                 {
-                $arr=array();
-                $err=array('code'=>1,'msg'=>'Error in updating data');
+                    $arr=array();
+                    $err=array('code'=>1,'msg'=>'Problem in deactivating status');
                 }
             }
             else
             {
                 $arr=array();
-                $err=array('code'=>1,'msg'=>'Problem in fetching data');
-            }  // If user is not registered
+                $err=array('code'=>1,'msg'=>'No such user');
+            }
             $result = array('results'=>$arr,'error'=>$err);
             return $result;
         }
@@ -372,9 +372,9 @@
             $vsql="SELECT 
                                 is_active 
                    FROM 
-                                tbl_registration 
+                                tbl_vendor_master 
                    WHERE 
-                                logmobile=".$params['mobile']."";
+                                vendor_id=".$params['userid']."";
             $vres=$this->query($vsql);
             if($this->numRows($vres)==1) //If user is registered
             {
@@ -383,17 +383,17 @@
                    SET 
                                 is_active=0 
                    WHERE 
-                                logmobile=".$params['mobile'];
+                                vendor_id=".$params['userid'];
             $ures=$this->query($usql);
                 if($ures)
                 {
-                $arr="User profile is deactivated";
-                $err=array('code'=>0,'msg'=>'Row has been Updated');
+                    $arr="User profile is deactivated";
+                    $err=array('code'=>0,'msg'=>'Row has been Updated');
                 }
                 else
                 {
-                $arr=array();
-                $err=array('code'=>1,'msg'=>'Error in updating data');
+                    $arr=array();
+                    $err=array('code'=>1,'msg'=>'Error in updating data');
                 }
             }
             else

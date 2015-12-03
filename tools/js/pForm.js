@@ -85,12 +85,6 @@ function submitForm(formid)
             else if((metal=='') || (metal==null) || (metal==undefined)) {
                 str ='Metal field is Empty';
             }
-            else if((color=='') || (color==null) || (color==undefined)) {
-                str ='Diamond Color field is Empty';
-            }
-            else if((clarity=='') || (clarity==null) || (clarity==undefined)) {
-                str ='Diamond Quality field is Empty';
-            }
             else if(purity == '' || isNaN(purity)) {
                 str ='Purity field is Empty';
                  $('#goldpurity').focus();
@@ -98,18 +92,6 @@ function submitForm(formid)
             else if(goldweight == '' || isNaN(goldweight)) {
                 str ='Gold weight is Required';
                 $('#goldweight').focus();
-            }
-            else if(isNaN(no_diamonds)) {
-                str ='Number of diamonds have to be Selected';
-                 $('#no_diamonds').focus();
-            }
-            else if(dweight == '' || isNaN(dweight)) {
-                str ='Diamond weight is Required';
-                $('#diamondweight').focus();
-            }
-            else if(gemweight == '' || isNaN(gemweight)) {
-                str ='Gemstone weight is important to fill';
-                 $('#gemweight').focus();
             }
             else if(barcode=='') {
                 str ='Design Number field is Required';
@@ -130,7 +112,36 @@ function submitForm(formid)
             }
             return false;
 }
-
+function calculatePrice()
+{
+   var baseprice=$('#baseprice').val();
+   var discount=$('#discount').val();
+   
+   
+   if(discount == null || discount == '' || discount == 'undefined' || discount == undefined){ 
+   
+        $('#prdprice').val(baseprice);
+   }
+   else 
+   {
+        if((isNaN(baseprice)) == false  || (isNaN(baseprice)) == false || baseprice == undefined  || baseprice == 'undefined' || discount == undefiend || discount == 'undefined')
+        {
+           var offerPrice =(parseFloat(baseprice)*(discount/100));
+           var total = baseprice-offerPrice;
+           $('#prdprice').val(total);
+        }
+        
+   }    
+}
+function validateNum(){
+               var regex = /^\\d{2}(\\.\\d)?$/;
+               var cert = $('#cert').val();
+                if(cert.match(regex) == null || cert == undefined) {
+                    common.toast(0,'valid');
+                } else {
+                    common.toast(0,'valid');
+                }
+            }
  function validateDForm(){
             var shape=$('.shapeComm');
             var metal = $("input[name='metal']:checked").val();
@@ -228,10 +239,6 @@ function submitForm(formid)
             else if(baseprice == '' || isNaN(baseprice)) {
             str ='Baseprice field is Required';
                 $('#baseprice').focus();
-            }
-            else if(discount=='') {
-            str ='Discount field is Required';
-                $('#discount').focus();
             }
             else if(prdprice == '' || isNaN(prdprice)) {
             str ='Price field is Required';

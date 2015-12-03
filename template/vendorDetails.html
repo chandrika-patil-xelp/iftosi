@@ -47,12 +47,12 @@ if(!empty($data['mdbw'])) {
                         </div>
                         <div class="divCon2 fRight c666">
                             <div class="titleDiv txtCap fLeft"> Area *</div>
-                            <input type="text" id="area" name="area" value="<?php echo $data['area']; ?>" placeholder=" Area" class="txtInput c666 fLeft fmRoboto font14" onfocus="searchAreaDivOutput(this.value);" onkeypress="return onlyAlphabets(event, this)" onblur="matchValue(this.value, areaList, 2);closeSuggest();" onkeyup="searchArea.showHint(this.value, event)" onclick="clearVal(this.id);searchAreaDivOutput(this.value)">
+                            <input type="text" id="area" name="area" value="<?php echo $data['area']; ?>" placeholder=" Area" maxlength="50" class="txtInput c666 fLeft fmRoboto font14" onfocus="searchAreaDivOutput(this.value);" onkeypress="return onlyAlphabets(event, this)" onblur="matchValue(this.value, areaList, 2);closeSuggest();" onkeyup="searchArea.showHint(this.value, event)" onclick="clearVal(this.id);searchAreaDivOutput(this.value)">
                             <div id="areaSuggestDiv" class="autoSuggestOuter"></div>
                         </div>
                         <div class="divCon2 fLeft c666">
                             <div class="titleDiv txtCap fLeft"> City *</div>
-                            <input type="text" id="city" name="city" value="<?php echo $data['city']; ?>" onkeypress="return common.onlyAlphabets(event)" placeholder=" City" class="txtInput c666 fLeft fmRoboto font14" onfocus="" onkeypress="return onlyAlphabets(event, this)" onblur="closeSuggest('citySuggestDiv');" onkeyup="" onclick="">
+                            <input type="text" id="city" name="city" value="<?php echo $data['city']; ?>" onkeypress="return common.onlyAlphabets(event)" maxlength="50" placeholder=" City" class="txtInput c666 fLeft fmRoboto font14" onfocus="" onkeypress="return onlyAlphabets(event, this)" onblur="closeSuggest('citySuggestDiv');" onkeyup="" onclick="">
                             <div id="citySuggestDiv" class="autoSuggestOuter"></div>
                         </div>
                         <div class="divCon2 fRight c666">
@@ -62,19 +62,19 @@ if(!empty($data['mdbw'])) {
                         </div>
                         <div class="divCon2 fLeft">
                             <div  class="titleDiv txtCap fLeft">VAT Number</div>
-                            <input name="" type="text" id="vat" value="<?php echo $data['vatno']; ?>" placeholder=" eg.  12345678901" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="" type="text" id="vat" value="<?php echo $data['vatno']; ?>" placeholder=" eg.  12345678901" maxlength="12" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon2  fRight">
                             <div  class="titleDiv txtCap fLeft">PAN Card Number</div>
-                            <input name="" type="text" id="pan" value="<?php echo $data['pancard']; ?>" placeholder=" eg.  ALXPK2999K" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="" type="text" id="pan" value="<?php echo $data['pancard']; ?>" maxlength="10" placeholder=" eg.  ALXPK2999K" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Turnover</div>
-                            <input name="" type="text" id="tovr" value="<?php echo $data['turnover']; ?>" placeholder=" eg.  100 CRORES" maxlength="10" onkeypress="return common.isNumberKey(event)" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="" type="text" id="tovr" value="<?php echo $data['turnover']; ?>" placeholder=" eg.  100 CRORES" maxlength="15" onkeypress="return common.isNumberKey(event)" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon2  fRight">
                             <div  class="titleDiv txtCap fLeft">Website</div>
-                            <input name="" type="text" id="wbst" value="<?php echo $data['website']; ?>" placeholder=" eg.  www.whitefirejewels.in" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="" type="text" id="wbst" value="<?php echo $data['website']; ?>" placeholder=" eg.  www.whitefirejewels.in" onkeypress="return common.validateUrl(event);" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon  fLeft">
                             <div  class="titleDiv txtCap fLeft">Bankers</div>
@@ -94,7 +94,7 @@ if(!empty($data['mdbw'])) {
                                 <div class="compPrice fLeft fmOpenR">
                                     <span>&#8377;</span>15000/- per year
                                 </div>
-                                 for Jewelery companies. 
+                                 for Jewellery companies. 
                             </div>
                             <div id='forBullion' class="compComm fLeft <?php if(in_array('3',$business_type)) { echo 'comSelected'; } ?>">
                                 <div class="compTitle fLeft fmOpenR">Bullion</div>
@@ -140,7 +140,7 @@ if(!empty($data['mdbw'])) {
                             <div class="formTitle fLeft fmOpenL">Jewellery</div>
                             <div class="divCon  fLeft">
                                 <div  class="titleDiv txtCap fLeft">Name Of Showroom</div>
-                                <input name="showroomname" id="showroomname" type="text" value="<?php echo $data['showroom_name']; ?>" placeholder=" eg. White Fire Jewels" class="txtInput fLeft fmOpenR font14 c666">
+                                <input name="showroomname" id="showroomname" type="text" value="<?php echo $data['orgName']; ?>" placeholder=" eg. White Fire Jewels" class="txtInput fLeft fmOpenR font14 c666">
                             </div>
                             <div class="divCon  fLeft">
                                 <div  class="titleDiv txtCap fLeft">Number of Showrooms In India</div>

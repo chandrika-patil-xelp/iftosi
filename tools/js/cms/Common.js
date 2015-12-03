@@ -29,7 +29,7 @@ function Common() {
     };
     this.isDecimalKey = function (evt) {
         var charCode = (evt.which) ? evt.which : evt.keyCode;
-        if (charCode == 46) {
+        if (charCode == 46 && (charCode > 48 || charCode < 57)) {
             return true;
         }
         else if (charCode == 13) {

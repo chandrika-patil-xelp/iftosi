@@ -63,7 +63,7 @@
                 <div class="fLeft vndAmount"><?php echo $cost?></div>
                 <div class="fLeft vndExpDate">NA</div>
                 <div class="fLeft vndEdit">
-                    <div class="toggle-button toggle-button <?php echo ($data[$i]['active_flag'] ? 'cyes' : '');?>" onclick="changeStatus(this)">
+                    <div class="toggle-button toggle-button <?=($data[$i]['is_active']==0) ? 'toggle-button-selected' : '';?>" onclick="changeStatus(<?=$data[$i]['vendor_id'];?>,this)">
                         <span class="fActive">Yes</span>
                         <button class="button"></button>
                         <span class="fDactive">No</span>
@@ -93,7 +93,7 @@
 
 
 
-    function changeStatus(uid, obj) {
+    function changeStatus(uid,obj) {
         var st = 0;
         setTimeout(function() {
             var pLeft = $(obj).find(".button").position().left;
@@ -102,17 +102,32 @@
             } else {
                 st = 0;
             }
-            var URL = global.webPath() + "ajax/updateStatus/" + uid + "/" + st;
+            var URL = DOMAIN+ "index.php?action=ajx&case=updateStatus&uid=" + uid +"&af="+st;
             $.ajax({
                 url: URL,
                 type: 'POST',
                 success: function(res) {
-                }
+                    if(uid !== null)
+                    {
+                        var params = 'action=Vpactive&vid='+uid+'&af='+st;
+                        var URL = APIDOMAIN + "index.php";
+
+                        $.getJSON(URL, params, function(data) {
+                                            if(data !== null && data !== undefined && data !== '' && data !== 'null' && data !== 'undefined' && typeof data !== 'undefined')
+                                            {
+                                                    if(data.error !== '' && data.error !== null && data.error !== undefined && data.error !== 'undefined' && typeof data.error !== 'undefined' && data.error.Code == 0)
+                                                    {
+                                                             customStorage.toast(1, 'Vendor status is changed');
+                                                    }
+                                            }
+                        });
+                    }
+             }
             });
         }, 350);
     }
 
 </script>
-
+<script type="text/javascript" src='tools/js/cms/lib/jquery.toast.min.js'></script>
 </body>
 </html>

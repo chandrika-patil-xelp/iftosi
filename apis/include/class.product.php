@@ -9,7 +9,16 @@
 
         public function addNewproduct($params)
         {  
-             $detl=$params['dt'];
+            $vendSql = "Select * from tbl_vendor_master where vendor_id = ".$params['vid'];
+            $vendres = $this->query($vendSql);
+            if($vendres)
+            {
+                $vendrow = $this->fetchData($vendres);
+                $display_flag = $vendrow['active_flag'];
+            }
+                  
+            
+            $detl=$params['dt'];
             $len=strlen($detl);
 
             
@@ -192,7 +201,7 @@
                                                         category_id             = \"".$catids[$i]."\",
                                                         price                   = \"".$detls['price']."\",
                                                         rating                  = \"".$detls['rating']."\",
-                                                        display_flag            =     1";
+                                                    display_flag                = \"".$display_flag."\"";
                                 $pcres=$this->query($pcsql);
                            }
                         }
@@ -216,7 +225,8 @@
                                                                         prd_img,
                                                                         product_warranty,
                                                                         desname,
-                                                                        date_time)
+                                                                        date_time,
+                                                                        active_flag)
                                                 VALUES
                                                                  ( \"".$pid."\",
                                                                    \"".$detls['barcode']."\",
@@ -234,7 +244,8 @@
                                                                    \"".$detls['prd_img']."\",
                                                                    \"".$detls['product_warranty']."\",
                                                                    \"".$detls['desname']."\",
-                                                                       now())
+                                                                       now(),
+                                                                   \"".$display_flag."\")
                                 ON DUPLICATE KEY UPDATE
                                                     barcode                      = \"".$detls['barcode']."\", 
                                                     lotref                       = \"".$detls['lot_ref']."\", 
@@ -249,7 +260,8 @@
                                                     prd_wt                       = \"".$detls['product_wt']."\", 
                                                     prd_img                      = \"".$detls['prd_img']."\",  
                                                     product_warranty             = \"".$detls['product_warranty']."\",
-                                                    desname                      = \"".$detls['desname']."\"";
+                                                    desname                      = \"".$detls['desname']."\"
+                                                    active_flag                      = \"".$display_flag."\"";
                     $res = $this->query($sql);
                     
                    //----------------------------------------------For product search table---------------------------------------------------                              
@@ -293,7 +305,8 @@
                                                      combination,
                                                      bullion_design,
                                                      rating,
-                                                     date_time)
+                                                     date_time,
+                                                     active_flag)
                                     VALUES
                                                  (\"".$pid."\",
                                                   \"".$detls['color']."\",
@@ -330,7 +343,8 @@
                                                   \"".$detls['combination']."\",
                                                   \"".$detls['design']."\",
                                                   \"".$detls['rating']."\",    
-                                                  now())
+                                                      now(),
+                                                  \"".$display_flag."\")
                                     ON DUPLICATE KEY UPDATE
                                                             color       = \"".$detls['color']."\",
                                                             carat       = \"".$detls['carat_weight']."\",
@@ -365,7 +379,8 @@
                                                             combination = \"".$detls['combination']."\",
                                                             gemstone_color=\"".$detls['gemstone_color']."\",
                                                             bullion_design=\"".$detls['design']."\",    
-                                                            rating      = \"".$detls['rating']."\"";    
+                                                            rating      = \"".$detls['rating']."\",
+                                                            active_flag      = \"".$display_flag."\"";    
                             $res = $this->query($sql);
                         
                             $vensql="  SELECT
@@ -391,7 +406,8 @@
                                                                             city,
                                                                             active_flag,
                                                                             updatedby,
-                                                                            date_time)";
+                                                                            date_time,
+                                                                            active_flag)";
                             $vendsql.=  "VALUES
                                                                        (\"".$pid."\",
                                                                         \"".$params['vid']."\",
@@ -402,7 +418,8 @@
                                                                         \"".$city."\",
                                                                             1,
                                                                            'vendor',
-                                                                            now())";
+                                                                            now(),
+                                                                        \"".$display_flag."\")";
                             $vendres = $this->query($vendsql);
                             
                                 $arr = array('pid'=>$pid);
