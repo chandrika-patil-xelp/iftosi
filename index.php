@@ -350,7 +350,7 @@ switch ($action) {
 
                 $vndrDtls['fulladdress'] = implode(', ', $vndrDtls['fulladdress']);
                 $vndrAddr = explode(',', $vndrDtls['fulladdress']);
-                //echo "<pre>";print_r($datacnt);die; 
+                //echo "<pre>";print_r($datacnt);die;
                 include 'template/diamond_details.html';
                 break;
             case 'bullion_details':
@@ -566,9 +566,13 @@ switch ($action) {
                 $catid = (!empty($_GET['catid']) ? $_GET['catid'] : '');
                 include 'template/vendor_enquiries.html';
                 break;
-            
+
             case 'vendorList':
                 $page = 'vendorList';
+                $url = APIDOMAIN . 'index.php?action=vendorlist';
+                $res = $comm->executeCurl($url);
+                $data = $res['results'];
+                //echo "<pre>";print_r($data);die;
                 include 'template/vendorList.html';
                 break;
 
@@ -619,4 +623,4 @@ switch ($action) {
         }
         break;
 }
-?>  
+?>

@@ -2,21 +2,40 @@
 include APICLUDE.'common/db.class.php';
 class vendor extends DB
 {
-    function __construct($db) 
+    function __construct($db)
     {
         parent::DB($db);
+    }
+    public function vendorList()
+    {
+        $sql = "SELECT * FROM tbl_vendor_master WHERE orgName is not null";
+        $res = $this->query($sql);
+        if($res)
+        {
+            while($row = $this->fetchData($res))
+            {
+                $arr[] = $row;
+            }
+            $err = array('Code' => 0, 'Msg' => 'Product details added successfully!');
+        }
+        else {
+            $err = array('Code' => 1, 'Msg' => 'Something went wrong');
+        }
+        //  echo "<pre>";print_r($arr);die;
+        $result = array('results' => $arr, 'error' => $err);
+        return $result;
     }
     public function addVendorPrdInfo($params)
     {
         $dt= json_decode($params['dt'],1);
         $detls  = $dt['result'];
-        
+
         $sql="SELECT city from tbl_vendor_master where active_flag=1 and vendor_id=\"".$detls['vid']."\"";
         $res=$this->query($sql);
         $row=$this->fetchData($res);
         $city=$row['city'];
-        
-        
+
+
         $sql="INSERT INTO tbl_vendor_product_mapping(product_id,vendor_id,vendor_price,vendor_quantity,vendor_currency,vendor_remarks,city,active_flag,updatedby,date_time)";
         $sql.="VALUES(".$detls['pid'].",".$detls['vid'].",".$detls['vp'].",".$detls['vq'].",'".$detls['vc']."','".$detls['vr']."',".$city.",".$detls['af'].",'vendor',now())";
         $res = $this->query($sql);
@@ -28,23 +47,23 @@ class vendor extends DB
         else
         {
             $arr=array();
-            $err = array('Code' => 1, 'Msg' => 'Product details Not Added!');            
+            $err = array('Code' => 1, 'Msg' => 'Product details Not Added!');
         }
         $result = array('results' => $arr, 'error' => $err);
         return $result;
     }
-    
+
     public function getVproducts($params)
-    {              
+    {
         $page   = ($params['page'] ? $params['page'] : 1);
         $limit  = ($params['limit'] ? $params['limit'] : 15);
-        
-        
+
+
         $total_products = 0;
-        
+
         $cnt_sql = "SELECT COUNT(1) as cnt FROM tbl_vendor_product_mapping  WHERE active_flag!=2 and vendor_id =".$params['vid'];
         $cnt_res = $this->query($cnt_sql); //checking number of products registered under vendor id provided
-        
+
         $chkcnt=$this->numRows($cnt_res);
          if($chkcnt>0)
         {
@@ -56,11 +75,11 @@ class vendor extends DB
             }
             $vres=$this->query($vsql);
             $prsql.=" LIMIT " . $start . ",$limit";
-            
+
             $i=-1;
             $vpmap=array();
-            while($row1=$this->fetchData($vres)) 
-            {   $i++;    
+            while($row1=$this->fetchData($vres))
+            {   $i++;
                 $vpmap['product_id'][$i]=$row1['product_id'];
                 $vpmap['vendor_price'][$i]=$row1['vendor_price'];
                 $vpmap['vendor_quantity'][$i]=$row1['vendor_quantity'];
@@ -71,14 +90,14 @@ class vendor extends DB
             }
             $vmapProd=implode(',',$vmap[$i]['product_id']);
 
-            $prsql="SELECT product_id,product_name,product_display_name,product_model,product_brand,prd_img,desname 
+            $prsql="SELECT product_id,product_name,product_display_name,product_model,product_brand,prd_img,desname
                     FROM tbl_product_master WHERE product_id IN(".$vmapProd.") AND active_flag=1 or active_flag=0";
             $prsql.=" LIMIT " . $start . ",$limit";
 
             $pres=$this->query($prsql);
             $j=-1;
             $preslt=array();
-            while ($prow = $this->fetchData($pres)) 
+            while ($prow = $this->fetchData($pres))
             {       $j++;
 
                     $preslt['product_name'][$j]         = $prow['product_name'];
@@ -97,7 +116,7 @@ class vendor extends DB
                 $total_products = $cnt_row['cnt'];
                 }
             }
-            $arr=array('productdet'=>$presults[$j],'vendor_prod'=>$vmap[$i],'total_products'=>$total_products);    
+            $arr=array('productdet'=>$presults[$j],'vendor_prod'=>$vmap[$i],'total_products'=>$total_products);
             $err = array('Code' => 0, 'Msg' => 'Details fetched successfully');
           }
              else
@@ -108,8 +127,8 @@ class vendor extends DB
             $result = array('results'=>$arr,'error'=> $err);
             return $result;
     }
-    
-     
+
+
     public function getVProductsBYBcode($params)
     {
         $page   = ($params['page'] ? $params['page'] : 1);
@@ -130,8 +149,8 @@ class vendor extends DB
                 $prDetails[]=$pdet;
             }
             $prIds=implode(',',$pdet1['pid']);
-        
-        $sql1=" SELECT 
+
+        $sql1=" SELECT
                     a.product_id,
                     a.barcode as product_barcode,
                     b.shape as product_shape,
@@ -141,7 +160,7 @@ class vendor extends DB
                     b.metal,
                     b.type
                 FROM
-                    tbl_product_master AS a join 
+                    tbl_product_master AS a join
                     tbl_product_search AS b
                ON
                     a.product_id = b.product_id
@@ -159,7 +178,7 @@ class vendor extends DB
                     OR
                     MATCH(b.metal) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
                     OR
-                    b.type LIKE '" . $params['bcode'] . "%'   
+                    b.type LIKE '" . $params['bcode'] . "%'
                     OR
                     b.certified LIKE '" . $params['bcode'] . "%'
                     OR
@@ -171,7 +190,7 @@ class vendor extends DB
             $start = ($page * $limit) - $limit;
             $sql1.=" LIMIT " . $start . ",$limit";
         }
-     
+
         $res1=$this->query($sql1);
         $chkcnt=$this->numRows($res1);
         if($chkcnt>0)
@@ -193,11 +212,11 @@ class vendor extends DB
                 $psql='d.type, d.metal, d.gold_purity, d.gold_weight';
             }
             $sql = "select
-                                    DISTINCT a.product_id 
-                AS id, 
+                                    DISTINCT a.product_id
+                AS id,
                                     c.product_name,
-                                    a.vendor_price 
-                AS price, 
+                                    a.vendor_price
+                AS price,
                                     c.barcode,
                                     c.update_time,
                                     c.active_flag,
@@ -206,35 +225,35 @@ class vendor extends DB
                                     tbl_vendor_product_mapping
                 AS a,
                                     tbl_product_category_mapping
-                AS b, 
+                AS b,
                                     tbl_product_master
                 AS c,
                                     tbl_product_search
-                AS d 
+                AS d
                 where
-                                    a.product_id=b.product_id 
-                AND 
+                                    a.product_id=b.product_id
+                AND
                                     b.product_id=c.product_id
-                AND 
+                AND
                                     c.product_id=d.product_id
-                AND 
+                AND
                                     b.category_id = " . $catid . "
-                AND 
+                AND
                                     a.vendor_id=" . $params['vid'] . "
                 AND
                                     a.active_flag=1
                 AND
                                     c.product_id IN(".$prId.")
-                ORDER BY 
+                ORDER BY
                                     field(c.product_id,".$prId.")";
-        
+
         $res = $this->query($sql);
         $total_products = $this->numRows($res);
 
         if($total_products>0)
         {
             $j=0;
-            while ($row1=$this->fetchData($res)) 
+            while ($row1=$this->fetchData($res))
             {
                 if ($catid == 10001) {
                     $csql="SELECT p_catid,cat_name FROM tbl_category_master WHERE catid in (SELECT category_id FROM `tbl_product_category_mapping` WHERE `product_id`=".$row1['id']." ) ORDER BY p_catid DESC";
@@ -249,15 +268,15 @@ class vendor extends DB
                 }
                 $arr1[]=$row1;
             }
-            $arr = array('total_products' => $total_products, 'total_pages' => $total_pages, 'products' => $arr1);    
+            $arr = array('total_products' => $total_products, 'total_pages' => $total_pages, 'products' => $arr1);
             $err = array('Code' => 0, 'Msg' => 'Details fetched successfully');
         }
         else
         {
-            $arr=array('total_products' => $total_products, 'total_pages' => $total_pages);    
+            $arr=array('total_products' => $total_products, 'total_pages' => $total_pages);
             $err = array('Code' => 0, 'Msg' => 'No Match Found');
         }
-        
+
      }
     else
     {
@@ -273,34 +292,34 @@ class vendor extends DB
         $result = array('results' => $arr,'error' => $err);
         return $result;
     }
-    
+
     public function updateProductInfo($params)
-    {        
+    {
         $sql = "UPDATE tbl_vendor_product_mapping SET vendor_price=".$params['vp'].",
                 vendor_quantity=".$params['vq'].",updatedby='vendor',
                 active_flag=".$params['af']." WHERE vendor_id=".$params['vid']." AND
                 product_id=".$params['pid']."";
         $res=$this->query($sql);
-        
-        if($res) 
-        {   
+
+        if($res)
+        {
             $arr="Vendor Product Map table updated";
             $err = array('Code' => 0, 'Msg' => 'Details updated successfully');
         }
-        else 
-        {   
+        else
+        {
             $arr=array();
             $err = array('Code' => 1, 'Msg' => 'Update unsuccessfull');
         }
-        $result = array('results'=>$arr,'error'=>$err);  
+        $result = array('results'=>$arr,'error'=>$err);
         return $result;
     }
-    
+
     public function getVDetailByVidPid($params)
     {
         $page   = ($params['page'] ? $params['page'] : 1);
         $limit  = ($params['limit'] ? $params['limit'] : 15);
-        
+
         $sql1="SELECT * FROM tbl_vendor_product_mapping where product_id=".$params['pid']." AND vendor_id=".$params['vid']." AND active_flag=1 ORDER BY date_time ASC";
         if (!empty($page))
         {
@@ -312,7 +331,7 @@ class vendor extends DB
         if($chkcnt>0)
         {
             while($row=$this->fetchData($res1))
-            {   
+            {
                 $vdet['vendor_price']=$row['vendor_price'];
                 $vdet['vendor_quantity']=$row['vendor_quantity'];
                 $vdet['vendor_currency']=$row['vendor_currency'];
@@ -320,7 +339,7 @@ class vendor extends DB
                 $vdet['vendor_city']=$row['city'];
                 $vdetls[]=$vdet;
             }
-            $sql2="SELECT 
+            $sql2="SELECT
                             orgName as OrganisationName,
                             fulladdress,
                             postal_code,
@@ -335,19 +354,19 @@ class vendor extends DB
                             memship_Cert as Membership_Certificate,
                             bdbc as bharat_Diamond_Bource_Certificate,
                             other_bdbc as other_Bharat_Diamond_Bource_Certificate,
-                            vatno as Vat_Number,                            
+                            vatno as Vat_Number,
                             landline,
-                            mdbw as membership_of_other_diamond_bourses_around_world,                            
+                            mdbw as membership_of_other_diamond_bourses_around_world,
                             website,
-                            banker as bankers,                            
+                            banker as bankers,
                             pancard,
                             turnover,
                             lat as latitude,
                             lng as longitude
 
-                    FROM 
-                                tbl_vendor_master 
-                    WHERE 
+                    FROM
+                                tbl_vendor_master
+                    WHERE
                                 vendor_id =".$params['vid']."";
             if (!empty($page))
             {
@@ -358,33 +377,33 @@ class vendor extends DB
             $res2=$this->query($sql2);
             if($this->numRows($res2)>0)
             {
-                while ($row1=$this->fetchData($res2)) 
+                while ($row1=$this->fetchData($res2))
                 {
                     $vresult[] = $row1;
                 }
-                $arr=array('Vendor-Detail'=>$vresult,'Vendor-Product'=>$vdetls);    
+                $arr=array('Vendor-Detail'=>$vresult,'Vendor-Product'=>$vdetls);
                 $err = array('Code' => 0, 'Msg' => 'Details fetched successfully');
             }
             else
             {
-                $arr=array();    
+                $arr=array();
                 $err = array('Code' => 1, 'Msg' => 'No Match Found');
             }
         }
         else
         {
-            $arr=array();    
+            $arr=array();
             $err = array('Code' => 0, 'Msg' => 'No Match Found');
         }
         $result = array('results'=>$arr,'error'=>$err);
-        return $result;        
+        return $result;
     }
-    
+
     public function getVDetailByPid($params)
     {
         $page   = ($params['page'] ? $params['page'] : 1);
         $limit  = ($params['limit'] ? $params['limit'] : 15);
-        
+
         $sql1="SELECT * FROM tbl_vendor_product_mapping where product_id=".$params['pid']." active_flag=1 and ORDER BY date_time ASC";
         if (!empty($page))
         {
@@ -396,7 +415,7 @@ class vendor extends DB
         if($chkcnt>0)
         {
             while($row=$this->fetchData($res1))
-            {   
+            {
                 $vid[] = $row['vendor_id'];
                 $vdet['vendor_id'] = $row['vendor_id'];
                 $vdet['vendor_price']=$row['vendor_price'];
@@ -406,10 +425,10 @@ class vendor extends DB
                 $vdet['vendor_city']=$row['city'];
                 $vdetls[]=$vdet;
             }
-            
+
             $vid = implode(',',$vid);
-            
-            $sql2="SELECT 
+
+            $sql2="SELECT
                             vendor_id AS vid,
                             orgName as OrganisationName,
                             fulladdress,
@@ -425,19 +444,19 @@ class vendor extends DB
                             memship_Cert as Membership_Certificate,
                             bdbc as bharat_Diamond_Bource_Certificate,
                             other_bdbc as other_Bharat_Diamond_Bource_Certificate,
-                            vatno as Vat_Number,                            
+                            vatno as Vat_Number,
                             landline,
-                            mdbw as membership_of_other_diamond_bourses_around_world,                            
+                            mdbw as membership_of_other_diamond_bourses_around_world,
                             website,
-                            banker as bankers,                            
+                            banker as bankers,
                             pancard,
                             turnover,
                             lat as latitude,
                             lng as longitude
 
-                    FROM 
-                                tbl_vendor_master 
-                    WHERE 
+                    FROM
+                                tbl_vendor_master
+                    WHERE
                                 vendor_id IN(".$vid.")
                     ORDER BY
                                 field(vendor_id,".$vid.")";
@@ -450,26 +469,26 @@ class vendor extends DB
             $res2=$this->query($sql2);
             if($this->numRows($res2) > 0)
             {
-                while ($row2=$this->fetchData($res2)) 
+                while ($row2=$this->fetchData($res2))
                 {
                     $arr1[$row2['vid']] = $row2;
                 }
-                $arr=array('Vendor-Detail'=>$arr1,'Vendor-Product'=>$vdetls);    
+                $arr=array('Vendor-Detail'=>$arr1,'Vendor-Product'=>$vdetls);
                 $err = array('Code' => 0, 'Msg' => 'Details fetched successfully');
             }
             else
             {
-                $arr=array();    
+                $arr=array();
                 $err = array('Code' => 1, 'Msg' => 'No Match Found');
             }
         }
         else
         {
-            $arr=array();    
+            $arr=array();
             $err = array('Code' => 0, 'Msg' => 'No Match Found');
         }
         $result = array('results'=>$arr,'error'=>$err);
-        return $result;        
+        return $result;
     }
 
     public function getVProductsByCatid($params) {
@@ -477,7 +496,7 @@ class vendor extends DB
         $catid = ($params['catid'] ? $params['catid'] : 10000);
         $limit = ($params['limit'] ? $params['limit'] : 15);
         $total_pages = $chkcnt = $total_products = 0;
-        
+
        // $cate_ids=  $this->getSubCat($catid);
         $psql='';
         if($catid == 10000) {
@@ -488,11 +507,11 @@ class vendor extends DB
             $psql='d.type, d.metal, d.gold_purity, d.gold_weight';
         }
         $sql = "select
-                                    DISTINCT a.product_id 
-                AS id, 
+                                    DISTINCT a.product_id
+                AS id,
                                     c.product_name,
-                                    a.vendor_price 
-                AS price, 
+                                    a.vendor_price
+                AS price,
                                     c.barcode,
                                     c.update_time,
                                     c.active_flag,
@@ -501,29 +520,29 @@ class vendor extends DB
                                     tbl_vendor_product_mapping
                 AS a,
                                     tbl_product_category_mapping
-                AS b, 
+                AS b,
                                     tbl_product_master
                 AS c,
                                     tbl_product_search
-                AS d 
+                AS d
                 where
-                                    a.product_id=b.product_id 
-                AND 
+                                    a.product_id=b.product_id
+                AND
                                     b.product_id=c.product_id
-                AND 
+                AND
                                     c.product_id=d.product_id
-                AND 
+                AND
                                     b.category_id = " . $catid . "
-                AND 
+                AND
                                     a.vendor_id=" . $params['vid'] . "
                 AND
                                     a.active_flag!=2
-                ORDER BY 
+                ORDER BY
                                     a.product_id
                 asc ";
         $res = $this->query($sql);
         $total_products = $this->numRows($res);
-        
+
         if (!empty($params['page'])) {
             $start = ($page * $limit) - $limit;
             $total_pages = ceil($total_products/$limit);
@@ -533,7 +552,7 @@ class vendor extends DB
         }
         //echo $sql;
         if ($chkcnt > 0) {
-            while ($row = $this->fetchData($res)) {        
+            while ($row = $this->fetchData($res)) {
                 if ($catid == 10001) {
                     $csql="SELECT p_catid,cat_name FROM tbl_category_master WHERE catid in (SELECT category_id FROM `tbl_product_category_mapping` WHERE `product_id`=".$row['id']." ) ORDER BY p_catid DESC";
                     $cres = $this->query($csql);
@@ -545,7 +564,7 @@ class vendor extends DB
                         $row['category']=$row1;
                     }
                 }
-                $arr1[] = $row;    
+                $arr1[] = $row;
             }
 
             $arr = array('total_products' => $total_products, 'total_pages' => $total_pages, 'products' => $arr1);
@@ -557,7 +576,7 @@ class vendor extends DB
         $result = array('results' => $arr, 'error' => $err);
         return $result;
     }
-    
+
     public function bulkInsertProducts($params) {
         $vid=$params['vid'];
         $data=$params['data'];
@@ -570,7 +589,7 @@ class vendor extends DB
         $city=$row['city'];
         if($type=='csv') {
             $rdv = explode("\n", $data);
-            $colName = explode(",", $rdv[0]);  
+            $colName = explode(",", $rdv[0]);
             $len = count($rdv) - 1;
         } else {
             $rdv=$data;
@@ -641,10 +660,10 @@ class vendor extends DB
         $result = array('results' => $arr, 'error' => $err);
         return $result;
     }
-    
+
     private function getSubCat($catid, $catarr = array()) {
         $sql = "SELECT p_catid, catid FROM tbl_category_master where p_catid in (" . $catid . ") order by catid ASC";
-        
+
         $res = $this->query($sql);
         if ($res) {
             while ($row = $this->fetchData($res)) {
@@ -655,7 +674,7 @@ class vendor extends DB
         }
         return $catid;
     }
-    
+
     public function deletePrd($params) {
         $sql = "UPDATE tbl_vendor_product_mapping SET active_flag=2 WHERE product_id=" . $params['prdid']." AND vendor_id=" . $params['vid'];
         $res = $this->query($sql);
@@ -685,13 +704,13 @@ class vendor extends DB
         $result = array('results' => $arr, 'error' => $err);
         return $result;
     }
-    
+
         public function toggleactive($params) {
         $chkact="SELECT active_flag from tbl_product_search WHERE product_id=".$params['prdid']."";
         $chkactres=$this->query($chkact);
         $chkrow=$this->fetchData($chkactres);
         $params['flag']=$chkrow['active_flag'];
-        
+
         if($params['flag']==1)
         {
             $sql = "UPDATE tbl_vendor_product_mapping SET active_flag=0 WHERE product_id=" . $params['prdid']." AND vendor_id=" . $params['vid'];
@@ -742,13 +761,13 @@ class vendor extends DB
         $result = array('results' => $arr, 'error' => $err);
         return $result;
     }
-    
+
     public function getVPrdByCatid($params)
         {
-			
+
 			$page   = ($params['page'] ? $params['page'] : 1);
 			$limit  = ($params['limit'] ? $params['limit'] : 15);
-			
+
 			$sql = "select cat_name as name from tbl_category_master where catid=\"".$params['catid']."\"";
 			$res = $this->query($sql);
 			if($res)
@@ -756,7 +775,7 @@ class vendor extends DB
 				$row = $this->fetchData($res);
 				$catname = $row['name'];
 			}
-			
+
                         if(!empty($params['ilist']))
 			{
 				$ilist = str_replace('|@|',',',$params['ilist']);
@@ -772,15 +791,15 @@ class vendor extends DB
 				}
 				$ilist = implode(',',$ids);
 				$where = " WHERE category_id in (".$ilist.") ";
-			} 
+			}
 			else
 			{
 				$where = " WHERE category_id in (".$params['catid'].") ";
 			}
-			
-			$sql = "SELECT 
-						count(distinct product_id) as cnt 
-					FROM 
+
+			$sql = "SELECT
+						count(distinct product_id) as cnt
+					FROM
 						tbl_product_category_mapping
 					".$where."
 					AND
@@ -788,71 +807,71 @@ class vendor extends DB
                                         OR
                                                 display_flag=0
                                 ";
-			
-			
+
+
 			$res = $this->query($sql);
 			if($res)
 			{
 				$row = $this->fetchData($res);
 				$total = $row['cnt'];
 			}
-			
-			$sql = "SELECT 
+
+			$sql = "SELECT
 						distinct product_id as pid,
-						price						
-					FROM 
-						tbl_product_category_mapping 
+						price
+					FROM
+						tbl_product_category_mapping
 					".$where."
 					AND display_flag=1 OR display_flag=0";
-			
+
 			switch($params['sortby'])
 			{
 				case 'pasc':
-					$sql.=" 
-							ORDER BY 
-								price ASC 
+					$sql.="
+							ORDER BY
+								price ASC
 						";
 				break;
-				
+
 				case 'pdesc':
-					$sql.=" 
-							ORDER BY 
-								price DESC 
+					$sql.="
+							ORDER BY
+								price DESC
 						";
 				break;
-				
+
 				case 'rate':
-					$sql.=" 
-							ORDER BY 
-								rating DESC 
+					$sql.="
+							ORDER BY
+								rating DESC
 						";
 				break;
-				
+
 				default:
-					$sql.=" 
-							ORDER BY 
-								product_id ASC 
+					$sql.="
+							ORDER BY
+								product_id ASC
 						";
 				break;
 			}
-			
+
 			$res = $this->query($sql);
 			$cres=$this->numRows($res);
 			if($cres>0)
 			{
-				while ($row = $this->fetchData($res)) 
+				while ($row = $this->fetchData($res))
 				{
 					$pid[] = $row['pid'];
 				}
-				
-				
-				
+
+
+
 				if(!empty($params['slist']))
 				{
 					$sarr = explode('|@|',$params['slist']);
 					$extn = " AND shape in ('".implode("','",$sarr)."') ";
 				}
-				
+
 				if(!empty($params['tlist']))
 				{
 					$sarr = explode('|$|',$params['tlist']);
@@ -869,11 +888,11 @@ class vendor extends DB
 					}
 					//$extn = " AND shape in ('".implode("','",$sarr)."') ";
 				}
-				
+
 				if(!empty($params['clist']))
 				{
 					$sarr = explode('|$|',$params['clist']);
-					
+
 					foreach($sarr as $key => $val)
 					{
 						$expd = explode('|~|',$val);
@@ -889,9 +908,9 @@ class vendor extends DB
 						$extn .= " AND ".$field." in ('".implode("','",$inarr)."') ";
 					}
 				}
-				
+
 				$allpids = $pid = implode(',',$pid);
-				
+
 				if($params['ctid'])
 				{
 					$sqlct = "SELECT cityname
@@ -901,16 +920,16 @@ class vendor extends DB
 					if($resct)
 					{
 						$rowct = $this->fetchData($resct);
-						
+
 						$sqlpct = "
-									SELECT 
+									SELECT
 										product_id as pid,
                                                                                 vendor_id as vid
-                                                                                
-									FROM 
-										tbl_vendor_product_mapping 
-									WHERE 
-										product_id in (".$allpids.") 
+
+									FROM
+										tbl_vendor_product_mapping
+									WHERE
+										product_id in (".$allpids.")
 									AND
                                                                                 active_flag=1 OR active_flag=0
 										city=\"".$rowct['cityname']."\"";
@@ -926,24 +945,24 @@ class vendor extends DB
 						}
 					}
 				}
-				
+
 				$page   = ($params['page'] ? $params['page'] : 1);
 				$limit  = ($params['limit'] ? $params['limit'] : 15);
-				
+
 				if($pid)
 				{
-						
-					$sql = "SELECT 
-								count(distinct product_id) as cnt 
-							FROM 
-								tbl_product_search 
-							WHERE 
+
+					$sql = "SELECT
+								count(distinct product_id) as cnt
+							FROM
+								tbl_product_search
+							WHERE
 								product_id IN(".$pid.")
                                                         AND
                                                                 active_flag=1
                                                         OR
                                                                 active_flag=0
-							".$extn."	
+							".$extn."
 							";
 					$res = $this->query($sql);
 					if($res)
@@ -951,7 +970,7 @@ class vendor extends DB
 						$row = $this->fetchData($res);
 						$total = $row['cnt'];
 					}
-					
+
 					$patsql="
 							SELECT
 								distinct product_id,
@@ -968,11 +987,11 @@ class vendor extends DB
 								type,
 								metal,
                                                                 bullion_design
-							FROM 
-								tbl_product_search 
-							WHERE 
+							FROM
+								tbl_product_search
+							WHERE
 								product_id IN(".$pid.")
-                                                        AND            
+                                                        AND
                                                                 active_flag=1
                                                         OR
                                                                 active_flag=0
@@ -980,15 +999,15 @@ class vendor extends DB
 							ORDER BY
 								field(product_id,".$pid.")
 							";
-							
+
 					if (!empty($page))
 					{
 						$start = ($page * $limit) - $limit;
 						$patsql.=" LIMIT " . $start . ",$limit";
 					}
-							
+
 					$patres=$this->query($patsql);
-					
+
 					while($row2=$this->fetchData($patres))
 					{
 						$prodid[] = $row2['product_id'];
@@ -996,7 +1015,7 @@ class vendor extends DB
 						unset($row2['product_id']);
 						$attr[$pid]['attributes']=$row2;
 					}
-					
+
 					if(!empty($prodid))
 					{
 						$pid = $pids = implode(',',$prodid);
@@ -1005,7 +1024,7 @@ class vendor extends DB
 					{
 						$pid = $pids = '';
 					}
-					
+
 					$psql = "
 							SELECT
 								product_id as pid,
@@ -1017,9 +1036,9 @@ class vendor extends DB
 								prd_price as pprice,
 								product_currency as pcur,
 								prd_img as pimg
-							FROM 
-								tbl_product_master 
-							WHERE 
+							FROM
+								tbl_product_master
+							WHERE
 								product_id IN(".$pid.")
                                                         AND
                                                                 active_flag=1
@@ -1035,23 +1054,23 @@ class vendor extends DB
 						$arr1[$pid]=$row1;
 						$arr1[$pid]['attributes'] = $attr[$pid]['attributes'];
 					}
-					
+
 					/* For filters */
-					
+
 					$sql = "
-						SELECT 
+						SELECT
 							attribute_id,
 							attr_values,
 							attr_range,
 							attr_unit,
 							attr_unit_pos
-						FROM 
-							tbl_attribute_category_mapping 
-						WHERE 
-							category_id=".$params['catid']." 
-						AND 
-							attr_filter_flag=1 
-						ORDER BY 
+						FROM
+							tbl_attribute_category_mapping
+						WHERE
+							category_id=".$params['catid']."
+						AND
+							attr_filter_flag=1
+						ORDER BY
 							attr_filter_position ASC";
 					$res = $this->query($sql);
 					if($res)
@@ -1063,24 +1082,24 @@ class vendor extends DB
 						}
 						$attrids 	= implode(',',$attrid);
 					}
-					
+
 					//echo "<pre>";print_r($attrmap);die;
-					
+
 					$sql="
 						SELECT
-							attr_id, 
-							attr_name, 
+							attr_id,
+							attr_name,
 							attr_display_name,
-							attr_type_flag				
-						FROM 
-							tbl_attribute_master 
-						WHERE 
-							attr_id IN(".$attrids.") 
-						ORDER BY 
+							attr_type_flag
+						FROM
+							tbl_attribute_master
+						WHERE
+							attr_id IN(".$attrids.")
+						ORDER BY
 							attr_display_name ASC";
-					
+
 					$res = $this->query($sql);
-					
+
 					if($res)
 					{
 						$i=0;
@@ -1089,10 +1108,10 @@ class vendor extends DB
 							switch ($row['attr_type_flag'])
 							{
 								case 6: //$pids
-									$qry = "SELECT 
-												MIN(".$row['attr_name'].") AS minval, 
-												MAX(".$row['attr_name'].") AS maxval 
-											FROM 
+									$qry = "SELECT
+												MIN(".$row['attr_name'].") AS minval,
+												MAX(".$row['attr_name'].") AS maxval
+											FROM
 												tbl_product_search
 											WHERE
 												product_id IN(".$allpids.")
@@ -1113,15 +1132,15 @@ class vendor extends DB
 										$i++;
 									}
 								break;
-								
+
 								case 7:
-									
-									$qry = "SELECT 
-												group_concat(DISTINCT ".$row['attr_name'].") as name 
-											FROM 
+
+									$qry = "SELECT
+												group_concat(DISTINCT ".$row['attr_name'].") as name
+											FROM
 												tbl_product_search
 											WHERE
-												product_id IN(".$allpids.") 
+												product_id IN(".$allpids.")
                                                                                         AND
                                                                                                 active_flag=1 OR active_flag=0
 											";
@@ -1146,15 +1165,15 @@ class vendor extends DB
 										$i++;
 									}
 								break;
-								
+
 								case 8:
 								break;
 							}
 						}
 					}
-					
+
 					/* *********** */
-					
+
 					$tmp_arr1 = (!empty($arr1)) ? (array_values($arr1)) : null;
 					$arr1 = array('filters'=>$data,'products'=>$tmp_arr1,'total'=>$total,'getdata'=>$params,'catname'=>$catname,'vid'=>$vid);
 					$err = array('errCode'=>0,'errMsg'=>'Details fetched successfully');
@@ -1173,7 +1192,7 @@ class vendor extends DB
             $result = array('results'=>$arr1,'error'=>$err);
             return $result;
         }
-    
+
     public function updateDollerRate($params) {
         $sql="UPDATE tbl_vendor_master SET dollar_rate='".$params['dolRate']."' WHERE vendor_id='".$params['vid']."'";
         $res=$this->query($sql);
@@ -1186,8 +1205,8 @@ class vendor extends DB
         }
         $result = array('results' => $arr, 'error' => $err);
         return $result;
-    }    
-    
+    }
+
     public function getDollerRate($params) {
         $sql="SELECT dollar_rate FROM tbl_vendor_master WHERE vendor_id='".$params['vid']."'";
         $res=$this->query($sql);
@@ -1202,7 +1221,7 @@ class vendor extends DB
         $result = array('results' => $arr, 'error' => $err);
         return $result;
     }
-    
+
         public function updateSilverRate($params) {
         $sql="UPDATE tbl_vendor_master SET silver_rate='".$params['silRate']."' WHERE vendor_id='".$params['vid']."'";
         $res=$this->query($sql);

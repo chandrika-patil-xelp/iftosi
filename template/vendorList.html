@@ -5,7 +5,7 @@
             <div class="wrapperMax">
                 <div class="vndLogo fLeft fmOpenR pointer" onclick="window.location.assign(DOMAIN);"><b>IF</b>to<b>SI</b></div>
                 <div class="vndInfo fRight fmOpenR">
-                    Hi, <span id="userName"></span> | 
+                    Hi, <span id="userName"></span> |
                     <div class="fRight pointer" onclick="common.doLogout();"><span>Logout</span></div>
                 </div>
             </div>
@@ -20,38 +20,77 @@
             <div class="fLeft headEdit">Activated</div>
         </div>
         <div class="listContainer fLeft fmOpenR">
+        <?php
+        for($i=0; $i<count($data); $i++)
+        {
+        ?>
             <div class="listComm fLeft fmOpenR">
                 <div class="fLeft vndName">
 
-                    <div class="nameLocatCont fLeft txtOver hedofc" id="cn_14267019859310">a l khalid forex pvt.ltd - cumballa hill - mumbai</div>
+                    <div class="nameLocatCont fLeft txtOver hedofc" id="cn_14267019859310"><?php echo $data[$i]['orgName'];?> - <?php echo $data[$i]['city'];?></div>
                     <div class="mobileEmailCont fLeft cBlue txtOver">
                         <div class="fLeft">
-                            <div class="mbIcon fLeft" id="mo_14267019859310">982163689</div>
-                            <div class="emIcon fLeft" id="em_14267019859310">faisal@travelhome.in</div>
+                            <div class="mbIcon fLeft" id="mo_14267019859310"><?php echo $data[$i]['contact_mobile']?></div>
+                            <div class="emIcon fLeft" id="em_14267019859310"><?php echo $data[$i]['email']?></div>
                         </div>
                     </div>
                 </div>
-                <div class="fLeft vndPackage">Bullion, Diamond, Jewellery</div>
-                <div class="fLeft vndAmount">12545454565</div>
-                <div class="fLeft vndExpDate">20/12/2018</div>
+                <?php
+                    $expd = explode(',',$data[$i]['business_type']);
+                    $cost = 0;
+                    $arr = array();
+                    for($j=0;$j<count($expd);$j++)
+                    {
+                        if($expd[$j] == 1)
+                        {
+                            $arr[] = 'Diamonds';
+                            $cost += 30000;
+                        }
+                        if($expd[$j] == 2)
+                        {
+                            $arr[] = 'Jewellery';
+                            $cost += 15000;
+                        }
+                        if($expd[$j] == 3)
+                        {
+                            $arr[] = 'Bullion';
+                            $cost += 15000;
+                        }
+                    }
+                    $package = implode(',',$arr);
+                ?>
+                <div class="fLeft vndPackage"><?php echo $package?></div>
+                <div class="fLeft vndAmount"><?php echo $cost?></div>
+                <div class="fLeft vndExpDate">NA</div>
                 <div class="fLeft vndEdit">
-                    <div class="toggle-button toggle-button" onclick="changeStatus(this)">
+                    <div class="toggle-button toggle-button <?php echo ($data[$i]['active_flag'] ? 'cyes' : '');?>" onclick="changeStatus(this)">
                         <span class="fActive">Yes</span>
                         <button class="button"></button>
                         <span class="fDactive">No</span>
                     </div>
                 </div>
             </div>
+        <?php
+        }
+        ?>
         </div>
     </div>
 </div>
 
-
 <script>
 
+    $(document).ready( function(){
+        $('.toggle-button').each(function(){
+            if($(this).hasClass('cyes'))
+            {
+                $(this).addClass('toggle-button-selected');
+            }
+        });
+    });
     $(document).on('click', '.toggle-button', function() {
         $(this).toggleClass('toggle-button-selected');
     });
+
 
 
     function changeStatus(uid, obj) {
@@ -68,7 +107,7 @@
                 url: URL,
                 type: 'POST',
                 success: function(res) {
-                },
+                }
             });
         }, 350);
     }
