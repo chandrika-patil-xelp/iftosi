@@ -64,9 +64,9 @@
                         <div class='prdResults fRight'>
                             <?php 
 							foreach($data as $key=>$val) { ?>
-								<a href="<?php echo DOMAIN.str_replace(' ', '-', $val['pbrand']).'-' . str_replace(' ' , '-', $val['pname']) . '-' . $val['pcode'] . '/jid-' . $val['pid']; ?>">
                                 <div class='prdComm fLeft jwRes' style="opacity: 0; transform: translateX(1000px);">
                                     <div class='prdCommDiv fLeft transition100'>
+										<a href="<?php echo DOMAIN.str_replace(' ', '-', $val['pbrand']).'-' . str_replace(' ' , '-', $val['pname']) . '-' . $val['pcode'] . '/jid-' . $val['pid']; ?>">
                                         <div class="prdCommImg fLeft">
                                             <?php 
 												$imgCount = count($data[$key]['images']);
@@ -218,15 +218,16 @@
                                                 <div class="detValue fmOpenB fLeft"><span>&#8377;</span><?php echo $val['attributes']['price'];?></div>
                                             </div>
                                         </div>
+										</a>
                                         <div class='prdActions fLeft'>
-                                            <div class='actionComm fLeft transition100 poR ripplelink'></div>
-                                            <div class='actionComm fLeft transition100 poR ripplelink'></div>
-                                            <div class='actionComm fLeft transition100 poR ripplelink'></div>
-                                            <div class='actionComm fLeft transition100 poR ripplelink'></div>
+                                            <a href="<?php echo DOMAIN.str_replace(' ', '-', $val['pbrand']).'-' . str_replace(' ' , '-', $val['pname']) . '-' . $val['pcode'] . '/jid-' . $val['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                            <a href="<?php echo DOMAIN.str_replace(' ', '-', $val['pbrand']).'-' . str_replace(' ' , '-', $val['pname']) . '-' . $val['pcode'] . '/jid-' . $val['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                            <a href="<?php echo DOMAIN.str_replace(' ', '-', $val['pbrand']).'-' . str_replace(' ' , '-', $val['pname']) . '-' . $val['pcode'] . '/jid-' . $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                            <a href="<?php echo DOMAIN.str_replace(' ', '-', $val['pbrand']).'-' . str_replace(' ' , '-', $val['pname']) . '-' . $val['pcode'] . '/jid-' . $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
                                         </div>
                                     </div>
                                 </div>
-                                </a>
+                                
                                 <?php $i++;
                             } ?>
 							<?php include 'pagination.html';?>

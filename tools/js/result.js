@@ -310,80 +310,82 @@ function getResultsData(data,sortby,showtree)
 		
 		if(pageName == 'diamonds') {
 			$.each(data.results.products, function(i, vl) {
-				html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/did-'+vl.pid+'">';
-					html += '<div class="prdComm fLeft" style="opacity: 0; transform: translateX(1500px);">';
-						html += '<div class="prdCommDiv fLeft">';
-							html += '<div class="prdShape fLeft">';
-								html += '<div class="prdShTitle fLeft fmOpenB">SHAPE</div>';
-								html += '<div class="prdShType fLeft fmOpenR">'+vl.attributes.shape+'</div>';
-								html += '<div class="'+vl.attributes.shape+' fRight"></div>';
+				html += '<div class="prdComm fLeft" style="opacity: 0; transform: translateX(1500px);">';
+					html += '<div class="prdCommDiv fLeft">';
+						html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/did-'+vl.pid+'">';
+						html += '<div class="prdShape fLeft">';
+							html += '<div class="prdShTitle fLeft fmOpenB">SHAPE</div>';
+							html += '<div class="prdShType fLeft fmOpenR">'+vl.attributes.shape+'</div>';
+							html += '<div class="'+vl.attributes.shape+' fRight"></div>';
+						html += '</div>';
+						html += '<div class="prdDetails fLeft">';
+							html += '<div class="detComm">';
+								html += '<div class="detLabel fmOpenB fLeft">COLOR</div>';
+								html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.color+'</div>';
 							html += '</div>';
-							html += '<div class="prdDetails fLeft">';
-								html += '<div class="detComm">';
-									html += '<div class="detLabel fmOpenB fLeft">COLOR</div>';
-									html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.color+'</div>';
-								html += '</div>';
-								html += '<div class="detComm">';
-									html += '<div class="detLabel fmOpenB fLeft">CARATS</div>';
-									html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.carat+'</div>';
-								html += '</div>';
-								html += '<div class="detComm">';
-									html += '<div class="detLabel fmOpenB fLeft">CLARITY</div>';
-									html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.clarity+'</div>';
-								html += '</div>';
-								html += '<div class="detComm">';
-									html += '<div class="detLabel fmOpenB fLeft">CERTIFICATE</div>';
-									html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.certified+'</div>';
-								html += '</div>';
+							html += '<div class="detComm">';
+								html += '<div class="detLabel fmOpenB fLeft">CARATS</div>';
+								html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.carat+'</div>';
 							html += '</div>';
-							html += '<div class="prdPrice fLeft">';
-								html += '<div class="detComm">';
-									html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
-                                                                        if(vl.dollar_rate!=0) { dollarValue=vl.dollar_rate; }
-									html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+number_format((vl.pprice*vl.dollarValue),2)+'</div>';
-								html += '</div>';
+							html += '<div class="detComm">';
+								html += '<div class="detLabel fmOpenB fLeft">CLARITY</div>';
+								html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.clarity+'</div>';
 							html += '</div>';
-							html += '<div class="prdActions fLeft">';
-								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
-								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
-								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
-								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+							html += '<div class="detComm">';
+								html += '<div class="detLabel fmOpenB fLeft">CERTIFICATE</div>';
+								html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.certified+'</div>';
 							html += '</div>';
 						html += '</div>';
+						html += '<div class="prdPrice fLeft">';
+							html += '<div class="detComm">';
+								html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
+																	if(vl.dollar_rate!=0) { dollarValue=vl.dollar_rate; }
+								html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+number_format((vl.pprice*vl.dollarValue),2)+'</div>';
+							html += '</div>';
+						html += '</div>';
+						html += '</a>';
+						html += '<div class="prdActions fLeft">';
+							html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/did-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
+							html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/did-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
+							html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/did-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
+							html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/did-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
+						html += '</div>';
 					html += '</div>';
-				html += '</a>';
+				html += '</div>';
 			});
 		}
 		else if(pageName == 'jewellery') {
 			
 			$.each(data.results.products, function(i, vl) {
-				html += '<a href="'+DOMAIN+vl.pbrand.toLowerCase()+'-'+vl.pname.toLowerCase()+'-'+vl.pcode.toLowerCase()+'/jid-'+vl.pid+'">';
+				
 					html += '<div class="prdComm fLeft jwRes transition100" style="opacity: 1; transform: translateX(0px);">';
 						html += '<div class="prdCommDiv fLeft transition100">';
-							html += '<div class="prdCommImg fLeft">';
-								html += getImageData(vl.images);
-							html += '</div>';
-							html += '<div class="prdDetails fLeft">';
-								html += '<div class="detComm">';
-									html += '<div class="detLabel fmOpenB fLeft">DESIGN NO.</div>';
-									html += '<div class="detValue fmOpenR fLeft">'+vl.pcode+'</div>';
+							html += '<a href="'+DOMAIN+vl.pbrand.toLowerCase()+'-'+vl.pname.toLowerCase()+'-'+vl.pcode.toLowerCase()+'/jid-'+vl.pid+'">';
+								html += '<div class="prdCommImg fLeft">';
+									html += getImageData(vl.images);
 								html += '</div>';
-							html += '</div>';
-							html += '<div class="prdPrice fLeft">';
-								html += '<div class="detComm">';
-									html += '<div class="detLabel fmOpenB fLeft">PRICE</div>';
-									html += '<div class="detValue fmOpenB fLeft"><span>₹</span>'+vl.attributes.price+'</div>';
+								html += '<div class="prdDetails fLeft">';
+									html += '<div class="detComm">';
+										html += '<div class="detLabel fmOpenB fLeft">DESIGN NO.</div>';
+										html += '<div class="detValue fmOpenR fLeft">'+vl.pcode+'</div>';
+									html += '</div>';
 								html += '</div>';
-							html += '</div>';
+								html += '<div class="prdPrice fLeft">';
+									html += '<div class="detComm">';
+										html += '<div class="detLabel fmOpenB fLeft">PRICE</div>';
+										html += '<div class="detValue fmOpenB fLeft"><span>₹</span>'+vl.attributes.price+'</div>';
+									html += '</div>';
+								html += '</div>';
+							html += '</a>';
 							html += '<div class="prdActions fLeft">';
-								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
-								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
-								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
-								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
+								html += '<a href="'+DOMAIN+vl.pbrand.toLowerCase()+'-'+vl.pname.toLowerCase()+'-'+vl.pcode.toLowerCase()+'/jid-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
+								html += '<a href="'+DOMAIN+vl.pbrand.toLowerCase()+'-'+vl.pname.toLowerCase()+'-'+vl.pcode.toLowerCase()+'/jid-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
+								html += '<a href="'+DOMAIN+vl.pbrand.toLowerCase()+'-'+vl.pname.toLowerCase()+'-'+vl.pcode.toLowerCase()+'/jid-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
+								html += '<a href="'+DOMAIN+vl.pbrand.toLowerCase()+'-'+vl.pname.toLowerCase()+'-'+vl.pcode.toLowerCase()+'/jid-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
 							html += '</div>';
 						html += '</div>';
 					html += '</div>';
-				html += '</a>';
+				
 			});
 		}
 		else if(pageName == 'wishlist-diamonds') {
@@ -539,10 +541,9 @@ function getResultsData(data,sortby,showtree)
 		}
 		else {
 			$.each(data.results.products, function(i, vl) {
-				html += '<a href="'+DOMAIN+vl.attributes.metal.toLowerCase()+'-'+vl.attributes.type.toLowerCase()+'-'+Math.round(vl.attributes.gold_weight)+'-grams/bid-'+vl.pid+'">';
-					html += '<div class="prdComm fLeft jwRes" style="opacity: 0; transform: translateX(1000px);">';
-						html += '<div class="prdCommDiv fLeft transition100">';
-						
+				html += '<div class="prdComm fLeft jwRes" style="opacity: 0; transform: translateX(1000px);">';
+					html += '<div class="prdCommDiv fLeft transition100">';
+						html += '<a href="'+DOMAIN+vl.attributes.metal.toLowerCase()+'-'+vl.attributes.type.toLowerCase()+'-'+Math.round(vl.attributes.gold_weight)+'-grams/bid-'+vl.pid+'">';
 							html += '<div class="prdShape fLeft">';
 								html += '<div class="prdShTitle fLeft fmOpenB">TYPE</div>';
 								html += '<div class="prdShType fLeft fmOpenR">'+vl.attributes.type+'</div>';
@@ -573,15 +574,15 @@ function getResultsData(data,sortby,showtree)
 									html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+ metal_price +'</div>';
 								html += '</div>';
 							html += '</div>';
-							html += '<div class="prdActions fLeft">';
-								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
-								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
-								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
-								html += '<div class="actionComm fLeft transition100 poR ripplelink"></div>';
-							html += '</div>';
+						html += '</a>';
+						html += '<div class="prdActions fLeft">';
+							html += '<a href="'+DOMAIN+vl.attributes.metal.toLowerCase()+'-'+vl.attributes.type.toLowerCase()+'-'+Math.round(vl.attributes.gold_weight)+'-grams/bid-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
+							html += '<a href="'+DOMAIN+vl.attributes.metal.toLowerCase()+'-'+vl.attributes.type.toLowerCase()+'-'+Math.round(vl.attributes.gold_weight)+'-grams/bid-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
+							html += '<a href="'+DOMAIN+vl.attributes.metal.toLowerCase()+'-'+vl.attributes.type.toLowerCase()+'-'+Math.round(vl.attributes.gold_weight)+'-grams/bid-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
+							html += '<a href="'+DOMAIN+vl.attributes.metal.toLowerCase()+'-'+vl.attributes.type.toLowerCase()+'-'+Math.round(vl.attributes.gold_weight)+'-grams/bid-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
 						html += '</div>';
 					html += '</div>';
-				html += '</a>';
+				html += '</div>';
 			});
 		}
 	}

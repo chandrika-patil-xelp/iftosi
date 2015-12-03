@@ -64,9 +64,9 @@
                         <?php include 'filters.html'; ?>
                         <div class='prdResults fRight'>
                             <?php foreach($data as $key=>$val) { ?>
-								<a href="<?php echo DOMAIN . strtolower($val['attributes']['metal']) . '-' . strtolower($val['attributes']['type']) . '-' . round($val['attributes']['gold_weight']); ?>-grams/bid-<?php echo $val['pid']; ?>">
 									<div class='prdComm fLeft' style="opacity: 0; transform: translateX(1000px);">
 										<div class='prdCommDiv fLeft transition100'>
+											<a href="<?php echo DOMAIN . strtolower($val['attributes']['metal']) . '-' . strtolower($val['attributes']['type']) . '-' . round($val['attributes']['gold_weight']); ?>-grams/bid-<?php echo $val['pid']; ?>">
 											<div class="prdShape fLeft">
 												<div class="prdShTitle fLeft fmOpenB">TYPE</div>
 												<div class="prdShType fLeft fmOpenR"><?php echo $val['attributes']['type'];?></div>
@@ -91,15 +91,15 @@
 													<div class="detValue fmOpenB fLeft"><span>&#8377;</span><?php echo number_format(($val['attributes']['gold_weight']*$metal_rate),2);?></div>
 												</div>
 											</div>
+											</a>
 											<div class='prdActions fLeft'>
-												<div class='actionComm fLeft transition100 poR ripplelink'></div>
-												<div class='actionComm fLeft transition100 poR ripplelink'></div>
-												<div class='actionComm fLeft transition100 poR ripplelink'></div>
-												<div class='actionComm fLeft transition100 poR ripplelink'></div>
+												<a href="<?php echo DOMAIN . strtolower($val['attributes']['metal']) . '-' . strtolower($val['attributes']['type']) . '-' . round($val['attributes']['gold_weight']); ?>-grams/bid-<?php echo $val['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
+												<a href="<?php echo DOMAIN . strtolower($val['attributes']['metal']) . '-' . strtolower($val['attributes']['type']) . '-' . round($val['attributes']['gold_weight']); ?>-grams/bid-<?php echo $val['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
+												<a href="<?php echo DOMAIN . strtolower($val['attributes']['metal']) . '-' . strtolower($val['attributes']['type']) . '-' . round($val['attributes']['gold_weight']); ?>-grams/bid-<?php echo $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
+												<a href="<?php echo DOMAIN . strtolower($val['attributes']['metal']) . '-' . strtolower($val['attributes']['type']) . '-' . round($val['attributes']['gold_weight']); ?>-grams/bid-<?php echo $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
 											</div>
 										</div>
 									</div>
-								</a>
                                 <?php $i++;
                             } ?>
 							<?php include 'pagination.html';?>
