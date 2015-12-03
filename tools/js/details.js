@@ -35,6 +35,11 @@ $(document).ready(function(){
         var img=$(this).css('background');
         $('.galleryImg').css({'background':img});
     });
+    
+    $('.imgPreview').click(function(){
+        var img=$(this).css('background');
+        $('.galleryImg').css({'background':img});
+    });
    
     $('#galleryClose').click(function(){
        $('#imgGallery').addClass('dn');

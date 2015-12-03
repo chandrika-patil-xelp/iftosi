@@ -19,23 +19,23 @@
                     <div class="imgsCont">
                         <div class="leftArrow transition300" onclick="movePrImg(true)"></div>
                         <div class="rightArrow  transition300" onclick="movePrImg(false)"></div>
-                        <div id='prdImage' class="forImg fLeft" style="background: url(<?php echo IMGDOMAIN.$data1[0];?>) 50% 50% / cover no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+                        <div id='prdImage' class="forImg fLeft imgPreview" style="background: url(<?php echo IMGDOMAIN.$data1[0];?>) 50% 50% / cover no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
                         <div id='gallery1' class="gallery fLeft transition300">
                             <div class="carousel transition300">
 <?php
-for($i=0;$i<count($data1);$i++)
-{
+                        for($i=0;$i<count($data1);$i++)
+                        {
 ?>
                                 <div class="thumbnil transition300" style="background:#fff url(<?php echo IMGDOMAIN.$data1[$i];?>)no-repeat;background-size: contain;background-position: center;">
                                 </div>
 <?php
-}
+                        }
 ?>                               
                             </div>
                         </div>
                     </div>
 <?php
-}
+                    }
 ?>                    
                     <div class="detCont">
                         <div class="btnsCont fLeft">
