@@ -66,15 +66,6 @@ var mxSc = 170;//$('.prdResults').offset().top;
 var lastSc = 0;
 $(document).ready(function () {
 	
-	$('.prdSeachTxt').bind('keyup',function(){
-		var str = $(this).val();
-		var params = 'action=ajx&case=refine&str='+str+'&catid='+catid;
-		var URL = DOMAIN + "index.php";
-		$.getJSON(URL, params, function(data) {
-			console.log(data);
-		});
-	});
-	
     $('.vTabs').eq(1).click();
 
     $(window).scroll(function () {
