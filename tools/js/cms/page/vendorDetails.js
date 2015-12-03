@@ -418,11 +418,11 @@ function loadAreaList() {
                 if (results != '') {
                     areaList = results;
 //                $('#area').val(results['area']);
-                    $('#city').val(results[0]['city']);
-                    $('#state').val(results[0]['state']);
-                    country = results[0]['country'];
-                    lat = results[0]['latitude'];
-                    lng = results[0]['longitude'];
+//                    $('#city').val(results[0]['city']);
+//                    $('#state').val(results[0]['state']);
+//                    country = results[0]['country'];
+//                    lat = results[0]['latitude'];
+//                    lng = results[0]['longitude'];
                 }
             }});
     }
@@ -457,6 +457,11 @@ var tmpAreaList = new Array();
 function searchAreaCallBack(res) {
     searchArea.setData = true;
     $("#area").val(res["area"]);
+    $('#city').val(res['city']);
+    $('#state').val(res['state']);
+    country = res['country'];
+    lat = res['latitude'];
+    lng = res['longitude'];
     document.getElementById("areaSuggestDiv").innerHTML = "";
 }
 
@@ -575,7 +580,7 @@ function searchCityDivOutput(res) {
             var i = 0;
             var suggest = "<div class='smallField w100 fmRoboto transition300 font14 pointer border1' >";
             while (i < len) {
-                suggest += "<div id='suggest" + i + "' class='autoSuggestRow w100 transition300 txtCaCase' onclick='setSuggestValue(\"" + obj[i].n + "\",\"city\")'>&nbsp;&nbsp;" + obj[i].n + "</div>";
+                suggest += "<div id='suggest" + i + "' class='autoSuggestRow w100 transition300 txtCaCase' onclick='setSuggestValue(\"" + obj[i].n + "\",\"city\");setSuggestValue(\"" + obj[i].s + "\",\"state\");'>&nbsp;&nbsp;" + obj[i].n + "</div>";
                 i++;
             }
             suggest += "</div>";

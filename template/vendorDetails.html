@@ -52,12 +52,12 @@ if(!empty($data['mdbw'])) {
                         </div>
                         <div class="divCon2 fLeft c666">
                             <div class="titleDiv txtCap fLeft"> City *</div>
-                            <input type="text" id="city" name="city" value="<?php echo $data['city']; ?>" onkeypress="return common.onlyAlphabets(event)" placeholder=" City" class="txtInput c666 fLeft fmRoboto font14" onfocus="" onkeypress="return onlyAlphabets(event, this)" onblur="closeSuggest('citySuggestDiv');" onkeyup="" onclick="clearVal(this.id);">
+                            <input type="text" id="city" name="city" value="<?php echo $data['city']; ?>" onkeypress="return common.onlyAlphabets(event)" placeholder=" City" class="txtInput c666 fLeft fmRoboto font14" onfocus="" onkeypress="return onlyAlphabets(event, this)" onblur="closeSuggest('citySuggestDiv');" onkeyup="" onclick="">
                             <div id="citySuggestDiv" class="autoSuggestOuter"></div>
                         </div>
                         <div class="divCon2 fRight c666">
                             <div class="titleDiv txtCap fLeft"> State *</div>
-                            <input type="text" id="state" name="state" value="<?php echo $data['state']; ?>" placeholder=" State  " class="txtInput c666 fLeft fmRoboto font14 " autocomplete="off" onkeypress="return onlyAlphabets(event, this)" onblur="closeSuggest('stateSuggestDiv');" onkeyup="" onclick="clearVal(this.id);">
+                            <input type="text" id="state" name="state" value="<?php echo $data['state']; ?>" placeholder=" State  " class="txtInput c666 fLeft fmRoboto font14 " autocomplete="off" onkeypress="return onlyAlphabets(event, this)" onblur="closeSuggest('stateSuggestDiv');" onkeyup="">
                             <div id="stateSuggestDiv" class="autoSuggestOuter"></div>
                         </div>
                         <div class="divCon2 fLeft">

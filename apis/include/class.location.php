@@ -168,7 +168,7 @@ class location extends DB
     
     public function suggestCity($params)
     {
-        $sql="SELECT DISTINCT city as n FROM tbl_area_master WHERE city LIKE '".$params['name']."%'";
+        $sql="SELECT DISTINCT city as n, state AS s FROM tbl_area_master WHERE city LIKE '".$params['name']."%'";
         $res=$this->query($sql);
         if($res)
         {
