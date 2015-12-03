@@ -162,6 +162,8 @@ class vendor extends DB
                     b.type LIKE '" . $params['bcode'] . "%'   
                     OR
                     b.certified LIKE '" . $params['bcode'] . "%'
+                    OR
+                    a.product_id = '".$params['bcode']."'
                     )
                 ";
         if (!empty($page))
