@@ -513,67 +513,15 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 .toggle-button-selected button { left: 38px;border-color:#666;background:#fff;}
 .fActive{display:block;float:left}
 .fDactive{display:block;float:right}
+.nameLocatCont {width: 100%;height: auto;line-height: 20px;text-transform: capitalize;padding: 10px 15px 0 15px;}
+.mobileEmailCont {width: 100%;height: auto;line-height: 20px;padding: 0px 15px 10px 15px;}
 
-.autoSuggestOuter {
-    background: #fff none repeat scroll 0 0;
-    box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.2);
-    box-sizing: border-box;
-    font-family: Roboto;
-    margin-left: -1px;
-    margin-top: 71px;
-    position: absolute;
-    text-align: left;
-    width: 23%;
-    z-index: 10000000;
-}
-.autoSuggestList {
-    box-sizing: border-box;
-    font-family: roboto;
-    font-size: 13px;
-    max-height: 140px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    width: 100%;
-}
-.autoSuggestRow {
-    background: #fff url("../img/selected.png") no-repeat scroll -30px center / auto 20px;
-    border-bottom: 1px solid #ccc;
-    box-sizing: border-box;
-    color: #666;
-    cursor: pointer;
-    display: block;
-    font-size: 13px;
-    height: 36px;
-    line-height: 36px;
-    padding: 0 15px;
-    width: 100%;
-    overflow: hidden;
-}
-.autoSuggestRow:hover {
-    background: #8a0044 url("../img/selected.png") no-repeat scroll 10px center / auto 20px;
-    border-bottom: 1px solid #8a0044;
-    color: #fff;
-    padding-left: 30px;
-}
-.autoSuggestRowSelect {
-    background: #8a0044 url("../img/selected.png") no-repeat scroll 10px center / auto 20px;
-    border-bottom: 1px solid #8a0044;
-    color: #fff;
-    padding-left: 30px;
-}
-.smallField {
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    font-size: 13px;
-    font-weight: bold;
-    font-family: openR;
-    max-height: 145px;
-    overflow-y: auto;
-    width: 100%;
-}
-.dropArrow {
-    background-image: url("../img/down_arrow.svg");
-    background-position: right center;
-    background-repeat: no-repeat;
-    background-size: auto 100%;
-}
+
+.autoSuggestOuter {background: #fff none repeat scroll 0 0;box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.2);box-sizing: border-box;font-family: Roboto;margin-left: -1px;margin-top: 71px;position: absolute;text-align: left;width: 23%;z-index: 10000000;}
+.autoSuggestList {box-sizing: border-box;font-family: roboto;font-size: 13px;max-height: 140px;overflow-x: hidden;overflow-y: auto;width: 100%;}
+.autoSuggestRow {background: #fff url("../img/selected.png") no-repeat scroll -30px center / auto 20px;border-bottom: 1px solid #ccc;box-sizing: border-box;color: #666;cursor: pointer;display: block;font-size: 13px;height: 36px;line-height: 36px;padding: 0 15px;width: 100%;overflow: hidden;}
+.autoSuggestRow:hover {background: #8a0044 url("../img/selected.png") no-repeat scroll 10px center / auto 20px;border-bottom: 1px solid #8a0044;color: #fff;padding-left: 30px;}
+.autoSuggestRowSelect {background: #8a0044 url("../img/selected.png") no-repeat scroll 10px center / auto 20px;border-bottom: 1px solid #8a0044;color: #fff;padding-left: 30px;}
+.smallField {border: 1px solid #ccc;box-sizing: border-box;font-size: 13px;font-weight: bold;font-family: openR;max-height: 145px;overflow-y: auto;width: 100%;}
+.dropArrow {background-image: url("../img/down_arrow.svg");background-position: right center;background-repeat: no-repeat;background-size: auto 100%;}
+
