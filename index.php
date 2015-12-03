@@ -328,14 +328,23 @@ switch ($action) {
                 $data1 = $res1['results'];
                 $datacnt = $res1['count'];
 
-
-
                 $vndrInfo = $prdInfo['vendor_details'];
 
                 foreach ($vndrInfo as $key => $value) {
                     $vndrId = $key;
                     $vndrDtls = $value;
                 }
+
+				if((empty($vndrDtls['latitude']) || empty($vndrDtls['longitude'])) && !empty($vndrDtls['area']) && !empty($vndrDtls['city']))
+				{
+					$latLngAreaURL = APIDOMAIN . 'index.php?action=getLatLngByArea&area=' . urlencode($vndrDtls['area']).'&city='.urlencode($vndrDtls['city']);
+					$latLngArea = $comm->executeCurl($latLngAreaURL);
+					if(!empty($latLngArea) && !empty($latLngArea['error']) && empty($latLngArea['error']['errCode']))
+					{
+						$vndrDtls['latitude'] = $latLngArea['results']['latitude'];
+						$vndrDtls['longitude'] = $latLngArea['results']['longitude'];
+					}
+				}
 
                 $vndrDtls['fulladdress'] = explode(",", $vndrDtls['fulladdress']);
                 foreach ($vndrDtls['fulladdress'] as $key => $value) {

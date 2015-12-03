@@ -1472,6 +1472,12 @@ echo '</pre>';
             $res=$result;
             break;
 
+		case 'getLatLngByArea':
+			include APICLUDE . 'class.location.php';
+			$obj = new location($db['iftosi']);
+			$res = $obj->getLatLngByArea($params);
+		break;
+
         default :
 
         break;

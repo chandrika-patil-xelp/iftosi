@@ -1365,7 +1365,10 @@
                                 turnover,
                                 lat as latitude,
                                 lng as longitude,
-                                dollar_rate
+                                dollar_rate,
+								area,
+								city,
+								state
                      FROM 
                                 tbl_vendor_master
                      WHERE 

@@ -20,7 +20,8 @@ $(document).ready(function() {
 		showWish(catid,pgno,uid,1);
 	});
 	
-	$(".wisgDel").bind('click',function(){
+	$(".wisgDel").bind('click',function(e){
+		e.stopImmediatePropagation();
 		var catid 	= $('#catid').val();
 		var pgno 	= $('#pgno').val()*1;
 		var uid 	= $('#uid').val();
@@ -261,7 +262,8 @@ function showWish(catid,pgno,uid,nojump,pid)
 			pageName = 'wishlist-bullion';
 		getResultsData(data);
 		
-		$(".wisgDel").bind('click',function(){
+		$(".wisgDel").bind('click',function(e){
+			e.stopImmediatePropagation();
 			var catid 	= $('#catid').val();
 			var pgno 	= $('#pgno').val()*1;
 			var uid 	= $('#uid').val();
@@ -388,7 +390,7 @@ function getResultsData(data,sortby,showtree)
 			$.each(data.results.products, function(i, vl) {
 				html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/did-'+vl.pid+'">';
 					html += '<div class="prdComm fLeft transition100">';
-						html += '<a class="wisgDel" id="'+vl.pid+'"></a>';
+						html += '<div class="wisgDel" id="'+vl.pid+'"></div>';
 						html += '<div class="prdCommDiv fLeft transition100">';
 							html += '<div class="prdShape fLeft">';
 								html += '<div class="prdShTitle fLeft fmOpenB">SHAPE</div>';
@@ -432,7 +434,7 @@ function getResultsData(data,sortby,showtree)
 			$.each(data.results.products, function(i, vl) {
 				html += '<a href="'+DOMAIN+vl.attributes.metal.toLowerCase()+'-'+vl.attributes.type.toLowerCase()+'-'+Math.round(vl.attributes.gold_weight)+'-grams/bid-'+vl.pid+'">';
 					html += '<div class="prdComm fLeft transition100" style="opacity: 1; transform: translateX(0px);">';
-						html += '<a class="wisgDel" id="'+vl.pid+'"></a>';
+						html += '<div class="wisgDel" id="'+vl.pid+'"></div>';
 						html += '<div class="prdCommDiv fLeft transition100">';
 							html += '<div class="prdShape fLeft">';
 								html += '<div class="prdShTitle fLeft fmOpenB">TYPE</div>';
@@ -467,7 +469,7 @@ function getResultsData(data,sortby,showtree)
 			$.each(data.results.products, function(i, vl) {
 				html += '<a href="'+DOMAIN+vl.pbrand.toLowerCase()+'-'+vl.pname.toLowerCase()+'-'+vl.pcode.toLowerCase()+'/jid-'+vl.pid+'">';
 					html += '<div class="prdComm fLeft jwRes transition100" style="opacity: 1; transform: translateX(0px);">';
-						html += '<a class="wisgDel" id="'+vl.pid+'"></a>';
+						html += '<div class="wisgDel" id="'+vl.pid+'"></div>';
 						html += '<div class="prdCommDiv fLeft transition100">';
 							html += '<div class="prdCommImg fLeft">';
 								html += getImageData(vl.images);

@@ -204,6 +204,44 @@ class location extends DB
         $result=array('results'=>$arr,'error'=>$err);
         return $result;
     }
+
+	public function getLatLngByArea($params)
+	{
+		$resp = array();
+		$area = (!empty($params['area'])) ? trim(urldecode($params['area'])) : '';
+		$city = (!empty($params['city'])) ? trim(urldecode($params['city'])) : '';
+
+		if(!empty($area))
+		{
+			$sql = "SELECT latitude, longitude FROM tbl_area_master WHERE area='$area' AND city='$city' LIMIT 1";
+			$res = $this->query($sql);
+
+			if($res)
+			{
+				$row = $this->fetchData($res);
+				if(!empty($row) && !empty($row['latitude']) && !empty($row['longitude']))
+				{
+					$resp = array('latitude' => $row['latitude'], 'longitude' => $row['longitude']);
+					$error = array('errCode' => 0, 'errMsg' => 'Details fetched successfully');
+				}
+				else
+				{
+					$error = array('errCode' => 0, 'errMsg' => 'No results found');
+				}
+			}
+			else
+			{
+				$error = array('errCode' => 1, 'errMsg' => 'Error fetching details');
+			}
+		}
+		else
+		{
+			$error = array('errCode' => 1, 'errMsg' => 'Area is mandatory');
+		}
+
+		$results = array('results' => $resp, 'error' => $error);
+		return $results;
+	}
         
 }
 ?>
