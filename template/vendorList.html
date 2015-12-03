@@ -1,0 +1,79 @@
+<?php include 'vendorHead.html'; ?>
+<div class="mainContainer fLeft vListPage">
+    <div class="topFixedCont">
+        <div class="vndHeader fLeft">
+            <div class="wrapperMax">
+                <div class="vndLogo fLeft fmOpenR pointer" onclick="window.location.assign(DOMAIN);"><b>IF</b>to<b>SI</b></div>
+                <div class="vndInfo fRight fmOpenR">
+                    Hi, <span id="userName"></span> | 
+                    <div class="fRight pointer" onclick="common.doLogout();"><span>Logout</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id='vList' class="vList fLeft">
+        <div class="listHeader fLeft fmOpenR">
+            <div class="fLeft headName">Vendor Name</div>
+            <div class="fLeft headPackage">Package</div>
+            <div class="fLeft headAmount">Amount</div>
+            <div class="fLeft headExpDate">Expiry Date</div>
+            <div class="fLeft headEdit">Activated</div>
+        </div>
+        <div class="listContainer fLeft fmOpenR">
+            <div class="listComm fLeft fmOpenR">
+                <div class="fLeft vndName">
+
+                    <div class="nameLocatCont fLeft txtOver hedofc" id="cn_14267019859310">a l khalid forex pvt.ltd - cumballa hill - mumbai</div>
+                    <div class="mobileEmailCont fLeft cBlue txtOver">
+                        <div class="fLeft">
+                            <div class="mbIcon fLeft" id="mo_14267019859310">982163689</div>
+                            <div class="emIcon fLeft" id="em_14267019859310">faisal@travelhome.in</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fLeft vndPackage">Bullion, Diamond, Jewellery</div>
+                <div class="fLeft vndAmount">12545454565</div>
+                <div class="fLeft vndExpDate">20/12/2018</div>
+                <div class="fLeft vndEdit">
+                    <div class="toggle-button toggle-button" onclick="changeStatus(this)">
+                        <span class="fActive">Yes</span>
+                        <button class="button"></button>
+                        <span class="fDactive">No</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).on('click', '.toggle-button', function() {
+        $(this).toggleClass('toggle-button-selected');
+    });
+
+
+    function changeStatus(uid, obj) {
+        var st = 0;
+        setTimeout(function() {
+            var pLeft = $(obj).find(".button").position().left;
+            if (pLeft === 0) {
+                st = 1;
+            } else {
+                st = 0;
+            }
+            var URL = global.webPath() + "ajax/updateStatus/" + uid + "/" + st;
+            $.ajax({
+                url: URL,
+                type: 'POST',
+                success: function(res) {
+                },
+            });
+        }, 350);
+    }
+
+</script>
+
+</body>
+</html>

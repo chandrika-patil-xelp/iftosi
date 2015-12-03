@@ -482,3 +482,34 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 .popDiv .downloadLink span { color: #666; font-size: 12px; display: block; margin-bottom: 8px; }
 .popDiv .inputCont { width: 100%; }
 .popDiv .inpTxt { border: 1px solid #d4d4c8; border-radius: 5px; font-size: 14px; height: 35px; outline: medium none; padding: 0 15px; width: 100%; }
+
+
+
+/*Vendor List*/
+.vListPage{}
+.vListPage .topFixedCont{height:60px;}
+.vList{width: 100%;height: auto;background: #fff;padding: 60px 0px 50px 0px;position: relative;z-index: 0;}
+.listHeader{width:100%;height:50px;line-height: 50px;position: fixed;top:60px;background:#f0f0f0;z-index: 10;line-height: 50px;border: 1px solid #ccc;padding: 0 15px;}
+.listHeader div{text-align: center;color:#666;font-size: 14px;}
+.headName{width:40%;height: 100%;border-right: 1px solid #ccc;}
+.headPackage{width:20%;height: 100%;border-right: 1px solid #ccc;}
+.headAmount{width:15%;height: 100%;border-right: 1px solid #ccc;}
+.headExpDate{width:15%;height: 100%;border-right: 1px solid #ccc;}
+.headEdit{width:10%;height: 100%;}
+
+.vndName{width:40%;height: 100%;border-right: 1px solid #ccc;padding: 0 15px}
+.vndPackage{width:20%;height: 100%;border-right: 1px solid #ccc;padding: 0 15px;line-height: 60px;text-align: center;}
+.vndAmount{width:15%;height: 100%;border-right: 1px solid #ccc;padding: 0 15px;line-height: 60px;text-align: center;}
+.vndExpDate{width:15%;height: 100%;border-right: 1px solid #ccc;padding: 0 15px;line-height: 60px;text-align: center;}
+.vndEdit{width:10%;height: 100%;padding: 0 15px;line-height: 6px;position: relative;}
+.listContainer{width: 100%;height: 500px;margin-bottom: 50px;padding: 15px;background: #e6e6e6;margin-top: 50px;}
+.listComm{width: 100%;height: 62px;padding: 0px;background: #fff;margin-bottom: 10px;color:#666;border: 1px solid #fff;}
+.mbIcon {width: auto;padding: 0 20px 0 25px;background-image: url(../img/iconMobileNumber.svg);background-repeat: no-repeat;background-size: auto 27px;background-position: 0 center;color:#8A0044;}
+.emIcon {width: auto;padding: 0 20px 0 30px;background-image: url(../img/iconEmail.svg);background-repeat: no-repeat;background-size: auto 27px;background-position: 0 center;color:#8A0044;}
+ 
+.toggle-button {background-color: #e00000;margin: 5px 0;border-radius: 20px;border: 2px solid #e00000!important;height: 22px!important;cursor: pointer;width: 60px;float: right;position: relative;display: inline-block;line-height: 18px!important;font-size: 10px;margin: 0;margin-top: -2px;padding: 0 5px;color: #fff;position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;}
+.toggle-button button {cursor: pointer;outline: 0;display: block;position: absolute;left: 0;top: 0;border-radius: 100%;width: 25px;height: 25px;background-color: #fff;float: left;margin: -4px 0 0 -3px;border: 2px solid #666;transition: left 0.3s;}
+.toggle-button-selected {background-color: #91BF34;border: 2px solid #91BF34!important;padding: 0 5px;color: #fff;}
+.toggle-button-selected button { left: 38px;border-color:#666;background:#fff;}
+.fActive{display:block;float:left}
+.fDactive{display:block;float:right}
