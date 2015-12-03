@@ -408,22 +408,29 @@ function changeTab(id) {
 var country='';
 var lng='';
 var lat='';
-$('#pincode').keyup(function () {
-    var pincode = $(this).val();
+function loadAreaList() {
+    var pincode = $('#pincode').val();
     if(pincode.length==6) {
         $.ajax({url: common.APIWebPath() + "index.php?action=viewbyPincode&code=" + pincode, success: function (result) {
             var obj = jQuery.parseJSON(result);
+            //var results = new Object;
             var results = obj['results'];
             if ( results!= '') {
-                $('#area').val(results['area']);
-                $('#city').val(results['city']);
-                $('#state').val(results['state']);
-                country=results['country'];
-                lat=results['latitude'];
-                lng=results['longitude'];
+                areaList = results;
+//                $('#area').val(results['area']);
+                $('#city').val(results[0]['city']);
+                $('#state').val(results[0]['state']);
+                country=results[0]['country'];
+                lat=results[0]['latitude'];
+                lng=results[0]['longitude'];
             }
         }});
     }
+}
+loadAreaList();
+$('#pincode').keyup(function () {
+    loadAreaList();
+    clearVal('area')
 });
 
 /*    
@@ -438,3 +445,107 @@ $('#pincode').keyup(function () {
  }
  }
  */
+
+var searchArea = new Search();
+searchArea.setMinimumSearchChar(1);
+searchArea.setId("areaSuggestDiv", "area", searchAreaCallBack, searchAreaDivOutput);
+searchArea.setAppId("searchArea");
+searchArea.arrayResult = true;
+var areaList =[{"area":"Jakkur","city":"Bangalore","state":"Karnataka","country":"India","latitude":"13.078057000000"
+,"longitude":"77.603974000000"}];
+var tmpAreaList = new Array();
+
+function searchAreaCallBack(res) {
+    searchArea.setData=true;
+    $("#area").val(res["area"]);
+    document.getElementById("areaSuggestDiv").innerHTML = "";
+}
+
+var lastHightlighted = "";
+var listName;
+var autoSuggDiv;
+var obiLen;
+function searchAreaDivOutput(res) {
+    setTimeout(function () {
+        listName = 'areaList';
+        autoSuggDiv = 'areaSuggestDiv';
+        autoSuggParent = 'area';
+        searchArea.suggestionList = areaList;
+        var obj = areaList;
+        var len = obj.length;
+        obiLen = len;
+        var i = 0;
+        if (len > 0)
+        {
+            searchArea.suggestLen = len;
+            var i = 0;
+            var suggest = "<div class='smallField fmRoboto font14 pointer border1 transition300' style='overflow-y:auto'>";
+            if (res == "") {
+                while (i < len) {
+                    suggest += "<div id='suggest" + i + "' class='autoSuggestRow transition300 txtCaCase' onmousedown='searchArea.setSearchResult(\"" + i + "\")' onclick='searchArea.setSearchResult(\"" + i + "\")'>&nbsp;&nbsp;" + obj[i].area + "</div>";
+                    i++;
+                }
+            } else {
+                var s = res.toUpperCase();
+                var slen = s.length;
+                var count = 0;
+                var tmpSearch = new Array();
+                while (i < len) {
+                    var t = (obj[i].area).split(" ");
+                    var len1 = t.length;
+                    var j = 0;
+                    var loadFlag = false;
+                    while (j < len1) {
+                        var st = (t[j].substring(0, slen)).toUpperCase();
+                        if (s == st) {
+                            loadFlag = true;
+                            break;
+                        }
+                        j++;
+                    }
+                    if (loadFlag) {
+                        tmpSearch.push(obj[i]);
+                        suggest += "<div id='suggest" + count + "' class='autoSuggestRow transition300 txtCaCase' onmousedown='searchArea.setSearchResult(\"" + count + "\")' onclick='searchArea.setSearchResult(\"" + count + "\")'>&nbsp;&nbsp;" + obj[i].area + "</div>";
+                        count++;
+                    }
+                    i++;
+                }
+                searchArea.suggestionList = tmpSearch;
+                searchArea.suggestLen = (count - 1);
+            }
+            suggest += "</div>";
+            searchArea.suggestLen = searchArea.suggestLen - 1;
+            document.getElementById("areaSuggestDiv").innerHTML = suggest;
+        }
+    }, 150);
+
+}
+
+function matchValue(val, list, type) {
+    var len = list.length;
+    for (var i = 0; i < len; i++) {
+        var text = (list[i].area).toLowerCase();
+        var ind = text.indexOf(val);
+        if ((ind != -1)) {
+                $('#area').val(list[i].area);
+            break;
+        }
+    }
+}
+
+function onlyAlphabets(evt, t) {
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode < 47) {
+        return true
+    } else
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return true;
+    }
+    return false;
+}
+function clearVal(id) {
+    $('#'+id).val('');
+}
+function closeSuggest() {
+    $('#areaSuggestDiv').html('');
+}

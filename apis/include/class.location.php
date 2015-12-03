@@ -128,14 +128,14 @@ class location extends DB
     
     public function viewbyPincode($params)
     {
-        $vsql="SELECT area,city,state,country,latitude,longitude from tbl_area_master where pincode='".$params['code']."' LIMIT 1";
+        $vsql="SELECT area,city,state,country,latitude,longitude from tbl_area_master where pincode='".$params['code']."'";
         $vres=$this->query($vsql);
         $cres=$this->numRows($vres);
         if($cres>0)
         {
             while($row=$this->fetchData($vres))
             {
-                $arr=$row;
+                $arr[]=$row;
             }
             $err=array('code'=>0,'msg'=>'Value fetched successfully');
         }
