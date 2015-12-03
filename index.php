@@ -5,6 +5,7 @@ $params = array_merge($_GET, $_POST);
 
 $action = (!empty($params['action'])) ? trim($params['action']) : '';
 $case = (!empty($params['case'])) ? trim($params['case']) : '';
+$popup = $_GET['popup'];
 
 switch ($action) {
     case 'ajx':

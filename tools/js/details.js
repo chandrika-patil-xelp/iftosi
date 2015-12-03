@@ -71,7 +71,8 @@ $(document).ready(function(){
     
     $('.iconWishlist').click(function(){
 		var isVendor = customStorage.readFromStorage('is_vendor');
-		if(isVendor !== '1' && isVendor !== 1)
+		var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
+		if((isVendor !== '1' && isVendor !== 1) || isLoggedIn == undefined || isLoggedIn == null || isLoggedIn == '' || isLoggedIn == false || isLoggedIn == 'false')
 		{
 			mobile = customStorage.readFromStorage('mobile');
 			name = customStorage.readFromStorage('name');
@@ -226,6 +227,22 @@ $(document).ready(function(){
 	if(pageName == 'diamond_details' || pageName == 'bullion_details' || pageName == 'jewellery_details')
 	{
 		getWishList();
+	}
+
+	if(popup !== null && popup !== '' && popup !== undefined)
+	{
+		if(popup == '3')
+		{
+			$('.iconWishlist').click();
+		}
+		else if(popup == '1')
+		{
+			$('.iconCall').click();
+		}
+		else if(popup == '2')
+		{
+			$('.iconMessage').click();
+		}
 	}
 });
 
