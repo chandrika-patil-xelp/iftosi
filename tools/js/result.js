@@ -559,7 +559,16 @@ function getResultsData(data,sortby,showtree)
 							html += '<div class="prdPrice fLeft">';
 								html += '<div class="detComm">';
 									html += '<div class="detLabel fmOpenB fLeft">PRICE</div>';
-									html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+vl.attributes.price+'</div>';
+                                                                        var metal_price = vl.attributes.price;
+                                                                        if(pageName=='bullion') {
+                                                                            if(vl.gold_rate!=0) { goldRate=vl.gold_rate; }
+                                                                            if(vl.silver_rate!=0) { silverRate=vl.silver_rate; }
+                                                                            var metal_rate = silverRate;
+                                                                            if((vl.attributes.metal.toLowerCase())=='gold'){ metal_rate=goldRate; }
+                                                                            metal_price = number_format((vl.attributes.gold_weight * metal_rate),2);
+                                                                        }
+                                                                        
+									html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+ metal_price +'</div>';
 								html += '</div>';
 							html += '</div>';
 							html += '<div class="prdActions fLeft">';

@@ -1079,11 +1079,13 @@
 					{
 						$pid = $row1['pid'];
 						$arr1[$pid]=$row1;
-                                                if($params['catid']==10000) {
-                                                    $dollarSql = "SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where product_id='".$pid."')";
+                                                if($params['catid']==10000 || $params['catid']==10002) {
+                                                    $dollarSql = "SELECT dollar_rate, gold_rate, silver_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where product_id='".$pid."')";
                                                     $dollarRes=$this->query($dollarSql);
                                                     $dollarRow=$this->fetchData($dollarRes);
-                                                    $arr1[$pid]['dollar_rate']=$dollarRow['dollar_rate'];//*$arr1[$pid]['pprice'];
+                                                    $arr1[$pid]['dollar_rate']=$dollarRow['dollar_rate'];
+                                                    $arr1[$pid]['gold_rate']=$dollarRow['gold_rate'];
+                                                    $arr1[$pid]['silver_rate']=$dollarRow['silver_rate'];
                                                 }
 						$arr1[$pid]['attributes'] = $attr[$pid]['attributes'];
                                                 $arr1[$pid]['images'] = $pimg[$row1['pid']]['images'];
