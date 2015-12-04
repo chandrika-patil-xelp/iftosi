@@ -420,7 +420,7 @@ function getResultsData(data,sortby,showtree)
 							html += '<div class="prdPrice fLeft">';
 								html += '<div class="detComm">';
 									html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
-																		if(vl.dollar_rate!=0) { dollarValue=vl.dollar_rate; }
+									if(vl.dollar_rate!=0 && vl.dollar_rate !== undefined && vl.dollar_rate !== null && vl.dollar_rate !== '') { dollarValue=vl.dollar_rate; }
 									html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+number_format((vl.pprice*dollarValue),2)+'</div>';
 								html += '</div>';
 							html += '</div>';
