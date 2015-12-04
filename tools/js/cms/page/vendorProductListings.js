@@ -89,6 +89,9 @@ function generateDiamondList(obj) {
     var pro_name = obj['product_name'];
     if(pro_name == null || pro_name == '' || pro_name == 'null') {
         pro_name = obj['barcode'];
+    }var barcode = obj['barcode'];
+    if(barcode == null || barcode == '' || barcode == 'null') {
+        barcode = '';
     }
     var date = obj['update_time'].split(' ');
     var str = '<li>';
@@ -97,7 +100,7 @@ function generateDiamondList(obj) {
     str += '<span class="lwSpan">' + date[1] + '</span>';
     str += '</div>';
     str += '<div class="barcode fLeft">';
-    str += '<span class="upSpan">' + obj['barcode'] + '</span>';
+    str += '<span class="upSpan">' + barcode + '</span>';
     str += '<span class="lwSpan"><a href="'+ DOMAIN + '-' + obj['shape'] +'-clarity-'+ obj['clarity'] +'/did-'+ obj['id'] +'" target="_blank">View Details</a></span>';
     str += '</div>';
     str += '<div class="shape fLeft">' + obj['shape'] + '</div>';
@@ -160,8 +163,13 @@ function generateJewellList(obj) {
     {
         category = '<span class="upSpan">Bangles / Bracelets</span>';
     }
+    var barcode = obj['barcode'];
+    if(barcode == null || barcode == '' || barcode == 'null') {
+        barcode = '';
+    }
+    
     if(pro_name == null || pro_name == '' || pro_name == 'null') {
-        pro_name = obj['barcode'];
+        pro_name = barcode;
     }
     var date = obj['update_time'].split(' ');
     var str = '<li>';
@@ -170,8 +178,8 @@ function generateJewellList(obj) {
     str += '<span class="lwSpan">'+ date[1] +'</span>';
     str += '</div>';
     str += '<div class="barcode fLeft">';
-    str += '<span class="upSpan">' + obj['barcode'] + '</span>';
-    str += '<span class="lwSpan"><a href="'+ DOMAIN + obj['barcode'] +'/jid-'+ obj['id'] +'" target="_blank">View Details</a></span>';
+    str += '<span class="upSpan">' + barcode + '</span>';
+    str += '<span class="lwSpan"><a href="'+ DOMAIN + barcode +'/jid-'+ obj['id'] +'" target="_blank">View Details</a></span>';
     str += '</div>';
     str += '<div class="metal fLeft">' + obj['metal'].split('~')[0] + '</div>';
     str += '<div class="catg fLeft">' + category + '</div>';
@@ -225,6 +233,10 @@ function loadBullionsCallback(res) {
     }
 }
 function generatBullionsList(obj) {
+    var barcode = obj['barcode'];
+    if(barcode == null || barcode == '' || barcode == 'null') {
+        barcode = '';
+    }
     var pro_name = obj['product_name'];
     if(pro_name == null || pro_name == '' || pro_name == 'null') {
         pro_name = '';
@@ -236,8 +248,8 @@ function generatBullionsList(obj) {
     str += '<span class="lwSpan">'+ date[1] +'</span>';
     str += '</div>';
     str += '<div class="barcode fLeft">';
-    str += '<span class="upSpan">' + obj['barcode'] + '</span>';
-    str += '<span class="lwSpan"><a href="'+ DOMAIN + obj['barcode'] +'/bid-'+ obj['id'] +'" target="_blank">View Details</a></span>';
+    str += '<span class="upSpan">' + barcode + '</span>';
+    str += '<span class="lwSpan"><a href="'+ DOMAIN + barcode +'/bid-'+ obj['id'] +'" target="_blank">View Details</a></span>';
     str += '</div>';
     str += '<div class="btype fLeft">' + obj['type'] + '</div>';
     str += '<div class="metal fLeft">' + obj['metal'].split('~')[0] + '</div>';

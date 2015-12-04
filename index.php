@@ -334,7 +334,7 @@ switch ($action) {
                 $res = $comm->executeCurl($url);
                 $fil = $res['results']['attributes'];
 
-                //echo "<pre>";print_r($fil);die;
+                echo "<pre>";print_r($data);die;
 
                 $totalCnt = $total;
                 $lastpg = ceil($total / 15);

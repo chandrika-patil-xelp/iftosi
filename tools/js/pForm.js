@@ -262,10 +262,11 @@ function validateNum(){
             var spurity = $('#silverpurity').val();
             var goldweight = $('#goldweight').val();
             var sweight= $('#silverweight').val();
-            var prprice = $('#prprice').val();
             var shape = $('.jshapeComm');
             var a = $('.jshapeComm').attr('id');
             var str = '';
+            var patt1 = /(^|[^-\d])(1|2|5|10|20|50|100|200|500|1000|)\b/;
+            var patt2 = /(^|[^-\d])(999|995)\b/;
             if(!shape.hasClass('shapeSelected')) {
                 str ='category is not Selected';
             }
@@ -275,24 +276,22 @@ function validateNum(){
             else if(barcode=='') {
                 str ='Design Number field is Required';
             }
-            else if(prprice == '' || isNaN(prprice)) {
-                str ='Product Price is important to fill';
-            }
             else if(a=='gCoins' || a=='gBars')
             {
-                if(purity == '' || isNaN(purity)) {
-                    str ='Gold Purity field is Empty';
+                
+                if(purity == '' || isNaN(purity) || !purity.match(patt2)) {
+                    str ='Gold Purity field is Invalid';
                 }
-                else if(goldweight=='') {
-                    str ='Gold weight is Required';
+                else if(goldweight=='' || !goldweight.match(patt1)) {
+                    str ='Gold weight field is Invalid';
                 }
             }
             else if(a=='sBars' || a=='sCoins')
             {
-                if(spurity == '' || isNaN(spurity)) {
+                if(spurity == '' || isNaN(spurity) || !spurity.match(patt2)) {
                     str ='Silver Purity field is Empty';
                 }
-                else if(sweight == '' || isNaN(sweight)) {
+                else if(sweight == '' || isNaN(sweight) || !sweight.match(patt1)) {
                     str ='Silver Weight field is Empty';
                 }
             }
@@ -305,6 +304,7 @@ function validateNum(){
                 return  true;
             }
             
+            
             return false;
 }
 function backbtn()
@@ -312,3 +312,4 @@ function backbtn()
             window.history.back();
             return true;
         }
+        

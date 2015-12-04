@@ -235,7 +235,7 @@
 ?>
                                                 <div class="divCon2  fLeft">
                                                     <div  class="titleDiv txtCap fLeft">Carat Weight</div>
-                                                    <input name="carat_weight" id="caratweight" type="text" placeholder="eg. 1.00" class="txtInput fLeft fmOpenR font14 c666" maxlength="5"  onkeypress="return common.isDecimalKey(event);" value="<?=$attr['carat'];?>" onkeypress="return common.isDecimalKey(event)">
+                                                    <input name="carat_weight" id="caratweight" type="text" placeholder="eg. 1.00" class="txtInput fLeft fmOpenR font14 c666" maxlength="5"  onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['carat'];?>" onkeypress="return common.isDecimalKey(event)">
                                                 </div>
 <?php                                            }
                                         }   
@@ -246,24 +246,24 @@
 <?php
                                     $measurement=explode('*',$attr['measurement']);
 ?>                                    
-                                <input name="measurement1" id="measure1" type="text" placeholder=" eg. 10" maxlength="5" class="mtxtInput fLeft fmOpenR font14 c666" onkeypress="return common.isDecimalKey(event);" value="<?php echo $measurement[0];?>">
+                                <input name="measurement1" id="measure1" type="text" placeholder=" eg. 10" maxlength="5" class="mtxtInput fLeft fmOpenR font14 c666" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?php echo $measurement[0];?>">
                                 <span class='fLeft'>X</span>
-                                <input name="measurement2" id="measure2" type="text" id="measure2" placeholder=" eg. 20" maxlength="5" class="mtxtInput fLeft fmOpenR font14 c666" onkeypress="return common.isDecimalKey(event);" value="<?php echo $measurement[1]; ?>">
+                                <input name="measurement2" id="measure2" type="text" id="measure2" placeholder=" eg. 20" maxlength="5" class="mtxtInput fLeft fmOpenR font14 c666" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?php echo $measurement[1]; ?>">
                                 <span class='fLeft'>X</span>
-                                <input name="measurement3" id="measure3" type="text" id="measure3" placeholder=" eg. 30" maxlength="5" class="mtxtInput fLeft fmOpenR font14 c666" onkeypress="return common.isDecimalKey(event);" value="<?php echo $measurement[2]; ?>">
+                                <input name="measurement3" id="measure3" type="text" id="measure3" placeholder=" eg. 30" maxlength="5" class="mtxtInput fLeft fmOpenR font14 c666" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?php echo $measurement[2]; ?>">
                             </div>
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Table</div>
-                            <input name="table" id="table" type="text" placeholder=" eg. 56" onkeypress="return common.isDecimalKey(event);" maxlength="5" class="txtInput fLeft fmOpenR font14 c666" value="<?=$attr['tab'];?>">
+                            <input name="table" id="table" type="text" placeholder=" eg. 56" onkeypress="return common.isDecimalNumber(event,this.value);" maxlength="5" class="txtInput fLeft fmOpenR font14 c666" value="<?=$attr['tab'];?>">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Crown Angle</div>
-                            <input name="crown_angle" id="crownangle" type="text" placeholder=" eg. 41" onkeypress="return common.isDecimalKey(event);" maxlength="5" class="txtInput fLeft fmOpenR font14 c666" value="<?=$attr['crownangle'];?>">
+                            <input name="crown_angle" id="crownangle" type="text" placeholder=" eg. 41" onkeypress="return common.isDecimalNumber(event,this.value);" maxlength="5" class="txtInput fLeft fmOpenR font14 c666" value="<?=$attr['crownangle'];?>">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Girdle</div>
-                            <input name="girdle" id="girdle" type="text" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666" maxlength="5" onkeypress="return common.isDecimalKey(event);" value="<?=$attr['girdle'];?>">
+                            <input name="girdle" id="girdle" type="text" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666" maxlength="5" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['girdle'];?>">
                         </div>
 
                         <div class="divCon2  fLeft">
@@ -272,7 +272,7 @@
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Lot Number</div>
-                            <input name="lot_no" id="lotnumber" type="text" placeholder=" eg. 56" onkeypress="return common.isDecimalKey(event);" maxlength="10" class="txtInput fLeft fmOpenR font14 c666" value="<?=$pdet['product_lotno'];?>">
+                            <input name="lot_no" id="lotnumber" type="text" placeholder=" eg. 56" onkeypress="return common.isDecimalNumber(event,this.value);" maxlength="10" class="txtInput fLeft fmOpenR font14 c666" value="<?=$pdet['product_lotno'];?>">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Lot Reference</div>
@@ -280,15 +280,15 @@
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Base Price</div>
-                            <input name="base_price" id="baseprice" type="text" placeholder=" eg. 120000" class="txtInput fLeft fmOpenR font14 c666" maxlength="16" onkeypress="return common.isDecimalKey(event);" onkeyup="calculatePrice()" value="<?=$attr['baseprice'];?>">
+                            <input name="base_price" id="baseprice" type="text" placeholder=" eg. 120000" class="txtInput fLeft fmOpenR font14 c666" maxlength="16" onkeypress="return common.isDecimalNumber(event,this.value);" onkeyup="calculatePrice()" value="<?=$attr['baseprice'];?>">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">% Discount</div>
-                            <input name="discount" id="discount" type="text" placeholder=" eg. 25%"   class="txtInput fLeft fmOpenR font14 c666" maxlength="5" minlength="1" onkeyup="calculatePrice()" onkeypress="return common.isDecimalKey(event);" value="<?=$attr['discount'];?>">
+                            <input name="discount" id="discount" type="text" placeholder=" eg. 25%"   class="txtInput fLeft fmOpenR font14 c666" maxlength="5" minlength="1" onkeyup="calculatePrice()" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['discount'];?>">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Price</div>
-                            <input name="price" id="prdprice" type="text" placeholder=" eg. 1200000" class="txtInput fLeft fmOpenR font14 c666" disabled="true" maxlength="16" onkeypress="return common.isDecimalKey(event);" onChange="(function(el){el.value=parseFloat(el.value).toFixed(15);})(this);" value="<?=$pdet['product_price'];?>">
+                            <input name="price" id="prdprice" type="text" placeholder=" eg. 1200000" class="txtInput fLeft fmOpenR font14 c666" disabled="true" maxlength="16" onkeypress="return common.isDecimalNumber(event,this.value);" onChange="(function(el){el.value=parseFloat(el.value).toFixed(15);})(this);" value="<?=$pdet['product_price'];?>">
                         </div>
                         <div class="btnCont fLeft">
                             <center>

@@ -96,12 +96,21 @@ function loadEnqCallback(res) {
     }
 }
 function generateEnqList(obj) {
+
     var date = obj['update_time'].split(' ');
     var pro_dtls=obj['pro_dtls'];
     var pro_name = pro_dtls['product_name'];
     if(pro_name == null) {
         pro_name = '';
     }
+    var barcode = pro_dtls['barcode'];
+    if(barcode == null || barcode == '' || barcode == 'null') {
+        barcode = '';
+    }
+    var uname = obj['user_name'];
+    var umail = obj['user_email'];
+    if(barcode !== '' && barcode !== 'null' && barcode !== null && uname !== 'undefined' &&  uname !== undefined && uname !== '' && uname !== 'null' && uname !== null && umail !== '' && umail !== 'null' && umail !== null)
+    {
     var str='';
     str += '<li>';
         str += '<div class="date fLeft"> ';
@@ -122,7 +131,7 @@ function generateEnqList(obj) {
             str += '<span class="lwSpan">' + subCatName + '</span>';
         str += '</div>';
         str += '<div class="barcode fLeft">';
-            str += '<span class="upSpan">' + pro_dtls['barcode'] + '</span>';
+            str += '<span class="upSpan">' + barcode + '</span>';
             if(pro_dtls['cat_name'][0] == 'Diamonds')
             {
                 str += '<span class="lwSpan"><a href="'+ DOMAIN + '-' +  pro_dtls['cat_name'][0] +'-/did-'+ obj['product_id'] +'" target="_blank">View Details</a></span>';
@@ -139,7 +148,11 @@ function generateEnqList(obj) {
         str += '<div class="price fLeft bNone fmOpenB">&#8377;' + pro_dtls['prd_price'] + '</div>';
     str += '</li>';
     return str;
-}
+    }
+    else {
+            return str='';
+        }
+    }
 
 </script>
 </body>

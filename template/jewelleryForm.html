@@ -476,12 +476,12 @@
                         
                     <div class="divCon2  fLeft">
                         <div  class="titleDiv txtCap fLeft">Diamond Weight</div>
-                        <input name="diamonds_weight" id="diamondweight" type="text" placeholder=" eg. 1.25" maxlength="8" onkeypress="return common.isDecimalKey(event);" value="<?=$attr['dwt'];?>" class="txtInput fLeft fmOpenR font14 c666">
+                        <input name="diamonds_weight" id="diamondweight" type="text" placeholder=" eg. 1.25" maxlength="8" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['dwt'];?>" class="txtInput fLeft fmOpenR font14 c666">
                     </div>
 
                     <div class="divCon2  fLeft">
                         <div  class="titleDiv txtCap fLeft">Gemstone Weight</div>
-                        <input name="gemstone_weight" type="text" id="gemweight" placeholder=" eg. 1.25" maxlength="8" onkeypress="return common.isDecimalKey(event);" value="<?=$attr['gemwt'];?>" class="txtInput fLeft fmOpenR font14 c666">
+                        <input name="gemstone_weight" type="text" id="gemweight" placeholder=" eg. 1.25" maxlength="8" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['gemwt'];?>" class="txtInput fLeft fmOpenR font14 c666">
                     </div>
                     <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Design Number</div>
@@ -495,7 +495,7 @@
 ?>                       
                                                 <div class="divCon2  fLeft">
                                                     <div  class="titleDiv txtCap fLeft"><?php echo $values['attr'][$key]['attr_display_name']; ?></div>
-                                                    <input name="<?php echo strtolower($values['attr'][$key]['attr_display_name']); ?>" id="prdprice" type="text" placeholder="eg. 12000" maxlength="16" onkeypress="return common.isDecimalKey(event);" value="<?=$attr['price'];?>" class="txtInput fLeft fmOpenR font14 c666">
+                                                    <input name="<?php echo strtolower($values['attr'][$key]['attr_display_name']); ?>" id="prdprice" type="text" placeholder="eg. 12000" maxlength="16" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['price'];?>" class="txtInput fLeft fmOpenR font14 c666">
                                                 </div>
 <?php                                       }
                                         }
