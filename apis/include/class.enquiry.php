@@ -88,8 +88,26 @@ class enquiry extends DB
     
     public function viewLog($params)
     {
-        # check the products under the requested vendor
+        $sql="SELECT silver_rate, gold_rate, dollar_rate FROM tbl_vendor_master WHERE vendor_id='".$params['vid']."'";
+        $res=$this->query($sql);
+        if ($res) {
+            $rates = $this->fetchData($res);
+            $dollarValue=dollarValue;
+            if(!empty($rates['dollar_rate']) && $rates['dollar_rate']!='0.00') {
+                $dollarValue = $rates['dollar_rate'];
+            }
+            $goldRate=goldRate;
+            if(!empty($rates['gold_rate']) && $rates['gold_rate']!='0.00') {
+                $goldRate = $rates['gold_rate'];
+            }
+            $silverRate=silverRate;
+            if(!empty($rates['silver_rate']) && $rates['silver_rate']!='0.00') {
+                $silverRate = $rates['silver_rate'];
+            }
+        }
         
+        
+        # check the products under the requested vendor
         $page   = ($params['page'] ? $params['page'] : 1);
         $limit  = ($params['limit'] ? $params['limit'] : 15);
         $viewprod=" SELECT
@@ -135,6 +153,17 @@ class enquiry extends DB
                     while($crow=$this->fetchData($cres))
                     {
                         $row['pro_dtls']=$crow;
+                        $prdPrice = $crow['prd_price'];
+                    }
+                }
+                $csql='SELECT gold_purity, gold_weight, metal FROM tbl_product_search WHERE product_id='.$row['product_id'].'';
+                $cres=$this->query($csql);
+                if($this->numRows($cres)>0) {
+                    while($crow=$this->fetchData($cres))
+                    {
+                        $purity=$crow['gold_purity'];
+                        $metal=strtolower($crow['metal']);
+                        $weight=$crow['gold_weight'];
                     }
                 }
                 $csql='SELECT b.cat_name,b.catid FROM tbl_product_category_mapping AS a, tbl_category_master AS b WHERE a.product_id='.$row['product_id'].' AND b.catid=a.category_id AND b.p_catid in (0,10000,10001,10002)';
@@ -145,6 +174,17 @@ class enquiry extends DB
                         $row['pro_dtls']['cat_name'][]=$crow['cat_name'];
                         if($crow['catid']==10000 || $crow['catid']==10001 || $crow['catid']==10002) {
                             $row['pro_dtls']['mCatid']=$crow['catid'];
+                            if($crow['catid']==10000) {
+                                $row['pro_dtls']['prd_price']=$prdPrice*$dollarValue;
+                            }
+                            if($crow['catid']==10002) {
+                                $metalRate=$silverRate;
+                                if($metal=='gold') {
+                                    $metalRate=$goldRate;
+                                }
+                                $finalRate=($metalRate)*($purity/995);
+                                $row['pro_dtls']['prd_price']=$finalRate*$weight;
+                            }
                         }
                     }
                 }
