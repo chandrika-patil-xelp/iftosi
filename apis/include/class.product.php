@@ -1385,6 +1385,8 @@
                                 lat as latitude,
                                 lng as longitude,
                                 dollar_rate,
+                                gold_rate,
+                                silver_rate,
 								area,
 								city,
 								state
@@ -1402,6 +1404,8 @@
                     $vid[]=$row4['vid'];
                     $vdetls[$row4['vid']]=$row4;
                     $details['dollar_rate']=$row4['dollar_rate'];
+                    $details['silver_rate']=$row4['silver_rate'];
+                    $details['gold_rate']=$row4['gold_rate'];
                 }
 
 				if(!empty($params['catid']))
