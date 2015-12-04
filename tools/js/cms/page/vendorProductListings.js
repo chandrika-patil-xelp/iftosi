@@ -454,16 +454,3 @@ function searchBarcodeCallback(res) {
         $('#s' + searchIDName + 'List').html(str);
     }
 }
-
-//var rateErr = customStorage.readFromStorage('rateErr');
-//if(rateErr==1) {
-//    showSilverRateForm();
-//    common.toast(0,'Please Update Silver Rate');
-//} else if(rateErr==2) {
-//    showGoldRateForm();
-//    common.toast(0,'Please Update Gold Rate');
-//} else if(rateErr==3) {
-//    showDollarRateForm();
-//    common.toast(0,'Please Update Dollar Rate');
-//}
-//customStorage.removeFromStorage('rateErr');

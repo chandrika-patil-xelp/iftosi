@@ -541,3 +541,35 @@ function getcatid() {
     }
     return 1000+catid.toString();
 }
+function addDiamond() {
+    $.ajax({url: common.APIWebPath() + "index.php?action=getDollerRate&vid="+ uid, success: function (result) {
+        var obj = jQuery.parseJSON(result);
+            var dollarRate=obj['results']['dollar_rate'];
+            if(dollarRate!=0.00) {
+                window.location.assign(DOMAIN+"index.php?case=diamond_Form&catid=10000&vid="+uid);
+            } else {
+                showDollarRateForm();
+                $('#dollarErr').removeClass('dn');
+            }
+    }}); 
+}
+function addBulion() {
+
+    $.ajax({url: DOMAIN + "apis/index.php?action=getAllRatesByVID&vid="+uid, success: function(result) {
+            var obj = jQuery.parseJSON(result);
+            var goldRate = obj['results']['gold_rate'];
+            var silverRate = obj['results']['silver_rate'];
+            var dollarRate = obj['results']['dollar_rate'];
+            if(goldRate==0.00) {
+                showGoldRateForm();
+                $('#goldErr').removeClass('dn');
+            }
+            else if(silverRate==0.00) {
+                showSilverRateForm();
+                $('#silverErr').removeClass('dn');
+            } else {
+                window.location.assign(DOMAIN+"index.php?case=bullion_Form&catid="+catid+"&vid="+uid);
+            }
+        
+    }}); 
+}

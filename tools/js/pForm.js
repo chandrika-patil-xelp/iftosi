@@ -344,4 +344,4 @@ function checkRates() {
         }
     });
 }
-checkRates();
+//checkRates();
