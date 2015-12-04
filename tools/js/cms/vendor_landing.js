@@ -167,11 +167,15 @@ $(document).ready(function () {
             {
                 $('.allprop').addClass('dn');
                 $('.goldprop').removeClass('dn');
+                $('#silverpurity').val('');
+                $('#silverweight').val('');
             }
             else if ((tmpId == 'sbars') || (tmpId == 'scoins'))
             {
                 $('.allprop').addClass('dn');
                 $('.silverprop').removeClass('dn');
+                $('#goldpurity').val('');
+                $('#goldweight').val('');
             }
         }
         else

@@ -177,15 +177,9 @@ function validateStep2Form() {
         }
     }
     if (/2/.test(busiType)) {
-        var showroomname = $('#showroomname').val();
-        var showroomno = $('#showroomno').val();
+       var showroomno = $('#showroomno').val();
         var mdbw = $('#mdbw').val();
-        if (showroomname == '') {
-            $('#showroomname').focus();
-            common.toast(0, 'Show Room Name is Required');
-            return false;
-        }
-        else if (showroomno == '' || isNaN(showroomno) || showroomno == 0) {
+        if (showroomno == '' || isNaN(showroomno) || showroomno == 0) {
             common.toast(0, 'Enter Number of Showrooms');
             $('#showroomno').focus();
             return false;
