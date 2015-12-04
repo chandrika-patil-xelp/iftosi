@@ -721,6 +721,7 @@
 								polish,
 								symmetry,
 								cno,
+								gold_purity,
 								gold_weight,
 								type,
 								metal
@@ -1030,6 +1031,7 @@
 								polish,
 								symmetry,
 								cno,
+								gold_purity,
 								gold_weight,
 								type,
 								metal,

@@ -568,6 +568,7 @@ function getResultsData(data,sortby,showtree)
                                                                             if(vl.silver_rate!=0) { silverRate=vl.silver_rate; }
                                                                             var metal_rate = silverRate;
                                                                             if((vl.attributes.metal.toLowerCase())=='gold'){ metal_rate=goldRate; }
+                                                                            metal_rate=metal_rate*(vl.attributes.gold_purity/995);
                                                                             metal_price = number_format((vl.attributes.gold_weight * metal_rate),2);
                                                                         }
                                                                         
