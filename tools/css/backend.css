@@ -482,6 +482,8 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 .popDiv .downloadLink span { color: #666; font-size: 12px; display: block; margin-bottom: 8px; }
 .popDiv .inputCont { width: 100%; }
 .popDiv .inpTxt { border: 1px solid #d4d4c8; border-radius: 5px; font-size: 14px; height: 35px; outline: medium none; padding: 0 15px; width: 100%; }
+.popDiv .rateErr { text-align: center; }
+.popDiv .rateErr span { color: red; font-size: 12px; line-height: 43px; text-align: center; }
 
 
 

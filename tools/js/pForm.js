@@ -322,16 +322,23 @@ function checkRates() {
             var dollarRate = obj['results']['dollar_rate'];
             if(catid==10002) {
                 if(silverRate==0.00) {
-                    customStorage.addToStorage('rateErr',1);
-                    window.location.assign(DOMAIN + "index.php?case=vendor_landing&catid=10002")
-                } else if(goldRate==0.00) {
-                    customStorage.addToStorage('rateErr',2);
-                    window.location.assign(DOMAIN + "index.php?case=vendor_landing&catid=10002")
+                    showSilverRateForm();
+                    $('#silverErr').removeClass('dn');
+//                    customStorage.addToStorage('rateErr',1);
+//                    window.location.assign(DOMAIN + "index.php?case=vendor_landing&catid=10002")
+                } 
+                if(goldRate==0.00) {
+                    $('#goldErr').removeClass('dn');
+                    showGoldRateForm();
+//                    customStorage.addToStorage('rateErr',2);
+//                    window.location.assign(DOMAIN + "index.php?case=vendor_landing&catid=10002")
                 }
             } else if(catid==10000) {
                 if(dollarRate==0.00) {
-                    customStorage.addToStorage('rateErr',3);
-                    window.location.assign(DOMAIN + "index.php?case=vendor_landing&catid=10000")
+                    $('#dollarErr').removeClass('dn');
+                    showDollarRateForm();
+//                    customStorage.addToStorage('rateErr',3);
+//                    window.location.assign(DOMAIN + "index.php?case=vendor_landing&catid=10000")
                 }
             }
         }

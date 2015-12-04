@@ -477,7 +477,7 @@ function isValidFloatKey(obj, e, allowDecimal)
         return true;
     }
     if(key == 13) {
-        updateDollarRate();
+       // updateDollarRate();
     }
     reg = /\d/;
     var isFirstD = allowDecimal ? keychar == '.' && obj.value.indexOf('.') == -1 : false;

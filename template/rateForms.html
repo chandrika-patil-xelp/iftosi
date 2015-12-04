@@ -1,0 +1,33 @@
+
+        <div id='overlay' class="overlay transition300 transit-100Y1 dn"></div>
+<div id='dollarRateDiv' class="popDiv transition300 transit-200Y1 dn" style="height: 250px;">
+                <div class="upTitle fLeft fmOpenR">Update Dollar Rate </div>
+                <div class="inputCont fLeft fmOpenR">
+                    <input type="text" id="dollar_rate" name="dollar_rate" class="inpTxt fRight fmOpenR" maxlength="5" onkeypress="return isValidFloatKey(this, event, true);" placeholder="eg. 60.45" autofocus="">
+                </div>
+                <div class="commBtn cancelBtn fLeft fmOpenR" id='upCancel' onclick="closeAllForms(1);"> CANCEL</div>
+                <div class="commBtn upBtn fLeft fmOpenR" onclick="updateDollarRate();">UPDATE</div>
+                <div id="dollarErr" class="rateErr dn"><span> Update Dollar Rate to add Diamonds</div>
+        </div>
+        
+        <div id='silverRateDiv' class="popDiv transition300 transit-200Y1 dn" style="height: 250px;">
+                <div class="upTitle fLeft fmOpenR">Update Silver Rate </div>
+                <div class="inputCont fLeft fmOpenR">
+                    <input type="text" id="silver_rate" name="silver_rate" class="inpTxt fRight fmOpenR" maxlength="7" onkeypress="return isValidFloatKey(this, event, true);" placeholder="Silver Rate For 995" autofocus="">
+                </div>
+                <div class="commBtn cancelBtn fLeft fmOpenR" id='upCancel' onclick="closeAllForms(2);"> CANCEL</div>
+                <div class="commBtn upBtn fLeft fmOpenR" onclick="updateSilverRate();">UPDATE</div>
+                <div id="silverErr" class="rateErr dn"><span> Update Silver Rate to add Products</div>
+           
+        </div>
+        
+        <div id='goldRateDiv' class="popDiv transition300 transit-200Y1 dn" style="height: 250px;">
+                <div class="upTitle fLeft fmOpenR">Update Gold Rate </div>
+                <div class="inputCont fLeft fmOpenR">
+                    <input type="text" id="gold_rate" name="gold_rate" class="inpTxt fRight fmOpenR" maxlength="8" onkeypress="return isValidFloatKey(this, event, true);" placeholder="Gold Rate For 995" autofocus="">
+                </div>
+                <div class="commBtn cancelBtn fLeft fmOpenR" id='upCancel' onclick="closeAllForms(3);"> CANCEL</div>
+                <div class="commBtn upBtn fLeft fmOpenR" onclick="updateGoldRate();">UPDATE</div>
+                <div id="goldErr" class="rateErr dn"><span> Update Gold Rate to add Products</div>
+        </div>
+        
