@@ -417,12 +417,12 @@ function loadAreaList() {
                 var results = obj['results'];
                 if (results != '') {
                     areaList = results;
-//                $('#area').val(results['area']);
-//                    $('#city').val(results[0]['city']);
-//                    $('#state').val(results[0]['state']);
-//                    country = results[0]['country'];
-//                    lat = results[0]['latitude'];
-//                    lng = results[0]['longitude'];
+                    $('#area').val(results[0]['area']);
+                    $('#city').val(results[0]['city']);
+                    $('#state').val(results[0]['state']);
+                    country = results[0]['country'];
+                    lat = results[0]['latitude'];
+                    lng = results[0]['longitude'];
                 }
             }});
     }
@@ -430,7 +430,6 @@ function loadAreaList() {
 loadAreaList();
 $('#pincode').keyup(function () {
     loadAreaList();
-    clearVal('area')
 });
 
 /*    

@@ -40,6 +40,23 @@ function Common() {
         }
         return true;
     };
+    this.isDecimalNumber = function (evt, val) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode == 46 && (charCode > 48 || charCode < 57)) {
+            if(val.split('.').length==2) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        else if (charCode == 13) {
+            return false;
+        }
+        else if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    };
 
     this.onlyAlphabets = function (evt) {
         var charCode = (evt.which) ? evt.which : evt.keyCode;

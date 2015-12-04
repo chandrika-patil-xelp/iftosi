@@ -47,7 +47,7 @@ if(!empty($data['mdbw'])) {
                         </div>
                         <div class="divCon2 fRight c666">
                             <div class="titleDiv txtCap fLeft"> Area *</div>
-                            <input type="text" id="area" name="area" value="<?php echo $data['area']; ?>" placeholder=" Area" maxlength="50" class="txtInput c666 fLeft fmRoboto font14" onfocus="searchAreaDivOutput(this.value);" onkeypress="return onlyAlphabets(event, this)" onblur="matchValue(this.value, areaList, 2);closeSuggest();" onkeyup="searchArea.showHint(this.value, event)" onclick="clearVal(this.id);searchAreaDivOutput(this.value)">
+                            <input type="text" id="area" name="area" value="<?php echo $data['area']; ?>" placeholder=" Area" maxlength="50" class="txtInput c666 fLeft fmRoboto font14" onfocus="searchAreaDivOutput(this.value);" onkeypress="return onlyAlphabets(event, this)" onblur="matchValue(this.value, areaList, 2);closeSuggest();" onkeyup="searchArea.showHint(this.value, event)" onclick="searchAreaDivOutput(this.value)">
                             <div id="areaSuggestDiv" class="autoSuggestOuter"></div>
                         </div>
                         <div class="divCon2 fLeft c666">
@@ -70,11 +70,11 @@ if(!empty($data['mdbw'])) {
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Turnover</div>
-                            <input name="" type="text" id="tovr" value="<?php echo $data['turnover']; ?>" placeholder=" eg.  100 CRORES" maxlength="15" onkeypress="return common.isNumberKey(event)" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="" type="text" id="tovr" value="<?php echo $data['turnover']; ?>" placeholder=" eg.  100 CRORES" maxlength="15" onkeypress="return common.isDecimalNumber(event,this.value)" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon2  fRight">
                             <div  class="titleDiv txtCap fLeft">Website</div>
-                            <input name="" type="text" id="wbst" value="<?php echo $data['website']; ?>" placeholder=" eg.  www.whitefirejewels.in" onkeypress="return common.validateUrl(event);" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="" type="text" id="wbst" value="<?php echo $data['website']; ?>" placeholder=" eg.  www.whitefirejewels.in" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon  fLeft">
                             <div  class="titleDiv txtCap fLeft">Bankers</div>
