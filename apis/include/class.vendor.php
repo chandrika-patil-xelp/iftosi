@@ -1280,6 +1280,21 @@ class vendor extends DB
         return $result;
         }
         
+        public function getAllRatesByVID($params) {
+        $sql="SELECT silver_rate, gold_rate, dollar_rate FROM tbl_vendor_master WHERE vendor_id='".$params['vid']."'";
+        $res=$this->query($sql);
+        if ($res) {
+            $row = $this->fetchData($res);
+            $arr = $row;
+            $err = array('Code' => 0, 'Msg' => 'Rates fetched successfully!');
+        } else {
+            $arr = array();
+            $err = array('code' => 1, 'msg' => 'Error in fatching Rates');
+        }
+        $result = array('results' => $arr, 'error' => $err);
+        return $result;
+        }
+        
         public function Vpactive($params) {
             
         $vprds="SELECT product_id from tbl_vendor_product_mapping where vendor_id=".$params['vid'];

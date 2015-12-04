@@ -313,3 +313,28 @@ function backbtn()
             return true;
         }
         
+        
+function checkRates() {
+    $.ajax({url: DOMAIN + "apis/index.php?action=getAllRatesByVID&vid="+uid, success: function(result) {
+            var obj = jQuery.parseJSON(result);
+            var goldRate = obj['results']['gold_rate'];
+            var silverRate = obj['results']['silver_rate'];
+            var dollarRate = obj['results']['dollar_rate'];
+            if(catid==10002) {
+                if(silverRate==0.00) {
+                    customStorage.addToStorage('rateErr',1);
+                    window.location.assign(DOMAIN + "index.php?case=vendor_landing&catid=10002")
+                } else if(goldRate==0.00) {
+                    customStorage.addToStorage('rateErr',2);
+                    window.location.assign(DOMAIN + "index.php?case=vendor_landing&catid=10002")
+                }
+            } else if(catid==10000) {
+                if(dollarRate==0.00) {
+                    customStorage.addToStorage('rateErr',3);
+                    window.location.assign(DOMAIN + "index.php?case=vendor_landing&catid=10000")
+                }
+            }
+        }
+    });
+}
+checkRates();

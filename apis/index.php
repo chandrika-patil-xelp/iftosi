@@ -521,6 +521,20 @@ switch($action)
             $res= $result;
         break;
 
+// localhost/iftosi/apis/index.php?action=getAllRatesByVID&vid=2
+        case 'getAllRatesByVID':
+            include APICLUDE.'class.vendor.php';
+            $vid=(!empty($params['vid'])) ? trim($params['vid']) : '';
+            if(!empty($vid)) {
+                $obj = new vendor($db['iftosi']);
+                $result = $obj->getAllRatesByVID($params);
+            } else {
+                $err = array('Code' => 1, 'Msg' => 'Invalid Parameters');
+                $result = array('results' => array(), 'error' => $err);
+            }
+            $res= $result;
+        break;
+
 // localhost/iftosi/apis/index.php?action=updateGoldRate&vid=2&dolRate=50.50
         case 'updateGoldRate':
             include APICLUDE.'class.vendor.php';

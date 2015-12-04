@@ -175,7 +175,7 @@
                 <div class="inputCont fLeft fmOpenR">
                     <input type="text" id="silver_rate" name="silver_rate" class="inpTxt fRight fmOpenR" maxlength="7" onkeypress="return isValidFloatKey(this, event, true);" placeholder="Silver Rate For 995" autofocus="">
                 </div>
-                <div class="commBtn cancelBtn fLeft fmOpenR" id='upCancel' onclick="closeAllForms2();"> CANCEL</div>
+                <div class="commBtn cancelBtn fLeft fmOpenR" id='upCancel' onclick="closeAllForms();"> CANCEL</div>
                 <div class="commBtn upBtn fLeft fmOpenR" onclick="updateSilverRate();">UPDATE</div>
             </form>
         </div>
@@ -186,19 +186,19 @@
                 <div class="inputCont fLeft fmOpenR">
                     <input type="text" id="gold_rate" name="gold_rate" class="inpTxt fRight fmOpenR" maxlength="8" onkeypress="return isValidFloatKey(this, event, true);" placeholder="Gold Rate For 995" autofocus="">
                 </div>
-                <div class="commBtn cancelBtn fLeft fmOpenR" id='upCancel' onclick="closeAllForms3();"> CANCEL</div>
+                <div class="commBtn cancelBtn fLeft fmOpenR" id='upCancel' onclick="closeAllForms();"> CANCEL</div>
                 <div class="commBtn upBtn fLeft fmOpenR" onclick="updateGoldRate();">UPDATE</div>
             </form>
         </div>
         
     
 </div>
+<script type="text/javascript" src='tools/js/cms/lib/jquery.toast.min.js'></script>
 <script type="text/javascript" src="tools/js/cms/Common.js"></script>
 <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['jqryUi']; ?>"></script>
 <script type="text/javascript" src='tools/js/cms/vendor_landing.js'></script>
 <script type="text/javascript" src="tools/js/cms/page/vendorProductListings.js"></script>
-<script type="text/javascript" src='tools/js/cms/lib/jquery.toast.min.js'></script>
 
 </body>
 </html>
