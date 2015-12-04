@@ -115,6 +115,7 @@ $(document).ready(function(){
     $('.iconCall,.iconMessage').click(function(){
 		var isVendor = customStorage.readFromStorage('is_vendor');
 		var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
+
 		if((isVendor !== '1' && isVendor !== 1) || isLoggedIn == undefined || isLoggedIn == null || isLoggedIn == '' || isLoggedIn == false || isLoggedIn == 'false')
 		{
 			mobile = customStorage.readFromStorage('mobile');
@@ -122,6 +123,7 @@ $(document).ready(function(){
 			email = customStorage.readFromStorage('email');
 			uid = customStorage.readFromStorage('userid');
 			islog = customStorage.readFromStorage('isLoggedIn');
+
 			if(uid == '' || uid == null || uid == undefined || islog == false || islog == '' || islog == null || islog == undefined)
 			{
 				$('#overlay,#userForm').removeClass('dn');
@@ -198,7 +200,16 @@ $(document).ready(function(){
         }
         else 
         {
-            showVendorDetails();
+			if(isMail)
+			{
+				sendDetailsToUser();
+				addToEnquiry();
+			}
+			else
+			{
+				showVendorDetails();
+			}
+
             $('#userForm').velocity({scale:0},{delay:0,ease:'swing'});
             $('#overlay').velocity({opacity:0},{delay:100,ease:'swing'});
             setTimeout(function(){
@@ -384,8 +395,8 @@ function showVendorDetails(obj)
 				$('#overlay').velocity({opacity:1},{delay:0,duration:300,ease:'swing'});
 				$('#userForm').velocity({scale:1},{delay:80,duration:100,ease:'swing'});
 			},10);
-			sendDetailsToUser();
-			addToEnquiry();
+			/*sendDetailsToUser();
+			addToEnquiry();*/
 		}
 		else if((isMail==false)&&(isWishList==false))
 		{
@@ -630,7 +641,28 @@ function sendDetailsToUser()
 		var params = 'action=ajx&case=sendDetailsToUser&usrName='+encodeURIComponent(usrName)+'&usrMobile='+encodeURIComponent(usrMobile)+'&usrEmail='+encodeURIComponent(usrEmail)+'&prdid='+encodeURIComponent(pid);
 		var URL = DOMAIN + "index.php";
 		$.getJSON(URL, params, function(data) {
-			
+			if(data !== undefined && data !== null && data !== '')
+			{
+				if(data.error !== undefined && data.error !== null && data.error !== '')
+				{
+					if(data.error.Code !== undefined && data.error.Code !== null && data.error.Code !== '' && data.error.Code == 0)
+					{
+						customStorage.toast(1, 'SMS / Email sent to the details');
+					}
+					else
+					{
+						customStorage.toast(0, 'Error sending SMS / Email');
+					}
+				}
+				else
+				{
+					customStorage.toast(0, 'Error sending SMS / Email');
+				}
+			}
+			else
+			{
+				customStorage.toast(0, 'Error sending SMS / Email');
+			}
 		});
 	}
 }
