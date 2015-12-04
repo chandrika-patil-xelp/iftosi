@@ -93,6 +93,8 @@ function generateDiamondList(obj) {
     if(barcode == null || barcode == '' || barcode == 'null') {
         barcode = '';
     }
+    if(barcode !== '' && barcode !== 'null' && barcode !== null && barcode !== 'undefined' &&  barcode !== undefined)
+    {
     var date = obj['update_time'].split(' ');
     var str = '<li>';
     str += '<div class="date fLeft"> ';
@@ -120,6 +122,11 @@ function generateDiamondList(obj) {
     str += '</li>';
     str += '';
     return str;
+    }
+    else
+    {
+        
+    }
 }
 
 
@@ -157,46 +164,57 @@ function loadJewellCallback(res) {
     }
 }
 function generateJewellList(obj) {
-    var pro_name = obj['product_name'];
-    var category= obj['category'][1]['cat_name'];
-    if(category == 'Bangles/Bracelets')
+    if(obj !== undefined && obj !== null && obj !== '')
     {
-        category = '<span class="upSpan">Bangles / Bracelets</span>';
+        var pro_name = obj['product_name'];
+        var category= obj['category'][1]['cat_name'];
+        if(category == 'Bangles/Bracelets')
+        {
+            category = '<span class="upSpan">Bangles / Bracelets</span>';
+        }
+        var barcode = obj['barcode'];
+        if(barcode == undefined || barcode == null || barcode == '' || barcode == 'null') {
+            barcode = '';
+        }
+
+        if(pro_name == undefined || pro_name == null || pro_name == '' || pro_name == 'null') {
+            pro_name = barcode;
+        }
+
+        if(barcode !== undefined && barcode !== '' && barcode !== 'null' && barcode !== null && barcode !== 'undefined')
+        {
+        var date = obj['update_time'].split(' ');
+        var str = '<li>';
+        str += '<div class="date fLeft"> ';
+        str += '<span class="upSpan">' + date[0] + '</span>';
+        str += '<span class="lwSpan">'+ date[1] +'</span>';
+        str += '</div>';
+        str += '<div class="barcode fLeft">';
+        str += '<span class="upSpan">' + barcode + '</span>';
+        str += '<span class="lwSpan"><a href="'+ DOMAIN + barcode +'/jid-'+ obj['id'] +'" target="_blank">View Details</a></span>';
+        str += '</div>';
+        str += '<div class="metal fLeft">' + obj['metal'].split('~')[0] + '</div>';
+        str += '<div class="catg fLeft">' + category + '</div>';
+        str += '<div class="degno fLeft">' + obj['dwt'] + '</div>';
+        str += '<div class="subType fLeft">' + obj['gold_weight'] + '</div>';
+        str += '<div class="price fLeft fmOpenB">&#8377;' + obj['price'] + '</div>';
+        str += '<div class="acct fLeft">';
+        str += '<center>';
+        str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'" target="_blank"><div class="uploadBtn poR ripplelink"></div></a>';
+        str += '<div class="deltBtn poR ripplelink" onclick="deleteProduct(' + obj['id'] + ',this)"></div>';
+        str += '<a href="'+ DOMAIN +'index.php?case=jewellery_Form&catid=10001&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn poR ripplelink"></div></a>';
+        str += '<div class="soldBtn poR ripplelink fmOpenR" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==1) ? "SOLD" : "STOCK");+'</div>';
+        str += '</center>';
+        str += '</div>';
+        str += '</li>';
+        str += '';
+        return str;
+        }
+        else
+        {
+            return '';
+        }
     }
-    var barcode = obj['barcode'];
-    if(barcode == null || barcode == '' || barcode == 'null') {
-        barcode = '';
-    }
-    
-    if(pro_name == null || pro_name == '' || pro_name == 'null') {
-        pro_name = barcode;
-    }
-    var date = obj['update_time'].split(' ');
-    var str = '<li>';
-    str += '<div class="date fLeft"> ';
-    str += '<span class="upSpan">' + date[0] + '</span>';
-    str += '<span class="lwSpan">'+ date[1] +'</span>';
-    str += '</div>';
-    str += '<div class="barcode fLeft">';
-    str += '<span class="upSpan">' + barcode + '</span>';
-    str += '<span class="lwSpan"><a href="'+ DOMAIN + barcode +'/jid-'+ obj['id'] +'" target="_blank">View Details</a></span>';
-    str += '</div>';
-    str += '<div class="metal fLeft">' + obj['metal'].split('~')[0] + '</div>';
-    str += '<div class="catg fLeft">' + category + '</div>';
-    str += '<div class="degno fLeft">' + obj['dwt'] + '</div>';
-    str += '<div class="subType fLeft">' + obj['gold_weight'] + '</div>';
-    str += '<div class="price fLeft fmOpenB">&#8377;' + obj['price'] + '</div>';
-    str += '<div class="acct fLeft">';
-    str += '<center>';
-    str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'" target="_blank"><div class="uploadBtn poR ripplelink"></div></a>';
-    str += '<div class="deltBtn poR ripplelink" onclick="deleteProduct(' + obj['id'] + ',this)"></div>';
-    str += '<a href="'+ DOMAIN +'index.php?case=jewellery_Form&catid=10001&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn poR ripplelink"></div></a>';
-    str += '<div class="soldBtn poR ripplelink fmOpenR" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==1) ? "SOLD" : "STOCK");+'</div>';
-    str += '</center>';
-    str += '</div>';
-    str += '</li>';
-    str += '';
-    return str;
 }
 
 function loadBullions() {
@@ -241,6 +259,8 @@ function generatBullionsList(obj) {
     if(pro_name == null || pro_name == '' || pro_name == 'null') {
         pro_name = '';
     }
+    if(barcode !== undefined && barcode !== '' && barcode !== 'null' && barcode !== null && barcode !== 'undefined')
+        {
     var date = obj['update_time'].split(' ');
     var str = '<li>';
     str += '<div class="date fLeft"> ';
@@ -267,6 +287,11 @@ function generatBullionsList(obj) {
     str += '</li>';
     str += '';
     return str;
+    }
+    else
+    {
+        return '';
+    }
 }
 var catName='';
 function deleteProduct(proId,ele) {
@@ -413,7 +438,10 @@ function searchBarcodeCallback(res) {
                     i++;
                 }
             }
-            $('#s'+searchIDName+'List').append(str);
+            if(str !== undefined && str !== null && str !== '')
+            {
+                $('#s'+searchIDName+'List').append(str);
+            }
         }
         else if(searchPage==1) {
             searchScroll = false;
