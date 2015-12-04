@@ -390,9 +390,9 @@ function getResultsData(data,sortby,showtree)
 		}
 		else if(pageName == 'wishlist-diamonds') {
 			$.each(data.results.products, function(i, vl) {
-				html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/did-'+vl.pid+'">';
-					html += '<div class="prdComm fLeft transition100">';
-						html += '<div class="wisgDel" id="'+vl.pid+'"></div>';
+				html += '<div class="prdComm fLeft transition100">';
+					html += '<div class="wisgDel" id="'+vl.pid+'"></div>';
+					html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/did-'+vl.pid+'">';
 						html += '<div class="prdCommDiv fLeft transition100">';
 							html += '<div class="prdShape fLeft">';
 								html += '<div class="prdShTitle fLeft fmOpenB">SHAPE</div>';
@@ -420,7 +420,7 @@ function getResultsData(data,sortby,showtree)
 							html += '<div class="prdPrice fLeft">';
 								html += '<div class="detComm">';
 									html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
-                                                                        if(vl.dollar_rate!=0) { dollarValue=vl.dollar_rate; }
+																		if(vl.dollar_rate!=0) { dollarValue=vl.dollar_rate; }
 									html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+number_format((vl.pprice*dollarValue),2)+'</div>';
 								html += '</div>';
 							html += '</div>';
@@ -428,15 +428,15 @@ function getResultsData(data,sortby,showtree)
 								html += '<div class="wConBtn fLeft">Contact Dealer</div>';
 							html += '</div>';
 						html += '</div>';
-					html += '</div>';
-				html += '</a>';
+					html += '</a>';
+				html += '</div>';
 			});
 		}
 		else if(pageName == 'wishlist-bullion') {
 			$.each(data.results.products, function(i, vl) {
-				html += '<a href="'+DOMAIN+vl.attributes.metal.toLowerCase()+'-'+vl.attributes.type.toLowerCase()+'-'+Math.round(vl.attributes.gold_weight)+'-grams/bid-'+vl.pid+'">';
-					html += '<div class="prdComm fLeft transition100" style="opacity: 1; transform: translateX(0px);">';
-						html += '<div class="wisgDel" id="'+vl.pid+'"></div>';
+				html += '<div class="prdComm fLeft transition100" style="opacity: 1; transform: translateX(0px);">';
+					html += '<div class="wisgDel" id="'+vl.pid+'"></div>';
+					html += '<a href="'+DOMAIN+vl.attributes.metal.toLowerCase()+'-'+vl.attributes.type.toLowerCase()+'-'+Math.round(vl.attributes.gold_weight)+'-grams/bid-'+vl.pid+'">';
 						html += '<div class="prdCommDiv fLeft transition100">';
 							html += '<div class="prdShape fLeft">';
 								html += '<div class="prdShTitle fLeft fmOpenB">TYPE</div>';
@@ -463,15 +463,15 @@ function getResultsData(data,sortby,showtree)
 								html += '<div class="wConBtn fLeft">Contact Dealer</div>';
 							html += '</div>';
 						html += '</div>';
-					html += '</div>';
-				html += '</a>';
+					html += '</a>';
+				html += '</div>';
 			});
 		}
 		else if(pageName == 'wishlist-jewellery') {
 			$.each(data.results.products, function(i, vl) {
-				html += '<a href="'+DOMAIN+vl.pbrand.toLowerCase()+'-'+vl.pname.toLowerCase()+'-'+vl.pcode.toLowerCase()+'/jid-'+vl.pid+'">';
-					html += '<div class="prdComm fLeft jwRes transition100" style="opacity: 1; transform: translateX(0px);">';
-						html += '<div class="wisgDel" id="'+vl.pid+'"></div>';
+				html += '<div class="prdComm fLeft jwRes transition100" style="opacity: 1; transform: translateX(0px);">';
+					html += '<div class="wisgDel" id="'+vl.pid+'"></div>';
+					html += '<a href="'+DOMAIN+vl.pbrand.toLowerCase()+'-'+vl.pname.toLowerCase()+'-'+vl.pcode.toLowerCase()+'/jid-'+vl.pid+'">';
 						html += '<div class="prdCommDiv fLeft transition100">';
 							html += '<div class="prdCommImg fLeft">';
 								html += getImageData(vl.images);
@@ -492,8 +492,8 @@ function getResultsData(data,sortby,showtree)
 								html += '<div class="wConBtn fLeft">Contact Dealer</div>';
 							html += '</div>';
 						html += '</div>';
-					html += '</div>';
-				html += '</a>';
+					html += '</a>';
+				html += '</div>';
 			});
 		}
 		else if(pageName == 'wishlist') {

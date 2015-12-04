@@ -249,9 +249,11 @@ function clickThis(id) {
     var obj = document.getElementById(id);
     if (id == 'step2' && validateForm()) {
         submitForm(obj)
+		$('html,body').animate({ scrollTop: 0 }, 'slow');
     }
     else if (id == 'step3' && validateStep2Form()) {
         submitStep2Form(obj)
+		$('html,body').animate({ scrollTop: 0 }, 'slow');
     }
     else if (id == 'step4' && validateStep3Form()) {
         submitStep3Form(obj)

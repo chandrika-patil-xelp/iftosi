@@ -30,9 +30,9 @@
 								foreach($data as $key=>$val)
 								{
 							?>
-									<a href="<?php echo DOMAIN . strtolower($val['attributes']['certified']) . '-' . strtolower($val['attributes']['shape']) . '-clarity-' . $val['attributes']['clarity']; ?>/did-<?php echo $val['pid']; ?>">
-										<div class='prdComm fLeft transition100'>
-											<div class="wisgDel" id="<?php echo $val['pid'];?>"></div>
+									<div class='prdComm fLeft transition100'>
+										<div class="wisgDel" id="<?php echo $val['pid'];?>"></div>
+										<a href="<?php echo DOMAIN . strtolower($val['attributes']['certified']) . '-' . strtolower($val['attributes']['shape']) . '-clarity-' . $val['attributes']['clarity']; ?>/did-<?php echo $val['pid']; ?>">
 											<div class='prdCommDiv fLeft transition100'>
 												<div class='prdShape fLeft'>
 													<div class='prdShTitle fLeft fmOpenB'>SHAPE</div>
@@ -67,8 +67,9 @@
 													<div class='wConBtn fLeft'>Contact Dealer</div>
 												</div>
 											</div>
-										</div>
-									</a>
+										</a>
+									</div>
+									
 								<?php 
 								$i++;
 								}
