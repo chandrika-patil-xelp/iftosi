@@ -145,7 +145,13 @@ function generateEnqList(obj) {
                 str += '<span class="lwSpan"><a href="'+ DOMAIN + '-' +  pro_dtls['cat_name'][0] +'-/jid-'+ obj['product_id'] +'" target="_blank">View Details</a></span>';
             }
     str += '</div>';
-        str += '<div class="price fLeft bNone fmOpenB">&#8377;' + pro_dtls['prd_price'] + '</div>';
+    if(vl.dollarValue!=0 && vl.dollarValue !== undefined && vl.dollarValue !== null && vl.dollarValue !== '') {
+        dollarValue=vl.dollarValue; 
+        if(pro_dtls['cat_name'][0])
+        str += '<div class="price fLeft bNone fmOpenB">&#8377;' + dollarValue + '</div>';
+        else if(pro_dtls['cat_name'][2])
+            str += '<div class="price fLeft bNone fmOpenB">&#8377;' + dollarValue + '</div>';
+    }
     str += '</li>';
     return str;
     }

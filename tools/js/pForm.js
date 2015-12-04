@@ -51,8 +51,8 @@ function submitForm(formid)
     }
     var URL   = DOMAIN+"apis/index.php";
     $.getJSON(URL, params, function(data) {
-        console.log(data.results.pid);
-        window.location.href = IMGUPLOAD+'pid-'+data.results.pid+'&c='+catid;
+        console.log(params);
+       window.location.href = IMGUPLOAD+'pid-'+data.results.pid+'&c='+catid;
     });
     
 }

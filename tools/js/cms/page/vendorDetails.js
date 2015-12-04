@@ -177,9 +177,15 @@ function validateStep2Form() {
         }
     }
     if (/2/.test(busiType)) {
-       var showroomno = $('#showroomno').val();
+       var showroomname = $('#showroomname').val();
+        var showroomno = $('#showroomno').val();
         var mdbw = $('#mdbw').val();
-        if (showroomno == '' || isNaN(showroomno) || showroomno == 0) {
+        if (showroomname == '') {
+            $('#showroomname').focus();
+            common.toast(0, 'Show Room Name is Required');
+            return false;
+        }
+        else if (showroomno == '' || isNaN(showroomno) || showroomno == 0) {
             common.toast(0, 'Enter Number of Showrooms');
             $('#showroomno').focus();
             return false;
@@ -282,6 +288,7 @@ function submitForm() {
             var errCode = obj['error']['code'];
             var errMsg = obj['error']['msg'];
             if (errCode == 0) {
+                $('#showroomname').val(res['orgname']);
                 common.toast(1, errMsg);
                 changeTab('step2');
             } else {

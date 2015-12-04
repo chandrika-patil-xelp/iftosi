@@ -218,6 +218,7 @@ function generateJewellList(obj) {
 }
 
 function loadBullions() {
+    console.log(uid);
     $.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + bullionPage + "&limit=15&catid=10002", success: function (result) {
             loadBullionsCallback(result);
         }});
@@ -260,7 +261,7 @@ function generatBullionsList(obj) {
         pro_name = '';
     }
     if(barcode !== undefined && barcode !== '' && barcode !== 'null' && barcode !== null && barcode !== 'undefined')
-        {
+    {
     var date = obj['update_time'].split(' ');
     var str = '<li>';
     str += '<div class="date fLeft"> ';

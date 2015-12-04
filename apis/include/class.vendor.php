@@ -516,8 +516,7 @@ class vendor extends DB
             if(!empty($rates['silver_rate']) && $rates['silver_rate']!='0.00') {
                 $silverRate = $rates['silver_rate'];
             }
-        }
-        
+        }        
        // $cate_ids=  $this->getSubCat($catid);
         $psql='';
         if($catid == 10000) {
@@ -571,10 +570,10 @@ class vendor extends DB
             $res = $this->query($sql);
             $chkcnt = $this->numRows($res);
         }
-        //echo $sql;
         if ($chkcnt > 0) {
-            while ($row = $this->fetchData($res)) {
-                if ($catid == 10001) {
+            while ($row = $this->fetchData($res)) {                
+                if ($catid == 10001)
+                {
                     $csql="SELECT p_catid,cat_name FROM tbl_category_master WHERE catid in (SELECT category_id FROM `tbl_product_category_mapping` WHERE `product_id`=".$row['id']." ) ORDER BY p_catid DESC";
                     $cres = $this->query($csql);
                     if($this->numRows($cres)>0) {

@@ -164,14 +164,15 @@
                                                                         desname=\"".$detls['desname']."\"
                             WHERE 
                                                                         designer_id=\"".$did."\"";
-                    $desres = $this->query($dessql);
+                    $desres = $this->query($dessq);
                    
                    }
                     //  For category product mapping
                         
                    
-                       
-                            $updtcatsql="UPDATE tbl_product_category_mapping set display_flag=0 where category_id NOT IN(\"".$catids1."\") and product_id=\"".$pid."\"";    
+                       $catids1 = explode(',', $catids1);
+                       $catids1 = implode('","', $catids1);
+                            $updtcatsql="UPDATE tbl_product_category_mapping set display_flag=1 where category_id NOT IN(\"".$catids1."\") and product_id=\"".$pid."\"";    
                             $updtcatres=$this->query($updtcatsql);
                         
                         for($i=0;$i<count($catids);$i++)
@@ -260,7 +261,7 @@
                                                     prd_wt                       = \"".$detls['product_wt']."\", 
                                                     prd_img                      = \"".$detls['prd_img']."\",  
                                                     product_warranty             = \"".$detls['product_warranty']."\",
-                                                    desname                      = \"".$detls['desname']."\"
+                                                    desname                      = \"".$detls['desname']."\",
                                                     active_flag                      = \"".$display_flag."\"";
                     $res = $this->query($sql);
                     
@@ -404,7 +405,6 @@
                                                                             vendor_currency,
                                                                             vendor_remarks,
                                                                             city,
-                                                                            active_flag,
                                                                             updatedby,
                                                                             date_time,
                                                                             active_flag)";
@@ -416,7 +416,6 @@
                                                                         \"".$detls['vendor_curr']."\",
                                                                         \"".$detls['vendor_remarks']."\",
                                                                         \"".$city."\",
-                                                                            1,
                                                                            'vendor',
                                                                             now(),
                                                                         \"".$display_flag."\")";
