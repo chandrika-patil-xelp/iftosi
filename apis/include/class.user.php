@@ -40,7 +40,7 @@
             
             if($params['isvendor']==1)
             {
-            $isql= "INSERT INTO tbl_vendor_master(vendor_id,email,date_time,is_complete,is_active) VALUES(".$uid.",'".$params['email']."',now(),0,0)";
+            $isql= "INSERT INTO tbl_vendor_master(vendor_id,email,date_time,is_complete,active_flag) VALUES(".$uid.",'".$params['email']."',now(),0,0)";
             $res=$this->query($isql);
                 if($res)
                 {
@@ -332,7 +332,7 @@
         public function actUser($params) // Activate Status
         {   
             $vsql="SELECT
-                                is_active 
+                                active_flag 
                    FROM 
                                 tbl_vendor_master  
                    WHERE 
@@ -343,7 +343,7 @@
                 $usql="UPDATE
                                     tbl_vendor_master
                        SET
-                                    is_active=\"".$params['active_flag']."\" 
+                                    active_flag=\"".$params['active_flag']."\" 
                        WHERE 
                                     vendor_id=".$params['userid'];
                 $ures=$this->query($usql);
@@ -370,7 +370,7 @@
         public function deactUser($params) // DeActivate Status
         {   
             $vsql="SELECT 
-                                is_active 
+                                active_flag 
                    FROM 
                                 tbl_vendor_master 
                    WHERE 

@@ -63,7 +63,7 @@
                 <div class="fLeft vndAmount"><?php echo $cost?></div>
                 <div class="fLeft vndExpDate">NA</div>
                 <div class="fLeft vndEdit">
-                    <div class="toggle-button toggle-button <?=($data[$i]['is_active']==0) ? 'toggle-button-selected' : '';?>" onclick="changeStatus(<?=$data[$i]['vendor_id'];?>,this)">
+                    <div class="toggle-button toggle-button <?=($data[$i]['active_flag']==0) ? 'toggle-button-selected' : '';?>" onclick="changeStatus(<?=$data[$i]['vendor_id'];?>,this)">
                         <span class="fActive">Yes</span>
                         <button class="button"></button>
                         <span class="fDactive">No</span>
