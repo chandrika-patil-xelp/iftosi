@@ -496,7 +496,28 @@ class vendor extends DB
         $catid = ($params['catid'] ? $params['catid'] : 10000);
         $limit = ($params['limit'] ? $params['limit'] : 15);
         $total_pages = $chkcnt = $total_products = 0;
-
+        $sql="SELECT "
+                . "silver_rate, "
+                . "gold_rate, "
+                . "dollar_rate "
+                . "FROM tbl_vendor_master WHERE vendor_id='".$params['vid']."'";
+        $res=$this->query($sql);
+        if ($res) {
+            $rates = $this->fetchData($res);
+            $dollarValue=dollarValue;
+            if(!empty($rates['dollar_rate']) && $rates['dollar_rate']!='0.00') {
+                $dollarValue = $rates['dollar_rate'];
+            }
+            $goldRate=goldRate;
+            if(!empty($rates['gold_rate']) && $rates['gold_rate']!='0.00') {
+                $goldRate = $rates['gold_rate'];
+            }
+            $silverRate=silverRate;
+            if(!empty($rates['silver_rate']) && $rates['silver_rate']!='0.00') {
+                $silverRate = $rates['silver_rate'];
+            }
+        }
+        
        // $cate_ids=  $this->getSubCat($catid);
         $psql='';
         if($catid == 10000) {
@@ -563,6 +584,20 @@ class vendor extends DB
                         }
                         $row['category']=$row1;
                     }
+                }
+                if ($catid == 10000) {
+                    $row['price']= $row['price']*$dollarValue;
+                }
+                if ($catid == 10002) {
+                    $purity=$row['gold_purity'];
+                    $metal=strtolower($row['metal']);
+                    $weight=$row['gold_weight'];
+                    $metalRate=$silverRate;
+                    if($metal=='gold') {
+                        $metalRate=$goldRate;
+                    }
+                    $finalRate=($metalRate)*($purity/995);
+                    $row['price']=$finalRate*$weight;
                 }
                 $arr1[] = $row;
             }
