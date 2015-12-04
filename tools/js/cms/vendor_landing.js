@@ -321,7 +321,10 @@ $('#upDolRt').click(function () {
         var obj = jQuery.parseJSON(result);
         var errCode = obj['error']['Code'];
         if(errCode==0) {
-            $('#dollar_rate').val(obj['results']['dollar_rate']);
+			if(obj['results']['dollar_rate'] !== null && obj['results']['dollar_rate'] !== undefined && obj['results']['dollar_rate'] !== '' && parseFloat(obj['results']['dollar_rate']) > 0)
+			{
+				$('#dollar_rate').val(obj['results']['dollar_rate']);
+			}
         }
     }});
 });
