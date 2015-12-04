@@ -203,7 +203,7 @@ class wishlist extends DB
     
    public function checklist($params)
    {
-       $sql="SELECT wid,wf FROM tbl_wishlist WHERE uid=".$params['uid']." AND pid=".$params['prdid']."&vid=".$params['vid']."";
+       $sql="SELECT wid,wf FROM tbl_wishlist WHERE uid=".$params['uid']." AND pid=".$params['prdid']." AND vid=".$params['vid']."";
        $res=$this->query($sql);
        if($res)
        {
@@ -253,7 +253,7 @@ class wishlist extends DB
                 $upsql="UPDATE tbl_wishlist SET wf=2 WHERE uid=".$params['uid']."  AND pid=".$params['pid']."";
                 else
                 $upsql="UPDATE tbl_wishlist SET wf=2 WHERE uid=".$params['uid']." AND vid=".$params['vid']." AND pid=".$params['pid']."";
-               $upres=$this->query($upsql,1);
+               $upres=$this->query($upsql);
                $arr="Product is removed from wishlist";
            }
            else

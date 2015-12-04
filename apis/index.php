@@ -1300,8 +1300,8 @@ echo '</pre>';
             include APICLUDE.'class.wishlist.php';
             $uid=(!empty($params['uid']))? trim($params['uid']):'';
             $vid=(!empty($params['vid']))? trim($params['vid']):'';
-            $pid=(!empty($params['prdid']))? trim($params['pid']):'';
-            if(empty($uid) && empty($pid))
+            $pid=(!empty($params['pid']))? trim($params['pid']):'';
+            if(empty($uid) || empty($pid))
             {
                 $arr = array();
                 $err=array('Code'=>1,'Msg'=>'Invalid Parameters');
