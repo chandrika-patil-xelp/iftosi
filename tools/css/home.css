@@ -518,7 +518,7 @@ a{cursor:pointer;}
 /*Details Page*/
 .detailsPage{padding-bottom: 0px;display: inline-block}
 .forBg{width:100%;height:300px;padding-top: 100px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;}
-.prdMainDetails{width:100%;height: 393px;margin-top: -90px;position: relative;margin-bottom: 20px;}
+.prdMainDetails{width:100%;height: 393px;margin-top: -90px;position: relative;margin-bottom: 20px;z-index: 0;}
 .prdMainDetails .wrapperMax{padding-left: 360px;position: relative;}
 .imgsCont{width:360px;height: 393px;position: absolute;left:0;top:0;border: 1px solid #d4d4c8;}
 .forImg{width:100%;height:300px;cursor: pointer;}
@@ -708,7 +708,7 @@ a{cursor:pointer;}
 .Pendants{background: url(../img/common/ifpendants.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(56, 11, 52,0.9);}
 .Necklaces{background: url(../img/common/ifnecklaces.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -70px 0px rgba(94, 0, 55,0.9);}
 .Bracelets{background: url(../img/common/ifbracelets.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(138, 0, 68,0.9);}
-.Bangles{background: url(../img/common/ifbracelets.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(138, 0, 68,0.9);}
+.Bangles{background: url(../img/common/ifbracelets.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(138, 0, 68,0.9);border-right:0px solid;}
 
 .jshapeComm.Rings:hover{background: url(../img/common/ifrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
 .jshapeComm.Earrings:hover{background: url(../img/common/ifearrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
@@ -817,65 +817,269 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .shapesPage .shapeComm:hover {border: 2px solid #fff;}
 .shapesPage .shapeComm {position: absolute;left: 0;top: 0;width: 100px;height: 100px;padding-bottom: 100px;margin: 0;bottom: 0;margin: auto;}
 
+.noImage {background: url(../img/noimage.svg) no-repeat 50% 50%;background-size: 50%;background-position: center;}
 
+
+
+
+@media only screen and (min-width: 320px) and (max-width: 767px){
+    /*Header*/
+        .header {height: 60px;padding: 0 15px;}
+        .headRight {display: none;}
+        .logo {width: 80px;height: 80px;font-size: 22px;top: 20px;}
+        .menuBtn, .filterBtn {display: block;}
+        .sortBox, .sTitle {display: none;}
+        .headCatCont {display: none;}
+    /*Header*/
+    
+    /*Central Part*/
+        .categoryCont {height: auto;background-size: auto 100%;padding: 180px 10px 50px 10px;}
+        .buyTxt {width: 80%;color: #fff;line-height: 30px;font-size: 30px;margin-bottom: 15px;}
+        .prllx {margin: 0;padding: 15px;width: 100%;list-style: none;}
+        .prllx li {width: 100%;display: inline-block !important;position: relative!important;margin: 10px 0;height: 60px;}
+        .categoryCircle {-webkit-transform: scale(1)!important;-moz-transform: scale(1)!important;-ms-transform: scale(1)!important;transform: scale(1)!important;width: 100%;position: relative;height: 100%;font-size: 20px;color: #8A0044;letter-spacing: -0.05em;padding-top: 0;border-radius: 5px;display: inline-block;vertical-align: middle;cursor: pointer;border-width: 0;border-style: solid;border-color: #42c1b9;box-shadow: 0 0 0 0 rgba(105,0,79,0.6);line-height: 60px;text-align: left;padding-left: 65px;}
+        .bgDiamonds {background: #fff url(../img/common/diamond.jpg)no-repeat;background-size: auto 100%;background-position: left center;}
+        .bgJewellery {background: #fff url(../img/common/jewellery.jpg)no-repeat;background-size: auto 100%;background-position: left center;}
+        .bgBullion {background: #fff url(../img/common/bullions.jpg)no-repeat;background-size: auto 100%;background-position: left center;}
+        .shapesTitle {width: 100%;height: auto;line-height: 30px;padding: 10px 0;font-size: 20px;text-align: center;margin-bottom: 10px;padding: 0 10%;}
+        .allShapes {width: 100%;height: auto;padding: 0;}
+        .shapeComm {width: 100px!important;height: 100px!important;margin: 0;border: 2px solid #fff;position: relative;background-image: url(../img/shapes.svg);display: inline-block;vertical-align: bottom;text-align: center;cursor: pointer;background-size: 1000% auto;}
+        .jShapesCont {height: auto;}
+        .jshapeComm {width: 50%;padding-top: 162px;font-size: 18px;}
+        .Rings {box-shadow: inset 0 -50px 0px rgba(23, 19, 52,0.9);}
+        .Earrings {box-shadow: inset 0 -50px 0px rgba(42, 14, 52,0.9);}
+        .Pendants {box-shadow: inset 0 -50px 0px rgba(56, 11, 52,0.9);}
+        .Necklaces {box-shadow: inset 0 -50px 0px rgba(94, 0, 55,0.9);}
+        .Bangles {box-shadow: inset 0 -50px 0px rgba(138, 0, 68,0.9);}
+        .homePage .Bangles {width: 100%;border-right: 0px;}
+        .homePage .Earrings {border-right: 0px;}
+        .homePage .Necklaces {border-right: 0px;}
+        .homePage .bresults .jshapeComm{width:100%!important;border-right: 0px;}
+        .homePage .shapesCont{padding-bottom: 0}
+    /*Central Part*/
+    
+    /*Footer*/
+        .bottmInfo {width: 100%;height: auto;padding: 0px 0;float: left;}
+        .infoComm {width: 100%;height: 100px;border-right: none;position: relative;float: none!important;border-bottom: 1px solid rgba(255,255,255,0.2);}
+        .homePage .infoComm:first-child{border-top:2px solid #fff;}
+        .infoTxt {width: 100%;height: 41px;}
+        .infoUpper {font-size: 16px;line-height: 16px;}
+        .infoLower {font-size: 25px;line-height: 25px;}
+    /*Footer*/
+    
+    /*Results Filter*/
+            .mfHeader {display: block;margin-left: -15px;}
+            .mfFooter {position: fixed;width: 100%;height: 50px;line-height: 50px;padding: 0;border-radius: 0;margin-left: -15px;}
+            #applyDbtn {display: block;}
+            #resetDbtn {display: none;}
+
+            
+    
+    /*Diamonds Results Page*/
+        .totalResultsDiv {height: 250px;line-height: 30px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: cover;padding: 150px 0 0 0;font-size: 30px;}
+        .resultsPage .shapesCont {padding: 10px 0;background: #fff;float: left;}
+        .showHide {display: none;}    
+        .allResults {float: left;padding: 0 10px;}
+        .filterTitleDiv {width: 100%;height: 60px;border-bottom: 0px solid #d4d4d4;margin-bottom: 0;}
+        .fTitle {display: none;}
+        .rCount {width: 100%;font-size: 16px;text-align: center;}
+        #resultCount {display: block;font-size: 40px;line-height: 40px;text-align: center;}
+        .results_Filter {padding: 0 0 0 0;}
+        .transit-100X {-o-transform: translateX(100%);-ms-transform: translateX(100%);-moz-transform: translateX(100%);-webkit-transform: translateX(100%);transform: translateX(100%);}
+        .filterList {width: 100%;height: 100%;position: fixed;left: 0px;top: 0;z-index: 115;background: #fff;padding: 50px 15px 50px 15px;overflow: scroll;box-shadow: inset 0 0 20px rgba(0,0,0,0.3);}
+        .prdResults {width: 100%;}
+        .prdComm {width: 100%;height: auto;border: 5px solid #ebebde;margin: 10px 0;}
+        .pgComm,.pgEmpty{display: none;}
+        .pagination {height: auto;padding: 0;}
+        .hideShow {display: block;}
+
+        /*Jewellery Results*/
+        .searchCon {width: 90%;}
+        /*Bullion Results*/
+        
+         /*Diamonds Details Page*/
+            .forBg {width: 100%;height: 270px;}
+            .prdMainDetails {height: auto;margin-top: -90px;margin-bottom: 0;}
+            .prdMainDetails .wrapperMax {padding-left: 0;position: initial;}
+            .imgsCont {width: 90%;position: relative;margin: 0 5%;height: 330px;padding: 10px;}
+            .detCont {width: 100%;height: auto;padding: 15px;display: inline-block;padding-bottom: 0;}
+            .btnsCont {height: auto;}
+            .btnsCont .prdShape {border: none;width: 100%;}
+            .prdBtns {width: 100%;height: auto;}
+            .btnComm {width: 100%;min-width: 0px;margin: 0;border: 1px solid #ccc;margin-bottom: 5px;text-align: center;padding: 0;height: 40px;line-height: 40px;}
+            .infoCommn {width: 50%;}
+            .infoCommn:last-child{margin-bottom: 0}
+            .prdInfo {padding: 0 15px;display: inline-block;margin-top: 0;}
+            .imgsCont.noImage {height: 150px;background: url(../img/noimage.svg) no-repeat 50% 50%;background-size: 50%;background-position: center;}
+            
+        /*Jewellery DEtails Page*/    /*Bullion DEtails Page*/    
+            .jewellery_details .infoCommn {width:100%!important;}
+            .prdInfoDiv:last-child{padding-bottom: 20px;}
+        
+        /*Inner Pages*/
+            .bgHolder {width: 100%;height: 190px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding: 0px 0 35px 0;}
+            .heading.font40 {font-size: 22px;}
+            .bgHolder .heading {width: 100%;height: auto;max-width: 1200px;margin: auto;color: #fff;padding: 150px 0px 0 0px;text-align: center;}
+            .texHolder {padding: 0 20px;}
+            .faqs {padding: 20px;}
+            
+        /*Education*/
+            .faq .shapesComm {width: 90%;margin: 0 5% 5% 5%;padding-top:0 }
+            .shapesPage .shapeComm{margin-top: 0;width: 100px!important;height: 100px!important;position: initial;}
+            .shapesPage .texHolder{padding: 0;}
+            .shapesPage h3{text-align: center;}
+            .forImg {width: 100%;height: 230px;}
+            .imgGallery{display: none;}
+            .thumbnil {width: 24%;height: 0;border: 1px solid #333;margin: 0 0.5%;cursor: pointer;padding-bottom: 25%;}
+            .leftArrow,.rightArrow {top: 235px;}
+            .prdInfoDiv{margin-bottom: 10px;}
+           
+           
+            .userForm {width: 100%;height: 100%;border-radius: 0;}
+            .cntEmail {width: 100%;}
+            .cntEmail {width: 100%;}
+
+        /*Login*/
+            .overlay {background: #fff url(../img/common/background.jpg)no-repeat;background-size: cover;}
+            .loginDiv {width: 100%;height: 100%;padding: 25px;border-radius: 0;}
+            .lgTitle {height:auto;line-height: 25px;}
+
+        /*SignUp page*/
+            .signupPage {background: url(../img/common/background.jpg)no-repeat;background-size: cover;padding: 5px 0 0px 0;height: 100vh;}
+            .signupDiv .wrapperMax {max-width: 100%;border: 0px solid #333;background: #fff;margin-top: 0;padding: 25px;border-radius: 0;height: 100vH;z-index: 115;position: relative;}
+            .bgHolder {width: 100%;height: 190px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding: 0px 0 35px 0;}
+            .bgHolder .heading {width: 100%;height: auto;max-width: 1200px;margin: auto;color: #fff;padding: 150px 0px 0 0px;text-align: center;}
+            .heading.font40 {font-size: 22px;}
+            .faqs {padding: 20px;}
+            .texHolder {padding: 0 20px;}
+        
+        /*Vendor Details*/
+            .vendorDetails {width: 100%;height:auto;margin-bottom: 20px;margin-top: 0;}
+            .vendorDetails .wrapperMax {padding-right: 0;position: initial;}
+            .vdLeftCard {width: 100%;}
+            .vdCenterCard {width: 100%;height: auto;padding:0 15px;}
+            .vdRightCard {width: 100%;height: auto;position:initial;padding:0 15px;}
+            .cardComm {width: 100%;height: auto;line-height: 25px;font-size: 14px;margin-top: 10px;color: #4d4d4d;}
+            .vdRightCard .cntCard:last-child{display: none;}
+            .prdInfoDiv ul li div:nth-child(2) {width: 100%;height: auto;line-height: 22px;font-size: 13px;padding-left: 0px;}
+
+}
 
 
 @media only screen and (min-width: 960px) and (max-width: 1024px){
+    /*Header*/
+        .header {padding-right: 15px;}
+        .prllx {width: 100%;}
+        .shapesCont {width: 100%;height: 315px;background: #FFF;padding: 15px 0;position: relative;z-index: 0;}
+        .shapeComm {width: 10%!important;padding-bottom: 10%;margin: 0;}
+        .Rings{box-shadow: inset 0 -40px 0px rgba(23, 19, 52,1);}
+        .Earrings{box-shadow: inset 0 -40px 0px rgba(42, 14, 52,1);}
+        .Pendants{box-shadow: inset 0 -40px 0px rgba(56, 11, 52,1);}
+        .Necklaces{box-shadow: inset 0 -40px 0px rgba(94, 0, 55,1);}
+        .Bracelets{box-shadow: inset 0 -40px 0px rgba(138, 0, 68,1);}
+        .Bangles{box-shadow: inset 0 -40px 0px rgba(138, 0, 68,1);}
+        .jshapeComm {height: 200px;padding-top: 160px;font-size: 20px;line-height: 40px;}
+        .bresults .jshapeComm {padding-top: 148px;}
+        .homePage .jShapesCont{height:auto;}
+        .bottmInfo {height: 205px;padding: 30px 0;}
+        
+    /*Diamonds, Jewellery, Bullions Results Page*/
+        .allResults { padding: 0 15px;}
+        .resultsPage .shapesCont {width: 100%;height: auto;}
+        .filterList {width: 30%;}
+        .prdResults {width: 70%;}
+        .prdComm{width:49%;margin:0.5%;}
+        .pgEmpty,.pgComm{display: none;}
+    /*Diamonds Details Page*/
+        .prdMainDetails{height: auto;padding: 0 20px;float: left;}
+        .detCont {width: 100%;height: auto;padding: 15px 15px 0px 25px;float: left;}
+        .prdMainDetails .wrapperMax {float: left;}
+        .imgsCont {width: 360px;height: 393px;position: absolute;left: 0;top: 0;border: 1px solid #d4d4c8;margin: auto;bottom: 0;}
+        .prdInfo {padding: 0 20px;}
+        .vendorDetails {width: 100%;height: auto;padding:0 20px;margin-bottom: 0;}
+        .vendorDetails .cardComm {width: 100%;height: auto;}
+        .vdRightCard .cntCard:last-child{display: none;}
 
-/*Header*/
-.header {padding-right:15px;}
-.headRight{width:auto;}
-
-/*Home Page*/
-.prllx {width: 100%;}
-.shapeComm{width: 9%!important;padding-bottom: 9%;}
-.shapesCont { width: 100%;height: 315px;background: #FFF;padding: 15px 0;position: relative; z-index: 0;}
-/*Diamond Result*/
-.resultsPage .shapesCont{padding: 10px;}
-.prdResults {width: 100%;}
-.filterTitleDiv{padding:0 10px;}
-.results_Filter{padding: 0 10px;}
-.fTitle{cursor: pointer;}
-.prdComm {width: 31%;height: auto;border: 5px solid #ebebde;margin: 0 1.16% 2.32% 1.16%;}
-
-/*Jewellery Result Page*/
-.jshapeComm {height: 200px;padding-top: 160px;font-size: 20px;line-height: 40px;}
-.jShapesCont {width: 100%;height: 202px;}
-.Rings{box-shadow: inset 0 -40px 0px rgba(23, 19, 52,1);}
-.Earrings{box-shadow: inset 0 -40px 0px rgba(42, 14, 52,1);}
-.Pendants{box-shadow: inset 0 -40px 0px rgba(56, 11, 52,1);}
-.Necklaces{box-shadow: inset 0 -40px 0px rgba(94, 0, 55,1);}
-.Bracelets{box-shadow: inset 0 -40px 0px rgba(138, 0, 68,1);}
-.Bangles{box-shadow: inset 0 -40px 0px rgba(138, 0, 68,1);}
-.jshapeComm::after {bottom: 50px;width: 0px;height: 0px;}
-.jshapeComm.shapeSelected::after {bottom: 30px;width: 30px;height: 30px;}
-
-/*Filters Page*/
-.filterList {width: 300px;height: auto;min-height: 100%;left: 0;background: #fff;padding-bottom: 25px;position: absolute;box-shadow: 0 0 20px 5px rgba(0,0,0,0.2);z-index: 10;top: -20px;padding: 15px;}
-.filterList.transit-100X{-webkit-transform:translateX(-350px);-moz-transform:translateX(-350px);;-ms-transform:translateX(-350px);-o-transform:translateX(-350px);transform:translateX(-350px);}
-
-/*Details Page*/
-.imgsCont {width: 300px;height: 300px;position: absolute;left: 0;top: 0;box-shadow: 0 0 20px 5px rgba(0,0,0,0.2);}
-.forImg {width: 100%;height: 225px;cursor: pointer;}
-.thumbnil {width: 71px;height: 73pX;border: 1px solid #333;margin: 2px;cursor: pointer;}
-.prdMainDetails .wrapperMax {padding-left: 300px;position: relative;}
-.btnsCont .prdShType {line-height: 35px;font-size: 25px;font-family: openR;}
-.btnComm{margin: 0}
-.btnComm:nth-child(2){margin:0 10px}
-.prdInfo {margin-top: 0;padding: 0 15px;}
-.imgThumbnil{width: 32%;padding-bottom: 32%;margin: 0.5%;}
-
-/*Footer*/
-.bottmInfo {height: 205px;padding: 30px 0;}
-/*education*/
- /*.shapeComm{width: 72px!important; padding-bottom: 7%;}
- .shapesPage{padding: 0 20px;}
-.shapesPage .shapeComm {margin-top: 15px; padding-bottom: 85px;}*/
+    /*Inner Page*/
+    .shapesPage{padding: 0 15px;}
+    .ques {width: 90%;margin:10px 5%;}
 }
 
+
 @media only screen and (min-width: 768px) and (max-width: 959px){
+    /*Header*/
+        .header{padding: 0 15px;}
+    
+    /*Home*/
+        .categoryCont {height: 489px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: cover;padding: 200px 0 50px 0;}
+        .prllx {width: 100%;}
+        .prllx li {width: 150px;margin: 0 10px;}
+        .categoryCircle {width: 150px;height: 150px;font-size: 16px;padding-top: 95px;}
+        .homePage .shapesCont {width: 100%;height: auto;background: #FFF;padding: 15px 0;position: relative;z-index: 0;}
+        .searchBtn {margin: 5px 0 0 0;}
+        
+        .homePage .shapeComm {width: 15%!important;padding-bottom: 15%;}
+        .homePage .jShapesCont {width: 100%;height: auto;background: #fff;padding: 0px 0 0px 0;position: relative;z-index: 0;}
+        .homePage .jShapesCont .jshapeComm {margin: 0;width: 50%;height:300px;line-height: 220px;}
+        .homePage .jShapesCont .jshapeComm.Bangles{margin: 0;width: 100%;}
+
+        .jshapeComm:hover{line-height: 50px;padding-top: 45px;}
+        .homePage .jshapeComm.Earrings{border-right:0px}
+        .homePage .jshapeComm.Necklaces{border-right:0px}
+        .homePage .jshapeComm.Bangles{border-right:0px}
+
+        .bottmInfo {width: 100%;height: 160px;padding: 30px 0;background: #380B34;}
+        .infoTxt {width: 100%;height: 47px;}
+        .infoUpper {width: 100%;height: 17px;font-size: 17px;line-height: 17px;color: #fff;}
+        .infoLower {width: 100%;height: auto;font-size: 26px;line-height: 30px;}
+
+        /*Diamond Results Page*/
+        .allResults{padding: 0 15px;}
+        .fTitle {width: 20%;}
+        .rCount {width: auto;font-size: 20px;}
+        .rCount  span{font-family: openB}
+        .filterList {width: 300px;height: auto;min-height: 100%;left: 0;background: #fff;padding-bottom: 25px;position: absolute;box-shadow: 0 0 20px 5px rgba(0,0,0,0.2);z-index: 10;top: -20px;padding: 15px;}
+        .filterList.transit-100X {-webkit-transform: translateX(-350px);-moz-transform: translateX(-350px);-ms-transform: translateX(-350px);-o-transform: translateX(-350px);transform: translateX(-350px);}
+        .prdResults {width: 100%;}
+        .prdComm {width: 49%;height: auto;border: 5px solid #ebebde;margin: 0.5%;background: #fff;}
+        .pgComm ,.pgEmpty{display: none;}
+
+        /*Jewellery Result*/
+        .jshapeComm {font-size: 16px;font-family: openR;letter-spacing: initial;}
+        .searchCon {width: 60%;}
+        
+        
+        /*Diamond Details */
+        .prdMainDetails {width: 100%;height: 704px;float: left;position: relative;padding: 0 15px 305px 15px;}
+        .prdMainDetails .wrapperMax{position: initial;padding-left: 400px;}
+        .rightArrow,.leftArrow{top:305px}
+        .imgsCont {width: 400px;height: 400px;position: absolute;top: 0;border: 1px solid #d4d4c8;left: 15px;}
+        .majorInfoBox {width: 100%;height: auto;margin-top: 45px;color: #4d4d4d;position: absolute;left: 0;width: 100%;top: 406px;padding: 15px;margin-top: 0;}
+        .btnsCont .prdShape {border: none;width: 100%;max-width: 100%;}
+        .btnComm {width: 70%;height: 45px;line-height: 45px;margin: 10px 15% 0 0%;text-align: center;}
+        .prdBtns {width: 100%;height: auto;margin-top: 20px;}
+        .prdInfo {padding: 0 15px;}
+        
+        /*Jewellery Details Page*/
+        .jwdet .prdMainDetails {width: 100%;height: 601px;float: left;position: relative;padding: 0 15px 101px 15px;}
+
+        /*Bullion Details Page*/
+        .bulldet.bullion_details .imgsCont {width: 50%;}
+        .bulldet.bullion_details .detCont {width: 50%;}
+        .bulldet.bullion_details .infoCommn {width: 50%!important;}
+        .bulldet .majorInfoBox{position: initial;    padding-left: 0;}
+        .bulldet .prdMainDetails{height: 408px;padding-bottom: 15px;}
+        
+        .shapesPage{padding: 0 15px;}
+        .ques {width: 90%;margin:10px 5%;}
+        .shapesPage .shapeComm {position: absolute;left: 0;top: 0;width: 100px!important;height: 100px!important;padding-bottom: 100px;margin: 0;bottom: 0;margin: auto;}
+        .shapesPage .texHolder {padding: 0;padding-left: 88px;line-height: 24px;color: #000;}        
+}
+/*
+
+@media only screen and (min-width: 1768px) and (max-width: 1959px){
 .bottmInfo{display: none;}
-/*Home Page*/
+Home Page
 .prllx {width: 100%;}
 .prllx li {width: 150px;margin: 0 10px;}
 .categoryCircle {width: 150px;height: 150px;font-size: 16px;padding-top: 95px;}
@@ -893,16 +1097,8 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .st3Middle {width: 100%;height: 47%;}
 .st3Lower {width: 100%;height: 53%;}
 
-     /*education*/
-     /*.shapesPage .shapeComm {margin: 0px; padding-bottom: 65px;}
-    .shapesPage .texHolder{padding-left: 0px;padding-top: 45px;}
-    .shapesPage{padding: 0 20px;}
-    .shapesComm{margin-top: 6px;}
-    .shapeComm{width: 72px!important;}
-    .infoComm {width: 100%;height: 100px;border-right: none;position: relative;float: none!important;border-bottom: 1px solid rgba(255,255,255,0.2);}
-     .bottmInfo{width: 100%;height: auto;padding: 0px 0;float:left}
-    .heading{text-align: center;}*/
-/*Diamond Result*/
+     
+Diamond Result
 .resultsPage .shapesCont{padding: 10px;}
 .prdResults {width: 100%;}
 .filterTitleDiv{padding:0 10px;}
@@ -912,7 +1108,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .prdActions {height:auto;}
 .actionComm {width: 25%;height: 0px;border: 1px solid #fff;cursor: pointer;padding-bottom: 24%;}
 
-/*Jewellery Result Page*/
+Jewellery Result Page
 .jshapeComm {height: 150px;padding-top: 110px;font-size: 18px;line-height: 40px;}
 .jshapeComm:hover {padding-top: 50px;font-size: 25px;}
 .jshapeComm.shapeSelected {background-color: #fff;border-right: 2px solid #FFF;padding-top: 50px;font-size: 25px;}
@@ -926,191 +1122,57 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .Bangles{box-shadow: inset 0 -40px 0px rgba(138, 0, 68,1);}
 .jshapeComm::after {bottom: 50px;width: 0px;height: 0px;}
 .jshapeComm.shapeSelected::after {bottom: 30px;width: 30px;height: 30px;}
-/*Education*/
-/*.shapeComm{width: 82px!important;}*/
+Education
+.shapeComm{width: 82px!important;}
 .shapesPage .shapeComm {margin-top: 15px; padding-bottom: 85px;}
 .shapesPage{padding: 0 20px;}
 .shapesComm{margin-top: 6px;}
 .heading{text-align: center;}
-/*Filters Page*/
+Filters Page
 .filterList {width: 300px;height: auto;min-height: 100%;left: 0;background: #fff;padding-bottom: 25px;position: absolute;box-shadow: 0 0 20px 5px rgba(0,0,0,0.2);z-index: 10;top: -20px;padding: 15px;}
 .filterList.transit-100X{-webkit-transform:translateX(-350px);-moz-transform:translateX(-350px);;-ms-transform:translateX(-350px);-o-transform:translateX(-350px);transform:translateX(-350px);}
-/*Diamonds Details Page */
+Diamonds Details Page 
 .btnsCont .prdShType {line-height: 35px; font-size: 25px;font-family: openR;}
 .prdBtns{height:auto;}
 .prdBtns .btnComm{margin:0 10px 5px 0;}
 .majorInfoBox{margin-top:20px;}
 .prdMainDetails .wrapperMax{padding-left: 300px; position: relative;}
 .imgsCont{width: 300px; height: 300px; position: absolute; left: 0; top: 0;  box-shadow: 0 0 20px 5px rgba(0,0,0,0.2);}
-}
-@media only screen and (min-width: 320px) and (max-width: 679px){
-    .logo {width: 80px;height: 80px;font-size: 22px;top:20px;}
-    .header{height:60px;padding: 0 15px;}
-    .cityName{display: none;}
-    .gallery{height: 150px;}
-    .menuBtn,.filterBtn{display: block;}
-    .headRight{display: none;}
-
-        /*For Home*/
-    .jshapeComm{width:50%;padding-top: 162px;font-size: 18px;}
-    .Necklaces{box-shadow: inset 0 -50px 0px rgba(94, 0, 55,0.9);}
-    .Earrings {box-shadow: inset 0 -50px 0px rgba(42, 14, 52,0.9);}
-    .Rings{box-shadow:inset 0 -50px 0px rgba(23, 19, 52,0.9);}
-    .Pendants{box-shadow: inset 0 -50px 0px rgba(56, 11, 52,0.9);}
-    .Bangles{box-shadow: inset 0 -50px 0px rgba(138, 0, 68,0.9);}
-    .gCoins{box-shadow: inset 0 -50px 0px rgba(56, 11, 52,0.9);}
-    .gBars{box-shadow: inset 0 -50px 0px rgba(23, 19, 52,0.9);}
-    .bresults .jshapeComm{width:100%!important;}
-    .jShapesCont {height:auto;}
-    .categoryCont{height: auto;background-size: auto 100%;padding: 180px 10px 50px 10px;}
-    .buyTxt {width: 80%;color: #fff;line-height: 30px;font-size: 30px;margin-bottom: 15px;}
-    .prllx {margin: 0;padding: 15px;width: 100%;list-style: none;}
-    .prllx li {width: 100%;display: inline-block !important;position: relative!important;margin: 10px 0;height: 60px;}
-    .categoryCircle {-webkit-transform:scale(1)!important;-moz-transform:scale(1)!important;-ms-transform:scale(1)!important;transform:scale(1)!important;width: 100%;position: relative;height: 100%;font-size: 20px;color: #8A0044;letter-spacing: -0.05em;padding-top: 0;border-radius: 5px;display: inline-block;vertical-align: middle;cursor: pointer;border-width: 0;border-style: solid;border-color: #42c1b9;box-shadow: 0 0 0 0 rgba(105,0,79,0.6);line-height: 60px;text-align: left;padding-left: 65px;}
-    .bgDiamonds {background: #fff url(../img/common/diamond.jpg)no-repeat;background-size: auto 100%;background-position: left center;}
-    .bgJewellery {background: #fff url(../img/common/jewellery.jpg)no-repeat;background-size: auto 100%;background-position: left center;}
-    .bgBullion{background: #fff url(../img/common/bullions.jpg)no-repeat;background-size: auto 100%;background-position: left center;}
-    .allShapes{width: 100%;height:auto;padding: 0 ;}
-    .homeProd{width: 100%;height: auto;padding: 10px 0;}
-    .hPrdComm{width: 100%;height: 320px;padding: 10px 0;float: none!important;}
-    .hPrdComm:nth-child(2) {width:100%;margin: 0%;}
-    .bottmInfo{width: 100%;height: auto;padding: 0px 0;float:left}
-    .infoComm {width: 100%;height: 100px;border-right: none;position: relative;float: none!important;border-bottom: 1px solid rgba(255,255,255,0.2);}
-    .shapeComm {width: 100px!important; height:100px!important;margin:0;border: 2px solid #fff;position: relative;background-image: url(../img/shapes.svg);display: inline-block;vertical-align: bottom;text-align: center;cursor: pointer;background-size: 1000% auto;}
-    .shapeComm:hover{border:2px solid #FFF;}
-    .shapeSelected.shapeComm.Round{background-color:#fff;border:2px solid #8A0044;background-position: 0% 33%;}
-    .shapeSelected.shapeComm.Pear{background-color:#fff;border:2px solid #8A0044;background-position: 11% 33%;}
-    .shapeSelected.shapeComm.Heart{background-color:#fff;border:2px solid #8A0044;background-position: 22% 33%;}
-    .shapeSelected.shapeComm.Princess{background-color:#fff;border:2px solid #8A0044;background-position: 33.5% 33%;}
-    .shapeSelected.shapeComm.Asscher{background-color:#fff;border:2px solid #8A0044;background-position: 44.5% 33%;}
-    .shapeSelected.shapeComm.Marquise{background-color:#fff;border:2px solid #8A0044;background-position: 55.5% 33%;}
-    .shapeSelected.shapeComm.Oval{background-color:#fff;border:2px solid #8A0044;background-position: 66.5% 33%;}
-    .shapeSelected.shapeComm.Emerald {background-color:#fff;border:2px solid #8A0044;background-position: 78% 33%;}
-    .shapeSelected.shapeComm.Radiant{background-color:#fff;border:2px solid #8A0044;background-position: 89% 33%;}
-    .shapeSelected.shapeComm.Cushion {background-color:#fff;border:2px solid #8A0044;background-position: 100% 33%;}
-    .shapesTitle {width: 100%;height: auto;line-height: 30px;padding: 10px 0;font-size: 20px;text-align: center;margin-bottom: 10px;padding: 0 10%;}
-    .infoUpper {width: 100%;height: auto;font-size: 16px;line-height:16px;color: #fff;}
-    .infoLower {width: 100%;height: auto;font-size: 25px;line-height: 25px;color: #fff;}
-    .infoTxt{width:100%;height:41px;}
-
-    .hPrdComm .infoUpper {font-size: 20px;line-height: 20px;}
-    .hPrdComm .infoLower {font-size: 30px;line-height: 30px;}
-    /*education*/
-       /*.shapesPage .shapeComm {margin: 0px; padding-bottom: 65px;}
-       .shapesPage .texHolder{padding-left: 0px;padding-top: 45px;}
-       .shapesPage{padding: 0 20px;}
-       .shapesComm{margin-top: 6px;}
-       .shapeComm{width: 72px!important;}*/
-    /*Results Page*/
-    .pgComm{display: none;}
-    .totalResultsDiv {height: 250px;line-height: 30px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: cover;padding: 150px 0 0 0;font-size: 30px;}
-    #resultCount{display: block;font-size: 40px;line-height: 40px;text-align: center;}
-    .headCatCont{display: none;}
-    .filterList {width: 100%;height: 100%;position: fixed;left: 0px;top: 0;z-index: 115;background: #fff;padding:50px 15px 50px 15px;overflow: scroll;box-shadow: inset 0 0 20px rgba(0,0,0,0.3);}
-    .mfHeader{display: block;margin-left: -15px;}
-    .mfFooter{position: fixed;width: 100%;height: 50px;line-height: 50px;padding:0;border-radius: 0;margin-left: -15px;}
-    #resetDbtn{display: none;}
-    #applyDbtn{display: block}
-    .results_Filter{padding:0 0 0 0}
-    .resultsPage .shapesCont{float: left;}
-    .allResults{float:left;padding: 0 10px;}
-    .fTitle {display: none;}
-    .sortBox {width: 52%;max-width: 100%;}
-    .prdComm {width: 100%;height: auto;border: 5px solid #ebebde;margin: 10px 0;}
-    .listCont .prdComm {width: 100%;height: auto;border: 5px solid #ebebde;margin: 10px 0;}
-    .resultsPage .shapeComm {border: 2px solid #fff;position: relative;background-image: url(../img/shapes.svg);background-repeat: no-repeat;margin:1%;width: 23%!important;height:0%!important;padding-bottom: 23%;display: block;float:left;vertical-align: bottom;text-align: center;cursor: pointer;background-size: 1000% auto;}
-    .resultsPage .shapesCont {padding: 10px 0;background: #fff;}
-    .filterTitleDiv {width: 100%;height: 60px;border-bottom: 0px solid #d4d4d4;margin-bottom: 0;}
-    .prdComm:hover{border-color: #ebebde;}
-    .prdComm:hover .actionComm{border-radius:0}
-    /*.transit-100X{-webkit-transform:translateX(350px);-moz-transform:translateX(350px);;-ms-transform:translateX(350px);-o-transform:translateX(350px);transform:translateX(350px);}
-    */.transit-100X{-webkit-transform:translateX(100%)}
-    .showHide{display: none;}
-    .hideShow{display: block;}
-
-
-    /*Details Page*/
-    .prdMainDetails{height:auto;margin-top: -90px;}
-    .detCont{width: 100%;height: auto;padding:15px;display: inline-block;}
-    .bullion_details .detCont {width:100%;height:auto;}
-    .bullion_details .infoCommn {width:50%!important;}
-    .bullion_details .imgsCont{width:100%}
-    .btnsCont .prdShape {border: none;width: 100%;}
-    .btnsCont{height:auto;}
-    .prdBtns {width: 100%;height: auto;}
-    .btnComm {width: 100%;min-width: 0px;margin: 0;border: 1px solid #ccc;margin-bottom: 5px;text-align: center;padding: 0;height: 40px;line-height: 40px;}
-    .btnsCont .prdShTitle {color: #4d4d4d;}
-    .btnsCont .prdShType{color: #4d4d4d;}
-    .prdMainDetails .wrapperMax {padding-left: 0;position: initial;}
-    .infoCommn {width: 50%;}
-    /*.majorInfoBox .infoCommn:nth-child(even){padding-left: 30px;}*/
-
-    .imgsCont {width: 90%;position: relative;margin: 0 5%;height: 330px;padding: 10px;}
-    .thumbnil {width: 24%;height: 0;border: 1px solid #333;margin: 0 0.5%;cursor: pointer;padding-bottom: 25%;}
-    .forBg {width: 100%;height: 270px;}
-    .forImg {width: 100%;height: 230px;}
-    .prdInfo{padding: 0 15px;display: inline-block;margin-top: 0;}
-    .prdInfoDiv {margin-bottom: 0;width: 100%;height: auto;line-height: 22px;font-size: 13px;padding-left: 0px;}
-    .vendorDetails {width: 100%;height:auto;margin-bottom: 20px;margin-top: 0;}
-    .vendorDetails .wrapperMax {padding-right: 0;position: initial;}
-    .vdLeftCard {width: 100%;}
-    .vdCenterCard {width: 100%;height: auto;padding:0 15px;}
-    .vdRightCard {width: 100%;height: auto;position:initial;padding:0 15px;}
-    .cardComm {width: 100%;height: auto;line-height: 25px;font-size: 14px;margin-top: 10px;color: #4d4d4d;}
-    .prdInfoDiv ul li div:nth-child(2) {width: 100%;height: auto;line-height: 22px;font-size: 13px;padding-left: 0px;}
-    .userForm {width: 100%;height: 100%;border-radius: 0;}
-
-    .cntEmail {width: 100%;}
-    .cntEmail {width: 100%;}
-
-    /*Login*/
-    .overlay {background: #fff url(../img/common/background.jpg)no-repeat;background-size: cover;}
-    .loginDiv {width: 100%;height: 100%;padding: 25px;border-radius: 0;}
-    .lgTitle {height:auto;line-height: 25px;}
-
-    /*SignUp page*/
-    .signupPage {background: url(../img/common/background.jpg)no-repeat;background-size: cover;padding: 5px 0 0px 0;height: 100vh;}
-    .signupDiv .wrapperMax {max-width: 100%;border: 0px solid #333;background: #fff;margin-top: 0;padding: 25px;border-radius: 0;height: 100vH;z-index: 115;position: relative;}
-    .bgHolder {width: 100%;height: 190px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding: 0px 0 35px 0;}
-    .bgHolder .heading {width: 100%;height: auto;max-width: 1200px;margin: auto;color: #fff;padding: 150px 0px 0 0px;text-align: center;}
-    .heading.font40 {font-size: 22px;}
-    .faqs {padding: 20px;}
-    .texHolder {padding: 0 20px;}
-
-
-    /*Diamond page*/
-    .rCount {width: 100%;font-size: 16px;text-align: center;}
-    .prdResults{width: 100%;}
-    .sortBox,.sTitle{display: none;}
-    .searchCon {width: 90%;}
-    /*education*/
-    .shapesPage .shapeComm {margin: 0px; padding-bottom: 65px;}
-    .shapesPage .texHolder{padding-left: 0px;padding-top: 45px;}
-    .shapesPage{padding: 0 20px;}
+}*/
 
 
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
 /*@media only screen and (min-width: 320px) and (max-width: 480px){
 
       .shapeComm{padding-bottom: 14%;}
 }*/
-@media only screen and (min-width: 1025px) and (max-width: 1279px){}
 
 
-@media only screen and (min-width: 680px) and (max-width: 767px){
-  /*Details Page*/
+/*@media only screen and (min-width: 680px) and (max-width: 767px){
+  Details Page
 .diamond_mod .infoCommn{width:33% }
 .btnsCont{  height: 160px;}
 .btnComm{width:100%;margin-bottom:5px;}
 .btnsCont .prdShType {line-height: 35px; font-size: 25px; font-family: openR;}
 .diamond_mod.wrapperMax{padding-left:308px}
 .imgsCont{width: 300px; height: 300px; position: absolute;left: 0;top: 0; box-shadow: 0 0 20px 5px rgba(0,0,0,0.2);}
-    /*.prdMainDetails .wrapperMax {padding-left: 300px; position: relative;}*/
+    .prdMainDetails .wrapperMax {padding-left: 300px; position: relative;}
 .jewellery_details .infoCommn { width: 50%!important;}
 .gallery{height: 150px;}
 .prdComm{width:47%}
-/*.filterList {
+.filterList {
     width: 100%;
     height: 100%;
     position: fixed;
@@ -1121,7 +1183,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
     padding: 50px 15px 50px 15px;
     overflow: scroll;
     box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
-}*/
+}
 .filterList.transit-100X{-webkit-transform:translateX(-350px);-moz-transform:translateX(-350px);;-ms-transform:translateX(-350px);-o-transform:translateX(-350px);transform:translateX(-350px);}
 .pgComm:nth-of-type(7) {
     display:none;
@@ -1135,13 +1197,79 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .pgComm:nth-of-type(10) {
     display:none;
 }
-/*Home Page */
+Home Page 
 .prllx {width: 100%;}
 .categoryCircle {width: 150px;height: 150px;font-size: 16px; padding-top: 95px;}
 .prllx li {width: 160px; margin: 0 10px;}
 .buyTxt{margin-bottom:25px;}
 .categoryCont {height: 489px;padding: 200px 0 50px 0;  }
 .jshapeComm {height: 150px; padding-top: 110px;font-size: 18px; line-height: 40px;}
-}
+}*/
 
-.noImage {background: url(../img/noimage.svg) no-repeat 50% 50%;background-size:50%;background-position: center;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*@media only screen and (min-width: 1970px) and (max-width: 1024px){
+
+Header
+.header {padding-right:15px;}
+.headRight{width:auto;}
+
+Home Page
+.prllx {width: 100%;}
+.shapeComm{width: 9%!important;padding-bottom: 9%;}
+.shapesCont { width: 100%;height: 315px;background: #FFF;padding: 15px 0;position: relative; z-index: 0;}
+Diamond Result
+.resultsPage .shapesCont{padding: 10px;}
+.prdResults {width: 100%;}
+.filterTitleDiv{padding:0 10px;}
+.results_Filter{padding: 0 10px;}
+.fTitle{cursor: pointer;}
+.prdComm {width: 31%;height: auto;border: 5px solid #ebebde;margin: 0 1.16% 2.32% 1.16%;}
+
+Jewellery Result Page
+.jshapeComm {height: 200px;padding-top: 160px;font-size: 20px;line-height: 40px;}
+.jShapesCont {width: 100%;height: 202px;}
+.Rings{box-shadow: inset 0 -40px 0px rgba(23, 19, 52,1);}
+.Earrings{box-shadow: inset 0 -40px 0px rgba(42, 14, 52,1);}
+.Pendants{box-shadow: inset 0 -40px 0px rgba(56, 11, 52,1);}
+.Necklaces{box-shadow: inset 0 -40px 0px rgba(94, 0, 55,1);}
+.Bracelets{box-shadow: inset 0 -40px 0px rgba(138, 0, 68,1);}
+.Bangles{box-shadow: inset 0 -40px 0px rgba(138, 0, 68,1);}
+.jshapeComm::after {bottom: 50px;width: 0px;height: 0px;}
+.jshapeComm.shapeSelected::after {bottom: 30px;width: 30px;height: 30px;}
+
+Filters Page
+.filterList {width: 300px;height: auto;min-height: 100%;left: 0;background: #fff;padding-bottom: 25px;position: absolute;box-shadow: 0 0 20px 5px rgba(0,0,0,0.2);z-index: 10;top: -20px;padding: 15px;}
+.filterList.transit-100X{-webkit-transform:translateX(-350px);-moz-transform:translateX(-350px);;-ms-transform:translateX(-350px);-o-transform:translateX(-350px);transform:translateX(-350px);}
+
+Details Page
+.imgsCont {width: 300px;height: 300px;position: absolute;left: 0;top: 0;box-shadow: 0 0 20px 5px rgba(0,0,0,0.2);}
+.forImg {width: 100%;height: 225px;cursor: pointer;}
+.thumbnil {width: 71px;height: 73pX;border: 1px solid #333;margin: 2px;cursor: pointer;}
+.prdMainDetails .wrapperMax {padding-left: 300px;position: relative;}
+.btnsCont .prdShType {line-height: 35px;font-size: 25px;font-family: openR;}
+.btnComm{margin: 0}
+.btnComm:nth-child(2){margin:0 10px}
+.prdInfo {margin-top: 0;padding: 0 15px;}
+.imgThumbnil{width: 32%;padding-bottom: 32%;margin: 0.5%;}
+
+Footer
+.bottmInfo {height: 205px;padding: 30px 0;}
+education
+ .shapeComm{width: 72px!important; padding-bottom: 7%;}
+ .shapesPage{padding: 0 20px;}
+.shapesPage .shapeComm {margin-top: 15px; padding-bottom: 85px;}
+}*/
