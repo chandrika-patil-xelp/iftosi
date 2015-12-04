@@ -145,7 +145,7 @@ if(!empty($data['mdbw'])) {
                             </div>
                             <div class="divCon  fLeft">
                                 <div  class="titleDiv txtCap fLeft">Number of Showrooms In India</div>
-                                <input name="showroomno" id="showroomno" type="text" value="<?php echo $data['no_showrooms']; ?>" maxlength="4" onkeypress="return common.isNumberKey(event)" placeholder=" eg. 20" class="txtInput fLeft fmOpenR font14 c666">
+                                <input name="showroomno" id="showroomno" type="text" value="<?php echo($data['no_showrooms']==0)? '' : $data['no_showrooms']; ?>" maxlength="4" onkeypress="return common.isNumberKey(event)" placeholder=" eg. 20" class="txtInput fLeft fmOpenR font14 c666">
                             </div>  
                             <div class="divCon  fLeft">
                                 <div  class="titleDiv txtCap fLeft">Membership Of Council / Jewellers Association</div>
