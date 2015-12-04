@@ -181,6 +181,24 @@ switch ($action) {
                 }
                 echo json_encode($resp);
                 break;
+				case 'getWishListCount':
+					$uid = (!empty($_GET['userid'])) ? trim(urldecode($_GET['userid'])) : '';
+					$total = 0;
+					if(!empty($uid))
+					{
+						$url = APIDOMAIN . "index.php?action=getPrdByCatid&uid=".$uid;
+						$res = $comm->executeCurl($url);
+
+						if(!empty($res) && !empty($res['error']) && empty($res['error']['errCode']))
+						{
+							if(!empty($res['results']['total']))
+							{
+								$total = $res['results']['total'];
+							}
+						}
+					}
+					echo $total;
+				break;
         }
         break;
 

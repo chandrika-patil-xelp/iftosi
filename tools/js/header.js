@@ -263,3 +263,12 @@ function htoggleDropDown(flag) {
     }
 
 }
+
+function redirectToWishlist()
+{
+	var uid = customStorage.readFromStorage('userid');
+	if(uid !== undefined && uid !== null && uid !== '')
+	{
+		window.location.href = DOMAIN + 'wishlist/' + uid;
+	}
+}

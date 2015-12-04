@@ -77,7 +77,14 @@ class wishlist extends DB
        $res=$this->query($sql);
        if($res)
        {
-           $arr="Product inserted into wishlist";
+		   if(!empty($this->lastInsertedId()))
+		   {
+				$arr="Product inserted into wishlist";
+		   }
+		   else
+		   {
+			   $arr="Product updated in wishlist";
+		   }
            $err=array('Code'=>0,'Msg'=>'Insert operation done');
        }
        else

@@ -84,7 +84,7 @@ function Common() {
             {
                 //userMenuStr += '<li class="transition100">Profile</li>';
                 //userMenuStr += '<li class="transition100">Orders</li>';
-                userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=wishlist&uid='+uid+'\');">Wishlist (25)</li>';
+                userMenuStr += '<li class="transition100" onclick="redirectToWishlist();">Wishlist (<span id="wishListCnt"></span>)</li>';
             }
             else
             {
@@ -105,6 +105,7 @@ function Common() {
             }
             userMenuStr += '<li class="transition100" onclick="common.doLogout();">Log Out</li>';
             $('#hdropList').html(userMenuStr);
+			_this.getWishListCount();
         }
     };
 
@@ -354,6 +355,26 @@ function Common() {
 				$('#ur_email').addClass('brGreen');
 				$('#ur_email').siblings('label').addClass('labelActive');
 			}
+		}
+	};
+
+	this.getWishListCount = function() {
+		var uid = customStorage.readFromStorage('userid');
+
+		if(uid !== undefined && uid !== null && uid !== '')
+		{
+			var params = 'action=ajx&case=getWishListCount&userid='+encodeURIComponent(uid);
+			var URL = DOMAIN + "index.php";
+			$.get(URL, params, function(data) {
+				if(data !== undefined && data !== null && data !== '')
+				{
+					$('#wishListCnt').html(data);
+				}
+				else
+				{
+					$('#wishListCnt').html(0);
+				}
+			});
 		}
 	};
 }

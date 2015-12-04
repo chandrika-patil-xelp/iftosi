@@ -495,7 +495,14 @@ function addToWishList()
 					{
 						isPidInWishlist = true;
 						$('#addtowishlist').html('Added To Wishlist');
-						customStorage.toast(1,'Added to wishlist');
+						if(data.results.indexOf('updated') !== -1)
+						{
+							customStorage.toast(1, 'Product already present in wishlist');
+						}
+						else
+						{
+							customStorage.toast(1,'Added to wishlist');
+						}
 					}
 				}
 			});
