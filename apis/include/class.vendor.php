@@ -585,30 +585,31 @@ class vendor extends DB
                     }
                 }
                 if ($catid == 10000) {
-                    $row['price']= $row['price']*$row['carat'];
+                    $row['price']= $row['price'];
                 }
-                if ($catid == 10002) {
+                if ($catid == 10002)
+                {
                     $purity=$row['gold_purity'];
                     $metal=strtolower($row['metal']);
-                    $weight=$row['gold_weight']; //weight of both silver and gold is stored here only
+                    $weight=$row['gold_weight'];
+                    
                     $metalRate=$silverRate;
+                    
                     if($metal=='gold')
                     {
                         $metalRate=$goldRate;
-                        if($weight <= 10)
-                        {
-                            $weight= ($weight/10);
-                            $finalRate=($metalRate)*($purity/995);
-                            $row['price']=$finalRate*$weight;
-                        }
+                        $finalRate=($metalRate/10)*($purity/995);
+                        $row['price']=$finalRate*$weight;
                     }
-                    else if($metal='silver'){
-                         $metalRate=$silverRate;
+                    else if($metal=='silver')
+                    {
+                        $metalRate=$silverRate;
+                        $finalRate=($metalRate/1000)*($purity/995);
+                        $row['price']=$finalRate*$weight;
                     }
+                        $arr1[] = $row;
                 }
-                $arr1[] = $row;
             }
-
             $arr = array('total_products' => $total_products, 'total_pages' => $total_pages, 'products' => $arr1);
             $err = array('Code' => 0, 'Msg' => 'Details fetched successfully');
         } else {
@@ -1367,8 +1368,7 @@ class vendor extends DB
             $res4 = $this->query($sql);}
             if($res4){
             $sql = "UPDATE tbl_designer_product_mapping SET active_flag=".$params['af']." WHERE product_id IN(".$prid."))";
-            $res = $this->query($sql);}
-        
+            $res5 = $this->query($sql);}
             $arr=array();
             $err=array('code'=>0,'msg'=>'Product status changed too');
         }

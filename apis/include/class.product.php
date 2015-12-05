@@ -81,7 +81,7 @@
                                                             (\"".$detls['brand']."\",
                                                              \"".$params['catid']."\",
                                                                  now(),
-                                                                 1)";
+                                                             \"".$display_flag."\")";
 
                     $res = $this->query($sql);
                     if(!empty($params['prdid']))
@@ -93,7 +93,7 @@
                              WHERE
                                                             product_id =\"".$params['prdid']."\"
                              AND                                   
-                                                            active_flag=1
+                                                            active_flag=\"".$display_flag."\"
                              ORDER BY
                                                             update_time
                              DESC
@@ -127,7 +127,7 @@
                             FROM 
                                    tbl_designer_product_mapping 
                             WHERE
-                                                            active_flag=1
+                                                            active_flag=\"".$display_flag."\"
                             AND                                
                                                             product_id=".$pid."";
                    
@@ -146,7 +146,7 @@
                             VALUES
                                                                 (\"".$pid."\",
                                                                  \"".$detls['desname']."\",
-                                                                     1,
+                                                                 \"".$display_flag."\",
                                                                      now())";
                   
                    $desres = $this->query($dessql);
@@ -196,7 +196,7 @@
                                                                                 \"".$catids[$i]."\",
                                                                                 \"".$detls['price']."\",
                                                                                 \"".$detls['rating']."\",
-                                                                                    1,
+                                                                                \"".$display_flag."\",
                                                                                     now())
                                 ON DUPLICATE KEY UPDATE
                                                         category_id             = \"".$catids[$i]."\",
