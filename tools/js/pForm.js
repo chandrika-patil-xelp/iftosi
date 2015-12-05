@@ -41,7 +41,7 @@ function submitForm(formid)
     
     data = values.join('|~|');
     //var JsonString = JSON.stringify(values);
-    if((pid!==null)&&(pid!==undefined)&&(pid!==''))
+    if((pid !== null)&&(pid !== undefined)&&(pid !== '') && pid !== 'undefined' && typeof pid !== 'undefined')
     {
     var params = 'action=addNewproduct&category_id='+catid+'&dt='+data+'&prdid='+pid+'&vid='+uid;
     }
@@ -51,8 +51,7 @@ function submitForm(formid)
     }
     var URL   = DOMAIN+"apis/index.php";
     $.getJSON(URL, params, function(data) {
-        console.log(params);
-       window.location.href = IMGUPLOAD+'pid-'+data.results.pid+'&c='+catid;
+        window.location.href = IMGUPLOAD+'pid-'+data.results.pid+'&c='+catid;
     });
     
 }

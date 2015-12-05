@@ -288,7 +288,7 @@
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Price</div>
-                            <input name="price" id="prdprice" type="text" placeholder=" eg. 1200000" class="txtInput fLeft fmOpenR font14 c666" disabled="true" maxlength="16" onkeypress="return common.isDecimalNumber(event,this.value);" onChange="(function(el){el.value=parseFloat(el.value).toFixed(15);})(this);" value="<?=$pdet['product_price'];?>">
+                            <input name="price" id="prdprice" type="text" placeholder=" eg. 1200000" class="txtInput fLeft fmOpenR font14 c666" readonly maxlength="16" onkeypress="return common.isDecimalNumber(event,this.value);" onChange="(function(el){el.value=parseFloat(el.value).toFixed(15);})(this);" value="<?=$pdet['product_price'];?>">
                         </div>
                         <div class="btnCont fLeft">
                             <center>

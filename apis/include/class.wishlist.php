@@ -77,7 +77,8 @@ class wishlist extends DB
        $res=$this->query($sql);
        if($res)
        {
-		   if(!empty($this->lastInsertedId()))
+		   $lastId = $this->lastInsertedId();
+		   if(!empty($lastId))
 		   {
 				$arr="Product inserted into wishlist";
 		   }

@@ -110,8 +110,7 @@ function Common() {
     };
 
     this.doLogout = function () {
-        customStorage.removeFromStorage('isLoggedIn');
-        customStorage.addToStorage('isLoggedIn', false);
+        customStorage.removeAll();
 		if(pageName == 'wishlist')
 		{
 			window.location.href = DOMAIN + "index.php";

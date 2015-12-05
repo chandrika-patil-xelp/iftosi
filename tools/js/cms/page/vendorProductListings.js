@@ -218,7 +218,6 @@ function generateJewellList(obj) {
 }
 
 function loadBullions() {
-    console.log(uid);
     $.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + bullionPage + "&limit=15&catid=10002", success: function (result) {
             loadBullionsCallback(result);
         }});
