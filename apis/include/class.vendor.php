@@ -585,18 +585,26 @@ class vendor extends DB
                     }
                 }
                 if ($catid == 10000) {
-                    $row['price']= $row['price']*$dollarValue;
+                    $row['price']= $row['price']*$row['carat'];
                 }
                 if ($catid == 10002) {
                     $purity=$row['gold_purity'];
                     $metal=strtolower($row['metal']);
-                    $weight=$row['gold_weight'];
+                    $weight=$row['gold_weight']; //weight of both silver and gold is stored here only
                     $metalRate=$silverRate;
-                    if($metal=='gold') {
+                    if($metal=='gold')
+                    {
                         $metalRate=$goldRate;
+                        if($weight <= 10)
+                        {
+                            $weight= ($weight/10);
+                            $finalRate=($metalRate)*($purity/995);
+                            $row['price']=$finalRate*$weight;
+                        }
                     }
-                    $finalRate=($metalRate)*($purity/995);
-                    $row['price']=$finalRate*$weight;
+                    else if($metal='silver'){
+                         $metalRate=$silverRate;
+                    }
                 }
                 $arr1[] = $row;
             }

@@ -9,7 +9,7 @@
 
         public function checkUser($params)
         {
-            $csql="select logmobile,user_id from tbl_registration where logmobile=".$params['mobile']."";
+            $csql="select * from tbl_registration where logmobile=".$params['mobile']."";
             $cres=$this->query($csql);
             $cnt1 = $this->numRows($cres);
             if($cnt1==0)
@@ -21,10 +21,12 @@
             {
                 while($row=$this->fetchData($cres))
                 {
-                    $arr2=$row['user_id'];
+                    $arr2['userid']=$row['user_id'];
+                    $arr2[]=$row;
+                            
                 }
                 $arr1=array();
-                $arr=array('msg'=>$arr1,'userid'=>$arr2);
+                $arr=array('msg'=>$arr1,'userid'=>$arr2['userid'],'userDet'=>$arr2);
                 $err=array('Code'=>1,'Msg'=>'Data matched');
             }
             $result = array('results' => $arr, 'error' => $err);

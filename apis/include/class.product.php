@@ -1272,7 +1272,7 @@
           $page   = ($params['page'] ? $params['page'] : 1);
           $limit  = ($params['limit'] ? $params['limit'] : 15);
             
-            $sql = "SELECT * FROM tbl_product_master WHERE product_id=".$params['prdid']." AND active_flag=1";
+            $sql = "SELECT * FROM tbl_product_master WHERE product_id=".$params['prdid']." AND active_flag!=2";
             if (!empty($page))
             {
                 $start = ($page * $limit) - $limit;
@@ -1312,7 +1312,7 @@
                     WHERE 
                         product_id=".$params['prdid']." 
                     AND        
-                        active_flag=1";
+                        active_flag!=2";
                         
             $res = $this->query($sql);
             $res2 = $this->query($sql2);
@@ -1343,7 +1343,7 @@
                         WHERE 
                                     product_id=".$pid."
                         AND                
-                                    active_flag=1
+                                    active_flag!=2
                         ORDER BY
                                     vendor_id ASC";
                 
@@ -1456,7 +1456,7 @@
                              FROM 
 								tbl_product_category_mapping
                              WHERE 
-								product_id =".$params['prdid']." AND display_flag=1 AND category_id!=".$params['catid']."";
+								product_id =".$params['prdid']." AND display_flag!=2 AND category_id!=".$params['catid']."";
                         $res5=$this->query($sql5);
                         if ($res5) {
                             while ($row5 = $this->fetchData($res5)) {
