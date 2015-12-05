@@ -68,7 +68,7 @@
                                                 foreach($attr_values as $color)
                                                 {
 ?>                                                  <div class="checkDiv fLeft">
-                                                        <input type="radio" value='<?=$color?>' name='color' class="filled-in" <?=($attr['color'] == $color) ? 'checked' : '';?> id="color_<?=ucwords(strtolower($color));?>"/>
+                                                        <input type="radio" value='<?=$color?>' name='color' autocomplete="false" class="filled-in" <?=($attr['color'] == $color) ? 'checked' : '';?> id="color_<?=ucwords(strtolower($color));?>"/>
                                                         <label for="color_<?=ucwords(strtolower($color));?>"><?=$color?></label>
                                                     </div>
 <?php
@@ -94,7 +94,7 @@
                                                                                                     
 ?>                                               
                                                 <div class="checkDiv fLeft">
-                                                    <input type="radio" name='clarity' class="filled-in" value="<?=$clarity?>" <?=($attr['clarity'] == $clarity) ? 'checked' : '';?> id="clarity_<?=ucwords(strtolower($clarity));?>">
+                                                    <input type="radio" name='clarity' autocomplete="false" class="filled-in" value="<?=$clarity?>" <?=($attr['clarity'] == $clarity) ? 'checked' : '';?> id="clarity_<?=ucwords(strtolower($clarity));?>">
                                                     <label for="clarity_<?=ucwords(strtolower($clarity));?>"><?=$clarity?></label>
                                                  </div>
 <?php                                           }
@@ -120,7 +120,7 @@
                                                 {
                                                                                                     
 ?>                                                      <div class="checkDiv fLeft">
-                                                            <input type="radio" name='cut' class="filled-in" <?=($attr['cut'] == $cut) ? 'checked' : '';?> value="<?=$cut;?>" id="cut_<?=ucwords(strtolower($cut)); ?>">
+                                                            <input type="radio" name='cut' autocomplete="false" class="filled-in" <?=($attr['cut'] == $cut) ? 'checked' : '';?> value="<?=$cut;?>" id="cut_<?=ucwords(strtolower($cut)); ?>">
                                                             <label for="cut_<?=ucwords(strtolower($cut));?>"> <?=$cut; ?></label>
                                                         </div>       
 <?php                                           }
@@ -145,7 +145,7 @@
                                                 {                                                                                                    
 ?>                                                              
                                                                 <div class="checkDiv fLeft">
-                                                                    <input type="radio" name='symmetry' class="filled-in" <?=($attr['symmetry'] == $sym) ? 'checked' : '';?> value="<?=$sym;?>" id="sym_<?=ucwords(strtolower($sym)); ?>">
+                                                                    <input type="radio" name='symmetry' autocomplete="false" class="filled-in" <?=($attr['symmetry'] == $sym) ? 'checked' : '';?> value="<?=$sym;?>" id="sym_<?=ucwords(strtolower($sym)); ?>">
                                                                     <label for="sym_<?=ucwords(strtolower($sym));?>"> <?=$sym; ?></label>
                                                                 </div>                                                               
 <?php                                           }
@@ -170,7 +170,7 @@
                                                             {                                                                                                    
 ?>                                                          
                                                                 <div class="checkDiv fLeft">
-                                                                    <input type="radio" name='polish' class="filled-in" value="<?=$polish;?>" <?=($attr['polish'] == $polish) ? 'checked' : '';?> id="polish_<?=ucwords(strtolower($polish)); ?>">
+                                                                    <input type="radio" name='polish' autocomplete="false" class="filled-in" value="<?=$polish;?>" <?=($attr['polish'] == $polish) ? 'checked' : '';?> id="polish_<?=ucwords(strtolower($polish)); ?>">
                                                                     <label for="polish_<?=ucwords(strtolower($polish));?>"> <?=$polish; ?></label>
                                                                 </div>
 <?php                                                       }
@@ -195,7 +195,7 @@
                                                             {                                                                                                    
 ?>
                                                                 <div class="checkDiv fLeft">
-                                                                    <input type="radio" name='flourecence' class="filled-in" <?=($attr['fluorescence'] == $fluoresence) ? 'checked' : '';?> value="<?=$fluoresence;?>" id="flourecence_<?=ucwords(strtolower($fluoresence)); ?>">
+                                                                    <input type="radio" autocomplete="false" name='flourecence' class="filled-in" <?=($attr['fluorescence'] == $fluoresence) ? 'checked' : '';?> value="<?=$fluoresence;?>" id="flourecence_<?=ucwords(strtolower($fluoresence)); ?>">
                                                                     <label for="flourecence_<?=ucwords(strtolower($fluoresence));?>"> <?php echo $fluoresence; ?></label>
                                                                 </div>
 <?php                                                       }
@@ -210,22 +210,22 @@
                                             <div  class="titleDiv txtCap fLeft">Certificate</div>
                                                 <div class='radioCont fLeft'> 
                                                     <div class="checkDiv fLeft">
-                                                        <input type="radio" name='Certficate' <?=($attr['certified'] == 'GIA') ? 'checked' : '';?> class="filled-in" id="Certficate_GIA" value="GIA">
+                                                        <input type="radio" autocomplete="false" name='Certficate' <?=($attr['certified'] == 'GIA') ? 'checked' : '';?> class="filled-in" id="Certficate_GIA" value="GIA">
                                                             <label for="Certficate_GIA">GIA</label>
                                                     </div>
                                                     <div class="checkDiv fLeft">
-                                                        <input type="radio" name='Certficate' <?=($attr['certified'] == 'IGI') ? 'checked' : '';?> class="filled-in" id="Certficate_IGI" value="IGI">
+                                                        <input type="radio" autocomplete="false" name='Certficate' <?=($attr['certified'] == 'IGI') ? 'checked' : '';?> class="filled-in" id="Certficate_IGI" value="IGI">
                                                             <label for="Certficate_IGI">IGI</label>
                                                     </div>
                                                     <div class="checkDiv fLeft">
-                                                        <input type="radio" name='Certficate' <?=($attr['certified'] == 'HRD') ? 'checked' : '';?> class="filled-in" id="Certficate_HRD" value="HRD">
+                                                        <input type="radio" autocomplete="false" name='Certficate' <?=($attr['certified'] == 'HRD') ? 'checked' : '';?> class="filled-in" id="Certficate_HRD" value="HRD">
                                                             <label for="Certficate_HRD">HRD</label>
                                                     </div>
                                                 </div>
                                         </div>
                                         <div class="divCon2  fLeft">
                                                                 <div  class="titleDiv txtCap fLeft">Certificate No.</div>
-                                                                <input name="certno" id="certno" type="text" placeholder="eg A1B23456" maxlength="10" class="txtInput fLeft fmOpenR font14 c666" value="<?=$attr['cno'];?>">
+                                                                <input name="certno" autocomplete="false" id="certno" type="text" placeholder="eg A1B23456" maxlength="10" class="txtInput fLeft fmOpenR font14 c666" value="<?=$attr['cno'];?>">
                                                             </div>
     <?php                                    
                                         foreach($fil['attributes'] as $key=>$values)
@@ -235,7 +235,7 @@
 ?>
                                                 <div class="divCon2  fLeft">
                                                     <div  class="titleDiv txtCap fLeft">Carat Weight</div>
-                                                    <input name="carat_weight" id="caratweight" type="text" placeholder="eg. 1.00" class="txtInput fLeft fmOpenR font14 c666" maxlength="5"  onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['carat'];?>" onkeypress="return common.isDecimalKey(event)">
+                                                    <input name="carat_weight" autocomplete="false" id="caratweight" type="text" placeholder="eg. 1.00" class="txtInput fLeft fmOpenR font14 c666" maxlength="5"  onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['carat'];?>" onkeypress="return common.isDecimalKey(event)">
                                                 </div>
 <?php                                            }
                                         }   
@@ -246,49 +246,49 @@
 <?php
                                     $measurement=explode('*',$attr['measurement']);
 ?>                                    
-                                <input name="measurement1" id="measure1" type="text" placeholder=" eg. 10" maxlength="5" class="mtxtInput fLeft fmOpenR font14 c666" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?php echo $measurement[0];?>">
+                                <input name="measurement1" id="measure1" autocomplete="false" type="text" placeholder=" eg. 10" maxlength="5" class="mtxtInput fLeft fmOpenR font14 c666" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?php echo $measurement[0];?>">
                                 <span class='fLeft'>X</span>
-                                <input name="measurement2" id="measure2" type="text" id="measure2" placeholder=" eg. 20" maxlength="5" class="mtxtInput fLeft fmOpenR font14 c666" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?php echo $measurement[1]; ?>">
+                                <input name="measurement2" id="measure2" type="text" autocomplete="false" placeholder=" eg. 20" maxlength="5" class="mtxtInput fLeft fmOpenR font14 c666" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?php echo $measurement[1]; ?>">
                                 <span class='fLeft'>X</span>
-                                <input name="measurement3" id="measure3" type="text" id="measure3" placeholder=" eg. 30" maxlength="5" class="mtxtInput fLeft fmOpenR font14 c666" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?php echo $measurement[2]; ?>">
+                                <input name="measurement3" id="measure3" type="text" autocomplete="false" placeholder=" eg. 30" maxlength="5" class="mtxtInput fLeft fmOpenR font14 c666" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?php echo $measurement[2]; ?>">
                             </div>
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Table</div>
-                            <input name="table" id="table" type="text" placeholder=" eg. 56" onkeypress="return common.isDecimalNumber(event,this.value);" maxlength="5" class="txtInput fLeft fmOpenR font14 c666" value="<?=$attr['tab'];?>">
+                            <input name="table" id="table" type="text" autocomplete="false" placeholder=" eg. 56" onkeypress="return common.isDecimalNumber(event,this.value);" maxlength="5" class="txtInput fLeft fmOpenR font14 c666" value="<?=$attr['tab'];?>">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Crown Angle</div>
-                            <input name="crown_angle" id="crownangle" type="text" placeholder=" eg. 41" onkeypress="return common.isDecimalNumber(event,this.value);" maxlength="5" class="txtInput fLeft fmOpenR font14 c666" value="<?=$attr['crownangle'];?>">
+                            <input name="crown_angle" id="crownangle" autocomplete="false" type="text" placeholder=" eg. 41" onkeypress="return common.isDecimalNumber(event,this.value);" maxlength="5" class="txtInput fLeft fmOpenR font14 c666" value="<?=$attr['crownangle'];?>">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Girdle</div>
-                            <input name="girdle" id="girdle" type="text" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666" maxlength="5" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['girdle'];?>">
+                            <input name="girdle" id="girdle" type="text" autocomplete="false" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666" maxlength="5" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['girdle'];?>">
                         </div>
 
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Bar Code</div>
-                            <input name="barcode" id="barcode" type="text" placeholder=" eg. ALXPK12" class="txtInput fLeft fmOpenR font14 c666" maxlength="10" value="<?=$pdet['product_barcode'];?>">
+                            <input name="barcode" id="barcode" type="text" autocomplete="false" placeholder=" eg. ALXPK12" class="txtInput fLeft fmOpenR font14 c666" maxlength="10" value="<?=$pdet['product_barcode'];?>">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Lot Number</div>
-                            <input name="lot_no" id="lotnumber" type="text" placeholder=" eg. 56" onkeypress="return common.isDecimalNumber(event,this.value);" maxlength="10" class="txtInput fLeft fmOpenR font14 c666" value="<?=$pdet['product_lotno'];?>">
+                            <input name="lot_no" id="lotnumber" autocomplete="false" type="text" placeholder=" eg. 56" onkeypress="return common.isDecimalNumber(event,this.value);" maxlength="10" class="txtInput fLeft fmOpenR font14 c666" value="<?=$pdet['product_lotno'];?>">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Lot Reference</div>
-                            <input name="lot_ref" id="lotreference" type="text" placeholder=" eg. iftosi -012" class="txtInput fLeft fmOpenR font14 c666" maxlength="10" value="<?=$pdet['product_lotref'];?>">
+                            <input name="lot_ref" id="lotreference" autocomplete="false" type="text" placeholder=" eg. iftosi -012" class="txtInput fLeft fmOpenR font14 c666" maxlength="10" value="<?=$pdet['product_lotref'];?>">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Base Price</div>
-                            <input name="base_price" id="baseprice" type="text" placeholder=" eg. 120000" class="txtInput fLeft fmOpenR font14 c666" maxlength="16" onkeypress="return common.isDecimalNumber(event,this.value);" onkeyup="calculatePrice()" value="<?=$attr['baseprice'];?>">
+                            <input name="base_price" id="baseprice" autocomplete="false" type="text" placeholder=" eg. 120000" class="txtInput fLeft fmOpenR font14 c666" maxlength="16" onkeypress="return common.isDecimalNumber(event,this.value);" onkeyup="calculatePrice()" value="<?=$attr['baseprice'];?>">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">% Discount</div>
-                            <input name="discount" id="discount" type="text" placeholder=" eg. 25%"   class="txtInput fLeft fmOpenR font14 c666" maxlength="5" minlength="1" onkeyup="calculatePrice()" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['discount'];?>">
+                            <input name="discount" id="discount" type="text" placeholder=" eg. 25%" autocomplete="false"  class="txtInput fLeft fmOpenR font14 c666" maxlength="5" minlength="1" onkeyup="calculatePrice()" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['discount'];?>">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Price</div>
-                            <input name="price" id="prdprice" type="text" placeholder=" eg. 1200000" class="txtInput fLeft fmOpenR font14 c666" readonly maxlength="16" onkeypress="return common.isDecimalNumber(event,this.value);" onChange="(function(el){el.value=parseFloat(el.value).toFixed(15);})(this);" value="<?=$pdet['product_price'];?>">
+                            <input name="price" id="prdprice" type="text" placeholder=" eg. 1200000" autocomplete="false" class="txtInput fLeft fmOpenR font14 c666" readonly maxlength="16" onkeypress="return common.isDecimalNumber(event,this.value);" onChange="(function(el){el.value=parseFloat(el.value).toFixed(15);})(this);" value="<?=$pdet['product_price'];?>">
                         </div>
                         <div class="btnCont fLeft">
                             <center>
