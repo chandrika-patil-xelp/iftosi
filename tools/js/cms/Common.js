@@ -263,9 +263,7 @@ function Common() {
     };
 
     this.doLogout = function () {
-        customStorage.removeFromStorage('isLoggedIn');
-        customStorage.addToStorage('isLoggedIn', false);
-        localStorage.clear();
+        customStorage.removeAll();
         window.location.href = window.location;
         //window.location.href = DOMAIN + "index.php";
     };
