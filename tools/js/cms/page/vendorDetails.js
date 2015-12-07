@@ -125,10 +125,13 @@ function validateForm() {
                 str = 'Invaild VAT No.';
                 $('#vat').focus();
             }
-        } else  {
-                str = 'Invaild VAT Nunber';
-                $('#vat').focus();
-            }
+        } else {
+            str = 'Invaild VAT Nunber';
+            $('#vat').focus();
+        }
+    } else  {
+        str = 'VAT Nunber Required';
+        $('#vat').focus();
     }
     if (str == '' && !$("#forDiamond").hasClass("comSelected") && !$("#forJewellery").hasClass("comSelected") && !$("#forBullion").hasClass("comSelected")) {
         str = 'Select business type';
