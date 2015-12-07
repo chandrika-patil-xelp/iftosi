@@ -7,37 +7,7 @@ if (pw < 768) {
 }
 
 var validMob = true;
-$('#pr_mobile').keyup(function () {
-    var mobile = $(this).val();
-    if(mobile.length==10) {
-        $.ajax({url: DOMAIN + "apis/index.php?action=checkUser&mobile=" + mobile, success: function (result) {
-            var obj = jQuery.parseJSON(result);
-            var errCode = obj['error']['Code'];
-            if(errCode == 1) {
-                validMob = false;
-                customStorage.toast(0,'This Mobile Number Already Registered!'); 
-            } else {
-                validMob = true;
-            }
-        }});
-    }
-});
 
-$('#pr_mobile').keyup(function () {
-    var mobile = $(this).val();
-    if(mobile.length==10) {
-        $.ajax({url: DOMAIN + "apis/index.php?action=checkUser&mobile=" + mobile, success: function (result) {
-            var obj = jQuery.parseJSON(result);
-            var errCode = obj['error']['Code'];
-            if(errCode == 1) {
-                validMob = false;
-                customStorage.toast(0,'This Mobile Number Already Registered!'); 
-            } else {
-                validMob = true;
-            }
-        }});
-    }
-});
 
     if (isMobile) {
         $(input_selector).focus(function () {
@@ -78,64 +48,79 @@ $('#pr_mobile').keyup(function () {
             isVendor=1;
         else 
             isVendor=-1;
-        if(pr_name.length==0 || isNaN(pr_name)!==true) {
-            customStorage.toast(0,'Invalide format for Name'); 
-            $('#pr_name').focus();
-            return false;
-        } else if(pr_mobile=='' || pr_mobile.length!=10 || isNaN(pr_mobile)) {
-            customStorage.toast(0,'Invalid format for Mobile'); 
-            $('#pr_mobile').focus();
-            return false;
-        } else if(pr_email=='') {
-            customStorage.toast(0,'Email is Required!'); 
-            $('#pr_email').focus();
-            return false;
-        } else if(!common.validateEmail('pr_email')) {
-            customStorage.toast(0,'Email is Not Valid!'); 
-            $('#pr_email').focus();
-            return false;
-        } else if(pr_pass=='') {
-            customStorage.toast(0,'Password is Required!'); 
-            $('#pr_pass').focus();
-            return false;
-        } else if(!validMob) {
-            customStorage.toast(0,'This Mobile Number Already Registered!'); 
-            $('#pr_mobile').focus();
-            return false;
-        }   
-        
-        else if(amIVendor == undefined || amIVendor == 'undefined' || amIVendor == '' || amIVendor == null || amIVendor == 'null'){
-            customStorage.toast(0,'You have not Selected the type of user!'); 
-            return false;
-        } else {
-                if(isVendor == -1)
-                {
-                    userType = 0;
-                }
-            
-            $.ajax({url: DOMAIN + "apis/index.php?action=userReg&username=" + pr_name +"&password=" + pr_pass +"&mobile=" + pr_mobile + "&email="+pr_email+'&isvendor='+userType, success: function (result) {
-                var obj = eval('('+result+')');
-                var errCode = obj.error.code;
-                if(errCode == 0) {
-                    var userid = obj.userid;
-                    customStorage.addToStorage('isLoggedIn',true);
-                    customStorage.addToStorage('userid',userid);
-                    customStorage.addToStorage('mobile',pr_mobile);
-                    customStorage.addToStorage('username',pr_name);
-                    customStorage.addToStorage('is_vendor',isVendor);
-                    if(isVendor===1) {
-                        customStorage.removeFromStorage('busiType');
-                        window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid='+userid);
-                    } else {
-                        customStorage.toast(1,'Registration Successfull Done');
-                        //window.history.back();
-                        setTimeout(function () {window.location.assign(DOMAIN + 'index.php'); },1500);
-                    }
-                } else {
-                    customStorage.toast(0,'Registration Unsuccessfull');
-                }
-            }});
-        }
+
+		if(pr_mobile.length==10) {
+			$.ajax({url: DOMAIN + "apis/index.php?action=checkUser&mobile=" + pr_mobile, success: function (result) {
+				var obj = jQuery.parseJSON(result);
+				var errCode = obj['error']['Code'];
+				if(errCode == 1) {
+					validMob = false;
+				} else {
+					validMob = true;
+				}
+			}});
+		}
+
+		setTimeout(function () {
+			if(pr_name.length==0 || isNaN(pr_name)!==true) {
+				customStorage.toast(0,'Invalide format for Name'); 
+				$('#pr_name').focus();
+				return false;
+			} else if(pr_mobile=='' || pr_mobile.length!=10 || isNaN(pr_mobile)) {
+				customStorage.toast(0,'Invalid format for Mobile'); 
+				$('#pr_mobile').focus();
+				return false;
+			} else if(pr_email=='') {
+				customStorage.toast(0,'Email is Required!'); 
+				$('#pr_email').focus();
+				return false;
+			} else if(!common.validateEmail('pr_email')) {
+				customStorage.toast(0,'Email is Not Valid!'); 
+				$('#pr_email').focus();
+				return false;
+			} else if(pr_pass=='') {
+				customStorage.toast(0,'Password is Required!'); 
+				$('#pr_pass').focus();
+				return false;
+			} else if(!validMob) {
+				customStorage.toast(0,'This mobile number is already registered!'); 
+				$('#pr_mobile').focus();
+				return false;
+			}   
+			
+			else if(amIVendor == undefined || amIVendor == 'undefined' || amIVendor == '' || amIVendor == null || amIVendor == 'null'){
+				customStorage.toast(0,'You have not Selected the type of user!'); 
+				return false;
+			} else {
+					if(isVendor == -1)
+					{
+						userType = 0;
+					}
+				
+				$.ajax({url: DOMAIN + "apis/index.php?action=userReg&username=" + pr_name +"&password=" + pr_pass +"&mobile=" + pr_mobile + "&email="+pr_email+'&isvendor='+userType, success: function (result) {
+					var obj = eval('('+result+')');
+					var errCode = obj.error.code;
+					if(errCode == 0) {
+						var userid = obj.userid;
+						customStorage.addToStorage('isLoggedIn',true);
+						customStorage.addToStorage('userid',userid);
+						customStorage.addToStorage('mobile',pr_mobile);
+						customStorage.addToStorage('username',pr_name);
+						customStorage.addToStorage('is_vendor',isVendor);
+						if(isVendor===1) {
+							customStorage.removeFromStorage('busiType');
+							window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid='+userid);
+						} else {
+							customStorage.toast(1,'Registration Successfull Done');
+							//window.history.back();
+							setTimeout(function () {window.location.assign(DOMAIN + 'index.php'); },1500);
+						}
+					} else {
+						customStorage.toast(0,'Registration Unsuccessfull');
+					}
+				}});
+			}
+		}, 250);
     });
     
 function isValidMKey(evt, id) {
