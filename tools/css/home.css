@@ -817,10 +817,11 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .shapesPage .shapeComm:hover {border: 2px solid #fff;}
 .shapesPage .shapeComm {position: absolute;left: 0;top: 0;width: 100px;height: 100px;padding-bottom: 100px;margin: 0;bottom: 0;margin: auto;}
 
+/* For No Image */
 .noImage {background: url(../img/noimage.svg) no-repeat 50% 50%;background-size: 50%;background-position: center;}
 
-
-
+/* For Sign Up Checkboxes in same Line*/
+.w50{width:50% !important;}
 
 @media only screen and (min-width: 320px) and (max-width: 767px){
     /*Header*/

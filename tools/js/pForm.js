@@ -262,7 +262,7 @@ function calculatePrice()
         if((isNaN(baseprice)) == false  || (isNaN(baseprice)) == false || baseprice == undefined  || baseprice == 'undefined' || discount == undefiend || discount == 'undefined')
         {
            var offerPrice =(parseFloat(baseprice)*(discount/100));
-           var total = baseprice-offerPrice;
+           var total = (baseprice-offerPrice).toFixed(2);
            if(total <= 0)
            {
                common.toast(0,'Price can not be in negative value');

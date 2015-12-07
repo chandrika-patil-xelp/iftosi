@@ -23,6 +23,22 @@ $('#pr_mobile').keyup(function () {
     }
 });
 
+$('#pr_mobile').keyup(function () {
+    var mobile = $(this).val();
+    if(mobile.length==10) {
+        $.ajax({url: DOMAIN + "apis/index.php?action=checkUser&mobile=" + mobile, success: function (result) {
+            var obj = jQuery.parseJSON(result);
+            var errCode = obj['error']['Code'];
+            if(errCode == 1) {
+                validMob = false;
+                customStorage.toast(0,'This Mobile Number Already Registered!'); 
+            } else {
+                validMob = true;
+            }
+        }});
+    }
+});
+
     if (isMobile) {
         $(input_selector).focus(function () {
             var npos = $('body').scrollTop() + 40;
@@ -56,9 +72,10 @@ $('#pr_mobile').keyup(function () {
         var pr_email = $('#pr_email').val();
         var pr_pass = $('#pr_pass').val();
         var isVendor = $('#isVendor').is(':checked');
+        var amIVendor = $('input[name=isVendor]:checked').val();
+        var userType =1;
         if(isVendor)
             isVendor=1;
-        
         else 
             isVendor=-1;
         if(pr_name.length==0 || isNaN(pr_name)!==true) {
@@ -81,12 +98,22 @@ $('#pr_mobile').keyup(function () {
             customStorage.toast(0,'Password is Required!'); 
             $('#pr_pass').focus();
             return false;
-        }  else if(!validMob) {
+        } else if(!validMob) {
             customStorage.toast(0,'This Mobile Number Already Registered!'); 
             $('#pr_mobile').focus();
             return false;
+        }   
+        
+        else if(amIVendor == undefined || amIVendor == 'undefined' || amIVendor == '' || amIVendor == null || amIVendor == 'null'){
+            customStorage.toast(0,'You have not Selected the type of user!'); 
+            return false;
         } else {
-            $.ajax({url: DOMAIN + "apis/index.php?action=userReg&username=" + pr_name +"&password=" + pr_pass +"&mobile=" + pr_mobile + "&email="+pr_email+'&isvendor='+isVendor, success: function (result) {
+                if(isVendor == -1)
+                {
+                    userType = 0;
+                }
+            
+            $.ajax({url: DOMAIN + "apis/index.php?action=userReg&username=" + pr_name +"&password=" + pr_pass +"&mobile=" + pr_mobile + "&email="+pr_email+'&isvendor='+userType, success: function (result) {
                 var obj = eval('('+result+')');
                 var errCode = obj.error.code;
                 if(errCode == 0) {
@@ -120,3 +147,7 @@ function isValidMKey(evt, id) {
         $('#' + id).val('');
     }
 }
+
+$(".amIVendor").change(function () {
+    $(".amIVendor").not(this).prop('checked', false);
+});
