@@ -24,9 +24,9 @@ var timeauto= "";
 var autodata = '';
 var JSONcache = new Array();
 
-Autosuggest = function(str,txt,suggest,filepath,params,vcheck,nextxt,hiddenid) {
+Autosuggest = function(str,txt,suggest,filepath,params,vcheck,nextxt,hiddenid,evnt) {
 	
-	if (handleKeys(event,txt,suggest,nextxt,'',hiddenid,params)==true)
+	if (handleKeys(evnt,txt,suggest,nextxt,'',hiddenid,params)==true)
 	{
 		return false;
 	}
