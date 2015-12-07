@@ -85,9 +85,23 @@
 											<div class='prdPrice fLeft'>
 												<div class="detComm">
 													<div class="detLabel fmOpenB fLeft">PRICE</div>
-                                                                                                        <?php if(empty($val['silver_rate']) || $val['silver_rate']=='0.00') { $val['silver_rate'] = silverRate; } ?>
-                                                                                                        <?php if(empty($val['gold_rate']) || $val['gold_rate']=='0.00') { $val['gold_rate'] = goldRate; } ?>
-                                                                                                        <?php $metal_rate=$val['silver_rate']; $pro_metal = strtolower($val['attributes']['metal']); if($pro_metal=='gold') { $metal_rate=$val['gold_rate']; } $metal_rate=$metal_rate*($val['attributes']['gold_purity']/995) ?>
+<?php 
+                                                                                                        if(empty($val['silver_rate']) || $val['silver_rate']=='0.00')
+                                                                                                        { 
+                                                                                                            $metal_rate = silverRate;
+                                                                                                        } 
+                                                                                                        if(empty($val['gold_rate']) || $val['gold_rate']=='0.00')
+                                                                                                        { 
+                                                                                                            $metal_rate = goldRate;
+                                                                                                        }
+                                                                                                        
+                                                                                                        $pro_metal = strtolower($val['attributes']['metal']);
+                                                                                                        if($pro_metal=='gold')
+                                                                                                        { 
+                                                                                                            $metal_rate=$val['gold_rate'];
+                                                                                                        } 
+                                                                                                        $metal_rate=$metal_rate*($val['attributes']['gold_purity']/995)
+?>
 													<div class="detValue fmOpenB fLeft"><span>&#8377;</span><?php echo number_format(($val['attributes']['gold_weight']*$metal_rate),2);?></div>
 												</div>
 											</div>

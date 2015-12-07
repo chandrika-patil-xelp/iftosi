@@ -53,6 +53,7 @@ $(window).scroll(function () {
     }
 });
 function loadDiamonds() {
+    console.log(diamondPage);
     $.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + diamondPage + "&limit=15&catid=10000", success: function (result) {
             loadDiamondCallback(result);
     }});
@@ -89,12 +90,12 @@ function generateDiamondList(obj) {
     var pro_name = obj['product_name'];
     if(pro_name == null || pro_name == '' || pro_name == 'null') {
         pro_name = obj['barcode'];
-    }var barcode = obj['barcode'];
-    if(barcode == null || barcode == '' || barcode == 'null') {
-        barcode = '';
     }
-    if(barcode !== '' && barcode !== 'null' && barcode !== null && barcode !== 'undefined' &&  barcode !== undefined)
-    {
+    var barcode = obj['barcode'];
+    if(barcode == 'null' || barcode == undefined || barcode == null || barcode == '' || barcode == '' ) {
+        barcode = 'N-A';
+    }
+    
     var date = obj['update_time'].split(' ');
     var str = '<li>';
     str += '<div class="date fLeft"> ';
@@ -106,27 +107,23 @@ function generateDiamondList(obj) {
     str += '<span class="lwSpan"><a href="'+ DOMAIN + '-' + obj['shape'] +'-clarity-'+ obj['clarity'] +'/did-'+ obj['id'] +'" target="_blank">View Details</a></span>';
     str += '</div>';
     str += '<div class="shape fLeft">' + obj['shape'] + '</div>';
-    str += '<div class="color fLeft">' + obj['color'] + '</div>';
     str += '<div class="carats fLeft">' + obj['carat'] + '</div>';
+    str += '<div class="color fLeft">' + obj['color'] + '</div>';
     str += '<div class="clarity fLeft">' + obj['clarity'] + '</div>';
     str += '<div class="cert fLeft">' + obj['cert'] + '</div>';
-    str += '<div class="price fLeft fmOpenB">&#8377;' + obj['price'] + '</div>';
+    str += '<div class="price fLeft fmOpenB">&#36;' + obj['price'] + '</div>';
     str += '<div class="acct fLeft">';
     str += '<center>';
     str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'" target="_blank"><div class="uploadBtn poR ripplelink"></div></a>';
     str += '<div class="deltBtn poR ripplelink" onclick="deleteProduct(' + obj['id'] + ',this)"></div>';
     str += '<a href="'+ DOMAIN +'index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn poR ripplelink"></div></a>';
-    str += '<div class="soldBtn poR ripplelink fmOpenR" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==1) ? "SOLD" : "STOCK");+'</div>';
+    str += '<div class="soldBtn poR ripplelink fmOpenR" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3) ? "STOCK" : "SOLD");+'</div>';
     str += '</center>';
     str += '</div>';
     str += '</li>';
     str += '';
     return str;
-    }
-    else
-    {
-        
-    }
+    
 }
 
 
@@ -167,22 +164,27 @@ function generateJewellList(obj) {
     if(obj !== undefined && obj !== null && obj !== '')
     {
         var pro_name = obj['product_name'];
+        var shape = obj['shape'];
         var category= obj['category'][1]['cat_name'];
+        var metal = obj['metal'];
         if(category == 'Bangles/Bracelets')
         {
             category = '<span class="upSpan">Bangles / Bracelets</span>';
         }
         var barcode = obj['barcode'];
         if(barcode == undefined || barcode == null || barcode == '' || barcode == 'null') {
-            barcode = '';
+            barcode = 'N-A';
         }
-
         if(pro_name == undefined || pro_name == null || pro_name == '' || pro_name == 'null') {
             pro_name = barcode;
         }
-
-        if(barcode !== undefined && barcode !== '' && barcode !== 'null' && barcode !== null && barcode !== 'undefined')
-        {
+        if(shape == undefined || shape == null || shape == '' || shape == 'null') {
+            shape = 'N/A';
+        }
+        
+        if(metal == undefined || metal == null || metal == '' || metal == 'null') {
+            metal = 'N/A';
+        }
         var date = obj['update_time'].split(' ');
         var str = '<li>';
         str += '<div class="date fLeft"> ';
@@ -193,8 +195,8 @@ function generateJewellList(obj) {
         str += '<span class="upSpan">' + barcode + '</span>';
         str += '<span class="lwSpan"><a href="'+ DOMAIN + barcode +'/jid-'+ obj['id'] +'" target="_blank">View Details</a></span>';
         str += '</div>';
-        str += '<div class="metal fLeft">' + obj['metal'].split('~')[0] + '</div>';
-        str += '<div class="catg fLeft">' + category + '</div>';
+        str += '<div class="metal fLeft">' + metal.split('~')[0] + '</div>';
+        str += '<div class="catg fLeft">' + shape +'</div>';
         str += '<div class="degno fLeft">' + obj['dwt'] + '</div>';
         str += '<div class="subType fLeft">' + obj['gold_weight'] + '</div>';
         str += '<div class="price fLeft fmOpenB">&#8377;' + obj['price'] + '</div>';
@@ -203,19 +205,14 @@ function generateJewellList(obj) {
         str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'" target="_blank"><div class="uploadBtn poR ripplelink"></div></a>';
         str += '<div class="deltBtn poR ripplelink" onclick="deleteProduct(' + obj['id'] + ',this)"></div>';
         str += '<a href="'+ DOMAIN +'index.php?case=jewellery_Form&catid=10001&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn poR ripplelink"></div></a>';
-        str += '<div class="soldBtn poR ripplelink fmOpenR" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==1) ? "SOLD" : "STOCK");+'</div>';
+        str += '<div class="soldBtn poR ripplelink fmOpenR" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "STOCK" : "SOLD");+'</div>';
         str += '</center>';
         str += '</div>';
         str += '</li>';
         str += '';
         return str;
         }
-        else
-        {
-            return '';
-        }
-    }
-}
+ }
 
 function loadBullions() {
     $.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + bullionPage + "&limit=15&catid=10002", success: function (result) {
@@ -281,7 +278,7 @@ function generatBullionsList(obj) {
     str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'" target="_blank"><div class="uploadBtn poR ripplelink"></div></a>';
     str += '<div class="deltBtn poR ripplelink" onclick="deleteProduct(' + obj['id'] + ',this)"></div>';
     str += '<a href="'+ DOMAIN +'index.php?case=bullion_Form&catid=10002&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn poR ripplelink"></div></a>';
-    str += '<div class="soldBtn poR ripplelink fmOpenR" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==1) ? "SOLD" : "STOCK");+'</div>';
+    str += '<div class="soldBtn poR ripplelink fmOpenR" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "STOCK" : "SOLD");+'</div>';
     str += '</center>';
     str += '</div>';
     str += '</li>';
@@ -337,41 +334,22 @@ function deleteProduct(proId,ele) {
 }
 
 function inStock(proId,ele) {
-    console.log(proId);
     $.ajax({url: common.APIWebPath() + "index.php?action=togglePrdstatus&vid=" + uid + "&prdid=" + proId, success: function (result) {
     var obj = jQuery.parseJSON(result);
         if(obj['error']['Code']==0) {
-            $(ele).parent().parent().parent().remove();
+            var stockid="isStock"+proId;
+            //$(ele).parent().parent().parent().remove();
             if(catid==10000) {
                 catName='Diamonds';
-            } else if(catid==10001) {
+             } else if(catid==10001) {
                 catName='Jewells';
             } else if(catid==10002) {
                 catName='Bullions';
             }
             var total=$('#total'+catName).text();
             $('#total'+catName).text(total);
-            console.log(total);
-            console.log(catName);
-            if(total==0) {
-                loadBullion = false;
-            }
-            var count = $("#"+catName+"List li").length;
-            if(count<15) {
-                $("#"+catName+"List").html('');
-                if(catid==10000) {
-                    diamondPage = 1;
-                    loadDiamonds();
-                } else if(catid==10001) {
-                    jewellPage = 1;
-                    loadJewels();
-                } else if(catid==10002) {
-                    bullionPage = 1;
-                    loadBullions();
-                }
-            }
-            console.log("#"+catName+"List");
             common.toast(1,obj['error']['Msg']);
+            $('#'+stockid).text()=='SOLD'?$('#'+stockid).text('STOCK'):$('#'+stockid).text('SOLD');
         } else {
             common.toast(0,obj['error']['Msg']);
         }

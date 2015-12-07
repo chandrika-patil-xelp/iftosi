@@ -52,39 +52,41 @@
                         <div class="majorInfoBox fLeft jewellery_details">
                            <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">DESIGN NO</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo $prdInfo['product_barcode']; ?></div>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['product_barcode']=='')?'N/A':$prdInfo['product_barcode']; ?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">METAL</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo str_replace('~', ', ', $prdInfo['attr_details']['metal']); ?></div>
+                                <?php $metal= str_replace('~', ', ', $prdInfo['attr_details']['metal']); ?>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo ($metal == ''? 'N/A' : $metal); ?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">GOLD PURITY</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo number_format($prdInfo['attr_details']['gold_purity']); ?>K</div>
+                              <?php  $gpurity = number_format($prdInfo['attr_details']['gold_purity']); ?>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo ($gpurity == ''?'N/A':$gpurity);?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">GOLD WEIGHT</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo $prdInfo['attr_details']['gold_weight']; ?> Gms</div>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['gold_weight']==''?'N/A':$prdInfo['attr_details']['gold_weight']); ?> Gms</div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">NO. OF DIAMONDS</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo $prdInfo['attr_details']['nofd']; ?></div>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['nofd']==''?'N/A':$prdInfo['attr_details']['nofd']); ?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">DIAMOND WEIGHT</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo $prdInfo['attr_details']['dwt']; ?> CTS</div>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['dwt']=='')?'N/A':$prdInfo['attr_details']['dwt']; ?> CTS</div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">DIAMOND QUALITY</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo $prdInfo['attr_details']['clarity']; ?></div>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['clarity']=='')?'N/A':$prdInfo['attr_details']['clarity']; ?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">GEMSTONES WEIGHT</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo $prdInfo['attr_details']['gemwt']; ?> CTS</div>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['gemwt']=='')?'N/A':$prdInfo['attr_details']['gemwt']; ?> CTS</div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR">
                                 <div class="infoLabel fmOpenB  font12">CERTIFIED BY</div>
-                                <div class="infoValue c666 font25 fmOpenR"><?php echo $prdInfo['attr_details']['certified']; ?></div>
+                                <div class="infoValue c666 font25 fmOpenR"><?php echo ($prdInfo['attr_details']['certified']=='')?'N/A':$prdInfo['attr_details']['certified']; ?></div>
                             </div>
                         </div>
                     </div>

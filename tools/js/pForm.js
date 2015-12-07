@@ -69,36 +69,172 @@ function submitForm(formid)
             var no_diamonds=$('#no_diamonds').val();
             var gemweight=$('#gemweight').val();
             var prdprice=$('#prdprice').val();
+            var othercert=$('#other_cerificate').val();
             var shape=$('.jshapeComm');
             var str = '';
-           
-            if(!shape.hasClass('shapeSelected')) {
+            var isValid = true;
+           if(!shape.hasClass('shapeSelected')) {
                 str ='category is not Selected';
+                isValid = false;
             }
-            else if(subcat<=false){
-                str ='Checkbox button is empty';                
+            if(isValid && subcat<=false){
+                str ='Checkbox button is empty';
+                isValid = false;
             }
-            else if((certificate=='') || (certificate==null) || (certificate==undefined)) {
+            if((certificate=='' || certificate==null || certificate==undefined) && isValid) {
                 str ='Certificate field is Empty';
+                isValid = false;
             }
-            else if((metal=='') || (metal==null) || (metal==undefined)) {
+            if(certificate == 'Other' && isValid)
+            {
+                if(isValid && (othercert == undefined || othercert == 'undefined' || othercert == null || othercert == 'null' || othercert == '' ))
+                {
+                    str ='Please mention the certificate in other field';
+                    isValid = false;
+                    $('#other_cerificate').focus();
+                }
+            }
+            if(isValid && (metal=='' || metal==null || metal==undefined)) {
                 str ='Metal field is Empty';
+                isValid = false;
             }
-            else if(purity == '' || isNaN(purity)) {
+            
+            if(isValid && (color !== undefined && color !== 'undefined' && color !== 'null' && color !== ''))
+            {
+                
+                if(isValid && (color == undefined || color == 'undefined' || color == 'null' || color == ''))
+                {
+                    str ='Diamond Color field is Empty';
+                    isValid = false;
+                }
+                else if(isValid && (clarity == undefined || clarity == 'undefined' || clarity == 'null' || clarity == ''))
+                {
+                    str ='Diamond Quality field is Empty';
+                    isValid = false;
+                }
+                else if(isValid && (no_diamonds == undefined || no_diamonds == 'undefined' || no_diamonds == 'null' || no_diamonds == '' || isNaN(no_diamonds)))
+                {
+                    str ='Number of diamonds have to be Selected';
+                    isValid = false;
+                    $('#no_diamonds').focus();
+                }
+                else if(isValid && (dweight == undefined || dweight == 'undefined' || dweight == 'null' || dweight == '' || isNaN(dweight)))
+                {
+                    str ='Diamond weight is Required';
+                    isValid = false;
+                    $('#diamondweight').focus();
+                }
+            }
+            if(isValid && (clarity !== undefined && clarity !== 'undefined' && clarity !== 'null' && clarity !== ''))
+            {
+                
+                if(isValid && (color == undefined || color == 'undefined' || color == 'null' || color == ''))
+                {
+                    str ='Diamond Color field is Empty';
+                    isValid = false;
+                }
+                else if(isValid && (clarity == undefined || clarity == 'undefined' || clarity == 'null' || clarity == ''))
+                {
+                    str ='Diamond Quality field is Empty';
+                    isValid = false;
+                }
+                else if(isValid && (no_diamonds == undefined || no_diamonds == 'undefined' || no_diamonds == 'null' || no_diamonds == '' || isNaN(no_diamonds)))
+                {
+                    str ='Number of diamonds have to be Selected';
+                    isValid = false;
+                    $('#no_diamonds').focus();
+                }
+                else if(isValid && (dweight == undefined || dweight == 'undefined' || dweight == 'null' || dweight == '' || isNaN(dweight)))
+                {
+                    str ='Diamond weight is Required';
+                    isValid = false;
+                    $('#diamondweight').focus();
+                }
+            }
+            if(isValid && (no_diamonds !== undefined && no_diamonds !== 'undefined' && no_diamonds !== 'null' && no_diamonds !== '' && isNaN(no_diamonds)))
+            {
+                
+                if(isValid && (color == undefined || color == 'undefined' || color == 'null' || color == ''))
+                {
+                    str ='Diamond Color field is Empty';
+                    isValid = false;
+                }
+                else if(isValid && (clarity == undefined || clarity == 'undefined' || clarity == 'null' || clarity == ''))
+                {
+                    str ='Diamond Quality field is Empty';
+                    isValid = false;
+                }
+                else if(isValid && (no_diamonds == undefined || no_diamonds == 'undefined' || no_diamonds == 'null' || no_diamonds == '' || isNaN(no_diamonds)))
+                {
+                    str ='Number of diamonds have to be Selected';
+                    isValid = false;
+                    $('#no_diamonds').focus();
+                }
+                else if(isValid && (dweight == undefined || dweight == 'undefined' || dweight == 'null' || dweight == '' || isNaN(dweight)))
+                {
+                    str ='Diamond weight is Required';
+                    isValid = false;
+                    $('#diamondweight').focus();
+                }
+            }
+            if(isValid && (dweight !== undefined && dweight !== 'undefined' && dweight !== 'null' && dweight !== '' && isNaN(dweight)))
+            {
+                
+                if(isValid && (color == undefined || color == 'undefined' || color == 'null' || color == ''))
+                {
+                    str ='Diamond Color field is Empty';
+                    isValid = false;
+                }
+                else if(isValid && (clarity == undefined || clarity == 'undefined' || clarity == 'null' || clarity == ''))
+                {
+                    str ='Diamond Quality field is Empty';
+                    isValid = false;
+                }
+                else if(isValid && (no_diamonds == undefined || no_diamonds == 'undefined' || no_diamonds == 'null' || no_diamonds == '' || isNaN(no_diamonds)))
+                {
+                    str ='Number of diamonds have to be Selected';
+                    isValid = false;
+                    $('#no_diamonds').focus();
+                }
+                else if(isValid && (dweight == undefined || dweight == 'undefined' || dweight == 'null' || dweight == '' || isNaN(dweight)))
+                {
+                    str ='Diamond weight is Required';
+                    isValid = false;
+                    $('#diamondweight').focus();
+                }
+            }
+            
+            if(isValid && (purity == '' || isNaN(purity))) {
                 str ='Purity field is Empty';
+                isValid = false;
                  $('#goldpurity').focus();
             }
-            else if(goldweight == '' || isNaN(goldweight)) {
+            if(isValid && (goldweight == '' || isNaN(goldweight))) {
                 str ='Gold weight is Required';
+                isValid = false;
                 $('#goldweight').focus();
             }
-            else if(barcode=='') {
+            if(isValid &&  barcode=='')
+            {
                 str ='Design Number field is Required';
+                isValid = false;
                 $('#barcode').focus();
             }
-            else if(prdprice == '' || isNaN(prdprice)) {
+            if(isValid && (prdprice == '' || isNaN(prdprice)))
+            {
                 str ='Product Price is important to fill';
+                isValid = false;
                 $('#prdprice').focus();
+            }
+            
+            if(isValid && gemweight !== null)
+            {
+                if(isValid && (gemweight == undefined || gemweight == 'undefined' || gemweight == 'null' || gemweight == '' || isNaN(gemweight)))
+                    {
+                        str ='Gemstone weight is important to fill';
+                        isValid = false;
+                        $('#gemweight').focus();
+                    }
             }
             if(str != '')
             {
@@ -127,7 +263,16 @@ function calculatePrice()
         {
            var offerPrice =(parseFloat(baseprice)*(discount/100));
            var total = baseprice-offerPrice;
-           $('#prdprice').val(total);
+           if(total <= 0)
+           {
+               common.toast(0,'Price can not be in negative value');
+               $('#prdprice').val('');
+               $('#discount').val('');
+           }
+           else
+           {
+                $('#prdprice').val(total);
+            }
         }
         
    }    

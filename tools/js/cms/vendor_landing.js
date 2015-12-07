@@ -4,15 +4,19 @@ var username = customStorage.readFromStorage('username');
 if(busiType==null || busiType=='' || busiType==undefined) {
     window.location.assign(DOMAIN+'index.php?case=vendor_Form&uid='+uid);
 }
+var active = '';
 document.getElementById('userName').innerHTML = username.split(' ')[0];
-if (/1/.test(busiType)) {
+if ( catid == '10000') {
     $('#dmdTab').removeClass('dn');
+   active = 'diamondFheader';
 }
-if (/2/.test(busiType)) {
+if ( catid == '10001') {
     $('#jewTab').removeClass('dn');
+    active = 'jewelleryFheader';
 }
-if (/3/.test(busiType)) {
+if ( catid == '10002') {
     $('#bullTab').removeClass('dn');
+    active = 'bullionFheader';
 }
 
 var activeVTab='';
@@ -59,7 +63,7 @@ function checkToHide(evt) {
     }
 }
 
-var active = 'diamondFheader';
+
 
 var mxSc = 170;//$('.prdResults').offset().top;
 
@@ -68,15 +72,7 @@ $(document).ready(function () {
 	
     $('.vTabs').eq(1).click();
 
-    $(window).scroll(function () {
-        var sc = $(window).scrollTop();
-        if (sc > mxSc) {
-            $('#' + active).removeClass('pLHtransit dn');
-        } else if (lastSc > sc) {
-            $('#' + active).addClass('pLHtransit');
-        }
-        lastSc = sc;
-    });
+    
 
 
 
@@ -102,7 +98,16 @@ $(document).ready(function () {
                 $('#diamondPrds,#jewelleryPrds').addClass('dn');
                 break;
         }
+    });
 
+    $(window).scroll(function () {
+        var sc = $(window).scrollTop();
+        if (sc > mxSc) {
+            $('#' + active).removeClass('pLHtransit dn');
+        } else if (lastSc > sc) {
+            $('#' + active).addClass('pLHtransit');
+        }
+        lastSc = sc;
     });
 
     $('.vFilBtn').click(function () {

@@ -70,6 +70,8 @@
 
             $detls['measurement']=$detls['measurement1'].'*'.$detls['measurement2'].'*'.$detls['measurement3'];
                     //  Inserting the values in brand table
+          
+           
                     $sql = "INSERT
                             INTO 
                                         tbl_brandid_generator
@@ -268,6 +270,7 @@
                    //----------------------------------------------For product search table---------------------------------------------------                              
                             //  For tbl_product_search
         // Few attributes remaining-- type,metal,purity,nofd,dwt,gemwt,quality,goldwt
+                    if($detls['Certficate']=='Other'){$detls['Certficate']=$detls['other_cerificate'];} 
                             $sql = "INSERT 
                                     INTO 
                                                     tbl_product_search
@@ -682,7 +685,9 @@
 							WHERE 
 								category_id = ".$params['catid']." 
 							AND 
-								product_id in (".$pid.") 
+								product_id in (".$pid.")
+                                                        AND     
+                                                                display_flag = 1
 							";
 						$res = $this->query($sql);
 						if($res)
