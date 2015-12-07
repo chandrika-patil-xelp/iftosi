@@ -6,12 +6,12 @@
                 <div class="wrapperMax">
                      <div class="signupTitle fLeft">Forgot Password?</div>
                      <div class="inputCont fLeft fmOpenR">
-                        <input type="email" id="pr_email" name="pr_email" autocomplete="false" class="txtInput cOrange fmOpenR font14 emailIcon">
+                        <input type="text" id="pr_email" name="pr_email" autocomplete="false" class="txtInput cOrange fmOpenR font14 emailIcon">
                         <label for="pr_email" class="inp-label transition100">MOBILE/EMAIL</label>
                         <div id="pr_email_inpText" class="inpText fRight transition300">enter<br>email address or mobile number</div>
                     </div>
-                     <div class="cancelLgBtn fLeft fmOpenR ripplelink poR" id='signupCancel'> CANCEL</div>
-                    <div class="loginBtn fLeft fmOpenR ripplelink poR" id='signupSubmit'>RETRIEVE</div>
+                     <div class="cancelLgBtn fLeft fmOpenR ripplelink poR" id='cancelBtn'> CANCEL</div>
+                    <div class="loginBtn fLeft fmOpenR ripplelink poR" id='submitBtn'>RETRIEVE</div>
                 </div>
             </div>
         </div>
@@ -21,5 +21,22 @@
     <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
     <script type="text/javascript" src="<?=$jvs['signup'];?>"></script>
     <script type="text/javascript" src="<?=$jvs['comm'];?>"></script>
+    <script>
+        
+    $('#submitBtn').click(function () {
+        var pr_email=  $('#pr_email').val();
+        $.ajax({url: DOMAIN + "apis/index.php?action=forgotPwd&email=" + pr_email, success: function (result) {
+            var obj = jQuery.parseJSON(result);
+            var errCode = obj['error']['Code'];
+            var errMsg = obj['error']['Msg'];
+            if(errCode == 1) {
+                customStorage.toast(0,errMsg);
+            } else {
+                customStorage.toast(1,errMsg);
+                window.location.assign(DOMAIN + "index.php?case=login");
+            }
+        }});
+    });
+    </script>
 </body>
 

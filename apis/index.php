@@ -134,6 +134,22 @@ switch($action)
             $res= $result;
             break;
 
+// localhost/iftosi/apis/index.php?action=forgotPwd&email=9655338337
+        case 'forgotPwd':
+            include_once APICLUDE . 'class.user.php';
+            $email = (!empty($params['email'])) ? trim($params['email']) : '';
+
+            if (empty($email)) {
+                $resp = array();
+                $error = array('errCode' => 1, 'errMsg' => 'Invalid parameters');
+                $result = array('results' => $resp, 'error' => $error);
+                break;
+            }
+            $obj=new user($db['iftosi']);
+            $tmp_params = array('email' => $email);
+            $res = $obj->forgotPwd($tmp_params);
+            break;
+
 // localhost/iftosi/apis/index.php?action=deactUser&mobile=9975887206
         case 'deactUser':
             include APICLUDE.'class.user.php';

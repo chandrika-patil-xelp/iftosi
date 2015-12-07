@@ -612,5 +612,44 @@
 
 		return $pwd;
 	}       
+        public function forgotPwd($params) {
+            $vsql = "SELECT * FROM tbl_registration WHERE logmobile=\"" . $params['email'] . "\"";
+            $vres = $this->query($vsql);
+            $row = $this->fetchData($vres);
+            $cnt1 = $this->numRows($vres);
+
+            if ($cnt1 > 0) {
+                $password = mt_rand(11111111, 99999999);
+                $vsql1 = "UPDATE tbl_registration SET password=MD5('.$password.') WHERE logmobile=\"" . $params['email'] . "\"";
+
+                $vres1 = $this->query($vsql1);
+                if ($vres1) {
+                    $subject = 'Your Password Changed';
+                    $message = 'Your password was successfully Changed. Your new password is ' . $password;
+
+                    $headers = "MIME-Version: 1.0" . "\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                    $headers .= 'From: <info@4tigo.com>' . "\r\n";
+
+                    $mail = mail($params['email'], $subject, $message, $headers);
+                    if ($mail) {
+                        $arr = array();
+                        $err = array('Code' => 0, 'Msg' => 'Email sent with the password');
+                    } else {
+                        $arr = array();
+                        $err = array('Code' => 1, 'Msg' => 'Mail not Sent');
+                    }
+                } else {
+                    $arr = array();
+                    $err = array('Code' => 1, 'Msg' => 'Failed to Update Password');
+                }
+            } else {
+                $arr = array();
+                $err = array('Code' => 1, 'Msg' => 'invalid Email ID');
+            }
+            $result = array('results' => $arr, 'error' => $err);
+            return $result;
+        }
+
 }
 ?>
