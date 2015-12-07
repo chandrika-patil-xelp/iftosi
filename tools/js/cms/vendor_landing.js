@@ -320,6 +320,19 @@ function submitDForm() {
      alert('submit ' +values);*/
 }
 
+function onEnterFormSubmit(evt,type) {
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if(charCode==13) {
+        if(type==1) {
+            updateDollarRate();
+        } else if(type==2) {
+            updateSilverRate();
+        } else if(type==3) {
+            updateGoldRate();
+        }
+    }
+}
+
 $('#overlay').velocity({opacity:0},{delay:0,duration:0});
 $('#uploadDiv,#dollarRateDiv,#goldRateDiv,#silverRateDiv').velocity({scale: 0}, {delay: 0, duration: 0});
 $('#upProds').click(function () {
@@ -344,10 +357,7 @@ function showDollarRateForm() {
         var obj = jQuery.parseJSON(result);
         var errCode = obj['error']['Code'];
         if (errCode == 0) {
-            if (obj['results']['dollar_rate'] !== null && obj['results']['dollar_rate'] !== undefined && obj['results']['dollar_rate'] !== '' && parseFloat(obj['results']['dollar_rate']) > 0)
-            {
-                $('#dollar_rate').val(obj['results']['dollar_rate']);
-            }
+            $('#dollar_rate').val(obj['results']['dollar_rate']);
         }
     }});
 }
