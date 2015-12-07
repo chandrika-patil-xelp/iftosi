@@ -151,7 +151,7 @@ function submitForm(formid)
                     $('#diamondweight').focus();
                 }
             }
-            if(isValid && (no_diamonds !== undefined && no_diamonds !== 'undefined' && no_diamonds !== 'null' && no_diamonds !== '' && isNaN(no_diamonds)))
+            if(isValid && (no_diamonds !== undefined || no_diamonds !== 'undefined' || no_diamonds !== 'null' || no_diamonds !== '' || isNaN(no_diamonds)))
             {
                 
                 if(isValid && (color == undefined || color == 'undefined' || color == 'null' || color == ''))
@@ -177,7 +177,7 @@ function submitForm(formid)
                     $('#diamondweight').focus();
                 }
             }
-            if(isValid && (dweight !== undefined && dweight !== 'undefined' && dweight !== 'null' && dweight !== '' && isNaN(dweight)))
+            if(isValid && (dweight !== undefined || dweight !== 'undefined' || dweight !== 'null' || dweight !== '' || isNaN(dweight)))
             {
                 
                 if(isValid && (color == undefined || color == 'undefined' || color == 'null' || color == ''))
