@@ -827,6 +827,23 @@ switch($action)
             $res=$result;
             break;
 
+//  localhost/iftosi/apis/index.php?action=suggestAreaCity&str=de&page=1&limit=3
+        case 'suggestAreaCity':
+            include APICLUDE.'class.auto.php';
+            $srch=(!empty($params['str'])) ? trim(urldecode($params['str'])) : '';
+            if(empty($srch))
+            {
+            $arr=array();
+            $err=array('code'=> 1,'Msg'=> 'Invalid parameters');
+            $result=array('results'=> $arr,'error'=>$err);
+            $res=$result;
+            break;
+            }
+            $obj = new auto($db['iftosi']);
+            $result=$obj->suggestAreaCity($params);
+            $res=$result;
+            break;
+
 //  localhost/iftosi/apis/index.php?action=suggestBrand&str=p&page=1&limit=1
         case 'suggestBrand':
             include APICLUDE.'class.auto.php';

@@ -235,6 +235,43 @@ class auto extends DB
     $result=array('results'=>$arr,'error'=>$err);
     return $result;
     }
+    public function suggestAreaCity($params) {
+        $page=(!empty($params['page'])) ? trim(urldecode($params['page'])) : 1;
+        $limit=(!empty($params['limit'])) ? trim(urldecode($params['limit'])) : 7;
+         $sql ="SELECT
+				id, 
+				if(area = '".$params['str']."',1,0) AS exact,
+				if(area like '".$params['str']."%',1,0) AS startwith,
+				MATCH(area) AGAINST ('" . $params['str'] . "*' IN BOOLEAN MODE) AS score,
+				area AS name,
+				dcity AS city
+			FROM 
+				tbl_area_master
+			WHERE 
+				MATCH(area) AGAINST ('".$params['str']."*' IN BOOLEAN MODE)
+			AND
+				display_flag = 0
+			ORDER BY 
+				exact DESC, startwith DESC, score DESC";
+        $page = $params['page'];
+        $limit = $params['limit'];
+        if (!empty($page)) {
+            $start = ($page * $limit) - $limit;
+            $sql.=" LIMIT " . $start . ",$limit";
+        }
+        $res = $this->query($sql);
+        if ($this->numRows($res) > 0) {
+            while ($row = $this->fetchData($res)) {
+                $arr[] = $row;
+            }
+            $err = array('Code' => 0, 'Msg' => 'Values are fetched');
+        } else {
+            $arr = "No records matched";
+            $err = array('Code' => 1, 'Msg' => 'Search Query Failed');
+        }
+        $result = array('results' => $arr, 'error' => $err);
+        return $result;
+    }
 
     
     
