@@ -646,7 +646,7 @@
         }
         
         public function getPrdByCatid($params)
-        {	
+        {
 			$page   = ($params['page'] ? $params['page'] : 1);
 			$limit  = ($params['limit'] ? $params['limit'] : 15);
 			
@@ -838,7 +838,7 @@
 				$catname = $row['name'];
 			}
 			
-                        if(!empty($params['ilist']))
+			if(!empty($params['ilist']))
 			{
 				$ilist = str_replace('|@|',',',$params['ilist']);
 				$where = " WHERE category_id in (".$ilist.") ";
@@ -968,24 +968,42 @@
 				}
 				
 				$allpids = $pid = implode(',',$pid);
-				
+
+				$city_area = $params['ctid'];
+				if(!empty($city_area))
+				{
+					$city_area = explode('_', $city_area);
+					if($city_area[1] == 'area')
+					{
+						$tbl_name = 'tbl_area_master';
+						$colmn_nm = 'city';
+						$whr_cond = 'id';
+					}
+					else
+					{
+						$tbl_name = 'tbl_city_master';
+						$colmn_nm = 'cityname';
+						$whr_cond = 'cityid';
+					}
+				}
+
 				if($params['ctid'])
 				{
-					$sqlct = "SELECT cityname
-							FROM tbl_city_master
-							WHERE cityid = ".$params['ctid'];
+					$sqlct = "SELECT $colmn_nm AS cityname 
+							FROM $tbl_name
+							WHERE $whr_cond = ".$city_area[0];
 					$resct = $this->query($sqlct);
 					if($resct)
 					{
 						$rowct = $this->fetchData($resct);
-						
+
 						$sqlpct = "
 									SELECT 
 										product_id as pid
 									FROM 
 										tbl_vendor_product_mapping 
 									WHERE 
-										product_id in (".$allpids.") 
+										product_id in (".$allpids.")
 									AND 
 										city=\"".$rowct['cityname']."\"";
 						$respct = $this->query($sqlpct);
