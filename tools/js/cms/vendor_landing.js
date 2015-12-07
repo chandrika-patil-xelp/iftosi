@@ -174,6 +174,11 @@ $(document).ready(function () {
                 $('.goldprop').removeClass('dn');
                 $('#silverpurity').val('');
                 $('#silverweight').val('');
+                if (tmpId == 'gbars') {
+                    $('#goldweight').attr('placeholder','eg. 10 Kgs/Gms');
+                } else {
+                    $('#goldweight').attr('placeholder','eg. 10 Gms');
+                }
             }
             else if ((tmpId == 'sbars') || (tmpId == 'scoins'))
             {
@@ -181,6 +186,11 @@ $(document).ready(function () {
                 $('.silverprop').removeClass('dn');
                 $('#goldpurity').val('');
                 $('#goldweight').val('');
+                if (tmpId == 'sbars') {
+                    $('#silverweight').attr('placeholder','eg. 10 Kgs/Gms');
+                } else {
+                    $('#silverweight').attr('placeholder','eg. 10 Gms');
+                }
             }
         }
         else
