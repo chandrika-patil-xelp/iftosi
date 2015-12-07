@@ -97,12 +97,12 @@ switch ($action) {
                 }
                 echo json_encode($resp);
                 break;
-                
-                case 'updateStatus':
-                
+
+            case 'updateStatus':
+
                 $vid = (!empty($_GET['uid'])) ? trim($_GET['uid']) : '';
-                $af = (!empty($_GET['af'])) ? trim($_GET['af']) : 0;    
-                $userUrl = APIDOMAIN . 'index.php?action=actUser&userid='.$vid.'&active_flag='.$af;
+                $af = (!empty($_GET['af'])) ? trim($_GET['af']) : 0;
+                $userUrl = APIDOMAIN . 'index.php?action=actUser&userid=' . $vid . '&active_flag=' . $af;
                 $resp = $comm->executeCurl($userUrl);
                 echo json_encode($resp);
                 break;
@@ -181,24 +181,21 @@ switch ($action) {
                 }
                 echo json_encode($resp);
                 break;
-				case 'getWishListCount':
-					$uid = (!empty($_GET['userid'])) ? trim(urldecode($_GET['userid'])) : '';
-					$total = 0;
-					if(!empty($uid))
-					{
-						$url = APIDOMAIN . "index.php?action=getPrdByCatid&uid=".$uid;
-						$res = $comm->executeCurl($url);
+            case 'getWishListCount':
+                $uid = (!empty($_GET['userid'])) ? trim(urldecode($_GET['userid'])) : '';
+                $total = 0;
+                if (!empty($uid)) {
+                    $url = APIDOMAIN . "index.php?action=getPrdByCatid&uid=" . $uid;
+                    $res = $comm->executeCurl($url);
 
-						if(!empty($res) && !empty($res['error']) && empty($res['error']['errCode']))
-						{
-							if(!empty($res['results']['total']))
-							{
-								$total = $res['results']['total'];
-							}
-						}
-					}
-					echo $total;
-				break;
+                    if (!empty($res) && !empty($res['error']) && empty($res['error']['errCode'])) {
+                        if (!empty($res['results']['total'])) {
+                            $total = $res['results']['total'];
+                        }
+                    }
+                }
+                echo $total;
+                break;
         }
         break;
 
@@ -232,7 +229,14 @@ switch ($action) {
                 $page = 'signup';
                 include 'template/signup.html';
                 break;
-
+            case 'forgot':
+                $page = 'forgot';
+                include 'template/forgotPsw.html';
+                break;
+            case 'login':
+                $page = 'login';
+                include 'template/login.html';
+                break;
             case 'upload':
                 $pid = $_GET['pid'];
                 $page = 'upload';
@@ -363,16 +367,14 @@ switch ($action) {
                     $vndrDtls = $value;
                 }
 
-				if((empty($vndrDtls['latitude']) || empty($vndrDtls['longitude'])) && !empty($vndrDtls['area']) && !empty($vndrDtls['city']))
-				{
-					$latLngAreaURL = APIDOMAIN . 'index.php?action=getLatLngByArea&area=' . urlencode($vndrDtls['area']).'&city='.urlencode($vndrDtls['city']);
-					$latLngArea = $comm->executeCurl($latLngAreaURL);
-					if(!empty($latLngArea) && !empty($latLngArea['error']) && empty($latLngArea['error']['errCode']))
-					{
-						$vndrDtls['latitude'] = $latLngArea['results']['latitude'];
-						$vndrDtls['longitude'] = $latLngArea['results']['longitude'];
-					}
-				}
+                if ((empty($vndrDtls['latitude']) || empty($vndrDtls['longitude'])) && !empty($vndrDtls['area']) && !empty($vndrDtls['city'])) {
+                    $latLngAreaURL = APIDOMAIN . 'index.php?action=getLatLngByArea&area=' . urlencode($vndrDtls['area']) . '&city=' . urlencode($vndrDtls['city']);
+                    $latLngArea = $comm->executeCurl($latLngAreaURL);
+                    if (!empty($latLngArea) && !empty($latLngArea['error']) && empty($latLngArea['error']['errCode'])) {
+                        $vndrDtls['latitude'] = $latLngArea['results']['latitude'];
+                        $vndrDtls['longitude'] = $latLngArea['results']['longitude'];
+                    }
+                }
 
                 $vndrDtls['fulladdress'] = explode(",", $vndrDtls['fulladdress']);
                 foreach ($vndrDtls['fulladdress'] as $key => $value) {
