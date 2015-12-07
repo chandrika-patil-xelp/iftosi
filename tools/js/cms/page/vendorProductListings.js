@@ -114,7 +114,7 @@ function generateDiamondList(obj) {
     str += '<div class="acct fLeft">';
     str += '<center>';
     str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'" target="_blank"><div class="uploadBtn poR ripplelink"></div></a>';
-    str += '<div class="deltBtn poR ripplelink" onclick="deleteProduct(' + obj['id'] + ',this)"></div>';
+    str += '<div class="deltBtn poR ripplelink" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
     str += '<a href="'+ DOMAIN +'index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn poR ripplelink"></div></a>';
     str += '<div class="soldBtn poR ripplelink fmOpenR" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3) ? "STOCK" : "SOLD");+'</div>';
     str += '</center>';
@@ -202,7 +202,7 @@ function generateJewellList(obj) {
         str += '<div class="acct fLeft">';
         str += '<center>';
         str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'" target="_blank"><div class="uploadBtn poR ripplelink"></div></a>';
-        str += '<div class="deltBtn poR ripplelink" onclick="deleteProduct(' + obj['id'] + ',this)"></div>';
+        str += '<div class="deltBtn poR ripplelink" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
         str += '<a href="'+ DOMAIN +'index.php?case=jewellery_Form&catid=10001&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn poR ripplelink"></div></a>';
         str += '<div class="soldBtn poR ripplelink fmOpenR" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "STOCK" : "SOLD");+'</div>';
         str += '</center>';
@@ -274,7 +274,7 @@ function generatBullionsList(obj) {
     str += '<div class="acct fLeft">';
     str += '<center>';
     str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'" target="_blank"><div class="uploadBtn poR ripplelink"></div></a>';
-    str += '<div class="deltBtn poR ripplelink" onclick="deleteProduct(' + obj['id'] + ',this)"></div>';
+    str += '<div class="deltBtn poR ripplelink" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
     str += '<a href="'+ DOMAIN +'index.php?case=bullion_Form&catid=10002&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn poR ripplelink"></div></a>';
     str += '<div class="soldBtn poR ripplelink fmOpenR" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "STOCK" : "SOLD");+'</div>';
     str += '</center>';
@@ -284,7 +284,34 @@ function generatBullionsList(obj) {
     return str;
 }
 var catName='';
-function deleteProduct(proId,ele) {
+
+var productDelId = '', productDelEle = '';
+
+function closeConfirmDelete()
+{
+	productDelId = '', productDelEle = '';
+	$('#confirmDelete').velocity({scale: 0}, {delay: 0, ease: 'swing'});
+	$('#overlay1').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
+	setTimeout(function () {
+		$('#overlay1,#confirmDelete').addClass('dn');
+	}, 1010);
+}
+
+function showConfirmDelete(proId, ele)
+{
+	productDelId = proId;
+	productDelEle = ele;
+	$('#overlay1,#confirmDelete').removeClass('dn');
+	setTimeout(function () {
+		$('#overlay1').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
+		$('#confirmDelete').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
+	}, 10);
+}
+
+
+function deleteProduct() {
+	var proId = productDelId;
+	var ele = productDelEle;
     $.ajax({url: common.APIWebPath() + "index.php?action=vDeletePrd&vid=" + uid + "&prdid=" + proId, success: function (result) {
         var obj = jQuery.parseJSON(result);
         if(obj['error']['Code']==0) {
@@ -324,6 +351,7 @@ function deleteProduct(proId,ele) {
             common.toast(0,obj['error']['Msg']);
         }
     }});
+	closeConfirmDelete();
 }
 
 function inStock(proId,ele) {

@@ -30,4 +30,10 @@
                 <div class="commBtn upBtn fLeft fmOpenR" onclick="updateGoldRate();">UPDATE</div>
                 <div id="goldErr" class="rateErr dn"><span> Update Gold Rate to add Products</div>
         </div>
+
+		<div id='confirmDelete' class="popDiv transition300 transit-200Y1 dn" style="height: 200px;">
+			<div class="upTitle fLeft fmOpenR">Are you sure you want to delete Product?</div>
+			<div class="commBtn cancelBtn fLeft fmOpenR" id='delCancel' onclick="closeConfirmDelete();"> CANCEL</div>
+			<div class="commBtn upBtn fLeft fmOpenR" onclick="deleteProduct();"> OK</div>
+        </div>
         
