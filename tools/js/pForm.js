@@ -433,10 +433,10 @@ function validateNum(){
             else if(a=='sBars' || a=='sCoins')
             {
                 if(spurity == '' || isNaN(spurity) || !spurity.match(patt2)) {
-                    str ='Silver Purity field is Empty';
+                    str ='Silver Purity field is Invalid';
                 }
                 else if(sweight == '' || isNaN(sweight) || !sweight.match(patt1)) {
-                    str ='Silver Weight field is Empty';
+                    str ='Silver Weight field is invalid';
                 }
             }
             if(str != '')

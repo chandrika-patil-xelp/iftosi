@@ -43,7 +43,10 @@
                                 <div class="prdShTitle fLeft fmOpenB">PRICE</div>
                                 <?php if(empty($prdInfo['attr_details']['silver_rate']) || $prdInfo['attr_details']['silver_rate']=='0.00') { $prdInfo['attr_details']['silver_rate'] = silverRate; } ?>
                                 <?php if(empty($prdInfo['attr_details']['gold_rate']) || $prdInfo['attr_details']['gold_rate']=='0.00') { $prdInfo['attr_details']['gold_rate'] = goldRate; } ?>
-                                <?php $metal_rate=$prdInfo['attr_details']['silver_rate']; $pro_metal = strtolower($prdInfo['attr_details']['metal']); if($pro_metal=='gold') { $metal_rate=$prdInfo['attr_details']['gold_rate']; } $metal_rate=$metal_rate*($prdInfo['attr_details']['gold_purity']/995) ?>                               
+                                <?php $metal_rate=$prdInfo['attr_details']['silver_rate']; $pro_metal = strtolower($prdInfo['attr_details']['metal']);
+                                if($pro_metal=='gold') { $metal_rate=$prdInfo['attr_details']['gold_rate'];  $metal_rate=($metal_rate/10)*($prdInfo['attr_details']['gold_purity']/995); }
+                                else if($pro_metal=='silver') { $metal_rate=$prdInfo['attr_details']['silver_rate'];  $metal_rate=($metal_rate/1000)*($prdInfo['attr_details']['gold_purity']/995); } ?>
+                                
                                 <div class="prdShType fLeft fmOpenL"><span>&#8377;</span><?php echo number_format(($prdInfo['attr_details']['gold_weight']*$metal_rate),2); ?></div>
                             </div>
                             <div class="prdBtns fLeft">

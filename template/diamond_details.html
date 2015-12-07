@@ -42,7 +42,7 @@
                             <div class="prdShape fLeft">
                                 <div class="prdShTitle fLeft fmOpenB">PRICE</div>
                                                         <?php if( empty($data['attr_details']['dollar_rate']) || $data['dollar_rate']=='0.00') { $data['attr_details']['dollar_rate'] = dollarValue; } ?>
-                                <div class="prdShType fLeft fmOpenL"><span>&#8377;</span><?php echo number_format(($data['attr_details']['price'] * $data['attr_details']['dollar_rate']), 2); ?></div>
+                                <div class="prdShType fLeft fmOpenL"><span>&#8377;</span><?php echo number_format((($data['attr_details']['price'] * $data['attr_details']['dollar_rate']) * $data['attr_details']['carat']), 2); ?></div>
                             </div>
                             <div class="prdBtns fLeft">
                                 <div class="btnComm fLeft iconCall ripplelink poR" >Contact Dealer</div>

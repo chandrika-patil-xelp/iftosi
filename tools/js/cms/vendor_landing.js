@@ -7,15 +7,15 @@ if(busiType==null || busiType=='' || busiType==undefined) {
 var active = '';
 document.getElementById('userName').innerHTML = username.split(' ')[0];
 if ( catid == '10000') {
-    $('#dmdTab').removeClass('dn');
+    //$('#dmdTab').removeClass('dn');
    active = 'diamondFheader';
 }
 if ( catid == '10001') {
-    $('#jewTab').removeClass('dn');
+    //$('#jewTab').removeClass('dn');
     active = 'jewelleryFheader';
 }
 if ( catid == '10002') {
-    $('#bullTab').removeClass('dn');
+   // $('#bullTab').removeClass('dn');
     active = 'bullionFheader';
 }
 
@@ -73,7 +73,22 @@ $(document).ready(function () {
     $('.vTabs').eq(1).click();
 
     
-
+var busiTypeSplt = busiType.split(',');
+for(var i = 0; i< busiTypeSplt.length; i++)
+{
+    if(busiTypeSplt[i] == 1)
+    {
+        $('#dmdTab').removeClass('dn');
+    }
+    if(busiTypeSplt[i] == 2)
+    {
+        $('#jewTab').removeClass('dn');
+    }
+    if(busiTypeSplt[i] == 3)
+    {
+        $('#bullTab').removeClass('dn');
+    }
+}
 
 
 
@@ -175,9 +190,9 @@ $(document).ready(function () {
                 $('#silverpurity').val('');
                 $('#silverweight').val('');
                 if (tmpId == 'gbars') {
-                    $('#goldweight').attr('placeholder','eg. 10 Kgs/Gms');
+                    $('#goldweight').attr('placeholder','eg. Kgs Or Gms');
                 } else {
-                    $('#goldweight').attr('placeholder','eg. 10 Gms');
+                    $('#goldweight').attr('placeholder','eg. Gms');
                 }
             }
             else if ((tmpId == 'sbars') || (tmpId == 'scoins'))
@@ -187,9 +202,9 @@ $(document).ready(function () {
                 $('#goldpurity').val('');
                 $('#goldweight').val('');
                 if (tmpId == 'sbars') {
-                    $('#silverweight').attr('placeholder','eg. 10 Kgs/Gms');
+                    $('#silverweight').attr('placeholder','eg. Kgs Or Gms');
                 } else {
-                    $('#silverweight').attr('placeholder','eg. 10 Gms');
+                    $('#silverweight').attr('placeholder','eg. Gms');
                 }
             }
         }
@@ -386,6 +401,7 @@ function updateDollarRate() {
                 var errCode = obj['error']['Code'];
                 if(errCode==0) {
                     common.toast(1,obj['error']['Msg']);
+					window.location.reload(1);
                     closeAllForms();
                 } else if(errCode==1) {
                     common.toast(0,obj['error']['Msg']);
@@ -452,24 +468,36 @@ function showGoldRateForm() {
         var errCode = obj['error']['Code'];
         if(errCode==0) {
             $('#gold_rate').val(obj['results']['gold_rate']);
+            $('#silver_rate').val(obj['results']['silver_rate']);
         }
     }});
 }
 
 function updateGoldRate() {
     var gold_rate = $("#gold_rate").val();
+    var silver_rate = $("#silver_rate").val();
+    console.log(silver_rate);
     gold_rate=parseFloat(gold_rate);
-    if(gold_rate=='' || gold_rate <= 0 || gold_rate == undefined) {
-        common.toast(0,'Invaild Rate');
-    } else {
-        $.ajax({url: DOMAIN + "/apis/index.php?action=updateGoldRate&vid="+uid+"&goldRate="+gold_rate, success: function(result) {
+    silver_rate=parseFloat(silver_rate);
+   if(gold_rate=='' || gold_rate <= 0 || gold_rate == undefined || isNaN(gold_rate) == true){
+        common.toast(0,'Gold Rate is Must to fill');
+        return false;
+    }
+    else if(silver_rate=='' || silver_rate <= 0 || silver_rate == undefined || isNaN(silver_rate) == true) {
+        common.toast(0,'Silver Rate is Must to fill');
+        return false;
+    }    
+    else {
+    $.ajax({url: DOMAIN + "/apis/index.php?action=updateGoldRate&vid="+uid+"&goldRate="+gold_rate+"&silverRate="+silver_rate, success: function(result) {
                 var obj = jQuery.parseJSON(result);
                 var errCode = obj['error']['code'];
                 if(errCode==0) {
                     common.toast(1,obj['error']['Msg']);
+                    window.location.reload(1);
                     customStorage.readFromStorage('rateErr');
                     closeAllForms();
                 } else if(errCode==1) {
+                    
                     common.toast(0,obj['error']['Msg']);
                 }
             }

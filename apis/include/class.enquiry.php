@@ -147,7 +147,7 @@ class enquiry extends DB
         {   
             while($row=$this->fetchData($viewres))
             {   
-                $csql='SELECT barcode, product_name, prd_price FROM tbl_product_master WHERE product_id='.$row['product_id'].'';
+                $csql='SELECT product_id,barcode, product_name, prd_price FROM tbl_product_master WHERE product_id='.$row['product_id'].'';
                 $cres=$this->query($csql);
                 if($this->numRows($cres)>0) {
                     while($crow=$this->fetchData($cres))
@@ -156,7 +156,7 @@ class enquiry extends DB
                         $prdPrice = $crow['prd_price'];
                     }
                 }
-                $csql='SELECT gold_purity, gold_weight, metal FROM tbl_product_search WHERE product_id='.$row['product_id'].'';
+                $csql='SELECT gold_purity, gold_weight,carat,metal FROM tbl_product_search WHERE product_id='.$row['product_id'].'';
                 $cres=$this->query($csql);
                 if($this->numRows($cres)>0) {
                     while($crow=$this->fetchData($cres))
@@ -164,6 +164,7 @@ class enquiry extends DB
                         $purity=$crow['gold_purity'];
                         $metal=strtolower($crow['metal']);
                         $weight=$crow['gold_weight'];
+                        $carat=$crow['carat'];
                     }
                 }
                 $csql='SELECT b.cat_name,b.catid FROM tbl_product_category_mapping AS a, tbl_category_master AS b WHERE a.product_id='.$row['product_id'].' AND b.catid=a.category_id AND b.p_catid in (0,10000,10001,10002)';
@@ -172,19 +173,27 @@ class enquiry extends DB
                     while($crow=$this->fetchData($cres))
                     {
                         $row['pro_dtls']['cat_name'][]=$crow['cat_name'];
-                        if($crow['catid']==10000 || $crow['catid']==10001 || $crow['catid']==10002) {
+                        if($crow['catid']==10000 || $crow['catid']==10001 || $crow['catid']==10002)
+                        {
                             $row['pro_dtls']['mCatid']=$crow['catid'];
                             if($crow['catid']==10000) {
-                                $row['pro_dtls']['prd_price']=$prdPrice*$dollarValue;
+                                $row['pro_dtls']['prd_price']=$prdPrice*$dollarValue*$carat;
                             }
-                            if($crow['catid']==10002) {
-                                $metalRate=$silverRate;
+                            if($crow['catid']==10002)
+                            {
                                 if($metal=='gold') {
                                     $metalRate=$goldRate;
+                                    $finalRate=($metalRate/10)*($purity/995);
+                                    $row['pro_dtls']['prd_price']=$finalRate*$weight;
                                 }
-                                $finalRate=($metalRate)*($purity/995);
-                                $row['pro_dtls']['prd_price']=$finalRate*$weight;
+                                else if($metal='silver')
+                                {
+                                    $metalRate=$silverRate;
+                                    $finalRate=($metalRate/1000)*($purity/995);
+                                    $row['pro_dtls']['prd_price']=$finalRate*$weight;
+                                }
                             }
+                           $row['pro_dtls']['prd_price'] = number_format($row['pro_dtls']['prd_price'],$decimals = 2 ,$dec_point = "." ,$thousands_sep = "," );
                         }
                     }
                 }

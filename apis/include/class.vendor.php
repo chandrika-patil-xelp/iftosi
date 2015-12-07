@@ -598,8 +598,10 @@ class vendor extends DB
                     if($metal=='gold')
                     {
                         $metalRate=$goldRate;
-                        $finalRate=($metalRate/10)*($purity/995);
-                        $row['price']=$finalRate*$weight;
+                        $rate = ((($metalRate/995)*$purity)/10)*$weight;
+                        //$metalRate=$goldRate;
+                        //$finalRate=($metalRate/10)*($purity/995);
+                        $row['price']=$rate;
                     }
                     else if($metal=='silver')
                     {
@@ -1305,7 +1307,13 @@ class vendor extends DB
         }
         
         public function updateGoldRate($params) {
-        $sql="UPDATE tbl_vendor_master SET gold_rate='".$params['goldRate']."' WHERE vendor_id='".$params['vid']."'";
+        $sql="UPDATE
+                    tbl_vendor_master
+            SET 
+                    gold_rate=\"".$params['goldRate']."\",
+                    silver_rate=\"".$params['silverRate']."\"
+            WHERE
+                    vendor_id=\"".$params['vid']."\"";
         $res=$this->query($sql);
         if ($res) {
             $arr = array();
@@ -1319,7 +1327,7 @@ class vendor extends DB
         }    
     
         public function getGoldRate($params) {
-        $sql="SELECT gold_rate FROM tbl_vendor_master WHERE vendor_id='".$params['vid']."'";
+        $sql="SELECT gold_rate,silver_rate FROM tbl_vendor_master WHERE vendor_id='".$params['vid']."'";
         $res=$this->query($sql);
         if ($res) {
             $row = $this->fetchData($res);

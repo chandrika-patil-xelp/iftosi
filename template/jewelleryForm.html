@@ -128,7 +128,7 @@
                                 <label for="Certficate_other">Other</label>
                             </div>
                             <div id='othCert' class="otherBox fLeft <?=(($attr['certified'] !== 'IGI')&&($attr['certified'] !== 'SGL')&&($attr['certified'] !== 'DGLA')&&($attr['certified'] !== 'EGL')&&(!empty($attr['certified']))) ? '' : 'dn';?>">
-                               <input name="other_cerificate" autocomplete="false" id="other_cerificate" type="text" placeholder=" Other Certificate" value="<?=$attr['certified'];?>" class="othTxtinp fLeft fmOpenR font14 c666">
+                               <input name="other_cerificate" autocomplete="false" id="other_cerificate" type="text" placeholder="AGS,CIBJO, etc." value="<?=$attr['certified'];?>" class="othTxtinp fLeft fmOpenR font14 c666">
                             </div>
                         </div>
                     </div>
@@ -260,7 +260,7 @@
 ?>                        
                     <div class="divCon2  fLeft">
                         <div  class="titleDiv txtCap fLeft">Weight</div>
-                        <input id="goldweight" name="gold_weight" type="text" placeholder=" eg. 10" maxlength="8" autocomplete="false" value="<?=$attr['gold_weight'];?>" onkeypress="common.isDecimalKey(event)" class="txtInput fLeft fmOpenR font14 c666">
+                        <input id="goldweight" name="gold_weight" type="text" placeholder=" eg. 18,22,24" maxlength="8" autocomplete="false" value="<?=$attr['gold_weight'];?>" onkeypress="common.isDecimalKey(event)" class="txtInput fLeft fmOpenR font14 c666">
                     </div>
                         
                     <div class="divCon2  fLeft">
@@ -279,7 +279,7 @@
                     </div>
                     <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Design Number</div>
-                            <input name="barcode" id="barcode" type="text" placeholder=" eg. ALXPK12" maxlength="8" autocomplete="false" class="txtInput fLeft fmOpenR font14 c666" value="<?=$pdet['product_barcode'];?>">
+                            <input name="barcode" id="barcode" type="text" placeholder=" eg. ABCD12" maxlength="8" autocomplete="false" class="txtInput fLeft fmOpenR font14 c666" value="<?=$pdet['product_barcode'];?>">
                     </div>
  <?php                
                                         foreach($cat['subcat'] as $key=>$values)

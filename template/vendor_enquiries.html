@@ -100,27 +100,36 @@ function generateEnqList(obj) {
     var date = obj['update_time'].split(' ');
     var pro_dtls=obj['pro_dtls'];
     var pro_name = pro_dtls['product_name'];
+    var barcode = pro_dtls['barcode'];
+    var uname = obj['user_name'];
+    var umail = obj['user_email'];
+    var umob = obj['user_mobile'];
     if(pro_name == null) {
         pro_name = '';
     }
-    var barcode = pro_dtls['barcode'];
+    
     if(barcode == null || barcode == '' || barcode == 'null') {
-        barcode = '';
+        barcode = 'N-A';
     }
-    var uname = obj['user_name'];
-    var umail = obj['user_email'];
-    if(barcode !== '' && barcode !== 'null' && barcode !== null && uname !== 'undefined' &&  uname !== undefined && uname !== '' && uname !== 'null' && uname !== null && umail !== '' && umail !== 'null' && umail !== null)
-    {
+    if(uname == undefined || uname == 'undefined' || uname == null || uname == '' || uname == 'null' || uname === '0') {
+        uname = 'N/A';
+    }
+    if(uname == undefined || uname == 'undefined' || umail == null || umail == '' || umail === '0' ) {
+        umail = 'N/A';
+    }
+    if(umob == undefined || umob == 'undefined' || umob == null || umob == '' || umob === '0' || umob === 0 ) {
+        umob = 'N/A';
+    }
     var str='';
     str += '<li>';
         str += '<div class="date fLeft"> ';
             str += '<span class="upSpan">' + date[0] + '</span>';
             str += '<span class="lwSpan">' + date[1] + '</span>';
         str += '</div>';
-        str += '<div class="name fLeft">' + obj['user_name'] + '</div>';
+        str += '<div class="name fLeft">' + uname + '</div>';
         str += '<div class="email fLeft">';
-            str += '<span class="upSpan">' + obj['user_email'] + '</span>';
-            str += '<span class="lwSpan">' + obj['user_mobile'] + '</span>';
+            str += '<span class="upSpan">' + umail + '</span>';
+            str += '<span class="lwSpan">' + umob + '</span>';
         str += '</div>';
         str += '<div class="type fLeft">';
             str += '<span class="upSpan">' + pro_dtls['cat_name'][0] + '</span>';
@@ -145,19 +154,12 @@ function generateEnqList(obj) {
                 str += '<span class="lwSpan"><a href="'+ DOMAIN + '-' +  pro_dtls['cat_name'][0] +'-/jid-'+ obj['product_id'] +'" target="_blank">View Details</a></span>';
             }
     str += '</div>';
-    if(vl.dollarValue!=0 && vl.dollarValue !== undefined && vl.dollarValue !== null && vl.dollarValue !== '') {
-        dollarValue=vl.dollarValue; 
         if(pro_dtls['cat_name'][0])
-        str += '<div class="price fLeft bNone fmOpenB">&#8377;' + dollarValue + '</div>';
+        str += '<div class="price fLeft bNone fmOpenB">&#8377;' + pro_dtls['prd_price'] + '</div>';
         else if(pro_dtls['cat_name'][2])
-            str += '<div class="price fLeft bNone fmOpenB">&#8377;' + dollarValue + '</div>';
-    }
+            str += '<div class="price fLeft bNone fmOpenB">&#8377;' + pro_dtls['prd_price'] + '</div>';
     str += '</li>';
     return str;
-    }
-    else {
-            return str='';
-        }
     }
 
 </script>

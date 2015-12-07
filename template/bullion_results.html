@@ -99,8 +99,16 @@
                                                                                                         if($pro_metal=='gold')
                                                                                                         { 
                                                                                                             $metal_rate=$val['gold_rate'];
-                                                                                                        } 
-                                                                                                        $metal_rate=$metal_rate*($val['attributes']['gold_purity']/995)
+                                                                                                         
+                                                                                                        $metal_rate=($metal_rate/10)*($val['attributes']['gold_purity']/995);
+                                                                                                        }
+                                                                                                        else if($pro_metal=='silver')
+                                                                                                        { 
+                                                                                                            $metal_rate=$val['silver_rate'];
+                                                                                                         
+                                                                                                        $metal_rate=($metal_rate/1000)*($val['attributes']['gold_purity']/995);
+                                                                                                        }
+                                                                                                        
 ?>
 													<div class="detValue fmOpenB fLeft"><span>&#8377;</span><?php echo number_format(($val['attributes']['gold_weight']*$metal_rate),2);?></div>
 												</div>
