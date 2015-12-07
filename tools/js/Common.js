@@ -59,6 +59,12 @@ function Common() {
         var is_vendor = customStorage.readFromStorage('is_vendor');
         var type = customStorage.readFromStorage('busiType');
         var isComp = customStorage.readFromStorage('isComp');
+
+		if(is_vendor != '' && (is_vendor == -1 || is_vendor == '-1'))
+		{
+			is_vendor = 0;
+		}
+
         if(is_vendor == 1)
         {
             if((type != null) && (type != undefined))
@@ -213,7 +219,14 @@ function Common() {
                     customStorage.addToStorage('isComp',isComp);
                     customStorage.addToStorage('userid', userid);
                     customStorage.addToStorage('username', username);
-                    customStorage.addToStorage('is_vendor', is_vendor);
+
+					var tmp_is_vendor = is_vendor;
+					if(is_vendor == 0 || is_vendor == "0")
+					{
+						tmp_is_vendor = -1;
+					}
+
+                    customStorage.addToStorage('is_vendor', tmp_is_vendor);
                     if (is_vendor == 1)
                     {
                         var busiType = obj['results']['busiType'];

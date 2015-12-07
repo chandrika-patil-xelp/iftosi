@@ -72,6 +72,12 @@ $(document).ready(function(){
     $('.iconWishlist').click(function(){
 		var isVendor = customStorage.readFromStorage('is_vendor');
 		var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
+
+		if(isVendor != "" && (isVendor == '-1' || isVendor == -1))
+		{
+			isVendor = 0;
+		}
+
 		if((isVendor !== '1' && isVendor !== 1) || isLoggedIn == undefined || isLoggedIn == null || isLoggedIn == '' || isLoggedIn == false || isLoggedIn == 'false')
 		{
 			mobile = customStorage.readFromStorage('mobile');
@@ -115,6 +121,11 @@ $(document).ready(function(){
     $('.iconCall,.iconMessage').click(function(){
 		var isVendor = customStorage.readFromStorage('is_vendor');
 		var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
+
+		if(isVendor != '' && (isVendor == -1 || isVendor == "-1"))
+		{
+			isVendor = 0;
+		}
 
 		if((isVendor !== '1' && isVendor !== 1) || isLoggedIn == undefined || isLoggedIn == null || isLoggedIn == '' || isLoggedIn == false || isLoggedIn == 'false')
 		{
@@ -343,7 +354,7 @@ function showVendorDetails(obj)
 			customStorage.addToStorage('name', name);
 			customStorage.addToStorage('email', email);
 			customStorage.addToStorage('isLoggedIn',true);
-			customStorage.addToStorage('is_vendor','0');
+			customStorage.addToStorage('is_vendor','-1');
 			common.checkLogin();
 
 			var params = 'action=ajx&case=userCheck&mobile='+mobile+'&name='+encodeURIComponent(name)+'&email='+encodeURIComponent(email);

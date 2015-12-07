@@ -254,10 +254,14 @@ function Common() {
         var nm = customStorage.readFromStorage('username');
         var is_vendor = customStorage.readFromStorage('is_vendor');
 
-        if (isLoggedIn === 'true' && is_vendor==1)
-        {
-            
-        } else {
+		if(is_vendor !== '' && (is_vendor == -1 || is_vendor == '-1'))
+		{
+			is_vendor = 0;
+		}
+
+        if (isLoggedIn === 'true' && is_vendor == 1) {}
+		else
+		{
             window.location.href = DOMAIN + "index.php";
         }
     };
@@ -265,6 +269,5 @@ function Common() {
     this.doLogout = function () {
         customStorage.removeAll();
         window.location.href = window.location;
-        //window.location.href = DOMAIN + "index.php";
     };
 }

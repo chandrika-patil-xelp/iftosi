@@ -239,6 +239,11 @@ $(document).ready(function() {
     var isVendor = customStorage.readFromStorage('is_vendor');
     var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
 
+	if(isVendor != '' && (isVendor == -1 || isVendor == "-1"))
+	{
+		isVendor = 0;
+	}
+
     if (isLoggedIn == 'true' || isLoggedIn == true)
     {
         if (isVendor == 1 || isVendor == '1')
