@@ -15,25 +15,43 @@
                 $case='bullion_Form';
             }
             ?>
-            <a href="<?php echo DOMAIN.'?case='.$case.'&catid='.$_GET['c'].'&prdid='.$_GET['pid'];?>"><div class="skipBtn btnComm fLeft">BACK</div></a>
 <?php
             $catid=$_GET['c'];
             
             $vendor_landing = DOMAIN.'?case=vendor_landing&catid='.$catid;
             if( !empty($catid))
             {
+            $backUrl = DOMAIN.'?case='.$case.'&catid='.$_GET['c'].'&prdid='.$_GET['pid'];
 ?>
+            <a href="<?php echo $backUrl;?>"><div class="skipBtn btnComm fLeft">BACK</div></a>
                 <a href="<?php echo $vendor_landing;?>"><div class="finishBtn btnComm fRight">PROCEED</div></a>
 <?php
             }
             else
             {
+            $backUrl=($_SERVER['HTTP_REFERER'] ? $_SERVER['HTTP_REFERER'] : $_COOKIE['back']);
 ?>
+            <a href="<?php echo $backUrl; ?>"><div class="skipBtn btnComm fLeft">BACK</div></a>
                 <a href="<?php echo ($_SERVER['HTTP_REFERER'] ? $_SERVER['HTTP_REFERER'] : $_COOKIE['back']);?>"><div class="finishBtn btnComm fRight">PROCEED</div></a>
             
 <?php
             }
 ?>
         </div>
+        <script>
+        (function(window, location) {
+            history.replaceState(null, document.title, location.pathname+"#!/stealingyourhistory");
+            history.pushState(null, document.title, location.pathname);
+
+            window.addEventListener("popstate", function() {
+              if(location.hash === "#!/stealingyourhistory") {
+                    history.replaceState(null, document.title, location.pathname);
+                    setTimeout(function(){
+                      location.replace('<?php echo $backUrl;?>');
+                    },0);
+              }
+            }, false);
+        }(window, location));
+        </script>
     </body>
 </html>
