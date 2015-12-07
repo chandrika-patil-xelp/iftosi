@@ -5,7 +5,17 @@
                 <input type="file" name="files[]" id="filer_input2" multiple="multiple">
                 <input type="hidden" name="pid" id="pid" value="<?php echo $pid;?>">
             </div>
-        <div class="btnConta fmOpenR">
+        <div class="btnConta fmOpenR"><?php
+            $catid=$_GET['c'];
+            if($catid==10000) {
+                $case='diamond_Form';
+            } else if($catid==10001) {
+                $case='jewellery_Form';
+            } else if($catid==10002) {
+                $case='bullion_Form';
+            }
+            ?>
+            <a href="<?php echo DOMAIN.'?case='.$case.'&catid='.$_GET['c'].'&prdid='.$_GET['pid'];?>"><div class="skipBtn btnComm fLeft">BACK</div></a>
 <?php
             $catid=$_GET['c'];
             
