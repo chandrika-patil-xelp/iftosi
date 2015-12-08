@@ -129,7 +129,7 @@ class vendor extends DB
     }
 
 
-    public function getVProductsBYBcode($params)
+    public function getVProductsByBcode($params)
     {
         $page   = ($params['page'] ? $params['page'] : 1);
         $limit  = ($params['limit'] ? $params['limit'] : 15);
@@ -148,61 +148,6 @@ class vendor extends DB
                 $pdet1['pid'][$k]=$row['product_id'];
                 $prDetails[]=$pdet;
             }
-            $prIds=implode(',',$pdet1['pid']);
-
-        $sql1=" SELECT
-                    a.product_id,
-                    a.barcode as product_barcode,
-                    b.shape as product_shape,
-                    b.clarity,
-                    b.certified,
-                    b.color,
-                    b.metal,
-                    b.type
-                FROM
-                    tbl_product_master AS a join
-                    tbl_product_search AS b
-               ON
-                    a.product_id = b.product_id
-                WHERE
-                    a.product_id in (".$prIds.")
-                AND
-                    (
-                    MATCH(a.barcode) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
-                        OR
-                    MATCH(b.shape) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
-                        OR
-                    b.color LIKE '" . $params['bcode'] . "%'
-                    OR
-                    MATCH(b.clarity) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
-                    OR
-                    MATCH(b.metal) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
-                    OR
-                    b.type LIKE '" . $params['bcode'] . "%'
-                    OR
-                    b.certified LIKE '" . $params['bcode'] . "%'
-                    OR
-                    a.product_id = '".$params['bcode']."'
-                    )
-                ";
-        if (!empty($page))
-        {
-            $start = ($page * $limit) - $limit;
-            $sql1.=" LIMIT " . $start . ",$limit";
-        }
-
-        $res1=$this->query($sql1);
-        $chkcnt=$this->numRows($res1);
-        if($chkcnt>0)
-        {
-            $i=-1;
-            while($row=$this->fetchData($res1))
-            {   $i++;
-                $pdet='';
-                $pdet1s['pid'][$i]=$row['product_id'];
-                $prDetails[]=$pdet;
-            }
-            $prId=implode(',',$pdet1s['pid']);
             $psql='';
             if($catid == 10000) {
                 $psql='d.color, d.carat, d.shape, d.certified AS cert, d.clarity';
@@ -211,7 +156,7 @@ class vendor extends DB
             } else if($catid == 10002) {
                 $psql='d.type, d.metal, d.gold_purity, d.gold_weight';
             }
-            $sql = "select
+                $sql = "select
                                     DISTINCT a.product_id
                 AS id,
                                     c.product_name,
@@ -233,23 +178,42 @@ class vendor extends DB
                 where
                                     a.product_id=b.product_id
                 AND
-                                    b.product_id=c.product_id
+                                    a.product_id=c.product_id
                 AND
-                                    c.product_id=d.product_id
+                                    a.product_id=d.product_id
                 AND
                                     b.category_id = " . $catid . "
                 AND
                                     a.vendor_id=" . $params['vid'] . "
                 AND
-                                    a.active_flag=1
-                AND
-                                    c.product_id IN(".$prId.")
+                    (
+                        MATCH(c.barcode) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
+                OR
+                        MATCH(d.shape) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
+                OR
+                        d.color LIKE '" . $params['bcode'] . "%'
+                OR
+                        MATCH(d.clarity) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
+                OR
+                        MATCH(d.metal) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
+                OR
+                        MATCH(d.type) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
+                OR
+                        d.certified LIKE '" . $params['bcode'] . "%'
+                OR
+                        d.product_id = '".$params['bcode']."'
+                    )
+                AND                    d.active_flag IN('0','1','3')
                 ORDER BY
-                                    field(c.product_id,".$prId.")";
-
+                                    id";
+        if (!empty($page))
+        {
+            $start = ($page * $limit) - $limit;
+            $sql.=" LIMIT " . $start . ",$limit";
+        }        
         $res = $this->query($sql);
         $total_products = $this->numRows($res);
-
+        
         if($total_products>0)
         {
             $j=0;
@@ -283,12 +247,7 @@ class vendor extends DB
         $arr = array('total_products' => $total_products, 'total_pages' => $total_pages);
         $err = array('Code' => 0, 'Msg' => 'No Match Found');
     }
-        }
-        else
-    {
-        $arr = array('total_products' => $total_products, 'total_pages' => $total_pages);
-        $err = array('Code' => 0, 'Msg' => 'No Products Yet');
-    }
+    
         $result = array('results' => $arr,'error' => $err);
         return $result;
     }
