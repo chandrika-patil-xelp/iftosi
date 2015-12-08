@@ -206,13 +206,14 @@ class vendor extends DB
                 AND                    d.active_flag IN('0','1','3')
                 ORDER BY
                                     id";
+		$res = $this->query($sql);
+		$total_products = $this->numRows($res);
         if (!empty($page))
         {
             $start = ($page * $limit) - $limit;
             $sql.=" LIMIT " . $start . ",$limit";
         }        
         $res = $this->query($sql);
-        $total_products = $this->numRows($res);
         
         if($total_products>0)
         {
