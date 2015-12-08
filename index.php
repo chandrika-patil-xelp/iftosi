@@ -283,7 +283,7 @@ switch ($action) {
                 $data = $res['results']['products'];
                 $total = $res['results']['total'];
                 $catname = $res['results']['catname'];
-                //echo "<pre>";print_r($res);die;
+                //echo "<pre>";print_r($data);die;
 
                 $url = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=' . $catid;
                 $res = $comm->executeCurl($url);

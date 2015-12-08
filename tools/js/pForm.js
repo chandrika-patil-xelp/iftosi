@@ -73,6 +73,7 @@ function submitForm(formid)
             var shape=$('.jshapeComm');
             var str = '';
             var isValid = true;
+            
            if(!shape.hasClass('shapeSelected')) {
                 str ='category is not Selected';
                 isValid = false;
@@ -101,7 +102,6 @@ function submitForm(formid)
             
             if(isValid && (color !== undefined && color !== 'undefined' && color !== 'null' && color !== ''))
             {
-                
                 if(isValid && (color == undefined || color == 'undefined' || color == 'null' || color == ''))
                 {
                     str ='Diamond Color field is Empty';
@@ -112,13 +112,13 @@ function submitForm(formid)
                     str ='Diamond Quality field is Empty';
                     isValid = false;
                 }
-                else if(isValid && (no_diamonds == undefined || no_diamonds == 'undefined' || no_diamonds == 'null' || no_diamonds == '' || isNaN(no_diamonds)))
+                else if(isValid && (no_diamonds == undefined || no_diamonds == 'undefined' || no_diamonds == 'null' || no_diamonds == '' || isNaN(no_diamonds) == true))
                 {
                     str ='Number of diamonds have to be Selected';
                     isValid = false;
                     $('#no_diamonds').focus();
                 }
-                else if(isValid && (dweight == undefined || dweight == 'undefined' || dweight == 'null' || dweight == '' || isNaN(dweight)))
+                else if(isValid && (dweight == undefined || dweight == 'undefined' || dweight == 'null' || dweight == '' || isNaN(dweight) == true))
                 {
                     str ='Diamond weight is Required';
                     isValid = false;
@@ -127,7 +127,6 @@ function submitForm(formid)
             }
             if(isValid && (clarity !== undefined && clarity !== 'undefined' && clarity !== 'null' && clarity !== ''))
             {
-                
                 if(isValid && (color == undefined || color == 'undefined' || color == 'null' || color == ''))
                 {
                     str ='Diamond Color field is Empty';
@@ -138,20 +137,45 @@ function submitForm(formid)
                     str ='Diamond Quality field is Empty';
                     isValid = false;
                 }
-                else if(isValid && (no_diamonds == undefined || no_diamonds == 'undefined' || no_diamonds == 'null' || no_diamonds == '' || isNaN(no_diamonds)))
+                else if(isValid && (no_diamonds == undefined || no_diamonds == 'undefined' || no_diamonds == 'null' || no_diamonds == '' || isNaN(no_diamonds) == true))
                 {
                     str ='Number of diamonds have to be Selected';
                     isValid = false;
                     $('#no_diamonds').focus();
                 }
-                else if(isValid && (dweight == undefined || dweight == 'undefined' || dweight == 'null' || dweight == '' || isNaN(dweight)))
+                else if(isValid && (dweight == undefined || dweight == 'undefined' || dweight == 'null' || dweight == '' || isNaN(dweight) == true))
                 {
                     str ='Diamond weight is Required';
                     isValid = false;
                     $('#diamondweight').focus();
                 }
             }
-            if(isValid && (no_diamonds !== undefined && no_diamonds !== 'undefined' && no_diamonds !== 'null' && no_diamonds !== '' && isNaN(no_diamonds)))
+             if(isValid && (no_diamonds !== undefined && no_diamonds !== 'undefined' && no_diamonds !== 'null' && no_diamonds !== '' && isNaN(no_diamonds) == false))
+            {
+                if(isValid && (color == undefined || color == 'undefined' || color == 'null' || color == ''))
+                {
+                    str ='Diamond Color field is Empty';
+                    isValid = false;
+                }
+                else if(isValid && (clarity == undefined || clarity == 'undefined' || clarity == 'null' || clarity == ''))
+                {
+                    str ='Diamond Quality field is Empty';
+                    isValid = false;
+                }
+                else if(isValid && (no_diamonds == undefined || no_diamonds == 'undefined' || no_diamonds == 'null' || no_diamonds == '' || isNaN(no_diamonds) == true))
+                {
+                    str ='Number of diamonds have to be Selected';
+                    isValid = false;
+                    $('#no_diamonds').focus();
+                }
+                else if(isValid && (dweight == undefined || dweight == 'undefined' || dweight == 'null' || dweight == '' || isNaN(dweight) == true))
+                {
+                    str ='Diamond weight is Required';
+                    isValid = false;
+                    $('#diamondweight').focus();
+                }
+            }
+            if(isValid && (dweight !== undefined && dweight !== 'undefined' && dweight !== 'null' && dweight !== '' && isNaN(dweight) == false))
             {
                 
                 if(isValid && (color == undefined || color == 'undefined' || color == 'null' || color == ''))
@@ -164,39 +188,13 @@ function submitForm(formid)
                     str ='Diamond Quality field is Empty';
                     isValid = false;
                 }
-                else if(isValid && (no_diamonds == undefined || no_diamonds == 'undefined' || no_diamonds == 'null' || no_diamonds == '' || isNaN(no_diamonds)))
+                else if(isValid && (no_diamonds == undefined || no_diamonds == 'undefined' || no_diamonds == 'null' || no_diamonds == '' || isNaN(no_diamonds) == true ))
                 {
                     str ='Number of diamonds have to be Selected';
                     isValid = false;
                     $('#no_diamonds').focus();
                 }
-                else if(isValid && (dweight == undefined || dweight == 'undefined' || dweight == 'null' || dweight == '' || isNaN(dweight)))
-                {
-                    str ='Diamond weight is Required';
-                    isValid = false;
-                    $('#diamondweight').focus();
-                }
-            }
-            if(isValid && (dweight !== undefined && dweight !== 'undefined' && dweight !== 'null' && dweight !== '' && isNaN(dweight)))
-            {
-                
-                if(isValid && (color == undefined || color == 'undefined' || color == 'null' || color == ''))
-                {
-                    str ='Diamond Color field is Empty';
-                    isValid = false;
-                }
-                else if(isValid && (clarity == undefined || clarity == 'undefined' || clarity == 'null' || clarity == ''))
-                {
-                    str ='Diamond Quality field is Empty';
-                    isValid = false;
-                }
-                else if(isValid && (no_diamonds == undefined || no_diamonds == 'undefined' || no_diamonds == 'null' || no_diamonds == '' || isNaN(no_diamonds)))
-                {
-                    str ='Number of diamonds have to be Selected';
-                    isValid = false;
-                    $('#no_diamonds').focus();
-                }
-                else if(isValid && (dweight == undefined || dweight == 'undefined' || dweight == 'null' || dweight == '' || isNaN(dweight)))
+                else if(isValid && (dweight == undefined || dweight == 'undefined' || dweight == 'null' || dweight == '' || isNaN(dweight) == true))
                 {
                     str ='Diamond weight is Required';
                     isValid = false;
@@ -204,12 +202,12 @@ function submitForm(formid)
                 }
             }
             
-            if(isValid && (purity == '' || isNaN(purity))) {
+            if(isValid && (purity == '' || isNaN(purity) == true)) {
                 str ='Purity field is Empty';
                 isValid = false;
                  $('#goldpurity').focus();
             }
-            if(isValid && (goldweight == '' || isNaN(goldweight))) {
+            if(isValid && (goldweight == '' || isNaN(goldweight) == true)) {
                 str ='Gold weight is Required';
                 isValid = false;
                 $('#goldweight').focus();
@@ -220,21 +218,20 @@ function submitForm(formid)
                 isValid = false;
                 $('#barcode').focus();
             }
-            if(isValid && (prdprice == '' || isNaN(prdprice)))
+            if(isValid && (prdprice == '' || isNaN(prdprice) == true ))
             {
                 str ='Product Price is important to fill';
                 isValid = false;
                 $('#prdprice').focus();
             }
-            
-            if(isValid && gemweight !== null)
+            if(isValid && (gemweight !== undefined && gemweight !== 'undefined' && gemweight !== 'null' && gemweight !== null && gemweight !== '' && isNaN(gemweight) == false))
             {
-                if(isValid && (gemweight == undefined || gemweight == 'undefined' || gemweight == 'null' || gemweight == '' || isNaN(gemweight)))
-                    {
-                        str ='Gemstone weight is important to fill';
-                        isValid = false;
-                        $('#gemweight').focus();
-                    }
+                if(isValid && (gemweight == undefined || gemweight == 'undefined' || gemweight == 'null' || gemweight == '' || isNaN(gemweight) == true))
+                {
+                    str ='Gemstone weight is important to fill';
+                    isValid = false;
+                    $('#gemweight').focus();
+                }
             }
             if(str != '')
             {

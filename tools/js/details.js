@@ -348,14 +348,8 @@ function showVendorDetails(obj)
 
 		if(mobCond && nmCond && emCond)
 		{
-			customStorage.addToStorage('l', mobile);
-			customStorage.addToStorage('mobile', mobile);
-			customStorage.addToStorage('username', name);
-			customStorage.addToStorage('name', name);
-			customStorage.addToStorage('email', email);
-			customStorage.addToStorage('isLoggedIn',true);
-			customStorage.addToStorage('is_vendor','-1');
-			common.checkLogin();
+
+
 
 			var params = 'action=ajx&case=userCheck&mobile='+mobile+'&name='+encodeURIComponent(name)+'&email='+encodeURIComponent(email);
 			var URL = DOMAIN + "index.php";
@@ -365,7 +359,22 @@ function showVendorDetails(obj)
 				{
 					if((data.error !== '' && data.error !== null && data.error !== undefined && data.error.Code == 0) || (data.error.Code == 1 && data.results.userid != ''))
 					{
-						var uid = customStorage.addToStorage('userid', data.userid);
+                                            if(data.results.userDet[0].is_vendor == 1)
+                                            {
+                                                customStorage.toast(0, 'This feature is not available for vendors');
+                                            }
+                                            else
+                                            {
+                                                customStorage.addToStorage('l', mobile);
+                                                customStorage.addToStorage('mobile', mobile);
+                                                customStorage.addToStorage('username', name);
+                                                customStorage.addToStorage('name', name);
+                                                customStorage.addToStorage('email', email);
+                                                customStorage.addToStorage('isLoggedIn',true);
+                                                
+                                                customStorage.addToStorage('is_vendor','-1');
+									
+                                                var uid = customStorage.addToStorage('userid', data.userid);
 						if((obj !== undefined && $(obj).hasClass('iconWishlist')) || isWishList)
 						{
 							addToWishList();
@@ -388,6 +397,7 @@ function showVendorDetails(obj)
 							},200);
 							addToEnquiry();
 						}
+                                            }
 					}
 				}
 			});

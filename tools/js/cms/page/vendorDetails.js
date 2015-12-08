@@ -48,7 +48,7 @@ function validateForm() {
     var state = $('#state').val();
     var wbst = $('#wbst').val();
     var pancard = $('#pan').val();
-    var vatno = $('#vat').val();
+    //var vatno = $('#vat').val();
 
     var str = "V02554544";
     var patt1 = /^(C|V){1}([0-3]){2}([0-9]){2}/g;
@@ -115,12 +115,31 @@ function validateForm() {
         str = 'Invaild PAN Card No.';
         $('#pan').focus();
     }
+//    if (vatno != '') {
+//        if (vatno.length == 11) {
+//            var vat_pattr = /^(C|V){1}([0-3]){1}([0-9]){2}/g;
+//            var vat_pattr1 = /([0-9]*$)/;
+//            var vatLtNo = vatno.substring(3, 11);
+//
+//            if (vatLtNo.search(vat_pattr1) != 0 || vatno.search(vat_pattr) != 0) {
+//                str = 'Invaild VAT No.';
+//                $('#vat').focus();
+//            }
+//        } else {
+//            str = 'Invaild VAT Nunber';
+//            $('#vat').focus();
+//        }
+//    } 
+//    else  {
+//        str = 'VAT Nunber Required';
+//        $('#vat').focus();
+//    }
     if (str == '' && !$("#forDiamond").hasClass("comSelected") && !$("#forJewellery").hasClass("comSelected") && !$("#forBullion").hasClass("comSelected")) {
         str = 'Select business type';
     }
     else if (str == '')
     {
-        if (wbst != '')
+        if (wbst !== '')
         {
             if (!common.validateUrl('wbst'))
             {

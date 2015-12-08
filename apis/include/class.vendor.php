@@ -561,15 +561,14 @@ class vendor extends DB
                         $rate = ((($metalRate/995)*$purity)/10)*$weight;
                         //$metalRate=$goldRate;
                         //$finalRate=($metalRate/10)*($purity/995);
-                        $row['price']=$rate;
+                        $row['price']=number_format($rate,2);
                     }
                     else if($metal=='silver')
                     {
                         $metalRate=$silverRate;
                         $finalRate=($metalRate/1000)*($purity/995);
-                        $row['price']=$finalRate*$weight;
+                        $row['price']=number_format($finalRate*$weight,2);
                     }
-                        
                 }
                         $arr1[] = $row;
              }
@@ -712,7 +711,7 @@ class vendor extends DB
     }
 
         public function toggleactive($params) {
-        $chkact="SELECT active_flag from tbl_vendor_master WHERE vendor_id_id=".$params['vid']."";
+        $chkact="SELECT active_flag from tbl_vendor_master WHERE vendor_id=".$params['vid']."";
         $chkactres=$this->query($chkact);
         $chkrow=$this->fetchData($chkactres);
         $vflag=$chkrow['active_flag'];

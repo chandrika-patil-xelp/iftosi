@@ -10,17 +10,22 @@ switch ($page) {
                 <div class="headRight fRight transition300">
                     <div class="compNo fRight fmOpenB">022-32623263</div>
                     <div class="fRight sortBox dn" id="userMenu">
+                        
                         <div class="dropdownBox fLeft">
                             <div id="hdrpinp" class="dropInput fmOpenR"></div>
                             <ul id="hdropList" class="fmOpenR">
 								<li id='prdHeader' class="transition100 dn"><a href="<?php echo DOMAIN; ?>index.php?case=vendor_landing&catid=<?=$catid;?>">Products</a></li>
 								<li id="enqHeader" class="transition100 dn"><a href="<?php echo DOMAIN; ?>index.php?case=vendor_enquiries&catid=<?=$catid;?>">Enquiry</a></li>
-								<li id="wishHeader" class="transition100 dn" onclick="redirectToWishlist();">Wishlist (<span id='wishListCnt'></span>)</li>
+<!--								<li id="wishHeader" class="transition100 dn" onclick="redirectToWishlist();">Wishlist (<span id='wishListCnt'></span>)</li>-->
 								<li class="transition100" onclick="common.doLogout();">Log Out</li>
                             </ul>
                         </div>
+
                     </div>
+                    
                     <div class="signInUpTab fRight fmOpenR"><span onclick="common.showLoginForm();">Sign In</span> / <a href="<?php echo DOMAIN; ?>index.php?case=signup">Sign Up</a></div>
+                    <div id="wishHeaderb4" class="wishlist fRight fmOpenR" onclick="common.showLoginForm();">Wishlist</div>
+                    <div id="wishHeaderaftr" class="wishlist fRight fmOpenR" onclick="redirectToWishlist();">Wishlist (<span id='wishListCnt'></span>)</div>
                 </div>
             </div>
         </div>
@@ -86,23 +91,31 @@ switch ($page) {
                     <div id='hbgJewel' class="headCat fLeft bgJewellery transition300"><span class="transition300">Jewellery</span><?php include 'jewelleryMenu.html'; ?></div>
                     <div id='hbgBull' class="headCat fLeft bgBullion transition300"><span>Bullions</span></div> -->
                 </div>
+                
                 <div class="headRight fRight transition300">
+                    
                     <div class="compNo fRight fmOpenB">022-32623263</div>
+                   
                     <div class="fRight sortBox dn" id="userMenu">
+                        
                         <div class="dropdownBox fLeft">
                             <div id="hdrpinp" class="dropInput fmOpenR"></div>
                             <ul id="hdropList" class="fmOpenR">
                                 <li class="transition100">Profile</li>
                                 <li class="transition100">Orders</li>
-                                <li class="transition100" onclick="redirectToWishlist();">Wishlist (<span id="wishListCnt"></span>)</li>
+<!--                                <li class="transition100" onclick="redirectToWishlist();">Wishlist (<span id="wishListCnt"></span>)</li>-->
                                 <li class="transition100" onclick="common.doLogout();">Log Out</li>
                             </ul>
                         </div>
                     </div>
+                   
+                     
                     <div class="signInUpTab fRight fmOpenR"><span onclick="common.showLoginForm();">Sign In</span> / <a href="<?php echo DOMAIN; ?>index.php?case=signup">Sign Up</a></div>
                     <!--                    <div class="headDivider fRight"></div>
-                                        <div class="wishlist fRight fmOpenR">Wishlist</div>
+                                        
                                         <div class="wishCount fRight fmOpenR ripplelink">25</div>-->
+                     <div id="wishHeaderb4" class="wishlist fRight fmOpenR" onclick="common.showLoginForm();">Wishlist</div>
+                     <div id="wishHeaderaftr" class="wishlist fRight fmOpenR" onclick="redirectToWishlist();">Wishlist (<span id='wishListCnt'></span>)</div>
                 </div>
             </div>
         </div>

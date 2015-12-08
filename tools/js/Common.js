@@ -90,10 +90,14 @@ function Common() {
             {
                 //userMenuStr += '<li class="transition100">Profile</li>';
                 //userMenuStr += '<li class="transition100">Orders</li>';
-                userMenuStr += '<li class="transition100" onclick="redirectToWishlist();">Wishlist (<span id="wishListCnt"></span>)</li>';
+                //userMenuStr += '<li class="transition100" onclick="redirectToWishlist();">Wishlist (<span id="wishListCnt"></span>)</li>';
+                $('#wishHeaderaftr').removeClass('dn');
+                $('#wishHeaderb4').addClass('dn');
             }
             else
             {
+                $('#wishHeaderb4').addClass('dn');
+                $('#wishHeaderaftr').addClass('dn');
                 //userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_dashboard\');">Dashboard</li>';
                 if(isComp==='2')
                 {
@@ -107,11 +111,15 @@ function Common() {
                 {
                     userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_Form&uid='+uid+'\');">Profile</li>';
                 }
-                
             }
             userMenuStr += '<li class="transition100" onclick="common.doLogout();">Log Out</li>';
             $('#hdropList').html(userMenuStr);
 			_this.getWishListCount();
+        }
+        else
+        {
+            $('#wishHeaderaftr').addClass('dn');
+            $('#wishHeaderb4').removeClass('dn');
         }
     };
 
@@ -125,6 +133,8 @@ function Common() {
 		{
 			window.location.href = window.location;
 		}
+                $('#wishHeaderaftr').addClass('dn');
+                $('#wishHeaderb4').removeClass('dn');
     };
     this.closeLoginForm = function () {
         $('#loginDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
