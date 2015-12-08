@@ -88,7 +88,7 @@ class enquiry extends DB
     
     public function viewLog($params)
     {
-        $sql="SELECT silver_rate, gold_rate, dollar_rate FROM tbl_vendor_master WHERE vendor_id='".$params['vid']."'";
+        $sql="SELECT silver_rate,gold_rate,dollar_rate FROM tbl_vendor_master WHERE vendor_id='".$params['vid']."'";
         $res=$this->query($sql);
         if ($res) {
             $rates = $this->fetchData($res);
@@ -127,6 +127,7 @@ class enquiry extends DB
                                     vendor_id=".$params['vid']."
                     ORDER BY
                                     update_time
+                    DESC
                 ";
         
         

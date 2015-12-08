@@ -1,6 +1,10 @@
 <?php include TEMPLATE.'backHead.html';?>
     <body>
-	<?php include TEMPLATE.'backheader.html';?>
+<?php 
+            include TEMPLATE.'backheader.html';
+            $catid=$_GET['c'];
+            $vendor_landing = DOMAIN.'?case=vendor_landing&catid='.$catid;
+?>            
         <div class="vndTabs fLeft fmOpenR"  style="margin-top: 50px;">
             <div class="wrapperMax">
                 <div class="vndTabs fLeft fmOpenR">
@@ -28,9 +32,6 @@
             }
             ?>
         <?php
-            $catid=$_GET['c'];
-            
-            $vendor_landing = DOMAIN.'?case=vendor_landing&catid='.$catid;
             if( !empty($catid))
             {
             $backUrl = DOMAIN.'?case='.$case.'&catid='.$_GET['c'].'&prdid='.$_GET['pid'];

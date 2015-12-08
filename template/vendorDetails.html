@@ -30,7 +30,7 @@ if(!empty($data['mdbw'])) {
                     </div>
                     <div id='tabData1' class="tabData fLeft">
                         <div class="divCon  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Organization Name</div>
+                            <div  class="titleDiv txtCap fLeft">Organization Name *</div>
                             <input name="" type="text" id="orgname" autocomplete="false" value="<?php echo $data['orgName']; ?>" placeholder=" eg. ABC XYZ Jewellers" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon fLeft c666">
@@ -61,11 +61,11 @@ if(!empty($data['mdbw'])) {
                             <div id="stateSuggestDiv" class="autoSuggestOuter"></div>
                         </div>
                         <div class="divCon2 fLeft">
-                            <div  class="titleDiv txtCap fLeft">VAT Number</div>
+                            <div  class="titleDiv txtCap fLeft">VAT Number *</div>
                             <input name="" type="text" id="vat" value="<?php echo $data['vatno']; ?>" autocomplete="false" placeholder=" eg.  12345678901" maxlength="12" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon2  fRight">
-                            <div  class="titleDiv txtCap fLeft">PAN Card Number</div>
+                            <div  class="titleDiv txtCap fLeft">PAN Card Number *</div>
                             <input name="" type="text" id="pan" value="<?php echo $data['pancard']; ?>" autocomplete="false" maxlength="10" placeholder=" eg.  ALXPK2999K" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon2  fLeft">
@@ -81,7 +81,7 @@ if(!empty($data['mdbw'])) {
                             <?php $banker = str_replace('~', ',', $data['banker']); ?>
                             <input name="" type="text" id="banker" value="<?php echo $banker; ?>" autocomplete="false" placeholder=" eg.  INDUS IND BANK, KOTAK BANK, STATE BANK OF INDIA" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
-                        <div class="formTitle fLeft fmOpenL">Select your business type</div>
+                        <div class="formTitle fLeft fmOpenL">Select your business type *</div>
                         <div class="comparisonDiv fLeft">
                             <div id='forDiamond' class="compComm fLeft <?php if(in_array('1',$business_type)) { echo 'comSelected'; } ?>">
                                 <div class="compTitle fLeft fmOpenR">Diamond</div>

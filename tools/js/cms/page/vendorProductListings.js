@@ -256,6 +256,7 @@ function loadJewellCallback(res,pgno) {
         if(total!=0) {
             if(total_pages==jewellPage) {
                 loadJewel = false;
+                
             }
             var len = obj['results']['products'].length;
             var i = 0;
@@ -408,7 +409,7 @@ function generatBullionsList(obj) {
     str += '<div class="metal fLeft">' + obj['metal'].split('~')[0] + '</div>';
     str += '<div class="purity fLeft">' + obj['gold_purity'] + '</div>';
     str += '<div class="weight fLeft">' + obj['gold_weight'] + '</div>';
-    str += '<div class="price fLeft fmOpenB">&#8377;' + obj['price'].toFixed(3)+ '</div>';
+    str += '<div class="price fLeft fmOpenB">&#8377;' + obj['price']+ '</div>';
     str += '<div class="acct fLeft">';
     str += '<center>';
     str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'" target="_blank"><div class="uploadBtn poR ripplelink"></div></a>';
