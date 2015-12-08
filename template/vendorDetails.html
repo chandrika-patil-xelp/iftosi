@@ -31,55 +31,55 @@ if(!empty($data['mdbw'])) {
                     <div id='tabData1' class="tabData fLeft">
                         <div class="divCon  fLeft">
                             <div  class="titleDiv txtCap fLeft">Organization Name *</div>
-                            <input name="" type="text" id="orgname" autocomplete="false" value="<?php echo $data['orgName']; ?>" placeholder=" eg. ABC XYZ Jewellers" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="" type="text" id="orgname" autocomplete="false" value="<?php echo $data['orgName']; ?>" placeholder="Please enter your organization name" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon fLeft c666">
                             <div class="titleDiv txtCap fLeft"> Address-1 *</div>
-                            <input type="text" id="fulladd" autocomplete="false" name="fulladd" value="<?php echo $data['fulladdress']; ?>" placeholder="Flat/House No,Floor,Building" class="txtInput c666 fLeft fmRoboto font14">
+                            <input type="text" id="fulladd" autocomplete="false" name="fulladd" value="<?php echo $data['fulladdress']; ?>" placeholder="Flat / House No, Floor, Building" class="txtInput c666 fLeft fmRoboto font14">
                         </div>
                         <div class="divCon fLeft c666">
                             <div class="titleDiv txtCap fLeft"> Address-2&nbsp;</div>
-                            <input type="text" autocomplete="false" id="add1" name="add2" value="<?php echo $data['address1']; ?>" placeholder="Colony/Society,Street,Locality/Area " class="txtInput c666 fLeft fmRoboto font14">
+                            <input type="text" autocomplete="false" id="add1" name="add2" value="<?php echo $data['address1']; ?>" placeholder="Colony / Society, Street" class="txtInput c666 fLeft fmRoboto font14">
                         </div>
                         <div class="divCon2 fLeft c666">
                             <div class="titleDiv txtCap fLeft"> Pin Code *</div>
-                            <input type="text" id="pincode" name="pincode" value="<?php echo $data['postal_code']; ?>" maxlength="6" onkeypress="return common.isNumberKey(event)"  placeholder="Pin Code" class="txtInput c666 fLeft fmRoboto font14">
+                            <input type="text" id="pincode" name="pincode" value="<?php echo $data['postal_code']; ?>" maxlength="6" onkeypress="return common.isNumberKey(event)"  placeholder=" e.g. 400064" class="txtInput c666 fLeft fmRoboto font14">
                         </div>
                         <div class="divCon2 fRight c666">
                             <div class="titleDiv txtCap fLeft"> Area *</div>
-                            <input type="text" id="area" name="area" value="<?php echo $data['area']; ?>" placeholder=" Area" maxlength="50" class="txtInput c666 fLeft fmRoboto font14" onfocus="searchAreaDivOutput(this.value);" onkeypress="return onlyAlphabets(event, this)" onblur="matchValue(this.value, areaList, 2);closeSuggest();" onkeyup="searchArea.showHint(this.value, event)" onclick="searchAreaDivOutput(this.value)">
+                            <input type="text" id="area" name="area" value="<?php echo $data['area']; ?>" placeholder=" e.g. Andheri West" maxlength="50" class="txtInput c666 fLeft fmRoboto font14" onfocus="searchAreaDivOutput(this.value);" onkeypress="return onlyAlphabets(event, this)" onblur="matchValue(this.value, areaList, 2);closeSuggest();" onkeyup="searchArea.showHint(this.value, event)" onclick="searchAreaDivOutput(this.value)">
                             <div id="areaSuggestDiv" class="autoSuggestOuter"></div>
                         </div>
                         <div class="divCon2 fLeft c666">
                             <div class="titleDiv txtCap fLeft"> City *</div>
-                            <input type="text" id="city" name="city" value="<?php echo $data['city']; ?>" onkeypress="return common.onlyAlphabets(event)" maxlength="50" placeholder=" City" class="txtInput c666 fLeft fmRoboto font14" onfocus="" onkeypress="return onlyAlphabets(event, this)" onblur="closeSuggest('citySuggestDiv');" onkeyup="" onclick="">
+                            <input type="text" id="city" name="city" value="<?php echo $data['city']; ?>" onkeypress="return common.onlyAlphabets(event)" maxlength="50" placeholder=" e.g. Mumbai" class="txtInput c666 fLeft fmRoboto font14" onfocus="" onkeypress="return onlyAlphabets(event, this)" onblur="closeSuggest('citySuggestDiv');" onkeyup="" onclick="">
                             <div id="citySuggestDiv" class="autoSuggestOuter"></div>
                         </div>
                         <div class="divCon2 fRight c666">
                             <div class="titleDiv txtCap fLeft"> State *</div>
-                            <input type="text" id="state" name="state" value="<?php echo $data['state']; ?>" placeholder=" State  " class="txtInput c666 fLeft fmRoboto font14 " autocomplete="false" onkeypress="return onlyAlphabets(event, this)" onblur="closeSuggest('stateSuggestDiv');" onkeyup="">
+                            <input type="text" id="state" name="state" value="<?php echo $data['state']; ?>" placeholder=" e.g. Maharashtra" class="txtInput c666 fLeft fmRoboto font14 " autocomplete="false" onkeypress="return onlyAlphabets(event, this)" onblur="closeSuggest('stateSuggestDiv');" onkeyup="">
                             <div id="stateSuggestDiv" class="autoSuggestOuter"></div>
                         </div>
                         <div class="divCon2 fLeft">
                             <div  class="titleDiv txtCap fLeft">VAT Number *</div>
-                            <input name="" type="text" id="vat" value="<?php echo $data['vatno']; ?>" autocomplete="false" placeholder=" eg.  12345678901" maxlength="12" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="" type="text" id="vat" value="<?php echo $data['vatno']; ?>" autocomplete="false" placeholder=" e.g. 12345678901" maxlength="12" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon2  fRight">
                             <div  class="titleDiv txtCap fLeft">PAN Card Number *</div>
-                            <input name="" type="text" id="pan" value="<?php echo $data['pancard']; ?>" autocomplete="false" maxlength="10" placeholder=" eg.  ALXPK2999K" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="" type="text" id="pan" value="<?php echo $data['pancard']; ?>" autocomplete="false" maxlength="10" placeholder=" e.g. ALXPK2999K" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Turnover (in Crores)</div>
-                            <input name="" type="text" id="tovr" value="<?php echo $data['turnover']; ?>" autocomplete="false" placeholder=" eg.  100 CRORES" maxlength="15" onkeypress="return common.isDecimalNumber(event,this.value)" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="" type="text" id="tovr" value="<?php echo $data['turnover']; ?>" autocomplete="false" placeholder=" e.g. 5 CRORES" maxlength="15" onkeypress="return common.isDecimalNumber(event,this.value)" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon2  fRight">
                             <div  class="titleDiv txtCap fLeft">Website</div>
-                            <input name="" type="text" id="wbst" value="<?php echo $data['website']; ?>" autocomplete="false" placeholder=" eg.  www.whitefirejewels.in" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="" type="text" id="wbst" value="<?php echo $data['website']; ?>" autocomplete="false" placeholder=" e.g. www.iftosi.com" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon  fLeft">
                             <div  class="titleDiv txtCap fLeft">Bankers</div>
                             <?php $banker = str_replace('~', ',', $data['banker']); ?>
-                            <input name="" type="text" id="banker" value="<?php echo $banker; ?>" autocomplete="false" placeholder=" eg.  INDUS IND BANK, KOTAK BANK, STATE BANK OF INDIA" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="" type="text" id="banker" value="<?php echo $banker; ?>" autocomplete="false" placeholder=" e.g. INDUS IND BANK, KOTAK BANK, STATE BANK OF INDIA" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="formTitle fLeft fmOpenL">Select your business type *</div>
                         <div class="comparisonDiv fLeft">

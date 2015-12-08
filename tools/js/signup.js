@@ -42,7 +42,7 @@ var validMob = true;
         var pr_email = $('#pr_email').val();
         var pr_pass = $('#pr_pass').val();
         var isVendor = $('#isVendor').is(':checked');
-        var amIVendor = $('input[name=isVendor]:checked').val();
+        var amIVendor = $("input[type=checkbox]:checked").length;
         var userType =1;
         if(isVendor)
             isVendor=1;
@@ -86,9 +86,8 @@ var validMob = true;
 				customStorage.toast(0,'This mobile number is already registered!'); 
 				$('#pr_mobile').focus();
 				return false;
-			}   
-			
-			else if(amIVendor == undefined || amIVendor == 'undefined' || amIVendor == '' || amIVendor == null || amIVendor == 'null'){
+			}
+			else if(amIVendor == undefined || amIVendor == 'undefined' || amIVendor == '' || amIVendor == null || amIVendor == 'null' || amIVendor == 0){
 				customStorage.toast(0,'You have not Selected the type of user!'); 
 				return false;
 			} else {

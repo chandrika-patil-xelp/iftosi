@@ -35,8 +35,32 @@
 
         public function userReg($params) // USER LOGIN PROCESS
         {   
-           $isql = "INSERT INTO tbl_registration(user_name,password,logmobile,email,is_vendor,is_active,date_time,update_time,updated_by)
-                    VALUES('".$params['username']."',MD5('".$params['password']."'),".$params['mobile'].",'".$params['email']."',".$params['isvendor'].",1,now(),now(),'".$params['username']."')";
+           $isql = "INSERT INTO 
+						tbl_registration 
+						(
+							user_name,
+							password,
+							logmobile,
+							email,
+							is_vendor,
+							is_active,
+							date_time,
+							update_time,
+							updated_by
+						)
+					VALUES
+						(
+							'".$params['username']."',
+							MD5('".$params['password']."'),
+							".$params['mobile'].",
+							'".$params['email']."',
+							".$params['isvendor'].",
+							1,
+							now(),
+							now(),
+							'".$params['username']."'
+						)
+					";
             $ires=$this->query($isql);
             $uid=$this->lastInsertedId();
             
@@ -237,7 +261,7 @@
             }
         }
         else if($isv==0)
-          {
+        {
              $vsql = "UPDATE tbl_registration 
                       SET 
                                             user_name='".$detls['username']."',
@@ -257,12 +281,12 @@
                 $arr=array();
                 $err=array('code'=>1,'msg'=>'Update operation unsuccessfull');
              }
-          }
-          else 
-          {
-                $arr=array();
-                $err=array('code'=>0,'msg'=>'Update operation unsuccessfull');
-          }
+		}
+		else 
+		{
+			$arr=array();
+			$err=array('code'=>0,'msg'=>'Update operation unsuccessfull');
+		}
           
             $result = array('results'=>$arr,'error'=>$err);
             return $result;
