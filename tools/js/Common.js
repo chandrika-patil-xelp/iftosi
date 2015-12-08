@@ -220,6 +220,7 @@ function Common() {
                     var is_vendor = obj['results']['utype'];
                     var email = obj['results']['email'];
                     var isComp = obj['results']['isC'];
+                    var pass_flag = obj['results']['pass_flag'];
                     
                     customStorage.addToStorage('isLoggedIn', true);
                     customStorage.addToStorage('l', pr_mobile);
@@ -235,7 +236,9 @@ function Common() {
 					{
 						tmp_is_vendor = -1;
 					}
-
+                    if(pass_flag == 1) {
+                        window.location.assign(DOMAIN + 'index.php?case=changepwd');
+                    }
                     customStorage.addToStorage('is_vendor', tmp_is_vendor);
                     if (is_vendor == 1)
                     {
@@ -250,6 +253,10 @@ function Common() {
                         {
                             window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid='+userid);
                         }
+                    }
+                    else if (is_vendor == 2)
+                    {
+                        window.location.assign(DOMAIN + 'index.php?case=product_list');
                     }
                     else
                     {

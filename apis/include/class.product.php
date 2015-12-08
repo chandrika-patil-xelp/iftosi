@@ -437,32 +437,28 @@
                     return $result;
         }
 		
-		public function imageUpdate($params)
-		{
-			$err = array('errCode' => 0, 'errMsg' => 'Details updated successfully');
-			$pid = $params['pid'];
-			$img = $params['imgpath'];
-			
-			$sql = "SELECT product_image, image_sequence FROM tbl_product_image_mapping WHERE product_id = ".$pid." AND active_flag = 1 order by image_sequence asc";
-			$res = $this->query($sql);
-			$cnt = $this->numRows($res);
-			$flag = true;
-			if($cnt)
-			{
-				while($row = $this->fetchData($res))
-				{
-					if(strtolower($row['product_image']) ==  strtolower($img))
-					{
-						$err = array('errCode' => 1, 'errMsg' => 'No results updated');
-						$flag = false;
-					}
-					$image_sequence = $row['image_sequence'];
-				}
-			}
-			$sequence = ($image_sequence ? $image_sequence+1 : 1);
-			if($flag)
-			{
-				$sql = "INSERT INTO 
+        public function imageUpdate($params) {
+
+        $err = array('errCode' => 0, 'errMsg' => 'Details updated successfully');
+        $pid = $params['pid'];
+        $img = $params['imgpath'];
+
+        $sql = "SELECT product_image, image_sequence FROM tbl_product_image_mapping WHERE product_id = " . $pid . " AND active_flag = 1 order by image_sequence asc";
+        $res = $this->query($sql);
+        $cnt = $this->numRows($res);
+        $flag = true;
+        if ($cnt) {
+            while ($row = $this->fetchData($res)) {
+                if (strtolower($row['product_image']) == strtolower($img)) {
+                    $err = array('errCode' => 1, 'errMsg' => 'No results updated');
+                    $flag = false;
+                }
+                $image_sequence = $row['image_sequence'];
+            }
+        }
+        $sequence = ($image_sequence ? $image_sequence + 1 : 1);
+        if ($flag) {
+            $sql = "INSERT INTO 
 							tbl_product_image_mapping 
 							(
 								product_id,
@@ -473,21 +469,21 @@
 							)
 							VALUES
 							(
-								".$pid.",
-								\"".$img."\",
+								" . $pid . ",
+								\"" . $img . "\",
 								1,
-								".$sequence.",
+								" . $sequence . ",
 								NOW()
 							)";
-				$res2 = $this->query($sql);
-			}
-			
-			$arr = array();
-			$result = array('results' => $arr, 'error' => $err);
-			return $result;
-		}
-		
-		public function imageRemove($params)
+            $res2 = $this->query($sql);
+        }
+
+        $arr = array();
+        $result = array('results' => $arr, 'error' => $err);
+        return $result;
+    }
+
+    public function imageRemove($params)
 		{
 			$pid = $params['pid'];
 			

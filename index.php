@@ -233,6 +233,23 @@ switch ($action) {
                 $page = 'forgot';
                 include 'template/forgotPsw.html';
                 break;
+            case 'changepwd':
+//                if(isset($params['pr_cpass'])) {
+//                    $uid=$params['uid'];
+//                    $pr_cpass=$params['pr_cpass'];
+//                    $pr_npass=$params['pr_npass'];
+//                    $pr_rpass=$params['pr_rpass'];
+//                    $uid=$params['uid'];
+//
+//                    $curl = APIDOMAIN . 'index.php?action=changepwd&cpass='.$pr_cpass.'&npass='.$pr_npass.'&rpass='.$pr_rpass.'&uid='.$uid;
+//                    $cres = $comm->executeCurl($curl);
+//                    $errCode = $cres['error']['Code'];
+//                    echo $errMsg = $cres['error']['Msg'];
+//                    die();
+//                }
+                $page = 'Change Password';
+                include 'template/changepwd.html';
+                break;
             case 'login':
                 $page = 'login';
                 include 'template/login.html';
@@ -653,6 +670,10 @@ switch ($action) {
                 break;
             
             case 'thumbnail':
+                $url = APIDOMAIN . 'index.php?action=getImgByProd&pid=12290';
+                $res = $comm->executeCurl($url);
+                $result = $res['results'];
+//                echo '<pre>';                print_r($result);die();
                 $page = 'thumbnail';
                 include 'template/thumbnail.html';
                 break;

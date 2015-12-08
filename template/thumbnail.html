@@ -4,37 +4,78 @@
     <div id="" class="contentCont fLeft thumbnilPage">
         <div class="wrapperMax">
             <div  class="prdSearchDiv fLeft">
-                <div class="formTitle fLeft fmOpenR m0"><span id="totalDiamonds">10</span> image(s) available</div>
+                <div class="formTitle fLeft fmOpenR m0"><span id="totalDiamonds"><?php echo $result['total_imgs']; ?></span> image(s) available</div>
             </div>
-            <?php for($i=0;$i<20;$i++) {?>
+            <?php $data=$result['imgs']; for($i=0;$i<count($data);$i++) {
+                $image = DOMAIN.'image-upload/'.$data[$i]['product_image'];
+            
+            ?>
             <div class="thumbnilComm fLeft">
-                <div id='thumb1' class="actThumbnail fLeft" onclick='openTab("http://localhost/iftosi/image-upload/uploads/10001/1449143035diamond4.jpg")' style='background: url(http://localhost/iftosi/image-upload/uploads/10001/1449143035diamond4.jpg) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);'></div>
+                <div id='thumb1' class="actThumbnail fLeft" onclick="openTab('<?php echo $image; ?>')" style='background: url(<?php echo $image; ?>) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);'></div>
                 <div class="comment fRight">
-                    <textarea class="txtComment fmOpenR" placeholder=" Comment ( if any )"></textarea>
+                    <textarea class="txtComment fmOpenR" id="reason_<?php echo $data[$i]['id']; ?>"  onblur="updateData(<?php echo $data[$i]['id']; ?>);" placeholder=" Comment ( if any )"><?php echo $data[$i]['reason']; ?></textarea>
                 </div>
                 <div class="acceptRej fRight">
                     <div class="checkDiv fLeft">
-                        <input type="radio" value="1" name="accept" autocomplete="false" class="filled-in" id="accept">
-                        <label for="accept">Accept</label>
+                        <input type="radio" value="3" onchange="updateFlag(<?php echo $data[$i]['id']; ?>,this.id);" name="accept_<?php echo $data[$i]['id']; ?>" <?php if($data[$i]['active_flag']==3) { echo 'checked'; } ?> class="filled-in" id="accept_<?php echo $data[$i]['id']; ?>">
+                        <label for="accept_<?php echo $data[$i]['id']; ?>">Accept</label>
                     </div>
                     <div class="checkDiv fLeft">
-                        <input type="radio" value="F" name="accept" autocomplete="false" class="filled-in" id="reject">
-                        <label for="reject">Reject</label>
+                        <input type="radio" value="4" onchange="updateFlag(<?php echo $data[$i]['id']; ?>,this.id);" name="accept_<?php echo $data[$i]['id']; ?>"<?php if($data[$i]['active_flag']==4) { echo 'checked'; } ?> class="filled-in" id="reject_<?php echo $data[$i]['id']; ?>">
+                        <label for="reject_<?php echo $data[$i]['id']; ?>">Reject</label>
                     </div>
                 </div>
                 <div class="seq fRight">
                     <div class="seqTitle fLeft">Position</div>
-                    <input type="text" class="seqTxt fLeft fmOpenR font14" placeholder=" eg 1">
+                    <input type="text" id="seq_<?php echo $data[$i]['id']; ?>" value="<?php echo $data[$i]['image_sequence']; ?>" onblur="updateData(<?php echo $data[$i]['id']; ?>);" class="seqTxt fLeft fmOpenR font14" placeholder=" eg 1">
                 </div>
             </div>
              <?php }?>
             
         </div>
     </div>
+    </div>
     
+<script type="text/javascript" src='tools/js/cms/lib/jquery.toast.min.js?v=<?=VERSION;?>'></script>
     <script>
+        var uid = customStorage.readFromStorage('userid');
+        var is_vendor = customStorage.readFromStorage('is_vendor');
+        var userName = customStorage.readFromStorage('name');
+        $('#userName').html(userName);
+        if (uid == '' || is_vendor!=2) {
+            indow.location.assign(DOMAIN + 'index.php');
+        }
         function openTab(link){
             window.open(link, '_blank');
+        }
+        function updateFlag(pid,id) {
+            var flag=$('#'+id).val();
+            console.log(flag);
+            $.ajax({url: DOMAIN + "apis/index.php?action=updateImageData&id="+pid+"&flag="+flag, success: function (result) {
+                var obj = jQuery.parseJSON(result);
+                var errCode = obj['error']['Code'];
+                var errMsg = obj['error']['Msg'];
+                if(errCode==1) {
+                   customStorage.toast(0,errMsg);
+                } else {
+                   customStorage.toast(1,errMsg);
+                }
+            }});
+        }
+        
+        function updateData(id) {
+            var reason=$('#reason_'+id).val();
+            var seq=$('#seq_'+id).val();
+            $.ajax({url: DOMAIN + "apis/index.php?action=updateImageData&id="+id+"&rea="+reason+"&seq="+seq, success: function (result) {
+                var obj = jQuery.parseJSON(result);
+                var errCode = obj['error']['Code'];
+                var errMsg = obj['error']['Msg'];
+                if(errCode==1) {
+                   customStorage.toast(0,errMsg);
+                } else {
+                   customStorage.toast(1,errMsg);
+                }
+            }});
         }
     </script>
     

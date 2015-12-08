@@ -260,6 +260,7 @@ function Common() {
 		}
 
         if (isLoggedIn === 'true' && is_vendor == 1) {}
+        else if (isLoggedIn === 'true' && is_vendor == 2) {}
 		else
 		{
             window.location.href = DOMAIN + "index.php";

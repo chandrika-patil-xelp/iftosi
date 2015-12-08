@@ -141,13 +141,37 @@ switch($action)
 
             if (empty($email)) {
                 $resp = array();
-                $error = array('errCode' => 1, 'errMsg' => 'Invalid parameters');
-                $result = array('results' => $resp, 'error' => $error);
+                $error = array('Code' => 1, 'Msg' => 'Invalid parameters');
+                $res = array('results' => $resp, 'error' => $error);
                 break;
             }
             $obj=new user($db['iftosi']);
             $tmp_params = array('email' => $email);
             $res = $obj->forgotPwd($tmp_params);
+            break;
+
+// localhost/iftosi/apis/index.php?action=changepwd&cpass=123456&npass=654321&rpass=654321
+        case 'changepwd':
+            include_once APICLUDE . 'class.user.php';
+            $uid = (!empty($params['uid'])) ? trim($params['uid']) : '';
+            $cpass = (!empty($params['cpass'])) ? trim($params['cpass']) : '';
+            $npass = (!empty($params['npass'])) ? trim($params['npass']) : '';
+            $rpass = (!empty($params['rpass'])) ? trim($params['rpass']) : '';
+
+            if (empty($cpass) || empty($npass) || empty($rpass)) {
+                $resp = array();
+                $error = array('Code' => 1, 'Msg' => 'Invalid parameters');
+                $res = array('results' => $resp, 'error' => $error);
+                break;
+            }
+            if ($rpass!=$npass) {
+                $resp = array();
+                $error = array('Code' => 1, 'Msg' => 'New Passwords not Matching');
+                $res = array('results' => $resp, 'error' => $error);
+                break;
+            }
+            $obj=new user($db['iftosi']);
+            $res = $obj->changePwd($params);
             break;
 
 // localhost/iftosi/apis/index.php?action=deactUser&mobile=9975887206
@@ -1537,6 +1561,27 @@ echo '</pre>';
             $res=$result;
             break;
 
+//  localhost/iftosi/apis/index.php?action=getProdList
+        case 'getProdList':
+            include APICLUDE.'class.admin.php';
+            $obj=new admin($db['iftosi']);
+            $res=$obj->getProdList($params);
+            break;   
+
+//  localhost/iftosi/apis/index.php?action=getImgByProd&pid=12000
+        case 'getImgByProd':
+            include APICLUDE.'class.admin.php';
+            $obj=new admin($db['iftosi']);
+            $res=$obj->getImgByProd($params);
+            break;
+        
+//  localhost/iftosi/apis/index.php?action=updateImageData&id=1&rea=dsdsd&seq=2
+        case 'updateImageData':
+            include APICLUDE.'class.admin.php';
+            $obj=new admin($db['iftosi']);
+            $res=$obj->updateImageData($params);
+            break;
+        
 		case 'getLatLngByArea':
 			include APICLUDE . 'class.location.php';
 			$obj = new location($db['iftosi']);

@@ -300,6 +300,7 @@
                           logmobile,
                           password,
                           is_vendor,
+                          pass_flag,
 						  email
                    FROM 
                           tbl_registration
@@ -320,6 +321,7 @@
                     $arr['username']=$row['user_name'];
                     $arr['mobile']=$row['logmobile'];
                     $arr['email']=$row['email'];
+                    $arr['pass_flag']=$row['pass_flag'];
                 }
                 $ut=$arr['utype'];
                 if($ut==0)
@@ -644,7 +646,7 @@
 
             if ($cnt1 > 0) {
                 $password = mt_rand(11111111, 99999999);
-                $vsql1 = "UPDATE tbl_registration SET password=MD5('.$password.') WHERE logmobile=\"" . $params['email'] . "\"";
+                $vsql1 = "UPDATE tbl_registration SET password=MD5('.$password.'), pass_flag=1 WHERE logmobile=\"" . $params['email'] . "\"";
 
                 $vres1 = $this->query($vsql1);
                 if ($vres1) {
@@ -670,6 +672,30 @@
             } else {
                 $arr = array();
                 $err = array('Code' => 1, 'Msg' => 'invalid Email ID');
+            }
+            $result = array('results' => $arr, 'error' => $err);
+            return $result;
+        }
+        public function changePwd($params) {
+            $vsql = "SELECT * FROM tbl_registration WHERE user_id='" . $params['uid'] . "' AND password=MD5('".$params['cpass']."') ";
+            $vres = $this->query($vsql);
+            $row = $this->fetchData($vres);
+            $cnt1 = $this->numRows($vres);
+
+            if ($cnt1 > 0) {
+                $vsql1 = "UPDATE tbl_registration SET password=MD5('".$params['rpass']."'), pass_flag=0 WHERE logmobile='" . $params['uid'] . "'";
+
+                $vres1 = $this->query($vsql1);
+                if ($vres1) {
+                        $arr = array();
+                        $err = array('Code' => 0, 'Msg' => 'Password Successfully Changed');
+                    } else {
+                        $arr = array();
+                        $err = array('Code' => 1, 'Msg' => 'Password failed to change');
+                    }
+            } else {
+                $arr = array();
+                $err = array('Code' => 1, 'Msg' => 'Old Password Not Matching');
             }
             $result = array('results' => $arr, 'error' => $err);
             return $result;
