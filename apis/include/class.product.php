@@ -976,7 +976,7 @@
 					if($city_area[1] == 'area')
 					{
 						$tbl_name = 'tbl_area_master';
-						$colmn_nm = 'city';
+						$colmn_nm = 'city AS cityname, latitude AS lat, longitude AS lng';
 						$whr_cond = 'id';
 					}
 					else
@@ -989,15 +989,37 @@
 
 				if($params['ctid'])
 				{
-					$sqlct = "SELECT $colmn_nm AS cityname 
+					$sqlct = "SELECT $colmn_nm  
 							FROM $tbl_name
 							WHERE $whr_cond = ".$city_area[0];
 					$resct = $this->query($sqlct);
 					if($resct)
 					{
 						$rowct = $this->fetchData($resct);
+						$vndrIds = array();
 
-						$sqlpct = "
+						if($rowct)
+						{
+							$lat = $rowct['lat'];
+							$lng = $rowct['lng'];
+							$cityname = $rowct['cityname'];
+							$vndrSql = "select vendor_id, city, ( 3959 * acos( cos( radians(" . $lat . ") ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(" . $lng . ") ) + sin( radians(" . $lat . ") ) * sin( radians( lat ) ) ) ) as distance ";
+							$vndrSql .="from tbl_vendor_master having distance > 0 and city='" . $cityname . "'";
+							$vndrRes = $this->query($vndrSql);
+							if($vndrRes)
+							{
+								while($vndrRow = $this->fetchData($vndrRes))
+								{
+									$vndrIds[] = $vndrRow['vendor_id'];
+								}
+							}
+						}
+
+						$vndrIds = implode('","', $vndrIds);
+
+						/*if(!empty($vndrIds))
+						{*/
+							$sqlpct = "
 									SELECT 
 										product_id as pid
 									FROM 
@@ -1005,16 +1027,22 @@
 									WHERE 
 										product_id in (".$allpids.")
 									AND 
-										city=\"".$rowct['cityname']."\"";
-						$respct = $this->query($sqlpct);
-						if($respct)
-						{
-							while ($rowpct = $this->fetchData($respct))
+										vendor_id in (\"".$vndrIds."\")";
+
+							$respct = $this->query($sqlpct);
+							if($respct)
 							{
-								$pids[] = $rowpct['pid'];
+								while ($rowpct = $this->fetchData($respct))
+								{
+									$pids[] = $rowpct['pid'];
+								}
+								$allpids = $pid = implode(',', $pids);
 							}
-							$allpids = $pid = implode(',',$pids);
-						}
+						/*}
+						else
+						{
+							$allpids = $pid = array();
+						}*/
 					}
 				}
 				
@@ -1030,8 +1058,8 @@
 								tbl_product_search 
 							WHERE 
 								product_id IN(".$pid.")
-                                                        AND
-                                                                active_flag=1
+							AND
+								active_flag=1
 							".$extn."	
 							";
 					$res = $this->query($sql);
@@ -1057,13 +1085,13 @@
 								gold_weight,
 								type,
 								metal,
-                                                                bullion_design
+								bullion_design
 							FROM 
 								tbl_product_search 
 							WHERE 
 								product_id IN(".$pid.")
-                                                        AND            
-                                                                active_flag=1    
+							AND            
+								active_flag=1    
 							".$extn."
 							ORDER BY
 								field(product_id,".$pid.")
@@ -1093,8 +1121,7 @@
 					{
 						$pid = $pids = '';
 					}
-					
-                                     
+
 					$psql = "
 							SELECT
 								product_id as pid,
@@ -1110,8 +1137,8 @@
 								tbl_product_master 
 							WHERE 
 								product_id IN(".$pid.")
-                                                        AND
-                                                                active_flag=1
+							AND
+								active_flag=1
 							ORDER BY
 								field(product_id,".$pid.");
 							";
@@ -1120,42 +1147,43 @@
 					{
 						$pid = $row1['pid'];
 						$arr1[$pid]=$row1;
-                                                if($params['catid']==10000 || $params['catid']==10002) {
-                                                    $dollarSql = "SELECT dollar_rate, gold_rate, silver_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where product_id='".$pid."')";
-                                                    $dollarRes=$this->query($dollarSql);
-                                                    $dollarRow=$this->fetchData($dollarRes);
-                                                    $arr1[$pid]['dollar_rate']=$dollarRow['dollar_rate'];
-                                                    $arr1[$pid]['gold_rate']=$dollarRow['gold_rate'];
-                                                    $arr1[$pid]['silver_rate']=$dollarRow['silver_rate'];
-                                                }
+						if($params['catid']==10000 || $params['catid']==10002)
+						{
+							$dollarSql = "SELECT dollar_rate, gold_rate, silver_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where product_id='".$pid."')";
+							$dollarRes=$this->query($dollarSql);
+							$dollarRow=$this->fetchData($dollarRes);
+							$arr1[$pid]['dollar_rate']=$dollarRow['dollar_rate'];
+							$arr1[$pid]['gold_rate']=$dollarRow['gold_rate'];
+							$arr1[$pid]['silver_rate']=$dollarRow['silver_rate'];
+						}
 						$arr1[$pid]['attributes'] = $attr[$pid]['attributes'];
-                                                $arr1[$pid]['images'] = $pimg[$row1['pid']]['images'];
+						$arr1[$pid]['images'] = $pimg[$row1['pid']]['images'];
 					}
-                                        
-                                        $pimgsql = "
+
+					$pimgsql = "
 							SELECT
-                                                                product_id,
+								product_id,
 								group_concat(product_image separator '|~|') AS images
 							FROM 
 								tbl_product_image_mapping 
 							WHERE 
 								product_id IN(".$pids.")
-                                                        AND
-                                                                active_flag=1
-                                                        GROUP BY
-                                                                product_id
+							AND
+								active_flag=1
+							GROUP BY
+								product_id
 							ORDER BY
 								field(product_id,".$pids.");
 							";
 					$pimgres=$this->query($pimgsql);
 					while($row2=$this->fetchData($pimgres))
 					{
-                                            $prid                  = $row2['product_id'];
-                                            $arr1[$prid]['images'] = explode('|~|',$row2['images']);
+						$prid                  = $row2['product_id'];
+						$arr1[$prid]['images'] = explode('|~|',$row2['images']);
 					}
-                                        
-                                        /* For filters */
-					
+
+					/* For filters */
+
 					$sql = "
 						SELECT 
 							attribute_id,
@@ -1174,16 +1202,14 @@
 					$res = $this->query($sql);
 					if($res)
 					{
-						while($row 		= $this->fetchData($res))
+						while($row = $this->fetchData($res))
 						{
 							$attrid[] = $row['attribute_id'];
 							$attrmap[$row['attribute_id']] = $row;
 						}
 						$attrids 	= implode(',',$attrid);
 					}
-					
-					//echo "<pre>";print_r($attrmap);die;
-					
+
 					$sql="
 						SELECT
 							attr_id, 
@@ -1196,9 +1222,9 @@
 							attr_id IN(".$attrids.") 
 						ORDER BY 
 							attr_display_name ASC";
-					
+
 					$res = $this->query($sql);
-					
+
 					if($res)
 					{
 						$i=0;
