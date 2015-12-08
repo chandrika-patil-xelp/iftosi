@@ -27,7 +27,15 @@
         <script type="text/javascript" src="<?php echo $jvs['jquery_toast']; ?>"></script>
         <script type="text/javascript" src="<?php echo $jvs['customStorage']; ?>"></script>
         <script type="text/javascript" src="<?php echo $jvs['signup']; ?>"></script>
-        <script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
+
+<?php
+		if($page == 'diamond_details' || $page == 'bullion_details' || $page == 'jewellery_details')
+		{
+?>
+			<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
+<?php
+		}
+?>
         <script>
             var pageName = '<?php echo $page;?>';
             var DOMAIN = '<?php echo DOMAIN;?>';
