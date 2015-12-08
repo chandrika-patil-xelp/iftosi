@@ -646,7 +646,16 @@ switch ($action) {
                 $page = 'shapes';
                 include 'template/shapes.html';
                 break;
-
+            
+            case 'product_list':
+                $page = 'product_list';
+                include 'template/product_list.html';
+                break;
+            
+            case 'thumbnail':
+                $page = 'thumbnail';
+                include 'template/thumbnail.html';
+                break;
             default:
                 $page = 'index';
 

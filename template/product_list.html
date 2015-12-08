@@ -1,0 +1,46 @@
+<?php include 'vendorHead.html'; ?>
+<div class="mainContainer fLeft">
+    <?php include 'HeaderVendor.html'; ?>
+    <div id="product" class="contentCont fLeft">
+        <div class="wrapperMax">
+            <div  class="forPrds fLeft fmOpenR">
+                <div class="prdResults fRight">
+                    <div id="dmdS" class="prdSearchDiv fLeft">
+                        <div class="formTitle fLeft fmOpenR m0"><span id="totalDiamonds">439</span> product(s) listed</div>
+                        <input type="text" onkeyup="searchBarcode(this.value);" autocomplete="false" class="prdSeachTxt fRight fmOpenR" placeholder="Search Product">
+                    </div>
+                    <div class="prdListHeader fLeft fmOpenR">
+                        <div class="date fLeft">Date</div>
+                        <div class="barcode fLeft">Barcode</div>
+                        <div class="totalCnt fLeft">Tatal Images</div>
+                        <div class="accepted fLeft">Accepted</div>
+                        <div class="rejected fLeft">Rejected</div>
+                        <div class="acct2 fLeft"></div>
+                    </div>
+
+                    <ul class="prdul fLeft fmOpenR" id="DiamondsList">
+                        <?php for($i=0;$i<20;$i++) {?>
+                        <li>
+                            <div class="date fLeft"> 
+                                <span class="upSpan">20/10/2015</span>
+                                <span class="lwSpan">8:10 Pm</span>
+                            </div>
+                            <div class="barcode fLeft">
+                                <span class="upSpan">CW0H8IE9</span>
+                                <span class="lwSpan"><a href="http://localhost/iftosi//gia-round-clarity-IF/did-10000">View Details</a></span>
+                            </div>
+                            <div class="totalCnt fLeft">10</div>
+                            <div class="accepted fLeft">5</div>
+                            <div class="rejected fLeft">5</div>
+                            <div class="acct2 fLeft">
+                                <div class="viewDetBtn poR ripplelink fmOpenR fRight">View Images</div>
+                            </div>
+                        </li>
+                        <?php }?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

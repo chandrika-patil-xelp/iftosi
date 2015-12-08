@@ -1,0 +1,42 @@
+<?php include 'vendorHead.html'; ?>
+<div class="mainContainer fLeft">
+    <?php include 'HeaderVendor.html'; ?>
+    <div id="" class="contentCont fLeft thumbnilPage">
+        <div class="wrapperMax">
+            <div  class="prdSearchDiv fLeft">
+                <div class="formTitle fLeft fmOpenR m0"><span id="totalDiamonds">10</span> image(s) available</div>
+            </div>
+            <?php for($i=0;$i<20;$i++) {?>
+            <div class="thumbnilComm fLeft">
+                <div id='thumb1' class="actThumbnail fLeft" onclick='openTab("http://localhost/iftosi/image-upload/uploads/10001/1449143035diamond4.jpg")' style='background: url(http://localhost/iftosi/image-upload/uploads/10001/1449143035diamond4.jpg) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);'></div>
+                <div class="comment fRight">
+                    <textarea class="txtComment fmOpenR" placeholder=" Comment ( if any )"></textarea>
+                </div>
+                <div class="acceptRej fRight">
+                    <div class="checkDiv fLeft">
+                        <input type="radio" value="1" name="accept" autocomplete="false" class="filled-in" id="accept">
+                        <label for="accept">Accept</label>
+                    </div>
+                    <div class="checkDiv fLeft">
+                        <input type="radio" value="F" name="accept" autocomplete="false" class="filled-in" id="reject">
+                        <label for="reject">Reject</label>
+                    </div>
+                </div>
+                <div class="seq fRight">
+                    <div class="seqTitle fLeft">Position</div>
+                    <input type="text" class="seqTxt fLeft fmOpenR font14" placeholder=" eg 1">
+                </div>
+            </div>
+             <?php }?>
+            
+        </div>
+    </div>
+    
+    <script>
+        function openTab(link){
+            window.open(link, '_blank');
+        }
+    </script>
+    
+</body>
+</html>

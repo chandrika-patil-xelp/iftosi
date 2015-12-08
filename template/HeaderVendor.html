@@ -3,11 +3,29 @@
         <div class="wrapperMax">
             <div class="vndLogo fLeft fmOpenR pointer" onclick="window.location.assign(DOMAIN);"><b>IF</b>to<b>SI</b></div>
             <div class="vndInfo fRight fmOpenR">
-                Hi, <span id="userName"></span> | 
+                Hi, <span id="userName">Shubham</span> | 
                 <div class="fRight pointer" onclick="common.doLogout();"><span>Logout</span></div>
             </div>
         </div>
     </div>
+    <?php  if($page=='product_list' || $page=='thumbnail') { ?>
+    <div class="vndTabs fLeft fmOpenR">
+        <div class="wrapperMax">
+            <div class="vndTabs fLeft fmOpenR">
+                <div class="wrapperMax">
+                    <?php  if($page=='product_list') { ?>
+                        <div class="heading font22 fmOpenR fLeft" style="color:#fff;width:auto">Products</div>
+                    <?php } if($page=='thumbnail') {?>
+                       <div class="heading font22 fmOpenR fLeft" style="color:#fff;width:auto">Products Images</div>
+                    <?php }?>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php }  else {?>
+    
     <div class="vndTabs fLeft fmOpenR">
         <div class="wrapperMax">
             <div class="vndTabs fLeft fmOpenR">
@@ -29,4 +47,11 @@
             </div>
         </div>
     </div>
+    
+    
+    <?php } ?>
+    
+    
+    
+    
 </div>
