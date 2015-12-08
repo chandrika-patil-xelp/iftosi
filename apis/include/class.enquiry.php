@@ -160,13 +160,13 @@ class enquiry extends DB
                 $csql='SELECT gold_purity,certified,shape,clarity,type,gold_weight,carat,metal FROM tbl_product_search WHERE product_id='.$row['product_id'].'';
                 $cres=$this->query($csql);
                 if($this->numRows($cres)>0) {
-                    while($crow=$this->fetchData($cres))
+                    while($crows=$this->fetchData($cres))
                     {
-                        $purity=$crow['gold_purity'];
-                        $metal=strtolower($crow['metal']);
-                        $weight=$crow['gold_weight'];
-                        $carat=$crow['carat'];
-                        $row['pro_detls']=$crow;
+                        $purity=$crows['gold_purity'];
+                        $metal=strtolower($crows['metal']);
+                        $weight=$crows['gold_weight'];
+                        $carat=$crows['carat'];
+                        $row['search']=$crows;
                     }
                 }
                 $csql='SELECT b.cat_name,b.catid FROM tbl_product_category_mapping AS a, tbl_category_master AS b WHERE a.product_id='.$row['product_id'].' AND b.catid=a.category_id AND b.p_catid in (0,10000,10001,10002)';
@@ -199,8 +199,7 @@ class enquiry extends DB
                         }
                     }
                 }
-                $arr2[]=$row;
-                $arr=array('enq'=>$arr2,'pdet'=>$arr1['prd']);
+                $arr['enq'][]=$row;
             }
             $err=array('Code'=>0,'Msg'=>'Values fetched successfully');
         }

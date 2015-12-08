@@ -48,8 +48,8 @@ function validateForm() {
     var state = $('#state').val();
     var wbst = $('#wbst').val();
     var pancard = $('#pan').val();
-    //var vatno = $('#vat').val();
-
+    var vatno = $('#vat').val();
+    var banker = $('#banker').val();
     var str = "V02554544";
     var patt1 = /^(C|V){1}([0-3]){2}([0-9]){2}/g;
     var result = str.match(patt1);
@@ -115,25 +115,28 @@ function validateForm() {
         str = 'Invaild PAN Card No.';
         $('#pan').focus();
     }
-//    if (vatno != '') {
-//        if (vatno.length == 11) {
-//            var vat_pattr = /^(C|V){1}([0-3]){1}([0-9]){2}/g;
-//            var vat_pattr1 = /([0-9]*$)/;
-//            var vatLtNo = vatno.substring(3, 11);
-//
-//            if (vatLtNo.search(vat_pattr1) != 0 || vatno.search(vat_pattr) != 0) {
-//                str = 'Invaild VAT No.';
-//                $('#vat').focus();
-//            }
-//        } else {
-//            str = 'Invaild VAT Nunber';
-//            $('#vat').focus();
-//        }
-//    } 
-//    else  {
-//        str = 'VAT Nunber Required';
-//        $('#vat').focus();
-//    }
+    if (vatno !== '') {
+        if (vatno.length == 12) {
+            var vat_pattr = /^([0-9]){11}(C|V){1}/g;
+            //var vat_pattr1 = /([0-9]*$)/;
+            //var vatLtNo = vatno.substring(3, 11);
+        if (vat_pattr.test(vatno) == false) {
+                str = 'Invaild VAT No.';
+                $('#vat').focus();
+            }
+        } else {
+            str = 'Invaild VAT Number';
+            $('#vat').focus();
+        }
+    } 
+    else  {
+        str = 'VAT Number Required';
+        $('#vat').focus();
+    }
+    if(banker == undefined || banker == 'undefiend' || banker == null || banker == 'null' || banker == '' || banker == ' '){
+        str = 'Banker field is empty';
+        $('#banker').focus();
+    }
     if (str == '' && !$("#forDiamond").hasClass("comSelected") && !$("#forJewellery").hasClass("comSelected") && !$("#forBullion").hasClass("comSelected")) {
         str = 'Select business type';
     }
@@ -169,8 +172,8 @@ function validateStep2Form() {
     var str = 'This Field is Required';
     if (/1/.test(busiType)) {
         var memcert = $('#memcert').val();
-        var bdbc = $('#bdbc').val();
-        var othdbaw = $('#othdbaw').val();
+        //var bdbc = $('#bdbc').val();
+        //var othdbaw = $('#othdbaw').val();
         var ofcity = $('#ofcity').val();
         var ofcountry = $('#ofcountry').val();
         if (memcert == '') {
@@ -178,16 +181,16 @@ function validateStep2Form() {
             common.toast(0, 'Enter GJEPC Membership Certificate');
             return false;
         }
-        else if (bdbc == '') {
-            common.toast(0, 'Enter Bharat Diamond Bourse Certificate');
-            $('#bdbc').focus();
-            return false;
-        }
-        else if (othdbaw == '') {
-            common.toast(0, 'Enter Details Of Membership Of Other Diamond Bourse Around The World');
-            $('#othdbaw').focus();
-            return false;
-        }
+//        else if (bdbc == '') {
+//            common.toast(0, 'Enter Bharat Diamond Bourse Certificate');
+//            $('#bdbc').focus();
+//            return false;
+//        }
+//        else if (othdbaw == '') {
+//            common.toast(0, 'Enter Details Of Membership Of Other Diamond Bourse Around The World');
+//            $('#othdbaw').focus();
+//            return false;
+//        }
         else if (ofcity == '') {
             common.toast(0, 'Enter Offices In other Cities');
             $('#ofcity').focus();
@@ -203,12 +206,12 @@ function validateStep2Form() {
        var showroomname = $('#showroomname').val();
         var showroomno = $('#showroomno').val();
         var mdbw = $('#mdbw').val();
-        if (showroomname == '') {
+        if (showroomname == undefiend || showroomname == 'undefined' || showroomname == null || showroomname == 'null' || showroomname == '') {
             $('#showroomname').focus();
             common.toast(0, 'Show Room Name is Required');
             return false;
         }
-        else if (showroomno == '' || isNaN(showroomno) || showroomno == 0) {
+        else if (showroomno == '' || isNaN(showroomno) || showroomno == 0 || showoomno === '0') {
             common.toast(0, 'Enter Number of Showrooms');
             $('#showroomno').focus();
             return false;
