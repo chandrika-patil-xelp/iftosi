@@ -22,10 +22,10 @@ var bullionPage = 1;
     }
     if (/1/.test(busiType) && catid==10000) {
         $('#diamondPrds').removeClass('dn');
-        loadDiamonds();
+        loadDiamonds(1);
     }
     else if (/2/.test(busiType) && catid==10001) {
-        loadJewels();
+        loadJewels(1);
         $('#jewelleryPrds').removeClass('dn');
     }
     else if (/3/.test(busiType) && catid==10002) {
@@ -34,6 +34,7 @@ var bullionPage = 1;
     }
 //}});
 
+/*
 $(window).scroll(function () {
     if ($(window).scrollTop() == ($(document).height() - $(window).height())) {
         if(!searchScroll) {
@@ -52,12 +53,17 @@ $(window).scroll(function () {
         }
     }
 });
-function loadDiamonds() {
-   $.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + diamondPage + "&limit=15&catid=10000", success: function (result) {
-            loadDiamondCallback(result);
-    }});
+*/
+
+function loadDiamonds(pgno) {
+	if(!pgno)
+		pgno = 1;
+	$.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + pgno + "&limit=50&catid="+catid, success: function (result) {
+		
+		loadDiamondCallback(result,pgno);
+	}});
 }
-function loadDiamondCallback(res) {
+function loadDiamondCallback(res,pgno) {
     var obj = jQuery.parseJSON(res);
     if (obj['results'] != '') {
         var total = obj['results']['total_products'];
@@ -75,16 +81,123 @@ function loadDiamondCallback(res) {
                 str += generateDiamondList(obj['results']['products'][i]);
                 i++;
             }
+			var html = pagination(obj,pgno);
             diamondPage++;
         } else {
             str = '<p class="noRecords"><span>Sorry! No Products Found!</span></p>';
             loadDiamont = false;
         }
-        $('#DiamondsList').append(str);
+        $('#DiamondsList').html(str);
+        $('#DiamondsList').append(html);
+		
+		$('.pgComm').click( function(){
+			
+			$('.pgComm').removeClass('pgActive');
+			$(this).addClass('pgActive');
+			loadDiamonds($(this).text());
+			$('body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+		});
+		
     } else {
         loadDiamont = false;
     }
 }
+
+function pagination(data,pgno){
+	/* For Pagintion */
+	pgno = pgno*1;
+	var html = '';
+	var tc = data.results.total_products;
+	var lastpg = Math.ceil(tc/50);
+	var adjacents = 2;
+	
+	if(lastpg > 1)
+	{
+		html += '<div class="fLeft pagination fmOpenR">';
+			html += '<center>';
+				html += '<div class="pPrev poR ripplelink">Previous</div>';
+				if(lastpg < 7 + (adjacents * 2))
+				{
+					for(var i = 1; i <= lastpg; i++)
+					{
+						if(i == pgno)
+						{
+							html += '<div class="pgComm poR ripplelink pgActive">'+i+'</div>';
+						}
+						else
+						{
+							html += '<div class="pgComm poR ripplelink">'+i+'</div>';
+						}
+					}
+				}
+				else if(lastpg > 5 + (adjacents * 2))
+				{
+					if(pgno < 1 + (adjacents * 2))
+					{
+						for (var i = 1; i < 4 + (adjacents * 2); i++)
+						{
+							if(i == pgno)
+							{
+								html += '<div class="pgComm poR ripplelink pgActive">'+i+'</div>';
+							}
+							else
+							{
+								html += '<div class="pgComm poR ripplelink">'+i+'</div>';
+							}
+						}
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgComm poR ripplelink">'+lastpg+'</div>';
+					}
+					else if(lastpg - (adjacents * 2) > pgno && pgno > (adjacents * 2))
+					{
+						html += '<div class="pgComm poR ripplelink">1</div>';
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgEmpty"></div>';
+						for (var i = pgno - adjacents; i <= pgno + adjacents; i++)
+						{
+							if(i == pgno)
+							{
+								html += '<div class="pgComm poR ripplelink pgActive">'+i+'</div>';
+							}
+							else
+							{
+								html += '<div class="pgComm poR ripplelink">'+i+'</div>';
+							}
+						}
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgComm poR ripplelink">'+lastpg+'</div>';
+					}
+					else
+					{
+						html += '<div class="pgComm poR ripplelink">1</div>';
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgEmpty"></div>';
+						for (var i = lastpg - (2 + (adjacents * 2)); i <= lastpg; i++)
+						{
+							if(i == pgno)
+							{
+								html += '<div class="pgComm poR ripplelink pgActive">'+i+'</div>';
+							}
+							else
+							{
+								html += '<div class="pgComm poR ripplelink">'+i+'</div>';
+							}
+						}
+					}
+				}
+				html += '<div class="pNext poR ripplelink">Next</div>';
+			html += '</center>';
+		html += '</div>';
+	}
+	return html;
+}
+
 function generateDiamondList(obj) {
     var pro_name = obj['product_name'];
     if(pro_name == null || pro_name == '' || pro_name == 'null') {
@@ -122,16 +235,17 @@ function generateDiamondList(obj) {
     str += '</li>';
     str += '';
     return str;
-    
 }
 
 
-function loadJewels() {
-    $.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + jewellPage + "&limit=15&catid=10001", success: function (result) {
-            loadJewellCallback(result);
+function loadJewels(pgno) {
+	if(!pgno)
+		pgno = 1;
+    $.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + pgno + "&limit=50&catid="+catid, success: function (result) {
+            loadJewellCallback(result,pgno);
     }});
 }
-function loadJewellCallback(res) {
+function loadJewellCallback(res,pgno) {
     var obj = jQuery.parseJSON(res);
     if (obj['results'] != '') {
         var total = obj['results']['total_products'];
@@ -149,12 +263,23 @@ function loadJewellCallback(res) {
                 str += generateJewellList(obj['results']['products'][i]);
                 i++;
             }
+			var html = pagination(obj,pgno);
             jewellPage++;
         } else {
             str = '<p class="noRecords"><span>Sorry! No Products Found!</span></p>';
             loadJewel = false;
         }
-        $('#JewellsList').append(str);
+		$('#JewellsList').html(str);
+        $('#JewellsList').append(html);
+		
+		$('.pgComm').click( function(){
+			
+			$('.pgComm').removeClass('pgActive');
+			$(this).addClass('pgActive');
+			loadJewels($(this).text());
+			$('body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+		});
+		
     } else {
         loadJewel = false;
     }
@@ -213,12 +338,14 @@ function generateJewellList(obj) {
         }
  }
 
-function loadBullions() {
-    $.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + bullionPage + "&limit=15&catid=10002", success: function (result) {
-            loadBullionsCallback(result);
-        }});
+function loadBullions(pgno) {
+	if(!pgno)
+		pgno = 1;
+    $.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + pgno + "&limit=50&catid="+catid, success: function (result) {
+		loadBullionsCallback(result,pgno);
+	}});
 }
-function loadBullionsCallback(res) {
+function loadBullionsCallback(res,pgno) {
     var obj = jQuery.parseJSON(res);
     if (obj['results'] != '') {
         var total = obj['results']['total_products'];
@@ -236,12 +363,23 @@ function loadBullionsCallback(res) {
                 str += generatBullionsList(obj['results']['products'][i]);
                 i++;
             }
+			var html = pagination(obj,pgno);
             bullionPage++;
         } else {
             str = '<p class="noRecords"><span>Sorry! No Products Found!</span></p>';
             loadBullion = false;
         }
-        $('#BullionsList').append(str);
+		$('#BullionsList').html(str);
+        $('#BullionsList').append(html);
+		
+		$('.pgComm').click( function(){
+			
+			$('.pgComm').removeClass('pgActive');
+			$(this).addClass('pgActive');
+			loadBullions($(this).text());
+			$('body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+		});
+		
     } else {
         loadBullion = false;
     }
@@ -326,8 +464,6 @@ function deleteProduct() {
             var total=$('#total'+catName).text();
             total--;
             $('#total'+catName).text(total);
-            console.log(total);
-            console.log(catName);
             if(total==0) {
                 loadBullion = false;
             }
@@ -345,7 +481,6 @@ function deleteProduct() {
                     loadBullions();
                 }
             }
-            console.log("#"+catName+"List");
             common.toast(1,obj['error']['Msg']);
         } else {
             common.toast(0,obj['error']['Msg']);
@@ -381,8 +516,12 @@ var searchScrollValue= '';
 var searchScroll= false;
 var searchIDName = '';
 var searchPage = 1;
+var searchVal = '';
 $('.prdSeachTxt').val('');
-function searchBarcode(val) {
+function searchBarcode(val,pgno) {
+	if(!pgno)
+		pgno = 1;
+	searchVal = val;
     if(catid==10000) {
         searchIDName='Diamonds';
     }else if(catid==10001) {
@@ -396,8 +535,8 @@ function searchBarcode(val) {
             $('#'+searchIDName+'List').removeClass('dn');
             $('#s'+searchIDName+'List').html('').addClass('dn');
         }
-        $.ajax({url: common.APIWebPath() + "index.php?action=getVProductsByBcode&bcode="+ val +"&vid="+ uid +"&catid="+catid+"&page="+searchPage+"&limit=15", success: function (result) {
-            searchBarcodeCallback(result);
+        $.ajax({url: common.APIWebPath() + "index.php?action=getVProductsByBcode&bcode="+ val +"&vid="+ uid +"&catid="+catid+"&page="+pgno+"&limit=50", success: function (result) {
+            searchBarcodeCallback(result,pgno);
         }});
         searchScrollValue = val;
     } else {
@@ -405,7 +544,7 @@ function searchBarcode(val) {
         $('#s'+searchIDName+'List').html('').addClass('dn');
     }
 }
-function searchBarcodeCallback(res) {
+function searchBarcodeCallback(res,pgno) {
     var obj = jQuery.parseJSON(res);
     if (obj['results'] !== '') {
         var total = obj['results']['total_products'];
@@ -437,9 +576,20 @@ function searchBarcodeCallback(res) {
                     i++;
                 }
             }
+			var html = pagination(obj,pgno);
             if(str !== undefined && str !== null && str !== '')
             {
-                $('#s'+searchIDName+'List').append(str);
+                //$('#s'+searchIDName+'List').append(str);
+				$('#s'+searchIDName+'List').html(str);
+				$('#s'+searchIDName+'List').append(html);
+				
+				$('.pgComm').click( function(){
+					
+					$('.pgComm').removeClass('pgActive');
+					$(this).addClass('pgActive');
+					searchBarcode(searchVal,$(this).text());
+					$('body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+				});
             }
         }
         else if(searchPage==1) {

@@ -527,3 +527,16 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 .smallField {border: 1px solid #ccc;box-sizing: border-box;font-size: 13px;font-weight: bold;font-family: openR;max-height: 145px;overflow-y: auto;width: 100%;}
 .dropArrow {background-image: url("../img/down_arrow.svg");background-position: right center;background-repeat: no-repeat;background-size: auto 100%;}
 
+/* For Pagination */
+
+.pagination{width:100%;height: 70px;background: #fff;padding: 10px 0;color:#666;font-size: 14px;text-align: center;}
+.pPrev{width:auto;height: 40px;border-radius:5px;display: inline-block;line-height: 40px;margin-right: 10px;cursor: pointer;vertical-align: top;padding:0 15px 0 35px;}
+.pPrev::after {content: '';position: absolute;left: 0%;top: 0px;width: 40px;height: 40px;background: url(../img/common/arrow_left_black.svg)no-repeat;background-size: auto 100%;background-position: center;}
+.pNext{width:auto;height: 40px;border-radius: 5px;padding:0 35px 0 15px;display: inline-block;line-height: 40px;cursor: pointer;vertical-align: top;}
+.pNext::after {content: '';position: absolute;right: 0;top: 0px;width: 40px;height: 40px;background: url(../img/common/arrow_left_black.svg)no-repeat;background-size: auto 100%;background-position: center;-ms-transform: rotate(180deg); -webkit-transform: rotate(180deg); -moz-transform: rotate(180deg); transform: rotate(180deg); }
+.pgComm{width:40px;height: 40px;border-radius: 20px;border:1px solid #d4d4c8;color:#666;display: inline-block;line-height: 40px;margin:0 10px 0 0;cursor: pointer;vertical-align: top;}
+.pgComm:hover{background: #8A0044;color:#fff;border-color:  #8A0044;}
+.pgEmpty{width:10px;height: 10px;border-radius: 5px;background: #d4d4c8;display: inline-block;line-height: 20px;margin:0 10px 0 0;vertical-align: bottom;}
+.pgActive{background: #8A0044;color:#fff;border-color:  #8A0044;}
+
+/* For Pagination */
