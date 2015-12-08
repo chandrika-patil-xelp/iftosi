@@ -1,11 +1,23 @@
 <?php include TEMPLATE.'backHead.html';?>
     <body>
 	<?php include TEMPLATE.'backheader.html';?>
+        <div class="vndTabs fLeft fmOpenR"  style="margin-top: 50px;">
+            <div class="wrapperMax">
+                <div class="vndTabs fLeft fmOpenR">
+                    <div class="wrapperMax">
+                        <div class="heading font22 fmOpenR fLeft" style="color:#fff;width:auto">Upload Product Images</div>
+                        <a href="<?php echo $vendor_landing;?>"><div class="finishBtn btnComm fRight">PROCEED</div></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
             <div id="content">
                 <input type="file" name="files[]" id="filer_input2" multiple="multiple">
                 <input type="hidden" name="pid" id="pid" value="<?php echo $pid;?>">
             </div>
-        <div class="btnConta fmOpenR"><?php
+        <div class="btnConta fmOpenR dn">
+        <?php
             $catid=$_GET['c'];
             if($catid==10000) {
                 $case='diamond_Form';
@@ -15,7 +27,7 @@
                 $case='bullion_Form';
             }
             ?>
-<?php
+        <?php
             $catid=$_GET['c'];
             
             $vendor_landing = DOMAIN.'?case=vendor_landing&catid='.$catid;
@@ -23,8 +35,8 @@
             {
             $backUrl = DOMAIN.'?case='.$case.'&catid='.$_GET['c'].'&prdid='.$_GET['pid'];
 ?>
-            <a href="<?php echo $backUrl;?>"><div class="skipBtn btnComm fLeft">BACK</div></a>
-                <a href="<?php echo $vendor_landing;?>"><div class="finishBtn btnComm fRight">PROCEED</div></a>
+            
+<!--                <a href="<?php echo $vendor_landing;?>"><div class="finishBtn btnComm fRight">PROCEED</div></a>-->
 <?php
             }
             else

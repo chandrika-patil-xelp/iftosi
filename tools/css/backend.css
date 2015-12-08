@@ -361,7 +361,7 @@ a{text-decoration: none;}
 .vLogo div{width:100%;height: 30px;color: #fff;text-align: center;}
 
 
-.prdHeader{width: 100%;position: fixed;height:45px;top: 100px;z-index:10;background: #ebebde;overflow: hidden;}
+.prdHeader{width: 100%;position: fixed;height:45px;top: 100px;z-index:0;background: #ebebde;overflow: hidden;}
 .pLHtransit{height: 0!important;}
 
 
