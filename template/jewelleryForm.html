@@ -242,13 +242,38 @@
                             </div>
                         </div>
                     </div>
- <?php                          
-                                        foreach($cat['subcat'] as $key=>$values)
-                                        {
-                                                if(strtolower($values['attr'][$key]['attr_name'])=='gold_purity')
-                                            {
-                                                    $goldpurity=$values['attr'][$key]['attr_name'];
-                                                    
+    
+<?php                          
+/*                    if(strtolower($catres[3]['attr_name'])=='gemstone_color')
+                    {
+?>
+                    <div class="divCon  fLeft jw3">
+                        <div  class="titleDiv txtCap fLeft"><?=$catres[3]['attr_display_name']?></div>
+                            <div class='radioCont fLeft'>     
+<?php
+                            $gemvalues = explode(',',  strtolower($catres[3]['attr_values']));
+                            foreach($gemvalues as $key=>$values)
+                            {   
+                                
+?>
+                                
+                                <div class="checkDiv fLeft">
+                                    <input type="radio" name='gemstone_color' class="filled-in" value="<?=$gemvalues[$key];?>" <?php echo ($gemvalues[$key] == $attr['gemstone_color']) ? 'checked' : '';?> id="<?=$gemvalues[$key];?>">
+                                    <label for="<?=$gemvalues[$key];?>"><?=  ucwords($gemvalues[$key]);?></label>
+                                </div>
+<?php
+                            }
+?>
+                        </div>
+                    </div>
+<?php 
+                    }
+      */                  foreach($cat['subcat'] as $key=>$values)
+                        {
+                                if(strtolower($values['attr'][$key]['attr_name'])=='gold_purity')
+                            {
+                                    $goldpurity=$values['attr'][$key]['attr_name'];
+
 ?>                        
                                                 <div class="divCon2  fLeft">
                                                     <div  class="titleDiv txtCap fLeft"><?php echo $values['attr'][$key]['attr_display_name']; ?></div>

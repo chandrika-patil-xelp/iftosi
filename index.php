@@ -523,10 +523,10 @@ switch ($action) {
                 $url = APIDOMAIN . 'index.php?action=categoryHeir&catid=' . $catid;
                 $res = $comm->executeCurl($url);
                 $cat = $res['result'];
-
+                $catres = $cat['subcat'][0]['attr'];
                 $attr = $result[$pid]['attr_details'];
                 $pdet = $result[$pid];
-                //echo "<pre>";print_r($pdet);die;
+                //echo "<pre>";print_r($attr['gemstone_color']);die;
                 include 'template/jewelleryForm.html';
                 break;
 

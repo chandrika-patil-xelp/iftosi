@@ -206,7 +206,7 @@ function validateStep2Form() {
        var showroomname = $('#showroomname').val();
         var showroomno = $('#showroomno').val();
         var mdbw = $('#mdbw').val();
-        if (showroomname == undefiend || showroomname == 'undefined' || showroomname == null || showroomname == 'null' || showroomname == '') {
+        if (showroomname == undefined || showroomname == 'undefined' || showroomname == null || showroomname == 'null' || showroomname == '') {
             $('#showroomname').focus();
             common.toast(0, 'Show Room Name is Required');
             return false;

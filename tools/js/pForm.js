@@ -43,11 +43,11 @@ function submitForm(formid)
     //var JsonString = JSON.stringify(values);
     if((pid !== null)&&(pid !== undefined)&&(pid !== '') && pid !== 'undefined' && typeof pid !== 'undefined')
     {
-    var params = 'action=addNewproduct&category_id='+catid+'&dt='+data+'&prdid='+pid+'&vid='+uid;
+        var params = 'action=addNewproduct&category_id='+catid+'&dt='+data+'&prdid='+pid+'&vid='+uid;
     }
     else
     {
-    var params = 'action=addNewproduct&category_id='+catid+'&dt='+data+'&vid='+uid;
+        var params = 'action=addNewproduct&category_id='+catid+'&dt='+data+'&vid='+uid;
     }
     var URL   = DOMAIN+"apis/index.php";
     $.getJSON(URL, params, function(data) {
@@ -61,6 +61,7 @@ function submitForm(formid)
             var color =  $('input[name=color]:checked').val();
             var certificate =  $('input[name=Certficate]:checked').val();
             var clarity = $("input[name='clarity']:checked").val();
+            //var gemcolour = $("input[name='gemstone_color']:checked").val();
             var subcat = $("input[type='checkbox']").is(':checked');
             var purity = $('#goldpurity').val();
             var dweight = $('#diamondweight').val();
@@ -232,7 +233,28 @@ function submitForm(formid)
                     isValid = false;
                     $('#gemweight').focus();
                 }
+//                if(isValid && (gemcolour=='' || gemcolour==null || gemcolour==undefined || gemcolour == 'undefiend')) 
+//                {
+//                    console.log(gemcolour);
+//                    str ='Gemstone colour field is Empty';
+//                    isValid = false;
+//                }
             }
+//            if(isValid && (gemcolour !== undefined && gemcolour !== 'undefined' && gemcolour !== 'null' && gemcolour !== null && gemcolour !== ''))
+//            {
+//                if(isValid && (gemweight == undefined || gemweight == 'undefined' || gemweight == 'null' || gemweight == '' || isNaN(gemweight) == true))
+//                {
+//                    str ='Gemstone weight is important to fill';
+//                    isValid = false;
+//                    $('#gemweight').focus();
+//                }
+//                if(isValid && (gemcolour=='' || gemcolour==null || gemcolour==undefined || gemcolour == 'undefiend')) 
+//                {
+//                    console.log(gemcolour);
+//                    str ='Gemstone colour field is Empty';
+//                    isValid = false;
+//                }
+//            }
             if(str != '')
             {
                 common.toast(0,str);
