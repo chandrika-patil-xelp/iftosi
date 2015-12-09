@@ -401,8 +401,8 @@ function updateDollarRate() {
                 var errCode = obj['error']['Code'];
                 if(errCode==0) {
                     common.toast(1,obj['error']['Msg']);
-					window.location.reload(1);
                     closeAllForms();
+                    setTimeout(function () { window.location.assign(DOMAIN+"index.php?case=diamond_Form&catid=10000&vid="+uid); }, 1800);
                 } else if(errCode==1) {
                     common.toast(0,obj['error']['Msg']);
                 }
@@ -493,9 +493,10 @@ function updateGoldRate() {
                 var errCode = obj['error']['code'];
                 if(errCode==0) {
                     common.toast(1,obj['error']['Msg']);
-                    window.location.reload(1);
+                    //window.location.reload(1);
                     customStorage.readFromStorage('rateErr');
                     closeAllForms();
+                    setTimeout(function () { window.location.assign(DOMAIN+"index.php?case=bullion_Form&catid=10002&vid="+uid); }, 1800);
                 } else if(errCode==1) {
                     
                     common.toast(0,obj['error']['Msg']);
