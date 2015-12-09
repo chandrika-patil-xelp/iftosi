@@ -2,21 +2,25 @@
 <body>
     <div id='baseCont' class="container fmOpenR signupPage loginP">
         <div class="wrapper">
-            <div class='signupDiv' style="height:250px;">
+            <div class='loginDiv'>
                 <div class="wrapperMax">
                     <div class="signupTitle fLeft">Login</div>
                     <div class="inputCont fLeft fmOpenR">
-                        <input type="email" id="pr_email" name="pr_email" autocomplete="false" class="txtInput cOrange fmOpenR font14 emailIcon">
-                        <label for="pr_email" class="inp-label transition100">MOBILE/EMAIL</label>
-                        <div id="pr_email_inpText" class="inpText fRight transition300">enter<br>email address</div>
+                        <input type="tel" id="pr_mobile" name="pr_mobile" autocomplete="off" class="txtInput cOrange fmOpenR font14 emailIcon">
+                        <label for="pr_mobile" class="inp-label transition100">MOBILE</label>
+                        <div id="pr_email_inpText" class="inpText fRight transition300">enter<br>mobile number</div>
                     </div>
                     <div class="inputCont fLeft fmOpenR">
-                        <input type="password" id="pr_pass" name="pr_pass" autocomplete="false" class="txtInput cOrange fmOpenR font14 passwordIcon" onKeyPress="common.eSubmit(event, 'signupSubmit');">
+                        <input type="password" id="pr_pass" name="pr_pass" autocomplete="off" class="txtInput cOrange fmOpenR font14 passwordIcon" onKeyPress="common.eSubmit(event, 'loginSubmit');">
                         <label for="pr_pass" class="inp-label transition100">PASSWORD</label>
                         <div id="pr_pass_inpText" class="inpText fRight transition300">enter your<br>password</div>
                     </div>  
                     <div class="cancelLgBtn fLeft fmOpenR ripplelink poR" id='signupCancel'> CANCEL</div>
-                    <div class="loginBtn fLeft fmOpenR ripplelink poR" id='signupSubmit'>SIGN IN</div>
+                    <div class="loginBtn fLeft fmOpenR ripplelink poR" id='loginSubmit' onclick="common.submitLoginForm();">SIGN IN</div>
+                    <div class="signuplink fmOpenB fLeft">
+                        <center class="w50 fLeft"><a href="<?php echo DOMAIN; ?>index.php?case=forgot" style="color:#171334;"><span>Forgot Password?</span></a></center>
+                        <center class="w50 fLeft"><a href="<?php echo DOMAIN; ?>index.php?case=signup"><span>Sign Up with Us</span></a></center>
+                    </div>
                 </div>
             </div>
         </div>
