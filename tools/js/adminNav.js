@@ -14,9 +14,5 @@ $(document).ready(function () {
 			window.location.href=DOMAIN+'index.php?case=vendorList&uid='+uid;
 			});
 		}
-		else
-		{
-			window.location.href = DOMAIN;
-		}
 	}
 });

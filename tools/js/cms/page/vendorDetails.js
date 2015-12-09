@@ -33,6 +33,13 @@ $(document).ready(function () {
             $('#bullionDet').toggleClass('dn');
         }
     });
+
+    $('#pan').bind('keyup', function () {
+		if($(this) !== undefined && typeof $(this) !== 'undefined' && $(this).val() !== undefined && typeof $(this).val() !== 'undefined')
+		{
+			$(this).val($(this).val().toUpperCase());
+		}
+	});
 });
 function fnValidatePAN() {
     var Obj = $conv('#pan').val();
@@ -181,16 +188,17 @@ function validateStep2Form() {
             common.toast(0, 'Enter GJEPC Membership Certificate');
             return false;
         }
-//        else if (bdbc == '') {
-//            common.toast(0, 'Enter Bharat Diamond Bourse Certificate');
-//            $('#bdbc').focus();
-//            return false;
-//        }
-//        else if (othdbaw == '') {
-//            common.toast(0, 'Enter Details Of Membership Of Other Diamond Bourse Around The World');
-//            $('#othdbaw').focus();
-//            return false;
-//        }
+        /*
+        else if (bdbc == '') {
+            common.toast(0, 'Enter Bharat Diamond Bourse Certificate');
+            $('#bdbc').focus();
+            return false;
+        }
+        else if (othdbaw == '') {
+            common.toast(0, 'Enter Details Of Membership Of Other Diamond Bourse Around The World');
+            $('#othdbaw').focus();
+            return false;
+        }
         else if (ofcity == '') {
             common.toast(0, 'Enter Offices In other Cities');
             $('#ofcity').focus();
@@ -201,6 +209,7 @@ function validateStep2Form() {
             $('#ofcountry').focus();
             return false;
         }
+        */
     }
     if (/2/.test(busiType)) {
        var showroomname = $('#showroomname').val();
@@ -211,11 +220,11 @@ function validateStep2Form() {
             common.toast(0, 'Show Room Name is Required');
             return false;
         }
-        else if (showroomno == '' || isNaN(showroomno) || showroomno == 0 || showroomno === '0') {
+        /*else if (showroomno == '' || isNaN(showroomno) || showroomno == 0 || showroomno === '0') {
             common.toast(0, 'Enter Number of Showrooms');
             $('#showroomno').focus();
             return false;
-        }
+        }*/
         else if (mdbw == '') {
             common.toast(0, 'Membership Of Council / Jewellers Association is Required');
             $('#mdbw').focus();
@@ -263,11 +272,9 @@ function validateStep3Form() {
         $('#email').focus();
         return false;
     }
-    if (landline != '') {
-        if (!common.checkLandline('lnCode', 'landline')) {
-            return false;
-        }
-    }
+    if (!common.checkLandline('lnCode', 'landline')) {
+		return false;
+	}
     return  true;
 }
 

@@ -93,12 +93,25 @@ function Common() {
         var lnum = $('#' + landlineid).val();
         var num = stdcode + lnum;
         var len = num.length;
-        if ((num.charAt(0) == '0') && (len == 11) || (num.charAt(0) != '0') && (len == 10)) {
-            return true;
-        } else {
-            this.toast(0,'Please enter correct lanline number.')
-            return false;
-        }
+        if(stdcode == undefined || stdcode == null || stdcode == '' || typeof stdcode == 'undefined')
+        {
+			this.toast(0,'Landline number is mandatory');
+			return false;
+		}
+		else if(lnum == undefined || lnum == null || lnum == '' || typeof lnum == 'undefined')
+        {
+			this.toast(0,'Landline number is mandatory');
+			return false;
+		}
+        else
+        {
+			if ((num.charAt(0) == '0') && (len == 11) || (num.charAt(0) != '0') && (len == 10)) {
+				return true;
+			} else {
+				this.toast(0,'Please enter correct lanline number.');
+				return false;
+			}
+		}
     }
 
 
