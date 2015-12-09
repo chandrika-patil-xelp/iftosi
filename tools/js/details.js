@@ -84,28 +84,15 @@ $(document).ready(function(){
 			name = customStorage.readFromStorage('name');
 			email = customStorage.readFromStorage('email');
 			uid = customStorage.readFromStorage('userid');
+
 			if(uid == '' || uid == null || uid == undefined)
 			{
-				if($(this).hasClass('iconWishlist'))
-				{
-					isWishList = true;
-				}
-				else
-				{
-					isWishList = false;
-				}
+				isWishList = true;
 				common.showLoginForm(1);
 			}
 			else
 			{
-				if($(this).hasClass('iconWishlist'))
-				{
-					isWishList = true;
-				}
-				else
-				{
-					isWishList = false;
-				}
+				isWishList = true;
 				showVendorDetails(this);
 			}
 		}
@@ -348,56 +335,54 @@ function showVendorDetails(obj)
 
 		if(mobCond && nmCond && emCond)
 		{
-
-
-
 			var params = 'action=ajx&case=userCheck&mobile='+mobile+'&name='+encodeURIComponent(name)+'&email='+encodeURIComponent(email);
 			var URL = DOMAIN + "index.php";
-                        
+
 			$.getJSON(URL, params, function(data) {
 				if(data !== null && data !== undefined && data !== '')
 				{
 					if((data.error !== '' && data.error !== null && data.error !== undefined && data.error.Code == 0) || (data.error.Code == 1 && data.results.userid != ''))
 					{
-                                            if(data.results.userDet[0].is_vendor == 1)
-                                            {
-                                                customStorage.toast(0, 'This feature is not available for vendors');
-                                            }
-                                            else
-                                            {
-                                                customStorage.addToStorage('l', mobile);
-                                                customStorage.addToStorage('mobile', mobile);
-                                                customStorage.addToStorage('username', name);
-                                                customStorage.addToStorage('name', name);
-                                                customStorage.addToStorage('email', email);
-                                                customStorage.addToStorage('isLoggedIn',true);
-                                                
-                                                customStorage.addToStorage('is_vendor','-1');
-									
-                                                var uid = customStorage.addToStorage('userid', data.userid);
-						if((obj !== undefined && $(obj).hasClass('iconWishlist')) || isWishList)
+						if(data.results.userDet[0].is_vendor == 1)
 						{
-							addToWishList();
-						}
-
-						if((obj !== undefined && $(obj).hasClass('iconMessage')) || isMail)
-						{
-							sendDetailsToUser();
+							customStorage.toast(0, 'This feature is not available for vendors');
 						}
 						else
 						{
-							setTimeout(function () {
-								initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
-							},10);
-							var pos=$('.wrapper').height()-100;
-							setTimeout(function(){
-								$('#vDetails').removeClass('vTransit');
-								$('#vDetails').removeClass('dn');
-								$('body').animate({scrollTop: pos}, 300);
-							},200);
-							addToEnquiry();
+							customStorage.addToStorage('l', mobile);
+							customStorage.addToStorage('mobile', mobile);
+							customStorage.addToStorage('username', name);
+							customStorage.addToStorage('name', name);
+							customStorage.addToStorage('email', email);
+							customStorage.addToStorage('isLoggedIn',true);
+							
+							customStorage.addToStorage('is_vendor','-1');
+				
+							var uid = customStorage.addToStorage('userid', data.results.userid);
+							common.checkLogin();
+							if((obj !== undefined && $(obj).hasClass('iconWishlist')) || isWishList)
+							{
+								addToWishList();
+							}
+
+							if((obj !== undefined && $(obj).hasClass('iconMessage')) || isMail)
+							{
+								sendDetailsToUser();
+							}
+							else
+							{
+								setTimeout(function () {
+									initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
+								},10);
+								var pos=$('.wrapper').height()-100;
+								setTimeout(function(){
+									$('#vDetails').removeClass('vTransit');
+									$('#vDetails').removeClass('dn');
+									$('body').animate({scrollTop: pos}, 300);
+								},200);
+								addToEnquiry();
+							}
 						}
-                                            }
 					}
 				}
 			});
@@ -516,6 +501,7 @@ function addToWishList()
 					{
 						isPidInWishlist = true;
 						$('#addtowishlist').html('Added To Wishlist');
+						common.getWishListCount();
 						if(data.results.indexOf('updated') !== -1)
 						{
 							customStorage.toast(1, 'Product already present in wishlist');
