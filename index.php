@@ -561,8 +561,7 @@ switch ($action) {
 
                 $attr = $result[$pid]['attr_details'];
                 $pdet = $result[$pid];
-//                                        echo "<pre>";print_r($fil);die;
-                //echo "<pre>";print_r($result[$pid]['attr_details']['type']);die;
+//              echo "<pre>";print_r($fil);die;
                 include 'template/bullionForm.html';
                 break;
 

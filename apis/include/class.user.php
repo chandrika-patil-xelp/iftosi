@@ -671,7 +671,7 @@
                 }
             } else {
                 $arr = array();
-                $err = array('Code' => 1, 'Msg' => 'invalid Email ID');
+                $err = array('Code' => 1, 'Msg' => 'Invalid Mobile Number');
             }
             $result = array('results' => $arr, 'error' => $err);
             return $result;

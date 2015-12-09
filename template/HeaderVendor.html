@@ -3,7 +3,7 @@
         <div class="wrapperMax">
             <div class="vndLogo fLeft fmOpenR pointer" onclick="window.location.assign(DOMAIN);"><b>IF</b>to<b>SI</b></div>
             <div class="vndInfo fRight fmOpenR">
-                Hi, <span id="userName">Shubham</span> | 
+                Hi, <span id="userName"></span> | 
                 <div class="fRight pointer" onclick="common.doLogout();"><span>Logout</span></div>
             </div>
         </div>
@@ -42,6 +42,7 @@
                         </div>
                     </div>
                     <div id='enqTab' class="fLeft vTabs transition300"><a href="<?php echo DOMAIN; ?>index.php?case=vendor_enquiries">Enquiries</a></div>
+                    <div id='profileTab' class="fLeft vTabs transition300" onclick="return showVendorProfile();">Profile</div>
                    <!-- <div id='setTab' class="fLeft vTabs transition300">Settings</div>-->
                 </div>
             </div>

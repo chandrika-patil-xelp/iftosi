@@ -113,12 +113,15 @@ function Common() {
                     catid=parseInt(catid1)-1;
                     userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_landing&catid=1000'+ catid+'\');">Products</li>';
                     userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_enquiries\');">Enquiry</li>';
-                    //userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_setting\');">Setting</li>';
+                    //userMenuStr += '<li id="profileHeader1" class="transition100">Profile</li>';
+                    userMenuStr += '<li id="profileHeader1" class="transition100" onclick="return showVendorProfile();">Profile</li>';
+                    
                 }
                 else
                 {
                     userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_Form&uid='+uid+'\');">Profile</li>';
                 }
+
 
 				$('#usrNm').html(nm.split(' ')[0]);
 				$('#lgotPg').removeClass('dn');
@@ -456,4 +459,9 @@ function Common() {
 			window.location.href = DOMAIN + '?case=login';
 		}
 	};
+}
+function showVendorProfile()
+{
+    var uid = customStorage.readFromStorage('userid');
+    window.location.href=DOMAIN+'index.php?case=vendor_Form&uid='+uid;
 }

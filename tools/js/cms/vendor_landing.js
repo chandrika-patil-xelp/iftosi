@@ -1,6 +1,11 @@
 var uid = customStorage.readFromStorage('userid');
 var busiType = customStorage.readFromStorage('busiType');
 var username = customStorage.readFromStorage('username');
+var is_vendor = customStorage.readFromStorage('is_vendor');
+if(is_vendor == 1 || is_vendor === '1')
+{
+    $('#profileTab').removeClass('dn');
+}
 if(busiType==null || busiType=='' || busiType==undefined) {
     window.location.assign(DOMAIN+'index.php?case=vendor_Form&uid='+uid);
 }
@@ -630,4 +635,9 @@ function addBulion() {
             }
         
     }}); 
+}
+
+function showVendorProfile()
+{
+    window.location.href=DOMAIN+'index.php?case=vendor_Form&uid='+uid;
 }

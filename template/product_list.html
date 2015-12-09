@@ -33,7 +33,7 @@
     var userName = customStorage.readFromStorage('name');
     $('#userName').html(userName);
     if (uid == '' || is_vendor!=2) {
-        indow.location.assign(DOMAIN + 'index.php');
+        window.location.assign(DOMAIN + 'index.php');
     }
     var loadProduct = true;
     var currentPage = 1;

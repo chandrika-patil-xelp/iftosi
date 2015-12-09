@@ -1,5 +1,5 @@
 var uid = customStorage.readFromStorage('userid');
-if (vid != uid || uid == '') {
+if (vid !== uid || uid == '') {
     window.location.assign(DOMAIN + 'index.php');
 }
 $(document).ready(function () {
