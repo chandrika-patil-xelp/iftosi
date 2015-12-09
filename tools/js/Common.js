@@ -163,16 +163,23 @@ function Common() {
 
     this.doLogout = function () {
         customStorage.removeAll();
-		if(pageName == 'wishlist')
+		if(pageName !== undefined && pageName !== null && pageName !== '' && typeof pageName !== 'undefined')
 		{
-			window.location.href = DOMAIN + "index.php";
+			if(pageName == 'wishlist')
+			{
+				window.location.href = DOMAIN + "index.php";
+			}
+			else
+			{
+				window.location.href = window.location;
+			}
 		}
 		else
 		{
-			window.location.href = window.location;
+			window.location.href = DOMAIN + "index.php";
 		}
-                $('#wishHeaderaftr').addClass('dn');
-                $('#wishHeaderb4').removeClass('dn');
+		$('#wishHeaderaftr').addClass('dn');
+		$('#wishHeaderb4').removeClass('dn');
     };
     this.closeLoginForm = function () {
         $('#loginDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
