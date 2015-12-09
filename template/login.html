@@ -6,7 +6,7 @@
                 <div class="wrapperMax">
                     <div class="signupTitle fLeft">Login</div>
                     <div class="inputCont fLeft fmOpenR">
-                        <input type="tel" id="pr_mobile" name="pr_mobile" autocomplete="off" class="txtInput cOrange fmOpenR font14 emailIcon">
+                        <input type="tel" id="pr_mobile" name="pr_mobile" maxlength="10" autocomplete="off" class="txtInput cOrange fmOpenR font14 mobileIcon">
                         <label for="pr_mobile" class="inp-label transition100">MOBILE</label>
                         <div id="pr_email_inpText" class="inpText fRight transition300">enter<br>mobile number</div>
                     </div>
@@ -30,4 +30,35 @@
     <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
     <script type="text/javascript" src="<?=$jvs['signup'];?>"></script>
     <script type="text/javascript" src="<?=$jvs['comm'];?>"></script>
+    <script>
+        
+        var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
+        if(isLoggedIn) {
+            var is_vendor = customStorage.readFromStorage('is_vendor');
+            if (is_vendor == 1)
+            {
+                var busiType = customStorage.readFromStorage('busiType');
+                var isComp = customStorage.readFromStorage('isComp');
+                if (isComp === '2')
+                {
+                    var catid = parseInt(busiType.charAt(0)) - 1;
+                    window.location.assign(DOMAIN + 'index.php?case=vendor_landing&catid=1000' + catid);
+                }
+                else
+                {
+                    window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid=' + userid);
+                }
+            }
+            else if (is_vendor == 2)
+            {
+                window.location.assign(DOMAIN + 'index.php?case=product_list');
+            }
+            else
+            {
+                customStorage.removeFromStorage('busiType');
+            }
+        } else {
+            customStorage.removeAll();
+        }
+    </script>
 </body>
