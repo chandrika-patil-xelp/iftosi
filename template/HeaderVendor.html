@@ -8,17 +8,13 @@
             </div>
         </div>
     </div>
-    <?php  if($page=='product_list' || $page=='thumbnail') { ?>
+    <?php  if($page=='product_list' || $page=='thumbnail' || $page == 'vendorList') { ?>
     <div class="vndTabs fLeft fmOpenR">
         <div class="wrapperMax">
             <div class="vndTabs fLeft fmOpenR">
                 <div class="wrapperMax">
-                    <?php  if($page=='product_list') { ?>
-                        <div class="heading font22 fmOpenR fLeft" style="color:#fff;width:auto">Products</div>
-                    <?php } if($page=='thumbnail') {?>
-                       <div class="heading font22 fmOpenR fLeft" style="color:#fff;width:auto">Products Images</div>
-                    <?php }?>
-                   
+                    <div id="productstab" class="fLeft vTabs transition300" onclick="showProductList()">Products</div>
+                        <div id="vendorlist" class="fLeft vTabs transition300" onclick="showProductList()">Vendor List</div>
                 </div>
             </div>
         </div>

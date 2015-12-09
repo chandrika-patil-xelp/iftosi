@@ -7,7 +7,7 @@
                 <div class="prdResults fRight">
                     <div id="dmdS" class="prdSearchDiv fLeft">
                         <div class="formTitle fLeft fmOpenR m0"><span id="totalProducts">439</span> product(s) listed</div>
-                        <input type="text" onkeyup="searchBarcode(this.value);" autocomplete="off" class="prdSeachTxt fRight fmOpenR" placeholder="Search Product">
+<!--                        <input type="text" onkeyup="searchBarcode(this.value);" autocomplete="off" class="prdSeachTxt fRight fmOpenR" placeholder="Search Product">-->
                     </div>
                     <div class="prdListHeader fLeft fmOpenR">
                         <div class="date fLeft">Date</div>
@@ -27,6 +27,7 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="tools/js/adminNav.js?v=<?=VERSION;?>"></script>
 <script>
     var uid = customStorage.readFromStorage('userid');
     var is_vendor = customStorage.readFromStorage('is_vendor');
@@ -86,6 +87,7 @@ function loadProductsCallback(res,pgno) {
             if (barcode == null || barcode == '' || barcode == 'null') {
                 barcode = 'N-A';
             }
+            
             var date = obj['update_time'].split(' ');
             var str = '<li>';
             str += '<div class="date fLeft"> ';

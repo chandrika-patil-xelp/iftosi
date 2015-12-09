@@ -135,6 +135,29 @@ class vendor extends DB
         $limit  = ($params['limit'] ? $params['limit'] : 15);
         $catid = ($params['catid'] ? $params['catid'] : 10000);
         $total_pages = $chkcnt = $total_products = 0;
+        
+        $sql1="SELECT "
+                . "silver_rate, "
+                . "gold_rate, "
+                . "dollar_rate "
+                . "FROM tbl_vendor_master WHERE vendor_id='".$params['vid']."'";
+        $res1=$this->query($sql1);
+        if ($res1) {
+            $rates = $this->fetchData($res1);
+            $dollarValue=dollarValue;
+            if(!empty($rates['dollar_rate']) && $rates['dollar_rate']!='0.00') {
+                $dollarValue = $rates['dollar_rate'];
+            }
+            $goldRate=goldRate;
+            if(!empty($rates['gold_rate']) && $rates['gold_rate']!='0.00') {
+                $goldRate = $rates['gold_rate'];
+            }
+            $silverRate=silverRate;
+            if(!empty($rates['silver_rate']) && $rates['silver_rate']!='0.00') {
+                $silverRate = $rates['silver_rate'];
+            }
+        }
+        
         $chkpidsinvid="SELECT product_id FROM tbl_vendor_product_mapping WHERE vendor_id=".$params['vid']."";
         $respidsinvid=$this->query($chkpidsinvid);
         $chkcnt=$this->numRows($respidsinvid);
@@ -143,16 +166,15 @@ class vendor extends DB
             $k=0;
             while($row=$this->fetchData($respidsinvid))
             {
-                $k++;
-                $pdet='';
-                $pdet1['pid'][$k]=$row['product_id'];
+                $pdet1[]=$row['product_id'];
                 $prDetails[]=$pdet;
             }
+            $pId = implode(',',$pdet1);
             $psql='';
             if($catid == 10000) {
                 $psql='d.color, d.carat, d.shape, d.certified AS cert, d.clarity';
             } else if($catid == 10001) {
-                $psql='d.metal,c.lotref,d.gold_weight,d.dwt';
+                $psql='d.shape,d.metal,c.lotref,d.gold_weight,d.dwt';
             } else if($catid == 10002) {
                 $psql='d.type, d.metal, d.gold_purity, d.gold_weight';
             }
@@ -203,7 +225,10 @@ class vendor extends DB
                 OR
                         d.product_id = '".$params['bcode']."'
                     )
-                AND                    d.active_flag IN('0','1','3')
+                AND                    
+                        d.active_flag <> 2
+                AND
+                        a.product_id IN(".$pId.")
                 ORDER BY
                                     id";
 		$res = $this->query($sql);
@@ -231,7 +256,57 @@ class vendor extends DB
                         $row1['category']=$row2;
                     }
                 }
-                $arr1[]=$row1;
+                if ($catid == 10000) {
+                    $price= $row1['price'];
+                }
+                if ($catid == 10001) {
+                    $price= $row1['price'];
+                }
+                if ($catid == 10002)
+                {
+                    $purity=$row1['gold_purity'];
+                    $metal=strtolower($row1['metal']);
+                    $weight=$row1['gold_weight'];
+                    
+                    $metalRate=$silverRate;
+                    
+                    if($metal=='gold')
+                    {
+                        $metalRate=$goldRate;
+                        $rate = ((($metalRate/995)*$purity)/10)*$weight;
+                        //$metalRate=$goldRate;
+                        //$finalRate=($metalRate/10)*($purity/995);
+                        $price=number_format($rate,2);
+                    }
+                    else if($metal=='silver')
+                    {
+                        $metalRate=$silverRate;
+                        $finalRate=($metalRate/1000)*($purity/995);
+                        $price=number_format($finalRate*$weight,2);
+                    }
+                }
+                $arr1[$j]['id']=$row1['id'];
+                $arr1[$j]['color']=$row1['color'];
+                $arr1[$j]['carat']=$row1['carat'];
+                $arr1[$j]['shape']=$row1['shape'];
+                $arr1[$j]['cert']=$row1['cert'];
+                $arr1[$j]['clarity']=$row1['clarity'];
+                $arr1[$j]['shape']=$row1['shape'];
+                $arr1[$j]['metal']=$row1['metal'];
+                $arr1[$j]['lotref']=$row1['lotref'];
+                $arr1[$j]['gold_weight']=$row1['gold_weight'];
+                $arr1[$j]['dwt']=$row1['dwt'];
+                $arr1[$j]['type']=$row1['type'];
+                $arr1[$j]['gold_purity']=$row1['gold_purity'];
+                $arr1[$j]['gold_weight']=$row1['gold_weight'];
+                $arr1[$j]['update_time']=$row1['update_time'];
+                $arr1[$j]['active_flag']=$row1['active_flag'];
+                $arr1[$j]['price']=$price;
+                $arr1[$j]['product_name']=$row1['product_name'];
+                $arr1[$j]['barcode']=$row1['barcode'];;
+                
+                
+                $j++;
             }
             $arr = array('total_products' => $total_products, 'total_pages' => $total_pages, 'products' => $arr1);
             $err = array('Code' => 0, 'Msg' => 'Details fetched successfully');
@@ -516,7 +591,7 @@ class vendor extends DB
                 AND
                                     a.vendor_id=" . $params['vid'] . "
                 AND
-                                    a.active_flag NOT IN(2)
+                                    a.active_flag <> 2
                 ORDER BY
                                     a.product_id
                 ASC ";

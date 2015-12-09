@@ -76,9 +76,9 @@ function Common() {
                 {
                     case '1':var catid=10000;
                     break;
-                    case '2':var catid=10002;
+                    case '2':var catid=10001;
                     break;        
-                    case '3':var catid=10003;
+                    case '3':var catid=10002;
                     break;
                     default: break;
                 }
@@ -101,6 +101,20 @@ function Common() {
 				$('#wshlstPg').removeClass('dn');
 				$('#lgotPg').removeClass('dn');
 				$('#usrNm').removeClass('dn');
+            }
+            if (is_vendor == 2)
+            {
+                userMenuStr += '<li id="productstab" class="transition100" onclick="return showProductList();">Products</li>';
+                userMenuStr += '<li id="vendorlist" class="transition100" onclick="return showProductList();">Vendor List</li>';
+                //userMenuStr += '<li class="transition100" onclick="redirectToWishlist();">Wishlist (<span id="wishListCnt"></span>)</li>';
+                $('#wishHeaderaftr').addClass('dn');
+                $('#wishHeaderb4').addClass('dn');
+
+				$('#usrNm').html(nm.split(' ')[0]);
+
+				$('#wshlstPg').addClass('dn');
+				$('#lgotPg').addClass('dn');
+				$('#usrNm').addClass('dn');
             }
             else
             {
@@ -140,6 +154,12 @@ function Common() {
 			$('#wshlstPg').removeClass('dn');
         }
     };
+        $(document).click(function (e) {
+            if($('#hdropList').is(":visible"))
+            {
+                $('#hdropList').hide();
+            }
+        });
 
     this.doLogout = function () {
         customStorage.removeAll();
@@ -465,3 +485,22 @@ function showVendorProfile()
     var uid = customStorage.readFromStorage('userid');
     window.location.href=DOMAIN+'index.php?case=vendor_Form&uid='+uid;
 }
+function showProductList()
+{
+    var uid = customStorage.readFromStorage('userid');
+    var is_vendor = customStorage.readFromStorage('is_vendor');
+    if(is_vendor == 2)
+    {
+        $('#productstab').bind('click',function(){
+        window.location.href=DOMAIN+'index.php?case=product_list&uid='+uid;
+        });
+        $('#vendorlist').bind('click',function(){
+        window.location.href=DOMAIN+'index.php?case=vendorList&uid='+uid;
+        });
+    }
+    else
+    {
+        window.location.href = DOMAIN;
+    }
+}
+

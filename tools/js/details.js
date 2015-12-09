@@ -77,8 +77,7 @@ $(document).ready(function(){
 		{
 			isVendor = 0;
 		}
-
-		if((isVendor !== '1' && isVendor !== 1) || isLoggedIn == undefined || isLoggedIn == null || isLoggedIn == '' || isLoggedIn == false || isLoggedIn == 'false')
+		if((isVendor !== '1' && isVendor !== 1 && isVendor !== '2' && isVendor !== 2 ) || isLoggedIn == undefined || isLoggedIn == null || isLoggedIn == '' || isLoggedIn == false || isLoggedIn == 'false')
 		{
 			mobile = customStorage.readFromStorage('mobile');
 			name = customStorage.readFromStorage('name');
@@ -96,9 +95,18 @@ $(document).ready(function(){
 				showVendorDetails(this);
 			}
 		}
+                
 		else
-		{
-			customStorage.toast(0, 'This feature is not available for vendors');
+		{   
+                    if(isVendor == 2 || isVendor == '2')
+                    {
+                        customStorage.toast(0, 'This feature is not available for Admin');
+                    }
+                    else
+                    {
+                        customStorage.toast(0, 'This feature is not available for vendors');
+                    }
+			
 		}
     });
 
@@ -113,8 +121,7 @@ $(document).ready(function(){
 		{
 			isVendor = 0;
 		}
-
-		if((isVendor !== '1' && isVendor !== 1) || isLoggedIn == undefined || isLoggedIn == null || isLoggedIn == '' || isLoggedIn == false || isLoggedIn == 'false')
+		if((isVendor !== '1' && isVendor !== 1 && isVendor !== '2' && isVendor !== 2) || isLoggedIn == undefined || isLoggedIn == null || isLoggedIn == '' || isLoggedIn == false || isLoggedIn == 'false')
 		{
 			mobile = customStorage.readFromStorage('mobile');
 			name = customStorage.readFromStorage('name');
@@ -155,9 +162,17 @@ $(document).ready(function(){
 				showVendorDetails(this);
 			}
 		}
+                
 		else
 		{
-			customStorage.toast(0, 'This feature is not available for vendors');
+                    if(isVendor == 2 || isVendor == '2')
+                    {
+                        customStorage.toast(0, 'This feature is not available for Admin');
+                    }
+                    else
+                    {
+                        customStorage.toast(0, 'This feature is not available for vendors');
+                    }
 		}
     });
     

@@ -1,6 +1,7 @@
 <?php include 'vendorHead.html'; ?>
 <div class="mainContainer fLeft vListPage">
-    <div class="topFixedCont">
+        <?php include 'HeaderVendor.html'; ?>
+<!--    <div class="topFixedCont">
         <div class="vndHeader fLeft">
             <div class="wrapperMax">
                 <div class="vndLogo fLeft fmOpenR pointer" onclick="window.location.assign(DOMAIN);"><b>IF</b>to<b>SI</b></div>
@@ -10,7 +11,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
     <div id='vList' class="vList fLeft">
         <div class="listHeader fLeft fmOpenR">
             <div class="fLeft headName">Vendor Name</div>
@@ -76,9 +77,13 @@
         </div>
     </div>
 </div>
-
+<script type="text/javascript" src="tools/js/adminNav.js?v=<?=VERSION;?>"></script>
+<script type="text/javascript" src="tools/js/Common.js?v=<?=VERSION;?>"></script>
 <script>
-
+ var uid = customStorage.readFromStorage('userid');
+    var is_vendor = customStorage.readFromStorage('is_vendor');
+    var userName = customStorage.readFromStorage('name');
+    $('#userName').html(userName);
     $(document).ready( function(){
         $('.toggle-button').each(function(){
             if($(this).hasClass('cyes'))

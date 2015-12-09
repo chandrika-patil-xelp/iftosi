@@ -35,12 +35,17 @@ class admin extends DB
         if($this->numRows($subQueryRes)>0) {
             while ($row = $this->fetchData($subQueryRes)) {
                 $productIDs[] = $row['product_id'];
-                $isql = "SELECT barcode, update_time FROM tbl_product_master  WHERE product_id = ".$row['id'];
+                $isql = "SELECT barcode,update_time FROM tbl_product_master  WHERE product_id = ".$row['id'];
                 $ires = $this->query($isql);
                 if( $this->numRows($ires)>0) {
                     $irow = $this->fetchData($ires);
                     $row['barcode']=$irow['barcode'];
                     $row['update_time']=$irow['update_time'];
+                }
+                else
+                {
+                    $row['barcode']='N-A';
+                    $row['update_time']='N-A';
                 }
                 $result[]=$row;
             }
