@@ -14,16 +14,16 @@
                         <div id="pr_pass_inpText" class="inpText fRight transition300">enter<br>Current Password</div>
                     </div>
                     <div class="inputCont fLeft fmOpenR">
-                        <input type="password" id="pr_npass" name="pr_npass" autocomplete="off" class="txtInput cOrange fmOpenR font14 passwordIcon" onKeyPress="common.eSubmit(event, 'signupSubmit');">
+                        <input type="password" id="pr_npass" name="pr_npass" autocomplete="off" class="txtInput cOrange fmOpenR font14 passwordIcon" >
                         <label for="pr_npass" class="inp-label transition100">New Password</label>
                         <div id="pr_pass_inpText" class="inpText fRight transition300">enter your<br>new password</div>
                     </div>  
                     <div class="inputCont fLeft fmOpenR">
-                        <input type="password" id="pr_rpass" name="pr_rpass" autocomplete="off" class="txtInput cOrange fmOpenR font14 passwordIcon" onKeyPress="common.eSubmit(event, 'signupSubmit');">
+                        <input type="password" id="pr_rpass" name="pr_rpass" autocomplete="off" class="txtInput cOrange fmOpenR font14 passwordIcon" onKeyPress="common.eSubmit(event, 'submitBtn');">
                         <label for="pr_rpass" class="inp-label transition100">Repeat New Password</label>
                         <div id="pr_pass_inpText" class="inpText fRight transition300">Retype your<br>new password</div>
                     </div>  
-                    <div class="cancelLgBtn fLeft fmOpenR ripplelink poR" id='cancelBtn'> CANCEL</div>
+                    <div class="cancelLgBtn fLeft fmOpenR ripplelink poR" id='cancelBtn' onclick="window.location.assign(DOMAIN+'index.php')"> CANCEL</div>
                     <div class="loginBtn fLeft fmOpenR ripplelink poR" id='submitBtn'>CHANGE</div>
                 </div>
             </div>
@@ -37,6 +37,10 @@
     <script type="text/javascript" src="<?=$jvs['comm'];?>"></script>
     <script>
         
+    var uid = customStorage.readFromStorage('userid');
+    if (uid == '' || uid==null) {
+        window.location.assign(DOMAIN + 'index.php');
+    }
     $('#submitBtn').click(function () {
         var cpass=$('#pr_cpass').val();
         var npass=$('#pr_npass').val();
@@ -44,19 +48,41 @@
         if(npass=='' || rpass=='' || cpass=='') {
             customStorage.toast(0,'All Fileds are Empty');
         }
+        else if(cpass==npass) {
+            customStorage.toast(0,'Old Password and New Passwords are same');
+        }
         else if(npass==rpass) {
-            $.ajax({url: APIDOMAIN + "index.php?action=changepwd&cpass="+rpass+"&npass="+rpass+"&rpass="+rpass+"&uid=4", success: function (result) {
+            $.ajax({url: APIDOMAIN + "index.php?action=changepwd&cpass="+cpass+"&npass="+rpass+"&rpass="+rpass+"&uid=4", success: function (result) {
                 var obj = jQuery.parseJSON(result);
                 var errCode = obj['error']['Code'];
                 var errMsg = obj['error']['Msg'];
-                if(errCode==1) {
-                   customStorage.toast(0,errMsg);
-                } else {
+                if(errCode==0) {
+                    var redirUrl='';
                    customStorage.toast(1,errMsg);
+                   var is_vendor = customStorage.readFromStorage('is_vendor');
+                   if(is_vendor==2) {
+                       redirUrl = DOMAIN + 'index.php?case=product_list';
+                   } else if(is_vendor==1) {
+                       var isComp = customStorage.readFromStorage('isComp');
+                        if (isComp === '2')
+                        {
+                            var catid = parseInt(busiType.charAt(0)) - 1;
+                            redirUrl = DOMAIN + 'index.php?case=vendor_landing&catid=1000' + catid;
+                        }
+                        else
+                        {
+                            redirUrl = DOMAIN + 'index.php?case=vendor_Form&uid=' + userid;
+                        }
+                    } else {
+                        redirUrl = DOMAIN + 'index.php';
+                    }
+                    setTimeout(function () { window.location.assign(redirUrl) },2000);
+                } else {
+                   customStorage.toast(0,errMsg);
                 }
             }});
         } else {
-            customStorage.toast(1,'New Password not matching');
+            customStorage.toast(0,'New Password not matching');
          }
     });
     </script>

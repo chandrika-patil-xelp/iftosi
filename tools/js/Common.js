@@ -1,3 +1,5 @@
+/* global DOMAIN */
+
 var common = new Common();
 common.checkLogin();
 
@@ -202,7 +204,7 @@ function Common() {
     this.submitLoginForm = function (vd) {
         var pr_mobile = $('#pr_mobile').val();
         var pr_pass = $('#pr_pass').val();
-        if (pr_mobile=='' || pr_mobile.length!=10 || isNaN(pr_mobile)) {
+        if (pr_mobile == '' || pr_mobile.length != 10 || isNaN(pr_mobile)) {
             customStorage.toast(0, 'Mobile Number Should Not Be Empty');
             $('#pr_mobile').focus();
             return;
@@ -212,75 +214,75 @@ function Common() {
             return;
         } else {
             $.ajax({url: DOMAIN + "apis/index.php?action=logUser&mobile=" + pr_mobile + "&password=" + pr_pass, success: function (result) {
-                var obj = jQuery.parseJSON(result);
-                var errCode = obj['error']['code'];
-                if (errCode == 0) {
-                    var userid = obj['results']['uid'];
-                    var username = obj['results']['username'];
-                    var is_vendor = obj['results']['utype'];
-                    var email = obj['results']['email'];
-                    var isComp = obj['results']['isC'];
-                    var pass_flag = obj['results']['pass_flag'];
-                    
-                    customStorage.addToStorage('isLoggedIn', true);
-                    customStorage.addToStorage('l', pr_mobile);
-                    customStorage.addToStorage('mobile', pr_mobile);
-                    customStorage.addToStorage('name', username);
-                    customStorage.addToStorage('email', email);
-                    customStorage.addToStorage('isComp',isComp);
-                    customStorage.addToStorage('userid', userid);
-                    customStorage.addToStorage('username', username);
+                    var obj = jQuery.parseJSON(result);
+                    var errCode = obj['error']['code'];
+                    if (errCode == 0) {
+                        var userid = obj['results']['uid'];
+                        var username = obj['results']['username'];
+                        var is_vendor = obj['results']['utype'];
+                        var email = obj['results']['email'];
+                        var isComp = obj['results']['isC'];
+                        var pass_flag = obj['results']['pass_flag'];
 
-					var tmp_is_vendor = is_vendor;
-					if(is_vendor == 0 || is_vendor == "0")
-					{
-						tmp_is_vendor = -1;
-					}
-                    if(pass_flag == 1) {
-                        window.location.assign(DOMAIN + 'index.php?case=changepwd');
-                    }
-                    customStorage.addToStorage('is_vendor', tmp_is_vendor);
-                    if (is_vendor == 1)
-                    {
-                        var busiType = obj['results']['busiType'];
-                        customStorage.addToStorage('busiType', busiType);
-                        if(isComp === '2')
+                        customStorage.addToStorage('isLoggedIn', true);
+                        customStorage.addToStorage('l', pr_mobile);
+                        customStorage.addToStorage('mobile', pr_mobile);
+                        customStorage.addToStorage('name', username);
+                        customStorage.addToStorage('email', email);
+                        customStorage.addToStorage('isComp', isComp);
+                        customStorage.addToStorage('userid', userid);
+                        customStorage.addToStorage('username', username);
+
+                        var tmp_is_vendor = is_vendor;
+                        if (is_vendor == 0 || is_vendor == "0")
                         {
-                            var catid = parseInt(busiType.charAt(0))-1;
-                            window.location.assign(DOMAIN + 'index.php?case=vendor_landing&catid=1000'+catid);
+                            tmp_is_vendor = -1;
+                        }
+                        customStorage.addToStorage('is_vendor', tmp_is_vendor);
+                        if (pass_flag != 0) {
+                            window.location.assign(DOMAIN + 'index.php?case=changepwd');return;
+                        }
+                        if (is_vendor == 1)
+                        {
+                            var busiType = obj['results']['busiType'];
+                            customStorage.addToStorage('busiType', busiType);
+                            if (isComp === '2')
+                            {
+                                var catid = parseInt(busiType.charAt(0)) - 1;
+                                window.location.assign(DOMAIN + 'index.php?case=vendor_landing&catid=1000' + catid);
+                            }
+                            else
+                            {
+                                window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid=' + userid);
+                            }
+                        }
+                        else if (is_vendor == 2)
+                        {
+                            window.location.assign(DOMAIN + 'index.php?case=product_list');
                         }
                         else
                         {
-                            window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid='+userid);
-                        }
-                    }
-                    else if (is_vendor == 2)
-                    {
-                        window.location.assign(DOMAIN + 'index.php?case=product_list');
-                    }
-                    else
-                    {
-                        customStorage.removeFromStorage('busiType');
-                        _this.checkLogin();
-                        _this.closeLoginForm();
+                            customStorage.removeFromStorage('busiType');
+                            _this.checkLogin();
+                            _this.closeLoginForm();
 
-						_this.changeStyle('all');
+                            _this.changeStyle('all');
 
-                        if(vd)
-                        {
-                            var dthis = $('#userSubmit');
-                            showVendorDetails();
-                            $('#userForm').velocity({scale:0},{delay:0,ease:'swing'});
-                            $('#overlay').velocity({opacity:0},{delay:100,ease:'swing'});
-                            setTimeout(function(){
+                            if (vd)
+                            {
+                                var dthis = $('#userSubmit');
+                                showVendorDetails();
+                                $('#userForm').velocity({scale: 0}, {delay: 0, ease: 'swing'});
+                                $('#overlay').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
+                                setTimeout(function () {
                                     $('#overlay,#userForm').addClass('dn');
-                            },1010);
+                                }, 1010);
+                            }
                         }
+                    } else {
+                        customStorage.toast(0, 'Invalid Login Credentials');
                     }
-                } else {
-                    customStorage.toast(0, 'Invalid Login Credentials');
-                }
-            }});
+                }});
         }
     }
     this.eSubmit = function (evt, btnId) {

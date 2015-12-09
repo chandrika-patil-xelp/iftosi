@@ -65,142 +65,141 @@ function loadProductsCallback(res,pgno) {
 			var html = pagination(obj,pgno);
         } else {
             str = '<p class="noRecords"><span>Sorry! No Products Found!</span></p>';
-            loadProduct = false;
+                    loadProduct = false;
+                }
+                $('#PoductsList').html(str);
+                $('#PoductsList').append(html);
+                $('.pgComm').click(function () {
+
+                    $('.pgComm').removeClass('pgActive');
+                    $(this).addClass('pgActive');
+                    loadProducts($(this).text());
+                    $('body').animate({scrollTop: $('.prdResults').offset().top - 100}, 300);
+                });
+            } else {
+                loadProduct = false;
+            }
         }
-            $('#PoductsList').html(str);
-        $('#PoductsList').append(html);
-        $('.pgComm').click( function(){
+        function generatProductsList(obj) {
+            var barcode = obj['barcode'];
+            if (barcode == null || barcode == '' || barcode == 'null') {
+                barcode = 'N-A';
+            }
+            var date = obj['update_time'].split(' ');
+            var str = '<li>';
+            str += '<div class="date fLeft"> ';
+            str += '<span class="upSpan">' + date[0] + '</span>';
+            str += '<span class="lwSpan">' + date[1] + '</span>';
+            str += '</div>';
+            str += '<div class="barcode fLeft">';
+            str += '<span class="upSpan">' + barcode + '</span>';
+            str += '<span class="lwSpan"><a href="' + DOMAIN + barcode + '/bid-' + obj['id'] + '" target="_blank">View Details</a></span>';
+            str += '</div>';
+            str += '<div class="totalCnt fLeft">' + obj['total_img'] + '</div>';
+            str += '<div class="accepted fLeft">' + obj['appr_img'] + '</div>';
+            str += '<div class="rejected fLeft">' + obj['rej_img'] + '</div>';
+            str += '<div class="acct2 fLeft">';
+            str += '<a href="' + DOMAIN + 'index.php?case=thumbnail&pid=' + obj['id'] + '"><div class="viewDetBtn poR ripplelink fmOpenR fRight">View Images</div></a>';
+            str += '</div>';
+            str += '</li>';
+            str += '';
+            return str;
+        }
 
-                $('.pgComm').removeClass('pgActive');
-                $(this).addClass('pgActive');
-                loadProducts($(this).text());
-                $('body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
-        });
-    } else {
-        loadProduct = false;
-    }
-}
-function generatProductsList(obj) {
-    var barcode = obj['barcode'];
-    if(barcode == null || barcode == '' || barcode == 'null') {
-        barcode = 'N-A';
-    }
-    var date = obj['update_time'].split(' ');
-    var str = '<li>';
-    str += '<div class="date fLeft"> ';
-    str += '<span class="upSpan">' + date[0] + '</span>';
-    str += '<span class="lwSpan">'+ date[1] +'</span>';
-    str += '</div>';
-    str += '<div class="barcode fLeft">';
-    str += '<span class="upSpan">' + barcode + '</span>';
-    str += '<span class="lwSpan"><a href="'+ DOMAIN + barcode +'/bid-'+ obj['id'] +'" target="_blank">View Details</a></span>';
-    str += '</div>';
-    str += '<div class="totalCnt fLeft">'+obj['total_img']+'</div>';
-    str += '<div class="accepted fLeft">'+obj['appr_img']+'</div>';
-    str += '<div class="rejected fLeft">'+obj['rej_img']+'</div>';
-    str += '<div class="acct2 fLeft">';
-    str += '<a href="'+DOMAIN+'index.php?case=thumbnail&pid='+obj['id']+'"><div class="viewDetBtn poR ripplelink fmOpenR fRight">View Images</div></a>';
-    str += '</div>';
-    str += '</li>';
-    str += '';
-    console.log(obj['id']);
-    return str;
-}
+        function pagination(data, pgno) {
+            /* For Pagintion */
+            pgno = pgno * 1;
+            var html = '';
+            var tc = data.results.total_products;
+            var lastpg = Math.ceil(tc / 50);
+            var adjacents = 2;
 
-function pagination(data,pgno){
-	/* For Pagintion */
-	pgno = pgno*1;
-	var html = '';
-	var tc = data.results.total_products;
-	var lastpg = Math.ceil(tc/50);
-	var adjacents = 2;
-	
-	if(lastpg > 1)
-	{
-		html += '<div class="fLeft pagination fmOpenR">';
-			html += '<center>';
-				html += '<div class="pPrev poR ripplelink">Previous</div>';
-				if(lastpg < 7 + (adjacents * 2))
-				{
-					for(var i = 1; i <= lastpg; i++)
-					{
-						if(i == pgno)
-						{
-							html += '<div class="pgComm poR ripplelink pgActive">'+i+'</div>';
-						}
-						else
-						{
-							html += '<div class="pgComm poR ripplelink">'+i+'</div>';
-						}
-					}
-				}
-				else if(lastpg > 5 + (adjacents * 2))
-				{
-					if(pgno < 1 + (adjacents * 2))
-					{
-						for (var i = 1; i < 4 + (adjacents * 2); i++)
-						{
-							if(i == pgno)
-							{
-								html += '<div class="pgComm poR ripplelink pgActive">'+i+'</div>';
-							}
-							else
-							{
-								html += '<div class="pgComm poR ripplelink">'+i+'</div>';
-							}
-						}
-						html += '<div class="pgEmpty"></div>';
-						html += '<div class="pgEmpty"></div>';
-						html += '<div class="pgEmpty"></div>';
-						html += '<div class="pgComm poR ripplelink">'+lastpg+'</div>';
-					}
-					else if(lastpg - (adjacents * 2) > pgno && pgno > (adjacents * 2))
-					{
-						html += '<div class="pgComm poR ripplelink">1</div>';
-						html += '<div class="pgEmpty"></div>';
-						html += '<div class="pgEmpty"></div>';
-						html += '<div class="pgEmpty"></div>';
-						for (var i = pgno - adjacents; i <= pgno + adjacents; i++)
-						{
-							if(i == pgno)
-							{
-								html += '<div class="pgComm poR ripplelink pgActive">'+i+'</div>';
-							}
-							else
-							{
-								html += '<div class="pgComm poR ripplelink">'+i+'</div>';
-							}
-						}
-						html += '<div class="pgEmpty"></div>';
-						html += '<div class="pgEmpty"></div>';
-						html += '<div class="pgEmpty"></div>';
-						html += '<div class="pgComm poR ripplelink">'+lastpg+'</div>';
-					}
-					else
-					{
-						html += '<div class="pgComm poR ripplelink">1</div>';
-						html += '<div class="pgEmpty"></div>';
-						html += '<div class="pgEmpty"></div>';
-						html += '<div class="pgEmpty"></div>';
-						for (var i = lastpg - (2 + (adjacents * 2)); i <= lastpg; i++)
-						{
-							if(i == pgno)
-							{
-								html += '<div class="pgComm poR ripplelink pgActive">'+i+'</div>';
-							}
-							else
-							{
-								html += '<div class="pgComm poR ripplelink">'+i+'</div>';
-							}
-						}
-					}
-				}
-				html += '<div class="pNext poR ripplelink">Next</div>';
-			html += '</center>';
-		html += '</div>';
-	}
-	return html;
-}
+            if (lastpg > 1)
+            {
+                html += '<div class="fLeft pagination fmOpenR">';
+                html += '<center>';
+                html += '<div class="pPrev poR ripplelink">Previous</div>';
+                if (lastpg < 7 + (adjacents * 2))
+                {
+                    for (var i = 1; i <= lastpg; i++)
+                    {
+                        if (i == pgno)
+                        {
+                            html += '<div class="pgComm poR ripplelink pgActive">' + i + '</div>';
+                        }
+                        else
+                        {
+                            html += '<div class="pgComm poR ripplelink">' + i + '</div>';
+                        }
+                    }
+                }
+                else if (lastpg > 5 + (adjacents * 2))
+                {
+                    if (pgno < 1 + (adjacents * 2))
+                    {
+                        for (var i = 1; i < 4 + (adjacents * 2); i++)
+                        {
+                            if (i == pgno)
+                            {
+                                html += '<div class="pgComm poR ripplelink pgActive">' + i + '</div>';
+                            }
+                            else
+                            {
+                                html += '<div class="pgComm poR ripplelink">' + i + '</div>';
+                            }
+                        }
+                        html += '<div class="pgEmpty"></div>';
+                        html += '<div class="pgEmpty"></div>';
+                        html += '<div class="pgEmpty"></div>';
+                        html += '<div class="pgComm poR ripplelink">' + lastpg + '</div>';
+                    }
+                    else if (lastpg - (adjacents * 2) > pgno && pgno > (adjacents * 2))
+                    {
+                        html += '<div class="pgComm poR ripplelink">1</div>';
+                        html += '<div class="pgEmpty"></div>';
+                        html += '<div class="pgEmpty"></div>';
+                        html += '<div class="pgEmpty"></div>';
+                        for (var i = pgno - adjacents; i <= pgno + adjacents; i++)
+                        {
+                            if (i == pgno)
+                            {
+                                html += '<div class="pgComm poR ripplelink pgActive">' + i + '</div>';
+                            }
+                            else
+                            {
+                                html += '<div class="pgComm poR ripplelink">' + i + '</div>';
+                            }
+                        }
+                        html += '<div class="pgEmpty"></div>';
+                        html += '<div class="pgEmpty"></div>';
+                        html += '<div class="pgEmpty"></div>';
+                        html += '<div class="pgComm poR ripplelink">' + lastpg + '</div>';
+                    }
+                    else
+                    {
+                        html += '<div class="pgComm poR ripplelink">1</div>';
+                        html += '<div class="pgEmpty"></div>';
+                        html += '<div class="pgEmpty"></div>';
+                        html += '<div class="pgEmpty"></div>';
+                        for (var i = lastpg - (2 + (adjacents * 2)); i <= lastpg; i++)
+                        {
+                            if (i == pgno)
+                            {
+                                html += '<div class="pgComm poR ripplelink pgActive">' + i + '</div>';
+                            }
+                            else
+                            {
+                                html += '<div class="pgComm poR ripplelink">' + i + '</div>';
+                            }
+                        }
+                    }
+                }
+                html += '<div class="pNext poR ripplelink">Next</div>';
+                html += '</center>';
+                html += '</div>';
+            }
+            return html;
+        }
 
 </script>
 </body>
