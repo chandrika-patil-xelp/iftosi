@@ -61,7 +61,7 @@ if(!empty($data['mdbw'])) {
                             <div id="stateSuggestDiv" class="autoSuggestOuter"></div>
                         </div>
                         <div class="divCon2 fLeft">
-                            <div  class="titleDiv txtCap fLeft">VAT Number</div>
+                            <div  class="titleDiv txtCap fLeft">VAT Number *</div>
                             <input name="" type="text" id="vat" value="<?php echo $data['vatno']; ?>" autocomplete="false" placeholder=" e.g. 12345678901" maxlength="12" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon2  fRight">
@@ -77,7 +77,7 @@ if(!empty($data['mdbw'])) {
                             <input name="" type="text" id="wbst" value="<?php echo $data['website']; ?>" autocomplete="false" placeholder=" e.g. www.iftosi.com" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Bankers</div>
+                            <div  class="titleDiv txtCap fLeft">Bankers *</div>
                             <?php $banker = str_replace('~', ',', $data['banker']); ?>
                             <input name="" type="text" id="banker" value="<?php echo $banker; ?>" autocomplete="false" placeholder=" e.g. INDUS IND BANK, KOTAK BANK, STATE BANK OF INDIA" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
@@ -116,7 +116,7 @@ if(!empty($data['mdbw'])) {
                         <div id='diamondDet' class="detailsComm fLeft <?php if(!in_array('1',$business_type)) { echo 'dn'; } ?>">
                             <div class="formTitle fLeft fmOpenL">Diamond</div>
                             <div class="divCon  fLeft">
-                                <div  class="titleDiv txtCap fLeft">GJEPC Membership Certificate</div>
+                                <div  class="titleDiv txtCap fLeft">GJEPC Membership Certificate *</div>
                                 <input name="" id="memcert" type="text" autocomplete="false" value="<?php echo $data['memship_Cert']; ?>" placeholder=" eg. GJEPC/HO-MUM(M)/G25885/AM/I" class="txtInput fLeft fGJEPCmOpenR font14 c666">
                             </div>
                             <div class="divCon  fLeft">
@@ -140,8 +140,8 @@ if(!empty($data['mdbw'])) {
                         <div id='jewelleryDet' class="detailsComm fLeft <?php if(!in_array('2',$business_type)) { echo 'dn'; } ?>">
                             <div class="formTitle fLeft fmOpenL">Jewellery</div>
                             <div class="divCon  fLeft">
-                                <div  class="titleDiv txtCap fLeft">Name Of Showroom</div>
-                                <input name="showroomname" id="showroomname" autocomplete="false" type="text" value="<?php echo $data['orgName']; ?>" placeholder=" eg. White Fire Jewels" class="txtInput fLeft fmOpenR font14 c666">
+                                <div  class="titleDiv txtCap fLeft">Name Of Showroom *</div>
+                                <input name="showroomname" id="showroomname" autocomplete="false" type="text" value="<?php echo $data['orgName']; ?>" readonly="true" placeholder=" eg. White Fire Jewels" class="txtInput fLeft fmOpenR font14 c666">
                             </div>
                             <div class="divCon  fLeft">
                                 <div  class="titleDiv txtCap fLeft">Number of Showrooms In India</div>
