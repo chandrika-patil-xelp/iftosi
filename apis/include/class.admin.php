@@ -18,8 +18,8 @@ class admin extends DB
                 product_id AS id,
                 count(product_id) AS total_img,
                 sum(active_flag = 0) as pend_img,
-                sum(active_flag = 3) as appr_img,
-                sum(active_flag = 4) as rej_img
+                sum(active_flag = 1) as appr_img,
+                sum(active_flag = 3) as rej_img
             FROM
                 tbl_product_image_mapping
             group by product_id

@@ -19,11 +19,11 @@
                 </div>
                 <div class="acceptRej fRight">
                     <div class="checkDiv fLeft">
-                        <input type="radio" value="3" onchange="updateFlag(<?php echo $data[$i]['id']; ?>,this.id);" name="accept_<?php echo $data[$i]['id']; ?>" <?php if($data[$i]['active_flag']==3) { echo 'checked'; } ?> class="filled-in" id="accept_<?php echo $data[$i]['id']; ?>">
+                        <input type="radio" value="1" onchange="updateFlag(<?php echo $data[$i]['id']; ?>,this.id);" name="accept_<?php echo $data[$i]['id']; ?>" <?php if($data[$i]['active_flag']==1) { echo 'checked'; } ?> class="filled-in" id="accept_<?php echo $data[$i]['id']; ?>">
                         <label for="accept_<?php echo $data[$i]['id']; ?>">Accept</label>
                     </div>
                     <div class="checkDiv fLeft">
-                        <input type="radio" value="4" onchange="updateFlag(<?php echo $data[$i]['id']; ?>,this.id);" name="accept_<?php echo $data[$i]['id']; ?>"<?php if($data[$i]['active_flag']==4) { echo 'checked'; } ?> class="filled-in" id="reject_<?php echo $data[$i]['id']; ?>">
+                        <input type="radio" value="3" onchange="updateFlag(<?php echo $data[$i]['id']; ?>,this.id);" name="accept_<?php echo $data[$i]['id']; ?>"<?php if($data[$i]['active_flag']==3) { echo 'checked'; } ?> class="filled-in" id="reject_<?php echo $data[$i]['id']; ?>">
                         <label for="reject_<?php echo $data[$i]['id']; ?>">Reject</label>
                     </div>
                 </div>

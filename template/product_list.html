@@ -13,6 +13,7 @@
                         <div class="date fLeft">Date</div>
                         <div class="barcode fLeft">Barcode</div>
                         <div class="totalCnt fLeft">Total Images</div>
+                        <div class="pending fLeft">Pending</div>
                         <div class="accepted fLeft">Accepted</div>
                         <div class="rejected fLeft">Rejected</div>
                         <div class="acct2 fLeft"></div>
@@ -96,6 +97,7 @@ function loadProductsCallback(res,pgno) {
             str += '<span class="lwSpan"><a href="' + DOMAIN + barcode + '/bid-' + obj['id'] + '" target="_blank">View Details</a></span>';
             str += '</div>';
             str += '<div class="totalCnt fLeft">' + obj['total_img'] + '</div>';
+            str += '<div class="pending fLeft">' + obj['pend_img'] + '</div>';
             str += '<div class="accepted fLeft">' + obj['appr_img'] + '</div>';
             str += '<div class="rejected fLeft">' + obj['rej_img'] + '</div>';
             str += '<div class="acct2 fLeft">';

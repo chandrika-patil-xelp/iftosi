@@ -532,8 +532,9 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 /*Product List*/
 .totalCnt{width:15%;}
 .accepted{width:15%;}
+.pending{width:15%;}
 .rejected{width:15%;}
-.acct2{width:34%;border: none!important;}
+.acct2{width:19%;border: none!important;}
 .viewDetBtn {width: auto;height: 36px!important;cursor: pointer;line-height: 36px;margin: 7px;border: none!important;background: #8A0044 url(../img/common/info.svg)no-repeat;background-size: auto 23px;background-position: 95% 8px;color: #fff;border-radius: 5px;padding: 0 30px 0 25px!important;}
 
 /*Thumbnail Page*/
