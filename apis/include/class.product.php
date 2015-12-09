@@ -30,6 +30,7 @@
                 $expd = explode('|@|',$detls1[$i]);
                 $detls[$expd[0]] = $expd[1];
             }
+
             if(($detls['shape']=='gBars')||($detls['shape']=='sBars')||($detls['shape']=='gCoins')||($detls['shape']=='sCoins'))
             {
                 $type=substr($detls['shape'],1,-1);
@@ -66,7 +67,6 @@
             $catids1.=','.$params['category_id'];
             
             $catids=explode(',',$catids1);
-            
 
             $detls['measurement']=$detls['measurement1'].'*'.$detls['measurement2'].'*'.$detls['measurement3'];
                     //  Inserting the values in brand table
@@ -81,7 +81,7 @@
                                                                 aflg) 
                             VALUES
                                                             (\"".$detls['brand']."\",
-                                                             \"".$params['catid']."\",
+                                                             \"".$params['category_id']."\",
                                                                  now(),
                                                              \"".$display_flag."\")";
 
@@ -1330,7 +1330,7 @@
 						carat,
 						color,
 						certified,
-                                                metal,
+						metal,
 						shape,
 						clarity,
 						price,
@@ -1338,22 +1338,23 @@
 						symmetry,
 						cno, 
 						cut,
-                                                nofd,
-                                                gemwt,
-                                                gold_purity,
-                                                dwt,
+						nofd,
+						gemwt,
+						gold_purity,
+						dwt,
 						fluo as fluorescence,
 						measurement,
 						td as tab,
-                                                gold_weight,
-                                                gemstone_color,
-                                                quality,
+						gold_weight,
+						gemstone_color,
+						quality,
 						cr_ang as crownangle,
 						girdle,
 						base as baseprice,
-                   				p_disc as discount,
-                                                type,
-                                                bullion_design
+						p_disc as discount,
+						type,
+						bullion_design,
+						tabl as tab
                     FROM 
                         tbl_product_search
                     WHERE 
@@ -1379,20 +1380,20 @@
                 $pid=implode(',',$prid);
                 
                 $sql3="SELECT 
-                                    product_id,
-                                    vendor_id,
-                                    vendor_price,
-                                    vendor_quantity,
-                                    vendor_currency,
-                                    vendor_remarks 
+							product_id,
+							vendor_id,
+							vendor_price,
+							vendor_quantity,
+							vendor_currency,
+							vendor_remarks 
                         FROM 
-                                    tbl_vendor_product_mapping
+							tbl_vendor_product_mapping
                         WHERE 
-                                    product_id=".$pid."
+							product_id=".$pid."
                         AND                
-                                    active_flag!=2
+							active_flag!=2
                         ORDER BY
-                                    vendor_id ASC";
+							vendor_id ASC";
                 
                 $res3=$this->query($sql3);
                 
@@ -1406,42 +1407,42 @@
                 
                 
                 $sql4="SELECT 
-                                vendor_id AS vid,
-                                orgName as OrganisationName,
-                                fulladdress,
-                                postal_code,
-                                telephones,
-                                alt_email,
-                                officecity as office_city,
-                                officecountry as office_country,
-                                contact_person,
-                                position,
-                                contact_mobile,
-                                email,
-                                memship_Cert as Membership_Certificate,
-                                bdbc as diamond_certificate,
-                                other_dbaw as other_Certificate,
-                                vatno as Vat_Number,                            
-                                landline,
-                                mdbw as membership_around_world,                            
-                                website,
-                                banker as bankers,                            
-                                pancard,
-                                turnover,
-                                lat as latitude,
-                                lng as longitude,
-                                dollar_rate,
-                                gold_rate,
-                                silver_rate,
-								area,
-								city,
-								state
+						vendor_id AS vid,
+						orgName as OrganisationName,
+						fulladdress,
+						postal_code,
+						telephones,
+						alt_email,
+						officecity as office_city,
+						officecountry as office_country,
+						contact_person,
+						position,
+						contact_mobile,
+						email,
+						memship_Cert as Membership_Certificate,
+						bdbc as diamond_certificate,
+						other_dbaw as other_Certificate,
+						vatno as Vat_Number,                            
+						landline,
+						mdbw as membership_around_world,                            
+						website,
+						banker as bankers,                            
+						pancard,
+						turnover,
+						lat as latitude,
+						lng as longitude,
+						dollar_rate,
+						gold_rate,
+						silver_rate,
+						area,
+						city,
+						state
                      FROM 
-                                tbl_vendor_master
+						tbl_vendor_master
                      WHERE 
-                                        vendor_id IN(".$venid.")
-                            ORDER BY
-                                        field(vendor_id,".$venid.")";
+						vendor_id IN(".$venid.")
+					ORDER BY
+						field(vendor_id,".$venid.")";
                 
                 $res4=$this->query($sql4);
                 

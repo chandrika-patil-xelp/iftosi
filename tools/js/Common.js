@@ -88,6 +88,7 @@ function Common() {
         if (isLoggedIn === 'true') {
             $('.signInUpTab').html('Hello ' + nm.split(' ')[0]).addClass('loggedIn');
             $('#userMenu').removeClass('dn');
+
             if (is_vendor == 0)
             {
                 //userMenuStr += '<li class="transition100">Profile</li>';
@@ -102,7 +103,7 @@ function Common() {
 				$('#lgotPg').removeClass('dn');
 				$('#usrNm').removeClass('dn');
             }
-            if (is_vendor == 2)
+            else if (is_vendor == 2)
             {
                 userMenuStr += '<li id="productstab" class="transition100" onclick="return showProductList();">Products</li>';
                 userMenuStr += '<li id="vendorlist" class="transition100" onclick="return showProductList();">Vendor List</li>';
@@ -121,7 +122,7 @@ function Common() {
                 $('#wishHeaderb4').addClass('dn');
                 $('#wishHeaderaftr').addClass('dn');
                 //userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_dashboard\');">Dashboard</li>';
-                if(isComp==='2')
+                if(isComp === '2')
                 {
                     var catid1=customStorage.readFromStorage('busiType').charAt(0);
                     catid=parseInt(catid1)-1;
@@ -504,10 +505,6 @@ function showProductList()
         $('#vendorlist').bind('click',function(){
         window.location.href=DOMAIN+'index.php?case=vendorList&uid='+uid;
         });
-    }
-    else
-    {
-        window.location.href = DOMAIN;
     }
 }
 
