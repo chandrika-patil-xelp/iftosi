@@ -363,7 +363,11 @@ $('#upProds').click(function () {
     }, 10);
     loadDiamont = false;
 });
+
+var uploadButton = false;
+
 $('#upDolRt').click(function () {
+	uploadButton = true;
     showDollarRateForm();
 });
 
@@ -407,7 +411,10 @@ function updateDollarRate() {
                 if(errCode==0) {
                     common.toast(1,obj['error']['Msg']);
                     closeAllForms();
-                    setTimeout(function () { window.location.assign(DOMAIN+"index.php?case=diamond_Form&catid=10000&vid="+uid); }, 1800);
+					if(uploadButton == false)
+					{
+						setTimeout(function () { window.location.assign(DOMAIN+"index.php?case=diamond_Form&catid=10000&vid="+uid); }, 1800);
+					}
                 } else if(errCode==1) {
                     common.toast(0,obj['error']['Msg']);
                 }
@@ -459,6 +466,7 @@ function updateSilverRate() {
 
 /* for bullion gold  rate of vendor */
 $('#upGoldRt').click(function () {
+	uploadButton = true;
     showGoldRateForm();
 });
 
@@ -501,7 +509,10 @@ function updateGoldRate() {
                     //window.location.reload(1);
                     customStorage.readFromStorage('rateErr');
                     closeAllForms();
-                    setTimeout(function () { window.location.assign(DOMAIN+"index.php?case=bullion_Form&catid=10002&vid="+uid); }, 1800);
+					if(uploadButton == false)
+					{
+						setTimeout(function () { window.location.assign(DOMAIN+"index.php?case=bullion_Form&catid=10002&vid="+uid); }, 1800);
+					}
                 } else if(errCode==1) {
                     
                     common.toast(0,obj['error']['Msg']);
