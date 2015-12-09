@@ -205,6 +205,10 @@ switch ($action) {
         $res = $comm->executeCurl($url);
         $headcat = $res['results'];
 
+		$leftMenuUrl = APIDOMAIN . 'index.php?action=getCatList&page=1&limit=3';
+		$leftMenuRes = $comm->executeCurl($leftMenuUrl);
+		$leftMenuData = $leftMenuRes['results'];
+
         if (count($headcat)) {
             foreach ($headcat['root'] as $key => $val) {
                 if ($val['catid'] == $_GET['catid'] || strtolower($case) == strtolower($val['cat_name'])) {

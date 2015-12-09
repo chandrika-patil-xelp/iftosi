@@ -95,6 +95,12 @@ function Common() {
                 //userMenuStr += '<li class="transition100" onclick="redirectToWishlist();">Wishlist (<span id="wishListCnt"></span>)</li>';
                 $('#wishHeaderaftr').removeClass('dn');
                 $('#wishHeaderb4').addClass('dn');
+
+				$('#usrNm').html(nm.split(' ')[0]);
+
+				$('#wshlstPg').removeClass('dn');
+				$('#lgotPg').removeClass('dn');
+				$('#usrNm').removeClass('dn');
             }
             else
             {
@@ -113,7 +119,12 @@ function Common() {
                 {
                     userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_Form&uid='+uid+'\');">Profile</li>';
                 }
+
+				$('#usrNm').html(nm.split(' ')[0]);
+				$('#lgotPg').removeClass('dn');
+				$('#usrNm').removeClass('dn');
             }
+			$('#lgnPg').addClass('dn');
             userMenuStr += '<li class="transition100" onclick="common.doLogout();">Log Out</li>';
             $('#hdropList').html(userMenuStr);
 			_this.getWishListCount();
@@ -122,6 +133,8 @@ function Common() {
         {
             $('#wishHeaderaftr').addClass('dn');
             $('#wishHeaderb4').removeClass('dn');
+			$('#lgnPg').removeClass('dn');
+			$('#wshlstPg').removeClass('dn');
         }
     };
 
@@ -401,12 +414,23 @@ function Common() {
 				if(data !== undefined && data !== null && data !== '')
 				{
 					$('#wishListCnt').html(data);
+					$('#lftWshCnt').html(data);
+					$('#lftWshCnt').removeClass('dn');
 				}
 				else
 				{
 					$('#wishListCnt').html(0);
+					$('#lftWshCnt').html(0);
+					$('#lftWshCnt').removeClass('dn');
 				}
 			});
+		}
+	};
+
+	this.goToUrl = function (url) {
+		if(url !== undefined && url !== null && url !== '')
+		{
+			window.location.href = url;
 		}
 	};
 }

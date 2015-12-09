@@ -1,11 +1,38 @@
 <div id='leftMenu' class='leftMenu transition300 leftTransit'>
     <ul class="fLeft fmOpenR">
-        <li class='iHome'>Home</li>
-        <li class='iDiamonds'>Diamonds</li>
-        <li class='iJewellery'>Jewellery</li>
-        <li class='iBullions'>Bullions</li>
-        <li class='iWishlist'>Wishlist <span class="fRight">25</span></li>
-        <li class='iLogin'>Login</li>
-        <li class='iLogout'>Logout <span class="fRight">Shubham</span></li>
+        <li class='iHome' id="homePg" onclick="common.goToUrl('<?php echo DOMAIN; ?>')">Home</li>
+        <!--<li class='iDiamonds' id="dmdsPg">Diamonds</li>
+        <li class='iJewellery' id="jwlryPg">Jewellery</li>
+        <li class='iBullions' id="blnsPg">Bullions</li>-->
+<?php
+			for ($i = 0; $i < count($leftMenuData); $i++) {
+				$curCatId = $leftMenuData[$i]['category_id'];
+				if($curCatId == 10000)
+				{
+					$clsNm = 'iDiamonds';
+					$idNm = 'dmdsPg';
+				}
+
+				if($curCatId == 10001)
+				{
+					$clsNm = 'iJewellery';
+					$idNm = 'jwlryPg';
+				}
+
+				if($curCatId == 10002)
+				{
+					$clsNm = 'iBullions';
+					$idNm = 'blnsPg';
+				}
+?>
+				<li class="<?php echo $clsNm; ?>" id="<?php echo $idNm; ?>" onclick="common.goToUrl('<?php echo DOMAIN . strtolower(str_replace(' ', '-', $leftMenuData[$i]['category_name'])); ?>/ct-<?php echo $leftMenuData[$i]['category_id']; ?>')">
+					<?php echo $leftMenuData[$i]['category_name']; ?>
+				</li>
+<?php
+			}
+?>
+        <li class='iWishlist dn' id="wshlstPg">Wishlist <span class="fRight dn" id="lftWshCnt">25</span></li>
+        <li class='iLogin dn' id="lgnPg" onclick="common.goToUrl('<?php echo DOMAIN . '?case=login'; ?>')">Login</li>
+        <li class='iLogout dn' id="lgotPg" onclick="common.doLogout();">Logout <span class="fRight dn" id="usrNm"></span></li>
     </ul>
 </div>

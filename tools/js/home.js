@@ -83,3 +83,16 @@ function showCategory() {
     //$('#catJewellery').velocity({scale: "1"}, {duration: 800, delay: 150, easing: 'spring'});
     //$('#catBullion').velocity({scale: "1"}, {duration: 800, delay: 250, easing: 'spring'});
 }
+
+function showLeftMenu(flag) {
+    if (flag) {
+        $('#leftMenu').removeClass('leftTransit');
+        $('body').addClass('pFixed');
+        $('#dragTarget').css({width: '50%', left: '250px'});
+
+    } else {
+        $('#leftMenu').addClass('leftTransit');
+        $('body').removeClass('pFixed');
+        $('#dragTarget').css({width: '20px', left: '0px'});
+    }
+}
