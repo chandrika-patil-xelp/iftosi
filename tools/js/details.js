@@ -371,15 +371,24 @@ function showVendorDetails(obj)
 							}
 							else
 							{
-								setTimeout(function () {
-									initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
-								},10);
 								var pos=$('.wrapper').height()-100;
+
 								setTimeout(function(){
 									$('#vDetails').removeClass('vTransit');
 									$('#vDetails').removeClass('dn');
 									$('body').animate({scrollTop: pos}, 300);
-								},200);
+								},10);
+
+								setTimeout(function () {
+									var mpscrpt = document.createElement("script");
+									mpscrpt.type = "text/javascript";
+									mpscrpt.src = "http://maps.google.com/maps/api/js";
+									$("head").append(mpscrpt);
+								}, 100);
+
+								setTimeout(function () {
+									initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
+								},250);
 								addToEnquiry();
 							}
 						}
@@ -406,17 +415,24 @@ function showVendorDetails(obj)
 		}
 		else if((isMail==false)&&(isWishList==false))
 		{
-			setTimeout(function () {
-				initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
-			},10);
-
 			var pos=$('.wrapper').height()-50;
 
 			setTimeout(function(){
 				$('#vDetails').removeClass('vTransit');
 				$('#vDetails').removeClass('dn');
 				$('body').animate({scrollTop: pos}, 300);
-			},200);
+			},10);
+
+			setTimeout(function () {
+				var mpscrpt = document.createElement("script");
+				mpscrpt.type = "text/javascript";
+				mpscrpt.src = "http://maps.google.com/maps/api/js";
+				$("head").append(mpscrpt);
+			}, 100);
+
+			setTimeout(function () {
+				initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
+			},250);
 			addToEnquiry();
 		}
 	}
@@ -427,12 +443,11 @@ function initMap(lat,lng,contentString) {
 		if(google.maps !== null && google.maps !== undefined && google.maps !== '')
 		{
 			var myLatLng = {lat: lat, lng: lng};
-			var infowindow = new google.maps.InfoWindow();
-
+			//var infowindow = new google.maps.InfoWindow();
 			var map = new google.maps.Map(document.getElementById('googleMap'), {
 				zoom: 16,
-				//center: new google.maps.LatLng(lat, lng)
-				center: myLatLng
+				center: new google.maps.LatLng(lat, lng)
+				//center: myLatLng
 			});
 		}
 	}
@@ -680,19 +695,3 @@ function sendDetailsToUser()
 		});
 	}
 }
-
-$('.wishProduct').bind('click',function(){
-    console.log('wishProduct');
-});
-
-$('.msgProduct').bind('click',function(){
-    console.log('msgProduct');
-});
-
-$('.callProduct').bind('click',function(){
-    console.log('callProduct');
-});
-
-$('.viewProduct').bind('click',function(){
-    console.log('viewProduct');
-});
