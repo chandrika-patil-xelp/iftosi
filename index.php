@@ -670,7 +670,7 @@ switch ($action) {
                 break;
             
             case 'thumbnail':
-                $url = APIDOMAIN . 'index.php?action=getImgByProd&pid=12290';
+                $url = APIDOMAIN . 'index.php?action=getImgByProd&pid='.$params['pid'];
                 $res = $comm->executeCurl($url);
                 $result = $res['results'];
 //                echo '<pre>';                print_r($result);die();

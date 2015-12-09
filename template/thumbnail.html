@@ -13,7 +13,7 @@
             <div class="thumbnilComm fLeft">
                 <div id='thumb1' class="actThumbnail fLeft" onclick="openTab('<?php echo $image; ?>')" style='background: url(<?php echo $image; ?>) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);'></div>
                 <div class="comment fRight">
-                    <textarea class="txtComment fmOpenR" id="reason_<?php echo $data[$i]['id']; ?>"  onblur="updateData(<?php echo $data[$i]['id']; ?>);" placeholder=" Comment ( if any )"><?php echo $data[$i]['reason']; ?></textarea>
+                    <textarea class="txtComment fmOpenR" id="reason_<?php echo $data[$i]['id']; ?>"  onchange="updateData(<?php echo $data[$i]['id']; ?>);" placeholder=" Comment ( if any )"><?php echo $data[$i]['reason']; ?></textarea>
                 </div>
                 <div class="acceptRej fRight">
                     <div class="checkDiv fLeft">
@@ -27,7 +27,7 @@
                 </div>
                 <div class="seq fRight">
                     <div class="seqTitle fLeft">Position</div>
-                    <input type="text" id="seq_<?php echo $data[$i]['id']; ?>" value="<?php echo $data[$i]['image_sequence']; ?>" onblur="updateData(<?php echo $data[$i]['id']; ?>);" class="seqTxt fLeft fmOpenR font14" placeholder=" eg 1">
+                    <input type="text" id="seq_<?php echo $data[$i]['id']; ?>" value="<?php echo $data[$i]['image_sequence']; ?>" onchange="updateData(<?php echo $data[$i]['id']; ?>);" class="seqTxt fLeft fmOpenR font14" placeholder=" eg 1">
                 </div>
             </div>
              <?php }?>
