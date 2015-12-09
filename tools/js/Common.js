@@ -163,7 +163,8 @@ function Common() {
         str += '<div class="cancelLgBtn fLeft fmOpenR" id="lgCancel" onclick="common.closeLoginForm();"> CANCEL</div>';
         str += '<div class="loginBtn fLeft fmOpenR" id="lgSubmit" onclick="common.submitLoginForm('+vd+');">LOGIN</div>';
         str += '<div class="signuplink fmOpenB fLeft">';
-        str += '<center><a href="'+ DOMAIN +'index.php?case=signup"><span>Sign Up with Us</span></a></center>';
+        str += '<center class="w50 fLeft"><a href="'+ DOMAIN +'index.php?case=forgot" style="color:#171334;"><span>Forgot Password?</span></a></center>';
+        str += '<center class="w50 fLeft"><a href="'+ DOMAIN +'index.php?case=signup"><span>Sign Up with Us</span></a></center>';
         str += '</div>';
         str += '</div>';
         $('body').append(str);
