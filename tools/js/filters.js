@@ -150,6 +150,12 @@ function removeFilters(id) {
     $('.results_Filter').height(ht + "px");
 }
 
+function mobileClearAll()
+{
+	resetFilters();
+	swichFilter();
+}
+
 function resetFilters()
 {
 	var catid = $('#catid').val();
