@@ -3,7 +3,7 @@
         <li class='iHome' id="homePg" onclick="common.goToUrl('<?php echo DOMAIN; ?>')">Home</li>
         <!--<li class='iDiamonds' id="dmdsPg">Diamonds</li>
         <li class='iJewellery' id="jwlryPg">Jewellery</li>
-        <li class='iBullions' id="blnsPg">Bullions</li>-->
+        <li class='iBullion' id="blnsPg">Bullions</li>-->
 <?php
 			for ($i = 0; $i < count($leftMenuData); $i++) {
 				$curCatId = $leftMenuData[$i]['category_id'];
@@ -21,7 +21,7 @@
 
 				if($curCatId == 10002)
 				{
-					$clsNm = 'iBullions';
+					$clsNm = 'iBullion';
 					$idNm = 'blnsPg';
 				}
 ?>
@@ -31,7 +31,7 @@
 <?php
 			}
 ?>
-        <li class='iWishlist dn' id="wshlstPg">Wishlist <span class="fRight dn" id="lftWshCnt">25</span></li>
+        <li class='iWishlist dn' id="wshlstPg" onclick="common.goToWishlist();">Wishlist <span class="fRight dn" id="lftWshCnt">25</span></li>
         <li class='iLogin dn' id="lgnPg" onclick="common.goToUrl('<?php echo DOMAIN . '?case=login'; ?>')">Login</li>
         <li class='iLogout dn' id="lgotPg" onclick="common.doLogout();">Logout <span class="fRight dn" id="usrNm"></span></li>
     </ul>

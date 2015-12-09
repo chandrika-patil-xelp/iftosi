@@ -433,4 +433,27 @@ function Common() {
 			window.location.href = url;
 		}
 	};
+
+	this.goToWishlist = function() {
+		var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
+		var is_vendor = customStorage.readFromStorage('is_vendor');
+		var uid = customStorage.readFromStorage('userid');
+
+		if(is_vendor !== undefined && is_vendor !== null && typeof is_vendor !== 'undefined' && is_vendor !== '')
+		{
+			if(is_vendor == -1 || is_vendor == '-1')
+			{
+				is_vendor = 0;
+			}
+
+			if(is_vendor == 0)
+			{
+				window.location.href = DOMAIN + 'wishlist/' + uid;
+			}
+		}
+		else
+		{
+			window.location.href = DOMAIN + '?case=login';
+		}
+	};
 }
