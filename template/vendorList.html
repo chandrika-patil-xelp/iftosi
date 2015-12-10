@@ -20,15 +20,14 @@
             <div class="fLeft headExpDate">Expiry Date</div>
             <div class="fLeft headEdit">Activated</div>
         </div>
-        <div class="listContainer fLeft fmOpenR">
+        <div class="listContainer fLeft fmOpenB">
         <?php
         for($i=0; $i<count($data); $i++)
         {
         ?>
             <div class="listComm fLeft fmOpenR">
                 <div class="fLeft vndName">
-
-                    <div class="nameLocatCont fLeft txtOver hedofc" id="cn_14267019859310"><?php echo $data[$i]['orgName'];?> - <?php echo $data[$i]['city'];?></div>
+                   <div class="nameLocatCont fLeft txtOver hedofc" id="cn_14267019859310"><?php echo $data[$i]['orgName'];?> - <?php echo $data[$i]['city'];?></div>
                     <div class="mobileEmailCont fLeft cBlue txtOver">
                         <div class="fLeft">
                             <div class="mbIcon fLeft" id="mo_14267019859310"><?php echo $data[$i]['contact_mobile']?></div>
@@ -102,7 +101,7 @@
         var st = 0;
         setTimeout(function() {
             var pLeft = $(obj).find(".button").position().left;
-            if (pLeft === 0) {
+            if (pLeft < 1) {
                 st = 1;
             } else {
                 st = 0;

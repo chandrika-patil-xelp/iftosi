@@ -41,8 +41,10 @@
                         <div class="btnsCont fLeft">
                             <div class="prdShape fLeft">
                                 <div class="prdShTitle fLeft fmOpenB">PRICE</div>
-                                                        <?php if( empty($data['attr_details']['dollar_rate']) && $data['attr_details']['dollar_rate'] == '0.00') { $data['attr_details']['dollar_rate'] = dollarValue; } ?>
-                                <div class="prdShType fLeft fmOpenL"><span>&#8377;</span><?php echo number_format((($data['attr_details']['price'] * $data['attr_details']['dollar_rate']) * $data['attr_details']['carat']), 2); ?></div>
+                                                        <?php if( empty($data['attr_details']['dollar_rate']) || $data['attr_details']['dollar_rate'] === '0.00') { $data['attr_details']['dollar_rate']= dollarValue;} ?>
+                                <div class="prdShType fLeft fmOpenL"><span>&#8377;</span>
+                                <?php echo number_format((($data['attr_details']['price'] * $data['attr_details']['dollar_rate']) * $data['attr_details']['carat']),0);?>
+ </div>
                             </div>
                             <div class="prdBtns fLeft">
                                 <div class="btnComm fLeft iconCall ripplelink poR" >Contact Dealer</div>
@@ -121,7 +123,7 @@
                             </div>
                             <div class="infoCommn fLeft fmOpenR">
                                 <div class="infoLabel fmOpenB  font12">BASE Price</div>
-                                <div class="infoValue c666 font25 fmOpenR"><?php echo number_format(($data['attr_details']['baseprice'] * $dollarValue), 2); ?></div>
+                                <div class="infoValue c666 font25 fmOpenR"><?php echo number_format((($data['attr_details']['baseprice'] * $dollarValue)*$data['attr_details']['carat']), 0); ?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR">
                                 <div class="infoLabel fmOpenB  font12">% DISCOUNT</div>
@@ -163,7 +165,7 @@
 
                         <div class="orgNo fLeft">
                             <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Bankers</div>
-                            <div class="commtxt bankers fmOpenR fLeft"><?php echo str_replace('~', ', ', $vndrDtls['bankers']); ?></div>
+                            <div class="commtxt bankers fmOpenR fLeft"><?php echo str_replace('~',', ', $vndrDtls['bankers']); ?></div>
                         </div>
                     </div>
                     <div class="vdCenterCard fLeft">

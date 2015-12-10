@@ -340,7 +340,7 @@ function getResultsData(data,sortby,showtree)
 							html += '<div class="detComm">';
 								html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
                                                                 if(vl.dollar_rate !== '0.00' && vl.dollar_rate !== undefined && vl.dollar_rate !== null && vl.dollarValue !== '') { dollarValue=vl.dollar_rate; }
-								html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+number_format(((vl.pprice * dollarValue) * vl.attributes.carat),2)+'</div>';
+								html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+number_format(((vl.pprice * dollarValue) * vl.attributes.carat),0)+'</div>';
 							html += '</div>';
 						html += '</div>';
 						html += '</a>';
@@ -421,7 +421,7 @@ function getResultsData(data,sortby,showtree)
 								html += '<div class="detComm">';
 									html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
                                                                             if(vl.dollar_rate !== '0.00' && vl.dollar_rate !== undefined && vl.dollar_rate !== null && vl.dollar_rate !== '') { dollarValue=vl.dollar_rate; }
-									html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+number_format(((vl.pprice*dollarValue)*vl.attributes.carat),2)+'</div>';
+									html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+number_format(((vl.pprice*dollarValue)*vl.attributes.carat),0)+'</div>';
 								html += '</div>';
 							html += '</div>';
                                                         html += '</a>';

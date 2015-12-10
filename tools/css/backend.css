@@ -527,7 +527,7 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 .vndAmount{width:15%;height: 100%;border-right: 1px solid #ccc;padding: 0 15px;line-height: 60px;text-align: center;}
 .vndExpDate{width:15%;height: 100%;border-right: 1px solid #ccc;padding: 0 15px;line-height: 60px;text-align: center;}
 .vndEdit{width:10%;height: 100%;padding: 0 15px;line-height: 6px;position: relative;}
-.listContainer{width: 100%;height: 500px;margin-bottom: 50px;padding: 15px;background: #e6e6e6;margin-top: 50px;}
+.listContainer{width: 100%;height: auto;margin-bottom: 50px;padding: 15px;background: #e6e6e6;margin-top: 50px;}
 .listComm{width: 100%;height: 62px;padding: 0px;background: #fff;margin-bottom: 10px;color:#666;border: 1px solid #fff;}
 .mbIcon {width: auto;padding: 0 20px 0 25px;background-image: url(../img/iconMobileNumber.svg);background-repeat: no-repeat;background-size: auto 27px;background-position: 0 center;color:#8A0044;}
 .emIcon {width: auto;padding: 0 20px 0 30px;background-image: url(../img/iconEmail.svg);background-repeat: no-repeat;background-size: auto 27px;background-position: 0 center;color:#8A0044;}

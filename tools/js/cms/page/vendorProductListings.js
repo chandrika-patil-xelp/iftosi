@@ -230,10 +230,10 @@ function generateDiamondList(obj) {
     str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn poR ripplelink"></div></a>';
     str += '<div class="deltBtn poR ripplelink" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
     str += '<a href="'+ DOMAIN +'index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn poR ripplelink"></div></a>';
-    if(obj['active_flag']!=3){
+    if(obj['active_flag'] == 3){
         cl='outofstock';
     }
-    str += '<div class="soldBtn poR ripplelink fmOpenR '+cl+'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3) ? "In Stock" : "Out Of Stock");+'</div>';
+    str += '<div class="soldBtn poR ripplelink fmOpenR '+cl+'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "Out Of Stock" : "Out Of Stock");+'</div>';
     str += '</center>';
     str += '</div>';
     str += '</li>';
@@ -338,7 +338,7 @@ function generateJewellList(obj) {
         if(obj['active_flag']!=3){
         cl='outofstock';
         }
-        str += '<div class="soldBtn poR ripplelink fmOpenR '+cl+'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "In Stock" : "Out Of Stock");+'</div>';
+        str += '<div class="soldBtn poR ripplelink fmOpenR '+cl+'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "Out Of Stock" : "Out Of Stock");+'</div>';
         str += '</center>';
         str += '</div>';
         str += '</li>';
@@ -427,7 +427,7 @@ function generatBullionsList(obj) {
     if(obj['active_flag']!=3){
         cl='outofstock';
     }
-    str += '<div class="soldBtn poR ripplelink fmOpenR '+cl+'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "In Stock" : "Out Of Stock");+'</div>';
+    str += '<div class="soldBtn poR ripplelink fmOpenR '((obj["active_flag"]==3 )? cl :"");'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "Out Of Stock" : "Out Of Stock");+'</div>';
     str += '</center>';
     str += '</div>';
     str += '</li>';
@@ -518,7 +518,8 @@ function inStock(proId,ele) {
             var total=$('#total'+catName).text();
             $('#total'+catName).text(total);
             common.toast(1,obj['error']['Msg']);
-            $('#'+stockid).text()=='SOLD'?$('#'+stockid).text('STOCK'):$('#'+stockid).text('SOLD');
+            //$('#'+stockid).text()=='SOLD' ? $('#'+stockid).text('STOCK'):$('#'+stockid).text('SOLD');
+            $('#'+stockid).toggleClass('outofstock');
         } else {
             common.toast(0,obj['error']['Msg']);
         }
