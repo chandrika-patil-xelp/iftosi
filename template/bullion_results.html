@@ -88,25 +88,24 @@
 <?php 
                                                                                                         if(empty($val['silver_rate']) || $val['silver_rate']=='0.00')
                                                                                                         { 
-                                                                                                            $metal_rate = silverRate;
+                                                                                                            $val['silver_rate'] = silverRate;
                                                                                                         } 
                                                                                                         if(empty($val['gold_rate']) || $val['gold_rate']=='0.00')
                                                                                                         { 
-                                                                                                            $metal_rate = goldRate;
+                                                                                                            $val['gold_rate'] = goldRate;
                                                                                                         }
                                                                                                         
                                                                                                         $pro_metal = strtolower($val['attributes']['metal']);
                                                                                                         if($pro_metal=='gold')
                                                                                                         { 
                                                                                                             $metal_rate=$val['gold_rate'];
-                                                                                                         
                                                                                                         $metal_rate=($metal_rate/10)*($val['attributes']['gold_purity']/995);
                                                                                                         }
                                                                                                         else if($pro_metal=='silver')
                                                                                                         { 
                                                                                                             $metal_rate=$val['silver_rate'];
                                                                                                          
-                                                                                                        $metal_rate=($metal_rate/1000)*($val['attributes']['gold_purity']/995);
+                                                                                                        $metal_rate=($metal_rate/1000)*($val['attributes']['gold_purity']/999);
                                                                                                         }
                                                                                                         
 ?>

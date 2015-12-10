@@ -1360,7 +1360,7 @@
                     WHERE 
                         product_id=".$params['prdid']." 
                     AND        
-                        active_flag!=2";
+                        active_flag <> 2";
                         
             $res = $this->query($sql);
             $res2 = $this->query($sql2);
@@ -1391,7 +1391,8 @@
                         WHERE 
 							product_id=".$pid."
                         AND                
-							active_flag!=2
+
+							active_flag <> 2
                         ORDER BY
 							vendor_id ASC";
                 
@@ -1504,7 +1505,7 @@
                              FROM 
 								tbl_product_category_mapping
                              WHERE 
-								product_id =".$params['prdid']." AND display_flag!=2 AND category_id!=".$params['catid']."";
+								product_id =".$params['prdid']." AND display_flag <> 2 AND category_id!=".$params['catid']."";
                         $res5=$this->query($sql5);
                         if ($res5) {
                             while ($row5 = $this->fetchData($res5)) {

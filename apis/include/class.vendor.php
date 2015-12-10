@@ -281,7 +281,7 @@ class vendor extends DB
                     else if($metal=='silver')
                     {
                         $metalRate=$silverRate;
-                        $finalRate=($metalRate/1000)*($purity/995);
+                        $finalRate=($metalRate/1000)*($purity/999);
                         $price=number_format($finalRate*$weight,2);
                     }
                 }
@@ -641,7 +641,7 @@ class vendor extends DB
                     else if($metal=='silver')
                     {
                         $metalRate=$silverRate;
-                        $finalRate=($metalRate/1000)*($purity/995);
+                        $finalRate=($metalRate/1000)*($purity/999);
                         $row['price']=number_format($finalRate*$weight,2);
                     }
                 }
@@ -892,9 +892,7 @@ class vendor extends DB
 						tbl_product_category_mapping
 					".$where."
 					AND
-                                                display_flag=1
-                                        OR
-                                                display_flag=0
+                                                display_flag<>2
                                 ";
 
 
@@ -911,7 +909,7 @@ class vendor extends DB
 					FROM
 						tbl_product_category_mapping
 					".$where."
-					AND display_flag=1 OR display_flag=0";
+					AND display_flag<>2";
 
 			switch($params['sortby'])
 			{
@@ -1048,10 +1046,8 @@ class vendor extends DB
 							WHERE
 								product_id IN(".$pid.")
                                                         AND
-                                                                active_flag=1
-                                                        OR
-                                                                active_flag=0
-							".$extn."
+                                                                active_flag<>2
+                                                        ".$extn."
 							";
 					$res = $this->query($sql);
 					if($res)
@@ -1081,10 +1077,8 @@ class vendor extends DB
 							WHERE
 								product_id IN(".$pid.")
                                                         AND
-                                                                active_flag=1
-                                                        OR
-                                                                active_flag=0
-							".$extn."
+                                                                active_flag<>2
+                                                        ".$extn."
 							ORDER BY
 								field(product_id,".$pid.")
 							";
@@ -1130,10 +1124,8 @@ class vendor extends DB
 							WHERE
 								product_id IN(".$pid.")
                                                         AND
-                                                                active_flag=1
-                                                        OR
-                                                                active_flag=0
-							ORDER BY
+                                                                active_flag<>2
+                                                        ORDER BY
 								field(product_id,".$pid.");
 							";
 					$pres=$this->query($psql);
@@ -1205,10 +1197,8 @@ class vendor extends DB
 											WHERE
 												product_id IN(".$allpids.")
                                                                                         AND
-                                                                                                active_flag=1
-                                                                                        OR
-                                                                                                active_flag=0
-											";
+                                                                                                active_flag<>2
+                                                                                        ";
 									$res1 = $this->query($qry);
 									if($res1)
 									{
@@ -1231,7 +1221,7 @@ class vendor extends DB
 											WHERE
 												product_id IN(".$allpids.")
                                                                                         AND
-                                                                                                active_flag=1 OR active_flag=0
+                                                                                                active_flag<>2
 											";
 									$res1 = $this->query($qry);
 									if($res1)
