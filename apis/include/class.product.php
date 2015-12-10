@@ -176,7 +176,7 @@
                        $catids1 = implode('","', $catids1);
                             $updtcatsql="UPDATE tbl_product_category_mapping set display_flag=1 where category_id NOT IN(\"".$catids1."\") and product_id=\"".$pid."\"";    
                             $updtcatres=$this->query($updtcatsql);
-                        
+                        $detls['discount'] = str_replace('-', '', $detls['discount']);
                         for($i=0;$i<count($catids);$i++)
                         {
                             if(!empty($catids[$i]))

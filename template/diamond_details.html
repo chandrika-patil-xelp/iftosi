@@ -125,7 +125,7 @@
                             </div>
                             <div class="infoCommn fLeft fmOpenR">
                                 <div class="infoLabel fmOpenB  font12">% DISCOUNT</div>
-                                <div class="infoValue c666 font25 fmOpenR"><?php echo $data['attr_details']['discount']; ?>%</div>
+                                <div class="infoValue c666 font25 fmOpenR"><?php echo str_replace('-', '', $data['attr_details']['discount']); ?>%</div>
                             </div>
                         </div>
                     </div>

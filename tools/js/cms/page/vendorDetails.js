@@ -65,106 +65,127 @@ function validateForm() {
     var code_chk = pancard.substring(3, 4);
 
     var str = '';
+
+	var isValid = true;
+
     if (orgname == '')
     {
         str = 'Organization Name is Required\n';
         $('#orgname').focus();
+		isValid = false;
     }
 
-    if (str == '' && fulladd == '')
+    if (isValid && str == '' && fulladd == '')
     {
         str = 'Address is Required';
         $('#fulladd').focus();
+		isValid = false;
     }
 
-    if (str == '' && (pincode == '' || pincode.length < 6 || isNaN(pincode)))
+    if (isValid && str == '' && (pincode == '' || pincode.length < 6 || isNaN(pincode)))
     {
         str = 'Pincode is Required';
         $('#pincode').focus();
+		isValid = false;
     }
 
-    if (str == '' && area == '')
+    if (isValid && str == '' && area == '')
     {
         str = 'Area is Required';
         $('#area').focus();
+		isValid = false;
     }
 
-    if (str == '' && city == '')
+    if (isValid && str == '' && city == '')
     {
         str = 'City is Required';
         $('#city').focus();
+		isValid = false;
     }
 
-    if (str == '' && state == '')
+    if (isValid && str == '' && state == '')
     {
         str = 'State is Required';
         $('#state').focus();
+		isValid = false;
     }
 
-    if (str == '' && pancard.match(panPat) == null)
-    {
-        str = 'Pancard is Invalid';
-        $('#pan').focus();
-    }
-
-    if (str == '' && pancard === ' ')
-    {
-        str = 'Pancard is Invalid';
-        $('#pan').focus();
-    }
-
-    if (str == '' && pancard.search(panPat) == -1) {
-        str = 'Invalid Pan No';
-        $('#pan').focus();
-    }
-
-    if (str == '' && code.test(code_chk) == false) {
-        str = 'Invaild PAN Card No.';
-        $('#pan').focus();
-    }
-    if (vatno !== '') {
-        if (vatno.length == 12) {
+	if (isValid && vatno !== '') {
+        if (isValid && vatno.length == 12)
+		{
             var vat_pattr = /^([0-9]){11}(C|V){1}/g;
             //var vat_pattr1 = /([0-9]*$)/;
             //var vatLtNo = vatno.substring(3, 11);
-        if (vat_pattr.test(vatno) == false) {
+			if (vat_pattr.test(vatno) == false) {
                 str = 'Invaild VAT No.';
                 $('#vat').focus();
+				isValid = false;
             }
-        } else {
+        } else if(isValid) {
             str = 'Invaild VAT Number';
             $('#vat').focus();
+			isValid = false;
         }
-    } 
-    else  {
+    }
+    else if (isValid && (vatno == undefined || vatno == null || vatno == ''))
+	{
         str = 'VAT Number Required';
         $('#vat').focus();
+		isValid = false;
     }
-    if(banker == undefined || banker == 'undefiend' || banker == null || banker == 'null' || banker == '' || banker == ' '){
+
+    if(isValid && str == '' && pancard.match(panPat) == null)
+    {
+        str = 'Pancard is Invalid';
+        $('#pan').focus();
+		isValid = false;
+    }
+
+    if (isValid && str == '' && pancard === ' ')
+    {
+        str = 'Pancard is Invalid';
+        $('#pan').focus();
+		isValid = false;
+    }
+
+    if (isValid && str == '' && pancard.search(panPat) == -1) {
+        str = 'Invalid Pan No';
+        $('#pan').focus();
+		isValid = false;
+    }
+
+    if (isValid && str == '' && code.test(code_chk) == false) {
+        str = 'Invaild PAN Card No.';
+        $('#pan').focus();
+		isValid = false;
+    }
+
+    if(isValid && (banker == undefined || banker == 'undefiend' || banker == null || banker == 'null' || banker == '' || banker == ' '))
+	{
         str = 'Banker field is empty';
         $('#banker').focus();
+		isValid = false;
     }
-    if (str == '' && !$("#forDiamond").hasClass("comSelected") && !$("#forJewellery").hasClass("comSelected") && !$("#forBullion").hasClass("comSelected")) {
+
+    if (isValid && str == '' && !$("#forDiamond").hasClass("comSelected") && !$("#forJewellery").hasClass("comSelected") && !$("#forBullion").hasClass("comSelected"))
+	{
         str = 'Select business type';
+		isValid = false;
     }
-    else if (str == '')
+
+    if (isValid && str == '')
     {
         if (wbst !== '')
         {
             if (!common.validateUrl('wbst'))
             {
-                return false;
-            }
-            else
-            {
-                return  true;
+                str  = "Please enter proper website url";
+				isValid = false;
             }
         }
-
-        return  true;
     }
 
-    if (str !== '')
+    if (isValid == false && str !== '')
     {
         common.toast(0, str);
         return false;
