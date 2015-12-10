@@ -12,15 +12,15 @@
     <div id='product' class="contentCont fLeft">
         <div class="wrapperMax">
             <?php if($catid==10000) { ?>
-            <div id='diamondPrds' class="forPrds fLeft fmOpenR">
+            <div id='diamondPrds' class="forPrds fLeft fmOpenR diamondPrds">
                 <?php include 'vProducts_Diamond.html'; ?>
             </div>
             <?php } else if($catid==10001) { ?>
-            <div id='jewelleryPrds' class="forPrds fLeft fmOpenR">
+            <div id='jewelleryPrds' class="forPrds fLeft fmOpenR jewelleryPrds">
                 <?php include 'vProducts_jewellery.html'; ?>
             </div>
             <?php } else if($catid==10002) { ?>
-            <div id='bullionPrds' class="forPrds fLeft fmOpenR">
+            <div id='bullionPrds' class="forPrds fLeft fmOpenR bullionPrds">
                 <?php include 'vProducts_bullion.html'; ?>
             </div>
             <?php } ?>
@@ -87,7 +87,7 @@
 
     
     <!------Product Headers------>
-    <div id='diamondFheader' class="prdHeader fLeft transition100 pLHtransit dn">
+    <div id='diamondFheader' class="prdHeader fLeft transition100 pLHtransit dn diamondPrds">
         <div class="wrapperMax">
             <div class="prdListHeader fLeft fmOpenR">
                 <div class="date fLeft">Date</div>
@@ -102,7 +102,7 @@
             </div>
         </div>
     </div>
-    <div id='jewelleryFheader' class="prdHeader fLeft transition100 pLHtransit dn">
+    <div id='jewelleryFheader' class="prdHeader fLeft transition100 pLHtransit dn jewelleryPrds">
         <div class="wrapperMax">
             <div class="prdListHeader fLeft fmOpenR">
                 <div class="date fLeft">Date</div>
@@ -116,7 +116,7 @@
             </div>  
         </div>
     </div>
-    <div id='bullionFheader' class="prdHeader fLeft transition100 pLHtransit">
+    <div id='bullionFheader' class="prdHeader fLeft transition100 pLHtransit dn bullionPrds">
         <div class="wrapperMax">
             <div class="prdListHeader fLeft fmOpenR">
                 <div class="date fLeft">Date</div>
