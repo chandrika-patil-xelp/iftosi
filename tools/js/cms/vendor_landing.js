@@ -69,6 +69,18 @@ function checkToHide(evt) {
 }
 
 
+var goldRate, silverRate, dollarRate = '';
+    
+$.ajax({url: DOMAIN + "apis/index.php?action=getAllRatesByVID&vid=" + uid, success: function (result) {
+    var obj = jQuery.parseJSON(result);
+    goldRate = obj['results']['gold_rate'];
+    silverRate = obj['results']['silver_rate'];
+    dollarRate = obj['results']['dollar_rate'];
+    $('#dollar_rate').val(dollarRate);
+    $('#gold_rate1').val(goldRate);
+    $('#silver_rate1').val(silverRate);
+}}); 
+ 
 
 var mxSc = 170;//$('.prdResults').offset().top;
 
@@ -77,12 +89,12 @@ $(document).ready(function () {
 	
     $('.vTabs').eq(1).click();
 
-    
 var busiTypeSplt = busiType.split(',');
 for(var i = 0; i< busiTypeSplt.length; i++)
 {
     if(busiTypeSplt[i] == 1)
     {
+        $('#dollarRateSpan').append(dollarRate).removeClass('dn');
         $('#dmdTab').removeClass('dn');
     }
     if(busiTypeSplt[i] == 2)
@@ -91,6 +103,8 @@ for(var i = 0; i< busiTypeSplt.length; i++)
     }
     if(busiTypeSplt[i] == 3)
     {
+        $('#goldRateSpan').append(goldRate).removeClass('dn');
+        $('#silverRateSpan').append(silverRate).removeClass('dn');
         $('#bullTab').removeClass('dn');
     }
 }
@@ -423,6 +437,7 @@ function updateDollarRate() {
                 var errCode = obj['error']['Code'];
                 if(errCode==0) {
                     common.toast(1,obj['error']['Msg']);
+                    $('#dollarRateSpan').html('Dollar Rate : &#8377; '+dollar_rate);
                     closeAllForms();
 					if(uploadButton == false)
 					{
@@ -460,6 +475,7 @@ function updateSilverRate() {
                 var errCode = obj['error']['code'];
                 if(errCode==0) {
                     common.toast(1,obj['error']['Msg']);
+                    $('#silverRateSpan').html('Silver Rate : &#8377; '+silver_rate);
                     closeAllForms();
                 } else if(errCode==1) {
                     common.toast(0,obj['error']['Msg']);
@@ -496,6 +512,7 @@ function updateGoldRate() {
             var errCode = obj['error']['code'];
             if(errCode==0) {
                 common.toast(1,obj['error']['Msg']);
+                $('#goldRateSpan').html('Gold Rate : &#8377; '+gold_rate);
                 //window.location.reload(1);
                 customStorage.readFromStorage('rateErr');
                 closeAllForms();
@@ -517,15 +534,6 @@ function showgoldSilverRateForm() {
         $('#overlay').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
         $('#goldSilverRateDiv').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
     }, 10);
-    $.ajax({url: common.APIWebPath() + "index.php?action=getAllRatesByVID&vid=" + uid, success: function (result) {
-        var obj = jQuery.parseJSON(result);
-        var errCode = obj['error']['Code'];
-        if (errCode == 0) {
-            $('#dollar_rate').val(obj['results']['dollar_rate']);
-            $('#gold_rate1').val(obj['results']['gold_rate']);
-            $('#silver_rate1').val(obj['results']['silver_rate']);
-        }
-    }});
 }
 
 function updateGoldSilverRate() {
@@ -548,6 +556,8 @@ function updateGoldSilverRate() {
                 var errCode = obj['error']['code'];
                 if(errCode==0) {
                     common.toast(1,obj['error']['Msg']);
+                    $('#goldRateSpan').html('Gold Rate : &#8377; '+gold_rate);
+                    $('#silverRateSpan').html('Silver Rate : &#8377; '+silver_rate);
                     //window.location.reload(1);
                     customStorage.readFromStorage('rateErr');
                     closeAllForms();
