@@ -199,6 +199,7 @@ function pagination(data,pgno){
 }
 
 function generateDiamondList(obj) {
+    var cl='';
     var pro_name = obj['product_name'];
     if(pro_name == null || pro_name == '' || pro_name == 'null') {
         pro_name = obj['barcode'];
@@ -229,7 +230,10 @@ function generateDiamondList(obj) {
     str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn poR ripplelink"></div></a>';
     str += '<div class="deltBtn poR ripplelink" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
     str += '<a href="'+ DOMAIN +'index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn poR ripplelink"></div></a>';
-    str += '<div class="soldBtn poR ripplelink fmOpenR" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3) ? "IN STOCK" : "OUT OF STOCK");+'</div>';
+    if(obj['active_flag']!=3){
+        cl='outofstock';
+    }
+    str += '<div class="soldBtn poR ripplelink fmOpenR '+cl+'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3) ? "IN STOCK" : "OUT OF STOCK");+'</div>';
     str += '</center>';
     str += '</div>';
     str += '</li>';
@@ -287,7 +291,8 @@ function loadJewellCallback(res,pgno) {
 }
 function generateJewellList(obj) {
     if(obj !== undefined && obj !== null && obj !== '')
-    {
+    {   
+        var cl='';
         var pro_name = obj['product_name'];
         var shape = obj['shape'];
         var category= obj['category'][1]['cat_name'];
@@ -330,7 +335,10 @@ function generateJewellList(obj) {
         str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn poR ripplelink"></div></a>';
         str += '<div class="deltBtn poR ripplelink" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
         str += '<a href="'+ DOMAIN +'index.php?case=jewellery_Form&catid=10001&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn poR ripplelink"></div></a>';
-        str += '<div class="soldBtn poR ripplelink fmOpenR" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "IN STOCK" : "OUT OF STOCK");+'</div>';
+        if(obj['active_flag']!=3){
+        cl='outofstock';
+        }
+        str += '<div class="soldBtn poR ripplelink fmOpenR '+cl+'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "IN STOCK" : "OUT OF STOCK");+'</div>';
         str += '</center>';
         str += '</div>';
         str += '</li>';
@@ -387,6 +395,7 @@ function loadBullionsCallback(res,pgno) {
 }
 function generatBullionsList(obj) {
     var barcode = obj['barcode'];
+    var cl='';
     if(barcode == null || barcode == '' || barcode == 'null') {
         barcode = 'N-A';
     }
@@ -415,7 +424,10 @@ function generatBullionsList(obj) {
     str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn poR ripplelink"></div></a>';
     str += '<div class="deltBtn poR ripplelink" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
     str += '<a href="'+ DOMAIN +'index.php?case=bullion_Form&catid=10002&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn poR ripplelink"></div></a>';
-    str += '<div class="soldBtn poR ripplelink fmOpenR" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "IN STOCK" : "OUT OF STOCK");+'</div>';
+    if(obj['active_flag']!=3){
+        cl='outofstock';
+    }
+    str += '<div class="soldBtn poR ripplelink fmOpenR '+cl+'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "IN STOCK" : "OUT OF STOCK");+'</div>';
     str += '</center>';
     str += '</div>';
     str += '</li>';
