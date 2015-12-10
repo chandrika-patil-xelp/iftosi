@@ -195,12 +195,12 @@ function Common() {
         str += '<div id="loginDiv" class="loginDiv transition300" style="transform: scale(0);">';
         str += '<div class="lgTitle fLeft fmOpenR">One account. All about Diamonds</div>';
         str += '<div class="inputCont fLeft fmOpenR">';
-        str += '<input type="tel" id="pr_mobile" name="pr_mobile" autocomplete="off" maxlength="10" class="txtInput cOrange fmOpenR font14 mobileIcon">';
+        str += '<input type="tel" id="pr_mobile" name="pr_mobile" autocomplete="off" maxlength="10" class="txtInput cOrange fmOpenR font14 mobileIcon" readonly>';
         str += '<label for="pr_mobile" class="inp-label transition100">MOBILE</label>';
         str += '<div id="pr_mobile_inpText" class="inpText fRight transition300">enter<br>mobile number</div>';
         str += '</div>  ';
         str += ' <div class="inputCont fLeft fmOpenR">';
-        str += '<input type="password" id="pr_pass" name="pr_pass" autocomplete="off" maxlength="10" onKeyPress="common.eSubmit(event,\'lgSubmit\');" class="txtInput cOrange fmOpenR font14 passwordIcon">';
+        str += '<input type="password" id="pr_pass" name="pr_pass" autocomplete="off" readonly maxlength="10" onKeyPress="common.eSubmit(event,\'lgSubmit\');" class="txtInput cOrange fmOpenR font14 passwordIcon">';
         str += '<label for="pr_pass" class="inp-label transition100">PASSWORD</label>';
         str += '<div id="pr_pass_inpText" class="inpText fRight transition300">enter your<br>password</div>';
         str += '</div>  ';
@@ -212,6 +212,7 @@ function Common() {
         str += '</div>';
         str += '</div>';
         $('body').append(str);
+        $('input').bind('focus',function(){$(this).attr('readonly',false);});
         $('input[type=tel], input[type=password]').bind('focus',function() {
             $(this).siblings('label, i').addClass('labelActive');
             $(this).addClass('brOrange');//.removeClass('brRed');
