@@ -1,4 +1,16 @@
 
+var goldRate = '';
+var silverRate = '';
+var dollarRate = '';
+    
+$.ajax({url: DOMAIN + "apis/index.php?action=getAllRatesByVID&vid=" + uid, success: function (result) {
+    var obj = jQuery.parseJSON(result);
+    goldRate = obj['results']['gold_rate'];
+    silverRate = obj['results']['silver_rate'];
+    dollarRate = obj['results']['dollar_rate'];
+    $('#gold_rate').val();
+    $('#silver_rate').val();
+}}); 
  
 function submitForm(formid)
 {

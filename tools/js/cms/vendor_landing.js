@@ -153,7 +153,7 @@ for(var i = 0; i< busiTypeSplt.length; i++)
         }
         
     });
-
+var GtmpId='';
     $('.jshapeComm').bind('click', function ()
     {
         var uthis = $(this);
@@ -167,9 +167,20 @@ for(var i = 0; i< busiTypeSplt.length; i++)
         {
             var tmpId = $(this).attr('id');
             tmpId = tmpId.toLowerCase();
-            $('.subCatType').addClass('dn');
-            $('#' + tmpId + 'Type').removeClass('dn');
-            $('#allcontent').removeClass('dn');
+            GtmpId=tmpId;
+            if (((tmpId == 'gbars') || (tmpId == 'gcoins')) && goldRate == 0.00) {
+                showGoldRateForm();
+                $('#goldErr,.subCatType').removeClass('dn');
+                $('#' + tmpId + 'Type,#allcontent,.allprop').addClass('dn');
+            } else if (((tmpId == 'sbars') || (tmpId == 'scoins')) && silverRate == 0.00) {
+                showSilverRateForm();
+                $('#silverErr,.subCatType').removeClass('dn');
+                $('#' + tmpId + 'Type,#allcontent,.allprop').addClass('dn');
+            } else {
+                $('.subCatType').addClass('dn');
+                $('#' + tmpId + 'Type').removeClass('dn');
+                $('#allcontent').removeClass('dn');
+            }
         }
         else
         {
@@ -190,29 +201,29 @@ for(var i = 0; i< busiTypeSplt.length; i++)
 
             if ((tmpId == 'gbars') || (tmpId == 'gcoins'))
             {
-                $('.allprop').addClass('dn');
-                $('.goldprop').removeClass('dn');
-                $('#silverpurity').val('');
-                $('#silverweight').val('');
-                if (tmpId == 'gbars') {
-                    $('#goldweight').attr('placeholder','eg. Kgs Or Gms');
-                } else {
-                    $('#goldweight').attr('placeholder','eg. Gms');
-                }
+                    $('.allprop').addClass('dn');
+                    $('.goldprop').removeClass('dn');
+                    $('#silverpurity').val('');
+                    $('#silverweight').val('');
+                    if (tmpId == 'gbars') {
+                        $('#goldweight').attr('placeholder','eg. Kgs Or Gms');
+                    } else {
+                        $('#goldweight').attr('placeholder','eg. Gms');
+                    }
             }
             else if ((tmpId == 'sbars') || (tmpId == 'scoins'))
             {
-                $('.allprop').addClass('dn');
-                $('.silverprop').removeClass('dn');
-                $('#goldpurity').val('');
-                $('#goldweight').val('');
-                if (tmpId == 'sbars') {
-                    $('#silverweight').attr('placeholder','eg. Kgs Or Gms');
-                } else {
-                    $('#silverweight').attr('placeholder','eg. Gms');
+                    $('.allprop').addClass('dn');
+                    $('.silverprop').removeClass('dn');
+                    $('#goldpurity').val('');
+                    $('#goldweight').val('');
+                    if (tmpId == 'sbars') {
+                        $('#silverweight').attr('placeholder','eg. Kgs Or Gms');
+                    } else {
+                        $('#silverweight').attr('placeholder','eg. Gms');
+                    }
                 }
             }
-        }
         else
         {
             $('.goldprop').addClass('dn');
@@ -349,12 +360,14 @@ function onEnterFormSubmit(evt,type) {
             updateSilverRate();
         } else if(type==3) {
             updateGoldRate();
+        } else if(type==4) {
+            updateGoldSilverRate();
         }
     }
 }
 
 $('#overlay').velocity({opacity:0},{delay:0,duration:0});
-$('#uploadDiv,#dollarRateDiv,#goldRateDiv,#silverRateDiv').velocity({scale: 0}, {delay: 0, duration: 0});
+$('#uploadDiv,#dollarRateDiv,#goldRateDiv,#silverRateDiv,#goldSilverRateDiv').velocity({scale: 0}, {delay: 0, duration: 0});
 $('#upProds').click(function () {
     $('#overlay,#uploadDiv').removeClass('dn');
     setTimeout(function () {
@@ -391,10 +404,10 @@ $('#overlay,#upCancel').bind('click', function () {
 });
 
 function closeAllForms() {
-    $('#uploadDiv,#dollarRateDiv,#goldRateDiv,#silverRateDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
+    $('#uploadDiv,#dollarRateDiv,#goldRateDiv,#silverRateDiv,#goldSilverRateDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
     $('#overlay').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
     setTimeout(function () {
-        $('#overlay,#uploadDiv,#dollarRateDiv,#goldRateDiv,#silverRateDiv').addClass('dn');
+        $('#overlay,#uploadDiv,#dollarRateDiv,#goldRateDiv,#silverRateDiv,#goldSilverRateDiv').addClass('dn');
     }, 1010);
     loadDiamont = true;
 }
@@ -434,13 +447,6 @@ function showSilverRateForm() {
         $('#overlay').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
         $('#silverRateDiv').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
     }, 10);
-    $.ajax({url: common.APIWebPath() + "index.php?action=getSilverRate&vid="+ uid, success: function (result) {
-        var obj = jQuery.parseJSON(result);
-        var errCode = obj['error']['Code'];
-        if(errCode==0) {
-            $('#silver_rate').val(obj['results']['silver_rate']);
-        }
-    }});
 }
 
 function updateSilverRate() {
@@ -476,19 +482,55 @@ function showGoldRateForm() {
         $('#overlay').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
         $('#goldRateDiv').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
     }, 10);
-    $.ajax({url: common.APIWebPath() + "index.php?action=getGoldRate&vid="+ uid, success: function (result) {
+}
+function updateGoldRate() {
+    var gold_rate = $("#gold_rate").val();
+    gold_rate=parseFloat(gold_rate);
+   if(gold_rate=='' || gold_rate <= 0 || gold_rate == undefined || isNaN(gold_rate) == true){
+        common.toast(0,'Gold Rate is Must to fill');
+        return false;
+    }   
+    else {
+        $.ajax({url: DOMAIN + "/apis/index.php?action=updateGoldRate&vid="+uid+"&goldRate="+gold_rate, success: function(result) {
+            var obj = jQuery.parseJSON(result);
+            var errCode = obj['error']['code'];
+            if(errCode==0) {
+                common.toast(1,obj['error']['Msg']);
+                //window.location.reload(1);
+                customStorage.readFromStorage('rateErr');
+                closeAllForms();
+                if(uploadButton == false)
+                {
+                    setTimeout(function () { window.location.assign(DOMAIN+"index.php?case=bullion_Form&catid=10002&vid="+uid); }, 1800);
+                }
+            } else if(errCode==1) {
+
+                common.toast(0,obj['error']['Msg']);
+            }
+        }});
+    }
+}
+
+function showgoldSilverRateForm() {
+    $('#overlay,#goldSilverRateDiv').removeClass('dn');
+    setTimeout(function () {
+        $('#overlay').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
+        $('#goldSilverRateDiv').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
+    }, 10);
+    $.ajax({url: common.APIWebPath() + "index.php?action=getAllRatesByVID&vid=" + uid, success: function (result) {
         var obj = jQuery.parseJSON(result);
         var errCode = obj['error']['Code'];
-        if(errCode==0) {
-            $('#gold_rate').val(obj['results']['gold_rate']);
-            $('#silver_rate').val(obj['results']['silver_rate']);
+        if (errCode == 0) {
+            $('#dollar_rate').val(obj['results']['dollar_rate']);
+            $('#gold_rate1').val(obj['results']['gold_rate']);
+            $('#silver_rate1').val(obj['results']['silver_rate']);
         }
     }});
 }
 
-function updateGoldRate() {
-    var gold_rate = $("#gold_rate").val();
-    var silver_rate = $("#silver_rate").val();
+function updateGoldSilverRate() {
+    var gold_rate = $("#gold_rate1").val();
+    var silver_rate = $("#silver_rate1").val();
     console.log(silver_rate);
     gold_rate=parseFloat(gold_rate);
     silver_rate=parseFloat(silver_rate);
@@ -509,10 +551,6 @@ function updateGoldRate() {
                     //window.location.reload(1);
                     customStorage.readFromStorage('rateErr');
                     closeAllForms();
-					if(uploadButton == false)
-					{
-						setTimeout(function () { window.location.assign(DOMAIN+"index.php?case=bullion_Form&catid=10002&vid="+uid); }, 1800);
-					}
                 } else if(errCode==1) {
                     
                     common.toast(0,obj['error']['Msg']);
@@ -628,21 +666,22 @@ function addDiamond() {
     }}); 
 }
 function addBulion() {
-
+window.location.assign(DOMAIN+"index.php?case=bullion_Form&catid="+catid+"&vid="+uid);
+    return ;
     $.ajax({url: DOMAIN + "apis/index.php?action=getAllRatesByVID&vid="+uid, success: function(result) {
             var obj = jQuery.parseJSON(result);
             var goldRate = obj['results']['gold_rate'];
             var silverRate = obj['results']['silver_rate'];
             var dollarRate = obj['results']['dollar_rate'];
             if(goldRate==0.00) {
-                showGoldRateForm();
+                //showGoldRateForm();
                 $('#goldErr').removeClass('dn');
             }
             else if(silverRate==0.00) {
-                showSilverRateForm();
+               // showSilverRateForm();
                 $('#silverErr').removeClass('dn');
             } else {
-                window.location.assign(DOMAIN+"index.php?case=bullion_Form&catid="+catid+"&vid="+uid);
+                
             }
         
     }}); 
