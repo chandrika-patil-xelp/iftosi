@@ -85,6 +85,8 @@ $.ajax({url: DOMAIN + "apis/index.php?action=getAllRatesByVID&vid=" + uid, succe
 var mxSc = 170;//$('.prdResults').offset().top;
 
 var lastSc = 0;
+
+var GtmpId='';
 $(document).ready(function () {
 	
     $('.vTabs').eq(1).click();
@@ -167,7 +169,6 @@ for(var i = 0; i< busiTypeSplt.length; i++)
         }
         
     });
-var GtmpId='';
     $('.jshapeComm').bind('click', function ()
     {
         var uthis = $(this);
@@ -215,29 +216,29 @@ var GtmpId='';
 
             if ((tmpId == 'gbars') || (tmpId == 'gcoins'))
             {
-                    $('.allprop').addClass('dn');
-                    $('.goldprop').removeClass('dn');
-                    $('#silverpurity').val('');
-                    $('#silverweight').val('');
-                    if (tmpId == 'gbars') {
-                        $('#goldweight').attr('placeholder','eg. Kgs Or Gms');
-                    } else {
-                        $('#goldweight').attr('placeholder','eg. Gms');
-                    }
+                $('.allprop').addClass('dn');
+                $('.goldprop').removeClass('dn');
+                $('#silverpurity').val('');
+                $('#silverweight').val('');
+                if (tmpId == 'gbars') {
+                    $('#goldweight').attr('placeholder','eg. Kgs Or Gms');
+                } else {
+                    $('#goldweight').attr('placeholder','eg. Gms');
+                }
             }
             else if ((tmpId == 'sbars') || (tmpId == 'scoins'))
             {
-                    $('.allprop').addClass('dn');
-                    $('.silverprop').removeClass('dn');
-                    $('#goldpurity').val('');
-                    $('#goldweight').val('');
-                    if (tmpId == 'sbars') {
-                        $('#silverweight').attr('placeholder','eg. Kgs Or Gms');
-                    } else {
-                        $('#silverweight').attr('placeholder','eg. Gms');
-                    }
+                $('.allprop').addClass('dn');
+                $('.silverprop').removeClass('dn');
+                $('#goldpurity').val('');
+                $('#goldweight').val('');
+                if (tmpId == 'sbars') {
+                    $('#silverweight').attr('placeholder','eg. Kgs Or Gms');
+                } else {
+                    $('#silverweight').attr('placeholder','eg. Gms');
                 }
             }
+        }
         else
         {
             $('.goldprop').addClass('dn');
@@ -475,6 +476,7 @@ function updateSilverRate() {
                 var errCode = obj['error']['code'];
                 if(errCode==0) {
                     common.toast(1,obj['error']['Msg']);
+                    showJewelleryImps(GtmpId);
                     $('#silverRateSpan').html('Silver Rate : &#8377; '+silver_rate);
                     closeAllForms();
                 } else if(errCode==1) {
@@ -514,12 +516,8 @@ function updateGoldRate() {
                 common.toast(1,obj['error']['Msg']);
                 $('#goldRateSpan').html('Gold Rate : &#8377; '+gold_rate);
                 //window.location.reload(1);
-                customStorage.readFromStorage('rateErr');
                 closeAllForms();
-                if(uploadButton == false)
-                {
-                    setTimeout(function () { window.location.assign(DOMAIN+"index.php?case=bullion_Form&catid=10002&vid="+uid); }, 1800);
-                }
+                showJewelleryImps(GtmpId);
             } else if(errCode==1) {
 
                 common.toast(0,obj['error']['Msg']);
@@ -676,25 +674,7 @@ function addDiamond() {
     }}); 
 }
 function addBulion() {
-window.location.assign(DOMAIN+"index.php?case=bullion_Form&catid="+catid+"&vid="+uid);
-    return ;
-    $.ajax({url: DOMAIN + "apis/index.php?action=getAllRatesByVID&vid="+uid, success: function(result) {
-            var obj = jQuery.parseJSON(result);
-            var goldRate = obj['results']['gold_rate'];
-            var silverRate = obj['results']['silver_rate'];
-            var dollarRate = obj['results']['dollar_rate'];
-            if(goldRate==0.00) {
-                //showGoldRateForm();
-                $('#goldErr').removeClass('dn');
-            }
-            else if(silverRate==0.00) {
-               // showSilverRateForm();
-                $('#silverErr').removeClass('dn');
-            } else {
-                
-            }
-        
-    }}); 
+    window.location.assign(DOMAIN+"index.php?case=bullion_Form&catid="+catid+"&vid="+uid);
 }
 
 function showVendorProfile()

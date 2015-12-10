@@ -472,36 +472,33 @@ function backbtn()
             window.history.back();
             return true;
         }
-        
-        
-function checkRates() {
-    $.ajax({url: DOMAIN + "apis/index.php?action=getAllRatesByVID&vid="+uid, success: function(result) {
-            var obj = jQuery.parseJSON(result);
-            var goldRate = obj['results']['gold_rate'];
-            var silverRate = obj['results']['silver_rate'];
-            var dollarRate = obj['results']['dollar_rate'];
-            if(catid==10002) {
-                if(silverRate==0.00) {
-                    showSilverRateForm();
-                    $('#silverErr').removeClass('dn');
-//                    customStorage.addToStorage('rateErr',1);
-//                    window.location.assign(DOMAIN + "index.php?case=vendor_landing&catid=10002")
-                } 
-                if(goldRate==0.00) {
-                    $('#goldErr').removeClass('dn');
-                    showGoldRateForm();
-//                    customStorage.addToStorage('rateErr',2);
-//                    window.location.assign(DOMAIN + "index.php?case=vendor_landing&catid=10002")
-                }
-            } else if(catid==10000) {
-                if(dollarRate==0.00) {
-                    $('#dollarErr').removeClass('dn');
-                    showDollarRateForm();
-//                    customStorage.addToStorage('rateErr',3);
-//                    window.location.assign(DOMAIN + "index.php?case=vendor_landing&catid=10000")
+function showJewelleryImps(tmpId) {
+    
+                $('.subCatType').addClass('dn');
+                $('#' + tmpId + 'Type').removeClass('dn');
+                $('#allcontent').removeClass('dn');
+            if ((tmpId == 'gbars') || (tmpId == 'gcoins'))
+            {
+                $('.allprop').addClass('dn');
+                $('.goldprop').removeClass('dn');
+                $('#silverpurity').val('');
+                $('#silverweight').val('');
+                if (tmpId == 'gbars') {
+                    $('#goldweight').attr('placeholder','eg. Kgs Or Gms');
+                } else {
+                    $('#goldweight').attr('placeholder','eg. Gms');
                 }
             }
-        }
-    });
+            else if ((tmpId == 'sbars') || (tmpId == 'scoins'))
+            {
+                $('.allprop').addClass('dn');
+                $('.silverprop').removeClass('dn');
+                $('#goldpurity').val('');
+                $('#goldweight').val('');
+                if (tmpId == 'sbars') {
+                    $('#silverweight').attr('placeholder','eg. Kgs Or Gms');
+                } else {
+                    $('#silverweight').attr('placeholder','eg. Gms');
+                }
+            }
 }
-//checkRates();
