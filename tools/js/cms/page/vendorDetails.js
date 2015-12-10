@@ -278,18 +278,43 @@ function validateStep3Form() {
     return  true;
 }
 
-function clickThis(id) {
+function clickThis(id, isDirect) {
     var obj = document.getElementById(id);
-    if (id == 'step2' && validateForm()) {
-        submitForm(obj)
+
+	if(id == 'step1')
+	{
+		changeTab('step1');
+	}
+    else if (id == 'step2' && validateForm()) {
+		submitForm(obj);
 		$('html,body').animate({ scrollTop: 0 }, 'slow');
     }
-    else if (id == 'step3' && validateStep2Form()) {
-        submitStep2Form(obj)
-		$('html,body').animate({ scrollTop: 0 }, 'slow');
+    else if (id == 'step3') {
+		if(isDirect !== undefined && isDirect !== null && isDirect !== '')
+		{
+			if(validateForm())
+			{
+				submitForm();
+				var isValidForm2 = validateStep2Form();
+				if(isValidForm2)
+				{
+					submitStep2Form(obj);
+					$('html,body').animate({ scrollTop: 0 }, 'slow');
+				}
+			}
+		}
+		else
+		{
+			var isValidForm2 = validateStep2Form();
+			if(isValidForm2)
+			{
+				submitStep2Form(obj);
+				$('html,body').animate({ scrollTop: 0 }, 'slow');
+			}
+		}
     }
     else if (id == 'step4' && validateStep3Form()) {
-        submitStep3Form(obj)
+		submitStep3Form(obj);
     }
 }
 function submitForm() {
@@ -323,7 +348,7 @@ function submitForm() {
             if (errCode == 0) {
                 $('#showroomname').val(res['orgname']);
                 common.toast(1, errMsg);
-                changeTab('step2');
+				changeTab('step2');
             } else {
                 common.toast(0, errMsg);
             }

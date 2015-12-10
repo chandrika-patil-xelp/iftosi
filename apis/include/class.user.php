@@ -104,46 +104,45 @@
             $isv=$row['is_vendor'];
             $uid=$row['user_id'];
           
-            if($isv==1)
+            if($isv == 1)
             {
-              /*
-           $vsql = "UPDATE 
-                                        tbl_vendor_master 
-                    SET 
-                                        orgName='".$detls['orgname']."',
-                                        fulladdress=".$detls['fulladd'].",
-                                        address1='".$detls['add1']."',
-                                        area='".$detls['area']."',
-                                        postal_code='".$detls['pincode']."',
-                                        city='".$detls['city']."',
-                                        country='".$detls['country']."',
-                                        state='".$detls['state']."',
-                                        telephones='".$detls['tel']."',
-                                        alt_email='".$detls['altmail']."',
-                                        officecity='".$detls['ofcity']."',
-                                        officecountry='".$detls['ofcountry']."', 
-                                        contact_person='".$detls['cperson']."',
-                                        position='".$detls['position']."',
-                                        contact_mobile=".$detls['cmobile'].",
-                                        email='".$detls['email']."',
-                                        memship_Cert='".$detls['memcert']."',
-                                        bdbc='".$detls['bdbc']."',
-                                        other_bdbc='".$detls['othbdbc']."',
-                                        vatno=".$detls['vat'].",
-                                        website='".$detls['wbst']."',
-                                        landline='".$detls['landline']."',
-                                        mdbw='".$detls['mdbw']."',
-                                        banker='".$detls['banker']."',
-                                        pancard='".$detls['pan']."',
-                                        turnover='".$detls['tovr']."',
-                                        lat=".$detls['lat'].",
-                                        lng=".$detls['lng'].",
-                                        updatedby='vendor',
-                                        is_complete=is_complete 
-                WHERE 
-                                                vendor_id=".$uid."";
-               
-               */
+				$tmp_params = array('uid' => $detls['uid']);
+				$vdtls = $this->viewAll($tmp_params);
+				if(!empty($vdtls) && !empty($vdtls['results']))
+				{
+					$vfulldtls = $vdtls['results'][1];
+					if(!empty($vfulldtls))
+					{
+						$vendor_id = $vfulldtls['vendor_id'];
+						$orgName = $vfulldtls['orgName'];
+						$address1 = $vfulldtls['address1'];
+						$area = $vfulldtls['area'];
+						$postal_code = $vfulldtls['postal_code'];
+						$city = $vfulldtls['city'];
+						$country = $vfulldtls['country'];
+						$state = $vfulldtls['state'];
+						$position = $vfulldtls['position'];
+						$contact_person = $vfulldtls['contact_person'];
+						$contact_mobile = $vfulldtls['contact_mobile'];
+						$email = $vfulldtls['email'];
+						$memship_Cert = $vfulldtls['memship_Cert'];
+						$vatno = $vfulldtls['vatno'];
+						$landline = $vfulldtls['landline'];
+						$banker = $vfulldtls['banker'];
+						$pancard = $vfulldtls['pancard'];
+						$business_type = $vfulldtls['business_type'];
+						$showroom_name = $vfulldtls['showroom_name'];
+
+						if(!empty($vendor_id) && !empty($orgName) && !empty($address1) && !empty($area) && !empty($postal_code) && !empty($city) && !empty($country) && !empty($state) && !empty($position) && !empty($contact_person) && !empty($contact_mobile) && !empty($email) && !empty($memship_Cert) && !empty($vatno) && !empty($landline) && !empty($banker) && !empty($pancard) && !empty($business_type) && !empty($showroom_name) && ($params['isC'] == 2 || $params['isC'] == '2'))
+						{
+							$params['isC'] = 2;
+						}
+						else
+						{
+							$params['isC'] = 0;
+						}
+					}
+				}
             $vsql='UPDATE tbl_vendor_master SET ';
             if (!empty($detls['orgname'])) {
                 $vsql .= " orgName = '".$detls['orgname']."', ";
@@ -246,7 +245,7 @@
             if (!empty($detls['lng'])) {
                 $vsql .= " lng = '".$detls['lng']."',";
             }
-            if (!empty($params['isC'])) {
+            if (isset($params['isC'])) {
                 $vsql .= " is_complete = ".$params['isC'].",";
             }
             $vsql.=" updatedby='vendor' WHERE vendor_id=".$uid."";

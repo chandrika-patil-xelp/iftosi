@@ -208,20 +208,20 @@ function Common() {
         switch (id) {
             case 'step1':
                 $('#tabData2,#tabData3').addClass('dn');
-                $('#step2,#step3').addClass('op04');
+                //$('#step2,#step3').addClass('op04');
                 $('#tabData1').removeClass('dn');
                 $('#disStep').css({width: 33 + "%"});
                 break;
             case 'step2':
                 $('#tabData1,#tabData3').addClass('dn');
                 $('#tabData2').removeClass('dn');
-                $('#step1,#step3').addClass('op04');
+                //$('#step1,#step3').addClass('op04');
                 $('#disStep').css({width: 66 + "%"});
                 break;
             case 'step3':
                 $('#tabData1,#tabData2').addClass('dn');
                 $('#tabData3').removeClass('dn');
-                $('#step1,#step2').addClass('op04');
+                //$('#step1,#step2').addClass('op04');
                 $('#disStep').css({width: 100 + "%"});
                 break;
             default :
