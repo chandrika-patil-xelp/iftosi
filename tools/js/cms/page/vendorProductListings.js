@@ -233,7 +233,7 @@ function generateDiamondList(obj) {
     if(obj['active_flag']!=3){
         cl='outofstock';
     }
-    str += '<div class="soldBtn poR ripplelink fmOpenR '+cl+'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3) ? "IN STOCK" : "OUT OF STOCK");+'</div>';
+    str += '<div class="soldBtn poR ripplelink fmOpenR '+cl+'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3) ? "In Stock" : "Out Of Stock");+'</div>';
     str += '</center>';
     str += '</div>';
     str += '</li>';
@@ -338,7 +338,7 @@ function generateJewellList(obj) {
         if(obj['active_flag']!=3){
         cl='outofstock';
         }
-        str += '<div class="soldBtn poR ripplelink fmOpenR '+cl+'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "IN STOCK" : "OUT OF STOCK");+'</div>';
+        str += '<div class="soldBtn poR ripplelink fmOpenR '+cl+'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "In Stock" : "Out Of Stock");+'</div>';
         str += '</center>';
         str += '</div>';
         str += '</li>';
@@ -427,7 +427,7 @@ function generatBullionsList(obj) {
     if(obj['active_flag']!=3){
         cl='outofstock';
     }
-    str += '<div class="soldBtn poR ripplelink fmOpenR '+cl+'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "IN STOCK" : "OUT OF STOCK");+'</div>';
+    str += '<div class="soldBtn poR ripplelink fmOpenR '+cl+'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "In Stock" : "Out Of Stock");+'</div>';
     str += '</center>';
     str += '</div>';
     str += '</li>';
