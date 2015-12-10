@@ -392,8 +392,8 @@ function getResultsData(data,sortby,showtree)
 			$.each(data.results.products, function(i, vl) {
 				html += '<div class="prdComm fLeft transition100">';
 					html += '<div class="wisgDel" id="'+vl.pid+'"></div>';
-					html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/did-'+vl.pid+'">';
 						html += '<div class="prdCommDiv fLeft transition100">';
+                                                html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/did-'+vl.pid+'">';
 							html += '<div class="prdShape fLeft">';
 								html += '<div class="prdShTitle fLeft fmOpenB">SHAPE</div>';
 								html += '<div class="prdShType fLeft fmOpenR">'+vl.attributes.shape+'</div>';
@@ -420,15 +420,18 @@ function getResultsData(data,sortby,showtree)
 							html += '<div class="prdPrice fLeft">';
 								html += '<div class="detComm">';
 									html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
-                                     if(vl.dollar_rate !== '0.00' && vl.dollar_rate !== undefined && vl.dollar_rate !== null && vl.dollar_rate !== '') { dollarValue=vl.dollar_rate; }
+                                                                            if(vl.dollar_rate !== '0.00' && vl.dollar_rate !== undefined && vl.dollar_rate !== null && vl.dollar_rate !== '') { dollarValue=vl.dollar_rate; }
 									html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+number_format(((vl.pprice*dollarValue)*vl.attributes.carat),2)+'</div>';
 								html += '</div>';
 							html += '</div>';
+                                                        html += '</a>';
 							html += '<div class="prdActions fLeft">';
-								html += '<div class="wConBtn fLeft">Contact Dealer</div>';
+                                                            html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/did-'+vl.pid+'/1">';
+                                                                    html += '<div class="wConBtn fLeft">Contact Dealer</div>';
+                                                            html += '</a>';
 							html += '</div>';
 						html += '</div>';
-					html += '</a>';
+					
 				html += '</div>';
 			});
 		}
@@ -436,8 +439,8 @@ function getResultsData(data,sortby,showtree)
 			$.each(data.results.products, function(i, vl) {
 				html += '<div class="prdComm fLeft transition100" style="opacity: 1; transform: translateX(0px);">';
 					html += '<div class="wisgDel" id="'+vl.pid+'"></div>';
-					html += '<a href="'+DOMAIN+vl.attributes.metal.toLowerCase()+'-'+vl.attributes.type.toLowerCase()+'-'+Math.round(vl.attributes.gold_weight)+'-grams/bid-'+vl.pid+'">';
 						html += '<div class="prdCommDiv fLeft transition100">';
+                                            html += '<a href="'+DOMAIN+vl.attributes.metal.toLowerCase()+'-'+vl.attributes.type.toLowerCase()+'-'+Math.round(vl.attributes.gold_weight)+'-grams/bid-'+vl.pid+'">';
 							html += '<div class="prdShape fLeft">';
 								html += '<div class="prdShTitle fLeft fmOpenB">TYPE</div>';
 								html += '<div class="prdShType fLeft fmOpenR">'+vl.attributes.type+'</div>';
@@ -471,11 +474,13 @@ function getResultsData(data,sortby,showtree)
                                                                         html += '<div class="detValue fmOpenB fLeft"><span>₹</span>'+metal_price+'</div>';
 								html += '</div>';
 							html += '</div>';
+                                                        html += '</a>';
 							html += '<div class="prdActions fLeft">';
+                                                            html += '<a href="'+DOMAIN+vl.attributes.metal.toLowerCase()+'-'+vl.attributes.type.toLowerCase()+'-'+Math.round(vl.attributes.gold_weight)+'-grams/bid-'+vl.pid+'/1">';
 								html += '<div class="wConBtn fLeft">Contact Dealer</div>';
+                                                            html += '</a>';
 							html += '</div>';
 						html += '</div>';
-					html += '</a>';
 				html += '</div>';
 			});
 		}
@@ -483,8 +488,8 @@ function getResultsData(data,sortby,showtree)
 			$.each(data.results.products, function(i, vl) {
 				html += '<div class="prdComm fLeft jwRes transition100" style="opacity: 1; transform: translateX(0px);">';
 					html += '<div class="wisgDel" id="'+vl.pid+'"></div>';
-					html += '<a href="'+DOMAIN+vl.pbrand.toLowerCase()+'-'+vl.pname.toLowerCase()+'-'+vl.pcode.toLowerCase()+'/jid-'+vl.pid+'">';
 						html += '<div class="prdCommDiv fLeft transition100">';
+                                                html += '<a href="'+DOMAIN+vl.pbrand.toLowerCase()+'-'+vl.pname.toLowerCase()+'-'+vl.pcode.toLowerCase()+'/jid-'+vl.pid+'">';
 							html += '<div class="prdCommImg fLeft">';
 								html += getImageData(vl.images);
 							html += '</div>';
@@ -500,11 +505,14 @@ function getResultsData(data,sortby,showtree)
 									html += '<div class="detValue fmOpenB fLeft"><span>₹</span>'+vl.attributes.price+'</div>';
 								html += '</div>';
 							html += '</div>';
+                                                html += '</a>';
 							html += '<div class="prdActions fLeft">';
+                                                        html += '<a href="'+DOMAIN+vl.pbrand.toLowerCase()+'-'+vl.pname.toLowerCase()+'-'+vl.pcode.toLowerCase()+'/jid-'+vl.pid+'/1">';
 								html += '<div class="wConBtn fLeft">Contact Dealer</div>';
+                                                        html += '</a>'; 
 							html += '</div>';
 						html += '</div>';
-					html += '</a>';
+					
 				html += '</div>';
 			});
 		}
