@@ -172,7 +172,7 @@ $(document).ready(function() {
             $('.logo').velocity({top: 30 + "px", height: 100 + "px", width: 100 + "px", backgroundPositionX: '50%'}, {duration: 0, delay: 0});
             $('#logoTxt').velocity({left: 0 + "px", bottom: -30 + "px"}, {duration: 300, delay: 0});
 
-            if (pageName === 'diamond_details' || pageName === 'jewellery_details' || pageName === 'bullion_details') {
+            if (pageName === 'diamond_details' || pageName === 'jewellery_details' || pageName === 'bullion_details' || pageName === 'diamond_shapes') {
                 $('#logoTxt').css({color: '#4d4d4d'});
             }
             $('#header').velocity({height: "100px"}, {duration: 0, delay: 0, easing: 'swing'});
