@@ -72,6 +72,7 @@ $css['jquery_toast'] = DOMAIN.'tools/css/jquery.toast.min.css?v='.VERSION;
 // Custom CSS Start
 
 $css['home'] = DOMAIN.'tools/css/home.css?v='.VERSION;
+$css['diamond'] = DOMAIN.'tools/css/diamond.css?v='.VERSION;
 
 // Custom CSS End
 
