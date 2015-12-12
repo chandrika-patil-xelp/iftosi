@@ -237,6 +237,10 @@ switch ($action) {
                 $page = 'forgot';
                 include 'template/forgotPsw.html';
                 break;
+             case 'diamond_shapes':
+                $page = 'diamond_shapes';
+                include 'template/diamond.html';
+                break;
             case 'changepwd':
 //                if(isset($params['pr_cpass'])) {
 //                    $uid=$params['uid'];
