@@ -427,6 +427,41 @@ function closeAllForms() {
     loadDiamont = true;
 }
 
+$(document).ready(function() {
+      $.ajax({url: DOMAIN + "apis/index.php?action=getAllRatesByVID&vid="+uid, success: function(result) {
+		  
+                var obj = jQuery.parseJSON(result);
+                var errCode = obj['error']['Code'];
+                if(errCode==0) {
+					obj = obj['results'];
+					console.log();
+					if(obj.dollar_rate !== '' && obj.dollar_rate !== undefined && obj.dollar_rate !== 'undefined'  &&  obj.dollar_rate !== 'null'  &&  obj.dollar_rate !== null ){
+                    $('#dollarRateSpan').html('Dollar Rate : &#8377; '+obj.dollar_rate);
+					}
+					else{
+						$('#dollarRateSpan').html('Dollar Rate : &#8377; '+obj.dollar_rate);
+					}
+					if(obj.silver_rate !== ''  &&  obj.silver_rate !== undefined  &&  obj.silver_rate !== 'undefined'  &&  obj.silver_rate !== 'null'  &&  obj.silver_rate !== null ){
+						$('#silverRateSpan').html('Silver Rate : &#8377; '+obj.silver_rate);
+					}
+					else
+					{
+						$('#silverRateSpan').html('Silver Rate : &#8377; ');
+					}
+					if(obj.gold_rate !== ''  &&  obj.gold_rate !== undefined  &&  obj.gold_rate !== 'undefined'  &&  obj.gold_rate !== 'null'  &&  obj.gold_rate !== null ){						
+                    $('#goldRateSpan').html('Gold Rate : &#8377; '+obj.gold_rate);
+					}
+					else
+					{
+						$('#goldRateSpan').html('Gold Rate : &#8377; ');
+					}
+}
+}
+});
+});
+
+
+
 function updateDollarRate() {
     var dollar_rate = $("#dollar_rate").val();
     dollar_rate=parseFloat(dollar_rate);

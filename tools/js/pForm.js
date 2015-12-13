@@ -537,13 +537,7 @@ function showJewelleryImps(tmpId) {
 function uploadFile()
 {
    
-        $.ajax({url: DOMAIN+"/apis/index.php?action=addNewproduct",
-            type: "POST",            
-            data: new FormData($('form')[0]),
-            success: function(result) {
-                console.log(result);
-            }
-        });
+         
     
 }
 function ValidateFile() {
