@@ -229,7 +229,7 @@
                                                             </div>
                                             <div class="divCon2  fLeft">
                                                                 <div  class="titleDiv txtCap fLeft">Upload Certificate</div>
-                                                                <input name="certFile" autocomplete="false" id="certfile" type="file" placeholder="Upload pdf of ceritificate" type="file" accept=".pdf" value="" onchange="uploadCert(this.value);" style="display: none;">
+                                                                <input name="certFile" autocomplete="false" id="certfile" type="file" placeholder="Upload pdf of ceritificate" onchange="uploadCert(this.value);" style="display: none;">
                                                                 <label for="certfile" class="addPrdBtn fLeft poR ripplelink ">Upload Doc</label><span id="filePath" class ="dn fLeft padRight" style="line-height:35px; padding-left: 10px" ></span>
                                                                 <img src="" id="uploadurl">
                                             </div>
@@ -299,7 +299,7 @@
                         <div class="btnCont fLeft">
                             <center>
                                 <div class="cancelBtn fmOpenR ripplelink poR" onclick="backbtn();" id='backBtnDiv'>CANCEL</div>
-                                <div class="submitBtn fmOpenR ripplelink poR" onclick='uploadFile();' id='Submitdiv'>SUBMIT</div>
+                                <div class="submitBtn fmOpenR ripplelink poR" onclick='submitForm("dAddForm");' id='Submitdiv'>SUBMIT</div>
                             </center>
                         </div>
                     </div>
