@@ -10,6 +10,7 @@ class vendor extends DB
     {
         $sql = "SELECT * FROM tbl_vendor_master WHERE orgName is not null";
         $res = $this->query($sql);
+        $total = $this->numRows($res);
         if($res)
         {
             while($row = $this->fetchData($res))
@@ -22,7 +23,7 @@ class vendor extends DB
             $err = array('Code' => 1, 'Msg' => 'Something went wrong');
         }
         //  echo "<pre>";print_r($arr);die;
-        $result = array('results' => $arr, 'error' => $err);
+        $result = array('results' => $arr, 'error' => $err,'total'=>$total);
         return $result;
     }
     public function addVendorPrdInfo($params)
@@ -559,7 +560,7 @@ class vendor extends DB
         } else if($catid == 10001) {
             $psql='d.shape,d.metal,c.lotref,d.gold_weight,d.dwt';
         } else if($catid == 10002) {
-            $psql='d.type, d.metal, d.gold_purity, d.gold_weight';
+            $psql='d.type, d.metal, d.gold_purity, d.gold_weight,d.bullion_design';
         }
         $sql = "select
                                     DISTINCT a.product_id

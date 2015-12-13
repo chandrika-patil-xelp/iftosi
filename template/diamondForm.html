@@ -2,7 +2,7 @@
 <div class="mainContainer fLeft">
     <?php include 'HeaderVendor.html'; ?>
     <div class="contentCont fLeft">
-        <form id='dAddForm'>
+        <form id='dAddForm' method="POST" name="dAddForm" enctype="multipart/form-data">
             <div class="wrapper">
                 <div class="wrapperMax">
                     <div class="vCommTitle fLeft fmOpenL">Select a diamond shape you want to add</div>
@@ -227,6 +227,12 @@
                                                                 <div  class="titleDiv txtCap fLeft">Certificate No.</div>
                                                                 <input name="certno" autocomplete="false" id="certno" type="text" placeholder="eg A1B23456" maxlength="10" class="txtInput fLeft fmOpenR font14 c666" value="<?=$attr['cno'];?>">
                                                             </div>
+                                            <div class="divCon2  fLeft">
+                                                                <div  class="titleDiv txtCap fLeft">Upload Certificate</div>
+                                                                <input name="certFile" autocomplete="false" id="certfile" type="file" placeholder="Upload pdf of ceritificate" type="file" accept=".pdf" value="" onchange="uploadCert(this.value);" style="display: none;">
+                                                                <label for="certfile" class="addPrdBtn fLeft poR ripplelink ">Upload Doc</label><span id="filePath" class ="dn fLeft padRight" style="line-height:35px; padding-left: 10px" ></span>
+                                                                <img src="" id="uploadurl">
+                                            </div>
     <?php                                    
                                         foreach($fil['attributes'] as $key=>$values)
                                         {
@@ -293,7 +299,7 @@
                         <div class="btnCont fLeft">
                             <center>
                                 <div class="cancelBtn fmOpenR ripplelink poR" onclick="backbtn();" id='backBtnDiv'>CANCEL</div>
-                                <div class="submitBtn fmOpenR ripplelink poR" onclick='validateDForm()' id='Submitdiv'>SUBMIT</div>
+                                <div class="submitBtn fmOpenR ripplelink poR" onclick='uploadFile();' id='Submitdiv'>SUBMIT</div>
                             </center>
                         </div>
                     </div>
@@ -309,5 +315,35 @@
 <script type="text/javascript" src='tools/js/pForm.js'></script>
 <script type="text/javascript" src='tools/js/cms/lib/jquery.toast.min.js'></script>
 <script type="text/javascript">var DOMAIN = '<?php echo DOMAIN;?>';</script>
+<script>
+    function uploadCert(val){
+    var certFile = val.split(/[\\\/]/g).pop();
+    certFile = certFile.replace(' ','_');
+    certFile = certFile.replace('(','');
+    certFile = certFile.replace(')','');
+    console.log(certFile);
+    if(certFile !== undefined || certFile !== 'undefined' || certFile !== null || certFile !== 'null' || certFile !== ''){
+    
+    if(certFile.length > 20)
+    {
+        certFile = certFile.substring(0,10)+'...pdf';
+    }
+        if (certFile.substring(3,11) == 'fakepath')
+        {   
+            $('#filePath').removeClass('dn');
+            $('#filePath').text(certFile);
+            
+        }
+        else
+        {
+            $('#filePath').removeClass('dn');
+            $('#filePath').text(certFile);
+        }
+      var val = $('#certfile').val();
+    }
+    }
+
+
+    </script>
 </body>
 </html>

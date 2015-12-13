@@ -23,14 +23,14 @@
 
             
             $detls1=explode('|~|',$params['dt']);
-
             
             for($i=0;$i<count($detls1);$i++)
             {
                 $expd = explode('|@|',$detls1[$i]);
                 $detls[$expd[0]] = $expd[1];
             }
-
+            print_r($_POST['certFile']);
+            
             if(($detls['shape']=='gBars')||($detls['shape']=='sBars')||($detls['shape']=='gCoins')||($detls['shape']=='sCoins'))
             {
                 $type=substr($detls['shape'],1,-1);
@@ -270,8 +270,14 @@
                    //----------------------------------------------For product search table---------------------------------------------------                              
                             //  For tbl_product_search
         // Few attributes remaining-- type,metal,purity,nofd,dwt,gemwt,quality,goldwt
-                    if($detls['Certficate']=='Other'){$detls['Certficate']=$detls['other_cerificate'];} 
-                            $sql = "INSERT 
+                    if($detls['Certficate']=='Other'){$detls['Certficate']=$detls['other_cerificate'];}
+                    if($detls['design']=='Other'){$detls['design']=$detls['bullion_design'];}
+                    if($shape == 'sCoins' || $shape == 'sBars')
+                    {
+                        if(!empty($detls['silver_purity'])){ $detls['gold_purity'] = $detls['silver_purity'];}
+                        if(!empty($detls['silver_weight'])){ $detls['gold_weight'] = $detls['silver_weight'];}
+                    }
+                        $sql = "INSERT 
                                     INTO 
                                                     tbl_product_search
                                                     (product_id,
@@ -350,41 +356,41 @@
                                                       now(),
                                                   \"".$display_flag."\")
                                     ON DUPLICATE KEY UPDATE
-                                                            color       = \"".$detls['color']."\",
-                                                            carat       = \"".$detls['carat_weight']."\",
-                                                            certified   = \"".$detls['Certficate']."\",
-                                                            shape       = \"".$shape."\",
-                                                            cut         = \"".$detls['cut']."\",
-                                                            clarity     = \"".$detls['clarity']."\",
-                                                            base        = \"".$detls['base_price']."\",
-                                                            tabl        = \"".$detls['table']."\",
-                                                            price       = \"".$detls['price']."\",
-                                                            p_disc      = \"".$detls['discount']."\",
-                                                            prop        = \"".$detls['prop']."\",
-                                                            polish      = \"".$detls['polish']."\",
-                                                            symmetry    = \"".$detls['symmetry']."\",
-                                                            fluo        = \"".$detls['flourecence']."\",
-                                                            td          = \"".$detls['td']."\",
-                                                            measurement = \"".$detls['measurement']."\",
-                                                            cno         = \"".$detls['certno']."\",
-                                                            pa          = \"".$detls['pa']."\",
-                                                            cr_hgt      = \"".$detls['cr_height']."\",
-                                                            cr_ang      = \"".$detls['crown_angle']."\",
-                                                            girdle      = \"".$detls['girdle']."\",
-                                                            pd          = \"".$detls['pd']."\",
-                                                            metal       = \"".$detls['metal']."\",
-                                                            type        = \"".$type."\",
-                                                            gold_purity = \"".$detls['gold_purity']."\",
-                                                            nofd        = \"".$detls['no_diamonds']."\",
-                                                            dwt         = \"".$detls['diamonds_weight']."\",
-                                                            gemwt       = \"".$detls['gemstone_weight']."\",
-                                                            quality     = \"".$detls['quality']."\",
-                                                            gold_weight = \"".$detls['gold_weight']."\",
-                                                            combination = \"".$detls['combination']."\",
+                                                            color         = \"".$detls['color']."\",
+                                                            carat         = \"".$detls['carat_weight']."\",
+                                                            certified     = \"".$detls['Certficate']."\",
+                                                            shape         = \"".$shape."\",
+                                                            cut           = \"".$detls['cut']."\",
+                                                            clarity       = \"".$detls['clarity']."\",
+                                                            base          = \"".$detls['base_price']."\",
+                                                            tabl          = \"".$detls['table']."\",
+                                                            price         = \"".$detls['price']."\",
+                                                            p_disc        = \"".$detls['discount']."\",
+                                                            prop          = \"".$detls['prop']."\",
+                                                            polish        = \"".$detls['polish']."\",
+                                                            symmetry      = \"".$detls['symmetry']."\",
+                                                            fluo          = \"".$detls['flourecence']."\",
+                                                            td            = \"".$detls['td']."\",
+                                                            measurement   = \"".$detls['measurement']."\",
+                                                            cno           = \"".$detls['certno']."\",
+                                                            pa            = \"".$detls['pa']."\",
+                                                            cr_hgt        = \"".$detls['cr_height']."\",
+                                                            cr_ang        = \"".$detls['crown_angle']."\",
+                                                            girdle        = \"".$detls['girdle']."\",
+                                                            pd            = \"".$detls['pd']."\",
+                                                            metal         = \"".$detls['metal']."\",
+                                                            type          = \"".$type."\",
+                                                            gold_purity   = \"".$detls['gold_purity']."\",
+                                                            nofd          = \"".$detls['no_diamonds']."\",
+                                                            dwt           = \"".$detls['diamonds_weight']."\",
+                                                            gemwt         = \"".$detls['gemstone_weight']."\",
+                                                            quality       = \"".$detls['quality']."\",
+                                                            gold_weight   = \"".$detls['gold_weight']."\",
+                                                            combination   = \"".$detls['combination']."\",
                                                             gemstone_color=\"".$detls['gemstone_color']."\",
                                                             bullion_design=\"".$detls['design']."\",    
-                                                            rating      = \"".$detls['rating']."\",
-                                                            active_flag      = \"".$display_flag."\"";    
+                                                            rating        = \"".$detls['rating']."\",
+                                                            active_flag   = \"".$display_flag."\"";    
                             $res = $this->query($sql);
                         
                             $vensql="  SELECT

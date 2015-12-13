@@ -12,10 +12,12 @@
                     <div class="prdListHeader fLeft fmOpenR">
                         <div class="date fLeft">Date</div>
                         <div class="barcode fLeft">Barcode</div>
-                        <div class="totalCnt fLeft">Total Images</div>
-                        <div class="pending fLeft">Pending</div>
-                        <div class="accepted fLeft">Accepted</div>
-                        <div class="rejected fLeft">Rejected</div>
+                        <div class="btype fLeft">Jeweller Name</div>
+                        <div class="catg fLeft">Category </div>
+                        <div class="shape fLeft">Total Images</div>
+                        <div class="date fLeft">Pending</div>
+                        <div class="shape fLeft">Accepted</div>
+                        <div class="shape fLeft">Rejected</div>
                         <div class="acct2 fLeft"></div>
                     </div>
 
@@ -32,6 +34,7 @@
     var uid = customStorage.readFromStorage('userid');
     var is_vendor = customStorage.readFromStorage('is_vendor');
     var userName = customStorage.readFromStorage('name');
+    var pgno = customStorage.readFromStorage('pgno');
     $('#userName').html(userName);
     if (uid == '' || is_vendor!=2) {
         window.location.assign(DOMAIN + 'index.php');
@@ -39,16 +42,17 @@
     var loadProduct = true;
     var currentPage = 1;
     
-loadProducts(1);
+
 
 function loadProducts(pgno) {
-    $.ajax({url: common.APIWebPath() + "index.php?action=getProdList&page=" + pgno + "&limit=50", success: function (result) {
+    $.ajax({url: common.APIWebPath() + "index.php?action=getProdList&page=" + pgno + "&limit=1", success: function (result) {
         loadProductsCallback(result,pgno);
     }});
 }
 function loadProductsCallback(res,pgno) {
     var obj = jQuery.parseJSON(res);
     if (obj['results'] != '') {
+        $('#pgno').val(pgno);
         var total = obj['results']['total_products'];
         $('#totalProducts').text(total);
         var total_pages = obj['results']['total_pages'];
@@ -78,6 +82,7 @@ function loadProductsCallback(res,pgno) {
                     loadProducts($(this).text());
                     $('body').animate({scrollTop: $('.prdResults').offset().top - 100}, 300);
                 });
+                paginationPrevNext();
             } else {
                 loadProduct = false;
             }
@@ -98,10 +103,12 @@ function loadProductsCallback(res,pgno) {
             str += '<span class="upSpan">' + barcode + '</span>';
             str += '<span class="lwSpan"><a href="' + DOMAIN + barcode + '/bid-' + obj['id'] + '" target="_blank">View Details</a></span>';
             str += '</div>';
-            str += '<div class="totalCnt fLeft">' + obj['total_img'] + '</div>';
-            str += '<div class="pending fLeft">' + obj['pend_img'] + '</div>';
-            str += '<div class="accepted fLeft">' + obj['appr_img'] + '</div>';
-            str += '<div class="rejected fLeft">' + obj['rej_img'] + '</div>';
+            str += '<div class="btype fLeft">'+ obj['orgName'] +'</div>';
+            str += '<div class="catg fLeft">'+ obj['category'] +'</div>';
+            str += '<div class="shape fLeft">' + obj['total_img'] + '</div>';
+            str += '<div class="date fLeft">' + obj['pend_img'] + '</div>';
+            str += '<div class="shape fLeft">' + obj['appr_img'] + '</div>';
+            str += '<div class="shape fLeft">' + obj['rej_img'] + '</div>';
             str += '<div class="acct2 fLeft">';
             str += '<a href="' + DOMAIN + 'index.php?case=thumbnail&pid=' + obj['id'] + '"><div class="viewDetBtn poR ripplelink fmOpenR fRight">View Images</div></a>';
             str += '</div>';
@@ -117,6 +124,7 @@ function loadProductsCallback(res,pgno) {
             var tc = data.results.total_products;
             var lastpg = Math.ceil(tc / 50);
             var adjacents = 2;
+            $('#total_pageno').val(lastpg);
 
             if (lastpg > 1)
             {
@@ -205,6 +213,117 @@ function loadProductsCallback(res,pgno) {
             return html;
         }
 
+function paginationPrevNext()
+{
+    $('.pPrev').bind('click', function() {
+        
+            var curpgno = parseInt($('#pgno').val());
+                var pgval = curpgno - 1;
+		if(curpgno > 1)
+		{
+			$('#pgno').val(pgval);
+			if(pageName.indexOf("product_list") !== -1)
+			{
+				/*if(typeof $('.productstab') !== 'undefined')
+				{
+					$(".productstab").each(function(){
+						if($(this).hasClass('sel'))
+						{
+							loadProducts($(this).attr('id'),pgval);
+						}
+					});
+				}*/
+                                loadProducts(pgval);
+			}
+			else
+			{   
+				loadProducts(1);
+			}
+		}
+            });
+            	$('.pNext').bind('click', function() {
+		var curpgno = parseInt($('#pgno').val());
+		var pgval = curpgno + 1;
+
+		if(curpgno < parseInt($('#total_pageno').val()))
+		{
+			$('#pgno').val(pgval);
+			if(pageName.indexOf("product_list") !== -1)
+			{
+				/*if(typeof $('.wishTabComm') !== 'undefined')
+				{
+					$(".productstab").each(function(){
+						if($(this).hasClass('sel'))
+						{
+							loadProducts($(this).attr('id'),pgval);
+						}
+					});
+				}*/
+                                loadProducts(pgval);
+			}
+			else
+			{
+				loadProducts(1);
+			}
+		}
+	});
+}
+$(document).ready(function() {	
+    loadProducts(1);
+        $('.pPrev').bind('click', function() {
+
+            var curpgno = parseInt($('#pgno').val());
+            	var pgval = curpgno - 1;
+		if(curpgno > 1)
+		{
+			$('#pgno').val(pgval);
+			if(pageName.indexOf("product_list") !== -1)
+			{
+				/*if(typeof $('.productstab') !== 'undefined')
+				{
+					$(".productstab").each(function(){
+						if($(this).hasClass('sel'))
+						{
+							loadProducts($(this).attr('id'),pgval);
+						}
+					});
+				}*/
+                                loadProducts(pgval);
+			}
+			else
+			{   
+				loadProducts(1);
+			}
+		}
+	});
+
+	$('.pNext').bind('click', function() {
+		var curpgno = parseInt($('#pgno').val());
+		var pgval = curpgno + 1;
+		if(curpgno < parseInt($('#total_pageno').val()))
+		{
+			$('#pgno').val(pgval);
+			
+			if(pageName.indexOf("product_list") !== -1)
+			{
+				/*if(typeof $('.wishTabComm') !== 'undefined')
+				{
+					$(".productstab").each(function(){
+						if($(this).hasClass('sel'))
+						{
+							loadProducts($(this).attr('id'),pgval);
+						}
+					});
+				}*/
+                                loadProducts(pgval);
+			}
+			else
+			{
+				loadProducts(1);
+			}
+		}
+	});
+    });
 </script>
 </body>
 </html>

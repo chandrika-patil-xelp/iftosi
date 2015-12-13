@@ -31,7 +31,7 @@ else
 	define('IMGDOMAIN','http://'.$_SERVER['HTTP_HOST'].'/iftosi/image-upload/');
 	define('IMGUPLOAD','http://'.$_SERVER['HTTP_HOST'].'/iftosi/upload-image/');
 	define('VERSION',2.0);
-	define('IMGPATH','image-upload/');
+	define('IMGPATH','image-upload/');        
 }
 /*define('SMSAPI','http://alerts.sinfini.com/api/web2sms.php?workingkey=Aacffda7db60ac1a8470709273bea3bfe&to=+91_MOBILE&sender=NAFEXC&message=_MESSAGE');*/
 

@@ -363,9 +363,11 @@
                 setTimeout(function(){
                     var id=$('#certiicates input[type=radio]:checked').attr('id');
                     if(id==='Certficate_other'){
+                        $('#other_cerificate').val('');
                         showOther('othCert');
                     }else{
                         hideOther('othCert');
+                        $('#other_cerificate').val('');
                     }
                 },10);
                 

@@ -35,10 +35,11 @@ class admin extends DB
         if($this->numRows($subQueryRes)>0) {
             while ($row = $this->fetchData($subQueryRes)) {
                 $productIDs[] = $row['product_id'];
-                $isql = "SELECT barcode,update_time FROM tbl_product_master  WHERE product_id = ".$row['id'];
+                $isql = "SELECT product_id,barcode,update_time FROM tbl_product_master  WHERE product_id = ".$row['id'];
                 $ires = $this->query($isql);
                 if( $this->numRows($ires)>0) {
                     $irow = $this->fetchData($ires);
+                    $rowp[]=$row['product_id'];
                     $row['barcode']=$irow['barcode'];
                     $row['update_time']=$irow['update_time'];
                 }
@@ -47,6 +48,35 @@ class admin extends DB
                     $row['barcode']='N-A';
                     $row['update_time']='N-A';
                 }
+                
+                $isqlV = "SELECT a.orgName FROM tbl_vendor_master as a,tbl_vendor_product_mapping as b WHERE a.vendor_id = b.vendor_id AND product_id = ".$row['id'];
+                $iresV = $this->query($isqlV);
+                if( $this->numRows($iresV)>0) {
+                    $irowV = $this->fetchData($iresV);
+                    $row['orgName']=$irowV['orgName'];
+                }
+                else
+                {
+                    $row['orgName']='N/A';
+                }
+                 $rowCd = array();
+                   
+                $isqlCid = "SELECT category_id FROM tbl_product_category_mapping WHERE product_id = ".$row['id'];
+                $iresCid = $this->query($isqlCid);
+                while($irowV = $this->fetchData($iresCid)) {
+                   $rowCd[]=$irowV['category_id'];
+                }
+                
+               $rowCid =  implode(',',$rowCd);
+                
+                $isqlC = "SELECT cat_name FROM tbl_category_master WHERE catid IN (".$rowCid.")";
+                $iresC = $this->query($isqlC);
+                $category = array();
+                while($irowC = $this->fetchData($iresC)) {
+                    
+                    $category[]=$irowC['cat_name'];
+                }
+                $row['category'] = implode(',',$category);
                 $result[]=$row;
             }
             $results=array('products'=>$result,"total_products"=>$total_products);

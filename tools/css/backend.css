@@ -592,6 +592,9 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 .pgActive{background: #8A0044;color:#fff;border-color:  #8A0044;}
 
 /* For Pagination */
+.checkOth{width:auto!important;}
+.dAuto_ .otherBox {width: 300px;height: 35px;margin-top: 0;}
+
 
 .rateDiv { height: 40px;line-height: 40px;}
 .rateDiv span { padding:0 10px 0 8px; border-right: 1px solid #fff;}

@@ -76,7 +76,6 @@ switch ($action) {
                     }
                     $res['results']['treedata'] = $showcat;
                 }
-
                 echo json_encode($res);
                 break;
 
@@ -414,7 +413,7 @@ switch ($action) {
 
                 $vndrDtls['fulladdress'] = implode(', ', $vndrDtls['fulladdress']);
                 $vndrAddr = explode(',', $vndrDtls['fulladdress']);
-                //echo "<pre>";print_r($datacnt);die;
+                //echo "<pre>";print_r($data);die;
                 include 'template/diamond_details.html';
                 break;
             case 'bullion_details':
@@ -565,7 +564,7 @@ switch ($action) {
 
                 $attr = $result[$pid]['attr_details'];
                 $pdet = $result[$pid];
-//              echo "<pre>";print_r($fil);die;
+              //echo "<pre>";print_r($pdet);die;
                 include 'template/bullionForm.html';
                 break;
 
@@ -632,9 +631,14 @@ switch ($action) {
 
             case 'vendorList':
                 $page = 'vendorList';
+                $pgno = (!empty($_GET['pgno']) ? $_GET['pgno'] : 1);
                 $url = APIDOMAIN . 'index.php?action=vendorlist';
                 $res = $comm->executeCurl($url);
                 $data = $res['results'];
+                $total = $res['total'];
+                $totalCnt = $total;
+                $lastpg = ceil($total / 15);
+                $adjacents = 2;
                 //echo "<pre>";print_r($data);die;
                 include 'template/vendorList.html';
                 break;
@@ -673,6 +677,14 @@ switch ($action) {
             
             case 'product_list':
                 $page = 'product_list';
+                $pgno = (!empty($_GET['pgno']) ? $_GET['pgno'] : 1);
+                $url = APIDOMAIN . 'index.php?action=getProdList&page='.$pgno;
+                $res = $comm->executeCurl($url);
+                $data = $res['results']['products'];
+                $total = $res['results']['total_products'];
+                $totalCnt = $total;
+                $lastpg = ceil($total / 15);
+                $adjacents = 2;
                 include 'template/product_list.html';
                 break;
             

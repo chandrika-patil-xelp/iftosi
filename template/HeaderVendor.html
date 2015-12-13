@@ -5,16 +5,20 @@
             <div class="vndInfo fRight fmOpenR">
                 Hi, <span id="userName"></span> | 
                 <div class="fRight pointer" onclick="common.doLogout();"><span>Logout</span></div>
+                <input type="hidden" id="pgno" value="1" />
+                <input type="hidden" id="total_pageno" value="<?php echo $lastpg; ?>" />
             </div>
         </div>
     </div>
+    
+    
     <?php  if($page=='product_list' || $page=='thumbnail' || $page == 'vendorList') { ?>
     <div class="vndTabs fLeft fmOpenR">
         <div class="wrapperMax">
             <div class="vndTabs fLeft fmOpenR">
                 <div class="wrapperMax">
                     <div id="productstab" class="fLeft vTabs transition300" onclick="showProductList()">Products</div>
-                        <div id="vendorlist" class="fLeft vTabs transition300" onclick="showProductList()">Vendor List</div>
+                        <div id="vendorlist" class="fLeft vTabs transition300">Vendor List</div>
                 </div>
             </div>
         </div>

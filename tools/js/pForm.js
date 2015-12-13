@@ -49,7 +49,12 @@ function submitForm(formid)
         var params = 'action=addNewproduct&category_id='+catid+'&dt='+data+'&vid='+uid;
     }
     var URL   = DOMAIN+"apis/index.php";
+    
+    
     $.getJSON(URL, params, function(data) {
+        if(formid=='dAddForm'){
+            uploadFile();
+        }
         window.location.href = IMGUPLOAD+'pid-'+data.results.pid+'&c='+catid;
     });
     
@@ -280,7 +285,7 @@ function calculatePrice()
         if((isNaN(baseprice)) == false  || (isNaN(baseprice)) == false || baseprice == undefined  || baseprice == 'undefined' || discount == undefiend || discount == 'undefined')
         {
            var offerPrice =(parseFloat(baseprice)*(discount/100));
-           var total = (baseprice-offerPrice).toFixed(2);
+           var total = (baseprice-offerPrice).toFixed(0);
            if(total <= 0)
            {
                common.toast(0,'Price can not be in negative value');
@@ -427,51 +432,76 @@ function validateNum(){
             var shape = $('.jshapeComm');
             var a = $('.jshapeComm.shapeSelected').attr('id');
             var str = '';
-            var patt1 = /(^|[^-\d])(1|2|5|10|20|50|100|200|500|1000|)\b/;
+            var patt1 = /(^|[^-\d])(1|2|5|10|20|50|100|200|500|1000)\b/;
             var patt2 = /(^|[^-\d])(999|995)\b/;
+            var otherdesign = $('#otherdesign').val();
+            var isValid = true;
+            console.log(a);
             if(!shape.hasClass('shapeSelected')) {
                 str ='category is not Selected';
+                isValid = false;
             }
-            else if((design=='')||(design==null)||(design==undefined)) {
+            if(isValid && (design=='' || design==null || design==undefined)) {
                 str ='Design field is Empty';
+                isValid = false;
             }
-            else if(barcode=='') {
-                str ='Design Number field is Required';
-            }
-            else if(a=='gCoins' || a=='gBars')
+            if(isValid && design === 'Other')
             {
-                
-                if(purity == '' || isNaN(purity) || !purity.match(patt2)){
+                if(isValid && (otherdesign == undefined || otherdesign == 'undefined' || otherdesign == null || otherdesign == 'null' || otherdesign == '' )){
+                    str ='Please mention the Bullion Design in other field';
+                    isValid = false;
+                    $('#otherdesign').focus();
+                }
+            }
+//            else if(isValid && (barcode !== '' && barcode == undefined && barcode == null && barcode == 'null' && typeof(barcode) == undefined )) {
+//                str ='Design Number field is Required';
+//                var isValid = false;
+//            }
+            if(a === 'gCoins' || a === 'gBars')
+            {
+                if(isValid && (purity == '' || isNaN(purity) || !purity.match(patt2))){
                     str ='Gold Purity field is Invalid';
+                    isValid = false;
                 }
-                else if(goldweight=='' || !goldweight.match(patt1)) {
+                else if(isValid &&(goldweight == undefined || goldweight == '' || /*!goldweight.match(patt1) ||*/ isNaN(purity) || goldweight == null)) {
                     str ='Gold weight field is Invalid';
+                    isValid = false;
                 }
             }
-            else if(a=='sBars' || a=='sCoins')
+            if(a=='sBars' || a=='sCoins')
             {
-                if(spurity == '' || isNaN(spurity) || !spurity.match(patt2)) {
+                if(isValid && (spurity == '' || isNaN(spurity) || !spurity.match(patt2))) {
                     str ='Silver Purity field is Invalid';
+                    isValid = false;
                 }
-                else if(sweight == '' || isNaN(sweight) || !sweight.match(patt1)) {
+                else if(isValid && (sweight == '' || isNaN(sweight) || !sweight.match(patt1))) {
                     str ='Silver Weight field is invalid';
+                    isValid = false;
                 }
             }
             if(str != '')
             {
                 common.toast(0,str);
             }
-            else {
+            if(isValid == true)
+            {
                 submitForm('bAddForm');
                 return  true;
             }
             return false;
 }
 function backbtn()
-        {
+    { 
+            if(history.length <= 0){
             window.history.back();
             return true;
-        }
+            }
+            else if(history.length || history.length == 'undefiend' || history.length == undefiend || history.length == null || history.length == 'null' || history.length >= 0)
+            {
+                window.close();
+                window.reload();
+            }
+    }
 function showJewelleryImps(tmpId) {
     
                 $('.subCatType').addClass('dn');
@@ -501,4 +531,27 @@ function showJewelleryImps(tmpId) {
                     $('#silverweight').attr('placeholder','eg. Gms');
                 }
             }
+}
+
+
+function uploadFile()
+{
+   
+        $.ajax({url: DOMAIN+"/apis/index.php?action=addNewproduct",
+            type: "POST",            
+            data: new FormData($('form')[0]),
+            success: function(result) {
+                console.log(result);
+            }
+        });
+    
+}
+function ValidateFile() {
+    var allowedFiles = ["pdf","png","jpeg"];
+    var fileUpload = document.getElementById("certfile").value;
+    var fileExt = fileUpload.split('.').pop();
+    if (allowedFiles.indexOf(fileExt)!=-1) {
+        return true;
+    }
+    return false;
 }

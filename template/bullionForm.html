@@ -96,7 +96,7 @@
                                             if(strtolower($values['attribute_disp_name'])=='design')
                                             {
 ?>                              
-                                                <div class="divCon  fLeft dAuto">
+                                                <div class="divCon  fLeft dAuto_" id="b_Designs">
                                                     <div  class="titleDiv txtCap fLeft">Bullion Design</div>
                                                         <div class='radioCont fLeft'> 
 <?php
@@ -111,8 +111,16 @@
                                                                 </div>
 <?php                                                       }
 ?>
-                                                        </div>
-                                                </div>
+                                                                <div class="checkDiv fLeft checkOth">
+                                                                    <input type="radio" name='design' class="filled-in" id="designOther" value="Other" <?=!in_array($attr['bullion_design'],$attr_values) && !empty($attr['bullion_design']) ? 'checked' : '';?>>
+                                                                    <label for="designOther">Other</label>
+                                                                </div>
+                                                                <div id='otherDes' class="otherBox fLeft <?=!in_array($attr['bullion_design'],$attr_values) && !empty($attr['bullion_design']) ? '' : 'dn';?>">
+                                                                   <input name="bullion_design" autocomplete="false" id="otherdesign" type="text" placeholder="AGS,CIBJO, etc." value="<?=!in_array($attr['bullion_design'],$attr_values) && !empty($attr['bullion_design']) ? $attr['bullion_design'] : '';?>" class="othTxtinp fLeft fmOpenR font14 c666">
+                                                                </div>
+
+                                </div>
+                        </div>
 <?php                                             
                                             }
                                         }
@@ -122,17 +130,18 @@
                                     <div  class="titleDiv txtCap fLeft">Gold Purity</div>
                                     <input name="gold_purity" id="goldpurity" type="text" autocomplete="false" placeholder=" eg. 999 or 995" maxlength="3" onkeyup="return common.isNumberKey(event);" value="<?=$attr['gold_purity'];?>" class="txtInput fLeft fmOpenR font14 c666">
                                     </div>
+                                    <?php if($attr['gold_weight'] == 0.00 || $attr['gold_weight'] === '0.000'){ $attr['gold_weight'] = ''; } ?>
                         <div class="divCon2  fLeft goldprop allprop <?=$showg;?>">
                             <div  class="titleDiv txtCap fLeft">Gold Weight</div>
                             <input name="gold_weight" id="goldweight" type="text" autocomplete="false" placeholder=" eg. 10 Gms" value="<?=$attr['gold_weight'];?>" maxlength="8" onkeypress="return common.isDecimalNumber(event,this.value);" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon2  fLeft silverprop allprop <?=$shows;?> ">
                             <div  class="titleDiv txtCap fLeft">Silver Purity</div>
-                            <input name="gold_purity" id="silverpurity" autocomplete="false" type="text" placeholder=" eg. 999 or 995" maxlength="3" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['gold_purity'];?>"  class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="silver_purity" id="silverpurity" autocomplete="false" type="text" placeholder=" eg. 999 or 995" maxlength="3" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['gold_purity'];?>"  class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon2  fLeft silverprop allprop <?=$shows;?>">
                             <div  class="titleDiv txtCap fLeft">Silver Weight</div>
-                            <input name="gold_weight" id="silverweight" type="text" autocomplete="false" placeholder=" eg. 10 Gms" maxlength="8" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['gold_weight'];?>" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="silver_weight" id="silverweight" type="text" autocomplete="false" placeholder=" eg. 10 Gms" maxlength="8" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['gold_weight'];?>" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Design Number</div>
@@ -156,7 +165,33 @@
 <script type="text/javascript" src='tools/js/cms/vendor_landing.js'></script>
 <script type="text/javascript" src='tools/js/cms/lib/jquery.toast.min.js'></script>
 <script type="text/javascript" src='tools/js/pForm.js'></script>
-
+<script>
+        function showOther(id){
+            $('#'+id).removeClass('dn');
+        }
+        
+        function hideOther(id){
+            $('#'+id).addClass('dn');
+        }
+        
+        $(document).ready(function(){
+            $('#b_Designs label').click(function(){
+                setTimeout(function(){
+               var id=$('#b_Designs input[type=radio]:checked').attr('id');
+               if(id==='designOther'){
+                        $('#otherdesign').val('');
+                        showOther('otherDes');
+                        
+                    }else{
+                        hideOther('otherDes');
+                        $('#otherdesign').val('');
+                    }
+            },10);
+                
+            });
+        });
+    
+    </script>
 
 </body>
 </html>
