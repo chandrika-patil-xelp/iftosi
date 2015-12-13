@@ -153,21 +153,40 @@ for(var i = 0; i< busiTypeSplt.length; i++)
 
     $('.shapeComm').bind('click', function ()
     {
-        var uthis = $(this);
-        $('.shapeComm').each(function () {
-            if ($(this).hasClass('shapeSelected') && $(this).attr('id') != uthis.attr('id'))
-                $(this).removeClass('shapeSelected');
-        });
-        $(this).toggleClass('shapeSelected');
-        if ($(this).hasClass('shapeSelected'))
-        {
-            $('#allcontent').removeClass('dn');
+		if(pageName == 'jewellery-Form')
+		{
+			var uthis = $(this);
+			$('.shapeComm').each(function () {
+				if ($(this).hasClass('shapeSelected') && $(this).attr('id') != uthis.attr('id'))
+					$(this).removeClass('shapeSelected');
+			});
+			$(this).toggleClass('shapeSelected');
+			if($(this).hasClass('shapeSelected'))
+			{
+				$('.diamondProp').removeClass('dn');
+			}
+			else
+			{
+				$('.diamondProp').addClass('dn');
+			}
+		}
+		else
+		{
+			var uthis = $(this);
+			$('.shapeComm').each(function () {
+				if ($(this).hasClass('shapeSelected') && $(this).attr('id') != uthis.attr('id'))
+					$(this).removeClass('shapeSelected');
+			});
+			$(this).toggleClass('shapeSelected');
+			if ($(this).hasClass('shapeSelected'))
+			{
+				$('#allcontent').removeClass('dn');
+			}
+			else
+			{
+				$('#allcontent').addClass('dn');
+			}
         }
-        else
-        {
-            $('#allcontent').addClass('dn');
-        }
-        
     });
     $('.jshapeComm').bind('click', function ()
     {

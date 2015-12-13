@@ -77,7 +77,8 @@ $(document).ready(function(){
 		{
 			isVendor = 0;
 		}
-		if((isVendor !== '1' && isVendor !== 1 && isVendor !== '2' && isVendor !== 2 ) || isLoggedIn == undefined || isLoggedIn == null || isLoggedIn == '' || isLoggedIn == false || isLoggedIn == 'false')
+
+		if((isVendor !== '2' && isVendor !== 2 ) || isLoggedIn == undefined || isLoggedIn == null || isLoggedIn == '' || isLoggedIn == false || isLoggedIn == 'false')
 		{
 			mobile = customStorage.readFromStorage('mobile');
 			name = customStorage.readFromStorage('name');
@@ -98,14 +99,14 @@ $(document).ready(function(){
                 
 		else
 		{   
-                    if(isVendor == 2 || isVendor == '2')
-                    {
-                        customStorage.toast(0, 'This feature is not available for Admin');
-                    }
-                    else
-                    {
-                        customStorage.toast(0, 'This feature is not available for vendors');
-                    }
+			if(isVendor == 2 || isVendor == '2')
+			{
+				customStorage.toast(0, 'This feature is not available for Admin');
+			}
+			/*else
+			{
+				customStorage.toast(0, 'This feature is not available for vendors');
+			}*/
 			
 		}
     });
@@ -121,7 +122,8 @@ $(document).ready(function(){
 		{
 			isVendor = 0;
 		}
-		if((isVendor !== '1' && isVendor !== 1 && isVendor !== '2' && isVendor !== 2) || isLoggedIn == undefined || isLoggedIn == null || isLoggedIn == '' || isLoggedIn == false || isLoggedIn == 'false')
+
+		if((isVendor !== '2' && isVendor !== 2) || isLoggedIn == undefined || isLoggedIn == null || isLoggedIn == '' || isLoggedIn == false || isLoggedIn == 'false')
 		{
 			mobile = customStorage.readFromStorage('mobile');
 			name = customStorage.readFromStorage('name');
@@ -162,17 +164,16 @@ $(document).ready(function(){
 				showVendorDetails(this);
 			}
 		}
-                
 		else
 		{
-                    if(isVendor == 2 || isVendor == '2')
-                    {
-                        customStorage.toast(0, 'This feature is not available for Admin');
-                    }
-                    else
-                    {
-                        customStorage.toast(0, 'This feature is not available for vendors');
-                    }
+			if(isVendor == 2 || isVendor == '2')
+			{
+				customStorage.toast(0, 'This feature is not available for Admin');
+			}
+			/*else
+			{
+				customStorage.toast(0, 'This feature is not available for vendors');
+			}*/
 		}
     });
     
@@ -358,20 +359,26 @@ function showVendorDetails(obj)
 				{
 					if((data.error !== '' && data.error !== null && data.error !== undefined && data.error.Code == 0) || (data.error.Code == 1 && data.results.userid != ''))
 					{
-						if(data.results.userDet[0].is_vendor == 1)
+						/*if(data.results.userDet[0].is_vendor == 1)
 						{
 							customStorage.toast(0, 'This feature is not available for vendors');
 						}
 						else
-						{
+						{*/
 							customStorage.addToStorage('l', mobile);
 							customStorage.addToStorage('mobile', mobile);
 							customStorage.addToStorage('username', name);
 							customStorage.addToStorage('name', name);
 							customStorage.addToStorage('email', email);
 							customStorage.addToStorage('isLoggedIn',true);
+							var isVndr = data.results.userDet[0].is_vendor;
+
+							if(isVndr == 0 || isVndr == '0')
+							{
+								isVndr = -1;
+							}
 							
-							customStorage.addToStorage('is_vendor','-1');
+							customStorage.addToStorage('is_vendor',isVndr);
 				
 							var uid = customStorage.addToStorage('userid', data.results.userid);
 							common.checkLogin();
@@ -406,7 +413,7 @@ function showVendorDetails(obj)
 								},250);
 								addToEnquiry();
 							}
-						}
+						//}
 					}
 				}
 			});

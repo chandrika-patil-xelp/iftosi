@@ -1,3 +1,17 @@
+function changeGemstoneType(obj)
+{
+	var gemType = $(obj).val();
+
+	if(gemType !== undefined && gemType !== null && gemType !== '' && typeof gemType !== 'undefined')
+	{
+		$('.gemstoneProp').removeClass('dn');
+	}
+	else
+	{
+		$('.gemstoneProp').addClass('dn');
+	}
+}
+
 
 function submitForm(formid)
 {
@@ -13,9 +27,9 @@ function submitForm(formid)
     if(formid=='dAddForm'){
     y=$('#dAddForm').serializeArray();
     }
-    else if(formid=='jwAddForm'){
+    /*else if(formid=='jwAddForm'){
         y=$('#jwAddForm').serializeArray();
-    }
+    }*/
     else if(formid=='bAddForm'){
         y=$('#bAddForm').serializeArray();
     }
@@ -28,11 +42,10 @@ function submitForm(formid)
         if(val.value)
         {  
             if(val[(y[i].name)]!=='subcat_type')
-            {  
+            {
                val[(y[i].name)]=(y[i].value);
                values[i+1] = val.name+'|@|'+val.value;
             }
-                
         }
     });
     var cnt = values.length;
@@ -60,18 +73,262 @@ function submitForm(formid)
     
 }
 
- function validateJForm(){
+function validateJForm()
+{
+	var shape=$('.jshapeComm');
+	var certificate =  $('input[name=Certficate]:checked').val();
+	var metal = $("input[name='metal']:checked").val();
+	var diamondShape=$('.shapeComm');
+	var color =  $('input[name=color]:checked').val();
+	var clarity = $("input[name='clarity']:checked").val();
+	var dweight = $('#diamondweight').val();
+	var no_diamonds=$('#no_diamonds').val();
+	var gemstone_type=$('#gemstone_type').val();
+	var gemcolour = $("input[name='gemstone_color']:checked").val();
+	var gemweight=$('#gemweight').val();
+	var num_gemstones = $('#num_gemstones').val();
+	var purity = $('#goldpurity').val();
+	var goldweight=$('#goldweight').val();
+	var barcode=$('#barcode').val();
+	var prdprice=$('#prdprice').val();
+	var othercert=$('#other_cerificate').val();
+	var subcat = '';
+	var isValid = true;
+
+	$("input[name='subcat_type']:checked").each(function() {
+		if(subcat !== '')
+		{
+			subcat += "," + $(this).val();
+		}
+		else
+		{
+			subcat = $(this).val();
+		}
+	})
+	// Validations Start
+
+	if(!shape.hasClass('shapeSelected'))
+	{
+		str ='Please select category';
+		isValid = false;
+	}
+
+	if(isValid && subcat == '')
+	{
+		str ='Please select sub category';
+		isValid = false;
+	}
+
+	if(isValid && (certificate === undefined || certificate === null || certificate === ''))
+	{
+		str ='Please select certificate';
+		isValid = false;
+	}
+	else if (isValid)
+	{
+		if(isValid && certificate.toLowerCase() === 'other')
+		{
+			if(isValid && (othercert === undefined || othercert === null || othercert === ''))
+			{
+				isValid = false;
+				str = 'Please enter certificate';
+			}
+		}
+	}
+
+	if(isValid && (metal === undefined || metal === null || metal === ''))
+	{
+		str = 'Please select metal type';
+		isValid = false;
+	}
+
+	if(isValid && diamondShape.hasClass('shapeSelected'))
+	{
+		if(color === undefined || color === null || color === '')
+		{
+			str = 'Please select diamond color';
+			isValid = false;
+		}
+
+		if(isValid && (clarity === undefined || clarity === null || clarity === ''))
+		{
+			str = 'Please enter diamond quality';
+			isValid = false;
+		}
+
+		if(isValid && (dweight === undefined || dweight === null || dweight === ''))
+		{
+			str = 'Please enter diamond weight in carates';
+			isValid = false;
+		}
+
+		if(isValid && (no_diamonds === undefined || no_diamonds === null || no_diamonds === ''))
+		{
+			str = 'Please select number of diamonds';
+			isValid = false;
+		}
+	}
+	else
+	{
+		diamondShape = color = clarity = dweight = no_diamonds = '';
+	}
+
+	if(isValid && (gemstone_type !== undefined && gemstone_type !== null && gemstone_type !== ''))
+	{
+		if(isValid && (gemcolour === undefined || gemcolour === null || gemcolour === ''))
+		{
+			str = 'Please select gemstone color';
+			isValid = false;
+		}
+
+		if(isValid && (gemweight === undefined || gemweight === null || gemweight === ''))
+		{
+			str = 'Please enter gemstone weight';
+			isValid = false;
+		}
+
+		if(isValid && (num_gemstones === undefined || num_gemstones === null || num_gemstones === ''))
+		{
+			str = 'Please enter number of gemstones';
+			isValid = false;
+		}
+	}
+	else
+	{
+		gemstone_type = gemcolour = gemweight = num_gemstones = '';
+	}
+
+	if(isValid && (purity === undefined || purity === null || purity === '' || isNaN(purity)))
+	{
+		str = 'Please enter purity';
+		isValid = false;
+	}
+
+	if(isValid && (goldweight === undefined || goldweight === null || goldweight === '' || isNaN(goldweight)))
+	{
+		str = 'Please enter weight';
+		isValid = false;
+	}
+
+	if(isValid && (barcode === undefined || barcode === null || barcode === ''))
+	{
+		str = 'Please enter design number';
+		isValid = false;
+	}
+
+	if(isValid && (prdprice === undefined || prdprice === null || prdprice === '' || isNaN(prdprice)))
+	{
+		str = 'Please enter product price';
+		isValid = false;
+	}
+
+	// Validations End
+
+	if(isValid === false)
+	{
+		common.toast(0, str);
+		return false;
+	}
+	else
+	{
+		// Submit form
+		var URL = DOMAIN+"/apis/index.php?action=addNewproduct";
+		var params
+		if((pid !== null)&&(pid !== undefined)&&(pid !== '') && pid !== 'undefined' && typeof pid !== 'undefined')
+		{
+			var params = 'action=addNewproduct&category_id='+catid+'&prdid='+pid+'&vid='+uid;
+		}
+		else
+		{
+			var params = 'action=addNewproduct&category_id='+catid+'&vid='+uid;
+		}
+
+		var dt = '';
+
+		var shapeVal = '';
+		
+		shape.each(function() {
+			if($(this).hasClass('shapeSelected'))
+			{
+				shapeVal = $(this).attr('id');
+			}
+		});
+
+		var diamondShapeVal = '';
+		
+		diamondShape.each(function() {
+			if($(this).hasClass('shapeSelected'))
+			{
+				diamondShapeVal = $(this).attr('id');
+			}
+		});
+
+		var values = new Array();
+		values[0] = "shape|@|"+encodeURIComponent(shapeVal);
+		values[1] = "subcatid|@|"+encodeURIComponent(subcat);
+		values[2] = "Certficate|@|"+encodeURIComponent(certificate);
+		values[3] = "metal|@|"+encodeURIComponent(metal);
+		values[4] = "diamondShape|@|"+encodeURIComponent(diamondShapeVal);
+		values[5] = "color|@|"+encodeURIComponent(color);
+		values[6] = "clarity|@|"+encodeURIComponent(clarity);
+		values[7] = "diamonds_weight|@|"+encodeURIComponent(dweight);
+		values[8] = "no_diamonds|@|"+encodeURIComponent(no_diamonds);
+		values[9] = "gemstone_type|@|"+encodeURIComponent(gemstone_type);
+		values[10] = "gemstone_color|@|"+encodeURIComponent(gemcolour);
+		values[11] = "gemstone_weight|@|"+encodeURIComponent(gemweight);
+		values[12] = "num_gemstones|@|"+encodeURIComponent(num_gemstones);
+		values[13] = "gold_purity|@|"+encodeURIComponent(purity);
+		values[14] = "gold_weight|@|"+encodeURIComponent(goldweight);
+		values[15] = "barcode|@|"+encodeURIComponent(barcode);
+		values[16] = "price|@|"+encodeURIComponent(prdprice);
+
+		dt = values.join('|~|');
+
+		params += "&dt="+dt;
+
+		$.getJSON(URL, params, function(data) {
+			if(data !== undefined && data !== null && data !== '' && typeof data !== 'undefined')
+			{
+				if(data.error !== undefined && data.error !== null && data.error !== '' && typeof data.error !== 'undefined')
+				{
+					if(data.error.code !== undefined && data.error.code !== null && data.error.code !== '' && typeof data.error.code !== 'undefined' && data.error.code == 0)
+					{
+						window.location.href = IMGUPLOAD+'pid-'+data.results.pid+'&c='+catid;
+					}
+					else
+					{
+						common.toast(0, 'Error adding / updating information');
+					}
+				}
+				else
+				{
+					common.toast(0, 'Error adding / updating information');
+				}
+			}
+			else
+			{
+				common.toast(0, 'Error adding / updating information');
+			}
+		});
+	}
+}
+
+
+/*
+function validateJForm(){
             var metal = $("input[name='metal']:checked").val();
             var color =  $('input[name=color]:checked').val();
             var certificate =  $('input[name=Certficate]:checked').val();
             var clarity = $("input[name='clarity']:checked").val();
-            //var gemcolour = $("input[name='gemstone_color']:checked").val();
+            var gemcolour = $("input[name='gemstone_color']:checked").val();
             var subcat = $("input[type='checkbox']").is(':checked');
             var purity = $('#goldpurity').val();
             var dweight = $('#diamondweight').val();
             var goldweight=$('#goldweight').val();
             var barcode=$('#barcode').val();
             var no_diamonds=$('#no_diamonds').val();
+            var num_gemstones = $('#num_gemstones').val();
+            var gemstone_type = $('#gemstone_type').val();
             var gemweight=$('#gemweight').val();
             var prdprice=$('#prdprice').val();
             var othercert=$('#other_cerificate').val();
@@ -229,47 +486,84 @@ function submitForm(formid)
                 isValid = false;
                 $('#prdprice').focus();
             }
+
             if(isValid && (gemweight !== undefined && gemweight !== 'undefined' && gemweight !== 'null' && gemweight !== null && gemweight !== '' && isNaN(gemweight) == false))
             {
-                if(isValid && (gemweight == undefined || gemweight == 'undefined' || gemweight == 'null' || gemweight == '' || isNaN(gemweight) == true))
+                if(isValid && (gemcolour=='' || gemcolour==null || gemcolour==undefined || gemcolour == 'undefiend')) 
                 {
-                    str ='Gemstone weight is important to fill';
+					str = 'Gemstone colour field is Empty';
+					isValid = false;
+                }
+
+				if(isValid && (num_gemstones == undefined || num_gemstones == null || num_gemstones == '' || typeof num_gemstones == 'undefined'))
+				{
+					str = 'Number of Gemstone is Empty';
+					isValid = false;
+				}
+
+				if(isValid && (gemstone_type == undefined || gemstone_type == null || gemstone_type == '' || typeof gemstone_type == 'undefined'))
+				{
+					str = 'Gemstone Type is Empty';
+					isValid = false;
+				}
+            }
+
+			if(isValid && num_gemstones !== undefined && num_gemstones !== null && num_gemstones !== '' && typeof num_gemstones !== 'undefined')
+			{
+				if(isValid && (gemcolour=='' || gemcolour==null || gemcolour==undefined || gemcolour == 'undefiend')) 
+                {
+					str = 'Gemstone colour field is Empty';
+					isValid = false;
+                }
+
+				if(isValid && (gemweight == undefined || gemweight == 'undefined' || gemweight == 'null' || gemweight == '' || isNaN(gemweight) == true))
+                {
+                    str = 'Gemstone weight is important to fill';
                     isValid = false;
                     $('#gemweight').focus();
                 }
-//                if(isValid && (gemcolour=='' || gemcolour==null || gemcolour==undefined || gemcolour == 'undefiend')) 
-//                {
-//                    console.log(gemcolour);
-//                    str ='Gemstone colour field is Empty';
-//                    isValid = false;
-//                }
+
+				if(isValid && (gemstone_type == undefined || gemstone_type == null || gemstone_type == '' || typeof gemstone_type == 'undefined'))
+				{
+					str = 'Gemstone Type is Empty';
+					isValid = false;
+				}
+			}
+
+            if(isValid && (gemcolour !== undefined && gemcolour !== 'undefined' && gemcolour !== 'null' && gemcolour !== null && gemcolour !== ''))
+            {
+                if(isValid && (gemweight == undefined || gemweight == 'undefined' || gemweight == 'null' || gemweight == '' || isNaN(gemweight) == true))
+                {
+                    str = 'Gemstone weight is important to fill';
+                    isValid = false;
+                    $('#gemweight').focus();
+                }
+
+				if(isValid && (num_gemstones == undefined || num_gemstones == null || num_gemstones == '' || typeof num_gemstones == 'undefined'))
+				{
+					str = 'Number of Gemstone is Empty';
+					isValid = false;
+				}
+
+				if(isValid && (gemstone_type == undefined || gemstone_type == null || gemstone_type == '' || typeof gemstone_type == 'undefined'))
+				{
+					str = 'Gemstone Type is Empty';
+					isValid = false;
+				}
             }
-//            if(isValid && (gemcolour !== undefined && gemcolour !== 'undefined' && gemcolour !== 'null' && gemcolour !== null && gemcolour !== ''))
-//            {
-//                if(isValid && (gemweight == undefined || gemweight == 'undefined' || gemweight == 'null' || gemweight == '' || isNaN(gemweight) == true))
-//                {
-//                    str ='Gemstone weight is important to fill';
-//                    isValid = false;
-//                    $('#gemweight').focus();
-//                }
-//                if(isValid && (gemcolour=='' || gemcolour==null || gemcolour==undefined || gemcolour == 'undefiend')) 
-//                {
-//                    console.log(gemcolour);
-//                    str ='Gemstone colour field is Empty';
-//                    isValid = false;
-//                }
-//            }
-            if(str != '')
+
+            if(isValid == false && str != '')
             {
                 common.toast(0,str);
             }
-            else {
-                
-                submitForm('jwAddForm');
-                return  true;
+            else
+			{
+                isValid = submitJewelleryForm();
+                return  isValid;
             }
             return false;
-}
+}*/
+
 function calculatePrice()
 {
    var baseprice=$('#baseprice').val();

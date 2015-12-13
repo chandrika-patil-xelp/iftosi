@@ -534,6 +534,11 @@ switch ($action) {
                 $attr = $result[$pid]['attr_details'];
                 $pdet = $result[$pid];
                 //echo "<pre>";print_r($attr['gemstone_color']);die;
+
+				$shapeUrl = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=10000';
+                $shapeRes = $comm->executeCurl($shapeUrl);
+                $shapeAttrs = $shapeRes['results'];
+
                 include 'template/jewelleryForm.html';
                 break;
 

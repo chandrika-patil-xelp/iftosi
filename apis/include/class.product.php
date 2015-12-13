@@ -56,8 +56,8 @@
             {
                 $shape=$detls['shape'];
                 $catids1=$detls['subcatid'];
-                
             }
+
             $maincatsql="SELECT p_catid from tbl_category_master where catid IN(\"".$catids1."\")";
             $maincatres=$this->query($maincatsql);
             $maincatrow=$this->fetchData($maincatres);
@@ -281,6 +281,7 @@
                                     INTO 
                                                     tbl_product_search
                                                     (product_id,
+													diamond_shape,
                                                      color,
                                                      carat,
                                                      shape,
@@ -312,6 +313,8 @@
                                                      quality,
                                                      gold_weight,
                                                      gemstone_color,
+													 num_gemstones,
+													 gemstone_type,
                                                      combination,
                                                      bullion_design,
                                                      rating,
@@ -319,6 +322,7 @@
                                                      active_flag)
                                     VALUES
                                                  (\"".$pid."\",
+												 \"".$detls['diamondShape']."\",
                                                   \"".$detls['color']."\",
                                                   \"".$detls['carat_weight']."\",
                                                   \"".$shape."\",
@@ -350,12 +354,15 @@
                                                   \"".$detls['quality']."\",
                                                   \"".$detls['gold_weight']."\",
                                                   \"".$detls['gemstone_color']."\",
+												  \"".$detls['num_gemstones']."\",
+												  \"".$detls['gemstone_type']."\",
                                                   \"".$detls['combination']."\",
                                                   \"".$detls['design']."\",
                                                   \"".$detls['rating']."\",    
                                                       now(),
                                                   \"".$display_flag."\")
                                     ON DUPLICATE KEY UPDATE
+                                                            diamond_shape         = \"".$detls['diamondShape']."\",
                                                             color         = \"".$detls['color']."\",
                                                             carat         = \"".$detls['carat_weight']."\",
                                                             certified     = \"".$detls['Certficate']."\",
@@ -388,6 +395,8 @@
                                                             gold_weight   = \"".$detls['gold_weight']."\",
                                                             combination   = \"".$detls['combination']."\",
                                                             gemstone_color=\"".$detls['gemstone_color']."\",
+                                                            num_gemstones=\"".$detls['num_gemstones']."\",
+                                                            gemstone_type=\"".$detls['gemstone_type']."\",
                                                             bullion_design=\"".$detls['design']."\",    
                                                             rating        = \"".$detls['rating']."\",
                                                             active_flag   = \"".$display_flag."\"";    
@@ -1360,7 +1369,8 @@
 						p_disc as discount,
 						type,
 						bullion_design,
-						tabl as tab
+						tabl as tab,
+						num_gemstones
                     FROM 
                         tbl_product_search
                     WHERE 
