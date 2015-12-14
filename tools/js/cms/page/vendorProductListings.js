@@ -71,31 +71,40 @@ function loadDiamondCallback(res,pgno) {
         var total_pages = obj['results']['total_pages'];
         
         var str = '';
-        if(total!=0) {
-            if(total_pages==diamondPage) {
-                loadDiamont = false;
-            }
-            var len = obj['results']['products'].length;
-            var i = 0;
-            while (i < len) {
-                str += generateDiamondList(obj['results']['products'][i]);
-                i++;
-            }
-			var html = pagination(obj,pgno);
-            diamondPage++;
+        if(total != 0) {
+			if(pgno <= total_pages)
+			{
+				if(total_pages==diamondPage) {
+					loadDiamont = false;
+				}
+				var len = obj['results']['products'].length;
+				var i = 0;
+				while (i < len) {
+					str += generateDiamondList(obj['results']['products'][i]);
+					i++;
+				}
+				var html = pagination(obj,pgno);
+				diamondPage++;
+				$('#DiamondsList').html(str);
+				$('#DiamondsList').append(html);
+			}
         } else {
             str = '<p class="noRecords"><span>Sorry! No Products Found!</span></p>';
             loadDiamont = false;
+			$('#DiamondsList').html(str);
+			$('#DiamondsList').append(html);
         }
-        $('#DiamondsList').html(str);
-        $('#DiamondsList').append(html);
 		
 		$('.pgComm').click( function(){
 			
 			$('.pgComm').removeClass('pgActive');
 			$(this).addClass('pgActive');
 			loadDiamonds($(this).text());
-			$('body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+			$('#pgno').val($(this).text());
+			if($(this).text() >= 1 && $(this).text() <= total_pages)
+			{
+				$('body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+			}
 		});
 		$('.pPrev').bind('click', function() {
 			var curpgno = parseInt($('#pgno').val());
@@ -104,6 +113,14 @@ function loadDiamondCallback(res,pgno) {
 			{
 				$('#pgno').val(pgval);
 				loadDiamonds(pgval);
+				if(pgval >= 1 && pgval <= total_pages)
+				{
+					$('body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+				}
+			}
+			else
+			{
+				pgval = 1;
 			}
 		});
 
@@ -114,6 +131,14 @@ function loadDiamondCallback(res,pgno) {
 			{
 				$('#pgno').val(pgval);
 				loadDiamonds(pgval);
+				if(pgval >= 1 && pgval <= total_pages)
+				{
+					$('body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+				}
+			}
+			else
+			{
+				pgval = parseInt($('#total_pageno').val());
 			}
 		});
 		
@@ -277,9 +302,10 @@ function loadJewellCallback(res,pgno) {
             
         var str = '';
         if(total!=0) {
+			if(pgno <= total_pages)
+			{
             if(total_pages==jewellPage) {
                 loadJewel = false;
-                
             }
             var len = obj['results']['products'].length;
             var i = 0;
@@ -289,19 +315,63 @@ function loadJewellCallback(res,pgno) {
             }
 			var html = pagination(obj,pgno);
             jewellPage++;
+			$('#JewellsList').html(str);
+			$('#JewellsList').append(html);
+			}
         } else {
             str = '<p class="noRecords"><span>Sorry! No Products Found!</span></p>';
             loadJewel = false;
+			$('#JewellsList').html(str);
+			$('#JewellsList').append(html);
         }
-		$('#JewellsList').html(str);
-        $('#JewellsList').append(html);
 		
 		$('.pgComm').click( function(){
 			
 			$('.pgComm').removeClass('pgActive');
 			$(this).addClass('pgActive');
 			loadJewels($(this).text());
-			$('body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+			$('#pgno').val($(this).text());
+
+			if($(this).text() >= 1 && $(this).text() <= total_pages)
+			{
+				$('body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+			}
+		});
+
+		$('.pPrev').bind('click', function() {
+			var curpgno = parseInt($('#pgno').val());
+			var pgval = curpgno - 1;
+			if(curpgno > 1)
+			{
+				$('#pgno').val(pgval);
+				loadJewels(pgval);
+				if(pgval >= 1 && pgval <= total_pages)
+				{
+					$('body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+				}
+			}
+			else
+			{
+				pgval = 1;
+			}
+		});
+
+		$('.pNext').bind('click', function() {
+			var curpgno = parseInt($('#pgno').val());
+			var pgval = curpgno + 1;
+			if(curpgno < parseInt($('#total_pageno').val()))
+			{
+				$('#pgno').val(pgval);
+				loadJewels(pgval);
+				if(pgval >= 1 && pgval <= total_pages)
+				{
+					$('body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+				}
+			}
+			else
+			{
+				pgval = parseInt($('#total_pageno').val());
+			}
 		});
 		
     } else {
@@ -382,30 +452,74 @@ function loadBullionsCallback(res,pgno) {
         
         var str = '';
         if(total!=0) {
-            if(total_pages==bullionPage) {
-                loadBullion = false;
-            }
-            var len = obj['results']['products'].length;
-            var i = 0;
-            while (i < len) {
-                str += generatBullionsList(obj['results']['products'][i]);
-                i++;
-            }
-			var html = pagination(obj,pgno);
-            bullionPage++;
+			if(pgno <= total_pages)
+			{
+				if(total_pages == bullionPage) {
+					loadBullion = false;
+				}
+				var len = obj['results']['products'].length;
+				var i = 0;
+				while (i < len) {
+					str += generatBullionsList(obj['results']['products'][i]);
+					i++;
+				}
+				var html = pagination(obj,pgno);
+				bullionPage++;
+				$('#BullionsList').html(str);
+				$('#BullionsList').append(html);
+			}
         } else {
             str = '<p class="noRecords"><span>Sorry! No Products Found!</span></p>';
             loadBullion = false;
+			$('#BullionsList').html(str);
+			$('#BullionsList').append(html);
         }
-		$('#BullionsList').html(str);
-        $('#BullionsList').append(html);
-		
-		$('.pgComm').click( function(){
-			
+
+		$('.pgComm').click( function() {
 			$('.pgComm').removeClass('pgActive');
 			$(this).addClass('pgActive');
 			loadBullions($(this).text());
-			$('body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+			$('#pgno').val($(this).text());
+			if($(this).text() >= 1 && $(this).text() <= total_pages)
+			{
+				$('body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+			}
+		});
+
+		$('.pPrev').bind('click', function() {
+			var curpgno = parseInt($('#pgno').val());
+			var pgval = curpgno - 1;
+			if(curpgno > 1)
+			{
+				$('#pgno').val(pgval);
+				loadBullions(pgval);
+				if(pgval >= 1 && pgval <= total_pages)
+				{
+					$('body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+				}
+			}
+			else
+			{
+				pgval = 1;
+			}
+		});
+
+		$('.pNext').bind('click', function() {
+			var curpgno = parseInt($('#pgno').val());
+			var pgval = curpgno + 1;
+			if(curpgno < parseInt($('#total_pageno').val()))
+			{
+				$('#pgno').val(pgval);
+				loadBullions(pgval);
+				if(pgval >= 1 && pgval <= total_pages)
+				{
+					$('body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+				}
+			}
+			else
+			{
+				pgval = parseInt($('#total_pageno').val());
+			}
 		});
 		
     } else {
@@ -623,6 +737,7 @@ function searchBarcodeCallback(res,pgno) {
 					$('.pgComm').removeClass('pgActive');
 					$(this).addClass('pgActive');
 					searchBarcode(searchVal,$(this).text());
+					$('#pgno').val($(this).text());
 					$('body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
 				});
             }
