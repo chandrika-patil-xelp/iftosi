@@ -83,7 +83,7 @@ class admin extends DB
             $err = array('Code' => 0, 'Msg' => 'Details fetched successfully');
         } else {
             $results = '';
-            $err = array('Code' => 1, 'Msg' => 'Error in fetching data');
+            $err = array('Code' => 1, 'Msg' => 'No records found');
         }
         $result=array('results'=>$results,'error'=>$err);
         return $result;

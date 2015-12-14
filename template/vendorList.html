@@ -20,7 +20,7 @@
             <div class="fLeft headExpDate">Expiry Date</div>
             <div class="fLeft headEdit">Activated</div>
         </div>
-        <div class="listContainer fLeft fmOpenB">
+        <div class="listContainer fLeft fmOpenB" id="vendorLists">
         <?php
         for($i=0; $i<count($data); $i++)
         {
@@ -131,6 +131,304 @@
         }, 350);
     }
 
+    var loadProduct = true;
+    var currentPage = 1;
+function loadProducts(pgno) {
+    $.ajax({url: APIDOMAIN + "index.php?action=vendorlist&pgno=" + pgno + "&limit=50", success: function (result) {
+        loadProductsCallback(result,pgno);
+    }});
+}
+function loadProductsCallback(res,pgno) {
+    var obj = jQuery.parseJSON(res);
+    if (obj['results'] != '') {
+        $('#pgno').val(pgno);
+        var total = obj['results']['total_vendors'];
+        $('#totalProducts').text(total);
+        var total_pages = obj['results']['total_vendors'];
+        
+        var str = '';
+        if(total!=0) {
+            if(total_pages==currentPage) {
+                loadProduct = false;
+            }
+            var len = obj['results']['vendors'].length;
+            var i = 0;
+            while (i < len) {
+                str += generateVendorsList(obj['results']['vendors'][i]);
+                i++;
+            }
+            var html = pagination(obj,pgno);
+        } else {
+            str = '<p class="noRecords"><span>Sorry! No Products Found!</span></p>';
+            loadProduct = false;
+        }
+        $('#vendorLists').html(str);
+        $('#vendorLists').append(html)
+        $('.pgComm').click(function () {
+            $('.pgComm').removeClass('pgActive');
+            $(this).addClass('pgActive');
+            loadProducts($(this).text());
+            $('body').animate({scrollTop: $('.listContainer').offset().top - 100}, 300);
+        });
+        paginationPrevNext();
+    } else {
+        loadProduct = false;
+    }
+}
+        function generateVendorsList(obj) {
+            var str = '<div class="listComm fLeft fmOpenR">';
+            str += '<div class="fLeft vndName">';
+            str += '   <div class="nameLocatCont fLeft txtOver hedofc" id="cn_14267019859310">'+obj['orgName']+' -'+obj['city']+'</div>';
+            str += '    <div class="mobileEmailCont fLeft cBlue txtOver">';
+            str += '        <div class="fLeft">';
+            str += '            <div class="mbIcon fLeft" id="mo_14267019859310">'+obj['contact_mobile']+'</div>';
+            str += '            <div class="emIcon fLeft" id="em_14267019859310">'+obj['email']+'</div>';
+            str += '        </div>';
+            str += '    </div>';
+            str += '</div>';
+            var cost=0;
+            var package=new Array();
+            var business_type = obj['business_type'].split(',');
+            for(var j = 0; j<business_type.length; j++) {
+                if(business_type[j] == 1)
+                {
+                    package.push('Diamonds');
+                    cost += 30000;
+                }
+                if(business_type[j] == 2)
+                {
+                    package.push('Jewellery');
+                    cost += 15000;
+                }
+                if(business_type[j] == 3)
+                {
+                    package.push('Bullion');
+                    cost += 15000;
+                }
+            }
+            
+            
+            str += '<div class="fLeft vndPackage">'+package.join()+'</div>';
+            str += '<div class="fLeft vndAmount">'+cost+'</div>';
+            str += '<div class="fLeft vndExpDate">NA</div>';
+            str += '<div class="fLeft vndEdit">';
+            var className='';
+            if(obj['active_flag']==0) {
+                className='toggle-button-selected';
+            }
+            str += '    <div class="toggle-button toggle-button '+className+'" onclick="changeStatus('+obj['vendor_id']+',this)">';
+            str += '        <span class="fActive">Yes</span>';
+            str += '        <button class="button"></button>';
+            str += '        <span class="fDactive">No</span>';
+            str += '    </div>';
+            str += '</div>';
+            str += '</div>';
+            return str;
+        }
+
+        function pagination(data, pgno) {
+            /* For Pagintion */
+            pgno = pgno * 1;
+            var html = '';
+            var tc = data.results.total_vendors;
+            var lastpg = Math.ceil(tc / 50);
+            var adjacents = 2;
+            $('#total_pageno').val(lastpg);
+            if (lastpg > 1)
+            {
+                html += '<div class="fLeft pagination fmOpenR">';
+                html += '<center>';
+                html += '<div class="pPrev poR ripplelink">Previous</div>';
+                if (lastpg < 7 + (adjacents * 2))
+                {
+                    for (var i = 1; i <= lastpg; i++)
+                    {
+                        if (i == pgno)
+                        {
+                            html += '<div class="pgComm poR ripplelink pgActive">' + i + '</div>';
+                        }
+                        else
+                        {
+                            html += '<div class="pgComm poR ripplelink">' + i + '</div>';
+                        }
+                    }
+                }
+                else if (lastpg > 5 + (adjacents * 2))
+                {
+                    if (pgno < 1 + (adjacents * 2))
+                    {
+                        for (var i = 1; i < 4 + (adjacents * 2); i++)
+                        {
+                            if (i == pgno)
+                            {
+                                html += '<div class="pgComm poR ripplelink pgActive">' + i + '</div>';
+                            }
+                            else
+                            {
+                                html += '<div class="pgComm poR ripplelink">' + i + '</div>';
+                            }
+                        }
+                        html += '<div class="pgEmpty"></div>';
+                        html += '<div class="pgEmpty"></div>';
+                        html += '<div class="pgEmpty"></div>';
+                        html += '<div class="pgComm poR ripplelink">' + lastpg + '</div>';
+                    }
+                    else if (lastpg - (adjacents * 2) > pgno && pgno > (adjacents * 2))
+                    {
+                        html += '<div class="pgComm poR ripplelink">1</div>';
+                        html += '<div class="pgEmpty"></div>';
+                        html += '<div class="pgEmpty"></div>';
+                        html += '<div class="pgEmpty"></div>';
+                        for (var i = pgno - adjacents; i <= pgno + adjacents; i++)
+                        {
+                            if (i == pgno)
+                            {
+                                html += '<div class="pgComm poR ripplelink pgActive">' + i + '</div>';
+                            }
+                            else
+                            {
+                                html += '<div class="pgComm poR ripplelink">' + i + '</div>';
+                            }
+                        }
+                        html += '<div class="pgEmpty"></div>';
+                        html += '<div class="pgEmpty"></div>';
+                        html += '<div class="pgEmpty"></div>';
+                        html += '<div class="pgComm poR ripplelink">' + lastpg + '</div>';
+                    }
+                    else
+                    {
+                        html += '<div class="pgComm poR ripplelink">1</div>';
+                        html += '<div class="pgEmpty"></div>';
+                        html += '<div class="pgEmpty"></div>';
+                        html += '<div class="pgEmpty"></div>';
+                        for (var i = lastpg - (2 + (adjacents * 2)); i <= lastpg; i++)
+                        {
+                            if (i == pgno)
+                            {
+                                html += '<div class="pgComm poR ripplelink pgActive">' + i + '</div>';
+                            }
+                            else
+                            {
+                                html += '<div class="pgComm poR ripplelink">' + i + '</div>';
+                            }
+                        }
+                    }
+                }
+                html += '<div class="pNext poR ripplelink">Next</div>';
+                html += '</center>';
+                html += '</div>';
+            }
+            return html;
+        }
+
+function paginationPrevNext()
+{
+    $('.pPrev').bind('click', function() {
+        
+            var curpgno = parseInt($('#pgno').val());
+                var pgval = curpgno - 1;
+		if(curpgno > 1)
+		{
+			$('#pgno').val(pgval);
+			if(pageName.indexOf("vendorList") !== -1)
+			{
+				/*if(typeof $('.productstab') !== 'undefined')
+				{
+					$(".productstab").each(function(){
+						if($(this).hasClass('sel'))
+						{
+							loadProducts($(this).attr('id'),pgval);
+						}
+					});
+				}*/
+                                loadProducts(pgval);
+			}
+			else
+			{   
+				loadProducts(1);
+			}
+		}
+            });
+            	$('.pNext').bind('click', function() {
+		var curpgno = parseInt($('#pgno').val());
+		var pgval = curpgno + 1;
+		if(curpgno < parseInt($('#total_pageno').val()))
+		{
+			$('#pgno').val(pgval);
+			if(pageName.indexOf("vendorList") !== -1)
+			{
+				/*if(typeof $('.wishTabComm') !== 'undefined')
+				{
+					$(".productstab").each(function(){
+						if($(this).hasClass('sel'))
+						{
+							loadProducts($(this).attr('id'),pgval);
+						}
+					});
+				}*/
+                                loadProducts(pgval);
+			}
+			else
+			{
+				loadProducts(1);
+			}
+		}
+	});
+}
+    loadProducts(1);
+        $('.pPrev').bind('click', function() {
+
+            var curpgno = parseInt($('#pgno').val());
+            	var pgval = curpgno - 1;
+		if(curpgno > 1)
+		{
+			$('#pgno').val(pgval);
+			if(pageName.indexOf("vendorList") !== -1)
+			{
+				/*if(typeof $('.productstab') !== 'undefined')
+				{
+					$(".productstab").each(function(){
+						if($(this).hasClass('sel'))
+						{
+							loadProducts($(this).attr('id'),pgval);
+						}
+					});
+				}*/
+                                loadProducts(pgval);
+			}
+			else
+			{   
+				loadProducts(1);
+			}
+		}
+	});
+
+	$('.pNext').bind('click', function() {
+		var curpgno = parseInt($('#pgno').val());
+		var pgval = curpgno + 1;
+		if(curpgno < parseInt($('#total_pageno').val()))
+		{
+			$('#pgno').val(pgval);
+			
+			if(pageName.indexOf("vendorList") !== -1)
+			{
+				/*if(typeof $('.wishTabComm') !== 'undefined')
+				{
+					$(".productstab").each(function(){
+						if($(this).hasClass('sel'))
+						{
+							loadProducts($(this).attr('id'),pgval);
+						}
+					});
+				}*/
+                                loadProducts(pgval);
+			}
+			else
+			{
+				loadProducts(1);
+			}
+		}
+	});
 </script>
 <script type="text/javascript" src='tools/js/cms/lib/jquery.toast.min.js'></script>
 </body>

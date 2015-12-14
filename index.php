@@ -637,12 +637,13 @@ switch ($action) {
             case 'vendorList':
                 $page = 'vendorList';
                 $pgno = (!empty($_GET['pgno']) ? $_GET['pgno'] : 1);
-                $url = APIDOMAIN . 'index.php?action=vendorlist';
+                $limit = (!empty($_GET['limit']) ? $_GET['limit'] : 2);
+                $url = APIDOMAIN . 'index.php?action=vendorlist&pgno='.$pgno.'&limit='.$limit;
                 $res = $comm->executeCurl($url);
-                $data = $res['results'];
-                $total = $res['total'];
+                $data = $res['results']['vendors'];
+                $total = $res['results']['total_vendors'];
                 $totalCnt = $total;
-                $lastpg = ceil($total / 15);
+                $lastpg = ceil($total / 2);
                 $adjacents = 2;
                 //echo "<pre>";print_r($data);die;
                 include 'template/vendorList.html';

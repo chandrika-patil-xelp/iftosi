@@ -6,24 +6,36 @@ class vendor extends DB
     {
         parent::DB($db);
     }
-    public function vendorList()
+    public function vendorList($params)
     {
-        $sql = "SELECT * FROM tbl_vendor_master WHERE orgName is not null";
+        $page   = ($params['pgno'] ? $params['pgno'] : 1);
+        $limit  = ($params['limit'] ? $params['limit'] : 50);
+
+
+        $total_products = 0;
+        $sql = "SELECT * FROM tbl_vendor_master WHERE orgName is not null ORDER BY vendor_id";
         $res = $this->query($sql);
         $total = $this->numRows($res);
+        if (!empty($page)) {
+            $start = ($page * $limit) - $limit;
+            $sql.=" LIMIT " . $start . ",$limit";
+        }
+       // echo $sql;die;
+        $res = $this->query($sql);
         if($res)
         {
             while($row = $this->fetchData($res))
             {
                 $arr[] = $row;
             }
-            $err = array('Code' => 0, 'Msg' => 'Product details added successfully!');
+            $results=array('vendors'=>$arr,"total_vendors"=>$total);
+            $err = array('Code' => 0, 'Msg' => 'Vendor details fetched successfully!');
         }
         else {
             $err = array('Code' => 1, 'Msg' => 'Something went wrong');
         }
         //  echo "<pre>";print_r($arr);die;
-        $result = array('results' => $arr, 'error' => $err,'total'=>$total);
+        $result = array('results' => $results, 'error' => $err);
         return $result;
     }
     public function addVendorPrdInfo($params)

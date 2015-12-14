@@ -13,7 +13,7 @@ switch($action)
     case 'vendorlist':
       include APICLUDE.'class.vendor.php';
       $obj	= new vendor($db['iftosi']);
-      $result	= $obj->vendorList();
+      $result	= $obj->vendorList($params);
       $res = $result;
     break;
 
