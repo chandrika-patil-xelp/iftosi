@@ -45,7 +45,7 @@
 
 
 function loadProducts(pgno) {
-    $.ajax({url: common.APIWebPath() + "index.php?action=getProdList&page=" + pgno + "&limit=1", success: function (result) {
+    $.ajax({url: common.APIWebPath() + "index.php?action=getProdList&page=" + pgno + "&limit=50", success: function (result) {
         loadProductsCallback(result,pgno);
     }});
 }
