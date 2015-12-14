@@ -458,7 +458,7 @@
         $pid = $params['pid'];
         $img = $params['imgpath'];
 
-        $sql = "SELECT product_image, image_sequence FROM tbl_product_image_mapping WHERE product_id = " . $pid . " AND active_flag = 1 order by image_sequence asc";
+        $sql = "SELECT product_image, image_sequence FROM tbl_product_image_mapping WHERE product_id = " . $pid . " AND active_flag = 0 order by image_sequence asc";
         $res = $this->query($sql);
         $cnt = $this->numRows($res);
         $flag = true;
@@ -486,7 +486,7 @@
 							(
 								" . $pid . ",
 								\"" . $img . "\",
-								1,
+								0,
 								" . $sequence . ",
 								NOW()
 							)";
