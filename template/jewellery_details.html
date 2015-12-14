@@ -41,7 +41,8 @@
                         <div class="btnsCont fLeft">
                             <div class="prdShape fLeft">
                                 <div class="prdShTitle fLeft fmOpenB">PRICE</div>
-                                <div class="prdShType fLeft fmOpenL"><span>&#8377;</span><?php $comm->IND_money_format(ceil($prdInfo['attr_details']['price'])); ?></div>
+                                <?php $price =  round($prdInfo['product_price']); ?>
+                                <div class="prdShType fLeft fmOpenL"><span>&#8377;</span><?php echo $comm->IND_money_format($price); ?></div>
                             </div>
                             <div class="prdBtns fLeft">
                                 <div class="btnComm fLeft iconCall ripplelink poR" >Contact Jeweller</div>
