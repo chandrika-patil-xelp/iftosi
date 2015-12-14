@@ -1370,7 +1370,8 @@
 						type,
 						bullion_design,
 						tabl as tab,
-						num_gemstones
+						num_gemstones,
+						certificate_url
                     FROM 
                         tbl_product_search
                     WHERE 
@@ -2230,6 +2231,56 @@
 			{
 				$resp = array();
 				$error = array('Code' => 1, 'Msg' => 'Error sending SMS / Email');
+			}
+
+			$results = array('results' => $resp, 'error' => $error);
+			return $results;
+		}
+
+		public function uploadCertificate($params)
+		{
+			$files = (!empty($params['file'])) ? $params['file'] : '';
+			$product_id = (!empty($params['prdid'])) ? $params['prdid'] : '';
+
+			if(empty($files))
+			{
+				$resp = array();
+				$error = array('code' => 1, 'msg' => 'Certificate file not found');
+				$results = array('results' => $resp, 'error' => $error);
+				return $results;
+			}
+
+			if(empty($product_id))
+			{
+				$resp = array();
+				$error = array('code' => 1, 'msg' => 'Product id not found');
+				$results = array('results' => $resp, 'error' => $error);
+				return $results;
+			}
+
+			$tmp_name = $params['file']["tmp_name"];
+			$name = $params['file']["name"];
+
+			if(move_uploaded_file($tmp_name, WEBROOT . 'image-upload/uploads/' . $product_id . '/' . $name))
+			{
+				$sql = "UPDATE tbl_product_search SET certificate_url='image-upload/uploads/" . $product_id . "/" . $name."' WHERE product_id='".$product_id."'";
+				$res = $this->query($sql);
+
+				if($res)
+				{
+					$resp = array();
+					$error = array('code' => 0, 'msg' => 'Data added / updated successfully');
+				}
+				else
+				{
+					$resp = array();
+					$error = array('code' => 1, 'msg' => 'Error adding / updating information');
+				}
+			}
+			else
+			{
+				$resp = array();
+				$error = array('code' => 1, 'msg' => 'Error uploading certificate');
 			}
 
 			$results = array('results' => $resp, 'error' => $error);

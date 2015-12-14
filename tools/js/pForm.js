@@ -52,7 +52,8 @@ function submitForm(formid)
     values[cnt+1]='subcatid'+'|@|'+optionValue.toString();
     
     data = values.join('|~|');
-    //var JsonString = JSON.stringify(values);
+	//return false;
+
     if((pid !== null)&&(pid !== undefined)&&(pid !== '') && pid !== 'undefined' && typeof pid !== 'undefined')
     {
         var params = 'action=addNewproduct&category_id='+catid+'&dt='+data+'&prdid='+pid+'&vid='+uid;
@@ -61,16 +62,118 @@ function submitForm(formid)
     {
         var params = 'action=addNewproduct&category_id='+catid+'&dt='+data+'&vid='+uid;
     }
-    var URL   = DOMAIN+"apis/index.php";
+    var URL   = DOMAIN+"apis/index.php?";
+
+	if(formid=='dAddForm')
+	{
+		$.ajax({
+			url: URL + params,
+			type: 'POST',
+			//data: params,
+			async: false,
+			success: function (data) {
+				if(data !== undefined && data !== null && data !== '' && typeof data !== 'undefined')
+				{
+					data = eval('(' + data + ')');
+					var tmp_pid = data.results.pid;
+					if(data.error !== undefined && data.error !== null && data.error !== '' && typeof data.error !== 'undefined')
+					{
+						if(data.error.code !== undefined && data.error.code !== null && data.error.code !== '' && typeof data.error.code !== 'undefined')
+						{
+							if(data.error.code == 0 || data.error.code == '0')
+							{
+								if(certificate_url === undefined || certificate_url === null || certificate_url === '')
+								{
+									var FD = new FormData();
+									var certFile = $('#certfile')[0]['files'][0];
+
+									FD.append('file', certFile);
+
+									$.ajax({
+										url: APIDOMAIN + 'index.php?action=uploadCertificate&prdid='+tmp_pid,
+										data: FD,
+										processData: false,
+										contentType: false,
+										type: 'POST',
+										success: function(data){
+											if(data !== undefined && data !== null && data !== '' && typeof data !== 'undefined')
+											{
+												data = eval('(' + data + ')');
+												if(data.error !== undefined && data.error !== null && data.error !== '' && typeof data.error !== 'undefined')
+												{
+													if(data.error.code !== undefined && data.error.code !== null && data.error.code !== '' && typeof data.error.code !== 'undefined')
+													{
+														if(data.error.code == 0 || data.error.code == '0')
+														{
+															window.location.href = IMGUPLOAD+'pid-'+tmp_pid+'&c='+catid;
+														}
+														else
+														{
+															common.toast(0, 'Error adding / updating certificate');
+															return false;
+														}
+													}
+													else
+													{
+														common.toast(0, 'Error adding / updating certificate');
+														return false;
+													}
+												}
+												else
+												{
+													common.toast(0, 'Error adding / updating certificate');
+													return false;
+												}
+											}
+											else
+											{
+												common.toast(0, 'Error adding / updating certificate');
+												return false;
+											}
+										}
+									});
+								}
+								else
+								{
+									window.location.href = IMGUPLOAD+'pid-'+tmp_pid+'&c='+catid;
+								}
+							}
+							else
+							{
+								common.toast(0, 'Error adding / updating information');
+								return false;
+							}
+						}
+						else
+						{
+							common.toast(0, 'Error adding / updating information');
+							return false;
+						}
+					}
+					else
+					{
+						common.toast(0, 'Error adding / updating information');
+						return false;
+					}
+				}
+				else
+				{
+					common.toast(0, 'Error adding / updating information');
+					return false;
+				}
+			},
+			cache: false,
+			contentType: false,
+			processData: false
+		});
+	}
+	else
+	{
     
-    
-    $.getJSON(URL, params, function(data) {
-        if(formid=='dAddForm'){
-            uploadFile();
-        }
-        window.location.href = IMGUPLOAD+'pid-'+data.results.pid+'&c='+catid;
-    });
-    
+		$.getJSON(URL, params, function(data) {
+			window.location.href = IMGUPLOAD+'pid-'+data.results.pid+'&c='+catid;
+		});
+	}
 }
 
 function validateJForm()
@@ -630,86 +733,141 @@ function validateNum(){
             var str = '';
             carat = parseFloat(carat);
             crown = parseFloat(crown);
-            if(!shape.hasClass('shapeSelected')) {
+			var isValid = true;
+
+            if(isValid && !shape.hasClass('shapeSelected')) {
                 str ='Shape is not Selected';
+				isValid = fale;
             }
-            else if((color=='')||(color==null)||(color==undefined)) {
+
+			if(isValid && ((color=='')||(color==null)||(color==undefined))) {
                 str ='Color field is Empty';
+				isValid = false;
             }
-            else if((clarity=='')||(clarity==null)||(clarity==undefined)) {
+
+            if(isValid && ((clarity=='')||(clarity==null)||(clarity==undefined))) {
                 str ='Clarity field is Empty';
+				isValid = false;
             }
-            else if((cut=='')||(cut==null)||(cut==undefined)) {
+
+			if(isValid && ((cut=='')||(cut==null)||(cut==undefined))) {
                 str ='Cut field is Empty';
+				isValid = false;
             }
-            else if((symmetry=='')||(symmetry==null)||(symmetry==undefined)) {
+
+			if(isValid && ((symmetry=='')||(symmetry==null)||(symmetry==undefined))) {
                 str ='Symmetry field is Empty';
+				isValid = false;
             }
-            else if((polish=='')||(polish==null)||(polish==undefined)) {
+
+			if(isValid && ((polish=='')||(polish==null)||(polish==undefined))) {
                 str ='Polish field is Empty';
+				isValid = false;
             }
-            else if((flourecence=='')||(flourecence==null)||(flourecence==undefined)) {
+
+			if(isValid && ((flourecence=='')||(flourecence==null)||(flourecence==undefined))) {
                 str ='Flourecence field is Empty';
+				isValid = false;
             }
-            else if((certificate=='')||(certificate==null)||(certificate==undefined)) {
+
+			if(isValid && ((certificate=='')||(certificate==null)||(certificate==undefined))) {
                 str ='Certificate field is Empty';
+				isValid = false;
             }
-            else if((certno=='')) {
+
+			if(isValid && (certno=='')) {
                 str ='Certificate Number field is Empty';
+				isValid = false;
             }
-            else if(carat == '' || isNaN(carat)) {
+
+			if(isValid && (certificate_url === undefined || certificate_url === null || certificate_url === ''))
+			{
+				var tmp_certificate_url = $('#filePath').html();
+				if(isValid && (tmp_certificate_url === undefined || tmp_certificate_url === null || tmp_certificate_url === ''))
+				{
+					str ='Please upload product certificate';
+					isValid = false;
+				}
+			}
+
+            if(isValid && (carat == '' || isNaN(carat))) {
                 str ='Carat Weight field is Empty';
                  $('#caratweight').focus();
+				 isValid = false;
             }
-            else if(measure1 == '' || isNaN(measure1)) {
+
+			if(isValid && (measure1 == '' || isNaN(measure1))) {
                 str ='Measurement column1 is Required';
                 $('#measure1').focus();
+				isValid = false;
             }
-            else if(measure2 == '' || isNaN(measure2)) {
+
+			if(isValid && (measure2 == '' || isNaN(measure2))) {
                 str ='Measurement column2 is Required';
                 $('#measure2').focus();
+				isValid = false;
             }
-            else if(measure3 == '' || isNaN(measure3)) {
+
+			if(isValid && (measure3 == '' || isNaN(measure3))) {
                 str ='Measurement column3 is Required';
                 $('#measure3').focus();
+				isValid = false;
             }
-            else if(table == '' || isNaN(table)) {
+
+			if(isValid && (table == '' || isNaN(table))) {
                 str ='Table field is Required';
                 $('#table').focus();
+				isValid = false;
             }
-            else if(crown == '' || isNaN(crown)) {
+
+			if(isValid && (crown == '' || isNaN(crown))) {
                 str ='Crown field is Required';
                 $('#crownangle').focus();
+				isValid = false;
             }
-            else if(girdle == '' || isNaN(girdle)) {
+
+			if(isValid && (girdle == '' || isNaN(girdle))) {
                 str ='Girdle field is Required';
                 $('#girdle').focus();
+				isValid = false;
             }
-            else if(barcode=='') {
+
+			if(isValid && barcode=='') {
                 str ='Barcode field is Required';
                 $('#barcode').focus();
+				isValid = false;
             }
-            else if(lotnumber == '' || isNaN(lotnumber)) {
-            str ='Lot number field is Required';
-            $('#lotnumber').focus();
+
+			if(isValid && (lotnumber == '' || isNaN(lotnumber))) {
+				str ='Lot number field is Required';
+				$('#lotnumber').focus();
+				isValid = false;
             }
-            else if(lotreference=='') {
-            str ='Lot reference field is Required';
+
+			if(isValid && lotreference=='') {
+				str ='Lot reference field is Required';
                 $('#lotreference').focus();
+				isValid = false;
             }
-            else if(baseprice == '' || isNaN(baseprice)) {
-            str ='Baseprice field is Required';
+
+			if(isValid && (baseprice == '' || isNaN(baseprice))) {
+				str ='Baseprice field is Required';
                 $('#baseprice').focus();
+				isValid = false;
             }
-            else if(prdprice == '' || isNaN(prdprice)) {
+
+			if(isValid && (prdprice == '' || isNaN(prdprice))) {
             str ='Price field is Required';
                 $('#prdprice').focus();
+				isValid = false;
             }
-            if(str != '')
+
+            if(isValid == false && str != '')
             {
                 common.toast(0,str);
             }
-            else {
+            else
+			{
                 submitForm('dAddForm');
                 return  true;
             }

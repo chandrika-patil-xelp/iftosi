@@ -2,6 +2,7 @@
 include '../config.php';
 $res['results'] = array();
 $params = array_merge($_GET, $_POST);
+$params = array_merge($params, $_FILES);
 $action = $_GET['action'];
 
 switch($action)
@@ -1586,6 +1587,12 @@ echo '</pre>';
 			include APICLUDE . 'class.location.php';
 			$obj = new location($db['iftosi']);
 			$res = $obj->getLatLngByArea($params);
+		break;
+
+		case 'uploadCertificate':
+			include APICLUDE . 'class.product.php';
+			$obj = new product($db['iftosi']);
+			$res = $obj->uploadCertificate($params);
 		break;
 
         default :

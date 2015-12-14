@@ -97,6 +97,25 @@ function loadDiamondCallback(res,pgno) {
 			loadDiamonds($(this).text());
 			$('body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
 		});
+		$('.pPrev').bind('click', function() {
+			var curpgno = parseInt($('#pgno').val());
+			var pgval = curpgno - 1;
+			if(curpgno > 1)
+			{
+				$('#pgno').val(pgval);
+				loadDiamonds(pgval);
+			}
+		});
+
+		$('.pNext').bind('click', function() {
+			var curpgno = parseInt($('#pgno').val());
+			var pgval = curpgno + 1;
+			if(curpgno < parseInt($('#total_pageno').val()))
+			{
+				$('#pgno').val(pgval);
+				loadDiamonds(pgval);
+			}
+		});
 		
     } else {
         loadDiamont = false;
