@@ -1347,8 +1347,7 @@ class vendor extends DB
         $sql="UPDATE
                     tbl_vendor_master
             SET 
-                    gold_rate=\"".$params['goldRate']."\",
-                    silver_rate=\"".$params['silverRate']."\"
+                    gold_rate=\"".$params['goldRate']."\"
             WHERE
                     vendor_id=\"".$params['vid']."\"";
         $res=$this->query($sql);

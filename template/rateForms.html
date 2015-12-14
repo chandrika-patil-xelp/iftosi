@@ -21,18 +21,14 @@
            
         </div>
         
-        <div id='goldSilverRateDiv' class="popDiv transition300 transit-200Y1 dn" style="height:315px">
+        <div id='goldSilverRateDiv' class="popDiv transition300 transit-200Y1 dn" style="height:250px">
                <div class="upSpan fLeft fmOpenR upTitle" style="padding-bottom: 0;height: auto;">Update Gold Rate </div>
                 <div class="inputCont fLeft fmOpenR">
                     <input type="text" id="gold_rate1" name="gold_rate" autocomplete="off" class="inpTxt fRight fmOpenR" maxlength="15" onkeypress="return isValidFloatKey(this, event, true);" onkeyup="return onEnterFormSubmit(event,4);" placeholder="Gold Rate For 995" autofocus="">
                 </div>
-                <div class="upSpan fLeft fmOpenR upTitle" style="padding-bottom: 0;height: auto;">Update Silver Rate </div>
-                <div class="inputCont fLeft fmOpenR">
-                    <input type="text" id="silver_rate1" name="silver_rate" class="inpTxt fRight fmOpenR" maxlength="15" autocomplete="off" onkeypress="return isValidFloatKey(this, event, true);" onkeyup="return onEnterFormSubmit(event,4);" placeholder="Silver Rate For 999" autofocus="">
-                </div>
                 <div class="commBtn cancelBtn fLeft fmOpenR" id='upCancel' onclick="closeAllForms(3);"> CANCEL</div>
                 <div class="commBtn upBtn fLeft fmOpenR" onclick="updateGoldSilverRate();">UPDATE</div>
-                <div id="goldErr" class="rateErr dn"><span> Update Gold And Silver Rate to add Products</span></div>
+                <div id="goldErr" class="rateErr dn"><span> Update Gold Rate to add Products</span></div>
         </div>
         
         <div id='goldRateDiv' class="popDiv transition300 transit-200Y1 dn" style="height:250px">
