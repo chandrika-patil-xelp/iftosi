@@ -1,0 +1,42 @@
+*{box-sizing:border-box;}
+div{display:block;}
+html{width:100%;height:100%;}
+body{padding:0;margin:0;}
+.fLeft{float:left;}
+.fRight{float:right;}
+.cPointer{cursor:pointer;}
+.bnone{border-bottom:0px !important}
+.divfirst{height: auto;width: 33%}
+.font13{font-size: 13px;}
+.container{width:100%;height:100%;background-color:#fff;}
+.wrapper{width:100%;height:100%;display:inline-block;}
+.wrapperMax{width:100%;height:auto;max-width:1200px;margin:auto;}
+.totalDiv{width:100%;height:auto;padding:20px;}
+.textDivLft{width:100%;height:auto;padding:15px; padding-top: 40px;}
+.textDiv{width:100%;height:40px;line-height:40px;color:#666;border-bottom:1px solid #ccc;font-size:14px;}
+.picDivRght{width:100%;height:auto;padding:15px;}
+.diamondPic{width:450px;height:426px;display:inline-block;}
+.diamontCat1{width:450px;height:426px;background:url(../img/diamond/anatomy-3.png)no-repeat;background-size:auto 90%;background-position:center center;}
+.diamontCat2{width:450px;height:426px;background:url(../img/diamond/anatomy-5.png)no-repeat;background-size:auto 90%;background-position:center center;}
+.diamontCat3{width:450px;height:426px;background:url(../img/diamond/anatomy-7.png)no-repeat;background-size:auto 90%;background-position:center center;}
+.diamontCat4{width:450px;height:426px;background:url(../img/diamond/anatomy-9.png)no-repeat;background-size:auto 90%;background-position:center center;}
+.diamontCat5{width:450px;height:426px;background:url(../img/diamond/anatomy-11.png)no-repeat;background-size:auto 90%;background-position:center center;}
+.diamontCat6{width:450px;height:426px;background:url(../img/diamond/anatomy-13.png)no-repeat;background-size:auto 90%;background-position:center center;}
+.diamontCat7{width:450px;height:426px;background:url(../img/diamond/anatomy-15.png)no-repeat;background-size:auto 90%;background-position:center center;}
+.diamontCat8{width:450px;height:426px;background:url(../img/diamond/anatomy-17.png)no-repeat;background-size:auto 90%;background-position:center center;}
+.diamontCat9{width:450px;height:426px;background:url(../img/diamond/anatomy-19.png)no-repeat;background-size:auto 90%;background-position:center center;}
+.diamontCat10{width:450px;height:426px;background:url(../img/diamond/anatomy-21.png)no-repeat;background-size:auto 90%;background-position:center center;}
+.diamontCat11{width:450px;height:426px;background:url(../img/diamond/anatomy-23.png)no-repeat;background-size:auto 90%;background-position:center center;}
+.diamontCat12{width:450px;height:426px;background:url(../img/diamond/anatomy-25.png)no-repeat;background-size:auto 90%;background-position:center center;}
+.diamontCat13{width:450px;height:426px;background:url(../img/diamond/anatomy-27.png)no-repeat;background-size:auto 90%;background-position:center center;}
+.diamontCat14{width:450px;height:426px;background:url(../img/diamond/anatomy-29.png)no-repeat;background-size:auto 90%;background-position:center center;}
+.diamontCat15{width:450px;height:426px;background:url(../img/diamond/anatomy-31.png)no-repeat;background-size:auto 90%;background-position:center center;}
+.diamontCat16{width:450px;height:426px;background:url(../img/diamond/anatomy-33.png)no-repeat;background-size:auto 90%;background-position:center center;}
+.diamontCat17{width:450px;height:426px;background:url(../img/diamond/anatomy-35.png)no-repeat;background-size:auto 90%;background-position:center center;}
+.diamontCat18{width:450px;height:426px;background:url(../img/diamond/anatomy-37.png)no-repeat;background-size:auto 90%;background-position:center center;}
+.diamontCat19{width:450px;height:426px;background:url(../img/diamond/anatomy-39.png)no-repeat;background-size:auto 90%;background-position:center center;}
+.diamontCat20{width:450px;height:426px;background:url(../img/diamond/anatomy-41.png)no-repeat;background-size:auto 90%;background-position:center center;}
+.diamontCat21{width:450px;height:426px;background:url(../img/diamond/anatomy-43.png)no-repeat;background-size:auto 90%;background-position:center center;}
+
+.diamond_shap{}
+.diamond_shap.container{padding-top: 120px;}
