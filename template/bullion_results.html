@@ -110,7 +110,7 @@
                                                                                                         
 ?>
 													<div class="detValue fmOpenB fLeft"><span>&#8377;</span><?php
-                                                                                                        $price = round(($val['attributes']['gold_weight']*$metal_rate));
+                                                                                                        $price = ceil(($val['attributes']['gold_weight']*$metal_rate));
                                                                                                         echo $comm->IND_money_format($price);
                                                                                                         ?></div>
                                                                                                         

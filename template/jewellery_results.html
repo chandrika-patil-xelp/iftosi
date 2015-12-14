@@ -215,7 +215,7 @@
                                         <div class='prdPrice fLeft'>
                                             <div class="detComm">
                                                 <div class="detLabel fmOpenB fLeft">PRICE</div>
-                                                <div class="detValue fmOpenB fLeft"><span>&#8377;</span><?php $price=round($val['attributes']['price']);
+                                                <div class="detValue fmOpenB fLeft"><span>&#8377;</span><?php $price=ceil($val['attributes']['price']);
                                                                                                               echo $price = $comm->IND_money_format($price);
                                                                                                         ?>
                                                 </div>

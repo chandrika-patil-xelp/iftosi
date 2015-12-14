@@ -341,7 +341,7 @@ function getResultsData(data,sortby,showtree)
 								html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
                                                                 if(vl.dollar_rate !== '0.00' && vl.dollar_rate !== undefined && vl.dollar_rate !== null && vl.dollarValue !== '') { dollarValue=vl.dollar_rate; }
                                                                  
-                                                                 var price = Math.round(((vl.pprice * dollarValue) * vl.attributes.carat));
+                                                                 var price = Math.ceil(((vl.pprice * dollarValue) * vl.attributes.carat));
 								html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+ common.IND_money_format(price) +'</div>';
 							html += '</div>';
 						html += '</div>';
@@ -360,7 +360,7 @@ function getResultsData(data,sortby,showtree)
 			
 			$.each(data.results.products, function(i, vl) {
 				
-                                var price = Math.round(vl.attributes.price);
+                                var price = Math.ceil(vl.attributes.price);
                                 
 					html += '<div class="prdComm fLeft jwRes transition100" style="opacity: 1; transform: translateX(0px);">';
 						html += '<div class="prdCommDiv fLeft transition100">';
@@ -425,7 +425,7 @@ function getResultsData(data,sortby,showtree)
 								html += '<div class="detComm">';
 									html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
                                                                             if(vl.vdetail.dollar_rate !== '0.00' && vl.vdetail.dollar_rate !== undefined && vl.vdetail.dollar_rate !== null && vl.vdetail.dollar_rate !== '') { dollarValue=vl.vdetail.dollar_rate; }
-									var price = Math.round(((vl.pprice * dollarValue) * vl.attributes.carat));
+									var price = Math.ceil(((vl.pprice * dollarValue) * vl.attributes.carat));
                                                                         html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+common.IND_money_format(price)+'</div>';
 								html += '</div>';
 							html += '</div>';
@@ -476,7 +476,7 @@ function getResultsData(data,sortby,showtree)
                                                                             metal_rate=(metal_rate/1000)*(vl.attributes.gold_purity/999);
                                                                             metal_price = vl.attributes.gold_weight * metal_rate;
                                                                             }
-                                                                            metal_price = Math.round(metal_price);
+                                                                            metal_price = Math.ceil(metal_price);
                                                                         html += '<div class="detValue fmOpenB fLeft"><span>₹</span>'+ common.IND_money_format(metal_price)+'</div>';
 								html += '</div>';
 							html += '</div>';
@@ -508,7 +508,7 @@ function getResultsData(data,sortby,showtree)
 							html += '<div class="prdPrice fLeft">';
 								html += '<div class="detComm">';
 									html += '<div class="detLabel fmOpenB fLeft">PRICE</div>';
-                                                                        var price = Math.round(vl.attributes.price);
+                                                                        var price = Math.ceil(vl.attributes.price);
 									html += '<div class="detValue fmOpenB fLeft"><span>₹</span>'+common.IND_money_format(price)+'</div>';
 								html += '</div>';
 							html += '</div>';
@@ -602,7 +602,7 @@ function getResultsData(data,sortby,showtree)
                                                                             metal_rate=(metal_rate/1000)*(vl.attributes.gold_purity/999);
                                                                             metal_price =vl.attributes.gold_weight * metal_rate;
                                                                             }
-                                                                            metal_price = Math.round(metal_price);
+                                                                            metal_price = Math.ceil(metal_price);
                                                                         html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+ common.IND_money_format(metal_price) +'</div>';
 								html += '</div>';
 							html += '</div>';

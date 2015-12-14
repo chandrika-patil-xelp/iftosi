@@ -540,6 +540,7 @@ class vendor extends DB
     }
 
     public function getVProductsByCatid($params) {
+        global $comm;
         $page = ($params['page'] ? $params['page'] : 1);
         $catid = ($params['catid'] ? $params['catid'] : 10000);
         $limit = ($params['limit'] ? $params['limit'] : 15);
@@ -649,14 +650,20 @@ class vendor extends DB
                         $rate = ((($metalRate/995)*$purity)/10)*$weight;
                         //$metalRate=$goldRate;
                         //$finalRate=($metalRate/10)*($purity/995);
-                        $row['price']=number_format($rate,2);
+                        $price = ceil($rate);
+                        $row['price'] = $comm->IND_money_format($price);
                     }
                     else if($metal=='silver')
                     {
                         $metalRate=$silverRate;
                         $finalRate=($metalRate/1000)*($purity/999);
-                        $row['price']=number_format($finalRate*$weight,2);
+                        $price=ceil($finalRate*$weight);
+                        $row['price'] = $comm->IND_money_format($price);
                     }
+                }
+                if($catid == 10001)
+                {
+                    $row['price'] = ceil($row['price']);
                 }
                         $arr1[] = $row;
              }

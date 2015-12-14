@@ -51,7 +51,7 @@
                                                             }
                                                         ?>
                                 <div class="prdShType fLeft fmOpenL"><span>&#8377;</span>
-                                <?php $price = round(($data['attr_details']['price'] * $rate) * $data['attr_details']['carat']);
+                                <?php $price = ceil(($data['attr_details']['price'] * $rate) * $data['attr_details']['carat']);
                                       echo $price = $comm->IND_money_format($price);
                                 ?>
  </div>

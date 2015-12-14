@@ -189,7 +189,7 @@ function loadProductsCallback(res,pgno) {
             var cost=0;
             var package=new Array();
             var business_type = obj['business_type'].split(',');
-            for(var j = 0; j<business_type.length; j++) {
+            for(var j = 0; j < business_type.length; j++) {
                 if(business_type[j] == 1)
                 {
                     package.push('Diamonds');

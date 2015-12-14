@@ -540,28 +540,58 @@ function showSilverRateForm() {
 
 function updateSilverRate() {
     var silver_rate = $("#silver_rate").val();
-    silver_rate=parseFloat(silver_rate);
-    if(silver_rate=='' || silver_rate <= 0 || silver_rate == undefined) {
-        common.toast(0,'Invaild Rate');
-    } else {
-        $.ajax({url: DOMAIN + "/apis/index.php?action=updateSilverRate&vid="+uid+"&silRate="+silver_rate, success: function(result) {
+    if(pageName == 'Products')
+    {
+        if(silver_rate == undefined || silver_rate == 'undefined' || silver_rate=='' || silver_rate <= 0 || isNaN(silver_rate))
+        {
+            silver_rate = '0.00';
+        }
+
+        $.ajax({url: DOMAIN + "apis/index.php?action=updateSilverRate&vid="+uid+"&silRate="+silver_rate, success: function(result) {
                 var obj = jQuery.parseJSON(result);
                 var errCode = obj['error']['code'];
-                if(errCode==0) {
+                if(errCode == 0) {
                     common.toast(1,obj['error']['Msg']);
-                    if(pageName !== 'Products')
-                    {
-                        showJewelleryImps(GtmpId);                        
-                    }
+                    
+                        //showJewelleryImps(GtmpId);                        
+                    
                    $('#silverRateSpan').html('Silver Rate : &#8377; '+silver_rate);
                     closeAllForms();
-                } else if(errCode==1) {
+                } else if(errCode == 1) {
                     common.toast(0,obj['error']['Msg']);
+                    closeAllForms();
                 }
             }
         });
     }
+    else if(pageName === 'bullion-Form')
+    {console.log('here');
+        
+        if(silver_rate == undefined || silver_rate == 'undefined' || silver_rate === '0.00' || silver_rate == 0.00 || silver_rate=='' || silver_rate <= 0 || isNaN(silver_rate)){        
+                common.toast(0,'Silver rate is must to fill');
+            }
+            else
+            {
+                $.ajax({url: DOMAIN + "apis/index.php?action=updateSilverRate&vid="+uid+"&silRate="+silver_rate, success: function(result)
+                    {
+                        var obj = jQuery.parseJSON(result);
+                        var errCode = obj['error']['code'];
+                        if(errCode==0) {
+                        common.toast(1,obj['error']['Msg']);
+
+                        showJewelleryImps(GtmpId);                        
+                    
+                       $('#silverRateSpan').html('Silver Rate : &#8377; '+silver_rate);
+                        closeAllForms();
+                        } else if(errCode==1) {
+                        common.toast(0,obj['error']['Msg']);
+                        }
+                    }
+                });
+        }
+    }
 }
+
 
 /* for bullion gold  rate of vendor */
 $('#upGoldRt').click(function () {

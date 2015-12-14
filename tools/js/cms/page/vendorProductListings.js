@@ -536,7 +536,10 @@ function generatBullionsList(obj) {
     if(pro_name == null || pro_name == '' || pro_name == 'null') {
         pro_name = '';
     }
-    
+    var design = obj['bullion_design'];
+    if(design == null || design == '' || design == 'null') {
+        design = '';
+    }
     var date = obj['update_time'].split(' ');
     var str = '<li>';
     str += '<div class="date fLeft"> ';
@@ -545,11 +548,11 @@ function generatBullionsList(obj) {
     str += '</div>';
     str += '<div class="barcode fLeft">';
     str += '<span class="upSpan">' + barcode + '</span>';
-    str += '<span class="lwSpan"><a href="'+DOMAIN+obj['metal'].toLowerCase()+'-'+obj['type'].toLowerCase()+'-'+Math.round(obj['gold_weight'])+'-grams/bid-'+obj['id']+'" target="_blank">View Details</a></span>';
+    str += '<span class="lwSpan"><a href="'+DOMAIN+obj['metal'].toLowerCase()+'-'+obj['type'].toLowerCase()+'-'+Math.ceil(obj['gold_weight'])+'-grams/bid-'+obj['id']+'" target="_blank">View Details</a></span>';
     str += '</div>';
     str += '<div class="weight fLeft">'
     str += '<span class="upSpan">' + obj['type'] + '</span>';
-    str += '<span class="lwSpan">'+ obj['bullion_design'] +'</span>';
+    str += '<span class="lwSpan textOverflow" title="'+ design +'" >'+ design +'</span>';
     str += '</div>';
     str += '<div class="metal fLeft">' + obj['metal'].split('~')[0] + '</div>';
     str += '<div class="purity fLeft">' + obj['gold_purity'] + '</div>';

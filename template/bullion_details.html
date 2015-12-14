@@ -64,7 +64,7 @@
                                     
                                 } ?>
                                 <div class="prdShType fLeft fmOpenL"><span>&#8377;</span><?php 
-                                $price = round(($prdInfo['attr_details']['gold_weight']*$metal_rate));
+                                $price = ceil(($prdInfo['attr_details']['gold_weight']*$metal_rate));
                                 echo $comm->IND_money_format($price);    
                                 ?>
                                 </div>

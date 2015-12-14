@@ -99,7 +99,7 @@ if (count($data)) {
                                                         ?>
                                                         <div class="detValue fmOpenB fLeft"><span>&#8377;</span>
                                                         <?php 
-                                                            $price = round((($val['pprice'] * $rate)*$val['attributes']['carat']));
+                                                            $price = ceil((($val['pprice'] * $rate)*$val['attributes']['carat']));
                                                             echo $price = $comm->IND_money_format($price);
                                                         ?>
                                                         </div>

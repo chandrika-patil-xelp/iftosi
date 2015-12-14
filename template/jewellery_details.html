@@ -41,7 +41,7 @@
                         <div class="btnsCont fLeft">
                             <div class="prdShape fLeft">
                                 <div class="prdShTitle fLeft fmOpenB">PRICE</div>
-                                <?php $price =  round($prdInfo['product_price']); ?>
+                                <?php $price =  ceil($prdInfo['product_price']); ?>
                                 <div class="prdShType fLeft fmOpenL"><span>&#8377;</span><?php echo $comm->IND_money_format($price); ?></div>
                             </div>
                             <div class="prdBtns fLeft">
