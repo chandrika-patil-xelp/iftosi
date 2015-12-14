@@ -313,11 +313,12 @@
                                                      quality,
                                                      gold_weight,
                                                      gemstone_color,
-													 num_gemstones,
-													 gemstone_type,
+                                                     num_gemstones,
+                                                     gemstone_type,
                                                      combination,
                                                      bullion_design,
                                                      rating,
+                                                     budget,
                                                      date_time,
                                                      active_flag)
                                     VALUES
@@ -354,11 +355,12 @@
                                                   \"".$detls['quality']."\",
                                                   \"".$detls['gold_weight']."\",
                                                   \"".$detls['gemstone_color']."\",
-												  \"".$detls['num_gemstones']."\",
-												  \"".$detls['gemstone_type']."\",
+                                                  \"".$detls['num_gemstones']."\",
+                                                  \"".$detls['gemstone_type']."\",
                                                   \"".$detls['combination']."\",
                                                   \"".$detls['design']."\",
-                                                  \"".$detls['rating']."\",    
+                                                  \"".$detls['rating']."\",
+                                                  \"".$detls['price']."\",
                                                       now(),
                                                   \"".$display_flag."\")
                                     ON DUPLICATE KEY UPDATE
@@ -399,6 +401,7 @@
                                                             gemstone_type=\"".$detls['gemstone_type']."\",
                                                             bullion_design=\"".$detls['design']."\",    
                                                             rating        = \"".$detls['rating']."\",
+                                                            budget        = \"".$detls['price']."\",    
                                                             active_flag   = \"".$display_flag."\"";    
                             $res = $this->query($sql);
                         
