@@ -52,18 +52,16 @@
 			}
 		}
                 //echo 'Rs. '.IND_money_format(1234567890);
-                public function IND_money_format($money)
-                {
-                    $len = strlen($money);
-                    $m = '';
-                    $money = strrev($money);
-                    for($i=0;$i<$len;$i++)
-                    {
-                        if(( $i==3 || ($i>3 && ($i-1)%2==0) )&& $i!=$len){
-                        $m .=',';
+                function IND_money_format($money){
+                $len = strlen($money);
+                $m = '';
+                $money = strrev($money);
+                for($i=0;$i<$len;$i++){
+                    if(( $i==3 || ($i>3 && ($i-1)%2==0) )&& $i != $len){
+                    $m .=',';
                     }
-                        $m .=$money[$i];
-                    }
+                    $m .=$money[$i];
+                }
                     return strrev($m);
                 }
     }

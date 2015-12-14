@@ -87,8 +87,22 @@ if (count($data)) {
                                                 <div class='prdPrice fLeft'>
                                                     <div class="detComm">
                                                         <div class="detLabel fmOpenB fLeft">BEST PRICE</div>
-                                                        <?php if( empty($val['dollar_rate']) || $val['dollar_rate'] == '0.00' || $val['dollar_rate'] == 0.00) { $val['dollar_rate'] = dollarValue; } ?>
-                                                        <div class="detValue fmOpenB fLeft"><span>&#8377;</span><?php echo number_format((($val['pprice'] * $val['dollar_rate'])*$val['attributes']['carat']), 2); ?></div>
+                                                        <?php
+                                                            $rate = $val['dollar_rate'];
+                                                            if( empty($val['dollar_rate']) || $val['dollar_rate'] == '0.00' || $val['dollar_rate'] == 0.00){
+                                                                $rate = dollarValue;
+                                                            }
+                                                            else{
+                                                                $rate = $val['dollar_rate'];
+                                                            }
+                                                                
+                                                        ?>
+                                                        <div class="detValue fmOpenB fLeft"><span>&#8377;</span>
+                                                        <?php 
+                                                            $price = round((($val['pprice'] * $rate)*$val['attributes']['carat']));
+                                                            echo $price = $comm->IND_money_format($price);
+                                                        ?>
+                                                        </div>
                                                     </div>
                                                 </div>
 												</a>

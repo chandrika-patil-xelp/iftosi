@@ -488,6 +488,23 @@ function Common() {
 			window.location.href = DOMAIN + '?case=login';
 		}
 	};
+        
+    this.IND_money_format = function(money)
+    {
+	var m = '';
+	money = money.toString().split("").reverse();
+	var len = money.length;
+	for(var i=0;i<len;i++)
+	{
+		if(( i == 3 || (i > 3 && ( i - 1) % 2 == 0) ) && i !== len)
+		{
+			m += ',';
+		}
+		m += money[i];
+	}
+
+	return m.split("").reverse().join("");
+    };    
 }
 function showVendorProfile()
 {

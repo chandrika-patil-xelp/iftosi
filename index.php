@@ -287,13 +287,14 @@ switch ($action) {
                 $url = APIDOMAIN . 'index.php?action=getPrdByCatid&uid=' . $uid . '&page=' . $pgno . '&catid=' . $firstid;
                 $res = $comm->executeCurl($url);
                 $data = $res['results']['products'];
+                $vrate = $data['vdetail'];
                 $total = $res['results']['total'];
                 $catname = $res['results']['catname'];
                 $totalCnt = $total;
                 $lastpg = ceil($total / 16);
                 $adjacents = 2;
 
-                //echo "<pre>";print_r($data);die;
+                //echo "<pre>";print_r($vrate);die;
 
                 include 'template/wishlist.html';
                 break;

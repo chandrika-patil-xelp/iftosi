@@ -1407,22 +1407,22 @@ class vendor extends DB
             }
             $prid=implode(',',$pid);
             
-            $sql = "UPDATE tbl_vendor_product_mapping SET active_flag=".$params['af']." WHERE product_id IN(\"".$prid."\") AND vendor_id=".$params['vid'];
+            $sql = "UPDATE tbl_vendor_product_mapping SET active_flag=".$params['af']." WHERE product_id IN(\"".$prid."\") AND vendor_id=".$params['vid']."AND active_flag NOT IN(2,3)";
             $res = $this->query($sql);
             if($res){
-            $sql = "UPDATE tbl_product_search SET active_flag=".$params['af']." WHERE product_id IN(".$prid.")";
+            $sql = "UPDATE tbl_product_search SET active_flag=".$params['af']." WHERE product_id IN(".$prid.") AND active_flag NOT IN(2,3)";
             $res1 = $this->query($sql);}
             if($res1){
-            $sql = "UPDATE tbl_product_master SET active_flag=".$params['af']." WHERE product_id IN(".$prid.")";
+            $sql = "UPDATE tbl_product_master SET active_flag=".$params['af']." WHERE product_id IN(".$prid.") AND active_flag NOT IN(2,3)";
             $res2 = $this->query($sql);}
             if($res2){
-            $sql = "UPDATE tbl_productid_generator SET active_flag=".$params['af']." WHERE product_id IN(".$prid.")";
+            $sql = "UPDATE tbl_productid_generator SET active_flag=".$params['af']." WHERE product_id IN(".$prid.") AND active_flag NOT IN(2,3)";
             $res3 = $this->query($sql);}
             if($res3){
-            $sql = "UPDATE tbl_product_category_mapping SET display_flag=".$params['af']." WHERE product_id IN(".$prid.")";
+            $sql = "UPDATE tbl_product_category_mapping SET display_flag=".$params['af']." WHERE product_id IN(".$prid.") AND display_flag NOT IN(2,3)";
             $res4 = $this->query($sql);}
             if($res4){
-            $sql = "UPDATE tbl_designer_product_mapping SET active_flag=".$params['af']." WHERE product_id IN(".$prid."))";
+            $sql = "UPDATE tbl_designer_product_mapping SET active_flag=".$params['af']." WHERE product_id IN(".$prid.")) AND active_flag NOT IN(2,3)";
             $res5 = $this->query($sql);}
             $arr=array();
             $err=array('code'=>0,'msg'=>'Product status changed too');

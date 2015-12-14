@@ -63,7 +63,11 @@
                                     $metal_rate=($metal_rate/1000)*($prdInfo['attr_details']['gold_purity']/999); 
                                     
                                 } ?>
-                                <div class="prdShType fLeft fmOpenL"><span>&#8377;</span><?php echo number_format(($prdInfo['attr_details']['gold_weight']*$metal_rate),2); ?></div>
+                                <div class="prdShType fLeft fmOpenL"><span>&#8377;</span><?php 
+                                $price = round(($prdInfo['attr_details']['gold_weight']*$metal_rate));
+                                echo $comm->IND_money_format($price);    
+                                ?>
+                                </div>
                             </div>
                             <div class="prdBtns fLeft">
                                 <div class="btnComm fLeft iconCall ripplelink poR" >Contact Merchant</div>

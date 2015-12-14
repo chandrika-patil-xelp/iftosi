@@ -758,23 +758,49 @@
 					}
 							
 					$patres=$this->query($patsql);
-					
+					$i=0;
 					while($row2=$this->fetchData($patres))
 					{
-						$prodid[] = $row2['product_id'];
-						$pid = $row2['product_id'];
-						unset($row2['product_id']);
-						$attr[$pid]['attributes']=$row2;
-					}
-					
-					if(!empty($prodid))
-					{
-						$pid = $pids = implode(',',$prodid);
-					}
-					else
-					{
-						$pid = $pids = '';
-					}
+                                                    $prodid[] = $row2['product_id'];
+                                                    $pid = $row2['product_id'];
+                                                    unset($row2['product_id']);
+                                                    $attr[$pid]['attributes']=$row2;
+
+
+                                            if(!empty($prodid))
+                                            {
+                                                    $pid = $pids = implode(',',$prodid);
+                                            }
+                                            else
+                                            {
+                                                    $pid = $pids = '';
+                                            }
+
+
+                                            $sqlV = "SELECT DISTINCT(vendor_id) from tbl_vendor_product_mapping where product_id = \"".$prodid[$i]."\" and active_flag=1";
+                                            $resV = $this->query($sqlV);
+
+                                            $resCnt = $this->numRows($resV);
+
+                                            if($resV > 0)
+                                            {
+                                                while($rowV = $this->fetchData($resV))
+                                                {
+
+                                                    $Vrate = "SELECT vendor_id,dollar_rate,silver_rate,gold_rate from tbl_vendor_master where vendor_id = ".$rowV['vendor_id']." AND active_flag=1";
+                                                    $Vres = $this->query($Vrate);
+                                                    $vratecnt = $this->numRows($Vres);
+                                                    if($vratecnt > 0)
+                                                    {
+                                                        while($rateV = $this->fetchData($Vres))
+                                                        {
+                                                            $rates[$prodid[$i]]= $rateV;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            $i++;
+                                        }
 					
                                         $pimgsql = "
 							SELECT
@@ -819,7 +845,8 @@
 						$pid = $row1['pid'];
 						$arr1[$pid]=$row1;
 						$arr1[$pid]['attributes'] = $attr[$pid]['attributes'];
-						$arr1[$pid]['images'] = $pimg[$pid]['image'];
+                                                $arr1[$pid]['images'] = $pimg[$pid]['image'];
+                                                $arr1[$pid]['vdetail'] = $rates[$pid];
 					}
 
 					while($row2=$this->fetchData($pimgres))
@@ -1334,7 +1361,7 @@
           $page   = ($params['page'] ? $params['page'] : 1);
           $limit  = ($params['limit'] ? $params['limit'] : 15);
             
-            $sql = "SELECT * FROM tbl_product_master WHERE product_id=".$params['prdid']." AND active_flag!=2";
+            $sql = "SELECT * FROM tbl_product_master WHERE product_id=".$params['prdid']." AND active_flag <> 2";
             if (!empty($page))
             {
                 $start = ($page * $limit) - $limit;

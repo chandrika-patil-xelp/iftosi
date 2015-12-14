@@ -109,7 +109,12 @@
                                                                                                         }
                                                                                                         
 ?>
-													<div class="detValue fmOpenB fLeft"><span>&#8377;</span><?php echo number_format(($val['attributes']['gold_weight']*$metal_rate),2);?></div>
+													<div class="detValue fmOpenB fLeft"><span>&#8377;</span><?php
+                                                                                                        $price = round(($val['attributes']['gold_weight']*$metal_rate));
+                                                                                                        echo $comm->IND_money_format($price);
+                                                                                                        ?></div>
+                                                                                                        
+                                                                                                        
 												</div>
 											</div>
 											</a>

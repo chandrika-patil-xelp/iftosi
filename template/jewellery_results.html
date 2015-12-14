@@ -215,7 +215,10 @@
                                         <div class='prdPrice fLeft'>
                                             <div class="detComm">
                                                 <div class="detLabel fmOpenB fLeft">PRICE</div>
-                                                <div class="detValue fmOpenB fLeft"><span>&#8377;</span><?php echo $val['attributes']['price'];?></div>
+                                                <div class="detValue fmOpenB fLeft"><span>&#8377;</span><?php $price=round($val['attributes']['price']);
+                                                                                                              echo $price = $comm->IND_money_format($price);
+                                                                                                        ?>
+                                                </div>
                                             </div>
                                         </div>
 										</a>
@@ -246,9 +249,9 @@
     <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['jqrynum']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['hammer']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['comm']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['result']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['head']; ?>"></script>
-    <script type="text/javascript" src="<?= $jvs['comm']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['filter']; ?>"></script>
 </body>
 </html>

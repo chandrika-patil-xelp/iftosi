@@ -60,7 +60,12 @@
 												<div class='prdPrice fLeft'>
 													<div class="detComm">
 														<div class="detLabel fmOpenB fLeft">BEST PRICE</div>
-														<div class="detValue fmOpenB fLeft"><span>&#8377;</span><?php echo number_format((($val['pprice'] * $dollarValue)*$val['attributes']['carat']), 2); ?></div>
+                                                                                                                <?php if(!empty($val['vdetail']['dollar_rate']) && $val['vdetail']['dollar_rate'] !== '0.00'){ $vrate = $val['vdetail']['dollar_rate']; } else { $vrate = $dollarValue; } ?>
+                                                                                                                <?php $price = (($val['pprice'] * $vrate)*$val['attributes']['carat']); 
+                                                                                                                      $price = ceil($price);
+                                                                                                                      $price = $comm->IND_money_format($price);
+                                                                                                               ?>
+														<div class="detValue fmOpenB fLeft"><span>&#8377;</span><?=$price; ?></div>
 													</div>
 												</div>
 												<div class='prdActions fLeft'>
