@@ -600,3 +600,5 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 .rateDiv { height: 40px;line-height: 40px;}
 .rateDiv span { padding:0 10px 0 8px; border-right: 1px solid #fff;}
 .rateDiv span:last-child { padding:0 0 0 8px; border: none;}
+
+.textOverflow{overflow: hidden;white-space:nowrap; text-overflow: ellipsis;}
