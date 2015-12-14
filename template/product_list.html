@@ -103,8 +103,8 @@ function loadProductsCallback(res,pgno) {
             str += '<span class="upSpan">' + barcode + '</span>';
             str += '<span class="lwSpan"><a href="' + DOMAIN + barcode + '/bid-' + obj['id'] + '" target="_blank">View Details</a></span>';
             str += '</div>';
-            str += '<div class="btype fLeft">'+ obj['orgName'] +'</div>';
-            str += '<div class="catg fLeft">'+ obj['category'] +'</div>';
+            str += '<div class="btype fLeft textOverflow">'+ obj['orgName'] +'</div>';
+            str += '<div class="catg fLeft textOverflow">'+ obj['category'] +'</div>';
             str += '<div class="shape fLeft">' + obj['total_img'] + '</div>';
             str += '<div class="date fLeft">' + obj['pend_img'] + '</div>';
             str += '<div class="shape fLeft">' + obj['appr_img'] + '</div>';
