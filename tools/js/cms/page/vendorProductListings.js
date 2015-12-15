@@ -384,7 +384,14 @@ function generateJewellList(obj) {
         var cl='';
         var pro_name = obj['product_name'];
         var shape = obj['shape'];
-        var category= obj['category'][1]['cat_name'];
+		if(obj['category'] !== undefined && obj['category'] !== null && obj['category'] !== '' && typeof obj['category'] !== 'undefined')
+		{
+			var category = obj['category'][1]['cat_name'];
+		}
+		else
+		{
+			var category = '';
+		}
         var metal = obj['metal'];
         if(category == 'Bangles/Bracelets')
         {
