@@ -830,6 +830,10 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .loginP{}
 .loginP .signupTitle{font-size:30px;line-height: 30px;}
 .vdRightCard .cntCard:last-child{display: none;}
+
+.cursorPointer {cursor: pointer!important;}
+
+
 @media only screen and (min-width: 320px) and (max-width: 767px){
     /*Header*/
         .header {height: 60px;padding: 0 15px;}

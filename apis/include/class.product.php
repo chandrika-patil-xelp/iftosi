@@ -2292,8 +2292,20 @@
 				return $results;
 			}
 
+			if(!file_exists(WEBROOT . 'image-upload/uploads/' . $product_id))
+			{
+				@mkdir(WEBROOT . 'image-upload/uploads/' . $product_id, 0755, true);
+			}
+
+			if(!is_writable(WEBROOT . 'image-upload/uploads/' . $product_id))
+			{
+				@chmod(WEBROOT . 'image-upload/uploads/' . $product_id, 0755);
+			}
+
 			$tmp_name = $params['file']["tmp_name"];
 			$name = $params['file']["name"];
+
+			$name = preg_replace("/[^a-zA-Z\.]+/", "", $name);
 
 			if(move_uploaded_file($tmp_name, WEBROOT . 'image-upload/uploads/' . $product_id . '/' . $name))
 			{

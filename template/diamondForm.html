@@ -228,10 +228,10 @@
                                                                 <input name="certno" autocomplete="false" id="certno" type="text" placeholder="eg A1B23456" maxlength="10" class="txtInput fLeft fmOpenR font14 c666" value="<?=$attr['cno'];?>">
                                                             </div>
                                             <div class="divCon2  fLeft">
-                                                                <div  class="titleDiv txtCap fLeft">Upload Certificate</div>
-                                                                <input name="certFile" autocomplete="false" id="certfile" type="file" placeholder="Upload pdf of ceritificate" onchange="uploadCert(this.value);" style="display: none;">
-                                                                <label for="certfile" class="addPrdBtn fLeft poR ripplelink ">Upload Doc</label><span id="filePath" class ="<?=($certificate_url) ? '' : 'dn';?> fLeft padRight" style="line-height:35px; padding-left: 10px" ><?=$certificate_url;?></span>
-                                                                <img src="" id="uploadurl">
+												<div  class="titleDiv txtCap fLeft">Upload Certificate</div>
+												<input name="certFile" autocomplete="false" id="certfile" type="file" placeholder="Upload pdf of ceritificate" onchange="uploadCert(this.value);" accept=".pdf" style="display: none;">
+												<label for="certfile" class="addPrdBtn fLeft poR ripplelink ">Upload Doc</label><span id="filePath" class ="<?=($certificate_url) ? '' : 'dn';?> fLeft padRight" style="line-height:35px; padding-left: 10px" ><?=$certificate_url;?></span>
+												<img src="" id="uploadurl">
                                             </div>
     <?php                                    
                                         foreach($fil['attributes'] as $key=>$values)
