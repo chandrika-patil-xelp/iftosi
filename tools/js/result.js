@@ -58,7 +58,8 @@ $(document).ready(function() {
 		
 		var sortby = $(this).attr('id');
 		var catid = $("#catid").val();
-		
+		$('#sortbyvl').val(sortby);
+                $('#pgno').val(1);
 		FR(sortby);
 		
 		
@@ -179,7 +180,12 @@ $(document).ready(function() {
 				}
 			}
 			else
-				FR(1);
+                        {
+                            if($('#sortbyvl').val())
+                                FR($('#sortbyvl').val());
+                            else
+                                FR(1);
+                        }
 		}
 	});
 
@@ -992,7 +998,12 @@ function getResultsData(data,sortby,showtree)
 				}
 			}
 			else
-			FR(1);
+			{
+                            if($('#sortbyvl').val())
+                                FR($('#sortbyvl').val());
+                            else
+                                FR(1);
+                        }
 		}
 	});
 

@@ -917,43 +917,12 @@
 			}
 			
 			$sql = "SELECT 
-						distinct product_id as pid,
+						*,product_id as pid,
 						price						
 					FROM 
 						tbl_product_category_mapping 
 					".$where."
 					AND display_flag=1";
-			
-			switch($params['sortby'])
-			{
-				case 'pasc':
-					$sql.=" 
-							ORDER BY 
-								price ASC 
-						";
-				break;
-				
-				case 'pdesc':
-					$sql.=" 
-							ORDER BY 
-								price DESC 
-						";
-				break;
-				
-				case 'rate':
-					$sql.=" 
-							ORDER BY 
-								rating DESC 
-						";
-				break;
-				
-				default:
-					$sql.=" 
-							ORDER BY 
-								product_id ASC 
-						";
-				break;
-			}
 			
 			$res = $this->query($sql);
 			$cres=$this->numRows($res);
@@ -1106,6 +1075,7 @@
 								active_flag=1
 							".$extn."	
 							";
+                                        
 					$res = $this->query($sql);
 					if($res)
 					{
@@ -1116,6 +1086,11 @@
 					$patsql="
 							SELECT
 								distinct product_id,
+                                                                product_id as pid,
+                                                                price*carat as totalprice,
+                                                                price as jprice,
+                                                                1*(SELECT gold_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as goldrate,
+                                                                if(metal='Gold',(((((SELECT gold_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1))/995)/10)*gold_purity)*gold_weight),(((((SELECT silver_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1))/999)/1000)*gold_purity)*gold_weight)) as bprice,
 								carat,
 								color,
 								certified,
@@ -1137,9 +1112,35 @@
 							AND            
 								active_flag=1    
 							".$extn."
-							ORDER BY
-								field(product_id,".$pid.")
 							";
+                                        switch($params['sortby'])
+                                        {
+                                            case 'pasc':
+                                                    if($params['catid'] == 10000)
+                                                        $patsql.=" ORDER BY totalprice ASC ";
+                                                    else if($params['catid'] == 10002)
+                                                        $patsql.=" ORDER BY bprice ASC ";
+                                                    else
+                                                        $patsql.=" ORDER BY jprice ASC ";
+                                            break;
+
+                                            case 'pdesc':
+                                                    if($params['catid'] == 10000)
+                                                        $patsql.=" ORDER BY totalprice DESC ";
+                                                    else if($params['catid'] == 10002)
+                                                        $patsql.=" ORDER BY bprice DESC ";
+                                                    else
+                                                        $patsql.=" ORDER BY jprice DESC ";
+                                            break;
+
+                                            case 'rate':
+                                                    $patsql.=" ORDER BY rating DESC ";
+                                            break;
+
+                                            default:
+                                                    $patsql.=" ORDER BY field(product_id,".$pid."), product_id ASC ";
+                                            break;
+                                        }
 							
 					if (!empty($page))
 					{
