@@ -1372,6 +1372,7 @@
             }
             $sql2 = "SELECT 
 						product_id,
+						diamond_shape,
 						carat,
 						color,
 						certified,
@@ -1392,6 +1393,7 @@
 						td as tab,
 						gold_weight,
 						gemstone_color,
+						gemstone_type,
 						quality,
 						cr_ang as crownangle,
 						girdle,
@@ -2311,6 +2313,40 @@
 			{
 				$resp = array();
 				$error = array('code' => 1, 'msg' => 'Error uploading certificate');
+			}
+
+			$results = array('results' => $resp, 'error' => $error);
+			return $results;
+		}
+
+		public function getGemstoneTypes()
+		{
+			$resp = array();
+			$sql = "SELECT gemstone_id, gemstone_name AS name, gemstone_display_name AS display_name, active_flag FROM tbl_gemstone_master";
+			$res = $this->query($sql);
+
+			if($res)
+			{
+				while($row = $this->fetchData($res))
+				{
+					if(!empty($row) && !empty($row['gemstone_id']))
+					{
+						$resp[] = $row;
+					}
+				}
+
+				if(empty($resp))
+				{
+					$error = array('code' => 0, 'msg' => 'No result found');
+				}
+				else
+				{
+					$error = array('code' => 1, 'msg' => 'Error fetching gemstone types');
+				}
+			}
+			else
+			{
+				$error = array('code' => 1, 'msg' => 'Error fetching gemstone types');
 			}
 
 			$results = array('results' => $resp, 'error' => $error);

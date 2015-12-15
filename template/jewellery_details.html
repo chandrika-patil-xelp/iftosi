@@ -69,26 +69,58 @@
                                 <div class="infoLabel fmOpenB font12 fmOpenB">GOLD WEIGHT</div>
                                 <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['gold_weight']==''?'N/A':$prdInfo['attr_details']['gold_weight']); ?> Gms</div>
                             </div>
-                            <div class="infoCommn fLeft fmOpenR ">
-                                <div class="infoLabel fmOpenB font12 fmOpenB">NO. OF DIAMONDS</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['nofd']==''?'N/A':$prdInfo['attr_details']['nofd']); ?></div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR ">
-                                <div class="infoLabel fmOpenB font12 fmOpenB">DIAMOND WEIGHT</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['dwt']=='')?'N/A':$prdInfo['attr_details']['dwt']; ?> CTS</div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR ">
-                                <div class="infoLabel fmOpenB font12 fmOpenB">DIAMOND QUALITY</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['clarity']=='')?'N/A':$prdInfo['attr_details']['clarity']; ?></div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR ">
-                                <div class="infoLabel fmOpenB font12 fmOpenB">GEMSTONES WEIGHT</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['gemwt']=='')?'N/A':$prdInfo['attr_details']['gemwt']; ?> CTS</div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR">
-                                <div class="infoLabel fmOpenB  font12">CERTIFIED BY</div>
-                                <div class="infoValue c666 font25 fmOpenR"><?php echo ($prdInfo['attr_details']['certified']=='')?'N/A':$prdInfo['attr_details']['certified']; ?></div>
-                            </div>
+<?php
+							if(!empty($prdInfo['attr_details']['diamond_shape']) && $prdInfo['attr_details']['diamond_shape'] !== 'null' && $prdInfo['attr_details']['diamond_shape'] !== 'undefined')
+							{
+?>
+								<div class="infoCommn fLeft fmOpenR">
+									<div class="infoLabel fmOpenB font12 fmOpenB">DIAMOND SHAPE</div>
+									<div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['diamond_shape']==''?'N/A':$prdInfo['attr_details']['diamond_shape']); ?></div>
+								</div>
+								<div class="infoCommn fLeft fmOpenR ">
+									<div class="infoLabel fmOpenB font12 fmOpenB">NO. OF DIAMONDS</div>
+									<div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['nofd']==''?'N/A':$prdInfo['attr_details']['nofd']); ?></div>
+								</div>
+								<div class="infoCommn fLeft fmOpenR ">
+									<div class="infoLabel fmOpenB font12 fmOpenB">DIAMOND WEIGHT</div>
+									<div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['dwt']=='')?'N/A':$prdInfo['attr_details']['dwt']; ?> CTS</div>
+								</div>
+								<div class="infoCommn fLeft fmOpenR ">
+									<div class="infoLabel fmOpenB font12 fmOpenB">DIAMOND QUALITY</div>
+									<div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['clarity']=='')?'N/A':$prdInfo['attr_details']['clarity']; ?></div>
+								</div>
+<?php
+							}
+?>
+
+<?php
+							if(!empty($prdInfo['attr_details']['gemstone_type']) && $prdInfo['attr_details']['gemstone_type'] !== 'null' && $prdInfo['attr_details']['gemstone_type'] !== 'undefined')
+							{
+								$prdInfo['attr_details']['gemstone_color'] = strtoupper($prdInfo['attr_details']['gemstone_color']);
+?>
+								<div class="infoCommn fLeft fmOpenR ">
+									<div class="infoLabel fmOpenB font12 fmOpenB">GEMSTONES TYPE</div>
+									<div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['gemstone_type']=='')?'N/A':$prdInfo['attr_details']['gemstone_type']; ?></div>
+								</div>
+								<div class="infoCommn fLeft fmOpenR ">
+									<div class="infoLabel fmOpenB font12 fmOpenB">GEMSTONES COLOR</div>
+									<div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['gemstone_color']=='')?'N/A':$prdInfo['attr_details']['gemstone_color']; ?></div>
+								</div>
+								<div class="infoCommn fLeft fmOpenR ">
+									<div class="infoLabel fmOpenB font12 fmOpenB">GEMSTONES WEIGHT</div>
+									<div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['gemwt']=='')?'N/A':$prdInfo['attr_details']['gemwt']; ?> CTS</div>
+								</div>
+								<div class="infoCommn fLeft fmOpenR ">
+									<div class="infoLabel fmOpenB font12 fmOpenB">NO. OF GEMSTONES</div>
+									<div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['num_gemstones']=='')?'N/A':$prdInfo['attr_details']['num_gemstones']; ?></div>
+								</div>
+<?php
+							}
+?>
+							<div class="infoCommn fLeft fmOpenR">
+								<div class="infoLabel fmOpenB  font12">CERTIFIED BY</div>
+								<div class="infoValue c666 font25 fmOpenR"><?php echo ($prdInfo['attr_details']['certified']=='')?'N/A':$prdInfo['attr_details']['certified']; ?></div>
+							</div>
                         </div>
                     </div>
                 </div>

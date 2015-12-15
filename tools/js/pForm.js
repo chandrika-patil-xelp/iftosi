@@ -4,11 +4,20 @@ function changeGemstoneType(obj)
 
 	if(gemType !== undefined && gemType !== null && gemType !== '' && typeof gemType !== 'undefined')
 	{
+		if(gemType == 'other')
+		{
+			$('.otherGemstoneProp').removeClass('dn');
+		}
+		else
+		{
+			$('.otherGemstoneProp').addClass('dn');
+		}
 		$('.gemstoneProp').removeClass('dn');
 	}
 	else
 	{
 		$('.gemstoneProp').addClass('dn');
+		$('.otherGemstoneProp').addClass('dn');
 	}
 }
 
@@ -195,8 +204,14 @@ function validateJForm()
 	var barcode=$('#barcode').val();
 	var prdprice=$('#prdprice').val();
 	var othercert=$('#other_cerificate').val();
+	var other_gem_type = $('#other_gem_type').val();
 	var subcat = '';
 	var isValid = true;
+
+	if(gemstone_type !== undefined && gemstone_type !== null && gemstone_type !== '' && typeof gemstone_type !== 'undefined' && gemstone_type === 'other')
+	{
+		gemstone_type = other_gem_type;
+	}
 
 	$("input[name='subcat_type']:checked").each(function() {
 		if(subcat !== '')

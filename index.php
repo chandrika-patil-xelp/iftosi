@@ -480,6 +480,20 @@ switch ($action) {
                 $res1 = $comm->executeCurl($url1);
                 $data1 = $res1['results'];
                 //echo "<pre>".print_r($prdInfo); die;
+
+				$gemsUrl = APIDOMAIN . 'index.php?action=getGemstoneTypes';
+                $gemsRes = $comm->executeCurl($gemsUrl);
+                $gemsAttrs = $gemsRes['results'];
+
+				foreach($gemsAttrs as $key => $value)
+				{
+					if(strtolower($prdInfo['attr_details']['gemstone_type']) == $value['name'])
+					{
+						$prdInfo['attr_details']['gemstone_type'] = $value['display_name'];
+						break;
+					}
+				}
+
                 include 'template/jewellery_details.html';
                 break;
             case 'diamond_Form':
@@ -543,6 +557,10 @@ switch ($action) {
 				$shapeUrl = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=10000';
                 $shapeRes = $comm->executeCurl($shapeUrl);
                 $shapeAttrs = $shapeRes['results'];
+
+				$gemsUrl = APIDOMAIN . 'index.php?action=getGemstoneTypes';
+                $gemsRes = $comm->executeCurl($gemsUrl);
+                $gemsAttrs = $gemsRes['results'];
 
                 include 'template/jewelleryForm.html';
                 break;

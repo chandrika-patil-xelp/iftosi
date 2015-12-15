@@ -1595,6 +1595,12 @@ echo '</pre>';
 			$res = $obj->uploadCertificate($params);
 		break;
 
+		case 'getGemstoneTypes':
+			include APICLUDE . 'class.product.php';
+			$obj = new product($db['iftosi']);
+			$res = $obj->getGemstoneTypes();
+		break;
+
         default :
 
         break;

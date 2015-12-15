@@ -167,6 +167,16 @@
 						<div  class="titleDiv txtCap fLeft">Diamond Shape</div>
 
 <?php
+						if(empty($attr['diamond_shape']))
+						{
+							$attr['color'] = $attr['clarity'] = $attr['dwt'] = $attr['nofd'] = '';
+						}
+
+						if(empty($attr['gemstone_type']))
+						{
+							$attr['gemstone_color'] = $attr['gemwt'] = $attr['num_gemstones'] = '';
+						}
+
 						foreach($shapeAttrs['attributes'] as $key => $value)
 						{
 							if(strtolower($value['attribute_name']) == 'shape')
@@ -181,7 +191,7 @@
 												foreach ($filval as $ky => $vl)
 												{
 ?>
-													<div id="<?php echo $vl; ?>" class="shapeComm transition300 ripplelink <?php echo $vl; ?>">
+													<div id="<?php echo $vl; ?>" class="shapeComm transition300 ripplelink <?php echo $vl; ?> <?php echo (strtolower($attr['diamond_shape']) == strtolower($vl)) ? 'shapeSelected' : '';?>">
 													</div>
 <?php
 												}
@@ -196,7 +206,7 @@
 ?>
 					</div>
 
-                    <div class="divCon fLeft dAuto dn diamondProp">
+                    <div class="divCon fLeft dAuto <?php echo ($attr['diamond_shape']) ? '' : 'dn'; ?> diamondProp">
                         <div  class="titleDiv txtCap fLeft">Diamond Color</div>
                         <div class='radioCont fLeft'> 
                             <div class="checkDiv fLeft">
@@ -250,7 +260,7 @@
                     </div>
                         </div>
                         
-                    <div class="divCon  fLeft jw3 dn diamondProp">
+                    <div class="divCon  fLeft jw3 <?php echo ($attr['diamond_shape']) ? '' : 'dn'; ?> diamondProp">
                         <div  class="titleDiv txtCap fLeft">Diamond Quality</div>
                         <div class='radioCont fLeft'> 
                             <div class="checkDiv fLeft">
@@ -288,12 +298,12 @@
                         </div>
                     </div>
                         
-                    <div class="divCon2 fLeft dn diamondProp">
+                    <div class="divCon2 fLeft <?php echo ($attr['diamond_shape']) ? '' : 'dn'; ?> diamondProp">
                         <div  class="titleDiv txtCap fLeft">Diamond Weight (in CTS)</div>
                         <input name="diamonds_weight" id="diamondweight" type="text" autocomplete="false" placeholder=" eg. 1.25" maxlength="8" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['dwt'];?>" class="txtInput fLeft fmOpenR font14 c666">
                     </div>
 
-					<div class="divCon2 fLeft dn diamondProp">
+					<div class="divCon2 fLeft <?php echo ($attr['diamond_shape']) ? '' : 'dn'; ?> diamondProp">
                         <div  class="titleDiv txtCap fLeft">No. Of Diamonds</div>
                         <input name="no_diamonds" id="no_diamonds" type="text" placeholder=" eg. 10" autocomplete="false" value="<?=$attr['nofd'];?>" onkeypress="common.isNumberKey(event);" class="txtInput fLeft fmOpenR font14 c666">
                     </div>
@@ -317,22 +327,45 @@
                         <div class="titleDiv txtCap fLeft">Gemstone Type</div>
 						<select id="gemstone_type" onchange="changeGemstoneType(this);" class="txtInput fLeft fmOpenR font14 c666">
 							<option value="">Select Gemstone Type</option>
-							<option value="agate">Agate</option>
+<?php
+							$gemsAttrsArr = array();
+							foreach($gemsAttrs as $key => $value)
+							{
+								$gemsAttrsArr[] = $value['name'];
+?>
+								<option value="<?php echo $value['name']; ?>" <?php echo (strtolower($attr['gemstone_type']) == strtolower($value['name'])) ? 'selected' : ''; ?>><?php echo $value['display_name']; ?></option>
+<?php
+							}
+?>
+							<option value="other" <?php echo (!empty($attr['gemstone_type']) && !in_array($attr['gemstone_type'], $gemsAttrsArr)) ? 'selected' : ''; ?>>Others</option>
+							<!--<option value="agate">Agate</option>
 							<option value="alexandrite">Alexandrite</option>
 							<option value="amazonite">Amazonite</option>
 							<option value="amethyst">Amethyst</option>
 							<option value="chrysocolla">Chrysocolla</option>
 							<option value="moonstone">Moonstone</option>
 							<option value="pearl">Pearl</option>
-							<option value="peridot">Peridot</option>
+							<option value="peridot">Peridot</option>-->
 						</select>
                     </div>
+
+<?php                          
+                    if(!empty($attr['gemstone_type']))
+                    {
+?>
+						<div class="divCon fLeft <?php echo (!empty($attr['gemstone_type']) && !in_array($attr['gemstone_type'], $gemsAttrsArr)) ? '' : 'dn'; ?> otherGemstoneProp">
+							<div class="titleDiv txtCap fLeft">Other Gemstone Type</div>
+							<input name="other_gem_type" type="text" id="other_gem_type" autocomplete="false" placeholder=" eg. ABC" value="<?php echo (!empty($attr['gemstone_type']) && !in_array($attr['gemstone_type'], $gemsAttrsArr)) ? $attr['gemstone_type'] : ''; ?>" class="txtInput fLeft fmOpenR font14 c666">
+						</div>
+<?php 
+                    }
+?>
 
 <?php                          
                     if(strtolower($catres[3]['attr_name'])=='gemstone_color')
                     {
 ?>
-						<div class="divCon fLeft jw3 dn gemstoneProp">
+						<div class="divCon fLeft jw3 <?php echo ($attr['gemstone_type']) ? '' : 'dn'; ?> gemstoneProp">
 							<div  class="titleDiv txtCap fLeft"><?=$catres[3]['attr_display_name']?></div>
 								<div class='radioCont fLeft'>     
 <?php
@@ -354,12 +387,18 @@
                     }
 ?>
 
-					<div class="divCon2 fLeft dn gemstoneProp">
+<?php
+					$attr['gemwt'] = (!empty($attr['gemwt']) && strval($attr['gemwt']) !== '0.00' && strval($attr['gemwt']) !== '0.000') ? $attr['gemwt'] : '';
+?>
+					<div class="divCon2 fLeft <?php echo ($attr['gemstone_type']) ? '' : 'dn'; ?> gemstoneProp">
                         <div  class="titleDiv txtCap fLeft">Gemstone Weight (in CTS)</div>
                         <input name="gemstone_weight" type="text" id="gemweight" autocomplete="false" placeholder=" eg. 1.25" maxlength="8" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['gemwt'];?>" class="txtInput fLeft fmOpenR font14 c666">
                     </div>
 
-					<div class="divCon2 fLeft dn gemstoneProp">
+<?php
+					$attr['num_gemstones'] = (!empty($attr['num_gemstones']) && strval($attr['num_gemstones']) !== '0.00' && strval($attr['num_gemstones']) !== '0.000') ? $attr['num_gemstones'] : '';
+?>
+					<div class="divCon2 fLeft <?php echo ($attr['gemstone_type']) ? '' : 'dn'; ?> gemstoneProp">
                         <div  class="titleDiv txtCap fLeft">No. of Gemstones</div>
                         <input name="num_gemstones" type="text" id="num_gemstones" autocomplete="false" placeholder=" eg. 10" maxlength="3" onkeypress="return common.isNumberKey(event);" value="<?=$attr['num_gemstones'];?>" class="txtInput fLeft fmOpenR font14 c666">
                     </div>
