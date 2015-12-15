@@ -505,7 +505,7 @@
 		{
 			$pid = $params['pid'];
 			
-			$sql = "SELECT product_image FROM tbl_product_image_mapping WHERE product_id = ".$pid." AND active_flag = 1";
+			$sql = "SELECT product_image FROM tbl_product_image_mapping WHERE product_id = ".$pid." AND active_flag in (0, 1)";
 			$res = $this->query($sql);
 			$cnt = $this->numRows($res);
 			
@@ -518,7 +518,7 @@
 						$sql = "UPDATE 
 									tbl_product_image_mapping 
 								SET 
-									active_flag = 0 
+									active_flag = 2 
 								WHERE 
 									product_id = ".$pid." 
 								AND 

@@ -76,10 +76,35 @@ $.ajax({url: DOMAIN + "apis/index.php?action=getAllRatesByVID&vid=" + uid, succe
     goldRate = obj['results']['gold_rate'];
     silverRate = obj['results']['silver_rate'];
     dollarRate = obj['results']['dollar_rate'];
-    $('#dollar_rate').val(dollarRate);
-    $('#gold_rate1').val(goldRate);
-    $('#silver_rate1').val(silverRate);
-    $('#silver_rate').val(silverRate);
+
+	if(dollarRate !== undefined && dollarRate !== null && dollarRate !== '' && typeof dollarRate !== 'undefined' && dollarRate !== 0.00 && dollarRate !== '0.00')
+	{
+		$('#dollar_rate').val(dollarRate);
+	}
+	else
+	{
+		$('#dollar_rate').val('');
+	}
+
+	if(goldRate !== undefined && goldRate !== null && goldRate !== '' && typeof goldRate !== 'undefined' && goldRate !== 0.00 && goldRate !== '0.00')
+	{
+		$('#gold_rate1').val(goldRate);
+	}
+	else
+	{
+		$('#gold_rate1').val('');
+	}
+
+	if(silverRate !== undefined && silverRate !== null && silverRate !== '' && typeof silverRate !== 'undefined' && silverRate !== 0.00 && silverRate !== '0.00')
+	{
+		$('#silver_rate1').val(silverRate);
+		$('#silver_rate').val(silverRate);
+	}
+	else
+	{
+		$('#silver_rate1').val('');
+		$('#silver_rate').val('');
+	}
 }}); 
  
 
@@ -409,7 +434,7 @@ $('#upProds').click(function () {
     $.ajax({url: common.APIWebPath() + "index.php?action=getDollerRate&vid="+ uid, success: function (result) {
         var obj = jQuery.parseJSON(result);
             var dollarRate=obj['results']['dollar_rate'];
-            if(dollarRate!=0.00) {
+            if(dollarRate != 0.00) {
                 $('#overlay,#uploadDiv').removeClass('dn');
                 setTimeout(function () {
                     $('#overlay').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
@@ -442,7 +467,15 @@ function showDollarRateForm() {
         var obj = jQuery.parseJSON(result);
         var errCode = obj['error']['Code'];
         if (errCode == 0) {
-            $('#dollar_rate').val(obj['results']['dollar_rate']);
+			var dlrRate = obj['results']['dollar_rate'];
+			if(dlrRate !== undefined && dlrRate !== null && dlrRate !== '' && typeof dlrRate !== 'undefined' && dlrRate !== '0.00' && dlrRate !== 0.00)
+			{
+				$('#dollar_rate').val(obj['results']['dollar_rate']);
+			}
+			else
+			{
+				$('#dollar_rate').val('');
+			}
         }
     }});
 }
@@ -642,26 +675,20 @@ function showgoldSilverRateForm() {
 function updateGoldSilverRate() {
     var gold_rate = $("#gold_rate1").val();
     gold_rate=parseFloat(gold_rate);
-    if(gold_rate=='' || gold_rate <= 0 || gold_rate == undefined || isNaN(gold_rate) == true){
-        common.toast(0,'Gold Rate is Must to fill');
-        return false;
-    }
-    else {
     $.ajax({url: DOMAIN + "/apis/index.php?action=updateGoldRate&vid="+uid+"&goldRate="+gold_rate, success: function(result) {
-                var obj = jQuery.parseJSON(result);
-                var errCode = obj['error']['code'];
-                if(errCode==0) {
-                    common.toast(1,obj['error']['Msg']);
-                    $('#goldRateSpan').html('Gold Rate : &#8377; '+gold_rate);
-                    //window.location.reload(1);
-                    customStorage.readFromStorage('rateErr');
-                    closeAllForms();
-                } else if(errCode==1) {
-                    common.toast(0,obj['error']['Msg']);
-                }
-            }
-        });
-    }
+			var obj = jQuery.parseJSON(result);
+			var errCode = obj['error']['code'];
+			if(errCode==0) {
+				common.toast(1,obj['error']['Msg']);
+				$('#goldRateSpan').html('Gold Rate : &#8377; '+gold_rate);
+				//window.location.reload(1);
+				customStorage.readFromStorage('rateErr');
+				closeAllForms();
+			} else if(errCode==1) {
+				common.toast(0,obj['error']['Msg']);
+			}
+		}
+	});
 }
 
 
