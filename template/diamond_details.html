@@ -139,6 +139,17 @@
                                 <div class="infoLabel fmOpenB  font12">% DISCOUNT</div>
                                 <div class="infoValue c666 font25 fmOpenR"><?php echo str_replace('-', '', $data['attr_details']['discount']); ?>%</div>
                             </div>
+<?php
+							if(!empty($certificate_url))
+							{
+?>
+								<div class="infoCommn fLeft fmOpenR">
+									<div class="infoLabel fmOpenB  font12">Certificate</div>
+									<div class="infoValue c666 font25 fmOpenR" onclick="common.showCertificate('<?php echo DOMAIN . $data['attr_details']['certificate_url']; ?>');"><?php echo $certificate_url; ?></div>
+								</div>
+<?php
+							}
+?>
                         </div>
                     </div>
                 </div>

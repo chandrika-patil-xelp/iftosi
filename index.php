@@ -416,6 +416,9 @@ switch ($action) {
                 $vndrDtls['fulladdress'] = implode(', ', $vndrDtls['fulladdress']);
                 $vndrAddr = explode(',', $vndrDtls['fulladdress']);
                 //echo "<pre>";print_r($data);die;
+				$certificate_url = $data['attr_details']['certificate_url'];
+				$certificate_url = explode('/', $certificate_url);
+				$certificate_url = $certificate_url[count($certificate_url) - 1];
                 include 'template/diamond_details.html';
                 break;
             case 'bullion_details':

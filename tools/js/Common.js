@@ -505,6 +505,12 @@ function Common() {
 
 	return m.split("").reverse().join("");
     };    
+
+	this.showCertificate = function(url)
+	{
+		var win = window.open(url, '_blank');
+		win.focus();
+	}
 }
 function showVendorProfile()
 {

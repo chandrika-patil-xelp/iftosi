@@ -381,13 +381,16 @@ function validateJForm()
 		});
 
 		var diamondShapeVal = '';
-		
-		diamondShape.each(function() {
-			if($(this).hasClass('shapeSelected'))
-			{
-				diamondShapeVal = $(this).attr('id');
-			}
-		});
+
+		if(diamondShape !== undefined && diamondShape !== null && diamondShape !== '' && diamondShape.hasClass('shapeSelected'))
+		{
+			diamondShape.each(function() {
+				if($(this).hasClass('shapeSelected'))
+				{
+					diamondShapeVal = $(this).attr('id');
+				}
+			});
+		}
 
 		var values = new Array();
 		values[0] = "shape|@|"+encodeURIComponent(shapeVal);
