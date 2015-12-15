@@ -100,17 +100,17 @@
 
 					if(strtolower($val['attribute_name']) == 'price' && $page == 'diamonds')
 				{
-					$val1 = $val['attribute_range'];                                        
+					$val1 = $fil[0]['attribute_range'];                                        
 					$expdCarat = explode("-",$val1);
 					$expdCarat0 = $expdCarat[0];
 					$expdCarat1 = $expdCarat[1];
 					$expd0 = floor(($expd[0] * $dollarValue) * $expdCarat0);
-					//$expd[0] = $expd0;
+					$expd[0] = $expd0;
 					$expd1 = ceil(($expd[1] * $dollarValue) * $expdCarat1);
-					//$expd[1] = $expd1;
+					$expd[1] = $expd1;
 
-					$expd[0] = $expd[0] * $dollarValue;
-					$expd[1] = $expd[1] * $dollarValue;
+					//$expd[0] = $expd[0] * $dollarValue;
+					//$expd[1] = $expd[1] * $dollarValue;
 				}
 	?>
 				<input type="hidden" id="<?php echo $val['attribute_name'];?>RangeMin" value="<?php echo $expd[0];?>">

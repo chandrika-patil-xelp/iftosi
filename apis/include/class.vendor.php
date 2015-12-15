@@ -790,10 +790,6 @@ class vendor extends DB
         if($res3){
         $sql = "UPDATE tbl_product_category_mapping SET display_flag=2 WHERE product_id=" . $params['prdid'];
         $res = $this->query($sql);}
-        if($res4){
-        $sql = "UPDATE tbl_designer_product_mapping SET active_flag=2 WHERE product_id=".$params['prdid'];
-        $res = $this->query($sql);
-        }
         if ($res) {
             $arr = array();
             $err = array('Code' => 0, 'Msg' => 'Product deleted successfully!');

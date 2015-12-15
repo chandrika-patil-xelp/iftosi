@@ -5,7 +5,7 @@
         <form id='dAddForm' method="POST" name="dAddForm" enctype="multipart/form-data">
             <div class="wrapper">
                 <div class="wrapperMax">
-                    <div class="vCommTitle fLeft fmOpenL">Select a diamond shape you want to add</div>
+                    <div class="vCommTitle fLeft fmOpenL">Select a diamond shape you want to add *</div>
                     <div class="formContainer fmOpenR">
                         <div class="shapesCont resultsPage showHide">
                             <div class="wrapperMax">
@@ -56,7 +56,7 @@
                                       -->
 <div class="<?=(!empty($attr['product_id']) == True) ? '' : 'dn';?>" id="allcontent">                                    
                         <div class="divCon  fLeft dAuto">
-                            <div  class="titleDiv txtCap fLeft">Color</div>
+                            <div  class="titleDiv txtCap fLeft">Color *</div>
                             <div class='radioCont fLeft'> 
 <?php
                                         foreach($fil['attributes'] as $key=>$values)
@@ -80,7 +80,7 @@
                                 </div>
                          </div>
                         <div class="divCon  fLeft dAuto">
-                            <div  class="titleDiv txtCap fLeft">Clarity</div>
+                            <div  class="titleDiv txtCap fLeft">Clarity *</div>
                             <div class='radioCont fLeft'> 
 <?php
                                         foreach($fil['attributes'] as $key=>$values)
@@ -111,7 +111,7 @@
                                             {
 ?>
                                             <div class="divCon  fLeft d5">
-                                             <div  class="titleDiv txtCap fLeft">Cut</div>
+                                             <div  class="titleDiv txtCap fLeft">Cut *</div>
                                                 <div class='radioCont fLeft'>    
 <?php
                                                     $attr_values = $values['attribute_values'];
@@ -136,7 +136,7 @@
                                             {
 ?>                        
                                             <div class="divCon  fLeft d5">
-                                                <div  class="titleDiv txtCap fLeft"><?=$values['attribute_disp_name'];?></div>
+                                                <div  class="titleDiv txtCap fLeft"><?=$values['attribute_disp_name'];?> *</div>
                                                         <div class='radioCont fLeft'> 
 <?php
                                                 $attr_values = $values['attribute_values'];
@@ -161,7 +161,7 @@
                                             {
 ?>                  
                                                 <div class="divCon  fLeft d5">
-                                                    <div  class="titleDiv txtCap fLeft">Polish</div>
+                                                    <div  class="titleDiv txtCap fLeft">Polish *</div>
                                                         <div class='radioCont fLeft'> 
 <?php
                                                             $attr_values = $values['attribute_values'];
@@ -186,7 +186,7 @@
                                             {
 ?>                               
                                                 <div class="divCon  fLeft d5">
-                                                    <div  class="titleDiv txtCap fLeft">Fluorescence</div>
+                                                    <div  class="titleDiv txtCap fLeft">Fluorescence *</div>
                                                         <div class='radioCont fLeft'> 
 <?php
                                                             $attr_values = $values['attribute_values'];
@@ -207,7 +207,7 @@
                                         }
                                         ?>
                                          <div class="divCon  fLeft dAuto">
-                                            <div  class="titleDiv txtCap fLeft">Certificate</div>
+                                            <div  class="titleDiv txtCap fLeft">Certificate *</div>
                                                 <div class='radioCont fLeft'> 
                                                     <div class="checkDiv fLeft">
                                                         <input type="radio" autocomplete="false" name='Certficate' <?=($attr['certified'] == 'GIA') ? 'checked' : '';?> class="filled-in" id="Certficate_GIA" value="GIA">
@@ -224,11 +224,11 @@
                                                 </div>
                                         </div>
                                         <div class="divCon2  fLeft">
-                                                                <div  class="titleDiv txtCap fLeft">Certificate No.</div>
+                                                                <div  class="titleDiv txtCap fLeft">Certificate No. *</div>
                                                                 <input name="certno" autocomplete="false" id="certno" type="text" placeholder="eg A1B23456" maxlength="10" class="txtInput fLeft fmOpenR font14 c666" value="<?=$attr['cno'];?>">
                                                             </div>
                                             <div class="divCon2  fLeft">
-												<div  class="titleDiv txtCap fLeft">Upload Certificate</div>
+												<div  class="titleDiv txtCap fLeft">Upload Certificate *</div>
 												<input name="certFile" autocomplete="false" id="certfile" type="file" placeholder="Upload pdf of ceritificate" onchange="uploadCert(this.value);" accept=".pdf" style="display: none;">
 												<label for="certfile" class="addPrdBtn fLeft poR ripplelink ">Upload Doc</label><span id="filePath" class ="<?=($certificate_url) ? '' : 'dn';?> fLeft padRight" style="line-height:35px; padding-left: 10px" ><?=$certificate_url;?></span>
 												<img src="" id="uploadurl">
@@ -240,14 +240,14 @@
                                             {    
 ?>
                                                 <div class="divCon2  fLeft">
-                                                    <div  class="titleDiv txtCap fLeft">Carat Weight</div>
+                                                    <div  class="titleDiv txtCap fLeft">Carat Weight *</div>
                                                     <input name="carat_weight" autocomplete="false" id="caratweight" type="text" placeholder="eg. 1.00" class="txtInput fLeft fmOpenR font14 c666" maxlength="5"  onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['carat'];?>" onkeypress="return common.isDecimalKey(event)">
                                                 </div>
 <?php                                            }
                                         }   
 ?>                                            
                         <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Measurement</div>
+                            <div  class="titleDiv txtCap fLeft">Measurement *</div>
                             <div class="mInputDiv fLeft">
 <?php
                                     $measurement=explode('*',$attr['measurement']);
@@ -260,40 +260,40 @@
                             </div>
                         </div>
                         <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Table</div>
+                            <div  class="titleDiv txtCap fLeft">Table *</div>
                             <input name="table" id="table" type="text" autocomplete="false" placeholder=" eg. 56" onkeypress="return common.isDecimalNumber(event,this.value);" maxlength="5" class="txtInput fLeft fmOpenR font14 c666" value="<?=$attr['tab'];?>">
                         </div>
                         <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Crown Angle</div>
+                            <div  class="titleDiv txtCap fLeft">Crown Angle *</div>
                             <input name="crown_angle" id="crownangle" autocomplete="false" type="text" placeholder=" eg. 41" onkeypress="return common.isDecimalNumber(event,this.value);" maxlength="5" class="txtInput fLeft fmOpenR font14 c666" value="<?=$attr['crownangle'];?>">
                         </div>
                         <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Girdle</div>
+                            <div  class="titleDiv txtCap fLeft">Girdle *</div>
                             <input name="girdle" id="girdle" type="text" autocomplete="false" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666" maxlength="5" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['girdle'];?>">
                         </div>
 
                         <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Bar Code</div>
+                            <div  class="titleDiv txtCap fLeft">Bar Code *</div>
                             <input name="barcode" id="barcode" type="text" autocomplete="false" placeholder=" eg. ALXPK12" class="txtInput fLeft fmOpenR font14 c666" maxlength="20" value="<?=$pdet['product_barcode'];?>">
                         </div>
                         <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Lot Number</div>
+                            <div  class="titleDiv txtCap fLeft">Lot Number *</div>
                             <input name="lot_no" id="lotnumber" autocomplete="false" type="text" placeholder=" eg. 56" onkeypress="return common.isDecimalNumber(event,this.value);" maxlength="10" class="txtInput fLeft fmOpenR font14 c666" value="<?=$pdet['product_lotno'];?>">
                         </div>
                         <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Lot Reference</div>
+                            <div  class="titleDiv txtCap fLeft">Lot Reference *</div>
                             <input name="lot_ref" id="lotreference" autocomplete="false" type="text" placeholder=" eg. iftosi -012" class="txtInput fLeft fmOpenR font14 c666" maxlength="10" value="<?=$pdet['product_lotref'];?>">
                         </div>
                         <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Base Price(in $)</div>
+                            <div  class="titleDiv txtCap fLeft">Base Price(in $) *</div>
                             <input name="base_price" id="baseprice" autocomplete="false" type="text" placeholder=" eg. 120000" class="txtInput fLeft fmOpenR font14 c666" maxlength="16" onkeypress="return common.isDecimalNumber(event,this.value);" onkeyup="calculatePrice()" value="<?=$attr['baseprice'];?>">
                         </div>
                         <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">% Back</div>
+                            <div  class="titleDiv txtCap fLeft">% Back *</div>
                             <input name="discount" id="discount" type="text" placeholder=" eg. 25%" autocomplete="false"  class="txtInput fLeft fmOpenR font14 c666" maxlength="5" minlength="1" onkeyup="calculatePrice()" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['discount'];?>">
                         </div>
                         <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Price</div>
+                            <div  class="titleDiv txtCap fLeft">Price *</div>
                             <input name="price" id="prdprice" type="text" placeholder=" eg. 1200000" autocomplete="false" class="txtInput fLeft fmOpenR font14 c666" readonly maxlength="16" onkeypress="return common.isDecimalNumber(event,this.value);" onChange="(function(el){el.value=parseFloat(el.value).toFixed(15);})(this);" value="<?=$pdet['product_price'];?>">
                         </div>
                         <div class="btnCont fLeft">

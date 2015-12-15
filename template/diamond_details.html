@@ -43,11 +43,8 @@
                                 <div class="prdShTitle fLeft fmOpenB">PRICE</div>
                                                         <?php 
                                                             $rate = $data['attr_details']['dollar_rate'];
-                                                            if( empty($data['attr_details']['dollar_rate']) || $data['attr_details']['dollar_rate'] == '0.00' || $data['attr_details']['dollar_rate'] == 0.00){
+                                                            if(empty($data['attr_details']['dollar_rate']) || $data['attr_details']['dollar_rate'] == '0.00' || $data['attr_details']['dollar_rate'] == 0.00){
                                                                 $rate = dollarValue;
-                                                            }
-                                                            else{
-                                                                $rate = $data['attr_details']['dollar_rate'];
                                                             }
                                                         ?>
                                 <div class="prdShType fLeft fmOpenL"><span>&#8377;</span>
@@ -133,7 +130,9 @@
                             </div>
                             <div class="infoCommn fLeft fmOpenR">
                                 <div class="infoLabel fmOpenB  font12">BASE Price</div>
-                                <div class="infoValue c666 font25 fmOpenR"><?php echo number_format((($data['attr_details']['baseprice'] * $data['attr_details']['dollar_rate'])*$data['attr_details']['carat']), 0); ?></div>
+                                <div class="infoValue c666 font25 fmOpenR"><?php $bprice = ceil((($data['attr_details']['baseprice'] * $data['attr_details']['dollar_rate'])*$data['attr_details']['carat']));
+                                                                                $bprice = $comm->IND_money_format($bprice);  
+                                                                                echo $bprice;?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR">
                                 <div class="infoLabel fmOpenB  font12">% DISCOUNT</div>

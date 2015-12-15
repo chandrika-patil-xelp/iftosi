@@ -5,7 +5,7 @@
         <form id='jwAddForm'>
             <div class="wrapper">
             <div class="wrapperMax">
-                <div class="vCommTitle fLeft fmOpenL">Select a jewellery you want to add</div>
+                <div class="vCommTitle fLeft fmOpenL">Select a jewellery you want to add *</div>
                 <div class="formContainer fmOpenR">
                     <div class="jShapesCont resultsPage showHide fmOpenL fLeft">
                         <div class="allShapes resultsPage">
@@ -61,7 +61,7 @@
                                             
 ?>                                              
                                                 <div class="divCon  fLeft fmOpenR subCatType <?php if($attr['shape']!=$values['catname']) { echo 'dn'; } ?> " id="<?=strtolower($values['catname']);?>Type">
-                                                    <div  class="titleDiv txtCap fLeft"><?=ucwords(strtolower($values['catname']));?> Type</div>
+                                                    <div  class="titleDiv txtCap fLeft"><?=ucwords(strtolower($values['catname']));?> Type *</div>
                                                     <div class='radioCont fLeft'>
 <?php                                                        
                                                         foreach($values['subcats'] as $ky=>$val)
@@ -82,7 +82,7 @@
                                             { 
 ?>                    
                                                 <div class="divCon  fLeft fmOpenR jw5 subCatType <?php if($attr['shape']!='Bracelet') { echo 'dn'; } ?>" id="braceletType">
-                                                <div  class="titleDiv txtCap fLeft">Bracelet Type</div>
+                                                <div  class="titleDiv txtCap fLeft">Bracelet Type *</div>
                                                 <div class='radioCont fLeft'> 
 <?php                                                        
                                                 foreach($values['subcats'] as $ky=>$val)
@@ -103,7 +103,7 @@
 ?>
 <div class="<?=(!empty($attr['product_id']) == True) ? '' : 'dn';?>" id="allcontent">                     
                     <div class="divCon  fLeft jw3" id='certiicates'>
-                        <div  class="titleDiv txtCap fLeft">Certficate</div>
+                        <div  class="titleDiv txtCap fLeft">Certficate *</div>
                         <div class='radioCont fLeft'> 
 
                             <div class="checkDiv fLeft">
@@ -134,7 +134,7 @@
                     </div>
                     
                      <div class="divCon  fLeft jw3">
-                        <div  class="titleDiv txtCap fLeft">Metal</div>
+                        <div  class="titleDiv txtCap fLeft">Metal *</div>
                         <div class='radioCont fLeft'> 
                             <div class="checkDiv fLeft">
                                 <input type="radio" name='metal' class="filled-in" value="Gold" <?=($attr['metal'] == 'Gold') ? 'checked' : '';?> id="gold">
@@ -207,7 +207,7 @@
 					</div>
 
                     <div class="divCon fLeft dAuto <?php echo ($attr['diamond_shape']) ? '' : 'dn'; ?> diamondProp">
-                        <div  class="titleDiv txtCap fLeft">Diamond Color</div>
+                        <div  class="titleDiv txtCap fLeft">Diamond Color *</div>
                         <div class='radioCont fLeft'> 
                             <div class="checkDiv fLeft">
                                 <input type="radio" name='color' class="filled-in" value="D" <?=($attr['color'] == 'D') ? 'checked' : '';?> id="color_D">
@@ -261,7 +261,7 @@
                         </div>
                         
                     <div class="divCon  fLeft jw3 <?php echo ($attr['diamond_shape']) ? '' : 'dn'; ?> diamondProp">
-                        <div  class="titleDiv txtCap fLeft">Diamond Quality</div>
+                        <div  class="titleDiv txtCap fLeft">Diamond Quality *</div>
                         <div class='radioCont fLeft'> 
                             <div class="checkDiv fLeft">
                                 <input type="radio" name='clarity' class="filled-in" value="IF" <?=($attr['clarity'] == 'IF') ? 'checked' : '';?> id="clarity_IF">
@@ -299,12 +299,12 @@
                     </div>
                         
                     <div class="divCon2 fLeft <?php echo ($attr['diamond_shape']) ? '' : 'dn'; ?> diamondProp">
-                        <div  class="titleDiv txtCap fLeft">Diamond Weight (in CTS)</div>
+                        <div  class="titleDiv txtCap fLeft">Diamond Weight (in CTS) *</div>
                         <input name="diamonds_weight" id="diamondweight" type="text" autocomplete="false" placeholder=" eg. 1.25" maxlength="8" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['dwt'];?>" class="txtInput fLeft fmOpenR font14 c666">
                     </div>
 
 					<div class="divCon2 fLeft <?php echo ($attr['diamond_shape']) ? '' : 'dn'; ?> diamondProp">
-                        <div  class="titleDiv txtCap fLeft">No. Of Diamonds</div>
+                        <div  class="titleDiv txtCap fLeft">No. Of Diamonds *</div>
                         <input name="no_diamonds" id="no_diamonds" type="text" placeholder=" eg. 10" autocomplete="false" value="<?=$attr['nofd'];?>" onkeypress="common.isNumberKey(event);" class="txtInput fLeft fmOpenR font14 c666">
                     </div>
 
@@ -359,7 +359,7 @@
                     {
 ?>
 						<div class="divCon fLeft jw3 <?php echo ($attr['gemstone_type']) ? '' : 'dn'; ?> gemstoneProp">
-							<div  class="titleDiv txtCap fLeft"><?=$catres[3]['attr_display_name']?></div>
+							<div  class="titleDiv txtCap fLeft"><?=$catres[3]['attr_display_name']?> *</div>
 								<div class='radioCont fLeft'>     
 <?php
 								$gemvalues = explode(',',  strtolower($catres[3]['attr_values']));
@@ -384,7 +384,7 @@
 					$attr['gemwt'] = (!empty($attr['gemwt']) && strval($attr['gemwt']) !== '0.00' && strval($attr['gemwt']) !== '0.000') ? $attr['gemwt'] : '';
 ?>
 					<div class="divCon2 fLeft <?php echo ($attr['gemstone_type']) ? '' : 'dn'; ?> gemstoneProp">
-                        <div  class="titleDiv txtCap fLeft">Gemstone Weight (in CTS)</div>
+                        <div  class="titleDiv txtCap fLeft">Gemstone Weight (in CTS) *</div>
                         <input name="gemstone_weight" type="text" id="gemweight" autocomplete="false" placeholder=" eg. 1.25" maxlength="8" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['gemwt'];?>" class="txtInput fLeft fmOpenR font14 c666">
                     </div>
 
@@ -392,7 +392,7 @@
 					$attr['num_gemstones'] = (!empty($attr['num_gemstones']) && strval($attr['num_gemstones']) !== '0.00' && strval($attr['num_gemstones']) !== '0.000') ? $attr['num_gemstones'] : '';
 ?>
 					<div class="divCon2 fLeft <?php echo ($attr['gemstone_type']) ? '' : 'dn'; ?> gemstoneProp">
-                        <div  class="titleDiv txtCap fLeft">No. of Gemstones</div>
+                        <div  class="titleDiv txtCap fLeft">No. of Gemstones *</div>
                         <input name="num_gemstones" type="text" id="num_gemstones" autocomplete="false" placeholder=" eg. 10" maxlength="3" onkeypress="return common.isNumberKey(event);" value="<?=$attr['num_gemstones'];?>" class="txtInput fLeft fmOpenR font14 c666">
                     </div>
 
@@ -405,7 +405,7 @@
 
 ?>                        
                                                 <div class="divCon2  fLeft">
-                                                    <div  class="titleDiv txtCap fLeft"><?php echo $values['attr'][$key]['attr_display_name']; ?> (in Kt)</div>
+                                                    <div  class="titleDiv txtCap fLeft"><?php echo $values['attr'][$key]['attr_display_name']; ?> (in Kt) *</div>
                                                     <input name="<?php echo strtolower($goldpurity); ?>" id="goldpurity" type="text" autocomplete="false" maxlength="2" onkeypress="return common.isNumberKey(event);" value="<?=$attr['gold_purity'];?>" placeholder="eg. 18" onkeypress="common.isNumberKey(event);" class="txtInput fLeft fmOpenR font14 c666">
                                                 </div>
 <?php
@@ -413,12 +413,12 @@
 					}
 ?>
                     <div class="divCon2  fLeft">
-                        <div  class="titleDiv txtCap fLeft">Weight</div>
+                        <div  class="titleDiv txtCap fLeft">Weight *</div>
                         <input id="goldweight" name="gold_weight" type="text" placeholder=" eg. 18,22,24" maxlength="8" autocomplete="false" value="<?=$attr['gold_weight'];?>" onkeypress="common.isDecimalKey(event)" class="txtInput fLeft fmOpenR font14 c666">
                     </div>
 
                     <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Design Number</div>
+                            <div  class="titleDiv txtCap fLeft">Design Number *</div>
                             <input name="barcode" id="barcode" type="text" placeholder=" eg. ABCD12" maxlength="20" autocomplete="false" class="txtInput fLeft fmOpenR font14 c666" value="<?=$pdet['product_barcode'];?>">
                     </div>
  <?php                
@@ -428,7 +428,7 @@
                                             {    
 ?>                       
                                                 <div class="divCon2  fLeft">
-                                                    <div  class="titleDiv txtCap fLeft"><?php echo $values['attr'][$key]['attr_display_name']; ?> (in Rs)</div>
+                                                    <div  class="titleDiv txtCap fLeft"><?php echo $values['attr'][$key]['attr_display_name']; ?> (in Rs) *</div>
                                                     <input name="<?php echo strtolower($values['attr'][$key]['attr_display_name']); ?>" autocomplete="false" id="prdprice" type="text" placeholder="eg. 12000" maxlength="16" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['price'];?>" class="txtInput fLeft fmOpenR font14 c666">
                                                 </div>
 <?php                                       }

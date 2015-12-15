@@ -950,8 +950,11 @@
 						$exd = explode(';',$expd[1]);
 						if($expd[0] == 'priceRange' && $params['catid'] == 10000)
 						{
-							$exd[0] = $exd[0]/dollarValue;
-							$exd[1] = $exd[1]/dollarValue;
+							$expCarat = explode('|~|',$sarr[0]);
+                                                        $exd1 = explode(';',$expCarat[1]);
+                                                    
+                                                        $exd[0] = ($exd[0]/dollarValue)/1;
+							$exd[1] = ($exd[1]/dollarValue)/$exd1[1];
 						}
 						$extn .= " AND ".str_replace('Range','',$expd[0])." between \"".$exd[0]."\" AND \"".$exd[1]."\"";
 					}
