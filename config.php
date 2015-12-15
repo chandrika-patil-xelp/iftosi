@@ -37,9 +37,9 @@ else
 
 $dollarValue = 66.03;
 define('dollarValue',$dollarValue);
-$goldRate =  2572;
+$goldRate =  24050;
 define('goldRate',$goldRate);
-$silverRate = 36.70;
+$silverRate = 35918.00;
 define('silverRate',$silverRate);
 
 define('FAVICON', DOMAIN . 'tools/img/common/favicon.ico');

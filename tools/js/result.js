@@ -424,7 +424,7 @@ function getResultsData(data,sortby,showtree)
 							html += '<div class="prdPrice fLeft">';
 								html += '<div class="detComm">';
 									html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
-                                                                            if(vl.vdetail.dollar_rate !== '0.00' && vl.vdetail.dollar_rate !== undefined && vl.vdetail.dollar_rate !== null && vl.vdetail.dollar_rate !== '') { dollarValue=vl.vdetail.dollar_rate; }
+                                                                            if(vl.vdetail !== null && vl.vdetail.dollar_rate !== '0.00' && vl.vdetail.dollar_rate !== undefined && vl.vdetail.dollar_rate !== null && vl.vdetail.dollar_rate !== '') { dollarValue=vl.vdetail.dollar_rate; }
 									var price = Math.ceil(((vl.pprice * dollarValue) * vl.attributes.carat));
                                                                         html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+common.IND_money_format(price)+'</div>';
 								html += '</div>';
@@ -466,8 +466,8 @@ function getResultsData(data,sortby,showtree)
 									html += '<div class="detLabel fmOpenB fLeft">PRICE</div>';
                                                                         var metal_price = vl.attributes.price;
                                                                         
-                                                                            if( vl.vdetail.gold_rate !== '0.00' && vl.vdetail.gold_rate !== undefined && vl.vdetail.gold_rate !== null && vl.vdetail.gold_rate !== '' ) { goldRate=vl.vdetail.gold_rate; }
-                                                                            else if(vl.vdetail.silver_rate !== '0.00' && vl.vdetail.silver_rate !== undefined && vl.vdetail.silver_rate !== null && vl.vdetail.silver_rate !== '') { silverRate=vl.vdetail.silver_rate; }
+                                                                            if(vl.vdetail !== null && vl.vdetail.gold_rate !== 'undefined'  && vl.vdetail.gold_rate !== undefined && vl.vdetail.gold_rate !== null && vl.vdetail.gold_rate !== 'null' && vl.vdetail.gold_rate !== '0.00'  && vl.vdetail.gold_rate !== '' ) { goldRate=vl.vdetail.gold_rate; }
+                                                                            if(vl.vdetail !== null && vl.vdetail.silver_rate !== '0.00' && vl.vdetail.silver_rate !== undefined && vl.vdetail.silver_rate !== null && vl.vdetail.silver_rate !== '') { silverRate=vl.vdetail.silver_rate; }
                                                                             if((vl.attributes.metal.toLowerCase()) === 'gold'){ metal_rate=goldRate; 
                                                                             metal_rate=(metal_rate/10)*(vl.attributes.gold_purity/995);
                                                                             metal_price = vl.attributes.gold_weight * metal_rate;
@@ -590,7 +590,7 @@ function getResultsData(data,sortby,showtree)
 								html += '<div class="detComm">';
 									html += '<div class="detLabel fmOpenB fLeft">PRICE</div>';
                                                                         var metal_price = '';
-                                                                            if( vl.gold_rate !== '0.00' && vl.gold_rate !== undefined && vl.gold_rate !== null && vl.gold_rate !== '' ) { goldRate=vl.gold_rate; }
+                                                                            if(vl.gold_rate !== undefined && vl.gold_rate !== 'undefined' && vl.gold_rate !== '0.00' && vl.gold_rate !== null && vl.gold_rate !== 'null' && vl.gold_rate !== '' ) { goldRate=vl.gold_rate; }
                                                                 else if(vl.silver_rate !== '0.00' && vl.silver_rate !== undefined && vl.silver_rate !== null && vl.silver_rate !== '') { silverRate=vl.silver_rate; }
                                                                 var metal_rate = silverRate;
                                                                 

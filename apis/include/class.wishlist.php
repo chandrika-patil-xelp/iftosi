@@ -286,7 +286,7 @@ class wishlist extends DB
 			return $results;
 		}
 
-		$sql = "SELECT * FROM tbl_wishlist WHERE uid='$uid' AND wf != 2";
+		$sql = "SELECT * FROM tbl_wishlist WHERE uid='$uid' AND wf <> 2";
 
 		if(!empty($prdid))
 		{

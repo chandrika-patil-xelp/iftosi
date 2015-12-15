@@ -740,7 +740,7 @@
 								symmetry,
 								cno,
 								gold_purity,
-								gold_weight,
+								CEIL(gold_weight) AS gold_weight,
 								type,
 								metal
 							FROM 
@@ -1125,7 +1125,7 @@
 								symmetry,
 								cno,
 								gold_purity,
-								gold_weight,
+								CEIL(gold_weight) as gold_weight,
 								type,
 								metal,
 								bullion_design
