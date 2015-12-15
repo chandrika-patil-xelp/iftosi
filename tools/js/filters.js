@@ -5,9 +5,9 @@ $(document).ready(function() {
 	$(".rngInp").each(function () {
 		
 		var id = $(this).attr('id');
-		var min_price = $('#'+id+'Min').val()*1;
-		var max_price = $('#'+id+'Max').val()*1;
-		
+		var min_price = $('#'+id+'Min').val() * 1;
+		var max_price = $('#'+id+'Max').val() * 1;
+
 		if((max_price - min_price) > 100)
 			var step = '';
 		else
@@ -22,6 +22,23 @@ $(document).ready(function() {
 			to: Math.ceil(max_price),
 			decorate_both: false,
 			prettify_separator: ",",
+			prettify: function(val) {
+				if(val > 1000)
+				{
+					if(id == 'priceRange')
+					{
+						return common.IND_money_format(val);
+					}
+					else
+					{
+						return val;
+					}
+				}
+				else
+				{
+					return val;
+				}
+			},
 			force_edges: true,
 			drag_interval: true,
 			step: step,
@@ -52,7 +69,6 @@ $(document).ready(function() {
 
 
 });
-
 
 function searchArea(val) {
     $('#asug').removeClass('dn');
