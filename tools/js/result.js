@@ -62,7 +62,6 @@ $(document).ready(function() {
                 $('#pgno').val(1);
 		FR(sortby);
 		
-		
         isOpen = false;
         toggleDropDown(false);
     });
@@ -96,6 +95,7 @@ $(document).ready(function() {
         $(this).toggleClass('shapeSelected');
 		var cnt = getRandomInt(-500,500);
         totalCnt = (totalCnt*1)+cnt;
+        $('#pgno').val(1);
 		FR();
     });
 
@@ -105,6 +105,7 @@ $(document).ready(function() {
         totalCnt = (totalCnt*1)+cnt;
 		var idsp = $(this).attr('id').split('_');
 		$('#'+idsp[0]+' a').click();
+                $('#pgno').val(1);
 		FR();
     });
 
@@ -303,6 +304,7 @@ function arrangeData(adata, id, divHolder, nextxt)
 }
 
 function makeCall(id, cid) {
+        $('#pgno').val(1);
 	FR();
 	$('body').animate({scrollTop: $('.allShapes').offset().top-60}, 300);
 }
@@ -810,6 +812,7 @@ function getResultsData(data,sortby,showtree)
 					
 					$(jid+' :input[type=checkbox]').each(function() {
 						$(this).bind('click', function(event) {
+                                                        $('#pgno').val(1);
 							FR();
 							if (event && $.isFunction(event.stopImmediatePropagation))
 								event.stopImmediatePropagation();

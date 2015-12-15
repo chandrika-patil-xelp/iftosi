@@ -1,7 +1,4 @@
 $(document).ready(function() {
-	
-	
-	
 	$(".rngInp").each(function () {
 		
 		var id = $(this).attr('id');
@@ -43,6 +40,7 @@ $(document).ready(function() {
 			drag_interval: true,
 			step: step,
 			onFinish: function(data) {
+                                $('#pgno').val(1);
 				FR();
 			}
 		});
@@ -50,6 +48,7 @@ $(document).ready(function() {
 	
 	$('.filterCont :input[type=checkbox]').each(function() {
 		$(this).bind('click', function(event) {
+                        $('#pgno').val(1);
 			FR();
 			if (event && $.isFunction(event.stopImmediatePropagation))
 				event.stopImmediatePropagation();
