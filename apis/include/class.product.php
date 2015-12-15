@@ -539,10 +539,11 @@
 		
 		public function imageDisplay($params)
 		{
-			
+			$af = (!empty($params['af'])) ? trim(urldecode($params['af'])) : 1;
+
 			$arr = array();
 			$pid = $params['pid'];
-			$sql = "SELECT product_image FROM tbl_product_image_mapping WHERE product_id = ".$pid." AND active_flag=1 ORDER BY image_sequence ASC";
+			$sql = "SELECT product_image FROM tbl_product_image_mapping WHERE product_id = ".$pid." AND active_flag in (".$af.") ORDER BY image_sequence ASC";
 			$res = $this->query($sql);
 			if($res)
 			{

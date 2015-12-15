@@ -278,12 +278,14 @@ function validateJForm()
 		{
 			str = 'Please enter diamond weight in carates';
 			isValid = false;
+			$('#diamondweight').focus();
 		}
 
 		if(isValid && (no_diamonds === undefined || no_diamonds === null || no_diamonds === ''))
 		{
 			str = 'Please select number of diamonds';
 			isValid = false;
+			$('#no_diamonds').focus();
 		}
 	}
 	else
@@ -303,12 +305,14 @@ function validateJForm()
 		{
 			str = 'Please enter gemstone weight';
 			isValid = false;
+			$('#gemweight').focus();
 		}
 
 		if(isValid && (num_gemstones === undefined || num_gemstones === null || num_gemstones === ''))
 		{
 			str = 'Please enter number of gemstones';
 			isValid = false;
+			$('#num_gemstones').focus();
 		}
 	}
 	else
@@ -320,24 +324,28 @@ function validateJForm()
 	{
 		str = 'Please enter purity';
 		isValid = false;
+		$('#goldpurity').focus();
 	}
 
 	if(isValid && (goldweight === undefined || goldweight === null || goldweight === '' || isNaN(goldweight)))
 	{
 		str = 'Please enter weight';
 		isValid = false;
+		$('#goldweight').focus();
 	}
 
 	if(isValid && (barcode === undefined || barcode === null || barcode === ''))
 	{
 		str = 'Please enter design number';
 		isValid = false;
+		$('#barcode').focus();
 	}
 
 	if(isValid && (prdprice === undefined || prdprice === null || prdprice === '' || isNaN(prdprice)))
 	{
 		str = 'Please enter product price';
 		isValid = false;
+		$('#prdprice').focus();
 	}
 
 	// Validations End
