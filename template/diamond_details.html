@@ -158,34 +158,66 @@
                     <div class="vdLeftCard fLeft">
                         <div class="orgName fLeft fmOpenR"><?php echo $vndrDtls['OrganisationName']; ?></div>
                         <div class="orgAdd fLeft fmOpenR">
-                            <?php echo trim($vndrAddr[0]); ?>,<br><?php echo trim($vndrAddr[1]); ?>,<br><?php echo trim($vndrAddr[2]); ?>,<br><?php echo trim($vndrAddr[3]); ?>.<br><?php echo trim($vndrAddr[4]); ?>
+                            <?php echo trim($vndrAddr[0]); ?>
+							<?php
+								if(!empty($vndrAddr[1]))
+								{
+							?>
+								,<br><?php echo trim($vndrAddr[1]); ?>
+							<?php
+								}
+							?>
+							<?php
+								if(!empty($vndrAddr[2]))
+								{
+							?>
+								,<br><?php echo trim($vndrAddr[2]); ?>
+							<?php
+								}
+							?>
+							<?php
+								if(!empty($vndrAddr[3]))
+								{
+							?>
+								,<br><?php echo trim($vndrAddr[3]); ?>
+							<?php
+								}
+							?>
+							<?php
+								if(!empty($vndrAddr[4]))
+								{
+							?>
+								,<br><?php echo trim($vndrAddr[4]); ?>
+							<?php
+								}
+							?>
                         </div>
                         <div class="orgNo fLeft">
                             <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Telephone No.</div>
-                            <div class="commtxt tel fmOpenR fLeft"><?php echo str_replace('~', ', ', $vndrDtls['telephones']); ?></div>
+                            <div class="commtxt tel fmOpenR fLeft"><?php echo ($vndrDtls['telephones']) ? str_replace('~', ', ', $vndrDtls['telephones']) : '-'; ?></div>
                         </div>
                         <div class="orgNo fLeft">
                             <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Email Address</div>
-                            <div class="commtxt email fmOpenR fLeft"><?php echo str_replace('~', ', ', $vndrDtls['alt_email']); ?></div>
+                            <div class="commtxt email fmOpenR fLeft"><?php echo ($vndrDtls['alt_email']) ? str_replace('~', ', ', $vndrDtls['alt_email']) : '-'; ?></div>
                         </div>
                         <div class="orgNo fLeft">
                             <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Website</div>
-                            <div class="commtxt email fmOpenR fLeft"><a href="<?php echo 'http://' . str_replace('http://' , '' , $vndrDtls['website']) ;?>"><?php echo $vndrDtls['website']; ?></a></div>
+                            <div class="commtxt email fmOpenR fLeft"><a href="<?php echo ($vndrDtls['website']) ? 'http://' . str_replace('http://' , '' , $vndrDtls['website']) : '';?>"><?php echo ($vndrDtls['website']) ? $vndrDtls['website'] : '-'; ?></a></div>
                         </div>
                         <div class="orgNo fLeft">
                             <div class="commLeft fLeft">
                                 <div class="infoLabel fmOpenB font12 fmOpenB fLeft">VAT Number</div>
-                                <div class="commtxt email fmOpenR fLeft"><?php echo $vndrDtls['Vat_Number']; ?></div>
+                                <div class="commtxt email fmOpenR fLeft"><?php echo ($vndrDtls['Vat_Number']) ? $vndrDtls['Vat_Number'] : '-'; ?></div>
                             </div>
                             <div class="commRight fLeft">
                                 <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Turnover (cr)</div>
-                                <div class="commtxt email fmOpenR fLeft"><?php echo $vndrDtls['turnover']; ?></div>
+                                <div class="commtxt email fmOpenR fLeft"><?php echo ($vndrDtls['turnover']) ? $vndrDtls['turnover'] : '-'; ?></div>
                             </div>
                         </div>
 
                         <div class="orgNo fLeft">
                             <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Bankers</div>
-                            <div class="commtxt bankers fmOpenR fLeft"><?php echo str_replace('~',', ', $vndrDtls['bankers']); ?></div>
+                            <div class="commtxt bankers fmOpenR fLeft"><?php echo ($vndrDtls['bankers']) ? str_replace('~',', ', $vndrDtls['bankers']) : '-'; ?></div>
                         </div>
                     </div>
                     <div class="vdCenterCard fLeft">
@@ -200,20 +232,20 @@
                         <div class="cntCard fLeft">
                             <div class="vTitle fLeft fmOpenR" style="background-color: #380B34;">Bharat Diamond Bourse Certificate</div>
                             <div class='cardCommCont'>
-                                <div class="cardComm fLeft fmOpenR"><?php echo $vndrDtls['diamond_certificate']; ?></div>
+                                <div class="cardComm fLeft fmOpenR"><?php echo ($vndrDtls['diamond_certificate']) ? $vndrDtls['diamond_certificate'] : '-'; ?></div>
                             </div>
                         </div>
 
                         <div class="cntCard fLeft">
                             <div class="vTitle fLeft fmOpenR" style="background-color: #2A0E34;">GJEPC Membership Certificate</div>
                             <div class='cardCommCont'>
-                                <div class="cardComm fLeft fmOpenR"><?php echo $vndrDtls['Membership_Certificate']; ?></div>
+                                <div class="cardComm fLeft fmOpenR"><?php echo ($vndrDtls['Membership_Certificate']) ? $vndrDtls['Membership_Certificate'] : '-'; ?></div>
                             </div>
                         </div>
                         <div class="cntCard fLeft">
                             <div class="vTitle fLeft fmOpenR" style="background-color: #171334;">Membership Of Other Diamond Bourses</div>
                             <div class='cardCommCont'>
-                                <div class="cardComm fLeft fmOpenR"><?php echo str_replace('~', ', ', $vndrDtls['membership_around_world']); ?></div>
+                                <div class="cardComm fLeft fmOpenR"><?php echo ($vndrDtls['membership_around_world']) ? str_replace('~', ', ', $vndrDtls['membership_around_world']) : '-'; ?></div>
                             </div>
                         </div>
                     </div>
