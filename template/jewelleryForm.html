@@ -349,17 +349,10 @@
 						</select>
                     </div>
 
-<?php                          
-                    if(!empty($attr['gemstone_type']))
-                    {
-?>
-						<div class="divCon fLeft <?php echo (!empty($attr['gemstone_type']) && !in_array($attr['gemstone_type'], $gemsAttrsArr)) ? '' : 'dn'; ?> otherGemstoneProp">
-							<div class="titleDiv txtCap fLeft">Other Gemstone Type</div>
-							<input name="other_gem_type" type="text" id="other_gem_type" autocomplete="false" placeholder=" eg. ABC" value="<?php echo (!empty($attr['gemstone_type']) && !in_array($attr['gemstone_type'], $gemsAttrsArr)) ? $attr['gemstone_type'] : ''; ?>" class="txtInput fLeft fmOpenR font14 c666">
-						</div>
-<?php 
-                    }
-?>
+					<div class="divCon fLeft <?php echo (!empty($attr['gemstone_type']) && !in_array($attr['gemstone_type'], $gemsAttrsArr)) ? '' : 'dn'; ?> otherGemstoneProp">
+						<div class="titleDiv txtCap fLeft">Other Gemstone Type</div>
+						<input name="other_gem_type" type="text" id="other_gem_type" autocomplete="false" placeholder=" eg. ABC" value="<?php echo (!empty($attr['gemstone_type']) && !in_array($attr['gemstone_type'], $gemsAttrsArr)) ? $attr['gemstone_type'] : ''; ?>" class="txtInput fLeft fmOpenR font14 c666">
+					</div>
 
 <?php                          
                     if(strtolower($catres[3]['attr_name'])=='gemstone_color')

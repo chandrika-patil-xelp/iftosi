@@ -190,7 +190,7 @@ function validateJForm()
 	var shape=$('.jshapeComm');
 	var certificate =  $('input[name=Certficate]:checked').val();
 	var metal = $("input[name='metal']:checked").val();
-	var diamondShape=$('.shapeComm');
+	var diamondShape = $('.shapeComm');
 	var color =  $('input[name=color]:checked').val();
 	var clarity = $("input[name='clarity']:checked").val();
 	var dweight = $('#diamondweight').val();
