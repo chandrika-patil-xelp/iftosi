@@ -406,15 +406,15 @@
 ?>                        
                                                 <div class="divCon2  fLeft">
                                                     <div  class="titleDiv txtCap fLeft"><?php echo $values['attr'][$key]['attr_display_name']; ?> (in Kt) *</div>
-                                                    <input name="<?php echo strtolower($goldpurity); ?>" id="goldpurity" type="text" autocomplete="false" maxlength="2" onkeypress="return common.isNumberKey(event);" value="<?=$attr['gold_purity'];?>" placeholder="eg. 18" onkeypress="common.isNumberKey(event);" class="txtInput fLeft fmOpenR font14 c666">
+                                                    <input name="<?php echo strtolower($goldpurity); ?>" id="goldpurity" type="text" autocomplete="false" maxlength="3" onkeypress="return common.isNumberKey(event);" value="<?=$attr['gold_purity'];?>" placeholder="eg. 18" onkeypress="common.isNumberKey(event);" class="txtInput fLeft fmOpenR font14 c666">
                                                 </div>
 <?php
 						}
 					}
 ?>
                     <div class="divCon2  fLeft">
-                        <div  class="titleDiv txtCap fLeft">Gold Weight (in Grams) *</div>
-                        <input id="goldweight" name="gold_weight" type="text" placeholder=" eg. 10,20,50" maxlength="8" autocomplete="false" value="<?=$attr['gold_weight'];?>" onkeypress="common.isDecimalKey(event)" class="txtInput fLeft fmOpenR font14 c666">
+                        <div  class="titleDiv txtCap fLeft">Weight (in Grams) *</div>
+                        <input id="goldweight" name="gold_weight" type="text" placeholder=" eg. 10,20,50" maxlength="8" autocomplete="false" value="<?=$attr['gold_weight'];?>" onkeypress="return common.isDecimalKey(event);" class="txtInput fLeft fmOpenR font14 c666">
                     </div>
 
                     <div class="divCon2  fLeft">
