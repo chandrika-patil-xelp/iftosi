@@ -86,7 +86,7 @@ a{text-decoration: none;}
 
 .loggedIn{margin-right: 0!important;}
 .header ul {width: 160px!important;left: -120px!important;}
-.upperMenu {width: 100%;height: auto;background: #171334;position: fixed;top: 100px;z-index: 0;left: 0;right: 0;margin: auto;padding: 0 20px 40px 20px;overflow: hidden;margin-left: 0;}
+.upperMenu {width: 100%;height: auto;background: #171334; position: fixed;top: 100px;z-index: 0;left: 0;right: 0;margin: auto;padding: 0 20px 40px 20px;overflow: hidden;margin-left: 0;}
 .upTransit{-webkit-transform: translateY(50px);-moz-transform: translateY(50px);-ms-transform: translateY(50px);transform: translateY(50px);opacity: 0;}
 
 .forJwMenu{width:100%;height: auto;display: none;}
@@ -98,9 +98,11 @@ a{text-decoration: none;}
 .menuListCont{width:100%;height: 400px;padding: 25px;}
 .mItemDiv{width:20%;height: auto;color: #fff;}
 .mItemTitle{width:100%;height:35px;line-height:35px;color: #fff;font-size: 20px;}
-.mItemDiv ul{width: 100%!important;height: auto;margin: 0;padding: 0;list-style: none;float: left}
-.mItemDiv ul li{width:100%;height: 30px;line-height: 30px;margin: 0;padding: 0 15px;font-size: 12px;}
-.mItemDiv ul li a{color:#fff;}
+.mItemDiv ul{width: 100%!important;height: auto;margin: 0;padding: 0 25px 0 0 ;list-style: none;float: left}
+.mItemDiv ul li{width:100%;height: 30px; background: url(../img/common/back_repeat_turn.jpg)repeat-y;background-size: 0% auto; background-position: -30px top;  line-height: 30px;margin: 0;font-size: 12px;border-bottom: 1px dotted rgba(255,255,255,0.2); transition: 200ms ease-in-out;-moz-transition: 200ms ease-in-out;-ms-transition: 200ms ease-in-out;-webkit-transition: 200ms ease-in-out;-o-transition: 200ms ease-in-out;}
+.mItemDiv ul li a{background: url(../img/common/right.svg)no-repeat; background-position: -3px -3px ; background-size: auto 30px; color:rgba(255,255,255,0.6);padding-left: 20px; }
+
+.mItemDiv ul li:hover {background-size: 100% auto;}
 
 /*
 .headCat.bgJewellery:hover.bgJewellery span{transform: translateY(100px);color:#171334;}
