@@ -49,6 +49,8 @@ class wishlist extends DB
 									product_id IN (".$row['pid'].")
 								AND
 									category_id IN (".$crow['catid'].")
+                                                                AND 
+                                                                        display_flag = 1
 								GROUP BY 
 									category_id
 								ORDER BY
