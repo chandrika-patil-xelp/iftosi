@@ -134,35 +134,37 @@ function validateForm() {
 		isValid = false;
     }
 
-    if(isValid && str == '' && pancard.match(panPat) == null)
+	if (isValid && str == '' && pancard === '')
     {
-        str = 'Pancard is Invalid';
+        str = 'Pancard is mandatory';
         $('#pan').focus();
 		isValid = false;
     }
 
-    if (isValid && str == '' && pancard === '')
+    if(isValid && str == '' && pancard.match(panPat) == null)
     {
-        str = 'Pancard field is Mandatory';
+        str = 'Invalid PAN card number';
         $('#pan').focus();
 		isValid = false;
     }
 
     if (isValid && str == '' && pancard.search(panPat) == -1) {
-        str = 'Invalid Pan No';
+        str = 'Invalid PAN card number';
         $('#pan').focus();
 		isValid = false;
     }
 
     if (isValid && str == '' && code.test(code_chk) == false) {
-        str = 'Invaild PAN Card No.';
+        str = 'Invalid PAN card number';
         $('#pan').focus();
 		isValid = false;
     }
 
+	banker = banker.trim();
+
     if(isValid && (banker == undefined || banker == 'undefiend' || banker == null || banker == 'null' || banker == '' || banker == ' '))
 	{
-        str = 'Banker field is empty';
+        str = 'Banker is empty';
         $('#banker').focus();
 		isValid = false;
     }
