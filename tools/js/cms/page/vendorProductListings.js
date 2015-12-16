@@ -676,7 +676,18 @@ function inStock(proId,ele) {
             }
             var total=$('#total'+catName).text();
             $('#total'+catName).text(total);
-            common.toast(1,obj['error']['Msg']);
+            if(ele == 1)
+            {
+                common.toast(1,"Product is in stock");
+            }
+            if(ele == 3)
+            {
+                common.toast(1,"Product is out of stock");
+            }
+            if(ele == 4)
+            {
+                common.toast(1,"Product is sold");
+            }
 //            $('#'+stockid).toggleClass('outofstock');
         } else {
             common.toast(0,obj['error']['Msg']);
