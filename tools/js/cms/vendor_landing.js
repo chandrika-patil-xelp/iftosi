@@ -124,9 +124,6 @@ for(var i = 0; i< busiTypeSplt.length; i++)
     {
         $('#dollarRateSpan').append(dollarRate).removeClass('dn');
         $('#dmdTab').removeClass('dn');
-        $('#dollarRateSpan').addClass('fRight');
-        $('#dollarRateSpan').attr('style','border-right:0px');
-        
     }
     if(busiTypeSplt[i] == 2)
     {
@@ -136,34 +133,22 @@ for(var i = 0; i< busiTypeSplt.length; i++)
     {
         $('#goldRateSpan').append(goldRate).removeClass('dn');
         $('#silverRateSpan').append(silverRate).removeClass('dn');
-        $('#bullTab').removeClass('dn');
-        $('#silverRateSpan,#goldRateSpan').addClass('fRight');
-        $('#goldRateSpan').attr('style','border-right:0px');
     }
-    if(busiTypeSplt[i] == 1 && busiTypeSplt[i] == 2)
+    if(busiTypeSplt[i].length == 1 && busiTypeSplt[i] === 1)
     {
         $('#dollarRateSpan').append(dollarRate).removeClass('dn');
         $('#dmdTab').removeClass('dn');
-        $('#jewTab').removeClass('dn');
         $('#dollarRateSpan').addClass('fRight');
         $('#dollarRateSpan').attr('style','border-right:0px');
     }
-    if(busiTypeSplt[i] == 2 && busiTypeSplt[i] == 3)
+    if(busiTypeSplt[i].length == 1 && busiTypeSplt[i] === 3)
     {
-        $('#jewTab').removeClass('dn');
         $('#goldRateSpan').append(goldRate).removeClass('dn');
         $('#silverRateSpan').append(silverRate).removeClass('dn');
         $('#bullTab').removeClass('dn');
-        $('#silverRateSpan,#goldRateSpan').addClass('fRight');
-        $('#goldRateSpan').attr('style','border-right:0px');
-    }
-    if(busiTypeSplt[i] == 1 && busiTypeSplt[i] == 3)
-    {
-        $('#dollarRateSpan').append(dollarRate).removeClass('dn');
-        $('#dmdTab').removeClass('dn');
-        $('#goldRateSpan').append(goldRate).removeClass('dn');
-        $('#silverRateSpan').append(silverRate).removeClass('dn');
-        $('#bullTab').removeClass('dn');
+        $('#silverRateSpan').addClass('fRight');
+        $('#goldRateSpan').addClass('fRight');
+        $('#silverRateSpan').attr('style','border-right:0px');
     }
 }
 
@@ -548,7 +533,7 @@ $(document).ready(function() {
 						$('#silverRateSpan').html('Silver Rate : &#8377; ');
 					}
 					if(obj.gold_rate !== ''  &&  obj.gold_rate !== undefined  &&  obj.gold_rate !== 'undefined'  &&  obj.gold_rate !== 'null'  &&  obj.gold_rate !== null ){						
-                    $('#goldRateSpan').html('Gold Rate : &#8377; '+obj.gold_rate);
+                                            $('#goldRateSpan').html('Gold Rate : &#8377; '+obj.gold_rate);
 					}
 					else
 					{
@@ -631,7 +616,7 @@ function updateSilverRate() {
         });
     }
     else if(pageName === 'bullion-Form')
-    {console.log('here');
+    {
         
         if(silver_rate == undefined || silver_rate == 'undefined' || silver_rate === '0.00' || silver_rate == 0.00 || silver_rate=='' || silver_rate <= 0 || isNaN(silver_rate)){        
                 common.toast(0,'Silver rate is must to fill');
@@ -707,7 +692,10 @@ function showgoldSilverRateForm() {
 
 function updateGoldSilverRate() {
     var gold_rate = $("#gold_rate1").val();
-    gold_rate=parseFloat(gold_rate);
+    if(gold_rate == undefined || gold_rate == 'undefined' || gold_rate == '' || gold_rate <= 0 || isNaN(gold_rate) == true )
+    {
+        gold_rate = '0.00';
+    }
     $.ajax({url: DOMAIN + "/apis/index.php?action=updateGoldRate&vid="+uid+"&goldRate="+gold_rate, success: function(result) {
 			var obj = jQuery.parseJSON(result);
 			var errCode = obj['error']['code'];

@@ -677,7 +677,7 @@ function inStock(proId,ele) {
             var total=$('#total'+catName).text();
             $('#total'+catName).text(total);
             common.toast(1,obj['error']['Msg']);
-            $('#'+stockid).toggleClass('outofstock');
+//            $('#'+stockid).toggleClass('outofstock');
         } else {
             common.toast(0,obj['error']['Msg']);
         }

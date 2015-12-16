@@ -195,7 +195,8 @@ class enquiry extends DB
                                     $row['pro_dtls']['prd_price']=$finalRate*$weight;
                                 }
                             }
-                           $row['pro_dtls']['prd_price'] = number_format($row['pro_dtls']['prd_price'],$decimals = 2 ,$dec_point = "." ,$thousands_sep = "," );
+                           $row['pro_dtls']['prd_price'] = ceil($row['pro_dtls']['prd_price']);
+                           $row['pro_dtls']['prd_price'] = $this->IND_money_format($row['pro_dtls']['prd_price']);
                         }
                     }
                 }
@@ -210,5 +211,20 @@ class enquiry extends DB
         }
         $result=array('results'=>$arr,'error'=>$err);
         return $result;
-    }    
+    }
+    public function IND_money_format($money)
+    {
+        $len = strlen($money);
+        $m = '';
+        $money = strrev($money);
+        for($i=0;$i<$len;$i++)
+        {
+            if(( $i==3 || ($i>3 && ($i-1)%2==0) )&& $i != $len)
+            {
+                $m .=',';
+            }
+            $m .=$money[$i];
+        }
+        return strrev($m);
+    }
 }

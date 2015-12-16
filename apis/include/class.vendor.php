@@ -273,7 +273,8 @@ class vendor extends DB
                     $price= $row1['price'];
                 }
                 if ($catid == 10001) {
-                    $price= $row1['price'];
+                    $price1 = ceil($row1['price']);
+                    $price = $this->IND_money_format($price1);
                 }
                 if ($catid == 10002)
                 {
@@ -289,13 +290,15 @@ class vendor extends DB
                         $rate = ((($metalRate/995)*$purity)/10)*$weight;
                         //$metalRate=$goldRate;
                         //$finalRate=($metalRate/10)*($purity/995);
-                        $price=number_format($rate,2);
+                        $price1 = ceil($rate);
+                        $price = $this->IND_money_format($price1);
                     }
                     else if($metal=='silver')
                     {
-                        $metalRate=$silverRate;
-                        $finalRate=($metalRate/1000)*($purity/999);
-                        $price=number_format($finalRate*$weight,2);
+                        $metalRate = $silverRate;
+                        $finalRate = ($metalRate/1000)*($purity/999);
+                        $price1 = ceil($finalRate*$weight);
+                        $price = $this->IND_money_format($price1);
                     }
                 }
                 $arr1[$j]['id']=$row1['id'];
@@ -340,6 +343,23 @@ class vendor extends DB
         $result = array('results' => $arr,'error' => $err);
         return $result;
     }
+    
+    public function IND_money_format($money)
+    {
+        $len = strlen($money);
+        $m = '';
+        $money = strrev($money);
+        for($i=0;$i<$len;$i++)
+        {
+            if(( $i==3 || ($i>3 && ($i-1)%2==0) )&& $i != $len)
+            {
+                $m .=',';
+            }
+            $m .=$money[$i];
+        }
+        return strrev($m);
+    }
+    
 
     public function updateProductInfo($params)
     {
@@ -651,19 +671,20 @@ class vendor extends DB
                         //$metalRate=$goldRate;
                         //$finalRate=($metalRate/10)*($purity/995);
                         $price = ceil($rate);
-                        $row['price'] = $comm->IND_money_format($price);
+                        $row['price'] = $this->IND_money_format($price);
                     }
                     else if($metal=='silver')
                     {
                         $metalRate=$silverRate;
                         $finalRate=($metalRate/1000)*($purity/999);
                         $price=ceil($finalRate*$weight);
-                        $row['price'] = $comm->IND_money_format($price);
+                        $row['price'] = $this->IND_money_format($price);
                     }
                 }
                 if($catid == 10001)
                 {
-                    $row['price'] = ceil($row['price']);
+                    $price = ceil($row['price']);
+                    $row['price'] = $this->IND_money_format($price);
                 }
                         $arr1[] = $row;
              }
