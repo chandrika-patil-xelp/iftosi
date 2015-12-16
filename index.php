@@ -294,7 +294,7 @@ switch ($action) {
                 $lastpg = ceil($total / 16);
                 $adjacents = 2;
 
-                //echo "<pre>";print_r($vrate);die;
+                //echo "<pre>";print_r($carr);die;
 
                 include 'template/wishlist.html';
                 break;
@@ -309,16 +309,16 @@ switch ($action) {
                 $data = $res['results']['products'];
                 $total = $res['results']['total'];
                 $catname = $res['results']['catname'];
-                //echo "<pre>";print_r($data);die;
+                
 
                 $url = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=' . $catid;
                 $res = $comm->executeCurl($url);
                 $fil = $res['results']['attributes'];
 
                 $totalCnt = $total;
-                $lastpg = ceil($total / 15);
+                $lastpg = floor($total / 15);
                 $adjacents = 2;
-
+                //echo "<pre>";print_r($total);die;
                 include 'template/results.html';
                 break;
 
@@ -415,7 +415,7 @@ switch ($action) {
 
                 $vndrDtls['fulladdress'] = implode(', ', $vndrDtls['fulladdress']);
                 $vndrAddr = explode(',', $vndrDtls['fulladdress']);
-                //echo "<pre>";print_r($data);die;
+                //echo "<pre>";print_r($vndrInfo);die;
 				$certificate_url = $data['attr_details']['certificate_url'];
 				$certificate_url = explode('/', $certificate_url);
 				$certificate_url = $certificate_url[count($certificate_url) - 1];
@@ -482,7 +482,7 @@ switch ($action) {
                 $url1 = APIDOMAIN . 'index.php?action=imagedisplay&pid=' . $pid;
                 $res1 = $comm->executeCurl($url1);
                 $data1 = $res1['results'];
-                //echo "<pre>".print_r($prdInfo); die;
+                //echo "<pre>".print_r($prdInfoUrl); die;
 
 				$gemsUrl = APIDOMAIN . 'index.php?action=getGemstoneTypes';
                 $gemsRes = $comm->executeCurl($gemsUrl);
