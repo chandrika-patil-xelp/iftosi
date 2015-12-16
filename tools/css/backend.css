@@ -286,11 +286,11 @@ a{text-decoration: none;}
 
 
 .comparisonDiv{width:100%;}
-.compComm{width:33%;height: 250px;text-align: center;padding-top: 10%;color:#fff;cursor: pointer;position: relative;overflow: hidden;}
+.compComm{width:33%;height: 250px;text-align: center;padding-top: 10%;color:#fff;cursor: pointer;position: relative;overflow: hidden;border-radius: 5px;}
 .compComm::after{content: '';position: absolute;right: 0px; left:0px;opacity:0; bottom: -55px;margin: auto; width: 40px;height: 40px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;}
-.compComm:hover::after{content: '';position: absolute;right: 0px; opacity:1;left:0px; bottom: 15px;margin: auto; width: 40px;height: 40px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;}
+.compComm:hover::after{content: '';position: absolute;right: 0px; opacity:1;left:0px; bottom: 30px;margin: auto; width: 40px;height: 40px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;}
 
-.compComm.comSelected::after{content: '';opacity:1;position: absolute;right: 0px; left:0px; bottom: 15px;margin: auto; width: 40px;height: 40px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;}
+.compComm.comSelected::after{content: '';opacity:1;position: absolute;right: 0px; left:0px; bottom: 30px;margin: auto; width: 40px;height: 40px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;}
 .compComm:nth-child(1){background:rgba(23, 19, 52,0.9);}
 .compComm:nth-child(2){margin: 0 0.5%;background: rgba(42, 14, 52,0.9);}
 .compComm:nth-child(3){background: rgba(56, 11, 52,0.9);}
@@ -603,3 +603,15 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 .rateDiv span:last-child { padding:0 0 0 8px; border: none;}
 
 .textOverflow{overflow: hidden;white-space:nowrap; text-overflow: ellipsis;}
+
+
+.comparisonDiv .compPrice {width: 100%;height: auto;font-size: 13px;}
+.comparisonDiv .compPrice span{font-size: 20px;}
+.bankDetails {width: 100%;height: auto;padding:0 20px;border: 1px solid #ccc;margin: 15px 0;border-radius: 5px;}
+.bankDetails .formTitle{width:100%;}
+
+.bankComm{width:50%;height: auto;}
+.bankComm2{width:100%;height: auto;}
+
+.label1 {width: 100%;height: auto;line-height: 16px;font-size: 12px;text-transform: uppercase;color: #888;}
+.label2 {width: 100%;height: auto;line-height: 23px;font-size: 18px;margin-bottom: 15px;color: #333;}
