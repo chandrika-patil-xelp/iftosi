@@ -291,7 +291,7 @@ switch ($action) {
                 $total = $res['results']['total'];
                 $catname = $res['results']['catname'];
                 $totalCnt = $total;
-                $lastpg = ceil($total / 16);
+                $lastpg = floor($total / 16);
                 $adjacents = 2;
 
                 //echo "<pre>";print_r($carr);die;
@@ -337,7 +337,7 @@ switch ($action) {
                 $fil = $res['results']['attributes'];
 
                 $totalCnt = $total;
-                $lastpg = ceil($total / 15);
+                $lastpg = floor($total / 15);
                 $adjacents = 2;
                 for ($i = 0; $i < count($data); $i++) {
                     $pid = $data[$i]['pid']; //die;
@@ -367,7 +367,7 @@ switch ($action) {
                 //echo "<pre>";print_r($data);die;
 
                 $totalCnt = $total;
-                $lastpg = ceil($total / 15);
+                $lastpg = floor($total / 15);
                 $adjacents = 2;
                 include 'template/bullion_results.html';
                 break;
@@ -380,11 +380,6 @@ switch ($action) {
                 $url = APIDOMAIN . 'index.php?action=getPrdById&prdid=' . $pid;
                 $res = $comm->executeCurl($url);
                 $data = $prdInfo = $res['results'][$pid];
-
-                $url1 = APIDOMAIN . 'index.php?action=imagedisplay&pid=' . $pid;
-                $res1 = $comm->executeCurl($url1);
-                $data1 = $res1['results'];
-                $datacnt = $res1['count'];
 
                 $vndrInfo = $prdInfo['vendor_details'];
 
@@ -415,12 +410,19 @@ switch ($action) {
 
                 $vndrDtls['fulladdress'] = implode(', ', $vndrDtls['fulladdress']);
                 $vndrAddr = explode(',', $vndrDtls['fulladdress']);
-                //echo "<pre>";print_r($vndrInfo);die;
-				$certificate_url = $data['attr_details']['certificate_url'];
-				$certificate_url = explode('/', $certificate_url);
-				$certificate_url = $certificate_url[count($certificate_url) - 1];
+                //echo "<pre>";print_r($vndrDtls);die;
+                $certificate_url = $data['attr_details']['certificate_url'];
+                $certificate_url = explode('/', $certificate_url);
+                $certificate_url = $certificate_url[count($certificate_url) - 1];
+                
+                $url1 = APIDOMAIN . 'index.php?action=imagedisplay&pid='.$pid.'&vid='.$vndrDtls['vid'];
+                $res1 = $comm->executeCurl($url1);
+                $data1 = $res1['results'];
+                $datacnt = $res1['count'];                
+                
                 include 'template/diamond_details.html';
                 break;
+            
             case 'bullion_details':
                 $page = 'bullion_details';
                 $prdInfo = array();
@@ -649,7 +651,7 @@ switch ($action) {
                 //echo "<pre>";print_r($vdet);die;
 
                 $totalCnt = $total;
-                $lastpg = ceil($total / 15);
+                $lastpg = floor($total / 15);
                 $adjacents = 2;
                 include 'template/vendor_landing_page.html';
                 break;
@@ -669,7 +671,7 @@ switch ($action) {
                 $data = $res['results']['vendors'];
                 $total = $res['results']['total_vendors'];
                 $totalCnt = $total;
-                $lastpg = ceil($total / 2);
+                $lastpg = floor($total / 2);
                 $adjacents = 2;
                 //echo "<pre>";print_r($data);die;
                 include 'template/vendorList.html';
@@ -715,7 +717,7 @@ switch ($action) {
                 $data = $res['results']['products'];
                 $total = $res['results']['total_products'];
                 $totalCnt = $total;
-                $lastpg = ceil($total / 15);
+                $lastpg = floor($total / 15);
                 $adjacents = 2;
                 include 'template/product_list.html';
                 break;

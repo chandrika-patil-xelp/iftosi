@@ -106,6 +106,8 @@ var validMob = true;
 						customStorage.addToStorage('mobile',pr_mobile);
 						customStorage.addToStorage('username',pr_name);
 						customStorage.addToStorage('is_vendor',isVendor);
+                        customStorage.addToStorage('email',pr_email);
+						customStorage.addToStorage('name',pr_name);
 						if(isVendor===1) {
 							customStorage.removeFromStorage('busiType');
 							window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid='+userid);

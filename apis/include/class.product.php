@@ -543,16 +543,36 @@
 
 			$arr = array();
 			$pid = $params['pid'];
-			$sql = "SELECT product_image FROM tbl_product_image_mapping WHERE product_id = ".$pid." AND active_flag in (".$af.") ORDER BY image_sequence ASC";
-			$res = $this->query($sql);
-			if($res)
-			{
-				while($row = $this->fetchData($res))
-				{
-					$arr[] = $row['product_image'];
-				}
-			}
-			
+                        $prdSql = " SELECT
+                                            vendor_id 
+                                    FROM 
+                                            tbl_vendor_product_mapping
+                                    WHERE
+                                            product_id = ".$pid."";
+                        $prdRes = $this->query($prdSql);
+                        $Vcnt = $this->numRows($prdRes);
+                        
+                        $extn = " AND active_flag in (".$af.") ";
+                        if($Vcnt)
+                        {
+                            $row = $this->fetchData($prdRes);
+                            if($row['vendor_id'] == $params['vid'])
+                            {
+                                $extn = " AND active_flag not in (2) ";
+                            }
+                        }
+                        
+                        $sql = "SELECT product_image FROM tbl_product_image_mapping WHERE product_id = ".$pid." ".$extn." ORDER BY image_sequence ASC";
+                        $res = $this->query($sql);
+                        if($res)
+                        {
+                                while($row = $this->fetchData($res))
+                                {
+                                        $arr[] = $row['product_image'];
+                                }
+
+                        }
+                        
 			if(!empty($arr))
 			{
 				$err = array('errCode' => 0, 'errMsg' => 'Details fetched successfully');

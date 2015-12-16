@@ -134,10 +134,26 @@
 							<?php
 								}
 							?>
+                                                        <?php
+								if(!empty($vndrDtls['city']))
+								{
+							?>
+								,<br><?php echo trim($vndrDtls['city']); ?>
+							<?php
+								}
+							?>
+                                                        <?php
+								if(!empty($vndrDtls['state']))
+								{
+							?>
+								,<br><?php echo trim($vndrDtls['state']); ?>
+							<?php
+								}
+							?>
                         </div>
                         <div class="orgNo fLeft">
                             <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Telephone No.</div>
-                            <div class="commtxt tel fmOpenR fLeft"><?php echo ($vndrDtls['telephones']) ? str_replace('~', ', ', $vndrDtls['telephones']) : '-'; ?></div>
+                            <div class="commtxt tel fmOpenR fLeft"><?php print_r(($vndrDtls['landline'] !== '') ? str_replace('|~|', ', ', $vndrDtls['landline']).', ' : '-, '); echo ($vndrDtls['telephones']) ? str_replace('~', ', ', $vndrDtls['telephones']) : '-';?></div>
                         </div>
                         <div class="orgNo fLeft">
                             <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Email Address</div>

@@ -276,7 +276,7 @@ function validateJForm()
 
 		if(isValid && (dweight === undefined || dweight === null || dweight === ''))
 		{
-			str = 'Please enter diamond weight in carates';
+			str = 'Please enter diamond weight in carats';
 			isValid = false;
 			$('#diamondweight').focus();
 		}
@@ -817,7 +817,7 @@ function validateNum(){
 			}
 
             if(isValid && (carat == '' || isNaN(carat))) {
-                str ='Carat Weight field is Empty';
+                str ='Carat field is Empty';
                  $('#caratweight').focus();
 				 isValid = false;
             }

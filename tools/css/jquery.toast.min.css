@@ -1,4 +1,4 @@
-.toast{ position:fixed; list-style: none; padding: 0; top:15px; z-index: 999999; font-family:openR;font-size:13px; line-height:16px;height:auto; }
+.toast{ position:fixed; list-style: none; padding: 0; top:15px; z-index: 999999; font-family:openR;font-size:13px; line-height:16px;height:auto; text-align: center}
 .toast li{height:auto;margin:0; margin-bottom:2px;display:block; background-color:#fcf8e3; color:#c09853; border:1px solid #fbeed5; padding: 15px;border-radius: 0px; -webkit-border-radius: 0px; }
 .toast li:first-child{ margin-top:0; }
 .toast li.danger{color: white;background-color: #8A0044;border: none;display: block;border-radius: 5px;box-shadow: 2px 2px 8px 0 rgba(0,0,0,0.2);}

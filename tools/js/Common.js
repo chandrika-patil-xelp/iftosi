@@ -120,7 +120,7 @@ function Common() {
             else
             {
                 $('#wishHeaderb4').addClass('dn');
-                $('#wishHeaderaftr').addClass('dn');
+                $('#wishHeaderaftr').removeClass('dn');
                 //userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_dashboard\');">Dashboard</li>';
                 if(isComp === '2')
                 {

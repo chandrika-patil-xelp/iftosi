@@ -109,7 +109,7 @@ function validateForm() {
         $('#state').focus();
 		isValid = false;
     }
-
+    
 	if (isValid && vatno !== '') {
         if (isValid && vatno.length == 12)
 		{
@@ -141,9 +141,9 @@ function validateForm() {
 		isValid = false;
     }
 
-    if (isValid && str == '' && pancard === ' ')
+    if (isValid && str == '' && pancard === '')
     {
-        str = 'Pancard is Invalid';
+        str = 'Pancard field is Mandatory';
         $('#pan').focus();
 		isValid = false;
     }

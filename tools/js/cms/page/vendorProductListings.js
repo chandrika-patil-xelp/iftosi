@@ -277,7 +277,12 @@ function generateDiamondList(obj) {
     if(obj['active_flag'] == 3){
         cl='outofstock';
     }
-    str += '<div class="soldBtn poR ripplelink fmOpenR '+cl+'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "Out Of Stock" : "Out Of Stock");+'</div>';
+    str += '<select id="isStock'+ obj['id'] +'" onchange="inStock(' + obj['id'] + ',this.value);" value='+obj['active_flag']+' class="txtInput divCon poR fmOpenR font14 c666 txtCenter divCon" style="background-image: url(tools/img/common/down_arrow.svg);background-repeat: no-repeat;background-position: right center;line-height:15px;width:50%;margin-top:1%">';
+    str += '<option '+((obj['active_flag']) == 1 ? "selected" : "")+' class="arrow txtCenter" value="1">In Stock</option>';
+    str += '<option '+((obj['active_flag']) == 3 ? "selected" : "")+' class="arrow txtCenter" value="3">Out Of Stock</option>';
+    str += '<option '+((obj['active_flag']) == 4 ? "selected" : "")+' class="arrow txtCenter" value="4">Sold</option>';
+    str += '</select>'
+//    str += '<div class="soldBtn poR ripplelink fmOpenR '+cl+'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "Out Of Stock" : "Out Of Stock");+'</div>';
     str += '</center>';
     str += '</div>';
     str += '</li>';
@@ -434,7 +439,11 @@ function generateJewellList(obj) {
         if(obj['active_flag']==3){
         cl='outofstock';
         }
-        str += '<div class="soldBtn poR ripplelink fmOpenR '+cl+'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "Out Of Stock" : "Out Of Stock");+'</div>';
+        str += '<select id="isStock'+ obj['id'] +'" onchange="inStock(' + obj['id'] + ',this.value);" value='+obj['active_flag']+' class="txtInput divCon poR fmOpenR font14 c666 txtCenter divCon" style="background-image: url(tools/img/common/down_arrow.svg);background-repeat: no-repeat;background-position: right center;line-height:15px;width:50%;margin-top:1%">';
+        str += '<option value="1" '+((obj['active_flag']) == 1 ? "selected" : "")+'>In Stock</option>';
+        str += '<option value="3" '+((obj['active_flag']) == 3 ? "selected" : "")+'>Out Of Stock</option>';
+        str += '</select>';
+        //str += '<div class="soldBtn poR ripplelink fmOpenR '+cl+'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "Out Of Stock" : "Out Of Stock");+'</div>';
         str += '</center>';
         str += '</div>';
         str += '</li>';
@@ -573,7 +582,11 @@ function generatBullionsList(obj) {
     if(obj['active_flag']==3){
     cl='outofstock';
     }
-    str += '<div class="soldBtn poR ripplelink fmOpenR '+cl+'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "Out Of Stock" : "Out Of Stock");+'</div>';
+    str += '<select id="isStock'+ obj['id'] +'" onchange="inStock(' + obj['id'] + ',this.value);" value='+obj['active_flag']+' class="txtInput divCon poR fmOpenR font14 c666 txtCenter divCon" style="background-image: url(tools/img/common/down_arrow.svg);background-repeat: no-repeat;background-position: right center;line-height:15px;width:50%;margin-top:1%">';
+    str += '<option value="1" '+((obj['active_flag']) == 1 ? "selected" : "")+'>In Stock</option>';
+    str += '<option value="3" '+((obj['active_flag']) == 3 ? "selected" : "")+'>Out Of Stock</option>';
+    str += '</select>';
+    //str += '<div class="soldBtn poR ripplelink fmOpenR '+cl+'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "Out Of Stock" : "Out Of Stock");+'</div>';
     str += '</center>';
     str += '</div>';
     str += '</li>';
@@ -649,7 +662,7 @@ function deleteProduct() {
 }
 
 function inStock(proId,ele) {
-    $.ajax({url: common.APIWebPath() + "index.php?action=togglePrdstatus&vid=" + uid + "&prdid=" + proId, success: function (result) {
+    $.ajax({url: common.APIWebPath() + "index.php?action=togglePrdstatus&vid=" + uid + "&prdid=" + proId+"&flag="+ele, success: function (result) {
     var obj = jQuery.parseJSON(result);
         if(obj['error']['Code']==0) {
             var stockid="isStock"+proId;

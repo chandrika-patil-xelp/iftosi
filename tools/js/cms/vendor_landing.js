@@ -124,6 +124,9 @@ for(var i = 0; i< busiTypeSplt.length; i++)
     {
         $('#dollarRateSpan').append(dollarRate).removeClass('dn');
         $('#dmdTab').removeClass('dn');
+        $('#dollarRateSpan').addClass('fRight');
+        $('#dollarRateSpan').attr('style','border-right:0px');
+        
     }
     if(busiTypeSplt[i] == 2)
     {
@@ -131,6 +134,33 @@ for(var i = 0; i< busiTypeSplt.length; i++)
     }
     if(busiTypeSplt[i] == 3)
     {
+        $('#goldRateSpan').append(goldRate).removeClass('dn');
+        $('#silverRateSpan').append(silverRate).removeClass('dn');
+        $('#bullTab').removeClass('dn');
+        $('#silverRateSpan,#goldRateSpan').addClass('fRight');
+        $('#goldRateSpan').attr('style','border-right:0px');
+    }
+    if(busiTypeSplt[i] == 1 && busiTypeSplt[i] == 2)
+    {
+        $('#dollarRateSpan').append(dollarRate).removeClass('dn');
+        $('#dmdTab').removeClass('dn');
+        $('#jewTab').removeClass('dn');
+        $('#dollarRateSpan').addClass('fRight');
+        $('#dollarRateSpan').attr('style','border-right:0px');
+    }
+    if(busiTypeSplt[i] == 2 && busiTypeSplt[i] == 3)
+    {
+        $('#jewTab').removeClass('dn');
+        $('#goldRateSpan').append(goldRate).removeClass('dn');
+        $('#silverRateSpan').append(silverRate).removeClass('dn');
+        $('#bullTab').removeClass('dn');
+        $('#silverRateSpan,#goldRateSpan').addClass('fRight');
+        $('#goldRateSpan').attr('style','border-right:0px');
+    }
+    if(busiTypeSplt[i] == 1 && busiTypeSplt[i] == 3)
+    {
+        $('#dollarRateSpan').append(dollarRate).removeClass('dn');
+        $('#dmdTab').removeClass('dn');
         $('#goldRateSpan').append(goldRate).removeClass('dn');
         $('#silverRateSpan').append(silverRate).removeClass('dn');
         $('#bullTab').removeClass('dn');
@@ -275,10 +305,12 @@ for(var i = 0; i< busiTypeSplt.length; i++)
             {
                 $('.allprop').addClass('dn');
                 $('.silverprop').removeClass('dn');
+                $('#silverpurity').val('999');
                 $('#goldpurity').val('');
                 $('#goldweight').val('');
                 if (tmpId == 'sbars') {
                     $('#silverweight').attr('placeholder','eg. Kgs Or Gms');
+                    
                 } else {
                     $('#silverweight').attr('placeholder','eg. Gms');
                 }
@@ -500,11 +532,12 @@ $(document).ready(function() {
                 var errCode = obj['error']['Code'];
                 if(errCode==0) {
 					obj = obj['results'];
-					console.log();
-					if(obj.dollar_rate !== '' && obj.dollar_rate !== undefined && obj.dollar_rate !== 'undefined'  &&  obj.dollar_rate !== 'null'  &&  obj.dollar_rate !== null ){
-                    $('#dollarRateSpan').html('Dollar Rate : &#8377; '+obj.dollar_rate);
+					if(obj.dollar_rate !== '' && obj.dollar_rate !== undefined && obj.dollar_rate !== 'undefined'  &&  obj.dollar_rate !== 'null'  &&  obj.dollar_rate !== null )
+                                        {
+                                            $('#dollarRateSpan').html('Dollar Rate : &#8377; '+obj.dollar_rate);
 					}
-					else{
+					else
+                                        {
 						$('#dollarRateSpan').html('Dollar Rate : &#8377; '+obj.dollar_rate);
 					}
 					if(obj.silver_rate !== ''  &&  obj.silver_rate !== undefined  &&  obj.silver_rate !== 'undefined'  &&  obj.silver_rate !== 'null'  &&  obj.silver_rate !== null ){

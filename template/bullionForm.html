@@ -132,7 +132,7 @@
                                     </div>
                                     <?php if($attr['gold_weight'] == 0.00 || $attr['gold_weight'] === '0.000'){ $attr['gold_weight'] = ''; } ?>
                         <div class="divCon2  fLeft goldprop allprop <?=$showg;?>">
-                            <div  class="titleDiv txtCap fLeft">Gold Weight *</div>
+                            <div  class="titleDiv txtCap fLeft">Gold Weight (in Grams)*</div>
                             <input name="gold_weight" id="goldweight" type="text" autocomplete="false" placeholder=" eg. 10 Gms" value="<?=$attr['gold_weight'];?>" maxlength="8" onkeypress="return common.isDecimalNumber(event,this.value);" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon2  fLeft silverprop allprop <?=$shows;?> ">
@@ -140,7 +140,7 @@
                             <input name="silver_purity" id="silverpurity" autocomplete="false" type="text" placeholder=" eg. 999 or 995" maxlength="3" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['gold_purity'];?>"  class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon2  fLeft silverprop allprop <?=$shows;?>">
-                            <div  class="titleDiv txtCap fLeft">Silver Weight *</div>
+                            <div  class="titleDiv txtCap fLeft">Silver Weight (in Grams)*</div>
                             <input name="silver_weight" id="silverweight" type="text" autocomplete="false" placeholder=" eg. 10 Gms" maxlength="8" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['gold_weight'];?>" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon2  fLeft">
@@ -190,6 +190,8 @@
                 
             });
         });
+        
+            
     
     </script>
 

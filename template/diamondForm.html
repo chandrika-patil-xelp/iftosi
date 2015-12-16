@@ -230,7 +230,7 @@
                                             <div class="divCon2  fLeft">
 												<div  class="titleDiv txtCap fLeft">Upload Certificate *</div>
 												<input name="certFile" autocomplete="false" id="certfile" type="file" placeholder="Upload pdf of ceritificate" onchange="uploadCert(this.value);" accept=".pdf" style="display: none;">
-												<label for="certfile" class="addPrdBtn fLeft poR ripplelink ">Upload Doc</label><span id="filePath" class ="<?=($certificate_url) ? '' : 'dn';?> fLeft padRight" style="line-height:35px; padding-left: 10px" ><?=$certificate_url;?></span>
+												<label for="certfile" class="addPrdBtn fLeft poR ripplelink ">Upload</label><span id="filePath" class ="<?=($certificate_url) ? '' : 'dn';?> fLeft padRight" style="line-height:35px; padding-left: 10px" ><?=$certificate_url;?></span>
 												<img src="" id="uploadurl">
                                             </div>
     <?php                                    
@@ -240,7 +240,7 @@
                                             {    
 ?>
                                                 <div class="divCon2  fLeft">
-                                                    <div  class="titleDiv txtCap fLeft">Carat Weight *</div>
+                                                    <div  class="titleDiv txtCap fLeft">Carat *</div>
                                                     <input name="carat_weight" autocomplete="false" id="caratweight" type="text" placeholder="eg. 1.00" class="txtInput fLeft fmOpenR font14 c666" maxlength="5"  onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['carat'];?>" onkeypress="return common.isDecimalKey(event)">
                                                 </div>
 <?php                                            }

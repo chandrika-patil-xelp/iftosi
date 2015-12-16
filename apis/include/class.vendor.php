@@ -801,70 +801,47 @@ class vendor extends DB
         return $result;
     }
 
-        public function toggleactive($params) {
-        $chkact="SELECT active_flag from tbl_vendor_master WHERE vendor_id=".$params['vid']."";
-        $chkactres=$this->query($chkact);
-        $chkrow=$this->fetchData($chkactres);
-        $vflag=$chkrow['active_flag'];
-            
-            
-        $chkact="SELECT active_flag from tbl_product_search WHERE product_id=".$params['prdid']."";
-        $chkactres=$this->query($chkact);
-        $chkrow=$this->fetchData($chkactres);
-        $params['flag']=$chkrow['active_flag'];
-
-        if($params['flag']==1 || $params['flag']==0)
+        public function toggleactive($params)
         {
-            $sql = "UPDATE tbl_vendor_product_mapping SET active_flag=3 WHERE product_id=" . $params['prdid']." AND vendor_id=" . $params['vid'];
+            $sql = "UPDATE tbl_vendor_product_mapping SET active_flag=".$params['flag']." WHERE product_id=" . $params['prdid']." AND vendor_id=" . $params['vid'];
             $res = $this->query($sql);
-        if($res){
-            $sql = "UPDATE tbl_product_search SET active_flag=3 WHERE product_id=" . $params['prdid'];
-            $res1 = $this->query($sql);}
-        if($res1){
-            $sql = "UPDATE tbl_product_master SET active_flag=3 WHERE product_id=" . $params['prdid'];
-            $res2 = $this->query($sql);}
-        if($res2){
-            $sql = "UPDATE tbl_productid_generator SET active_flag=3 WHERE product_id=" . $params['prdid'];
-            $res3 = $this->query($sql);}
-        if($res3){
-            $sql = "UPDATE tbl_product_category_mapping SET display_flag=3 WHERE product_id=" . $params['prdid'];
-            $res4 = $this->query($sql);}
-        if($res4){
-            $sql = "UPDATE tbl_designer_product_mapping SET active_flag=3 WHERE product_id=".$params['prdid'];
-            $res = $this->query($sql);}
-        }
-        if($params['flag']==3)
-        {
-            $sql = "UPDATE tbl_vendor_product_mapping SET active_flag=\"".$vflag."\" WHERE product_id=" . $params['prdid']." AND vendor_id=" . $params['vid'];
-            $res = $this->query($sql);
-        if($res){
-            $sql = "UPDATE tbl_product_search SET active_flag=\"".$vflag."\" WHERE product_id=" . $params['prdid'];
-            $res1 = $this->query($sql);}
-        if($res1){
-            $sql = "UPDATE tbl_product_master SET active_flag=\"".$vflag."\" WHERE product_id=" . $params['prdid'];
-            $res2 = $this->query($sql);}
-        if($res2){
-            $sql = "UPDATE tbl_productid_generator SET active_flag=\"".$vflag."\" WHERE product_id=" . $params['prdid'];
-            $res3 = $this->query($sql);}
-        if($res3){
-            $sql = "UPDATE tbl_product_category_mapping SET display_flag=\"".$vflag."\" WHERE product_id=" . $params['prdid'];
-            $res4 = $this->query($sql);}
-        if($res4){
-            $sql = "UPDATE tbl_designer_product_mapping SET active_flag=\"".$vflag."\" WHERE product_id=".$params['prdid'];
-            $res = $this->query($sql);}
-        }
-        if ($res)
-        {
-            $arr = array();
-            $err = array('Code' => 0, 'Msg' => 'Product status changed!');
-        }
-        else
-        {
-            $arr = array();
-            $err = array('code' => 1, 'msg' => 'Error in fetching data');
-        }
-        $result = array('results' => $arr, 'error' => $err);
-        return $result;
+            if($res)
+            {
+                $sql = "UPDATE tbl_product_search SET active_flag=".$params['flag']." WHERE product_id=" . $params['prdid'];
+                $res1 = $this->query($sql);
+            }
+            if($res1)
+            {
+                $sql = "UPDATE tbl_product_master SET active_flag=".$params['flag']." WHERE product_id=" . $params['prdid'];
+                $res2 = $this->query($sql);
+            }
+            if($res2)
+            {
+                $sql = "UPDATE tbl_productid_generator SET active_flag=".$params['flag']." WHERE product_id=" . $params['prdid'];
+                $res3 = $this->query($sql);
+            }
+            if($res3)
+            {
+                $sql = "UPDATE tbl_product_category_mapping SET display_flag=".$params['flag']." WHERE product_id=" . $params['prdid'];
+                $res4 = $this->query($sql);
+            }
+            if($res4)
+            {
+                $sql = "UPDATE tbl_designer_product_mapping SET active_flag=".$params['flag']." WHERE product_id=".$params['prdid'];
+                $res = $this->query($sql);
+            }
+            if($res)
+            {
+                $arr = array();
+                $err = array('Code' => 0, 'Msg' => 'Product status changed!');
+            }
+            else
+            {
+                $arr = array();
+                $err = array('code' => 1, 'msg' => 'Error in fetching data');
+            }
+            $result = array('results' => $arr, 'error' => $err);
+            return $result;
     }
 
     public function getVPrdByCatid($params)
