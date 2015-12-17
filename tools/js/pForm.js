@@ -901,7 +901,7 @@ function validateNum(){
 }
 
  function validateBForm(){
-            var design =  $('input[name=design]:checked').val().trim();
+            var design =  $('input[name=design]:checked').val();
             var purity = $('#goldpurity').val().trim();
             var barcode=$('#barcode').val().trim();
             var spurity = $('#silverpurity').val().trim();
@@ -951,7 +951,7 @@ function validateNum(){
                     str ='Silver Purity field is Invalid';
                     isValid = false;
                 }
-                else if(isValid && (sweight == '' || isNaN(sweight) || !sweight.match(patt1))) {
+                else if(isValid && (sweight == '' || isNaN(sweight) || sweight == null || sweight == undefined)) {
                     str ='Silver Weight field is invalid';
                     isValid = false;
                 }

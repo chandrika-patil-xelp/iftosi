@@ -56,7 +56,7 @@ function validateForm() {
     var wbst = $('#wbst').val().trim();
     var pancard = $('#pan').val().trim();
     var vatno = $('#vat').val().trim();
-    var banker = $('#banker').val();
+    var banker = $('#banker').val().trim();
     var str = "V02554544";
     var patt1 = /^(C|V){1}([0-3]){2}([0-9]){2}/g;
     var result = str.match(patt1);
@@ -255,7 +255,7 @@ function validateStep2Form() {
         }
     }
     if (/3/.test(busiType)) {
-        var bul_mdbw = $('#bul_mdbw').val();
+        var bul_mdbw = $('#bul_mdbw').val().trim();
         if (bul_mdbw == '') {
             common.toast(0, 'Membership Of Council / Jewellers Association is Required');
             $('#bul_mdbw').focus();
