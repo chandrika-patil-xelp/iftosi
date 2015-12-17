@@ -47,15 +47,15 @@ function fnValidatePAN() {
 
 }
 function validateForm() {
-    var orgname = $('#orgname').val();
-    var fulladd = $('#fulladd').val();
+    var orgname = $('#orgname').val().trim();
+    var fulladd = $('#fulladd').val().trim();
     var pincode = $('#pincode').val();
-    var area = $('#area').val();
-    var city = $('#city').val();
-    var state = $('#state').val();
-    var wbst = $('#wbst').val();
-    var pancard = $('#pan').val();
-    var vatno = $('#vat').val();
+    var area = $('#area').val().trim();
+    var city = $('#city').val().trim();
+    var state = $('#state').val().trim();
+    var wbst = $('#wbst').val().trim();
+    var pancard = $('#pan').val().trim();
+    var vatno = $('#vat').val().trim();
     var banker = $('#banker').val();
     var str = "V02554544";
     var patt1 = /^(C|V){1}([0-3]){2}([0-9]){2}/g;
@@ -67,7 +67,7 @@ function validateForm() {
     var str = '';
 
 	var isValid = true;
-
+     
     if (orgname == '')
     {
         str = 'Organization Name is Required\n';
@@ -201,11 +201,11 @@ function validateForm() {
 function validateStep2Form() {
     var str = 'This Field is Required';
     if (/1/.test(busiType)) {
-        var memcert = $('#memcert').val();
+        var memcert = $('#memcert').val().trim();
         //var bdbc = $('#bdbc').val();
         //var othdbaw = $('#othdbaw').val();
-        var ofcity = $('#ofcity').val();
-        var ofcountry = $('#ofcountry').val();
+        var ofcity = $('#ofcity').val().trim();
+        var ofcountry = $('#ofcountry').val().trim();
         if (memcert == '') {
             $('#memcert').focus();
             common.toast(0, 'Enter GJEPC Membership Certificate');
@@ -235,9 +235,9 @@ function validateStep2Form() {
         */
     }
     if (/2/.test(busiType)) {
-       var showroomname = $('#showroomname').val();
-        var showroomno = $('#showroomno').val();
-        var mdbw = $('#mdbw').val();
+       var showroomname = $('#showroomname').val().trim();
+        var showroomno = $('#showroomno').val().trim();
+        var mdbw = $('#mdbw').val().trim();
         if (showroomname == undefined || showroomname == 'undefined' || showroomname == null || showroomname == 'null' || showroomname == '') {
             $('#showroomname').focus();
             common.toast(0, 'Show Room Name is Required');
@@ -270,11 +270,11 @@ function validateStep2Form() {
 }
 
 function validateStep3Form() {
-    var cperson = $('#cperson').val();
-    var position = $('#position').val();
-    var conMobile = $('#conMobile').val();
-    var email = $('#email').val();
-    var landline = $('#landline').val();
+    var cperson = $('#cperson').val().trim();
+    var position = $('#position').val().trim();
+    var conMobile = $('#conMobile').val().trim();
+    var email = $('#email').val().trim();
+    var landline = $('#landline').val().trim();
     var str = '';
     if (cperson == '') {
         common.toast(0, 'Contact Person Name is Required');

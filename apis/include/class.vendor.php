@@ -187,9 +187,9 @@ class vendor extends DB
             if($catid == 10000) {
                 $psql='d.color, d.carat, d.shape, d.certified AS cert, d.clarity';
             } else if($catid == 10001) {
-                $psql='d.shape,d.metal,c.lotref,d.gold_weight,d.dwt';
+                $psql='d.shape,d.metal,c.lotref,d.gold_weight,d.dwt as dwt';
             } else if($catid == 10002) {
-                $psql='d.type, d.metal, d.gold_purity, d.gold_weight';
+                $psql='d.type, d.metal,d.bullion_design as bullion_design,d.gold_purity as gold_purity, d.gold_weight as gold_weight';
             }
                 $sql = "select
                                     DISTINCT a.product_id
@@ -230,9 +230,19 @@ class vendor extends DB
                 OR
                         MATCH(d.clarity) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
                 OR
+                        MATCH(dwt) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)            
+                OR
                         MATCH(d.metal) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
                 OR
+                        MATCH(carat) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)            
+                OR
                         MATCH(d.type) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
+                OR
+                        MATCH(bullion_design) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
+                OR
+                        MATCH(gold_purity) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
+                OR
+                        MATCH(gold_weight) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)            
                 OR
                         d.certified LIKE '" . $params['bcode'] . "%'
                 OR
@@ -319,7 +329,8 @@ class vendor extends DB
                 $arr1[$j]['active_flag']=$row1['active_flag'];
                 $arr1[$j]['price']=$price;
                 $arr1[$j]['product_name']=$row1['product_name'];
-                $arr1[$j]['barcode']=$row1['barcode'];;
+                $arr1[$j]['barcode']=$row1['barcode'];
+                $arr1[$j]['bullion_design']=$row1['bullion_design'];
                 
                 
                 $j++;

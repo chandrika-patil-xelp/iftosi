@@ -193,18 +193,18 @@ function validateJForm()
 	var diamondShape = $('.shapeComm');
 	var color =  $('input[name=color]:checked').val();
 	var clarity = $("input[name='clarity']:checked").val();
-	var dweight = $('#diamondweight').val();
-	var no_diamonds=$('#no_diamonds').val();
+	var dweight = $('#diamondweight').val().trim();
+	var no_diamonds=$('#no_diamonds').val().trim();
 	var gemstone_type=$('#gemstone_type').val();
 	var gemcolour = $("input[name='gemstone_color']:checked").val();
-	var gemweight=$('#gemweight').val();
-	var num_gemstones = $('#num_gemstones').val();
-	var purity = $('#goldpurity').val();
-	var goldweight=$('#goldweight').val();
-	var barcode=$('#barcode').val();
-	var prdprice=$('#prdprice').val();
-	var othercert=$('#other_cerificate').val();
-	var other_gem_type = $('#other_gem_type').val();
+	var gemweight=$('#gemweight').val().trim();
+	var num_gemstones = $('#num_gemstones').val().trim();
+	var purity = $('#goldpurity').val().trim();
+	var goldweight=$('#goldweight').val().trim();
+	var barcode=$('#barcode').val().trim();
+	var prdprice=$('#prdprice').val().trim();
+	var othercert=$('#other_cerificate').val().trim();
+	var other_gem_type = $('#other_gem_type').val().trim();
 	var subcat = '';
 	var isValid = true;
 
@@ -695,8 +695,8 @@ function validateJForm(){
 
 function calculatePrice()
 {
-   var baseprice=$('#baseprice').val();
-   var discount=$('#discount').val();
+   var baseprice=$('#baseprice').val().trim();
+   var discount=$('#discount').val().trim();
    
    
    if(discount == null || discount == '' || discount == 'undefined' || discount == undefined){ 
@@ -725,7 +725,7 @@ function calculatePrice()
 }
 function validateNum(){
                var regex = /^\\d{2}(\\.\\d)?$/;
-               var cert = $('#cert').val();
+               var cert = $('#cert').val().trim();
                 if(cert.match(regex) == null || cert == undefined) {
                     common.toast(0,'valid');
                 } else {
@@ -742,20 +742,20 @@ function validateNum(){
             var flourecence = $("input[name='flourecence']:checked").val();
             var certificate = $("input[name='Certficate']:checked").val();
             var clarity = $("input[name='clarity']:checked").val();
-            var certno = $('#certno').val();
-            var carat = $('#caratweight').val();
-            var measure1 = $('#measure1').val();
-            var measure2 = $('#measure2').val();
-            var measure3 = $('#measure3').val();
-            var table = $('#table').val();
-            var crown = $('#crownangle').val();
-            var girdle = $('#girdle').val();
-            var barcode=$('#barcode').val();
-            var lotnumber=$('#lotnumber').val();
-            var lotreference=$('#lotreference').val();
-            var baseprice=$('#baseprice').val();
-            var discount=$('#discount').val();
-            var prdprice=$('#prdprice').val();
+            var certno = $('#certno').val().trim();
+            var carat = $('#caratweight').val().trim();
+            var measure1 = $('#measure1').val().trim();
+            var measure2 = $('#measure2').val().trim();
+            var measure3 = $('#measure3').val().trim();
+            var table = $('#table').val().trim();
+            var crown = $('#crownangle').val().trim();
+            var girdle = $('#girdle').val().trim();
+            var barcode=$('#barcode').val().trim();
+            var lotnumber=$('#lotnumber').val().trim();
+            var lotreference=$('#lotreference').val().trim();
+            var baseprice=$('#baseprice').val().trim();
+            var discount=$('#discount').val().trim();
+            var prdprice=$('#prdprice').val().trim();
             var str = '';
             carat = parseFloat(carat);
             crown = parseFloat(crown);
@@ -901,20 +901,19 @@ function validateNum(){
 }
 
  function validateBForm(){
-            var design =  $('input[name=design]:checked').val();
-            var purity = $('#goldpurity').val();
-            var barcode=$('#barcode').val();
-            var spurity = $('#silverpurity').val();
-            var goldweight = $('#goldweight').val();
-            var sweight= $('#silverweight').val();
+            var design =  $('input[name=design]:checked').val().trim();
+            var purity = $('#goldpurity').val().trim();
+            var barcode=$('#barcode').val().trim();
+            var spurity = $('#silverpurity').val().trim();
+            var goldweight = $('#goldweight').val().trim();
+            var sweight= $('#silverweight').val().trim();
             var shape = $('.jshapeComm');
             var a = $('.jshapeComm.shapeSelected').attr('id');
             var str = '';
             var patt1 = /(^|[^-\d])(1|2|5|10|20|50|100|200|500|1000)\b/;
             var patt2 = /(^|[^-\d])(999|995)\b/;
-            var otherdesign = $('#otherdesign').val();
+            var otherdesign = $('#otherdesign').val().trim();
             var isValid = true;
-            console.log(a);
             if(!shape.hasClass('shapeSelected')) {
                 str ='category is not Selected';
                 isValid = false;
@@ -1028,13 +1027,6 @@ function showJewelleryImps(tmpId) {
             }
 }
 
-
-function uploadFile()
-{
-   
-         
-    
-}
 function ValidateFile() {
     var allowedFiles = ["pdf","png","jpeg"];
     var fileUpload = document.getElementById("certfile").value;

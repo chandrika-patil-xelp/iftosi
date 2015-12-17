@@ -20,15 +20,15 @@ var bullionPage = 1;
         $('#bullTab').removeClass('dn');
         loadBullion = true;
     }
-    if (/1/.test(busiType) && catid==10000) {
+    if (/1/.test(busiType) && catid == 10000) {
         $('#diamondPrds').removeClass('dn');
         loadDiamonds(1);
     }
-    else if (/2/.test(busiType) && catid==10001) {
+    else if (/2/.test(busiType) && catid == 10001) {
         loadJewels(1);
         $('#jewelleryPrds').removeClass('dn');
     }
-    else if (/3/.test(busiType) && catid==10002) {
+    else if (/3/.test(busiType) && catid == 10002) {
         $('#bullionPrds').removeClass('dn');
         loadBullions();
     }
@@ -712,17 +712,15 @@ function searchBarcode(val,pgno) {
     } else if(catid==10002) {
         searchIDName='Bullions';
     }
-    if(val!='') {
-        if(searchPage == 1)
-        {
-            $('#'+searchIDName+'List').removeClass('dn');
-            $('#s'+searchIDName+'List').html('').addClass('dn');
-        }
+    if(val!='')
+    {
         $.ajax({url: common.APIWebPath() + "index.php?action=getVProductsByBcode&bcode="+ val +"&vid="+ uid +"&catid="+catid+"&page="+pgno+"&limit=50", success: function (result) {
             searchBarcodeCallback(result,pgno);
         }});
         searchScrollValue = val;
-    } else {
+    }
+    else
+    {
         $('#'+searchIDName+'List').removeClass('dn');
         $('#s'+searchIDName+'List').html('').addClass('dn');
     }
