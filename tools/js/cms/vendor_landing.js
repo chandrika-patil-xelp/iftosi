@@ -131,17 +131,18 @@ for(var i = 0; i< busiTypeSplt.length; i++)
     }
     if(busiTypeSplt[i] == 3)
     {
+		$('#bullTab').removeClass('dn');
         $('#goldRateSpan').append(goldRate).removeClass('dn');
         $('#silverRateSpan').append(silverRate).removeClass('dn');
     }
-    if(busiTypeSplt[i].length == 1 && busiTypeSplt[i] === 1)
+    if(busiTypeSplt.length == 1 && busiTypeSplt[i] === 1)
     {
         $('#dollarRateSpan').append(dollarRate).removeClass('dn');
         $('#dmdTab').removeClass('dn');
         $('#dollarRateSpan').addClass('fRight');
         $('#dollarRateSpan').attr('style','border-right:0px');
     }
-    if(busiTypeSplt[i].length == 1 && busiTypeSplt[i] === 3)
+    if(busiTypeSplt.length == 1 && busiTypeSplt[i] === 3)
     {
         $('#goldRateSpan').append(goldRate).removeClass('dn');
         $('#silverRateSpan').append(silverRate).removeClass('dn');
