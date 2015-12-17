@@ -969,17 +969,34 @@ function validateNum(){
             return false;
 }
 function backbtn()
-    { 
-            if(history.length <= 0){
-            window.history.back();
-            return true;
-            }
-            else if(history.length || history.length == 'undefiend' || history.length == undefiend || history.length == null || history.length == 'null' || history.length >= 0)
-            {
-                window.close();
-                window.reload();
-            }
-    }
+{
+	var qryParams = window.location.href.split('&');
+	var catidVal = httpUrl = '';
+	for(var i = 0; i < qryParams.length; i++)
+	{
+		if(qryParams[i].indexOf('catid') !== -1)
+		{
+			catidVal = qryParams[i].split('=');
+			if(catidVal[1] !== undefined && catidVal[1] !== null && catidVal[1] !== '' && typeof catidVal[1] !== 'undefined')
+			{
+				catidVal = catidVal[1];
+				httpUrl = DOMAIN + '?case=vendor_landing&catid='+catidVal;
+				break;
+			}
+		}
+	}
+	window.location.href = httpUrl;
+	/*if(history.length <= 0)
+	{
+		window.history.back();
+		return true;
+	}
+	else if(history.length || history.length == 'undefiend' || history.length == undefiend || history.length == null || history.length == 'null' || history.length >= 0)
+	{
+		window.close();
+		window.location.reload();
+	}*/
+}
 function showJewelleryImps(tmpId) {
     
                 $('.subCatType').addClass('dn');
