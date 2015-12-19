@@ -171,17 +171,18 @@
                    }
                     //  For category product mapping
                         
-                   
-                       $catids1 = explode(',', $catids1);
-                       $catids1 = implode('","', $catids1);
+                        
+                       $catids = explode(',',$catids1);
+                       $catidies = array_unique($catids);
+                       $catids1 = implode('","', array_unique($catids1));
+                       
                             $updtcatsql="UPDATE tbl_product_category_mapping set display_flag=1 where category_id NOT IN(\"".$catids1."\") and product_id=\"".$pid."\"";    
                             $updtcatres=$this->query($updtcatsql);
                         $detls['discount'] = str_replace('-', '', $detls['discount']);
-                        for($i=0;$i<count($catids);$i++)
+                        for($i=0;$i<count($catidies);$i++)
                         {
-                            if(!empty($catids[$i]))
+                            if(!empty($catidies[$i]))
                             {
-                                
                                 
                                 
                                 $pcsql="INSERT
@@ -195,7 +196,7 @@
                                                                                     date_time)
                                         VALUES
                                                                                (\"".$pid."\",
-                                                                                \"".$catids[$i]."\",
+                                                                                \"".$catidies[$i]."\",
                                                                                 \"".$detls['price']."\",
                                                                                 \"".$detls['rating']."\",
                                                                                 \"".$display_flag."\",
@@ -439,7 +440,9 @@
                                                                         \"".$city."\",
                                                                            'vendor',
                                                                             now(),
-                                                                        \"".$display_flag."\")";
+                                                                        \"".$display_flag."\")
+                                        ON DUPLICATE KEY UPDATE
+                                                                            vendor_price = \"".$detls['price']."\"";
                             $vendres = $this->query($vendsql);
                             
                                 $arr = array('pid'=>$pid);
@@ -911,8 +914,8 @@
 				foreach($expd as $key => $val)
 				{
 					$exd = explode('_',$val);
-					$ids[] = $exd[0];
-				}
+                    $ids[] = $exd[0];
+                }
 				$ilist = implode(',',$ids);
 				$where = " WHERE category_id in (".$ilist.") ";
 			} 
@@ -993,17 +996,16 @@
 						foreach($exd as $ky => $vl)
 						{
 							$ex = explode('_',$vl);
-                                                        $re='^[0-9]+$';
-                                                        if(preg_replace("/[^0-9]/","",$ex[count($ex)-1]) == $re)
-                                                        {
-                                                            $inarr[] = preg_replace("/[^0-9]/","",$ex[count($ex)-1]);
-                                                        }
-                                                        else
-                                                        {
-                                                            $inarr[] = $ex[count($ex)-1];
-                                                        }
-                                                        
-                                                        unset($ex[count($ex)-1]);
+                            $re='^[0-9]+$';
+                            if(preg_replace("/[^0-9]/","",$ex[count($ex)-1]) == $re)
+                            {
+                               $inarr[] = preg_replace("/[^0-9]/","",$ex[count($ex)-1]);
+                            }
+                            else
+                            {
+                               $inarr[] = $ex[count($ex)-1];
+                            }
+                            unset($ex[count($ex)-1]);
 							$field = implode('_',$ex);
 						}
 						$extn .= " AND ".$field." in ('".implode("','",$inarr)."') ";

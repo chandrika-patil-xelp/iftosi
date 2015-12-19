@@ -89,7 +89,7 @@
                                                 {
 ?>                            
                                                     <div class="checkDiv fLeft">
-                                                    <input type="checkbox" name='<?=$val['subcatid'];?>' class="filled-in"  value="<?=$val['subcatid'];?>" id="<?=$val['subcatid'];?>" <?=(in_array($val['subcatid'],$pdet['catid'])) ? 'checked="true"' : '';?> />
+                                                    <input type="checkbox" name='subcat_type' class="filled-in"  value="<?=$val['subcatid'];?>" id="<?=$val['subcatid'];?>" <?=(in_array($val['subcatid'],$pdet['catid'])) ? 'checked="true"' : '';?> />
                                                     <label for="<?=$val['subcatid'];?>"><?php echo $val['subcatname'];?></label>
                                                     </div>
 <?php

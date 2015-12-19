@@ -293,11 +293,6 @@ $('#pr_city').bind('keyup focus', input_selector, function(event)
     new Autosuggest($(this).val(), '#pr_city', '#pr_citySuggestDiv', DOMAIN + "apis/index.php", params, true, '', '', event);
 });
 
-$('#pr_city').bind('blur', input_selector, function(event)
-{		
-    //
-});
-
 function arrangeData(data, id, divHolder, nextxt)
 {
     if (data.results)
