@@ -33,7 +33,7 @@ else
 	define('VERSION',2.0);
 	define('IMGPATH','image-upload/');        
 }
-/*define('SMSAPI','http://alerts.sinfini.com/api/web2sms.php?workingkey=Aacffda7db60ac1a8470709273bea3bfe&to=+91_MOBILE&sender=NAFEXC&message=_MESSAGE');*/
+define('SMSAPI','http://alerts.sinfini.com/api/web2sms.php?workingkey=A31cf85c3cc3b65100bf9bd7fbe30cd90&to=+91_MOBILE&sender=SIDEMO&message=_MESSAGE');
 
 $dollarValue = 66.03;
 define('dollarValue',$dollarValue);
@@ -103,7 +103,6 @@ $jvs['head'] 		= DOMAIN.'tools/js/header.js?v='.VERSION;
 $jvs['signup'] 		= DOMAIN.'tools/js/signup.js?v='.VERSION;
 $jvs['filter'] 		= DOMAIN.'tools/js/filters.js?v='.VERSION;
 $jvs['dmap'] 		= DOMAIN.'tools/js/detailsMap.js?v='.VERSION;
-
 // Custom JS End
 
 

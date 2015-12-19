@@ -429,18 +429,15 @@ function submitDForm() {
      alert('submit ' +values);*/
 }
 
-function onEnterFormSubmit(evt,type) {
+function onEnterFormSubmit(evt,type)
+{
     var charCode = (evt.which) ? evt.which : evt.keyCode;
-    if(charCode==13) {
-        if(type==1) {
-            updateDollarRate();
-        } else if(type==2) {
-            updateSilverRate();
-        } else if(type==3) {
-            updateGoldRate();
-        } else if(type==4) {
-            updateGoldSilverRate();
-        }
+    if(charCode==13)
+    {
+        if(type==1)
+        {
+            otpCheck();
+        } 
     }
 }
 

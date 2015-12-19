@@ -87,7 +87,7 @@ SUGGESTION = function(URL,parameter,divHolder,txt,vcheck,nextxt) {
 			else
 			{
 				$(divHolder).html('');
-				$(divHolder).áddClass('dn');
+				$(divHolder).addClass('dn');
 			}
 		});
 	}

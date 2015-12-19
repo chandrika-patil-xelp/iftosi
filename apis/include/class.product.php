@@ -993,8 +993,17 @@
 						foreach($exd as $ky => $vl)
 						{
 							$ex = explode('_',$vl);
-							$inarr[] = $ex[count($ex)-1];
-							unset($ex[count($ex)-1]);
+                                                        $re='^[0-9]+$';
+                                                        if(preg_replace("/[^0-9]/","",$ex[count($ex)-1]) == $re)
+                                                        {
+                                                            $inarr[] = preg_replace("/[^0-9]/","",$ex[count($ex)-1]);
+                                                        }
+                                                        else
+                                                        {
+                                                            $inarr[] = $ex[count($ex)-1];
+                                                        }
+                                                        
+                                                        unset($ex[count($ex)-1]);
 							$field = implode('_',$ex);
 						}
 						$extn .= " AND ".$field." in ('".implode("','",$inarr)."') ";

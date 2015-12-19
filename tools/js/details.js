@@ -15,7 +15,7 @@ var isWishList = false;
 var isMail = false;
 var isContact = false;
 var isPidInWishlist = false;
-
+var funcObj = '';
 $(document).ready(function(){
      setTimeout(function() {
         var samt = 100;
@@ -351,74 +351,16 @@ function showVendorDetails(obj)
 
 		if(mobCond && nmCond && emCond)
 		{
-			var params = 'action=ajx&case=userCheck&mobile='+mobile+'&name='+encodeURIComponent(name)+'&email='+encodeURIComponent(email);
-			var URL = DOMAIN + "index.php";
-
-			$.getJSON(URL, params, function(data) {
-				if(data !== null && data !== undefined && data !== '')
-				{
-					if((data.error !== '' && data.error !== null && data.error !== undefined && data.error.Code == 0) || (data.error.Code == 1 && data.results.userid != ''))
-					{
-						/*if(data.results.userDet[0].is_vendor == 1)
-						{
-							customStorage.toast(0, 'This feature is not available for vendors');
-						}
-						else
-						{*/
-							customStorage.addToStorage('l', mobile);
-							customStorage.addToStorage('mobile', mobile);
-							customStorage.addToStorage('username', name);
-							customStorage.addToStorage('name', name);
-							customStorage.addToStorage('email', email);
-							customStorage.addToStorage('isLoggedIn',true);
-							var isVndr = data.results.userDet[0].is_vendor;
-
-							if(isVndr == 0 || isVndr == '0')
-							{
-								isVndr = -1;
-							}
-							
-							customStorage.addToStorage('is_vendor',isVndr);
-				
-							var uid = customStorage.addToStorage('userid', data.results.userid);
-							common.checkLogin();
-							if((obj !== undefined && $(obj).hasClass('iconWishlist')) || isWishList)
-							{
-								addToWishList();
-							}
-
-							if((obj !== undefined && $(obj).hasClass('iconMessage')) || isMail)
-							{
-								sendDetailsToUser();
-							}
-							else
-							{
-								var pos=$('.wrapper').height()-100;
-
-								setTimeout(function(){
-									$('#vDetails').removeClass('vTransit');
-									$('#vDetails').removeClass('dn');
-									$('body').animate({scrollTop: pos}, 300);
-								},10);
-
-								setTimeout(function () {
-									var mpscrpt = document.createElement("script");
-									mpscrpt.type = "text/javascript";
-									mpscrpt.src = "http://maps.google.com/maps/api/js";
-									$("head").append(mpscrpt);
-								}, 100);
-
-								setTimeout(function () {
-									initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
-								},250);
-								addToEnquiry();
-							}
-						//}
-					}
-				}
-			});
-		}
-	}
+                    
+                    funcObj = obj;
+                    common.checkMobile('ur_mobile');
+                    
+                    var pr_mobile = customStorage.addToStorage('mobile',mobile);
+                    otpGo(pr_mobile);
+                    requestOTP();
+                }
+			
+        }
 	else
 	{
 		if(isWishList==true)
@@ -437,7 +379,8 @@ function showVendorDetails(obj)
 		}
 		else if((isMail==false)&&(isWishList==false))
 		{
-			var pos=$('.wrapper').height()-50;
+                    var bottomPos = $('.prdMainDetails').position().top+$('.prdMainDetails').outerHeight(true)
+			var pos=bottomPos - 65;
 
 			setTimeout(function(){
 				$('#vDetails').removeClass('vTransit');
@@ -717,3 +660,182 @@ function sendDetailsToUser()
 		});
 	}
 }
+
+
+function requestOTP()
+{
+    $('#overlay1').removeClass('dn');
+     $('#otpDiv').removeClass('dn');
+    setTimeout(function () {
+        $('#overlay1').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
+        $('#optDiv').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
+    }, 10);
+}
+function otpCheck()
+{
+   var otpProvided =  $('#pr_otp').val();
+   var mobile = customStorage.readFromStorage('mobile');
+   var isValid = true;
+   $.ajax({url: DOMAIN + "apis/index.php?action=validOTP&mobile="+mobile+"&vc="+otpProvided, success: function(result)
+       {
+                var obj = jQuery.parseJSON(result);
+                var errCode = obj['error']['Msg'];
+                
+                if(errCode == 'Data matched')
+                {
+                    isValid = true;
+                    var mobile = $('#ur_mobile').val().trim();
+                        var name = $('#ur_name').val().trim();
+                        var email = $('#ur_email').val().trim();
+                        
+			var params = 'action=ajx&case=userCheck&mobile='+mobile+'&name='+encodeURIComponent(name)+'&email='+encodeURIComponent(email);
+			var URL = DOMAIN + "index.php";
+
+			$.getJSON(URL, params, function(data) {
+				if(data !== null && data !== undefined && data !== '')
+				{
+					if((data.error !== '' && data.error !== null && data.error !== undefined && data.error.Code == 0) || (data.error.Code == 1 && data.results.userid != ''))
+					{
+						/*if(data.results.userDet[0].is_vendor == 1)
+						{
+							customStorage.toast(0, 'This feature is not available for vendors');
+						}
+						else
+						{*/
+                                                    if(data.error.Msg === 'Data matched')
+                                                    {
+                                                        customStorage.addToStorage('l', data.results.userDet.logmobile);
+							customStorage.addToStorage('mobile', data.results.userDet.logmobile);
+							customStorage.addToStorage('username', data.results.userDet.user_name);
+							customStorage.addToStorage('name', name);
+							customStorage.addToStorage('email', email);
+							customStorage.addToStorage('city', data.results.userDet.city);
+							customStorage.addToStorage('isLoggedIn',true);
+                                                        var isVndr = data.results.userDet.is_vendor;
+
+							if(isVndr == 0 || isVndr == '0')
+							{
+								isVndr = -1;
+							}
+							
+							customStorage.addToStorage('is_vendor',isVndr);
+				
+							var uid = customStorage.addToStorage('userid', data.results.userid);
+                                                    }
+                                                    else
+                                                    {
+                                                        customStorage.addToStorage('l', mobile);
+							customStorage.addToStorage('mobile', mobile);
+							customStorage.addToStorage('username', name);
+							customStorage.addToStorage('name', name);
+							customStorage.addToStorage('email', email);
+							customStorage.addToStorage('isLoggedIn',true);
+							var isVndr = data.results.userDet.is_vendor;
+							if(isVndr == 0 || isVndr == '0')
+							{
+								isVndr = -1;
+							}
+							
+							customStorage.addToStorage('is_vendor',isVndr);
+				
+							var uid = customStorage.addToStorage('userid', data.results.userid);
+                                                    }
+							common.checkLogin();
+                                                        var obj = funcObj;
+                                                        
+                                                        $('#otpDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
+                                                        $('#overlay1').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
+                                                        setTimeout(function () {
+                                                        $('#overlay1,#otpDiv').addClass('dn');
+                                                        $("#otpDiv,#overlay1").remove();
+                                                        }, 1010);
+                                                        
+							if((obj !== undefined && $(obj).hasClass('iconWishlist')) || isWishList)
+							{
+								addToWishList();
+							}
+
+							if((obj !== undefined && $(obj).hasClass('iconMessage')) || isMail)
+							{
+								sendDetailsToUser();
+							}
+							else
+							{
+                                                            var bottomPos = $('.prdMainDetails').position().top+$('.prdMainDetails').outerHeight(true)
+                                                            var pos=bottomPos - 65;
+
+								setTimeout(function(){
+									$('#vDetails').removeClass('vTransit');
+									$('#vDetails').removeClass('dn');
+									$('body').animate({scrollTop: pos}, 300);
+								},10);
+
+								setTimeout(function () {
+									var mpscrpt = document.createElement("script");
+									mpscrpt.type = "text/javascript";
+									mpscrpt.src = "http://maps.google.com/maps/api/js";
+									$("head").append(mpscrpt);
+								}, 100);
+
+								setTimeout(function () {
+									initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
+								},250);
+								addToEnquiry();
+							}
+						//}
+					}
+				}
+			});
+                }
+                else if(errCode === 'Otp validation failed')
+                {
+                    isValid = false;
+                    customStorage.toast(0,'OTP verification Unsuccessful');
+                    requestOTP(pr_mobile);
+                }
+        }
+        });
+        return isValid;
+}
+function otpGo(pr_mobile)
+{
+        var pr_mobile = $('#ur_mobile').val().trim();
+        var otpValue = $("#pr_otp").val().trim();
+
+    otpValue = parseFloat(otpValue);
+    if(otpValue =='' || otpValue <= 0 || otpValue == undefined || otpValue == 'undefined')
+    {
+        common.toast(0,'OTP value provied is not proper');
+    }
+    else
+    {
+        $.ajax({url: DOMAIN + "apis/index.php?action=sendOTP&mb="+pr_mobile, success: function(result)
+            {
+                var obj = jQuery.parseJSON(result);
+                
+                var errCode = obj.code;
+                if(errCode == 1)
+                {
+                    isValid = true;
+                    return isValid;
+                }
+                if(errCode == 0)
+                {
+                    return isValid;
+                }
+            }
+        });
+    }
+}
+function closeOtpForm()
+{
+        $('#otpDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
+        window.history.back();
+        $('#overlay1').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
+        setTimeout(function () {
+            $('#overlay1,#otpDiv').addClass('dn');
+            $("#otpDiv,#overlay1").remove();
+        }, 1010);
+}
+
+

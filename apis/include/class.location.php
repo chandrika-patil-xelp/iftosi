@@ -185,6 +185,27 @@ class location extends DB
         $result=array('results'=>$arr,'error'=>$err);
         return $result;
     }
+    
+    public function cityName($params)
+    {
+        $sql="SELECT DISTINCT name as n,id FROM tbl_location_master WHERE type=2 AND name LIKE '".$params['name']."%'";
+        $res=$this->query($sql);
+        if($res)
+        {
+            while ($row=  $this->fetchData($res)) {
+                $arr[]=$row;
+            }
+            $err=array('code'=>0,'msg'=>'Value fetched successfully');
+        }
+        else
+        {
+            $err=array('code'=>1,'msg'=>'No records found');
+            $arr=array();
+        }
+        $result=array('results'=>$arr,'error'=>$err);
+        return $result;
+    }
+    
     public function suggestState($params)
     {
         $sql="SELECT DISTINCT state as n FROM tbl_area_master WHERE state LIKE '".$params['name']."%'";

@@ -54,7 +54,40 @@ switch($action)
             $result= $obj->checkUser($params);
             $res= $result;
             break;
+            
+    case 'sendOTP':
+        include APICLUDE.'class.user.php';
+        $mb = (!empty($params['mb'])) ? trim($params['mb']) : '';
+        if(empty($mb))
+        {
+            $resp = array();
+            $error = array('errCode' => 1, 'errMsg' => 'Invalid parameters');
+            $result = array('results' => $resp, 'error' => $error);
+            break;
+        }
+        $obj= new user($db['iftosi']);
+        $result = $obj->sendOTP($params);
+        $res = $result;
+        break;
+        
 
+    case 'validOTP':
+        include APICLUDE.'class.user.php';
+        $mobile = (!empty($params['mobile'])) ? trim($params['mobile']) : '';
+        $vc = (!empty($params['vc'])) ? trim($params['vc']) : '';
+        $user_name= (!empty($params['name'])) ? trim($params['name']) : '';
+        if(empty($mobile) && empty($vc))
+        {
+            $resp = array();
+            $error = array('errCode' => 1, 'errMsg' => 'Invalid parameters');
+            $result = array('results' => $resp, 'error' => $error);
+            break;
+        }
+        $obj= new user($db['iftosi']);
+        $result = $obj->validOTP($params);
+        $res = $result;
+        break;
+        
 // localhost/iftosi/apis/index.php?action=userReg&username=Shushrut Kumar&password=mishra1.234&mobile=7309290529&email=shubham.bajpai@xelpmoc.in&isvendor=1
         case 'userReg':
             include APICLUDE.'class.user.php';
@@ -1553,6 +1586,15 @@ echo '</pre>';
             $result=$obj->suggestCity($params);
             $res=$result;
             break;
+
+        //  localhost/iftosi/apis/index.php?action=citySuggest&name=bangalo
+        case 'cityName':
+            include APICLUDE.'class.location.php';
+            $obj=new location($db['iftosi']);
+            $result=$obj->cityName($params);
+            $res=$result;
+            break;
+
 
 //  localhost/iftosi/apis/index.php?action=stateSuggest&name=tami
         case 'stateSuggest':

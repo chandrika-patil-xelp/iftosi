@@ -34,23 +34,31 @@ var validMob = true;
     $('#signupCancel').click(function () {
         $("input").val('');
         $("#isVendor").removeAttr('checked');
-        window.history.back();
+        setTimeout(function () {window.location.assign(DOMAIN + 'index.php'); },20);
     });
     $('#signupSubmit').bind('click', function () {
+        if(!$('#pr_citySuggestDiv').hasClass('dn'))
+        {
+            $('#pr_citySuggestDiv').addClass('dn');            
+        }
         var pr_name = $('#pr_name').val();
         var pr_mobile = $('#pr_mobile').val();
         var pr_email = $('#pr_email').val();
         var pr_pass = $('#pr_pass').val();
+        var city = $('#pr_city').val();
+        var cityid = $('#pr_cid').val();
         var isVendor = $('#isVendor').is(':checked');
         var amIVendor = $("input[type=checkbox]:checked").length;
+        var isValid = false;
         var userType =1;
         if(isVendor)
             isVendor=1;
         else 
             isVendor=-1;
 
-		if(pr_mobile.length==10) {
-			$.ajax({url: DOMAIN + "apis/index.php?action=checkUser&mobile=" + pr_mobile, success: function (result) {
+		if(pr_mobile.length==10)
+                {
+                        $.ajax({url: DOMAIN + "apis/index.php?action=checkUser&mobile=" + pr_mobile, success: function (result) {
 				var obj = jQuery.parseJSON(result);
 				var errCode = obj['error']['Code'];
 				if(errCode == 1) {
@@ -66,7 +74,18 @@ var validMob = true;
 				customStorage.toast(0,'Invalide format for Name'); 
 				$('#pr_name').focus();
 				return false;
-			} else if(pr_mobile=='' || pr_mobile.length!=10 || isNaN(pr_mobile)) {
+			}
+                        else if(city == '') {
+				customStorage.toast(0,'City is mandatory!'); 
+				$('#pr_city').focus();
+				return false;
+			}
+                         else if(cityid == '') {
+				customStorage.toast(0,'Please choose city from the list!'); 
+				$('#pr_city').focus();
+				return false;
+			}
+                        else if(pr_mobile=='' || pr_mobile.length!=10 || isNaN(pr_mobile)) {
 				customStorage.toast(0,'Invalid format for Mobile'); 
 				$('#pr_mobile').focus();
 				return false;
@@ -82,11 +101,13 @@ var validMob = true;
 				customStorage.toast(0,'Password is Required!'); 
 				$('#pr_pass').focus();
 				return false;
-			} else if(!validMob) {
+			}
+                        else if(!validMob) {
 				customStorage.toast(0,'This mobile number is already registered!'); 
 				$('#pr_mobile').focus();
 				return false;
 			}
+                        
 			else if(amIVendor == undefined || amIVendor == 'undefined' || amIVendor == '' || amIVendor == null || amIVendor == 'null' || amIVendor == 0){
 				customStorage.toast(0,'You have not Selected the type of user!'); 
 				return false;
@@ -95,31 +116,10 @@ var validMob = true;
 					{
 						userType = 0;
 					}
-				
-				$.ajax({url: DOMAIN + "apis/index.php?action=userReg&username=" + pr_name +"&password=" + pr_pass +"&mobile=" + pr_mobile + "&email="+pr_email+'&isvendor='+userType, success: function (result) {
-					var obj = eval('('+result+')');
-					var errCode = obj.error.code;
-					if(errCode == 0) {
-						var userid = obj.userid;
-						customStorage.addToStorage('isLoggedIn',true);
-						customStorage.addToStorage('userid',userid);
-						customStorage.addToStorage('mobile',pr_mobile);
-						customStorage.addToStorage('username',pr_name);
-						customStorage.addToStorage('is_vendor',isVendor);
-                        customStorage.addToStorage('email',pr_email);
-						customStorage.addToStorage('name',pr_name);
-						if(isVendor===1) {
-							customStorage.removeFromStorage('busiType');
-							window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid='+userid);
-						} else {
-							customStorage.toast(1,'Registration Successfull Done');
-							//window.history.back();
-							setTimeout(function () {window.location.assign(DOMAIN + 'index.php'); },1500);
-						}
-					} else {
-						customStorage.toast(0,'Registration Unsuccessfull');
-					}
-				}});
+                                        pr_mobile = customStorage.addToStorage('mobile',pr_mobile);
+                                        otpGo(pr_mobile);
+                                        requestOTP();
+                                        
 			}
 		}, 250);
     });
@@ -137,3 +137,195 @@ function isValidMKey(evt, id) {
 $(".amIVendor").change(function () {
     $(".amIVendor").not(this).prop('checked', false);
 });
+
+function requestOTP()
+{
+    $('#overlay').removeClass('dn');
+     $('#otpDiv').removeClass('dn');
+    setTimeout(function () {
+        $('#overlay').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
+        $('#optDiv').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
+    }, 10);
+}
+function otpCheck()
+{
+   var otpProvided =  $('#pr_otp').val();
+   var mobile = customStorage.readFromStorage('mobile');
+   var isValid = true;
+   $.ajax({url: DOMAIN + "apis/index.php?action=validOTP&mobile="+mobile+"&vc="+otpProvided, success: function(result)
+       {
+                var obj = jQuery.parseJSON(result);
+                var errCode = obj['error']['Msg'];
+                if(errCode === 'Data Matched')
+                {
+                    isValid = true;
+                }
+                else if(errCode === 'Otp validation failed')
+                {
+                    isValid = false;
+
+                }
+        }
+        });
+    if(pageName == 'forgot')
+    {
+        $.ajax({url: DOMAIN + "apis/index.php?action=forgotPwd&email=" + mobile, success: function (result) {
+            var obj = jQuery.parseJSON(result);
+            var errCode = obj['error']['Code'];
+            var errMsg = obj['error']['Msg'];
+            if(errCode == 1) {
+                customStorage.toast(0,errMsg);
+            } else {
+                customStorage.toast(1,errMsg);
+                window.location.assign(DOMAIN + "index.php?case=login");
+            }
+        }});
+    }
+    else
+    {
+        if(isValid == true)
+        {
+            var pr_name = $('#pr_name').val();
+            var pr_mobile = $('#pr_mobile').val();
+            var pr_email = $('#pr_email').val();
+            var pr_pass = $('#pr_pass').val();
+            var pr_city = $('#pr_city').val();
+            var isVendor = $('#isVendor').is(':checked');
+            var amIVendor = $("input[type=checkbox]:checked").length;
+            var isValid = false;
+            var userType =1;
+            if(isVendor)
+                isVendor=1;
+            else 
+                isVendor=-1;
+            $.ajax({url: DOMAIN + "apis/index.php?action=userReg&username=" + pr_name +"&password=" + pr_pass +"&mobile=" + pr_mobile + "&cityname="+pr_city+"&email="+pr_email+'&isvendor='+userType, success: function (result) {
+                        var obj = eval('('+result+')');
+                        var errCode = obj.error.code;
+                        if(errCode == 0) {
+                                var userid = obj.userid;
+                                customStorage.addToStorage('isLoggedIn',true);
+                                customStorage.addToStorage('userid',userid);
+                                customStorage.addToStorage('mobile',pr_mobile);
+                                customStorage.addToStorage('username',pr_name);
+                                customStorage.addToStorage('is_vendor',isVendor);
+                                customStorage.addToStorage('email',pr_email);
+                                customStorage.addToStorage('name',pr_name);
+                                customStorage.addToStorage('city',pr_city);
+                                if(isVendor===1) {
+                                        customStorage.removeFromStorage('busiType');
+                                        window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid='+userid);
+                                } else {
+                                        customStorage.toast(1,'Registration Successfull Done');
+                                        setTimeout(function () {window.location.assign(DOMAIN + 'index.php'); },1500);
+                                }
+                        } else {
+                                customStorage.toast(0,'Registration Unsuccessfull');
+                        }
+                }});
+        }
+        else
+        {
+            customStorage.toast(0,'OTP verification Unsuccessful');
+            requestOTP(pr_mobile);
+        }
+    }
+        return isValid;
+}
+function otpGo(pr_mobile)
+{
+        var pr_mobile = $('#pr_mobile').val().trim();
+        var otpValue = $("#pr_otp").val().trim();
+
+    otpValue = parseFloat(otpValue);
+    if(otpValue =='' || otpValue <= 0 || otpValue == undefined || otpValue == 'undefined')
+    {
+        common.toast(0,'OTP value provied is not proper');
+    }
+    else
+    {
+        $.ajax({url: DOMAIN + "apis/index.php?action=sendOTP&mb="+pr_mobile, success: function(result)
+            {
+                var obj = jQuery.parseJSON(result);
+                
+                var errCode = obj.code;
+                if(errCode == 1)
+                {
+                    isValid = true;
+                    return isValid;
+                }
+                if(errCode == 0)
+                {
+                    return isValid;
+                }
+            }
+        });
+    }
+}
+
+function closeOtpForm()
+{
+        $('#otpDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
+        window.history.back();
+        $('#overlay').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
+        setTimeout(function () {
+            $('#overlay,#otpDiv').addClass('dn');
+            $("#otpDiv,#overlay").remove();
+        }, 1010);
+}
+
+function onEnterFormSubmit(evt,type)
+{
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if(charCode==13)
+    {
+        if(type==1)
+        {
+            otpCheck();
+        }
+    }
+}
+
+
+/* For suggestions of City */
+$('#pr_city').bind('keyup focus', input_selector, function(event)
+{		
+    var params = 'action=cityName&name=' + escape($(this).val());
+    new Autosuggest($(this).val(), '#pr_city', '#pr_citySuggestDiv', DOMAIN + "apis/index.php", params, true, '', '', event);
+});
+
+$('#pr_city').bind('blur', input_selector, function(event)
+{		
+    //
+});
+
+function arrangeData(data, id, divHolder, nextxt)
+{
+    if (data.results)
+    {
+        var suggest = "<div class='smallField w100 fmRoboto transition300 font14 pointer border1'>";
+        $.each(data.results, function(i, vl) {
+                suggest += "<div id='suggest" + i + "' class='autoSuggestRow w100 transition300 txtCaCase txtOverFlow txtOver' title="+vl.n+" style='text-transform:capitalize;' onClick='setSuggestValue(\""+vl.n+"\",\"#pr_city\",\""+vl.id+"\");'>"+vl.n+"</div>";
+        });
+        suggest += "</div>";    
+        return suggest;
+    }
+    else
+        return '';
+    
+}
+
+function setSuggestValue(val, id, cid) {
+    $(id).val(val);
+    $('#pr_cid').val(cid);
+    $(id).next( "label" ).addClass("labelActive");
+    $(id).addClass('brGreen');
+    setTimeout(function () {
+        $('#pr_citySuggestDiv').addClass('dn');
+    }, 50);
+}
+
+function closeSuggest(id) {
+    setTimeout(function () {
+        $('#' + id).html('');
+    }, 10);
+}

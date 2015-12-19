@@ -22,16 +22,127 @@
                 while($row=$this->fetchData($cres))
                 {
                     $arr2['userid']=$row['user_id'];
-                    $arr2[]=$row;
+                    $arr2=$row;
                             
                 }
                 $arr1=array();
-                $arr=array('msg'=>$arr1,'userid'=>$arr2['userid'],'userDet'=>$arr2);
+                $arr=array('msg'=>$arr1,'userid'=>$arr2['user_id'],'userDet'=>$arr2);
                 $err=array('Code'=>1,'Msg'=>'Data matched');
             }
             $result = array('results' => $arr, 'error' => $err);
             return $result;
         }
+
+        
+        public function validOTP($params) 
+        {      
+            $sql = "SELECT 
+                                *,
+                                DATE_SUB(`updated_on`,INTERVAL - 10 MINUTE) as intervl,
+                                now()
+                    FROM 
+                                tbl_verification_code
+                    WHERE
+                                mobile = " . $params['mobile'] . " 
+                    AND
+                                DATE_SUB(`updated_on`,INTERVAL - 10 MINUTE) > now() limit 1";
+            $res = $this->query($sql);
+            if($res)
+            {
+                $row = $this->fetchData($res);
+                if ($row['vcode'] == $params['vc'])
+                {
+                    $vsql = "SELECT
+                                        *
+                             FROM 
+                                        tbl_registration 
+                             WHERE 
+                                        logmobile=\"" . $params['mobile'] . "\"";
+
+                    $vres = $this->query($vsql);
+                    $cnt1 = $this->numRows($vres);
+                    if ($cnt1 > 0)
+                    {
+                        $row = $this->fetchData($vres);
+                        $send_otp_params = array('mobile' => $params['mobile']);
+                        $userid = $row['userid'];
+                        $arr = array('Msg' => 'Otp is validated successfully for existing user', 'userid' => $userid);
+                        $err = array('Code' => 0, 'Msg' => 'Data matched');
+                    }
+                    else
+                    {
+                        $arr = array();
+                        $err = array('Code' => 0, 'Msg' => 'Data matched');
+                    }
+                } 
+                else 
+                {
+                    $arr = array();
+                    $err = array('Code' => 1, 'Msg' => 'Otp validation failed');
+                }
+            }
+            else
+            {
+                $arr = array();
+                $err = array('Code' => 1, 'Msg' => 'Otp validation failed');
+            }
+        $result = array('results' => $arr, 'error' => $err);
+        return $result;
+    }
+    # OTP creation
+    public function sendOTP($params)
+    {
+        global $comm;
+        $isValidate = true;
+        $sql = "SELECT
+                        *,
+                        DATE_SUB(`updated_on`,INTERVAL - 10 MINUTE) as intervl,
+                        now()
+                FROM
+                        tbl_verification_code
+                WHERE
+                        mobile = " . $params['mb'] . "
+                AND
+                        DATE_SUB(`updated_on`,INTERVAL - 10 MINUTE) > now() limit 1";
+        $res = $this->query($sql);
+        if ($res)
+        {
+            $row = $this->fetchData($res);
+            if ($row['vcode'])
+            {
+                $rno = $row['vcode'];
+                $isValidate = false;
+            }
+        }
+        if ($isValidate)
+        {
+            $rno = rand(100000, 999999);
+            $sql = "INSERT
+                    INTO 
+                                tbl_verification_code (mobile,vcode) 
+                    VALUES
+                                (" . $params['mb'] . ",
+                                 " . $rno . ")";
+            $res = $this->query($sql);
+        }
+        if($rno)
+        {
+            $txt = 'Your OTP is ' . $rno;
+            $url = str_replace('_MOBILE', $params['mb'], SMSAPI);
+            $url = str_replace('_MESSAGE', urlencode($txt), $url);
+            $res = $comm->executeCurl($url, true);
+            if (!empty($url))
+            {
+                $result = array('result'=>'','code'=>1);
+                return $result;
+            }
+            else
+            {
+                $result = array('result'=>'','code'=>0);
+                return $result;
+            }
+        }
+    }
 
         public function userReg($params) // USER LOGIN PROCESS
         {   
@@ -44,21 +155,23 @@
 							email,
 							is_vendor,
 							is_active,
+                                                        city,
 							date_time,
 							update_time,
 							updated_by
 						)
 					VALUES
 						(
-							'".$params['username']."',
-							MD5('".$params['password']."'),
-							".$params['mobile'].",
-							'".$params['email']."',
-							".$params['isvendor'].",
-							1,
-							now(),
-							now(),
-							'".$params['username']."'
+							\"".$params['username']."\",
+                                                    MD5(\"".$params['password']."\"),
+							\"".$params['mobile']."\",
+							\"".$params['email']."\",
+							\"".$params['isvendor']."\",
+                                                            1,
+                                                        \"".$params['cityname']."\",
+                                                            now(),
+                                                            now(),
+							\"".$params['username']."\"
 						)
 					";
             $ires=$this->query($isql);
@@ -66,7 +179,22 @@
             
             if($params['isvendor']==1)
             {
-            $isql= "INSERT INTO tbl_vendor_master(vendor_id,email,date_time,is_complete,active_flag) VALUES(".$uid.",'".$params['email']."',now(),0,0)";
+            $isql= "INSERT
+                    INTO
+                                tbl_vendor_master
+                               (vendor_id,
+                                email,
+                                date_time,
+                                is_complete,
+                                active_flag,
+                                city)
+                    VALUES
+                             (".$uid.",
+                             '".$params['email']."',
+                                now(),
+                                0,
+                                0,
+                            \"".$params['cityname']."\")";
             $res=$this->query($isql);
                 if($res)
                 {
@@ -143,11 +271,16 @@
 						}
 					}
 				}
+            $vsql1='UPDATE tbl_registration SET ';
+            $vsql1 .= " city = \"".$vfulldtls['city']."\"";
+            
+                                
+                                
             $vsql='UPDATE tbl_vendor_master SET ';
             if (!empty($detls['orgname'])) {
                 $vsql .= " orgName = '".$detls['orgname']."', ";
             }
-
+            
             if (!empty($detls['fulladd'])) {
                 $vsql .= " fulladdress = '".$detls['fulladd']."',";
             }
@@ -249,9 +382,10 @@
                 $vsql .= " is_complete = ".$params['isC'].",";
             }
             $vsql.=" updatedby='vendor' WHERE vendor_id=".$uid."";
-
+            $vsql1 .= " WHERE user_id=".$uid;
             $vres = $this->query($vsql);
-            if ($vres) {
+            $vres2 = $this->query($vsql1);
+            if ($vres && $vres2) {
                 $arr = "Vendor table is updated";
                 $err = array('code' => 0, 'msg' => 'Update operation is done successfully');
             } else {
@@ -267,6 +401,7 @@
                                             email='".$detls['email']."',
                                             updatedby='".$detls['username']."',
                                             is_complete=2
+                                            city = \"".$detls['city']."\"
                      WHERE 
                                             user_id=".$uid."";
              $vres=$this->query($vsql);
@@ -474,77 +609,7 @@
             return $result;
         }
         
-//        public function viewAll($params)
-//        {
-//            $vsql="SELECT 
-//                                    is_vendor,
-//                                    user_id 
-//                   FROM 
-//                                    tbl_registration 
-//                   WHERE 
-//                                    user_id=".$params['uid']." 
-//                   AND
-//                                    is_active=1";
-//            $vres=$this->query($vsql);
-//            $chkres=$this->numRows($vres);
-//            if($chkres>0)//If user is registered and is customer
-//            {
-//                while($row1=$this->fetchData($vres))
-//                {
-//                    $arr1['isv']=$row1['is_vendor'];
-//                    $arr1['uid']=$row1['user_id'];
-//                }
-//
-//                if($arr1['isv']==0)   // check if it is User
-//                {  
-//                  $vensql="SELECT 
-//                                            user_name,
-//                                            logmobile,
-//                                            email 
-//                           FROM 
-//                                            tbl_registration
-//                           WHERE 
-//                                            user_id =".$arr1['uid'];
-//                  $res=$this->query($vensql);
-//                  while($row=$this->fetchData($res))
-//                   {
-//                      $arr[]=$row;
-//                  }
-//                  $err=array('code'=>0,'msg'=>'Values fetched');
-//                }
-//                else if($arr1['isv']==1)    // check if it is Vendor
-//                {
-//                  $vensql="SELECT 
-//                                            orgName,
-//                                            email,
-//                                            fulladdress,
-//                                            contact_person,
-//                                            contact_mobile 
-//                           FROM 
-//                                            tbl_vendor_master 
-//                           WHERE
-//                                            vendor_id =".$arr1['uid'];
-//                  $res=$this->query($vensql);
-//                  while($row=$this->fetchData($res))
-//                  {
-//                      $arr[]=$row;
-//                  }
-//                  $err=array('code'=>0,'msg'=>'Data fetched successfully');
-//                }
-//                else
-//                {
-//                    $arr=array();
-//                    $err=array('code'=>1,'msg'=>'Problem in fetching data');
-//                }
-//            }
-//            else
-//            {
-//                $arr=array();
-//                $err=array('code'=>1,'msg'=>'Problem in fetching data');
-//            }  
-//            $result = array('results'=>$arr,'error'=>$err);
-//            return $result;
-//        }
+
     public function viewAll($params) {
         $vsql = "SELECT 
                                     is_vendor,
