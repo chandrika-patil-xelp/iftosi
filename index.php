@@ -316,7 +316,7 @@ switch ($action) {
                 $fil = $res['results']['attributes'];
 
                 $totalCnt = $total;
-                $lastpg = floor($total / 15);
+                $lastpg = ceil($total / 15);
                 $adjacents = 2;
                 //echo "<pre>";print_r($total);die;
                 include 'template/results.html';
@@ -337,7 +337,7 @@ switch ($action) {
                 $fil = $res['results']['attributes'];
 
                 $totalCnt = $total;
-                $lastpg = floor($total / 15);
+                $lastpg = ceil($total / 15);
                 $adjacents = 2;
                 for ($i = 0; $i < count($data); $i++) {
                     $pid = $data[$i]['pid']; //die;
@@ -367,7 +367,7 @@ switch ($action) {
                 //echo "<pre>";print_r($data);die;
 
                 $totalCnt = $total;
-                $lastpg = floor($total / 15);
+                $lastpg = ceil($total / 15);
                 $adjacents = 2;
                 include 'template/bullion_results.html';
                 break;
