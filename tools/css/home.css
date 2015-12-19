@@ -33,7 +33,9 @@ body{padding: 0;margin: 0;}
 .font55{font-size: 55px;}
 .font65{font-size: 65px;}
 
-*{box-sizing: border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-ms-box-sizing:border-box;-o-box-sizing:border-box;-webkit-appearance: none;-moz-user-select: none;-webkit-user-select: none;-ms-user-select: none;}
+*{box-sizing: border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-ms-box-sizing:border-box;-o-box-sizing:border-box;-webkit-appearance: none;}
+div,span{-moz-user-select: none;-webkit-user-select: none;-ms-user-select: none;}
+
 .dn{display: none!important;}
 .fLeft{float:left!important}
 .fRight{float:right!important}
