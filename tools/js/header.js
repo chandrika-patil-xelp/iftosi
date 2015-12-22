@@ -172,7 +172,7 @@ $(document).ready(function() {
             $('.logo').velocity({top: 30 + "px", height: 100 + "px", width: 100 + "px", backgroundPositionX: '50%'}, {duration: 0, delay: 0});
             $('#logoTxt').velocity({left: 0 + "px", bottom: -30 + "px"}, {duration: 300, delay: 0});
 
-            if (pageName === 'diamond_details' || pageName === 'jewellery_details' || pageName === 'bullion_details' || pageName === 'diamond_shapes') {
+            if (pageName === 'diamond_details' || pageName === 'jewellery_details' || pageName === 'bullion_details' || pageName === 'diamond_shapes' || pageName === 'education_round'||pageName === 'education_pear'||pageName === 'education_oval'||pageName === 'education_emerald'||pageName === 'education_clarity'||pageName === 'education_asscher'||pageName === 'education_heart'||pageName === 'education_marq'||pageName === 'education_radiant'||pageName === 'e_certification'||pageName === 'e_certification1'||pageName === 'e_certification2'||pageName === 'e_carat_weight'||pageName === 'education_cushion'||pageName === 'education_princess'||pageName === 'e_color'||pageName === 'e_color1'||pageName === 'e_cut'||pageName === 'e_cut1'||pageName === 'e_cut2'||pageName === 'e_cut3'||pageName === 'e_cut4'||pageName === 'e_cut5') {
                 $('#logoTxt').css({color: '#4d4d4d'});
             }
             $('#header').velocity({height: "100px"}, {duration: 0, delay: 0, easing: 'swing'});
