@@ -1,131 +1,155 @@
 <?php
 switch ($page) {
-    case 'index':
-    case 'wishlist':
-        ?>
-        <div id='header' class="header transition300">
-            <div class="wrapperMax">
-                <div id="mMenuBtn" class="menuBtn fLeft transition300 ripplelink" onclick="showLeftMenu(true)"></div>
-<!--                <div class="cityName fLeft txtOver">Bangalore</div>-->
-                <div class="headRight fRight transition300">
-                    <div class="compNo fRight fmOpenB">022-32623263</div>
-                    <div class="fRight sortBox dn" id="userMenu">
-                        
-                        <div class="dropdownBox fLeft">
-                            <div id="hdrpinp" class="dropInput fmOpenR"></div>
-                            <ul id="hdropList" class="fmOpenR">
-								<li id='prdHeader' class="transition100 dn"><a href="<?php echo DOMAIN; ?>index.php?case=vendor_landing&catid=<?=$catid;?>">Products</a></li>
-								<li id="enqHeader" class="transition100 dn"><a href="<?php echo DOMAIN; ?>index.php?case=vendor_enquiries&catid=<?=$catid;?>">Enquiry</a></li>
-									<li id="profileHeader" class="transition100 dn">Profile</li>
-<!--								<li id="wishHeader" class="transition100 dn" onclick="redirectToWishlist();">Wishlist (<span id='wishListCnt'></span>)</li>-->
-								<li class="transition100" onclick="common.doLogout();">Log Out</li>
-                            </ul>
-                        </div>
+case 'index':
+case 'wishlist':
+?>
+<div id='header' class="header transition300">
+    <div class="wrapperMax">
+        <div id="mMenuBtn" class="menuBtn fLeft transition300 ripplelink" onclick="showLeftMenu(true)"></div>
+        <!--                <div class="cityName fLeft txtOver">Bangalore</div>-->
+        <div class="headRight fRight transition300">
+            <div class="compNo fRight fmOpenB">022-32623263</div>
+            <div class="fRight sortBox dn" id="userMenu">
 
-                    </div>
-                    
-                    <div class="signInUpTab fRight fmOpenR"><span onclick="common.showLoginForm();">Sign In</span> / <a href="<?php echo DOMAIN; ?>index.php?case=signup">Sign Up</a></div>
-                    <div id="wishHeaderb4" class="wishlist fRight fmOpenR" onclick="common.showLoginForm();">Wishlist</div>
-                    <div id="wishHeaderaftr" class="wishlist fRight fmOpenR" onclick="redirectToWishlist();">Wishlist (<span id='wishListCnt'></span>)</div>
+                <div class="dropdownBox fLeft">
+                    <div id="hdrpinp" class="dropInput fmOpenR"></div>
+                    <ul id="hdropList" class="fmOpenR">
+                        <li id='prdHeader' class="transition100 dn"><a href="<?php echo DOMAIN; ?>index.php?case=vendor_landing&catid=<?=$catid;?>">Products</a></li>
+                        <li id="enqHeader" class="transition100 dn"><a href="<?php echo DOMAIN; ?>index.php?case=vendor_enquiries&catid=<?=$catid;?>">Enquiry</a></li>
+                        <li id="profileHeader" class="transition100 dn">Profile</li>
+                        <!--								<li id="wishHeader" class="transition100 dn" onclick="redirectToWishlist();">Wishlist (<span id='wishListCnt'></span>)</li>-->
+                        <li class="transition100" onclick="common.doLogout();">Log Out</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="signInUpTab fRight fmOpenR"><span onclick="common.showLoginForm();">Sign In</span> / <a href="<?php echo DOMAIN; ?>index.php?case=signup">Sign Up</a></div>
+            <div id="wishHeaderb4" class="wishlist fRight fmOpenR" onclick="common.showLoginForm();">Wishlist</div>
+            <div id="wishHeaderaftr" class="wishlist fRight fmOpenR" onclick="redirectToWishlist();">Wishlist (<span id='wishListCnt'></span>)</div>
+        </div>
+    </div>
+</div>
+<?php
+break;
+
+case 'diamonds':
+case 'jewellery':
+case 'bullion':
+case 'diamond_details':
+case 'jewellery_details':
+case 'bullion_details':
+case 'diamond_shapes':
+case 'education_round':
+case 'education_oval':
+case 'education_pear':
+case 'education_emerald':
+case 'education_clarity':
+case 'education_asscher':
+case 'education_heart':
+case 'education_marq':
+case 'education_radiant':
+case 'education_cushion':
+case 'education_princess':
+case 'e_certification':
+case 'e_certification1':
+case 'e_certification2':
+case 'e_carat_weight':
+case 'e_color':
+case 'e_color1':
+case 'e_cut':
+case 'e_cut1':
+case 'e_cut2':
+case 'e_cut3':
+case 'e_cut4':
+case 'e_cut5':
+case 'e_glossary':
+?>
+<div id='header' class="header transition300">
+    <div class="wrapperMax poR bgWhite">
+        <div id="mMenuBtn" class="menuBtn fLeft transition300 ripplelink" onclick="showLeftMenu(true)"></div>
+        <div id="mFilterBtn" class="filterBtn fRight transition300 ripplelink" onclick="swichFilter();"></div>
+        <div class="headCatCont fLeft transition300">
+            <?php
+            foreach($showhead as $key => $val)
+            {
+            $selected = ($val['catid'] == $_GET['catid']) ? 'headSelected' : '';
+            if($val['cat_name'] == 'Diamonds')
+            {
+            ?>
+            <a href="<?php echo DOMAIN.strtolower($val['cat_name']).'/ct-'.$val['catid'];?>">
+                <div id='hbgDiam' class="headCat fLeft bg<?php echo $val['cat_name'];?> transition300 <?php echo $selected;?>">
+                    <span><?php echo $val['cat_name'];?></span>
+                </div>
+            </a>
+
+            <?php
+            }
+            else if($val['cat_name'] == 'Jewellery')
+            {
+            $showcat = $val;
+            ?>
+            <a href="<?php echo DOMAIN.strtolower($val['cat_name']).'/ct-'.$val['catid'];?>" class="fLeft">
+                <div id='hbgJewel' class="headCat fLeft bg<?php echo $val['cat_name'];?> transition300 <?php echo $selected;?>">
+
+                    <span class="transition300"><?php echo $val['cat_name'];?></span>
+
+                    <?php include 'jewelleryMenu.html'; ?>
+                </div>
+            </a>
+            <?php
+            }
+            else
+            {
+            ?>
+            <a href="<?php echo DOMAIN.strtolower($val['cat_name']).'/ct-'.$val['catid'];?>">
+                <div id='hbgBull' class="headCat fLeft bg<?php echo $val['cat_name'];?> transition300 <?php echo $selected;?>">
+                    <span><?php echo $val['cat_name'];?></span>
+
+                </div>
+            </a>
+
+            <?php
+            }
+            }
+            ?>
+            <!-- <div id='hbgDiam' class="headCat fLeft bgDiamond transition300 headSelected"><span>Diamonds</span></div>
+            <div id='hbgJewel' class="headCat fLeft bgJewellery transition300"><span class="transition300">Jewellery</span><?php include 'jewelleryMenu.html'; ?></div>
+            <div id='hbgBull' class="headCat fLeft bgBullion transition300"><span>Bullions</span></div> -->
+        </div>
+
+        <div class="headRight fRight transition300">
+
+            <div class="compNo fRight fmOpenB">022-32623263</div>
+
+            <div class="fRight sortBox dn" id="userMenu">
+
+                <div class="dropdownBox fLeft">
+                    <div id="hdrpinp" class="dropInput fmOpenR"></div>
+                    <ul id="hdropList" class="fmOpenR">
+                        <li id="profileHeader1" class="transition100 dn">Profile</li>
+                        <!--                                <li class="transition100" onclick="redirectToWishlist();">Wishlist (<span id="wishListCnt"></span>)</li>-->
+                        <li class="transition100" onclick="common.doLogout();">Log Out</li>
+                    </ul>
                 </div>
             </div>
+
+
+            <div class="signInUpTab fRight fmOpenR"><span onclick="common.showLoginForm();">Sign In</span> / <a href="<?php echo DOMAIN; ?>index.php?case=signup">Sign Up</a></div>
+            <!--                    <div class="headDivider fRight"></div>
+                                
+                                <div class="wishCount fRight fmOpenR ripplelink">25</div>-->
+            <div id="wishHeaderb4" class="wishlist fRight fmOpenR" onclick="common.showLoginForm();">Wishlist</div>
+            <div id="wishHeaderaftr" class="wishlist fRight fmOpenR" onclick="redirectToWishlist();">Wishlist (<span id='wishListCnt'></span>)</div>
         </div>
-        <?php
-        break;
+    </div>
+</div>
+<?php
+break;
 
-    case 'diamonds':
-    case 'jewellery':
-    case 'bullion':
-    case 'diamond_details':
-    case 'jewellery_details':
-    case 'bullion_details':
-    case 'diamond_shapes':
-        ?>
-        <div id='header' class="header transition300">
-            <div class="wrapperMax poR bgWhite">
-                <div id="mMenuBtn" class="menuBtn fLeft transition300 ripplelink" onclick="showLeftMenu(true)"></div>
-                <div id="mFilterBtn" class="filterBtn fRight transition300 ripplelink" onclick="swichFilter();"></div>
-                <div class="headCatCont fLeft transition300">
-					<?php
-					foreach($showhead as $key => $val)
-					{
-						$selected = ($val['catid'] == $_GET['catid']) ? 'headSelected' : '';
-						if($val['cat_name'] == 'Diamonds')
-						{
-						?>
-							<a href="<?php echo DOMAIN.strtolower($val['cat_name']).'/ct-'.$val['catid'];?>">
-                                                            <div id='hbgDiam' class="headCat fLeft bg<?php echo $val['cat_name'];?> transition300 <?php echo $selected;?>">
-                                                                    <span><?php echo $val['cat_name'];?></span>
-                                                            </div>
-                                                        </a>
-							
-						<?php
-						}
-						else if($val['cat_name'] == 'Jewellery')
-						{
-							$showcat = $val;
-						?>
-                                                    <a href="<?php echo DOMAIN.strtolower($val['cat_name']).'/ct-'.$val['catid'];?>" class="fLeft">
-							<div id='hbgJewel' class="headCat fLeft bg<?php echo $val['cat_name'];?> transition300 <?php echo $selected;?>">
-								
-								<span class="transition300"><?php echo $val['cat_name'];?></span>
-								
-								<?php include 'jewelleryMenu.html'; ?>
-							</div>
-                                                    </a>
-						<?php
-						}
-						else
-						{
-						?>
-							<a href="<?php echo DOMAIN.strtolower($val['cat_name']).'/ct-'.$val['catid'];?>">
-                                                            <div id='hbgBull' class="headCat fLeft bg<?php echo $val['cat_name'];?> transition300 <?php echo $selected;?>">
-                                                                <span><?php echo $val['cat_name'];?></span>
 
-                                                            </div>
-                                                        </a>
-							
-						<?php
-						}
-					}
-					?>
-                    <!-- <div id='hbgDiam' class="headCat fLeft bgDiamond transition300 headSelected"><span>Diamonds</span></div>
-                    <div id='hbgJewel' class="headCat fLeft bgJewellery transition300"><span class="transition300">Jewellery</span><?php include 'jewelleryMenu.html'; ?></div>
-                    <div id='hbgBull' class="headCat fLeft bgBullion transition300"><span>Bullions</span></div> -->
-                </div>
-                
-                <div class="headRight fRight transition300">
-                    
-                    <div class="compNo fRight fmOpenB">022-32623263</div>
-                   
-                    <div class="fRight sortBox dn" id="userMenu">
-                        
-                        <div class="dropdownBox fLeft">
-                            <div id="hdrpinp" class="dropInput fmOpenR"></div>
-                            <ul id="hdropList" class="fmOpenR">
-                                <li id="profileHeader1" class="transition100 dn">Profile</li>
-<!--                                <li class="transition100" onclick="redirectToWishlist();">Wishlist (<span id="wishListCnt"></span>)</li>-->
-                                <li class="transition100" onclick="common.doLogout();">Log Out</li>
-                            </ul>
-                        </div>
-                    </div>
-                   
-                     
-                    <div class="signInUpTab fRight fmOpenR"><span onclick="common.showLoginForm();">Sign In</span> / <a href="<?php echo DOMAIN; ?>index.php?case=signup">Sign Up</a></div>
-                    <!--                    <div class="headDivider fRight"></div>
-                                        
-                                        <div class="wishCount fRight fmOpenR ripplelink">25</div>-->
-                     <div id="wishHeaderb4" class="wishlist fRight fmOpenR" onclick="common.showLoginForm();">Wishlist</div>
-                     <div id="wishHeaderaftr" class="wishlist fRight fmOpenR" onclick="redirectToWishlist();">Wishlist (<span id='wishListCnt'></span>)</div>
-                </div>
-            </div>
-        </div>
-        <?php
-        break;
-
-    
-    default:
-        break;
+default:
+break;
 }
 ?>
 
