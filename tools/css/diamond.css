@@ -79,9 +79,9 @@ body{padding:0;margin:0;}
 .subList{border-bottom:1px solid #e6e6e6; cursor:pointer; height:40px; line-height: 40px; color:#4d4d4d; padding:0 10px;}
 .subList:hover{background: #f0f0f0;color:#8A0044;}
 .sideDiv ul li:hover{background: #f0f0f0;color:#8A0044;}
-.sideDiv ul li:visited{color:#8A0044;}
+/*.sideDiv ul li:visited{color:#8A0044;}*/
 .nameFont:hover{background: #f0f0f0;color:#8A0044;}
-
+.padB0{padding-bottom: 0px!important;}
 
 .topContent{display: inline-block;vertical-align: middle;width: 79%;font-family: openB;color: #333;line-height: 20px;font-size: 13px;}
 .sideDiv ul{margin:0; padding:0;}
@@ -244,7 +244,7 @@ body{padding:0;margin:0;}
 .caution{width:100%;height: auto;line-height: 24px;}
 .row{width: 100%;height: auto;display: inline-block;}
 /*.color{color:#4d4d4d;}*/
-.lumera{width:100%;height: auto;line-height: 24px;}
+
 .tableHdng{width: 100%;height:40px;line-height: 24px;}
 .rating{width: 100%;height:auto; border: 1px solid #e6e6e6;}
 .rate{width: 25%; text-align: left;height:102px;padding: 10px;border-right: 1px solid #e6e6e6;border-bottom: 1px solid #e6e6e6;}
