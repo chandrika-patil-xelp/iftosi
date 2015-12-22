@@ -241,6 +241,104 @@ switch ($action) {
                 $page = 'diamond_shapes';
                 include 'template/diamond.html';
                 break;
+             case 'education_round':
+                $page = 'education_round';
+                include 'template/education_round.html';
+                break;
+            case 'education_pear':
+                $page = 'education_pear';
+                include 'template/education_pear.html';
+                break;
+            case 'education_oval':
+                $page = 'education_oval';
+                include 'template/education_oval.html';
+                break;
+            case 'education_emerald':
+                $page = 'education_emerald';
+                include 'template/education_emerald.html';
+                break;
+             case 'education_clarity':
+                $page = 'education_clarity';
+                include 'template/education_clarity.html';
+                break;
+            case 'education_asscher':
+                $page = 'education_asscher';
+                include 'template/education_asscher.html';
+                break;
+             case 'education_heart':
+                $page = 'education_heart';
+                include 'template/education_heart.html';
+                break;
+            case 'education_marq':
+                $page = 'education_marq';
+                include 'template/education_marq.html';
+                break;
+            case 'education_radiant':
+                $page = 'education_radiant';
+                include 'template/education_radiant.html';
+                break;
+            case 'e_certification':
+                $page = 'e_certification';
+                include 'template/e_certification.html';
+                break;
+            case 'e_certification1':
+                $page = 'e_certification1';
+                include 'template/e_certification1.html';
+                break;
+            case 'e_certification2':
+                $page = 'e_certification2';
+                include 'template/e_certification2.html';
+                break;
+            case 'e_carat_weight':
+                $page = 'e_carat_weight';
+                include 'template/e_carat_weight.html';
+                break;
+             case 'education_cushion':
+                $page = 'education_cushion';
+                include 'template/education_cushion.html';
+                break;
+            case 'education_princess':
+                $page = 'education_princess';
+                include 'template/education_princess.html';
+                break;
+            case 'e_color':
+                $page = 'e_color';
+                include 'template/e_color.html';
+                break;
+             case 'e_color1':
+                $page = 'e_color1';
+                include 'template/e_color1.html';
+                break;
+             case 'e_cut':
+                $page = 'e_cut';
+                include 'template/e_cut.html';
+                break;
+             case 'e_cut1':
+                $page = 'e_cut1';
+                include 'template/e_cut1.html';
+                break;
+            case 'e_cut2':
+                $page = 'e_cut2';
+                include 'template/e_cut2.html';
+                break;
+            case 'e_cut3':
+                $page = 'e_cut3';
+                include 'template/e_cut3.html';
+                break;
+            case 'e_cut4':
+                $page = 'e_cut4';
+                include 'template/e_cut4.html';
+                break;
+            case 'e_cut5':
+                $page = 'e_cut5';
+                include 'template/e_cut5.html';
+                break;
+            case 'e_glossary':
+                $page = 'e_glossary';
+                include 'template/e_glossary.html';
+                break;
+            
+            
             case 'changepwd':
 //                if(isset($params['pr_cpass'])) {
 //                    $uid=$params['uid'];
