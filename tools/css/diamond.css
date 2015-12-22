@@ -6,7 +6,7 @@ body{padding:0;margin:0;}
 .fRight{float:right;}
 .cPointer{cursor:pointer;}
 .bnone{border-bottom:0px !important}
-.divfirst{height: auto;width: 33%}
+.divfirst{height: auto;width: 25%}
 .font13{font-size: 13px;}
 .container{width:100%;height:100%;background-color:#fff;}
 .wrapper{width:100%;height:100%;display:inline-block;}
@@ -16,27 +16,487 @@ body{padding:0;margin:0;}
 .textDiv{width:100%;height:40px;line-height:40px;color:#666;border-bottom:1px solid #ccc;font-size:14px;}
 .picDivRght{width:100%;height:auto;padding:15px;}
 .diamondPic{width:450px;height:426px;display:inline-block;}
-.diamontCat1{width:450px;height:426px;background:url(../img/diamond/anatomy-3.png)no-repeat;background-size:auto 90%;background-position:center center;}
-.diamontCat2{width:450px;height:426px;background:url(../img/diamond/anatomy-5.png)no-repeat;background-size:auto 90%;background-position:center center;}
-.diamontCat3{width:450px;height:426px;background:url(../img/diamond/anatomy-7.png)no-repeat;background-size:auto 90%;background-position:center center;}
-.diamontCat4{width:450px;height:426px;background:url(../img/diamond/anatomy-9.png)no-repeat;background-size:auto 90%;background-position:center center;}
-.diamontCat5{width:450px;height:426px;background:url(../img/diamond/anatomy-11.png)no-repeat;background-size:auto 90%;background-position:center center;}
-.diamontCat6{width:450px;height:426px;background:url(../img/diamond/anatomy-13.png)no-repeat;background-size:auto 90%;background-position:center center;}
-.diamontCat7{width:450px;height:426px;background:url(../img/diamond/anatomy-15.png)no-repeat;background-size:auto 90%;background-position:center center;}
-.diamontCat8{width:450px;height:426px;background:url(../img/diamond/anatomy-17.png)no-repeat;background-size:auto 90%;background-position:center center;}
-.diamontCat9{width:450px;height:426px;background:url(../img/diamond/anatomy-19.png)no-repeat;background-size:auto 90%;background-position:center center;}
-.diamontCat10{width:450px;height:426px;background:url(../img/diamond/anatomy-21.png)no-repeat;background-size:auto 90%;background-position:center center;}
-.diamontCat11{width:450px;height:426px;background:url(../img/diamond/anatomy-23.png)no-repeat;background-size:auto 90%;background-position:center center;}
-.diamontCat12{width:450px;height:426px;background:url(../img/diamond/anatomy-25.png)no-repeat;background-size:auto 90%;background-position:center center;}
-.diamontCat13{width:450px;height:426px;background:url(../img/diamond/anatomy-27.png)no-repeat;background-size:auto 90%;background-position:center center;}
-.diamontCat14{width:450px;height:426px;background:url(../img/diamond/anatomy-29.png)no-repeat;background-size:auto 90%;background-position:center center;}
-.diamontCat15{width:450px;height:426px;background:url(../img/diamond/anatomy-31.png)no-repeat;background-size:auto 90%;background-position:center center;}
-.diamontCat16{width:450px;height:426px;background:url(../img/diamond/anatomy-33.png)no-repeat;background-size:auto 90%;background-position:center center;}
-.diamontCat17{width:450px;height:426px;background:url(../img/diamond/anatomy-35.png)no-repeat;background-size:auto 90%;background-position:center center;}
-.diamontCat18{width:450px;height:426px;background:url(../img/diamond/anatomy-37.png)no-repeat;background-size:auto 90%;background-position:center center;}
-.diamontCat19{width:450px;height:426px;background:url(../img/diamond/anatomy-39.png)no-repeat;background-size:auto 90%;background-position:center center;}
-.diamontCat20{width:450px;height:426px;background:url(../img/diamond/anatomy-41.png)no-repeat;background-size:auto 90%;background-position:center center;}
-.diamontCat21{width:450px;height:426px;background:url(../img/diamond/anatomy-43.png)no-repeat;background-size:auto 90%;background-position:center center;}
+.diamontCat1{width:380px;height:426px;background:url(../img/diamond/anatomy-3.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat2{width:380px;height:426px;background:url(../img/diamond/anatomy-5.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat3{width:380px;height:426px;background:url(../img/diamond/anatomy-7.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat4{width:380px;height:426px;background:url(../img/diamond/anatomy-9.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat5{width:380px;height:426px;background:url(../img/diamond/anatomy-11.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat6{width:380px;height:426px;background:url(../img/diamond/anatomy-13.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat7{width:380px;height:426px;background:url(../img/diamond/anatomy-15.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat8{width:380px;height:426px;background:url(../img/diamond/anatomy-17.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat9{width:380px;height:426px;background:url(../img/diamond/anatomy-19.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat10{width:380px;height:426px;background:url(../img/diamond/anatomy-21.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat11{width:380px;height:426px;background:url(../img/diamond/anatomy-23.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat12{width:380px;height:426px;background:url(../img/diamond/anatomy-25.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat13{width:380px;height:426px;background:url(../img/diamond/anatomy-27.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat14{width:380px;height:426px;background:url(../img/diamond/anatomy-29.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat15{width:380px;height:426px;background:url(../img/diamond/anatomy-31.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat16{width:380px;height:426px;background:url(../img/diamond/anatomy-33.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat17{width:380px;height:426px;background:url(../img/diamond/anatomy-35.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat18{width:380px;height:426px;background:url(../img/diamond/anatomy-37.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat19{width:380px;height:426px;background:url(../img/diamond/anatomy-39.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat20{width:380px;height:426px;background:url(../img/diamond/anatomy-41.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat21{width:380px;height:426px;background:url(../img/diamond/anatomy-43.png)no-repeat;background-size:initial;background-position:center center;}
 
 .diamond_shap{}
 .diamond_shap.container{padding-top: 120px;}
+
+/*education_shapes*/
+/*bhagyashree*/
+
+.education_shape{}
+.education_shape.container{padding-top: 120px;}
+.sideDiv{width: 17%;height: auto;float: left;padding-left:20px;}
+.centerDiv{width: 66%;float: left;height: auto;padding-left: 20px;padding-right: 20px;}
+.color0044{color: #8A0044;}
+.margnTop0{margin-top: 0px!important;}
+.shapeHolder{width: 100%;height: auto;border: 1px solid #e6e6e6;border-radius: 5px;}
+.shapeSize{padding-bottom: 19%;width:19%!important;height: 105px!important;position: relative;background-image: url(../img/shapes.svg);background-repeat: no-repeat;margin: 0.5%;display: inline-block;vertical-align: middle;text-align: center;background-size: 1000% auto;}
+/*.shapeSize:hover{border: 1px solid #8A0044;}*/
+.shapTypes{width: 100%;height: auto;display:inline-block;}
+.fontPropery{width: 80%;float: right;font-size: 13px;line-height: 20px;}
+.lineHeight24{line-height: 24px;}
+.bRight{border-right:  1px solid #e6e6e6;}
+.bLeft{border-left:  1px solid #e6e6e6;}
+.tableContr{width: 100%;height: auto;border: 1px solid #e6e6e6;display: inline-block;}
+.tableHeadng{width:16.666%;height: 40px;border:1px solid #e6e6e6;float:left; }
+.tableCont{width:16.666%;height: 80px;border:1px solid #e6e6e6;float:left;}
+.fntBold{font-size: 14px;text-align: center; line-height: 40px; font-family: openB;color:#4d4d4d;}
+.tablValue{font-size: 12px;text-align: center;padding: 8px;}
+.width50{width: 50%;}
+.width33{width: 33.33%;}
+.licontent{list-style:none; padding-left: 24px;line-height:30px; margin-top: 0px;font-size: 13px;color:#4d4d4d; }
+.ovalImg{background-image: url('../img/oval-diamonds.gif');background-repeat:no-repeat;background-size: 100% auto;width:30%;height:130px;text-align: center;font-size: 14px;font-family: openB;padding-top: 110px;color:#4d4d4d;}
+.width70{width:70%;}
+.marTop15{margin-top: 15px;}
+.marBottom0{margin-bottom: 0px!important;}
+
+.education_oval{}
+.education_oval.container{padding-top: 120px;}
+.emraldImg{background-image: url('../img/emerald-cut-diamonds.gif');background-repeat:no-repeat;background-size: 100% auto;width:30%;height:130px;text-align: center;font-size: 14px;font-family: openB;padding-top: 110px;color:#4d4d4d;}
+
+.paraHead{font-size: 45px;}
+.subList{border-bottom:1px solid #e6e6e6; cursor:pointer; height:40px; line-height: 40px; color:#4d4d4d; padding:0 10px;}
+.subList:hover{background: #f0f0f0;color:#8A0044;}
+.sideDiv ul li:hover{background: #f0f0f0;color:#8A0044;}
+.sideDiv ul li:visited{color:#8A0044;}
+.nameFont:hover{background: #f0f0f0;color:#8A0044;}
+
+
+.topContent{display: inline-block;vertical-align: middle;width: 79%;font-family: openB;color: #333;line-height: 20px;font-size: 13px;}
+.sideDiv ul{margin:0; padding:0;}
+.sideDiv ul li{background: url(../img/common/right-black.svg)no-repeat; padding:0 25px;color:#666; font-family: OpenB;background-size: contain;background-position: 0px 4px;}
+.arrowPos{background-size: 15% auto!important;background-position: 0px 5px;line-height: 20px;}
+.subHead4{font-size: 18px; padding: 15px 15px 10px 0;text-transform: capitalize;color:#8A0044;}
+
+.tableBox{height: 150px; border: 1px solid #e6e6e6; float: left;font-family: openR; text-align: center;color: #4d4d4d;padding: 8px;font-size: 13px;}
+.width10{width:10%;}
+.width20{width:20%;}
+.contStyle{line-height: 18px;text-align:initial;}
+.subT{width:100%;height: auto;color:#4d4d4d;font-family: openB;}
+.lineHeight150{line-height: 150px;}
+.diamond_plot{background-image: url('../img/diamond_plot.jpg');background-repeat:no-repeat;background-size: 100% auto;width:59%;height:200px;text-align: center;font-size: 14px;font-family: openB;padding-top: 160px;color:#4d4d4d;}
+.halfPara{width:40%;height: auto;font-size: 13px;}
+.borderTB{border-bottom: 1px solid #e6e6e6;border-top: 1px solid #e6e6e6;}
+.flucturng{background-image: url('../img/diamond-fracture-filling.jpg');background-repeat:no-repeat;background-size: 100% auto;width:20%;height:130px;text-align: center;font-size: 14px;font-family: openB;padding-top: 80px;color:#4d4d4d;}
+.padng15{padding: 15px;}
+
+.asscherImg{background-image: url('../img/asscher-cut-diamonds.gif');background-repeat:no-repeat;background-size: 100% auto;width:30%;height:130px;text-align: center;font-size: 14px;font-family: openB;padding-top: 95px;color:#4d4d4d;}
+.heartImg{background-image: url('../img/heart-shaped-diamonds.gif');background-repeat:no-repeat;background-size: 100% auto;width:30%;height:130px;text-align: center;font-size: 14px;font-family: openB;padding-top: 95px;color:#4d4d4d;}
+.radiImg{background-image: url('../img/radiant-cut-diamonds.gif');background-repeat:no-repeat;background-size: 100% auto;width:30%;height:130px;text-align: center;font-size: 14px;font-family: openB;padding-top: 110px;color:#4d4d4d;}
+.marqImg{background-image: url('../img/marquise-diamonds.gif');background-repeat:no-repeat;background-size: 100% auto;width:30%;height:130px;text-align: center;font-size: 14px;font-family: openB;padding-top: 110px;color:#4d4d4d;}
+.giaCampus{display: inline-block;background-image: url('../img/gia-campus.jpg');background-repeat:no-repeat;background-size: 100% auto;width:20%;height:130px;text-align: center;font-size: 14px;font-family: openB;padding-top: 75px;color:#4d4d4d;}
+.imgDiv{width:100%;height:200px;}
+.reprtImg{background-image: url('../img/GIA_diamond_grading_report.jpg');background-repeat:no-repeat;background-size: contain;width:40%;height: 100%;float: left;cursor: pointer;}
+.reprt2Img{background-image: url('../img/GIA_diamond_dossier.jpg');background-repeat:no-repeat;background-size:contain;width:60%;height: 100%;float: right;cursor: pointer;}
+.ulConts{color:#4d4d4d;font-family: openR;font-size: 13px;}
+
+.MoreDetails{width:100%;height:500px;}
+.nameDetails{width:20%;height: 70%;float: left;}
+.imagChange{width:80%;height: 70%;float: left;padding: 20px;}
+.nameFont{width:100%;height: 30px;color: #4d4d4d;font-size: 13px;font-family: openR;line-height: 30px;cursor:pointer;padding-left: 5px;border-bottom: 1px solid #f0f0f0;}
+.crystal{width:100%;height: 100%;background-image: url('../img/details/inclusion-9.png');background-repeat:no-repeat;background-size: initial;background-position: 70px 25px;}
+.pinPoint{width:100%;height: 100%;background-image: url('../img/details/inclusion-11.png');background-repeat:no-repeat;background-size: initial;background-position: 70px 25px;}
+.cloud{width:100%;height: 100%;background-image: url('../img/details/inclusion-13.png');background-repeat:no-repeat;background-size: initial;background-position: 70px 25px;}
+.cavity{width:100%;height: 100%;background-image: url('../img/details/inclusion-32.png');background-repeat:no-repeat;background-size: initial;background-position: 70px 25px;}
+.chip{width:100%;height: 100%;background-image: url('../img/details/inclusion-17.png');background-repeat:no-repeat;background-size: initial;background-position: 70px 25px;}
+.bruise{width:100%;height: 100%;background-image: url('../img/details/inclusion-19.png');background-repeat:no-repeat;background-size: initial;background-position: 70px 25px;}
+.feather{width:100%;height: 100%;background-image: url('../img/details/inclusion-21.png');background-repeat:no-repeat;background-size: initial;background-position: 70px 25px;}
+.needle{width:100%;height: 100%;background-image: url('../img/details/inclusion-23.png');background-repeat:no-repeat;background-size: initial;background-position: 70px 25px;}
+.twinning{width:100%;height: 100%;background-image: url('../img/details/inclusion-25.png');background-repeat:no-repeat;background-size: initial;background-position: 70px 25px;}
+.natural{width:100%;height: 100%;background-image: url('../img/details/inclusion-27.png');background-repeat:no-repeat;background-size: initial;background-position: 70px 25px;}
+.indented{width:100%;height: 100%;background-image: url('../img/details/inclusion-29.png');background-repeat:no-repeat;background-size: initial;background-position: 70px 25px;}
+.extra{width:100%;height: 100%;background-image: url('../img/details/inclusion-31.png');background-repeat:no-repeat;background-size: initial;background-position: 70px 25px;}
+
+.meanigDiv{width: 100%;height: 30%; float: left;padding: 10px;}
+.giaGrade{background-image: url('../img/how-gia-grades-diamonds.jpg');background-repeat:no-repeat;background-size: 100% auto;width:28%;height:200px;text-align: center;font-size: 14px;font-family: openB;padding-top: 145px;color:#4d4d4d;}
+.giaCenrt{ display: inline-block;background-image: url('../img/gia-certification-weighing.jpg');background-repeat:no-repeat;background-size: 100% auto;width:28%;height:200px;text-align: center;font-size: 14px;font-family: openB;padding-top: 145px;color:#4d4d4d;}
+.plotCreatn{background-image: url('../img/gia-diamond-plot-creation.jpg');background-repeat:no-repeat;background-size: 100% auto;width:28%;height:290px;text-align: center;font-size: 14px;font-family: openB;padding-top: 240px;color:#4d4d4d;}
+.giaMaster{background-image: url('../img/gia-master-stones.jpg');background-repeat:no-repeat;background-size: 100% auto;width:28%;height:160px;text-align: center;font-size: 14px;font-family: openB;padding-top: 110px;color:#4d4d4d;background-position: center;}
+.giaimg{display: inline-block;background-image: url('../img/gia-color-grading.jpg');background-repeat:no-repeat;background-size: 100% auto;width:28%;height:150px;text-align: center;font-size: 14px;font-family: openB;padding-top: 100px;color:#4d4d4d;}
+.giaimg2{display: inline-block;background-image: url('../img/laser-inscribing-a-diamond.jpg');background-repeat:no-repeat;background-size: 100% auto;width:28%;height:200px;text-align: center;font-size: 14px;font-family: openB;padding-top: 145px;color:#4d4d4d;}
+.giaimg3{background-image: url('../img/GIA-EGL-comparison.gif');background-repeat:no-repeat;background-size: contain;width:35%;height: 100%;float: left;cursor: pointer;padding-top: 195px;}
+.giaimg4{background-image: url('../img/EGL-GIA-comparison.gif');background-repeat:no-repeat;background-size: contain;width:35%;height: 100%;float: left;cursor: pointer;padding-top: 195px;}
+.showSide{display: block;}
+.txtStyle{height: 30px;line-height: 30px;text-decoration: underline;color: #4d4d4d;list-style: none;}
+.colo4d4d{color: #4d4d4d;}
+
+
+
+
+/*jhon*/
+.subTxt{width:100%;height:auto;font-size:12px;line-height:18px;color:#666;margin-top: 8px;text-align: center;}
+.padding8{padding:8px;}
+.font14{font-size:14px;}
+.fbold{font-weight:bold;}
+.l54{line-height:54px;}
+.l60{line-height:60px !important;}
+.l22{line-height:22px;}
+.l26{line-height:26px !important;}
+.l30{line-height:30px !important;}
+.pleft127{padding-left:127px;}
+.plef50{padding-left: 50px;}
+.h30{height:30px !important;}
+.h80{height:80px !important;}
+.tcenter{text-align:center !important;}
+.m0t{margin-top:0px !important;}
+.m0b{margin-bottom:0px !important;}
+.plr20{padding:0px 20px;}
+.bulletImg{background:url(../img/bullet.svg)no-repeat;background-position:32px 10px;background-size:auto 10%;}
+
+.tableCont1{width:16.666%;height: 110px;border:1px solid #e6e6e6;float:left;}
+.subtblecnt1{width:100%;height:50%;}
+.txttblecnt1{width:100%;height:auto;text-align:center;color:#666;font-size:12px;}
+.imgDmnd{background:url(../img/10.jpg)no-repeat;background-size:auto 100%;background-position:center center;}
+.imgDmnd1{background:url(../img/20.jpg)no-repeat;background-size:auto 90%;background-position:center center;}
+.imgDmnd2{background:url(../img/30.jpg)no-repeat;background-size:auto 90%;background-position:center center;}
+.creatSzimg{background-image:url('../img/carat-weight-comparison.gif');background-repeat:no-repeat;background-size:auto 80%;width:30%;height:auto;text-align: center;font-size: 12px;font-family: openB;padding-top: 175px;color:#4d4d4d;}
+.tableHeadngCrt{width:9.0909%;height:60px;border:1px solid #e6e6e6;float:left;}
+.imgcarat1{background:url(../img/round-carat.gif)no-repeat;background-size:auto 85%;background-position:center center;}
+.imgcarat2{background:url(../img/princess-carat.gif)no-repeat;background-size:auto 85%;background-position:center center;}
+.imgcarat3{background:url(../img/oval-carat.gif)no-repeat;background-size:auto 80%;background-position:center center;}
+.imgcarat4{background:url(../img/pear-carat.gif)no-repeat;background-size:auto 80%;background-position:center center;}
+.imgcarat5{background:url(../img/pc.gif)no-repeat;background-size:auto 80%;background-position:center center;}
+.imgcarat6{background:url(../img/cushion-carat.gif)no-repeat;background-size:auto 80%;background-position:center center;}
+.imgcarat7{background:url(../img/emerald-carat.gif)no-repeat;background-size:auto 80%;background-position:center center;}
+.imgcarat8{background:url(../img/asscher-carat.gif)no-repeat;background-size:auto 80%;background-position:center center;}
+.imgcarat9{background:url(../img/radiant-carat.gif)no-repeat;background-size:auto 80%;background-position:center center;}
+.imgcarat10{background:url(../img/heart-carat.gif)no-repeat;background-size:auto 80%;background-position:center center;}
+.pdscDiv{width:100%;height:auto;}
+.chartDv{width:25%;height:200px;background:url(../img/size_chart.jpg)no-repeat;background-size:initial;background-position:left center;}
+.pdscTxtRght{width:75%;height:auto;}
+.btnPrintDv{width:100%;height:auto;margin-top:15px;}
+.prntbtn{width: auto;height: 40px;line-height: 40px;padding: 0 35px;border-radius: 5px;background: #8A0044;color: #fff;font-size: 16px;cursor: pointer;}
+.width49{width: 49.99% !important;}
+.cushnImg{background-image:url('../img/cushion-cut-diamond-facets.jpg');background-repeat:no-repeat;background-size: 100% auto;width:30%;height:130px;text-align: center;font-size: 14px;font-family: openB;padding-top: 110px;color:#4d4d4d;}
+.cushnImg1{background-image:url('../img/cushion-cut-diamonds.gif');background-repeat:no-repeat;background-size: 100% auto;width:30%;height:130px;text-align: center;font-size: 14px;font-family: openB;padding-top: 110px;color:#4d4d4d;}
+
+
+/*bottom link*/
+.mobileLnk{width:100%;height:auto;padding:20px 20px;display:none;}
+.lnkWrppr{width:25%;height:auto;padding-left: 5px;}
+.catLnk{width:100%;height:200px;box-shadow:2px 2px 8px 2px rgba(0,0,0,0.2);cursor:pointer;position:relative;border-right: 1px solid #ccc;}
+.linktxtMn{width:100%;height: 56px;position:absolute;margin:auto;left:0;right:0;top:0;bottom:0;}
+.abtCatLnk{width:100%;height:auto;font-size:20px;line-height:20px;color:#666;}
+.abtCatTxt{width:100%;height:auto;font-size:14px;line-height:18px;color:#666;}
+
+
+
+/*chandrika*/
+.height{height:167px;}
+.background{background: url("../img/princess_diamond_in_rough.gif") no-repeat;background-size:85% auto;background-position: center;width: 30%; text-align: center; font-size: 14px;font-family: openB;padding-top: 110px;color: #4d4d4d;}
+.prince_bkg{background: url("../img/princess-cut-diamonds.gif") no-repeat;background-size:100% auto;background-position:top center;width: 30%;height: 150px;text-align: center; font-size: 14px;font-family: openB;padding-top: 100px; color: #4d4d4d;}
+.padL10{padding-left: 10px!important;}
+
+/*diamonds_cut*/
+.dcontainer{width: 100%;height:auto;margin: auto;max-width: 1200px;}
+.side-col1{width: 20%;height: 100px;border: 1px solid;}
+.content{width: 60%;height: auto;padding-right: 20px;padding-left: 20px;}
+.side-col2{width: 20%;height: 100px;border: 1px solid;}
+.cutHeading{width: 100%;text-transform:capitalize;}
+.diamond_info{line-height:24px;width: 100%;height:auto;text-align: justify;font-family: openR;}
+.imageDiv{width: 35%;height: 230px;background: url("../img/common/diamond_cut_diagram.gif") no-repeat;background-size: auto 100%;background-position: center;}
+.continue{width: 65%;height: auto;font-family:openR;text-align: justify;line-height:24px;padding-left: 15px;}
+.belowImage{font-family:openR;text-align: justify;line-height: 24px;border-bottom: 1px solid #ddd;} 
+.subHeading{width: 100%;height: 50px;padding: 15px 15px 10px 0px;}
+.d_propoation{font-family:openR;text-align: justify;line-height:24px;}
+.tableDiv{width: 100%;height: auto;border: 1px solid #ddd;}
+.images{width:50%;height:195px;border-right:1px solid #ddd;border-bottom: 1px solid #ddd;text-align: center;}
+.imgtag{width:auto;height: auto;}
+.image1{background: url("../img/common/shallow_diamond_cut.jpg") no-repeat;background-size: auto 100%;background-position: center;}
+.image2{background: url("../img/common/deep_diamond_cut.jpg") no-repeat;background-size: auto 100%;background-position: center;}
+.image3{background: url("../img/common/correct_diamond_cut.jpg") no-repeat;background-size: auto 100%;background-position: center;}
+.image3{background: url("../img/common/correct_diamond_cut.jpg") no-repeat;background-size: auto 100%;background-position: center;}
+.image4{background: url("../img/common/depth_table.gif") no-repeat;background-size: auto 100%;background-position: center;}
+.image5{background: url("../img/common/diamond-proportion-diagram.jpg") no-repeat;background-size:90% auto;background-position: center;}
+.image6{background: url("../img/common/gia-cut-grades.jpg") no-repeat;background-size:90% auto;background-position: center;}
+.definition{width: 50%;height:195px;border-bottom: 1px solid #ddd;text-align: justify;font-family: openR;padding:10px;line-height: 24px;}
+.leftContent{width:50%;height:auto;font-family:openR;text-align: justify;line-height:24px;display: inline-block;padding-right: 15px;}
+.imageRight{width: 50%;height:350px;text-align: center;}
+.depthHead{width:100%;height: 40px;text-transform: uppercase;padding: 15px 15px 10px 0px;color: #8A0044;}
+.note{width: 100%;height: auto;padding: 15px;}
+.noteContent{font-family:openR;text-align: justify;line-height: 24px;border-top: 1px solid #8A0044;border-bottom: 1px solid #8A0044;}
+.diamond_diagram{width:50%;height: auto;text-align: justify;line-height:24px;}
+.search{width: 100%;height: 100px;color: #fff;padding: 25px;border-bottom: 1px solid #000;cursor: pointer;}
+.sbtn{width: 40%;height:45px;border-radius: 5px; margin-left: 160px;background-color:#8A0044; text-align: center;line-height: 45px;text-transform: uppercase;}
+.grade{width:50%;height: 200px;padding:15px}
+.gradeImage{width:50%;height:auto;line-height:24px;text-align: justify;}
+.caution{width:100%;height: auto;line-height: 24px;}
+.row{width: 100%;height: auto;display: inline-block;}
+/*.color{color:#4d4d4d;}*/
+.lumera{width:100%;height: auto;line-height: 24px;}
+.tableHdng{width: 100%;height:40px;line-height: 24px;}
+.rating{width: 100%;height:auto; border: 1px solid #e6e6e6;}
+.rate{width: 25%; text-align: left;height:102px;padding: 10px;border-right: 1px solid #e6e6e6;border-bottom: 1px solid #e6e6e6;}
+.rating_def{width: 75%;height: 102px;padding: 5px;border-bottom: 1px solid #e6e6e6;line-height: 24px;}
+.question{width:100%;height:100px;line-height: 24px;}
+.tip{width: 100%;height: auto;line-height: 24px;}
+
+
+/*diamonds_cut*/
+.width60{width: 60%;}
+.side-col1{width: 20%;height: 100px;border: 1px solid;}
+.content{width: 60%;height: auto;padding-right: 20px;padding-left: 20px;}
+.side-col2{width: 20%;height: 100px;border: 1px solid;}
+.cutHeading{width: 100%;text-transform:capitalize;}
+.diamond_info{line-height:24px;width: 100%;height:auto;text-align: justify;font-family: openR;}
+.imageDiv{width:50%;height: 230px;background: url("../img/common/diamond_cut_diagram.gif") no-repeat;background-size: auto 100%;background-position: center;}
+.continue{width: 65%;height: auto;font-family:openR;text-align: justify;line-height:24px;padding-left: 15px;}
+.belowImage{font-family:openR;text-align: justify;line-height: 24px;border-bottom: 1px solid #ddd;} 
+.subHeading{width: 100%;height: 50px;padding: 15px 15px 10px 0px;}
+.d_propoation{font-family:openR;text-align: justify;line-height:24px;}
+.tableDiv{width: 100%;height: auto;border: 1px solid #e6e6e6;}
+.images{width:50%;height:195px;border-right:1px solid #e6e6e6;border-bottom: 1px solid #e6e6e6;text-align: center;}
+.imgtag{width:auto;height: auto;}
+/*.image1{background: url("../img/common/shallow_diamond_cut.jpg") no-repeat;background-size: auto 100%;background-position: center;}
+.image2{background: url("../img/common/deep_diamond_cut.jpg") no-repeat;background-size: auto 100%;background-position: center;}
+.image3{background: url("../img/common/correct_diamond_cut.jpg") no-repeat;background-size: auto 100%;background-position: center;}
+.image3{background: url("../img/common/correct_diamond_cut.jpg") no-repeat;background-size: auto 100%;background-position: center;}
+.image4{background: url("../img/common/depth_table.gif") no-repeat;background-size: auto 100%;background-position: center;}
+.image5{background: url("../img/common/diamond-proportion-diagram.jpg") no-repeat;background-size:90% auto;background-position: center;}
+.image6{background: url("../img/common/gia-cut-grades.jpg") no-repeat;background-size:90% auto;background-position: center;}*/
+.definition{width: 50%;height:195px;border-bottom: 1px solid #e6e6e6;text-align: justify;font-family: openR;padding:10px;line-height: 24px;}
+.leftContent{width:50%;height:auto;font-family:openR;text-align: justify;line-height:24px;display: inline-block;padding-right: 15px;}
+.imageRight{width: 100%;height:255px;text-align: center;}
+.outerImage{width:50%;height: auto;display: inline-blocke}
+.depthHead{width:100%;height: 40px;text-transform: uppercase;padding: 15px 15px 10px 0px;color: #8A0044;}
+.note{width: 100%;height: auto;padding: 15px;}
+.noteContent{font-family:openR;text-align: justify;line-height: 24px;border-top: 1px solid #8A0044;border-bottom: 1px solid #8A0044;}
+.diamond_diagram{width:50%;height: auto;text-align: justify;line-height:24px;}
+.search{width: 100%;height: 100px;color: #fff;padding: 25px;border-bottom: 1px solid #000;cursor: pointer;}
+.sbtn{width: 40%;height:45px;border-radius: 5px; margin-left: 160px;background-color:#8A0044; text-align: center;line-height: 45px;text-transform: uppercase;}
+.grade{width:50%;height: 200px;padding:15px}
+.gradeImage{width:50%;height:auto;line-height:24px;text-align: justify;}
+.caution{width:100%;height: auto;line-height: 24px;}
+.row{width: 100%;height: auto;display: inline-block;}
+.lumera{width:100%;height: auto;line-height: 24px;}
+.tableHdng{width: 100%;height:40px;line-height: 24px;}
+.rating{width: 100%;height:auto; border: 1px solid #e6e6e6;}
+.rate{width: 25%; text-align: left;height:102px;padding: 10px;border-right: 1px solid #e6e6e6;;border-bottom: 1px solid #e6e6e6;}
+.rating_def{width: 75%;height: 102px;padding: 5px;border-bottom: 1px solid #e6e6e6;;line-height: 24px;}
+.question{width:100%;height:100px;line-height: 24px;}
+.tip{width: 100%;height: auto;line-height: 24px;}
+
+
+
+/*diamond_color*/
+
+.w_100{width: 100%;}
+.para{width:50%;}
+.h150{height: 150px;}
+.img{width: 50%;height: 100px;background: url("../img/common/gia-color-grades.jpg") no-repeat;background-size:auto 100%;background-position: center;}
+.giaHeading{text-transform: uppercase;height: 45px;}
+.table_color{    width: 100%;height: auto;  border: 1px solid #e6e6e6;}
+.colorDiv{width: 20%;height:200px;border-bottom: 1px solid #e6e6e6;text-align: center; padding-top: 75px;}
+.color_img{width: 15%;height: 200px;border-right: 1px solid #e6e6e6;border-left: 1px solid #e6e6e6;border-bottom: 1px solid #e6e6e6;text-align: center;padding-top: 20px;}
+.color_cont{width: 65%;height: 200px;    border-bottom: 1px solid #e6e6e6;}
+/*.d_image{background: url("../img/common/colorless.gif") no-repeat;background-size:auto 100%;background-position: center;}
+.near_image{background: url("../img/common/near_colorless.jpg") no-repeat;background-size:auto 100%;background-position: center;}
+.faint_image{background: url("../img/common/faint_color.jpg") no-repeat;background-size:auto 100%;background-position: center;}
+.vlight_image{background: url("../img/common/vlight_color.gif") no-repeat;background-size:100% auto;background-position: center;}
+.light_image{background: url("../img/common/light_color.gif") no-repeat;background-size:100% auto;background-position: center;}*/
+.diamonds{width: 100%;height: 100px;background: url("../img/common/gia-diamond-color-scale.jpg") no-repeat;background-size:100% auto;background-position: center;}
+.ringImage{width: 40%;height:400px;background: url("../img/common/diamond-color-in-setting.jpg") no-repeat;background-size:100% auto;background-position: center;}
+
+
+/*princess*/
+
+.height{height:167px;}
+.background{background: url("../img/common/princess_diamond_in_rough.gif") no-repeat;background-size:85% auto;background-position: center;}
+/*.prince_bkg{    border: 1px solid #ddd;background: url("../img/common/princess-cut-diamonds.gif") no-repeat;background-size:100% auto;background-position: center;}*/
+.padL10{padding-left: 10px!important;}
+
+/*fluro*/
+
+.h120{height: 120px;}
+/*.h45{height:45px;}*/
+.w45{width:45%!important;}
+.w16{width: 16.666%;}
+
+.pt100{padding-top: 100px;}
+.image_degree{background: url("../img/common/degree-of-diamond-fluoroescence.jpg") no-repeat;background-size:100% auto;background-position:top;}
+
+/*Gridle*/
+
+.gridle_img{background: url("../img/common/diamond_girdle_width.gif") no-repeat;background-size:100% auto;background-position:top;}
+.h215{height: 215px;}
+.table_div{width:100%;height: auto;border: 1px solid #e6e6e6;display: inline-block;}
+.table_data{width:100%;border-bottom: 1px solid #e6e6e6;padding: 10px;    height: 45px;}
+.table_img1{height: 34px;background: url("../img/common/girdle_ex_thin.gif") no-repeat;background-size:initial;background-position:center;}
+.thin{width: 40%;padding-top: 5px;}
+.table_img2{height: 34px;background: url("../img/common/girdle_v_thin.jpg") no-repeat;background-size:initial;background-position:center;}
+.table_img3{height: 34px;background: url("../img/common/girdle_s_thin.jpg") no-repeat;background-size:initial;background-position:center;}
+.table_img4{height: 34px;background: url("../img/common/girdle_medium.jpg") no-repeat;background-size:initial;background-position:center;}
+.table_img5{height: 34px;background: url("../img/common/girdle_s_thick.jpg") no-repeat;background-size:initial;background-position:center;}
+.table_img6{height: 34px;background: url("../img/common/girdle_thick.jpg") no-repeat;background-size:initial;background-position:center;}
+.table_img7{height: 34px;background: url("../img/common/girdle_v_thick.jpg") no-repeat;background-size:initial;background-position:center;}
+.table_img8{height: 34px;background: url("../img/common/girdle_ex_thick.jpg") no-repeat;background-size:initial;background-position:center;}
+ .h220{ height: 220px;}
+ .h115{height: 115px;}
+.thick_img{background: url("../img/common/thick-thin-girdle-compared.jpg") no-repeat;background-size:100% auto;background-position:top;}
+.pad0{padding: 0px;}
+/*culet*/
+
+.culet_img{background: url("../img/common/diamond_culet_size.gif") no-repeat;background-size:100% auto;background-position:top;}
+
+/*polish*/
+
+.width30{width: 30%;}
+.h235{height: 235px;}
+.polish_img{background: url("../img/common/diamond-polish-defects.jpg") no-repeat;background-size:contain;background-position:center;}
+.padding{padding-top: 180px; padding-left: 40px;}
+
+/*symmetry*/
+
+.symmtry_img{background: url("../img/common/diamond_symmetry.gif") no-repeat;background-size:100% auto;background-position:top;}
+
+/*hearts and arrows*/
+
+.img_div{width:49%;height: auto;display: inline-block;padding:15px;}
+.img_container{width: 100%;height: 200px;}
+.paddingRight{padding-right: 10px;}
+.heart_img{background: url("../img/common/hearts-and-arrows-viewer.jpg") no-repeat;background-size:initial;background-position:center;}
+.scope_img{background: url("../img/common/ideal-scope-image.jpg") no-repeat;background-size:initial;background-position:center;}
+.arrow_img{background: url("../img/common/hearts-arrows.jpg") no-repeat;background-size:auto 100%;background-position:center;}
+
+.h400{height: 400px;}
+
+
+
+
+
+
+
+
+
+@media only screen and (min-width: 320px) and (max-width: 767px){
+    .centerDiv{width: 100%; border: none;padding: 0px;}
+    .sideDiv{display: none;}
+    .paraHead{font-size: 25px;}
+    .shapeSize{width: 100px!important;height: 100px!important;margin-left: 30%;padding: 0px;}
+    .fontPropery{width: 100%!important;}
+    .fntBold{font-size: 7px;}
+    .tablValue{font-size: 10px;padding: 4px;}
+    .radiImg{width: 275px;height: 150px;padding-top: 130px;background-size: initial;background-position: center;}
+    .heartImg{width: 275px;height: 150px;padding-top: 130px;background-size: initial;background-position: center;}
+    .emraldImg{width: 275px;height: 150px;padding-top: 130px;background-size: initial;background-position: center;}
+    .asscherImg{width: 275px;height: 150px;padding-top: 130px;background-size: initial;background-position: center;}
+    .marqImg{width: 275px;height: 150px;padding-top: 130px;background-size: initial;background-position: center;}
+    .ovalImg{width: 275px;height: 150px;padding-top: 130px;background-size: initial;background-position: center;}
+    .cushnImg{width: 275px;height: 165px;padding-top: 130px;background-size: initial;background-position: center;}
+    .cushnImg1{width: 275px;height: 150px;padding-top: 130px;background-size: initial;background-position: center;}
+    .tableBox{    font-size: 10px!important;line-height: 11px;padding: 4px!important;}
+    .width20{width:40%;}
+    .width70{width: 50%;}
+    .diamond_plot{width: 280px;padding-top: 120px;}
+    .halfPara{width: 100%;}
+    .nameDetails{width:100%;}
+    .imagChange{width:100%;padding: 0px;height: 40%;}
+    .imagSize{background-size: contain;background-position: 0px 0px;}
+    .flucturng{width: 250px;height: 160px;padding-top: 130px;}
+    .meanigDiv{    height: 35%;}
+    .giaCampus{width:200px;padding-top: 140px;height: 160px;background-position: center;float: none;}
+    .giaGrade{width: 250px;height: 250px; padding-top: 175px;}
+    .giaCenrt{padding-top: 200px;;width:250px;height: 250px;}
+    .plotCreatn{padding-top:  300px;height: 380px;width:250px;}
+    .giaMaster{width: 250px;padding-top: 115px;}
+    .giaimg{height: 160px;padding-top: 120px;width:250px;}
+    .giaimg2{height: 200px;padding-top: 180px;width: 250px;}
+    .subTxt{font-size: 9px;line-height: 10px;}
+    .txttblecnt1{font-size: 8px;}
+    .creatSzimg{width:100%;}
+    .tableHeadngCrt{height: 45px;}
+    .chartDv{width: 100%;background-position: center;}
+    .pdscTxtRght{width:100%;}
+    .prince_bkg{width: 240px; padding-top: 125px;}
+/*    .MoreDetails{    height: auto;}*/
+
+
+.mobileLnk{display:block;} 
+  .lnkWrppr {width: 100%;margin-bottom: 10px;padding-left:0px !important;}
+  .catLnk {height: 90px;border-right:none !important;}
+/*  .lnkWrppr{width: 50%;margin-bottom: 8px;}*/
+
+/*chandrikA*/
+ 
+ .content{width: 100%;}
+ .imageDiv{width: 100%;}
+ .continue{padding-left: 0px;width: 100%;}
+ .images{width:100%;}
+ .definition{width:100%;height: auto;}
+ 
+ .leftContent{width: 100%;}
+ .imageRight{width: 100%;height: 265px;}
+ .diamond_diagram{width: 100%}
+ .subHead4{font-size: 16px;}
+.gradeImage{width: 100%;}
+.grade{height:100px;background-size: auto 100%;width: 100%;}
+.rate{height:226px;}
+.rating_def{height:226px;}
+.tableHdng {height: 90px;}
+.question{height: auto;}
+
+/*gridle*/
+
+.img_div{width: 100%;}
+.outerImage{width: 100%;}
+
+.gtext{padding-top: 2px;padding-left: 10px;}
+.table_data{height: 76px;padding: 2px 0px 0px 10px;}
+
+.img{width:100%;}
+.para{width:100%;}
+.ringImage{width:100%;}
+
+.content{padding: 0px;}
+.color_cont{width: 50%;height: 560px;}
+.color_img{height: 560px; width: 30%;}
+.colorDiv{height: 560px;padding-top: 150px;}
+.polish{padding-left: 0px;
+    height: 150px;    padding-top: 140px;}
+.width250{width: 250px;}
+
+}
+@media only screen and (min-width: 960px) and (max-width: 1024px){
+     .contStyle{line-height: 16px;font-size:11px!important;}
+     .tableBox{font-size: 10px;}
+/*     .imgtag{width: 300px;}*/
+.width250{width: 300px;}
+}
+@media only screen and (min-width: 768px) and (max-width: 959px){
+    .centerDiv{width:80%;}
+    .showSide{display: none;}
+    .bRight{border-right: none;}
+    .subList{height: auto;}
+    .creatSzimg{background-size: contain;}
+    .contStyle{line-height: 16px;font-size:11px!important;}
+    .sideDiv{width: 26%;}
+    .centerDiv{width:74%;}
+    .images{width:100%;}
+ .definition{width:100%;height: auto;}
+/* .imgtag{width: 250px;}*/
+ .color_cont{width: 50%;height: 560px;}
+.color_img{height: 560px; width: 30%;}
+.colorDiv{height: 560px;padding-top: 150px;}
+.width250{width: 250px;}
+}
