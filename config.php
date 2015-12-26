@@ -103,8 +103,8 @@ $jvs['head'] 		= DOMAIN.'tools/js/header.js?v='.VERSION;
 $jvs['signup'] 		= DOMAIN.'tools/js/signup.js?v='.VERSION;
 $jvs['filter'] 		= DOMAIN.'tools/js/filters.js?v='.VERSION;
 $jvs['dmap'] 		= DOMAIN.'tools/js/detailsMap.js?v='.VERSION;
+$jvs['vendorDetails'] 		= DOMAIN.'tools/js/cms/page/vendorDetails.js?v='.VERSION;
 // Custom JS End
-$jvs['vendorDetails'] 		= DOMAIN.'tools/js/vendorDetails.js?v='.VERSION;
 
 
 include INCLUDES.'class.common.php';
