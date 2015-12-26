@@ -195,7 +195,7 @@ function Common() {
         str += '<div id="loginDiv" class="loginDiv transition300" style="transform: scale(0);">';
         str += '<div class="lgTitle fLeft fmOpenR">One account. All about Diamonds</div>';
         str += '<div class="inputCont fLeft fmOpenR">';
-        str += '<input type="tel" id="pr_mobile" name="pr_mobile" autocomplete="off" maxlength="10" class="txtInput cOrange fmOpenR font14 mobileIcon" readonly>';
+        str += '<input type="tel" id="pr_mobile" name="pr_mobile" autocomplete="off" class="txtInput cOrange fmOpenR font14 mobileIcon" readonly>';
         str += '<label for="pr_mobile" class="inp-label transition100">MOBILE</label>';
         str += '<div id="pr_mobile_inpText" class="inpText fRight transition300">enter<br>mobile number</div>';
         str += '</div>  ';
@@ -250,7 +250,7 @@ function Common() {
     this.submitLoginForm = function (vd) {
         var pr_mobile = $('#pr_mobile').val();
         var pr_pass = $('#pr_pass').val();
-        if (pr_mobile == '' || pr_mobile.length != 10 || isNaN(pr_mobile)) {
+        if (pr_mobile == '') {
             customStorage.toast(0, 'Mobile Number Should Not Be Empty');
             $('#pr_mobile').focus();
             return;

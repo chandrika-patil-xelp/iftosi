@@ -7,6 +7,93 @@ class location extends DB
         parent::DB($db);
         
     }
+    
+    public function checkArea($params)
+    {
+        $vsql=" SELECT
+                            *
+                FROM
+                            tbl_area_master
+                WHERE
+                            area=\"".$params['fulladd']."\"
+                AND
+                            area=\"".$params['area']."\"
+                AND
+                            city=\"".$params['city']."\" 
+                AND
+                            state=\"".$params['state']."\"";
+        $vres=$this->query($vsql);
+        $cres=$this->numRows($vres);
+        if($cres > 0)
+        {    
+               $arr['status'] = 'Success';
+               while($row = $this->fetchData($vres))
+               {
+                   $arr['lat']  =   $row['latitude'];
+                   $arr['lng']  =   $row['longitude'];
+                   
+               }
+               $err=  array('code' =>0,'msg'=>'Area values matched');
+        }
+        else
+        {
+            $place = urlencode($params['fulladd']).','.urlencode($params['area']).','.urlencode($params['city']).','.urlencode($params['state']);
+            $url="https://maps.googleapis.com/maps/api/geocode/json?address=".$place."&key=AIzaSyCM1Oa91TLMg7Ol7VP-DiTBBOFqiEPDBI0";
+            global $comm;
+            $resp = $comm->executeCurl($url, false, false, false, false, false, true);
+            if($resp)
+            {
+                $arr['fadd']=$resp['results'][0]['formatted_address'];
+                $arr['lat']=(string)$resp['results'][0]['geometry']['location']['lat'];
+                $arr['lng']=(string)$resp['results'][0]['geometry']['location']['lng'];
+                if(!empty($arr['fadd']) && !empty($arr['lat']) && !empty($arr['lng']))
+                {
+                    
+                    $areaIns    = " INSERT
+                                    INTO 
+                                                tbl_area_master
+                                                (area,
+                                                pincode,
+                                                state,
+                                                city,
+                                                dcity,
+                                                latitude,
+                                                longitude,
+                                                created_date)
+                                    VALUES
+                                            (\"".$params['area']."\",
+                                             \"".$params['pincode']."\",
+                                             \"".$params['state']."\",
+                                             \"".$params['city']."\",
+                                             \"".ucwords(strtolower($params['city']))."\",
+                                             \"".$arr['lat']."\",
+                                             \"".$arr['lng']."\",
+                                                 now()
+                                            )";
+                    $areaRes    =   $this->query($areaIns);
+                    if($areaRes)
+                    {
+                        $arr['status']    =   'Success';
+                    }
+                    else
+                    {
+                        $arr['status']    =   'Failure';
+                    }
+                }
+                else
+                {
+                    $arr['status']    =   'Success';
+                }
+            }
+            else 
+            {
+                $arr['status']    =   'Failure';
+            }
+        }
+        $result = array('results'=>$arr);
+        return $result;
+    }
+    
 //...................City..........................    
     
     public function addCity($params)
@@ -141,8 +228,110 @@ class location extends DB
         }
         else
         {
-            $arr=array();
+            $pincode   = urlencode($params['code']);
+            if(!empty($pincode))
+            {
+              $url="https://maps.googleapis.com/maps/api/geocode/json?address=".$pincode."&sensor=true&components=country:IN&key=AIzaSyCM1Oa91TLMg7Ol7VP-DiTBBOFqiEPDBI0";
+            }
+            global $comm;
+            $resp = $comm->executeCurl($url, false, false, false, false, false, true);
+            if($resp)
+            {   
+                
+                $address = $resp['results'][0]['address_components'];
+                for($i=0;$i<count($address);$i++)
+                {
+                    if($address[$i]['long_name'] == 'India')
+                    {
+                        if($address[$i]['types'][0] == 'postal_code')
+                        {
+                            $arr[0]['pincode']=$address[$i]['long_name'];
+                        }
+
+                        if($address[$i]['types'][0] == 'administrative_area_level_2')
+                        {
+                            $arr[0]['area']=$address[$i]['long_name'];
+                            $arr[0]['city']=$address[$i]['long_name'];
+                        }
+                            if($address[$i]['types'][0] == 'administrative_area_level_1')
+                            {
+                                $arr[0]['state']=$address[$i]['long_name'];
+
+                            }
+                    }
+                }
+                    if(!empty($arr))
+                    {
+                        $err=array('code'=>0,'msg'=>'Details fetched successfully');
+                    }
+                    else
+                    {
+                        $err=array('code'=>0,'msg'=>'No match found');
+                    }
+            }
             $err=array('code'=>1,'msg'=>'no records found');
+        }
+        $result=array('results'=>$arr,'error'=>$err);
+        return $result;
+    }
+    
+    public function viewbyAreaPincode($params)
+    {
+        $vsql="SELECT area,city,state,country,latitude,longitude from tbl_area_master where area ='".$params['area']."' AND pincode='".$params['code']."'";
+        $vres=$this->query($vsql);
+        $cres=$this->numRows($vres);
+        if($cres>0)
+        {
+            while($row=$this->fetchData($vres))
+            {
+                $arr[]=$row;
+            }
+            $err=array('code'=>0,'msg'=>'Value fetched successfully');
+        }
+        else
+        {
+            $pincode   = urlencode($params['code']);
+            $place     = urlencode($params['area']);
+            if(!empty($pincode))
+            {
+                $url="https://maps.googleapis.com/maps/api/geocode/json?address=".$place."&components=postal_code:".$pincode."&sensor=false&key=AIzaSyCM1Oa91TLMg7Ol7VP-DiTBBOFqiEPDBI0";
+            }
+            else
+            {
+                $url="https://maps.googleapis.com/maps/api/geocode/json?address=".$place."&components=postal_code&sensor=false&key=AIzaSyCM1Oa91TLMg7Ol7VP-DiTBBOFqiEPDBI0";
+            }
+            global $comm;
+            $resp = $comm->executeCurl($url, false, false, false, false, false, true);
+            if($resp)
+            {   
+
+                $address = $resp['results'][0]['address_components'];
+                for($i=0;$i<count($address);$i++)
+                {
+                        if($address[$i]['types'][0] == 'postal_code')
+                        {
+                            $arr['pincode']=$address[$i]['long_name'];
+                        }
+                        if($address[$i]['types'][0] == 'locality')
+                        {
+                            
+                            $arr['city']=$address[$i]['long_name'];
+                        }
+                        if($address[$i]['types'][0] == 'administrative_area_level_1')
+                        {
+                            $arr['state']=$address[$i]['long_name'];
+
+                        }
+                }
+                if(!empty($arr))
+                {
+                    $err=array('code'=>0,'msg'=>'Details fetched successfully');
+                }
+                else
+                {
+                    $err=array('code'=>0,'msg'=>'No match found');
+                }
+            }
         }
         $result=array('results'=>$arr,'error'=>$err);
         return $result;
@@ -188,12 +377,13 @@ class location extends DB
     
     public function cityName($params)
     {
-        $sql="SELECT DISTINCT name as n,id FROM tbl_location_master WHERE type=2 AND name LIKE '".$params['name']."%'";
+        $sql="SELECT DISTINCT(city) as n FROM tbl_area_master WHERE city LIKE '".$params['name']."%'";
         $res=$this->query($sql);
+        
         if($res)
         {
-            while ($row=  $this->fetchData($res)) {
-                $arr[]=$row;
+            while ($row2 =  $this->fetchData($res)) {
+                $arr[]=$row2;
             }
             $err=array('code'=>0,'msg'=>'Value fetched successfully');
         }
@@ -221,6 +411,85 @@ class location extends DB
         {
             $err=array('code'=>1,'msg'=>'No records found');
             $arr=array();
+        }
+        $result=array('results'=>$arr,'error'=>$err);
+        return $result;
+    }
+    
+    public function suggestArea($params)
+    {
+        if(empty($params['pincode']))
+        {
+            $sql="SELECT DISTINCT area as n,city,state,pincode FROM tbl_area_master WHERE area LIKE '".$params['area']."%'";
+        }
+        else
+        {
+            $sql="SELECT DISTINCT area as n,city,state,pincode FROM tbl_area_master WHERE area LIKE '".$params['area']."%' AND  pincode = ".$params['pincode']."";
+        }
+        $res=$this->query($sql);
+        $cntres =   $this->numRows($res);
+        if($cntres > 0)
+        {
+            $i=0;
+            while ($row =  $this->fetchData($res))
+            {
+                $arr[$i]['city'] =$row['city'];
+                $arr[$i]['pincode']=$row['pincode'];
+                $arr[$i]['n']=$row['n'];
+                $arr[$i]['state']=$row['state'];
+                $i++;
+            }
+            $err=array('code'=>0,'msg'=>'Value fetched successfully');
+        }
+        else
+        {
+            $pincode   = urlencode($params['code']);
+            $place     = urlencode($params['area']);
+            if(!empty($pincode))
+            {
+                $url="https://maps.googleapis.com/maps/api/geocode/json?address=".$place."&components=postal_code:".$pincode."&sensor=false&key=AIzaSyCM1Oa91TLMg7Ol7VP-DiTBBOFqiEPDBI0";
+            }
+            else
+            {
+                $url="https://maps.googleapis.com/maps/api/geocode/json?address=".$place."&sensor=false&key=AIzaSyCM1Oa91TLMg7Ol7VP-DiTBBOFqiEPDBI0";
+            }
+            global $comm;
+            $resp = $comm->executeCurl($url, false, false, false, false, false, true);
+            if($resp)
+            {
+                $address = $resp['results'];
+                for($i=0;$i<count($address);$i++)
+                {
+                    for($j=0;$j< count($address[$i]);$j++)
+                    {
+                        if($address[$i]['address_components'][$j]['types'][0] == 'postal_code')
+                        {
+                            $arr[$i]['pincode']=$address[$i]['address_components'][$j]['long_name'];
+                        }
+                        if($address[$i]['address_components'][$j]['types'][0] == 'administrative_area_level_2')
+                        {
+                            $arr[$i]['city']=$address[$i]['address_components'][$j]['long_name'];
+                        }
+                        if($address[$i]['address_components'][$j]['types'][0] == 'locality')
+                        {
+                            $arr[$i]['n']=$address[$i]['address_components'][$j]['long_name'];
+                        }
+                        if($address[$i]['address_components'][$j]['types'][0] == 'administrative_area_level_1')
+                        {
+                            $arr[$i]['state']=$address[$i]['address_components'][$j]['long_name'];
+                        }
+                    }
+                }
+                if(!empty($arr))
+                {
+                    $err=array('code'=>0,'msg'=>'Details fetched successfully');
+                }
+                else
+                {
+                    $err=array('code'=>0,'msg'=>'No match found');
+                }
+            }
+            $err=array('code'=>1,'msg'=>'No records found');
         }
         $result=array('results'=>$arr,'error'=>$err);
         return $result;

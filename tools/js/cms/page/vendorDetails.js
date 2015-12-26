@@ -1,3 +1,4 @@
+var input_selector = 'input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=number], input[type=search], textarea, input[type=radio]';
 var uid = customStorage.readFromStorage('userid');
 if (vid !== uid || uid == '') {
     window.location.assign(DOMAIN + 'index.php');
@@ -318,12 +319,14 @@ function clickThis(id, isDirect) {
 			if(validateForm())
 			{
 				submitForm();
-				var isValidForm2 = validateStep2Form();
-				if(isValidForm2)
-				{
-					submitStep2Form(obj);
-					$('html,body').animate({ scrollTop: 0 }, 'slow');
-				}
+				setTimeout(function() {
+                                    var isValidForm2 = validateStep2Form();
+                                    if(isValidForm2)
+                                    {
+                                            submitStep2Form(obj);
+                                            $('html,body').animate({ scrollTop: 0 }, 'slow');
+                                    }
+                                }, 200); 
 			}
 		}
 		else
@@ -340,8 +343,13 @@ function clickThis(id, isDirect) {
 		submitStep3Form(obj);
     }
 }
+
 function submitForm() {
-    customStorage.removeFromStorage('isComp');
+    var complete = customStorage.readFromStorage('isComp');
+    if(complete !== '2' && complete !== 2)
+    {
+        customStorage.removeFromStorage('isComp');
+    }
     var val = new Array("orgname", "fulladd", "add1", "pincode", "area", "city", "state", "vat", "pan", "tovr", "wbst", "banker");
     var data = new Object;
     var res = formatData(val);
@@ -362,20 +370,39 @@ function submitForm() {
     res['lat'] = lat;
     res['uid'] = uid;
     data['result'] = res;
-    data = JSON.stringify(data);
-    $.ajax({url: common.APIWebPath() + "index.php?action=udtProfile&dt=" + encodeURIComponent(data), success: function (result) {
-            var obj = jQuery.parseJSON(result);
-            customStorage.addToStorage('busiType', busiType);
-            var errCode = obj['error']['code'];
-            var errMsg = obj['error']['msg'];
-            if (errCode == 0) {
-                $('#showroomname').val(res['orgname']);
-                common.toast(1, errMsg);
-				changeTab('step2');
-            } else {
-                common.toast(0, errMsg);
-            }
-        }});
+    
+    var area  = res.area;
+    var city  = res.city;
+    var state = res.state;
+    var fulladdress  = res.fulladd;
+    var pincode     =  res.pincode;
+    $.ajax({url: common.APIWebPath() + "index.php?action=checkArea&fulladd="+encodeURIComponent(fulladdress)+"&area="+encodeURIComponent(area)+"&state="+encodeURIComponent(state)+"&city="+encodeURIComponent(city)+"&pincode="+encodeURIComponent(pincode), success: function (result)
+    {
+        var obj = jQuery.parseJSON(result);
+        var errCode = obj.results;
+        if (errCode.status == 'Success')
+        {
+                    data = JSON.stringify(data);
+                    $.ajax({url: common.APIWebPath() + "index.php?action=udtProfile&lat="+errCode.lat+"&lng="+errCode.lng+"&dt=" + encodeURIComponent(data), success: function (result) {
+                            var obj = jQuery.parseJSON(result);
+                            customStorage.addToStorage('busiType', busiType);
+                            var errCode = obj['error']['code'];
+                            var errMsg = obj['error']['msg'];
+                            if (errCode == 0) {
+                                $('#showroomname').val(res['orgname']);
+                                //common.toast(1, errMsg);
+                                                changeTab('step2');
+                            } else {
+                                common.toast(0, errMsg);
+                            }
+                        }});
+        }
+        else
+        {
+            common.toast(0,'Please mention the correct area location');
+        }
+    }
+    });
 }
 
 function submitStep2Form() {
@@ -402,13 +429,21 @@ function submitStep2Form() {
     data['result'] = res;
 
     data = JSON.stringify(data);
-    customStorage.addToStorage('isComp', 1);
+    var complete = customStorage.readFromStorage('isComp');
+    if(complete !== '2' && complete !== 2)
+    {
+        customStorage.addToStorage('isComp', 1);
+    }
+    else
+    {
+        customStorage.addToStorage('isComp', 2);
+    }
     $.ajax({url: common.APIWebPath() + "index.php?action=udtProfile&isC=1&dt=" + encodeURIComponent(data), success: function (result) {
             var obj = jQuery.parseJSON(result);
             var errCode = obj['error']['code'];
             var errMsg = obj['error']['msg'];
             if (errCode == 0) {
-                common.toast(1, errMsg);
+                //common.toast(1, errMsg);
                 changeTab('step3');
             } else {
                 common.toast(0, errMsg);
@@ -433,6 +468,7 @@ function submitStep3Form() {
     if (altmbNo2_Mobile != '') {
         res['alt_cmobile'] += '|~|' + altmbNo2_Mobile;
     }
+    
     /*
      var landline = $('#landline').val();
      var lnCode = $('#lnCode').val();
@@ -455,8 +491,8 @@ function submitStep3Form() {
      res['landline'] += '~'+lnCode3 + '-' + landline3;
      }
      */
+
     res['landline'] = common.getLandlineNo();
-    ;
     res['uid'] = uid;
     data['result'] = res;
     data = JSON.stringify(data);
@@ -470,7 +506,10 @@ function submitStep3Form() {
                 customStorage.addToStorage('isComp', isComp);
                 var bsType = parseInt(busiType.charAt(0));
                 bsType = bsType - 1;
-                window.location.href = 'index.php?case=vendor_landing&catid=1000' + bsType;
+                setTimeout(function() {
+                    window.location.href = 'index.php?case=vendor_landing&catid=1000' + bsType;
+                },800) 
+
             } else {
                 common.toast(0, errMsg);
             }
@@ -494,21 +533,25 @@ var lng = '';
 var lat = '';
 function loadAreaList() {
     var pincode = $('#pincode').val();
-    if (pincode.length == 6) {
-        $.ajax({url: common.APIWebPath() + "index.php?action=viewbyPincode&code=" + pincode, success: function (result) {
-                var obj = jQuery.parseJSON(result);
-                //var results = new Object;
-                var results = obj['results'];
-                if (results != '') {
-                    areaList = results;
-                    $('#area').val(results[0]['area']);
-                    $('#city').val(results[0]['city']);
-                    $('#state').val(results[0]['state']);
-                    country = results[0]['country'];
-                    lat = results[0]['latitude'];
-                    lng = results[0]['longitude'];
+    if (pincode.length == 6)
+    {
+        $.ajax({url: common.APIWebPath() + "index.php?action=viewbyPincode&code=" + pincode, success: function (result)
+                {
+                    var obj = jQuery.parseJSON(result);
+                    //var results = new Object;
+                    var results = obj['results'];
+                    if (results !== '' && results['city'] !== null && results['city'] !== undefined && results[0]['area'] !== null && results[0]['area'] !== undefined && results[0]['state'] !== null && results[0]['state'] !== undefined)
+                    {
+                        areaList = results;
+                        $('#area').val(results[0]['area']);
+                        $('#city').val(results[0]['city']);
+                        $('#state').val(results[0]['state']);
+                        country = results[0]['country'];
+                        lat = results[0]['latitude'];
+                        lng = results[0]['longitude'];
+                    }
                 }
-            }});
+            });
     }
 }
 loadAreaList();
@@ -516,108 +559,108 @@ $('#pincode').keyup(function () {
     loadAreaList();
 });
 
-/*    
- function ValidateNumber(val,minLen,maxLen) {
- var length = val.length;
- if(val=='') {
- return 'is required';
- } else if (length<minLen || length>maxLen) {
- return ' length should be between ' + minLen + ' to' + maxLen;
- } else if (isNaN(val)) {
- return ' must be a Number';
- }
- }
- */
 
-var searchArea = new Search();
-searchArea.setMinimumSearchChar(1);
-searchArea.setId("areaSuggestDiv", "area", searchAreaCallBack, searchAreaDivOutput);
-searchArea.setAppId("searchArea");
-searchArea.arrayResult = true;
-var areaList = '';
-var tmpAreaList = new Array();
-
-function searchAreaCallBack(res) {
-    searchArea.setData = true;
-    $("#area").val(res["area"]);
-    $('#city').val(res['city']);
-    $('#state').val(res['state']);
-    country = res['country'];
-    lat = res['latitude'];
-    lng = res['longitude'];
-    document.getElementById("areaSuggestDiv").innerHTML = "";
-}
-
-var lastHightlighted = "";
-var listName;
-var autoSuggDiv;
-var obiLen;
-function searchAreaDivOutput(res) {
-    setTimeout(function () {
-        listName = 'areaList';
-        autoSuggDiv = 'areaSuggestDiv';
-        autoSuggParent = 'area';
-        searchArea.suggestionList = areaList;
-        var obj = areaList;
-        var len = obj.length;
-        obiLen = len;
-        var i = 0;
-        if (len > 0)
+var pincode1;
+$(document).ready(function () {
+pincode1 = $('#pincode').val();
+    $('#pincode').bind('keyup',function(event)
+    {
+        if(pincode1 == 'undefined' || pincode1 == null || pincode1 == undefined || pincode1 == 'null')
         {
-            searchArea.suggestLen = len;
-            var i = 0;
-            var suggest = "<div class='smallField fmRoboto font14 pointer border1 transition300' style='overflow-y:auto'>";
-            if (res == "") {
-                while (i < len) {
-                    suggest += "<div id='suggest" + i + "' class='autoSuggestRow transition300 txtCaCase' onmousedown='searchArea.setSearchResult(\"" + i + "\")' onclick='searchArea.setSearchResult(\"" + i + "\")'>&nbsp;&nbsp;" + obj[i].area + "</div>";
-                    i++;
-                }
-            } else {
-                var s = res.toUpperCase();
-                var slen = s.length;
-                var count = 0;
-                var tmpSearch = new Array();
-                while (i < len) {
-                    var t = (obj[i].area).split(" ");
-                    var len1 = t.length;
-                    var j = 0;
-                    var loadFlag = false;
-                    while (j < len1) {
-                        var st = (t[j].substring(0, slen)).toUpperCase();
-                        if (s == st) {
-                            loadFlag = true;
-                            break;
-                        }
-                        j++;
-                    }
-                    if (loadFlag) {
-                        tmpSearch.push(obj[i]);
-                        suggest += "<div id='suggest" + count + "' class='autoSuggestRow transition300 txtCaCase' onmousedown='searchArea.setSearchResult(\"" + count + "\")' onclick='searchArea.setSearchResult(\"" + count + "\")'>&nbsp;&nbsp;" + obj[i].area + "</div>";
-                        count++;
-                    }
-                    i++;
-                }
-                searchArea.suggestionList = tmpSearch;
-                searchArea.suggestLen = (count - 1);
-            }
-            suggest += "</div>";
-            searchArea.suggestLen = searchArea.suggestLen - 1;
-            document.getElementById("areaSuggestDiv").innerHTML = suggest;
+            pincode1 = '';
         }
-    }, 150);
+    });
+    
+    
+    var msuggest = '';
+    
+    /* For suggestions of City */
+    $('#area').bind('keyup', function(event)    
+    {
+        if ($(this).attr('id') == 'area')
+        {
+            pincode1 = $('#pincode').val();
+            msuggest = 'areaSuggestDiv';
+            var params = '';
+            if(pincode1.length == 0)
+            {
+                params = 'action=areaSuggest&area='+escape($(this).val());
+            }
+            else
+            {
+                params = 'action=areaSuggest&pincode='+pincode1+'&area='+escape($(this).val());
+            }
+            new Autosuggest($(this).val(), '#area', '#areaSuggestDiv', DOMAIN + "apis/index.php", params, true, '', '', event);
+        }
+    });
 
+    $('#city').bind('keyup focus', function(event){
+        if ($(this).attr('id') == 'city')
+        {
+            msuggest = 'citySuggestDiv';
+            var params = 'action=citySuggest&name=' + escape($(this).val());
+            new Autosuggest($(this).val(), '#city', '#citySuggestDiv', DOMAIN + "apis/index.php", params, true, '', '', event);
+        }
+    });
+
+    $('#state').bind('keyup focus', function(event)
+    {
+        if ($(this).attr('id') == 'state')
+        {
+            msuggest = 'stateSuggestDiv';
+            var params = 'action=stateSuggest&name=' + escape($(this).val());
+            new Autosuggest($(this).val(), '#state', '#stateSuggestDiv', DOMAIN + "apis/index.php", params, true, '', '', event);
+        }
+    });
+
+    $('body').bind('click',function() {
+        $('#'+ msuggest).addClass('dn');
+    });
+});
+    
+function arrangeData(data, id, divHolder, nextxt)
+{
+    if (data.results)
+    {
+        var suggest = "<ul class='smallField fmRoboto font14 pointer border1 transition300' style='overflow-y:auto;'>";
+        $.each(data.results, function(i, vl) {
+            if (id == '#area' && (vl.n !== null && vl.n !== undefined && vl.n !== 'undefined' && vl.n !== 'null' && vl.n !== ''))
+                suggest += "<li id='suggest" + i + "' class='autoSuggestRow transition300 txtCaCase txtOver' onclick='setAreaSuggestValue(\"" + vl.n + "\",\"" + vl.city + "\",\"" + vl.state + "\",\"" + vl.pincode + "\",\"area\");'>&nbsp;&nbsp;" + vl.n+"</li>";
+            if (id == '#city')
+                suggest += "<li id='suggest" + i + "' class='autoSuggestRow w100 transition300 txtCaCase' onclick='setCitySuggestValue(\"" + vl.n + "\",\"city\");'>&nbsp;&nbsp;" + vl.n + "</li>";
+            if (id == '#state')
+                suggest += "<li id='suggest" + i + "' class='autoSuggestRow w100 transition300 txtCaCase' onclick='setStateSuggestValue(\"" + vl.n + "\",\"state\")'>&nbsp;&nbsp;" + vl.n + "</li>";
+        });
+        suggest += "</ul>";    
+        return suggest;
+    }
+    else
+        return '';
 }
 
-function matchValue(val, list, type) {
-    var len = list.length;
-    for (var i = 0; i < len; i++) {
-        var text = (list[i].area).toLowerCase();
-        var ind = text.indexOf(val);
-        if ((ind != -1)) {
-            $('#area').val(list[i].area);
-            break;
-        }
-    }
+function setAreaSuggestValue(val,city,state,pin,id) {
+    $('#'+id).val(val.trim());
+    $('#city').val(city.trim());
+    $('#state').val(state.trim());
+    $('#pincode').val(pin.trim());
+    
+    setTimeout(function () {
+        $('#areaSuggestDiv').addClass('dn');
+    }, 50);
+}
+
+function setCitySuggestValue(val, id) {
+    $('#'+id).val(val);
+    setTimeout(function () {
+        $('#citySuggestDiv').addClass('dn');
+    }, 50);
+}
+
+function setStateSuggestValue(val, id) {
+    $('#'+id).val(val);
+    setTimeout(function () {
+        $('#stateSuggestDiv').addClass('dn');
+    }, 50);
 }
 
 function onlyAlphabets(evt, t) {
@@ -630,124 +673,3 @@ function onlyAlphabets(evt, t) {
     }
     return false;
 }
-function clearVal(id) {
-    $('#' + id).val('');
-}
-function closeSuggest(id) {
-    setTimeout(function () {
-        $('#' + id).html('');
-    }, 500);
-}
-
-var searchCity = new Search();
-searchCity.setMinimumSearchChar(1);
-searchCity.setId("citySuggestDiv", "prName", searchCityCallBack, searchCityDivOutput);
-searchCity.setAppId("searchCity");
-searchCity.setPath(APIDOMAIN + "apis/index.php?action=citySuggest&name=ban");
-
-function searchCityCallBack(res) {
-    searchCity.setData = true;
-    document.getElementById("citySuggestDiv").innerHTML = "";
-}
-
-
-function searchCityDivOutput(res) {
-    if (res != null) {
-        searchCity.suggestionList = res;
-        var obj = res;
-        var len = obj.length;
-        var i = 0;
-        if (len > 0)
-        {
-            searchCity.suggestLen = len;
-            var i = 0;
-            var suggest = "<div class='smallField w100 fmRoboto transition300 font14 pointer border1' >";
-            while (i < len) {
-                suggest += "<div id='suggest" + i + "' class='autoSuggestRow w100 transition300 txtCaCase' onclick='setSuggestValue(\"" + obj[i].n + "\",\"city\");setSuggestValue(\"" + obj[i].s + "\",\"state\");'>&nbsp;&nbsp;" + obj[i].n + "</div>";
-                i++;
-            }
-            suggest += "</div>";
-            searchCity.suggestLen = searchCity.suggestLen - 1;
-            document.getElementById("citySuggestDiv").innerHTML = suggest;
-        }
-
-    } else {
-        document.getElementById("citySuggestDiv").innerHTML = "";
-    }
-}
-
-var searchState = new Search();
-searchState.setMinimumSearchChar(1);
-searchState.setId("stateSuggestDiv", "prName", searchStateCallBack, searchStateDivOutput);
-searchState.setAppId("searchState");
-
-function searchStateCallBack(res) {
-    searchCity.setData = true;
-    document.getElementById("stateSuggestDiv").innerHTML = "";
-}
-
-function searchStateDivOutput(res) {
-    if (res != null) {
-        searchState.suggestionList = res;
-        var obj = res;
-        var len = obj.length;
-        var i = 0;
-        if (len > 0)
-        {
-            searchState.suggestLen = len;
-            var i = 0;
-            var suggest = "<div class='smallField w100 fmRoboto transition300 font14 pointer border1' >";
-            while (i < len) {
-                suggest += "<div id='suggest" + i + "' class='autoSuggestRow w100 transition300 txtCaCase' onclick='setSuggestValue(\"" + obj[i].n + "\",\"state\")'>&nbsp;&nbsp;" + obj[i].n + "</div>";
-                i++;
-            }
-            suggest += "</div>";
-            searchState.suggestLen = searchState.suggestLen - 1;
-            document.getElementById("stateSuggestDiv").innerHTML = suggest;
-        }
-
-    } else {
-        document.getElementById("stateSuggestDiv").innerHTML = "";
-    }
-}
-function setSuggestValue(val, id) {
-    $('#' + id).val(val);
-    closeSuggest(id + 'SuggestDiv');
-}
-
-$('#pincode').keyup(function () {
-    loadAreaList();
-    clearVal('area')
-});
-
-$('#city').keyup(function () {
-    var city = $(this).val();
-    if (city != '') {
-        $.ajax({url: common.APIWebPath() + "index.php?action=citySuggest&name=" + city, success: function (result) {
-                var obj = jQuery.parseJSON(result);
-                //var results = new Object;
-                var results = obj['results'];
-                if (results != '') {
-                    searchCityDivOutput(results);
-                }
-            }});
-    } else {
-        closeSuggest('citySuggestDiv')
-    }
-});
-
-$('#state').keyup(function () {
-    var state = $(this).val();
-    if (state != '') {
-        $.ajax({url: common.APIWebPath() + "index.php?action=stateSuggest&name=" + state, success: function (result) {
-                var obj = jQuery.parseJSON(result);
-                //var results = new Object;
-                var results = obj['results'];
-                if (results != '') {
-                    searchStateDivOutput(results);
-                }
-            }});
-    } else {
-        closeSuggest('stateSuggestDiv')
-    }
-});

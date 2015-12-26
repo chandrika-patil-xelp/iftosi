@@ -642,6 +642,26 @@ switch($action)
 //-------------------------Location---------------------------------
 
 // localhost/iftosi/apis/index.php?action=addCity&cname=Pakistan&sname=Punjab&cityname=lahore
+        case 'checkArea':
+            include APICLUDE.'class.location.php';
+            $city=(!empty($params['city'])) ? trim(urldecode($params['city'])) : '';
+            $state=(!empty($params['state'])) ? trim(urldecode($params['state'])) : '';
+            $area=(!empty($params['area'])) ? trim(urldecode($params['area'])) : '';
+            $fulladd=(!empty($params['fulladd'])) ? trim(urldecode($params['fulladd'])) : '';
+            if(empty($city) || empty($city) || empty($area) || empty($state))
+            {
+                $arr = array();
+                $err = array('Code' => 1, 'Msg' => 'Invalid Parameters');
+                $result = array('results' => $arr, 'error' => $err);
+                $res=$result;
+                break;
+            }
+            $obj= new location($db['iftosi']);
+            $result= $obj->checkArea($params);
+            $res=$result;
+            break;
+        
+// localhost/iftosi/apis/index.php?action=addCity&cname=Pakistan&sname=Punjab&cityname=lahore
         case 'addCity':
             include APICLUDE.'class.location.php';
             $cityname=(!empty($params['cityname'])) ? trim(urldecode($params['cityname'])) : '';
@@ -713,6 +733,24 @@ switch($action)
             break;
 
 
+//  localhost/iftosi/apis/index.php?action=viewbyPincode&code=380001
+        case 'viewbyAreaPincode':
+            include APICLUDE.'class.location.php';
+            
+            $area=(!empty($params['area'])) ? trim(urldecode($params['area'])) : '';
+            if(empty($area))
+            {
+                $arr = array();
+                $err = array('Code' => 1, 'Msg' => 'Invalid Parameters');
+                $result = array('results' => $arr, 'error' => $err);
+                $res=$result;
+                break;
+            }
+            $obj= new location($db['iftosi']);
+            $result= $obj->viewbyAreaPincode($params);
+            $res=$result;
+            break;            
+            
 //  localhost/iftosi/apis/index.php?action=viewbyPincode&code=380001
         case 'viewbyPincode':
             include APICLUDE.'class.location.php';
@@ -1603,6 +1641,16 @@ echo '</pre>';
             $result=$obj->suggestState($params);
             $res=$result;
             break;
+
+//  localhost/iftosi/apis/index.php?action=areaSuggest&name=tami
+        case 'areaSuggest':
+            include APICLUDE.'class.location.php';
+            $obj=new location($db['iftosi']);
+            $result=$obj->suggestArea($params);
+            $res=$result;
+            break;
+
+        
 
 //  localhost/iftosi/apis/index.php?action=getProdList
         case 'getProdList':

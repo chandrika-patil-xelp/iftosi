@@ -149,88 +149,92 @@ function requestOTP()
 }
 function otpCheck()
 {
-   var otpProvided =  $('#pr_otp').val();
-   var mobile = customStorage.readFromStorage('mobile');
-   var isValid = true;
-   $.ajax({url: DOMAIN + "apis/index.php?action=validOTP&mobile="+mobile+"&vc="+otpProvided, success: function(result)
+   //var mobile = customStorage.readFromStorage('mobile');
+   //checkOtp();
+   //return false;
+
+    var otpProvided =  $('#pr_otp').val();
+    var mobile = customStorage.readFromStorage('mobile');
+
+    $.ajax({url: DOMAIN + "apis/index.php?action=validOTP&mobile="+mobile+"&vc="+otpProvided, success: function(result)
        {
                 var obj = jQuery.parseJSON(result);
-                var errCode = obj['error']['Msg'];
-                if(errCode === 'Data Matched')
+                var errCode = obj.error.Code;
+                if(errCode == 0 || errCode == '0')
                 {
                     isValid = true;
-                }
-                else if(errCode === 'Otp validation failed')
-                {
-                    isValid = false;
+                    if(pageName == 'forgot')
+                    {
+                        $.ajax({url: DOMAIN + "apis/index.php?action=forgotPwd&email=" + mobile, success: function (result) {
+                            var obj = jQuery.parseJSON(result);
+                            var errCode = obj['error']['Code'];
+                            var errMsg = obj['error']['Msg'];
+                            if(errCode == 1)
+                            {
+                                customStorage.toast(0,errMsg);
+                            }
+                            else
+                            {
+                                customStorage.toast(1,errMsg);
+                                window.location.assign(DOMAIN + "index.php?case=login");
+                            }
+                        }});
+                    }
+                    else
+                    {
 
+                        var pr_name = $('#pr_name').val();
+                        var pr_mobile = $('#pr_mobile').val();
+                        var pr_email = $('#pr_email').val();
+                        var pr_pass = $('#pr_pass').val();
+                        var pr_city = $('#pr_city').val();
+                        var isVendor = $('#isVendor').is(':checked');
+                        var amIVendor = $("input[type=checkbox]:checked").length;
+                        var isValid = false;
+                        var userType =1;
+                        if(isVendor)
+                            isVendor=1;
+                        else 
+                            isVendor=-1;
+                        $.ajax({url: DOMAIN + "apis/index.php?action=userReg&username=" + pr_name +"&password=" + pr_pass +"&mobile=" + pr_mobile + "&cityname="+pr_city+"&email="+pr_email+'&isvendor='+userType, success: function (result) {
+                                    var obj = eval('('+result+')');
+                                    var errCode = obj.error.code;
+                                    if(errCode == 0) {
+                                            var userid = obj.userid;
+                                            customStorage.addToStorage('isLoggedIn',true);
+                                            customStorage.addToStorage('userid',userid);
+                                            customStorage.addToStorage('mobile',pr_mobile);
+                                            customStorage.addToStorage('username',pr_name);
+                                            customStorage.addToStorage('is_vendor',isVendor);
+                                            customStorage.addToStorage('email',pr_email);
+                                            customStorage.addToStorage('name',pr_name);
+                                            customStorage.addToStorage('city',pr_city);
+                                            if(isVendor===1) {
+                                                    customStorage.removeFromStorage('busiType');
+                                                    window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid='+userid);
+                                            } else {
+                                                    customStorage.toast(1,'Registration Successfull Done');
+                                                    setTimeout(function () {window.location.assign(DOMAIN + 'index.php'); },1500);
+                                            }
+                                    } else {
+                                            customStorage.toast(0,'Registration Unsuccessfull');
+                                    }
+                            }
+                        });
+                        
+                    }
+                }
+                else if(errCode == 1 || errCode == '1')
+                {
+                    customStorage.toast(0,'OTP verification Unsuccessful');
+                    isValid = false;
                 }
         }
-        });
-    if(pageName == 'forgot')
-    {
-        $.ajax({url: DOMAIN + "apis/index.php?action=forgotPwd&email=" + mobile, success: function (result) {
-            var obj = jQuery.parseJSON(result);
-            var errCode = obj['error']['Code'];
-            var errMsg = obj['error']['Msg'];
-            if(errCode == 1) {
-                customStorage.toast(0,errMsg);
-            } else {
-                customStorage.toast(1,errMsg);
-                window.location.assign(DOMAIN + "index.php?case=login");
-            }
-        }});
-    }
-    else
-    {
-        if(isValid == true)
-        {
-            var pr_name = $('#pr_name').val();
-            var pr_mobile = $('#pr_mobile').val();
-            var pr_email = $('#pr_email').val();
-            var pr_pass = $('#pr_pass').val();
-            var pr_city = $('#pr_city').val();
-            var isVendor = $('#isVendor').is(':checked');
-            var amIVendor = $("input[type=checkbox]:checked").length;
-            var isValid = false;
-            var userType =1;
-            if(isVendor)
-                isVendor=1;
-            else 
-                isVendor=-1;
-            $.ajax({url: DOMAIN + "apis/index.php?action=userReg&username=" + pr_name +"&password=" + pr_pass +"&mobile=" + pr_mobile + "&cityname="+pr_city+"&email="+pr_email+'&isvendor='+userType, success: function (result) {
-                        var obj = eval('('+result+')');
-                        var errCode = obj.error.code;
-                        if(errCode == 0) {
-                                var userid = obj.userid;
-                                customStorage.addToStorage('isLoggedIn',true);
-                                customStorage.addToStorage('userid',userid);
-                                customStorage.addToStorage('mobile',pr_mobile);
-                                customStorage.addToStorage('username',pr_name);
-                                customStorage.addToStorage('is_vendor',isVendor);
-                                customStorage.addToStorage('email',pr_email);
-                                customStorage.addToStorage('name',pr_name);
-                                customStorage.addToStorage('city',pr_city);
-                                if(isVendor===1) {
-                                        customStorage.removeFromStorage('busiType');
-                                        window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid='+userid);
-                                } else {
-                                        customStorage.toast(1,'Registration Successfull Done');
-                                        setTimeout(function () {window.location.assign(DOMAIN + 'index.php'); },1500);
-                                }
-                        } else {
-                                customStorage.toast(0,'Registration Unsuccessfull');
-                        }
-                }});
-        }
-        else
-        {
-            customStorage.toast(0,'OTP verification Unsuccessful');
-            requestOTP(pr_mobile);
-        }
-    }
-        return isValid;
+    });
+
 }
+
+
 function otpGo(pr_mobile)
 {
         var pr_mobile = $('#pr_mobile').val().trim();
@@ -286,6 +290,29 @@ function onEnterFormSubmit(evt,type)
 }
 
 
+function checkOtp()
+{
+    var otpProvided =  $('#pr_otp').val();
+    var mobile = customStorage.readFromStorage('mobile');
+
+    $.ajax({url: DOMAIN + "apis/index.php?action=validOTP&mobile="+mobile+"&vc="+otpProvided, success: function(result)
+       {
+                var obj = jQuery.parseJSON(result);
+                console.log(obj);
+                var errCode = obj.error.Code;
+                console.log(errCode);
+                if(errCode == 0 || errCode == '0')
+                {
+                    isValid = true;
+                }
+                else if(errCode == 1 || errCode == '1')
+                {
+                    isValid = false;
+                }
+        }
+    });
+}
+
 /* For suggestions of City */
 $('#pr_city').bind('keyup focus', input_selector, function(event)
 {		
@@ -297,11 +324,11 @@ function arrangeData(data, id, divHolder, nextxt)
 {
     if (data.results)
     {
-        var suggest = "<div class='smallField w100 fmRoboto transition300 font14 pointer border1'>";
+        var suggest = "<ul class='smallField w100 fmRoboto transition300 font14 pointer border1'>";
         $.each(data.results, function(i, vl) {
-                suggest += "<div id='suggest" + i + "' class='autoSuggestRow w100 transition300 txtCaCase txtOverFlow txtOver' title="+vl.n+" style='text-transform:capitalize;' onClick='setSuggestValue(\""+vl.n+"\",\"#pr_city\",\""+vl.id+"\");'>"+vl.n+"</div>";
+                suggest += "<li id='suggest" + i + "' class='autoSuggestRow w100 transition300 txtCaCase txtOverFlow txtOver' title="+vl.n+" style='text-transform:capitalize;' onClick='setSuggestValue(\""+vl.n+"\",\"#pr_city\",\""+vl.id+"\");'>"+vl.n+"</li>";
         });
-        suggest += "</div>";    
+        suggest += "</ul>";  
         return suggest;
     }
     else
@@ -324,3 +351,7 @@ function closeSuggest(id) {
         $('#' + id).html('');
     }, 10);
 }
+$('body').click(function()
+{
+    $('#pr_citySuggestDiv').addClass('dn');
+});

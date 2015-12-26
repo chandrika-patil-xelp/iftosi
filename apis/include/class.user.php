@@ -231,51 +231,54 @@
             $row=$this->fetchData($res);
             $isv=$row['is_vendor'];
             $uid=$row['user_id'];
+
+            $vstat  = "SELECT is_complete from tbl_vendor_master where vendor_id=\"".$uid."\"";
+            $vres   = $this->query($vstat);
+            $statrow= $this->fetchData($vres);
+            $completeStat = $statrow['is_complete'];
           
             if($isv == 1)
             {
-				$tmp_params = array('uid' => $detls['uid']);
-				$vdtls = $this->viewAll($tmp_params);
-				if(!empty($vdtls) && !empty($vdtls['results']))
-				{
-					$vfulldtls = $vdtls['results'][1];
-					if(!empty($vfulldtls))
-					{
-						$vendor_id = $vfulldtls['vendor_id'];
-						$orgName = $vfulldtls['orgName'];
-						$address1 = $vfulldtls['address1'];
-						$area = $vfulldtls['area'];
-						$postal_code = $vfulldtls['postal_code'];
-						$city = $vfulldtls['city'];
-						$country = $vfulldtls['country'];
-						$state = $vfulldtls['state'];
-						$position = $vfulldtls['position'];
-						$contact_person = $vfulldtls['contact_person'];
-						$contact_mobile = $vfulldtls['contact_mobile'];
-						$email = $vfulldtls['email'];
-						$memship_Cert = $vfulldtls['memship_Cert'];
-						$vatno = $vfulldtls['vatno'];
-						$landline = $vfulldtls['landline'];
-						$banker = $vfulldtls['banker'];
-						$pancard = $vfulldtls['pancard'];
-						$business_type = $vfulldtls['business_type'];
-						$showroom_name = $vfulldtls['showroom_name'];
+                $tmp_params = array('uid' => $detls['uid']);
+                $vdtls = $this->viewAll($tmp_params);
+                if(!empty($vdtls) && !empty($vdtls['results']))
+                {
+                    $vfulldtls = $vdtls['results'][1];
+                    if(!empty($vfulldtls))
+                    {
+                        $vendor_id = $vfulldtls['vendor_id'];
+                        $orgName = $vfulldtls['orgName'];
+                        $address1 = $vfulldtls['address1'];
+                        $area = $vfulldtls['area'];
+                        $postal_code = $vfulldtls['postal_code'];
+                        $city = $vfulldtls['city'];
+                        $country = $vfulldtls['country'];
+                        $state = $vfulldtls['state'];
+                        $position = $vfulldtls['position'];
+                        $contact_person = $vfulldtls['contact_person'];
+                        $contact_mobile = $vfulldtls['contact_mobile'];
+                        $email = $vfulldtls['email'];
+                        $memship_Cert = $vfulldtls['memship_Cert'];
+                        $vatno = $vfulldtls['vatno'];
+                        $landline = $vfulldtls['landline'];
+                        $banker = $vfulldtls['banker'];
+                        $pancard = $vfulldtls['pancard'];
+                        $business_type = $vfulldtls['business_type'];
+                        $showroom_name = $vfulldtls['showroom_name'];
 
-						if(!empty($vendor_id) && !empty($orgName) && !empty($address1) && !empty($area) && !empty($postal_code) && !empty($city) && !empty($country) && !empty($state) && !empty($position) && !empty($contact_person) && !empty($contact_mobile) && !empty($email) && !empty($memship_Cert) && !empty($vatno) && !empty($landline) && !empty($banker) && !empty($pancard) && !empty($business_type) && !empty($showroom_name) && ($params['isC'] == 2 || $params['isC'] == '2'))
-						{
-							$params['isC'] = 2;
-						}
-						else
-						{
-							$params['isC'] = 0;
-						}
-					}
-				}
+                        if(!empty($vendor_id) && !empty($orgName) && !empty($address1) && !empty($area) && !empty($postal_code) && !empty($city) && !empty($country) && !empty($state) && !empty($position) && !empty($contact_person) && !empty($contact_mobile) && !empty($email) && !empty($memship_Cert) && !empty($vatno) && !empty($landline) && !empty($banker) && !empty($pancard) && !empty($business_type) && !empty($showroom_name) && ($params['isC'] == 2 || $params['isC'] == '2' || $completeStat == 2 || $completeStat == '2'))
+                        {
+                                $params['isC'] = 2;
+                        }
+                        else
+                        {
+                                $params['isC'] = 0;
+                        }
+                    }
+                }
             $vsql1='UPDATE tbl_registration SET ';
             $vsql1 .= " city = \"".$vfulldtls['city']."\"";
             
-                                
-                                
             $vsql='UPDATE tbl_vendor_master SET ';
             if (!empty($detls['orgname'])) {
                 $vsql .= " orgName = '".$detls['orgname']."', ";
@@ -372,11 +375,11 @@
             if (!empty($detls['busiType'])) {
                 $vsql .= " business_type = '".$detls['busiType']."',";
             }
-            if (!empty($detls['lat'])) {
-                $vsql .= " lat = '".$detls['lat']."',";
+            if (!empty($params['lat'])) {
+                $vsql .= " lat = '".$params['lat']."',";
             }
-            if (!empty($detls['lng'])) {
-                $vsql .= " lng = '".$detls['lng']."',";
+            if (!empty($params['lng'])) {
+                $vsql .= " lng = '".$params['lng']."',";
             }
             if (isset($params['isC'])) {
                 $vsql .= " is_complete = ".$params['isC'].",";
@@ -400,7 +403,6 @@
                                             user_name='".$detls['username']."',
                                             email='".$detls['email']."',
                                             updatedby='".$detls['username']."',
-                                            is_complete=2
                                             city = \"".$detls['city']."\"
                      WHERE 
                                             user_id=".$uid."";
@@ -439,7 +441,9 @@
                    FROM 
                           tbl_registration
                    WHERE
-                          logmobile=".$params['mobile']." 
+                          (logmobile=\"".$params['mobile']."\")
+                              OR
+                          (email =\"".$params['mobile']."\")
                    AND 
                           password=MD5('".$params['password']."')
                    AND
@@ -482,10 +486,58 @@
                 }
                 $err=array('code'=>0,'msg'=>'Parameters matched');
             }
+            else if($cntres > 1)
+            {
+                while($row=$this->fetchData($vres))
+                {
+                    $allRows[] = $row;
+                    if($row['is_vendor'] == 1)
+                    {
+                        $arr['uid']=$row['user_id'];
+                        $arr['utype']=$row['is_vendor'];
+                        $arr['username']=$row['user_name'];
+                        $arr['mobile']=$row['logmobile'];
+                        $arr['email']=$row['email'];
+                        $arr['pass_flag']=$row['pass_flag'];
+                        break;
+                    }
+                }
+
+                if(empty($arr['uid']))
+                {
+                    $arr['uid']=$allRows[0]['user_id'];
+                    $arr['utype']=$allRows[0]['is_vendor'];
+                    $arr['username']=$allRows[0]['user_name'];
+                    $arr['mobile']=$allRows[0]['logmobile'];
+                    $arr['email']=$allRows[0]['email'];
+                    $arr['pass_flag']=$allRows[0]['pass_flag'];
+                }
+
+                if($arr['utype'] == 1)
+                {
+                      $sql="SELECT 
+                              business_type,
+                              is_complete
+                       FROM 
+                              tbl_vendor_master
+                       WHERE
+                              vendor_id=".$arr['uid'];
+                    $res=$this->query($sql);
+                    if($this->numRows($res)==1)
+                    {
+                        while($vrow=$this->fetchData($res))
+                        {
+                            $arr['busiType']=$vrow['business_type'];
+                            $arr['isC']=$vrow['is_complete'];
+                        }
+                    }
+                }
+               $err=array('code'=>0,'msg'=>'Details Fetched successfully');
+            }
             else
             {
-                $arr=array();
-                $err=array('code'=>1,'msg'=>'Problem in fetching data');
+                $arr = array();
+                $err=array('code'=>1,'msg'=>'Error in fetching data');
             }
             $result = array('results'=>$arr,'error'=>$err);
             return $result;

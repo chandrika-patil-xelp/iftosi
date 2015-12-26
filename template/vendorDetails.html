@@ -45,20 +45,20 @@ if(!empty($data['mdbw'])) {
                             <div class="titleDiv txtCap fLeft"> Pin Code *</div>
                             <input type="text" id="pincode" name="pincode" value="<?php echo $data['postal_code']; ?>" maxlength="6" onkeypress="return common.isNumberKey(event)"  placeholder=" e.g. 400064" class="txtInput c666 fLeft fmRoboto font14">
                         </div>
-                        <div class="divCon2 fRight c666">
-                            <div class="titleDiv txtCap fLeft"> Area *</div>
-                            <input type="text" id="area" name="area" value="<?php echo $data['area']; ?>" placeholder=" e.g. Andheri West" maxlength="50" class="txtInput c666 fLeft fmRoboto font14" onfocus="searchAreaDivOutput(this.value);" onkeypress="return onlyAlphabets(event, this)" onblur="matchValue(this.value, areaList, 2);closeSuggest();" onkeyup="searchArea.showHint(this.value, event)" onclick="searchAreaDivOutput(this.value)">
+                        <div class="divCon2 fRight c666 suggestHolder" id="areaSuggest">
+                            <div class="titleDiv txtCap fLeft "> Area *</div>
+                            <input type="text" id="area" name="area" value="<?php echo $data['area']; ?>" placeholder=" e.g. Andheri West" maxlength="50"  class="txtInput c666 fLeft fmRoboto font14" >
                             <div id="areaSuggestDiv" class="autoSuggestOuter"></div>
                         </div>
-                        <div class="divCon2 fLeft c666">
+                        <div class="divCon2 fLeft c666 suggestHolder">
                             <div class="titleDiv txtCap fLeft"> City *</div>
-                            <input type="text" id="city" name="city" value="<?php echo $data['city']; ?>" onkeypress="return common.onlyAlphabets(event)" maxlength="50" placeholder=" e.g. Mumbai" class="txtInput c666 fLeft fmRoboto font14" onfocus="" onkeypress="return onlyAlphabets(event, this)" onblur="closeSuggest('citySuggestDiv');" onkeyup="" onclick="">
-                            <div id="citySuggestDiv" class="autoSuggestOuter"></div>
+                            <input type="text" id="city" name="city" value="<?php echo $data['city']; ?>" maxlength="50" placeholder=" e.g. Mumbai" class="txtInput c666 fLeft fmRoboto font14">
+                            <div id="citySuggestDiv" class="autoSuggestOuter" onfocus="clearField('areaSuggestDiv');"></div>
                         </div>
-                        <div class="divCon2 fRight c666">
+                        <div class="divCon2 fRight c666 suggestHolder">
                             <div class="titleDiv txtCap fLeft"> State *</div>
-                            <input type="text" id="state" name="state" value="<?php echo $data['state']; ?>" placeholder=" e.g. Maharashtra" class="txtInput c666 fLeft fmRoboto font14 " autocomplete="false" onkeypress="return onlyAlphabets(event, this)" onblur="closeSuggest('stateSuggestDiv');" onkeyup="">
-                            <div id="stateSuggestDiv" class="autoSuggestOuter"></div>
+                            <input type="text" id="state" name="state" value="<?php echo $data['state']; ?>" placeholder=" e.g. Maharashtra" class="txtInput c666 fLeft fmRoboto font14 " autocomplete="false">
+                            <div id="stateSuggestDiv" class="autoSuggestOuter" onfocus="clearField('citySuggestDiv');"></div>
                         </div>
                         <div class="divCon2 fLeft">
                             <div  class="titleDiv txtCap fLeft">VAT Number *</div>
@@ -284,6 +284,7 @@ if(!empty($data['mdbw'])) {
         var busiType="<?php echo $data['business_type']; ?>";
     </script>
     <script src="tools/js/cms/lib/Search.js" type="text/javascript"></script>
+    <script type="text/javascript" src="<?=$jvs['auto'];?>"></script>
     <script type="text/javascript" src='tools/js/cms/page/vendorDetails.js?v=<?=VERSION;?>'></script>
     <script type="text/javascript" src='tools/js/cms/lib/jquery.toast.min.js'></script>
     <script>

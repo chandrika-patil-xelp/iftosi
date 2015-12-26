@@ -1,7 +1,7 @@
 <?php
     class Common
     {
-        function executeCurl($url, $isRaw = false, $tm = false, $postData = false, $fromWhere = false, $authData = false)
+        function executeCurl($url, $isRaw = false, $tm = false, $postData = false, $fromWhere = false, $authData = false, $sslCurl = false)
         {
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -15,6 +15,10 @@
             if(!empty($tm))
             {
                 curl_setopt($ch, CURLOPT_TIMEOUT, $tm);
+            }
+            if($sslCurl)
+            {
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             }
 
             if(!empty($authData))

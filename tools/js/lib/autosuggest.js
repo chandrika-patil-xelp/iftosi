@@ -114,7 +114,7 @@ function setAutoData(cid,cval,id,divHolder,nextxt,hiddenid)
 		$(divHolder).addClass('dn');
 		$(divHolder).html();
 	},20);
-	makeCall(id,cid);
+	//makeCall(id,cid);
 	auto = false;
 	cleardata();
 }
@@ -136,7 +136,7 @@ function focusfn()
 }
 
 var handleKeys = function(evt,txt,divHolder,nextxt,divSelection,hiddenid,params) {
-	if (!divSelection) divSelection = $(divHolder + " ul li.hover");
+	if (!divSelection) divSelection = $(divHolder + " ul li.autoSuggestRowSelect");
 	var keyCode = evt.which;
 	
 	if(keyCode == 13) {
@@ -153,7 +153,7 @@ var handleKeys = function(evt,txt,divHolder,nextxt,divSelection,hiddenid,params)
 		
 		var li_Index="-1";
 		$(divHolder+' ul li').each(function(index,data) {
-			if($(data).hasClass("hover")==true) {
+			if($(data).hasClass("autoSuggestRowSelect")==true) {
 				li_Index = index;
 			}
 		});
@@ -169,13 +169,14 @@ var handleKeys = function(evt,txt,divHolder,nextxt,divSelection,hiddenid,params)
 				li_Index = 0;
 			else
 				li_Index++;
+                                
 		}
 		$(divHolder+' ul li').each(function(index,data) {
 			if (index  == li_Index) {
-				$(this).addClass("hover");
+				$(this).addClass("autoSuggestRowSelect");
 			}
 			else {
-				$(this).removeClass("hover");
+				$(this).removeClass("autoSuggestRowSelect");
 			}
 		});
 		return true;
