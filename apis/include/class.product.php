@@ -555,7 +555,7 @@
                         $prdRes = $this->query($prdSql);
                         $Vcnt = $this->numRows($prdRes);
                         
-                        $extn = " AND active_flag in (".$af.") ";
+//                        $extn = " AND active_flag in (".$af.") ";
                         if($Vcnt)
                         {
                             $row = $this->fetchData($prdRes);
