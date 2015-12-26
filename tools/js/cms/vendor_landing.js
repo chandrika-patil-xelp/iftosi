@@ -73,9 +73,9 @@ var goldRate, silverRate, dollarRate = '';
     
 $.ajax({url: DOMAIN + "apis/index.php?action=getAllRatesByVID&vid=" + uid, success: function (result) {
     var obj = jQuery.parseJSON(result);
-    goldRate = obj['results']['gold_rate'];
-    silverRate = obj['results']['silver_rate'];
-    dollarRate = obj['results']['dollar_rate'];
+    goldRate = obj.results.gold_rate;
+    silverRate = obj.results.silver_rate;
+    dollarRate = obj.results.dollar_rate;
 
 	if(dollarRate !== undefined && dollarRate !== null && dollarRate !== '' && typeof dollarRate !== 'undefined' && dollarRate !== 0.00 && dollarRate !== '0.00')
 	{
