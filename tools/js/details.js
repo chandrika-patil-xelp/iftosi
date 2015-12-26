@@ -390,7 +390,7 @@ function showVendorDetails(obj)
 		}
 		else if((isMail==false)&&(isWishList==false))
 		{
-                    var bottomPos = $('.prdMainDetails').position().top+$('.prdMainDetails').outerHeight(true)
+			var bottomPos = $('.prdMainDetails').position().top+$('.prdMainDetails').outerHeight(true)
 			var pos=bottomPos - 65;
 
 			setTimeout(function(){
