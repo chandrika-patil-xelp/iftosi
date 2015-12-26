@@ -131,7 +131,7 @@
             $url = str_replace('_MOBILE', $params['mb'], SMSAPI);
             $url = str_replace('_MESSAGE', urlencode($txt), $url);
             $res = $comm->executeCurl($url, true);
-            if (!empty($url))
+            if (!empty($res))
             {
                 $result = array('result'=>'','code'=>1);
                 return $result;

@@ -2147,6 +2147,7 @@
 
 		public function sendDetailsToUser($params)
 		{
+			global $comm;
 			$usrEmail = (!empty($params['usrEmail'])) ? trim(urldecode($params['usrEmail'])) : '';
 			$usrMobile = (!empty($params['usrMobile'])) ? trim(urldecode($params['usrMobile'])) : '';
 			$usrName = (!empty($params['usrName'])) ? trim(urldecode($params['usrName'])) : '';
@@ -2290,7 +2291,54 @@
 			$mailHeaders = "Content-type:text/html;charset=UTF-8" . "\r\n";
 			$mailHeaders .= "From: noreply@xelpmoc.in \r\n";
 
-			if(mail($usrEmail, 'Product Details', $emailContent, $mailHeaders))
+			$smsText = "Dear $usrName,";
+			$smsText .= "\r\n\r\n";
+			$smsText .= "Product Details:";
+			$smsText .= "\r\n\r\n";
+			$smsText .= "Id: ";
+			$smsText .= $prdid;
+			$smsText .= "\r\n";
+			$smsText .= "Price: ";
+			$smsText .= $prdPrice;
+			$smsText .= "\r\n";
+			$smsText .= "Carats: ";
+			$smsText .= $prdCarat;
+			$smsText .= "\r\n";
+			$smsText .= "Color: ";
+			$smsText .= $prdColor;
+			$smsText .= "\r\n";
+			$smsText .= "Shape: ";
+			$smsText .= $prdShape;
+			$smsText .= "\r\n";
+			$smsText .= "Polish: ";
+			$smsText .= $prdPolish;
+			$smsText .= "\r\n\r\n";
+			$smsText .= "IFtoSI Team";
+
+			$smsText = urlencode($smsText);
+			$sendSMS = str_replace('_MOBILE', $usrMobile, SMSAPI);
+			$sendSMS = str_replace('_MESSAGE', $smsText, $sendSMS);
+			$res = $comm->executeCurl($sendSMS, true);
+            /*if (!empty($res))
+            {
+				if(stristr($res, 'messageid'))
+				{
+					$result = array('result'=>'','code'=>1);
+					return $result;
+				}
+				else
+				{
+					$result = array('result'=>'','code'=>0);
+					return $result;
+				}
+            }
+            else
+            {
+                $result = array('result'=>'','code'=>0);
+                return $result;
+            }*/
+
+			if(mail($usrEmail, 'Product Details', $emailContent, $mailHeaders) && stristr($res, 'gid'))
 			{
 				$resp = $prdRes;
 				$error = array('Code' => 0, 'Msg' => 'SMS / Email sent');

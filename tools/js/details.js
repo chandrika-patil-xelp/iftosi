@@ -216,8 +216,19 @@ $(document).ready(function(){
         {
 			if(isMail)
 			{
-				sendDetailsToUser();
-				addToEnquiry();
+				var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
+				if(isLoggedIn == '' || isLoggedIn == null || isLoggedIn == undefined || isLoggedIn == false || isLoggedIn == 'false')
+				{
+					customStorage.addToStorage('mobile',ur_mobile);
+					pr_mobile = customStorage.readFromStorage('mobile');
+					otpGo(pr_mobile);
+					requestOTP();
+				}
+				else
+				{
+					sendDetailsToUser();            
+					addToEnquiry();
+				}
 			}
 			else
 			{
@@ -352,15 +363,15 @@ function showVendorDetails(obj)
 		if(mobCond && nmCond && emCond)
 		{
                     
-                    funcObj = obj;
-                    common.checkMobile('ur_mobile');
-                    
-                    var pr_mobile = customStorage.addToStorage('mobile',mobile);
-                    otpGo(pr_mobile);
-                    requestOTP();
-                }
+			funcObj = obj;
+			common.checkMobile('ur_mobile');
+			customStorage.addToStorage('mobile',mobile);
+			pr_mobile = customStorage.readFromStorage('mobile');
+			otpGo(pr_mobile);
+			requestOTP();
+		}
 			
-        }
+	}
 	else
 	{
 		if(isWishList==true)
@@ -702,53 +713,53 @@ function otpCheck()
 						}
 						else
 						{*/
-                                                    if(data.error.Msg === 'Data matched')
-                                                    {
-                                                        customStorage.addToStorage('l', data.results.userDet.logmobile);
-							customStorage.addToStorage('mobile', data.results.userDet.logmobile);
-							customStorage.addToStorage('username', data.results.userDet.user_name);
-							customStorage.addToStorage('name', name);
-							customStorage.addToStorage('email', email);
-							customStorage.addToStorage('city', data.results.userDet.city);
-							customStorage.addToStorage('isLoggedIn',true);
-                                                        var isVndr = data.results.userDet.is_vendor;
+							if(data.error.Msg === 'Data matched')
+							{
+								customStorage.addToStorage('l', data.results.userDet.logmobile);
+								customStorage.addToStorage('mobile', data.results.userDet.logmobile);
+								customStorage.addToStorage('username', data.results.userDet.user_name);
+								customStorage.addToStorage('name', name);
+								customStorage.addToStorage('email', email);
+								customStorage.addToStorage('city', data.results.userDet.city);
+								customStorage.addToStorage('isLoggedIn',true);
+								var isVndr = data.results.userDet.is_vendor;
 
-							if(isVndr == 0 || isVndr == '0')
-							{
-								isVndr = -1;
+								if(isVndr == 0 || isVndr == '0')
+								{
+									isVndr = -1;
+								}
+								
+								customStorage.addToStorage('is_vendor',isVndr);
+					
+								var uid = customStorage.addToStorage('userid', data.results.userid);
 							}
-							
-							customStorage.addToStorage('is_vendor',isVndr);
-				
-							var uid = customStorage.addToStorage('userid', data.results.userid);
-                                                    }
-                                                    else
-                                                    {
-                                                        customStorage.addToStorage('l', mobile);
-							customStorage.addToStorage('mobile', mobile);
-							customStorage.addToStorage('username', name);
-							customStorage.addToStorage('name', name);
-							customStorage.addToStorage('email', email);
-							customStorage.addToStorage('isLoggedIn',true);
-							var isVndr = data.results.userDet.is_vendor;
-							if(isVndr == 0 || isVndr == '0')
+							else
 							{
-								isVndr = -1;
+								customStorage.addToStorage('l', mobile);
+								customStorage.addToStorage('mobile', mobile);
+								customStorage.addToStorage('username', name);
+								customStorage.addToStorage('name', name);
+								customStorage.addToStorage('email', email);
+								customStorage.addToStorage('isLoggedIn',true);
+								var isVndr = data.results.userDet.is_vendor;
+								if(isVndr == 0 || isVndr == '0')
+								{
+									isVndr = -1;
+								}
+								
+								customStorage.addToStorage('is_vendor',isVndr);
+					
+								var uid = customStorage.addToStorage('userid', data.results.userid);
 							}
-							
-							customStorage.addToStorage('is_vendor',isVndr);
-				
-							var uid = customStorage.addToStorage('userid', data.results.userid);
-                                                    }
 							common.checkLogin();
-                                                        var obj = funcObj;
-                                                        
-                                                        $('#otpDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
-                                                        $('#overlay1').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
-                                                        setTimeout(function () {
-                                                        $('#overlay1,#otpDiv').addClass('dn');
-                                                        $("#otpDiv,#overlay1").remove();
-                                                        }, 1010);
+							var obj = funcObj;
+							
+							$('#otpDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
+							$('#overlay1').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
+							setTimeout(function () {
+							$('#overlay1,#otpDiv').addClass('dn');
+							$("#otpDiv,#overlay1").remove();
+							}, 1010);
                                                         
 							if((obj !== undefined && $(obj).hasClass('iconWishlist')) || isWishList)
 							{
@@ -758,11 +769,12 @@ function otpCheck()
 							if((obj !== undefined && $(obj).hasClass('iconMessage')) || isMail)
 							{
 								sendDetailsToUser();
+								addToEnquiry();
 							}
 							else
 							{
-                                                            var bottomPos = $('.prdMainDetails').position().top+$('.prdMainDetails').outerHeight(true)
-                                                            var pos=bottomPos - 65;
+								var bottomPos = $('.prdMainDetails').position().top+$('.prdMainDetails').outerHeight(true)
+								var pos=bottomPos - 65;
 
 								setTimeout(function(){
 									$('#vDetails').removeClass('vTransit');
