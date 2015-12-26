@@ -191,7 +191,7 @@ class enquiry extends DB
                                 else if($metal='silver')
                                 {
                                     $metalRate=$silverRate;
-                                    $finalRate=($metalRate/1000)*($purity/995);
+                                    $finalRate=($metalRate/1000)*($purity/999);
                                     $row['pro_dtls']['prd_price']=$finalRate*$weight;
                                 }
                             }

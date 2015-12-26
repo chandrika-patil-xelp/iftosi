@@ -269,10 +269,12 @@ function Common() {
                         var email = obj['results']['email'];
                         var isComp = obj['results']['isC'];
                         var pass_flag = obj['results']['pass_flag'];
+                        var mobile = obj['results']['mobile'];
+                        console.log(mobile);
 
                         customStorage.addToStorage('isLoggedIn', true);
-                        customStorage.addToStorage('l', pr_mobile);
-                        customStorage.addToStorage('mobile', pr_mobile);
+                        customStorage.addToStorage('l', mobile);
+                        customStorage.addToStorage('mobile', mobile);
                         customStorage.addToStorage('name', username);
                         customStorage.addToStorage('email', email);
                         customStorage.addToStorage('isComp', isComp);

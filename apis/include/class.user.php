@@ -507,7 +507,17 @@
                 while($row=$this->fetchData($vres))
                 {
                     $allRows[] = $row;
-                    if($row['is_vendor'] == 1)
+                    if($row['is_vendor'] == 2)
+                    {
+                        $arr['uid']=$row['user_id'];
+                        $arr['utype']=$row['is_vendor'];
+                        $arr['username']=$row['user_name'];
+                        $arr['mobile']=$row['logmobile'];
+                        $arr['email']=$row['email'];
+                        $arr['pass_flag']=$row['pass_flag'];
+                        break;
+                    }
+                    else if($row['is_vendor'] == 1)
                     {
                         $arr['uid']=$row['user_id'];
                         $arr['utype']=$row['is_vendor'];
@@ -518,7 +528,6 @@
                         break;
                     }
                 }
-
                 if(empty($arr['uid']))
                 {
                     $arr['uid']=$allRows[0]['user_id'];
