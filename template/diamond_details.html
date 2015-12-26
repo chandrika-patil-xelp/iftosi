@@ -192,6 +192,14 @@
 								}
 							?>
                                                         <?php
+								if(!empty($vndrDtls['area']))
+								{
+							?>
+								,<br><?php echo trim($vndrDtls['area']); ?>
+							<?php
+								}
+							?>
+                            <?php
 								if(!empty($vndrDtls['city']))
 								{
 							?>

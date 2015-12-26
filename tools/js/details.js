@@ -723,12 +723,16 @@ function otpCheck()
 								customStorage.addToStorage('city', data.results.userDet.city);
 								customStorage.addToStorage('isLoggedIn',true);
 								var isVndr = data.results.userDet.is_vendor;
-
+								var isComp = data.results.userDet.is_complete;
 								if(isVndr == 0 || isVndr == '0')
 								{
 									isVndr = -1;
 								}
-								
+                                else if(isVndr == 1 || isVndr == '1')
+                                {
+                                    customStorage.addToStorage('isComp', data.results.userDet.isComp);
+                                    customStorage.addToStorage('busiType', data.results.userDet.busiType);
+                                }
 								customStorage.addToStorage('is_vendor',isVndr);
 					
 								var uid = customStorage.addToStorage('userid', data.results.userid);

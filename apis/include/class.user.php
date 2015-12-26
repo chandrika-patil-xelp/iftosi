@@ -22,8 +22,24 @@
                 while($row=$this->fetchData($cres))
                 {
                     $arr2['userid']=$row['user_id'];
+                    $isV=$row['is_vendor'];
+                    if($isV == 1)
+                    {
+                        $uid = $arr2['userid'];
+                    }
                     $arr2=$row;
-                            
+                }
+                if($isV == 1)
+                {
+                    $sql = "SELECT is_complete,business_type from tbl_vendor_master where vendor_id =\"".$uid."\"";
+                    $res = $this->query($sql);
+                    $cntres = $this->numRows();
+                   if($cntres == 1 )
+                   {
+                       $row=$this->fetchData($res);
+                       $arr2['isComp']= $row['is_complete'];
+                       $arr2['busiType']= $row['business_type'];
+                   }
                 }
                 $arr1=array();
                 $arr=array('msg'=>$arr1,'userid'=>$arr2['user_id'],'userDet'=>$arr2);

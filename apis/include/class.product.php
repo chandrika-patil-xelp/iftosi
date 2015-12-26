@@ -1522,7 +1522,8 @@
 						silver_rate,
 						area,
 						city,
-						state
+						state,
+                                                postal_code
                      FROM 
 						tbl_vendor_master
                      WHERE 
