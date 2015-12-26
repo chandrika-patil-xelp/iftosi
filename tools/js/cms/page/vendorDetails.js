@@ -540,7 +540,7 @@ function loadAreaList() {
                     var obj = jQuery.parseJSON(result);
                     //var results = new Object;
                     var results = obj['results'];
-                    if (results !== '' && results['city'] !== null && results['city'] !== undefined && results[0]['area'] !== null && results[0]['area'] !== undefined && results[0]['state'] !== null && results[0]['state'] !== undefined)
+                    if (results !== '' && results[0]['city'] !== null && results[0]['city'] !== undefined && results[0]['area'] !== null && results[0]['area'] !== undefined && results[0]['state'] !== null && results[0]['state'] !== undefined)
                     {
                         areaList = results;
                         $('#area').val(results[0]['area']);
