@@ -173,18 +173,25 @@
                         
                         
                        $catids = explode(',',$catids1);
-                       $catidies = array_unique($catids);
-                       $catids1 = implode('","', array_unique($catids1));
-                       
-                            $updtcatsql="UPDATE tbl_product_category_mapping set display_flag=1 where category_id NOT IN(\"".$catids1."\") and product_id=\"".$pid."\"";    
-                            $updtcatres=$this->query($updtcatsql);
+                       foreach($catids as $key=>$val)
+                       {
+                           if(!empty($val))
+                           {
+                                $catidies[] = trim($val);
+                           }
+
+                        }
+                        if(!empty($catidies))
+                        {
+                            $catids1 = implode('","', array_unique($catidies));
+                        }
+                        $updtcatsql="UPDATE tbl_product_category_mapping set display_flag=0 where category_id NOT IN(\"".$catids1."\") and product_id=\"".$pid."\"";    
+                        $updtcatres=$this->query($updtcatsql);
                         $detls['discount'] = str_replace('-', '', $detls['discount']);
                         for($i=0;$i<count($catidies);$i++)
                         {
                             if(!empty($catidies[$i]))
                             {
-                                
-                                
                                 $pcsql="INSERT
                                         INTO 
                                                     tbl_product_category_mapping
@@ -202,7 +209,7 @@
                                                                                 \"".$display_flag."\",
                                                                                     now())
                                 ON DUPLICATE KEY UPDATE
-                                                        category_id             = \"".$catids[$i]."\",
+                                                        category_id             = \"".$catidies[$i]."\",
                                                         price                   = \"".$detls['price']."\",
                                                         rating                  = \"".$detls['rating']."\",
                                                     display_flag                = \"".$display_flag."\"";
