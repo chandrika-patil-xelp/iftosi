@@ -155,6 +155,7 @@ function otpCheck()
 
     var otpProvided =  $('#pr_otp').val();
     var mobile = customStorage.readFromStorage('mobile');
+	var isValid= '';
 
     $.ajax({url: DOMAIN + "apis/index.php?action=validOTP&mobile="+mobile+"&vc="+otpProvided, success: function(result)
        {
@@ -190,7 +191,7 @@ function otpCheck()
                         var pr_city = $('#pr_city').val();
                         var isVendor = $('#isVendor').is(':checked');
                         var amIVendor = $("input[type=checkbox]:checked").length;
-                        var isValid = false;
+                        isValid = false;
                         var userType =1;
                         if(isVendor)
                             isVendor=1;
@@ -239,6 +240,7 @@ function otpGo(pr_mobile)
 {
         var pr_mobile = $('#pr_mobile').val().trim();
         var otpValue = $("#pr_otp").val().trim();
+		var isValid = false;
 
     otpValue = parseFloat(otpValue);
     if(otpValue =='' || otpValue <= 0 || otpValue == undefined || otpValue == 'undefined')
