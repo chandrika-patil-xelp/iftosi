@@ -270,10 +270,9 @@ function generateDiamondList(obj) {
     str += '<div class="cert fLeft">' + obj['cert'] + '</div>';
     str += '<div class="price fLeft fmOpenB">&#36;' + obj['price']+ '</div>';
     str += '<div class="acct fLeft">';
-    str += '<center>';
-    str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn poR ripplelink"></div></a>';
-    str += '<div class="deltBtn poR ripplelink" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
-    str += '<a href="'+ DOMAIN +'index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn poR ripplelink"></div></a>';
+    str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn fLeft poR ripplelink"></div></a>';
+    str += '<div class="deltBtn poR fLeft ripplelink" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
+    str += '<a href="'+ DOMAIN +'index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn fLeft poR ripplelink"></div></a>';
     if(obj['active_flag'] == 3){
         cl='outofstock';
     }
@@ -283,7 +282,6 @@ function generateDiamondList(obj) {
     str += '<option '+((obj['active_flag']) == 4 ? "selected" : "")+' class="arrow txtCenter" value="4">Sold</option>';
     str += '</select>'
 //    str += '<div class="soldBtn poR ripplelink fmOpenR '+cl+'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "Out Of Stock" : "Out Of Stock");+'</div>';
-    str += '</center>';
     str += '</div>';
     str += '</li>';
     str += '';

@@ -517,25 +517,25 @@ $(document).ready(function() {
 					obj = obj['results'];
 					if(obj.dollar_rate !== '' && obj.dollar_rate !== undefined && obj.dollar_rate !== 'undefined'  &&  obj.dollar_rate !== 'null'  &&  obj.dollar_rate !== null )
                                         {
-                                            $('#dollarRateSpan').html('Dollar Rate : &#8377; '+obj.dollar_rate);
+                                            $('#dollarRateSpan').html('&#8377; '+obj.dollar_rate);
 					}
 					else
                                         {
-						$('#dollarRateSpan').html('Dollar Rate : &#8377; '+obj.dollar_rate);
+						$('#dollarRateSpan').html('&#8377; '+obj.dollar_rate);
 					}
 					if(obj.silver_rate !== ''  &&  obj.silver_rate !== undefined  &&  obj.silver_rate !== 'undefined'  &&  obj.silver_rate !== 'null'  &&  obj.silver_rate !== null ){
-						$('#silverRateSpan').html('Silver Rate : &#8377; '+obj.silver_rate);
+						$('#silverRateSpan').html('&#8377; '+obj.silver_rate);
 					}
 					else
 					{
-						$('#silverRateSpan').html('Silver Rate : &#8377; ');
+						$('#silverRateSpan').html("NA");
 					}
 					if(obj.gold_rate !== ''  &&  obj.gold_rate !== undefined  &&  obj.gold_rate !== 'undefined'  &&  obj.gold_rate !== 'null'  &&  obj.gold_rate !== null ){						
-                                            $('#goldRateSpan').html('Gold Rate : &#8377; '+obj.gold_rate);
+                                            $('#goldRateSpan').html('&#8377; '+obj.gold_rate);
 					}
 					else
 					{
-						$('#goldRateSpan').html('Gold Rate : &#8377; ');
+						$('#goldRateSpan').html("NA");
 					}
 }
 }
