@@ -618,3 +618,4 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 .label1 {width: 100%;height: auto;line-height: 16px;font-size: 12px;text-transform: uppercase;color: #888;}
 .label2 {width: 100%;height: auto;line-height: 23px;font-size: 18px;margin-bottom: 15px;color: #333;}
 .bankDetails .formTitle {margin: 15px 0;}
+.txtSelect {width: 120px;height: 36px;line-height: 35px;border: 1px solid #ccc;border-radius: 5px;font-size: 13px;color: #666;background: url(../img/common/down_arrow.svg)no-repeat;background-size: auto 100%;background-position: right center;cursor: pointer;display: inline-block;vertical-align: top;margin: 7px 0;padding-left: 5px;}

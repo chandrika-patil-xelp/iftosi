@@ -562,7 +562,7 @@ a{cursor:pointer;}
 .prdInfoDiv ul li div:nth-child(2){width: 100%;height: auto;line-height: 30px;padding: 0;color: #4d4d4d;font-size: 16px;padding-left: 25px;text-align: left;}
 .prdInfoDiv .prdInfoDiv{margin-bottom: 0}
 .jewellery_details .infoCommn {width: 33.33%!important;}
-.bullion_details .infoCommn {width: 100%!important;}
+.bullion_details .infoCommn {width: 50%!important;}
 
 .bullion_details{}
 
