@@ -184,10 +184,8 @@ $(document).ready(function(){
         setTimeout(function(){
             $('#overlay,#userForm').addClass('dn');
         },1010);
-    }); 
-    
-        //console.log(isNaN(ur_name));return false;
-	
+    });
+
 	$('#userSubmit').bind('click',function() {
         var ur_name = $('#ur_name').val();
         var ur_mobile = $('#ur_mobile').val();
@@ -280,7 +278,105 @@ $(document).ready(function(){
 			$('.iconMessage').click();
 		}
 	}
+
+	getImagesData(prdList);
 });
+
+function getImagesData(prdList)
+{
+	if(prdList !== undefined && prdList !== null && prdList !== '' && typeof prdList !== 'undefined' && prdList !== 'undefined' && prdList !== 'null')
+	{
+		var params 	= 'action=ajx&case=getImages&prdIds=' + encodeURIComponent(prdList);
+		var URL 	= DOMAIN + "index.php";
+		$.getJSON(URL, params, function(data)
+		{
+			if(data !== undefined && data !== null && data !== '' && data !== 'undefined' && data !== 'null'&& typeof data !== 'undefined')
+			{
+				showImages(data);
+			}
+		});
+	}
+}
+
+function showImages(data)
+{
+	var vid = customStorage.readFromStorage('userid');
+	var newVid = '';
+	var imgArr = new Array();
+	var k = 0;
+	if(data.error.code == 0)
+	{
+		$.each(data.results, function(i, val) {
+			$.each(val.images, function(j, vl){
+				if(vl.active_flag === '0' || vl.active_flag === 0)
+				{
+					if(val.vid == vid)
+					{
+						imgArr[k] = vl.image;
+					}
+				}
+				else
+				{
+					imgArr[k] = vl.image;
+				}
+				k++;
+			});
+
+			var imgHtml = getDtlsImageData(imgArr);
+			$('#detailsImgs').html(imgHtml);
+			imgArr = new Array();
+			k = 0;
+		});
+
+		$('#gallery1 .thumbnil').click(function(){
+			var img=$(this).css('background');
+			$('#prdImage').css({'background':img});
+		});
+		
+		$('.imgThumbnil').click(function(){
+			var img=$(this).css('background');
+			$('.galleryImg').css({'background':img});
+		});
+		
+		$('.imgPreview').click(function(){
+			var img=$(this).css('background');
+			$('.galleryImg').css({'background':img});
+		});
+	   
+		$('#galleryClose').click(function(){
+		   $('#imgGallery').addClass('dn');
+		});
+		
+		$('#prdImage').click(function(){
+		   $('#imgGallery').removeClass('dn');
+		});
+	}
+}
+
+function getDtlsImageData(imgData)
+{
+	var imgLen = 0;
+	var tmpHtml = "<div class='for-1 noImage'></div>";
+	if(imgData !== undefined && imgData !== null && imgData !== '')
+	{
+		if(imgData.length > 0)
+		{
+			tmpHtml = '<div class="leftArrow transition300" onclick="movePrImg(true);"></div>';
+			tmpHtml += '<div class="rightArrow  transition300" onclick="movePrImg(false);"></div>';
+			tmpHtml += '<div id="prdImage" class="forImg fLeft imgPreview" style="background: url('+IMGDOMAIN + imgData[0]+') 50% 50% / cover no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>';
+			tmpHtml += '<div id="gallery1" class="gallery fLeft transition300">';
+            tmpHtml += '<div class="carousel transition300">';
+			for(var imgi = 0; imgi < imgData.length; imgi++)
+			{
+				tmpHtml += '<div class="thumbnil transition300" style="background:#fff url('+IMGDOMAIN+imgData[imgi]+')no-repeat;background-size: contain;background-position: center;">';
+				tmpHtml += '</div>';
+			}
+			tmpHtml += '</div>';
+            tmpHtml += '</div>';
+		}
+	}
+	return tmpHtml;
+}
 
 function eSubmit(evt, btnId)
 {

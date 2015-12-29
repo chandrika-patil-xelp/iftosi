@@ -2456,5 +2456,98 @@
 			$results = array('results' => $resp, 'error' => $error);
 			return $results;
 		}
+
+		public function getPrdImgsByIds($params)
+		{
+			$prdIds= (!empty($params['prdIds']) && !stristr($params['prdIds'], 'undefined') && !stristr($params['prdIds'], 'null')) ? trim(urldecode($params['prdIds'])) : '';
+
+			if(empty($prdIds))
+			{
+				$resp = array();
+				$error = array('code' => 0, 'msg' => 'No Product IDs found');
+				$results = array('results' => $resp, 'error' => $error);
+				return $results;
+			}
+
+			$expPrdIds = explode(',', $prdIds);
+			$expActPrdIds = '';
+
+			foreach($expPrdIds as $key => $value)
+			{
+				if(!empty($value) && !stristr($value, 'undefined') && !stristr($value, 'null'))
+				{
+					if(!empty($expActPrdIds))
+					{
+						$expActPrdIds .= ',' . $value;
+					}
+					else
+					{
+						$expActPrdIds .= $value;
+					}
+				}
+			}
+
+			$imgArr = array();
+			if(!empty($expActPrdIds))
+			{
+				$vsql = "SELECT product_id AS pid, vendor_id AS vid FROM tbl_vendor_product_mapping WHERE product_id IN (".$expActPrdIds.")";
+				$vres = $this->query($vsql);
+
+				if($vres)
+				{
+					while($vrow = $this->fetchData($vres))
+					{
+						if(!empty($vrow) && !empty($vrow['pid']) && !empty($vrow['vid']))
+						{
+							$vids[$vrow['pid']] = $vrow['vid'];
+						}
+					}
+				}
+
+				$sql = "SELECT product_id, product_image, active_flag FROM tbl_product_image_mapping WHERE product_id IN (".$expActPrdIds.") AND active_flag NOT IN (2, 4);";
+				$res = $this->query($sql);
+
+				if($res)
+				{
+					while($row = $this->fetchData($res))
+					{
+						if(!empty($row) && !empty($row['product_image']))
+						{
+							if(!empty($vids[$row['product_id']]))
+							{
+								$pvid = $vids[$row['product_id']];
+							}
+							else
+							{
+								$pvid = '';
+							}
+
+							$imgArr[$row['product_id']]['images'][] = array('image' => $row['product_image'], 'active_flag' => $row['active_flag']);
+							$imgArr[$row['product_id']]['vid'] = $pvid;
+						}
+					}
+
+					if(!empty($imgArr))
+					{
+						$error = array('code' => 0, 'msg' => 'Details fetched successfully');
+					}
+					else
+					{
+						$error = array('code' => 0, 'msg' => 'No images found');
+					}
+				}
+				else
+				{
+					$error = array('code' => 1, 'msg' => 'Error fetching product images');
+				}
+			}
+			else
+			{
+				$error = array('code' => 0, 'msg' => 'No Product IDs found');
+			}
+
+			$results = array('results' => $imgArr, 'error' => $error);
+			return $results;
+		}
     }
 ?>

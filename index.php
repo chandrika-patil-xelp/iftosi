@@ -196,6 +196,20 @@ switch ($action) {
                 }
                 echo $total;
                 break;
+
+			case 'getImages':
+				$prdIds= (!empty($params['prdIds']) && !stristr($params['prdIds'], 'undefined') && !stristr($params['prdIds'], 'null')) ? trim(urldecode($params['prdIds'])) : '';
+				if(!empty($prdIds))
+				{
+					$url = APIDOMAIN . "index.php?action=getPrdImgsByIds&prdIds=" . urlencode($prdIds);
+                    $res = $comm->executeCurl($url);
+				}
+				else
+				{
+					$res = array('results' => array(), 'error' => array('code' => 0, 'msg' => 'No Product IDs found'));
+				}
+				echo json_encode($res);
+			break;
         }
         break;
 
@@ -561,7 +575,7 @@ switch ($action) {
 
                 if (!empty($prdId)) {
                     $prdId = explode(' ', $prdId);
-                    $prdId = $pid = $prdId[1];
+                    $prdList = $prdId = $pid = $prdId[1];
                     $prdInfoUrl = APIDOMAIN . 'index.php?action=getPrdById&prdid=' . $prdId;
                     $prdInfo = $comm->executeCurl($prdInfoUrl);
                     if (!empty($prdInfo) && !empty($prdInfo['results']) && !empty($prdInfo['error']) && empty($prdInfo['error']['errCode'])) {

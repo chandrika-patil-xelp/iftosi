@@ -63,12 +63,36 @@
                         <?php include 'filters.html'; ?>
                         <div class='prdResults fRight'>
                             <?php 
-							foreach($data as $key=>$val) { ?>
+							$prdList = '';
+							foreach($data as $key=>$val) {
+								if($prdList !== '')
+								{
+									$prdList .= ',' . $val['pid'];
+								}
+								else
+								{
+									$prdList .= $val['pid'];
+								}
+?>
                                 <div class='prdComm fLeft jwRes' style="opacity: 0; transform: translateX(1000px);">
                                     <div class='prdCommDiv fLeft transition100'>
 										<a href="<?php echo DOMAIN.str_replace(' ', '-', $val['pbrand']).'-' . str_replace(' ' , '-', $val['pname']) . '-' . $val['pcode'] . '/jid-' . $val['pid']; ?>">
                                         <div class="prdCommImg fLeft">
-                                            <?php 
+<?php
+											$imgCount = count($data[$key]['images']);
+											if($imgCount > 0)
+											{
+?>
+												<div class="for-1 noImage"></div>
+<?php
+											}
+											else
+											{
+?>
+												<div class="for-1 noImage"></div>
+<?php
+											}
+/*											
 												$imgCount = count($data[$key]['images']);
 												if($imgCount > 12)
 												{
@@ -204,6 +228,7 @@
 														<div class="proxImg fLeft" style="background: #fff url(<?php echo IMGDOMAIN . $data[$key]['images'][0]; ?>)no-repeat;background-size:contain;background-position:center;background-color:#FFF;"></div>
                                                         <?php break;
                                                 }
+*/
                                             ?>
                                         </div>
                                         <div class="prdDetails fLeft">

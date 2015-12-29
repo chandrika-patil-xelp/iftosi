@@ -1691,6 +1691,12 @@ echo '</pre>';
 			$res = $obj->getGemstoneTypes();
 		break;
 
+		case "getPrdImgsByIds":
+			include APICLUDE . 'class.product.php';
+			$obj = new product($db['iftosi']);
+			$res = $obj->getPrdImgsByIds($params);
+		break;
+
         default :
 
         break;
