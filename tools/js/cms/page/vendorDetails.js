@@ -59,10 +59,10 @@ function validateForm() {
     var vatno = $('#vat').val().trim();
     var banker = $('#banker').val().trim();
     var str = "V02554544";
-    var patt1 = /^(C|V){1}([0-3]){2}([0-9]){2}/g;
+    var patt1 = /^(C|V|c|v){1}([0-3]){2}([0-9]){2}/g;
     var result = str.match(patt1);
-    var panPat = /^([A-Z]){5}([0-9]){4}([A-Z]){1}?$/;
-    var code = /([C,P,H,F,A,T,B,L,J,G,K])/;
+    var panPat = /^([A-Z]|[a-z]){5}([0-9]){4}([A-Z]|[a-z]){1}?$/;
+    var code = /([C,c,P,p,H,h,F,f,A,a,T,t,B,b,L,l,J,j,G,g,K,k])/;
     var code_chk = pancard.substring(3, 4);
 
     var str = '';
@@ -114,7 +114,7 @@ function validateForm() {
 	if (isValid && vatno !== '') {
         if (isValid && vatno.length == 12)
 		{
-            var vat_pattr = /^([0-9]){11}(C|V){1}/g;
+            var vat_pattr = /^([0-9]){11}(C|V|c|v){1}/g;
             //var vat_pattr1 = /([0-9]*$)/;
             //var vatLtNo = vatno.substring(3, 11);
 			if (vat_pattr.test(vatno) == false) {
@@ -326,7 +326,7 @@ function clickThis(id, isDirect) {
                                             submitStep2Form(obj);
                                             $('html,body').animate({ scrollTop: 0 }, 'slow');
                                     }
-                                }, 200); 
+                                }, 500);
 			}
 		}
 		else

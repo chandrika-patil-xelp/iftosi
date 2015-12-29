@@ -229,7 +229,7 @@
                                                             </div>
                                             <div class="divCon2  fLeft">
 												<div  class="titleDiv txtCap fLeft">Upload Certificate *</div>
-												<input name="certFile" autocomplete="false" id="certfile" type="file" placeholder="Upload pdf of ceritificate" onchange="uploadCert(this.value);" accept=".pdf" style="display: none;">
+												<input name="certFile" autocomplete="false" id="certfile" type="file" placeholder="Upload pdf of ceritificate" onchange="uploadCert(this.value);" accept=".pdf,.jpeg,.jpg" style="display: none;">
 												<label for="certfile" class="addPrdBtn fLeft poR ripplelink ">Upload</label><span id="filePath" class ="<?=($certificate_url) ? '' : 'dn';?> fLeft padRight" style="line-height:35px; padding-left: 10px" ><?=$certificate_url;?></span>
 												<img src="" id="uploadurl">
                                             </div>
@@ -289,7 +289,7 @@
                             <input name="base_price" id="baseprice" autocomplete="false" type="text" placeholder=" eg. 120000" class="txtInput fLeft fmOpenR font14 c666" maxlength="16" onkeypress="return common.isDecimalNumber(event,this.value);" onkeyup="calculatePrice()" value="<?=$attr['baseprice'];?>">
                         </div>
                         <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">% Back *</div>
+                            <div  class="titleDiv txtCap fLeft">% Back </div>
                             <input name="discount" id="discount" type="text" placeholder=" eg. 25%" autocomplete="false"  class="txtInput fLeft fmOpenR font14 c666" maxlength="5" minlength="1" onkeyup="calculatePrice()" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['discount'];?>">
                         </div>
                         <div class="divCon2  fLeft">
@@ -308,12 +308,13 @@
         </form>
     </div>
 </div>
+    <?php include 'rateForms.html'; ?>
 </div>
 <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['jqryUi']; ?>"></script>
-<script type="text/javascript" src='tools/js/cms/vendor_landing.js'></script>
-<script type="text/javascript" src='tools/js/pForm.js'></script>
-<script type="text/javascript" src='tools/js/cms/lib/jquery.toast.min.js'></script>
+<script type="text/javascript" src="<?=$jvs['vendorLanding'];?>"></script>
+<script type="text/javascript" src="<?=$jvs['pForm'];?>"></script>
+<script type="text/javascript" src="<?=$jvs['jquery_toast']?>"></script>
 <script type="text/javascript">var DOMAIN = '<?php echo DOMAIN;?>';</script>
 <script>
     function uploadCert(val)
@@ -328,13 +329,14 @@
 		
 			if(certFile.length > 20)
 			{
-				certFile = certFile.substring(0,10)+'...pdf';
+				certFile = certFile.split(".");
+                                var fileExt = certFile[certFile.length-1];
+                                certFile = certFile[0].substring(0,10)+'..'+fileExt;
 			}
 			if (certFile.substring(3,11) == 'fakepath')
 			{   
 				$('#filePath').removeClass('dn');
 				$('#filePath').text(certFile);
-				
 			}
 			else
 			{

@@ -129,10 +129,10 @@
                                 <div class="infoValue c666 font25 fmOpenR"><?php echo $data['product_lotref']; ?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR">
-                                <div class="infoLabel fmOpenB  font12">BASE Price</div>
+                                <div class="infoLabel fmOpenB  font12">BASE Price </div>
                                 <div class="infoValue c666 font25 fmOpenR"><?php $bprice = ceil((($data['attr_details']['baseprice'] * $data['attr_details']['dollar_rate'])*$data['attr_details']['carat']));
-                                                                                $bprice = $comm->IND_money_format($bprice);  
-                                                                                echo $bprice;?></div>
+                                                                                $bprice = $comm->IND_money_format($bprice);?>
+                                                                                &#8377; <?php echo $bprice;?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR">
                                 <div class="infoLabel fmOpenB  font12">% DISCOUNT</div>

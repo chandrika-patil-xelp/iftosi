@@ -185,9 +185,9 @@ class vendor extends DB
             $pId = implode(',',$pdet1);
             $psql='';
             if($catid == 10000) {
-                $psql='d.color, d.carat, d.shape, d.certified AS cert, d.clarity';
+                $psql='d.color, d.carat, d.shape, d.certified AS cert, d.clarity,d.price';
             } else if($catid == 10001) {
-                $psql='d.shape,d.metal,c.lotref,d.gold_weight,d.dwt as dwt';
+                $psql='d.shape,d.metal,c.lotref,d.price,d.gold_weight,d.dwt as dwt';
             } else if($catid == 10002) {
                 $psql='d.type, d.metal,d.bullion_design as bullion_design,d.gold_purity as gold_purity, d.gold_weight as gold_weight';
             }
@@ -234,7 +234,9 @@ class vendor extends DB
                 OR
                         MATCH(d.metal) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
                 OR
-                        MATCH(carat) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)            
+                        MATCH(d.carat) AGAINST('".$params['bcode'] . "*' IN BOOLEAN MODE)
+                OR
+                        d.price LIKE '".$params['bcode']."%'            
                 OR
                         MATCH(d.type) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
                 OR
@@ -1444,6 +1446,11 @@ class vendor extends DB
 			{
 				$sql = "UPDATE tbl_designer_product_mapping SET active_flag=".$params['af']." WHERE product_id IN(".$prid.")) AND active_flag NOT IN(2,3)";
 				$res5 = $this->query($sql);
+			}
+            if($res5)
+			{
+				$sql = "UPDATE tbl_product_enquiry SET active_flag=".$params['af']." WHERE product_id IN(".$prid.")) AND active_flag NOT IN(2,3)";
+				$res6 = $this->query($sql);
 			}
             $arr=array();
             $err=array('code'=>0,'msg'=>'Product status changed too');

@@ -63,7 +63,7 @@
                 <div class="fLeft vndAmount"><?php echo $cost?></div>
                 <div class="fLeft vndExpDate">NA</div>
                 <div class="fLeft vndEdit">
-                    <div class="toggle-button toggle-button <?=($data[$i]['active_flag']==0) ? 'toggle-button-selected' : '';?>" onclick="changeStatus(<?=$data[$i]['vendor_id'];?>,this)">
+                    <div class="toggle-button <?=($data[$i]['active_flag'] === '0') ? '' : 'toggle-button-selected';?>" onclick="changeStatus(<?=$data[$i]['vendor_id'];?>,this)">
                         <span class="fActive">Yes</span>
                         <button class="button"></button>
                         <span class="fDactive">No</span>
@@ -84,15 +84,9 @@
     var userName = customStorage.readFromStorage('name');
     $('#userName').html(userName);
     $(document).ready( function(){
-        $('.toggle-button').each(function(){
-            if($(this).hasClass('cyes'))
-            {
-                $(this).addClass('toggle-button-selected');
-            }
-        });
-    });
-    $(document).on('click', '.toggle-button', function() {
-        $(this).toggleClass('toggle-button-selected');
+        /*$('.toggle-button').on('click', function() {function
+            $(this).toggleClass('toggle-button-selected');
+        });*/
     });
 
 
@@ -101,11 +95,15 @@
         var st = 0;
         setTimeout(function() {
             var pLeft = $(obj).find(".button").position().left;
-            if (pLeft < 1) {
+            if(pLeft == 0)
+            {
                 st = 1;
-            } else {
+            }
+            else
+            {
                 st = 0;
             }
+            //st = pLeft;
             var URL = DOMAIN+ "index.php?action=ajx&case=updateStatus&uid=" + uid +"&af="+st;
             $.ajax({
                 url: URL,
@@ -117,13 +115,14 @@
                         var URL = APIDOMAIN + "index.php";
 
                         $.getJSON(URL, params, function(data) {
-                                            if(data !== null && data !== undefined && data !== '' && data !== 'null' && data !== 'undefined' && typeof data !== 'undefined')
-                                            {
-                                                    if(data.error !== '' && data.error !== null && data.error !== undefined && data.error !== 'undefined' && typeof data.error !== 'undefined' && data.error.Code == 0)
-                                                    {
-                                                             customStorage.toast(1, 'Vendor status is changed');
-                                                    }
-                                            }
+                            if(data !== null && data !== undefined && data !== '' && data !== 'null' && data !== 'undefined' && typeof data !== 'undefined')
+                            {
+                                if(data.error !== '' && data.error !== null && data.error !== undefined && data.error !== 'undefined' && typeof data.error !== 'undefined' && data.error.code == 0)
+                                {
+                                    $(obj).toggleClass('toggle-button-selected');
+                                    customStorage.toast(1, 'Vendor status is changed');
+                                }
+                            }
                         });
                     }
              }
@@ -213,10 +212,10 @@ function loadProductsCallback(res,pgno) {
             str += '<div class="fLeft vndExpDate">NA</div>';
             str += '<div class="fLeft vndEdit">';
             var className='';
-            if(obj['active_flag']==0) {
+            if(obj['active_flag']=='1'){
                 className='toggle-button-selected';
             }
-            str += '    <div class="toggle-button toggle-button '+className+'" onclick="changeStatus('+obj['vendor_id']+',this)">';
+            str += '    <div class="toggle-button '+className+'" onclick="changeStatus('+obj['vendor_id']+',this)">';
             str += '        <span class="fActive">Yes</span>';
             str += '        <button class="button"></button>';
             str += '        <span class="fDactive">No</span>';
@@ -430,6 +429,6 @@ function paginationPrevNext()
 		}
 	});
 </script>
-<script type="text/javascript" src='tools/js/cms/lib/jquery.toast.min.js'></script>
+<script type="text/javascript" src="<?= $jvs['cms_jquery_toast'];?>"></script>
 </body>
 </html>

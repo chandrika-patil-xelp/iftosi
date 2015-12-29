@@ -24,6 +24,7 @@ class enquiry extends DB
         $udsql="SELECT 
                                 logmobile,
                                 user_name,
+                                is_vendor,
                                 email
                 FROM 
                                 tbl_registration
@@ -31,54 +32,65 @@ class enquiry extends DB
                                 user_id=".$uid."";
         $udres=$this->query($udsql);
         $chkres=$this->numRows($udres);
-        if($chkres=1)
+        if($chkres == 1)
         {
             while($row1=$this->fetchData($udres)) 
             {
                 $udetail['umobile']=$row1['logmobile'];
                 $udetail['uname']=$row1['user_name'];
                 $udetail['uemail']=$row1['email'];
+                $isV['isV']       = $row1['is_vendor'];
             }
             
             $chksql="SELECT user_id FROM tbl_product_enquiry where user_id=".$uid." AND product_id=".$params['pid']." and vendor_id=".$params['pid'].""; 
             $chkres=$this->query($chksql);
             $numchk=$this->numRows($chkres);
-                if($numchk<1)
-                 {
-                 $isql="INSERT
-                 INTO 
-                                    tbl_product_enquiry
-                                   (user_id,
-                                   user_name,
-                                   user_mobile,
-                                   user_email,
-                                   product_id,
-                                   vendor_id,
-                                   type_flag,
-                                   updatedby,
-                                   date_time)
-                   VALUES
-                                (".$uid.",
-                                \"".$udetail['uname']."\",
-                                \"".$udetail['umobile']."\",    
-                                \"".$udetail['uemail']."\",
-                                \"".$params['pid']."\",
-                                \"".$params['vid']."\",
-                                  1,
-                                 'customer',
-                                  now())";
-                $ires=$this->query($isql);
-                if($ires)
+                if($numchk == 0)
                 {
-                    $arr="Log Entry is successfully completed";
-                    $err=array('Code'=>0,'Msg'=>'Data inserted');
-                }
+                    if($isV['isV'] == 2)
+                    {
+                        $arr= array();
+                        $err=array('Code'=>0,'Msg'=>'Data Hidden');
+                    }
                     else
-                {
-                    $arr=array();
-                    $err=array('Code'=>1,'Msg'=>'Error in completing the operation');
+                    {
+
+                        $isql=" INSERT
+                                INTO 
+                                            tbl_product_enquiry
+                                           (user_id,
+                                           user_name,
+                                           user_mobile,
+                                           user_email,
+                                           product_id,
+                                           vendor_id,
+                                           type_flag,
+                                           updatedby,
+                                           date_time)
+                                VALUES
+                                        (".$uid.",
+                                        \"".$udetail['uname']."\",
+                                        \"".$udetail['umobile']."\",    
+                                        \"".$udetail['uemail']."\",
+                                        \"".$params['pid']."\",
+                                        \"".$params['vid']."\",
+                                            1,
+                                            'customer',
+                                            now())";
+                        $ires=$this->query($isql);
+                    
+                        if($ires)
+                        {
+                            $arr="Log Entry is successfully completed";
+                            $err=array('Code'=>0,'Msg'=>'Data inserted');
+                        }
+                        else
+                        {
+                            $arr=array();
+                            $err=array('Code'=>1,'Msg'=>'Error in completing the operation');
+                        }
+                    }
                 }
-            }
         }
         $result=array('results'=>$arr,'error'=>$err);
         return $result;
@@ -90,7 +102,8 @@ class enquiry extends DB
     {
         $sql="SELECT silver_rate,gold_rate,dollar_rate FROM tbl_vendor_master WHERE vendor_id='".$params['vid']."'";
         $res=$this->query($sql);
-        if ($res) {
+        if ($res)
+        {
             $rates = $this->fetchData($res);
             $dollarValue=dollarValue;
             if(!empty($rates['dollar_rate']) && $rates['dollar_rate']!='0.00') {
@@ -124,6 +137,8 @@ class enquiry extends DB
                     FROM
                                     tbl_product_enquiry
                     WHERE
+                                    active_flag=1
+                    AND                
                                     vendor_id=".$params['vid']."
                     ORDER BY
                                     update_time
@@ -148,7 +163,7 @@ class enquiry extends DB
         {   
             while($row=$this->fetchData($viewres))
             {   
-                $csql='SELECT product_id,barcode, product_name, prd_price FROM tbl_product_master WHERE product_id='.$row['product_id'].'';
+                $csql='SELECT product_id,barcode, product_name, prd_price FROM tbl_product_master WHERE active_flag=1 AND product_id='.$row['product_id'];
                 $cres=$this->query($csql);
                 if($this->numRows($cres)>0) {
                     while($crow=$this->fetchData($cres))
@@ -157,7 +172,7 @@ class enquiry extends DB
                         $prdPrice = $crow['prd_price'];
                     }
                 }
-                $csql='SELECT gold_purity,certified,shape,clarity,type,gold_weight,carat,metal FROM tbl_product_search WHERE product_id='.$row['product_id'].'';
+                $csql='SELECT gold_purity,certified,shape,clarity,type,gold_weight,carat,metal FROM tbl_product_search WHERE product_id='.$row['product_id'];
                 $cres=$this->query($csql);
                 if($this->numRows($cres)>0) {
                     while($crows=$this->fetchData($cres))

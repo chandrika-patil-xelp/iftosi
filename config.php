@@ -87,8 +87,9 @@ $jvs['rngsld'] 		= DOMAIN.'tools/js/lib/ion.rangeSlider.js?v='.VERSION;
 $jvs['jqrynum'] 	= DOMAIN.'tools/js/lib/jquery-numerator.js?v='.VERSION;
 $jvs['hammer'] 		= DOMAIN.'tools/js/lib/hammer.js?v='.VERSION;
 $jvs['auto'] 		= DOMAIN.'tools/js/lib/autosuggest.js?v='.VERSION;
-$jvs['customStorage'] 		= DOMAIN.'tools/js/lib/CustomStorage.js?v='.VERSION;
-$jvs['jquery_toast'] 		= DOMAIN.'tools/js/lib/jquery.toast.min.js?v='.VERSION;
+$jvs['customStorage']   = DOMAIN.'tools/js/lib/CustomStorage.js?v='.VERSION;
+$jvs['jquery_toast']	= DOMAIN.'tools/js/lib/jquery.toast.min.js?v='.VERSION;
+$jvs['cms_jquery_toast']	= DOMAIN.'tools/js/cms/lib/jquery.toast.min.js?v='.VERSION;
 
 // JS Libraries End
 
@@ -103,7 +104,11 @@ $jvs['head'] 		= DOMAIN.'tools/js/header.js?v='.VERSION;
 $jvs['signup'] 		= DOMAIN.'tools/js/signup.js?v='.VERSION;
 $jvs['filter'] 		= DOMAIN.'tools/js/filters.js?v='.VERSION;
 $jvs['dmap'] 		= DOMAIN.'tools/js/detailsMap.js?v='.VERSION;
-$jvs['vendorDetails'] 		= DOMAIN.'tools/js/cms/page/vendorDetails.js?v='.VERSION;
+$jvs['vendorDetails'] 	= DOMAIN.'tools/js/cms/page/vendorDetails.js?v='.VERSION;
+$jvs['vendorLanding'] 	= DOMAIN.'tools/js/cms/vendor_landing.js?v='.VERSION;
+$jvs['pForm']    	= DOMAIN.'tools/js/pForm.js?v='.VERSION;
+$jvs['cmsCommon'] 	= DOMAIN.'tools/js/cms/Common.js?v='.VERSION;
+$jvs['vendor_Product'] 	= DOMAIN.'tools/js/cms/page/vendorProductListings.js?v='.VERSION;
 // Custom JS End
 
 

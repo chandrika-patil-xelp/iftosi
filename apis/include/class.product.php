@@ -571,7 +571,7 @@
                                 $extn = " AND active_flag not in (2) ";
                             }
                         }
-                        
+                               $extn = " AND active_flag not in (2) ";                       
                         $sql = "SELECT product_image FROM tbl_product_image_mapping WHERE product_id = ".$pid." ".$extn." ORDER BY image_sequence ASC";
                         $res = $this->query($sql);
                         if($res)

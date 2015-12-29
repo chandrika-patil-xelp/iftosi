@@ -88,6 +88,26 @@
                                 <div class="infoLabel fmOpenB font12 fmOpenB">GOLD PURITY</div>
                                 <div class="infoValue c666 fmOpenR font25"><?php echo $prdInfo['attr_details']['gold_purity']; ?></div>
                             </div>
+<?php
+                            if(!empty($prdInfo['attr_details']['bullion_design']))
+                            {
+?>
+                                <div class="infoCommn fLeft fmOpenR ">
+                                    <div class="infoLabel fmOpenB font12 fmOpenB">DESIGN</div>
+                                    <div class="infoValue c666 fmOpenR font25"><?php echo $prdInfo['attr_details']['bullion_design']; ?></div>
+                                </div>
+<?php
+                            }   
+                            if(!empty($prdInfo['product_barcode']))
+                            {
+?>
+                                <div class="infoCommn fLeft fmOpenR ">
+                                    <div class="infoLabel fmOpenB font12 fmOpenB">DESIGN NUMBER</div>
+                                    <div class="infoValue c666 fmOpenR font25"><?php echo $prdInfo['product_barcode']; ?></div>
+                                </div>
+<?php
+                            }   
+?>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">GOLD WEIGHT</div>
                                 <div class="infoValue c666 fmOpenR font25"><?php echo number_format($prdInfo['attr_details']['gold_weight'], 2); ?> Gms</div>

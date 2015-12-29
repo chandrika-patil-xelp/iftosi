@@ -405,7 +405,7 @@
 
 ?>                        
                                                 <div class="divCon2  fLeft">
-                                                    <div  class="titleDiv txtCap fLeft"><?php echo $values['attr'][$key]['attr_display_name']; ?> (in Kt) *</div>
+                                                    <div  class="titleDiv txtCap fLeft">Gold <?php echo $values['attr'][$key]['attr_display_name']; ?> (in Kt) *</div>
                                                     <input name="<?php echo strtolower($goldpurity); ?>" id="goldpurity" type="text" autocomplete="false" maxlength="3" onkeypress="return common.isNumberKey(event);" value="<?=$attr['gold_purity'];?>" placeholder="eg. 18" onkeypress="common.isNumberKey(event);" class="txtInput fLeft fmOpenR font14 c666">
                                                 </div>
 <?php
@@ -446,13 +446,13 @@
         </div>
         </form>
     </div>
-
+<?php include 'rateForms.html'; ?>
 </div>
     <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['jqryUi']; ?>"></script>
-    <script type="text/javascript" src='tools/js/cms/vendor_landing.js'></script>
-    <script type="text/javascript" src='tools/js/cms/lib/jquery.toast.min.js'></script>
-    <script type="text/javascript" src='tools/js/pForm.js'></script>
+    <script type="text/javascript" src="<?= $jvs['vendorLanding'];?>"></script>
+    <script type="text/javascript" src="<?= $jvs['cms_jquery_toast'];?>"></script>
+    <script type="text/javascript" src="<?= $jvs['pForm'];?>"></script>
         <script>
         function showOther(id){
             $('#'+id).removeClass('dn');

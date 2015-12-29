@@ -261,7 +261,7 @@ function generateDiamondList(obj) {
     str += '</div>';
     str += '<div class="barcode fLeft">';
     str += '<span class="upSpan fmOpenB">' + barcode + '</span>';
-    str += '<span class="lwSpan"><a href="'+DOMAIN+obj['cert'].toLowerCase()+'-'+obj['shape'].toLowerCase()+'-clarity-'+obj['clarity']+'/did-'+obj['id']+'" target="_blank">View Details</a></span>';
+    str += '<span class="lwSpan"><a href="'+DOMAIN+obj.cert.toLowerCase()+'-'+obj.shape.toLowerCase()+'-clarity-'+obj.clarity+'/did-'+obj.id+'" target="_blank">View Details</a></span>';
     str += '</div>';
     str += '<div class="shape fLeft">' + obj['shape'] + '</div>';
     str += '<div class="carats fLeft fmOpenB">' + obj['carat'] + '</div>';

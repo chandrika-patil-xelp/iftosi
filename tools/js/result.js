@@ -321,12 +321,28 @@ function showWish(catid,pgno,uid,nojump,pid)
 		else
 			pageName = 'wishlist-bullion';
 		getResultsData(data);
-		
+                
+                var params = 'action=ajx&case=getWishListCount&userid='+encodeURIComponent(uid);
+                var URL = DOMAIN + "index.php";
+                $.get(URL, params, function(data)
+                {
+                    if(data !== undefined && data !== null && data !== '')
+                    {
+                        $('#wishListCnt').html(data);
+                    }
+                    else
+                    {
+                        $('#wishListCnt').html(0);
+                    }
+                });
+                $('#wishListCnt').html(data.results.total);
 		$(".wisgDel").bind('click',function(e){
 			e.stopImmediatePropagation();
 			var catid 	= $('#catid').val();
 			var pgno 	= $('#pgno').val()*1;
 			var uid 	= $('#uid').val();
+                        //console.log(data.results.total);
+                        //$('#wishListCnt').html(data.results.total);
 			showWish(catid,pgno,uid,1,$(this).attr('id'));
 		});
 	});

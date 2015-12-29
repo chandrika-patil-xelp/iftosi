@@ -150,7 +150,7 @@
                         <div class="btnCont fLeft">
                             <center>
                             <!--    <a href="<?php echo DOMAIN ?>index.php?case=vendor_landing">--> <div class="cancelBtn fmOpenR ripplelink poR" onclick="backbtn();" id='backBtnDiv'>CANCEL</div></a>
-                            <!--    <a href="<?php echo DOMAIN?>index.php?case=vendor_landing"> --> <div class="submitBtn fmOpenR ripplelink poR" onclick="validateBForm()">SUBMIT</div></a>
+                            <!--    <a href="<?php echo DOMAIN?>index.php?case=vendor_landing"> --> <div class="submitBtn fmOpenR ripplelink poR" onclick="validateBForm()" id="Submitdiv">SUBMIT</div></a>
                             </center>
                         </div>
                      </div>   
@@ -162,9 +162,9 @@
 </div>
 <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['jqryUi']; ?>"></script>
-<script type="text/javascript" src='tools/js/cms/vendor_landing.js'></script>
-<script type="text/javascript" src='tools/js/cms/lib/jquery.toast.min.js'></script>
-<script type="text/javascript" src='tools/js/pForm.js'></script>
+<script type="text/javascript" src="<?= $jvs['vendorLanding']; ?>"></script>
+<script type="text/javascript" src="<?=$jvs['jquery_toast'];?>"></script>
+<script type="text/javascript" src="<?=$jvs['pForm'];?>"></script>
 <script>
         function showOther(id){
             $('#'+id).removeClass('dn');

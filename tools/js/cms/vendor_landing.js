@@ -244,12 +244,14 @@ for(var i = 0; i< busiTypeSplt.length; i++)
             var tmpId = $(this).attr('id');
             tmpId = tmpId.toLowerCase();
             GtmpId=tmpId;
-            if (((tmpId == 'gbars') || (tmpId == 'gcoins')) && goldRate == 0.00) {
+            if (((tmpId == 'gbars') || (tmpId == 'gcoins'))) {
                 showGoldRateForm();
+                $('#gold_rate').val(goldRate);
                 $('#goldErr,.subCatType').removeClass('dn');
                 $('#' + tmpId + 'Type,#allcontent,.allprop').addClass('dn');
-            } else if (((tmpId == 'sbars') || (tmpId == 'scoins')) && silverRate == 0.00) {
+            } else if (((tmpId == 'sbars') || (tmpId == 'scoins'))) {
                 showSilverRateForm();
+                $('#gold_rate').val(silverRate);
                 $('#silverErr,.subCatType').removeClass('dn');
                 $('#' + tmpId + 'Type,#allcontent,.allprop').addClass('dn');
             } else {
@@ -432,13 +434,19 @@ function submitDForm() {
 function onEnterFormSubmit(evt,type)
 {
     var charCode = (evt.which) ? evt.which : evt.keyCode;
-    if(charCode==13)
+    
+    $("#pr_otp").keypress(function (charCode)
     {
-        if(type==1)
+        console.log('here');
+        if(charCode==13)
         {
-            otpCheck();
-        } 
-    }
+            if(type==1)
+            {
+
+                otpCheck();
+            } 
+        }
+    });
 }
 
 $('#overlay').velocity({opacity:0},{delay:0,duration:0});
@@ -471,6 +479,27 @@ $('#upDolRt').click(function () {
 	uploadButton = true;
     showDollarRateForm();
 });
+
+$('#dollarRateSpan').click(function () {
+    console.log('here');
+	uploadButton = true;
+    showDollarRateForm();
+});
+
+$('#goldRateSpan').click(function ()
+{
+    $('#overlay,#goldSilverRateDiv').removeClass('dn');
+        setTimeout(function () {
+            $('#overlay').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
+            $('#goldSilverRateDiv').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
+        }, 10);
+});
+
+$('#silverRateSpan').click(function ()
+{
+   showSilverRateForm();
+});
+
 
 function showDollarRateForm() {
     $('#overlay,#dollarRateDiv').removeClass('dn');
@@ -546,16 +575,22 @@ $(document).ready(function() {
 
 function updateDollarRate() {
     var dollar_rate = $("#dollar_rate").val();
-    dollar_rate=parseFloat(dollar_rate);
+    //dollar_rate=parseFloat(dollar_rate);
     if(dollar_rate=='' || dollar_rate <= 0 || dollar_rate == undefined) {
         common.toast(0,'Invaild Rate');
-    } else {
+    }
+    else if(dollar_rate.length >= 11 || dollar_rate > 9999999.99)
+    {
+        common.toast(0,'Please enter proper rate!');
+    }    
+    else {
         $.ajax({url: DOMAIN + "/apis/index.php?action=updateDollerRate&vid="+uid+"&dolRate="+dollar_rate, success: function(result) {
                 var obj = jQuery.parseJSON(result);
                 var errCode = obj['error']['Code'];
-                if(errCode==0) {
+                if(errCode==0)
+                {
                     common.toast(1,obj['error']['Msg']);
-                    $('#dollarRateSpan').html('Dollar Rate : &#8377; '+dollar_rate);
+                    $('#dollarRateSpan').html('&#8377; '+dollar_rate);
                     closeAllForms();
 					if(uploadButton == false)
 					{
@@ -563,10 +598,17 @@ function updateDollarRate() {
 					}
                                         if(loadDiamont)
                                         {
-                                            setTimeout(function () {  $('#upProds').click(); }, 1500);
-                                               
+                                            //setTimeout(function () {  $('#upProds').click(); }, 1500);
+                                            if(pageName == 'Products' && pageName !== undefined && pageName !== 'undefined' && pageName !== null && pageName !== 'null')
+                                            {
+                                                loadDiamonds(1);
+                                            }
+                                            closeAllForms();
+                                            
                                         }
-                } else if(errCode==1) {
+                }
+                else if(errCode==1)
+                {
                     common.toast(0,obj['error']['Msg']);
                 }
             }
@@ -601,11 +643,10 @@ function updateSilverRate() {
                 var errCode = obj['error']['code'];
                 if(errCode == 0) {
                     common.toast(1,obj['error']['Msg']);
-                    
                         //showJewelleryImps(GtmpId);                        
-                    
-                   $('#silverRateSpan').html('Silver Rate : &#8377; '+silver_rate);
+                    $('#silverRateSpan').html('&#8377; '+silver_rate);
                     closeAllForms();
+                    loadBullions(1);
                 } else if(errCode == 1) {
                     common.toast(0,obj['error']['Msg']);
                     closeAllForms();
@@ -630,7 +671,7 @@ function updateSilverRate() {
 
                         showJewelleryImps(GtmpId);                        
                     
-                       $('#silverRateSpan').html('Silver Rate : &#8377; '+silver_rate);
+                       $('#silverRateSpan').html('&#8377; '+silver_rate);
                         closeAllForms();
                         } else if(errCode==1) {
                         common.toast(0,obj['error']['Msg']);
@@ -668,7 +709,7 @@ function updateGoldRate() {
             var errCode = obj['error']['code'];
             if(errCode==0) {
                 common.toast(1,obj['error']['Msg']);
-                $('#goldRateSpan').html('Gold Rate : &#8377; '+gold_rate);
+                $('#goldRateSpan').html('&#8377; '+gold_rate);
                 //window.location.reload(1);
                 closeAllForms();
                 showJewelleryImps(GtmpId);
@@ -699,10 +740,15 @@ function updateGoldSilverRate() {
 			var errCode = obj['error']['code'];
 			if(errCode==0) {
 				common.toast(1,obj['error']['Msg']);
-				$('#goldRateSpan').html('Gold Rate : &#8377; '+gold_rate);
+				$('#goldRateSpan').html('&#8377; '+gold_rate);
 				//window.location.reload(1);
 				customStorage.readFromStorage('rateErr');
-				closeAllForms();
+                                if(pageName  == 'Products' && pageName !== undefined && pageName  !== 'undefined')
+                                {
+                                    loadBullions(1);
+                                }
+                                closeAllForms();
+                                
 			} else if(errCode==1) {
 				common.toast(0,obj['error']['Msg']);
 			}
@@ -804,16 +850,17 @@ function getcatid() {
     return 1000+catid.toString();
 }
 function addDiamond() {
-    $.ajax({url: common.APIWebPath() + "index.php?action=getDollerRate&vid="+ uid, success: function (result) {
-        var obj = jQuery.parseJSON(result);
-            var dollarRate=obj['results']['dollar_rate'];
-            if(dollarRate!=0.00) {
-                window.location.assign(DOMAIN+"index.php?case=diamond_Form&catid=10000&vid="+uid);
-            } else {
+//    $.ajax({url: common.APIWebPath() + "index.php?action=getDollerRate&vid="+ uid, success: function (result) {
+//        var obj = jQuery.parseJSON(result);
+//            var dollarRate=obj['results']['dollar_rate'];
+//            if(dollarRate!=0.00) {
+//                window.location.assign(DOMAIN+"index.php?case=diamond_Form&catid=10000&vid="+uid);
+//            } else {
+                uploadButton = false;
                 showDollarRateForm();
                 $('#dollarErr').removeClass('dn');
-            }
-    }}); 
+//            }
+//    }}); 
 }
 function addBulion() {
     window.location.assign(DOMAIN+"index.php?case=bullion_Form&catid="+catid+"&vid="+uid);

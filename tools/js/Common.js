@@ -86,7 +86,10 @@ function Common() {
         }
         var userMenuStr='';
         if (isLoggedIn === 'true') {
-            $('.signInUpTab').html('Hello ' + nm.split(' ')[0]).addClass('loggedIn');
+            if(nm !== undefined || nm !== 'undefined' || nm !== null || nm !== 'null' || nm !== '')
+            {
+                $('.signInUpTab').html('Hello ' + nm.split(' ')[0]).addClass('loggedIn');
+            }
             $('#userMenu').removeClass('dn');
 
             if (is_vendor == 0)

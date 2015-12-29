@@ -46,6 +46,7 @@
             </div>
         </div>
     </div>
+    <?php include 'rateForms.html'; ?>
 </div>
 <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['jqryUi']; ?>"></script>
@@ -64,39 +65,59 @@ function loadEnqs(pgno) {
             loadEnqCallback(result,pgno);
     }});
 }
-function loadEnqCallback(res,pgno) {
+function loadEnqCallback(res,pgno)
+{
     var obj = jQuery.parseJSON(res);
-    if (obj['results'] != '') {
-        var total = (obj['results']['total_enqs'] == 1 ? obj['results']['total_enqs']+ ' Enquiry Listed' : obj['results']['total_enqs']+ ' Enquiries Listed');
-        $('#totalEnqs').text(total);
-        var total_pages = obj['results']['total_pages'];
+    if (obj.results !== undefined && obj.results !== 'undefined' && obj.results !== null && obj.results !== 'null' && obj.results !== '')
+    {
+        if (obj.results.total_enqs !== undefined && obj.results.total_enqs !== 'undefined' && obj.results.total_enqs !== null && obj.results.total_enqs !== 'null' && obj.results.total_enqs !== '')
+        {
+             if (obj.results.total_pages !== undefined && obj.results.total_pages !== 'undefined' && obj.results.total_pages !== null && obj.results.total_pages !== 'null' && obj.results.total_pages !== '')
+            {   
+                
+                var total = (obj.results.total_enqs == 1 ? obj.results.total_enqs + ' Enquiry Listed' : obj.results.total_enqs + ' Enquiries Listed');
+                $('#totalEnqs').text(total);
+                
+                var total_pages = obj.results.total_pages;
         
-        var str = '';
-        if(total!=0) {
-            if(total_pages==pgno) {
-                loadEnq = false;
+                var str = '';
+                if(total_pages !== 0 && total_pages !== '0')
+                {
+                    if(total_pages == pgno)
+                    {
+                        loadEnq = false;
+                    }
+                    var enqs = obj.results.total_enqs;
+                    var len = enqs;
+                    var i = 0;
+                    while (i < len)
+                    {
+
+                        str += generateEnqList(obj.results.enq[i]);
+                        i++;
+                    }
+                    var html = pagination(obj,pgno);
+                    pgno++;
+                }
+                else
+                {
+                    str += '<p class="noRecords"><span>Sorry! No Enquiries Found!</span></p>';
+                    loadEnq = false;
+                }
             }
-            var len = obj['results']['enq'].length;
-            var i = 0;
-            while (i < len) {
-                str += generateEnqList(obj['results']['enq'][i]);
-                i++;
-            }
-            var html = pagination(obj,pgno);
-            pgno++;
-        } else {
-            str = '<p class="noRecords"><span>Sorry! No Enquiries Found!</span></p>';
-            loadEnq = false;
         }
         $('#enqList').html(str);
         $('#enqList').append(html);
-        $('.pgComm').click( function(){
-			$('.pgComm').removeClass('pgActive');
-			$(this).addClass('pgActive');
-			loadEnqs($(this).text());
-			$('body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
-		});
-    } else {
+        $('.pgComm').click( function()
+        {
+            $('.pgComm').removeClass('pgActive');
+            $(this).addClass('pgActive');
+            loadEnqs($(this).text());
+            $('body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+        });
+    }
+    else
+    {
         loadEnq = false;
     }
 }

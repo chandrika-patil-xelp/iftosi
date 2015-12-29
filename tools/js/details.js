@@ -123,7 +123,7 @@ $(document).ready(function(){
 			isVendor = 0;
 		}
 
-		if((isVendor !== '2' && isVendor !== 2) || isLoggedIn == undefined || isLoggedIn == null || isLoggedIn == '' || isLoggedIn == false || isLoggedIn == 'false')
+		if(isLoggedIn == undefined || isLoggedIn == null || isLoggedIn == '' || isLoggedIn == false || isLoggedIn == 'false')
 		{
 			mobile = customStorage.readFromStorage('mobile');
 			name = customStorage.readFromStorage('name');
@@ -166,10 +166,21 @@ $(document).ready(function(){
 		}
 		else
 		{
-			if(isVendor == 2 || isVendor == '2')
-			{
-				customStorage.toast(0, 'This feature is not available for Admin');
-			}
+                        if($(this).hasClass('iconMessage'))
+                        {
+                                isMail = true;
+                                isWishList = false;
+                        }
+                        if($(this).hasClass('iconCall'))
+                        {
+                                isWishList = false;
+                                isMail = false;
+                        }
+                        showVendorDetails(this);
+//			if(isVendor == 2 || isVendor == '2')
+//			{
+//				customStorage.toast(0, 'This feature is not available for Admin');
+//			}
 			/*else
 			{
 				customStorage.toast(0, 'This feature is not available for vendors');
@@ -215,13 +226,18 @@ $(document).ready(function(){
 			if(isMail)
 			{
 				var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
-				if(isLoggedIn == '' || isLoggedIn == null || isLoggedIn == undefined || isLoggedIn == false || isLoggedIn == 'false')
+                                var mobile = customStorage.readFromStorage('mobile');
+                                if(isLoggedIn == '' || isLoggedIn == null || isLoggedIn == undefined || isLoggedIn == false || isLoggedIn == 'false')
 				{
 					customStorage.addToStorage('mobile',ur_mobile);
-					pr_mobile = customStorage.readFromStorage('mobile');
-					otpGo(pr_mobile);
-					requestOTP();
+					var pr_mobile = customStorage.readFromStorage('mobile');
+					otpGo();
+					
 				}
+                                else if(mobile !== ur_mobile)
+                                {
+                                    otpGo();
+                                }
 				else
 				{
 					sendDetailsToUser();            
@@ -463,8 +479,7 @@ function showVendorDetails(obj)
 			common.checkMobile('ur_mobile');
 			customStorage.addToStorage('mobile',mobile);
 			pr_mobile = customStorage.readFromStorage('mobile');
-			otpGo(pr_mobile);
-			requestOTP();
+			otpGo();
 		}
 			
 	}
@@ -722,7 +737,7 @@ function sendDetailsToUser()
 	var usrName = $('#ur_name').val();
 	var usrMobile = $('#ur_mobile').val();
 	var usrEmail = $('#ur_email').val();
-
+        var isVendor = customStorage.readFromStorage('is_vendor');
 	var isValidName = (usrName !== '' && usrName !== null && usrName !== undefined) ? true : false;
 	var isValidMobile = (usrMobile !== '' && usrMobile !== null && usrMobile !== undefined) ? true : false;
 	var isValidEmail = (usrEmail !== '' && usrEmail !== null && usrEmail !== undefined) ? true : false;
@@ -736,7 +751,9 @@ function sendDetailsToUser()
 	{
 		isValidEmail = common.validate_email(usrEmail);
 	}
-
+        
+    if(isVendor !== 2 && isVendor !== '2')
+    {
 	if(isValidName && isValidMobile && isValidEmail)
 	{
 		var params = 'action=ajx&case=sendDetailsToUser&usrName='+encodeURIComponent(usrName)+'&usrMobile='+encodeURIComponent(usrMobile)+'&usrEmail='+encodeURIComponent(usrEmail)+'&prdid='+encodeURIComponent(pid);
@@ -766,6 +783,11 @@ function sendDetailsToUser()
 			}
 		});
 	}
+    }
+    else
+    {
+        customStorage.toast(1, 'Details can not be sent to Admin');
+    }
 }
 
 
@@ -903,51 +925,57 @@ function otpCheck()
                 {
                     isValid = false;
                     customStorage.toast(0,'OTP verification Unsuccessful');
-                    requestOTP(pr_mobile);
+                    requestOTP();
                 }
         }
         });
         return isValid;
 }
-function otpGo(pr_mobile)
+function otpGo()
 {
-        var pr_mobile = $('#ur_mobile').val().trim();
-        var otpValue = $("#pr_otp").val().trim();
-
-    otpValue = parseFloat(otpValue);
-    if(otpValue =='' || otpValue <= 0 || otpValue == undefined || otpValue == 'undefined')
-    {
-        common.toast(0,'OTP value provied is not proper');
-    }
-    else
-    {
-        $.ajax({url: DOMAIN + "apis/index.php?action=sendOTP&mb="+pr_mobile, success: function(result)
+    var pr_mobile = $('#ur_mobile').val();
+    isValid = false;
+    $.ajax({url: DOMAIN + "apis/index.php?action=sendOTP&mb="+pr_mobile, success: function(result)
             {
                 var obj = jQuery.parseJSON(result);
                 
                 var errCode = obj.code;
+                
                 if(errCode == 1)
                 {
                     isValid = true;
+                    $('#overlay1').removeClass('dn');
+                    $('#otpDiv').removeClass('dn');
+                    setTimeout(function () {
+                    $('#overlay1').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
+                    $('#optDiv').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
+                    }, 10);
                     return isValid;
                 }
-                if(errCode == 0)
+                else(errCode == 0)
                 {
                     return isValid;
                 }
             }
         });
-    }
 }
+
 function closeOtpForm()
 {
         $('#otpDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
-        window.history.back();
-        $('#overlay1').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
-        setTimeout(function () {
-            $('#overlay1,#otpDiv').addClass('dn');
-            $("#otpDiv,#overlay1").remove();
-        }, 1010);
+        if(pageName == 'signup' || pageName == 'forgot')
+        {
+            window.history.back();
+        }
+        else
+        {
+            $('#overlay1').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
+            setTimeout(function () {
+                $('#overlay1,#otpDiv').addClass('dn');
+                $("#otpDiv,#overlay1").remove();
+            }, 1010);
+            isValid = true;
+        }
 }
 
 
