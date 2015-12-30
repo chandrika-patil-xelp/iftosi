@@ -486,7 +486,7 @@ switch ($action) {
 
             case 'diamond_details':
                 $page = 'diamond_details';
-                $pid = $_GET['productid'];
+                $prdList = $pid = $_GET['productid'];
                 $uid = $_GET['userid'];
 
                 $url = APIDOMAIN . 'index.php?action=getPrdById&prdid=' . $pid;
@@ -538,7 +538,7 @@ switch ($action) {
             case 'bullion_details':
                 $page = 'bullion_details';
                 $prdInfo = array();
-                $prdId = $orgPrdId = (!empty($_GET['productid'])) ? $_GET['productid'] : '';
+                $prdList = $prdId = $orgPrdId = (!empty($_GET['productid'])) ? $_GET['productid'] : '';
 
                 if (!empty($prdId)) {
                     $prdId = explode(' ', $prdId);
