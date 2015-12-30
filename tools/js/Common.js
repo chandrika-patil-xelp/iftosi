@@ -97,8 +97,7 @@ function Common() {
                 //userMenuStr += '<li class="transition100">Profile</li>';
                 //userMenuStr += '<li class="transition100">Orders</li>';
                 //userMenuStr += '<li class="transition100" onclick="redirectToWishlist();">Wishlist (<span id="wishListCnt"></span>)</li>';
-                $('#wishHeaderaftr').removeClass('dn');
-                $('#wishHeaderb4').addClass('dn');
+                $('#wishListCnt').removeClass('dn');
 
 				$('#usrNm').html(nm.split(' ')[0]);
 
@@ -111,8 +110,7 @@ function Common() {
                 userMenuStr += '<li id="productstab" class="transition100" onclick="return showProductList();">Products</li>';
                 userMenuStr += '<li id="vendorlist" class="transition100" onclick="return showProductList();">Vendor List</li>';
                 //userMenuStr += '<li class="transition100" onclick="redirectToWishlist();">Wishlist (<span id="wishListCnt"></span>)</li>';
-                $('#wishHeaderaftr').addClass('dn');
-                $('#wishHeaderb4').addClass('dn');
+                $('#wishListCnt').addClass('dn');
 
 				$('#usrNm').html(nm.split(' ')[0]);
 
@@ -122,8 +120,7 @@ function Common() {
             }
             else
             {
-                $('#wishHeaderb4').addClass('dn');
-                $('#wishHeaderaftr').removeClass('dn');
+                $('#wishListCnt').removeClass('dn');
                 //userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_dashboard\');">Dashboard</li>';
                 if(isComp === '2')
                 {
@@ -152,8 +149,7 @@ function Common() {
         }
         else
         {
-            $('#wishHeaderaftr').addClass('dn');
-            $('#wishHeaderb4').removeClass('dn');
+            $('#wishListCnt').addClass('dn');
 			$('#lgnPg').removeClass('dn');
 			$('#wshlstPg').removeClass('dn');
         }
@@ -185,8 +181,8 @@ function Common() {
 		{
 			window.location.href = DOMAIN + "index.php";
 		}
-		$('#wishHeaderaftr').addClass('dn');
-		$('#wishHeaderb4').removeClass('dn');
+
+		$('#wishListHdr').removeClass('dn');
     };
     this.closeLoginForm = function () {
         $('#loginDiv').velocity({scale: 0,borderRadius:'100%'}, {delay: 0, ease: 'swing'});
@@ -453,13 +449,13 @@ function Common() {
 			$.get(URL, params, function(data) {
 				if(data !== undefined && data !== null && data !== '')
 				{
-					$('#wishListCnt').html(data);
+					$('#wishListCnt').html(' (' + data + ')');
 					$('#lftWshCnt').html(data);
 					$('#lftWshCnt').removeClass('dn');
 				}
 				else
 				{
-					$('#wishListCnt').html(0);
+					$('#wishListCnt').html('(' + 0 + ')');
 					$('#lftWshCnt').html(0);
 					$('#lftWshCnt').removeClass('dn');
 				}

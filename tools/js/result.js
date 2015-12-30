@@ -155,8 +155,16 @@ $(document).ready(function() {
 		/* Autocomplete code */
 		if ($(this).attr('id') == 'txtjArea')
 		{
-			var params = 'action=ajx&case=auto&str=' + escape($(this).val());
-			new Autosuggest($(this).val(), '#txtjArea', '#jasug', DOMAIN + "index.php", params, false, '', '#ctid', event);
+			if($(this).val() == '')
+			{
+				$('#ctid').val('');
+				FR();
+			}
+			else
+			{
+				var params = 'action=ajx&case=auto&str=' + escape($(this).val());
+				new Autosuggest($(this).val(), '#txtjArea', '#jasug', DOMAIN + "index.php", params, false, '', '#ctid', event);
+			}
 		}
 	});
 	
@@ -328,14 +336,14 @@ function showWish(catid,pgno,uid,nojump,pid)
                 {
                     if(data !== undefined && data !== null && data !== '')
                     {
-                        $('#wishListCnt').html(data);
+                        $('#wishListCnt').html(' (' + data + ')');
                     }
                     else
                     {
-                        $('#wishListCnt').html(0);
+                        $('#wishListCnt').html(' (' + 0 + ')');
                     }
                 });
-                $('#wishListCnt').html(data.results.total);
+                //$('#wishListCnt').html(data.results.total);
 		$(".wisgDel").bind('click',function(e){
 			e.stopImmediatePropagation();
 			var catid 	= $('#catid').val();
@@ -373,7 +381,7 @@ function arrangeData(adata, id, divHolder, nextxt)
 }
 
 function makeCall(id, cid) {
-        $('#pgno').val(1);
+	$('#pgno').val(1);
 	FR();
 	$('body').animate({scrollTop: $('.allShapes').offset().top-60}, 300);
 }
