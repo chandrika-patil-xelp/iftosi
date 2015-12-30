@@ -206,9 +206,9 @@ for(var i = 0; i< busiTypeSplt.length; i++)
 			if($(this).hasClass('shapeSelected'))
 			{
 				$('.diamondProp').removeClass('dn');
-			}
-			else
-			{
+		}
+		else
+		{
 				$('.diamondProp').addClass('dn');
 			}
 		}
@@ -525,7 +525,11 @@ function showDollarRateForm() {
 }
 
 $('#overlay,#upCancel').bind('click', function () {
-    closeAllForms();
+    if(uploadStart) {
+        common.toast(0,'Please wait,Upload Process is running')
+    } else {
+        closeAllForms();
+    }
 });
 
 function closeAllForms() {
@@ -793,11 +797,16 @@ function isValidFloatKey(obj, e, allowDecimal)
     return isFirstD || reg.test(keychar);
 }
 
-
+var uploadStart=false;
 $("#upSubmit").on('click',(function(e) {
     if($("#up_file").val()=='' || ValidateFile()==false) {
         common.toast(0,'Please Select Valid CSV File');
+    } 
+    else if(uploadStart) {
+        common.toast(0,'Upload process is running');
     } else {
+        $('#upSubmit').text('Uploading Data');
+        uploadStart=true;
         $.ajax({url: DOMAIN + "/apis/index.php?action=bulkInsertProducts&vid="+uid,
             type: "POST",             
             data: new FormData($('form')[0]), 
@@ -805,6 +814,7 @@ $("#upSubmit").on('click',(function(e) {
             cache: false,
             processData:false,
             success: function(result) {
+                $('#upSubmit').text('Upload');
                 var obj = jQuery.parseJSON(result);
                 $("#up_file").val('');
                 var errCode = obj['error']['Code'];

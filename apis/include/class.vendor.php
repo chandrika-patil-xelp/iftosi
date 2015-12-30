@@ -715,7 +715,7 @@ class vendor extends DB
         $vid=$params['vid'];
         $data=$params['data'];
         $type=$params['type'];
-        $defaultColNames = array('Barcode','Lot Ref','Lot No','Price','Shape','Cert1','Cut','Carats','Col','Cla','Base','Value','P(Disc)','Prop','Pol','Sym','Fluo','T.D','Table','Measurement','Cert1 No','P.A','Cr Hgt','Cr Ang','Girdle','P.D');
+        $defaultColNames = array('Barcode','Lot Ref','Lot No','Cert','Cut','Carats','Col','Cla','Base','Price','Value','P(Disc)','Prop','Pol','Sym','Fluo','T.D','Table','Measurement','Cert1 No','P.A','Cr Hgt','Cr Ang','Girdle','P.D');
 
         $sql="SELECT city from tbl_vendor_master where vendor_id=\"".$vid."\"";
         $res=$this->query($sql);
@@ -758,20 +758,20 @@ class vendor extends DB
                     $res = $this->query($query);
                     if ($res) {
                         $pro_id = mysql_insert_id();
-                        $sql = "INSERT INTO `tbl_product_category_mapping` (product_id, category_id, price, date_time) VALUES ('" . $pro_id . "','10000','" . $value[3] . "','" . $ts . "')";
+                        $sql = "INSERT INTO `tbl_product_category_mapping` (product_id, category_id, price, date_time) VALUES ('" . $pro_id . "','10000','" . $value[9] . "','" . $ts . "')";
                         //echo $sql.'<br>';
                         $res = $this->query($sql);
-                        $sql = "INSERT INTO `tbl_product_master` (product_id, barcode, lotref, lotno, prd_price, date_time) VALUES ('" . $pro_id . "','" . $value[0] . "','" . $value[1] . "','" . $value[2] . "','" . $value[3] . "','" . $ts . "')";
+                        $sql = "INSERT INTO `tbl_product_master` (product_id, barcode, lotref, lotno, prd_price, date_time) VALUES ('" . $pro_id . "','" . $value[0] . "','" . $value[1] . "','" . $value[2] . "','" . $value[9] . "','" . $ts . "')";
                         //echo $sql.'<br>';
                         $res = $this->query($sql);
-                        $sql = "INSERT INTO `tbl_vendor_product_mapping` (product_id, vendor_id, vendor_price, city, vendor_currency, date_time) VALUES ('" . $pro_id . "','" . $vid . "','" . $value[3] . "','" . $city . "','USD', '" . $ts . "')";
+                        $sql = "INSERT INTO `tbl_vendor_product_mapping` (product_id, vendor_id, vendor_price, city, vendor_currency, date_time) VALUES ('" . $pro_id . "','" . $vid . "','" . $value[9] . "','" . $city . "','USD', '" . $ts . "')";
                         //echo $sql.'<br>';
                         $res = $this->query($sql);
                         $srch_val = "'" . $pro_id . "', ";
                         for ($j = 3; $j < count($value); $j++) {
                             $srch_val .= "'" . $value[$j] . "', ";
                         }
-                        $sql = "INSERT INTO `tbl_product_search` (product_id, price, shape, certified, cut, carat, color, clarity, base, value, p_disc, prop, polish, symmetry, fluo, td, tabl, measurement, cno, pa, cr_hgt, cr_ang, girdle, pd) VALUES (" . rtrim($srch_val, ', ') . ")";
+                        $sql = "INSERT INTO `tbl_product_search` (product_id, certified, cut, carat, color, clarity, base, price, value, p_disc, prop, polish, symmetry, fluo, td, tabl, measurement, cno, pa, cr_hgt, cr_ang, girdle, pd) VALUES (" . rtrim($srch_val, ', ') . ")";
                         //echo $sql.'<br>';
                         $res = $this->query($sql);
                         $totlIns++;
