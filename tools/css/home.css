@@ -807,7 +807,7 @@ textarea[name=feedback] {resize: none;}
 .padLeft{padding-left:50px !important;}
 .para{padding-bottom: 10px;line-height: 25px;}
 /*Footer*/
-.pageLinks{height: auto;width: 100%;background:#8A0044;margin: 0;padding: 15px;border-top: 1px solid #fff;}
+.pageLinks{height: auto;width: 100%;background:#8A0044;margin: 0;padding: 15px;border-top: 1px solid #fff;float:left;}
 .lowerFooterTab { width: auto;  height: 35px;  line-height: 35px;  cursor: pointer;  display: inline-block;  padding: 0 10px;  color: #fff;  font-size: 12px;    margin: 0 0 0 10px;}
 .texHolder  a{text-decoration: none;color:#8A0044;}
 
@@ -868,7 +868,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
         .sortBox, .sTitle {display: none;}
         .headCatCont {display: none;}
     /*Header*/
-    
+
     /*Central Part*/
         .categoryCont {height: auto;background-size: auto 100%;padding: 180px 10px 50px 10px;}
         .buyTxt {width: 80%;color: #fff;line-height: 30px;font-size: 30px;margin-bottom: 15px;}
@@ -894,7 +894,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
         .homePage .bresults .jshapeComm{width:100%!important;border-right: 0px;}
         .homePage .shapesCont{padding-bottom: 0}
     /*Central Part*/
-    
+
     /*Footer*/
         .bottmInfo {width: 100%;height: auto;padding: 0px 0;float: left;}
         .infoComm {width: 100%;height: 100px;border-right: none;position: relative;float: none!important;border-bottom: 1px solid rgba(255,255,255,0.2);}
@@ -903,19 +903,19 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
         .infoUpper {font-size: 16px;line-height: 16px;}
         .infoLower {font-size: 25px;line-height: 25px;}
     /*Footer*/
-    
+
     /*Results Filter*/
             .mfHeader {display: block;margin-left: -15px;}
             .mfFooter {position: fixed;width: 100%;height: 50px;line-height: 50px;padding: 0;border-radius: 0;margin-left: -15px;}
             #applyDbtn {display: block;}
             #resetDbtn {display: none;}
 
-            
-    
+
+
     /*Diamonds Results Page*/
         .totalResultsDiv {height: 250px;line-height: 30px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: cover;padding: 150px 0 0 0;font-size: 30px;}
         .resultsPage .shapesCont {padding: 10px 0;background: #fff;float: left;}
-        .showHide {display: none;}    
+        .showHide {display: none;}
         .allResults {float: left;padding: 0 10px;}
         .filterTitleDiv {width: 100%;height: 60px;border-bottom: 0px solid #d4d4d4;margin-bottom: 0;}
         .fTitle {display: none;}
@@ -933,13 +933,15 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
         /*Jewellery Results*/
         .searchCon {width: 90%;}
         /*Bullion Results*/
-        
+
          /*Diamonds Details Page*/
             .forBg {width: 100%;height: 270px;}
             .prdMainDetails {height: auto;margin-top: -90px;margin-bottom: 0;}
             .prdMainDetails .wrapperMax {padding-left: 0;position: initial;}
             .imgsCont {width: 90%;position: relative;margin: 0 5%;height: 330px;padding: 10px;}
+            .bullion_details .imgsCont {width:90%;position: relative;margin: 0 5%;height: 330px;padding: 10px;}
             .detCont {width: 100%;height: auto;padding: 15px;display: inline-block;padding-bottom: 0;}
+            .bullion_details .detCont {width:100%;height: auto;padding: 15px 15px 0px 25px;float: left;}
             .btnsCont {height: auto;}
             .btnsCont .prdShape {border: none;width: 100%;}
             .prdBtns {width: 100%;height: auto;}
@@ -948,18 +950,18 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
             .infoCommn:last-child{margin-bottom: 0}
             .prdInfo {padding: 0 15px;display: inline-block;margin-top: 0;}
             .imgsCont.noImage {height: 150px;background: url(../img/noimage.svg) no-repeat 50% 50%;background-size: 50%;background-position: center;}
-            
-        /*Jewellery DEtails Page*/    /*Bullion DEtails Page*/    
-            .jewellery_details .infoCommn {width:100%!important;}
+
+        /*Jewellery DEtails Page*/    /*Bullion DEtails Page*/
+            .jewellery_details .infoCommn {width:50%!important;}
             .prdInfoDiv:last-child{padding-bottom: 20px;}
-        
+
         /*Inner Pages*/
             .bgHolder {width: 100%;height: 190px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding: 0px 0 35px 0;}
             .heading.font40 {font-size: 22px;}
             .bgHolder .heading {width: 100%;height: auto;max-width: 1200px;margin: auto;color: #fff;padding: 150px 0px 0 0px;text-align: center;}
             .texHolder {padding: 0 20px;}
             .faqs {padding: 20px;}
-            
+
         /*Education*/
             .faq .shapesComm {width: 90%;margin: 0 5% 5% 5%;padding-top:0 }
             .shapesPage .shapeComm{margin-top: 0;width: 100px!important;height: 100px!important;position: initial;}
@@ -970,8 +972,8 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
             .thumbnil {width: 24%;height: 0;border: 1px solid #333;margin: 0 0.5%;cursor: pointer;padding-bottom: 25%;}
             .leftArrow,.rightArrow {top: 235px;}
             .prdInfoDiv{margin-bottom: 10px;}
-           
-           
+
+
             .userForm {width: 100%;height: 100%;border-radius: 0;}
             .cntEmail {width: 100%;}
             .cntEmail {width: 100%;}
@@ -989,7 +991,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
             .heading.font40 {font-size: 22px;}
             .faqs {padding: 20px;}
             .texHolder {padding: 0 20px;}
-        
+
         /*Vendor Details*/
             .vendorDetails {width: 100%;height:auto;margin-bottom: 20px;margin-top: 0;}
             .vendorDetails .wrapperMax {padding-right: 0;position: initial;}
@@ -1019,7 +1021,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
         .bresults .jshapeComm {padding-top: 148px;}
         .homePage .jShapesCont{height:auto;}
         .bottmInfo {height: 205px;padding: 30px 0;}
-        
+
     /*Diamonds, Jewellery, Bullions Results Page*/
         .allResults { padding: 0 15px;}
         .resultsPage .shapesCont {width: 100%;height: auto;}
@@ -1046,7 +1048,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 @media only screen and (min-width: 768px) and (max-width: 959px){
     /*Header*/
         .header{padding: 0 15px;}
-    
+
     /*Home*/
         .categoryCont {height: 489px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: cover;padding: 200px 0 50px 0;}
         .prllx {width: 100%;}
@@ -1054,7 +1056,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
         .categoryCircle {width: 150px;height: 150px;font-size: 16px;padding-top: 95px;}
         .homePage .shapesCont {width: 100%;height: auto;background: #FFF;padding: 15px 0;position: relative;z-index: 0;}
         .searchBtn {margin: 5px 0 0 0;}
-        
+
         .homePage .shapeComm {width: 15%!important;padding-bottom: 15%;}
         .homePage .jShapesCont {width: 100%;height: auto;background: #fff;padding: 0px 0 0px 0;position: relative;z-index: 0;}
         .homePage .jShapesCont .jshapeComm {margin: 0;width: 50%;height:300px;line-height: 220px;}
@@ -1084,8 +1086,8 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
         /*Jewellery Result*/
         .jshapeComm {font-size: 16px;font-family: openR;letter-spacing: initial;}
         .searchCon {width: 60%;}
-        
-        
+
+
         /*Diamond Details */
         .prdMainDetails {width: 100%;height: 704px;float: left;position: relative;padding: 0 15px 305px 15px;}
         .prdMainDetails .wrapperMax{position: initial;padding-left: 400px;}
@@ -1096,7 +1098,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
         .btnComm {width: 70%;height: 45px;line-height: 45px;margin: 10px 15% 0 0%;text-align: center;}
         .prdBtns {width: 100%;height: auto;margin-top: 20px;}
         .prdInfo {padding: 0 15px;}
-        
+
         /*Jewellery Details Page*/
         .jwdet .prdMainDetails {width: 100%;height: 601px;float: left;position: relative;padding: 0 15px 101px 15px;}
 
@@ -1106,11 +1108,11 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
         .bulldet.bullion_details .infoCommn {width: 50%!important;}
         .bulldet .majorInfoBox{position: initial;    padding-left: 0;}
         .bulldet .prdMainDetails{height: 408px;padding-bottom: 15px;}
-        
+
         .shapesPage{padding: 0 15px;}
         .ques {width: 90%;margin:10px 5%;}
         .shapesPage .shapeComm {position: absolute;left: 0;top: 0;width: 100px!important;height: 100px!important;padding-bottom: 100px;margin: 0;bottom: 0;margin: auto;}
-        .shapesPage .texHolder {padding: 0;padding-left: 88px;line-height: 24px;color: #000;}        
+        .shapesPage .texHolder {padding: 0;padding-left: 88px;line-height: 24px;color: #000;}
 }
 
 /*
@@ -1135,7 +1137,7 @@ Home Page
 .st3Middle {width: 100%;height: 47%;}
 .st3Lower {width: 100%;height: 53%;}
 
-     
+
 Diamond Result
 .resultsPage .shapesCont{padding: 10px;}
 .prdResults {width: 100%;}
@@ -1169,7 +1171,7 @@ Education
 Filters Page
 .filterList {width: 300px;height: auto;min-height: 100%;left: 0;background: #fff;padding-bottom: 25px;position: absolute;box-shadow: 0 0 20px 5px rgba(0,0,0,0.2);z-index: 10;top: -20px;padding: 15px;}
 .filterList.transit-100X{-webkit-transform:translateX(-350px);-moz-transform:translateX(-350px);;-ms-transform:translateX(-350px);-o-transform:translateX(-350px);transform:translateX(-350px);}
-Diamonds Details Page 
+Diamonds Details Page
 .btnsCont .prdShType {line-height: 35px; font-size: 25px;font-family: openR;}
 .prdBtns{height:auto;}
 .prdBtns .btnComm{margin:0 10px 5px 0;}
@@ -1235,7 +1237,7 @@ Diamonds Details Page
 .pgComm:nth-of-type(10) {
     display:none;
 }
-Home Page 
+Home Page
 .prllx {width: 100%;}
 .categoryCircle {width: 150px;height: 150px;font-size: 16px; padding-top: 95px;}
 .prllx li {width: 160px; margin: 0 10px;}
@@ -1311,5 +1313,3 @@ education
  .shapesPage{padding: 0 20px;}
 .shapesPage .shapeComm {margin-top: 15px; padding-bottom: 85px;}
 }*/
-
-
