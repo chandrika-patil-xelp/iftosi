@@ -151,30 +151,57 @@ function Common() {
         }
     };
 
-    _this.nmbCount = 1;
+    _this.nmbCount = parseInt(mNCount)+1;
     this.addMobileNumber = function () {
         if (_this.nmbCount == 0) {
             _this.nmbCount++;
         }
+//        if (_this.nmbCount == 2) {
+//            $('.falmb .addBtn').addClass('dn');
+//        }
+        
+        if(this.checkMobile('conMobile')) {
+            
+            if($('#altmbNo1').hasClass('dn')) {
+                if($('#altmbNo2_Mobile').val()!='') {
+                    var flag = this.checkMobile('altmbNo2_Mobile');
+                    if(flag) {
+                        _this.nmbCount=2;
+                        $('#altmbNo1').removeClass('dn');
+                    }
+                }
+                else {
+                    _this.nmbCount=1;
+                    $('#altmbNo1').removeClass('dn');
+                }
+            }else if($('#altmbNo2').hasClass('dn')) {
+                var flag = this.checkMobile('altmbNo1_Mobile');
+                if(flag) {
+                    _this.nmbCount=2;
+                    $('#altmbNo2').removeClass('dn');
+                }
+            }
+        }
         if (_this.nmbCount == 2) {
             $('.falmb .addBtn').addClass('dn');
         }
-        if (_this.nmbCount == 1) {
-            var flag = this.checkMobile('conMobile');
-            if (flag) {
-                $('#altmbNo' + _this.nmbCount).removeClass('dn');
-                _this.nmbCount++;
-            }
-        } else {
-            var flag = this.checkMobile('altmbNo' + (_this.nmbCount - 1) + "_Mobile");
-            if (flag) {
-                $('#altmbNo' + _this.nmbCount).removeClass('dn');
-                if (_this.nmbCount !== 2)
-                    _this.nmbCount++;
-            } else {
-                $('.falmb .addBtn').removeClass('dn');
-            }
-        }
+//        
+//        if (_this.nmbCount == 1) {
+//            var flag = this.checkMobile('conMobile');
+//            if (flag) {
+//                $('#altmbNo' + _this.nmbCount).removeClass('dn');
+//                _this.nmbCount++;
+//            }
+//        } else {
+//            var flag = this.checkMobile('altmbNo' + (_this.nmbCount - 1) + "_Mobile");
+//            if (flag) {
+//                $('#altmbNo' + _this.nmbCount).removeClass('dn');
+//                if (_this.nmbCount !== 2)
+//                    _this.nmbCount++;
+//            } else {
+//                $('.falmb .addBtn').removeClass('dn');
+//            }
+//        }
     };
 
     this.delmbNumber = function (id) {
@@ -186,13 +213,13 @@ function Common() {
 
     this.checkMobile = function (id) {
         var num = $('#' + id).val();
-        var len = num.length;
-        if ((num.charAt(0) == '9') && (len == 10) || (num.charAt(0) == '8') && (len == 10) || (num.charAt(0) == '7') && (len == 10)) {
+                var len = num.length;
+                if ((num.charAt(0) == '9') && (len == 10) || (num.charAt(0) == '8') && (len == 10) || (num.charAt(0) == '7') && (len == 10)) {
             return true;
-        } else {
+                } else {
             this.toast(0,'Please enter correct mobile number.')
             return false;
-        }
+                }
 
     };
     this.validateEmail = function (id) {
