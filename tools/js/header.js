@@ -214,7 +214,8 @@ $(document).ready(function() {
 
     $('#hdropList').mouseleave(function(){
         if (hisOpen) {
-            htoggleDropDown(false);
+//            htoggleDropDown(false);
+             htoggleDropDown(true);
         }
         
     });
