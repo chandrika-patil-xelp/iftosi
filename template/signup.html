@@ -2,71 +2,90 @@
 <body>
     <div id='baseCont' class="container fmOpenR signupPage">
         <div class="wrapper">
+            <div id="header" class="header transition300">
+                <div class="wrapperMax">
+                    <div class="headRight fRight transition300">
+                        <div class="compNo fRight fmOpenB">022-32623263</div>
+                    </div>
+                </div>
+            </div>
             <div class='signupDiv' style="height:450px;">
                 <div class="wrapperMax">
-                    <div class="signupTitle fLeft">Sign up </div>
-                    <div class="inputCont fLeft fmOpenR">
-                        <input type="text" id="pr_name" name="pr_name" autocomplete="off" maxlength="100" class="txtInput cOrange fmOpenR font14 nameIcon">
-                        <label for="pr_name" class="inp-label transition100">NAME</label>
-                        <div id="pr_name_inpText" class="inpText fRight transition300">enter<br>your name</div>
+                    <div class="signupCont">
+                        <div class="signupCl1 fLeft fmOpenL">
+                            <div class="head1">Sign up today</div>
+                            <div class="head2">for better options.</div>
+                            <div class="head3 fmOpenR headIcon1">Add products to wishlist</div>
+                            <div class="head3 fmOpenR headIcon2">Get vendor details instantly</div>
+                            <div class="head3 fmOpenR headIcon3">Browse exclusive products</div>
+                           
+                        </div>
+                        <div class="signupCl2 fRight">
+                            <div class="inputCont fLeft fmOpenR">
+                                <input type="text" id="pr_name" name="pr_name" autocomplete="off" maxlength="100" class="txtInput cOrange fmOpenR font14 nameIcon">
+                                <label for="pr_name" class="inp-label transition100">NAME</label>
+                                <div id="pr_name_inpText" class="inpText fRight transition300">enter<br>your name</div>
+                            </div>
+
+                            <div class="inputCont fLeft fmOpenR">
+                                <input type="text" id="pr_city" name="pr_city" style="text-transform:capitalize;" value="<?php echo ucfirst($data['city']); ?>" class="txtInput cOrange fmOpenR font14 areaIcon">
+                                <label for="pr_city" class="inp-label fRight transition100">CITY</label>
+                                <div id="pr_city_inpText" class="inpText fRight transition300">enter<br>city name</div>
+                                <input type="hidden" id="pr_cid" name="pr_cid" value="">
+                                <div id="pr_citySuggestDiv" class="autoSuggestOuter"></div>
+                            </div>
+
+                            <div class="inputCont fLeft fmOpenR">
+                                <input type="tel" id="pr_mobile" name="pr_mobile" autocomplete="off" onkeypress="return common.isNumberKey(event);" onkeyup="isValidMKey(event, this.id);" maxlength="10" class="txtInput cOrange fmOpenR font14 mobileIcon">
+                                <label for="pr_mobile" class="inp-label transition100">MOBILE</label>
+                                <div id="pr_mobile_inpText" class="inpText fRight transition300">enter<br>mobile number</div>
+                            </div>
+                            <div class="inputCont fLeft fmOpenR">
+                                <input type="email" id="pr_email" name="pr_email" autocomplete="false" class="txtInput cOrange fmOpenR font14 emailIcon" >
+                                <label for="pr_email" class="inp-label transition100">EMAIL</label>
+                                <div id="pr_email_inpText" class="inpText fRight transition300">enter<br>email address</div>
+                            </div>
+                            <div class="inputCont fLeft fmOpenR">
+                                <input type="password" id="pr_pass" name="pr_pass" autocomplete="off" class="txtInput cOrange fmOpenR font14 passwordIcon" onKeyPress="common.eSubmit(event, 'signupSubmit');">
+                                <label for="pr_pass" class="inp-label transition100">PASSWORD</label>
+                                <div id="pr_pass_inpText" class="inpText fRight transition300">enter your<br>password</div>
+                            </div>  
+                            <input type="password"  style="display:none">
+                            <div class="checkDiv fLeft w50">
+                                <input type="checkbox" id="isVendor" class="filled-in amIVendor" name="isVendor">
+                                <label for="isVendor"> I'm a Vendor</label>
+                            </div>
+                            <div class="checkDiv w50 fLeft">
+                                <input type="checkbox" id="isBuyer" class="filled-in amIVendor" name="isBuyer">
+                                <label for="isBuyer"> I'm a Buyer</label>
+                            </div>
+                            <div class="font12 txtCenter fLeft termsLink">By clicking on Sign Up below, <br><b>you agree to our <a href="<?php echo DOMAIN?>index.php?case=terms_conditions" alt="Terms And Conditions" title="Terms And Conditions">Terms of Service</a></b></div>
+                            <div class="cancelLgBtn fLeft fmOpenR ripplelink poR" id='signupCancel'> CANCEL</div>
+                            <div class="loginBtn fLeft fmOpenR ripplelink poR" id='signupSubmit'>SIGN UP</div>
+                        </div>
                     </div>
-                    
-                    <div class="inputCont fLeft fmOpenR">
-                        <input type="text" id="pr_city" name="pr_city" style="text-transform:capitalize;" value="<?php echo ucfirst($data['city']); ?>" class="txtInput cOrange fmOpenR font14 areaIcon">
-                        <label for="pr_city" class="inp-label fRight transition100">CITY NAME</label>
-                        <div id="pr_city_inpText" class="inpText fRight transition300">enter<br>city name</div>
-                        <input type="hidden" id="pr_cid" name="pr_cid" value="">
-                        <div id="pr_citySuggestDiv" class="autoSuggestOuter"></div>
-                    </div>
-                    
-                    <div class="inputCont fLeft fmOpenR">
-                        <input type="tel" id="pr_mobile" name="pr_mobile" autocomplete="off" onkeypress="return common.isNumberKey(event);" onkeyup="isValidMKey(event,this.id);" maxlength="10" class="txtInput cOrange fmOpenR font14 mobileIcon">
-                        <label for="pr_mobile" class="inp-label transition100">MOBILE</label>
-                        <div id="pr_mobile_inpText" class="inpText fRight transition300">enter<br>mobile number</div>
-                    </div>
-                    <div class="inputCont fLeft fmOpenR">
-                        <input type="email" id="pr_email" name="pr_email" autocomplete="false" class="txtInput cOrange fmOpenR font14 emailIcon" >
-                        <label for="pr_email" class="inp-label transition100">EMAIL</label>
-                        <div id="pr_email_inpText" class="inpText fRight transition300">enter<br>email address</div>
-                    </div>
-                    <div class="inputCont fLeft fmOpenR">
-                        <input type="password" id="pr_pass" name="pr_pass" autocomplete="off" class="txtInput cOrange fmOpenR font14 passwordIcon" onKeyPress="common.eSubmit(event,'signupSubmit');">
-                        <label for="pr_pass" class="inp-label transition100">PASSWORD</label>
-                        <div id="pr_pass_inpText" class="inpText fRight transition300">enter your<br>password</div>
-                    </div>  
-                    <input type="password"  style="display:none">
-                    <div class="checkDiv fLeft w50">
-                        <input type="checkbox" id="isVendor" class="filled-in amIVendor" name="isVendor">
-                        <label for="isVendor"> I'm the Vendor</label>
-                    </div>
-                    <div class="checkDiv w50 fLeft">
-                        <input type="checkbox" id="isBuyer" class="filled-in amIVendor" name="isBuyer">
-                        <label for="isBuyer"> I'm the Buyer</label>
-                    </div>
-                    <div class="cancelLgBtn fLeft fmOpenR ripplelink poR" id='signupCancel'> CANCEL</div>
-                    <div class="loginBtn fLeft fmOpenR ripplelink poR" id='signupSubmit'>SIGN UP</div>
                 </div>
-             </div>
-          <div id='overlay' class="overlay transition300 transit-100Y1 dn" ></div>
-        <div id="otpDiv" class="loginDiv transition300 dn" style="transform: scale(1);height:200px !important">
-            <div class="lgTitle fLeft fmOpenR">Enter OTP sent to your mobile</div>
+            </div>
+            <div id='overlay' class="overlay transition300 transit-100Y1 dn" ></div>
+            <div id="otpDiv" class="loginDiv transition300 dn" style="transform: scale(1);height:200px !important">
+                <div class="lgTitle fLeft fmOpenR">Enter OTP sent to your mobile</div>
                 <div class="inputCont fLeft fmOpenR">
-                    <input type="tel" id="pr_otp" name="pr_otp" autocomplete="off" maxlength="6" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeyup="return onEnterFormSubmit(event,1);" style="padding-right: 80px">
+                    <input type="tel" id="pr_otp" name="pr_otp" autocomplete="off" maxlength="6" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeyup="return onEnterFormSubmit(event, 1);" style="padding-right: 80px">
                     <span onclick="otpGo();" class="resendOTP">RESEND</span>
                     <label for="pr_otp" class="inp-label transition100">OTP</label>
                 </div>  
                 <div class="cancelLgBtn fLeft fmOpenR" id="lgCancel" onclick="closeOtpForm();">CANCEL</div>
-            <div class="loginBtn fLeft fmOpenR" id="lgSubmit" onclick="otpCheck();">SUBMIT</div>
-        </div>          
+                <div class="loginBtn fLeft fmOpenR" id="lgSubmit" onclick="otpCheck();">SUBMIT</div>
+            </div>          
         </div>
-        <?php include 'logo.html'?>
+        <?php include 'logo.html' ?>
     </div>
+    <?php include 'footer.html'; ?>
     <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
-    <script type="text/javascript" src="<?=$jvs['auto'];?>"></script>
-    <script type="text/javascript" src="<?=$jvs['signup'];?>"></script>
-    <script type="text/javascript" src="<?=$jvs['comm'];?>"></script>
-    
-    
+    <script type="text/javascript" src="<?= $jvs['auto']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['signup']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['comm']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['head']; ?>"></script>
 </body>
 </html>

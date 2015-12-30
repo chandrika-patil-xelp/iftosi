@@ -159,8 +159,10 @@ function Common() {
         }
     };
         $(document).click(function (e) {
+           
             if($('#hdropList').is(":visible"))
-            {
+            {   
+                console.log('1');
 				hisOpen = false;
                 $('#hdropList').hide();
             }
@@ -187,7 +189,7 @@ function Common() {
 		$('#wishHeaderb4').removeClass('dn');
     };
     this.closeLoginForm = function () {
-        $('#loginDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
+        $('#loginDiv').velocity({scale: 0,borderRadius:'100%'}, {delay: 0, ease: 'swing'});
         $('#overlay1').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
         setTimeout(function () {
             $('#overlay1,#loginDiv').addClass('dn');
@@ -232,7 +234,7 @@ function Common() {
             }
         });
 
-        $('#loginDiv').velocity({scale: 0}, {delay: 0, duration: 0});
+        $('#loginDiv').velocity({scale: 0, borderRadius:'100%'}, {delay: 0, duration: 0});
         $('#overlay1').velocity({opacity: 0}, {delay: 0, duration: 0});
         var mobile = customStorage.readFromStorage('mobile');
         var name = customStorage.readFromStorage('name');
@@ -243,7 +245,7 @@ function Common() {
             $('#overlay1,#loginDiv').removeClass('dn');
             setTimeout(function () {
                 $('#overlay1').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
-                $('#loginDiv').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
+                $('#loginDiv').velocity({scale: 1,borderRadius:'2px'}, {delay: 80, duration: 100, ease: 'swing'});
             }, 10);
         }
         else

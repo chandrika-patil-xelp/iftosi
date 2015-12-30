@@ -30,6 +30,22 @@ var validMob = true;
             $(this).removeClass(' ').addClass('brGreen');
         }
     });
+    
+    
+     $(input_selector).bind('keyup',function() {
+        var val = $(this).val();
+        var len = val.length;
+        var id = $(this).attr('id');
+        var max = 5;
+        if (len >= max) {
+            $('#' + id + '_inpText').addClass('op0');
+        }
+        else if (len < max) {
+            $('#' + id + '_inpText').removeClass('op0');
+        }
+    });
+        
+
 
     $('#signupCancel').click(function () {
         $("input").val('');
