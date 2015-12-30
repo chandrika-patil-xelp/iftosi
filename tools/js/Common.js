@@ -161,6 +161,7 @@ function Common() {
         $(document).click(function (e) {
             if($('#hdropList').is(":visible"))
             {
+				hisOpen = false;
                 $('#hdropList').hide();
             }
         });

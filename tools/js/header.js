@@ -191,10 +191,18 @@ $(document).ready(function() {
 
 
     $('#hdrpinp,div.loggedIn').click(function() {
-        setTimeout(function() {
-            hisOpen = true;
-        }, 150);
-        htoggleDropDown(true);
+		if(hisOpen)
+		{
+			hisOpen = false;
+			htoggleDropDown(false);
+		}
+		else
+		{
+			setTimeout(function() {
+				hisOpen = true;
+			}, 150);
+			htoggleDropDown(true);
+		}
     });
 
     $('#hdropList li').click(function() {
@@ -212,12 +220,12 @@ $(document).ready(function() {
 //        }
 //    });
 
-    $('#hdropList').mouseleave(function(){
+    /*$('#hdropList').mouseleave(function(){
         if (hisOpen) {
             htoggleDropDown(false);
         }
         
-    });
+    });*/
 
 
 
