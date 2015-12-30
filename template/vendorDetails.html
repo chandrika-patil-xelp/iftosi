@@ -242,29 +242,17 @@ if(!empty($data['mdbw'])) {
                                     <div class="fRight addBtn pointer" onclick="common.addNumber(this)"></div>
                                 </div>
                             </div>
-                            <div id="altNo1" class="divCon fLeft c666 <?php if(empty($landline[1])) { echo 'dn'; } ?>">
-                                <div class="titleDiv fmRoboto fLeft font14">Alternate Number</div>
-                                <div class="mobileCont fLeft">
-                                    <input type="text" id="lnCode1" autocomplete="false" value="<?php if(!empty($landlines[1][0])) { echo $landlines[1][0]; } ?>" class="fLeft txtCCode" placeholder=" Code" maxlength="5">
-                                    <input type="text" id="landline1" autocomplete="false" value="<?php if(!empty($landlines[1][1])) { echo $landlines[1][1]; } ?>" onkeypress="return common.isNumberKey(event)" maxlength="8" placeholder=" Contact No. " class="txtInput c666 fLeft fmRoboto font14 lnNo">
-                                    <div class="fRight delBtn pointer" onclick="common.delNumber('altNo1')"></div>
-                                </div>
-                            </div>
-                            <div id="altNo2" class="divCon fLeft c666 <?php if(empty($landline[2])) { echo 'dn'; } ?>">
-                                <div class="titleDiv fmRoboto fLeft font14">Alternate Number</div>
-                                <div class="mobileCont fLeft">
-                                    <input type="text" id="lnCode2"  autocomplete="false"value="<?php if(!empty($landlines[2][0])) { echo $landlines[2][0]; } ?>" class="fLeft txtCCode" placeholder=" Code" maxlength="5">
-                                    <input type="text" id="landline2" autocomplete="false" value="<?php if(!empty($landlines[2][1])) { echo $landlines[2][1]; } ?>" onkeypress="return common.isNumberKey(event)" maxlength="8" placeholder=" Contact No. " class="txtInput c666 fLeft fmRoboto font14 lnNo">
-                                    <div class="fRight delBtn pointer" onclick="common.delNumber('altNo2')"></div>
-                                </div>
-                            </div>
-                            <div id="altNo3" class="divCon fLeft c666 <?php if(empty($landline[3])) { echo 'dn'; } ?>">
-                                <div class="titleDiv fmRoboto fLeft font14">Alternate Number</div>
-                                <div class="mobileCont fLeft">
-                                    <input type="text" id="lnCode3" autocomplete="false" value="<?php if(!empty($landlines[3][0])) { echo $landlines[3][0]; } ?>" class="fLeft txtCCode" placeholder=" Code" maxlength="5">
-                                    <input type="text" id="landline3" autocomplete="false" value="<?php if(!empty($landlines[3][1])) { echo $landlines[3][1]; } ?>" onkeypress="return common.isNumberKey(event)" maxlength="8" placeholder=" Contact No. " class="txtInput c666 fLeft fmRoboto font14 lnNo">
-                                    <div class="fRight delBtn pointer" onclick="common.delNumber('altNo3')"></div>
-                                </div>
+                            <div id="altNo">
+                                <?php 
+                                    for($i=1;$i<count($landlines); $i++) {
+                                ?>
+                                <div id="altNo_<?php echo $i; ?>" class="divCon fLeft c666">
+                                    <div class="titleDiv fmRoboto fLeft font14">Alternate Number </div>
+                                    <div class="mobileCont fLeft">
+                                        <input type="text" id="lnCode<?php echo $i; ?>" autocomplete="false" value="<?php if(!empty($landlines[$i][0])) { echo $landlines[$i][0]; } ?>" class="fLeft txtCCode" placeholder=" Code" maxlength="5">
+                                        <input type="text" id="landline<?php echo $i; ?>" autocomplete="false" value="<?php if(!empty($landlines[$i][1])) { echo $landlines[$i][1]; } ?>" onkeypress="return common.isNumberKey(event)" maxlength="8" placeholder=" Contact No. " class="txtInput c666 fLeft fmRoboto font14 lnNo">
+                                        <div class="fRight delBtn pointer" onclick="common.delNumber(<?php echo $i; ?>)"></div></div></div>
+                                <?php } ?>
                             </div>
                             <div class="btnCont fLeft">
                                 <center>
