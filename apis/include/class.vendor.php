@@ -769,9 +769,17 @@ class vendor extends DB
                         $res = $this->query($sql);
                         $srch_val = "'" . $pro_id . "', ";
                         for ($j = 3; $j < count($value); $j++) {
+                            if($j==4) {
+                                $shape=$value[$j];
+                                $value[$j]=$this->getAbbrValue($value[12]);
+                            }
+                            if($j>=12 && $j<=15) {
+                                $value[$j]=$this->getAbbrValue($value[$j]);
+                            }
                             $srch_val .= "'" . $value[$j] . "', ";
                         }
-                        $sql = "INSERT INTO `tbl_product_search` (product_id, certified, cut, carat, color, clarity, base, price, value, p_disc, prop, polish, symmetry, fluo, td, tabl, measurement, cno, pa, cr_hgt, cr_ang, girdle, pd) VALUES (" . rtrim($srch_val, ', ') . ")";
+                        $srch_val .="'".$shape."'";
+                        $sql = "INSERT INTO `tbl_product_search` (product_id, certified, cut, carat, color, clarity, base, price, value, p_disc, prop, polish, symmetry, fluo, td, tabl, measurement, cno, pa, cr_hgt, cr_ang, girdle, pd, shape) VALUES (" . rtrim($srch_val, ', ') . ")";
                         //echo $sql.'<br>';
                         $res = $this->query($sql);
                         $totlIns++;
@@ -1462,6 +1470,10 @@ class vendor extends DB
         }
         $result=array('result'=>$arr,'error'=>$err);
         return $result;
+        }
+        private function getAbbrValue($val) {
+            $propValArr=array('EX'=>'Excellent','VG'=>'Very Good','GD'=>"Good",'FAIR'=>'Fair','NN'=>'None','MED'=>'Medium','FNT'=>'Faint','STG'=>'Strong','VSTG'=>'Very Strong');
+            return $propValArr[$val];
         }
 }
 ?>
