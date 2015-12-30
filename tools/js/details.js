@@ -1,3 +1,4 @@
+console.log('here');
 var isOpen = false;
 var lastSc=0;
 var pw=$(window).width();
@@ -24,22 +25,24 @@ $(document).ready(function(){
         }
       //  $('body').animate({scrollTop: samt}, 300);
     }, 100);
+    
+    
 
     
-    $('#gallery1 .thumbnil').click(function(){
-        var img=$(this).css('background');
-        $('#prdImage').css({'background':img});
+    /* $("#gallery1").bind("click", function(){
+        var img=$(this).css("background-image");
+        $("#prdImage").css({'background':"url("+img+") 50% 50% / cover no-repeat scroll padding-box border-box rgb(255, 255, 255);"});
     });
     
     $('.imgThumbnil').click(function(){
-        var img=$(this).css('background');
-        $('.galleryImg').css({'background':img});
+        var img=$(this).css('background-image');
+        $('.galleryImg').css({'background':"url("+img+") 50% 50% / cover no-repeat scroll padding-box border-box rgb(255, 255, 255);"});
     });
     
     $('.imgPreview').click(function(){
-        var img=$(this).css('background');
-        $('.galleryImg').css({'background':img});
-    });
+        var img=$(this).css('background-image');
+        $('.galleryImg').css({'background':"url("+img+") 50% 50% / cover no-repeat scroll padding-box border-box rgb(255, 255, 255);"});
+    }); */
    
     $('#galleryClose').click(function(){
        $('#imgGallery').addClass('dn');
@@ -252,7 +255,7 @@ $(document).ready(function(){
             $('#userForm').velocity({scale:0},{delay:0,ease:'swing'});
             $('#overlay').velocity({opacity:0},{delay:100,ease:'swing'});
             setTimeout(function(){
-                    $('#overlay,#userForm').addClass('dn');
+                    $('#overlay, #userForm').addClass('dn');
             },1010);
             return true;
         }
@@ -302,7 +305,7 @@ function getImagesData(prdList)
 {
 	if(prdList !== undefined && prdList !== null && prdList !== '' && typeof prdList !== 'undefined' && prdList !== 'undefined' && prdList !== 'null')
 	{
-		var params 	= 'action=ajx&case=getImages&prdIds=' + encodeURIComponent(prdList);
+		var params 	= 'action=ajx&case=getImages&prdIds=' + encodeURIComponent(prdList) + '&td=' + new Date();
 		var URL 	= DOMAIN + "index.php";
 		$.getJSON(URL, params, function(data)
 		{
@@ -343,20 +346,25 @@ function showImages(data)
 			imgArr = new Array();
 			k = 0;
 		});
+        
+        console.log('this');
 
 		$('#gallery1 .thumbnil').click(function(){
-			var img=$(this).css('background');
-			$('#prdImage').css({'background':img});
+            
+            console.log('thisasdasdasdasd');
+            console.log($(this).css('background-image'));
+			var imgvl=$(this).css('background-image');
+			$('#prdImage').css({'background-image': imgvl});
 		});
 		
 		$('.imgThumbnil').click(function(){
-			var img=$(this).css('background');
-			$('.galleryImg').css({'background':img});
+			var imgvl=$(this).css('background-image');
+			$('.galleryImg').css({'background-image': imgvl});
 		});
 		
 		$('.imgPreview').click(function(){
-			var img=$(this).css('background');
-			$('.galleryImg').css({'background':img});
+			var imgvl=$(this).css('background-image');
+			$('.galleryImg').css({'background-image': imgvl});
 		});
 	   
 		$('#galleryClose').click(function(){
