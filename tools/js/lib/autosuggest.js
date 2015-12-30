@@ -114,7 +114,7 @@ function setAutoData(cid,cval,id,divHolder,nextxt,hiddenid)
 		$(divHolder).addClass('dn');
 		$(divHolder).html();
 	},20);
-	//makeCall(id,cid);
+	makeCall(id,cid);
 	auto = false;
 	cleardata();
 }

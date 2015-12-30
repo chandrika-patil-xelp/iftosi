@@ -362,7 +362,7 @@ function arrangeData(adata, id, divHolder, nextxt)
 			{
 				var dtval = (vl.city) ? vl.name+' ('+vl.city+')' : vl.name;
 				var dtid = (vl.city) ? vl.id+'_area' : vl.id;
-				html += '<li class="autoSuggstions transition300 txtCap" onmousedown="setAutoData(\'' + dtid + '\',\'' + dtval + '\',\'' + id + '\',\'' + divHolder + '\',\'\',\'#ctid\');" id="' + dtid + '">'+dtval+'</li>';
+				html += '<li class="autoSuggstions transition300 txtCap" onmousedown="setAutoData(\'' + dtid + '\',\'' + vl.name + '\',\'' + id + '\',\'' + divHolder + '\',\'\',\'#ctid\');" id="' + dtid + '">'+dtval+'</li>';
 			}
         });
         html += '</ul>';
