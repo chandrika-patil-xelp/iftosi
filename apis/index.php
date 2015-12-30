@@ -493,7 +493,7 @@ switch($action)
 //            $params['data'] = file_get_contents($_FILES['up_file']['tmp_name']);
 //            }
 //
-            $alloweExt=array('xlsx','xls');
+            $alloweExt=array('xlsx','xls','csv');
             $up_file =$file['name'];
             $fileExt=end((explode('.',$up_file)));
             $arr=array();
