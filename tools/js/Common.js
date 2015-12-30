@@ -110,7 +110,7 @@ function Common() {
                 userMenuStr += '<li id="productstab" class="transition100" onclick="return showProductList();">Products</li>';
                 userMenuStr += '<li id="vendorlist" class="transition100" onclick="return showProductList();">Vendor List</li>';
                 //userMenuStr += '<li class="transition100" onclick="redirectToWishlist();">Wishlist (<span id="wishListCnt"></span>)</li>';
-                $('#wishListCnt').addClass('dn');
+                $('#wishListHdr').addClass('dn');
 
 				$('#usrNm').html(nm.split(' ')[0]);
 
