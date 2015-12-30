@@ -280,8 +280,14 @@ function htoggleDropDown(flag) {
 function redirectToWishlist()
 {
 	var uid = customStorage.readFromStorage('userid');
-	if(uid !== undefined && uid !== null && uid !== '')
+	var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
+
+	if((isLoggedIn == true || isLoggedIn == 'true') && uid !== undefined && uid !== null && uid !== '')
 	{
 		window.location.href = DOMAIN + 'wishlist/' + uid;
+	}
+	else
+	{
+		common.showLoginForm();
 	}
 }
