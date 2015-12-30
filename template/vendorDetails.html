@@ -1,4 +1,3 @@
-<?php include 'backHead.html' ?>
 <?php 
 if(!empty($data['landline'])) {
     $landline=explode('|~|',$data['landline']);
@@ -16,6 +15,7 @@ if(!empty($data['mdbw'])) {
     $mdbw=explode('~',$data['mdbw']);
 }
 ?>
+<?php include 'backHead.html' ?>
 <body>
     <div class="container">
         <center><div class="backLogo fmOpenR" onclick="window.location.assign(DOMAIN);"><div><b>IF</b>to<b>SI</b></div></div></center>
@@ -213,7 +213,7 @@ if(!empty($data['mdbw'])) {
                                 <div class="titleDiv fmRoboto fLeft font14">Contact Mobile *</div>
                                 <div class="fLeft falmb">
                                     <input type="text" name="cmobile" autocomplete="false" id="conMobile" value="<?php echo $data['contact_mobile']; ?>" maxlength="10" onkeypress="return common.isNumberKey(event)" placeholder=" Mobile Number  " class="txtInput c666 fLeft fmRoboto font14">
-                                    <div class="fRight addBtn pointer" onclick="common.addMobileNumber(this)"></div>
+                                    <div class="fRight addBtn pointer <?=(count($alt_cmobile) >= 2) ? 'dn' : ''?>" onclick="common.addMobileNumber(this)"></div>
                                 </div>
                             </div>
                             <div class="divCon2 fRight c666">

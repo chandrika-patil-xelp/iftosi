@@ -115,8 +115,8 @@ function Common() {
     }
 
 
-    _this.nCount = 1;
-    this.addNumber = function () {
+    _this.nCount = parseInt(llCount);
+    this.addNumber = function (obj) {
         if (_this.nCount == 1) {
             var flag = this.checkLandline('lnCode', 'landline');
             if (flag) {
