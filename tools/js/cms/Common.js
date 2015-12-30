@@ -116,28 +116,40 @@ function Common() {
 
 
     _this.nCount = parseInt(llCount);
-    this.addNumber = function (obj) {
-        if (_this.nCount == 1) {
-            var flag = this.checkLandline('lnCode', 'landline');
-            if (flag) {
-                $('#altNo' + _this.nCount).removeClass('dn');
-                _this.nCount++;
+    _this.divNo = (llCount!=0) ? llCount:1;
+    var lastReDiv=0;
+    this.addNumber = function () {
+        var str = '<div id="altNo_' + _this.divNo + '" class="divCon fLeft c666">';
+        str += '<div class="titleDiv fmRoboto fLeft font14">Alternate Number</div>';
+        str += '<div class="mobileCont fLeft">';
+        str += '<input type="text" id="lnCode' + _this.divNo + '" autocomplete="false" class="fLeft txtCCode" placeholder=" Code" maxlength="5">';
+        str += '<input type="text" id="landline' + _this.divNo + '" autocomplete="false" value="" onkeypress="return common.isNumberKey(event)" maxlength="8" placeholder=" Contact No. " class="txtInput c666 fLeft fmRoboto font14 lnNo">';
+        str += '<div class="fRight delBtn pointer" onclick="common.delNumber(' + _this.divNo + ')"></div></div></div>';
+        var validNo=true;
+        $('.txtCCode').each(function () {
+            var flag = _this.checkLandline($(this).attr('id'), $(this).siblings('.lnNo').attr('id'));
+            if(!flag) {
+                validNo = false;
             }
-        } else {
-            var flag = this.checkLandline('lnCode' + (_this.nCount - 1), 'landline' + (_this.nCount - 1));
-            if (flag) {
-                $('#altNo' + _this.nCount).removeClass('dn');
-                _this.nCount++;
-            }
+        });
+        if(!validNo) {
+            return false;
         }
-    };
+        if (_this.nCount <= 4) {
+            $('#altNo').append(str);
+            _this.nCount++;
+            _this.divNo++;
+        } else {
+            _this.toast(0, 'You can add only 4 Landline Numbers')
+        }
+    }
 
     this.delNumber = function (id) {
-        $('#' + id).addClass('dn');
-        $('#' + id + ' input').val('');
-        _this.nCount--;
+        $('#altNo_' + id).remove();
+        if(_this.nCount>=0) {
+            _this.nCount--;
+        }
     };
-
 
     _this.nmbCount = 1;
     this.addMobileNumber = function () {
