@@ -197,20 +197,20 @@ for(var i = 0; i< busiTypeSplt.length; i++)
     {
 		if(pageName == 'jewellery-Form')
 		{
-			var uthis = $(this);
-			$('.shapeComm').each(function () {
-				if ($(this).hasClass('shapeSelected') && $(this).attr('id') != uthis.attr('id'))
-					$(this).removeClass('shapeSelected');
-			});
-			$(this).toggleClass('shapeSelected');
-			if($(this).hasClass('shapeSelected'))
-			{
-				$('.diamondProp').removeClass('dn');
-		}
-		else
-		{
-				$('.diamondProp').addClass('dn');
-			}
+//			var uthis = $(this);
+//			$('.shapeComm').each(function () {
+//				if ($(this).hasClass('shapeSelected') && $(this).attr('id') != uthis.attr('id'))
+//					$(this).removeClass('shapeSelected');
+//			});
+//			$(this).toggleClass('shapeSelected');
+//			if($(this).hasClass('shapeSelected'))
+//			{
+//				$('.diamondProp').removeClass('dn');
+//			}
+//			else
+//			{
+//				$('.diamondProp').addClass('dn');
+//			}
 		}
 		else
 		{
@@ -438,14 +438,14 @@ function onEnterFormSubmit(evt,type)
     $("#pr_otp").keypress(function (charCode)
     {
         console.log('here');
-        if(charCode==13)
+    if(charCode==13)
+    {
+        if(type==1)
         {
-            if(type==1)
-            {
 
-                otpCheck();
-            } 
-        }
+            otpCheck();
+        } 
+    }
     });
 }
 
@@ -608,7 +608,7 @@ function updateDollarRate() {
                                                 loadDiamonds(1);
                                             }
                                             closeAllForms();
-                                            
+                                               
                                         }
                 }
                 else if(errCode==1)
@@ -751,7 +751,7 @@ function updateGoldSilverRate() {
                                 {
                                     loadBullions(1);
                                 }
-                                closeAllForms();
+				closeAllForms();
                                 
 			} else if(errCode==1) {
 				common.toast(0,obj['error']['Msg']);
@@ -871,7 +871,7 @@ function addDiamond() {
                 $('#dollarErr').removeClass('dn');
 //            }
 //    }}); 
-}
+            }
 function addBulion() {
     window.location.assign(DOMAIN+"index.php?case=bullion_Form&catid="+catid+"&vid="+uid);
 }

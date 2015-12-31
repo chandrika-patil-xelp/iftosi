@@ -1,4 +1,4 @@
-function changeGemstoneType(obj)
+function changeGemstoneType(obj,id)
 {
 	var gemType = $(obj).val();
 
@@ -6,19 +6,29 @@ function changeGemstoneType(obj)
 	{
 		if(gemType == 'other')
 		{
-			$('.otherGemstoneProp').removeClass('dn');
+			$('.otherGemstoneProp_'+id).removeClass('dn');
 		}
 		else
 		{
-			$('.otherGemstoneProp').addClass('dn');
+			$('.otherGemstoneProp_'+id).addClass('dn');
 		}
-		$('.gemstoneProp').removeClass('dn');
+		$('.gemstoneProp_'+id).removeClass('dn');
+                
+                $('#addGemsType').remove();
+                $('#gemsTypeCont').append('<div onclick="addGemsType()" id="addGemsType" class="submitBtn fmOpenR ripplelink poR fRight">Add Gem Type</div><div style="clear: both;"></div>');
 	}
 	else
 	{
-		$('.gemstoneProp').addClass('dn');
-		$('.otherGemstoneProp').addClass('dn');
+		$('.gemstoneProp_'+id).addClass('dn');
+		$('.otherGemstoneProp_'+id).addClass('dn');
+                $('.gemstoneProp_'+id+' input').removeAttr('checked');
 	}
+        $('.gemstoneProp').addClass('dn');
+        $('#gemsDiv select').each(function () {
+            if($(this).val()!='') {
+                $('.gemstoneProp').removeClass('dn');
+            }
+        });
 }
 
 
@@ -195,8 +205,8 @@ function validateJForm()
 	var clarity = $("input[name='clarity']:checked").val();
 	var dweight = $('#diamondweight').val().trim();
 	var no_diamonds=$('#no_diamonds').val().trim();
-	var gemstone_type=$('#gemstone_type').val();
-	var gemcolour = $("input[name='gemstone_color']:checked").val();
+//	var gemstone_type=$('#gemstone_type').val();
+//	var gemcolour = $("input[name='gemstone_color']:checked").val();
 	var gemweight=$('#gemweight').val().trim();
 	var num_gemstones = $('#num_gemstones').val().trim();
 	var purity = $('#goldpurity').val().trim();
@@ -260,25 +270,36 @@ function validateJForm()
 		isValid = false;
 	}
 
+        var vclarity=new Array();
+        var vcolor=new Array();
 	if(isValid && diamondShape.hasClass('shapeSelected'))
 	{
-		if(color === undefined || color === null || color === '')
-		{
-			str = 'Please select diamond color';
-			isValid = false;
-		}
+                var DivLen = ($('#diamondShapeCont #diamondShapeDiv').length)+1;
+                for(var i=1; i<DivLen; i++) {
+                    if($('#diamondShapeCont_'+i+' .shapeComm').hasClass('shapeSelected')) {
+                        var color =  $('input[name=color_'+i+']:checked').val();
+                        var clarity = $('input[name=clarity_'+i+']:checked').val();
+                        vcolor.push(color);
+                        vclarity.push(clarity);
+                        if(color === undefined || color === null || color === '')
+                        {
+                                str = 'Please select diamond color';
+                                isValid = false;
+                        }
 
-		if(isValid && (clarity === undefined || clarity === null || clarity === ''))
-		{
-			str = 'Please enter diamond quality';
-			isValid = false;
+                        if(isValid && (clarity === undefined || clarity === null || clarity === ''))
+                        {
+                                str = 'Please enter diamond quality';
+                                isValid = false;
+                        }
+                    }
 		}
 
 		if(isValid && (dweight === undefined || dweight === null || dweight === ''))
 		{
 			str = 'Please enter diamond weight in carats';
 			isValid = false;
-			$('#diamondweight').focus();
+			$('#diamondwdiamondShapeCont #diamondShapeDiveight').focus();
 		}
 
 		if(isValid && (no_diamonds === undefined || no_diamonds === null || no_diamonds === ''))
@@ -293,33 +314,58 @@ function validateJForm()
 		diamondShape = color = clarity = dweight = no_diamonds = '';
 	}
 
-	if(isValid && (gemstone_type !== undefined && gemstone_type !== null && gemstone_type !== ''))
-	{
-		if(isValid && (gemcolour === undefined || gemcolour === null || gemcolour === ''))
-		{
-			str = 'Please select gemstone color';
-			isValid = false;
-		}
+        var vgemstone_type=new Array();
+        var vgemcolour=new Array();
+        var DivLen = ($('#gemsTypeCont #gemsDiv').length)+1;
+        for(var i=1; i<DivLen; i++) {
+            
+            var gemstone_type=$('#gemsTypeCont_'+i+' #gemstone_type').val();
+            
+            var other_gem_type = $('.otherGemstoneProp_'+i+' #other_gem_type').val().trim();
+            
+            if(gemstone_type !== undefined && gemstone_type !== null && gemstone_type !== '' && typeof gemstone_type !== 'undefined' && gemstone_type === 'other')
+            {
+                    gemstone_type = other_gem_type;
+            }
+            
 
-		if(isValid && (gemweight === undefined || gemweight === null || gemweight === ''))
-		{
-			str = 'Please enter gemstone weight';
-			isValid = false;
-			$('#gemweight').focus();
-		}
-
-		if(isValid && (num_gemstones === undefined || num_gemstones === null || num_gemstones === ''))
-		{
-			str = 'Please enter number of gemstones';
-			isValid = false;
-			$('#num_gemstones').focus();
-		}
+            var gemcolour = $("input[name='gemstone_color_"+i+"']:checked").val();
+            
+            if(isValid && (gemstone_type !== undefined && gemstone_type !== null && gemstone_type !== ''))
+            {
+                    vgemstone_type.push(gemstone_type);
+                    vgemcolour.push(gemcolour);
+                    if(isValid && (gemcolour === undefined || gemcolour === null || gemcolour === ''))
+                    {
+                            str = 'Please select gemstone color';
+                            isValid = false;
+                    }
+            }
+            else
+            {
+                    gemstone_type = gemcolour = gemweight = num_gemstones = '';
+            }
 	}
-	else
-	{
-		gemstone_type = gemcolour = gemweight = num_gemstones = '';
-	}
 
+	if(isValid && (vgemstone_type != undefined || vgemstone_type != null || vgemstone_type != '')) {
+            
+            var gemweight=$('#gemweight').val().trim();
+            var num_gemstones = $('#num_gemstones').val().trim();
+            if(isValid && (gemweight === undefined || gemweight === null || gemweight === ''))
+            {
+                    str = 'Please enter gemstone weight';
+                    isValid = false;
+                    $('#gemweight').focus();
+            }
+
+            if(isValid && (num_gemstones === undefined || num_gemstones === null || num_gemstones === ''))
+            {
+                    str = 'Please enter number of gemstones';
+                    isValid = false;
+                    $('#num_gemstones').focus();
+            }
+        }
+        
 	if(isValid && (purity === undefined || purity === null || purity === '' || isNaN(purity)))
 	{
 		str = 'Please enter purity';
@@ -380,37 +426,45 @@ function validateJForm()
 			}
 		});
 
-		var diamondShapeVal = '';
+		var diamondShapeVal = new Array();
 
 		if(diamondShape !== undefined && diamondShape !== null && diamondShape !== '' && diamondShape.hasClass('shapeSelected'))
 		{
+                    var i=0;
 			diamondShape.each(function() {
 				if($(this).hasClass('shapeSelected'))
-				{
-					diamondShapeVal = $(this).attr('id');
+				{   
+                                    var diaVal=$(this).attr('id').split('_');
+					diamondShapeVal[i] = diaVal[0];
+                                        i++;
 				}
 			});
 		}
-
+                diamondShapeVal=diamondShapeVal.join('|!|');
+                vcolor=vcolor.join('|!|');
+                vclarity=vclarity.join('|!|');
+                vgemstone_type=vgemstone_type.join('|!|');
+                vgemcolour=vgemcolour.join('|!|');
 		var values = new Array();
 		values[0] = "shape|@|"+encodeURIComponent(shapeVal);
 		values[1] = "subcatid|@|"+encodeURIComponent(subcat);
 		values[2] = "Certficate|@|"+encodeURIComponent(certificate);
 		values[3] = "metal|@|"+encodeURIComponent(metal);
 		values[4] = "diamondShape|@|"+encodeURIComponent(diamondShapeVal);
-		values[5] = "color|@|"+encodeURIComponent(color);
-		values[6] = "clarity|@|"+encodeURIComponent(clarity);
+		values[5] = "color|@|"+encodeURIComponent(vcolor);
+		values[6] = "clarity|@|"+encodeURIComponent(vclarity);
 		values[7] = "diamonds_weight|@|"+encodeURIComponent(dweight);
 		values[8] = "no_diamonds|@|"+encodeURIComponent(no_diamonds);
-		values[9] = "gemstone_type|@|"+encodeURIComponent(gemstone_type);
-		values[10] = "gemstone_color|@|"+encodeURIComponent(gemcolour);
+		values[9] = "gemstone_type|@|"+encodeURIComponent(vgemstone_type);
+		values[10] = "gemstone_color|@|"+encodeURIComponent(vgemcolour);
 		values[11] = "gemstone_weight|@|"+encodeURIComponent(gemweight);
 		values[12] = "num_gemstones|@|"+encodeURIComponent(num_gemstones);
 		values[13] = "gold_purity|@|"+encodeURIComponent(purity);
 		values[14] = "gold_weight|@|"+encodeURIComponent(goldweight);
 		values[15] = "barcode|@|"+encodeURIComponent(barcode);
 		values[16] = "price|@|"+encodeURIComponent(prdprice);
-
+                console.log(vgemstone_type);
+                console.log(vgemcolour);
 		dt = values.join('|~|');
 
 		params += "&dt="+dt;
@@ -422,7 +476,7 @@ function validateJForm()
 				{
 					if(data.error.code !== undefined && data.error.code !== null && data.error.code !== '' && typeof data.error.code !== 'undefined' && data.error.code == 0)
 					{
-						window.location.href = IMGUPLOAD+'pid-'+data.results.pid+'&c='+catid;
+//						window.location.href = IMGUPLOAD+'pid-'+data.results.pid+'&c='+catid;
 					}
 					else
 					{
@@ -1035,4 +1089,118 @@ function ValidateFile() {
         return true;
     }
     return false;
+}
+
+// Multiple Diamond shape
+
+function addShapeType() {
+    var DivLen = ($('#diamondShapeCont #diamondShapeDiv').length)+1;
+    var str ='<div id="diamondShapeDiv"><div id="diamondShapeCont_'+DivLen+'" class="divCon fLeft dAuto" style="margin-top:0px;">';
+        str +='<div class="shapesCont">';
+            str +='<div class="wrapperMax">';
+                str +='<div class="allShapes">';
+                        str +='<center>';
+                        var shapeTypesArr=JSON.parse(shapeTypes);
+                        for(var i=0; i<shapeTypesArr.length; i++) {
+                            str +='<div class="shapeComm transition300 ripplelink '+shapeTypesArr[i]+' " id="'+shapeTypesArr[i]+'_'+DivLen+'" onclick="checkDiamondShape(this,'+DivLen+');"> </div>';
+                        }
+                        str +='</center></div></div></div></div>';
+
+                str +='<div class="divCon fLeft dAuto diamondProp dn diamondProp_'+DivLen+'"><div class="titleDiv txtCap fLeft">Diamond Color *</div>';
+                str +='<div class="radioCont fLeft"> ';
+                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="D" id="color_D_'+DivLen+'" type="radio"><label for="color_D_'+DivLen+'"> D</label></div>';
+                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="E" id="color_E_'+DivLen+'" type="radio"><label for="color_E_'+DivLen+'">E</label></div>';
+                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="F" id="color_F_'+DivLen+'" type="radio"><label for="color_F_'+DivLen+'">F</label></div>';
+                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="G" id="color_G_'+DivLen+'" type="radio"><label for="color_G_'+DivLen+'">G</label></div>';
+                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="H" id="color_H_'+DivLen+'" type="radio"><label for="color_H_'+DivLen+'">H</label></div>';
+                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="I" id="color_I_'+DivLen+'" type="radio"><label for="color_I_'+DivLen+'">I</label></div>';
+                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="J" id="color_J_'+DivLen+'" type="radio"><label for="color_J_'+DivLen+'">J</label></div>';
+                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="K" id="color_K_'+DivLen+'" type="radio"><label for="color_K_'+DivLen+'">K</label></div>';
+                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="L" id="color_L_'+DivLen+'" type="radio"><label for="color_L_'+DivLen+'">L</label></div>';
+                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="M" id="color_M_'+DivLen+'" type="radio"><label for="color_M_'+DivLen+'">M</label></div>';
+                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="N" id="color_N_'+DivLen+'" type="radio"><label for="color_N_'+DivLen+'">N</label></div>';
+                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="O" id="color_O_'+DivLen+'" type="radio"><label for="color_O_'+DivLen+'">O</label></div>';
+            str +='</div></div>';
+            str +='<div class="divCon  fLeft jw3 diamondProp dn diamondProp_'+DivLen+'">';
+                str +='<div class="titleDiv txtCap fLeft">Diamond Quality *</div>';
+                str +='<div class="radioCont fLeft"> ';
+                    str +='<div class="checkDiv fLeft"><input type="radio" id="clarity_IF_'+DivLen+'" value="IF" class="filled-in" name="clarity_'+DivLen+'"><label for="clarity_IF_'+DivLen+'">IF</label></div>';
+                    str +='<div class="checkDiv fLeft"><input type="radio" id="clarity_VVS1_'+DivLen+'" value="VVS1" class="filled-in" name="clarity_'+DivLen+'"><label for="clarity_VVS1_'+DivLen+'">VVS1</label></div>';
+                    str +='<div class="checkDiv fLeft"><input type="radio" id="clarity_VVS2_'+DivLen+'" value="VVS2" class="filled-in" name="clarity_'+DivLen+'"><label for="clarity_VVS2_'+DivLen+'">VVS2</label></div>';
+                    str +='<div class="checkDiv fLeft"><input type="radio" id="clarity_VS1_'+DivLen+'" value="VS1" class="filled-in" name="clarity_'+DivLen+'"><label for="clarity_VS1_'+DivLen+'">VS1</label></div>';
+                    str +='<div class="checkDiv fLeft"><input type="radio" id="clarity_VS2_'+DivLen+'" value="VS2" class="filled-in" name="clarity_'+DivLen+'"><label for="clarity_VS2_'+DivLen+'">VS2</label></div>';
+                    str +='<div class="checkDiv fLeft"><input type="radio" id="clarity_SI1_'+DivLen+'" value="SI1" class="filled-in" name="clarity_'+DivLen+'"><label for="clarity_SI1_'+DivLen+'">SI1</label></div>';
+                    str +='<div class="checkDiv fLeft"><input type="radio" id="clarity_SI2_'+DivLen+'" value="SI2" class="filled-in" name="clarity_'+DivLen+'"><label for="clarity_SI2_'+DivLen+'">SI2</label></div>';
+                    str +='<div class="checkDiv fLeft"><input type="radio" id="clarity_I1_'+DivLen+'" value="I1" class="filled-in" name="clarity_'+DivLen+'"><label for="clarity_I1_'+DivLen+'">I1</label></div>';
+                str +='</div></div></div>';
+    $('#diamondShapeCont').append(str);
+    $('#addDiamondType').remove();
+}
+function checkDiamondShape(evt,id) {
+
+    if($(evt).hasClass('shapeSelected'))
+    {
+        $(evt).toggleClass('shapeSelected');
+        $('.diamondProp_'+id).addClass('dn');
+        $('.diamondProp_'+id+' input').removeAttr('checked');
+    } else {
+        $(evt).removeClass('shapeSelected');
+        var uthis = $(evt);
+        var wholeDiv='#diamondShapeCont_'+id+' .shapeComm';
+        $(wholeDiv).each(function () {
+            if ($(wholeDiv).hasClass('shapeSelected') && $(wholeDiv).attr('id') != uthis.attr('id'))
+                $(wholeDiv).removeClass('shapeSelected');
+        });
+        $(evt).toggleClass('shapeSelected');
+        if($(evt).hasClass('shapeSelected'))
+        {
+            $('#addDiamondType').remove();
+            $('#diamondShapeCont').append('<div onclick="addShapeType()" id="addDiamondType" class="submitBtn fmOpenR ripplelink poR fRight">Add Diamond Type</div><div style="clear: both;"></div>');
+            $('.diamondProp_'+id).removeClass('dn');
+        }
+        else
+        {
+            $('.diamondProp_'+id).addClass('dn');
+        }
+    }
+
+    $('.divCon2.diamondProp').addClass('dn');
+    $('.shapeComm').each(function () {
+        if ($(this).hasClass('shapeSelected')) {
+            $('.divCon2.diamondProp').removeClass('dn');
+        }
+    });
+}
+
+
+function addGemsType() {
+    var DivLen = ($('#gemsTypeCont #gemsDiv').length)+1;
+    var str ='<div id="gemsDiv"><div id="gemsTypeCont_'+DivLen+'"><div class="divCon fLeft">';
+        str +='<div class="titleDiv txtCap fLeft">Gemstone Type</div>';
+        str +='<select class="txtInput fLeft fmOpenR font14 c666" onchange="changeGemstoneType(this,'+DivLen+');" id="gemstone_type">';
+        str +='<option value="">Select Gemstone Type</option>';
+        var gemsTypesArr=JSON.parse(gemsTypes);
+        for(var i=0; i<gemsTypesArr.length; i++) {
+            str +='<option value="'+gemsTypesArr[i].c+'">'+gemsTypesArr[i].n+'</option>';
+        }
+        str +='<option value="other">Others</option>';
+        str +='</select>';
+    str +='</div>';
+
+    str +='<div class="divCon fLeft dn otherGemstoneProp_'+DivLen+'">';
+    str +='<div class="titleDiv txtCap fLeft">Other Gemstone Type</div>';
+    str +='<input type="text" class="txtInput fLeft fmOpenR font14 c666" value="" placeholder=" eg. ABC" autocomplete="false" id="other_gem_type" name="other_gem_type"></div>';
+
+    str +='<div class="divCon fLeft jw3 dn gemstoneProp_'+DivLen+'">';
+    str +='<div class="titleDiv txtCap fLeft">Gemstone Colour *</div>';
+    str +='<div class="radioCont fLeft">';
+
+        var gemsValuesArr=JSON.parse(gemsValues);
+        for(var i=0; i<gemsValuesArr.length; i++) {
+            str +='<div class="checkDiv fLeft"><input type="radio" id="'+gemsValuesArr[i]+'_'+DivLen+'" value="'+gemsValuesArr[i]+'" class="filled-in" name="gemstone_color_'+DivLen+'"><label for="'+gemsValuesArr[i]+'_'+DivLen+'" class=" txtCap">'+gemsValuesArr[i]+'</label></div>';
+        }
+
+    str +='</div></div></div>';
+    $('#addGemsType').remove();
+    $('#gemsTypeCont').append(str);
 }

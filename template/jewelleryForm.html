@@ -163,7 +163,16 @@
                     }
 ?>
     <div class="vCommTitle fLeft fmOpenL" style="font-size:25px">Select the diamond you want to add in product</div>
-					<div class="divCon fLeft dAuto">
+    <div id="diamondShapeCont">
+    <?php
+        $attr['diamond_shape']=explode('|!|',$attr['diamond_shape']);
+        $attr['color']=explode('|!|',$attr['color']);
+        $attr['clarity']=explode('|!|',$attr['clarity']);
+        for($curIndex=0; $curIndex<count($attr['diamond_shape']); $curIndex++) {
+            $curDiv=$curIndex+1;
+    ?>
+        <div id="diamondShapeDiv">
+					<div class="divCon fLeft dAuto" id="diamondShapeCont_<?php echo $curDiv; ?>">
 						
 
 <?php
@@ -172,9 +181,9 @@
 							$attr['color'] = $attr['clarity'] = $attr['dwt'] = $attr['nofd'] = '';
 						}
 
-						if(empty($attr['gemstone_type']))
+						if(empty($attr['gemstone_type'][$curIndex]))
 						{
-							$attr['gemstone_color'] = $attr['gemwt'] = $attr['num_gemstones'] = '';
+							$attr['gemstone_color'][$curIndex] = $attr['gemwt'] = $attr['num_gemstones'] = '';
 						}
 
 						foreach($shapeAttrs['attributes'] as $key => $value)
@@ -191,7 +200,7 @@
 												foreach ($filval as $ky => $vl)
 												{
 ?>
-													<div id="<?php echo $vl; ?>" class="shapeComm transition300 ripplelink <?php echo $vl; ?> <?php echo (strtolower($attr['diamond_shape']) == strtolower($vl)) ? 'shapeSelected' : '';?>">
+													<div id="<?php echo $vl; ?>_<?php echo $curDiv; ?>" class="shapeComm transition300 ripplelink <?php echo $vl; ?> <?php echo (strtolower($attr['diamond_shape'][$curIndex]) == strtolower($vl)) ? 'shapeSelected' : '';?>" onclick="checkDiamondShape(this,<?php echo $curDiv; ?>);">
 													</div>
 <?php
 												}
@@ -206,97 +215,104 @@
 ?>
 					</div>
 
-                    <div class="divCon fLeft dAuto <?php echo ($attr['diamond_shape']) ? '' : 'dn'; ?> diamondProp">
+                    <div class="divCon fLeft dAuto <?php echo ($attr['diamond_shape'][$curIndex]) ? '' : 'dn'; ?> diamondProp diamondProp_<?php echo $curDiv; ?>">
                         <div  class="titleDiv txtCap fLeft">Diamond Color *</div>
                         <div class='radioCont fLeft'> 
                             <div class="checkDiv fLeft">
-                                <input type="radio" name='color' class="filled-in" value="D" <?=($attr['color'] == 'D') ? 'checked' : '';?> id="color_D">
-                                <label for="color_D"> D</label>
+                                <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="D" <?=($attr['color'][$curIndex] == 'D') ? 'checked' : '';?> id="color_D_<?php echo $curDiv; ?>">
+                                <label for="color_D_<?php echo $curDiv; ?>"> D</label>
                             </div>
                             <div class="checkDiv fLeft">
-                                <input type="radio" name='color' class="filled-in" value="E" <?=($attr['color'] == 'E') ? 'checked' : '';?> id="color_E">
-                                <label for="color_E">E</label>
+                                <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="E" <?=($attr['color'][$curIndex] == 'E') ? 'checked' : '';?> id="color_E_<?php echo $curDiv; ?>">
+                                <label for="color_E_<?php echo $curDiv; ?>">E</label>
                             </div>
                             <div class="checkDiv fLeft">
-                                <input type="radio" name='color' class="filled-in" value="F" <?=($attr['color'] == 'F') ? 'checked' : '';?> id="color_F">
-                                <label for="color_F">F</label>
+                                <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="F" <?=($attr['color'][$curIndex] == 'F') ? 'checked' : '';?> id="color_F_<?php echo $curDiv; ?>">
+                                <label for="color_F_<?php echo $curDiv; ?>">F</label>
                             </div>
                             <div class="checkDiv fLeft">
-                                <input type="radio" name='color' class="filled-in" value="G" <?=($attr['color'] == 'G') ? 'checked' : '';?> id="color_G">
-                                <label for="color_G">G</label>
+                                <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="G" <?=($attr['color'][$curIndex] == 'G') ? 'checked' : '';?> id="color_G_<?php echo $curDiv; ?>">
+                                <label for="color_G_<?php echo $curDiv; ?>">G</label>
                             </div>
                             <div class="checkDiv fLeft">
-                                <input type="radio" name='color' class="filled-in" value="H" <?=($attr['color'] == 'H') ? 'checked' : '';?> id="color_H">
-                                <label for="color_H">H</label>
+                                <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="H" <?=($attr['color'][$curIndex] == 'H') ? 'checked' : '';?> id="color_H_<?php echo $curDiv; ?>">
+                                <label for="color_H_<?php echo $curDiv; ?>">H</label>
                             </div>
                             <div class="checkDiv fLeft">
-                                <input type="radio" name='color' class="filled-in" value="I" <?=($attr['color'] == 'I') ? 'checked' : '';?> id="color_I">
-                                <label for="color_I">I</label>
+                                <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="I" <?=($attr['color'][$curIndex] == 'I') ? 'checked' : '';?> id="color_I_<?php echo $curDiv; ?>">
+                                <label for="color_I_<?php echo $curDiv; ?>">I</label>
                             </div>
                             <div class="checkDiv fLeft">
-                                <input type="radio" name='color' class="filled-in" value="J" <?=($attr['color'] == 'J') ? 'checked' : '';?> id="color_J">
-                                <label for="color_J">J</label>
+                                <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="J" <?=($attr['color'][$curIndex] == 'J') ? 'checked' : '';?> id="color_J_<?php echo $curDiv; ?>">
+                                <label for="color_J_<?php echo $curDiv; ?>">J</label>
                             </div>
                             <div class="checkDiv fLeft">
-                                <input type="radio" name='color' class="filled-in" value="K" <?=($attr['color'] == 'K') ? 'checked' : '';?> id="color_K">
-                                <label for="color_K">K</label>
+                                <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="K" <?=($attr['color'][$curIndex] == 'K') ? 'checked' : '';?> id="color_K_<?php echo $curDiv; ?>">
+                                <label for="color_K_<?php echo $curDiv; ?>">K</label>
                             </div>
                             <div class="checkDiv fLeft">
-                                <input type="radio" name='color' class="filled-in" value="L" <?=($attr['color'] == 'L') ? 'checked' : '';?> id="color_L">
-                                <label for="color_L">L</label>
+                                <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="L" <?=($attr['color'][$curIndex] == 'L') ? 'checked' : '';?> id="color_L_<?php echo $curDiv; ?>">
+                                <label for="color_L_<?php echo $curDiv; ?>">L</label>
                             </div>
                             <div class="checkDiv fLeft">
-                                <input type="radio" name='color' class="filled-in" value="M" <?=($attr['color'] == 'M') ? 'checked' : '';?> id="color_M">
-                                <label for="color_M">M</label>
+                                <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="M" <?=($attr['color'][$curIndex] == 'M') ? 'checked' : '';?> id="color_M_<?php echo $curDiv; ?>">
+                                <label for="color_M_<?php echo $curDiv; ?>">M</label>
                             </div>
                             <div class="checkDiv fLeft">
-                                <input type="radio" name='color' class="filled-in" value="N" <?=($attr['color'] == 'N') ? 'checked' : '';?> id="color_N">
-                                <label for="color_N">N</label>
+                                <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="N" <?=($attr['color'][$curIndex] == 'N') ? 'checked' : '';?> id="color_N_<?php echo $curDiv; ?>">
+                                <label for="color_N_<?php echo $curDiv; ?>">N</label>
                             </div>
                             <div class="checkDiv fLeft">
-                                <input type="radio" name='color' class="filled-in" value="O" <?=($attr['color'] == 'O') ? 'checked' : '';?> id="color_O">
-                                <label for="color_O">O</label>
+                                <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="O" <?=($attr['color'][$curIndex] == 'O') ? 'checked' : '';?> id="color_O_<?php echo $curDiv; ?>">
+                                <label for="color_O_<?php echo $curDiv; ?>">O</label>
                         </div>
                     </div>
                         </div>
                         
-                    <div class="divCon  fLeft jw3 <?php echo ($attr['diamond_shape']) ? '' : 'dn'; ?> diamondProp">
+                    <div class="divCon  fLeft jw3 <?php echo ($attr['diamond_shape'][$curIndex]) ? '' : 'dn'; ?> diamondProp diamondProp_<?php echo $curDiv; ?>">
                         <div  class="titleDiv txtCap fLeft">Diamond Quality *</div>
                         <div class='radioCont fLeft'> 
                             <div class="checkDiv fLeft">
-                                <input type="radio" name='clarity' class="filled-in" value="IF" <?=($attr['clarity'] == 'IF') ? 'checked' : '';?> id="clarity_IF">
-                                <label for="clarity_IF">IF</label>
+                                <input type="radio" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="IF" <?=($attr['clarity'][$curIndex] == 'IF') ? 'checked' : '';?> id="clarity_IF_<?php echo $curDiv; ?>">
+                                <label for="clarity_IF_<?php echo $curDiv; ?>">IF</label>
                             </div>
                             <div class="checkDiv fLeft">
-                                <input type="radio" name='clarity' class="filled-in" value="VVS1" <?=($attr['clarity'] == 'VVS1') ? 'checked' : '';?> id="clarity_VVS1">
-                                <label for="clarity_VVS1">VVS1</label>
+                                <input type="radio" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="VVS1" <?=($attr['clarity'][$curIndex] == 'VVS1') ? 'checked' : '';?> id="clarity_VVS1_<?php echo $curDiv; ?>">
+                                <label for="clarity_VVS1_<?php echo $curDiv; ?>">VVS1</label>
                             </div>
                             <div class="checkDiv fLeft">
-                                <input type="radio" name='clarity' class="filled-in" value="VVS2" <?=($attr['clarity'] == 'VVS2') ? 'checked' : '';?> id="clarity_VVS2">
-                                <label for="clarity_VVS2">VVS2</label>
+                                <input type="radio" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="VVS2" <?=($attr['clarity'][$curIndex] == 'VVS2') ? 'checked' : '';?> id="clarity_VVS2_<?php echo $curDiv; ?>">
+                                <label for="clarity_VVS2_<?php echo $curDiv; ?>">VVS2</label>
                             </div>
                             <div class="checkDiv fLeft">
-                                <input type="radio" name='clarity' class="filled-in" value="VS1" <?=($attr['clarity'] == 'VS1') ? 'checked' : '';?> id="clarity_VS1">
-                                <label for="clarity_VS1">VS1</label>
+                                <input type="radio" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="VS1" <?=($attr['clarity'][$curIndex] == 'VS1') ? 'checked' : '';?> id="clarity_VS1_<?php echo $curDiv; ?>">
+                                <label for="clarity_VS1_<?php echo $curDiv; ?>">VS1</label>
                             </div>
                             <div class="checkDiv fLeft">
-                                <input type="radio" name='clarity' class="filled-in" value="VS2" <?=($attr['clarity'] == 'VS2') ? 'checked' : '';?> id="clarity_VS2">
-                                <label for="clarity_VS2">VS2</label>
+                                <input type="radio" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="VS2" <?=($attr['clarity'][$curIndex] == 'VS2') ? 'checked' : '';?> id="clarity_VS2_<?php echo $curDiv; ?>">
+                                <label for="clarity_VS2_<?php echo $curDiv; ?>">VS2</label>
                             </div>
                             <div class="checkDiv fLeft">
-                                <input type="radio" name='clarity' class="filled-in" value="SI1" <?=($attr['clarity'] == 'SI1') ? 'checked' : '';?> id="clarity_SI1">
-                                <label for="clarity_SI1">SI1</label>
+                                <input type="radio" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="SI1" <?=($attr['clarity'][$curIndex] == 'SI1') ? 'checked' : '';?> id="clarity_SI1_<?php echo $curDiv; ?>">
+                                <label for="clarity_SI1_<?php echo $curDiv; ?>">SI1</label>
                             </div>
                             <div class="checkDiv fLeft">
-                                <input type="radio" name='clarity' class="filled-in" value="SI2" <?=($attr['clarity'] == 'SI2') ? 'checked' : '';?> id="clarity_SI2">
-                                <label for="clarity_SI2">SI2</label>
+                                <input type="radio" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="SI2" <?=($attr['clarity'][$curIndex] == 'SI2') ? 'checked' : '';?> id="clarity_SI2_<?php echo $curDiv; ?>">
+                                <label for="clarity_SI2_<?php echo $curDiv; ?>">SI2</label>
                             </div>
                             <div class="checkDiv fLeft">
-                                <input type="radio" name='clarity' class="filled-in" value="I1" <?=($attr['clarity'] == 'I1') ? 'checked' : '';?> id="clarity_I1">
-                                <label for="clarity_I1">I1</label>
+                                <input type="radio" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="I1" <?=($attr['clarity'][$curIndex] == 'I1') ? 'checked' : '';?> id="clarity_I1_<?php echo $curDiv; ?>">
+                                <label for="clarity_I1_<?php echo $curDiv; ?>">I1</label>
                             </div>
                         </div>
                     </div>
+                    </div>
+            <?php } ?>
+            </div>
+    <?php if(!empty($attr['diamond_shape'][0])) { ?>
+    <div class="submitBtn fmOpenR ripplelink poR fRight" id="addDiamondType" onclick="addShapeType()">Add Diamond Type</div>
+   <div style="clear: both;"></div>
+   <?php } ?> <!--<div onclick="addShapeType()" id="addDiamondType" class="submitBtn fmOpenR ripplelink poR fRight">Add Diamond Type</div><div class="clearFill"></div>-->
                         
                     <div class="divCon2 fLeft <?php echo ($attr['diamond_shape']) ? '' : 'dn'; ?> diamondProp">
                         <div  class="titleDiv txtCap fLeft">Diamond Weight (in CTS) *</div>
@@ -320,12 +336,21 @@
                     {
                        $attr['gemwt'] = ''; 
                     }
+                    
+                    $curDiv=1;
 ?>
 
-
-					<div class="divCon fLeft">
+                        <div id="gemsTypeCont">
+                            <?php
+                                $attr['gemstone_type']=explode('|!|',$attr['gemstone_type']);
+                                $attr['gemstone_color']=explode('|!|',$attr['gemstone_color']);
+                                for($curIndex=0; $curIndex<count($attr['gemstone_type']); $curIndex++) {
+                                    $curDiv=$curIndex+1;
+                            ?>
+                            <div id="gemsDiv">
+					<div class="divCon fLeft" id="gemsTypeCont_<?php echo $curDiv; ?>">
                         <div class="titleDiv txtCap fLeft">Gemstone Type</div>
-						<select id="gemstone_type" onchange="changeGemstoneType(this);" class="txtInput fLeft fmOpenR font14 c666">
+						<select id="gemstone_type" onchange="changeGemstoneType(this,<?php echo $curDiv; ?>);" class="txtInput fLeft fmOpenR font14 c666">
 							<option value="">Select Gemstone Type</option>
 <?php
 							$gemsAttrsArr = array();
@@ -333,11 +358,11 @@
 							{
 								$gemsAttrsArr[] = $value['name'];
 ?>
-								<option value="<?php echo $value['name']; ?>" <?php echo (strtolower($attr['gemstone_type']) == strtolower($value['name'])) ? 'selected' : ''; ?>><?php echo $value['display_name']; ?></option>
+								<option value="<?php echo $value['name']; ?>" <?php echo (strtolower($attr['gemstone_type'][$curIndex]) == strtolower($value['name'])) ? 'selected' : ''; ?>><?php echo $value['display_name']; ?></option>
 <?php
 							}
 ?>
-							<option value="other" <?php echo (!empty($attr['gemstone_type']) && !in_array($attr['gemstone_type'], $gemsAttrsArr)) ? 'selected' : ''; ?>>Others</option>
+							<option value="other" <?php echo (!empty($attr['gemstone_type'][$curIndex]) && !in_array($attr['gemstone_type'][$curIndex], $gemsAttrsArr)) ? 'selected' : ''; ?>>Others</option>
 							<!--<option value="agate">Agate</option>
 							<option value="alexandrite">Alexandrite</option>
 							<option value="amazonite">Amazonite</option>
@@ -349,16 +374,16 @@
 						</select>
                     </div>
 
-					<div class="divCon fLeft <?php echo (!empty($attr['gemstone_type']) && !in_array($attr['gemstone_type'], $gemsAttrsArr)) ? '' : 'dn'; ?> otherGemstoneProp">
+					<div class="divCon fLeft <?php echo (!empty($attr['gemstone_type'][$curIndex]) && !in_array($attr['gemstone_type'][$curIndex], $gemsAttrsArr)) ? '' : 'dn'; ?> otherGemstoneProp_<?php echo $curDiv; ?>">
 						<div class="titleDiv txtCap fLeft">Other Gemstone Type</div>
-						<input name="other_gem_type" type="text" id="other_gem_type" autocomplete="false" placeholder=" eg. ABC" value="<?php echo (!empty($attr['gemstone_type']) && !in_array($attr['gemstone_type'], $gemsAttrsArr)) ? $attr['gemstone_type'] : ''; ?>" class="txtInput fLeft fmOpenR font14 c666">
+						<input name="other_gem_type" type="text" id="other_gem_type" autocomplete="false" placeholder=" eg. ABC" value="<?php echo (!empty($attr['gemstone_type'][$curIndex]) && !in_array($attr['gemstone_type'][$curIndex], $gemsAttrsArr)) ? $attr['gemstone_type'][$curIndex] : ''; ?>" class="txtInput fLeft fmOpenR font14 c666">
 					</div>
 
 <?php                          
                     if(strtolower($catres[3]['attr_name'])=='gemstone_color')
                     {
 ?>
-						<div class="divCon fLeft jw3 <?php echo ($attr['gemstone_type']) ? '' : 'dn'; ?> gemstoneProp">
+						<div class="divCon fLeft jw3 <?php echo ($attr['gemstone_type'][$curIndex]) ? '' : 'dn'; ?> gemstoneProp_<?php echo $curDiv; ?>">
 							<div  class="titleDiv txtCap fLeft"><?=$catres[3]['attr_display_name']?> *</div>
 								<div class='radioCont fLeft'>     
 <?php
@@ -368,8 +393,8 @@
 ?>
                                 
 									<div class="checkDiv fLeft">
-										<input type="radio" name='gemstone_color' class="filled-in" value="<?=$gemvalues[$key];?>" <?php echo ($gemvalues[$key] == $attr['gemstone_color']) ? 'checked' : '';?> id="<?=$gemvalues[$key];?>">
-										<label for="<?=$gemvalues[$key];?>"><?=  ucwords($gemvalues[$key]);?></label>
+										<input type="radio" name='gemstone_color_<?php echo $curDiv; ?>' class="filled-in" value="<?=$gemvalues[$key]; ?>" <?php echo ($gemvalues[$key] == $attr['gemstone_color'][$curIndex]) ? 'checked' : '';?> id="<?=$gemvalues[$key].'_'.$curDiv; ?>">
+										<label for="<?=$gemvalues[$key].'_'.$curDiv; ?>"><?=  ucwords($gemvalues[$key]);?></label>
 									</div>
 <?php
 								}
@@ -379,11 +404,19 @@
 <?php 
                     }
 ?>
-
+                                </div>
+            <?php } ?>
+                            </div>
+                            <div class="clearFill"></div>
+    <?php if(!empty($attr['gemstone_type'][0])) { ?>
+    <div class="submitBtn fmOpenR ripplelink poR fRight" id="addGemsType" onclick="addGemsType()">Add Gem Type</div>
+    <div style="clear: both;"></div>
+    <?php } ?>
+<!--<div onclick="addGemsType()" id="addGemsType" class="submitBtn fmOpenR ripplelink poR fRight">Add Gem Type</div><div class="clearFill"></div>-->
 <?php
 					$attr['gemwt'] = (!empty($attr['gemwt']) && strval($attr['gemwt']) !== '0.00' && strval($attr['gemwt']) !== '0.000') ? $attr['gemwt'] : '';
 ?>
-					<div class="divCon2 fLeft <?php echo ($attr['gemstone_type']) ? '' : 'dn'; ?> gemstoneProp">
+					<div class="divCon2 fLeft <?php echo ($attr['gemstone_type'][0]) ? '' : 'dn'; ?> gemstoneProp">
                         <div  class="titleDiv txtCap fLeft">Gemstone Weight (in CTS) *</div>
                         <input name="gemstone_weight" type="text" id="gemweight" autocomplete="false" placeholder=" eg. 1.25" maxlength="8" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['gemwt'];?>" class="txtInput fLeft fmOpenR font14 c666">
                     </div>
@@ -391,10 +424,10 @@
 <?php
 					$attr['num_gemstones'] = (!empty($attr['num_gemstones']) && strval($attr['num_gemstones']) !== '0.00' && strval($attr['num_gemstones']) !== '0.000') ? $attr['num_gemstones'] : '';
 ?>
-					<div class="divCon2 fLeft <?php echo ($attr['gemstone_type']) ? '' : 'dn'; ?> gemstoneProp">
+					<div class="divCon2 fLeft <?php echo ($attr['gemstone_type'][0]) ? '' : 'dn'; ?> gemstoneProp">
                         <div  class="titleDiv txtCap fLeft">No. of Gemstones *</div>
                         <input name="num_gemstones" type="text" id="num_gemstones" autocomplete="false" placeholder=" eg. 10" maxlength="3" onkeypress="return common.isNumberKey(event);" value="<?=$attr['num_gemstones'];?>" class="txtInput fLeft fmOpenR font14 c666">
-                    </div>
+                    </div><div style="clear: both;"></div>
 
 <?php
 					foreach($cat['subcat'] as $key=>$values)
@@ -448,6 +481,21 @@
     </div>
 <?php include 'rateForms.html'; ?>
 </div>
+      <?php
+        function convertJSObj($array) {
+            foreach ($array as $key => $value) {
+                $c['c']=$value['name'];
+                $c['n']=$value['display_name'];
+                $val[]=$c;
+            }
+            return json_encode($val);
+        }
+    ?>
+        <script>
+            var shapeTypes = '<?php echo json_encode($filval);?>';
+            var gemsTypes = '<?php echo convertJSObj($gemsAttrs);?>';
+            var gemsValues = '<?php echo json_encode($gemvalues);?>';
+        </script>
     <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['jqryUi']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['vendorLanding'];?>"></script>
