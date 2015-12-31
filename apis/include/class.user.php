@@ -216,6 +216,7 @@
                 {
                 $arr="SignUp process Is Complete";
                 $err=array('code'=>0,'msg'=>"Insert Operation Done");
+				$this->sendMail($params);
                 }
                 else
                 {       
@@ -226,7 +227,8 @@
            else if($params['isvendor']==0)
             {
                 $arr="SignUp process Is Complete";
-                $err=array('code'=>0,'msg'=>"Insert Operation Done");            
+                $err=array('code'=>0,'msg'=>"Insert Operation Done");
+				$this->sendMail($params);
             }
             else
             {
@@ -841,6 +843,25 @@
             $result = array('results' => $arr, 'error' => $err);
             return $result;
         }
+
+		private function sendMail($params)
+		{
+			$subject = 'Your Password for IFtoSI';
+			$message = 'Dear ' . $params['username'] . ',';
+			$message .= "\r\n";
+			$message .= "Your new password is " . $params['password'];
+			$message .= "\r\n \r\n";
+			$message .= "Team IFtoSI";
+
+			$headers = "MIME-Version: 1.0" . "\r\n";
+			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+			$headers .= 'From: <info@iftosi.com>' . "\r\n";
+
+			if(!empty($params['email']))
+			{
+				mail($params['email'], $subject, $message, $headers);
+			}
+		}
 
 }
 ?>
