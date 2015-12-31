@@ -12,7 +12,7 @@ $(document).ready(function() {
     $('input').bind('click',function(){$(this).attr('readonly',false);});
     
     //$('.categoryCircle').velocity({scale: "0"}, {duration: 0, delay: 0});
-    $('body').animate({scrollTop: 0});
+    $('html,body').animate({scrollTop: 0});
     scene = document.getElementById('scene');
     parallax = new Parallax(scene);
 

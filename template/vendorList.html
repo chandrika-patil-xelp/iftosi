@@ -167,7 +167,7 @@ function loadProductsCallback(res,pgno) {
             $('.pgComm').removeClass('pgActive');
             $(this).addClass('pgActive');
             loadProducts($(this).text());
-            $('body').animate({scrollTop: $('.listContainer').offset().top - 100}, 300);
+            $('html,body').animate({scrollTop: $('.listContainer').offset().top - 100}, 300);
         });
         paginationPrevNext();
     } else {

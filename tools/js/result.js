@@ -309,7 +309,7 @@ function showWish(catid,pgno,uid,nojump,pid)
 	if(typeof pid === 'undefined')
 		pid = '';
 	if(!nojump)
-		$('body').animate({scrollTop: $('.wishTabsCont').offset().top-60}, 300);
+		$('html,body').animate({scrollTop: $('.wishTabsCont').offset().top-60}, 300);
 	
 	var params 	= 'action=ajx&case=filter&catid='+catid+'&pgno='+pgno+"&uid="+uid+"&pid="+pid;
 	var URL 	= DOMAIN + "index.php";
@@ -383,7 +383,7 @@ function arrangeData(adata, id, divHolder, nextxt)
 function makeCall(id, cid) {
 	$('#pgno').val(1);
 	FR();
-	$('body').animate({scrollTop: $('.allShapes').offset().top-60}, 300);
+	$('html,body').animate({scrollTop: $('.allShapes').offset().top-60}, 300);
 }
 
 function getResultsData(data,sortby,showtree)
@@ -1065,10 +1065,10 @@ function getResultsData(data,sortby,showtree)
 	{
 		if(typeof $('.allResults').offset() !== 'undefined')
 		{
-			$('body').animate({scrollTop: $('.allResults').offset().top-60}, 300);
+			$('html,body').animate({scrollTop: $('.allResults').offset().top-60}, 300);
 		}
 		else
-			$('body').animate({scrollTop: $('.listCont').offset().top-120}, 300);
+			$('html,body').animate({scrollTop: $('.listCont').offset().top-120}, 300);
 	}
 		
 	

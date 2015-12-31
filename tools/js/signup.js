@@ -11,8 +11,8 @@ var validMob = true;
 
     if (isMobile) {
         $(input_selector).focus(function () {
-            var npos = $('body').scrollTop() + 40;
-            $('body').animate({scrollTop: npos}, 100);
+            var npos = $('html,body').scrollTop() + 40;
+            $('html,body').animate({scrollTop: npos}, 100);
         });
     }
     

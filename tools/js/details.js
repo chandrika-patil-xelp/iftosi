@@ -515,7 +515,7 @@ function showVendorDetails(obj)
 			setTimeout(function(){
 				$('#vDetails').removeClass('vTransit');
 				$('#vDetails').removeClass('dn');
-				$('body').animate({scrollTop: pos}, 300);
+				$('html,body').animate({scrollTop: pos}, 300);
 			},10);
 
 			setTimeout(function () {
@@ -909,7 +909,7 @@ function otpCheck()
 								setTimeout(function(){
 									$('#vDetails').removeClass('vTransit');
 									$('#vDetails').removeClass('dn');
-									$('body').animate({scrollTop: pos}, 300);
+									$('html,body').animate({scrollTop: pos}, 300);
 								},10);
 
 								setTimeout(function () {
