@@ -374,6 +374,14 @@ a{text-decoration: none;}
 .deltBtn {vertical-align:top;display: inline-block;width: 40px;height: 40px!important;line-height: 40px;color: #fff;background: url(../img/common/delete.svg)no-repeat;background-size: auto 80%;background-position: center;padding: 0!important;cursor: pointer;}
 .editBtn {vertical-align:top;display: inline-block;width: 40px;height: 40px!important;line-height: 40px;color: #fff;background: url(../img/common/edit.svg)no-repeat;background-size: auto 80%;background-position: center;padding: 0!important;cursor: pointer;}
 .soldBtn {min-width:168px;vertical-align: top;display: inline-block;width: auto;height: 36px!important;line-height: 40px;color: #fff;background: #8A0044 url(../img/common/sold.svg)no-repeat;background-size: auto 80%;background-position: 10px center;padding: 0!important;margin: 7px;cursor: pointer;border: none!important;font-size: 13px;padding: 0 30px 0 40px!important;border-radius: 5px;}
+
+.deltBtn:hover{background-color: #f0f0f0;border-radius: 5px;}
+.editBtn:hover{background-color: #f0f0f0;border-radius: 5px;}
+.uploadBtn:hover{background-color: #f0f0f0;border-radius: 5px;}
+
+
+
+
 .outofstock{background-color: #b3b3b3!important;}
 
 .prdSearchDiv{width:100%;height: 55px;background: #fff;padding:10px 0px;margin-top: 0px;}
@@ -613,7 +621,8 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 .pgComm:hover{background: #8A0044;color:#fff;border-color:  #8A0044;}
 .pgEmpty{width:10px;height: 10px;border-radius: 5px;background: #d4d4c8;display: inline-block;line-height: 20px;margin:0 10px 0 0;vertical-align: bottom;}
 .pgActive{background: #8A0044;color:#fff;border-color:  #8A0044;}
-
+.pPrev:hover{color:#8A0044;}
+.pNext:hover{color:#8A0044;}
 /* For Pagination */
 .checkOth{width:auto!important;}
 .dAuto_ .otherBox {width: 300px;height: 35px;margin-top: 0;}
