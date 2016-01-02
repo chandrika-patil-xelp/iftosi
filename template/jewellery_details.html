@@ -80,7 +80,7 @@
 ?>
 								<div class="infoCommn fLeft fmOpenR">
 									<div class="infoLabel fmOpenB font12 fmOpenB">DIAMOND SHAPE</div>
-									<div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['diamond_shape']==''?'N/A':$prdInfo['attr_details']['diamond_shape']); ?></div>
+									<div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['diamond_shape']==''?'N/A':str_replace('|!|', ', ', $prdInfo['attr_details']['diamond_shape'])); ?></div>
 								</div>
 								<div class="infoCommn fLeft fmOpenR ">
 									<div class="infoLabel fmOpenB font12 fmOpenB">NO. OF DIAMONDS</div>
@@ -92,7 +92,7 @@
 								</div>
 								<div class="infoCommn fLeft fmOpenR ">
 									<div class="infoLabel fmOpenB font12 fmOpenB">DIAMOND QUALITY</div>
-									<div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['clarity']=='')?'N/A':$prdInfo['attr_details']['clarity']; ?></div>
+									<div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['clarity']=='')?'N/A':str_replace('|!|', ', ', $prdInfo['attr_details']['clarity']); ?></div>
 								</div>
 <?php
 							}
@@ -105,11 +105,11 @@
 ?>
 								<div class="infoCommn fLeft fmOpenR ">
 									<div class="infoLabel fmOpenB font12 fmOpenB">GEMSTONES TYPE</div>
-									<div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['gemstone_type']=='')?'N/A':$prdInfo['attr_details']['gemstone_type']; ?></div>
+									<div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['gemstone_type']=='')?'N/A':str_replace('|!|', ', ', $prdInfo['attr_details']['gemstone_type']); ?></div>
 								</div>
 								<div class="infoCommn fLeft fmOpenR ">
 									<div class="infoLabel fmOpenB font12 fmOpenB">GEMSTONES COLOR</div>
-									<div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['gemstone_color']=='')?'N/A':$prdInfo['attr_details']['gemstone_color']; ?></div>
+									<div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['gemstone_color']=='')?'N/A':str_replace('|!|', ', ', $prdInfo['attr_details']['gemstone_color']); ?></div>
 								</div>
 								<div class="infoCommn fLeft fmOpenR ">
 									<div class="infoLabel fmOpenB font12 fmOpenB">GEMSTONES WEIGHT</div>
