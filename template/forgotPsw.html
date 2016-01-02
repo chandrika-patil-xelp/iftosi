@@ -1,94 +1,75 @@
 <?php include 'bhead.html'; ?>
 <body>
-    <!--    <div id='baseCont' class="container fmOpenR signupPage forgotP">
-            <div class="wrapper">
-                <div class='signupDiv' style="height:184px;">
-                    <div class="wrapperMax">
-                         <div class="signupTitle fLeft">Forgot Password?</div>
-                         <div class="inputCont fLeft fmOpenR">
-                             <input type="text" id="pr_mobile" name="pr_mobile" autocomplete="off" class="txtInput cOrange fmOpenR font14 emailIcon" onKeyPress="common.eSubmit(event, 'submitBtn');">
+    <?php include 'logo.html' ?>
+</div>-->
+<div id='baseCont' class="container fmOpenR signupPage">
+    <div class="wrapper">
+        <div id="header" class="header transition300">
+            <div class="wrapperMax">
+                <div class="headRight fRight transition300">
+                    <div class="compNo fRight fmOpenB">022-32623263</div>
+                </div>
+            </div>
+        </div>
+        <div class='signupDiv' style="height:450px;">
+            <div class="wrapperMax">
+                <div class="signupCont">
+                    <div class="signupCl1 fLeft fmOpenL frgtCont">
+                        <div class="head1">Forgot Password?</div>
+                    </div>
+                    <div class="signupCl2 fRight margL">
+                        <div class="inputCont fLeft fmOpenR">
+                            <input type="tel" id="pr_mobile" name="pr_mobile" autocomplete="off" onkeypress="return common.isNumberKey(event);" onkeyup="isValidMKey(event, this.id);" maxlength="10" class="txtInput cOrange fmOpenR font14 mobileIcon">
                             <label for="pr_mobile" class="inp-label transition100">MOBILE</label>
-                            <div id="pr_mobile_inpText" class="inpText fRight transition300">enter<br> mobile number</div>
+                            <div id="pr_mobile_inpText" class="inpText fRight transition300">enter<br>mobile number</div>
                         </div>
-                         <div class="cancelLgBtn fLeft fmOpenR ripplelink poR" id='cancelBtn' onclick="window.location.assign(DOMAIN+'index.php')"> CANCEL</div>
+                        <div class="cancelLgBtn fLeft fmOpenR ripplelink poR" id='cancelBtn' onclick="window.location.assign(DOMAIN + 'index.php')"> CANCEL</div>
                         <div class="loginBtn fLeft fmOpenR ripplelink poR" id='submitBtn'>RETRIEVE</div>
                     </div>
                 </div>
             </div>
-             <?php include 'logo.html'?>
-        </div>-->
-    <div id='baseCont' class="container fmOpenR signupPage">
-        <div class="wrapper">
-            <div id="header" class="header transition300">
-                <div class="wrapperMax">
-
-                    <div class="headRight fRight transition300">
-                        <div class="compNo fRight fmOpenB">022-32623263</div>
-                    </div>
-                </div>
-            </div>
-            <div class='signupDiv' style="height:450px;">
-                <div class="wrapperMax">
-                    <div class="signupCont">
-                        <div class="signupCl1 fLeft fmOpenL frgtCont">
-                            <div class="head1">Forgot Password?</div>
-                            <!--                            <div class="head2">for better options.</div>-->
-
-
-                        </div>
-                        <div class="signupCl2 fRight margL">
-                            <div class="inputCont fLeft fmOpenR">
-                                <input type="tel" id="pr_mobile" name="pr_mobile" autocomplete="off" onkeypress="return common.isNumberKey(event);" onkeyup="isValidMKey(event, this.id);" maxlength="10" class="txtInput cOrange fmOpenR font14 mobileIcon">
-                                <label for="pr_mobile" class="inp-label transition100">MOBILE</label>
-                                <div id="pr_mobile_inpText" class="inpText fRight transition300">enter<br>mobile number</div>
-                            </div>
-                            <div class="cancelLgBtn fLeft fmOpenR ripplelink poR" id='cancelBtn' onclick="window.location.assign(DOMAIN + 'index.php')"> CANCEL</div>
-                            <div class="loginBtn fLeft fmOpenR ripplelink poR" id='submitBtn'>RETRIEVE</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id='overlay' class="overlay transition300 transit-100Y1 dn" ></div>
-            <div id="otpDiv" class="loginDiv transition300 dn" style="transform: scale(1);height:200px !important">
-                <div class="lgTitle fLeft fmOpenR">Enter OTP sent to your mobile</div>
-                <div class="inputCont fLeft fmOpenR">
-                    <input type="tel" id="pr_otp" name="pr_otp" autocomplete="off" maxlength="6" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeypress="return common.isNumberKey(event);" onkeyup="return onEnterFormSubmit(event, 1);" style="padding-right: 80px">
-                    <span onclick="otpGo();" class="resendOTP">RESEND</span>
-                    <label for="pr_otp" class="inp-label transition100">OTP</label>
-                </div>  
-                <div class="cancelLgBtn fLeft fmOpenR" id="lgCancel" onclick="closeOtpForm();">CANCEL</div>
-                <div class="loginBtn fLeft fmOpenR" id="lgSubmit" onclick="otpCheck();">SUBMIT</div>
-            </div>          
         </div>
-        <?php include 'logo.html' ?>
+        <div id='overlay' class="overlay transition300 transit-100Y1 dn" ></div>
+        <div id="otpDiv" class="loginDiv transition300 dn" style="transform: scale(1);height:200px !important">
+            <div class="lgTitle fLeft fmOpenR">Enter OTP sent to your mobile</div>
+            <div class="inputCont fLeft fmOpenR">
+                <input type="tel" id="pr_otp" name="pr_otp" autocomplete="off" maxlength="6" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeypress="return common.isNumberKey(event);" onkeyup="return onEnterFormSubmit(event, 1);" style="padding-right: 80px">
+                <span onclick="otpGo();" class="resendOTP">RESEND</span>
+                <label for="pr_otp" class="inp-label transition100">OTP</label>
+            </div>  
+            <div class="cancelLgBtn fLeft fmOpenR" id="lgCancel" onclick="closeOtpForm();">CANCEL</div>
+            <div class="loginBtn fLeft fmOpenR" id="lgSubmit" onclick="otpCheck();">SUBMIT</div>
+        </div>          
     </div>
-    <div id='overlay' class="overlay transition300 transit-100Y1 dn" ></div>
-    <div id="otpDiv" class="loginDiv transition300 dn" style="transform: scale(1);height:200px !important">
-        <div class="lgTitle fLeft fmOpenR">Enter OTP sent to your mobile</div>
-        <div class="inputCont fLeft fmOpenR">
-            <input type="tel" id="pr_otp" name="pr_otp" autocomplete="off" maxlength="6" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeyup="return onEnterFormSubmit(event, 1);" style="padding-right: 80px">
-            <span onclick="otpGo();" class="resendOTP">RESEND</span>
-            <label for="pr_otp" class="inp-label transition100">OTP</label>
-        </div>  
-        <div class="cancelLgBtn fLeft fmOpenR" id="lgCancel" onclick="closeOtpForm();">CANCEL</div>
-        <div class="loginBtn fLeft fmOpenR" id="lgSubmit" onclick="otpCheck();">Submit</div>
-    </div>
-    <?php include 'footer.html'; ?>
-    <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
-    <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
-    <script type="text/javascript" src="<?=$jvs['signup'];?>"></script>
-    <script type="text/javascript" src="<?=$jvs['comm'];?>"></script>
-    <script>
+    <?php include 'logo.html' ?>
+</div>
+<div id='overlay' class="overlay transition300 transit-100Y1 dn" ></div>
+<div id="otpDiv" class="loginDiv transition300 dn" style="transform: scale(1);height:200px !important">
+    <div class="lgTitle fLeft fmOpenR">Enter OTP sent to your mobile</div>
+    <div class="inputCont fLeft fmOpenR">
+        <input type="tel" id="pr_otp" name="pr_otp" autocomplete="off" maxlength="6" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeyup="return onEnterFormSubmit(event, 1);" style="padding-right: 80px">
+        <span onclick="otpGo();" class="resendOTP">RESEND</span>
+        <label for="pr_otp" class="inp-label transition100">OTP</label>
+    </div>  
+    <div class="cancelLgBtn fLeft fmOpenR" id="lgCancel" onclick="closeOtpForm();">CANCEL</div>
+    <div class="loginBtn fLeft fmOpenR" id="lgSubmit" onclick="otpCheck();">Submit</div>
+</div>
+<?php include 'footer.html'; ?>
+<script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
+<script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
+<script type="text/javascript" src="<?= $jvs['signup']; ?>"></script>
+<script type="text/javascript" src="<?= $jvs['comm']; ?>"></script>
+<script>
 
-                        $('#submitBtn').click(function () {
+        $('#submitBtn').click(function() {
 
-                    var pr_mobile = $('#pr_mobile').val();
-                    pr_mobile = customStorage.addToStorage('mobile', pr_mobile);
+            var pr_mobile = $('#pr_mobile').val();
+            pr_mobile = customStorage.addToStorage('mobile', pr_mobile);
 
-                    otpGo(pr_mobile);
+            otpGo(pr_mobile);
 
-                    requestOTP();
-                });
-    </script>
+            requestOTP();
+        });
+</script>
 </body>
 
