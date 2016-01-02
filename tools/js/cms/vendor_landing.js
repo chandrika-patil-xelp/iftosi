@@ -489,7 +489,6 @@ $('#upDolRt').click(function () {
 });
 
 $('#dollarRateSpan').click(function () {
-    console.log('here');
 	uploadButton = true;
     showDollarRateForm();
 });

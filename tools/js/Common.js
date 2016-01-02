@@ -157,8 +157,7 @@ function Common() {
         $(document).click(function (e) {
            
             if($('#hdropList').is(":visible"))
-            {   
-                console.log('1');
+            {
                 hisOpen = false;
                 $('#hdropList').hide();
             }
@@ -272,7 +271,6 @@ function Common() {
                         var isComp = obj['results']['isC'];
                         var pass_flag = obj['results']['pass_flag'];
                         var mobile = obj['results']['mobile'];
-                        console.log(mobile);
 
                         customStorage.addToStorage('isLoggedIn', true);
                         customStorage.addToStorage('l', mobile);

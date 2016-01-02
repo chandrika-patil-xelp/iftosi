@@ -16,9 +16,7 @@ $(document).ready(function() {
 			ar['file'] = IMGDOMAIN+vl;
 			mar[i] = ar;
 		});
-		
-		console.log(mar);
-		
+
 		$("#filer_input2").filer({
 			limit: null,
 			maxSize: null,
@@ -140,8 +138,6 @@ $(document).ready(function() {
 				}
 			}
 		});
-		
-		console.log(mar);
 	});
     
     //Example 2

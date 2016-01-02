@@ -420,11 +420,11 @@ class location extends DB
     {
         if(empty($params['pincode']))
         {
-            $sql="SELECT DISTINCT area as n,city,state,pincode FROM tbl_area_master WHERE area LIKE '".$params['area']."%'";
+            $sql="SELECT DISTINCT area as n,city,state,pincode FROM tbl_area_master WHERE area LIKE '".$params['area']."%' LIMIT 0, 20";
         }
         else
         {
-            $sql="SELECT DISTINCT area as n,city,state,pincode FROM tbl_area_master WHERE area LIKE '".$params['area']."%' AND  pincode = ".$params['pincode']."";
+            $sql="SELECT DISTINCT area as n,city,state,pincode FROM tbl_area_master WHERE area LIKE '".$params['area']."%' AND  pincode = ".$params['pincode']." LIMIT 0, 20";
         }
         $res=$this->query($sql);
         $cntres =   $this->numRows($res);
@@ -457,6 +457,7 @@ class location extends DB
             $resp = $comm->executeCurl($url, false, false, false, false, false, true);
             if($resp)
             {
+				$isBreak = false;
                 $address = $resp['results'];
                 for($i=0;$i<count($address);$i++)
                 {
@@ -478,7 +479,17 @@ class location extends DB
                         {
                             $arr[$i]['state']=$address[$i]['address_components'][$j]['long_name'];
                         }
+						if($j >= 20)
+						{
+							$isBreak = true;
+							break;
+						}
                     }
+
+					if($isBreak)
+					{
+						break;
+					}
                 }
                 if(!empty($arr))
                 {

@@ -353,7 +353,6 @@ function showWish(catid,pgno,uid,nojump,pid)
 			var catid 	= $('#catid').val();
 			var pgno 	= $('#pgno').val()*1;
 			var uid 	= $('#uid').val();
-                        //console.log(data.results.total);
                         //$('#wishListCnt').html(data.results.total);
 			showWish(catid,pgno,uid,1,$(this).attr('id'));
 		});

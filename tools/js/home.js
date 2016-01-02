@@ -6,7 +6,6 @@ var isMobile = false;
 if (pw < 768) {
     isMobile = true;
 }
-console.log(pw);
 
 $(document).ready(function() {
     $('input').bind('click',function(){$(this).attr('readonly',false);});

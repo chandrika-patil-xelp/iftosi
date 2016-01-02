@@ -699,7 +699,6 @@ function inStock(proId,ele) {
             }
             var total=$('#total'+catName).text();
             $('#total'+catName).text(total);
-            console.log(proId);
             if(ele == 1)
             {
                 common.toast(1,"Product is in stock");

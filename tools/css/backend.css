@@ -659,3 +659,4 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 .vendorSt{width:auto;height: 30px;padding:0 10px;border:2px solid #fff;border-radius:15px;font-size: 12px;margin-right: 10px;}
 .vDactive{border-color: #b80f00}
 .vActive{border-color:#4db800;}
+.addMore {width: auto;height: 40px;font-size: 14px;line-height: 40px;text-align: center;display: inline-block;padding: 0 35px 0 20px;background: #8A0044url(../img/common/add_White.svg)no-repeat;background-size: auto 40%;background-position: 95% center;color: #fff;border-radius: 0px;cursor: pointer;-webkit-appearance: none;-moz-user-select: none;-webkit-user-select: none;-ms-user-select: none;}

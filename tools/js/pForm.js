@@ -15,7 +15,7 @@ function changeGemstoneType(obj,id)
 		$('.gemstoneProp_'+id).removeClass('dn');
                 
                 $('#addGemsType').remove();
-                $('#gemsTypeCont').append('<div onclick="addGemsType()" id="addGemsType" class="submitBtn fmOpenR ripplelink poR fRight">Add Gem Type</div><div style="clear: both;"></div>');
+                $('#gemsTypeCont').append('<div onclick="addGemsType()" id="addGemsType" class="submitBtn fmOpenR ripplelink poR fRight addMore">Add Gemstone Type</div><div style="clear: both;"></div>');
 	}
 	else
 	{
@@ -490,8 +490,6 @@ function validateJForm()
 		values[14] = "gold_weight|@|"+encodeURIComponent(goldweight);
 		values[15] = "barcode|@|"+encodeURIComponent(barcode);
 		values[16] = "price|@|"+encodeURIComponent(prdprice);
-                console.log(vgemstone_type);
-                console.log(vgemcolour);
 		dt = values.join('|~|');
 
 		params += "&dt="+dt;
@@ -942,7 +940,7 @@ function checkDiamondShape(evt,id) {
         if($(evt).hasClass('shapeSelected'))
         {
             $('#addDiamondType').remove();
-            $('#diamondShapeCont').append('<div onclick="addShapeType()" id="addDiamondType" class="submitBtn fmOpenR ripplelink poR fRight">Add Diamond Type</div><div style="clear: both;"></div>');
+            $('#diamondShapeCont').append('<div onclick="addShapeType()" id="addDiamondType" class="submitBtn fmOpenR ripplelink poR fRight addMore">Add Diamond Type</div><div style="clear: both;"></div>');
             $('.diamondProp_'+id).removeClass('dn');
         }
         else

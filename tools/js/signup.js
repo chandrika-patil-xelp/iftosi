@@ -319,9 +319,7 @@ function checkOtp()
     $.ajax({url: DOMAIN + "apis/index.php?action=validOTP&mobile="+mobile+"&vc="+otpProvided, success: function(result)
        {
                 var obj = jQuery.parseJSON(result);
-                console.log(obj);
                 var errCode = obj.error.Code;
-                console.log(errCode);
                 if(errCode == 0 || errCode == '0')
                 {
                     isValid = true;

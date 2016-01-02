@@ -610,6 +610,22 @@ switch ($action) {
 					}
 				}
 
+				$diamondsShape = explode('|!|', $prdInfo['attr_details']['diamond_shape']);
+				$diamondsShape = array_unique($diamondsShape);
+				$prdInfo['attr_details']['diamond_shape'] = implode('|!|', $diamondsShape);
+
+				$diamondsClarity = explode('|!|', $prdInfo['attr_details']['clarity']);
+				$diamondsClarity = array_unique($diamondsClarity);
+				$prdInfo['attr_details']['clarity'] = implode('|!|', $diamondsClarity);
+
+				$gemstoneType = explode('|!|', $prdInfo['attr_details']['gemstone_type']);
+				$gemstoneType = array_unique($gemstoneType);
+				$prdInfo['attr_details']['gemstone_type'] = implode('|!|', $gemstoneType);
+
+				$gemstoneColor = explode('|!|', $prdInfo['attr_details']['gemstone_color']);
+				$gemstoneColor = array_unique($gemstoneColor);
+				$prdInfo['attr_details']['gemstone_color'] = implode('|!|', $gemstoneColor);
+
                 include 'template/jewellery_details.html';
                 break;
             case 'diamond_Form':
