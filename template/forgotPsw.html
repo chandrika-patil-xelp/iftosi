@@ -21,6 +21,7 @@
         <div class="wrapper">
             <div id="header" class="header transition300">
                 <div class="wrapperMax">
+
                     <div class="headRight fRight transition300">
                         <div class="compNo fRight fmOpenB">022-32623263</div>
                     </div>
@@ -51,7 +52,7 @@
             <div id="otpDiv" class="loginDiv transition300 dn" style="transform: scale(1);height:200px !important">
                 <div class="lgTitle fLeft fmOpenR">Enter OTP sent to your mobile</div>
                 <div class="inputCont fLeft fmOpenR">
-                    <input type="tel" id="pr_otp" name="pr_otp" autocomplete="off" maxlength="6" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeyup="return onEnterFormSubmit(event, 1);" style="padding-right: 80px">
+                    <input type="tel" id="pr_otp" name="pr_otp" autocomplete="off" maxlength="6" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeypress="return common.isNumberKey(event);" onkeyup="return onEnterFormSubmit(event, 1);" style="padding-right: 80px">
                     <span onclick="otpGo();" class="resendOTP">RESEND</span>
                     <label for="pr_otp" class="inp-label transition100">OTP</label>
                 </div>  

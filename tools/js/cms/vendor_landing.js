@@ -314,6 +314,47 @@ for(var i = 0; i< busiTypeSplt.length; i++)
 
     //$(this).toggleClass('shapeSelected');
 
+    $('#dollar_rate').on('keyup', function(evnt) {
+        var kcode = (evnt.which) ? evnt.which : evnt.keyCode;
+        if(kcode == 13)
+        {
+            updateDollarRate();
+        }
+    });
+    
+    $('#gold_rate').on('keyup', function(evnt) {
+    var kcode = (evnt.which) ? evnt.which : evnt.keyCode;
+        if(kcode == 13)
+        {
+            updateGoldRate();
+        }
+    });
+    
+    $('#gold_rate1').on('keyup', function(evnt) {
+    var kcode = (evnt.which) ? evnt.which : evnt.keyCode;
+        if(kcode == 13)
+        {
+            updateGoldSilverRate();
+        }
+    });
+    
+    $('#silver_rate').on('keyup', function(evnt) {
+    var kcode = (evnt.which) ? evnt.which : evnt.keyCode;
+        if(kcode == 13)
+        {
+            updateSilverRate();
+        }
+    });
+    
+    $('#pr_otp').on('keyup', function(evnt) {
+    var kcode = (evnt.which) ? evnt.which : evnt.keyCode;
+        if(kcode == 13)
+        {
+            otpCheck();
+        }
+    });
+    
+
 });
 
 
@@ -350,34 +391,6 @@ $('.vTabs').mouseover(function () {
     }
 });
 
-
-//$('.vTabs').click(function () {
-//    var id = $(this).attr('id');
-//    $('.vTabs').removeClass('vSelected');
-//    $(this).addClass('vSelected');
-//
-//    switch (id) {
-//        case 'dashTab':
-//            active = '';
-//            $('#product,#enquiry,#settings').addClass('dn');
-//            $('#dashboard').removeClass('dn');
-//            break;
-//        case 'prdTab':
-//            $('#dashboard,#enquiry,#settings').addClass('dn');
-//            $('#product').removeClass('dn');
-//            break;
-//        case 'enqTab':
-//            active = 'enqFheader';
-//            $('#dashboard,#product,#settings').addClass('dn');
-//            $('#enquiry').removeClass('dn');
-//            break;
-//        case 'setTab':
-//            active = '';
-//            $('#dashboard,#product,#enquiry').addClass('dn');
-//            $('#settings').removeClass('dn');
-//            break;
-//    }
-//});
 
 function toggleDropDown(flag, id) {
     if (flag) {
@@ -429,24 +442,6 @@ function submitDForm() {
      values[y[i].name]=y[i].value;
      });
      alert('submit ' +values);*/
-}
-
-function onEnterFormSubmit(evt,type)
-{
-    var charCode = (evt.which) ? evt.which : evt.keyCode;
-    
-    $("#pr_otp").keypress(function (charCode)
-    {
-        console.log('here');
-    if(charCode==13)
-    {
-        if(type==1)
-        {
-
-            otpCheck();
-        } 
-    }
-    });
 }
 
 $('#overlay').velocity({opacity:0},{delay:0,duration:0});
@@ -683,6 +678,32 @@ function updateSilverRate() {
                     }
                 });
         }
+    }
+    else
+    {
+        if(silver_rate == undefined || silver_rate == 'undefined' || silver_rate=='' || silver_rate <= 0 || isNaN(silver_rate))
+        {
+            silver_rate = '0.00';
+        }
+
+        $.ajax({url: DOMAIN + "apis/index.php?action=updateSilverRate&vid="+uid+"&silRate="+silver_rate, success: function(result)
+            {
+                var obj = jQuery.parseJSON(result);
+                var errCode = obj['error']['code'];
+                if(errCode == 0)
+                {
+                    common.toast(1,obj['error']['Msg']);
+                        //showJewelleryImps(GtmpId);                        
+                    $('#silverRateSpan').html('&#8377; '+silver_rate);
+                    closeAllForms();
+                }
+                else if(errCode == 1)
+                {
+                    common.toast(0,obj['error']['Msg']);
+                    closeAllForms();
+                }
+            }
+        });
     }
 }
 

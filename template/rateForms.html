@@ -3,7 +3,7 @@
 <div id='dollarRateDiv' class="popDiv transition300 transit-200Y1 dn" style="height: 250px;">
                 <div class="upTitle fLeft fmOpenR">Update Dollar Rate </div>
                 <div class="inputCont fLeft fmOpenR">
-                    <input type="text" id="dollar_rate" name="dollar_rate" class="inpTxt fRight fmOpenR" maxlength="10" autocomplete="off" onkeypress="return isValidFloatKey(this, event, true);" onkeyup="return onEnterFormSubmit(event,1);" placeholder="eg. 60.45" autofocus="">
+                    <input type="text" id="dollar_rate" name="dollar_rate" class="inpTxt fRight fmOpenR" maxlength="10" autocomplete="off" onkeypress="return isValidFloatKey(this, event, true);" onkeyup="return onEnterFormSubmit(event,this);" placeholder="eg. 60.45" autofocus="">
                 </div>
                 <div class="commBtn cancelBtn fLeft fmOpenR" id='upCancel' onclick="closeAllForms(1);"> CANCEL</div>
                 <div class="commBtn upBtn fLeft fmOpenR" onclick="updateDollarRate();">UPDATE</div>

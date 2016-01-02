@@ -50,8 +50,8 @@
 </div>
 <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['jqryUi']; ?>"></script>
-<script type="text/javascript" src="tools/js/cms/Common.js?v=<?=VERSION;?>"></script>
-<script type="text/javascript" src='tools/js/cms/vendor_landing.js'></script>
+<script type="text/javascript" src="<?= $jvs['cmsCommon']; ?>"></script>
+<script type="text/javascript" src="<?= $jvs['vendorLanding']; ?>"></script>
 <script>
 var uid = customStorage.readFromStorage('userid');
 var loadEnq = true;
@@ -264,7 +264,7 @@ function generateEnqList(obj) {
             str += '<span class="upSpan">' + barcode + '</span>';
             if(pro_dtls['cat_name'][0] == 'Diamonds')
             {
-                str += '<span class="lwSpan"><a href="'+DOMAIN+search['certified']+'-'+search['shape']+'-clarity-'+search['clarity']+'/did-'+pro_dtls['product_id']+'" target="_blank">View Details</a></span>';
+                str += '<span class="lwSpan"><a href="'+DOMAIN+search['certified']+'-'+search['shape']+'-clarity-'+search['clarity']+'/did-'+obj['product_id']+'" target="_blank">View Details</a></span>';
             }
             else if(pro_dtls['cat_name'][0] == 'Bullion')
             {

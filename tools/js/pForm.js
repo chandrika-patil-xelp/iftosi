@@ -30,173 +30,184 @@ function changeGemstoneType(obj,id)
             }
         });
 }
-
+var submiter = false;
 
 function submitForm(formid)
 {
-    var optionValue=new Array();
-    values= new Array();
-    var shapearr = '';
-    var attr = new Array();
-        var reslt = new Array();
-    if(typeof $('.shapeSelected').attr('id') !== 'undefined'){
-        values[0]='shape|@|'+$('.shapeSelected').attr('id');
-    }
-    
-    if(formid=='dAddForm'){
-    y=$('#dAddForm').serializeArray();
-    }
-    /*else if(formid=='jwAddForm'){
-        y=$('#jwAddForm').serializeArray();
-    }*/
-    else if(formid=='bAddForm'){
-        y=$('#bAddForm').serializeArray();
-    }
-    $('input[type=checkbox]:checked').each(function(){
-       optionValue.push(($(this).attr('value'))); 
-    });
-    
-   // var i=1;
-    $(y).each(function(i,val){
-        if(val.value)
-        {  
-            if(val[(y[i].name)]!=='subcat_type')
-            {
-               val[(y[i].name)]=(y[i].value);
-               values[i+1] = val.name+'|@|'+val.value;
-            }
-        }
-    });
-    var cnt = values.length;
-    values[cnt+1]='subcatid'+'|@|'+optionValue.toString();
-    
-    data = values.join('|~|');
-	//return false;
-
-    if((pid !== null)&&(pid !== undefined)&&(pid !== '') && pid !== 'undefined' && typeof pid !== 'undefined')
+    if(submiter !== true)
     {
-        var params = 'action=addNewproduct&category_id='+catid+'&dt='+data+'&prdid='+pid+'&vid='+uid;
-    }
+        submiter = true;
+        var optionValue=new Array();
+        values= new Array();
+        var shapearr = '';
+        var attr = new Array();
+            var reslt = new Array();
+        if(typeof $('.shapeSelected').attr('id') !== 'undefined'){
+            values[0]='shape|@|'+$('.shapeSelected').attr('id');
+        }
+
+        if(formid=='dAddForm'){
+        y=$('#dAddForm').serializeArray();
+        }
+        /*else if(formid=='jwAddForm'){
+            y=$('#jwAddForm').serializeArray();
+        }*/
+        else if(formid=='bAddForm'){
+            y=$('#bAddForm').serializeArray();
+        }
+        $('input[type=checkbox]:checked').each(function(){
+           optionValue.push(($(this).attr('value'))); 
+        });
+
+       // var i=1;
+        $(y).each(function(i,val){
+            if(val.value)
+            {  
+                if(val[(y[i].name)]!=='subcat_type')
+                {
+                   val[(y[i].name)]=(y[i].value);
+                   values[i+1] = val.name+'|@|'+val.value;
+                }
+            }
+        });
+        var cnt = values.length;
+        values[cnt+1]='subcatid'+'|@|'+optionValue.toString();
+
+        data = values.join('|~|');
+            //return false;
+
+        if((pid !== null)&&(pid !== undefined)&&(pid !== '') && pid !== 'undefined' && typeof pid !== 'undefined')
+        {
+            var params = 'action=addNewproduct&category_id='+catid+'&dt='+data+'&prdid='+pid+'&vid='+uid;
+        }
+        else
+        {
+            var params = 'action=addNewproduct&category_id='+catid+'&dt='+data+'&vid='+uid;
+        }
+        var URL   = DOMAIN+"apis/index.php?";
+
+            if(formid=='dAddForm')
+            {
+                    $.ajax({
+                            url: URL + params,
+                            type: 'POST',
+                            //data: params,
+                            async: false,
+                            success: function (data) {
+                                    if(data !== undefined && data !== null && data !== '' && typeof data !== 'undefined')
+                                    {
+                                            data = eval('(' + data + ')');
+                                            var tmp_pid = data.results.pid;
+                                            if(data.error !== undefined && data.error !== null && data.error !== '' && typeof data.error !== 'undefined')
+                                            {
+                                                    if(data.error.code !== undefined && data.error.code !== null && data.error.code !== '' && typeof data.error.code !== 'undefined')
+                                                    {
+                                                            if(data.error.code == 0 || data.error.code == '0')
+                                                            {
+                                                                    if(certificate_url === undefined || certificate_url === null || certificate_url === '')
+                                                                    {
+                                                                            var FD = new FormData();
+                                                                            var certFile = $('#certfile')[0]['files'][0];
+
+                                                                            FD.append('file', certFile);
+
+                                                                            $.ajax({
+                                                                                    url: APIDOMAIN + 'index.php?action=uploadCertificate&prdid='+tmp_pid,
+                                                                                    data: FD,
+                                                                                    processData: false,
+                                                                                    contentType: false,
+                                                                                    type: 'POST',
+                                                                                    success: function(data){
+                                                                                            if(data !== undefined && data !== null && data !== '' && typeof data !== 'undefined')
+                                                                                            {
+                                                                                                    data = eval('(' + data + ')');
+                                                                                                    if(data.error !== undefined && data.error !== null && data.error !== '' && typeof data.error !== 'undefined')
+                                                                                                    {
+                                                                                                            if(data.error.code !== undefined && data.error.code !== null && data.error.code !== '' && typeof data.error.code !== 'undefined')
+                                                                                                            {
+                                                                                                                    if(data.error.code == 0 || data.error.code == '0')
+                                                                                                                    {
+                                                                                                                            window.location.href = IMGUPLOAD+'pid-'+tmp_pid+'&c='+catid;
+                                                                                                                    }
+                                                                                                                    else
+                                                                                                                    {
+                                                                                                                            common.toast(0, 'Error adding / updating certificate');
+                                                                                                                            return false;
+                                                                                                                    }
+                                                                                                            }
+                                                                                                            else
+                                                                                                            {
+                                                                                                                    common.toast(0, 'Error adding / updating certificate');
+                                                                                                                    return false;
+                                                                                                            }
+                                                                                                    }
+                                                                                                    else
+                                                                                                    {
+                                                                                                            common.toast(0, 'Error adding / updating certificate');
+                                                                                                            return false;
+                                                                                                    }
+                                                                                            }
+                                                                                            else
+                                                                                            {
+                                                                                                    common.toast(0, 'Error adding / updating certificate');
+                                                                                                    return false;
+                                                                                            }
+                                                                                    }
+                                                                            });
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                            window.location.href = IMGUPLOAD+'pid-'+tmp_pid+'&c='+catid;
+                                                                    }
+                                                            }
+                                                            else
+                                                            {
+                                                                    common.toast(0, 'Error adding / updating information');
+                                                                    return false;
+                                                            }
+                                                    }
+                                                    else
+                                                    {
+                                                            common.toast(0, 'Error adding / updating information');
+                                                            return false;
+                                                    }
+                                            }
+                                            else
+                                            {
+                                                    common.toast(0, 'Error adding / updating information');
+                                                    return false;
+                                            }
+                                    }
+                                    else
+                                    {
+                                            common.toast(0, 'Error adding / updating information');
+                                            return false;
+                                    }
+                            },
+                            cache: false,
+                            contentType: false,
+                            processData: false
+                    });
+            }
+            else
+            {
+
+                    $.getJSON(URL, params, function(data) {
+                            window.location.href = IMGUPLOAD+'pid-'+data.results.pid+'&c='+catid;
+                    });
+            }
+}
     else
     {
-        var params = 'action=addNewproduct&category_id='+catid+'&dt='+data+'&vid='+uid;
+        submiter = false;
+        common.toast(0, 'Submit button can be pressed only once');
     }
-    var URL   = DOMAIN+"apis/index.php?";
-
-	if(formid=='dAddForm')
-	{
-		$.ajax({
-			url: URL + params,
-			type: 'POST',
-			//data: params,
-			async: false,
-			success: function (data) {
-				if(data !== undefined && data !== null && data !== '' && typeof data !== 'undefined')
-				{
-					data = eval('(' + data + ')');
-					var tmp_pid = data.results.pid;
-					if(data.error !== undefined && data.error !== null && data.error !== '' && typeof data.error !== 'undefined')
-					{
-						if(data.error.code !== undefined && data.error.code !== null && data.error.code !== '' && typeof data.error.code !== 'undefined')
-						{
-							if(data.error.code == 0 || data.error.code == '0')
-							{
-								if(certificate_url === undefined || certificate_url === null || certificate_url === '')
-								{
-									var FD = new FormData();
-									var certFile = $('#certfile')[0]['files'][0];
-
-									FD.append('file', certFile);
-
-									$.ajax({
-										url: APIDOMAIN + 'index.php?action=uploadCertificate&prdid='+tmp_pid,
-										data: FD,
-										processData: false,
-										contentType: false,
-										type: 'POST',
-										success: function(data){
-											if(data !== undefined && data !== null && data !== '' && typeof data !== 'undefined')
-											{
-												data = eval('(' + data + ')');
-												if(data.error !== undefined && data.error !== null && data.error !== '' && typeof data.error !== 'undefined')
-												{
-													if(data.error.code !== undefined && data.error.code !== null && data.error.code !== '' && typeof data.error.code !== 'undefined')
-													{
-														if(data.error.code == 0 || data.error.code == '0')
-														{
-															window.location.href = IMGUPLOAD+'pid-'+tmp_pid+'&c='+catid;
-														}
-														else
-														{
-															common.toast(0, 'Error adding / updating certificate');
-															return false;
-														}
-													}
-													else
-													{
-														common.toast(0, 'Error adding / updating certificate');
-														return false;
-													}
-												}
-												else
-												{
-													common.toast(0, 'Error adding / updating certificate');
-													return false;
-												}
-											}
-											else
-											{
-												common.toast(0, 'Error adding / updating certificate');
-												return false;
-											}
-										}
-									});
-								}
-								else
-								{
-									window.location.href = IMGUPLOAD+'pid-'+tmp_pid+'&c='+catid;
-								}
-							}
-							else
-							{
-								common.toast(0, 'Error adding / updating information');
-								return false;
-							}
-						}
-						else
-						{
-							common.toast(0, 'Error adding / updating information');
-							return false;
-						}
-					}
-					else
-					{
-						common.toast(0, 'Error adding / updating information');
-						return false;
-					}
-				}
-				else
-				{
-					common.toast(0, 'Error adding / updating information');
-					return false;
-				}
-			},
-			cache: false,
-			contentType: false,
-			processData: false
-		});
-	}
-	else
-	{
-    
-		$.getJSON(URL, params, function(data) {
-			window.location.href = IMGUPLOAD+'pid-'+data.results.pid+'&c='+catid;
-		});
-	}
 }
-
 function validateJForm()
 {
+    if(submiter !== true)
+    {
+        submiter = true;
 	var shape=$('.jshapeComm');
 	var certificate =  $('input[name=Certficate]:checked').val();
 	var metal = $("input[name='metal']:checked").val();
@@ -494,258 +505,14 @@ function validateJForm()
 			}
 		});
 	}
+    }
+    else
+    {
+        submiter = false;
+        common.toast(0, 'Submit button can be pressed only once');
+    }
 }
 
-
-/*
-function validateJForm(){
-            var metal = $("input[name='metal']:checked").val();
-            var color =  $('input[name=color]:checked').val();
-            var certificate =  $('input[name=Certficate]:checked').val();
-            var clarity = $("input[name='clarity']:checked").val();
-            var gemcolour = $("input[name='gemstone_color']:checked").val();
-            var subcat = $("input[type='checkbox']").is(':checked');
-            var purity = $('#goldpurity').val();
-            var dweight = $('#diamondweight').val();
-            var goldweight=$('#goldweight').val();
-            var barcode=$('#barcode').val();
-            var no_diamonds=$('#no_diamonds').val();
-            var num_gemstones = $('#num_gemstones').val();
-            var gemstone_type = $('#gemstone_type').val();
-            var gemweight=$('#gemweight').val();
-            var prdprice=$('#prdprice').val();
-            var othercert=$('#other_cerificate').val();
-            var shape=$('.jshapeComm');
-            var str = '';
-            var isValid = true;
-            
-           if(!shape.hasClass('shapeSelected')) {
-                str ='category is not Selected';
-                isValid = false;
-            }
-            if(isValid && subcat<=false){
-                str ='Checkbox button is empty';
-                isValid = false;
-            }
-            if((certificate=='' || certificate==null || certificate==undefined) && isValid) {
-                str ='Certificate field is Empty';
-                isValid = false;
-            }
-            if(certificate == 'Other' && isValid)
-            {
-                if(isValid && (othercert == undefined || othercert == 'undefined' || othercert == null || othercert == 'null' || othercert == '' ))
-                {
-                    str ='Please mention the certificate in other field';
-                    isValid = false;
-                    $('#other_cerificate').focus();
-                }
-            }
-            if(isValid && (metal=='' || metal==null || metal==undefined)) {
-                str ='Metal field is Empty';
-                isValid = false;
-            }
-            
-            if(isValid && (color !== undefined && color !== 'undefined' && color !== 'null' && color !== ''))
-            {
-                if(isValid && (color == undefined || color == 'undefined' || color == 'null' || color == ''))
-                {
-                    str ='Diamond Color field is Empty';
-                    isValid = false;
-                }
-                else if(isValid && (clarity == undefined || clarity == 'undefined' || clarity == 'null' || clarity == ''))
-                {
-                    str ='Diamond Quality field is Empty';
-                    isValid = false;
-                }
-                else if(isValid && (no_diamonds == undefined || no_diamonds == 'undefined' || no_diamonds == 'null' || no_diamonds == '' || isNaN(no_diamonds) == true))
-                {
-                    str ='Number of diamonds have to be Selected';
-                    isValid = false;
-                    $('#no_diamonds').focus();
-                }
-                else if(isValid && (dweight == undefined || dweight == 'undefined' || dweight == 'null' || dweight == '' || isNaN(dweight) == true))
-                {
-                    str ='Diamond weight is Required';
-                    isValid = false;
-                    $('#diamondweight').focus();
-                }
-            }
-            if(isValid && (clarity !== undefined && clarity !== 'undefined' && clarity !== 'null' && clarity !== ''))
-            {
-                if(isValid && (color == undefined || color == 'undefined' || color == 'null' || color == ''))
-                {
-                    str ='Diamond Color field is Empty';
-                    isValid = false;
-                }
-                else if(isValid && (clarity == undefined || clarity == 'undefined' || clarity == 'null' || clarity == ''))
-                {
-                    str ='Diamond Quality field is Empty';
-                    isValid = false;
-                }
-                else if(isValid && (no_diamonds == undefined || no_diamonds == 'undefined' || no_diamonds == 'null' || no_diamonds == '' || isNaN(no_diamonds) == true))
-                {
-                    str ='Number of diamonds have to be Selected';
-                    isValid = false;
-                    $('#no_diamonds').focus();
-                }
-                else if(isValid && (dweight == undefined || dweight == 'undefined' || dweight == 'null' || dweight == '' || isNaN(dweight) == true))
-                {
-                    str ='Diamond weight is Required';
-                    isValid = false;
-                    $('#diamondweight').focus();
-                }
-            }
-             if(isValid && (no_diamonds !== undefined && no_diamonds !== 'undefined' && no_diamonds !== 'null' && no_diamonds !== '' && isNaN(no_diamonds) == false))
-            {
-                if(isValid && (color == undefined || color == 'undefined' || color == 'null' || color == ''))
-                {
-                    str ='Diamond Color field is Empty';
-                    isValid = false;
-                }
-                else if(isValid && (clarity == undefined || clarity == 'undefined' || clarity == 'null' || clarity == ''))
-                {
-                    str ='Diamond Quality field is Empty';
-                    isValid = false;
-                }
-                else if(isValid && (no_diamonds == undefined || no_diamonds == 'undefined' || no_diamonds == 'null' || no_diamonds == '' || isNaN(no_diamonds) == true))
-                {
-                    str ='Number of diamonds have to be Selected';
-                    isValid = false;
-                    $('#no_diamonds').focus();
-                }
-                else if(isValid && (dweight == undefined || dweight == 'undefined' || dweight == 'null' || dweight == '' || isNaN(dweight) == true))
-                {
-                    str ='Diamond weight is Required';
-                    isValid = false;
-                    $('#diamondweight').focus();
-                }
-            }
-            if(isValid && (dweight !== undefined && dweight !== 'undefined' && dweight !== 'null' && dweight !== '' && isNaN(dweight) == false))
-            {
-                
-                if(isValid && (color == undefined || color == 'undefined' || color == 'null' || color == ''))
-                {
-                    str ='Diamond Color field is Empty';
-                    isValid = false;
-                }
-                else if(isValid && (clarity == undefined || clarity == 'undefined' || clarity == 'null' || clarity == ''))
-                {
-                    str ='Diamond Quality field is Empty';
-                    isValid = false;
-                }
-                else if(isValid && (no_diamonds == undefined || no_diamonds == 'undefined' || no_diamonds == 'null' || no_diamonds == '' || isNaN(no_diamonds) == true ))
-                {
-                    str ='Number of diamonds have to be Selected';
-                    isValid = false;
-                    $('#no_diamonds').focus();
-                }
-                else if(isValid && (dweight == undefined || dweight == 'undefined' || dweight == 'null' || dweight == '' || isNaN(dweight) == true))
-                {
-                    str ='Diamond weight is Required';
-                    isValid = false;
-                    $('#diamondweight').focus();
-                }
-            }
-            
-            if(isValid && (purity == '' || isNaN(purity) == true)) {
-                str ='Purity field is Empty';
-                isValid = false;
-                 $('#goldpurity').focus();
-            }
-            if(isValid && (goldweight == '' || isNaN(goldweight) == true)) {
-                str ='Gold weight is Required';
-                isValid = false;
-                $('#goldweight').focus();
-            }
-            if(isValid &&  barcode=='')
-            {
-                str ='Design Number field is Required';
-                isValid = false;
-                $('#barcode').focus();
-            }
-            if(isValid && (prdprice == '' || isNaN(prdprice) == true ))
-            {
-                str ='Product Price is important to fill';
-                isValid = false;
-                $('#prdprice').focus();
-            }
-
-            if(isValid && (gemweight !== undefined && gemweight !== 'undefined' && gemweight !== 'null' && gemweight !== null && gemweight !== '' && isNaN(gemweight) == false))
-            {
-                if(isValid && (gemcolour=='' || gemcolour==null || gemcolour==undefined || gemcolour == 'undefiend')) 
-                {
-					str = 'Gemstone colour field is Empty';
-					isValid = false;
-                }
-
-				if(isValid && (num_gemstones == undefined || num_gemstones == null || num_gemstones == '' || typeof num_gemstones == 'undefined'))
-				{
-					str = 'Number of Gemstone is Empty';
-					isValid = false;
-				}
-
-				if(isValid && (gemstone_type == undefined || gemstone_type == null || gemstone_type == '' || typeof gemstone_type == 'undefined'))
-				{
-					str = 'Gemstone Type is Empty';
-					isValid = false;
-				}
-            }
-
-			if(isValid && num_gemstones !== undefined && num_gemstones !== null && num_gemstones !== '' && typeof num_gemstones !== 'undefined')
-			{
-				if(isValid && (gemcolour=='' || gemcolour==null || gemcolour==undefined || gemcolour == 'undefiend')) 
-                {
-					str = 'Gemstone colour field is Empty';
-					isValid = false;
-                }
-
-				if(isValid && (gemweight == undefined || gemweight == 'undefined' || gemweight == 'null' || gemweight == '' || isNaN(gemweight) == true))
-                {
-                    str = 'Gemstone weight is important to fill';
-                    isValid = false;
-                    $('#gemweight').focus();
-                }
-
-				if(isValid && (gemstone_type == undefined || gemstone_type == null || gemstone_type == '' || typeof gemstone_type == 'undefined'))
-				{
-					str = 'Gemstone Type is Empty';
-					isValid = false;
-				}
-			}
-
-            if(isValid && (gemcolour !== undefined && gemcolour !== 'undefined' && gemcolour !== 'null' && gemcolour !== null && gemcolour !== ''))
-            {
-                if(isValid && (gemweight == undefined || gemweight == 'undefined' || gemweight == 'null' || gemweight == '' || isNaN(gemweight) == true))
-                {
-                    str = 'Gemstone weight is important to fill';
-                    isValid = false;
-                    $('#gemweight').focus();
-                }
-
-				if(isValid && (num_gemstones == undefined || num_gemstones == null || num_gemstones == '' || typeof num_gemstones == 'undefined'))
-				{
-					str = 'Number of Gemstone is Empty';
-					isValid = false;
-				}
-
-				if(isValid && (gemstone_type == undefined || gemstone_type == null || gemstone_type == '' || typeof gemstone_type == 'undefined'))
-				{
-					str = 'Gemstone Type is Empty';
-					isValid = false;
-				}
-            }
-
-            if(isValid == false && str != '')
-            {
-                common.toast(0,str);
-            }
-            else
-			{
-                isValid = submitJewelleryForm();
-                return  isValid;
-            }
-            return false;
-}*/
 
 function calculatePrice()
 {

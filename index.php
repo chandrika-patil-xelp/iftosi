@@ -488,7 +488,6 @@ switch ($action) {
                 $page = 'diamond_details';
                 $prdList = $pid = $_GET['productid'];
                 $uid = $_GET['userid'];
-
                 $url = APIDOMAIN . 'index.php?action=getPrdById&prdid=' . $pid;
                 $res = $comm->executeCurl($url);
                 $data = $prdInfo = $res['results'][$pid];

@@ -261,7 +261,7 @@ function otpGo(pr_mobile)
     otpValue = parseFloat(otpValue);
     if(otpValue =='' || otpValue <= 0 || otpValue == undefined || otpValue == 'undefined')
     {
-        common.toast(0,'OTP value provied is not proper');
+        common.toast(0,'OTP value provided is not proper');
     }
     else
     {
@@ -272,11 +272,14 @@ function otpGo(pr_mobile)
                 var errCode = obj.code;
                 if(errCode == 1)
                 {
+                    
                     isValid = true;
+                    common.toast(1,'OTP is sent to your mobile number');
                     return isValid;
                 }
                 if(errCode == 0)
                 {
+                    common.toast(0,'OTP sending failed');
                     return isValid;
                 }
             }

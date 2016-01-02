@@ -70,12 +70,12 @@
             <div id="otpDiv" class="loginDiv transition300 dn" style="transform: scale(1);height:200px !important">
                 <div class="lgTitle fLeft fmOpenR">Enter OTP sent to your mobile</div>
                 <div class="inputCont fLeft fmOpenR">
-                    <input type="tel" id="pr_otp" name="pr_otp" autocomplete="off" maxlength="6" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeyup="return onEnterFormSubmit(event, 1);" style="padding-right: 80px">
+                    <input type="text" id="pr_otp" name="pr_otp" autocomplete="off" maxlength="6" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeypress="return common.isNumberKey(event);" onkeyup="return onEnterFormSubmit(event, 1);" style="padding-right: 80px">
                     <span onclick="otpGo();" class="resendOTP">RESEND</span>
                     <label for="pr_otp" class="inp-label transition100">OTP</label>
                 </div>  
-                <div class="cancelLgBtn fLeft fmOpenR" id="lgCancel" onclick="closeOtpForm();">CANCEL</div>
-                <div class="loginBtn fLeft fmOpenR" id="lgSubmit" onclick="otpCheck();">SUBMIT</div>
+                <div class="cancelLgBtn fLeft fmOpenR" id="otpCancel" onclick="closeOtpForm();">CANCEL</div>
+                <div class="loginBtn fLeft fmOpenR" id="otpSubmit" onclick="otpCheck();">SUBMIT</div>
             </div>          
         </div>
         <?php include 'logo.html' ?>

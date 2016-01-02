@@ -139,33 +139,35 @@
 							<?php
 								if(!empty($vndrAddr[1]))
 								{
-							?>
-									,<br><?php echo trim($vndrAddr[1]); ?>
-							<?php
+                                                                    echo trim($vndrAddr[1]).', '; 
 								}
 								if(!empty($vndrAddr[2]))
 								{
-							?>
-									,<br><?php echo trim($vndrAddr[2]); ?>
-							<?php
-								}
-								if(!empty($vndrAddr[3]))
+                                                                    echo trim($vndrAddr[2]).', ';
+                                                            	}
+                                                                if(!empty($vndrAddr[3]))
 								{
-							?>
-									,<br><?php echo trim($vndrAddr[3]); ?>
-							<?php
+                                                                    echo trim($vndrAddr[3]).', '; 
 								}
-								if(!empty($vndrDtls['city']))
+                                                                if(!empty($vndrAddr[4]))
 								{
-							?>
-								,<br><?php echo trim($vndrDtls['city']); ?>
-							<?php
+                                                                    echo trim($vndrAddr[4]).', ';
+                                                                }
+                                                                if(!empty($vndrDtls['area']))
+								{
+                                                                    echo trim($vndrDtls['area']).', ';
 								}
+                                                                if(!empty($vndrDtls['city']))
+								{
+                                                                    echo trim($vndrDtls['city']).', ';
+                                                                }
 								if(!empty($vndrDtls['state']))
 								{
-							?>
-								,<br><?php echo trim($vndrDtls['state']); ?>
-							<?php
+                                                                    echo trim($vndrDtls['state']).',';
+								}
+                                                                if(!empty($vndrDtls['postal_code']))
+								{
+                                                                    echo trim($vndrDtls['postal_code']).'.';
 								}
 							?>                
                         </div>
@@ -282,7 +284,7 @@
         <div id='userForm' class="userForm transition300 dn">
             <div class="lgTitle fLeft fmOpenR">Submit details to get SMS & EMAIL</div>
             <div class="inputCont fLeft fmOpenR">
-                <input type="tel" id="ur_mobile" name="ur_mobile" autocomplete="false" maxlength="10" class="txtInput cOrange fmOpenR font14 mobileIcon">
+                <input type="text" id="ur_mobile" name="ur_mobile" autocomplete="false" maxlength="10" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeypress="return common.isNumberKey(event);">
                 <label for="ur_mobile" class="inp-label transition100">MOBILE</label>
                 <div id="ur_mobile_inpText" class="inpText fRight transition300">enter<br>mobile number</div>
             </div> 
@@ -292,7 +294,7 @@
                 <div id="ur_name_inpText" class="inpText fRight transition300">enter<br>your name</div>
             </div> 
             <div class="inputCont fLeft fmOpenR">
-                <input type="text" id="ur_email" name="ur_email" autocomplete="false" onKeyPress="common.eSubmit('event','userCancel');" class="txtInput cOrange fmOpenR font14 emailIcon">
+                <input type="text" id="ur_email" name="ur_email" autocomplete="false" onKeyPress="return common.eSubmit('event','userCancel');" class="txtInput cOrange fmOpenR font14 emailIcon">
                 <label for="ur_email" class="inp-label transition100">EMAIL</label>
                 <div id="ur_email_inpText" class="inpText fRight transition300">enter<br>your email</div>
             </div> 
@@ -328,12 +330,12 @@
         <div id="otpDiv" class="loginDiv transition300 dn" style="transform: scale(1);height:200px !important">
             <div class="lgTitle fLeft fmOpenR">Enter OTP sent to your mobile</div>
                 <div class="inputCont fLeft fmOpenR">
-                    <input type="tel" id="pr_otp" name="pr_otp" autocomplete="off" maxlength="6" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeyup="return onEnterFormSubmit(event,1);" style="padding-right: 80px">
+                    <input type="text" id="pr_otp" name="pr_otp" autocomplete="off" maxlength="6" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeypress="return common.isNumberKey(event);" onkeyup="return onEnterFormSubmit(event,1);" style="padding-right: 80px">
                     <span onclick="otpGo();" class="resendOTP">RESEND</span>
                     <label for="pr_otp" class="inp-label transition100">OTP</label>
                 </div>  
-                <div class="cancelLgBtn fLeft fmOpenR" id="lgCancel" onclick="closeOtpForm();">CANCEL</div>
-            <div class="loginBtn fLeft fmOpenR" id="lgSubmit" onclick="otpCheck();">Submit</div>
+                <div class="cancelLgBtn fLeft fmOpenR" id="otpCancel" onclick="closeOtpForm();">CANCEL</div>
+            <div class="loginBtn fLeft fmOpenR" id="otpSubmit" onclick="otpCheck();">Submit</div>
         </div>
     
 

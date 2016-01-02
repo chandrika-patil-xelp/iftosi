@@ -1,4 +1,3 @@
-console.log('here');
 var isOpen = false;
 var lastSc=0;
 var pw=$(window).width();
@@ -25,9 +24,6 @@ $(document).ready(function(){
         }
       //  $('body').animate({scrollTop: samt}, 300);
     }, 100);
-    
-    
-
     
     /* $("#gallery1").bind("click", function(){
         var img=$(this).css("background-image");
@@ -224,7 +220,7 @@ $(document).ready(function(){
             $('#ur_email').focus();
             return false;
         }
-        else 
+        else
         {
 			if(isMail)
 			{
@@ -232,8 +228,8 @@ $(document).ready(function(){
                                 var mobile = customStorage.readFromStorage('mobile');
                                 if(isLoggedIn == '' || isLoggedIn == null || isLoggedIn == undefined || isLoggedIn == false || isLoggedIn == 'false')
 				{
-					customStorage.addToStorage('mobile',ur_mobile);
-					var pr_mobile = customStorage.readFromStorage('mobile');
+					//customStorage.addToStorage('mobile',ur_mobile);
+					//var pr_mobile = customStorage.readFromStorage('mobile');
 					otpGo();
 					
 				}
@@ -347,12 +343,8 @@ function showImages(data)
 			k = 0;
 		});
         
-        console.log('this');
 
 		$('#gallery1 .thumbnil').click(function(){
-            
-            console.log('thisasdasdasdasd');
-            console.log($(this).css('background-image'));
 			var imgvl=$(this).css('background-image');
 			$('#prdImage').css({'background-image': imgvl});
 		});
@@ -484,9 +476,9 @@ function showVendorDetails(obj)
 		{
                     
 			funcObj = obj;
-			common.checkMobile('ur_mobile');
-			customStorage.addToStorage('mobile',mobile);
-			pr_mobile = customStorage.readFromStorage('mobile');
+			//common.checkMobile('ur_mobile');
+			//customStorage.addToStorage('mobile',mobile);
+			//pr_mobile = customStorage.readFromStorage('mobile');
 			otpGo();
 		}
 			
@@ -654,12 +646,11 @@ $('#signInUpTab').click(function () {
 $('#overlay').bind('click', function () {
     closeAllForms();
 });
-$('#lgSubmit, #lgCancel').bind('click', function () {
-    if(this.id=='lgCancel') {
-        closeAllForms();
-    }
-    
-});
+//$('#lgSubmit, #lgCancel').bind('click', function () {
+//    if(this.id=='lgCancel') {
+//        closeAllForms();
+//    }
+//});
 
 function closeAllForms() {
     $('#loginDiv,#userForm').velocity({scale: 0}, {delay: 0, ease: 'swing'});
@@ -801,148 +792,152 @@ function sendDetailsToUser()
 
 function requestOTP()
 {
-    $('#overlay1').removeClass('dn');
-     $('#otpDiv').removeClass('dn');
     setTimeout(function () {
-        $('#overlay1').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
+        $('#overlay1').removeClass('dn');
+        $('#otpDiv').removeClass('dn');
+        $('#overlay1').velocity({opacity: 1}, {delay: 0, duration: 50, ease: 'swing'});
         $('#optDiv').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
-    }, 10);
+    }, 500);
 }
 function otpCheck()
 {
    var otpProvided =  $('#pr_otp').val();
-   var mobile = customStorage.readFromStorage('mobile');
-   var isValid = true;
-   $.ajax({url: DOMAIN + "apis/index.php?action=validOTP&mobile="+mobile+"&vc="+otpProvided, success: function(result)
-       {
-                var obj = jQuery.parseJSON(result);
-                var errCode = obj['error']['Msg'];
+   var obj = funcObj;
+   if(otpProvided !== undefined && otpProvided !== 'undefined' && otpProvided !== null && otpProvided !== 'null' && otpProvided !== '' && isNaN(otpProvided) == false )
+   {
+            var mobile = $('#ur_mobile').val();
+            var isValid = true;
+            
+            //var loggedin = customStorage.readfromStorage(isLoggedIn);
+           $.ajax({url: DOMAIN + "apis/index.php?action=validOTP&mobile="+mobile+"&vc="+otpProvided, success: function(result)
+               {
+                        var obj = jQuery.parseJSON(result);
+                        var errCode = obj['error']['Msg'];
+
+                        if(errCode == 'Data matched')
+                        {
+                            
+                                isValid = true;
+                                var mobile = $('#ur_mobile').val().trim();
+                                var name = $('#ur_name').val().trim();
+                                var email = $('#ur_email').val().trim();
+
+                                var params = 'action=ajx&case=userCheck&mobile='+mobile+'&name='+encodeURIComponent(name)+'&email='+encodeURIComponent(email);
+                                var URL = DOMAIN + "index.php";
+
+                                $.getJSON(URL, params, function(data) {
+                                        if(data !== null && data !== undefined && data !== '')
+                                        {
+                                                if((data.error !== '' && data.error !== null && data.error !== undefined && data.error.Code == 0) || (data.error.Code == 1 && data.results.userid != ''))
+                                                {
+                                                        /*if(data.results.userDet[0].is_vendor == 1)
+                                                        {
+                                                                customStorage.toast(0, 'This feature is not available for vendors');
+                                                        }
+                                                        else
+                                                        {*/
+                                                                if(data.error.Msg === 'Data matched')
+                                                                {
+                                                                    customStorage.addToStorage('l', data.results.userDet.logmobile);
+                                                                    customStorage.addToStorage('mobile', data.results.userDet.logmobile);
+                                                                    customStorage.addToStorage('username', data.results.userDet.user_name);
+                                                                    customStorage.addToStorage('name', name);
+                                                                    customStorage.addToStorage('email', email);
+                                                                    customStorage.addToStorage('city', data.results.userDet.city);
+                                                                    customStorage.addToStorage('isLoggedIn',true);
+                                                                    var isVndr = data.results.userDet.is_vendor;
+                                                                    var isComp = data.results.userDet.is_complete;
+
+                                                                    if(isVndr == 0 || isVndr == '0')
+                                                                    {
+                                                                            isVndr = -1;
+                                                                    }
+                                                                    else if(isVndr == 1 || isVndr == '1')
+                                                                    {
+                                                                        customStorage.addToStorage('isComp', data.results.userDet.isComp);
+                                                                        customStorage.addToStorage('busiType', data.results.userDet.busiType);
+                                                                    }
+                                                                    customStorage.addToStorage('is_vendor',isVndr);
+                                                                    var uid = customStorage.addToStorage('userid', data.results.userid);
+                                                                }
+                                                                else
+                                                                {
+                                                                    customStorage.addToStorage('l', mobile);
+                                                                    customStorage.addToStorage('mobile', mobile);
+                                                                    customStorage.addToStorage('username', name);
+                                                                    customStorage.addToStorage('name', name);
+                                                                    customStorage.addToStorage('email', email);
+                                                                    customStorage.addToStorage('isLoggedIn',true);
+                                                                    var isVndr = data.results.userDet.is_vendor;
+                                                                    if(isVndr == 0 || isVndr == '0')
+                                                                    {
+                                                                            isVndr = -1;
+                                                                    }
+                                                                    customStorage.addToStorage('is_vendor',isVndr);
+                                                                    var uid = customStorage.addToStorage('userid', data.results.userid);
+                                                                }
+                                                                common.checkLogin();
+                                                                closeOtpForm();
+
+                                                                if((obj !== undefined && $(obj).hasClass('iconWishlist')) || isWishList)
+                                                                {
+                                                                        addToWishList();
+                                                                }
+
+                                                                if((obj !== undefined && $(obj).hasClass('iconMessage')) || isMail)
+                                                                {
+                                                                        sendDetailsToUser();
+                                                                        addToEnquiry();
+                                                                }
+                                                                else
+                                                                {
+                                                                        var bottomPos = $('.prdMainDetails').position().top+$('.prdMainDetails').outerHeight(true)
+                                                                        var pos=bottomPos - 65;
+
+                                                                        setTimeout(function(){
+                                                                                $('#vDetails').removeClass('vTransit');
+                                                                                $('#vDetails').removeClass('dn');
+                                                                                $('body').animate({scrollTop: pos}, 300);
+                                                                        },10);
+
+                                                                        setTimeout(function () {
+                                                                                var mpscrpt = document.createElement("script");
+                                                                                mpscrpt.type = "text/javascript";
+                                                                                mpscrpt.src = "http://maps.google.com/maps/api/js";
+                                                                                $("head").append(mpscrpt);
+                                                                        }, 100);
+
+                                                                        setTimeout(function () {
+                                                                                initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
+                                                                        },250);
+                                                                        addToEnquiry();
+                                                                }
+                                                        //}
+                                                }
+                                        }
+                                });
+                        }
+                        else if(errCode === 'Otp validation failed')
+                        {
+                            isValid = false;
+                            customStorage.toast(0,'OTP verification Unsuccessful');
+                            requestOTP();
+                        }
+                }
                 
-                if(errCode == 'Data matched')
-                {
-                    isValid = true;
-                    var mobile = $('#ur_mobile').val().trim();
-                        var name = $('#ur_name').val().trim();
-                        var email = $('#ur_email').val().trim();
-                        
-			var params = 'action=ajx&case=userCheck&mobile='+mobile+'&name='+encodeURIComponent(name)+'&email='+encodeURIComponent(email);
-			var URL = DOMAIN + "index.php";
-
-			$.getJSON(URL, params, function(data) {
-				if(data !== null && data !== undefined && data !== '')
-				{
-					if((data.error !== '' && data.error !== null && data.error !== undefined && data.error.Code == 0) || (data.error.Code == 1 && data.results.userid != ''))
-					{
-						/*if(data.results.userDet[0].is_vendor == 1)
-						{
-							customStorage.toast(0, 'This feature is not available for vendors');
-						}
-						else
-						{*/
-							if(data.error.Msg === 'Data matched')
-							{
-								customStorage.addToStorage('l', data.results.userDet.logmobile);
-								customStorage.addToStorage('mobile', data.results.userDet.logmobile);
-								customStorage.addToStorage('username', data.results.userDet.user_name);
-								customStorage.addToStorage('name', name);
-								customStorage.addToStorage('email', email);
-								customStorage.addToStorage('city', data.results.userDet.city);
-								customStorage.addToStorage('isLoggedIn',true);
-								var isVndr = data.results.userDet.is_vendor;
-								var isComp = data.results.userDet.is_complete;
-								if(isVndr == 0 || isVndr == '0')
-								{
-									isVndr = -1;
-								}
-                                else if(isVndr == 1 || isVndr == '1')
-                                {
-                                    customStorage.addToStorage('isComp', data.results.userDet.isComp);
-                                    customStorage.addToStorage('busiType', data.results.userDet.busiType);
-                                }
-								customStorage.addToStorage('is_vendor',isVndr);
-					
-								var uid = customStorage.addToStorage('userid', data.results.userid);
-							}
-							else
-							{
-								customStorage.addToStorage('l', mobile);
-								customStorage.addToStorage('mobile', mobile);
-								customStorage.addToStorage('username', name);
-								customStorage.addToStorage('name', name);
-								customStorage.addToStorage('email', email);
-								customStorage.addToStorage('isLoggedIn',true);
-								var isVndr = data.results.userDet.is_vendor;
-								if(isVndr == 0 || isVndr == '0')
-								{
-									isVndr = -1;
-								}
-								
-								customStorage.addToStorage('is_vendor',isVndr);
-					
-								var uid = customStorage.addToStorage('userid', data.results.userid);
-							}
-							common.checkLogin();
-							var obj = funcObj;
-							
-							$('#otpDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
-							$('#overlay1').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
-							setTimeout(function () {
-							$('#overlay1,#otpDiv').addClass('dn');
-							$("#otpDiv,#overlay1").remove();
-							}, 1010);
-                                                        
-							if((obj !== undefined && $(obj).hasClass('iconWishlist')) || isWishList)
-							{
-								addToWishList();
-							}
-
-							if((obj !== undefined && $(obj).hasClass('iconMessage')) || isMail)
-							{
-								sendDetailsToUser();
-								addToEnquiry();
-							}
-							else
-							{
-								var bottomPos = $('.prdMainDetails').position().top+$('.prdMainDetails').outerHeight(true)
-								var pos=bottomPos - 65;
-
-								setTimeout(function(){
-									$('#vDetails').removeClass('vTransit');
-									$('#vDetails').removeClass('dn');
-									$('html,body').animate({scrollTop: pos}, 300);
-								},10);
-
-								setTimeout(function () {
-									var mpscrpt = document.createElement("script");
-									mpscrpt.type = "text/javascript";
-									mpscrpt.src = "http://maps.google.com/maps/api/js";
-									$("head").append(mpscrpt);
-								}, 100);
-
-								setTimeout(function () {
-									initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
-								},250);
-								addToEnquiry();
-							}
-						//}
-					}
-				}
-			});
-                }
-                else if(errCode === 'Otp validation failed')
-                {
-                    isValid = false;
-                    customStorage.toast(0,'OTP verification Unsuccessful');
-                    requestOTP();
-                }
-        }
-        });
+            });
+    }
+    else
+    {
+        isValid = false;
+        customStorage.toast(0,'OTP verification Unsuccessful');
+        requestOTP();
+    }
         return isValid;
 }
 function otpGo()
 {
     var pr_mobile = $('#ur_mobile').val();
-    isValid = false;
     $.ajax({url: DOMAIN + "apis/index.php?action=sendOTP&mb="+pr_mobile, success: function(result)
             {
                 var obj = jQuery.parseJSON(result);
@@ -951,18 +946,12 @@ function otpGo()
                 
                 if(errCode == 1)
                 {
-                    isValid = true;
-                    $('#overlay1').removeClass('dn');
-                    $('#otpDiv').removeClass('dn');
-                    setTimeout(function () {
-                    $('#overlay1').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
-                    $('#optDiv').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
-                    }, 10);
-                    return isValid;
+                    customStorage.toast(1,'OTP is sent to your mobile number');
+                    requestOTP();
                 }
-                else(errCode == 0)
+                else
                 {
-                    return isValid;
+                    customStorage.toast(0,'OTP sending failed');
                 }
             }
         });
@@ -970,18 +959,23 @@ function otpGo()
 
 function closeOtpForm()
 {
-        $('#otpDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
+        
         if(pageName == 'signup' || pageName == 'forgot')
         {
             window.history.back();
         }
         else
         {
-            $('#overlay1').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
+            
+//            $('#overlay1').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
+//            $('#otpDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
             setTimeout(function () {
+                $('#overlay1').velocity({opacity: 0}, {delay: 100, duration: 300, ease: 'swing'});
+                $('#optDiv').velocity({scale: 0}, {delay: 0, duration: 100, ease: 'swing'});
                 $('#overlay1,#otpDiv').addClass('dn');
-                $("#otpDiv,#overlay1").remove();
-            }, 1010);
+                //$("#otpDiv,#overlay1").remove();
+            }, 10);
+    
             isValid = true;
         }
 }

@@ -140,7 +140,7 @@ function Common() {
             _this.nCount++;
             _this.divNo++;
         } else {
-            _this.toast(0, 'You can add only 4 Landline Numbers')
+            _this.toast(0, 'You can add only 4 Alternate Landline Numbers')
         }
     }
 

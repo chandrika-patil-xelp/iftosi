@@ -159,7 +159,7 @@ function Common() {
             if($('#hdropList').is(":visible"))
             {   
                 console.log('1');
-				hisOpen = false;
+                hisOpen = false;
                 $('#hdropList').hide();
             }
         });

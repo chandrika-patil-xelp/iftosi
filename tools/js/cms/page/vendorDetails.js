@@ -563,7 +563,7 @@ $('#pincode').keyup(function () {
 var pincode1;
 $(document).ready(function () {
 pincode1 = $('#pincode').val();
-    $('#pincode').bind('keyup',function(event)
+    $('#pincode').bind('keyup keydown',function(event)
     {
         if(pincode1 == 'undefined' || pincode1 == null || pincode1 == undefined || pincode1 == 'null')
         {
@@ -575,7 +575,7 @@ pincode1 = $('#pincode').val();
     var msuggest = '';
     
     /* For suggestions of City */
-    $('#area').bind('keyup', function(event)    
+    $('#area').bind('keyup keydown', function(event)    
     {
         if ($(this).attr('id') == 'area')
         {
@@ -590,26 +590,47 @@ pincode1 = $('#pincode').val();
             {
                 params = 'action=areaSuggest&pincode='+pincode1+'&area='+escape($(this).val());
             }
-            new Autosuggest($(this).val(), '#area', '#areaSuggestDiv', DOMAIN + "apis/index.php", params, true, '', '', event);
+            if($(this).attr('value') !== '')
+            {
+                new Autosuggest($(this).val(), '#area', '#areaSuggestDiv', DOMAIN + "apis/index.php", params, true, '', '', event);
+            }
+            else
+            {
+                $('#areaSuggestDiv').addClass('dn');
+            }
         }
     });
 
-    $('#city').bind('keyup focus', function(event){
+    $('#city').bind('keyup focus keydown', function(event){
         if ($(this).attr('id') == 'city')
         {
             msuggest = 'citySuggestDiv';
             var params = 'action=citySuggest&name=' + escape($(this).val());
-            new Autosuggest($(this).val(), '#city', '#citySuggestDiv', DOMAIN + "apis/index.php", params, true, '', '', event);
+            if($(this).attr('value') !== '')
+            {
+                new Autosuggest($(this).val(), '#city', '#citySuggestDiv', DOMAIN + "apis/index.php", params, true, '', '', event);
+            }
+            else
+            {
+                $('#citySuggestDiv').addClass('dn');
+            }
         }
     });
 
-    $('#state').bind('keyup focus', function(event)
+    $('#state').bind('keyup focus keydown', function(event)
     {
         if ($(this).attr('id') == 'state')
         {
             msuggest = 'stateSuggestDiv';
             var params = 'action=stateSuggest&name=' + escape($(this).val());
-            new Autosuggest($(this).val(), '#state', '#stateSuggestDiv', DOMAIN + "apis/index.php", params, true, '', '', event);
+            if($(this).attr('value') !== '')
+            {
+                new Autosuggest($(this).val(), '#state', '#stateSuggestDiv', DOMAIN + "apis/index.php", params, true, '', '', event);
+            }
+            else
+            {
+                $('#stateSuggestDiv').addClass('dn');
+            }
         }
     });
 
@@ -639,11 +660,22 @@ function arrangeData(data, id, divHolder, nextxt)
 }
 
 function setAreaSuggestValue(val,city,state,pin,id) {
-    $('#'+id).val(val.trim());
-    $('#city').val(city.trim());
-    $('#state').val(state.trim());
-    $('#pincode').val(pin.trim());
-    
+    if(val !== undefined && val !== 'undefined' && val !== null && val !== 'null')
+    {
+        $('#'+id).val(val.trim());
+    }
+    if(city !== undefined && city !== 'undefined' && city !== null && city !== 'null')
+    {
+        $('#city').val(city.trim());
+    }
+    if(state !== undefined && state !== 'undefined' && state !== null && state !== 'null')
+    {
+        $('#state').val(state.trim());
+    }
+    if(pin !== undefined && pin !== 'undefined' && pin !== null && pin !== 'null')
+    {
+        $('#pincode').val(pin.trim());
+    }
     setTimeout(function () {
         $('#areaSuggestDiv').addClass('dn');
     }, 50);

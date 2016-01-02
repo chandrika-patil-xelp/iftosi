@@ -101,12 +101,13 @@ function timout() {
 
 function setAutoData(cid,cval,id,divHolder,nextxt,hiddenid)
 {
+    
 	//common.addToStorage(id.replace('#',''),cval);
-	$(id).val(cval);
-	if(typeof(hiddenid) !== "undefined") {
-		$(hiddenid).val(cid);
-		//common.addToStorage(hiddenid.replace('#',''),cid);
-	}	
+            $(id).val(cval.trim());
+        if(typeof(hiddenid) !== "undefined") {
+                $(hiddenid).val(cid);
+                //common.addToStorage(hiddenid.replace('#',''),cid);
+        }
 	setTimeout(function (){
 		focusfn();
 	},20);
@@ -114,7 +115,11 @@ function setAutoData(cid,cval,id,divHolder,nextxt,hiddenid)
 		$(divHolder).addClass('dn');
 		$(divHolder).html();
 	},20);
-	makeCall(id,cid);
+        
+        if(id == '#txtjArea')
+        {
+            makeCall(id,cid);
+        }
 	auto = false;
 	cleardata();
 }
@@ -138,13 +143,26 @@ function focusfn()
 var handleKeys = function(evt,txt,divHolder,nextxt,divSelection,hiddenid,params) {
 	if (!divSelection) divSelection = $(divHolder + " ul li.autoSuggestRowSelect");
 	var keyCode = evt.which;
-	
+	var a = '';
 	if(keyCode == 13) {
 		$(divHolder).addClass('dn');
 		$(divHolder+' ul li').each(function(index,data) {
 				var dtxt = $(divSelection).text();
 				var id = $(divSelection).attr('id');
-				setAutoData(id,dtxt,txt,divHolder,nextxt,hiddenid);
+                                if(divHolder == '#areaSuggestDiv')
+                                {
+                                    var areaSugFunc = divSelection[0]['attributes'][2].value;
+                                    areaSugFunc;
+                                    if(typeof(areaSugFunc) == 'string')
+                                    {
+                                        var func = new Function(areaSugFunc);
+                                        func();
+                                    }
+                                }
+                                else
+                                {
+                                    setAutoData(id,dtxt,txt,divHolder,nextxt,hiddenid);
+                                }
 				return true;
 		});
 		return true;

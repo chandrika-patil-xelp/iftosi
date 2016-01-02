@@ -166,6 +166,10 @@ $(document).ready(function() {
 				new Autosuggest($(this).val(), '#txtjArea', '#jasug', DOMAIN + "index.php", params, false, '', '#ctid', event);
 			}
 		}
+                $(document).bind('click',function()
+                {
+                    $('#jasug').addClass('dn');
+                });
 	});
 	
 	$('.pgComm').bind('click', function() {
@@ -707,7 +711,8 @@ function getResultsData(data,sortby,showtree)
                                                                     metal_price =vl.attributes.gold_weight * metal_rate;
                                                                 }
                                                                 metal_price = Math.ceil(metal_price);
-                                                                    html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+ common.IND_money_format(metal_price) +'</div>';
+                                                                var tmp_metalprce = common.IND_money_format(metal_price)
+                                                                    html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+ tmp_metalprce +'</div>';
 								html += '</div>';
 							html += '</div>';
 						html += '</a>';
