@@ -70,43 +70,6 @@ function checkToHide(evt) {
 
 
 var goldRate, silverRate, dollarRate = '';
-    
-$.ajax({url: DOMAIN + "apis/index.php?action=getAllRatesByVID&vid=" + uid, success: function (result) {
-    var obj = jQuery.parseJSON(result);
-    goldRate = obj.results.gold_rate;
-    silverRate = obj.results.silver_rate;
-    dollarRate = obj.results.dollar_rate;
-
-	if(dollarRate !== undefined && dollarRate !== null && dollarRate !== '' && typeof dollarRate !== 'undefined' && dollarRate !== 0.00 && dollarRate !== '0.00')
-	{
-		$('#dollar_rate').val(dollarRate);
-	}
-	else
-	{
-		$('#dollar_rate').val('');
-	}
-
-	if(goldRate !== undefined && goldRate !== null && goldRate !== '' && typeof goldRate !== 'undefined' && goldRate !== 0.00 && goldRate !== '0.00')
-	{
-		$('#gold_rate1').val(goldRate);
-	}
-	else
-	{
-		$('#gold_rate1').val('');
-	}
-
-	if(silverRate !== undefined && silverRate !== null && silverRate !== '' && typeof silverRate !== 'undefined' && silverRate !== 0.00 && silverRate !== '0.00')
-	{
-		$('#silver_rate1').val(silverRate);
-		$('#silver_rate').val(silverRate);
-	}
-	else
-	{
-		$('#silver_rate1').val('');
-		$('#silver_rate').val('');
-	}
-}}); 
- 
 
 var mxSc = 170;//$('.prdResults').offset().top;
 

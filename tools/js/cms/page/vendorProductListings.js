@@ -263,7 +263,7 @@ function generateDiamondList(obj) {
     str += '<span class="upSpan fmOpenB">' + barcode + '</span>';
     var shape = '';
     if(obj['shape'] != null || obj['shape'] !== undefined) {
-        shape = obj.shape.toLowerCase();
+        shape = obj.shape;
     }
     str += '<span class="lwSpan"><a href="'+ DOMAIN + obj.cert +'-'+shape+'-clarity-'+obj.clarity+'/did-'+obj.id+'" target="_blank">View Details</a></span>';
     str += '</div>';
@@ -591,7 +591,7 @@ function generatBullionsList(obj) {
     str += '</div>';
     str += '<div class="barcode fLeft">';
     str += '<span class="upSpan fmOpenB">' + barcode + '</span>';
-    str += '<span class="lwSpan"><a href="'+DOMAIN+obj.metal.toLowerCase()+'-'+obj.type.toLowerCase()+'-'+Math.ceil(obj['gold_weight'])+'-grams/bid-'+obj['id']+'" target="_blank">View Details</a></span>';
+    str += '<span class="lwSpan"><a href="'+DOMAIN+obj.metal+'-'+obj.type+'-'+Math.ceil(obj['gold_weight'])+'-grams/bid-'+obj['id']+'" target="_blank">View Details</a></span>';
     str += '</div>';
     str += '<div class="weight fLeft">'
     str += '<span class="upSpan">' + obj['type'] + '</span>';
