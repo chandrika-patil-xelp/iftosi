@@ -607,7 +607,7 @@ pincode1 = $('#pincode').val();
     var msuggest = '';
     
     /* For suggestions of City */
-    $('#area').bind('keyup keydown', function(event)    
+    $('#area').bind('keyup', function(event)    
     {
         if ($(this).attr('id') == 'area')
         {
@@ -633,7 +633,7 @@ pincode1 = $('#pincode').val();
         }
     });
 
-    $('#city').bind('keyup focus keydown', function(event){
+    $('#city').bind('keyup focus', function(event){
         if ($(this).attr('id') == 'city')
         {
             msuggest = 'citySuggestDiv';
@@ -649,7 +649,7 @@ pincode1 = $('#pincode').val();
         }
     });
 
-    $('#state').bind('keyup focus keydown', function(event)
+    $('#state').bind('keyup focus', function(event)
     {
         if ($(this).attr('id') == 'state')
         {
