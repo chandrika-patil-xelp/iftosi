@@ -151,7 +151,7 @@ function Common() {
         }
     };
 
-    _this.nmbCount = parseInt(mNCount)+1;
+    _this.nmbCount = parseInt(mNCount);
     this.addMobileNumber = function () {
         if (_this.nmbCount == 0) {
             _this.nmbCount++;
@@ -213,13 +213,29 @@ function Common() {
 
     this.checkMobile = function (id) {
         var num = $('#' + id).val();
-                var len = num.length;
-                if ((num.charAt(0) == '9') && (len == 10) || (num.charAt(0) == '8') && (len == 10) || (num.charAt(0) == '7') && (len == 10)) {
-            return true;
-                } else {
-            this.toast(0,'Please enter correct mobile number.')
-            return false;
+        var len = num.length;
+        if ((num.charAt(0) == '9') && (len == 10) || (num.charAt(0) == '8') && (len == 10) || (num.charAt(0) == '7') && (len == 10)) {
+            
+            var conMobile = $('#conMobile').val();
+            var altmbNo1_Mobile = $('#altmbNo1_Mobile').val();
+            var altmbNo2_Mobile = $('#altmbNo2_Mobile').val();
+            if (altmbNo1_Mobile!='' || altmbNo2_Mobile!='') {
+                if(conMobile==altmbNo1_Mobile) {
+                    this.toast(0, 'Please enter unique mobile number.')
+                    return false;
+                } else if(altmbNo1_Mobile==altmbNo2_Mobile) {
+                    this.toast(0, 'Please enter unique mobile number.')
+                    return false;
+                } else if(conMobile==altmbNo2_Mobile) {
+                    this.toast(0, 'Please enter unique mobile number.')
+                    return false;
                 }
+            }
+            return true;
+        } else {
+            this.toast(0, 'Please enter correct mobile number.')
+            return false;
+        }
 
     };
     this.validateEmail = function (id) {

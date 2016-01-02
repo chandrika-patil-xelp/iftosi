@@ -291,6 +291,38 @@ function validateStep3Form() {
         $('#conMobile').focus();
         return false;
     }
+    var altmbNo1_Mobile = $('#altmbNo1_Mobile').val();
+    var altmbNo2_Mobile = $('#altmbNo2_Mobile').val();
+    if (altmbNo1_Mobile!='' || altmbNo2_Mobile!='') {
+        if(conMobile==altmbNo1_Mobile) {
+            $('#altmbNo1_Mobile').val('').focus();
+            common.toast(0, 'Please enter unique mobile number.');
+            return false;
+        } else if(altmbNo1_Mobile==altmbNo2_Mobile) {
+            $('#altmbNo1_Mobile').val('').focus();
+            common.toast(0, 'Please enter unique mobile number.');
+            return false;
+        } else if(conMobile==altmbNo2_Mobile) {
+            $('#altmbNo2_Mobile').val('').focus();
+            common.toast(0, 'Please enter unique mobile number.');
+            return false;
+        }
+    }
+    var llNoArr = new Array;
+    var llUnique=true;
+    $('.txtCCode').each(function () {
+        var llNo = $(this).val() + '' + $(this).siblings('.lnNo').val();
+        if (llNo != '') {
+            if (llNoArr.indexOf(llNo) != -1) {
+                llUnique = false;
+            }
+            llNoArr.push(llNo);
+        }
+    });
+    if(!llUnique) {
+        common.toast(0, 'Please enter unique Landline number.');
+        return false;
+    }
     if (!common.validateEmail('email')) {
         common.toast(0, 'Contact Email is Required');
         $('#email').focus();
