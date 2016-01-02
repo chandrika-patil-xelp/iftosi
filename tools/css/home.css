@@ -594,7 +594,7 @@ a{cursor:pointer;}
 .bullion_details{}
 
 .bullion_details .prdMainDetails .wrapperMax {padding-left: 0;position: relative;}
-.bullion_details .imgsCont {width: 40%;height: 393px;position: relative;left: 0;top: 0;border: 1px solid #d4d4c8;float: left;}
+.bullion_details .imgsCont {height: 393px;position: relative;left: 0;top: 0;border: 1px solid #d4d4c8;float: left;}
 
 .bullion_details .thumbnil {width: 24%;height: 83px;border: 1px solid #d4d4c8;margin: 0.5%;cursor: pointer;display: inline-block;}
 .bullion_details .leftArrow {top: 0px;}
@@ -883,6 +883,8 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .vdRightCard .cntCard:last-child{display: none;}
 
 .cursorPointer {cursor: pointer!important;}
+.frgtCont{width: 100%;text-align: center;margin-bottom: 20px;}
+.margL{margin-right: 210px;}
 
 
 /* For Resend OTP*/
