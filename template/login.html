@@ -1,6 +1,30 @@
 <?php include 'bhead.html'; ?>
 <body>
-    <div id='baseCont' class="container fmOpenR signupPage loginP">
+    <!--    <div id='baseCont' class="container fmOpenR signupPage loginP">
+            <div class="wrapper">
+                <div class='loginDiv'>
+                    <div class="wrapperMax">
+                        <div class="signupTitle fLeft">Login</div>
+                        <div class="inputCont fLeft fmOpenR">
+                            <input type="tel" id="pr_mobile" name="pr_mobile" maxlength="10" autocomplete="off" class="txtInput cOrange fmOpenR font14 mobileIcon">
+                            <label for="pr_mobile" class="inp-label transition100">MOBILE OR EMAIL</label>
+                            <div id="pr_email_inpText" class="inpText fRight transition300">enter<br>mobile number or email</div>
+                        </div>
+                        <div class="inputCont fLeft fmOpenR">
+                            <input type="password" id="pr_pass" name="pr_pass" autocomplete="off" class="txtInput cOrange fmOpenR font14 passwordIcon" onKeyPress="common.eSubmit(event, 'loginSubmit');">
+                            <label for="pr_pass" class="inp-label transition100">PASSWORD</label>
+                            <div id="pr_pass_inpText" class="inpText fRight transition300">enter your<br>password</div>
+                        </div>  
+                        <div class="cancelLgBtn fLeft fmOpenR ripplelink poR" id='signupCancel'> CANCEL</div>
+                        <div class="loginBtn fLeft fmOpenR ripplelink poR" id='loginSubmit' onclick="common.submitLoginForm();">SIGN IN</div>
+                        <div class="signuplink fmOpenB fLeft">
+                            <center class="w50 fLeft"><a href="<?php echo DOMAIN; ?>index.php?case=forgot" style="color:#171334;"><span>Forgot Password?</span></a></center>
+                            <center class="w50 fLeft"><a href="<?php echo DOMAIN; ?>index.php?case=signup"><span>Sign Up with Us</span></a></center>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+    <div id='baseCont' class="container fmOpenR signupPage">
         <div class="wrapper">
             <div id="header" class="header transition300">
                 <div class="wrapperMax">
@@ -9,64 +33,90 @@
                     </div>
                 </div>
             </div>
-            <div class='loginDiv'>
+            <div class='signupDiv' style="height:450px;">
                 <div class="wrapperMax">
-                    <div class="signupTitle fLeft">Login</div>
-                    <div class="inputCont fLeft fmOpenR">
-                        <input type="tel" id="pr_mobile" name="pr_mobile" maxlength="10" autocomplete="off" class="txtInput cOrange fmOpenR font14 mobileIcon">
-                        <label for="pr_mobile" class="inp-label transition100">MOBILE OR EMAIL</label>
-                        <div id="pr_email_inpText" class="inpText fRight transition300">enter<br>mobile number or email</div>
-                    </div>
-                    <div class="inputCont fLeft fmOpenR">
-                        <input type="password" id="pr_pass" name="pr_pass" autocomplete="off" class="txtInput cOrange fmOpenR font14 passwordIcon" onKeyPress="common.eSubmit(event, 'loginSubmit');">
-                        <label for="pr_pass" class="inp-label transition100">PASSWORD</label>
-                        <div id="pr_pass_inpText" class="inpText fRight transition300">enter your<br>password</div>
-                    </div>  
-                    <div class="cancelLgBtn fLeft fmOpenR ripplelink poR" id='signupCancel'> CANCEL</div>
-                    <div class="loginBtn fLeft fmOpenR ripplelink poR" id='loginSubmit' onclick="common.submitLoginForm();">SIGN IN</div>
-                    <div class="signuplink fmOpenB fLeft">
-                        <center class="w50 fLeft"><a href="<?php echo DOMAIN; ?>index.php?case=forgot" style="color:#171334;"><span>Forgot Password?</span></a></center>
-                        <center class="w50 fLeft"><a href="<?php echo DOMAIN; ?>index.php?case=signup"><span>Sign Up with Us</span></a></center>
+                    <div class="signupCont">
+                        <div class="signupCl1 fLeft fmOpenL">
+                            <div class="head1">Login </div>
+                            <div class="head2">for better results.</div>
+                            <div class="head3 fmOpenR headIcon1">Add products to wishlist</div>
+                            <div class="head3 fmOpenR headIcon2">Get vendor details instantly</div>
+                            <div class="head3 fmOpenR headIcon3">Browse exclusive products</div>
+
+                        </div>
+                        <div class="signupCl2 fRight">
+
+
+
+                            <div class="inputCont fLeft fmOpenR">
+                                <input type="tel" id="pr_mobile" name="pr_mobile" autocomplete="off" onkeypress="return common.isNumberKey(event);" onkeyup="isValidMKey(event, this.id);" maxlength="10" class="txtInput cOrange fmOpenR font14 mobileIcon">
+                                <label for="pr_mobile" class="inp-label transition100">MOBILE OR EMAIL</label>
+                                <div id="pr_mobile_inpText" class="inpText fRight transition300">enter<br>mobile number</div>
+                            </div>
+                            <div class="inputCont fLeft fmOpenR">
+                                <input type="password" id="pr_pass" name="pr_pass" autocomplete="off" class="txtInput cOrange fmOpenR font14 passwordIcon" onKeyPress="common.eSubmit(event, 'loginSubmit');">
+                                <label for="pr_pass" class="inp-label transition100">PASSWORD</label>
+                                <div id="pr_pass_inpText" class="inpText fRight transition300">enter your<br>password</div>
+                            </div>  
+
+
+                            <div class="cancelLgBtn fLeft fmOpenR ripplelink poR" id='signupCancel'> CANCEL</div>
+                            <div class="loginBtn fLeft fmOpenR ripplelink poR" id='loginSubmit' onclick="common.submitLoginForm();">SIGN IN</div>
+                            <div class="signuplink fmOpenB fLeft">
+                                <center class="w50 fLeft"><a href="<?php echo DOMAIN; ?>index.php?case=forgot" style="color:#171334;"><span>Forgot Password?</span></a></center>
+                                <center class="w50 fLeft"><a href="<?php echo DOMAIN; ?>index.php?case=signup"><span>Sign Up with Us</span></a></center>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div id='overlay' class="overlay transition300 transit-100Y1 dn" ></div>
+            <div id="otpDiv" class="loginDiv transition300 dn" style="transform: scale(1);height:200px !important">
+                <div class="lgTitle fLeft fmOpenR">Enter OTP sent to your mobile</div>
+                <div class="inputCont fLeft fmOpenR">
+                    <input type="text" id="pr_otp" name="pr_otp" autocomplete="off" maxlength="6" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeypress="return common.isNumberKey(event);" onkeyup="return onEnterFormSubmit(event, 1);" style="padding-right: 80px">
+                    <span onclick="otpGo();" class="resendOTP">RESEND</span>
+                    <label for="pr_otp" class="inp-label transition100">OTP</label>
+                </div>  
+                <div class="cancelLgBtn fLeft fmOpenR" id="otpCancel" onclick="closeOtpForm();">CANCEL</div>
+                <div class="loginBtn fLeft fmOpenR" id="otpSubmit" onclick="otpCheck();">SUBMIT</div>
+            </div>          
         </div>
         <?php include 'logo.html'?>
+            
     </div>
     <?php include 'footer.html'; ?>
     <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
     <script type="text/javascript" src="<?=$jvs['signup'];?>"></script>
     <script type="text/javascript" src="<?=$jvs['comm'];?>"></script>
+    <script type="text/javascript" src="<?= $jvs['head']; ?>"></script>
     <script>
-        
-        var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
-        if(isLoggedIn) {
-            var is_vendor = customStorage.readFromStorage('is_vendor');
-            if (is_vendor == 1)
-            {
-                var busiType = customStorage.readFromStorage('busiType');
-                var isComp = customStorage.readFromStorage('isComp');
-                if (isComp === '2')
-                {
-                    var catid = parseInt(busiType.charAt(0)) - 1;
-                    window.location.assign(DOMAIN + 'index.php?case=vendor_landing&catid=1000' + catid);
-                }
-                else
-                {
-                    window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid=' + userid);
-                }
-            }
-            else if (is_vendor == 2)
-            {
-                window.location.assign(DOMAIN + 'index.php?case=product_list');
-            }
-            else
-            {
-                customStorage.removeFromStorage('busiType');
-            }
-        } else {
-            customStorage.removeAll();
-        }
+
+                            var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
+                    if (isLoggedIn) {
+                        var is_vendor = customStorage.readFromStorage('is_vendor');
+                        if (is_vendor == 1)
+                        {
+                            var busiType = customStorage.readFromStorage('busiType');
+                            var isComp = customStorage.readFromStorage('isComp');
+                            if (isComp === '2')
+                            {
+                                var catid = parseInt(busiType.charAt(0)) - 1;
+                                window.location.assign(DOMAIN + 'index.php?case=vendor_landing&catid=1000' + catid);
+                            } else
+                            {
+                                window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid=' + userid);
+                            }
+                        } else if (is_vendor == 2)
+                        {
+                            window.location.assign(DOMAIN + 'index.php?case=product_list');
+                        } else
+                        {
+                            customStorage.removeFromStorage('busiType');
+                        }
+                    } else {
+                        customStorage.removeAll();
+                    }
     </script>
 </body>
