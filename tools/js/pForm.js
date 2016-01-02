@@ -370,8 +370,8 @@ function validateJForm()
                     gemstone_type = gemcolour = gemweight = num_gemstones = '';
             }
 	}
-
-	if(isValid && (vgemstone_type != undefined || vgemstone_type != null || vgemstone_type != '')) {
+        
+	if(isValid && (vgemstone_type.length!=0)) {
             
             var gemweight=$('#gemweight').val().trim();
             var num_gemstones = $('#num_gemstones').val().trim();
