@@ -21,7 +21,9 @@ function changeGemstoneType(obj,id)
 	{
 		$('.gemstoneProp_'+id).addClass('dn');
 		$('.otherGemstoneProp_'+id).addClass('dn');
-                $('#gemsTypeCont_'+id).parent().addClass('dn');
+                if(id!=1) {
+                    $('#gemsTypeCont_'+id).parent().addClass('dn');
+                }
                 $('.gemstoneProp_'+id+' input').removeAttr('checked');
 	}
         $('.gemstoneProp').addClass('dn');
@@ -927,7 +929,9 @@ function checkDiamondShape(evt,id) {
     if($(evt).hasClass('shapeSelected'))
     {
         $(evt).toggleClass('shapeSelected');
-        $('#diamondShapeCont_'+id).parent().addClass('dn');
+        if(id!=1) {
+            $('#diamondShapeCont_'+id).parent().addClass('dn');
+        }
         $('.diamondProp_'+id).addClass('dn');
         $('.diamondProp_'+id+' input').removeAttr('checked');
     } else {
