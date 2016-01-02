@@ -635,8 +635,10 @@ function closeConfirmDelete()
 	$('#confirmDelete').velocity({scale: 0}, {delay: 0, ease: 'swing'});
 	$('#overlay1').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
 	setTimeout(function () {
-		$('#overlay1,#confirmDelete').addClass('dn');
+		$('#overlay,#confirmDelete').addClass('dn');
+                window.location.reload();
 	}, 1010);
+        
 }
 
 function showConfirmDelete(proId, ele)
