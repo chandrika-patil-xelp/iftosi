@@ -358,7 +358,7 @@ function clickThis(id, isDirect) {
                                             submitStep2Form(obj);
                                             $('html,body').animate({ scrollTop: 0 }, 'slow');
                                     }
-                                }, 500);
+                                }, 800);
 			}
 		}
 		else
@@ -607,7 +607,7 @@ pincode1 = $('#pincode').val();
     var msuggest = '';
     
     /* For suggestions of City */
-    $('#area').bind('keyup', function(event)    
+    $('#area').bind('keyup focus', function(event)    
     {
         if ($(this).attr('id') == 'area')
         {
@@ -622,8 +622,9 @@ pincode1 = $('#pincode').val();
             {
                 params = 'action=areaSuggest&pincode='+pincode1+'&area='+escape($(this).val());
             }
-            if($(this).attr('value') !== '')
+            if($(this).val() !== '')
             {
+
                 new Autosuggest($(this).val(), '#area', '#areaSuggestDiv', DOMAIN + "apis/index.php", params, true, '', '', event);
             }
             else
@@ -638,7 +639,7 @@ pincode1 = $('#pincode').val();
         {
             msuggest = 'citySuggestDiv';
             var params = 'action=citySuggest&name=' + escape($(this).val());
-            if($(this).attr('value') !== '')
+            if($(this).val() !== '')
             {
                 new Autosuggest($(this).val(), '#city', '#citySuggestDiv', DOMAIN + "apis/index.php", params, true, '', '', event);
             }
@@ -655,7 +656,7 @@ pincode1 = $('#pincode').val();
         {
             msuggest = 'stateSuggestDiv';
             var params = 'action=stateSuggest&name=' + escape($(this).val());
-            if($(this).attr('value') !== '')
+            if($(this).val() !== '')
             {
                 new Autosuggest($(this).val(), '#state', '#stateSuggestDiv', DOMAIN + "apis/index.php", params, true, '', '', event);
             }
@@ -677,6 +678,7 @@ function arrangeData(data, id, divHolder, nextxt)
     {
         var suggest = "<ul class='smallField fmRoboto font14 pointer border1 transition300' style='overflow-y:auto;'>";
         $.each(data.results, function(i, vl) {
+            
             if (id == '#area' && (vl.n !== null && vl.n !== undefined && vl.n !== 'undefined' && vl.n !== 'null' && vl.n !== ''))
                 suggest += "<li id='suggest" + i + "' class='autoSuggestRow transition300 txtCaCase txtOver' onclick='setAreaSuggestValue(\"" + vl.n + "\",\"" + vl.city + "\",\"" + vl.state + "\",\"" + vl.pincode + "\",\"area\");'>&nbsp;&nbsp;" + vl.n+"</li>";
             if (id == '#city')

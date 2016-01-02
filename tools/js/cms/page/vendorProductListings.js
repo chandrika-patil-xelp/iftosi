@@ -274,7 +274,7 @@ function generateDiamondList(obj) {
     str += '<div class="cert fLeft">' + obj['cert'] + '</div>';
     str += '<div class="price fLeft fmOpenB">&#36;' + obj['price']+ '</div>';
     str += '<div class="acct fLeft">';
-    if(obj['active_flag'] == 1){
+    if(obj['active_flag'] == 1 || obj['active_flag'] == 0){
         cl='inStockPrd';
     }
     if(obj['active_flag'] == 3){
@@ -445,7 +445,7 @@ function generateJewellList(obj) {
         str += '<div class="price fLeft fmOpenB">&#8377;' + obj['price']+ '</div>';
         str += '<div class="acct fLeft">';
         
-        if(obj['active_flag'] == 1){
+        if(obj['active_flag'] == 1 || obj['active_flag'] == 0){
             cl='inStockPrd';
         }
         if(obj['active_flag'] == 3){
@@ -605,7 +605,7 @@ function generatBullionsList(obj) {
    
     
     
-    if(obj['active_flag'] == 1){
+    if(obj['active_flag'] == 1 || obj['active_flag'] == 0){
             cl='inStockPrd';
     }
     if(obj['active_flag'] == 3){

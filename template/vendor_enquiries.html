@@ -88,6 +88,14 @@ function loadEnqCallback(res,pgno)
                         loadEnq = false;
                     }
                     var enqs = obj.results.total_enqs;
+                    if(enqs == false)
+                    {
+                        enqs = 0;
+                    }
+                    else
+                    {
+                        enqs = enqs;
+                    }
                     var len = enqs;
                     var i = 0;
                     while (i < len)
