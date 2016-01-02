@@ -249,19 +249,22 @@ function validateJForm()
 	if(!shape.hasClass('shapeSelected'))
 	{
 		str ='Please select category';
+                submiter = false;
 		isValid = false;
 	}
 
 	if(isValid && subcat == '')
 	{
 		str ='Please select sub category';
-		isValid = false;
+                submiter = false;
+                isValid = false;
 	}
 
 	if(isValid && (certificate === undefined || certificate === null || certificate === ''))
 	{
 		str ='Please select certificate';
-		isValid = false;
+                submiter = false;
+                isValid = false;
 	}
 	else if (isValid)
 	{
@@ -270,7 +273,8 @@ function validateJForm()
 			if(isValid && (othercert === undefined || othercert === null || othercert === ''))
 			{
 				isValid = false;
-				str = 'Please enter certificate';
+                                submiter = false;
+                                str = 'Please enter certificate';
 			}
 		}
 	}
@@ -278,7 +282,8 @@ function validateJForm()
 	if(isValid && (metal === undefined || metal === null || metal === ''))
 	{
 		str = 'Please select metal type';
-		isValid = false;
+                submiter = false;
+                isValid = false;
 	}
 
         var vclarity=new Array();
@@ -295,12 +300,14 @@ function validateJForm()
                         if(color === undefined || color === null || color === '')
                         {
                                 str = 'Please select diamond color';
+                                submiter = false;
                                 isValid = false;
                         }
 
                         if(isValid && (clarity === undefined || clarity === null || clarity === ''))
                         {
                                 str = 'Please enter diamond quality';
+                                submiter = false;
                                 isValid = false;
                         }
                     }
@@ -309,14 +316,16 @@ function validateJForm()
 		if(isValid && (dweight === undefined || dweight === null || dweight === ''))
 		{
 			str = 'Please enter diamond weight in carats';
-			isValid = false;
+			submiter = false;
+                        isValid = false;
 			$('#diamondwdiamondShapeCont #diamondShapeDiveight').focus();
 		}
 
 		if(isValid && (no_diamonds === undefined || no_diamonds === null || no_diamonds === ''))
 		{
 			str = 'Please select number of diamonds';
-			isValid = false;
+			submiter = false;
+                        isValid = false;
 			$('#no_diamonds').focus();
 		}
 	}
@@ -349,6 +358,7 @@ function validateJForm()
                     if(isValid && (gemcolour === undefined || gemcolour === null || gemcolour === ''))
                     {
                             str = 'Please select gemstone color';
+                            submiter = false;
                             isValid = false;
                     }
             }
@@ -365,6 +375,7 @@ function validateJForm()
             if(isValid && (gemweight === undefined || gemweight === null || gemweight === ''))
             {
                     str = 'Please enter gemstone weight';
+                    submiter = false;
                     isValid = false;
                     $('#gemweight').focus();
             }
@@ -372,6 +383,7 @@ function validateJForm()
             if(isValid && (num_gemstones === undefined || num_gemstones === null || num_gemstones === ''))
             {
                     str = 'Please enter number of gemstones';
+                    submiter = false;
                     isValid = false;
                     $('#num_gemstones').focus();
             }
@@ -380,28 +392,32 @@ function validateJForm()
 	if(isValid && (purity === undefined || purity === null || purity === '' || isNaN(purity)))
 	{
 		str = 'Please enter purity';
-		isValid = false;
+		submiter = false;
+                isValid = false;
 		$('#goldpurity').focus();
 	}
 
 	if(isValid && (goldweight === undefined || goldweight === null || goldweight === '' || isNaN(goldweight)))
 	{
 		str = 'Please enter weight';
-		isValid = false;
+		submiter = false;
+                isValid = false;
 		$('#goldweight').focus();
 	}
 
 	if(isValid && (barcode === undefined || barcode === null || barcode === ''))
 	{
 		str = 'Please enter design number';
-		isValid = false;
+		submiter = false;
+                isValid = false;
 		$('#barcode').focus();
 	}
 
 	if(isValid && (prdprice === undefined || prdprice === null || prdprice === '' || isNaN(prdprice)))
 	{
 		str = 'Please enter product price';
-		isValid = false;
+		submiter = false;
+                isValid = false;
 		$('#prdprice').focus();
 	}
 
@@ -487,21 +503,25 @@ function validateJForm()
 				{
 					if(data.error.code !== undefined && data.error.code !== null && data.error.code !== '' && typeof data.error.code !== 'undefined' && data.error.code == 0)
 					{
-//						window.location.href = IMGUPLOAD+'pid-'+data.results.pid+'&c='+catid;
+						submiter = false;
+                                                window.location.href = IMGUPLOAD+'pid-'+data.results.pid+'&c='+catid;
 					}
 					else
 					{
 						common.toast(0, 'Error adding / updating information');
+                                                submiter = false;
 					}
 				}
 				else
 				{
 					common.toast(0, 'Error adding / updating information');
+                                        submiter = false;
 				}
 			}
 			else
 			{
 				common.toast(0, 'Error adding / updating information');
+                                submiter = false;
 			}
 		});
 	}

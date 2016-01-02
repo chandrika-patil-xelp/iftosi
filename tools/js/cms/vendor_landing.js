@@ -114,7 +114,29 @@ var lastSc = 0;
 
 var GtmpId='';
 $(document).ready(function () {
-	
+    
+    $.ajax({url: DOMAIN + "apis/index.php?action=activateVendor&user_id=" + uid, success: function (result)
+    {
+        var obj = jQuery.parseJSON(result);
+        var status = obj.results.flag;
+        if(status !== undefined && status !== 'undefined' && status !== null && status !== 'null' && status !== '')
+        {
+            if(status == 1)
+            {
+                $('.vendorSt').text('Active');
+                $('.vendorSt').removeClass('vDactive dn');
+                $('.vendorSt').addClass('vActive');
+            }
+            else
+            {
+                $('.vendorSt').text('Deactive');
+                $('.vendorSt').removeClass('vActive dn');
+                $('.vendorSt').addClass('vDactive');
+            }
+        }
+    }
+    });
+    
     $('.vTabs').eq(1).click();
 
 var busiTypeSplt = busiType.split(',');
@@ -430,18 +452,9 @@ function showEnqFilter() {
 }
 
 
-function submitDForm() {
-    window.location.href = 'http://localhost/iftosi/?case=vendor_landing';
-
-    /*
-     values={};
-     values['shape']=$('.shapeSelected').attr('id');
-     
-     y=$('#dAddForm').serializeArray();
-     $(y).each(function(i){
-     values[y[i].name]=y[i].value;
-     });
-     alert('submit ' +values);*/
+function submitDForm()
+{
+    window.location.href = DOMAIN+'index.php?case=vendor_landing';
 }
 
 $('#overlay').velocity({opacity:0},{delay:0,duration:0});

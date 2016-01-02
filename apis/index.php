@@ -241,6 +241,23 @@ switch($action)
             $result =  $obj->actUser($params);
             $res= $result;
             break;
+            
+// localhost/iftosi/apis/index.php?action=activateVendor&user_id=3
+        case 'activateVendor':
+            include APICLUDE.'class.user.php';
+            $userid=(!empty($params['user_id'])) ?  trim($params['user_id']) : '';
+            if(empty($userid))
+            {
+                $arr=array();
+                $err=array('code'=>1,'Msg'=>'Invalid Parameter');
+                $result=array('results'=> $arr,'error'=>$err);
+                $res=$result;
+                break;
+            }
+            $obj=new user($db['iftosi']);
+            $result =  $obj->activateVendor($params);
+            $res= $result;
+            break;
 
 //  localhost/iftosi/apis/index.php?action=viewAll&uid=6
         case 'viewAll':

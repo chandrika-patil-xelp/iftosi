@@ -587,7 +587,14 @@
                                     active_flag=\"".$params['active_flag']."\" 
                        WHERE 
                                     vendor_id=".$params['userid'];
+                $usql1="UPDATE
+                                    tbl_registration
+                       SET
+                                    is_active=\"".$params['active_flag']."\" 
+                       WHERE 
+                                    vendor_id=".$params['userid'];
                 $ures=$this->query($usql);
+                $ures1=$this->query($usql1);
                 if($ures)
                 {
                     $arr="User profile is activated";
@@ -603,6 +610,31 @@
             {
                 $arr=array();
                 $err=array('code'=>1,'msg'=>'No such user');
+            }
+            $result = array('results'=>$arr,'error'=>$err);
+            return $result;
+        }
+        
+        public function activateVendor($params) // Activate Status
+        {   
+            $vsql="SELECT
+                                is_active 
+                   FROM 
+                                tbl_registration  
+                   WHERE 
+                                user_id=".$params['user_id']."";
+            $vres=$this->query($vsql);
+            $row =$this->fetchData($vres);
+            if($this->numRows($vres) == 1) //If user is registered
+            {
+                $flag=$row['is_active'];
+                $arr['flag']=$flag;
+                $err=array('code'=>0,'msg'=>'vendor profile status retrieved');
+            }
+            else
+            {
+                    $arr=array();
+                    $err=array('code'=>1,'msg'=>'Problem in fetching status');
             }
             $result = array('results'=>$arr,'error'=>$err);
             return $result;
