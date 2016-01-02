@@ -633,7 +633,7 @@ function closeConfirmDelete()
 {
 	productDelId = '', productDelEle = '';
 	$('#confirmDelete').velocity({scale: 0}, {delay: 0, ease: 'swing'});
-	$('#overlay1').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
+	$('#overlay').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
 	setTimeout(function () {
 		$('#overlay,#confirmDelete').addClass('dn');
                 window.location.reload();
@@ -645,9 +645,9 @@ function showConfirmDelete(proId, ele)
 {
 	productDelId = proId;
 	productDelEle = ele;
-	$('#overlay1,#confirmDelete').removeClass('dn');
+	$('#overlay,#confirmDelete').removeClass('dn');
 	setTimeout(function () {
-		$('#overlay1').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
+		$('#overlay').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
 		$('#confirmDelete').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
 	}, 10);
 }
