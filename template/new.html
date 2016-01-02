@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<?php include 'backHead.html'?>
+<body>
+    <div class="container">
+        <center><div class="backLogo fmOpenR" onclick="window.location.assign(DOMAIN);"><div><b>IF</b>to<b>SI</b></div></div></center>
+        <div class="wrapper">
+            <div class="wrapperMax vMax">
+                <div class="formContainer fmOpenR vendorDetails">
+                      <div class="titleDiv txtCap fLeft headng"> Heading</div>
+                    <div id='tabData1' class="tabData fLeft">
+                        <div class="divCon2 fLeft c666 w45">
+                            <div class="titleDiv txtCap fLeft"> Mobile</div>
+                            <input type="tel" id="Mobile" name="Mobile" value=""  onkeypress="return common.isNumberKey(event)"   class="txtInput c666 fLeft fmRoboto font14" readonly>
+                        </div>
+                        <div class="divCon2 fLeft c666 suggestHolder w45 marginLeft" >
+                            <div class="titleDiv txtCap fLeft "> Email</div>
+                            <input type="text" id="Email" name="Email" value=""   class="txtInput c666 fLeft fmRoboto font14" readonly >
+
+                        </div>
+                        <div class="checkDiv w8 fLeft checkBoxLegnth">
+                            <input type="checkbox" id="one" class="filled-in amIVendor" name="one" >
+                            <label for="one"></label>
+                        </div>
+                        <div class="divCon2 fLeft c666 w45">
+                            <div class="titleDiv txtCap fLeft"> Mobile</div>
+                            <input type="tel" id="Mobile" name="Mobile" value=""  onkeypress="return common.isNumberKey(event)"   class="txtInput c666 fLeft fmRoboto font14" readonly>
+                        </div>
+                        <div class="divCon2 fLeft c666 suggestHolder w45 marginLeft" >
+                            <div class="titleDiv txtCap fLeft "> Email</div>
+                            <input type="text" id="Email" name="Email" value=""   class="txtInput c666 fLeft fmRoboto font14" readonly>
+
+                        </div>
+                        <div class="checkDiv w8 fLeft checkBoxLegnth">
+                            <input type="checkbox" id="two" class="filled-in amIVendor" name="two">
+                            <label for="two"></label>
+                        </div>
+                        <div class="divCon2 fLeft c666 w45">
+                            <div class="titleDiv txtCap fLeft"> Mobile</div>
+                            <input type="tel" id="Mobile" name="Mobile" value=""  onkeypress="return common.isNumberKey(event)"   class="txtInput c666 fLeft fmRoboto font14" readonly>
+                        </div>
+                        <div class="divCon2 fLeft c666 suggestHolder w45 marginLeft" >
+                            <div class="titleDiv txtCap fLeft "> Email</div>
+                            <input type="text" id="Email" name="Email" value=""    class="txtInput c666 fLeft fmRoboto font14" readonly>
+
+                        </div>
+                        <div class="checkDiv w8 fLeft checkBoxLegnth">
+                            <input type="checkbox" id="three" class="filled-in amIVendor" name="three">
+                            <label for="three"></label>
+                        </div>
+                        <div class="btnCont fLeft">
+                            <center>
+                                <div class="cancelBtn fmOpenR ripplelink poR" >CANCEL</div>
+                                <div class="submitBtn fmOpenR ripplelink poR" >SUBMIT</div>
+                            </center>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var vid = "<?php echo $uid; ?>";
+        var busiType = "<?php echo $data['business_type']; ?>";
+    </script>
+    <script type="text/javascript" src="<?=$jvs['auto'];?>"></script>
+    <script type="text/javascript" src="<?=$jvs['vendorDetails'];?>"></script>
+    <script type="text/javascript" src="<?=$jvs['jquery_toast'];?>"></script>
+</body>
+</html>
