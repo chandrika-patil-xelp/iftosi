@@ -135,7 +135,7 @@ function Common() {
         if(!validNo) {
             return false;
         }
-        if (_this.nCount <= 4) {
+        if (_this.divNo <= 4) {
             $('#altNo').append(str);
             _this.nCount++;
             _this.divNo++;
