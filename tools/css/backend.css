@@ -656,3 +656,6 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 
 .txtSelect  option {background: #fff;color:#4d4d4d;}
 .bgcolor0044{background-color: #8A0044!important;}
+.vendorSt{width:auto;height: 30px;padding:0 10px;border:2px solid #fff;border-radius:15px;font-size: 12px;margin-right: 10px;}
+.vDactive{border-color: #b80f00}
+.vActive{border-color:#4db800;}
