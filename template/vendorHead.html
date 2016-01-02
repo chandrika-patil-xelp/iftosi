@@ -43,5 +43,15 @@
         <link rel="stylesheet" href="<?php echo DOMAIN;?>tools/css/jquery.toast.min.css?v=<?php echo VERSION; ?>" />
         <script type="text/javascript" src="<?php echo DOMAIN;?>tools/js/lib/CustomStorage.js?v=<?php echo VERSION; ?>"></script>
         <script type="text/javascript" src='<?php echo DOMAIN;?>tools/js/cms/Common.js?v=<?php echo VERSION; ?>'></script>
+        <script>
+            var is_vendor = customStorage.readFromStorage('is_vendor');
+            if(pageName == 'vendorList' || pageName == 'product_list')
+            {
+                if(is_vendor == undefined || is_vendor == 'undefined' || is_vendor == null &&(is_vendor !== 2 || is_vendor !== '2'))
+                {
+                    window.assign.href = DOMAIN + 'index.php';
+                }
+            }
+        </script>
     </head>
     <body>

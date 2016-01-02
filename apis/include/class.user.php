@@ -592,7 +592,7 @@
                        SET
                                     is_active=\"".$params['active_flag']."\" 
                        WHERE 
-                                    vendor_id=".$params['userid'];
+                                    user_id=".$params['userid'];
                 $ures=$this->query($usql);
                 $ures1=$this->query($usql1);
                 if($ures)

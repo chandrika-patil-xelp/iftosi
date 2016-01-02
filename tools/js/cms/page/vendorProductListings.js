@@ -262,10 +262,10 @@ function generateDiamondList(obj) {
     str += '<div class="barcode fLeft">';
     str += '<span class="upSpan fmOpenB">' + barcode + '</span>';
     var shape = '';
-    if(obj['shape']!=null) {
-        shape = obj['shape'].toLowerCase();
+    if(obj['shape'] != null || obj['shape'] !== undefined) {
+        shape = obj.shape.toLowerCase();
     }
-    str += '<span class="lwSpan"><a href="'+DOMAIN+obj['cert'].toLowerCase()+'-'+shape+'-clarity-'+obj['clarity']+'/did-'+obj['id']+'" target="_blank">View Details</a></span>';
+    str += '<span class="lwSpan"><a href="'+ DOMAIN + obj.cert +'-'+shape+'-clarity-'+obj.clarity+'/did-'+obj.id+'" target="_blank">View Details</a></span>';
     str += '</div>';
     str += '<div class="shape fLeft">' + obj['shape'] + '</div>';
     str += '<div class="carats fLeft fmOpenB">' + obj['carat'] + '</div>';
@@ -574,6 +574,15 @@ function generatBullionsList(obj) {
     if(design == null || design == '' || design == 'null') {
         design = '';
     }
+        var metal = obj['metal'];
+    if(metal == null || metal == '' || metal == 'null' || metal == 'undefined') {
+        metal = '';
+    }
+        var type = obj['type'];
+    if(type == null || type == '' || type == 'null' || type == 'unfined' || type == undefined) {
+        type = '';
+    }
+    
     var date = obj['update_time'].split(' ');
     var str = '<li>';
     str += '<div class="date fLeft"> ';
@@ -582,7 +591,7 @@ function generatBullionsList(obj) {
     str += '</div>';
     str += '<div class="barcode fLeft">';
     str += '<span class="upSpan fmOpenB">' + barcode + '</span>';
-    str += '<span class="lwSpan"><a href="'+DOMAIN+obj['metal'].toLowerCase()+'-'+obj['type'].toLowerCase()+'-'+Math.ceil(obj['gold_weight'])+'-grams/bid-'+obj['id']+'" target="_blank">View Details</a></span>';
+    str += '<span class="lwSpan"><a href="'+DOMAIN+obj.metal.toLowerCase()+'-'+obj.type.toLowerCase()+'-'+Math.ceil(obj['gold_weight'])+'-grams/bid-'+obj['id']+'" target="_blank">View Details</a></span>';
     str += '</div>';
     str += '<div class="weight fLeft">'
     str += '<span class="upSpan">' + obj['type'] + '</span>';
