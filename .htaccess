@@ -12,6 +12,12 @@ RewriteEngine on
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+####################### FRONT END LINKS ######################
+
+RewriteRule ^((?i)sign-up)$    index.php?case=signup [L]
+RewriteRule ^((?i)forgot-password)$    index.php?case=forgot [L]
+RewriteRule ^((?i)login)$ index.php?case=login [L]
+RewriteRule ^((?i)change-password)$ index.php?case=changepwd [L]
 
 ####################### CMS STARTS ###########################
 

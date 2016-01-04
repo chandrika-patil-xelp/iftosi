@@ -557,7 +557,20 @@ function getResultsData(data,sortby,showtree)
 								html += '</div>';
 								html += '<div class="detComm">';
 									html += '<div class="detLabel fmOpenB fLeft">WEIGHT</div>';
-									html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.gold_weight+' Gms</div>';
+                                                                        if(vl.attributes.gold_weight > 1000)
+                                                                        {
+                                                                            vl.attributes.gold_weight = parseFloat(number_format(vl.attributes.gold_weight,2));
+                                                                            var gweights = vl.attributes.gold_weight / 1000+' Kgs';
+                                                                        }
+                                                                        else if(vl.attributes.gold_weight == 1000)
+                                                                        {
+                                                                            var gweights = '1 Kgs';
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            var gweights = number_format(vl.attributes.gold_weight,2)+' Gms';
+                                                                        }
+									html += '<div class="detValue fmOpenR fLeft">'+gweights+'</div>';
 								html += '</div>';
 							html += '</div>';
 							html += '<div class="prdPrice fLeft">';
@@ -682,7 +695,20 @@ function getResultsData(data,sortby,showtree)
 								html += '</div>';
 								html += '<div class="detComm">';
 									html += '<div class="detLabel fmOpenB fLeft">WEIGHT</div>';
-									html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.gold_weight+' Gms</div>';
+                                                                        if(vl.attributes.gold_weight > 1000)
+                                                                        {
+                                                                            vl.attributes.gold_weight = parseFloat(number_format(vl.attributes.gold_weight,2));
+                                                                            var gweights = vl.attributes.gold_weight / 1000+' Kgs';
+                                                                        }
+                                                                        else if(vl.attributes.gold_weight == 1000)
+                                                                        {
+                                                                            var gweights ='1 Kgs';
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            var gweights = vl.attributes.gold_weight+' Gms';
+                                                                        }
+									html += '<div class="detValue fmOpenR fLeft">'+gweights+'</div>';
 								html += '</div>';
 							html += '</div>';
 							html += '<div class="prdPrice fLeft">';

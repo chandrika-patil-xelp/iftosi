@@ -116,7 +116,17 @@
 ?>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">GOLD WEIGHT</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo number_format($prdInfo['attr_details']['gold_weight'], 2); ?> Gms</div>
+<?php
+                                    if($prdInfo['attr_details']['gold_weight'] >= 1000)
+                                    {
+                                        $gweights = $prdInfo['attr_details']['gold_weight']/1000 .' Kgs';
+                                    }
+                                    else
+                                    {
+                                        $gweights = $prdInfo['attr_details']['gold_weight'].' Gms'; 
+                                    }
+?>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo $gweights; ?></div>
                             </div>
                         </div>
                     </div>

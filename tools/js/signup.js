@@ -87,7 +87,7 @@ var validMob = true;
 
 		setTimeout(function () {
 			if(pr_name.length==0 || isNaN(pr_name)!==true) {
-				customStorage.toast(0,'Invalide format for Name'); 
+				customStorage.toast(0,'Invalid format for Name'); 
 				$('#pr_name').focus();
 				return false;
 			}
@@ -193,7 +193,7 @@ function otpCheck()
                             else
                             {
                                 customStorage.toast(1,errMsg);
-                                window.location.assign(DOMAIN + "index.php?case=login");
+                                window.location.assign(DOMAIN + "Login");
                             }
                         }});
                     }

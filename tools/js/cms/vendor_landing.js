@@ -503,6 +503,7 @@ $('#overlay,#upCancel').bind('click', function () {
 });
 
 function closeAllForms() {
+    $('.shapeSelected').removeClass('shapeSelected');
     $('#uploadDiv,#dollarRateDiv,#goldRateDiv,#silverRateDiv,#goldSilverRateDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
     $('#overlay').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
     setTimeout(function () {
@@ -521,24 +522,33 @@ $(document).ready(function() {
 					if(obj.dollar_rate !== '' && obj.dollar_rate !== undefined && obj.dollar_rate !== 'undefined'  &&  obj.dollar_rate !== 'null'  &&  obj.dollar_rate !== null )
                                         {
                                             $('#dollarRateSpan').html('&#8377; '+obj.dollar_rate);
+                                            dollarRate = obj.dollar_rate;
 					}
 					else
                                         {
-						$('#dollarRateSpan').html('&#8377; '+obj.dollar_rate);
+						$('#dollarRateSpan').html('&#8377; 0.00');
+                                                dollarRate = obj.dollar_rate;
 					}
 					if(obj.silver_rate !== ''  &&  obj.silver_rate !== undefined  &&  obj.silver_rate !== 'undefined'  &&  obj.silver_rate !== 'null'  &&  obj.silver_rate !== null ){
 						$('#silverRateSpan').html('&#8377; '+obj.silver_rate);
+                                                silverRate = obj.silver_rate;
 					}
 					else
 					{
-						$('#silverRateSpan').html("NA");
+						$('#silverRateSpan').html('&#8377; 0.00');
+                                                silverRate = obj.silver_rate;
+                                                
 					}
 					if(obj.gold_rate !== ''  &&  obj.gold_rate !== undefined  &&  obj.gold_rate !== 'undefined'  &&  obj.gold_rate !== 'null'  &&  obj.gold_rate !== null ){						
                                             $('#goldRateSpan').html('&#8377; '+obj.gold_rate);
+                                            goldRate = obj.gold_rate;
+                                            
 					}
 					else
 					{
-						$('#goldRateSpan').html("NA");
+						$('#goldRateSpan').html('&#8377; 0.00');
+                                                goldRate = obj.gold_rate;
+                                                
 					}
 }
 }
@@ -548,6 +558,7 @@ $(document).ready(function() {
 
 
 function updateDollarRate() {
+    
     var dollar_rate = $("#dollar_rate").val();
     //dollar_rate=parseFloat(dollar_rate);
     if(dollar_rate=='' || dollar_rate <= 0 || dollar_rate == undefined) {
@@ -565,6 +576,7 @@ function updateDollarRate() {
                 {
                     common.toast(1,obj['error']['Msg']);
                     $('#dollarRateSpan').html('&#8377; '+dollar_rate);
+                    dollarRate = dollar_rate;
                     closeAllForms();
 					if(uploadButton == false)
 					{
@@ -601,6 +613,7 @@ function showSilverRateForm() {
         $('#overlay').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
         $('#silverRateDiv').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
     }, 10);
+    $('#silver_rate').val(silverRate);
 }
 
 function updateSilverRate() {
@@ -619,7 +632,10 @@ function updateSilverRate() {
                     common.toast(1,obj['error']['Msg']);
                         //showJewelleryImps(GtmpId);                        
                     $('#silverRateSpan').html('&#8377; '+silver_rate);
+                    silverRate = silver_rate;
+                    
                     closeAllForms();
+
                     loadBullions(1);
                 } else if(errCode == 1) {
                     common.toast(0,obj['error']['Msg']);
@@ -642,7 +658,7 @@ function updateSilverRate() {
                         var errCode = obj['error']['code'];
                         if(errCode==0) {
                         common.toast(1,obj['error']['Msg']);
-
+                        silverRate = silver_rate;
                         showJewelleryImps(GtmpId);                        
                     
                        $('#silverRateSpan').html('&#8377; '+silver_rate);
@@ -670,6 +686,7 @@ function updateSilverRate() {
                     common.toast(1,obj['error']['Msg']);
                         //showJewelleryImps(GtmpId);                        
                     $('#silverRateSpan').html('&#8377; '+silver_rate);
+                    silverRate = silver_rate;
                     closeAllForms();
                 }
                 else if(errCode == 1)
@@ -695,6 +712,7 @@ function showGoldRateForm() {
         $('#overlay').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
         $('#goldRateDiv').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
     }, 10);
+    $('#gold_rate').val(goldRate);
 }
 function updateGoldRate() {
     var gold_rate = $("#gold_rate").val();
@@ -711,6 +729,7 @@ function updateGoldRate() {
                 common.toast(1,obj['error']['Msg']);
                 $('#goldRateSpan').html('&#8377; '+gold_rate);
                 //window.location.reload(1);
+                goldRate = gold_rate;
                 closeAllForms();
                 showJewelleryImps(GtmpId);
             } else if(errCode==1) {
@@ -727,6 +746,7 @@ function showgoldSilverRateForm() {
         $('#overlay').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
         $('#goldSilverRateDiv').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
     }, 10);
+
 }
 
 function updateGoldSilverRate() {
@@ -742,6 +762,7 @@ function updateGoldSilverRate() {
 				common.toast(1,obj['error']['Msg']);
 				$('#goldRateSpan').html('&#8377; '+gold_rate);
 				//window.location.reload(1);
+                                goldRate = gold_rate;
 				customStorage.readFromStorage('rateErr');
                                 if(pageName  == 'Products' && pageName !== undefined && pageName  !== 'undefined')
                                 {

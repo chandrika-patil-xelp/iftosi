@@ -79,7 +79,19 @@
 												</div>
 												<div class="detComm">
 													<div class="detLabel fmOpenB fLeft">WEIGHT</div>
-													<div class="detValue fmOpenR fLeft"><?php echo $val['attributes']['gold_weight'];?> Gms</div>
+													<div class="detValue fmOpenR fLeft">
+<?php
+                                                                                                        if($val['attributes']['gold_weight'] >= 1000)
+                                                                                                        {
+                                                                                                            $gweights = $val['attributes']['gold_weight']/1000;
+                                                                                                            echo $gweights.' Kg';
+                                                                                                        }
+                                                                                                        else
+                                                                                                        {
+                                                                                                            echo $val['attributes']['gold_weight'].' Gms'; 
+                                                                                                        }
+?>
+                                                                                                        </div>
 												</div>
 											</div>
 											<div class='prdPrice fLeft'>

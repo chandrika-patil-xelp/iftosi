@@ -1358,15 +1358,45 @@ class vendor extends DB
             return $result;
         }
 
-    public function updateDollerRate($params) {
+    public function updateDollerRate($params)
+    {
+        $rates = $this->getAllRatesByVID($params['vid']);
+        $emailsql = "SELECT email from tbl_registration WHERE user_id =\"".$params['vid']."\"";
+        $emailres = $this->query($emailsql);
+        $emailcnt = $this->numRows($emailres);
+        if($emailcnt > 0 )
+        {
+           $row = $this->fetchData($emailres);
+        }
         $sql="UPDATE tbl_vendor_master SET dollar_rate='".$params['dolRate']."' WHERE vendor_id='".$params['vid']."'";
         $res=$this->query($sql);
-        if ($res) {
+        if ($res)
+        {
+            if($params['dolRate'] !== $rates['results']['dollar_rate'])
+            {
+                $temp = array('dollar_rate'=>'dollar_rate','vid'=>$params['vid'],'type'=>'Dollar','prevRate'=>$rates['results']['dollar_rate'],'to'=>$row['email']);
+                $mail = $this->sendRateMail($temp);
+                if($mail == 1)
+                {
+                    $arr = array();
+                    $err = array('Code' => 0, 'Msg' => 'Dollar Rate Updated successfully!');
+                }
+                else
+                {
+                    $arr = array();
+                    $err = array('code' => 1, 'msg' => 'Error in Updating Dollar Rate');
+                }
+            }
+            else
+            {
+                $arr = array('There is no change in the rate');
+                $err = array('code' => 0, 'Msg' => 'Silver Rate Updated successfully!');
+            }
+        }
+        else
+        {
             $arr = array();
-            $err = array('Code' => 0, 'Msg' => 'Dollar Rate Updated successfully!');
-        } else {
-            $arr = array();
-            $err = array('code' => 1, 'msg' => 'Error in Updating Dollar Rate');
+            $err = array('code' => 1, 'msg' => 'Error in Updating Silver Rate');
         }
         $result = array('results' => $arr, 'error' => $err);
         return $result;
@@ -1387,18 +1417,48 @@ class vendor extends DB
         return $result;
     }
 
-        public function updateSilverRate($params) {
-        $sql="UPDATE tbl_vendor_master SET silver_rate='".$params['silRate']."' WHERE vendor_id='".$params['vid']."'";
-        $res=$this->query($sql);
-        if ($res) {
-            $arr = array();
-            $err = array('code' => 0, 'Msg' => 'Silver Rate Updated successfully!');
-        } else {
-            $arr = array();
-            $err = array('code' => 1, 'msg' => 'Error in Updating Silver Rate');
-        }
-        $result = array('results' => $arr, 'error' => $err);
-        return $result;
+        public function updateSilverRate($params)
+        {
+            $rates = $this->getAllRatesByVID($params['vid']);
+            $emailsql = "SELECT email from tbl_registration WHERE user_id =\"".$params['vid']."\"";
+            $emailres = $this->query($emailsql);
+            $emailcnt = $this->numRows($emailres);
+            if($emailcnt > 0 )
+            {
+                $row = $this->fetchData($emailres);
+            }
+            $sql="UPDATE tbl_vendor_master SET silver_rate='".$params['silRate']."' WHERE vendor_id='".$params['vid']."'";
+            $res=$this->query($sql);
+            if($res)
+            {
+                if($params['silRate'] !== $rates['results']['silver_rate'])
+                {
+                    $temp = array('silver_rate'=>'silver_rate','vid'=>$params['vid'],'type'=>'Silver','prevRate'=>$rates['results']['silver_rate'],'to'=>$row['email']);
+                    $mail = $this->sendRateMail($temp);
+                    if($mail == 1)
+                    {
+                        $arr = array();
+                        $err = array('code' => 0, 'Msg' => 'Silver Rate Updated successfully!');
+                    }
+                    else
+                    {
+                        $arr = array();
+                        $err = array('code' => 1, 'msg' => 'Error in Updating Silver Rate');
+                    }
+                }
+                else
+                {
+                    $arr = array('There is no change in the rate');
+                    $err = array('code' => 0, 'Msg' => 'Silver Rate Updated successfully!');
+                }
+            }
+            else
+            {
+                $arr = array();
+                $err = array('code' => 1, 'msg' => 'Error in Updating Silver Rate');
+            }
+            $result = array('results' => $arr, 'error' => $err);
+            return $result;
         }    
     
         public function getSilverRate($params) {
@@ -1416,23 +1476,51 @@ class vendor extends DB
         return $result;
         }
         
-        public function updateGoldRate($params) {
-        $sql="UPDATE
-                    tbl_vendor_master
-            SET 
-                    gold_rate=\"".$params['goldRate']."\"
-            WHERE
-                    vendor_id=\"".$params['vid']."\"";
-        $res=$this->query($sql);
-        if ($res) {
-            $arr = array();
-            $err = array('code' => 0, 'Msg' => 'Gold Rate Updated successfully!');
-        } else {
-            $arr = array();
-            $err = array('code' => 1, 'msg' => 'Error in Updating Gold Rate');
-        }
-        $result = array('results' => $arr, 'error' => $err);
-        return $result;
+        public function updateGoldRate($params)
+        {
+            $rates = $this->getAllRatesByVID($params['vid']);
+            $emailsql = "SELECT email from tbl_registration WHERE user_id =\"".$params['vid']."\"";
+            $emailres = $this->query($emailsql);
+            $emailcnt = $this->numRows();
+            $row = $this->fetchData($emailres);
+            
+            $sql="UPDATE
+                        tbl_vendor_master
+                SET 
+                        gold_rate=\"".$params['goldRate']."\"
+                WHERE
+                        vendor_id=\"".$params['vid']."\"";
+            $res=$this->query($sql);
+            if ($res)
+            {
+                $temp = array('gold_rate'=>'gold_rate','vid'=>$params['vid'],'type'=>'Gold','prevRate'=>$rates['results']['gold_rate'],'to'=>$row['email']);
+                if($params['goldRate'] !== $rates['results']['gold_rate'])
+                {
+                    $mail = $this->sendRateMail($temp);
+                    if($mail == 1)
+                    {
+                        $arr = array();
+                        $err = array('code' => 0, 'Msg' => 'Gold Rate Updated successfully!');
+                    }
+                    else
+                    {
+                        $arr = array();
+                        $err = array('code' => 1, 'msg' => 'Error in Updating Gold Rate');                    
+                    }
+                }
+                else
+                {
+                    $arr = array('There is no change in the rate');
+                    $err = array('code' => 0, 'Msg' => 'Gold Rate Updated successfully!');
+                }
+            }
+            else
+            {
+                $arr = array();
+                $err = array('code' => 1, 'msg' => 'Error in Updating Gold Rate');
+            }
+            $result = array('results' => $arr, 'error' => $err);
+            return $result;
         }    
     
         public function getGoldRate($params) {
@@ -1522,9 +1610,71 @@ class vendor extends DB
         $result=array('result'=>$arr,'error'=>$err);
         return $result;
         }
+        
         private function getAbbrValue($val) {
             $propValArr=array('EX'=>'Excellent','VG'=>'Very Good','GD'=>"Good",'FAIR'=>'Fair','NN'=>'None','MED'=>'Medium','FNT'=>'Faint','STG'=>'Strong','VSTG'=>'Very Strong');
             return $propValArr[$val];
         }
+        
+        public function sendRateMail($params)
+        {
+            global $comm;
+
+            if(!empty($params['dollar_rate']))
+            {
+                $rate = $params['dollar_rate'];
+            }
+            else if(!empty($params['silver_rate']))
+            {
+                $rate = $params['silver_rate'];
+            }
+            else if(!empty($params['gold_rate']))
+            {
+                $rate = $params['gold_rate'];
+            }
+
+            $sql = "SELECT
+                            orgName,
+                            contact_person,
+                            $rate
+                    FROM
+                            tbl_vendor_master
+                    WHERE
+                            vendor_id = ".$params['vid'];
+            $res = $this->query($sql);
+            $chkV = $this->numRows($res);
+            if($chkV == 1)
+            {
+                while($row = $this->fetchData($res))
+                {
+                    $vDet['org_name'] = $row['orgName'];
+                    $vDet['C_person'] = $row['contact_person'];
+                    $vDet['cur_rate'] = $row[$rate];
+                }
+                $subject = $params['type'].' Rate for IFtoSI';
+                $message = 'Dear ' . $vDet['org_name'] . ',';
+                $message .= "\r\n";
+                $message .= "Your ". strtolower($params['type'])." rate has changed from Previous rate : ". $params['prevRate']. " to Current rate : ". $vDet['cur_rate'];
+                $message .= "\r\n \r\n";
+                $message .= "Team IFtoSI";
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                $headers .= 'From: <info@iftosi.com>' . "\r\n";
+                if(!empty($params['to']))
+                {
+                    mail($params['to'], $subject, $message, $headers);
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                return 0;
+            }
+
+    }
 }
 ?>

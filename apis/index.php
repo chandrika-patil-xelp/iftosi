@@ -55,7 +55,7 @@ switch($action)
             $res= $result;
             break;
     
-   case 'sendRateOTP':
+   case 'sendRateMail':
         include APICLUDE.'class.user.php';
         $vid  = (!empty($params['vid'])) ? trim($params['vid']) : '';
         if(empty($vid))
@@ -66,7 +66,7 @@ switch($action)
             break;
         }
         $obj= new user($db['iftosi']);
-        $result = $obj->sendRateOTP($params);
+        $result = $obj->sendRateMail($params);
         $res = $result;
         break;         
             

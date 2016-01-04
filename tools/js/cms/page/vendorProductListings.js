@@ -599,7 +599,25 @@ function generatBullionsList(obj) {
     str += '</div>';
     str += '<div class="metal fLeft">' + obj['metal'].split('~')[0] + '</div>';
     str += '<div class="purity fLeft">' + obj['gold_purity'] + '</div>';
-    str += '<div class="btype fLeft">' + obj['gold_weight'] + '</div>';
+    
+    if(obj.gold_weight == 1000)
+    {
+        var gweights = '1 Kgs';
+    }
+    else if(obj.gold_weight > 1000)
+    {
+        obj.gold_weight = common.number_format(obj.gold_weight,2);
+        obj.gold_weight = parseFloat(obj.gold_weight);
+        var gweights = (obj.gold_weight/1000)+ ' Kgs';
+        
+    }
+    else
+    {
+        obj.gold_weight = common.number_format(obj.gold_weight,2);
+        obj.gold_weight = parseFloat(obj.gold_weight);
+        var gweights = obj.gold_weight + ' Gms';
+    }
+    str += '<div class="btype fLeft">' + gweights + '</div>';
     str += '<div class="price fLeft fmOpenB">&#8377;' + obj['price']+ '</div>';
     str += '<div class="acct fLeft">';
    

@@ -208,8 +208,8 @@ function Common() {
         str += '<div class="cancelLgBtn fLeft fmOpenR" id="lgCancel" onclick="common.closeLoginForm();"> CANCEL</div>';
         str += '<div class="loginBtn fLeft fmOpenR" id="lgSubmit" onclick="common.submitLoginForm('+vd+');">LOGIN</div>';
         str += '<div class="signuplink fmOpenB fLeft">';
-        str += '<center class="w50 fLeft"><a href="'+ DOMAIN +'index.php?case=forgot" style="color:#171334;"><span>Forgot Password?</span></a></center>';
-        str += '<center class="w50 fLeft"><a href="'+ DOMAIN +'index.php?case=signup"><span>Sign Up with Us</span></a></center>';
+        str += '<center class="w50 fLeft"><a href="'+ DOMAIN +'Forgot-Password" style="color:#171334;"><span>Forgot Password?</span></a></center>';
+        str += '<center class="w50 fLeft"><a href="'+ DOMAIN +'Sign-Up"><span>Sign Up with Us</span></a></center>';
         str += '</div>';
         str += '</div>';
         $('body').append(str);
@@ -288,7 +288,7 @@ function Common() {
                         }
                         customStorage.addToStorage('is_vendor', tmp_is_vendor);
                         if (pass_flag != 0) {
-                            window.location.assign(DOMAIN + 'index.php?case=changepwd');return;
+                            window.location.assign(DOMAIN + 'Change-Password');return;
                         }
                         if (is_vendor == 1)
                         {

@@ -160,75 +160,6 @@
         }
     }
     
-    public function sendRateOTP($params)
-    {
-        global $comm;
-        $isValidate = true;
-        $sql = "SELECT
-                        orgName,
-                        contact_mobile,
-                        contact_person,
-                        dollar_rate,
-                        silver_rate,
-                        gold_rate
-                FROM
-                        tbl_vendor_master
-                WHERE
-                        vendor_id = ".$params['vid'];
-        
-        $sql2 = "SELECT
-                        logmobile,
-                        is_vendor
-                FROM
-                        tbl_registration
-                WHERE
-                        user_id = ".$params['vid'];
-        
-        $res = $this->query($sql);
-        $res2 = $this->query($sql2);
-        $chkV = $this->numRows($sql2);
-        if($chkV == 1)
-        {
-            $row = $this->fetchData($res);
-            $row2 = $this->fetchData($res2);
-            if(!empty($row['dollar_rate']))
-            {
-                $rno['dollar_rate'] = $row['dollar_rate'];
-            }
-            if(!empty($row['gold_rate']))
-            {
-                $rno['gold_rate'] = $row['gold_rate'];
-            }
-            if(!empty($row['silver_rate']))
-            {
-                $rno['silver_rate'] = $row['silver_rate'];
-            }
-        }
-        if(!empty($rno))
-        {
-            $txt  = "Dear ".$row['orgname'];
-            $txt .= "\r \n your updated rates are as follows";
-            $txt .= "\r \n Gold Rate :" . $rno['gold_rate'];
-            $txt .= "\r \n Dollar Rate :" . $rno['dollar_rate'];
-            $txt .= "\r \n Silver Rate :" . $rno['silver_rate'];
-            
-            $url = str_replace('_MOBILE', $row2['logmobile'], SMSAPI);
-            $url = str_replace('_MESSAGE', urlencode($txt), $url);
-            $res = $comm->executeCurl($url, true);
-            
-            if (!empty($res))
-            {
-                $result = array('result'=>'','code'=>1);
-                return $result;
-            }
-            else
-            {
-                $result = array('result'=>'','code'=>0);
-                return $result;
-            }
-        }
-    }
-
         public function userReg($params) // USER LOGIN PROCESS
         {   
            $isql = "INSERT INTO 
@@ -881,7 +812,8 @@
 		}
 
 		return $pwd;
-	}       
+	}
+        
         public function forgotPwd($params) {
             $vsql = "SELECT email FROM tbl_registration WHERE logmobile=\"" . $params['email'] . "\"";
             $vres = $this->query($vsql);
@@ -920,6 +852,7 @@
             $result = array('results' => $arr, 'error' => $err);
             return $result;
         }
+        
         public function changePwd($params) {
             $vsql = "SELECT * FROM tbl_registration WHERE user_id='" . $params['uid'] . "' AND password=MD5('".$params['cpass']."') ";
             $vres = $this->query($vsql);

@@ -65,11 +65,30 @@
                     $('#submitBtn').click(function () {
 
                 var pr_mobile = $('#pr_mobile').val();
-                pr_mobile = customStorage.addToStorage('mobile', pr_mobile);
+                customStorage.addToStorage('mobile', pr_mobile);
+                if(pr_mobile !== undefined || pr_mobile !== 'undefined')
+                {
+                    $.ajax({url: DOMAIN + "apis/index.php?action=checkUser&mobile=" + pr_mobile, success: function (result) {
+                            var obj = jQuery.parseJSON(result);
+                            var errCode = obj['error']['Code'];
+                            if(errCode == 0)
+                            {
+                                validMob = false;
+                                customStorage.toast(0,'There is no such user with this mobile number registered with us');
+                            }
+                            else
+                            {
+                                validMob = true;
+                                otpGo(pr_mobile);
+                                requestOTP();
+                            }
+                    }});
+		}
+                else
+                {
+                    customStorage.toast(0,'Invalid mobile number');
+                }
 
-                otpGo(pr_mobile);
-
-                requestOTP();
             });
     </script>
 </body>
