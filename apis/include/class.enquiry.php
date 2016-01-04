@@ -137,7 +137,7 @@ class enquiry extends DB
                     FROM
                                     tbl_product_enquiry
                     WHERE
-                                    active_flag=1
+                                    active_flag <> 2
                     AND                
                                     vendor_id=".$params['vid']."
                     ORDER BY
@@ -169,7 +169,7 @@ class enquiry extends DB
                         FROM
                                 tbl_product_master
                         WHERE 
-                                active_flag=1 
+                                active_flag <> 2 
                         AND 
                                 product_id='.$row['product_id'];
                 $cres=$this->query($csql);
