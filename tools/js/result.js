@@ -3,6 +3,7 @@ var isStop = false;
 var pw = $(window).width();
 var ph = $(window).height();
 var isMobile = false;
+var suggestObj = null;
 if (pw < 768) {
     isMobile = true;
 }
@@ -1227,7 +1228,10 @@ function number_format (number, decimals, dec_point, thousands_sep) {
 }
 
 function FR(sortby,showtree) {
-	
+	if(suggestObj)
+	{
+		suggestObj.abort();
+	}
 	var slistarr = new Array();
 	var jlistarr = new Array();
 	var clistarr = new Array();
@@ -1307,12 +1311,12 @@ function FR(sortby,showtree) {
 	
 	var pgno = $('#pgno').val();
 	var uid = $('#uid').val();
-	
+
 	if(sortby)
 	{
 		var params = 'action=ajx&case=filter&catid='+catid+'&sortby='+sortby+'&slist='+slist+'&clist='+clist+'&tlist='+tlist+'&ilist='+ilist+'&jlist='+jlist+'&ctid='+ctid+'&pgno='+pgno+"&uid="+uid;
 		var URL = DOMAIN + "index.php";
-		$.getJSON(URL, params, function(data) {
+		suggestObj = $.getJSON(URL, params, function(data) {
 			getResultsData(data,sortby);   
 		});
 	}
@@ -1321,7 +1325,7 @@ function FR(sortby,showtree) {
 		$('#drpinp').text('Best Match');
 		var params = 'action=ajx&case=filter&catid='+catid+'&slist='+slist+'&clist='+clist+'&tlist='+tlist+'&ilist='+ilist+'&jlist='+jlist+'&ctid='+ctid+'&pgno='+pgno+"&uid="+uid;
 		var URL = DOMAIN + "index.php";
-		$.getJSON(URL, params, function(data) {
+		suggestObj = $.getJSON(URL, params, function(data) {
 			getResultsData(data);
 		});
 	}
