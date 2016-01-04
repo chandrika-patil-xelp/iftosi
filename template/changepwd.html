@@ -2,39 +2,56 @@
 <body>
     <div id='baseCont' class="container fmOpenR signupPage loginP">
         <div class="wrapper">
+            <div id="header" class="header transition300">
+                <div class="wrapperMax">
+                    <div class="headRight fRight transition300">
+                        <div class="compNo fRight fmOpenB">022-32623263</div>
+                    </div>
+                </div>
+            </div>
             <form id="changePwd" name="changePwd" action="<?php echo DOMAIN.'index.php?case=changepwd'; ?>" method="post">
                 
             <div class='signupDiv' style="height:300px;">
-                
                 <div class="wrapperMax">
-                    <div class="signupTitle fLeft">Change Password</div>
-                    <div class="inputCont fLeft fmOpenR">
-                        <input type="password" id="pr_cpass" name="pr_cpass" autocomplete="off" class="txtInput cOrange fmOpenR font14 emailIcon">
-                        <label for="pr_cpass" class="inp-label transition100">Current Password</label>
-                        <div id="pr_pass_inpText" class="inpText fRight transition300">enter<br>Current Password</div>
+                    
+                    
+                    <div class="signupCont">
+                        <div class="signupCl1 fLeft fmOpenL">
+                            <div class="head1">Change Password?</div>
+                        </div>
+                        <div class="signupCl2 fRight">
+                            <div class="inputCont fLeft fmOpenR">
+                                <input type="password" id="pr_cpass" name="pr_cpass" autocomplete="off" class="txtInput cOrange fmOpenR font14 emailIcon">
+                                <label for="pr_cpass" class="inp-label transition100">Current Password</label>
+                                <div id="pr_pass_inpText" class="inpText fRight transition300">enter<br>Current Password</div>
+                            </div>
+                            <div class="inputCont fLeft fmOpenR">
+                                <input type="password" id="pr_npass" name="pr_npass" autocomplete="off" class="txtInput cOrange fmOpenR font14 passwordIcon" >
+                                <label for="pr_npass" class="inp-label transition100">New Password</label>
+                                <div id="pr_pass_inpText" class="inpText fRight transition300">enter your<br>new password</div>
+                            </div>  
+                            <div class="inputCont fLeft fmOpenR">
+                                <input type="password" id="pr_rpass" name="pr_rpass" autocomplete="off" class="txtInput cOrange fmOpenR font14 passwordIcon" onKeyPress="common.eSubmit(event, 'submitBtn');">
+                                <label for="pr_rpass" class="inp-label transition100">Repeat New Password</label>
+                                <div id="pr_pass_inpText" class="inpText fRight transition300">Retype your<br>new password</div>
+                            </div>  
+                            <div class="cancelLgBtn fLeft fmOpenR ripplelink poR" id='cancelBtn' onclick="window.location.assign(DOMAIN+'index.php')"> CANCEL</div>
+                            <div class="loginBtn fLeft fmOpenR ripplelink poR" id='submitBtn'>CHANGE</div>
+                        </div>
                     </div>
-                    <div class="inputCont fLeft fmOpenR">
-                        <input type="password" id="pr_npass" name="pr_npass" autocomplete="off" class="txtInput cOrange fmOpenR font14 passwordIcon" >
-                        <label for="pr_npass" class="inp-label transition100">New Password</label>
-                        <div id="pr_pass_inpText" class="inpText fRight transition300">enter your<br>new password</div>
-                    </div>  
-                    <div class="inputCont fLeft fmOpenR">
-                        <input type="password" id="pr_rpass" name="pr_rpass" autocomplete="off" class="txtInput cOrange fmOpenR font14 passwordIcon" onKeyPress="common.eSubmit(event, 'submitBtn');">
-                        <label for="pr_rpass" class="inp-label transition100">Repeat New Password</label>
-                        <div id="pr_pass_inpText" class="inpText fRight transition300">Retype your<br>new password</div>
-                    </div>  
-                    <div class="cancelLgBtn fLeft fmOpenR ripplelink poR" id='cancelBtn' onclick="window.location.assign(DOMAIN+'index.php')"> CANCEL</div>
-                    <div class="loginBtn fLeft fmOpenR ripplelink poR" id='submitBtn'>CHANGE</div>
                 </div>
             </div>
                 </form>
         </div>
         <?php include 'logo.html'?>
     </div>
+     <?php include 'footer.html'; ?>
     <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
     <script type="text/javascript" src="<?=$jvs['signup'];?>"></script>
     <script type="text/javascript" src="<?=$jvs['comm'];?>"></script>
+    <script type="text/javascript" src="<?= $jvs['head']; ?>"></script>
+    
     <script>
         
     var uid = customStorage.readFromStorage('userid');
