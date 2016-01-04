@@ -159,6 +159,75 @@
             }
         }
     }
+    
+    public function sendRateOTP($params)
+    {
+        global $comm;
+        $isValidate = true;
+        $sql = "SELECT
+                        orgName,
+                        contact_mobile,
+                        contact_person,
+                        dollar_rate,
+                        silver_rate,
+                        gold_rate
+                FROM
+                        tbl_vendor_master
+                WHERE
+                        vendor_id = ".$params['vid'];
+        
+        $sql2 = "SELECT
+                        logmobile,
+                        is_vendor
+                FROM
+                        tbl_registration
+                WHERE
+                        user_id = ".$params['vid'];
+        
+        $res = $this->query($sql);
+        $res2 = $this->query($sql2);
+        $chkV = $this->numRows($sql2);
+        if($chkV == 1)
+        {
+            $row = $this->fetchData($res);
+            $row2 = $this->fetchData($res2);
+            if(!empty($row['dollar_rate']))
+            {
+                $rno['dollar_rate'] = $row['dollar_rate'];
+            }
+            if(!empty($row['gold_rate']))
+            {
+                $rno['gold_rate'] = $row['gold_rate'];
+            }
+            if(!empty($row['silver_rate']))
+            {
+                $rno['silver_rate'] = $row['silver_rate'];
+            }
+        }
+        if(!empty($rno))
+        {
+            $txt  = "Dear ".$row['orgname'];
+            $txt .= "\r \n your updated rates are as follows";
+            $txt .= "\r \n Gold Rate :" . $rno['gold_rate'];
+            $txt .= "\r \n Dollar Rate :" . $rno['dollar_rate'];
+            $txt .= "\r \n Silver Rate :" . $rno['silver_rate'];
+            
+            $url = str_replace('_MOBILE', $row2['logmobile'], SMSAPI);
+            $url = str_replace('_MESSAGE', urlencode($txt), $url);
+            $res = $comm->executeCurl($url, true);
+            
+            if (!empty($res))
+            {
+                $result = array('result'=>'','code'=>1);
+                return $result;
+            }
+            else
+            {
+                $result = array('result'=>'','code'=>0);
+                return $result;
+            }
+        }
+    }
 
         public function userReg($params) // USER LOGIN PROCESS
         {   
@@ -618,16 +687,16 @@
         public function activateVendor($params) // Activate Status
         {   
             $vsql="SELECT
-                                is_active 
+                                active_flag 
                    FROM 
-                                tbl_registration  
+                                tbl_vendor_master  
                    WHERE 
-                                user_id=".$params['user_id']."";
+                                vendor_id=".$params['user_id']."";
             $vres=$this->query($vsql);
             $row =$this->fetchData($vres);
             if($this->numRows($vres) == 1) //If user is registered
             {
-                $flag=$row['is_active'];
+                $flag=$row['active_flag'];
                 $arr['flag']=$flag;
                 $err=array('code'=>0,'msg'=>'vendor profile status retrieved');
             }
@@ -689,7 +758,7 @@
                  WHERE 
                             logmobile=".$params['mobile']."
                   AND 
-                            is_active=1";
+                            is_active <> 2";
             $vres=$this->query($vsql);
             if($this->numRows($vres)==1) //If user is registered
             {
@@ -733,7 +802,7 @@
                    WHERE 
                                     user_id=" . $params['uid'] . " 
                    AND
-                                    is_active=1";
+                                    is_active <> 2";
         $vres = $this->query($vsql);
         $chkres = $this->numRows($vres);
         if ($chkres > 0)

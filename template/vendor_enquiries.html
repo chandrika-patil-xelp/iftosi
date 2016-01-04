@@ -227,68 +227,90 @@ function pagination(data,pgno){
 
 
 function generateEnqList(obj) {
+    if(obj !== undefined && obj !== 'undefined' && obj !== null && obj !== 'null')
+    {
+        var date = obj.update_time.split(' ');
+        var pro_dtls=obj.pro_dtls;
+        var search = obj.search;
+        var pro_name = pro_dtls.product_name;
+        var barcode = pro_dtls.barcode;
+        var uname = obj.user_name;
+        var umail = obj.user_email;
+        var umob = obj.user_mobile;
+        var certified = obj.certified;
+        var clarity = obj.clarity;
 
-    var date = obj['update_time'].split(' ');
-    var pro_dtls=obj['pro_dtls'];
-    var search = obj['search'];
-    var pro_name = pro_dtls['product_name'];
-    var barcode = pro_dtls['barcode'];
-    var uname = obj['user_name'];
-    var umail = obj['user_email'];
-    var umob = obj['user_mobile'];
-    if(pro_name == null) {
-        pro_name = '';
-    }
-    
-    if(barcode == null || barcode == '' || barcode == 'null') {
-        barcode = 'N-A';
-    }
-    if(uname == undefined || uname == 'undefined' || uname == null || uname == '' || uname == 'null' || uname === '0') {
-        uname = 'N/A';
-    }
-    if(uname == undefined || uname == 'undefined' || umail == null || umail == '' || umail === '0' ) {
-        umail = 'N/A';
-    }
-    if(umob == undefined || umob == 'undefined' || umob == null || umob == '' || umob === '0' || umob === 0 ) {
-        umob = 'N/A';
-    }
-    var str='';
-    str += '<li>';
-        str += '<div class="date fLeft"> ';
-            str += '<span class="upSpan">' + date[0] + '</span>';
-            str += '<span class="lwSpan">' + date[1] + '</span>';
+        var shape = obj.shape;
+        if(pro_name == null) {
+            pro_name = '';
+        }
+
+        if(barcode == null || barcode == '' || barcode == 'null') {
+            barcode = 'N-A';
+        }
+        if(uname == undefined || uname == 'undefined' || uname == null || uname == '' || uname == 'null' || uname === '0') {
+            uname = 'N/A';
+        }
+        if(uname == undefined || uname == 'undefined' || umail == null || umail == '' || umail === '0' ) {
+            umail = 'N/A';
+        }
+        if(umob == undefined || umob == 'undefined' || umob == null || umob == '' || umob === '0' || umob === 0 ) {
+            umob = 'N/A';
+        }
+        if(certified == undefined || certified == 'undefined' || certified == null || certified == '' || certified === '0' || certified === 0 ) {
+            certified = 'N/A';
+        }
+        if(shape == undefined || shape == 'undefined' || shape == null || shape == '' || shape === '0' || shape === 0 ) {
+            shape = 'N/A';
+        }
+        if(clarity == undefined || clarity == 'undefined' || clarity == null || clarity == '' || clarity === '0' || clarity === 0 ) {
+            clarity = 'N/A';
+        }
+
+        var str='';
+        str += '<li>';
+            str += '<div class="date fLeft"> ';
+                str += '<span class="upSpan">' + date[0] + '</span>';
+                str += '<span class="lwSpan">' + date[1] + '</span>';
+            str += '</div>';
+            str += '<div class="name fLeft">' + uname + '</div>';
+            str += '<div class="email fLeft txtOverflow" title='+umail+'>'+ umail + '</div>';
+            str += '<div class="type fLeft">';
+                str += '<span class="upSpan">' + pro_dtls.cat_name[0] + '</span>';
+                var subCatName = pro_dtls.cat_name[1];
+                if(subCatName == undefined) {
+                    subCatName='';
+                }
+                str += '<span class="lwSpan">' + subCatName + '</span>';
+            str += '</div>';
+            str += '<div class="barcode fLeft">';
+                str += '<span class="upSpan">' + barcode + '</span>';
+                if(pro_dtls.cat_name[0] == 'Diamonds')
+                {
+                    str += '<span class="lwSpan"><a href="'+DOMAIN+ certified +'-'+ shape +'-clarity-'+ clarity +'/did-'+obj.product_id+'" target="_blank">View Details</a></span>';
+                }
+                else if(pro_dtls.cat_name[0] == 'Bullion')
+                {
+                    str += '<span class="lwSpan"><a href="'+ DOMAIN + '-' +  pro_dtls.cat_name[0] +'-/bid-'+ obj.product_id +'" target="_blank">View Details</a></span>';
+                }
+                else if(pro_dtls.cat_name[0] == 'Jewellery')
+                {
+                    str += '<span class="lwSpan"><a href="'+ DOMAIN + '-' +  pro_dtls.cat_name[0] +'-/jid-'+ obj.product_id +'" target="_blank">View Details</a></span>';
+                }
         str += '</div>';
-        str += '<div class="name fLeft">' + uname + '</div>';
-        str += '<div class="email fLeft txtOverflow" title='+umail+'>'+ umail + '</div>';
-        str += '<div class="type fLeft">';
-            str += '<span class="upSpan">' + pro_dtls['cat_name'][0] + '</span>';
-            var subCatName = pro_dtls['cat_name'][1];
-            if(subCatName == undefined) {
-                subCatName='';
-            }
-            str += '<span class="lwSpan">' + subCatName + '</span>';
-        str += '</div>';
-        str += '<div class="barcode fLeft">';
-            str += '<span class="upSpan">' + barcode + '</span>';
-            if(pro_dtls['cat_name'][0] == 'Diamonds')
-            {
-                str += '<span class="lwSpan"><a href="'+DOMAIN+search['certified']+'-'+search['shape']+'-clarity-'+search['clarity']+'/did-'+obj['product_id']+'" target="_blank">View Details</a></span>';
-            }
-            else if(pro_dtls['cat_name'][0] == 'Bullion')
-            {
-                str += '<span class="lwSpan"><a href="'+ DOMAIN + '-' +  pro_dtls['cat_name'][0] +'-/bid-'+ obj['product_id'] +'" target="_blank">View Details</a></span>';
-            }
-            else if(pro_dtls['cat_name'][0] == 'Jewellery')
-            {
-                str += '<span class="lwSpan"><a href="'+ DOMAIN + '-' +  pro_dtls['cat_name'][0] +'-/jid-'+ obj['product_id'] +'" target="_blank">View Details</a></span>';
-            }
-    str += '</div>';
-        if(pro_dtls['cat_name'][0])
-        str += '<div class="price fLeft bNone fmOpenB">&#8377;' + pro_dtls['prd_price'] + '</div>';
-        else if(pro_dtls['cat_name'][2])
-            str += '<div class="price fLeft bNone fmOpenB">&#8377;' + pro_dtls['prd_price'] + '</div>';
-    str += '</li>';
-    return str;
+            if(pro_dtls.cat_name[0])
+            str += '<div class="price fLeft bNone fmOpenB">&#8377;' + pro_dtls.prd_price + '</div>';
+            else if(pro_dtls.cat_name[2])
+                str += '<div class="price fLeft bNone fmOpenB">&#8377;' + pro_dtls.prd_price + '</div>';
+        str += '</li>';
+        return str;
+    }
+    else
+    {
+     str = '';
+     return str;
+    }
+        
     }
 
 </script>

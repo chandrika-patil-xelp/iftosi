@@ -374,6 +374,13 @@ switch ($action) {
                 $page = 'login';
                 include 'template/login.html';
                 break;
+            
+            case 'loginsel':
+                $page = 'loginsel';
+                $uid = $_GET['uid'];
+                include 'template/new.html';
+                break;
+            
             case 'upload':
                 $pid = $_GET['pid'];
                 $page = 'upload';
@@ -734,6 +741,7 @@ switch ($action) {
                 $url = APIDOMAIN . 'index.php?action=viewAll&uid=' . $uid;
                 $res = $comm->executeCurl($url);
                 $data = $res['results'][1];
+                //echo "<pre>";print_r($data);die;
                 include 'template/vendorDetails.html';
                 break;
 

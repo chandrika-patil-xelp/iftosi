@@ -54,6 +54,22 @@ switch($action)
             $result= $obj->checkUser($params);
             $res= $result;
             break;
+    
+   case 'sendRateOTP':
+        include APICLUDE.'class.user.php';
+        $vid  = (!empty($params['vid'])) ? trim($params['vid']) : '';
+        if(empty($vid))
+        {
+            $resp = array();
+            $error = array('errCode' => 1, 'errMsg' => 'Invalid parameters');
+            $result = array('results' => $resp, 'error' => $error);
+            break;
+        }
+        $obj= new user($db['iftosi']);
+        $result = $obj->sendRateOTP($params);
+        $res = $result;
+        break;         
+            
             
     case 'sendOTP':
         include APICLUDE.'class.user.php';

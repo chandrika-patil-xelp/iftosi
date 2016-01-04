@@ -144,8 +144,6 @@ class enquiry extends DB
                                     update_time
                     DESC
                 ";
-        
-        
         $viewres=$this->query($viewprod);
         $totalEnqs=$this->numRows($viewres);
         $arr['total_enqs']=$totalEnqs;
@@ -163,18 +161,44 @@ class enquiry extends DB
         {   
             while($row=$this->fetchData($viewres))
             {   
-                $csql='SELECT product_id,barcode, product_name, prd_price FROM tbl_product_master WHERE active_flag=1 AND product_id='.$row['product_id'];
+                $csql='SELECT
+                                product_id,
+                                barcode,
+                                product_name,
+                                prd_price
+                        FROM
+                                tbl_product_master
+                        WHERE 
+                                active_flag=1 
+                        AND 
+                                product_id='.$row['product_id'];
                 $cres=$this->query($csql);
-                if($this->numRows($cres)>0) {
+                if($this->numRows($cres)>0)
+                {
                     while($crow=$this->fetchData($cres))
                     {
                         $row['pro_dtls']=$crow;
                         $prdPrice = $crow['prd_price'];
                     }
                 }
-                $csql='SELECT gold_purity,certified,shape,clarity,type,gold_weight,carat,metal FROM tbl_product_search WHERE product_id='.$row['product_id'];
+                $csql=' SELECT 
+                                gold_purity,
+                                certified,
+                                shape,
+                                clarity,
+                                type,
+                                gold_weight,
+                                carat,
+                                metal
+                        FROM
+                                tbl_product_search
+                        WHERE
+                                active_flag <> 2
+                        AND 
+                                product_id='.$row['product_id'];
                 $cres=$this->query($csql);
-                if($this->numRows($cres)>0) {
+                if($this->numRows($cres)>0)
+                {
                     while($crows=$this->fetchData($cres))
                     {
                         $purity=$crows['gold_purity'];
@@ -184,35 +208,51 @@ class enquiry extends DB
                         $row['search']=$crows;
                     }
                 }
-                $csql='SELECT b.cat_name,b.catid FROM tbl_product_category_mapping AS a, tbl_category_master AS b WHERE a.product_id='.$row['product_id'].' AND b.catid=a.category_id AND b.p_catid in (0,10000,10001,10002)';
+                $csql='SELECT 
+                                    b.cat_name,
+                                    b.catid
+                        FROM 
+                                    tbl_product_category_mapping AS a,
+                                    tbl_category_master AS b
+                        WHERE 
+                                    a.product_id='.$row['product_id'].' 
+                        AND 
+                                    b.catid=a.category_id 
+                        AND 
+                                    b.p_catid in (0,10000,10001,10002)';
                 $cres=$this->query($csql);
                 if($this->numRows($cres)>0) {
                     while($crow=$this->fetchData($cres))
                     {
                         $row['pro_dtls']['cat_name'][]=$crow['cat_name'];
-                        if($crow['catid']==10000 || $crow['catid']==10001 || $crow['catid']==10002)
-                        {
                             $row['pro_dtls']['mCatid']=$crow['catid'];
-                            if($crow['catid']==10000) {
+                            if($row['pro_dtls']['mCatid'] == 10000)
+                            {
                                 $row['pro_dtls']['prd_price']=$prdPrice*$dollarValue*$carat;
                             }
-                            if($crow['catid']==10002)
+                            else if($row['pro_dtls']['mCatid'] == 10002)
                             {
-                                if($metal=='gold') {
+                                if($metal == 'gold')
+                                {
                                     $metalRate=$goldRate;
                                     $finalRate=($metalRate/10)*($purity/995);
                                     $row['pro_dtls']['prd_price']=$finalRate*$weight;
                                 }
-                                else if($metal='silver')
+                                else if($metal == 'silver')
                                 {
                                     $metalRate=$silverRate;
                                     $finalRate=($metalRate/1000)*($purity/999);
                                     $row['pro_dtls']['prd_price']=$finalRate*$weight;
                                 }
                             }
+                            else if($row['pro_dtls']['mCatid'] == 10001)
+                            {
+                                $a = $crow['prd_price'];
+                                $row['pro_dtls']['prd_price'] = $a;
+                            }
                            $row['pro_dtls']['prd_price'] = ceil($row['pro_dtls']['prd_price']);
                            $row['pro_dtls']['prd_price'] = $this->IND_money_format($row['pro_dtls']['prd_price']);
-                        }
+                        
                     }
                 }
                 $arr['enq'][]=$row;
