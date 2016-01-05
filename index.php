@@ -359,6 +359,10 @@ switch ($action) {
                 $page = 'privacy';
                 include 'template/privacy.html';
                 break;
+             case 'faq_sellers':
+                $page = 'faq_sellers';
+                include 'template/faq_sellers.html';
+                break;
             case 'new1':
                 $page = 'new1';
                 $uid = $_GET['uid'];
