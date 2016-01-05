@@ -850,6 +850,12 @@ switch ($action) {
                 $page = 'terms_conditions';
                 include 'template/terms_conditions.html';
                 break;
+            
+            case 'vterms_condition':
+                $page = 'vterms_condition';
+                include 'template/vterms_condition.html';
+                break;
+            
 
             case 'faq':
                 $page = 'faq';

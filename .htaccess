@@ -20,6 +20,7 @@ RewriteRule ^((?i)education)$    index.php?case=education [L]
 RewriteRule ^((?i)faqs)$    index.php?case=faq [L]
 RewriteRule ^((?i)faqs-seller)$    index.php?case=faqs_seller [L]
 RewriteRule ^((?i)terms-and-conditions)$    index.php?case=terms_conditions [L]
+RewriteRule ^((?i)vendor-terms-and-conditions)$    index.php?case=vterms_condition [L]
 RewriteRule ^((?i)privacy-policy)$    index.php?case=policy [L]
 
 ####################### EDUCATION #############################

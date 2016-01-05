@@ -687,3 +687,5 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .dnArrow{height:50px;width:50px;position:absolute;top:0;left:0;}
 .padLeft{padding-left:50px !important;}
 .para{padding-bottom: 10px;line-height: 25px;}
+.padL30{padding:10px 20px}
+.subNumber{padding:0px 15px} 
