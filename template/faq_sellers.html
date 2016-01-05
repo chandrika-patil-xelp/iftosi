@@ -1,0 +1,145 @@
+<?php include 'bhead.html'; ?>
+<body>
+    <div id='baseCont' class=" fmOpenR faq">
+        <div class="wrapper">
+            <?php include 'header.html'; ?>
+            <div class='bgHolder'>
+                <div class="heading font40 fmOpenL">FAQs</div>
+            </div>
+            <div class="wrapperA">
+                <div class="wrapperMax">
+                    <div class="faqs">
+                    <h2>For Sellers</h2>
+                        <div class="ques font15" id="que19">
+                            1.As a seller, how do I benefit through IFtoSI?
+                        </div>
+                        <div class="ans">
+                            <div class="para">
+                                Today, having an online counterpart to your brick-and-mortar store is a must – especially 
+                                for diamond jewellery retailers. It takes real work to develop and maintain a successful 
+                                site and this is where IFtoSI can help you in saving your cost and time. IFtoSI becomes 
+                                your online storefront exposing you to a wide range of consumers directly who could be 
+                                looking for products like yours.
+                            </div>
+                            <div class="para">
+                                IFtoSI is not a replacement for your brick and mortar store, rather it supports your brand 
+                                online by increasing your reach and offering an additional revenue stream for your 
+                                products. Most importantly it connects you directly with the end consumers and can 
+                                effectively help you in trend forecasting, generating customer insights and feedback. For 
+                                new brand entrants, it helps in creating awareness and raising your credibility online.
+                            </div>
+                        </div>
+                        <div class="ques font15" id="que20">
+                            2.How do I offer my merchandise for display at IFtoSI?
+                        </div>
+                        <div class="ans">
+                            <div class="para">
+                                In order to offer your merchandise for display at IFtoSI, you need to first become a 
+                                member. IFtoSI membership is open and accessible for all reputable retailers and 
+                                manufacturers. All applicants need to go through the accreditation process, which 
+                                consists of:<br>
+                                1. Filling out the applications form<br>
+                                2. Agreeing to IFtoSI Terms & Conditions<br>
+                                3. Paying the Membership Fee<br>
+                            </div>
+                        </div>
+                        <div class="ques font15" id="que21">
+                            3.Do we need to submit any documents while applying for membership? 
+                        </div>
+                        <div class="ans">
+                            <div class="para">
+                                An IFtoSI applicant can apply for membership with uploading the following documents:<br>
+                                * Copy of any trade license / VAT certificate<br>
+                                * Proof of membership to local reputable Jewellery association,<br> diamond bourse (s),associated organisations;<br>
+                                * Catalogue of products <br>
+                                * Duly completed application form<br>
+                                * Any other documents that may be deemed relevant by IFtoSI
+                            </div>
+                        </div>
+                        <div class="ques font15" id="que22">
+                            4.How long is my membership valid? 
+                        </div>
+                        <div class="ans">
+                            <div class="para">
+                                Signing of the IFtoSI membership needs to be renewed annually. This means every year
+                                you will have to apply for a renewal.
+                            </div>
+                        </div>
+                        <div class="ques font15" id="que23">
+                            5.Where can I get an application form? 
+                        </div>
+                        <div class="ans">
+                            <div class="para">
+                                The application form is simple and easy to fill. It is available online here:<a href="<?php echo DOMAIN.'index.php?case=signup';?>"><span class='color0044 fmOpenB'> link.</span></a>
+                                also get in touch with us through email or call us for the same.
+                            </div>
+                        </div>
+                        <div class="ques font15" id="que24">
+                            6.What does this membership fee include?
+                        </div>
+                        <div class="ans">
+                            <div class="para">
+                                This fee includes the accreditation of the company and the use of the IFtoSI title 
+                                according to the licensing guidelines. It also includes clerical work and inclusion of 
+                                promoting the company / store(s) in IFtoSI database and website.
+                            </div>
+                        </div>
+                        <div class="ques font15" id="que25">
+                            7.How does selling on IFtoSI work once I become a member? 
+                        </div>
+                        <div class="ans">
+                            <div class="para">
+                                Selling on IFtoSI is easy. List the products you want to sell at IFtoSI. Customer sees 
+                                your product and books an order. You and the customer then mutually decide upon the 
+                                delivery mode and mode of payment.
+                            </div>
+                        </div>
+                        <div class="ques font15" id="que26">
+                            8.What are my obligations as a seller?
+                        </div>
+                        <div class="ans">
+                            <div class="para">
+                                You need to provide true, accurate, current and complete information about yourself as 
+                                prompted by IFtoSI's membership form. IFtoSI reserves the right to confirm and validate 
+                                the information and other details provided by you at any point of time. If you provide any 
+                                information that is untrue (wholly or partly), inaccurate, incomplete, or not current or if 
+                                IFtoSI has reasonable grounds to suspect that such information is untrue, inaccurate, 
+                                and not current or not in accordance with this User Agreement, we have the right to 
+                                indefinitely suspend or terminate your membership and and debar you from using the 
+                                services of www.IFtoSI.com without prior notice whatsoever.
+                            </div>
+                        </div>
+                        <div class="ques font15" id="que27">
+                            9.Who should be contacted in case of any disputes? 
+                        </div>
+                        <div class="ans">
+                            <div class="para">
+                                You can write to us at <span class='color0044 fmOpenB'>info@iftosi.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php include 'logo.html'; ?>
+    </div>
+    <?php include 'footer.html'; ?>
+    <script>
+        var last = "";
+        $(document).ready(function () {
+            $(".ques").click(function () {
+                $('.ans').each(function () {
+                    $(this).slideUp();
+                });
+
+                if (last == '' || (last !== '' && last.attr('id') !== $(this).attr('id')) || (last !== '' && last.attr('id') === $(this).attr('id') && last.next(".ans").is(":visible") === false))
+                {
+                    last = $(this);
+                    $(this).next(".ans").slideDown();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
