@@ -412,8 +412,8 @@ a{text-decoration: none;}
 .jewelleryPrds .price {width: 12%;}
 
 .bullionPrds{}
-.bullionPrds .acct{width:30%;}
-.bullionPrds .btype{width: 7%;}
+.bullionPrds .acct{width:25%;}
+.bullionPrds .btype{width: 12%;}
 .bullionPrds .purity{width: 10%;}
 
 
@@ -517,8 +517,8 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 .forPrds{width:100%;height: auto;}
 .forPrds .prdSearchDiv{}
 .m0{margin: 0!important;}
-.addPrdBtn{width:auto;background: #8A0044;margin-left: 10px;color: #fff;height: 35px;line-height: 35px;font-size: 13px;padding: 0 30px;border-radius: 5px;cursor: pointer;}
-.addPrdBtn:hover{padding:0 45px 0 15px;}
+.addPrdBtn{width:auto;background: #8A0044 url(../img/common/tickCircle.svg)no-repeat;background-position: 150% center;background-size: auto 80%;margin-left: 10px;color: #fff;height: 35px;line-height: 35px;font-size: 13px;padding: 0 30px;border-radius: 5px;cursor: pointer;}
+.addPrdBtn:hover{padding:0 45px 0 15px;background: #8A0044 url(../img/common/tickCircle.svg)no-repeat;background-position: 95% center;background-size: auto 80%;}
 .vFilBtn{width:35px;height: 35px;margin-right:5px;background:url(../img/common/filter2.svg)no-repeat;background-size: auto 80%;background-position: center 8px;cursor: pointer;}
 
 .vCommTitle{width:100%;height:50px;line-height: 50px;font-size:40px;text-align: center; margin: 20px 0;}
@@ -632,7 +632,7 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 .rateDiv { height: 40px;padding: 7px 0;font-size: 13px;}
 
 .spTitle{color: rgba(255,255,255,0.6);padding: 0;height: 25px;display: block;float: left;margin: 0 10px 0 0px;line-height: 25px;}
-.spValue{background: rgba(255,255,255,1);font-family: openB;padding: 0 30px 0 10px;border-radius: 15px;color: #4d4d4d;height: 25px;display: block;float: left;cursor: pointer;margin: 0 10px 0 0px;line-height: 25px;}
+.spValue{background: rgba(255,255,255,1) url(../img/common/edit.svg)no-repeat;background-position: 95% center;background-size: auto 90%;font-family: openB;padding: 0 30px 0 10px;border-radius: 15px;color: #4d4d4d;height: 25px;display: block;float: left;cursor: pointer;margin: 0 10px 0 0px;line-height: 25px;}
 
 .textOverflow{overflow: hidden;white-space:nowrap; text-overflow: ellipsis;}
 
@@ -656,9 +656,9 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 
 .txtSelect  option {background: #fff;color:#4d4d4d;}
 .bgcolor0044{background-color: #8A0044!important;}
-.vendorSt{width:auto;height: 30px;padding:0 10px;border:2px solid #fff;border-radius:15px;font-size: 12px;margin-right: 10px;}
-.vDactive{border-color: #b80f00}
-.vActive{border-color:#4db800;}
+.vendorSt {width: auto;height: 35px;padding: 3px 10px;border-radius: 15px;font-size: 10px;margin: 0 10px;text-transform: uppercase;font-family: openB;}
+.vDactive{background: #b80f00}
+.vActive{background: #4db800;}
 .addMore {width: auto;height: 40px;font-size: 14px;line-height: 40px;text-align: center;display: inline-block;padding: 0 35px 0 20px;background: #8A0044 url(../img/common/add_White.svg)no-repeat;background-size: auto 40%;background-position: 95% center;color: #fff;border-radius: 0px;cursor: pointer;-webkit-appearance: none;-moz-user-select: none;-webkit-user-select: none;-ms-user-select: none;}
 
 /*newpage*/
