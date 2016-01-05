@@ -208,7 +208,7 @@ a{text-decoration: none;}
 .Cushion {background-position: 100% 0%;}
 .Cushion:hover {opacity: 1;}
 
-.shapeSelected.Round,.shapeSelected:hover.Round{opacity: 1;} 
+.shapeSelected.Round,.shapeSelected:hover.Round{opacity: 1;}
 .shapeSelected.Pear,.shapeSelected:hover.Pear{opacity: 1;}
 .shapeSelected.Heart,.shapeSelected:hover.Heart{opacity: 1;}
 .shapeSelected.Princess,.shapeSelected:hover.Princess{opacity: 1;}
@@ -325,7 +325,7 @@ a{text-decoration: none;}
 
 .sno{width:6%;}
 .barcode{width:12%;}
-.shape{width:10%;text-align: center;} 
+.shape{width:10%;text-align: center;}
 .color {width:6%;text-align: center;}
 .carats{width:8%;text-align: center;}
 .clarity{width:6%;text-align: center;}
@@ -496,7 +496,7 @@ a{text-decoration: none;}
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus{background: #8A0044;color:#fff}
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active{background: #333;color:#fff}
 .ui-datepicker-title{width: 70%;height: 30px;line-height: 30px;font-size: 16px;text-align: center;float: left;color:#333;}
-.ui-datepicker-header.ui-widget-header.ui-helper-clearfix.ui-corner-all{width: 100%;height: 30px;line-height: 30px;}    
+.ui-datepicker-header.ui-widget-header.ui-helper-clearfix.ui-corner-all{width: 100%;height: 30px;line-height: 30px;}
 a.ui-datepicker-prev.ui-corner-all {width: 15%;height: 30px;line-height: 30px;text-align: center;display: block;float: left;cursor: pointer;font-size: 12px}
 a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;text-align: center;display: block;float: right;cursor: pointer;font-size: 12px }
 .ui-state-disabled {color: #b3b3b3;}
@@ -564,7 +564,7 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 .listComm{width: 100%;height: 62px;padding: 0px;background: #fff;margin-bottom: 10px;color:#666;border: 1px solid #fff;}
 .mbIcon {width: auto;padding: 0 20px 0 25px;background-image: url(../img/iconMobileNumber.svg);background-repeat: no-repeat;background-size: auto 27px;background-position: 0 center;color:#8A0044;}
 .emIcon {width: auto;padding: 0 20px 0 30px;background-image: url(../img/iconEmail.svg);background-repeat: no-repeat;background-size: auto 27px;background-position: 0 center;color:#8A0044;}
- 
+
 .toggle-button {background-color: #e00000;margin: 5px 0;border-radius: 20px;border: 2px solid #e00000!important;height: 22px!important;cursor: pointer;width: 60px;float: right;position: relative;display: inline-block;line-height: 18px!important;font-size: 10px;margin: 0;margin-top: -2px;padding: 0 5px;color: #fff;position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;}
 .toggle-button button {cursor: pointer;outline: 0;display: block;position: absolute;left: 0;top: 0;border-radius: 100%;width: 25px;height: 25px;background-color: #fff;float: left;margin: -4px 0 0 -3px;border: 2px solid #666;transition: left 0.3s;}
 .toggle-button-selected {background-color: #91BF34;border: 2px solid #91BF34!important;padding: 0 5px;color: #fff;}
@@ -680,6 +680,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .faqs{width:100%;height:auto;padding:20px 0px;}
 .faq{}
 .faq .logo {position: absolute;}
+.bgHolder{width:100%;height: 140px;padding:100px 0 35px 0;max-width:1200px;margin:auto;}
 .ques{width:100%; height:auto;padding:10px 40px 10px 20px;margin-bottom:10px;  border-bottom:1px solid #EBEBDE; position:relative;cursor:pointer;background:#EBEBDE url(../img/common/down_arrow.svg)no-repeat;background-position: right center;border-radius:5px;}
 .ans{width:100%; height:auto;padding:0px 20px 0px 20px; border-bottom:1px solid #EBEBDE; position:relative; display:none;font-size:15px;}
 
