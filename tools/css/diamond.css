@@ -383,13 +383,25 @@ body{padding:0;margin:0;}
 .arrow_img{background: url("../img/common/hearts-arrows.jpg") no-repeat;background-size:auto 100%;background-position:center;}
 
 .h400{height: 400px;}
-
-
-
-
-
-
-
+.videoDiv{width:50%;float:right;height: 345px;border: 1px solid #e6e6e6;}
+.sectns{width: 33%;float: left;height: 800px;border-right: 1px solid #e6e6e6;}
+.noBorder{border:none!important;}
+.subSectn{width:100%;height:33.33%;border-bottom:1px solid #e6e6e6;padding-top: 110px;text-align: center;}
+.allShapesImg{background-image:url("../img/allShapes.gif");background-repeat: no-repeat; background-size: initial;background-position: center top;}
+.caratWeight{background-image:url("../img/caratWeight.gif");background-repeat: no-repeat; background-size: initial;background-position: center top;}
+.cutShape{background-image:url("../img/cutShape.gif");background-repeat: no-repeat; background-size: initial;background-position: center top;}
+.certificate{background-image:url("../img/certificate.gif");background-repeat: no-repeat; background-size: initial;background-position: center top;}
+.anatomy{background-image:url("../img/anatomy.gif");background-repeat: no-repeat; background-size: initial;background-position: center top;}
+.diamondGrade{background-image:url("../img/diamondGrade.gif");background-repeat: no-repeat; background-size: initial;background-position: center top;}
+.clarityImg{background-image:url("../img/clarity.gif");background-repeat: no-repeat; background-size: initial;background-position: center top;}
+.book{background-image:url("../img/book.gif");background-repeat: no-repeat; background-size: initial;background-position: center top;}
+.moreBtn{width: 125px!important;}
+.padLeft40{padding-left: 40px;}
+.subNumber{width: auto;float: left;color: #4d4d4d;}
+.padL30{padding-left: 30px;}
+.txtUnderline{text-decoration: underline;}
+.marT5{margin-top: 5px;}
+.textLowercase{text-transform: lowercase;}
 
 
 @media only screen and (min-width: 320px) and (max-width: 767px){
