@@ -19,28 +19,28 @@ body{padding:0;margin:0;}
 .textDivH{width:100%;height:28px;line-height:28px;color:#666;font-size:14px;color:#8A0044;}
 .measurement .textDiv{width:50%;}
 .picDivRght{width:100%;height:auto;padding:15px;}
-.diamondPic{width:380px;height:235px;display:inline-block;}
-.diamontCat1{width:380px;height:235px;background:url(../img/diamond/anatomy-3.png)no-repeat;background-size:initial;background-position:center center;}
-.diamontCat2{width:380px;height:235px;background:url(../img/diamond/anatomy-5.png)no-repeat;background-size:initial;background-position:center center;}
-.diamontCat3{width:380px;height:235px;background:url(../img/diamond/anatomy-7.png)no-repeat;background-size:initial;background-position:center center;}
-.diamontCat4{width:380px;height:235px;background:url(../img/diamond/anatomy-9.png)no-repeat;background-size:initial;background-position:center center;}
-.diamontCat5{width:380px;height:235px;background:url(../img/diamond/anatomy-11.png)no-repeat;background-size:initial;background-position:center center;}
-.diamontCat6{width:380px;height:235px;background:url(../img/diamond/anatomy-13.png)no-repeat;background-size:initial;background-position:center center;}
-.diamontCat7{width:380px;height:235px;background:url(../img/diamond/anatomy-15.png)no-repeat;background-size:initial;background-position:center center;}
-.diamontCat8{width:380px;height:235px;background:url(../img/diamond/anatomy-17.png)no-repeat;background-size:initial;background-position:center center;}
-.diamontCat9{width:380px;height:235px;background:url(../img/diamond/anatomy-19.png)no-repeat;background-size:initial;background-position:center center;}
-.diamontCat10{width:380px;height:235px;background:url(../img/diamond/anatomy-21.png)no-repeat;background-size:initial;background-position:center center;}
-.diamontCat11{width:380px;height:235px;background:url(../img/diamond/anatomy-23.png)no-repeat;background-size:initial;background-position:center center;}
-.diamontCat12{width:380px;height:235px;background:url(../img/diamond/anatomy-25.png)no-repeat;background-size:initial;background-position:center center;}
-.diamontCat13{width:380px;height:235px;background:url(../img/diamond/anatomy-27.png)no-repeat;background-size:initial;background-position:center center;}
-.diamontCat14{width:380px;height:235px;background:url(../img/diamond/anatomy-29.png)no-repeat;background-size:initial;background-position:center center;}
-.diamontCat15{width:380px;height:235px;background:url(../img/diamond/anatomy-31.png)no-repeat;background-size:initial;background-position:center center;}
-.diamontCat16{width:380px;height:235px;background:url(../img/diamond/anatomy-33.png)no-repeat;background-size:initial;background-position:center center;}
-.diamontCat17{width:380px;height:235px;background:url(../img/diamond/anatomy-35.png)no-repeat;background-size:initial;background-position:center center;}
-.diamontCat18{width:380px;height:235px;background:url(../img/diamond/anatomy-37.png)no-repeat;background-size:initial;background-position:center center;}
-.diamontCat19{width:380px;height:235px;background:url(../img/diamond/anatomy-39.png)no-repeat;background-size:initial;background-position:center center;}
-.diamontCat20{width:380px;height:235px;background:url(../img/diamond/anatomy-41.png)no-repeat;background-size:initial;background-position:center center;}
-.diamontCat21{width:380px;height:235px;background:url(../img/diamond/anatomy-43.png)no-repeat;background-size:initial;background-position:center center;}
+.diamondPic{width:380px;height:250px;display:inline-block;}
+.diamontCat1{width:380px;height:250px;background:url(../img/diamond/anatomy-3.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat2{width:380px;height:250px;background:url(../img/diamond/anatomy-5.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat3{width:380px;height:250px;background:url(../img/diamond/anatomy-7.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat4{width:380px;height:250px;background:url(../img/diamond/anatomy-9.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat5{width:380px;height:250px;background:url(../img/diamond/anatomy-11.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat6{width:380px;height:250px;background:url(../img/diamond/anatomy-13.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat7{width:380px;height:250px;background:url(../img/diamond/anatomy-15.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat8{width:380px;height:250px;background:url(../img/diamond/anatomy-17.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat9{width:380px;height:250px;background:url(../img/diamond/anatomy-19.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat10{width:380px;height:250px;background:url(../img/diamond/anatomy-21.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat11{width:380px;height:250px;background:url(../img/diamond/anatomy-23.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat12{width:380px;height:250px;background:url(../img/diamond/anatomy-25.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat13{width:380px;height:250px;background:url(../img/diamond/anatomy-27.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat14{width:380px;height:250px;background:url(../img/diamond/anatomy-29.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat15{width:380px;height:250px;background:url(../img/diamond/anatomy-31.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat16{width:380px;height:250px;background:url(../img/diamond/anatomy-33.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat17{width:380px;height:250px;background:url(../img/diamond/anatomy-35.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat18{width:380px;height:250px;background:url(../img/diamond/anatomy-37.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat19{width:380px;height:250px;background:url(../img/diamond/anatomy-39.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat20{width:380px;height:250px;background:url(../img/diamond/anatomy-41.png)no-repeat;background-size:initial;background-position:center center;}
+.diamontCat21{width:380px;height:250px;background:url(../img/diamond/anatomy-43.png)no-repeat;background-size:initial;background-position:center center;}
 .tx_margin{margin-bottom:20px}
 .diamond_shap{}
 .diamond_shap.container{padding-top: 120px;}
@@ -224,7 +224,7 @@ body{padding:0;margin:0;}
 .side-col2{width: 20%;height: 100px;border: 1px solid;}
 .cutHeading{width: 100%;text-transform:capitalize;}
 .diamond_info{line-height:24px;width: 100%;height:auto;text-align: justify;font-family: openR;}
-.imageDiv{width: 35%;height: 235px;background: url("../img/common/diamond_cut_diagram.gif") no-repeat;background-size: auto 100%;background-position: center;}
+.imageDiv{width: 35%;height: 250px;background: url("../img/common/diamond_cut_diagram.gif") no-repeat;background-size: auto 100%;background-position: center;}
 .continue{width: 65%;height: auto;font-family:openR;text-align: justify;line-height:24px;padding-left: 15px;}
 .belowImage{font-family:openR;text-align: justify;line-height: 24px;border-bottom: 1px solid #ddd;}
 .subHeading{width: 100%;height: 50px;padding: 15px 15px 10px 0px;}
@@ -269,7 +269,7 @@ body{padding:0;margin:0;}
 .side-col2{width: 20%;height: 100px;border: 1px solid;}
 .cutHeading{width: 100%;text-transform:capitalize;}
 .diamond_info{line-height:24px;width: 100%;height:auto;text-align: justify;font-family: openR;}
-.imageDiv{width:50%;height: 235px;background: url("../img/common/diamond_cut_diagram.gif") no-repeat;background-size: auto 100%;background-position: center;}
+.imageDiv{width:50%;height: 250px;background: url("../img/common/diamond_cut_diagram.gif") no-repeat;background-size: auto 100%;background-position: center;}
 .continue{width: 65%;height: auto;font-family:openR;text-align: justify;line-height:24px;padding-left: 15px;}
 .belowImage{font-family:openR;text-align: justify;line-height: 24px;border-bottom: 1px solid #ddd;}
 .subHeading{width: 100%;height: 50px;padding: 15px 15px 10px 0px;}
