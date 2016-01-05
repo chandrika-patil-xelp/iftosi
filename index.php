@@ -351,7 +351,22 @@ switch ($action) {
                 $page = 'e_glossary';
                 include 'template/e_glossary.html';
                 break;
-            
+            case 'e_shapes':
+                $page = 'e_shapes';
+                include 'template/e_shapes.html';
+                break;
+            case 'privacy':
+                $page = 'privacy';
+                include 'template/privacy.html';
+                break;
+            case 'new1':
+                $page = 'new1';
+                $uid = $_GET['uid'];
+                $url = APIDOMAIN . 'index.php?action=viewAll&uid=' . $uid;
+                $res = $comm->executeCurl($url);
+                $data = $res['results'][1];
+                include 'template/new.html';
+                break;
             
             case 'changepwd':
 //                if(isset($params['pr_cpass'])) {
