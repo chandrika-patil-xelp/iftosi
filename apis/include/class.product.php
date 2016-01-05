@@ -937,8 +937,6 @@
 						tbl_product_category_mapping
 					".$where."
 					and display_flag=1";
-			
-			
 			$res = $this->query($sql);
 			if($res)
 			{
@@ -953,7 +951,6 @@
 						tbl_product_category_mapping 
 					".$where."
 					AND display_flag=1";
-			
 			$res = $this->query($sql);
 			$cres=$this->numRows($res);
 			if($cres>0)

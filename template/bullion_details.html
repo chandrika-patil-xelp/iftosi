@@ -119,11 +119,16 @@
 <?php
                                     if($prdInfo['attr_details']['gold_weight'] >= 1000)
                                     {
-                                        $gweights = $prdInfo['attr_details']['gold_weight']/1000 .' Kgs';
+                                        $gweights = $prdInfo['attr_details']['gold_weight']/1000;
+                                        $gweights = number_format($gweights,2);
+                                    }
+                                    else if($prdInfo['attr_details']['gold_weight'] == 1000)
+                                    {
+                                        $gweights = '1 Kgs';
                                     }
                                     else
                                     {
-                                        $gweights = $prdInfo['attr_details']['gold_weight'].' Gms'; 
+                                        $gweights = number_format($prdInfo['attr_details']['gold_weight'],2).' Gms'; 
                                     }
 ?>
                                 <div class="infoValue c666 fmOpenR font25"><?php echo $gweights; ?></div>

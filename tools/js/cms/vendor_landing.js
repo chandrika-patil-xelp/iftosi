@@ -503,7 +503,6 @@ $('#overlay,#upCancel').bind('click', function () {
 });
 
 function closeAllForms() {
-    $('.shapeSelected').removeClass('shapeSelected');
     $('#uploadDiv,#dollarRateDiv,#goldRateDiv,#silverRateDiv,#goldSilverRateDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
     $('#overlay').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
     setTimeout(function () {
@@ -513,6 +512,10 @@ function closeAllForms() {
 }
 
 $(document).ready(function() {
+    $('.cancelBtn').click( function ()
+    {
+        $('.shapeSelected').removeClass('shapeSelected');
+    });
       $.ajax({url: DOMAIN + "apis/index.php?action=getAllRatesByVID&vid="+uid, success: function(result) {
 		  
                 var obj = jQuery.parseJSON(result);

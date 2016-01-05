@@ -109,6 +109,9 @@ $jvs['vendorLanding'] 	= DOMAIN.'tools/js/cms/vendor_landing.js?v='.VERSION;
 $jvs['pForm']    	= DOMAIN.'tools/js/pForm.js?v='.VERSION;
 $jvs['cmsCommon'] 	= DOMAIN.'tools/js/cms/Common.js?v='.VERSION;
 $jvs['vendor_Product'] 	= DOMAIN.'tools/js/cms/page/vendorProductListings.js?v='.VERSION;
+$jvs['clarity'] 	= DOMAIN.'tools/js/clarity.js?v='.VERSION;
+$jvs['anatomy'] 	= DOMAIN.'tools/js/anatomy.js?v='.VERSION;
+$jvs['enquiry'] 	= DOMAIN.'tools/js/enquiry.js?v='.VERSION;
 // Custom JS End
 
 

@@ -441,7 +441,23 @@ function generateJewellList(obj) {
         str += '<div class="metal fLeft">' + metal.split('~')[0] + '</div>';
         str += '<div class="catg fLeft">' + shape +'</div>';
         str += '<div class="degno fLeft">' + obj['dwt'] + '</div>';
-        str += '<div class="subType fLeft">' + obj['gold_weight'] + '</div>';
+        if(obj.gold_weight == 1000)
+        {
+            var gweights = '1 Kgs';
+        }
+        else if(obj.gold_weight > 1000)
+        {
+            obj.gold_weight = parseFloat(obj.gold_weight);
+            var gweights = (obj.gold_weight/1000);
+            gweights = common.number_format(gweights,2)+' Kgs';
+
+        }
+        else
+        {
+            obj.gold_weight = parseFloat(obj.gold_weight);
+            var gweights = common.number_format(obj.gold_weight,2)+' Gms';
+        }
+        str += '<div class="subType fLeft">' + gweights + '</div>';
         str += '<div class="price fLeft fmOpenB">&#8377;' + obj['price']+ '</div>';
         str += '<div class="acct fLeft">';
         
@@ -602,13 +618,14 @@ function generatBullionsList(obj) {
     
     if(obj.gold_weight == 1000)
     {
+        
         var gweights = '1 Kgs';
     }
     else if(obj.gold_weight > 1000)
     {
-        obj.gold_weight = common.number_format(obj.gold_weight,2);
         obj.gold_weight = parseFloat(obj.gold_weight);
-        var gweights = (obj.gold_weight/1000)+ ' Kgs';
+        var gweights = (obj.gold_weight/1000);
+        gweights = common.number_format(gweights,2)+' Kgs';
         
     }
     else

@@ -459,9 +459,9 @@
                    FROM 
                           tbl_registration
                    WHERE
-                          (logmobile=\"".$params['mobile']."\")
+                          ((logmobile=\"".$params['mobile']."\")
                               OR
-                          (email =\"".$params['mobile']."\")
+                          (email =\"".$params['mobile']."\"))
                    AND 
                           password=MD5('".$params['password']."')
                    AND
@@ -821,10 +821,10 @@
             $cnt1 = $this->numRows($vres);
 
             if ($cnt1 > 0) {
-                $password = mt_rand(11111111, 99999999);
-                $vsql1 = "UPDATE tbl_registration SET password=MD5('.$password.'), pass_flag=1 WHERE logmobile=\"" . $params['email'] . "\"";
+                $password = mt_rand(111111, 999999);
+                $vsql1 = "UPDATE tbl_registration SET password=MD5(\"".$password."\"), pass_flag=1 WHERE logmobile=\"" . $params['email'] . "\"";
 
-                $vres1 = $this->query($vsql1);
+                $vres1 = $this->query($vsql1,1);
                 if ($vres1) {
                     $subject = 'Your Password Changed';
                     $message = 'Your password was successfully Changed. Your new password is ' . $password;

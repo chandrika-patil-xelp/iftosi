@@ -394,6 +394,11 @@ switch ($action) {
                 include 'template/login.html';
                 break;
             
+            case 'policy':
+                $page = 'policy';
+                include 'template/privacy.html';
+                break;
+            
             case 'loginsel':
                 $page = 'loginsel';
                 $uid = $_GET['uid'];
@@ -849,6 +854,11 @@ switch ($action) {
             case 'faq':
                 $page = 'faq';
                 include 'template/faq.html';
+                break;
+            
+            case 'faqs_seller':
+                $page = 'faq';
+                include 'template/faq_sellers.html';
                 break;
             case 'education':
                 $page = 'education';

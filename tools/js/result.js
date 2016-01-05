@@ -559,8 +559,9 @@ function getResultsData(data,sortby,showtree)
 									html += '<div class="detLabel fmOpenB fLeft">WEIGHT</div>';
                                                                         if(vl.attributes.gold_weight > 1000)
                                                                         {
-                                                                            vl.attributes.gold_weight = parseFloat(number_format(vl.attributes.gold_weight,2));
-                                                                            var gweights = vl.attributes.gold_weight / 1000+' Kgs';
+                                                                            vl.attributes.gold_weight = parseFloat(vl.attributes.gold_weight);
+                                                                            var gweights = vl.attributes.gold_weight / 1000;
+                                                                            gweights = number_format(gweights,2)+' Kgs';
                                                                         }
                                                                         else if(vl.attributes.gold_weight == 1000)
                                                                         {
@@ -568,6 +569,7 @@ function getResultsData(data,sortby,showtree)
                                                                         }
                                                                         else
                                                                         {
+                                                                            vl.attributes.gold_weight = parseFloat(vl.attributes.gold_weight);
                                                                             var gweights = number_format(vl.attributes.gold_weight,2)+' Gms';
                                                                         }
 									html += '<div class="detValue fmOpenR fLeft">'+gweights+'</div>';
@@ -697,8 +699,9 @@ function getResultsData(data,sortby,showtree)
 									html += '<div class="detLabel fmOpenB fLeft">WEIGHT</div>';
                                                                         if(vl.attributes.gold_weight > 1000)
                                                                         {
-                                                                            vl.attributes.gold_weight = parseFloat(number_format(vl.attributes.gold_weight,2));
-                                                                            var gweights = vl.attributes.gold_weight / 1000+' Kgs';
+                                                                            vl.attributes.gold_weight = parseFloat(vl.attributes.gold_weight);
+                                                                            var gweights = vl.attributes.gold_weight / 1000;
+                                                                            gweights = number_format(gweights,2)+' Kgs';
                                                                         }
                                                                         else if(vl.attributes.gold_weight == 1000)
                                                                         {
@@ -706,6 +709,7 @@ function getResultsData(data,sortby,showtree)
                                                                         }
                                                                         else
                                                                         {
+                                                                            vl.attributes.gold_weight = parseFloat(vl.attributes.gold_weight);
                                                                             var gweights = vl.attributes.gold_weight+' Gms';
                                                                         }
 									html += '<div class="detValue fmOpenR fLeft">'+gweights+'</div>';

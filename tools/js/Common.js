@@ -271,7 +271,8 @@ function Common() {
                         var isComp = obj['results']['isC'];
                         var pass_flag = obj['results']['pass_flag'];
                         var mobile = obj['results']['mobile'];
-
+                        var busiType = obj['results']['busiType'];
+                        
                         customStorage.addToStorage('isLoggedIn', true);
                         customStorage.addToStorage('l', mobile);
                         customStorage.addToStorage('mobile', mobile);
@@ -280,7 +281,7 @@ function Common() {
                         customStorage.addToStorage('isComp', isComp);
                         customStorage.addToStorage('userid', userid);
                         customStorage.addToStorage('username', username);
-
+                        customStorage.addToStorage('busiType', busiType);
                         var tmp_is_vendor = is_vendor;
                         if (is_vendor == 0 || is_vendor == "0")
                         {
@@ -292,8 +293,7 @@ function Common() {
                         }
                         if (is_vendor == 1)
                         {
-                            var busiType = obj['results']['busiType'];
-                            customStorage.addToStorage('busiType', busiType);
+                            
                             if (isComp === '2')
                             {
                                 var catid = parseInt(busiType.charAt(0)) - 1;

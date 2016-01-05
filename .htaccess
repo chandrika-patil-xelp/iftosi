@@ -14,6 +14,42 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 ####################### FRONT END LINKS ######################
 
+RewriteRule ^((?i)about-us)$    index.php?case=about_us [L]
+RewriteRule ^((?i)membership)$    index.php?case=membership [L]
+RewriteRule ^((?i)education)$    index.php?case=education [L]
+RewriteRule ^((?i)faqs)$    index.php?case=faq [L]
+RewriteRule ^((?i)faqs-seller)$    index.php?case=faqs_seller [L]
+RewriteRule ^((?i)terms-and-conditions)$    index.php?case=terms_conditions [L]
+RewriteRule ^((?i)privacy-policy)$    index.php?case=policy [L]
+
+####################### EDUCATION #############################
+RewriteRule ^((?i)round)$    index.php?case=education_round [L]
+RewriteRule ^((?i)heart)$    index.php?case=education_heart [L]
+RewriteRule ^((?i)pear)$    index.php?case=education_pear [L]
+RewriteRule ^((?i)cushion)$    index.php?case=education_cushion [L]
+RewriteRule ^((?i)emerald)$    index.php?case=education_emerald [L]
+RewriteRule ^((?i)marquise)$    index.php?case=education_marq [L]
+RewriteRule ^((?i)asscher)$    index.php?case=education_asscher [L]
+RewriteRule ^((?i)oval)$    index.php?case=education_oval [L]
+RewriteRule ^((?i)princess)$    index.php?case=education_princess [L]
+RewriteRule ^((?i)radiant)$    index.php?case=education_radiant [L]
+RewriteRule ^((?i)carat-weight)$    index.php?case=e_carat_weight [L]
+RewriteRule ^((?i)shapes)$    index.php?case=e_shapes [L]
+RewriteRule ^((?i)anatomy)$    index.php?case=diamond_shapes [L]
+RewriteRule ^((?i)cut)$    index.php?case=e_cut [L]
+RewriteRule ^((?i)girdle-size)$    index.php?case=e_cut1 [L]
+RewriteRule ^((?i)culet-size)$    index.php?case=e_cut2 [L]
+RewriteRule ^((?i)polish)$    index.php?case=e_cut3 [L]
+RewriteRule ^((?i)symmetry)$    index.php?case=e_cut4 [L]
+RewriteRule ^((?i)heart-and-arrows)$    index.php?case=e_cut5 [L]
+RewriteRule ^((?i)color)$    index.php?case=e_color [L]
+RewriteRule ^((?i)fluorescence)$    index.php?case=e_color1 [L]
+RewriteRule ^((?i)clarity)$    index.php?case=education_clarity [L]
+RewriteRule ^((?i)certification-and-grading)$    index.php?case=e_certification [L]
+RewriteRule ^((?i)how-gia-grades-a-diamond)$    index.php?case=e_certification1 [L]
+RewriteRule ^((?i)gia-vs-egl)$    index.php?case=e_certification2 [L]
+
+###################### LOGIN RELATED ##########################
 RewriteRule ^((?i)sign-up)$    index.php?case=signup [L]
 RewriteRule ^((?i)forgot-password)$    index.php?case=forgot [L]
 RewriteRule ^((?i)login)$ index.php?case=login [L]

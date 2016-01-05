@@ -35,7 +35,7 @@
                                 <label for="pr_rpass" class="inp-label transition100">Repeat New Password</label>
                                 <div id="pr_pass_inpText" class="inpText fRight transition300">Retype your<br>new password</div>
                             </div>  
-                            <div class="cancelLgBtn fLeft fmOpenR ripplelink poR" id='cancelBtn' onclick="window.location.assign(DOMAIN+'index.php')"> CANCEL</div>
+                            <div class="cancelLgBtn fLeft fmOpenR ripplelink poR" id='cancelBtn' onclick="common.doLogout()"> CANCEL</div>
                             <div class="loginBtn fLeft fmOpenR ripplelink poR" id='submitBtn'>CHANGE</div>
                         </div>
                     </div>
@@ -53,7 +53,8 @@
     <script type="text/javascript" src="<?= $jvs['head']; ?>"></script>
     
     <script>
-        
+
+    
     var uid = customStorage.readFromStorage('userid');
     if (uid == '' || uid==null) {
         window.location.assign(DOMAIN + 'index.php');
@@ -69,17 +70,21 @@
             customStorage.toast(0,'Old Password and New Passwords are same');
         }
         else if(npass==rpass) {
-            $.ajax({url: APIDOMAIN + "index.php?action=changepwd&cpass="+cpass+"&npass="+rpass+"&rpass="+rpass+"&uid=4", success: function (result) {
+            $.ajax({url: APIDOMAIN + "index.php?action=changepwd&cpass="+cpass+"&npass="+rpass+"&rpass="+rpass+"&uid="+uid, success: function (result) {
                 var obj = jQuery.parseJSON(result);
                 var errCode = obj['error']['Code'];
                 var errMsg = obj['error']['Msg'];
                 if(errCode==0) {
+                    var busiType = customStorage.readFromStorage('busiType');
                     var redirUrl='';
                    customStorage.toast(1,errMsg);
                    var is_vendor = customStorage.readFromStorage('is_vendor');
-                   if(is_vendor==2) {
+                   if(is_vendor==2)
+                   {
                        redirUrl = DOMAIN + 'index.php?case=product_list';
-                   } else if(is_vendor==1) {
+                   }
+                   else if(is_vendor==1)
+                   {
                        var isComp = customStorage.readFromStorage('isComp');
                         if (isComp === '2')
                         {
@@ -90,7 +95,9 @@
                         {
                             redirUrl = DOMAIN + 'index.php?case=vendor_Form&uid=' + userid;
                         }
-                    } else {
+                    }
+                    else
+                    {
                         redirUrl = DOMAIN + 'index.php';
                     }
                     setTimeout(function () { window.location.assign(redirUrl) },2000);

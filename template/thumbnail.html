@@ -52,7 +52,6 @@
         }
         function updateFlag(pid,id) {
             var flag=$('#'+id).val();
-            console.log(flag);
             $.ajax({url: DOMAIN + "apis/index.php?action=updateImageData&id="+pid+"&flag="+flag, success: function (result) {
                 var obj = jQuery.parseJSON(result);
                 var errCode = obj['error']['Code'];
