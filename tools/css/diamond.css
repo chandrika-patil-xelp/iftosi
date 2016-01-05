@@ -53,7 +53,7 @@ body{padding:0;margin:0;}
 .education_shape{}
 .education_shape.container{padding-top: 120px;}
 .sideDiv{width: 17%;height: auto;float: left;padding-left:20px;}
-.centerDiv{width: 66%;float: left;height: auto;padding:50px 20px 0px 20px}
+.centerDiv{width: 66%;float: left;height: auto;padding:0px 20px 0px 20px}
 .color0044{color: #8A0044;}
 .margnTop0{margin-top: 0px!important;}
 .shapeHolder{width: 100%;height: auto;border: 1px solid #e6e6e6;border-radius: 5px;}
@@ -390,9 +390,9 @@ body{padding:0;margin:0;}
 
 .h400{height: 400px;}
 .videoDiv{width:50%;float:right;height: 345px;border: 1px solid #e6e6e6;}
-.sectns{width: 33%;float: left;height: 800px;border-right: 1px solid #e6e6e6;}
+.sectns{width: 33%;float: left;height: 800px;}
 .noBorder{border:none!important;}
-.subSectn{width:100%;height:33.33%;border-bottom:1px solid #e6e6e6;padding-top: 110px;text-align: center;}
+.subSectn{width:100%;height:33.33%;border-bottom:1px solid #e6e6e6;padding-top: 110px;text-align: center;border-right: 1px solid #e6e6e6;}
 .allShapesImg{background-image:url("../img/allShapes.gif");background-repeat: no-repeat; background-size: initial;background-position: center top;}
 .caratWeight{background-image:url("../img/caratWeight.gif");background-repeat: no-repeat; background-size: initial;background-position: center top;}
 .cutShape{background-image:url("../img/cutShape.gif");background-repeat: no-repeat; background-size: initial;background-position: center top;}
@@ -401,13 +401,15 @@ body{padding:0;margin:0;}
 .diamondGrade{background-image:url("../img/diamondGrade.gif");background-repeat: no-repeat; background-size: initial;background-position: center top;}
 .clarityImg{background-image:url("../img/clarity.gif");background-repeat: no-repeat; background-size: initial;background-position: center top;}
 .book{background-image:url("../img/book.gif");background-repeat: no-repeat; background-size: initial;background-position: center top;}
-.moreBtn{width: 125px!important;}
+.moreBtn{width: 130px!important;}
 .padLeft40{padding-left: 40px;}
 .subNumber{width: auto;float: left;color: #4d4d4d;}
 .padL30{padding-left: 30px;}
 .txtUnderline{text-decoration: underline;}
 .marT5{margin-top: 5px;}
 .textLowercase{text-transform: lowercase;}
+.noRBorder{border-right: none;}
+.noBBorder{border-bottom:  none;}
 
 
 @media only screen and (min-width: 320px) and (max-width: 767px){
