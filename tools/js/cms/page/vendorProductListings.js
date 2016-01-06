@@ -630,8 +630,8 @@ function generatBullionsList(obj) {
     }
     else
     {
-        obj.gold_weight = common.number_format(obj.gold_weight,2);
         obj.gold_weight = parseFloat(obj.gold_weight);
+        obj.gold_weight = common.number_format(obj.gold_weight,2);
         var gweights = obj.gold_weight + ' Gms';
     }
     str += '<div class="btype fLeft">' + gweights + '</div>';

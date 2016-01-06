@@ -463,6 +463,7 @@ $('#goldRateSpan').click(function ()
             $('#overlay').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
             $('#goldSilverRateDiv').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
         }, 10);
+        $('#gold_rate1').val(goldRate);
 });
 
 $('#silverRateSpan').click(function ()
@@ -749,7 +750,7 @@ function showgoldSilverRateForm() {
         $('#overlay').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
         $('#goldSilverRateDiv').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
     }, 10);
-
+    $('#gold_rate1').val(goldRate);
 }
 
 function updateGoldSilverRate() {

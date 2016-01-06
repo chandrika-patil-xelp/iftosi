@@ -81,14 +81,19 @@
 													<div class="detLabel fmOpenB fLeft">WEIGHT</div>
 													<div class="detValue fmOpenR fLeft">
 <?php
-                                                                                                        if($val['attributes']['gold_weight'] >= 1000)
+                                                                                                        if($val['attributes']['gold_weight'] > 1000)
                                                                                                         {
-                                                                                                            $gweights = $val['attributes']['gold_weight']/1000;
+                                                                                                            $gweights = number_format(($val['attributes']['gold_weight']/1000),2);
                                                                                                             echo $gweights.' Kg';
+                                                                                                        }
+                                                                                                        else if($val['attributes']['gold_weight'] == 1000)
+                                                                                                        {
+                                                                                                            $gweights = '1 Kg';
+                                                                                                            echo $gweights;
                                                                                                         }
                                                                                                         else
                                                                                                         {
-                                                                                                            echo $val['attributes']['gold_weight'].' Gms'; 
+                                                                                                            echo number_format($val['attributes']['gold_weight'],2).' Gms';
                                                                                                         }
 ?>
                                                                                                         </div>

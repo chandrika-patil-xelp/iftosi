@@ -15,7 +15,7 @@
                             <h3>1.General </h3>
                             <div class='subNumber font12 fmOpenB marT5'> 1.1.</div>
 
-                               <div class="padL30">IftoSi is the sole owner of the  <a href="<?php echo DOMAIN;?>"><span class="fmOpenB color0044">www.iftosi.com</span></a>(“Website”, which expression shall include any versions of the Website designed for use on mobile phones and other devices) and associated domain names, trademarks and mobile applications.</div>
+                            <div class="padL30">IftoSi is the sole owner of the  <a href="<?php echo DOMAIN;?>" target="_blank"><span class="fmOpenB color0044">www.iftosi.com</span></a>(“Website”, which expression shall include any versions of the Website designed for use on mobile phones and other devices) and associated domain names, trademarks and mobile applications.</div>
 
 
                             <div class='subNumber font12 fmOpenB marTop15'>1.2.</div>
@@ -55,7 +55,7 @@
 
                             <div class='padL10'>
                                 <div class="subNumber font12 fmOpenB">3.3.1</div>
-                                <div class="padL30"> The “Privacy Policy” available for view on the Website and incorporated herein by reference. <a href="<?php echo DOMAIN.'index.php?case=privacy';?>" class="fmOpenB">[Click here to
+                                <div class="padL30"> The “Privacy Policy” available for view on the Website and incorporated herein by reference. <a href="<?php echo DOMAIN.'Vendor-Privacy-Policy';?>" target="_blank" class="fmOpenB">[Click here to
                                         view the Privacy Policy.]</a> </div>
                                 <div class="subNumber font12 fmOpenB">3.3.2</div>
                                 <div class="padL30">
@@ -268,7 +268,13 @@
                 </div>
             </div>
         </div>
+                <?php include 'rateForms.html'; ?>
     </div>
-        <?php include 'vfooter.html'; ?>
+<?php include 'vfooter.html'; ?>
+<script type="text/javascript" src="<?=$jvs['velocity']; ?>"></script>
+<script type="text/javascript" src="<?=$jvs['jqryUi']; ?>"></script>
+<script type="text/javascript" src="<?=$jvs['jquery_toast'];?>"></script>
+<script type="text/javascript" src="<?=$jvs['cmsCommon'];?>"></script>
+<script type="text/javascript" src="<?=$jvs['vendorLanding'];?>"></script>
 </body>
 </html>

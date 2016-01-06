@@ -117,7 +117,7 @@
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">GOLD WEIGHT</div>
 <?php
-                                    if($prdInfo['attr_details']['gold_weight'] >= 1000)
+                                    if($prdInfo['attr_details']['gold_weight'] > 1000)
                                     {
                                         $gweights = $prdInfo['attr_details']['gold_weight']/1000;
                                         $gweights = number_format($gweights,2);

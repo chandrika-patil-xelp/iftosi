@@ -42,6 +42,7 @@ switch($action)
         case 'checkUser':
             include APICLUDE.'class.user.php';
             $mobile=(!empty($params['mobile'])) ? trim($params['mobile']) : '';
+            $email=(!empty($params['email'])) ? trim($params['email']) : '';
             if(empty($mobile))
             {
                 $arr = array();

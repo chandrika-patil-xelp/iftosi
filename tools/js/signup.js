@@ -8,7 +8,6 @@ if (pw < 768) {
 
 var validMob = true;
 
-
     if (isMobile) {
         $(input_selector).focus(function () {
             var npos = $('html,body').scrollTop() + 40;
@@ -30,7 +29,6 @@ var validMob = true;
             $(this).removeClass(' ').addClass('brGreen');
         }
     });
-    
     
      $(input_selector).bind('keyup',function() {
         var val = $(this).val();
@@ -72,19 +70,6 @@ var validMob = true;
         else 
             isVendor=-1;
 
-		if(pr_mobile.length==10)
-                {
-                        $.ajax({url: DOMAIN + "apis/index.php?action=checkUser&mobile=" + pr_mobile, success: function (result) {
-				var obj = jQuery.parseJSON(result);
-				var errCode = obj['error']['Code'];
-				if(errCode == 1) {
-					validMob = false;
-				} else {
-					validMob = true;
-				}
-			}});
-		}
-
 		setTimeout(function () {
 			if(pr_name.length==0 || isNaN(pr_name)!==true) {
 				customStorage.toast(0,'Invalid format for Name'); 
@@ -96,7 +81,7 @@ var validMob = true;
 				$('#pr_city').focus();
 				return false;
 			}
-                         else if(cityid == '') {
+                        else if(cityid == '') {
 				customStorage.toast(0,'Please choose city from the list!'); 
 				$('#pr_city').focus();
 				return false;
@@ -105,38 +90,55 @@ var validMob = true;
 				customStorage.toast(0,'Invalid format for Mobile'); 
 				$('#pr_mobile').focus();
 				return false;
-			} else if(pr_email=='') {
+			}
+                        else if(pr_email=='') {
 				customStorage.toast(0,'Email is Required!'); 
 				$('#pr_email').focus();
 				return false;
-			} else if(!common.validateEmail('pr_email')) {
+			}
+                        else if(!common.validateEmail('pr_email')) {
 				customStorage.toast(0,'Email is Not Valid!'); 
 				$('#pr_email').focus();
 				return false;
-			} else if(pr_pass=='') {
+			}
+                        else if(pr_pass=='') {
 				customStorage.toast(0,'Password is Required!'); 
 				$('#pr_pass').focus();
 				return false;
 			}
-                        else if(!validMob) {
-				customStorage.toast(0,'This mobile number is already registered!'); 
-				$('#pr_mobile').focus();
-				return false;
-			}
-                        
-			else if(amIVendor == undefined || amIVendor == 'undefined' || amIVendor == '' || amIVendor == null || amIVendor == 'null' || amIVendor == 0){
+                        else if(amIVendor == undefined || amIVendor == 'undefined' || amIVendor == '' || amIVendor == null || amIVendor == 'null' || amIVendor == 0){
 				customStorage.toast(0,'You have not Selected the type of user!'); 
 				return false;
-			} else {
-					if(isVendor == -1)
-					{
-						userType = 0;
-					}
-                                        pr_mobile = customStorage.addToStorage('mobile',pr_mobile);
-                                        otpGo(pr_mobile);
-                                        requestOTP();
-                                        
 			}
+                        else if(pr_mobile.length==10 && common.validateEmail('pr_email'))
+                        {
+                                $.ajax({url: DOMAIN + "apis/index.php?action=checkUser&mobile=" + pr_mobile + "&email="+pr_email, success: function (result) {
+                                        var obj = jQuery.parseJSON(result);
+                                        var errCode = obj['error']['type'];
+                                        if(errCode == 3)
+                                        {
+                                            customStorage.toast(0,'Mobile number is already registered!'); 
+                                            $('#pr_mobile').focus();
+                                            return false;
+                                        }
+                                        else if(errCode == 2)
+                                        {
+                                            customStorage.toast(0,'Email id is already registered!'); 
+                                            $('#pr_email').focus();
+                                            return false;
+                                        }
+                                        else if(errCode == 0)
+                                        {
+                                            if(isVendor == -1)
+                                            {
+                                                    userType = 0;
+                                            }
+                                            pr_mobile = customStorage.addToStorage('mobile',pr_mobile);
+                                            otpGo(pr_mobile);
+                                            requestOTP();
+                                        }
+                                    }});
+                        }
 		}, 250);
     });
     

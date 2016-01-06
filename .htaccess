@@ -22,6 +22,7 @@ RewriteRule ^((?i)faqs-seller)$    index.php?case=faqs_seller [L]
 RewriteRule ^((?i)terms-and-conditions)$    index.php?case=terms_conditions [L]
 RewriteRule ^((?i)vendor-terms-and-conditions)$    index.php?case=vterms_condition [L]
 RewriteRule ^((?i)privacy-policy)$    index.php?case=policy [L]
+RewriteRule ^((?i)vendor-privacy-policy)$    index.php?case=vendor_privacy [L]
 
 ####################### EDUCATION #############################
 RewriteRule ^((?i)round)$    index.php?case=education_round [L]

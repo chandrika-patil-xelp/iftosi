@@ -72,7 +72,26 @@
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">GOLD WEIGHT</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['gold_weight']==''?'N/A':$prdInfo['attr_details']['gold_weight']); ?> Gms</div>
+                                <div class="infoValue c666 fmOpenR font25">
+<?php 
+                                if(empty($prdInfo['attr_details']['gold_weight']) || $prdInfo['attr_details']['gold_weight'] == '0.00')
+                                {
+                                   echo $prdInfo['attr_details']['gold_weight'] = 'N/A';
+                                }
+                                else if($prdInfo['attr_details']['gold_weight'] == 1000)
+                                {
+                                   echo $prdInfo['attr_details']['gold_weight'] = '1 Kgs';
+                                }
+                                else if($prdInfo['attr_details']['gold_weight'] > 1000)
+                                {
+                                   echo $prdInfo['attr_details']['gold_weight'] = number_format(($prdInfo['attr_details']['gold_weight']/1000),2).' Kgs';
+                                }
+                                else if($prdInfo['attr_details']['gold_weight'] < 1000 && $prdInfo['attr_details']['gold_weight'] !== '0.00')
+                                {
+                                   echo $prdInfo['attr_details']['gold_weight'] = number_format($prdInfo['attr_details']['gold_weight'],2).' Gms';
+                                }
+?>
+                                </div>
                             </div>
 <?php
 							if(!empty($prdInfo['attr_details']['diamond_shape']) && $prdInfo['attr_details']['diamond_shape'] !== 'null' && $prdInfo['attr_details']['diamond_shape'] !== 'undefined')

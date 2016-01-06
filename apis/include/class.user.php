@@ -9,41 +9,45 @@
 
         public function checkUser($params)
         {
-            $csql="select * from tbl_registration where logmobile=".$params['mobile']."";
+            $csql="select * from tbl_registration where logmobile=\"".$params['mobile']."\" OR email = \"".$params['email']."\"";
             $cres=$this->query($csql);
             $cnt1 = $this->numRows($cres);
             if($cnt1==0)
             {
                 $arr='User Not yet Registered';
-                $err=array('Code'=>0,'Msg'=>'No Data matched');
+                $err=array('Code'=>0,'Msg'=>'No Data matched','type'=>0);
             }
             else 
             {
-                while($row=$this->fetchData($cres))
-                {
-                    $arr2['userid']=$row['user_id'];
-                    $isV=$row['is_vendor'];
-                    if($isV == 1)
-                    {
-                        $uid = $arr2['userid'];
-                    }
-                    $arr2=$row;
-                }
+                $row=$this->fetchData($cres);
+                $arr2['userid']=$row['user_id'];
+                $isV=$row['is_vendor'];
+                $arr2=$row;
+                $isDuplicateEmail = $row['email'];
+                $isDuplicateMobile = $row['logmobile'];
                 if($isV == 1)
                 {
-                    $sql = "SELECT is_complete,business_type from tbl_vendor_master where vendor_id =\"".$uid."\"";
+                    $sql = "SELECT is_complete,business_type from tbl_vendor_master where vendor_id =\"".$row['user_id']."\"";
                     $res = $this->query($sql);
                     $cntres = $this->numRows();
-                   if($cntres == 1 )
-                   {
-                       $row=$this->fetchData($res);
-                       $arr2['isComp']= $row['is_complete'];
-                       $arr2['busiType']= $row['business_type'];
-                   }
+                    if($cntres == 1 )
+                    {
+                        $row=$this->fetchData($res);
+                        $arr2['isComp']= $row['is_complete'];
+                        $arr2['busiType']= $row['business_type'];
+                    }
+                }
+                if($isDuplicateMobile == $params['mobile'])
+                {
+                    $err2 = 3;
+                }
+                else if($isDuplicateEmail == $params['email'])
+                {
+                    $err2 = 2;
                 }
                 $arr1=array();
                 $arr=array('msg'=>$arr1,'userid'=>$arr2['user_id'],'userDet'=>$arr2);
-                $err=array('Code'=>1,'Msg'=>'Data matched');
+                $err=array('Code'=>1,'Msg'=>'Data matched','type'=>$err2);
             }
             $result = array('results' => $arr, 'error' => $err);
             return $result;

@@ -710,7 +710,7 @@ function getResultsData(data,sortby,showtree)
                                                                         else
                                                                         {
                                                                             vl.attributes.gold_weight = parseFloat(vl.attributes.gold_weight);
-                                                                            var gweights = vl.attributes.gold_weight+' Gms';
+                                                                            var gweights = number_format(vl.attributes.gold_weight,2)+' Gms';
                                                                         }
 									html += '<div class="detValue fmOpenR fLeft">'+gweights+'</div>';
 								html += '</div>';

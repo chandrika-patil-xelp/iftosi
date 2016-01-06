@@ -1139,7 +1139,7 @@
 								symmetry,
 								cno,
 								gold_purity,
-								CEIL(gold_weight) as gold_weight,
+								gold_weight as gold_weight,
 								type,
 								metal,
 								bullion_design

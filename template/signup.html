@@ -80,6 +80,15 @@
         </div>
         <?php include 'logo.html' ?>
     </div>
+    <script type="text/javascript">
+    $(document).ready(function (){
+    var uid = customStorage.readFromStorage('userid');
+    if(uid !== undefined && uid !== 'undefined' && uid !== null && uid !== 'null' && uid !== '')
+    {
+        window.location.href=DOMAIN;
+    }
+});
+    </script>
     <?php include 'footer.html'; ?>
     <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
