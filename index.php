@@ -359,6 +359,12 @@ switch ($action) {
                 $page = 'privacy';
                 include 'template/privacy.html';
                 break;
+
+            case 'vendor_privacy':
+                $page = 'vendor_privacy';
+                include 'template/vprivacy.html';
+                break;
+
              case 'faq_sellers':
                 $page = 'faq_sellers';
                 include 'template/faq_sellers.html';
@@ -371,7 +377,7 @@ switch ($action) {
                 $data = $res['results'][1];
                 include 'template/new.html';
                 break;
-            
+
             case 'changepwd':
 //                if(isset($params['pr_cpass'])) {
 //                    $uid=$params['uid'];
@@ -393,18 +399,18 @@ switch ($action) {
                 $page = 'login';
                 include 'template/login.html';
                 break;
-            
+
             case 'policy':
                 $page = 'policy';
                 include 'template/privacy.html';
                 break;
-            
+
             case 'loginsel':
                 $page = 'loginsel';
                 $uid = $_GET['uid'];
                 include 'template/new.html';
                 break;
-            
+
             case 'upload':
                 $pid = $_GET['pid'];
                 $page = 'upload';
@@ -452,7 +458,7 @@ switch ($action) {
                 $data = $res['results']['products'];
                 $total = $res['results']['total'];
                 $catname = $res['results']['catname'];
-                
+
 
                 $url = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=' . $catid;
                 $res = $comm->executeCurl($url);
@@ -556,15 +562,15 @@ switch ($action) {
                 $certificate_url = $data['attr_details']['certificate_url'];
                 $certificate_url = explode('/', $certificate_url);
                 $certificate_url = $certificate_url[count($certificate_url) - 1];
-                
+
                 $url1 = APIDOMAIN . 'index.php?action=imagedisplay&pid='.$pid.'&vid='.$vndrDtls['vid'];
                 $res1 = $comm->executeCurl($url1);
                 $data1 = $res1['results'];
-                $datacnt = $res1['count'];                
-                
+                $datacnt = $res1['count'];
+
                 include 'template/diamond_details.html';
                 break;
-            
+
             case 'bullion_details':
                 $page = 'bullion_details';
                 $prdInfo = array();
@@ -850,18 +856,18 @@ switch ($action) {
                 $page = 'terms_conditions';
                 include 'template/terms_conditions.html';
                 break;
-            
+
             case 'vterms_condition':
                 $page = 'vterms_condition';
                 include 'template/vterms_condition.html';
                 break;
-            
+
 
             case 'faq':
                 $page = 'faq';
                 include 'template/faq.html';
                 break;
-            
+
             case 'faqs_seller':
                 $page = 'faq';
                 include 'template/faq_sellers.html';
@@ -878,7 +884,7 @@ switch ($action) {
                 $page = 'shapes';
                 include 'template/shapes.html';
                 break;
-            
+
             case 'product_list':
                 $page = 'product_list';
                 $pgno = (!empty($_GET['pgno']) ? $_GET['pgno'] : 1);
@@ -891,7 +897,7 @@ switch ($action) {
                 $adjacents = 2;
                 include 'template/product_list.html';
                 break;
-            
+
             case 'thumbnail':
                 $url = APIDOMAIN . 'index.php?action=getImgByProd&pid='.$params['pid'];
                 $res = $comm->executeCurl($url);
