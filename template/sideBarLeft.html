@@ -3,7 +3,7 @@
 
 <body>
     <div class="sideDiv ">
-        <div class="subList transition300 fmOpenR font15">Shape</div>
+        <a href="<?php echo DOMAIN.'index.php?case=e_shapes';?>" class="sideli <?=($page == 'e_shapes')? 'sideactive' : ''; ?>"><div class="subList transition300 fmOpenR font15">Shape</div></a>
         <ul class="licontent fmOpenR">
             <li><a href="<?php echo DOMAIN.'Round';?>" class="sideli <?=($page == 'education_round')? 'sideactive' : ''; ?>">Round</a></li>
             <li><a href="<?php echo DOMAIN.'Princess';?>" class="sideli <?=($page == 'education_princess')? 'sideactive' : ''; ?>">Princess</a></li>
@@ -36,7 +36,7 @@
              <li class="arrowPos"><a href="<?php echo DOMAIN.'How-GIA-Grades-A-Diamond';?>" class="sideli <?=($page == 'e_certification1')? 'sideactive' : ''; ?>">How GIA Grades A Diamond</a></li>
             <li><a href="<?php echo DOMAIN.'GIA-vs-EGL';?>" class="sideli <?=($page == 'e_certification2')? 'sideactive' : ''; ?>">GIA Vs EGL</a></li>
          </ul>
-<!--        <div class="subList transition300 fmOpenR font15">Glossary</div>-->
+<!--        <div class="subList transition300 fmOpenR font15"> <a href="<?php echo DOMAIN.'index.php?case=e_glossary';?>" class="sideli <?=($page == 'e_glossary')? 'sideactive' : ''; ?>">Glossary</a></div>-->
     </div>
 </body>
 </html>
