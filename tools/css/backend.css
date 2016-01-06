@@ -669,7 +669,7 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 .headng{font-size:20px!important;}
 
 /*vendor footer*/
-.pageLinks{height: auto;width: 100%;background:#e6e6e6;margin: 0;padding: 5px;float:left;}
+.pageLinks{height: auto;width: 100%;background:#e6e6e6;margin: 0;padding: 5px;position:absolute;bottom:0;}
 .lowerFooterTab { width: auto;  height: 35px;  border-right:1px solid rgba(0,0,0,0.2);line-height: 35px;  cursor: pointer;  display: inline-block;  padding: 0 15px;  color: rgba(0,0,0,0.5);  font-size: 12px;}
 .lowerFooterTab:hover{color:rgba(0,0,0,0.7)}
 .texHolder  a{text-decoration: none;color:#8A0044;}
@@ -688,4 +688,6 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .padLeft{padding-left:50px !important;}
 .para{padding-bottom: 10px;line-height: 25px;}
 .padL30{padding:10px 20px}
-.subNumber{padding:0px 15px} 
+.subNumber{padding:0px 15px}
+.vterms{}
+.texHolder.vterms{padding-top:100px;}
