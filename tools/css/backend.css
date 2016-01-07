@@ -49,7 +49,7 @@ div,span{-moz-user-select: none;-webkit-user-select: none;-ms-user-select: none;
 a{text-decoration: none;}
 .cBl {color: #4d4d4d !important;}
 
-/*.w100{width:100%!important;}*/
+.w100{width:100%!important;}
 .transition100 {transition: 100ms ease-in-out;-moz-transition: 100ms ease-in-out;-ms-transition: 100ms ease-in-out;-webkit-transition: 100ms ease-in-out;-o-transition: 100ms ease-in-out;}
 .transition300 {transition: 300ms ease-in-out;-moz-transition: 300ms ease-in-out;-ms-transition: 300ms ease-in-out;-webkit-transition: 300ms ease-in-out;-o-transition: 300ms ease-in-out;}
 
