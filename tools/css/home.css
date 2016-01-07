@@ -296,7 +296,7 @@ a{text-decoration: none;}
 .headCatCont {width: 360px;height: 100px;position: absolute;left: 0;}
 .headCat span {display: block;width: 100%;height: 25px;line-height: 25px;position: absolute;bottom: 12px;text-align: center;color: #4d4d4d;font-size: 14px;}
 .headCatActive{}
-.headSelected span{color:#8A0044!important;font-weight: bold;}
+.headSelected span{color:#8A0044!important;font-family: openB;}
 .headCat{width:100px;height: 100%;;margin: 0;position: relative;cursor: pointer;border-bottom: 6px solid transparent;}
 .headCat span1{display: block;width: 100%;height: 25px;line-height: 25px;position: absolute;bottom: 0;text-align: center;color: #4d4d4d;}
 
@@ -519,7 +519,7 @@ a{text-decoration: none;}
 [type="checkbox"] + label:before {content: '';position: absolute;top: 0;left: 0;width: 18px;height: 18px;z-index: 0;border: 2px solid #5a5a5a;border-radius: 1px;margin-top: 2px;-webkit-transition: 0.2s;-moz-transition: 0.2s;-o-transition: 0.2s;-ms-transition: 0.2s;transition: 0.2s; }
 [type="checkbox"]:not(:checked):disabled + label:before {border: none;background-color: rgba(0, 0, 0, 0.26); }
 [type="checkbox"]:checked + label:before {top: -4px;left: -3px;width: 12px;height: 22px;border-top: 2px solid transparent;border-left: 2px solid transparent;border-right: 2px solid #8A0044;border-bottom: 2px solid #8A0044;-webkit-transform: rotate(40deg);-moz-transform: rotate(40deg);-ms-transform: rotate(40deg);-o-transform: rotate(40deg);transform: rotate(40deg);-webkit-backface-visibility: hidden;-webkit-transform-origin: 100% 100%;-moz-transform-origin: 100% 100%;-ms-transform-origin: 100% 100%;-o-transform-origin: 100% 100%;transform-origin: 100% 100%; }[type="checkbox"]:checked:disabled + label:before {border-right: 2px solid rgba(0, 0, 0, 0.26);border-bottom: 2px solid rgba(0, 0, 0, 0.26); }
-[type="checkbox"]:checked + label{font-weight: bold;}
+[type="checkbox"]:checked + label{font-family: openB;}
 /* Indeterminate checkbox */
 [type="checkbox"]:indeterminate + label:before {left: -10px;top: -11px;width: 10px;height: 22px;border-top: none;border-left: none;border-right: 2px solid #8A0044;border-bottom: none;-webkit-transform: rotate(90deg);-moz-transform: rotate(90deg);-ms-transform: rotate(90deg);-o-transform: rotate(90deg);transform: rotate(90deg);-webkit-backface-visibility: hidden;-webkit-transform-origin: 100% 100%;-moz-transform-origin: 100% 100%;-ms-transform-origin: 100% 100%;-o-transform-origin: 100% 100%;transform-origin: 100% 100%; }
 [type="checkbox"]:indeterminate:disabled + label:before {border-right: 2px solid rgba(0, 0, 0, 0.26);background-color: transparent; }
@@ -603,9 +603,10 @@ a{cursor:pointer;}
 .infoCommn {width: 25%;text-align: left;padding-left:0px;height: 40px;margin-bottom: 15px;}
 .infoLabel {width: 100%;line-height: 15px;height: 15px;text-transform: uppercase;color:#8A0044}
 .infoValue {width: 100%;line-height: 25px;height: 25px;font-size: 18px;}
+.prdInfoCont{width:25%;padding: 0 20px;}
 .prdInfo{width:100%;height: auto;margin-top: 0;}
-.prdInfoTitle{width:100%;height: 40px;line-height: 40px;border-bottom: 2px solid #8A0044;font-size: 25px;margin-bottom:20px;}
-.prdInfoDiv{width: 100%;height: auto;line-height: 30px;padding: 0;color: #4d4d4d;font-size: 16px;text-align: left;margin-bottom: 30px;}
+.prdInfoTitle{width:100%;height: 40px;line-height: 40px;border-bottom: 1px solid #ccc;font-size: 20px;margin-bottom:10px;color:#8A0044;}
+.prdInfoDiv{width: 100%;height: auto;line-height:24px;padding: 0;color: #4d4d4d;font-size: 13px;text-align: left;margin-bottom: 30px;}
 .prdInfoDiv ul{margin: 0;padding: 0;width:100%;height: auto;list-style: none;}
 .prdInfoDiv ul li{width:100%;height: auto;padding: 0;margin: 0 0 15px 0;}
 .prdInfoDiv ul li div:nth-child(1){width:auto;height: 40px;line-height: 40px;padding:0 25px 0 0;color: #8A0044 ;font-size: 22px;}
@@ -613,6 +614,15 @@ a{cursor:pointer;}
 .prdInfoDiv .prdInfoDiv{margin-bottom: 0}
 .jewellery_details .infoCommn {width: 33.33%!important;}
 .bullion_details .infoCommn {width: 50%!important;}
+
+.shapesPage2 .texHolder {padding: 0;padding-left: 100px;line-height: 24px;color: #000;}
+.shapesPage2 .shapeComm:hover {border: 2px solid #fff;}
+.shapesPage2 .shapeComm {position: absolute;left: 10px;top: 0;width: 100px;height: 100px;margin: 0;bottom: 0;margin: auto;width: 100px;}
+
+
+
+
+
 
 .bullion_details{}
 
@@ -718,7 +728,7 @@ a{cursor:pointer;}
 .brGreen.cOrange {color: #00AD2F;}
 .txtInput {width: 100%;height: 100%;border: none;border-bottom: 1px solid #d4d4c8;outline: none;outline-style: none;padding: 0 10px;float: left;position: relative;z-index: 1;background-color: transparent;padding-top: 10px;border-radius: 0;-webkit-appearance: none;}
 .inp-label {color: #a8b7ce;font-size: 14px;display: inline-block;-webkit-transform: translate(0px,15px);-moz-transform: translate(0px,15px);-ms-transform: translate(0px,15px);-o-transform: translate(0px,15px);position: absolute;left: 45px;top: 0;}
-.labelActive {-webkit-transform: translate(0px,7px);-moz-transform: translate(0px,7px);-ms-transform: translate(0px,7px);transform: translate(0px,7px);font-size: 10px;color: #380b34;font-weight: bold;letter-spacing: 0.05em;font-family: openB;}
+.labelActive {-webkit-transform: translate(0px,7px);-moz-transform: translate(0px,7px);-ms-transform: translate(0px,7px);transform: translate(0px,7px);font-size: 10px;color: #380b34;font-family: openB;letter-spacing: 0.05em;font-family: openB;}
 
 /*Form Icons*/
 .mobileIcon {padding-left: 45px;background-image: url(../img/common/new/mobile.svg);background-repeat: no-repeat;background-size: auto 30px;background-position: 5px center;}
@@ -925,7 +935,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .autoSuggestRow {background: #fff url("../img/selected.png") no-repeat scroll -30px center / auto 20px;border-bottom: 1px solid #ccc;box-sizing: border-box;color: #666;cursor: pointer;display: block;font-size: 13px;height: 36px;line-height: 36px;padding: 0 15px;width: 100%;overflow: hidden;}
 .autoSuggestRow:hover {background: #8a0044 url("../img/selected.png") no-repeat scroll 10px center / auto 20px;border-bottom: 1px solid #8a0044;color: #fff;padding-left: 30px;}
 .autoSuggestRowSelect {background: #8a0044 url("../img/selected.png") no-repeat scroll 10px center / auto 20px;border-bottom: 1px solid #8a0044;color: #fff;padding-left: 30px;line-height: 36px}
-.smallField {border: 1px solid #ccc;box-sizing: border-box;font-size: 13px;font-weight: bold;font-family: openR;max-height: 145px;overflow-y: auto;width: 100%;}
+.smallField {border: 1px solid #ccc;box-sizing: border-box;font-size: 13px;font-family: openB;font-family: openR;max-height: 145px;overflow-y: auto;width: 100%;}
 .dropArrow {background-image: url("../img/down_arrow.svg");background-position: right center;background-repeat: no-repeat;background-size: auto 100%;}
 /* End of suggest */
 

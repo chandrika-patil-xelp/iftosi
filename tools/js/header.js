@@ -244,7 +244,7 @@ $(document).ready(function() {
                 $('#jwMenu').velocity({translateY:"0px",borderRadius:"0px"},{queue: false,delay:00,duration:400,easing:"swing"});
 
                 }, 0);
-        }, 300);
+        }, 100);
     });
     
     $('#hbgJewel').bind('mouseleave', function() {
