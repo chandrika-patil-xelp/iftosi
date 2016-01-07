@@ -6,57 +6,55 @@
             <div class="forBg bgWhite"></div>
             <div class='prdMainDetails'>
                 <div class="wrapperMax diamond_mod">
-<?php
-                    if(count($data1) == 0)
-                    {
-?>
-                    <div class="imgsCont noImage"></div>
-<?php                    
-                    }
-                    else
-                    {
-?>
-                    <div id="detailsImgs" class="imgsCont">
-<?php
-/*
-                        <div class="leftArrow transition300" onclick="movePrImg(true)"></div>
-                        <div class="rightArrow  transition300" onclick="movePrImg(false)"></div>
-                        <div id='prdImage' class="forImg fLeft imgPreview" style="background: url(<?php echo IMGDOMAIN.$data1[0];?>) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
-                        <div id='gallery1' class="gallery fLeft transition300">
-                            <div class="carousel transition300">
-<?php
-                                for($i=0;$i<count($data1);$i++)
-{
-?>
-                                    <div class="thumbnil transition300" style="background:#fff url(<?php echo IMGDOMAIN.$data1[$i];?>)no-repeat;background-size: contain;background-position: center;">
-                                    </div>
-<?php
-}
-?>
-                            </div>
+                    <?php
+                    if (count($data1) == 0) {
+                        ?>
+                        <div class="imgsCont noImage"></div>
+                        <?php
+                    } else {
+                        ?>
+                        <div id="detailsImgs" class="imgsCont">
+                        <?php
+                        /*
+                          <div class="leftArrow transition300" onclick="movePrImg(true)"></div>
+                          <div class="rightArrow  transition300" onclick="movePrImg(false)"></div>
+                          <div id='prdImage' class="forImg fLeft imgPreview" style="background: url(<?php echo IMGDOMAIN.$data1[0];?>) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+                          <div id='gallery1' class="gallery fLeft transition300">
+                          <div class="carousel transition300">
+                          <?php
+                          for($i=0;$i<count($data1);$i++)
+                          {
+                          ?>
+                          <div class="thumbnil transition300" style="background:#fff url(<?php echo IMGDOMAIN.$data1[$i];?>)no-repeat;background-size: contain;background-position: center;">
+                          </div>
+                          <?php
+                          }
+                          ?>
+                          </div>
+                          </div>
+                         */
+                        ?>
+                            <div class="imgsCont noImage"></div>
                         </div>
-*/
-?>
-						<div class="imgsCont noImage"></div>
-                    </div>
-<?php
-                    }
-?>
+                            <?php
+                        }
+                        ?>
                     <div class="detCont">
                         <div class="btnsCont fLeft">
                             <div class="prdShape fLeft">
                                 <div class="prdShTitle fLeft fmOpenB">PRICE</div>
-                                                        <?php 
-                                                            $rate = $data['attr_details']['dollar_rate'];
-                                                            if(empty($data['attr_details']['dollar_rate']) || $data['attr_details']['dollar_rate'] == '0.00' || $data['attr_details']['dollar_rate'] == 0.00){
-                                                                $rate = dollarValue;
-                                                            }
-                                                        ?>
+<?php
+$rate = $data['attr_details']['dollar_rate'];
+if (empty($data['attr_details']['dollar_rate']) || $data['attr_details']['dollar_rate'] == '0.00' || $data['attr_details']['dollar_rate'] == 0.00) {
+    $rate = dollarValue;
+}
+?>
                                 <div class="prdShType fLeft fmOpenL"><span>&#8377;</span>
-                                <?php $price = ceil(($data['attr_details']['price'] * $rate) * $data['attr_details']['carat']);
-                                      echo $price = $comm->IND_money_format($price);
+                                <?php
+                                $price = ceil(($data['attr_details']['price'] * $rate) * $data['attr_details']['carat']);
+                                echo $price = $comm->IND_money_format($price);
                                 ?>
- </div>
+                                </div>
                             </div>
                             <div class="prdBtns fLeft">
                                 <div class="btnComm fLeft iconCall ripplelink poR" >Contact Dealer</div>
@@ -135,74 +133,67 @@
                             </div>
                             <div class="infoCommn fLeft fmOpenR">
                                 <div class="infoLabel fmOpenB  font12">BASE Price </div>
-                                <div class="infoValue c666 font25 fmOpenR"><?php $bprice = ceil((($data['attr_details']['baseprice'] * $data['attr_details']['dollar_rate'])*$data['attr_details']['carat']));
-                                                                                $bprice = $comm->IND_money_format($bprice);?>
-                                                                                &#8377; <?php echo $bprice;?></div>
+                                <div class="infoValue c666 font25 fmOpenR"><?php $bprice = ceil((($data['attr_details']['baseprice'] * $data['attr_details']['dollar_rate']) * $data['attr_details']['carat']));
+                                    $bprice = $comm->IND_money_format($bprice);
+                                ?>
+                                    &#8377; <?php echo $bprice; ?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR">
                                 <div class="infoLabel fmOpenB  font12">% DISCOUNT</div>
                                 <div class="infoValue c666 font25 fmOpenR"><?php echo str_replace('-', '', $data['attr_details']['discount']); ?>%</div>
                             </div>
-<?php
-							if(!empty($certificate_url))
-							{
-?>
-								<div class="infoCommn fLeft fmOpenR cursorPointer">
-									<div class="infoLabel fmOpenB  font12">Certificate</div>
-									<div class="infoValue c666 font25 fmOpenR" onclick="common.showCertificate('<?php echo DOMAIN . $data['attr_details']['certificate_url']; ?>');">See Certificate</div>
-								</div>
-<?php
-							}
+                            <?php
+                            if (!empty($certificate_url)) {
+                                ?>
+                                <div class="infoCommn fLeft fmOpenR cursorPointer">
+                                    <div class="infoLabel fmOpenB  font12">Certificate</div>
+                                    <div class="infoValue c666 font25 fmOpenR" onclick="common.showCertificate('<?php echo DOMAIN . $data['attr_details']['certificate_url']; ?>');">See Certificate</div>
+                                </div>
+    <?php
+}
 ?>
                         </div>
                     </div>
                 </div>
             </div>
             <div id='vDetails' class="vendorDetails fLeft transition300 dn vTransit">
-				<div class="wrapperMax ">
+                <div class="wrapperMax ">
                     <div class="vdLeftCard fLeft">
                         <div class="orgName fLeft fmOpenR"><?php echo $vndrDtls['OrganisationName']; ?></div>
                         <div class="orgAdd fLeft fmOpenR">
-                            <?php echo trim($vndrAddr[0]); ?>
-							<?php
-								if(!empty($vndrAddr[1]))
-								{
-                                                                    echo trim($vndrAddr[1]).', '; 
-								}
-								if(!empty($vndrAddr[2]))
-								{
-                                                                    echo trim($vndrAddr[2]).', ';
-                                                            	}
-                                                                if(!empty($vndrAddr[3]))
-								{
-                                                                    echo trim($vndrAddr[3]).', '; 
-								}
-                                                                if(!empty($vndrAddr[4]))
-								{
-                                                                    echo trim($vndrAddr[4]).', ';
-                                                                }
-                                                                if(!empty($vndrDtls['area']))
-								{
-                                                                    echo trim($vndrDtls['area']).', ';
-								}
-                                                                if(!empty($vndrDtls['city']))
-								{
-                                                                    echo trim($vndrDtls['city']).', ';
-                                                                }
-								if(!empty($vndrDtls['state']))
-								{
-                                                                    echo trim($vndrDtls['state']).',';
-								}
-                                                                if(!empty($vndrDtls['postal_code']))
-								{
-                                                                    echo trim($vndrDtls['postal_code']).'.';
-								}
-							?>
-                                                                
+<?php echo trim($vndrAddr[0]); ?>
+                            <?php
+                            if (!empty($vndrAddr[1])) {
+                                echo trim($vndrAddr[1]) . ', ';
+                            }
+                            if (!empty($vndrAddr[2])) {
+                                echo trim($vndrAddr[2]) . ', ';
+                            }
+                            if (!empty($vndrAddr[3])) {
+                                echo trim($vndrAddr[3]) . ', ';
+                            }
+                            if (!empty($vndrAddr[4])) {
+                                echo trim($vndrAddr[4]) . ', ';
+                            }
+                            if (!empty($vndrDtls['area'])) {
+                                echo trim($vndrDtls['area']) . ', ';
+                            }
+                            if (!empty($vndrDtls['city'])) {
+                                echo trim($vndrDtls['city']) . ', ';
+                            }
+                            if (!empty($vndrDtls['state'])) {
+                                echo trim($vndrDtls['state']) . ',';
+                            }
+                            if (!empty($vndrDtls['postal_code'])) {
+                                echo trim($vndrDtls['postal_code']) . '.';
+                            }
+                            ?>
+
                         </div>
                         <div class="orgNo fLeft">
                             <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Telephone No.</div>
-                            <div class="commtxt tel fmOpenR fLeft"><?php print_r(($vndrDtls['landline'] !== '') ? str_replace('|~|', ', ', $vndrDtls['landline']).', ' : '-, '); echo ($vndrDtls['telephones']) ? str_replace('~', ', ', $vndrDtls['telephones']) : '-';?></div>
+                            <div class="commtxt tel fmOpenR fLeft"><?php print_r(($vndrDtls['landline'] !== '') ? str_replace('|~|', ', ', $vndrDtls['landline']) . ', ' : '-, ');
+                            echo ($vndrDtls['telephones']) ? str_replace('~', ', ', $vndrDtls['telephones']) : '-'; ?></div>
                         </div>
                         <div class="orgNo fLeft">
                             <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Email Address</div>
@@ -210,7 +201,7 @@
                         </div>
                         <div class="orgNo fLeft">
                             <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Website</div>
-                            <div class="commtxt email fmOpenR fLeft"><a href="<?php echo ($vndrDtls['website']) ? 'http://' . str_replace('http://' , '' , $vndrDtls['website']) : '';?>"><?php echo ($vndrDtls['website']) ? $vndrDtls['website'] : '-'; ?></a></div>
+                            <div class="commtxt email fmOpenR fLeft"><a href="<?php echo ($vndrDtls['website']) ? 'http://' . str_replace('http://', '', $vndrDtls['website']) : ''; ?>"><?php echo ($vndrDtls['website']) ? $vndrDtls['website'] : '-'; ?></a></div>
                         </div>
                         <div class="orgNo fLeft">
                             <div class="commLeft fLeft">
@@ -225,7 +216,7 @@
 
                         <div class="orgNo fLeft">
                             <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Bankers</div>
-                            <div class="commtxt bankers fmOpenR fLeft"><?php echo ($vndrDtls['bankers']) ? str_replace('~',', ', $vndrDtls['bankers']) : '-'; ?></div>
+                            <div class="commtxt bankers fmOpenR fLeft"><?php echo ($vndrDtls['bankers']) ? str_replace('~', ', ', $vndrDtls['bankers']) : '-'; ?></div>
                         </div>
                     </div>
                     <div class="vdCenterCard fLeft">
@@ -279,6 +270,138 @@
         </div>
         <div class='prdInfo fLeft'>
             <div class="wrapperMax fmOpenR">
+                <div class="centerDiv">
+                    <div class="paraHead fmOpenL color0044 fLeft">Diamond Anatomy</div>
+                    <div class="lineHeight24 topContent tx_margin">Once cut and polished, all diamonds possess a shared set of characteristics,
+                        often referred to as the anatomy of the diamond. While the individual proportions, angles and placement
+                        of these common characteristics vary for diamonds of different shapes, their definition is the same.
+                    </div>
+                    <div class="textDiv fLeft bnone fmOpenB tcenter font15 tx_margin"><b>Place your cursor over any term to learn more.</b></div>
+                    <div class="divfirst fLeft fmOpenB">
+                        <div class="textDivLft fLeft">
+                            <div class="textDivH fLeft " id="t1">Crown</div>
+                            <div class="textDiv fLeft" id="t2">Table</div>
+                            <div class="textDiv fLeft" id="t3">Star Facets</div>
+                            <div class="textDiv fLeft" id="t4">Bezel Facets</div>
+                            <div class="textDiv fLeft" id="t5">Upper Girdle Facets</div>
+                            <div class="textDivH fLeft" id="t6">Girdle</div>
+                            <div class="textDivH fLeft" id="t7">Pavilion</div>
+                            <div class="textDiv fLeft" id="t8">Lower Girdle Facets</div>
+                            <div class="textDiv fLeft" id="t9">Pavilion Girdle</div>
+                            <div class="textDiv fLeft " id="t10">Culet</div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="divsecond fLeft">
+                        <div class="picDivRght fRight">
+                            <div class="diamontCat2 diamondPic fLeft" id="picchange"></div>
+                        </div>
+                    </div>
+                    <div class="divfirst fLeft fmOpenB measurement">
+                        <div class="textDivLft fLeft">
+                            <div class="textDivH fLeft">Key Measurements</div>
+                            <div class="textDiv fLeft" id="t11">Length</div>
+                            <div class="textDiv fLeft" id="t12">Depth</div>
+                            <div class="textDiv fLeft" id="t13">Width</div>
+                            <div class="textDiv fLeft" id="t14">Depth%</div>
+                            <div class="textDiv fLeft" id="t15">L/W Ration</div>
+                            <div class="textDiv fLeft" id="t16">Table%</div>
+                            <div class="textDiv fLeft" id="t17">Girdle Width</div>
+                            <div class="textDiv fLeft" id="t18">Crown Angel</div>
+                            <div class="textDiv fLeft" id="t19">Culet Size</div>
+                            <div class="textDiv fLeft" id="t20">Pavilion Angel</div>
+                        </div>
+                    </div>
+                    <div class="divsecond fLeft fmOpenB">
+                        <div class="textDivLft fLeft tx_change">
+                            <div class="textDivH fLeft ">Crown</div>
+                            <div class="textDiv fLeft">The entire portion of the diamond that sits above the girdle. The table as well as the star, bezel , and upper girdle facets are all part of the crown.
+                                usually constitutes the bulk of a diamonds weight.</div>
+                        </div>
+                        <div class="textDivLft fLeft tx_change dn">
+                            <div class="textDivH fLeft ">Table</div>
+                            <div class="textDiv fLeft">The uppermost , flat surface of a diamond which runs parallel to the plane of the girdle.</div>
+                        </div>
+                        <div class="textDivLft fLeft tx_change dn">
+                            <div class="textDivH fLeft ">Star Facets</div>
+                            <div class="textDiv fLeft">The facets that sit adjacent to the table, responsible for directing light that enters the diamond down to the pavilion and lower girdle facets.</div>
+                        </div>
+                        <div class="textDivLft fLeft tx_change dn">
+                            <div class="textDivH fLeft ">Bezel Facets</div>
+                            <div class="textDiv fLeft">The kite shaped facets that sit between the table and girdle, resposible for directing light that enters the diamond down to the pavilion and lower girdle facets.</div>
+                        </div>
+                        <div class="textDivLft fLeft tx_change dn">
+                            <div class="textDivH fLeft ">Upper Girdle Facets</div>
+                            <div class="textDiv fLeft">The lowest facets on the crown, sitting just above the girdle. Responsible for directing light that enters the diamond down to the pavilion and lower girdle facets.</div>
+                        </div>
+                        <div class="textDivLft fLeft tx_change dn">
+                            <div class="textDivH fLeft ">Girdle</div>
+                            <div class="textDiv fLeft">The outer edge of the diamond , where the crown meets the pavilion . the girdle may be faceted or smooth.</div>
+                        </div>
+                        <div class="textDivLft fLeft tx_change dn">
+                            <div class="textDivH fLeft ">Pavilion </div>
+                            <div class="textDiv fLeft">The entire portion of the diamond that sits below the girdle. The lower girdle facets,pavilion facets , and culet are all part of the pavalion.
+                                usually constitutes the bulk of a diamonds weight.</div>
+                        </div>
+                        <div class="textDivLft fLeft tx_change dn">
+                            <div class="textDivH fLeft ">Lower Girdle Facets</div>
+                            <div class="textDiv fLeft">The highest facets on the pavilion , sitting just below the girdle . Responsible fo redirectiong light that enters the diamond back out through the crown.</div>
+                        </div>
+                        <div class="textDivLft fLeft tx_change dn">
+                            <div class="textDivH fLeft ">Pavilion Facets</div>
+                            <div class="textDiv fLeft">the facets that sit adjacent to the culet, responsible for redirecting light that enters the diamond back out through the crown.</div>
+                        </div>
+                        <div class="textDivLft fLeft tx_change dn">
+                            <div class="textDivH fLeft ">Culet</div>
+                            <div class="textDiv fLeft">The culet is the small area at the bottom of the pavilion.The culet can be a point, or a very small facet sitting parallel to the table.</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft ">Length</div>
+                            <div class="textDiv fLeft">When viewed from above as a diamond would sit in a ring , length is the diameter measured from the "top" to "bottom".Stated in millimeters . Length is always the first of three numbers shown under "measurements" for each diamond. </div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft ">Depth</div>
+                            <div class="textDiv fLeft">The distance from the table to the culet when the diamond is viewed from the side.State</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft ">Width</div>
+                            <div class="textDiv fLeft">When viewed from above as a diamond would sit in a ring, width is the diameter measured from "side" to "side". Width is always the measure perpendicular to length. Stated in millimeters . Width is always the measure perpendicular to length. Stated in millimeters . Width is always the second of the three numbers shown under "measurements" for each diamond.</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft ">Depth %</div>
+                            <div class="textDiv fLeft">Calculated by dividing the dpth by the width. If a diamond is 3mm in depth , and has a midth of 4mm, the depth % is 75. Depth % is a measure of cut . The more shallow the cut of a diamond , teh higher the depth %.</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft ">Length / Width Ratio</div>
+                            <div class="textDiv fLeft">Calculated by dividing the length by the width.A perfectly round or square diamond has a L/W ratio of 1.00(since it's length and width are equal). </div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft ">Table %</div>
+                            <div class="textDiv fLeft">calculated by dividing the width of the table by the width of the diamond. If the table is 3mm wide , and the diamond is 4 mm in width , the table %is 75. The ;arger the table in relation to the diamond , the higher the table %.</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft ">Girdle Width</div>
+                            <div class="textDiv fLeft">A measure of the thickness of the diamond's girdle.The measure is taken only at the "valleys" of the girdle, never the peaks. Usually stated in terms of a nine point scale , from the Extremely Thin through Extremely Thick. If the girdle valleys vary in width, two values are given, one of the widest and one for the narrowest points.</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft ">Crown Angle</div>
+                            <div class="textDiv fLeft">Refers to the number of degrees between the plane of the table and bezel facets. The angle of the crown facets will determine how much light is reflected into the pavilion at an angle that will allow it to be reflected back up through the crown (where the observer cn perceive it).</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft ">Culet Size</div>
+                            <div class="textDiv fLeft">the culet can vary in size from a single point , to a small facet . Culet size is usually expressed using a seven point scale , from None(a point) to Very Large. If the culet is too large, it might appear as an inclusion when the diamond is viewed from above.</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft ">Pavilion Angle</div>
+                            <div class="textDiv fLeft">Refers to the number of degrees between the planes of the table , and the pavilion facets. the angle determines how much of the light which has travelled into the lower part of the diamond will be successfully reflected back through the crown (where the observer can perceive it).</div>
+                        </div>
+                    </div>
+                    <div class="lineHeight24 topContent tx_margin">Questions about anatomy or other aspects of a diamond? Ask a diamond consultant for answers. A consultant will answer any questions you have, and if you like, search for diamonds on your behalf that match your criteria. Email consultant@iftosi.com.</div>
+
+                </div>
+
                 <div class="prdInfoCont fLeft">
                     <div class="prdInfoTitle fLeft">Color - D (Colorless)</div>
                     <div class="prdInfoDiv fLeft">
@@ -286,26 +409,26 @@
                     </div>
                 </div>    
                 <div class="prdInfoCont fLeft">
-                    <div class="prdInfoTitle fLeft">Clarity</div>
+                    <div class="prdInfoTitle fLeft">Clarity - VVS1</div>
                     <div class="prdInfoDiv fLeft">
-                        Using a jewelers eye glass or loop at 10 times (10x) magnification, a trained eye can detect identifying characteristics which affect a diamonds clarity. The most common are internal flaws called inclusions. Some diamonds have external flaws, which are called blemishes. The size and location of these characteristics determine how the diamond is graded on scale as: Internally Flawless- IF, Very Very Small inclusions- VVS, Very Small inclusions-VS, Small Inclusions-SI.
+                        Using a jewelers eye glass or loop at 10 times (10x) magnification, a trained eye can detect identifying characteristics which affect a diamonds clarity. The most common are internal flaws called inclusions.
                     </div>
                 </div>    
                 <div class="prdInfoCont fLeft">
-                    <div class="prdInfoTitle fLeft">Cut - Excellent(EX)</div>
+                    <div class="prdInfoTitle fLeft">Cut - EX (Excellent)</div>
                     <div class="prdInfoDiv fLeft">
                         Cut refers not to a diamond's shape (e.g. round, oval, pear, etc.) but to a diamond's proportions, symmetry and polish. The beauty of a diamond depends more on cut than any other factor. <span class="fmOpenB">Maximum fire and brilliance. Reflects nearly all of the light that enters the diamond, creating exceptional sparkle and life.</span>
-                                
+
                     </div>            
                 </div>    
                 <div class="prdInfoCont fLeft">
-                    <div class="prdInfoTitle fLeft">Carat</div>
+                    <div class="prdInfoTitle fLeft">Carat - 0.33</div>
                     <div class="prdInfoDiv fLeft">
-                        Among all of the characteristics of a diamond, the carat is the most known and probably the most easily observed. A carat abbreviated CT, measures the weight of a diamond. One carat is one fifth of a gram, meaning a 5 Carat diamond weighs one gram. Since larger diamonds are rarer than smaller ones, the price per carat increases with its weight. In other words, two one carat diamonds will cost less than a two carat diamond of the same grade. Although carat weight mostly determines a diamonds apparent size, what really determines its appearance are the other three C's. So while a larger diamond might be more costly, it may not be as beautiful as a smaller one.
+                        Among all of the characteristics of a diamond, the carat is the most known and probably the most easily observed. A carat abbreviated CT, measures the weight of a diamond. One carat is one fifth of a gram, meaning a 5 Carat diamond weighs one gram.
                     </div>
                 </div>    
-                
-                <div class="prdInfoTitle fLeft">Shape</div>
+
+
                 <div class="prdInfoDiv fLeft shapesPage2 ">
                     <div class="shapesComm fLeft">
                         <div class="Round shapeComm"></div>
@@ -314,58 +437,57 @@
                         </div>
                     </div>
                 </div>
-                    
-                
-                
-                
+
+
+
+
 
             </div>
         </div>
         <div class="wrapper fLeft">
             <div class="">
-                <?php include 'footer.html'; ?>
+<?php include 'footer.html'; ?>
             </div>
         </div>
-        <?php include 'logo.html'; ?>
-        <?php include 'leftmenu.html'; ?>
+<?php include 'logo.html'; ?>
+<?php include 'leftmenu.html'; ?>
         <div id='dragTarget' class="drag-target" style="touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); left: 0px;"></div>
         <div id='overlay' class="overlay transition300 transit-100Y1 dn"></div>
         <div id='userForm' class="userForm transition300 dn">
-             <div class="lgTitle fLeft fmOpenR">Submit details to get SMS & EMAIL</div>
-             <div class="inputCont fLeft fmOpenR">
-                 <input type="text" id="ur_mobile" name="ur_mobile" autocomplete="false" maxlength="10" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeypress="return common.isNumberKey(event);">
-                 <label for="ur_mobile" class="inp-label transition100">MOBILE</label>
-                 <div id="ur_mobile_inpText" class="inpText fRight transition300">enter<br>mobile number</div>
-             </div>
-             <div class="inputCont fLeft fmOpenR">
-                 <input type="text" id="ur_name" name="ur_name" autocomplete="false"  class="txtInput cOrange fmOpenR font14 nameIcon">
-                 <label for="ur_name" class="inp-label transition100">NAME</label>
-                 <div id="ur_name_inpText" class="inpText fRight transition300">enter<br>your name</div>
-             </div>
-             <div class="inputCont fLeft fmOpenR">
-                 <input type="text" id="ur_email" name="ur_email" autocomplete="false" onKeyPress="return common.eSubmit(event,'userSubmit');" class="txtInput cOrange fmOpenR font14 emailIcon">
-                 <label for="ur_email" class="inp-label transition100">EMAIL</label>
-                 <div id="ur_email_inpText" class="inpText fRight transition300">enter<br>your email</div>
-             </div>
-             <div class="cancelLgBtn fLeft fmOpenR" id='userCancel'> CANCEL</div>
-             <div class="loginBtn fLeft fmOpenR" id="userSubmit">SUBMIT</div>
-         </div>
+            <div class="lgTitle fLeft fmOpenR">Submit details to get SMS & EMAIL</div>
+            <div class="inputCont fLeft fmOpenR">
+                <input type="text" id="ur_mobile" name="ur_mobile" autocomplete="false" maxlength="10" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeypress="return common.isNumberKey(event);">
+                <label for="ur_mobile" class="inp-label transition100">MOBILE</label>
+                <div id="ur_mobile_inpText" class="inpText fRight transition300">enter<br>mobile number</div>
+            </div>
+            <div class="inputCont fLeft fmOpenR">
+                <input type="text" id="ur_name" name="ur_name" autocomplete="false"  class="txtInput cOrange fmOpenR font14 nameIcon">
+                <label for="ur_name" class="inp-label transition100">NAME</label>
+                <div id="ur_name_inpText" class="inpText fRight transition300">enter<br>your name</div>
+            </div>
+            <div class="inputCont fLeft fmOpenR">
+                <input type="text" id="ur_email" name="ur_email" autocomplete="false" onKeyPress="return common.eSubmit(event, 'userSubmit');" class="txtInput cOrange fmOpenR font14 emailIcon">
+                <label for="ur_email" class="inp-label transition100">EMAIL</label>
+                <div id="ur_email_inpText" class="inpText fRight transition300">enter<br>your email</div>
+            </div>
+            <div class="cancelLgBtn fLeft fmOpenR" id='userCancel'> CANCEL</div>
+            <div class="loginBtn fLeft fmOpenR" id="userSubmit">SUBMIT</div>
+        </div>
     </div>
     <div id='imgGallery' class="imgGallery dn">
         <div id='galleryClose' class="galleryClose ripplelink"></div>
-        <div class="galleryImg fLeft" style="background: url(<?php echo IMGDOMAIN.$data1[0];?>) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+        <div class="galleryImg fLeft" style="background: url(<?php echo IMGDOMAIN . $data1[0]; ?>) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
         <div class="imgListCont fLeft">
 <?php
-                                for($i=0;$i<count($data1);$i++)
-{
-?>            
-            <div class="imgThumbnil fLeft" style="background: url(<?php echo IMGDOMAIN.$data1[$i];?>) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
-<?php
+for ($i = 0; $i < count($data1); $i++) {
+    ?>            
+                <div class="imgThumbnil fLeft" style="background: url(<?php echo IMGDOMAIN . $data1[$i]; ?>) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+    <?php
 }
 ?>        
         </div>
     </div>
- 
+
     <div id='imgvendorGallery' class="imgGallery dn">
         <div id='galleryClose2' class="galleryClose ripplelink"></div>
         <div class="galleryImg fLeft" style="background: url(<?php echo DOMAIN; ?>tools/img/common/tumb1.png) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
@@ -375,19 +497,19 @@
             <div class="imgThumbnil fLeft" style="background: url(<?php echo DOMAIN; ?>tools/img/common/tumb3.jpg) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
         </div>
     </div>
-    
+
     <div id='overlay1' class="overlay transition300 transit-100Y1 dn" ></div>
-        <div id="otpDiv" class="loginDiv transition300 dn" style="transform: scale(1);height:200px !important">
-            <div class="lgTitle fLeft fmOpenR">Enter OTP sent to your mobile</div>
-                <div class="inputCont fLeft fmOpenR">
-                    <input type="text" id="pr_otp" name="pr_otp" autocomplete="off" maxlength="6" class="txtInput cOrange fmOpenR font14 mobileIcon" style="padding-right: 80px">
-                    <span onclick="otpGo();" class="resendOTP">RESEND</span>
-                    <label for="pr_otp" class="inp-label transition100">OTP</label>
-                </div>  
-                <div class="cancelLgBtn fLeft fmOpenR" id="otpCancel" onclick="closeOtpForm();">CANCEL</div>
-            <div class="loginBtn fLeft fmOpenR" id="otpSubmit" onclick="otpCheck();">Submit</div>
-        </div>
-    
+    <div id="otpDiv" class="loginDiv transition300 dn" style="transform: scale(1);height:200px !important">
+        <div class="lgTitle fLeft fmOpenR">Enter OTP sent to your mobile</div>
+        <div class="inputCont fLeft fmOpenR">
+            <input type="text" id="pr_otp" name="pr_otp" autocomplete="off" maxlength="6" class="txtInput cOrange fmOpenR font14 mobileIcon" style="padding-right: 80px">
+            <span onclick="otpGo();" class="resendOTP">RESEND</span>
+            <label for="pr_otp" class="inp-label transition100">OTP</label>
+        </div>  
+        <div class="cancelLgBtn fLeft fmOpenR" id="otpCancel" onclick="closeOtpForm();">CANCEL</div>
+        <div class="loginBtn fLeft fmOpenR" id="otpSubmit" onclick="otpCheck();">Submit</div>
+    </div>
+
     <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['hammer']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
