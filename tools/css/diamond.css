@@ -15,7 +15,7 @@ body{padding:0;margin:0;}
 .totalDiv{width:100%;height:auto;padding:20px;}
 .textDivLft{width:100%;height:auto;padding:15px; padding-top: 0px;}
 .textDivLft.tx-change{ height:435px;}
-.textDiv{width:100%;height:auto;line-height:25px;color:#666;font-size:12px;padding-left:15px;}
+.textDiv{width:100%;height:auto;line-height:25px;color:#666;font-size:13px;padding-left:15px;}
 .textDivH{width:100%;height:28px;line-height:28px;color:#666;font-size:14px;color:#8A0044;}
 .measurement .textDiv{width:50%;}
 .picDivRght{width:100%;height:auto;padding:15px;}
