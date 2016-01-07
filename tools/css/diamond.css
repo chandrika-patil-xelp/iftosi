@@ -16,10 +16,11 @@ body{padding:0;margin:0;}
 .textDivLft{width:100%;height:auto;padding:15px; padding-top: 0px;}
 .textDivLft.tx-change{ height:435px;}
 .textDiv{width:50%;height:auto;line-height:25px;color:#666;font-size:13px;padding-left:15px;margin-right:50%; cursor:help;}
-.textDivH{width:100%;height:28px;line-height:28px;color:#666;font-size:14px;color:#8A0044;}
+.textDivH{width:100%;height:28px;line-height:28px;color:#666;font-size:14px;color:#8A0044;cursor:help;}
 .measurement .textDiv{margin:0;}
 .dia-char{}
 .dia-char .textDiv {width:100%;margin:0;cursor:default}
+.dia-char .textDivH {cursor:default}
 .picDivRght{width:100%;height:auto;padding:15px;}
 .diamondPic{width:380px;height:250px;display:inline-block;}
 .diamontCat1{width:380px;height:250px;background:url(../img/diamond/anatomy-3.png)no-repeat;background-size:initial;background-position:center center;}
