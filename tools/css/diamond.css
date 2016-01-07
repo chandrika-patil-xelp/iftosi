@@ -541,6 +541,7 @@ body{padding:0;margin:0;}
     .contStyle{line-height: 16px;font-size:11px!important;}
     .sideDiv{width: 26%;}
     .centerDiv{width:74%;}
+    .detailsPage .centerDiv{width:100%}
     .images{width:100%;}
     .definition{width:100%;height: auto;}
     /* .imgtag{width: 250px;}*/
