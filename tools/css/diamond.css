@@ -458,6 +458,7 @@ body{padding:0;margin:0;}
     /*    .MoreDetails{    height: auto;}*/
     .textDivLft{padding-left: 0px;}
     .divfirst{width:100%;}
+    .divsecond{width:100%;}
     .diamontCat1{width: 260px;background-size: contain;}
     .diamontCat2{width: 260px;background-size: contain;}
     .diamontCat3{width: 260px;background-size: contain;}
@@ -571,5 +572,5 @@ body{padding:0;margin:0;}
     .diamontCat20{background-size: contain;width:200px;}
     .diamontCat21{background-size: contain;width:200px;}
 
-    .divfirst{width:33%;}
+    .divfirst{width:40%;}
 }
