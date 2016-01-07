@@ -7,7 +7,7 @@ body{padding:0;margin:0;}
 .cPointer{cursor:pointer;}
 .bnone{border-bottom:0px !important}
 .divfirst{height: auto;width: 40%}
-.divsecond{height: auto;width: 60%}
+.divsecond{height: auto;width: 60%;min-height: 500px;}
 .font13{font-size: 13px;}
 .container{width:100%;height:100%;background-color:#fff;}
 .wrapper{width:100%;height:100%;display:inline-block;}
@@ -16,6 +16,8 @@ body{padding:0;margin:0;}
 .textDivLft{width:100%;height:auto;padding:15px; padding-top: 0px;}
 .textDivLft.tx-change{ height:435px;}
 .textDiv{width:50%;height:auto;line-height:25px;color:#666;font-size:13px;padding-left:15px;margin-right:50%; cursor:help;}
+.textDiv:hover{color:#8A0044}
+.divsecond .textDiv:hover {color: #666;}
 .textDivH{width:100%;height:28px;line-height:28px;color:#666;font-size:14px;color:#8A0044;cursor:help;}
 .measurement .textDiv{margin:0;}
 .dia-char{}
