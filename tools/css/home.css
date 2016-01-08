@@ -617,7 +617,7 @@ a{cursor:pointer;}
 
 .shapesPage2 .texHolder {padding: 0;padding-left: 100px;line-height: 24px;color: #000;}
 .shapesPage2 .shapeComm:hover {border: 2px solid #fff;}
-.shapesPage2 .shapeComm {position: absolute;left: 10px;top: 0;width: 100px;height: 100px;margin: 0;bottom: 0;margin: auto;width: 100px;}
+.shapesPage2 .shapeComm {position: absolute;left: 10px;top: 0;width: 100px;height: 100px;margin: 0;bottom: 0;margin: auto;width: 100px;border:none;}
 
 
 
