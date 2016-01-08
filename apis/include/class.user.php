@@ -828,7 +828,7 @@
                 $password = mt_rand(111111, 999999);
                 $vsql1 = "UPDATE tbl_registration SET password=MD5(\"".$password."\"), pass_flag=1 WHERE logmobile=\"" . $params['email'] . "\"";
 
-                $vres1 = $this->query($vsql1,1);
+                $vres1 = $this->query($vsql1);
                 if ($vres1) {
                     $subject = 'Your Password Changed';
                     $message = 'Your password was successfully Changed. Your new password is ' . $password;
