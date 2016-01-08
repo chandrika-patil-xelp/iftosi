@@ -39,6 +39,7 @@ body{padding:0;margin:0;}
 .education_shape.container{padding-top: 120px;}
 .sideDiv{width: 17%;height: auto;float: left;padding-left:20px;}
 .centerDiv{width: 66%;float: left;height: auto;padding:0px 20px 0px 20px}
+.detailsPage .centerDiv{border-right:1px solid #ccc;padding:0;padding-right:20px;} 
 .color0044{color: #8A0044;}
 .margnTop0{margin-top: 0px!important;}
 .shapeHolder{width: 100%;height: auto;border: 1px solid #e6e6e6;border-radius: 5px;}

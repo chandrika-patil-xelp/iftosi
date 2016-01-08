@@ -895,6 +895,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 /*Shapes Page*/
 .shapesPage{padding-bottom: 20px;}
 .shapesComm{width:100%;height: auto;min-height: 104px;box-shadow: 2px 2px 8px 0 rgba(0,0,0,0.2);padding: 20px;border-radius: 5px;margin-top: 10px;background: #fff;position: relative;}
+.shapesCommH{width:100%;height: auto;min-height: 104px;padding: 30px  20px;border-radius: 5px;margin-top: 10px;background: #fff;position: relative;background-color:#ebebed;}
 .shapesPage .texHolder{padding: 0;padding-left: 13%;line-height: 24px;color:#000;}
 .shapesPage .wrapperA {background: #ebebde;padding-bottom: 20px;}
 .shapesPage .wrapper{background: #ebebde;}
@@ -1063,7 +1064,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
             .overlay {background: #fff url(../img/common/background.jpg)no-repeat;background-size: cover;}
             .loginDiv {width: 100%;height: 100%;padding: 25px;border-radius: 0;}
             .lgTitle {height:auto;line-height: 25px;}
-  
+
         /*SignUp page*/
             .signupPage {background: #171334 url(../img/common/pattern.svg)repeat;background-size:auto 25px;padding: 120px 0 0px 0;height: 160vh;}
             .signupDiv .wrapperMax {max-width: 100%;border: 0px solid #333;margin-top: 0;padding: 10px;border-radius: 0;height: 100vH;z-index: 115;position: relative;}
@@ -1210,9 +1211,9 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
         .signInUpTab{margin: 0 15px 0 0px;}
         .wishlist{margin: 0 0px;}
         .headRight{font-size: 11px;}
-        
-        
-        
+
+
+
 }
 
 /*
