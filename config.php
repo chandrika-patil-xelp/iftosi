@@ -66,7 +66,7 @@ if(stristr($_SERVER['HTTP_HOST'],'iftosi.com'))
 }
 else if(stristr($_SERVER['HTTP_HOST'], '54.213.148.243'))
 {
-	$db['iftosi'] = array('localhost','iftosi','iftosi_live','db_iftosi');
+	$db['iftosi'] = array('localhost','iftosi','iftosi@live','db_iftosi');
 }
 else
 {
