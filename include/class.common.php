@@ -26,6 +26,11 @@
                 curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
                 curl_setopt($ch, CURLOPT_USERPWD, $authData['user'] . ":" . $authData['pwd']);
             }
+            else
+            {
+				curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+                curl_setopt($ch, CURLOPT_USERPWD, "iftosi:live");
+			}
 
             $result = curl_exec($ch);
             curl_close($ch);
