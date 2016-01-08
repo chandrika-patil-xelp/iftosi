@@ -6,7 +6,21 @@ if(!stristr($_SERVER['HTTP_HOST'], '.iftosi.com') && !stristr($_SERVER['HTTP_HOS
 }
 */
 error_reporting(0);
-if(stristr($_SERVER['HTTP_HOST'],'iftosi.com'))
+if(stristr($_SERVER['HTTP_HOST'],'demo.iftosi.com'))
+{
+
+	define('DOMAIN','http://'.$_SERVER['HTTP_HOST'].'/');
+	define('APIDOMAIN','http://'.$_SERVER['HTTP_HOST'].'/apis/');
+	define('WEBROOT',$_SERVER['DOCUMENT_ROOT'].'/');
+	define('TEMPLATE',WEBROOT.'template/');
+	define('INCLUDES',WEBROOT.'include/');
+	define('APICLUDE',WEBROOT.'apis/include/');
+	define('IMGDOMAIN','http://'.$_SERVER['HTTP_HOST'].'/image-upload/');
+	define('IMGUPLOAD','http://'.$_SERVER['HTTP_HOST'].'/upload-image/');
+	define('VERSION',6.0);
+	define('IMGPATH','image-upload/');
+}
+else if(stristr($_SERVER['HTTP_HOST'],'iftosi.com'))
 {
 
 	define('DOMAIN','http://'.$_SERVER['HTTP_HOST'].'/');
@@ -57,8 +71,11 @@ define('silverRate',$silverRate);
 
 define('FAVICON', DOMAIN . 'tools/img/common/favicon.ico');
 
-
-if(stristr($_SERVER['HTTP_HOST'],'iftosi.com'))
+if(stristr($_SERVER['HTTP_HOST'], 'demo.iftosi.com'))
+{
+	$db['iftosi'] = array('localhost','iftosi','iftosi@live','db_iftosi');
+}
+else if(stristr($_SERVER['HTTP_HOST'],'iftosi.com'))
 {
 	//$db['iftosi'] = array('54.213.106.43','nafexdb','nafexdb','db_iftosi');
 	//$db['iftosi'] = array('10.123.0.91','xelpmoc_iftosi','iftosi','xelpmoc_iftosi');
