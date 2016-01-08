@@ -510,12 +510,15 @@ function showVendorDetails(obj)
 				$('html,body').animate({scrollTop: pos}, 300);
 			},10);
 
-			setTimeout(function () {
-				var mpscrpt = document.createElement("script");
-				mpscrpt.type = "text/javascript";
-				mpscrpt.src = "http://maps.google.com/maps/api/js";
-				$("head").append(mpscrpt);
-			}, 100);
+			if($("head").html().indexOf('http://maps.google.com/maps/api/js') === -1)
+			{
+				setTimeout(function () {
+					var mpscrpt = document.createElement("script");
+					mpscrpt.type = "text/javascript";
+					mpscrpt.src = "http://maps.google.com/maps/api/js";
+					$("head").append(mpscrpt);
+				}, 100);
+			}
 
 			setTimeout(function () {
 				initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
@@ -900,12 +903,15 @@ function otpCheck()
                                                                                 $('body').animate({scrollTop: pos}, 300);
                                                                         },10);
 
-                                                                        setTimeout(function () {
-                                                                                var mpscrpt = document.createElement("script");
-                                                                                mpscrpt.type = "text/javascript";
-                                                                                mpscrpt.src = "http://maps.google.com/maps/api/js";
-                                                                                $("head").append(mpscrpt);
-                                                                        }, 100);
+																		if($("head").html().indexOf('http://maps.google.com/maps/api/js') === -1)
+																		{
+																			setTimeout(function () {
+																					var mpscrpt = document.createElement("script");
+																					mpscrpt.type = "text/javascript";
+																					mpscrpt.src = "http://maps.google.com/maps/api/js";
+																					$("head").append(mpscrpt);
+																			}, 100);
+																		}
 
                                                                         setTimeout(function () {
                                                                                 initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
