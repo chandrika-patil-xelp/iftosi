@@ -501,28 +501,28 @@ function showVendorDetails(obj)
 		}
 		else if((isMail==false)&&(isWishList==false))
 		{
-			var bottomPos = $('.prdMainDetails').position().top+$('.prdMainDetails').outerHeight(true)
+			var bottomPos = $('.prdMainDetails').position().top+$('.prdMainDetails').outerHeight(true);
 			var pos=bottomPos - 65;
 
 			setTimeout(function(){
 				$('#vDetails').removeClass('vTransit');
 				$('#vDetails').removeClass('dn');
-				$('html,body').animate({scrollTop: pos}, 300);
-			},10);
+				$('html,body').animate({scrollTop: pos}, 150);
+				if($("head").html().indexOf('http://maps.google.com/maps/api/js') === -1)
+				{
+					//setTimeout(function () {
+						var mpscrpt = document.createElement("script");
+						mpscrpt.type = "text/javascript";
+						mpscrpt.src = "http://maps.google.com/maps/api/js";
+						$("head").append(mpscrpt);
 
-			if($("head").html().indexOf('http://maps.google.com/maps/api/js') === -1)
-			{
-				setTimeout(function () {
-					var mpscrpt = document.createElement("script");
-					mpscrpt.type = "text/javascript";
-					mpscrpt.src = "http://maps.google.com/maps/api/js";
-					$("head").append(mpscrpt);
-				}, 100);
-			}
+						setTimeout(function () {
+							initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
+						}, 220);
+					//}, 220);
+				}
+			}, 20);
 
-			setTimeout(function () {
-				initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
-			},250);
 			addToEnquiry();
 		}
 	}
@@ -900,22 +900,24 @@ function otpCheck()
                                                                         setTimeout(function(){
                                                                                 $('#vDetails').removeClass('vTransit');
                                                                                 $('#vDetails').removeClass('dn');
-                                                                                $('body').animate({scrollTop: pos}, 300);
-                                                                        },10);
+                                                                                $('body').animate({scrollTop: pos}, 150);
+																				if($("head").html().indexOf('http://maps.google.com/maps/api/js') === -1)
+																				{
+																					//setTimeout(function () {
+																							var mpscrpt = document.createElement("script");
+																							mpscrpt.type = "text/javascript";
+																							mpscrpt.src = "http://maps.google.com/maps/api/js";
+																							$("head").append(mpscrpt);
+																							setTimeout(function () {
+																								initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
+																							}, 220);
+																					//}, 220);
+																				}
+                                                                        }, 20);
 
-																		if($("head").html().indexOf('http://maps.google.com/maps/api/js') === -1)
-																		{
-																			setTimeout(function () {
-																					var mpscrpt = document.createElement("script");
-																					mpscrpt.type = "text/javascript";
-																					mpscrpt.src = "http://maps.google.com/maps/api/js";
-																					$("head").append(mpscrpt);
-																			}, 100);
-																		}
+																		
 
-                                                                        setTimeout(function () {
-                                                                                initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
-                                                                        },250);
+                                                                        
                                                                         addToEnquiry();
                                                                 }
                                                         //}
