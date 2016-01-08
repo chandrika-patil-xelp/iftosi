@@ -73,13 +73,13 @@ define('FAVICON', DOMAIN . 'tools/img/common/favicon.ico');
 
 if(stristr($_SERVER['HTTP_HOST'], 'demo.iftosi.com'))
 {
-	$db['iftosi'] = array('localhost','iftosi','iftosi@live','db_iftosi');
+	$db['iftosi'] = array('localhost','xelpmoc_dmiftosi','1234567890','xelpmoc_dmiftosi');
 }
 else if(stristr($_SERVER['HTTP_HOST'],'iftosi.com'))
 {
 	//$db['iftosi'] = array('54.213.106.43','nafexdb','nafexdb','db_iftosi');
 	//$db['iftosi'] = array('10.123.0.91','xelpmoc_iftosi','iftosi','xelpmoc_iftosi');
-	$db['iftosi'] = array('localhost','xelpmoc_dbiftosi','1234567890','xelpmoc_dbiftosi');
+	$db['iftosi'] = array('localhost','iftosi','iftosi@live','db_iftosi');
 }
 else if(stristr($_SERVER['HTTP_HOST'], '52.77.214.223'))
 {
