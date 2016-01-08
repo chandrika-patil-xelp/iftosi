@@ -17,7 +17,20 @@ if(stristr($_SERVER['HTTP_HOST'],'iftosi.com'))
 	define('APICLUDE',WEBROOT.'apis/include/');
 	define('IMGDOMAIN','http://'.$_SERVER['HTTP_HOST'].'/image-upload/');
 	define('IMGUPLOAD','http://'.$_SERVER['HTTP_HOST'].'/upload-image/');
-	define('VERSION',2.0);
+	define('VERSION',6.0);
+	define('IMGPATH','image-upload/');
+}
+else if(stristr($_SERVER['HTTP_HOST'], '54.213.148.243'))
+{
+	define('DOMAIN','http://'.$_SERVER['HTTP_HOST'].'/');
+	define('APIDOMAIN','http://'.$_SERVER['HTTP_HOST'].'/apis/');
+	define('WEBROOT',$_SERVER['DOCUMENT_ROOT'].'/');
+	define('TEMPLATE',WEBROOT.'template/');
+	define('INCLUDES',WEBROOT.'include/');
+	define('APICLUDE',WEBROOT.'apis/include/');
+	define('IMGDOMAIN','http://'.$_SERVER['HTTP_HOST'].'/image-upload/');
+	define('IMGUPLOAD','http://'.$_SERVER['HTTP_HOST'].'/upload-image/');
+	define('VERSION',6.0);
 	define('IMGPATH','image-upload/');
 }
 else
@@ -50,6 +63,10 @@ if(stristr($_SERVER['HTTP_HOST'],'iftosi.com'))
 	//$db['iftosi'] = array('54.213.106.43','nafexdb','nafexdb','db_iftosi');
 	//$db['iftosi'] = array('10.123.0.91','xelpmoc_iftosi','iftosi','xelpmoc_iftosi');
 	$db['iftosi'] = array('localhost','xelpmoc_dbiftosi','1234567890','xelpmoc_dbiftosi');
+}
+else if(stristr($_SERVER['HTTP_HOST'], '54.213.148.243'))
+{
+	$db['iftosi'] = array('localhost','iftosi','iftosi_live','db_iftosi');
 }
 else
 {
