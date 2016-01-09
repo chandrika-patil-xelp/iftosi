@@ -921,8 +921,8 @@
 				foreach($expd as $key => $val)
 				{
 					$exd = explode('_',$val);
-                    $ids[] = $exd[0];
-                }
+                                        $ids[] = $exd[0];
+                                }
 				$ilist = implode(',',$ids);
 				$where = " WHERE category_id in (".$ilist.") ";
 			} 
@@ -2038,6 +2038,216 @@
                 $err=array('Code'=>1,'Msg'=>'Data not found');
             }
             $result=array('result'=>$arr,'error'=>$err);
+            return $result;
+        }
+        
+        public function suggestProducts($params)
+        {
+            $page   = ($params['page'] ? $params['page'] : 1);
+            $limit  = ($params['limit'] ? $params['limit'] : 4);
+            
+            if(!empty($params['purity']))
+            {
+                $params['purity'] = preg_replace("/[^0-9]/","",$params['purity']);
+            }
+            
+            $fetchPids = "  SELECT 
+                                        product_id
+                            FROM
+                                        tbl_product_category_mapping
+                            WHERE 
+                                        category_id = \"".$params['catid']."\"
+                            AND
+                                        product_id NOT IN(\"".$params['pid']."\")
+                            AND
+                                        display_flag = 1";
+            $fetchPidsRes = $this->query($fetchPids);
+            $cntprds      = $this->numRows($fetchPidsRes);
+            
+            if($cntprds > 0)
+            {
+                while($rows = $this->fetchData($fetchPidsRes))
+                {
+                    $pids[] = $rows['product_id'];
+                }
+                $cnt = count($pids);
+                $pid  = implode(',',$pids);
+                if($cnt > 0)
+                {
+                    $patsql="   SELECT
+                                    distinct a.product_id,
+                                    if(a.shape = \"".$params['shape']."\",1,0) as sameshape,
+                                    if(a.clarity = \"".$params['clarity']."\",1,0) as sameclarity,
+                                    if(a.color = \"".$params['color']."\",1,0) as samecolor,
+                                    if(a.cut = \"".$params['cut']."\",1,0) as samecut,
+                                    if(a.carat = \"".$params['carat']."\",1,0) as samecarat,
+                                    if(a.gold_purity = \"".$params['purity']."\",1,0) as samepurity,
+                                    if(a.metal = \"".$params['metal']."\",1,0) as samemetal,
+                                    if(a.gold_weight = \"".$params['gwt']."\",1,0) as sametype,
+                                    a.product_id as pid,
+                                    a.price as jprice,
+                                    a.carat,
+                                    a.color,
+                                    a.cut,
+                                    a.certified,
+                                    a.shape,
+                                    a.clarity,
+                                    a.price,
+                                    a.polish,
+                                    a.symmetry,
+                                    a.cno,
+                                    a.gold_purity,
+                                    a.gold_weight as gold_weight,
+                                    a.type,
+                                    a.metal,
+                                    a.bullion_design
+                            FROM 
+                                    tbl_product_search as a
+                            WHERE 
+                                    a.product_id IN(".$pid.")
+                            AND            
+                                    a.active_flag=1
+                            ORDER BY 
+                                    sameshape desc,
+                                    sameclarity desc,
+                                    samecolor desc,
+                                    samecut desc,
+                                    samecarat desc,
+                                    samepurity desc,
+                                    samemetal desc,
+                                    sametype desc,
+                                    pid ASC";
+                    if(!empty($page)) 
+                    {
+                        $start = ($page * $limit) - $limit;
+                        $patsql.=" LIMIT " . $start . ",$limit";
+                    }
+                    $resSql = $this->query($patsql);
+                    $totalPrd = $this->numRows($resSql);
+                    if($totalPrd > 0)
+                    {
+                        while($row = $this->fetchData($resSql))
+                        {
+                            $pid  = $row['pid'];
+                            $arr[$pid] = $row;
+                        
+                            $masterSql = "  SELECT
+                                                    product_id,
+                                                    barcode,
+                                                    product_name as pname,
+                                                    product_display_name as pdname
+                                            FROM
+                                                    tbl_product_master
+                                            WHERE
+                                                    product_id = \"".$pid."\"
+                                            AND
+                                                    active_flag = 1
+                                            ORDER BY
+                                                    product_id ASC";
+                        $masterRes = $this->query($masterSql);
+                        $mastercnt = $this->numRows($masterRes);
+                        
+                        if($mastercnt > 0)
+                        {
+                            while($masterRows = $this->fetchData($masterRes))
+                            {
+                                $arr[$pid]['product_main'] = $masterRows;
+                            }
+                            
+                            $vRateSql = "   SELECT 
+                                                    vendor_id,
+                                                    dollar_rate,
+                                                    silver_rate,
+                                                    gold_rate
+                                            FROM 
+                                                    tbl_vendor_master
+                                            WHERE 
+                                                    vendor_id =(SELECT vendor_id FROM tbl_vendor_product_mapping as b WHERE b.product_id = \"".$pid."\") 
+                                            AND
+                                                    active_flag=1
+                                            ";
+                            $vRateRes = $this->query($vRateSql);
+                            $vRateCnt = $this->numRows($vRateRes);
+                            if($vRateCnt > 0)
+                            {
+                                while($vRateRow = $this->fetchData($vRateRes))
+                                {
+                                    $arr[$pid]['vendor_rates'] = $vRateRow;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            $arr = array();
+                            $err = array('code'=>1,'msg'=>'No products for suggestion');
+                        }
+                    }
+                }
+                else
+                {
+                    $arr = array();
+                    $err = array('code'=>1,'msg'=>'No products for suggestion');
+                }
+            }
+            else
+            {
+                $arr = array();
+                $err = array('code'=>1,'msg'=>'Errors in fetching data');
+            }
+            $result = array('results'=>$arr,'error'=>$err,'total'=>$totalPrd);
+            return $result;
+        }
+        }
+        
+        public function showDescription($params)
+        {
+            $page   = ($params['page'] ? $params['page'] : 1);
+            $limit  = ($params['limit'] ? $params['limit'] : 25);
+            if($params['catid'] == 10000)
+            {
+                $needed = "'carat','color','clarity','cut',\"".$params['color']."\",\"".$params['carat']."\",\"".$params['clarity']."\",\"".$params['cut']."\",\"".$params['shape']."\"";
+            }
+            else if($params['catid'] == 10001)
+            {
+                $condition = "'gold_purity','metal','gold_weight','gemstone_type','diamond_shape','carat'";
+            }
+            else if($params['catid'] == 10002)
+            {
+                $condition = "'gold_purity','metal','gold_weight','type','bullion_design'";
+            }
+
+                $patsql="   SELECT
+                                    *
+                            FROM 
+                                    tbl_attribute_describe
+                            WHERE 
+                                    describe_name IN(".$needed.")
+                            AND
+                                    active_flag=1
+                            ORDER BY 
+                                    display_position ASC";
+                    if(!empty($page)) 
+                    {
+                        $start = ($page * $limit) - $limit;
+                        $patsql.=" LIMIT " . $start . ",$limit";
+                    }
+                    $resSql = $this->query($patsql);
+                    $totalDes = $this->numRows($resSql);
+                    if($totalDes > 0)
+                    {
+                        while($row = $this->fetchData($resSql))
+                        {
+                            $desname = $row['describe_name'];
+                            $arr[$desname] = $row;
+                        }
+                        $err = array('code'=>0,'msg'=>'Description fetched');
+                    }
+                    else
+                    {
+                        $arr = array();
+                        $err = array('code'=>1,'msg'=>'No Description available');
+                    }
+            $result = array('results'=>$arr,'error'=>$err,'total'=>$totalDes);
             return $result;
         }
         

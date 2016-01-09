@@ -272,10 +272,93 @@
                 <div class="prdInfoDiv fLeft">
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                 </div>
-                <div class="prdInfoTitle fLeft">Header 5</div>
-                <div class="prdInfoDiv fLeft">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                </div>
+                <div class="prdInfoTitle fLeft">Similar Products</div>
+                
+        <div class='w100 fLeft'>
+<?php
+                    foreach($data3 as $key=>$value)
+                    {
+?>                
+                        <div class='prdComm fLeft' style="opacity: 1; transform: translateX(1px);">
+										<div class='prdCommDiv fLeft transition100'>
+											<a href="<?php echo DOMAIN . strtolower($data3[$key]['metal']) . '-' . strtolower($data3[$key]['type']) . '-' . round($data3[$key]['gold_weight']); ?>-grams/bid-<?php echo $data3[$key]['pid']; ?>">
+											<div class="prdShape fLeft">
+												<div class="prdShTitle fLeft fmOpenB">TYPE</div>
+												<div class="prdShType fLeft fmOpenR"><?php echo $data3[$key]['type'];?></div>
+                                                                                                <div class="<?=  strtolower($data3[$key]['type']).'Ic';?> fRight"></div>
+											</div>
+											<div class="prdDetails fLeft">
+												<div class="detComm">
+													<div class="detLabel fmOpenB fLeft">METAL</div>
+													<div class="detValue fmOpenR fLeft"><?php echo $data3[$key]['metal'];?></div>
+												</div>
+												<div class="detComm">
+													<div class="detLabel fmOpenB fLeft">WEIGHT</div>
+													<div class="detValue fmOpenR fLeft">
+<?php
+                                                                                                        if($data3[$key]['gold_weight'] > 1000)
+                                                                                                        {
+                                                                                                            $gweights = number_format(($data3[$key]['gold_weight']/1000),2);
+                                                                                                            echo $gweights.' Kg';
+                                                                                                        }
+                                                                                                        else if($data3[$key]['gold_weight'] == 1000)
+                                                                                                        {
+                                                                                                            $gweights = '1 Kg';
+                                                                                                            echo $gweights;
+                                                                                                        }
+                                                                                                        else
+                                                                                                        {
+                                                                                                            echo number_format($data3[$key]['gold_weight'],2).' Gms';
+                                                                                                        }
+?>
+                                                                                                        </div>
+												</div>
+											</div>
+											<div class='prdPrice fLeft'>
+												<div class="detComm">
+													<div class="detLabel fmOpenB fLeft">PRICE</div>
+<?php 
+                                                                                                        if($data3[$key]['metal'] == 'Gold')
+                                                                                                        {
+                                                                                                            if(empty($data3[$key]['vendor_rates']['gold_rate']))
+                                                                                                            {
+                                                                                                                $data3[$key]['vendor_rates'] = goldRate;
+                                                                                                            }
+                                                                                                            $metal_rate = ($data3[$key]['vendor_rates']['gold_rate']/10)*($data3[$key]['gold_purity']/995);
+                                                                                                        }
+                                                                                                        else if($data3[$key]['metal'] == 'Silver')
+                                                                                                        {
+                                                                                                            if(empty($data3[$key]['vendor_rates']['silver_rate']))
+                                                                                                            {
+                                                                                                                $data3[$key]['vendor_rates'] = silverRate; 
+                                                                                                            }
+                                                                                                            $metal_rate = ($data3[$key]['vendor_rates']['silver_rate']/1000)*($data3[$key]['gold_purity']/999);
+                                                                                                        }
+?>
+													<div class="detValue fmOpenB fLeft"><span>&#8377;</span><?php
+                                                                                                        $price = ceil(($data3[$key]['gold_weight']*$metal_rate));
+                                                                                                        echo $comm->IND_money_format($price);
+                                                                                                        ?></div>
+                                                                                                        
+                                                                                                        
+												</div>
+											</div>
+											</a>
+											<div class='prdActions fLeft'>
+												<a href="<?php echo DOMAIN . strtolower($data3[$key]['metal']) . '-' . strtolower($data3[$key]['type']) . '-' . round($data3[$key]['gold_weight']); ?>-grams/bid-<?php echo $data3[$key]['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
+												<a href="<?php echo DOMAIN . strtolower($data3[$key]['metal']) . '-' . strtolower($data3[$key]['type']) . '-' . round($data3[$key]['gold_weight']); ?>-grams/bid-<?php echo $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
+												<a href="<?php echo DOMAIN . strtolower($data3[$key]['metal']) . '-' . strtolower($data3[$key]['type']) . '-' . round($data3[$key]['gold_weight']); ?>-grams/bid-<?php echo $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
+												<a href="<?php echo DOMAIN . strtolower($data3[$key]['metal']) . '-' . strtolower($data3[$key]['type']) . '-' . round($data3[$key]['gold_weight']); ?>-grams/bid-<?php echo $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+											</div>
+										</div>
+                        </div>
+<?php
+                    }
+?>
+        </div>
+             
+                
+                
             </div>
         </div>
         <div class="wrapper fLeft">

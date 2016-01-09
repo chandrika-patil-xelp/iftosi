@@ -690,5 +690,5 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .padL30{padding:10px 20px}
 .subNumber{padding:0px 15px}
 .vterms{}
-.texHolder.vterms{padding-top:100px;}
+.texHolder.vterms{padding:100px 0px 50px 0px;}
 .padL10{padding:0px 20px}

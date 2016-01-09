@@ -46,7 +46,7 @@
                         <div class="btnsCont fLeft">
                             <div class="prdShape fLeft">
                                 <div class="prdShTitle fLeft fmOpenB">PRICE</div>
-                                <?php $price =  ceil($prdInfo['product_price']); ?>
+                                <?php $price =  ceil($prdInfo['attr_details']['price']); ?>
                                 <div class="prdShType fLeft fmOpenL"><span>&#8377;</span><?php echo $comm->IND_money_format($price); ?></div>
                             </div>
                             <div class="prdBtns fLeft">
@@ -285,10 +285,62 @@
                 <div class="prdInfoDiv fLeft">
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                 </div>
-                <div class="prdInfoTitle fLeft">Header 5</div>
-                <div class="prdInfoDiv fLeft">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                </div>
+                <div class="prdInfoTitle fLeft">Similar Products</div>
+                <div class="w100 fLeft">
+<?php                                    
+                    foreach($data3 as $key=>$value)
+                    {
+?>
+                                    <div class="prdComm fLeft jwRes transition100">
+					<div class="prdCommDiv fLeft transition100">
+						<a href="<?=DOMAIN.$data3[$key]['pname'].'-'.$data3[$key]['barcode'].'-'.$data3[$key]['pcode'].'/jid-'.$data3[$key]['pid']; ?>">
+                                                    <div class="prdCommImg fLeft">
+    <?php
+                                                        $imgCount = count($dataI[$key]['images']);
+                                                        if($imgCount > 0)
+                                                        {
+    ?>
+                                                            <div class="for-1 noImage"></div>
+    <?php
+                                                        }
+                                                        else
+                                                        {
+    ?>
+                                                            <div class="for-1 noImage"></div>
+    <?php
+                                                        }
+    ?>
+							</div>
+							<div class="prdDetails fLeft">
+							<div class="detComm">
+							<div class="detLabel fmOpenB fLeft">DESIGN NO.</div>
+							<div class="detValue fmOpenR fLeft"><?=$data3[$key]['barcode']; ?></div>
+							</div>
+							</div>
+							<div class="prdPrice fLeft">
+                                                        <div class="detComm">
+							<div class="detLabel fmOpenB fLeft">PRICE</div>
+							<div class="detValue fmOpenB fLeft">
+                                                            <span>&#8377;</span>
+<?php                                                             
+                                                            $price=ceil($data3[$key]['jprice']);
+                                                            echo $price = $comm->IND_money_format($price);
+?>
+                                                </div>
+							</div>
+							</div>
+                                                </a>
+                                            <div class='prdActions fLeft'>
+                                                <a href="<?php echo DOMAIN.str_replace(' ' , '-', $data3[$key]['pdname']).'-'.$data3[$key]['barcode'] . '/jid-' . $data3[$key]['pid'];?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                <a href="<?php echo DOMAIN.str_replace(' ' , '-', $data3[$key]['pdname']).'-'.$data3[$key]['barcode'] . '/jid-' . $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                <a href="<?php echo DOMAIN.str_replace(' ' , '-', $data3[$key]['pdname']).'-'.$data3[$key]['barcode'] . '/jid-' . $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                <a href="<?php echo DOMAIN.str_replace(' ' , '-', $data3[$key]['pdname']).'-'.$data3[$key]['barcode'] . '/jid-' . $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                            </div>
+                                        </div>
+                                    </div>
+<?php
+                        }
+?>
             </div>
         </div>
         <div class="wrapper fLeft">

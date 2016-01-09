@@ -527,7 +527,7 @@ switch ($action) {
                 $uid = $_GET['userid'];
                 $url = APIDOMAIN . 'index.php?action=getPrdById&prdid=' . $pid;
                 $res = $comm->executeCurl($url);
-                $data = $prdInfo = $res['results'][$pid];
+                $prdVars = $data = $prdInfo = $res['results'][$pid];
 
                 $vndrInfo = $prdInfo['vendor_details'];
 
@@ -567,7 +567,27 @@ switch ($action) {
                 $res1 = $comm->executeCurl($url1);
                 $data1 = $res1['results'];
                 $datacnt = $res1['count'];
-
+                
+                $prdVars = $prdVars['attr_details'];
+                $sug   = APIDOMAIN."index.php?action=suggestProducts&pid=".$pid."&catid=10000&clarity=".$prdVars['clarity']."&carat=".$prdVars['carat']."&shape=".$prdVars['shape']."&cut=".$prdVars['cut']."&color=".$prdVars['color']."&fluo=".$prdVars['fluorescence']."&sym = ".$prdVars['symmetry']."&polish=".$prdVars['polish'];
+                $res3  = $comm->executeCurl($sug);
+                $data3 = $res3['results'];
+                $sugTotal = $res3['total'];
+                
+                $ValArr=array('EX'=>'Excellent','VG'=>'Very Good','GD'=>"Good",'FAIR'=>'Fair','NN'=>'None','MED'=>'Medium','FNT'=>'Faint','STG'=>'Strong','VSTG'=>'Very Strong');
+                foreach($ValArr as $ky=>$value)
+                {
+                    if($data['attr_details']['cut'] == $ky)
+                    {
+                       $prdVars['cut'] = $ValArr[$ky];
+                    }
+                }
+                $desres   = APIDOMAIN."index.php?action=showDescription&pid=".$pid."&catid=10000&color=".$prdVars['color']."&cut=".$prdVars['cut']."&clarity=".$prdVars['clarity']."&shape=".$prdVars['shape'];
+                $desres  = $comm->executeCurl($desres);
+                $des = $desres['results'];
+                $totalDes = $res3['total'];
+                //echo "<pre>".print_r($data); die;
+                
                 include 'template/diamond_details.html';
                 break;
 
@@ -580,9 +600,9 @@ switch ($action) {
                     $prdId = explode(' ', $prdId);
                     $prdId = $pid = $prdId[1];
                     $prdInfoUrl = APIDOMAIN . 'index.php?action=getPrdById&prdid=' . $prdId;
-                    $prdInfo = $comm->executeCurl($prdInfoUrl);
+                     $prdInfo = $comm->executeCurl($prdInfoUrl);
                     if (!empty($prdInfo) && !empty($prdInfo['results']) && !empty($prdInfo['error']) && empty($prdInfo['error']['errCode'])) {
-                        $prdInfo = $prdInfo['results'][$prdId];
+                       $prdVars = $prdInfo = $prdInfo['results'][$prdId];
                         $vndrInfo = $prdInfo['vendor_details'];
                         foreach ($vndrInfo as $key => $value) {
                             $vndrId = $key;
@@ -599,30 +619,40 @@ switch ($action) {
                 $url1 = APIDOMAIN . 'index.php?action=imagedisplay&pid=' . $pid;
                 $res1 = $comm->executeCurl($url1);
                 $data1 = $res1['results'];
-                //echo "<pre>".print_r($data1); die;
+                
+                $prdVars = $prdVars['attr_details'];
+                $sug   = APIDOMAIN."index.php?action=suggestProducts&pid=".$pid."&catid=10002&purity=".$prdVars['gold_purity']."&metal=".$prdVars['metal']."&gwt=".$prdVars['gold_weight']."&type=".$prdVars['type'];
+                $res3  = $comm->executeCurl($sug);
+                $data3 = $res3['results'];
+                $sugTotal = $res3['total'];
+                //echo "<pre>".print_r($data3); die;
+                
                 include 'template/bullion_details.html';
                 break;
+                
             case 'jewellery_details':
                 $page = 'jewellery_details';
                 $prdInfo = array();
-
                 $prdName = (!empty($_GET['productname'])) ? $_GET['productname'] : '';
                 $prdId = $orgPrdId = (!empty($_GET['productid'])) ? $_GET['productid'] : '';
-
-                if (!empty($prdId)) {
+                if (!empty($prdId))
+                {
                     $prdId = explode(' ', $prdId);
                     $prdList = $prdId = $pid = $prdId[1];
                     $prdInfoUrl = APIDOMAIN . 'index.php?action=getPrdById&prdid=' . $prdId;
                     $prdInfo = $comm->executeCurl($prdInfoUrl);
-                    if (!empty($prdInfo) && !empty($prdInfo['results']) && !empty($prdInfo['error']) && empty($prdInfo['error']['errCode'])) {
-                        $prdInfo = $prdInfo['results'][$prdId];
+                    if (!empty($prdInfo) && !empty($prdInfo['results']) && !empty($prdInfo['error']) && empty($prdInfo['error']['errCode']))
+                    {
+                        $prdDet = $prdInfo = $prdInfo['results'][$prdId];
                         $vndrInfo = $prdInfo['vendor_details'];
-                        foreach ($vndrInfo as $key => $value) {
+                        foreach ($vndrInfo as $key => $value)
+                        {
                             $vndrId = $key;
                             $vndrDtls = $value;
                         }
                         $vndrDtls['fulladdress'] = explode(",", $vndrDtls['fulladdress']);
-                        foreach ($vndrDtls['fulladdress'] as $key => $value) {
+                        foreach ($vndrDtls['fulladdress'] as $key => $value)
+                        {
                             $vndrDtls['fulladdress'][$key] = trim($value);
                         }
                         $vndrDtls['fulladdress'] = implode(', ', $vndrDtls['fulladdress']);
@@ -632,39 +662,45 @@ switch ($action) {
                 $url1 = APIDOMAIN . 'index.php?action=imagedisplay&pid=' . $pid;
                 $res1 = $comm->executeCurl($url1);
                 $data1 = $res1['results'];
-                //echo "<pre>".print_r($prdInfoUrl); die;
-
-				$gemsUrl = APIDOMAIN . 'index.php?action=getGemstoneTypes';
+                
+                $gemsUrl = APIDOMAIN . 'index.php?action=getGemstoneTypes';
                 $gemsRes = $comm->executeCurl($gemsUrl);
                 $gemsAttrs = $gemsRes['results'];
 
-				foreach($gemsAttrs as $key => $value)
-				{
-					if(strtolower($prdInfo['attr_details']['gemstone_type']) == $value['name'])
-					{
-						$prdInfo['attr_details']['gemstone_type'] = $value['display_name'];
-						break;
-					}
-				}
+                foreach($gemsAttrs as $key => $value)
+                {
+                    if(strtolower($prdInfo['attr_details']['gemstone_type']) == $value['name'])
+                    {
+                        $prdInfo['attr_details']['gemstone_type'] = $value['display_name'];
+                        break;
+                    }
+                }
+                $diamondsShape = explode('|!|', $prdInfo['attr_details']['diamond_shape']);
+                $diamondsShape = array_unique($diamondsShape);
+                $prdInfo['attr_details']['diamond_shape'] = implode('|!|', $diamondsShape);
 
-				$diamondsShape = explode('|!|', $prdInfo['attr_details']['diamond_shape']);
-				$diamondsShape = array_unique($diamondsShape);
-				$prdInfo['attr_details']['diamond_shape'] = implode('|!|', $diamondsShape);
+                $diamondsClarity = explode('|!|', $prdInfo['attr_details']['clarity']);
+                $diamondsClarity = array_unique($diamondsClarity);
+                $prdInfo['attr_details']['clarity'] = implode('|!|', $diamondsClarity);
 
-				$diamondsClarity = explode('|!|', $prdInfo['attr_details']['clarity']);
-				$diamondsClarity = array_unique($diamondsClarity);
-				$prdInfo['attr_details']['clarity'] = implode('|!|', $diamondsClarity);
+                $gemstoneType = explode('|!|', $prdInfo['attr_details']['gemstone_type']);
+                $gemstoneType = array_unique($gemstoneType);
+                $prdInfo['attr_details']['gemstone_type'] = implode('|!|', $gemstoneType);
 
-				$gemstoneType = explode('|!|', $prdInfo['attr_details']['gemstone_type']);
-				$gemstoneType = array_unique($gemstoneType);
-				$prdInfo['attr_details']['gemstone_type'] = implode('|!|', $gemstoneType);
-
-				$gemstoneColor = explode('|!|', $prdInfo['attr_details']['gemstone_color']);
-				$gemstoneColor = array_unique($gemstoneColor);
-				$prdInfo['attr_details']['gemstone_color'] = implode('|!|', $gemstoneColor);
-
+                $gemstoneColor = explode('|!|', $prdInfo['attr_details']['gemstone_color']);
+                $gemstoneColor = array_unique($gemstoneColor);
+                $prdInfo['attr_details']['gemstone_color'] = implode('|!|', $gemstoneColor);
+                
+                $prdVars = $prdInfo['attr_details'];
+                $sug   = APIDOMAIN."index.php?action=suggestProducts&pid=".$pid."&catid=10001&metal=".$prdVars['metal']."&purity=".$prdVars['gold_purity']."&gwt=".$prdVars['gold_weight']."&shape=".$prdVars['shape']."&certified=".$prdVars['certified'];
+                $res3  = $comm->executeCurl($sug);
+                $data3 = $res3['results'];
+                $sugTotal = $res3['total'];
+                
+//                echo "<pre>"; print_r($data3); die;
                 include 'template/jewellery_details.html';
                 break;
+                
             case 'diamond_Form':
                 $page = 'diamond-Form';
                 $vid = $_GET['vid'];

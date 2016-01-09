@@ -44,10 +44,11 @@
                             <div class="prdShape fLeft">
                                 <div class="prdShTitle fLeft fmOpenB">PRICE</div>
 <?php
-$rate = $data['attr_details']['dollar_rate'];
-if (empty($data['attr_details']['dollar_rate']) || $data['attr_details']['dollar_rate'] == '0.00' || $data['attr_details']['dollar_rate'] == 0.00) {
-    $rate = dollarValue;
-}
+                                $rate = $data['attr_details']['dollar_rate'];
+                                if (empty($data['attr_details']['dollar_rate']) || $data['attr_details']['dollar_rate'] == '0.00' || $data['attr_details']['dollar_rate'] == 0.00)
+                                {
+                                    $rate = dollarValue;
+                                }
 ?>
                                 <div class="prdShType fLeft fmOpenL"><span>&#8377;</span>
                                 <?php
@@ -81,7 +82,7 @@ if (empty($data['attr_details']['dollar_rate']) || $data['attr_details']['dollar
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">CUT</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['cut']; ?></div>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo $prdVars['cut']; ?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR">
                                 <div class="infoLabel fmOpenB  font12">SYMMETRY</div>
@@ -161,7 +162,7 @@ if (empty($data['attr_details']['dollar_rate']) || $data['attr_details']['dollar
                     <div class="vdLeftCard fLeft">
                         <div class="orgName fLeft fmOpenR"><?php echo $vndrDtls['OrganisationName']; ?></div>
                         <div class="orgAdd fLeft fmOpenR">
-<?php echo trim($vndrAddr[0]); ?>
+                            <?php echo trim($vndrAddr[0]); ?>
                             <?php
                             if (!empty($vndrAddr[1])) {
                                 echo trim($vndrAddr[1]) . ', ';
@@ -271,14 +272,27 @@ if (empty($data['attr_details']['dollar_rate']) || $data['attr_details']['dollar
         <div class='prdInfo fLeft'>
             <div class="wrapperMax fmOpenR">
                 <div class="centerDiv">
-                  <div class="prdInfoDiv fLeft shapesPage2 ">
-                      <div class="shapesCommH fLeft">
-                          <div class="Round shapeComm"></div>
-                          <div class="texHolder font13 fmOpenR">
-                              The round cut diamond is the most popular diamond shape, representing approximately 75% of all diamonds sold. The most commonly chosen variation, round-cut diamonds have been more researched by certified gemologists than other shape. Renowned for its unrivaled fire and brilliance, this cut boasts excellent light refraction properties, causing it to appear brighter than other shapes. When clarity and color are equal, a round diamond will be more valuable than alternative shapes.
+<?php
+
+foreach($des as $key=>$value)
+                {
+                    if($data['attr_details']['shape'] == ucwords(strtolower($key)))
+                    {
+?>      
+                      <div class="prdInfoDiv fLeft shapesPage2 ">
+                          <div class="shapesCommH fLeft">
+                              <div class="<?=ucwords(strtolower($key));?> shapeComm"></div>
+                              <div class="texHolder font13 fmOpenR">
+<?php
+                                echo $des[$key]['describe_text'];
+?>
+                              </div>
                           </div>
                       </div>
-                  </div>
+<?php
+                    }
+                }
+?>
 
                   <div class="prdInfoTitle fLeft fmOpenR">Diamond Anatomy</div>
                   <div class="fmOpenR tctContents fLeft">
@@ -398,43 +412,161 @@ if (empty($data['attr_details']['dollar_rate']) || $data['attr_details']['dollar
                           <div class="textDiv fLeft">Refers to the number of degrees between the planes of the table , and the pavilion facets. the angle determines how much of the light which has travelled into the lower part of the diamond will be successfully reflected back through the crown (where the observer can perceive it).</div>
                       </div>
                   </div>
-
-
                 </div>
-              <div class="prdInfoWrap fLeft">
-                <div class="prdInfoCont fLeft">
-                    <div class="prdInfoTitle fLeft">Color - D (Colorless)</div>
-                    <div class="prdInfoDiv fLeft">
-                        While there are differences in color between D, E, and F diamonds, they can be detected only by a gemologist in side by side comparisons, and rarely by the untrained eye.
+                <div class="prdInfoWrap fLeft">
+<?php
+               foreach($des as $key=>$value)
+                {
+                    if($des[$key]['describe_name'] == 'color')
+                    {
+ ?>
+                        <div class="prdInfoCont fLeft">
+                            <div class="prdInfoTitle fLeft"><?php echo $des[$key]['describe_display_name'].' - '.$data['attr_details'][$key];?></div>
+                            <div class="prdInfoDiv fLeft">
+                            <span class="fmOpenB"><?php echo $des[$data['attr_details'][$key]]['describe_display_name'].': ';?></span>
+<?php
+                                        echo $des[$key]['describe_text'].'<br>';
+                                        print_r($des[$data['attr_details'][$key]]['describe_text']);
+                                        
+?>
+                            </div>
+                        </div>
+<?php
+                    }
+                    if($des[$key]['describe_name'] == 'clarity')
+                    {
+?>
+                        <div class="prdInfoCont fLeft">
+                            <div class="prdInfoTitle fLeft"><?php echo $des[$key]['describe_display_name'].' - '.$data['attr_details'][$key];?></div>
+                            <div class="prdInfoDiv fLeft">
+                            <span class="fmOpenB">
+<?php 
+                                        if(!empty($des[$data['attr_details'][$key]]['describe_display_name']))
+                                        {
+                                            echo $des[$data['attr_details'][$key]]['describe_display_name'].': ';
+                                        }
+                                        else
+                                        {
+                                            echo $data['attr_details'][$key].': ';
+                                        }
+?>
+                            </span>
+<?php 
+                                        echo $des[$key]['describe_text'];
+                                        print_r($des[$data['attr_details'][$key]]['describe_text']);
+                                        
+?>
+                            </div>
+                        </div>
+<?php
+                    }
+                    if($des[$key]['describe_name'] == 'cut')
+                    {
+                         print_r();
+?>
+                        <div class="prdInfoCont fLeft">
+                            <div class="prdInfoTitle fLeft"><?php echo $des[$key]['describe_display_name'].' - '.$data['attr_details'][$key];?></div>
+                            <div class="prdInfoDiv fLeft">
+                                <span class="fmOpenB"><?php echo $data['attr_details'][$key].' ('.ucwords(strtolower($prdVars['cut'])).'): ';?></span>
+<?php
+                                        echo $des[$key]['describe_text'];
+                                        print_r($des[$data['attr_details'][$key]]['describe_text']);
+?>
+                            </div>
+                        </div>
+<?php
+                    }
+                    if($des[$key]['describe_name'] == 'carat')
+                    {
+?>
+                        <div class="prdInfoCont fLeft">
+                            <div class="prdInfoTitle fLeft"><?php echo $des[$key]['describe_display_name'].' - '.$data['attr_details'][$key];?></div>
+                            <div class="prdInfoDiv fLeft">
+<?php
+                                        echo $des[$key]['describe_text'].'<br>';
+                                        print_r($des[$data['attr_details'][$key]]['describe_text']);
+                                        
+?>
+                            </div>
+                        </div>
+<?php
+                    }
+                }
+?>
                     </div>
-                </div>
-                <div class="prdInfoCont fLeft">
-                    <div class="prdInfoTitle fLeft">Clarity - VVS1</div>
-                    <div class="prdInfoDiv fLeft">
-                        Using a jewelers eye glass or loop at 10 times (10x) magnification, a trained eye can detect identifying characteristics which affect a diamonds clarity. The most common are internal flaws called inclusions.
-                    </div>
-                </div>
-                <div class="prdInfoCont fLeft">
-                    <div class="prdInfoTitle fLeft">Cut - EX (Excellent)</div>
-                    <div class="prdInfoDiv fLeft">
-                        Cut refers not to a diamond's shape (e.g. round, oval, pear, etc.) but to a diamond's proportions, symmetry and polish. The beauty of a diamond depends more on cut than any other factor. <span class="fmOpenB">Maximum fire and brilliance. Reflects nearly all of the light that enters the diamond, creating exceptional sparkle and life.</span>
-
-                    </div>
-                </div>
-                <div class="prdInfoCont fLeft">
-                    <div class="prdInfoTitle fLeft">Carat - 0.33</div>
-                    <div class="prdInfoDiv fLeft">
-                        Among all of the characteristics of a diamond, the carat is the most known and probably the most easily observed. A carat abbreviated CT, measures the weight of a diamond. One carat is one fifth of a gram, meaning a 5 Carat diamond weighs one gram.
-                    </div>
-                </div>
-            </div>
-
-
-
-
-
-
-
+<?php                    
+            if($sugTotal > 0)
+            {
+?>
+                <div class="prdInfoTitle fLeft">Similar Products</div>
+                <div class='w100 fLeft'>
+<?php
+                    foreach($data3 as $key=>$value)
+                    {
+?>
+                                        <div class='prdComm fLeft'>
+                                            <div class='prdCommDiv fLeft transition100'>
+                                                <a href="<?php echo DOMAIN . strtolower($data3[$key]['certified']) . '-' . strtolower($data3[$key]['shape']) . '-clarity-' . $data3[$key]['clarity']; ?>/did-<?php echo $data3[$key]['pid']; ?>">
+                                                <div class='prdShape fLeft'>
+                                                    <div class='prdShTitle fLeft fmOpenB'>SHAPE</div>
+                                                    <div class='prdShType fLeft fmOpenR'><?=$data3[$key]['shape'];?></div>
+                                                    <div class="<?=ucwords(strtolower($data3[$key]['shape']));  ?> fRight"></div>
+                                                </div>
+                                                <div class="prdDetails fLeft">
+                                                    <div class="detComm">
+                                                        <div class="detLabel fmOpenB fLeft">COLOR</div>
+                                                        <div class="detValue fmOpenR fLeft"><?php echo $data3[$key]['color']; ?></div>
+                                                    </div>
+                                                    <div class="detComm">
+                                                        <div class="detLabel fmOpenB fLeft">CARATS</div>
+                                                        <div class="detValue fmOpenR fLeft"><?php echo $data3[$key]['carat']; ?></div>
+                                                    </div>
+                                                    <div class="detComm">
+                                                        <div class="detLabel fmOpenB fLeft">CLARITY</div>
+                                                        <div class="detValue fmOpenR fLeft"><?php echo $data3[$key]['clarity']; ?></div>
+                                                    </div>
+                                                    <div class="detComm">
+                                                        <div class="detLabel fmOpenB fLeft">CERTIFICATE</div>
+                                                        <div class="detValue fmOpenR fLeft"><?php echo $data3[$key]['certified']; ?></div>
+                                                    </div>
+                                                </div>
+                                                    
+                                                <div class='prdPrice fLeft'>
+                                                    <div class="detComm">
+                                                        <div class="detLabel fmOpenB fLeft">BEST PRICE</div>
+<?php
+                                                            if(empty($data3[$key]['vendor_rates']['dollar_rate']) || $data3[$key]['vendor_rates']['dollar_rate'] == '0.00')
+                                                            {
+                                                                $rate = dollarValue;
+                                                            }
+                                                            else
+                                                            {
+                                                                $rate = $data3[$key]['vendor_rates']['dollar_rate'];
+                                                            }
+                                                            
+?>
+                                                        <div class="detValue fmOpenB fLeft"><span>&#8377;</span>
+<?php 
+                                                            $price = ceil($data3[$key]['price']* $rate*$data3[$key]['carat']);
+                                                            echo $price = $comm->IND_money_format($price);
+?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </a>
+                                                <div class='prdActions fLeft'>
+                                                    <a href="<?php echo DOMAIN . strtolower($data3[$key]['certified']) . '-' . strtolower($data3[$key]['shape']) . '-clarity-' . $data3[$key]['clarity']; ?>/did-<?php echo $data3[$key]['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                    <a href="<?php echo DOMAIN . strtolower($data3[$key]['certified']) . '-' . strtolower($data3[$key]['shape']) . '-clarity-' . $data3[$key]['clarity']; ?>/did-<?php echo $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                    <a href="<?php echo DOMAIN . strtolower($data3[$key]['certified']) . '-' . strtolower($data3[$key]['shape']) . '-clarity-' . $data3[$key]['clarity']; ?>/did-<?php echo $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                    <a href="<?php echo DOMAIN . strtolower($data3[$key]['certified']) . '-' . strtolower($data3[$key]['shape']) . '-clarity-' . $data3[$key]['clarity']; ?>/did-<?php echo $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                </div>
+                                            </div>
+                                        </div>
+<?php
+                    }
+            }
+?>
+        </div>
             </div>
         </div>
         <div class="wrapper fLeft">

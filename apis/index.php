@@ -1208,6 +1208,22 @@ switch($action)
             $res=$result;
             break;
 
+//  localhost/iftosi/apis/index.php?action=suggestProducts
+        case 'suggestProducts':
+            include APICLUDE.'class.product.php';
+            $obj= new product($db['iftosi']);
+            $result=$obj->suggestProducts($params);
+            $res=$result;
+            break;
+        
+//  localhost/iftosi/apis/index.php?action=showDescription
+        case 'showDescription':
+            include APICLUDE.'class.product.php';
+            $obj= new product($db['iftosi']);
+            $result=$obj->showDescription($params);
+            $res=$result;
+            break;
+
 //------------------------------Suggestions str and table name---------------
 
      /*   case 'getsuggestions':
@@ -1475,10 +1491,6 @@ echo '</pre>';
             $obj=new wishlist($db['iftosi']);
             $result=$obj->removeFromWishlist($params);
             $res=$result;
-            break;
-
-        case 'bullionDet':
-            include 'bullions_details.html';
             break;
 
 //-------------------------Helpdesk--------------------------------------

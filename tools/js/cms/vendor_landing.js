@@ -575,7 +575,7 @@ function updateDollarRate() {
     else {
         $.ajax({url: DOMAIN + "/apis/index.php?action=updateDollerRate&vid="+uid+"&dolRate="+dollar_rate, success: function(result) {
                 var obj = jQuery.parseJSON(result);
-                var errCode = obj['error']['Code'];
+                var errCode = obj['error']['code'];
                 if(errCode==0)
                 {
                     common.toast(1,obj['error']['Msg']);
