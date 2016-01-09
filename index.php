@@ -586,7 +586,7 @@ switch ($action) {
                 $desres  = $comm->executeCurl($desres);
                 $des = $desres['results'];
                 $totalDes = $res3['total'];
-                //echo "<pre>".print_r($data); die;
+                //echo "<pre>".print_r($data3); die;
                 
                 include 'template/diamond_details.html';
                 break;
@@ -692,12 +692,21 @@ switch ($action) {
                 $prdInfo['attr_details']['gemstone_color'] = implode('|!|', $gemstoneColor);
                 
                 $prdVars = $prdInfo['attr_details'];
-                $sug   = APIDOMAIN."index.php?action=suggestProducts&pid=".$pid."&catid=10001&metal=".$prdVars['metal']."&purity=".$prdVars['gold_purity']."&gwt=".$prdVars['gold_weight']."&shape=".$prdVars['shape']."&certified=".$prdVars['certified'];
-                $res3  = $comm->executeCurl($sug);
-                $data3 = $res3['results'];
-                $sugTotal = $res3['total'];
                 
-//                echo "<pre>"; print_r($data3); die;
+                if(!empty($prdVars['metal']) && !empty($prdVars['gold_purity']) && !empty($prdVars['gold_weight']) && !empty($prdVars['shape']) && !empty($prdVars['certified']))
+                {
+                    $sug   = APIDOMAIN."index.php?action=suggestProducts&pid=".$pid."&catid=10001&metal=".$prdVars['metal']."&purity=".$prdVars['gold_purity']."&gwt=".$prdVars['gold_weight']."&shape=".$prdVars['shape']."&certified=".$prdVars['certified'];
+                    $res3  = $comm->executeCurl($sug);
+                    $data3 = $res3['results'];
+                    $sugTotal = $res3['total'];
+                }
+                foreach($data3 as $imagekey=>$imgval)
+                {
+                    $urlI = APIDOMAIN . 'index.php?action=imagedisplay&pid='.$imagekey;
+                    $resI = $comm->executeCurl($urlI);
+                    $dataI[] = $resI['results'];
+                }
+                //echo "<pre>"; print_r($dataI); die;
                 include 'template/jewellery_details.html';
                 break;
                 

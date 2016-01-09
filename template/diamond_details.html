@@ -417,15 +417,26 @@ foreach($des as $key=>$value)
 <?php
                foreach($des as $key=>$value)
                 {
-                    if($des[$key]['describe_name'] == 'color')
+                    if($des[$key]['describe_name'] == 'color' && !empty($des[$key]['describe_name']))
                     {
  ?>
                         <div class="prdInfoCont fLeft">
                             <div class="prdInfoTitle fLeft"><?php echo $des[$key]['describe_display_name'].' - '.$data['attr_details'][$key];?></div>
                             <div class="prdInfoDiv fLeft">
-                            <span class="fmOpenB"><?php echo $des[$data['attr_details'][$key]]['describe_display_name'].': ';?></span>
+                            <span class="fmOpenB">
 <?php
-                                        echo $des[$key]['describe_text'].'<br>';
+                                        if(!empty($des[$data['attr_details'][$key]]['describe_display_name']))
+                                        {
+                                            echo $des[$data['attr_details'][$key]]['describe_display_name'].': ';
+                                        }
+                                        else
+                                        {
+                                            echo $data['attr_details'][$key].': ';
+                                        }
+?>
+                            </span>
+<?php
+                                        echo $des[$key]['describe_text'];
                                         print_r($des[$data['attr_details'][$key]]['describe_text']);
                                         
 ?>
@@ -433,7 +444,7 @@ foreach($des as $key=>$value)
                         </div>
 <?php
                     }
-                    if($des[$key]['describe_name'] == 'clarity')
+                    if($des[$key]['describe_name'] == 'clarity' && !empty($des[$key]['describe_name']))
                     {
 ?>
                         <div class="prdInfoCont fLeft">
@@ -460,14 +471,25 @@ foreach($des as $key=>$value)
                         </div>
 <?php
                     }
-                    if($des[$key]['describe_name'] == 'cut')
+                    if($des[$key]['describe_name'] == 'cut' && !empty($des[$key]['describe_name']))
                     {
-                         print_r();
+                        
 ?>
                         <div class="prdInfoCont fLeft">
-                            <div class="prdInfoTitle fLeft"><?php echo $des[$key]['describe_display_name'].' - '.$data['attr_details'][$key];?></div>
+                            <div class="prdInfoTitle fLeft"><?php echo $des[$key]['describe_display_name'].' - '.(strstr($des[$data['attr_details'][$key]]['describe_display_name'],' ',true));?></div>
                             <div class="prdInfoDiv fLeft">
-                                <span class="fmOpenB"><?php echo $data['attr_details'][$key].' ('.ucwords(strtolower($prdVars['cut'])).'): ';?></span>
+                                <span class="fmOpenB">
+<?php
+                                        if(!empty($des[$data['attr_details'][$key]]['describe_display_name']))
+                                        {
+                                            echo $des[$data['attr_details'][$key]]['describe_display_name'].': ';
+                                        }
+                                        else
+                                        {
+                                            echo $data['attr_details'][$key].': ';
+                                        }
+?>
+                                    </span>
 <?php
                                         echo $des[$key]['describe_text'];
                                         print_r($des[$data['attr_details'][$key]]['describe_text']);
@@ -476,16 +498,23 @@ foreach($des as $key=>$value)
                         </div>
 <?php
                     }
-                    if($des[$key]['describe_name'] == 'carat')
+                    if($des[$key]['describe_name'] == 'carat' && !empty($des[$key]['describe_name']))
                     {
 ?>
                         <div class="prdInfoCont fLeft">
                             <div class="prdInfoTitle fLeft"><?php echo $des[$key]['describe_display_name'].' - '.$data['attr_details'][$key];?></div>
                             <div class="prdInfoDiv fLeft">
 <?php
-                                        echo $des[$key]['describe_text'].'<br>';
+                                        if(!empty($des[$data['attr_details'][$key]]['describe_display_name']))
+                                        {
+                                            echo $des[$data['attr_details'][$key]]['describe_display_name'].': ';
+                                        }
+                                        else
+                                        {
+                                            echo $data['attr_details'][$key].': ';
+                                        }
+                                        echo $des[$key]['describe_text'];
                                         print_r($des[$data['attr_details'][$key]]['describe_text']);
-                                        
 ?>
                             </div>
                         </div>

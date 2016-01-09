@@ -3,7 +3,7 @@
 <?php 
             include TEMPLATE.'backheader.html';
             $catid=$_GET['c'];
-            $vendor_landing = DOMAIN.'?case=vendor_landing&catid='.$catid;
+            $vendor_landing = DOMAIN.'index.php?case=vendor_landing&catid='.$catid;
 ?>            
         <div class="vndTabs fLeft fmOpenR"  style="margin-top: 50px;">
             <div class="wrapperMax">
@@ -36,7 +36,7 @@
         <?php
             if( !empty($catid))
             {
-            $backUrl = DOMAIN.'?case='.$case.'&catid='.$_GET['c'].'&prdid='.$_GET['pid'];
+            $backUrl = DOMAIN.'index.php?case='.$case.'&catid='.$_GET['c'].'&prdid='.$_GET['pid'];
 ?>
             
 <!--                <a href="<?php echo $vendor_landing;?>"><div class="finishBtn btnComm fRight">PROCEED</div></a>-->
