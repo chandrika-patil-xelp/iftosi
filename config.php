@@ -17,7 +17,6 @@ if(stristr($_SERVER['HTTP_HOST'],'demo.iftosi.com'))
 	define('APICLUDE',WEBROOT.'apis/include/');
 	define('IMGDOMAIN','http://'.$_SERVER['HTTP_HOST'].'/image-upload/');
 	define('IMGUPLOAD','http://'.$_SERVER['HTTP_HOST'].'/upload-image/');
-	define('VERSION',6.0);
 	define('IMGPATH','image-upload/');
 }
 else if(stristr($_SERVER['HTTP_HOST'],'iftosi.com'))
@@ -31,7 +30,6 @@ else if(stristr($_SERVER['HTTP_HOST'],'iftosi.com'))
 	define('APICLUDE',WEBROOT.'apis/include/');
 	define('IMGDOMAIN','http://'.$_SERVER['HTTP_HOST'].'/image-upload/');
 	define('IMGUPLOAD','http://'.$_SERVER['HTTP_HOST'].'/upload-image/');
-	define('VERSION',6.0);
 	define('IMGPATH','image-upload/');
 }
 else if(stristr($_SERVER['HTTP_HOST'], '52.77.214.223'))
@@ -44,7 +42,6 @@ else if(stristr($_SERVER['HTTP_HOST'], '52.77.214.223'))
 	define('APICLUDE',WEBROOT.'apis/include/');
 	define('IMGDOMAIN','http://'.$_SERVER['HTTP_HOST'].'/image-upload/');
 	define('IMGUPLOAD','http://'.$_SERVER['HTTP_HOST'].'/upload-image/');
-	define('VERSION',6.0);
 	define('IMGPATH','image-upload/');
 }
 else
@@ -57,10 +54,11 @@ else
 	define('APICLUDE',WEBROOT.'apis/include/');
 	define('IMGDOMAIN','http://'.$_SERVER['HTTP_HOST'].'/iftosi/image-upload/');
 	define('IMGUPLOAD','http://'.$_SERVER['HTTP_HOST'].'/iftosi/upload-image/');
-	define('VERSION',6.0);
 	define('IMGPATH','image-upload/');        
 }
 define('SMSAPI','http://alerts.sinfini.com/api/web2sms.php?workingkey=A31cf85c3cc3b65100bf9bd7fbe30cd90&to=+91_MOBILE&sender=SIDEMO&message=_MESSAGE');
+
+define('VERSION',6.10);
 
 $dollarValue = 66.03;
 define('dollarValue',$dollarValue);
