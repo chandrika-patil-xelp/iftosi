@@ -62,13 +62,18 @@ var validMob = true;
         var city = $('#pr_city').val();
         var cityid = $('#pr_cid').val();
         var isVendor = $('#isVendor').is(':checked');
+            isVendor = $('#isVendor').val();
         var amIVendor = $("input[type=checkbox]:checked").length;
         var isValid = false;
-        var userType =1;
-        if(isVendor)
+        var userType = isVendor;
+        if(isVendor == 1 || isVendor == '1')
+        {
             isVendor=1;
-        else 
+        }
+        else
+        {
             isVendor=-1;
+        }
 
 		setTimeout(function () {
 			if(pr_name.length==0 || isNaN(pr_name)!==true) {
@@ -78,11 +83,6 @@ var validMob = true;
 			}
                         else if(city == '') {
 				customStorage.toast(0,'City is mandatory!'); 
-				$('#pr_city').focus();
-				return false;
-			}
-                        else if(cityid == '') {
-				customStorage.toast(0,'Please choose city from the list!'); 
 				$('#pr_city').focus();
 				return false;
 			}
@@ -106,8 +106,9 @@ var validMob = true;
 				$('#pr_pass').focus();
 				return false;
 			}
-                        else if(amIVendor == undefined || amIVendor == 'undefined' || amIVendor == '' || amIVendor == null || amIVendor == 'null' || amIVendor == 0){
-				customStorage.toast(0,'You have not Selected the type of user!'); 
+                        else if(pr_pass.length <= 5 || pr_pass == 0) {
+				customStorage.toast(0,'Password must have minimum 6 characters!'); 
+				$('#pr_pass').focus();
 				return false;
 			}
                         else if(pr_mobile.length==10 && common.validateEmail('pr_email'))
@@ -207,18 +208,24 @@ function otpCheck()
                         var pr_email = $('#pr_email').val();
                         var pr_pass = $('#pr_pass').val();
                         var pr_city = $('#pr_city').val();
-                        var isVendor = $('#isVendor').is(':checked');
+                        //var isVendor = $('#isVendor').is(':checked');
+                        var isVendor = $('#isVendor').val();
                         var amIVendor = $("input[type=checkbox]:checked").length;
                         isValid = false;
-                        var userType =1;
-                        if(isVendor)
+                        var userType = isVendor;
+                        if(isVendor == 1)
+                        {
                             isVendor=1;
-                        else 
+                        }
+                        else
+                        {
                             isVendor=-1;
+                        }
                         $.ajax({url: DOMAIN + "apis/index.php?action=userReg&username=" + pr_name +"&password=" + pr_pass +"&mobile=" + pr_mobile + "&cityname="+pr_city+"&email="+pr_email+'&isvendor='+userType, success: function (result) {
                                     var obj = eval('('+result+')');
                                     var errCode = obj.error.code;
-                                    if(errCode == 0) {
+                                    if(errCode == 0)
+                                    {
                                             var userid = obj.userid;
                                             customStorage.addToStorage('isLoggedIn',true);
                                             customStorage.addToStorage('userid',userid);
@@ -228,14 +235,18 @@ function otpCheck()
                                             customStorage.addToStorage('email',pr_email);
                                             customStorage.addToStorage('name',pr_name);
                                             customStorage.addToStorage('city',pr_city);
-                                            if(isVendor===1) {
+                                            if(isVendor === 1)
+                                            {
                                                     customStorage.removeFromStorage('busiType');
                                                     window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid='+userid);
-                                            } else {
+                                            } else
+                                            {
                                                     customStorage.toast(1,'Registration Successfull Done');
                                                     setTimeout(function () {window.location.assign(DOMAIN + 'index.php'); },1500);
                                             }
-                                    } else {
+                                    }
+                                    else
+                                    {
                                             customStorage.toast(0,'Registration Unsuccessfull');
                                     }
                             }
@@ -375,4 +386,13 @@ function closeSuggest(id) {
 $('body').click(function()
 {
     $('#pr_citySuggestDiv').addClass('dn');
+});
+
+$(document).ready(function ()
+{
+    var uid = customStorage.readFromStorage('userid');
+        if(uid == null || uid == undefined || uid == 'undefined' || uid == 'null' || uid == '')
+        {
+            $('#vsignup').removeClass('dn');
+        }
 });

@@ -38,6 +38,9 @@ RewriteRule ^((?i)radiant)$    index.php?case=education_radiant [L]
 RewriteRule ^((?i)carat-weight)$    index.php?case=e_carat_weight [L]
 RewriteRule ^((?i)shapes)$    index.php?case=e_shapes [L]
 RewriteRule ^((?i)anatomy)$    index.php?case=diamond_shapes [L]
+
+RewriteRule ^((?i)jewellery-tips)$    index.php?case=jewellery_tips [L]
+
 RewriteRule ^((?i)cut)$    index.php?case=e_cut [L]
 RewriteRule ^((?i)girdle-size)$    index.php?case=e_cut1 [L]
 RewriteRule ^((?i)culet-size)$    index.php?case=e_cut2 [L]
@@ -53,9 +56,11 @@ RewriteRule ^((?i)gia-vs-egl)$    index.php?case=e_certification2 [L]
 
 ###################### LOGIN RELATED ##########################
 RewriteRule ^((?i)sign-up)$    index.php?case=signup [L]
+RewriteRule ^((?i)vendor-sign-up)$    index.php?case=vsignup [L]
 RewriteRule ^((?i)forgot-password)$    index.php?case=forgot [L]
 RewriteRule ^((?i)login)$ index.php?case=login [L]
 RewriteRule ^((?i)change-password)$ index.php?case=changepwd [L]
+RewriteRule ^((?i)fp-[^/.]*)$ index.php?case=changepwd&key=$1 [L]
 
 ####################### CMS STARTS ###########################
 

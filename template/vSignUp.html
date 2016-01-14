@@ -15,8 +15,8 @@
                         <div class="signupCl1 fLeft fmOpenL">
                             <div class="head1">Sign up today</div>
                             <div class="head2">for better options.</div>
-                            <div class="head3 fmOpenR headIcon1">Add products to wishlist</div>
-                            <div class="head3 fmOpenR headIcon2">Get vendor details instantly</div>
+                            <div class="head3 fmOpenR headIcon1">Add products to stock</div>
+                            <div class="head3 fmOpenR headIcon2">Upload and manage products</div>
                             <div class="head3 fmOpenR headIcon3">Browse exclusive products</div>
                            
                         </div>
@@ -52,7 +52,7 @@
                             </div>  
                             <input type="password"  style="display:none">
                             
-                            <input type="hidden" id="isVendor" class="filled-in amIVendor" value="0" name="isBuyer">
+                            <input type="hidden" id="isVendor" class="filled-in amIVendor" value="1" name="isVendor">
                             
                             <div class="font12 txtCenter fLeft termsLink">By clicking on Sign Up below, <br><b>you agree to our <a href="<?php echo DOMAIN?>index.php?case=terms_conditions" alt="Terms And Conditions" title="Terms of Services">Terms of Service</a></b></div>
                             <div class="cancelLgBtn fLeft fmOpenR ripplelink poR" id='signupCancel'> CANCEL</div>
@@ -76,14 +76,13 @@
         <?php include 'logo.html' ?>
     </div>
     <script type="text/javascript">
-    $(document).ready(function ()
+    $(document).ready(function (){
+    var uid = customStorage.readFromStorage('userid');
+    if(uid !== undefined && uid !== 'undefined' && uid !== null && uid !== 'null' && uid !== '')
     {
-        var uid = customStorage.readFromStorage('userid');
-        if(uid !== undefined && uid !== 'undefined' && uid !== null && uid !== 'null' && uid !== '')
-        {
-            window.location.href=DOMAIN;
-        }
-    });
+        window.location.href=DOMAIN;
+    }
+});
     </script>
     <?php include 'footer.html'; ?>
     <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>

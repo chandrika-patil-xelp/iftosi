@@ -8,6 +8,7 @@ if (pw < 768) {
 }
 
 $(document).ready(function() {
+    var uid = customStorage.readFromStorage('userid');
     $('input').bind('click',function(){$(this).attr('readonly',false);});
     
     //$('.categoryCircle').velocity({scale: "0"}, {duration: 0, delay: 0});

@@ -197,7 +197,7 @@
             $ires=$this->query($isql);
             $uid=$this->lastInsertedId();
             
-            if($params['isvendor']==1)
+            if($params['isvendor'] == 1)
             {
             $isql= "INSERT
                     INTO
@@ -294,7 +294,7 @@
                         }
                         else
                         {
-                                $params['isC'] = 0;
+                                $params['isC'] = $params['isC'];
                         }
                     }
                 }
@@ -396,6 +396,9 @@
             }
             if (!empty($detls['busiType'])) {
                 $vsql .= " business_type = '".$detls['busiType']."',";
+            }
+            if (!empty($params['payamt'])) {
+                $vsql .= " pay_amount = '".$params['payamt']."',";
             }
             if (!empty($params['lat'])) {
                 $vsql .= " lat = '".$params['lat']."',";
@@ -731,7 +734,7 @@
                                     user_id,
                                     user_name,
                                     logmobile,
-                                    email 
+                                    email
                    FROM 
                                     tbl_registration 
                    WHERE 
@@ -818,63 +821,112 @@
 		return $pwd;
 	}
         
-        public function forgotPwd($params) {
-            $vsql = "SELECT email FROM tbl_registration WHERE logmobile=\"" . $params['email'] . "\"";
+        public function forgotPwd($params)
+        {
+            $vsql = "   SELECT
+                                email,
+                                user_id,
+                                logmobile
+                        FROM 
+                                tbl_registration
+                        WHERE 
+                                logmobile=\"" . $params['email'] . "\"
+                        AND 
+                                is_active <> 2";
             $vres = $this->query($vsql);
             $row = $this->fetchData($vres);
             $cnt1 = $this->numRows($vres);
-
-            if ($cnt1 > 0) {
-                $password = mt_rand(111111, 999999);
-                $vsql1 = "UPDATE tbl_registration SET password=MD5(\"".$password."\"), pass_flag=1 WHERE logmobile=\"" . $params['email'] . "\"";
-
-                $vres1 = $this->query($vsql1);
-                if ($vres1) {
-                    $subject = 'Your Password Changed';
-                    $message = 'Your password was successfully Changed. Your new password is ' . $password;
+            $mobile = $row['logmobile'];
+            $uid = $row['user_id'];
+            $em = urlencode($row['email']);
+            
+            global $comm;
+            $url = APIDOMAIN."index.php?action=changePassUrl&uid=".$uid."&email=".$mobile."&mobile=".$em;
+            $res  = $comm->executeCurl($url);
+            $data = $res;
+            
+            $urlkey =  $data['result'][0]['urlkey'];
+            
+            if ($cnt1 > 0)
+            {
+                    $subject = 'IFtoSI Forgot Password';
+                    $message = 'Please Click on the link to change your password- ';
+                    $message = DOMAIN.'FP-'. $urlkey;
 
                     $headers = "MIME-Version: 1.0" . "\r\n";
                     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                     $headers .= 'From: <info@iftosi.com>' . "\r\n";
                     
                     $mail = mail($row['email'], $subject, $message, $headers);
-                    if ($mail) {
+                    if ($mail)
+                    {
                         $arr = array();
                         $err = array('Code' => 0, 'Msg' => 'Email sent with the password');
-                    } else {
+                    }
+                    else
+                    {
                         $arr = array();
                         $err = array('Code' => 1, 'Msg' => 'Mail not Sent');
                     }
-                } else {
-                    $arr = array();
-                    $err = array('Code' => 1, 'Msg' => 'Failed to Update Password');
-                }
-            } else {
+            }
+            else
+            {
                 $arr = array();
-                $err = array('Code' => 1, 'Msg' => 'Invalid Mobile Number');
+                $err = array('Code' => 1, 'Msg' => 'Failed to Update Password');
             }
             $result = array('results' => $arr, 'error' => $err);
             return $result;
         }
         
-        public function changePwd($params) {
-            $vsql = "SELECT * FROM tbl_registration WHERE user_id='" . $params['uid'] . "' AND password=MD5('".$params['cpass']."') ";
+        public function changePwd($params)
+        {
+            $vsql = "   SELECT
+                                *
+                        FROM
+                                tbl_registration
+                        WHERE
+                                user_id=".$params['uid'];
+            
             $vres = $this->query($vsql);
             $row = $this->fetchData($vres);
             $cnt1 = $this->numRows($vres);
 
-            if ($cnt1 > 0) {
-                $vsql1 = "UPDATE tbl_registration SET password=MD5('".$params['rpass']."'), pass_flag=0 WHERE user_id='" . $params['uid'] . "'";
-
+            if ($cnt1 > 0)
+            {
+                $vsql1 = "  UPDATE
+                                    tbl_registration
+                            SET
+                                    password=MD5('".$params['rpass']."'),
+                                    pass_flag=0
+                            WHERE
+                                    user_id=". $params['uid'];
+                
+                $vsql2 = "  UPDATE
+                                    tbl_url_master
+                            SET
+                                    active_flag= 2
+                            WHERE
+                                    user_id='" . $params['uid'] . "'
+                            AND
+                                    urlkey = \"".$params['ukey']."\"
+                                        ";
+                
                 $vres1 = $this->query($vsql1);
-                if ($vres1) {
-                        $arr = array();
-                        $err = array('Code' => 0, 'Msg' => 'Password Successfully Changed');
-                    } else {
-                        $arr = array();
-                        $err = array('Code' => 1, 'Msg' => 'Password failed to change');
-                    }
-            } else {
+                
+                $vres2 = $this->query($vsql2);
+                if ($vres1)
+                {
+                    $arr = array();
+                    $err = array('Code' => 0, 'Msg' => 'Password Successfully Changed');
+                }
+                else
+                {
+                    $arr = array();
+                    $err = array('Code' => 1, 'Msg' => 'Password failed to change');
+                }
+            }
+            else
+            {
                 $arr = array();
                 $err = array('Code' => 1, 'Msg' => 'Old Password Not Matching');
             }

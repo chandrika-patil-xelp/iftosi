@@ -1379,7 +1379,7 @@ class vendor extends DB
                 if($mail == 1)
                 {
                     $arr = array();
-                    $err = array('Code' => 0, 'Msg' => 'Dollar Rate Updated successfully!');
+                    $err = array('code' => 0, 'msg' => 'Dollar Rate Updated successfully!');
                 }
                 else
                 {
@@ -1390,7 +1390,7 @@ class vendor extends DB
             else
             {
                 $arr = array('There is no change in the rate');
-                $err = array('code' => 0, 'Msg' => 'Silver Rate Updated successfully!');
+                $err = array('code' => 0, 'msg' => 'Dollar Rate Updated successfully!');
             }
         }
         else
@@ -1408,7 +1408,7 @@ class vendor extends DB
         if ($res) {
             $row = $this->fetchData($res);
             $arr = $row;
-            $err = array('Code' => 0, 'Msg' => 'Dollar Rate Updated successfully!');
+            $err = array('code' => 0, 'msg' => 'Dollar Rate Updated successfully!');
         } else {
             $arr = array();
             $err = array('code' => 1, 'msg' => 'Error in Updating Dollar Rate');
@@ -1438,7 +1438,7 @@ class vendor extends DB
                     if($mail == 1)
                     {
                         $arr = array();
-                        $err = array('code' => 0, 'Msg' => 'Silver Rate Updated successfully!');
+                        $err = array('code' => 0, 'msg' => 'Silver Rate Updated successfully!');
                     }
                     else
                     {
@@ -1449,7 +1449,7 @@ class vendor extends DB
                 else
                 {
                     $arr = array('There is no change in the rate');
-                    $err = array('code' => 0, 'Msg' => 'Silver Rate Updated successfully!');
+                    $err = array('code' => 0, 'msg' => 'Silver Rate Updated successfully!');
                 }
             }
             else
@@ -1467,7 +1467,7 @@ class vendor extends DB
         if ($res) {
             $row = $this->fetchData($res);
             $arr = $row;
-            $err = array('Code' => 0, 'Msg' => 'Silver Rate Updated successfully!');
+            $err = array('code' => 0, 'msg' => 'Silver Rate Updated successfully!');
         } else {
             $arr = array();
             $err = array('code' => 1, 'msg' => 'Error in Updating Silver Rate');
@@ -1500,7 +1500,7 @@ class vendor extends DB
                     if($mail == 1)
                     {
                         $arr = array();
-                        $err = array('code' => 0, 'Msg' => 'Gold Rate Updated successfully!');
+                        $err = array('code' => 0, 'msg' => 'Gold Rate Updated successfully!');
                     }
                     else
                     {
@@ -1511,7 +1511,7 @@ class vendor extends DB
                 else
                 {
                     $arr = array('There is no change in the rate');
-                    $err = array('code' => 0, 'Msg' => 'Gold Rate Updated successfully!');
+                    $err = array('code' => 0, 'msg' => 'Gold Rate Updated successfully!');
                 }
             }
             else
@@ -1529,7 +1529,7 @@ class vendor extends DB
         if ($res) {
             $row = $this->fetchData($res);
             $arr = $row;
-            $err = array('Code' => 0, 'Msg' => 'Gold Rate Updated successfully!');
+            $err = array('code' => 0, 'msg' => 'Gold Rate Updated successfully!');
         } else {
             $arr = array();
             $err = array('code' => 1, 'msg' => 'Error in Updating Gold Rate');
@@ -1544,7 +1544,7 @@ class vendor extends DB
         if ($res) {
             $row = $this->fetchData($res);
             $arr = $row;
-            $err = array('Code' => 0, 'Msg' => 'Rates fetched successfully!');
+            $err = array('code' => 0, 'msg' => 'Rates fetched successfully!');
         } else {
             $arr = array();
             $err = array('code' => 1, 'msg' => 'Error in fatching Rates');

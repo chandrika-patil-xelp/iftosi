@@ -259,8 +259,8 @@
                             <div class="vTitle fLeft fmOpenR" style="background-color: #ebebde;color:#666;">Gallery</div>
                             <div class='cardCommCont' style="padding: 10px;">
                                 <div class="gallery fLeft">
-                                    <div class="thumbnil fLeft" style="background:#fff url(http://localhost/iftosi/tools/img/common/tumb5.jpg)no-repeat;background-size: contain;background-position: center;"></div><div class="thumbnil fLeft" style="background:#fff url(http://localhost/iftosi/tools/img/common/tumb2.png)no-repeat;background-size: contain;background-position: center;"></div>
-                                    <div class="thumbnil fLeft" style="background:#fff url(http://localhost/iftosi/tools/img/common/tumb3.jpg)no-repeat;background-size: contain;background-position: center;"></div>
+                                    <div class="thumbnil fLeft" style="background:#fff url(<?=DOMAIN;?>tools/img/common/tumb5.jpg)no-repeat;background-size: contain;background-position: center;"></div><div class="thumbnil fLeft" style="background:#fff url(<?=DOMAIN;?>tools/img/common/tumb2.png)no-repeat;background-size: contain;background-position: center;"></div>
+                                    <div class="thumbnil fLeft" style="background:#fff url(<?=DOMAIN;?>tools/img/common/tumb3.jpg)no-repeat;background-size: contain;background-position: center;"></div>
                                     <div id='moreimg' class="thumbnil fLeft poR" style="background:#8A0044"><span>+5 More</span></div>
                                 </div>
                             </div>
@@ -436,9 +436,7 @@ foreach($des as $key=>$value)
 ?>
                             </span>
 <?php
-                                        echo $des[$key]['describe_text'];
                                         print_r($des[$data['attr_details'][$key]]['describe_text']);
-                                        
 ?>
                             </div>
                         </div>
@@ -463,9 +461,7 @@ foreach($des as $key=>$value)
 ?>
                             </span>
 <?php 
-                                        echo $des[$key]['describe_text'];
                                         print_r($des[$data['attr_details'][$key]]['describe_text']);
-                                        
 ?>
                             </div>
                         </div>
@@ -491,7 +487,6 @@ foreach($des as $key=>$value)
 ?>
                                     </span>
 <?php
-                                        echo $des[$key]['describe_text'];
                                         print_r($des[$data['attr_details'][$key]]['describe_text']);
 ?>
                             </div>
@@ -504,6 +499,7 @@ foreach($des as $key=>$value)
                         <div class="prdInfoCont fLeft">
                             <div class="prdInfoTitle fLeft"><?php echo $des[$key]['describe_display_name'].' - '.$data['attr_details'][$key];?></div>
                             <div class="prdInfoDiv fLeft">
+                                <span class="fmOpenB">
 <?php
                                         if(!empty($des[$data['attr_details'][$key]]['describe_display_name']))
                                         {
@@ -513,9 +509,9 @@ foreach($des as $key=>$value)
                                         {
                                             echo $data['attr_details'][$key].': ';
                                         }
-                                        echo $des[$key]['describe_text'];
-                                        print_r($des[$data['attr_details'][$key]]['describe_text']);
 ?>
+                                    </span>
+                                <?=$des[$key]['describe_text'];?>
                             </div>
                         </div>
 <?php
@@ -532,6 +528,8 @@ foreach($des as $key=>$value)
 <?php
                     foreach($data3 as $key=>$value)
                     {
+                        if($data3[$key]['sameshape'] == 1 || $data3[$key]['sameclarity'] == 1 || $data3[$key]['samecolor'] == 1 || $data3[$key]['samecut'] == 1)
+                            {
 ?>
                                         <div class='prdComm fLeft'>
                                             <div class='prdCommDiv fLeft transition100'>
@@ -592,6 +590,7 @@ foreach($des as $key=>$value)
                                             </div>
                                         </div>
 <?php
+                        }
                     }
             }
 ?>

@@ -7,6 +7,47 @@ $action = $_GET['action'];
 
 switch($action)
     {
+    
+//----------------------------Change Pass--------------------------------
+
+//  localhost/iftosi/apis/index.php?action=changePassUrl&mobile=7309290529&uid=3&email=shubham.bajpai@xelpmoc.in
+
+    case 'changePassUrl':
+        $mobile=(!empty($params['mobile'])) ? trim($params['mobile']) : '';
+        $email=(!empty($params['email'])) ? trim(urldecode($params['email'])) : '';
+        $uid=(!empty($params['uid'])) ? trim($params['uid']) : '';
+        $url=(!empty($params['url'])) ? trim(urldecode($params['url'])) : '';
+        if(empty($mobile) || empty($email) || empty($uid))
+        {
+            $arr = array();
+            $err = array('Code' => 1, 'Msg' => 'Some Parameters missing');
+            $result = array('results'=>$arr, 'error' => $err);
+            $res=$result;
+            break;
+        }
+        include APICLUDE.'class.urlmaster.php';
+        $obj	= new urlmaster($db['iftosi']);
+        $result	= $obj->changePassUrl($params);
+        $res = $result;
+        break;
+    
+//  localhost/iftosi/apis/index.php?action=getUserDet&key=uvwxyz
+    case 'getUserDet':
+        $url=(!empty($params['key'])) ? trim($params['key']) : '';
+        if(empty($url))
+        {
+            $arr = array();
+            $err = array('Code' => 1, 'Msg' => 'Some Parameters missing');
+            $result = array('results'=>$arr, 'error' => $err);
+            $res=$result;
+            break;
+        }
+        include APICLUDE.'class.urlmaster.php';
+        $obj	= new urlmaster($db['iftosi']);
+        $result	= $obj->getUserDet($params);
+        $res = $result;
+        break;  
+    
 //----------------------------User--------------------------------
 
 //  localhost/iftosi/apis/index.php?action=checkUser&mobile=9987867578
@@ -209,13 +250,13 @@ switch($action)
             $npass = (!empty($params['npass'])) ? trim($params['npass']) : '';
             $rpass = (!empty($params['rpass'])) ? trim($params['rpass']) : '';
 
-            if (empty($cpass) || empty($npass) || empty($rpass)) {
+            if (empty($npass) || empty($rpass)) {
                 $resp = array();
                 $error = array('Code' => 1, 'Msg' => 'Invalid parameters');
                 $res = array('results' => $resp, 'error' => $error);
                 break;
             }
-            if ($rpass!=$npass) {
+            if ($rpass !== $npass) {
                 $resp = array();
                 $error = array('Code' => 1, 'Msg' => 'New Passwords not Matching');
                 $res = array('results' => $resp, 'error' => $error);

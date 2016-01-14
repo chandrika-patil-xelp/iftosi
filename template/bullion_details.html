@@ -92,7 +92,7 @@
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">GOLD PURITY</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo $prdInfo['attr_details']['gold_purity']; ?></div>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo $prdInfo['attr_details']['gold_purity'].' Kts'; ?></div>
                             </div>
 <?php
                             if(!empty($prdInfo['attr_details']['bullion_design']))
@@ -244,8 +244,8 @@
                             <div class="vTitle fLeft fmOpenR" style="background-color: #ebebde;color:#666;">Gallery</div>
                             <div class='cardCommCont' style="padding: 10px;">
                                 <div class="gallery fLeft">
-                                    <div class="thumbnil fLeft" style="background:#fff url(http://localhost/iftosi/tools/img/common/tumb5.jpg)no-repeat;background-size: contain;background-position: center;"></div><div class="thumbnil fLeft" style="background:#fff url(http://localhost/iftosi/tools/img/common/tumb2.png)no-repeat;background-size: contain;background-position: center;"></div>
-                                    <div class="thumbnil fLeft" style="background:#fff url(http://localhost/iftosi/tools/img/common/tumb3.jpg)no-repeat;background-size: contain;background-position: center;"></div>
+                                    <div class="thumbnil fLeft" style="background:#fff url(<?=DOMAIN;?>tools/img/common/tumb5.jpg)no-repeat;background-size: contain;background-position: center;"></div><div class="thumbnil fLeft" style="background:#fff url(<?=DOMAIN;?>tools/img/common/tumb2.png)no-repeat;background-size: contain;background-position: center;"></div>
+                                    <div class="thumbnil fLeft" style="background:#fff url(<?=DOMAIN;?>tools/img/common/tumb3.jpg)no-repeat;background-size: contain;background-position: center;"></div>
                                     <div id='moreimg' class="thumbnil fLeft poR" style="background:#8A0044"><span>+5 More</span></div>
                                 </div>
                             </div>
@@ -256,28 +256,64 @@
         </div>
         <div class='prdInfo fLeft'>
             <div class="wrapperMax fmOpenR">
-                <div class="prdInfoTitle fLeft">Header 1</div>
-                <div class="prdInfoDiv fLeft">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                </div>
-                <div class="prdInfoTitle fLeft">Header 2</div>
-                <div class="prdInfoDiv fLeft">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                </div>
-                <div class="prdInfoTitle fLeft">Header 3</div>
-                <div class="prdInfoDiv fLeft">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                </div>
-                <div class="prdInfoTitle fLeft">Header 4</div>
-                <div class="prdInfoDiv fLeft">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                </div>
+<?php
+                    foreach($des as $key=>$value)
+                    {
+                        
+                        if($des[$key]['describe_name'] == strtolower($prdInfo['attr_details']['metal']) && !empty($des[$key]['describe_name']))
+                        {
+?>
+                            <div class="prdInfoTitle fLeft"><?php echo "Metal: ".ucwords($prdInfo['attr_details']['metal']); ?></div>
+                            <div class="prdInfoDiv fLeft">
+<?php
+                            print_r($des[$key]['describe_text']);
+?>
+                            </div>
+<?php
+                        }
+                        if($des[$key]['describe_name'] == 'gold_weight' && !empty($des[$key]['describe_name']))
+                        {
+?>
+                            <div class="prdInfoTitle fLeft"><?php echo "Gold Weight: ".$prdInfo['attr_details']['gold_weight'].' Gms'; ?></div>
+                            <div class="prdInfoDiv fLeft">
+<?php
+                            print_r($des[$key]['describe_text']);
+?>
+                            </div>
+<?php
+                        }
+                        if($des[$key]['describe_name'] == 'purity' && !empty($des[$key]['describe_name']))
+                        {
+?>
+                            <div class="prdInfoTitle fLeft"><?php echo "Purity: ".$prdInfo['attr_details']['gold_purity'].' Kts'; ?></div>
+                            <div class="prdInfoDiv fLeft">
+<?php
+                            print_r($des[$key]['describe_text']);
+?>
+                            </div>
+<?php
+                        }
+                        if($des[$key]['describe_name'] == strtolower($prdInfo['attr_details']['type']) && !empty($des[$key]['describe_name']))
+                        {
+?>
+                            <div class="prdInfoTitle fLeft"><?php echo "Type: ".$prdInfo['attr_details']['type']; ?></div>
+                            <div class="prdInfoDiv fLeft">
+<?php
+                            print_r($des[$key]['describe_text']);
+?>
+                            </div>
+<?php
+                        }
+                    }
+?>
                 <div class="prdInfoTitle fLeft">Similar Products</div>
                 
         <div class='w100 fLeft'>
 <?php
                     foreach($data3 as $key=>$value)
                     {
+                        if($data3[$key]['samemetal'] == 1 || $data3[$key]['sametype'] == 1)
+                        {
 ?>                
                         <div class='prdComm fLeft' style="opacity: 1; transform: translateX(1px);">
 										<div class='prdCommDiv fLeft transition100'>
@@ -353,6 +389,7 @@
 										</div>
                         </div>
 <?php
+                    }
                     }
 ?>
         </div>

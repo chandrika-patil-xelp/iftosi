@@ -66,12 +66,12 @@
                                 <div class="infoValue c666 fmOpenR font25"><?php echo ($metal == ''? 'N/A' : $metal); ?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
-                                <div class="infoLabel fmOpenB font12 fmOpenB">GOLD PURITY</div>
-                              <?php  $gpurity = number_format($prdInfo['attr_details']['gold_purity']); ?>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo ($gpurity == ''?'N/A':$gpurity);?></div>
+                                <div class="infoLabel fmOpenB font12 fmOpenB">PURITY</div>
+                              <?php  $gpurity = $prdInfo['attr_details']['gold_purity']; ?>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo ($gpurity == ''?'N/A':$gpurity.' Kts');?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
-                                <div class="infoLabel fmOpenB font12 fmOpenB">GOLD WEIGHT</div>
+                                <div class="infoLabel fmOpenB font12 fmOpenB">WEIGHT</div>
                                 <div class="infoValue c666 fmOpenR font25">
 <?php 
                                 if(empty($prdInfo['attr_details']['gold_weight']) || $prdInfo['attr_details']['gold_weight'] == '0.00')
@@ -257,8 +257,8 @@
                             <div class="vTitle fLeft fmOpenR" style="background-color: #ebebde;color:#666;">Gallery</div>
                             <div class='cardCommCont' style="padding: 10px;">
                                 <div class="gallery fLeft">
-                                    <div class="thumbnil fLeft" style="background:#fff url(http://localhost/iftosi/tools/img/common/tumb5.jpg)no-repeat;background-size: contain;background-position: center;"></div><div class="thumbnil fLeft" style="background:#fff url(http://localhost/iftosi/tools/img/common/tumb2.png)no-repeat;background-size: contain;background-position: center;"></div>
-                                    <div class="thumbnil fLeft" style="background:#fff url(http://localhost/iftosi/tools/img/common/tumb3.jpg)no-repeat;background-size: contain;background-position: center;"></div>
+                                    <div class="thumbnil fLeft" style="background:#fff url(<?=DOMAIN;?>tools/img/common/tumb5.jpg)no-repeat;background-size: contain;background-position: center;"></div><div class="thumbnil fLeft" style="background:#fff url(<?=DOMAIN;?>tools/img/common/tumb2.png)no-repeat;background-size: contain;background-position: center;"></div>
+                                    <div class="thumbnil fLeft" style="background:#fff url(<?=DOMAIN;?>tools/img/common/tumb3.jpg)no-repeat;background-size: contain;background-position: center;"></div>
                                     <div id='moreimg' class="thumbnil fLeft poR" style="background:#8A0044"><span>+5 More</span></div>
                                 </div>
                             </div>
@@ -269,24 +269,274 @@
         </div>
         <div class='prdInfo fLeft'>
             <div class="wrapperMax fmOpenR">
-                <div class="prdInfoTitle fLeft">Header 1</div>
-                <div class="prdInfoDiv fLeft">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                </div>
-                <div class="prdInfoTitle fLeft">Header 2</div>
-                <div class="prdInfoDiv fLeft">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                </div>
-                <div class="prdInfoTitle fLeft">Header 3</div>
-                <div class="prdInfoDiv fLeft">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                </div>
-                <div class="prdInfoTitle fLeft">Header 4</div>
-                <div class="prdInfoDiv fLeft">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                </div>
 <?php
-                if(!empty($data3))
+                    $cert = $prdInfo['attr_details']['certified'];
+                    foreach($des as $key=>$value)
+                    {
+                        
+                        if($des[$key]['describe_name'] == strtolower($metal) && !empty($des[$key]['describe_name']))
+                        {
+?>
+                            <div class="prdInfoTitle fLeft"><?php echo "Metal: ".ucwords($metal); ?></div>
+                            <div class="prdInfoDiv fLeft">
+<?php
+                            print_r($des[$key]['describe_text']);
+?>
+                            </div>
+<?php
+                        }
+                        if($des[$key]['describe_name'] == strtolower($cert) && !empty($des[$key]['describe_name']))
+                        {
+?>
+                            <div class="prdInfoTitle fLeft"><?php echo "Certificate: ".ucwords($cert); ?></div>
+                            <div class="prdInfoDiv fLeft">
+<?php
+                            print_r($des[$key]['describe_text']);
+?>
+                            </div>
+<?php
+                        }
+                        if(strtolower($metal) == 'gold')
+                        {
+                            if($des[$key]['describe_name'] == 'gold_weight' && !empty($des[$key]['describe_name']))
+                            {
+?>
+                                <div class="prdInfoTitle fLeft"><?php echo "Gold Weight: ".$prdInfo['attr_details']['gold_weight']; ?></div>
+                                <div class="prdInfoDiv fLeft">
+<?php
+                                print_r($des[$key]['describe_text']);
+?>
+                                </div>
+<?php
+                            }
+                        }
+                        else if(strtolower($metal) == 'silver')
+                        {
+                            if($des[$key]['describe_name'] == 'silver_weight' && !empty($des[$key]['describe_name']))
+                            {
+?>
+                                <div class="prdInfoTitle fLeft"><?php echo "Silver Weight: ".$prdInfo['attr_details']['gold_weight']; ?></div>
+                                <div class="prdInfoDiv fLeft">
+<?php
+                                print_r($des[$key]['describe_text']);
+?>
+                                </div>
+<?php
+                            }
+                        }
+                        else
+                        {
+                            if($des[$key]['describe_name'] == 'weight' && !empty($des[$key]['describe_name']))
+                            {
+?>
+                                <div class="prdInfoTitle fLeft"><?php echo "Weight: ".$prdInfo['attr_details']['gold_weight']; ?></div>
+                                <div class="prdInfoDiv fLeft">
+<?php
+                                print_r($des[$key]['describe_text']);
+?>
+                                </div>
+<?php
+                            }
+                        }
+                        if($des[$key]['describe_name'] == 'purity' && !empty($des[$key]['describe_name']))
+                        {
+?>
+                            <div class="prdInfoTitle fLeft"><?php echo "Purity: ".$gpurity.' Kts'; ?></div>
+                            <div class="prdInfoDiv fLeft">
+<?php
+                            print_r($des[$key]['describe_text']);
+?>
+                            </div>
+<?php
+                        }
+                    }
+?>
+                
+<?php
+if(!empty($prdInfo['attr_details']['diamond_shape']) && $prdInfo['attr_details']['diamond_shape'] !== 'null' && $prdInfo['attr_details']['diamond_shape'] !== 'undefined')
+{
+    ?>
+
+                <div class="centerDiv">
+<?php
+
+foreach($des as $key=>$value)
+                {
+                    if($prdInfo['attr_details']['diamond_shape'] == ucwords(strtolower($key)))
+                    {
+?>      
+                      <div class="prdInfoDiv fLeft shapesPage2 ">
+                          <div class="shapesCommH fLeft">
+                              <div class="<?=ucwords(strtolower($key));?> shapeComm"></div>
+                              <div class="texHolder font13 fmOpenR">
+<?php
+                                echo $des[$key]['describe_text'];
+?>
+                              </div>
+                          </div>
+                      </div>
+<?php
+                    }
+                }
+?>
+
+                  <div class="prdInfoTitle fLeft fmOpenR">Diamond Anatomy</div>
+                  <div class="fmOpenR tctContents fLeft">
+                      Once cut and polished, all diamonds possess a shared set of characteristics,
+                      often referred to as the anatomy of the diamond. While the individual proportions, angles and placement
+                      of these common characteristics vary for diamonds of different shapes, their definition is the same.
+                  </div>
+                  <div class="prdInfoTitle3 fLeft">Place your cursor over any term to learn more.</div>
+                  <div class="diamondterms fLeft">
+                      <div class="measurement fLeft">
+                          <div class="textDivH fLeft fmOpenB" id="t1">Crown</div>
+                          <div class="textDiv fLeft" id="t2">Table</div>
+                          <div class="textDiv fLeft" id="t3">Star Facets</div>
+                          <div class="textDiv fLeft" id="t4">Bezel Facets</div>
+                          <div class="textDiv fLeft" id="t5">Upper Girdle Facets</div>
+                          <div class="textDivH fLeft fmOpenB" id="t6">Girdle</div>
+                          <div class="textDivH fLeft fmOpenB" id="t7">Pavilion</div>
+                          <div class="textDiv fLeft" id="t8">Lower Girdle Facets</div>
+                          <div class="textDiv fLeft" id="t9">Pavilion Girdle</div>
+                          <div class="textDiv fLeft " id="t10">Culet</div>
+                          <div class="textDivH fLeft fmOpenB" >Key Measurements</div>
+                          <div class="textDiv fLeft" id="t11">Length</div>
+                          <div class="textDiv fLeft" id="t12">Depth</div>
+                          <div class="textDiv fLeft" id="t13">Width</div>
+                          <div class="textDiv fLeft" id="t14">Depth%</div>
+                          <div class="textDiv fLeft" id="t15">L/W Ration</div>
+                          <div class="textDiv fLeft" id="t16">Table%</div>
+                          <div class="textDiv fLeft" id="t17">Girdle Width</div>
+                          <div class="textDiv fLeft" id="t18">Crown Angel</div>
+                          <div class="textDiv fLeft" id="t19">Culet Size</div>
+                          <div class="textDiv fLeft" id="t20">Pavilion Angel</div>
+                      </div>
+                      <div class="diamondPic diamontCat1 fLeft" id="picchange"></div>
+                  </div>
+
+                  <div class="divsecondInfo fLeft">
+                      <div class="textDivLft fLeft  tx_change ">
+                          <div class="textDivH fLeft fmOpenB">Crown</div>
+                          <div class="textDiv fLeft dia-char">The entire portion of the diamond that sits above the girdle. The table as well as the star, bezel , and upper girdle facets are all part of the crown.
+                              usually constitutes the bulk of a diamonds weight.</div>
+                      </div>
+                      <div class="textDivLft fLeft dn tx_change">
+                          <div class="textDivH fLeft fmOpenB ">Table</div>
+                          <div class="textDiv fLeft">The uppermost , flat surface of a diamond which runs parallel to the plane of the girdle.</div>
+                      </div>
+                      <div class="textDivLft fLeft dn tx_change">
+                          <div class="textDivH fLeft fmOpenB">Star Facets</div>
+                          <div class="textDiv fLeft">The facets that sit adjacent to the table, responsible for directing light that enters the diamond down to the pavilion and lower girdle facets.</div>
+                      </div>
+                      <div class="textDivLft fLeft dn tx_change">
+                          <div class="textDivH fLeft fmOpenB">Bezel Facets</div>
+                          <div class="textDiv fLeft">The kite shaped facets that sit between the table and girdle, resposible for directing light that enters the diamond down to the pavilion and lower girdle facets.</div>
+                      </div>
+                      <div class="textDivLft fLeft dn tx_change">
+                          <div class="textDivH fLeft fmOpenB">Upper Girdle Facets</div>
+                          <div class="textDiv fLeft">The lowest facets on the crown, sitting just above the girdle. Responsible for directing light that enters the diamond down to the pavilion and lower girdle facets.</div>
+                      </div>
+                      <div class="textDivLft fLeft dn tx_change">
+                          <div class="textDivH fLeft fmOpenB">Girdle</div>
+                          <div class="textDiv fLeft">The outer edge of the diamond , where the crown meets the pavilion . the girdle may be faceted or smooth.</div>
+                      </div>
+                      <div class="textDivLft fLeft dn tx_change">
+                          <div class="textDivH fLeft fmOpenB">Pavilion </div>
+                          <div class="textDiv fLeft">The entire portion of the diamond that sits below the girdle. The lower girdle facets,pavilion facets , and culet are all part of the pavalion.
+                              usually constitutes the bulk of a diamonds weight.</div>
+                      </div>
+                      <div class="textDivLft fLeft dn tx_change">
+                          <div class="textDivH fLeft fmOpenB">Lower Girdle Facets</div>
+                          <div class="textDiv fLeft">The highest facets on the pavilion , sitting just below the girdle . Responsible fo redirectiong light that enters the diamond back out through the crown.</div>
+                      </div>
+                      <div class="textDivLft fLeft dn tx_change">
+                          <div class="textDivH fLeft fmOpenB">Pavilion Facets</div>
+                          <div class="textDiv fLeft">The facets that sit adjacent to the culet, responsible for redirecting light that enters the diamond back out through the crown.</div>
+                      </div>
+                      <div class="textDivLft fLeft dn tx_change">
+                          <div class="textDivH fLeft fmOpenB">Culet</div>
+                          <div class="textDiv fLeft">The culet is the small area at the bottom of the pavilion.The culet can be a point, or a very small facet sitting parallel to the table.</div>
+                      </div>
+                      <div class="textDivLft fLeft dn tx_change">
+                          <div class="textDivH fLeft fmOpenB">Length</div>
+                          <div class="textDiv fLeft">When viewed from above as a diamond would sit in a ring , length is the diameter measured from the "top" to "bottom".Stated in millimeters . Length is always the first of three numbers shown under "measurements" for each diamond. </div>
+                      </div>
+                      <div class="textDivLft fLeft dn tx_change">
+                          <div class="textDivH fLeft fmOpenB">Depth</div>
+                          <div class="textDiv fLeft">The distance from the table to the culet when the diamond is viewed from the side.State</div>
+                      </div>
+                      <div class="textDivLft fLeft dn tx_change">
+                          <div class="textDivH fLeft fmOpenB">Width</div>
+                          <div class="textDiv fLeft">When viewed from above as a diamond would sit in a ring, width is the diameter measured from "side" to "side". Width is always the measure perpendicular to length. Stated in millimeters . Width is always the measure perpendicular to length. Stated in millimeters . Width is always the second of the three numbers shown under "measurements" for each diamond.</div>
+                      </div>
+                      <div class="textDivLft fLeft dn tx_change">
+                          <div class="textDivH fLeft fmOpenB">Depth %</div>
+                          <div class="textDiv fLeft">Calculated by dividing the dpth by the width. If a diamond is 3mm in depth , and has a midth of 4mm, the depth % is 75. Depth % is a measure of cut . The more shallow the cut of a diamond , teh higher the depth %.</div>
+                      </div>
+                      <div class="textDivLft fLeft dn tx_change">
+                          <div class="textDivH fLeft fmOpenB">Length / Width Ratio</div>
+                          <div class="textDiv fLeft">Calculated by dividing the length by the width.A perfectly round or square diamond has a L/W ratio of 1.00(since it's length and width are equal). </div>
+                      </div>
+                      <div class="textDivLft fLeft dn tx_change">
+                          <div class="textDivH fLeft fmOpenB">Table %</div>
+                          <div class="textDiv fLeft">Calculated by dividing the width of the table by the width of the diamond. If the table is 3mm wide , and the diamond is 4 mm in width , the table %is 75. The ;arger the table in relation to the diamond , the higher the table %.</div>
+                      </div>
+                      <div class="textDivLft fLeft dn tx_change">
+                          <div class="textDivH fLeft fmOpenB">Girdle Width</div>
+                          <div class="textDiv fLeft">A measure of the thickness of the diamond's girdle.The measure is taken only at the "valleys" of the girdle, never the peaks. Usually stated in terms of a nine point scale , from the Extremely Thin through Extremely Thick. If the girdle valleys vary in width, two values are given, one of the widest and one for the narrowest points.</div>
+                      </div>
+                      <div class="textDivLft fLeft dn tx_change">
+                          <div class="textDivH fLeft fmOpenB">Crown Angle</div>
+                          <div class="textDiv fLeft">Refers to the number of degrees between the plane of the table and bezel facets. The angle of the crown facets will determine how much light is reflected into the pavilion at an angle that will allow it to be reflected back up through the crown (where the observer cn perceive it).</div>
+                      </div>
+                      <div class="textDivLft fLeft dn tx_change">
+                          <div class="textDivH fLeft fmOpenB">Culet Size</div>
+                          <div class="textDiv fLeft">The culet can vary in size from a single point , to a small facet . Culet size is usually expressed using a seven point scale , from None(a point) to Very Large. If the culet is too large, it might appear as an inclusion when the diamond is viewed from above.</div>
+                      </div>
+                      <div class="textDivLft fLeft dn tx_change">
+                          <div class="textDivH fLeft fmOpenB">Pavilion Angle</div>
+                          <div class="textDiv fLeft">Refers to the number of degrees between the planes of the table , and the pavilion facets. the angle determines how much of the light which has travelled into the lower part of the diamond will be successfully reflected back through the crown (where the observer can perceive it).</div>
+                      </div>
+                  </div>
+                </div>
+
+                <div class="prdInfoWrap fLeft">
+<?php
+
+
+               foreach($des as $key=>$value)
+                {
+                    if($des[$key]['describe_name'] == 'clarity' && !empty($des[$key]['describe_name']))
+                    {
+?>
+                        <div class="prdInfoCont fLeft">
+                            <div class="prdInfoTitle fLeft"><?php echo $des[$key]['describe_display_name'].' - '.str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['clarity']));?></div>
+                            <div class="prdInfoDiv fLeft">
+                                <span class="fmOpenB">
+<?php
+                                        if(!empty($des[$data['attr_details'][$key]]['describe_display_name']))
+                                        {
+                                            echo $des[$data['attr_details'][$key]]['describe_display_name'].': ';
+                                        }
+                                        else
+                                        {
+                                            echo str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['clarity'])).': ';
+                                        }
+?>
+                                    </span>
+                                <?=$des[$key]['describe_text'];?>
+                            </div>
+                        </div>
+<?php
+                    }
+                }
+?>
+                    </div>
+<?php
+            }
+?>            
+<?php            
+                if($sugTotal > 0)
                 {
 ?>
                 <div class="prdInfoTitle fLeft">Similar Products</div>
@@ -294,14 +544,14 @@
 <?php                                    
                     foreach($data3 as $key=>$value)
                     {
+                        if($data3[$key]['samemetal'] == 1 || $data3[$key]['samepurity'] == 1 || $data3[$key]['sameweight'] == 1 || $data3[$key]['samecertified'] == 1 || $data3[$key]['sameshape'] == 1)
+                        {
 ?>
                                     <div class="prdComm fLeft jwRes transition100">
 					<div class="prdCommDiv fLeft transition100">
 						<a href="<?=DOMAIN.$data3[$key]['pname'].'-'.$data3[$key]['barcode'].'-'.$data3[$key]['pcode'].'/jid-'.$data3[$key]['pid']; ?>">
-                                                    <div class="prdCommImg fLeft">
+                                                    <div class="prdCommImg fLeft" id="<?=$data3[$key]['pid'];?>">
 <?php
-
-                                                        $imgCount = count($dataI[$key]['images']);
                                                         if($imgCount > 0)
                                                         {
 ?>
@@ -345,10 +595,13 @@
                                     </div>
 <?php
                         }
+                        }
 ?>
             </div>
                 <?php } ?>
+                </div>
         </div>
+        
         <div class="wrapper fLeft">
             <div class="">
                 <?php include 'footer.html'; ?>
@@ -423,5 +676,6 @@
 <script type="text/javascript" src="<?= $jvs['details']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['head']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['dmap']; ?>"></script>
+<script type="text/javascript" src="<?= $jvs['anatomy']; ?>"></script>
 </body>
 </html>

@@ -2083,7 +2083,9 @@
                                     if(a.carat = \"".$params['carat']."\",1,0) as samecarat,
                                     if(a.gold_purity = \"".$params['purity']."\",1,0) as samepurity,
                                     if(a.metal = \"".$params['metal']."\",1,0) as samemetal,
-                                    if(a.gold_weight = \"".$params['gwt']."\",1,0) as sametype,
+                                    if(a.gold_weight = \"".$params['gwt']."\",1,0) as sameweight,
+                                    if(a.type = \"".$params['type']."\",1,0) as sametype,
+                                    if(a.certified = \"".$params['certified']."\",1,0) as samecertified,
                                     a.product_id as pid,
                                     a.price as jprice,
                                     a.carat,
@@ -2114,6 +2116,8 @@
                                     samecut desc,
                                     samecarat desc,
                                     samepurity desc,
+                                    samemetal desc,
+                                    sameweight desc,
                                     samemetal desc,
                                     sametype desc,
                                     pid ASC";
@@ -2209,11 +2213,32 @@
             }
             else if($params['catid'] == 10001)
             {
-                $condition = "'gold_purity','metal','gold_weight','gemstone_type','diamond_shape','carat'";
+                $needed = "\"".$params['cert']."\",'purity',\"".strtolower($params['metal'])."\",'gemstone_type',\"".$params['shape']."\",'carat','color','clarity','cut',\"".$params['color']."\",\"".$params['carat']."\",\"".$params['clarity']."\",\"".$params['cut']."\"";
+                if(strtolower($params['metal']) == 'gold')
+                {
+                    $needed .= ",'gold_weight'";
+                }
+                else if(strtolower($params['metal']) == 'silver')
+                {
+                    $needed .= ",'silver_weight'";
+                }
+                else
+                {
+                    $needed .= ",'weight'";
+                }
+
             }
             else if($params['catid'] == 10002)
             {
-                $condition = "'gold_purity','metal','gold_weight','type','bullion_design'";
+                $needed = "'purity','".strtolower($params['metal'])."','".$params['type']."'";
+                if(strtolower($params['metal']) == 'gold')
+                {
+                    $needed.= ",'gold_weight'";
+                }
+                else if(strtolower($params['metal']) == 'silver')
+                {
+                    $needed.= ",'silver_weight'";
+                }
             }
 
                 $patsql="   SELECT

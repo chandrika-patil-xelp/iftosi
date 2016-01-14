@@ -132,6 +132,14 @@ $(document).ready(function(){
 
 			if(uid == '' || uid == null || uid == undefined || islog == false || islog == '' || islog == null || islog == undefined)
 			{
+                                if($(this).hasClass('iconCall'))
+                                {
+                                    $('.lgTitle').html('Submit details to get Vendor Details');
+                                }
+                                else if($(this).hasClass('iconMessage'))
+                                {
+                                    $('.lgTitle').html('Submit details to get SMS & EMAIL');
+                                }
 				$('#overlay,#userForm').removeClass('dn');
 				setTimeout(function(){
 					$('#overlay').velocity({opacity:1},{delay:0,duration:300,ease:'swing'});
@@ -295,9 +303,14 @@ $(document).ready(function(){
 	}
 
 	getImagesData(prdList);
+        
+        if(similarPrdList !== undefined && similarPrdList !== 'undefined' && similarPrdList !== null && similarPrdList !== '')
+        {
+            getImagesData(similarPrdList,true);
+        }
 });
 
-function getImagesData(prdList)
+function getImagesData(prdList,simtrue)
 {
 	if(prdList !== undefined && prdList !== null && prdList !== '' && typeof prdList !== 'undefined' && prdList !== 'undefined' && prdList !== 'null')
 	{
@@ -305,9 +318,17 @@ function getImagesData(prdList)
 		var URL 	= DOMAIN + "index.php";
 		$.getJSON(URL, params, function(data)
 		{
+                    
 			if(data !== undefined && data !== null && data !== '' && data !== 'undefined' && data !== 'null'&& typeof data !== 'undefined')
 			{
-				showImages(data);
+                                if(simtrue == true)
+                                {
+                                    showSimillarImages(data);
+                                }
+                                else
+                                {
+                                    showImages(data);
+                                }
 			}
 		});
 	}
@@ -368,6 +389,189 @@ function showImages(data)
 		});
 	}
 }
+
+
+function showSimillarImages(data)
+{
+    	var vid = customStorage.readFromStorage('userid');
+	var newVid = '';
+	var imgArr = new Array();
+	var k = 0;
+	if(data.error.code == 0)
+	{
+		$.each(data.results, function(i, val) {
+			$.each(val.images, function(j, vl){
+                            	if(vl.active_flag === '0' || vl.active_flag === 0)
+				{
+					if(val.vid == vid)
+					{
+						imgArr[k] = vl.image;
+					}
+				}
+				else
+				{
+					imgArr[k] = vl.image;
+				}
+				k++;
+                        });
+                        var a = Object.keys(data.results)[0];
+			var imgHtml = getSimilarDtlsImageData(imgArr);
+			$('#'+a).html(imgHtml);
+			imgArr = new Array();
+			k = 0;
+		});
+	}
+}
+
+function getSimilarDtlsImageData(imgData)
+{
+		var imgLen = 0;
+		var tmpHtml = "<div class='for-1 noImage'></div>";
+		if(imgData !== undefined && imgData !== null && imgData !== '')
+		{
+			imgLen = imgData.length;
+			if(imgLen > 12)
+			{
+				imgLen = 12;
+			}
+
+			switch(imgLen)
+			{
+				case 0:
+					tmpHtml = "<div class='for-1 noImage'></div>";
+				break;
+				case 1:
+				case 2:
+				case 3:
+				case 4:
+				case 6:
+				case 8:
+				case 9:
+				case 10:
+				case 12:
+					tmpHtml = '';
+					for(imgi = 0; imgi < imgLen; imgi++)
+					{
+						tmpHtml += "<div class='prox for-"+imgLen+"' onmouseover='showMouseOver(this);' style='background: #ccc url(" + IMGDOMAIN + imgData[imgi] + ") no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div>";
+					}
+					tmpHtml += "<div class='proxImg fLeft' style='background: #fff url(" + IMGDOMAIN + imgData[0] + ")no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div>";
+				break;
+				case 5:
+					tmpHtml = "<div class='prox for-"+imgLen+"Left'>";
+					for(imgi = 0; imgi < imgLen; imgi++)
+					{
+						if(imgi == imgLen - 1)
+						{
+							tmpHtml += "</div>";
+							tmpHtml += "<div class='prox for-"+imgLen+"Right'><div onmouseover='showMouseOver(this);' class='prox for-"+imgLen+"' style='background: #ccc url(" + IMGDOMAIN + imgData[imgi] + ")no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div></div>";
+						}
+						else
+						{
+							tmpHtml += "<div class='prox for-"+imgLen+"' onmouseover='showMouseOver(this);' style='background: #ccc url(" + IMGDOMAIN + imgData[imgi] + ")no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div>";
+						}
+					}
+					tmpHtml += "<div class='proxImg fLeft' style='background: #fff url(" + IMGDOMAIN + imgData[0] + ")no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div>";
+				break;
+				case 7:
+					tmpHtml = "";
+					var curi = 0;
+					for(imgi = 0; imgi < imgLen; imgi++)
+					{
+						if(imgi == 0)
+						{
+							tmpHtml += "<div class='for-" + imgLen + "Upper'><div class='prox for-" + imgLen + "' onmouseover='showMouseOver(this);' style='background: #ccc url(" + IMGDOMAIN + imgData[imgi] + ")no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div></div>";
+						}
+						else
+						{
+							if(curi == 0)
+							{
+								tmpHtml += "<div class='for-" + imgLen + "Lower'>";
+							}
+							tmpHtml += "<div class='prox for-" + imgLen + "' onmouseover='showMouseOver(this);' style='background: #fff url(" + IMGDOMAIN + imgData[imgi] + ")no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div>";
+
+							if(curi == imgLen - 2)
+							{
+								tmpHtml += "</div>";
+							}
+
+							curi++;
+						}
+					}
+					tmpHtml += "<div class='proxImg fLeft' style='background: #fff url(" + IMGDOMAIN + imgData[0] + ")no-repeat;background-size:contain;background-position:center;background-color:#FFF;'></div>";
+				break;
+				case 11:
+					var curi = 0;
+					tmpHtml = "<div class='prox for-" + imgLen + "Left'>";
+
+					for(imgi = 0; imgi < imgLen; imgi++)
+					{
+						if(curi == 0)
+						{
+							if(imgi < 3)
+							{
+								tmpHtml += "<div class='prox for-"+imgLen+"' onmouseover='showMouseOver(this);' style='background: #fff url(" + IMGDOMAIN + imgData[imgi] + ")no-repeat;background-size:contain;background-position:center;background-color:#FFF;'></div>";
+
+								if(imgi == 2)
+								{
+									curi++;
+								}
+							}
+						}
+						else
+						{
+							if(imgi == 3)
+							{
+								tmpHtml += "</div>";
+								tmpHtml += "<div class='prox for-"+imgLen+"Right'>";
+							}
+
+							tmpHtml += "<div class='prox for-"+imgLen+"' onmouseover='showMouseOver(this);' style='background: #fff url(" + IMGDOMAIN + imgData[imgi] + ")no-repeat;background-size:contain;background-position:center;background-color:#FFF;'></div>";
+
+							if(imgi == imgLen - 1)
+							{
+								tmpHtml += "</div>";
+							}
+						}
+					}
+					tmpHtml += "<div class='proxImg fLeft' style='background: #fff url(" + IMGDOMAIN + imgData[0] + ")no-repeat;background-size:contain;background-position:center;background-color:#FFF;'></div>";
+				break;
+			}
+		}
+	return tmpHtml;
+}
+
+function showMouseOver(obj)
+{
+	var tmpClass = $(obj).attr('class');
+	tmpClass = tmpClass.split(' ');
+	var actClassNm = 'for-1';
+	for(var i = 0 ; i < tmpClass.length; i++)
+	{
+		if(tmpClass[i].indexOf('for-') !== -1)
+		{
+			actClassNm = tmpClass[i];
+			break;
+		}
+	}
+
+	var classInd = actClassNm.split('-');
+	classInd = classInd[1];
+
+	var img=$(obj).css('background');
+	if(classInd == 1 || classInd == 2 || classInd == 3 || classInd == 4 || classInd == 6 || classInd == 8 || classInd == 9 || classInd == 10 || classInd == 12)
+	{
+		$(obj).siblings('.proxImg').css({'background':img});
+	}
+	else
+	{
+		$(obj).parent().siblings('.proxImg').css({'background':img});
+	}
+}
+
+
+
+
+
 
 function getDtlsImageData(imgData)
 {

@@ -288,16 +288,28 @@ a{text-decoration: none;}
 
 
 .comparisonDiv{width:100%;}
-.compComm{width:33%;height: 250px;text-align: center;padding-top: 10%;color:#fff;cursor: pointer;position: relative;overflow: hidden;border-radius: 5px;}
+.compComm{width:33%;height: 280px;text-align: center;padding-top: 6%;color:#fff;cursor: pointer;position: relative;overflow: hidden;border-radius: 5px;}
 .compComm::after{content: '';position: absolute;right: 0px; left:0px;opacity:0; bottom: -55px;margin: auto; width: 40px;height: 40px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;}
 .compComm:hover::after{content: '';position: absolute;right: 0px; opacity:1;left:0px; bottom: 30px;margin: auto; width: 40px;height: 40px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;}
 
 .compComm.comSelected::after{content: '';opacity:1;position: absolute;right: 0px; left:0px; bottom: 30px;margin: auto; width: 40px;height: 40px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;}
 .compComm:nth-child(1){background:rgba(23, 19, 52,0.9);}
 .compComm:nth-child(2){margin: 0 0.5%;background: rgba(42, 14, 52,0.9);}
-.compComm:nth-child(3){background: rgba(56, 11, 52,0.9);}
-.compTitle{width:100%;height: 50px;font-size: 30px;}
-.compPrice{width:100%;height: 50px;font-size: 20px;}
+
+/* Comming Soon */
+/*.compComm:nth-child(3){background: rgba(56, 11, 52,0.9);}*/
+
+.compTitle{width:100%;height: 35px;font-size: 30px; line-height: 35px;}
+.compPrice{width:100%;height: 35px;font-size: 18px;margin-top:10px}
+
+/* For Disable compComm */
+.compCommDis{width:33%;height: 280px;text-align: center;padding-top: 10%;color:#fff;cursor: pointer;position: relative;overflow: hidden;border-radius: 5px;}
+
+.compCommDis.comSelected::after{content: '';opacity:1;position: absolute;right: 0px; left:0px; bottom: 30px;margin: auto; width: 40px;height: 40px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;}
+.compCommDis:nth-child(3){background: rgba(56, 11, 52,0.9);}
+.compDisTitle{width:100%;height: 35px;font-size: 30px;line-height:35px;}
+.compDisPrice{width:100%;height: 50px;font-size: 20px;}
+
 
 .detailsComm{width:100%;height: auto;}
 
@@ -638,7 +650,7 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 
 
 .comparisonDiv .compPrice {width: 100%;height: auto;font-size: 13px;}
-.comparisonDiv .compPrice span{font-size: 20px;}
+.comparisonDiv .compPrice span{font-size: 18px;}
 .bankDetails {width: 100%;height: auto;padding:0 20px;border: 1px solid #ccc;margin: 15px 0;border-radius: 5px;}
 .bankDetails .formTitle{width:100%;}
 
@@ -692,3 +704,4 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .vterms{}
 .texHolder.vterms{padding:100px 0px 50px 0px;}
 .padL10{padding:0px 20px}
+.m010 {margin: 0 10px;}

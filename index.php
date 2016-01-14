@@ -247,6 +247,11 @@ switch ($action) {
                 $page = 'signup';
                 include 'template/signup.html';
                 break;
+            
+            case 'vsignup':
+                $page = 'signup';
+                include 'template/vSignUp.html';
+                break;
             case 'forgot':
                 $page = 'forgot';
                 include 'template/forgotPsw.html';
@@ -254,6 +259,11 @@ switch ($action) {
              case 'diamond_shapes':
                 $page = 'diamond_shapes';
                 include 'template/diamond.html';
+                break;
+            
+             case 'jewellery_tips':
+                $page = 'jewellery_tips';
+                include 'template/jewellery_tips.html';
                 break;
              case 'education_round':
                 $page = 'education_round';
@@ -393,6 +403,9 @@ switch ($action) {
 //                    die();
 //                }
                 $page = 'Change Password';
+                $urlkey = $_GET['key'];
+                $urlkey = explode(' ',$urlkey);
+                $urlkey = $urlkey[1];
                 include 'template/changepwd.html';
                 break;
             case 'login':
@@ -582,12 +595,11 @@ switch ($action) {
                        $prdVars['cut'] = $ValArr[$ky];
                     }
                 }
-                $desres   = APIDOMAIN."index.php?action=showDescription&pid=".$pid."&catid=10000&color=".$prdVars['color']."&cut=".$prdVars['cut']."&clarity=".$prdVars['clarity']."&shape=".$prdVars['shape'];
-                $desres  = $comm->executeCurl($desres);
+                $desurl   = APIDOMAIN."index.php?action=showDescription&pid=".$pid."&catid=10000&color=".$prdVars['color']."&cut=".$prdVars['cut']."&clarity=".$prdVars['clarity']."&shape=".$prdVars['shape'];
+                $desres  = $comm->executeCurl($desurl);
                 $des = $desres['results'];
                 $totalDes = $res3['total'];
-                //echo "<pre>".print_r($data3); die;
-                
+                //echo "<pre>".print_r($des); die;
                 include 'template/diamond_details.html';
                 break;
 
@@ -621,10 +633,16 @@ switch ($action) {
                 $data1 = $res1['results'];
                 
                 $prdVars = $prdVars['attr_details'];
-                $sug   = APIDOMAIN."index.php?action=suggestProducts&pid=".$pid."&catid=10002&purity=".$prdVars['gold_purity']."&metal=".$prdVars['metal']."&gwt=".$prdVars['gold_weight']."&type=".$prdVars['type'];
+                $sug   = APIDOMAIN."index.php?action=suggestProducts&pid=".$pid."&catid=10002&metal=".$prdVars['metal']."&type=".$prdVars['type'];
                 $res3  = $comm->executeCurl($sug);
                 $data3 = $res3['results'];
                 $sugTotal = $res3['total'];
+                
+                $desurl   = APIDOMAIN."index.php?action=showDescription&pid=".$pid."&catid=10002&metal=".$prdVars['metal']."&type=".strtolower($prdVars['type']);
+                $desres  = $comm->executeCurl($desurl);
+                $des = $desres['results'];
+                $totalDes = $res3['total'];
+                
                 //echo "<pre>".print_r($data3); die;
                 
                 include 'template/bullion_details.html';
@@ -705,8 +723,16 @@ switch ($action) {
                     $urlI = APIDOMAIN . 'index.php?action=imagedisplay&pid='.$imagekey;
                     $resI = $comm->executeCurl($urlI);
                     $dataI[] = $resI['results'];
+                    $smPrdList[] .= $imagekey;
                 }
-                //echo "<pre>"; print_r($dataI); die;
+                $smPrdList = implode(',',$smPrdList);
+                
+                $desurl   = APIDOMAIN."index.php?action=showDescription&pid=".$pid."&catid=10001&metal=".$prdVars['metal']."&cert=".strtolower($prdVars['certified'])."&shape=".$prdVars['diamond_shape']."";
+                $desres  = $comm->executeCurl($desurl);
+                $des = $desres['results'];
+                $totalDes = $res3['total'];
+                
+                //echo "<pre>"; print_r($des); die;
                 include 'template/jewellery_details.html';
                 break;
                 

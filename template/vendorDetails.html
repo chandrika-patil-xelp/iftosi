@@ -74,7 +74,7 @@ if(!empty($data['mdbw'])) {
                         </div>
                         <div class="divCon2  fRight">
                             <div  class="titleDiv txtCap fLeft">Website</div>
-                            <input name="" type="text" id="wbst" value="<?php echo $data['website']; ?>" autocomplete="false" placeholder=" e.g. www.iftosi.com" class="txtInput fLeft fmOpenR font14 c666">
+                            <input name="" type="text" id="wbst" value="<?php echo $data['website']; ?>" autocomplete="false" placeholder=" e.g. www.IFtoSI.com" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon  fLeft">
                             <div  class="titleDiv txtCap fLeft">Bankers *</div>
@@ -90,17 +90,17 @@ if(!empty($data['mdbw'])) {
                                 </div>
                                 
                             </div>
-                            <div id='forJewellery' class="compComm fLeft <?php if(in_array('2',$business_type)) { echo 'comSelected'; } ?>">
-                                <div class="compTitle fLeft fmOpenL">Jewellery</div>
+                            <div id='forJewellery' class="compComm fLeft <?php if((in_array('2',$business_type)) && (in_array('2',$business_type)))  { echo 'comSelected'; } ?>">
+                               <div class="compTitle fLeft fmOpenL">Jewellery</div>
+                               <div class="compTitle fLeft fmOpenL">&</div>
+                               <div class="compTitle fLeft fmOpenL">Bullion</div>
                                 <div class="compPrice fLeft fmOpenR">
-                                    <span>&#8377;15,000/year</span><br>for Jewellery companies. 
+                                    <span>&#8377;30,000/year</span><br>for Jewellery companies. 
                                 </div>
-                                 
                             </div>
-                            <div id='forBullion' class="compComm fLeft <?php if(in_array('3',$business_type)) { echo 'comSelected'; } ?>">
-                                <div class="compTitle fLeft fmOpenL">Bullion</div>
-                                <div class="compPrice fLeft fmOpenR">
-                                    <span>&#8377;15,000/year</span><br>for Bullion companies.
+                            <div id='commingSoon' class="compCommDis fLeft">
+                                <div class="compDisTitle fLeft fmOpenL">Comming <br> Soon</div>
+                                <div class="compDisPrice fLeft fmOpenR">
                                 </div>
                                 
                             </div>
@@ -109,7 +109,8 @@ if(!empty($data['mdbw'])) {
                             <div class="formTitle fLeft fmOpenL txtLeft">IFtoSI Bank Details</div>
                             <div class="bankComm fLeft">
                                 <div class="label1 fmOpenB">Amount Payable</div>
-                                <div class="label2 fmOpenR">&#8377;25000</div>
+                                <div class="label2 fmOpenR" id="payingamt">25000</div>
+                                <input type="hidden" id="payammo" value="<?php echo $data['pay_amount']; ?>">
                             </div>
                             <div class="bankComm fLeft">
                                 <div class="label1 fmOpenB">Bank Name</div>
@@ -117,7 +118,7 @@ if(!empty($data['mdbw'])) {
                             </div>
                             <div class="bankComm fLeft">
                                 <div class="label1 fmOpenB">Account Holder Name</div>
-                                <div class="label2 fmOpenR">IFTOSI JEWELS PVT. LTD.</div>
+                                <div class="label2 fmOpenR">IFtoSI JEWELS PVT. LTD.</div>
                             </div>
                             <div class="bankComm fLeft">
                                 <div class="label1 fmOpenB">Account Number</div>
@@ -171,7 +172,7 @@ if(!empty($data['mdbw'])) {
                                 <input name="" id="ofcountry" type="text" autocomplete="false" value="<?php echo $data['officecountry']; ?>" placeholder=" eg.  HONG KONG, ANTWERP, TOKYO, NEW YORK, TEL AVIV" class="txtInput fLeft fmOpenR font14 c666">
                             </div>
                         </div>
-                        <div id='jewelleryDet' class="detailsComm fLeft <?php if(!in_array('2',$business_type)) { echo 'dn'; } ?>">
+                        <div id='jewelleryDet' class="detailsComm fLeft <?php if(!in_array('2',$business_type) && !in_array('3',$business_type)) { echo 'dn'; } ?>">
                             <div class="formTitle fLeft fmOpenL">Jewellery</div>
                             <div class="divCon  fLeft">
                                 <div  class="titleDiv txtCap fLeft">Name Of Showroom *</div>
@@ -187,7 +188,7 @@ if(!empty($data['mdbw'])) {
                             </div> 
                         </div>
 
-                        <div id='bullionDet' class="detailsComm fLeft <?php if(!in_array('3',$business_type)) { echo 'dn'; } ?>">
+                        <div id='bullionDet' class="detailsComm fLeft <?php if(!in_array('2',$business_type) && !in_array('3',$business_type)) { echo 'dn'; } ?>">
                             <div class="formTitle fLeft fmOpenL">Bullion</div>
                             <div class="divCon  fLeft">
                                 <div  class="titleDiv txtCap fLeft">Membership Of Council / Jewellers Association *</div>
@@ -263,7 +264,8 @@ if(!empty($data['mdbw'])) {
                             <div class="formTitle fLeft fmOpenL txtLeft">IFtoSI Bank Details</div>
                             <div class="bankComm fLeft">
                                 <div class="label1 fmOpenB">Amount Payable</div>
-                                <div class="label2 fmOpenR">&#8377;25000</div>
+                                <div class="label2 fmOpenR" id="payammo2"><?=$data['pay_amount'];?></div>
+                                <input type="hidden" id="payammo" value="<?php echo $data['pay_amount']; ?>">
                             </div>
                             <div class="bankComm fLeft">
                                 <div class="label1 fmOpenB">Bank Name</div>
@@ -271,7 +273,7 @@ if(!empty($data['mdbw'])) {
                             </div>
                             <div class="bankComm fLeft">
                                 <div class="label1 fmOpenB">Account Holder Name</div>
-                                <div class="label2 fmOpenR">IFTOSI JEWELS PVT. LTD.</div>
+                                <div class="label2 fmOpenR">IFtoSI JEWELS PVT. LTD.</div>
                             </div>
                             <div class="bankComm fLeft">
                                 <div class="label1 fmOpenB">Account Number</div>

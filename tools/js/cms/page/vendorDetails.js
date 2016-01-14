@@ -1,9 +1,15 @@
 var input_selector = 'input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=number], input[type=search], textarea, input[type=radio]';
 var uid = customStorage.readFromStorage('userid');
+
+
 if (vid !== uid || uid == '') {
     window.location.assign(DOMAIN + 'index.php');
 }
 $(document).ready(function () {
+    var pay = parseInt($('#payammo').val());
+    $('#payingamt').html('&#8377 '+pay);
+    $('#payammo2').html('&#8377 '+pay);
+    
     if ($('#cperson').val() == '') {
         $('#cperson').val(customStorage.readFromStorage('username'));
     }
@@ -14,7 +20,7 @@ $(document).ready(function () {
 
         var x = (document.all) ? event.x : e.pageX;
         var y = (document.all) ? event.y : e.pageY;
-
+        
         setTimeout(function () {
             x = e.pageX = e.pageX + 100;
             y = e.pageY = e.pageY + 100;
@@ -26,13 +32,49 @@ $(document).ready(function () {
         var id = $(this).attr('id');
         if (id == 'forDiamond') {
             $('#diamondDet').toggleClass('dn');
+            if($('#'+id).hasClass('comSelected'))
+            {
+                pay = (pay + 30000);
+                $('#payammo').val(pay);
+            }
+            else
+            {
+                pay = (pay - 30000);
+                $('#payammo').val(pay);
+            }
         }
         else if (id == 'forJewellery') {
             $('#jewelleryDet').toggleClass('dn');
-        }
-        else if (id == 'forBullion') {
             $('#bullionDet').toggleClass('dn');
+            if($('#'+id).hasClass('comSelected'))
+            {
+                pay = parseInt(pay + 30000);
+                $('#payammo').val(pay);
+            }
+            else
+            {
+                pay = (pay - 30000);
+                $('#payammo').val(pay);
+            }
+            
         }
+//        else if (id == 'forBullion')
+//        {
+//            $('#bullionDet').toggleClass('dn');
+//            if($('#'+id).hasClass('comSelected'))
+//            {
+//                pay = parseInt(pay + 15000);
+//                $('#payammo').val(pay);
+//            }
+//            else
+//            {
+//                pay = (pay - 15000);
+//                $('#payammo').val(pay);
+//            }
+//        }
+        $('#payingamt').html('&#8377 '+pay);
+        $('#payammo2').html('&#8377 '+pay);
+        
     });
 
     $('#pan').bind('keyup', function () {
@@ -385,6 +427,7 @@ function submitForm() {
     var val = new Array("orgname", "fulladd", "add1", "pincode", "area", "city", "state", "vat", "pan", "tovr", "wbst", "banker");
     var data = new Object;
     var res = formatData(val);
+    var payamt = $('#payammo').val();
     var busiTypeVal = new Array;
     if ($("#forDiamond").hasClass("comSelected")) {
         busiTypeVal.push(1);
@@ -392,9 +435,10 @@ function submitForm() {
     if ($("#forJewellery").hasClass("comSelected")) {
         busiTypeVal.push(2);
     }
-    if ($("#forBullion").hasClass("comSelected")) {
+    if ($("#forJewellery").hasClass("comSelected")) {
         busiTypeVal.push(3);
     }
+    payamt = payamt.trim();
     busiType = busiTypeVal.join(',');
     res['busiType'] = busiType;
     res['country'] = country;
@@ -415,7 +459,7 @@ function submitForm() {
         if (errCode.status == 'Success')
         {
                     data = JSON.stringify(data);
-                    $.ajax({url: common.APIWebPath() + "index.php?action=udtProfile&lat="+errCode.lat+"&lng="+errCode.lng+"&dt=" + encodeURIComponent(data), success: function (result) {
+                    $.ajax({url: common.APIWebPath() + "index.php?action=udtProfile&payamt="+payamt+"&lat="+errCode.lat+"&lng="+errCode.lng+"&dt=" + encodeURIComponent(data), success: function (result) {
                             var obj = jQuery.parseJSON(result);
                             customStorage.addToStorage('busiType', busiType);
                             var errCode = obj['error']['code'];

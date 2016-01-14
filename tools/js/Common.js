@@ -169,7 +169,7 @@ function Common() {
 		{
 			if(pageName == 'wishlist')
 			{
-				window.location.href = DOMAIN + "index.php";
+				window.location.href = DOMAIN;
 			}
 			else
 			{
@@ -178,7 +178,7 @@ function Common() {
 		}
 		else
 		{
-			window.location.href = DOMAIN + "index.php";
+			window.location.href = DOMAIN;
 		}
 
 		$('#wishListHdr').removeClass('dn');
