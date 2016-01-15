@@ -5,6 +5,8 @@
 <input type="hidden" id="slist" value="<?php echo $_GET['slist']; ?>" />
 <input type="hidden" id="total_pageno" value="<?php echo $lastpg; ?>" />
 <input type="hidden" id="sortbyvl" value="" />
+
+
 <div class="bottmInfo fmOpenR">
     <div class="wrapperMax">
         <div class="infoComm fLeft">
@@ -33,6 +35,10 @@
         </div>
     </div>
 </div>
+<?php
+if($case != 'b2bproducts')
+{
+?>
 <div class="pageLinks fmOpenR">
 	<center>
        <a href="<?php echo DOMAIN?>About-Us" alt="About Us" title="About Us"><div class="lowerFooterTab transition100">ABOUT US</div></a>
@@ -44,6 +50,9 @@
 	   <a href="<?php echo DOMAIN?>Vendor-Sign-Up" alt="Vendor SignUp" class="dn" title="Vendor SignUp" id="vsignup"><div class="lowerFooterTab transition100" >VENDOR SIGN-UP</div></a>
     </center>
 </div>
+<?php
+}
+?>
 <script type="text/javascript">
 	var prdList = "<?=$prdList;?>";
         var similarPrdList = "<?=$smPrdList;?>";

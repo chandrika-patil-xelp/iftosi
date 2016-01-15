@@ -462,6 +462,7 @@ switch ($action) {
                 break;
                 
             case 'b2bproducts':
+                $dummypage = $case;
                 $page = 'diamonds';
                 $slist = $_GET['slist'];
                 $pgno = ($_GET['pgno'] ? $_GET['pgno'] : 1);

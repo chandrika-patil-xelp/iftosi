@@ -85,6 +85,7 @@ function Common() {
             }
         }
         var userMenuStr='';
+        
         if (isLoggedIn === 'true') {
             if(nm !== undefined || nm !== 'undefined' || nm !== null || nm !== 'null' || nm !== '')
             {

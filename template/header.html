@@ -25,7 +25,14 @@ case 'wishlist':
             </div>
 
             <div class="signInUpTab fRight fmOpenR"><span onclick="common.showLoginForm();">Sign In</span> / <a href="<?php echo DOMAIN; ?>Sign-Up">Sign Up</a></div>
-            <div id="wishListHdr" class="wishlist fRight fmOpenR" onclick="redirectToWishlist();">Wishlist<span id="wishListCnt" class="dn"> ()</span></div>
+            <?php
+            if($case != 'b2bproducts')
+            { 
+            ?>
+                <div id="wishListHdr" class="wishlist fRight fmOpenR" onclick="redirectToWishlist();">Wishlist<span id="wishListCnt" class="dn"> ()</span></div>
+            <?php
+            }
+            ?>
         </div>
     </div>
 </div>
@@ -69,6 +76,10 @@ case 'e_glossary':
     <div class="wrapperMax poR bgWhite">
         <div id="mMenuBtn" class="menuBtn fLeft transition300 ripplelink" onclick="showLeftMenu(true)"></div>
         <div id="mFilterBtn" class="filterBtn fRight transition300 ripplelink" onclick="swichFilter();"></div>
+        <?php
+        if($case != 'b2bproducts')
+        { 
+        ?>
         <div class="headCatCont fLeft transition300">
             <?php
             foreach($showhead as $key => $val)
@@ -117,6 +128,10 @@ case 'e_glossary':
             <div id='hbgJewel' class="headCat fLeft bgJewellery transition300"><span class="transition300">Jewellery</span><?php include 'jewelleryMenu.html'; ?></div>
             <div id='hbgBull' class="headCat fLeft bgBullion transition300"><span>Bullions</span></div> -->
         </div>
+        
+        <?php
+        }
+        ?>
 
         <div class="headRight fRight transition300">
 
@@ -139,7 +154,14 @@ case 'e_glossary':
             <!--                    <div class="headDivider fRight"></div>
                                 
                                 <div class="wishCount fRight fmOpenR ripplelink">25</div>-->
-            <div id="wishListHdr" class="wishlist fRight fmOpenR" onclick="redirectToWishlist();">Wishlist<span id="wishListCnt" class="dn"> ()</span></div>
+            <?php
+            if($case != 'b2bproducts')
+            { 
+            ?>
+                <div id="wishListHdr" class="wishlist fRight fmOpenR" onclick="redirectToWishlist();">Wishlist<span id="wishListCnt" class="dn"> ()</span></div>
+            <?php
+            }
+            ?>
         </div>
     </div>
 </div>
