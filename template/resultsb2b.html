@@ -1,0 +1,137 @@
+<?php include 'bhead.html'; ?>
+<body>
+    <div id='baseCont' class="container fmOpenR bgWhite resultsPage">
+        <div class="wrapper">
+            <?php include 'header.html' ?>
+            <div class="totalResultsDiv"></div>
+            <?php
+            if (count($fil)) {
+                foreach ($fil as $key => $val) {
+                    if ($val['attribute_name'] == 'shape' && !empty($val['attribute_values'])) {
+                        ?>
+                        <div class='shapesCont resultsPage showHide'>
+                            <div class="wrapperMax">
+                                <div class="allShapes resultsPage">
+                                    <center>
+            <?php
+            $filval = explode(",", $val['attribute_values']);
+            foreach ($filval as $ky => $vl) {
+                ?>
+                                            <div id="<?php echo $vl; ?>" class="shapeComm transition300 ripplelink <?php echo $vl; ?>">
+                                            </div>
+                                            <?php
+                                        }
+                                        ?>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+            <?php
+            unset($fil[$key]);
+        }
+    }
+}
+?>
+            <div class="allResults">
+                <div class="wrapperMax">
+                    <div class="filterTitleDiv">
+                        <div class='fTitle fLeft fmOpenR'>Filter Results</div>
+                        <div class="rCount fLeft fmOpenR"><span id='resultCount'> 0</span> Results Found For <?php echo $catname;?></div>
+                        <div class="fRight sortBox">
+                            <div class="dropdownBox fLeft">
+                                <div id="drpinp" class="dropInput fmOpenR">Best Match</div>
+                                <ul id="dropList" class="fmOpenR">
+                                    <li class="transition100" id="bmatch">Best Match</li>
+                                    <li class="transition100" id="pasc">Lowest Price</li>
+                                    <li class="transition100" id="pdesc">Highest Price</li>
+                                    <!-- <li class="transition100" id="rate">Rating</li> -->
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="fRight sTitle">Sort by</div>
+                    </div>
+                    <div class='results_Filter'>
+<?php include 'filters.html'; ?>
+                        <div class='prdResults fRight'>
+<?php
+if (count($data)) {
+    foreach ($data as $key => $val) {
+        ?>
+                                    
+                                        <div class='prdComm fLeft'>
+                                            <div class='prdCommDiv fLeft transition100'>
+												<a href="<?php echo DOMAIN . strtolower($val['attributes']['certified']) . '-' . strtolower($val['attributes']['shape']) . '-clarity-' . $val['attributes']['clarity']; ?>/did-<?php echo $val['pid']; ?>">
+                                                <div class='prdShape fLeft'>
+                                                    <div class='prdShTitle fLeft fmOpenB'>SHAPE</div>
+                                                    <div class='prdShType fLeft fmOpenR'><?php echo $val['attributes']['shape']; ?></div>
+                                                    <div class="<?php echo $val['attributes']['shape']; ?> fRight"></div>
+                                                </div>
+                                                <div class="prdDetails fLeft">
+                                                    <div class="detComm">
+                                                        <div class="detLabel fmOpenB fLeft">COLOR</div>
+                                                        <div class="detValue fmOpenR fLeft"><?php echo $val['attributes']['color']; ?></div>
+                                                    </div>
+                                                    <div class="detComm">
+                                                        <div class="detLabel fmOpenB fLeft">CARATS</div>
+                                                        <div class="detValue fmOpenR fLeft"><?php echo $val['attributes']['carat']; ?></div>
+                                                    </div>
+                                                    <div class="detComm">
+                                                        <div class="detLabel fmOpenB fLeft">CLARITY</div>
+                                                        <div class="detValue fmOpenR fLeft"><?php echo $val['attributes']['clarity']; ?></div>
+                                                    </div>
+                                                    <div class="detComm">
+                                                        <div class="detLabel fmOpenB fLeft">CERTIFICATE</div>
+                                                        <div class="detValue fmOpenR fLeft"><?php echo $val['attributes']['certified']; ?></div>
+                                                    </div>
+                                                </div>
+                                                <div class='prdPrice fLeft'>
+                                                    <div class="detComm">
+                                                        <div class="detLabel fmOpenB fLeft">BEST PRICE</div>
+                                                        <?php
+                                                            $rate = $val['dollar_rate'];
+                                                            if( empty($val['dollar_rate']) || $val['dollar_rate'] == '0.00' || $val['dollar_rate'] == 0.00){
+                                                                $rate = dollarValue;
+                                                            }
+                                                        ?>
+                                                        <div class="detValue fmOpenB fLeft"><span>&#8377;</span>
+                                                        <?php 
+                                                            $price = ceil((($val['pprice'] * $rate)*$val['attributes']['carat']));
+                                                            echo $price = $comm->IND_money_format($price);
+                                                        ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+												</a>
+                                                <div class='prdActions fLeft'>
+                                                    <a href="<?php echo DOMAIN . strtolower($val['attributes']['certified']) . '-' . strtolower($val['attributes']['shape']) . '-clarity-' . $val['attributes']['clarity']; ?>/did-<?php echo $val['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                    <a href="<?php echo DOMAIN . strtolower($val['attributes']['certified']) . '-' . strtolower($val['attributes']['shape']) . '-clarity-' . $val['attributes']['clarity']; ?>/did-<?php echo $val['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                    <a href="<?php echo DOMAIN . strtolower($val['attributes']['certified']) . '-' . strtolower($val['attributes']['shape']) . '-clarity-' . $val['attributes']['clarity']; ?>/did-<?php echo $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                    <a href="<?php echo DOMAIN . strtolower($val['attributes']['certified']) . '-' . strtolower($val['attributes']['shape']) . '-clarity-' . $val['attributes']['clarity']; ?>/did-<?php echo $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                </div>
+                                            </div>
+                                        </div>
+        <?php
+    }
+}
+?>
+						<?php include 'pagination.html';?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php include 'footer.html'; ?>
+        </div>
+        <?php include 'logo.html'; ?>
+        <?php include 'leftmenu.html'; ?>
+    </div>
+    <div id='dragTarget' class="drag-target" style="touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); left: 0px;"></div>
+    <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['jqrynum']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['hammer']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['comm']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['result']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['head']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['filter']; ?>"></script>
+</body>
+</html>

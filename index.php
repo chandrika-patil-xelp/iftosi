@@ -460,6 +460,29 @@ switch ($action) {
 
                 include 'template/wishlist.html';
                 break;
+                
+            case 'b2bproducts':
+                $page = 'diamonds';
+                $slist = $_GET['slist'];
+                $pgno = ($_GET['pgno'] ? $_GET['pgno'] : 1);
+                $catid = $_GET['catid'];
+                $url = APIDOMAIN . 'index.php?action=getPrdByCatid&catid=' . $catid . '&page=' . $pgno . '&slist=' . $slist;
+                $res = $comm->executeCurl($url);
+                $data = $res['results']['products'];
+                $total = $res['results']['total'];
+                $catname = $res['results']['catname'];
+
+
+                $url = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=' . $catid;
+                $res = $comm->executeCurl($url);
+                $fil = $res['results']['attributes'];
+
+                $totalCnt = $total;
+                $lastpg = ceil($total / 15);
+                $adjacents = 2;
+                //echo "<pre>";print_r($total);die;
+                include 'template/resultsb2b.html';
+                break;
 
             case 'diamonds':
                 $page = 'diamonds';
