@@ -374,6 +374,16 @@ switch ($action) {
                 $page = 'vendor_privacy';
                 include 'template/vprivacy.html';
                 break;
+            
+            case 'inactive_vendor':
+                $page = 'inactive_vendor';
+                $uid = $_GET['uid'];
+                $url = APIDOMAIN . 'index.php?action=viewAll&uid='.$uid;
+                $res = $comm->executeCurl($url);
+                $data = $res['results'][1];
+                //echo "<pre>";print_r($data);die;
+                include 'template/inactiveVendor.html';
+                break;
 
              case 'faq_sellers':
                 $page = 'faq_sellers';
@@ -606,7 +616,7 @@ switch ($action) {
                 $datacnt = $res1['count'];
                 
                 $prdVars = $prdVars['attr_details'];
-                $sug   = APIDOMAIN."index.php?action=suggestProducts&pid=".$pid."&catid=10000&clarity=".$prdVars['clarity']."&carat=".$prdVars['carat']."&shape=".$prdVars['shape']."&cut=".$prdVars['cut']."&color=".$prdVars['color']."&fluo=".$prdVars['fluorescence']."&sym = ".$prdVars['symmetry']."&polish=".$prdVars['polish'];
+                $sug   = APIDOMAIN."index.php?action=suggestProducts&pid=".$pid."&catid=10000&clarity=".urlencode($prdVars['clarity'])."&carat=".$prdVars['carat']."&shape=".urlencode($prdVars['shape'])."&cut=".urlencode($prdVars['cut'])."&color=".urlencode($prdVars['color'])."&fluo=".urlencode($prdVars['fluorescence'])."&sym = ".urlencode($prdVars['symmetry'])."&polish=".urlencode($prdVars['polish']);
                 $res3  = $comm->executeCurl($sug);
                 $data3 = $res3['results'];
                 $sugTotal = $res3['total'];
@@ -619,11 +629,12 @@ switch ($action) {
                        $prdVars['cut'] = $ValArr[$ky];
                     }
                 }
-                $desurl   = APIDOMAIN."index.php?action=showDescription&pid=".$pid."&catid=10000&color=".$prdVars['color']."&cut=".$prdVars['cut']."&clarity=".$prdVars['clarity']."&shape=".$prdVars['shape'];
+                
+                $desurl   = APIDOMAIN."index.php?action=showDescription&pid=".$pid."&catid=10000&color=".urlencode($prdVars['color'])."&cut=".urlencode($prdVars['cut'])."&clarity=".urlencode($prdVars['clarity'])."&shape=".urlencode($prdVars['shape']);
                 $desres  = $comm->executeCurl($desurl);
                 $des = $desres['results'];
                 $totalDes = $res3['total'];
-                //echo "<pre>".print_r($des); die;
+                //echo "<pre>";print_r($des); die;
                 include 'template/diamond_details.html';
                 break;
 
@@ -657,12 +668,12 @@ switch ($action) {
                 $data1 = $res1['results'];
                 
                 $prdVars = $prdVars['attr_details'];
-                $sug   = APIDOMAIN."index.php?action=suggestProducts&pid=".$pid."&catid=10002&metal=".$prdVars['metal']."&type=".$prdVars['type'];
+                $sug   = APIDOMAIN."index.php?action=suggestProducts&pid=".$pid."&catid=10002&metal=".urlencode($prdVars['metal'])."&type=".urlencode($prdVars['type']);
                 $res3  = $comm->executeCurl($sug);
                 $data3 = $res3['results'];
                 $sugTotal = $res3['total'];
                 
-                $desurl   = APIDOMAIN."index.php?action=showDescription&pid=".$pid."&catid=10002&metal=".$prdVars['metal']."&type=".strtolower($prdVars['type']);
+                $desurl   = APIDOMAIN."index.php?action=showDescription&pid=".$pid."&catid=10002&metal=".urlencode($prdVars['metal'])."&type=".strtolower(urlencode($prdVars['type']));
                 $desres  = $comm->executeCurl($desurl);
                 $des = $desres['results'];
                 $totalDes = $res3['total'];
@@ -719,10 +730,38 @@ switch ($action) {
                 }
                 $diamondsShape = explode('|!|', $prdInfo['attr_details']['diamond_shape']);
                 $diamondsShape = array_unique($diamondsShape);
+                
                 $prdInfo['attr_details']['diamond_shape'] = implode('|!|', $diamondsShape);
 
                 $diamondsClarity = explode('|!|', $prdInfo['attr_details']['clarity']);
                 $diamondsClarity = array_unique($diamondsClarity);
+                
+                
+                $tempcheck1 = strpos($prdInfo['attr_details']['color'],'~');
+                if($tempcheck1 == true)
+                {
+                    $diamondsColor = explode('~',$prdInfo['attr_details']['color']);
+                }
+                else
+                {
+                    $diamondsColor = explode('|!|', $prdInfo['attr_details']['color']);
+                }
+                
+                $diamondsColor = array_unique($diamondsColor);
+                
+                
+                $metal = $prdInfo['attr_details']['metal'];
+                $tempcheck2 = strpos($metal,'~');
+                if($tempcheck2 == true)
+                {
+                    $metal = explode('~',$metal);
+                }
+                else
+                {
+                    $metal = explode('|!|', $prdInfo['attr_details']['metal']);
+                }
+                $metal = array_unique($metal);
+                
                 $prdInfo['attr_details']['clarity'] = implode('|!|', $diamondsClarity);
 
                 $gemstoneType = explode('|!|', $prdInfo['attr_details']['gemstone_type']);
@@ -735,13 +774,7 @@ switch ($action) {
                 
                 $prdVars = $prdInfo['attr_details'];
                 
-                if(!empty($prdVars['metal']) && !empty($prdVars['gold_purity']) && !empty($prdVars['gold_weight']) && !empty($prdVars['shape']) && !empty($prdVars['certified']))
-                {
-                    $sug   = APIDOMAIN."index.php?action=suggestProducts&pid=".$pid."&catid=10001&metal=".$prdVars['metal']."&purity=".$prdVars['gold_purity']."&gwt=".$prdVars['gold_weight']."&shape=".$prdVars['shape']."&certified=".$prdVars['certified'];
-                    $res3  = $comm->executeCurl($sug);
-                    $data3 = $res3['results'];
-                    $sugTotal = $res3['total'];
-                }
+                
                 foreach($data3 as $imagekey=>$imgval)
                 {
                     $urlI = APIDOMAIN . 'index.php?action=imagedisplay&pid='.$imagekey;
@@ -751,10 +784,22 @@ switch ($action) {
                 }
                 $smPrdList = implode(',',$smPrdList);
                 
-                $desurl   = APIDOMAIN."index.php?action=showDescription&pid=".$pid."&catid=10001&metal=".$prdVars['metal']."&cert=".strtolower($prdVars['certified'])."&shape=".$prdVars['diamond_shape']."";
+                $diamondsShape  = implode(',',$diamondsShape);
+                $diamondsClarity  = implode(',',$diamondsClarity);
+                $diamondsColor  = implode(',',$diamondsColor);
+                $metal = implode(',',$metal);
+                $gemstoneType = implode(',',$gemstoneType);
+                
+                $desurl   = APIDOMAIN."index.php?action=showDescription&pid=".$pid."&catid=10001&gemstone_type=".strtolower(urlencode($gemstoneType))."&metal=".strtolower(urlencode($metal))."&clarity=".urlencode($diamondsClarity)."&colour=".urlencode($diamondsColor)."&cert=".strtolower($prdVars['certified'])."&shape=".$diamondsShape."";
                 $desres  = $comm->executeCurl($desurl);
                 $des = $desres['results'];
                 $totalDes = $res3['total'];
+                
+                $sug   = APIDOMAIN."index.php?action=suggestProducts&pid=".$pid."&catid=10001&metal=".strtolower(urlencode($metal))."&purity=".$prdVars['gold_purity']."&gwt=".$prdVars['gold_weight']."&shape=".urlencode($diamondsShape)."&certified=".strtolower(urlencode($prdVars['certified']));
+                $res3  = $comm->executeCurl($sug);
+                $data3 = $res3['results'];
+                $sugTotal = $res3['total'];
+                
                 
                 //echo "<pre>"; print_r($des); die;
                 include 'template/jewellery_details.html';

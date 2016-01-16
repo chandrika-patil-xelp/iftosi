@@ -1,0 +1,64 @@
+<?php include 'backHead.html' ?>
+<body>
+    <div class="container">
+        <center><div class="backLogo fmOpenR" onclick="window.location.assign(DOMAIN);"><div><b>IF</b>to<b>SI</b></div></div></center>
+        <div class="wrapper">
+            <div class="wrapperMax vMax">
+                <div id="stepsDiv" class="fmRoboto uppercase ">
+                        <div id="step1" class="font14 c666 stTextComm fLeft" ><span class="stepNo">1</span>Business Details </div>
+                        <div id="step2" class="font14 c666 stTextComm fLeft" ><span class="stepNo">2</span>Type Details</div>
+                        <div id="step3" class="font14 c666 stTextComm fLeft" ><span class="stepNo">3</span>Contact Details</div>
+                        <div id="step4" class="font14 c666 stTextComm fLeft" ><span class="stepNo">4</span>Payment Details</div>
+                        <div class="dStepCon fLeft"><div id="disStep" class="disStepComm transition300" style="width:100%"></div></div>
+                    </div>
+                <div class="formContainer fmOpenR vendorDetails">
+                    
+                    <div class="notActDiv">
+                        <div class="notActMsg font22 fLeft" id="vendrInfo"></div>
+                    </div>
+                    <div class='bankDetails fLeft'>
+                            <div class="formTitle fLeft fmOpenL txtLeft">IFtoSI Bank Details</div>
+                            <div class="bankComm fLeft">
+                                <div class="label1 fmOpenB">Amount Payable</div>
+                                <div class="label2 fmOpenR" id="payammo2"><?=$data['pay_amount'];?></div>
+                                <input type="hidden" id="payammo" value="<?php echo $data['pay_amount']; ?>">
+                            </div>
+                            <div class="bankComm fLeft">
+                                <div class="label1 fmOpenB">Bank Name</div>
+                                <div class="label2 fmOpenR">HDFC Bank</div>
+                            </div>
+                            <div class="bankComm fLeft">
+                                <div class="label1 fmOpenB">Account Holder Name</div>
+                                <div class="label2 fmOpenR">IFtoSI JEWELS PVT. LTD.</div>
+                            </div>
+                            <div class="bankComm fLeft">
+                                <div class="label1 fmOpenB">Account Number</div>
+                                <div class="label2 fmOpenR">50200015934307</div>
+                            </div>
+                            <div class="bankComm fLeft">
+                                <div class="label1 fmOpenB">IFSC CODE</div>
+                                <div class="label2 fmOpenR">HDFC0000019</div>
+                            </div>
+                            <div class="bankComm2 fLeft">
+                                <div class="label1 fmOpenB">Branch</div>
+                                <div class="label2 fmOpenR">Juhu Versova Link Road Branch,<br>Andheri West, Mumbai</div>
+                            </div>
+                    </div>
+                </div>
+                <div class="btnCont fLeft">
+                    <center>
+                        <a class="submitBtn fmOpenR ripplelink poR" href="<?=DOMAIN;?>">GO TO HOMEPAGE</a>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+var vid="<?php echo $uid; ?>";
+var busiType="<?php echo $data['business_type']; ?>";
+var username = customStorage.readFromStorage('username');
+$('#vendrInfo').text('Dear '+username+', Your profile is not fully functional. For exciting features please pay the required price to the IFtoSI Account.Details being provided below');
+</script>
+<script type="text/javascript" src="<?=$jvs['vendorDetails'];?>"></script>
+<script type="text/javascript" src="<?=$jvs['jquery_toast'];?>"></script>
