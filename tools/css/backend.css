@@ -707,5 +707,5 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .m010 {margin: 0 10px;}
 
 /* For Inactive Vendor Page */
-.notActDiv{width:100%;height: 200px;padding: 50px 0;text-align: center;color:#d4d4c8;border:1px solid #d4d4c8;margin-bottom: 50px;}
+.notActDiv{width:100%;height: 200px;padding: 50px 0;text-align: center;color:#d4d4c8;border:1px solid #d4d4c8;margin-bottom: 50px; }
 .notActMsg{width:100%;}
