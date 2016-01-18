@@ -41,8 +41,8 @@
                         ?>
                     <div class="detCont">
                         <div class="btnsCont fLeft">
-                            <div class="prdShape fLeft">
-                                <div class="prdShTitle fLeft fmOpenB">CUSTOMER PRICE</div>
+                            <div class="prdShape fLeft mRight20">
+                                <div class="prdShTitle wAuto fmOpenB">CUSTOMER PRICE</div>
 <?php
                                 $rate = $data['attr_details']['dollar_rate'];
                                 if (empty($data['attr_details']['dollar_rate']) || $data['attr_details']['dollar_rate'] == '0.00' || $data['attr_details']['dollar_rate'] == 0.00)
@@ -50,7 +50,7 @@
                                     $rate = dollarValue;
                                 }
 ?>
-                                <div class="prdShType fLeft fmOpenL"><span>&#8377;</span>
+                                <div class="prdShType wAuto fmOpenL"><span>&#8377;</span>
                                 <?php
                                 $price = ceil(($data['attr_details']['price'] * $rate) * $data['attr_details']['carat']);
                                 echo $price = $comm->IND_money_format($price);
