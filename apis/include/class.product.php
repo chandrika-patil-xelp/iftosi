@@ -775,6 +775,7 @@
 								price,
 								polish,
 								symmetry,
+                                                                b2b_price as b2bprice,
 								cno,
 								gold_purity,
 								CEIL(gold_weight) AS gold_weight,
