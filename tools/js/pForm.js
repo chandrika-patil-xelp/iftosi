@@ -565,6 +565,39 @@ function calculatePrice()
         
    }    
 }
+
+function calculateB2BPrice()
+{
+   var baseprice=$('#baseprice').val().trim();
+   var discount=$('#discountb2b').val().trim();
+   
+   
+   if(discount == null || discount == '' || discount == 'undefined' || discount == undefined){ 
+   
+        $('#prdb2bprice').val(baseprice);
+   }
+   else 
+   {
+        if((isNaN(baseprice)) == false  || (isNaN(baseprice)) == false || baseprice == undefined  || baseprice == 'undefined' || discount == undefiend || discount == 'undefined')
+        {
+           var offerPrice =(parseFloat(baseprice)*(discount/100));
+           var total = (baseprice-offerPrice).toFixed(0);
+           if(total <= 0)
+           {
+               common.toast(0,'B2B Price can not be in negative value');
+               $('#prdb2bprice').val('');
+               $('#discountb2b').val('');
+           }
+           else
+           {
+                $('#prdb2bprice').val(total);
+            }
+        }
+        
+   }    
+}
+
+
 function validateNum(){
                var regex = /^\\d{2}(\\.\\d)?$/;
                var cert = $('#cert').val().trim();

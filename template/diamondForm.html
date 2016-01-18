@@ -293,12 +293,17 @@
                             <input name="discount" id="discount" type="text" placeholder=" eg. 25%" autocomplete="false"  class="txtInput fLeft fmOpenR font14 c666" maxlength="5" minlength="1" onkeyup="calculatePrice()" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['discount'];?>">
                         </div>
                         <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">% Back to Vendor </div>
-                            <input name="discountb2b" id="discountb2b" type="text" placeholder=" eg. 25%" autocomplete="false"  class="txtInput fLeft fmOpenR font14 c666" maxlength="5" minlength="1" onkeyup="calculatePrice()" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['discountb2b'];?>">
+                            <div  class="titleDiv txtCap fLeft"> Customer Price*</div>
+                            <input name="price" id="prdprice" type="text" placeholder=" eg. 1200000" autocomplete="false" class="txtInput fLeft fmOpenR font14 c666" readonly maxlength="16" onkeypress="return common.isDecimalNumber(event,this.value);" onChange="(function(el){el.value=parseFloat(el.value).toFixed(15);})(this);" value="<?=$pdet['product_price'];?>">
                         </div>
                         <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Price*</div>
-                            <input name="price" id="prdprice" type="text" placeholder=" eg. 1200000" autocomplete="false" class="txtInput fLeft fmOpenR font14 c666" readonly maxlength="16" onkeypress="return common.isDecimalNumber(event,this.value);" onChange="(function(el){el.value=parseFloat(el.value).toFixed(15);})(this);" value="<?=$pdet['product_price'];?>">
+                            <div  class="titleDiv txtCap fLeft">% Back to Vendor </div>
+                            <input name="discountb2b" id="discountb2b" type="text" placeholder=" eg. 25%" autocomplete="false"  class="txtInput fLeft fmOpenR font14 c666" maxlength="5" minlength="1" onkeyup="calculateB2BPrice()" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['discountb2b'];?>">
+                        </div>
+                        <div class="divCon2  fLeft">
+                            
+                            <div  class="titleDiv txtCap fLeft">Vendor Price*</div>
+                            <input name="priceb2b" id="prdb2bprice" type="text" placeholder=" eg. 1200000" autocomplete="false" class="txtInput fLeft fmOpenR font14 c666" readonly maxlength="16" onkeypress="return common.isDecimalNumber(event,this.value);" onChange="(function(el){el.value=parseFloat(el.value).toFixed(15);})(this);" value="<?=$attr['b2bprice'];?>">
                         </div>
                         <div class="btnCont fLeft">
                             <center>

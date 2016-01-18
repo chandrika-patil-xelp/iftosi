@@ -328,6 +328,7 @@
                                                      bullion_design,
                                                      rating,
                                                      budget,
+                                                     b2b_price,
                                                      date_time,
                                                      active_flag)
                                     VALUES
@@ -371,6 +372,7 @@
                                                   \"".$detls['design']."\",
                                                   \"".$detls['rating']."\",
                                                   \"".$detls['price']."\",
+                                                  \"".$detls['priceb2b']."\",
                                                       now(),
                                                   \"".$display_flag."\")
                                     ON DUPLICATE KEY UPDATE
@@ -413,6 +415,7 @@
                                                             bullion_design=\"".$detls['design']."\",    
                                                             rating        = \"".$detls['rating']."\",
                                                             budget        = \"".$detls['price']."\",    
+                                                            b2b_price        = \"".$detls['priceb2b']."\",    
                                                             active_flag   = \"".$display_flag."\"";    
                             $res = $this->query($sql);
                         
@@ -1443,6 +1446,7 @@
 						base as baseprice,
 						p_disc as discount,
 						p_discb2b as discountb2b,
+						b2b_price as b2bprice,
 						type,
 						bullion_design,
 						tabl as tab,
