@@ -567,6 +567,79 @@ switch ($action) {
                 $adjacents = 2;
                 include 'template/bullion_results.html';
                 break;
+                
+                
+            case 'b2bdetails':
+                $page = 'diamond_details';
+                $prdList = $pid = $_GET['productid'];
+                $uid = $_GET['userid'];
+                $url = APIDOMAIN . 'index.php?action=getPrdById&prdid=' . $pid;
+                $res = $comm->executeCurl($url);
+                $prdVars = $data = $prdInfo = $res['results'][$pid];
+
+                $vndrInfo = $prdInfo['vendor_details'];
+
+                foreach ($vndrInfo as $key => $value) {
+                    $vndrId = $key;
+                    $vndrDtls = $value;
+                }
+
+                if ((empty($vndrDtls['latitude']) || empty($vndrDtls['longitude'])) && !empty($vndrDtls['area']) && !empty($vndrDtls['city'])) {
+                    $latLngAreaURL = APIDOMAIN . 'index.php?action=getLatLngByArea&area=' . urlencode($vndrDtls['area']) . '&city=' . urlencode($vndrDtls['city']);
+                    $latLngArea = $comm->executeCurl($latLngAreaURL);
+                    if (!empty($latLngArea) && !empty($latLngArea['error']) && empty($latLngArea['error']['errCode'])) {
+                        $vndrDtls['latitude'] = $latLngArea['results']['latitude'];
+                        $vndrDtls['longitude'] = $latLngArea['results']['longitude'];
+                    }
+                }
+
+                $vndrDtls['fulladdress'] = explode(",", $vndrDtls['fulladdress']);
+                foreach ($vndrDtls['fulladdress'] as $key => $value) {
+                    $vndrDtls['fulladdress'][$key] = trim($value);
+                }
+
+                if (!empty($uid)) {
+                    $url = APIDOMAIN . 'index.php?action=checklist&uid=' . $uid . '&vid=' . $vndrId . '&prdid=' . $pid;
+                    $res = $comm->executeCurl($url);
+                    $wish = $res['error'];
+                }
+
+                $vndrDtls['fulladdress'] = implode(', ', $vndrDtls['fulladdress']);
+                $vndrAddr = explode(',', $vndrDtls['fulladdress']);
+                //echo "<pre>";print_r($vndrDtls);die;
+                $certificate_url = $data['attr_details']['certificate_url'];
+                $certificate_url = explode('/', $certificate_url);
+                $certificate_url = $certificate_url[count($certificate_url) - 1];
+
+                $url1 = APIDOMAIN . 'index.php?action=imagedisplay&pid='.$pid.'&vid='.$vndrDtls['vid'];
+                $res1 = $comm->executeCurl($url1);
+                $data1 = $res1['results'];
+                $datacnt = $res1['count'];
+                
+                $prdVars = $prdVars['attr_details'];
+                $sug   = APIDOMAIN."index.php?action=suggestProducts&pid=".$pid."&catid=10000&clarity=".urlencode($prdVars['clarity'])."&carat=".$prdVars['carat']."&shape=".urlencode($prdVars['shape'])."&cut=".urlencode($prdVars['cut'])."&color=".urlencode($prdVars['color'])."&fluo=".urlencode($prdVars['fluorescence'])."&sym = ".urlencode($prdVars['symmetry'])."&polish=".urlencode($prdVars['polish']);
+                $res3  = $comm->executeCurl($sug);
+                $data3 = $res3['results'];
+                $sugTotal = 0;
+                
+                $ValArr=array('EX'=>'Excellent','VG'=>'Very Good','GD'=>"Good",'FAIR'=>'Fair','NN'=>'None','MED'=>'Medium','FNT'=>'Faint','STG'=>'Strong','VSTG'=>'Very Strong');
+                foreach($ValArr as $ky=>$value)
+                {
+                    if($data['attr_details']['cut'] == $ky)
+                    {
+                       $prdVars['cut'] = $ValArr[$ky];
+                    }
+                }
+                
+                $desurl   = APIDOMAIN."index.php?action=showDescription&pid=".$pid."&catid=10000&color=".urlencode($prdVars['color'])."&cut=".urlencode($prdVars['cut'])."&clarity=".urlencode($prdVars['clarity'])."&shape=".urlencode($prdVars['shape']);
+                $desres  = $comm->executeCurl($desurl);
+                $des = $desres['results'];
+                $totalDes = $res3['total'];
+                //echo "<pre>";print_r($des); die;
+                include 'template/diamond_detailsb2b.html';
+                break;
+                
+                
 
             case 'diamond_details':
                 $page = 'diamond_details';
