@@ -112,6 +112,42 @@ switch($action)
         $res = $result;
         break;         
             
+   case 'sendWelcomeMailSMS':
+        include APICLUDE.'class.user.php';
+        $username  = (!empty($params['username'])) ? trim($params['username']) : '';
+        $email  = (!empty($params['email'])) ? trim($params['email']) : '';
+        $mobile  = (!empty($params['mobile'])) ? trim($params['mobile']) : '';
+        $isV  = (!empty($params['isVendor'])) ? trim($params['isVendor']) : '';
+        if(empty($username) && empty($email) && empty($mobile) && empty($isV))
+        {
+            $resp = array();
+            $error = array('errCode' => 1, 'errMsg' => 'Invalid parameters');
+            $result = array('results' => $resp, 'error' => $error);
+            break;
+        }
+        $obj= new user($db['iftosi']);
+        $result = $obj->sendRateMail($params);
+        $res = $result;
+        break;
+        
+   case 'sendEnqMailSMS':
+        include APICLUDE.'class.user.php';
+        $username  = (!empty($params['username'])) ? trim($params['username']) : '';
+        $email  = (!empty($params['email'])) ? trim($params['email']) : '';
+        $mobile  = (!empty($params['mobile'])) ? trim($params['mobile']) : '';
+        $useremail  = (!empty($params['useremail'])) ? trim($params['useremail']) : '';
+        
+        if(empty($username) && empty($email) && empty($mobile) && empty($useremail))
+        {
+            $resp = array();
+            $error = array('errCode' => 1, 'errMsg' => 'Invalid parameters');
+            $result = array('results' => $resp, 'error' => $error);
+            break;
+        }
+        $obj= new user($db['iftosi']);
+        $result = $obj->sendRateMail($params);
+        $res = $result;
+        break;        
             
     case 'sendOTP':
         include APICLUDE.'class.user.php';

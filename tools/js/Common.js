@@ -125,13 +125,26 @@ function Common() {
                 //userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_dashboard\');">Dashboard</li>';
                 if(isComp === '2')
                 {
-                    var catid1=customStorage.readFromStorage('busiType').charAt(0);
-                    catid=parseInt(catid1)-1;
-                    userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_landing&catid=1000'+ catid+'\');">Products</li>';
-                    userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_enquiries\');">Enquiry</li>';
-                    //userMenuStr += '<li id="profileHeader1" class="transition100">Profile</li>';
-                    userMenuStr += '<li id="profileHeader1" class="transition100" onclick="return showVendorProfile();">Profile</li>';
-                    
+                    $.ajax({url: DOMAIN + "apis/index.php?action=viewAll&uid=" + uid, success: function (result)
+                        {
+                            var obj = jQuery.parseJSON(result);
+                            var isactive = obj.results[1].active_flag;
+                            
+                            if (isactive == 1 || isactive == '1')
+                            {
+                                var catid1=customStorage.readFromStorage('busiType').charAt(0);
+                                catid=parseInt(catid1)-1;
+                                userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_landing&catid=1000'+ catid+'\');">Products</li>';
+                                userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_enquiries\');">Enquiry</li>';
+                                //userMenuStr += '<li id="profileHeader1" class="transition100">Profile</li>';
+                                userMenuStr += '<li id="profileHeader1" class="transition100" onclick="return showVendorProfile();">Profile</li>';
+                            }
+                            else if(isactive == 0)
+                            {
+                                userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_Form&uid='+uid+'\');">Profile</li>';
+                            }
+                        }
+                    });
                 }
                 else
                 {
@@ -143,10 +156,13 @@ function Common() {
 				$('#lgotPg').removeClass('dn');
 				$('#usrNm').removeClass('dn');
             }
-			$('#lgnPg').addClass('dn');
-            userMenuStr += '<li class="transition100" onclick="common.doLogout();">Log Out</li>';
-            $('#hdropList').html(userMenuStr);
-			_this.getWishListCount();
+			setTimeout(function()
+                        {
+                                $('#lgnPg').addClass('dn');
+                                userMenuStr += '<li class="transition100" onclick="common.doLogout();">Log Out</li>';
+                                $('#hdropList').html(userMenuStr);
+                                _this.getWishListCount();
+                        },1200);
         }
         else
         {

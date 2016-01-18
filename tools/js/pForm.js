@@ -597,6 +597,7 @@ function validateNum(){
             var lotreference=$('#lotreference').val().trim();
             var baseprice=$('#baseprice').val().trim();
             var discount=$('#discount').val().trim();
+            var discountb2b=$('#discountb2b').val().trim();
             var prdprice=$('#prdprice').val().trim();
             var str = '';
             carat = parseFloat(carat);

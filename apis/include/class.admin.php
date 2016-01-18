@@ -23,7 +23,7 @@ class admin extends DB
             FROM
                 tbl_product_image_mapping
             group by product_id
-            order by product_id";
+            order by update_time";
         
         $cntRes = $this->query($subQuery);
         $total_products = $this->numRows($cntRes);

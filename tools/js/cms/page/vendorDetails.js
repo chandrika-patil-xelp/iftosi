@@ -3,7 +3,7 @@ var uid = customStorage.readFromStorage('userid');
 
 
 if (vid !== uid || uid == '') {
-    window.location.assign(DOMAIN + 'index.php');
+    window.location.assign(DOMAIN);
 }
 $(document).ready(function () {
     var pay = parseInt($('#payammo').val());
@@ -48,12 +48,12 @@ $(document).ready(function () {
             $('#bullionDet').toggleClass('dn');
             if($('#'+id).hasClass('comSelected'))
             {
-                pay = parseInt(pay + 30000);
+                pay = parseInt(pay + 25000);
                 $('#payammo').val(pay);
             }
             else
             {
-                pay = (pay - 30000);
+                pay = (pay - 25000);
                 $('#payammo').val(pay);
             }
             
@@ -582,10 +582,36 @@ function submitStep3Form() {
                 customStorage.addToStorage('isComp', isComp);
                 var bsType = parseInt(busiType.charAt(0));
                 bsType = bsType - 1;
-                setTimeout(function() {
-                    window.location.href = 'index.php?case=vendor_landing&catid=1000' + bsType;
-                },800) 
+                $.ajax({url: common.APIWebPath() + "index.php?action=viewAll&uid="+res['uid'],success: function (result)
+                {
 
+                    var obj = jQuery.parseJSON(result);
+                    var isactive = obj.results[1]['active_flag'];
+                                        console.log(isactive);
+                    if(isactive == 1 || isactive == '1')
+                    {
+                        setTimeout(function() {
+                            window.location.href = 'index.php?case=vendor_landing&catid=1000' + bsType;
+                        },800);                       
+                    }
+                    else if(isactive == 0 || isactive == '0')
+                    {
+                        var pr_name = customStorage.readFromStorage('username');
+                        var pr_mobile = customStorage.readFromStorage('mobile');
+                        var pr_email = customStorage.readFromStorage('email');
+                        var isVendor = customStorage.readFromStorage('is_vendor');
+                        var uid = customStorage.readFromStorage('userid');
+                        $.ajax({url: DOMAIN + "apis/index.php?action=sendWelcomeMailSMS&username="+pr_name +"&mobile="+pr_mobile +"&email="+pr_email +"&isVendor="+isVendor, success: function (result) {
+                            var obj = eval('('+result+')');
+                            var errCode = obj.error.code;
+                            if(errCode == 0)
+                            {
+                                customStorage.toast(1,'Registration Successfully Done');
+                                setTimeout(function () {window.location.href = 'index.php?case=inactive_vendor&uid=' + uid },2500);
+                            }
+                        }});
+                    }
+                }});
             } else {
                 common.toast(0, errMsg);
             }

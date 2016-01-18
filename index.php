@@ -543,7 +543,7 @@ switch ($action) {
                     $datacnt = $res1['count'];
                     //echo '<pre>';print_r($data1);
                 }
-                //echo "<pre>";print_r($data[4]['images']);die;
+                //echo "<pre>";print_r($data);die;
                 include 'template/jewellery_results.html';
                 break;
             case 'bullion':

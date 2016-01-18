@@ -402,7 +402,54 @@ function getResultsData(data,sortby,showtree)
 			$.each(data.results.products, function(i, vl) {
 				html += '<div class="prdComm fLeft" style="opacity: 0; transform: translateX(1500px);">';
 					html += '<div class="prdCommDiv fLeft">';
-						html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/did-'+vl.pid+'">';
+                                        
+                                                var tempUrl = '';
+                                                var shape = vl.attributes.shape;
+                                                var color = vl.attributes.color;
+                                                var clarity = vl.attributes.clarity;
+                                                var cert = vl.attributes.certified;
+                                                
+                                                if(shape !== null && shape !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-'+shape; 
+                                                    }
+                                                    else{
+                                                        tempUrl += shape;
+                                                    }
+                                                }
+                                                if(color !== null && color !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-colour-'+color; 
+                                                    }
+                                                    else{
+                                                        tempUrl += 'colour-'+color;
+                                                    }
+                                                }
+                                                if(clarity !== null && clarity !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-clarity-'+clarity; 
+                                                    }
+                                                    else{
+                                                        tempUrl += 'clarity-'+clarity;
+                                                    }
+                                                }
+                                                if(cert !== null && cert !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-certified-'+cert; 
+                                                    }
+                                                    else{
+                                                        tempUrl += 'certified-'+cert;
+                                                    }
+                                                }
+                                                if(tempUrl !== '')
+                                                {
+                                                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'">';
+                                                }
+                                                else
+                                                {
+                                                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'">';
+                                                }                                        
+                                                
 						html += '<div class="prdShape fLeft">';
 							html += '<div class="prdShTitle fLeft fmOpenB">SHAPE</div>';
 							html += '<div class="prdShType fLeft fmOpenR">'+vl.attributes.shape+'</div>';
@@ -437,10 +484,22 @@ function getResultsData(data,sortby,showtree)
 						html += '</div>';
 						html += '</a>';
 						html += '<div class="prdActions fLeft">';
-							html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/did-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
-							html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/did-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
-							html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/did-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
-							html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/did-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                                                if(tempUrl !== '')
+                                                {
+                                                	html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
+							html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
+							html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
+							html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                                                }
+                                                else
+                                                {
+                                                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'">';
+                                                    	html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
+							html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
+							html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
+							html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                                                }
+						
 						html += '</div>';
 					html += '</div>';
 				html += '</div>';
@@ -462,7 +521,62 @@ function getResultsData(data,sortby,showtree)
                                 
 					html += '<div class="prdComm fLeft jwRes transition100" style="opacity: 1; transform: translateX(0px);">';
 						html += '<div class="prdCommDiv fLeft transition100">';
-							html += '<a href="'+DOMAIN+vl.pbrand.toLowerCase()+'-'+vl.pname.toLowerCase()+'-'+vl.pcode.toLowerCase()+'/jid-'+vl.pid+'">';
+                                                
+                                                var tempUrl = '';
+                                                var metal = vl.attributes.metal;
+                                                var shape = vl.attributes.shape;
+                                                var purity = parseInt(vl.attributes.gold_purity);
+                                                var weight = parseInt(vl.attributes.gold_weight);
+                                                var cert = vl.attributes.certified;
+                                                
+                                                if(metal !== null && metal !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-'+metal; 
+                                                    }
+                                                    else{
+                                                        tempUrl += metal;
+                                                    }
+                                                }
+                                                if(shape !== null && shape !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-'+shape; 
+                                                    }
+                                                    else{
+                                                        tempUrl += shape;
+                                                    }
+                                                }
+                                                if(purity !== null && purity !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-'+purity+'-Karat'; 
+                                                    }
+                                                    else{
+                                                        tempUrl += purity+'-Karat';
+                                                    }
+                                                }
+                                                if(weight !== null && weight !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-'+weight+'-Grams'; 
+                                                    }
+                                                    else{
+                                                        tempUrl += weight+'-Grams';
+                                                    }
+                                                }
+                                                if(cert !== null && cert !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-'+cert; 
+                                                    }
+                                                    else{
+                                                        tempUrl += cert;
+                                                    }
+                                                }
+                                                if(tempUrl !== '')
+                                                {
+                                                    html += '<a href="'+DOMAIN+tempUrl+'/jid-'+vl.pid+'">';
+                                                }
+                                                else
+                                                {
+                                                    html += '<a href="'+DOMAIN+cert+'/jid-'+vl.pid+'">';
+                                                }
 								html += '<div id="'+vl.pid+'_imgs" class="prdCommImg fLeft">';
 									html += getImageData(vl.images);
 								html += '</div>';
@@ -480,11 +594,21 @@ function getResultsData(data,sortby,showtree)
 								html += '</div>';
 							html += '</a>';
 							html += '<div class="prdActions fLeft">';
-								html += '<a href="'+DOMAIN+vl.pbrand.toLowerCase()+'-'+vl.pname.toLowerCase()+'-'+vl.pcode.toLowerCase()+'/jid-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
-								html += '<a href="'+DOMAIN+vl.pbrand.toLowerCase()+'-'+vl.pname.toLowerCase()+'-'+vl.pcode.toLowerCase()+'/jid-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
-								html += '<a href="'+DOMAIN+vl.pbrand.toLowerCase()+'-'+vl.pname.toLowerCase()+'-'+vl.pcode.toLowerCase()+'/jid-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
-								html += '<a href="'+DOMAIN+vl.pbrand.toLowerCase()+'-'+vl.pname.toLowerCase()+'-'+vl.pcode.toLowerCase()+'/jid-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
-							html += '</div>';
+                                                        if(tempUrl !== '' )
+                                                        {
+                                                            html += '<a href="'+DOMAIN+tempUrl+'/jid-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                                                            html += '<a href="'+DOMAIN+tempUrl+'/jid-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                                                            html += '<a href="'+DOMAIN+tempUrl+'/jid-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                                                            html += '<a href="'+DOMAIN+tempUrl+'/jid-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                                                        }
+                                                        else
+                                                        {
+                                                            html += '<a href="'+DOMAIN+cert+'/jid-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                                                            html += '<a href="'+DOMAIN+cert+'/jid-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                                                            html += '<a href="'+DOMAIN+cert+'/jid-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                                                            html += '<a href="'+DOMAIN+cert+'/jid-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';                                                           
+                                                        }
+                                                        html += '</div>';
 						html += '</div>';
 					html += '</div>';
 				
@@ -496,56 +620,158 @@ function getResultsData(data,sortby,showtree)
 				html += '<div class="prdComm fLeft transition100">';
 					html += '<div class="wisgDel" id="'+vl.pid+'"></div>';
 						html += '<div class="prdCommDiv fLeft transition100">';
-                                                html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/did-'+vl.pid+'">';
-							html += '<div class="prdShape fLeft">';
-								html += '<div class="prdShTitle fLeft fmOpenB">SHAPE</div>';
-								html += '<div class="prdShType fLeft fmOpenR">'+vl.attributes.shape+'</div>';
-								html += '<div class="'+vl.attributes.shape+' fRight"></div>';
-							html += '</div>';
-							html += '<div class="prdDetails fLeft">';
-								html += '<div class="detComm">';
-									html += '<div class="detLabel fmOpenB fLeft">COLOR</div>';
-									html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.color+'</div>';
-								html += '</div>';
-								html += '<div class="detComm">';
-									html += '<div class="detLabel fmOpenB fLeft">CARATS</div>';
-									html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.carat+'</div>';
-								html += '</div>';
-								html += '<div class="detComm">';
-									html += '<div class="detLabel fmOpenB fLeft">CLARITY</div>';
-									html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.clarity+'</div>';
-								html += '</div>';
-								html += '<div class="detComm">';
-									html += '<div class="detLabel fmOpenB fLeft">CERTIFICATE</div>';
-									html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.certified+'</div>';
-								html += '</div>';
-							html += '</div>';
-							html += '<div class="prdPrice fLeft">';
-								html += '<div class="detComm">';
-									html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
-                                                                            if(vl.vdetail !== null && vl.vdetail.dollar_rate !== '0.00' && vl.vdetail.dollar_rate !== undefined && vl.vdetail.dollar_rate !== null && vl.vdetail.dollar_rate !== '') { dollarValue=vl.vdetail.dollar_rate; }
-									var price = Math.ceil(((vl.pprice * dollarValue) * vl.attributes.carat));
-                                                                        html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+common.IND_money_format(price)+'</div>';
-								html += '</div>';
-							html += '</div>';
-                                                        html += '</a>';
-							html += '<div class="prdActions fLeft">';
-                                                            html += '<a href="'+DOMAIN+vl.attributes.certified.toLowerCase()+'-'+vl.attributes.shape.toLowerCase()+'-clarity-'+vl.attributes.clarity+'/did-'+vl.pid+'/1">';
-                                                                    html += '<div class="wConBtn fLeft">Contact Dealer</div>';
-                                                            html += '</a>';
-							html += '</div>';
-						html += '</div>';
-					
-				html += '</div>';
-			});
+                                                
+                                                
+                                                
+                                                var tempUrl = '';
+                                                var shape = vl.attributes.shape;
+                                                var color = vl.attributes.color;
+                                                var clarity = vl.attributes.clarity;
+                                                var cert = vl.attributes.certified;
+                                                
+                                                if(shape !== null && shape !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-'+shape; 
+                                                    }
+                                                    else{
+                                                        tempUrl += shape;
+                                                    }
+                                                }
+                                                if(color !== null && color !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-colour-'+color; 
+                                                    }
+                                                    else{
+                                                        tempUrl += 'colour-'+color;
+                                                    }
+                                                }
+                                                if(clarity !== null && clarity !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-clarity-'+clarity; 
+                                                    }
+                                                    else{
+                                                        tempUrl += 'clarity-'+clarity;
+                                                    }
+                                                }
+                                                if(cert !== null && cert !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-certified-'+cert; 
+                                                    }
+                                                    else{
+                                                        tempUrl += 'certified-'+cert;
+                                                    }
+                                                }
+                                                if(tempUrl !== '')
+                                                {
+                                                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'">';
+                                                }
+                                                else
+                                                {
+                                                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'">';
+                                                }
+                                                
+                                                html += '<div class="prdShape fLeft">';
+                                                        html += '<div class="prdShTitle fLeft fmOpenB">SHAPE</div>';
+                                                        html += '<div class="prdShType fLeft fmOpenR">'+vl.attributes.shape+'</div>';
+                                                        html += '<div class="'+vl.attributes.shape+' fRight"></div>';
+                                                html += '</div>';
+                                                html += '<div class="prdDetails fLeft">';
+                                                        html += '<div class="detComm">';
+                                                                html += '<div class="detLabel fmOpenB fLeft">COLOR</div>';
+                                                                html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.color+'</div>';
+                                                        html += '</div>';
+                                                        html += '<div class="detComm">';
+                                                                html += '<div class="detLabel fmOpenB fLeft">CARATS</div>';
+                                                                html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.carat+'</div>';
+                                                        html += '</div>';
+                                                        html += '<div class="detComm">';
+                                                                html += '<div class="detLabel fmOpenB fLeft">CLARITY</div>';
+                                                                html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.clarity+'</div>';
+                                                        html += '</div>';
+                                                        html += '<div class="detComm">';
+                                                                html += '<div class="detLabel fmOpenB fLeft">CERTIFICATE</div>';
+                                                                html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.certified+'</div>';
+                                                        html += '</div>';
+                                                html += '</div>';
+                                                html += '<div class="prdPrice fLeft">';
+                                                        html += '<div class="detComm">';
+                                                                html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
+                                                                    if(vl.vdetail !== null && vl.vdetail.dollar_rate !== '0.00' && vl.vdetail.dollar_rate !== undefined && vl.vdetail.dollar_rate !== null && vl.vdetail.dollar_rate !== '') { dollarValue=vl.vdetail.dollar_rate; }
+                                                                var price = Math.ceil(((vl.pprice * dollarValue) * vl.attributes.carat));
+                                                                html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+common.IND_money_format(price)+'</div>';
+                                                        html += '</div>';
+                                                html += '</div>';
+                                                html += '</a>';
+                                                html += '<div class="prdActions fLeft">';
+                                                if(tempUrl !== '')
+                                                {
+                                                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/1">';
+                                                }
+                                                else
+                                                {
+                                                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'">';
+                                                }
+                                                html += '<div class="wConBtn fLeft">Contact Dealer</div>';
+                                            html += '</a>';
+                                        html += '</div>';
+                                    html += '</div>';
+                                html += '</div>';
+                        });
 		}
 		else if(pageName == 'wishlist-bullion') {
 			$.each(data.results.products, function(i, vl) {
 				html += '<div class="prdComm fLeft transition100" style="opacity: 1; transform: translateX(0px);">';
 					html += '<div class="wisgDel" id="'+vl.pid+'"></div>';
 						html += '<div class="prdCommDiv fLeft transition100">';
-                                            html += '<a href="'+DOMAIN+vl.attributes.metal.toLowerCase()+'-'+vl.attributes.type.toLowerCase()+'-'+Math.round(vl.attributes.gold_weight)+'-grams/bid-'+vl.pid+'">';
-							html += '<div class="prdShape fLeft">';
+                                                
+                                                var tempUrl = '';
+                                                var metal = vl.attributes.metal;
+                                                var type = vl.attributes.type;
+                                                var purity = parseInt(vl.attributes.gold_purity);
+                                                var weight = parseInt(vl.attributes.gold_weight);
+                                                
+                                                if(metal !== null && metal !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-'+metal; 
+                                                    }
+                                                    else{
+                                                        tempUrl += metal;
+                                                    }
+                                                }
+                                                if(type !== null && type !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-'+type; 
+                                                    }
+                                                    else{
+                                                        tempUrl += type;
+                                                    }
+                                                }
+                                                if(purity !== null && purity !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-'+purity+'-Karat'; 
+                                                    }
+                                                    else{
+                                                        tempUrl += purity+'-Karat';
+                                                    }
+                                                }
+                                                if(weight !== null && weight !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-'+weight+'-Grams'; 
+                                                    }
+                                                    else{
+                                                        tempUrl += weight+'-Grams';
+                                                    }
+                                                }
+                                                
+                                                if(tempUrl !== '')
+                                                {
+                                                    html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'">';
+                                                }
+                                                else
+                                                {
+                                                    html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'">';
+                                                }
+                                            		html += '<div class="prdShape fLeft">';
 								html += '<div class="prdShTitle fLeft fmOpenB">TYPE</div>';
 								html += '<div class="prdShType fLeft fmOpenR">'+vl.attributes.type+'</div>';
 								html += '<div class="'+vl.attributes.type.toLowerCase()+'Ic fRight"></div>';
@@ -596,8 +822,15 @@ function getResultsData(data,sortby,showtree)
 							html += '</div>';
                                                         html += '</a>';
 							html += '<div class="prdActions fLeft">';
-                                                            html += '<a href="'+DOMAIN+vl.attributes.metal.toLowerCase()+'-'+vl.attributes.type.toLowerCase()+'-'+Math.round(vl.attributes.gold_weight)+'-grams/bid-'+vl.pid+'/1">';
-								html += '<div class="wConBtn fLeft">Contact Dealer</div>';
+                                                        if(tempUrl !== '')
+                                                {
+                                                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/1">';
+                                                }
+                                                else
+                                                {
+                                                    html += '<a href="'+DOMAIN+type+'/did-'+vl.pid+'">';
+                                                }
+                                                        	html += '<div class="wConBtn fLeft">Contact Dealer</div>';
                                                             html += '</a>';
 							html += '</div>';
 						html += '</div>';
@@ -609,7 +842,63 @@ function getResultsData(data,sortby,showtree)
 				html += '<div class="prdComm fLeft jwRes transition100" style="opacity: 1; transform: translateX(0px);">';
 					html += '<div class="wisgDel" id="'+vl.pid+'"></div>';
 						html += '<div class="prdCommDiv fLeft transition100">';
-							html += '<a href="'+DOMAIN+vl.pbrand.toLowerCase()+'-'+vl.pname.toLowerCase()+'-'+vl.pcode.toLowerCase()+'/jid-'+vl.pid+'">';
+                                                
+                                                var tempUrl = '';
+                                                var metal = vl.attributes.metal;
+                                                var shape = vl.attributes.shape;
+                                                var purity = parseInt(vl.attributes.gold_purity);
+                                                var weight = parseInt(vl.attributes.gold_weight);
+                                                var cert = vl.attributes.certified;
+                                                
+                                                if(metal !== null && metal !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-'+metal; 
+                                                    }
+                                                    else{
+                                                        tempUrl += metal;
+                                                    }
+                                                }
+                                                if(shape !== null && shape !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-'+shape; 
+                                                    }
+                                                    else{
+                                                        tempUrl += shape;
+                                                    }
+                                                }
+                                                if(purity !== null && purity !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-'+purity+'-Karat'; 
+                                                    }
+                                                    else{
+                                                        tempUrl += purity+'-Karat';
+                                                    }
+                                                }
+                                                if(weight !== null && weight !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-'+weight+'-Grams'; 
+                                                    }
+                                                    else{
+                                                        tempUrl += weight+'-Grams';
+                                                    }
+                                                }
+                                                if(cert !== null && cert !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-'+cert; 
+                                                    }
+                                                    else{
+                                                        tempUrl += cert;
+                                                    }
+                                                }
+                                                if(tempUrl !== '')
+                                                {
+                                                    html += '<a href="'+DOMAIN+tempUrl+'/jid-'+vl.pid+'">';
+                                                }
+                                                else
+                                                {
+                                                    html += '<a href="'+DOMAIN+cert+'/jid-'+vl.pid+'">';
+                                                }
+                                                
 							html += '<div id="'+vl.pid+'_imgs" class="prdCommImg fLeft">';
 								html += getImageData(vl.images);
 							html += '</div>';
@@ -628,8 +917,15 @@ function getResultsData(data,sortby,showtree)
 							html += '</div>';
                                                 html += '</a>';
 							html += '<div class="prdActions fLeft">';
-                                                        html += '<a href="'+DOMAIN+vl.pbrand.toLowerCase()+'-'+vl.pname.toLowerCase()+'-'+vl.pcode.toLowerCase()+'/jid-'+vl.pid+'/1">';
-								html += '<div class="wConBtn fLeft">Contact Dealer</div>';
+                                                        if(tempUrl !== '')
+                                                            {
+                                                                html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/1">';
+                                                            }
+                                                            else
+                                                            {
+                                                                html += '<a href="'+DOMAIN+cert+'/did-'+vl.pid+'">';
+                                                            }
+                                                        html += '<div class="wConBtn fLeft">Contact Dealer</div>';
                                                         html += '</a>'; 
 							html += '</div>';
 						html += '</div>';
@@ -684,7 +980,54 @@ function getResultsData(data,sortby,showtree)
 			$.each(data.results.products, function(i, vl) {
 				html += '<div class="prdComm fLeft jwRes" style="opacity: 0; transform: translateX(1000px);">';
 					html += '<div class="prdCommDiv fLeft transition100">';
-						html += '<a href="'+DOMAIN+vl.attributes.metal.toLowerCase()+'-'+vl.attributes.type.toLowerCase()+'-'+Math.round(vl.attributes.gold_weight)+'-grams/bid-'+vl.pid+'">';
+                                                
+                                                var tempUrl = '';
+                                                var metal = vl.attributes.metal;
+                                                var type = vl.attributes.type;
+                                                var purity = parseInt(vl.attributes.gold_purity);
+                                                var weight = parseInt(vl.attributes.gold_weight);
+                                                
+                                                if(metal !== null && metal !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-'+metal; 
+                                                    }
+                                                    else{
+                                                        tempUrl += metal;
+                                                    }
+                                                }
+                                                if(type !== null && type !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-'+type; 
+                                                    }
+                                                    else{
+                                                        tempUrl += type;
+                                                    }
+                                                }
+                                                if(purity !== null && purity !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-'+purity+'-Karat'; 
+                                                    }
+                                                    else{
+                                                        tempUrl += purity+'-Karat';
+                                                    }
+                                                }
+                                                if(weight !== null && weight !== undefined){
+                                                    if(tempUrl !== ''){
+                                                        tempUrl += '-'+weight+'-Grams'; 
+                                                    }
+                                                    else{
+                                                        tempUrl += weight+'-Grams';
+                                                    }
+                                                }
+                                                
+                                                if(tempUrl !== '')
+                                                {
+                                                    html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'">';
+                                                }
+                                                else
+                                                {
+                                                    html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'">';
+                                                }
 							html += '<div class="prdShape fLeft">';
 								html += '<div class="prdShTitle fLeft fmOpenB">TYPE</div>';
 								html += '<div class="prdShType fLeft fmOpenR">'+vl.attributes.type+'</div>';
@@ -747,11 +1090,21 @@ function getResultsData(data,sortby,showtree)
 							html += '</div>';
 						html += '</a>';
 						html += '<div class="prdActions fLeft">';
-							html += '<a href="'+DOMAIN+vl.attributes.metal.toLowerCase()+'-'+vl.attributes.type.toLowerCase()+'-'+Math.round(vl.attributes.gold_weight)+'-grams/bid-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
-							html += '<a href="'+DOMAIN+vl.attributes.metal.toLowerCase()+'-'+vl.attributes.type.toLowerCase()+'-'+Math.round(vl.attributes.gold_weight)+'-grams/bid-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
-							html += '<a href="'+DOMAIN+vl.attributes.metal.toLowerCase()+'-'+vl.attributes.type.toLowerCase()+'-'+Math.round(vl.attributes.gold_weight)+'-grams/bid-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
-							html += '<a href="'+DOMAIN+vl.attributes.metal.toLowerCase()+'-'+vl.attributes.type.toLowerCase()+'-'+Math.round(vl.attributes.gold_weight)+'-grams/bid-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
-						html += '</div>';
+                                                    if(tempUrl !== '' )
+                                                        {
+                                                            html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                                                            html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                                                            html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                                                            html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                                                        }
+                                                        else
+                                                        {
+                                                            html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                                                            html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                                                            html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                                                            html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';                                                           
+                                                        }
+                                                html += '</div>';
 					html += '</div>';
 				html += '</div>';
 			});

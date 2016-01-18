@@ -66,8 +66,64 @@
                             <?php foreach($data as $key=>$val) { ?>
 									<div class='prdComm fLeft' style="opacity: 0; transform: translateX(1000px);">
 										<div class='prdCommDiv fLeft transition100'>
-											<a href="<?php echo DOMAIN . strtolower($val['attributes']['metal']) . '-' . strtolower($val['attributes']['type']) . '-' . round($val['attributes']['gold_weight']); ?>-grams/bid-<?php echo $val['pid']; ?>">
-											<div class="prdShape fLeft">
+                                                                                    
+<?php
+                                                                                        $tempUrl = '';
+                                                                                        if(!empty($val['attributes']['metal']))
+                                                                                        {
+                                                                                            if($tempUrl !== ''){
+                                                                                                $tempUrl .= '-'.$val['attributes']['metal'];
+                                                                                            }
+                                                                                            else{
+                                                                                                $tempUrl .= $val['attributes']['metal'];
+                                                                                            }
+                                                                                        }
+                                                                                        if(!empty($val['attributes']['type']))
+                                                                                        {
+                                                                                            if($tempUrl !== '')
+                                                                                            {
+                                                                                                $tempUrl .= '-'.$val['attributes']['type']; 
+                                                                                            }
+                                                                                            else
+                                                                                            {
+                                                                                                $tempUrl .= $val['attributes']['type'];
+                                                                                            }
+                                                                                        }
+                                                                                        if(!empty($val['attributes']['gold_purity']))
+                                                                                        {
+                                                                                            if($tempUrl !== '')
+                                                                                            {
+                                                                                                $tempUrl .= '-'.number_format($val['attributes']['gold_purity'],0).'-Karat'; 
+                                                                                            }
+                                                                                            else
+                                                                                            {
+                                                                                                $tempUrl .= number_format($val['attributes']['gold_purity'],0).'-Karat';
+                                                                                            }
+                                                                                        }
+                                                                                        if(!empty($val['attributes']['gold_weight'])){
+                                                                                            if($tempUrl !== '')
+                                                                                            {
+                                                                                                $tempUrl .= '-'.number_format($val['attributes']['gold_weight'],0).'-Grams'; 
+                                                                                            }
+                                                                                            else
+                                                                                            {
+                                                                                                $tempUrl .= number_format($val['attributes']['gold_weight'],0).'-Grams';
+                                                                                            }
+                                                                                        }
+                                                                                        if($tempUrl !== '')
+                                                                                        {
+?>
+                                                                                            <a href="<?php echo DOMAIN.$tempUrl. '/bid-' . $val['pid']; ?>">
+<?php                                                    
+                                                                                        }
+                                                                                        else
+                                                                                        {
+?>
+                                                                                            <a href="<?php echo DOMAIN . $val['attributes']['type'];?>/bid-<?php echo $val['pid']; ?>">
+<?php
+                                                                                        }
+?>
+                                                                                	<div class="prdShape fLeft">
 												<div class="prdShTitle fLeft fmOpenB">TYPE</div>
 												<div class="prdShType fLeft fmOpenR"><?php echo $val['attributes']['type'];?></div>
 												<div class="coinIc fRight"></div>
@@ -136,11 +192,27 @@
 											</div>
 											</a>
 											<div class='prdActions fLeft'>
-												<a href="<?php echo DOMAIN . strtolower($val['attributes']['metal']) . '-' . strtolower($val['attributes']['type']) . '-' . round($val['attributes']['gold_weight']); ?>-grams/bid-<?php echo $val['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
-												<a href="<?php echo DOMAIN . strtolower($val['attributes']['metal']) . '-' . strtolower($val['attributes']['type']) . '-' . round($val['attributes']['gold_weight']); ?>-grams/bid-<?php echo $val['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
-												<a href="<?php echo DOMAIN . strtolower($val['attributes']['metal']) . '-' . strtolower($val['attributes']['type']) . '-' . round($val['attributes']['gold_weight']); ?>-grams/bid-<?php echo $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
-												<a href="<?php echo DOMAIN . strtolower($val['attributes']['metal']) . '-' . strtolower($val['attributes']['type']) . '-' . round($val['attributes']['gold_weight']); ?>-grams/bid-<?php echo $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
-											</div>
+<?php
+                                                                                            if(!empty($tempUrl))
+                                                                                            {
+?>
+                                                                                            	<a href="<?php echo DOMAIN .$tempUrl ."/bid-".$val['pid']."/1";?>" class="actionComm fLeft transition100 poR ripplelink"></a>
+												<a href="<?php echo DOMAIN .$tempUrl .'/bid-'.$val['pid'].'/2'?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+												<a href="<?php echo DOMAIN .$tempUrl; ?>'/bid-<?php echo $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
+												<a href="<?php echo DOMAIN .$tempUrl; ?>-grams/bid-<?php echo $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+<?php
+                                                                                            }
+                                                                                            else
+                                                                                            {
+?>
+                                                                                                <a href="<?php echo DOMAIN . $val['attributes']['type']; ?>/bid-<?php echo $val['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
+												<a href="<?php echo DOMAIN . $val['attributes']['type']; ?>/bid-<?php echo $val['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
+												<a href="<?php echo DOMAIN . $val['attributes']['type']; ?>/bid-<?php echo $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
+												<a href="<?php echo DOMAIN . $val['attributes']['type']; ?>/bid-<?php echo $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+<?php
+                                                                                            }
+?>
+                                                                                        </div>
 										</div>
 									</div>
                                 <?php $i++;

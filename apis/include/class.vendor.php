@@ -13,7 +13,7 @@ class vendor extends DB
 
 
         $total_products = 0;
-        $sql = "SELECT * FROM tbl_vendor_master WHERE orgName is not null ORDER BY vendor_id";
+        $sql = "SELECT * FROM tbl_vendor_master WHERE orgName is not null ORDER BY date_time DESC";
         $res = $this->query($sql);
         $total = $this->numRows($res);
         if (!empty($page)) {
@@ -604,7 +604,7 @@ class vendor extends DB
         if($catid == 10000) {
             $psql='d.color, d.carat, d.shape, d.certified AS cert, d.clarity';
         } else if($catid == 10001) {
-            $psql='d.shape,d.metal,c.lotref,d.gold_weight,d.dwt';
+            $psql='d.shape,d.metal,c.lotref,d.gold_weight,d.dwt,d.gold_purity,d.certified as cert';
         } else if($catid == 10002) {
             $psql='d.type, d.metal, d.gold_purity, d.gold_weight,d.bullion_design';
         }
@@ -640,8 +640,8 @@ class vendor extends DB
                 AND
                                     a.active_flag <> 2
                 ORDER BY
-                                    a.product_id
-                ASC ";
+                                    a.date_time
+                DESC ";
         $res = $this->query($sql);
         $total_products = $this->numRows($res);
 

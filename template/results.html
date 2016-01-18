@@ -60,7 +60,63 @@ if (count($data)) {
                                     
                                         <div class='prdComm fLeft'>
                                             <div class='prdCommDiv fLeft transition100'>
-												<a href="<?php echo DOMAIN . strtolower($val['attributes']['certified']) . '-' . strtolower($val['attributes']['shape']) . '-clarity-' . $val['attributes']['clarity']; ?>/did-<?php echo $val['pid']; ?>">
+<?php
+                                                $tempUrl = '';
+                                                if(!empty($val['attributes']['shape']))
+                                                {
+                                                    if($tempUrl !== ''){
+                                                        $tempUrl .= '-'.$val['attributes']['shape']; 
+                                                    }
+                                                    else{
+                                                        $tempUrl .= $val['attributes']['shape'];
+                                                    }
+                                                }
+                                                if(!empty($val['attributes']['color']))
+                                                {
+                                                    if($tempUrl !== '')
+                                                    {
+                                                        $tempUrl .= '-colour-'.$val['attributes']['color']; 
+                                                    }
+                                                    else
+                                                    {
+                                                        $tempUrl .= 'colour-'.$val['attributes']['color'];
+                                                    }
+                                                }
+                                                if(!empty($val['attributes']['clarity']))
+                                                {
+                                                    if($tempUrl !== '')
+                                                    {
+                                                        $tempUrl .= '-clarity-'.$val['attributes']['clarity']; 
+                                                    }
+                                                    else
+                                                    {
+                                                        $tempUrl .= 'clarity-'.$val['attributes']['clarity'];
+                                                    }
+                                                }
+                                                if(!empty($val['attributes']['certified'])){
+                                                    if($tempUrl !== '')
+                                                    {
+                                                        $tempUrl .= '-certified-'.$val['attributes']['certified']; 
+                                                    }
+                                                    else
+                                                    {
+                                                        $tempUrl .= 'certified-'.$val['attributes']['certifed'];
+                                                    }
+                                                }
+                                                
+                                                if($tempUrl !== '')
+                                                {
+?>
+                                                    <a href="<?php echo DOMAIN . $tempUrl;?>/did-<?php echo $val['pid']; ?>">
+<?php                                                    
+                                                }
+                                                else
+                                                {
+?>
+                                                    <a href="<?php echo DOMAIN . $val['attributes']['shape']; ?>/did-<?php echo $val['pid']; ?>">
+<?php
+                                                }
+?>
                                                 <div class='prdShape fLeft'>
                                                     <div class='prdShTitle fLeft fmOpenB'>SHAPE</div>
                                                     <div class='prdShType fLeft fmOpenR'><?php echo $val['attributes']['shape']; ?></div>
@@ -103,10 +159,27 @@ if (count($data)) {
                                                 </div>
 												</a>
                                                 <div class='prdActions fLeft'>
-                                                    <a href="<?php echo DOMAIN . strtolower($val['attributes']['certified']) . '-' . strtolower($val['attributes']['shape']) . '-clarity-' . $val['attributes']['clarity']; ?>/did-<?php echo $val['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                    <a href="<?php echo DOMAIN . strtolower($val['attributes']['certified']) . '-' . strtolower($val['attributes']['shape']) . '-clarity-' . $val['attributes']['clarity']; ?>/did-<?php echo $val['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                    <a href="<?php echo DOMAIN . strtolower($val['attributes']['certified']) . '-' . strtolower($val['attributes']['shape']) . '-clarity-' . $val['attributes']['clarity']; ?>/did-<?php echo $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                    <a href="<?php echo DOMAIN . strtolower($val['attributes']['certified']) . '-' . strtolower($val['attributes']['shape']) . '-clarity-' . $val['attributes']['clarity']; ?>/did-<?php echo $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+<?php
+                                                    if(!empty($tempUrl))
+                                                    {
+?>
+                                                    
+                                                        <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $val['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                        <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $val['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                        <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                        <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+<?php
+                                                    }
+                                                    else
+                                                    {
+?>
+                                                        <a href="<?php echo DOMAIN . $val['attributes']['shape']; ?>/did-<?php echo $val['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                        <a href="<?php echo DOMAIN . $val['attributes']['shape']; ?>/did-<?php echo $val['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                        <a href="<?php echo DOMAIN . $val['attributes']['shape']; ?>/did-<?php echo $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                        <a href="<?php echo DOMAIN . $val['attributes']['shape']; ?>/did-<?php echo $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+<?php
+                                                    }
+?>
                                                 </div>
                                             </div>
                                         </div>

@@ -239,10 +239,18 @@ function otpCheck()
                                             {
                                                     customStorage.removeFromStorage('busiType');
                                                     window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid='+userid);
-                                            } else
+                                            }
+                                            else
                                             {
-                                                    customStorage.toast(1,'Registration Successfull Done');
-                                                    setTimeout(function () {window.location.assign(DOMAIN + 'index.php'); },1500);
+                                               $.ajax({url: DOMAIN + "apis/index.php?action=sendWelcomeMailSMS&username="+pr_name +"&mobile="+pr_mobile +"&email="+pr_email +"&isVendor="+isVendor, success: function (result) {
+                                                    var obj = eval('('+result+')');
+                                                    var errCode = obj.error.code;
+                                                    if(errCode == 0)
+                                                    {
+                                                        customStorage.toast(1,'Registration Successfully Done');
+                                                        setTimeout(function () {window.location.assign(DOMAIN); },2500);
+                                                    }
+                                                }});
                                             }
                                     }
                                     else

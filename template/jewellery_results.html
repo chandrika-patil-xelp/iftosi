@@ -76,7 +76,75 @@
 ?>
                                 <div class='prdComm fLeft jwRes' style="opacity: 0; transform: translateX(1000px);">
                                     <div class='prdCommDiv fLeft transition100'>
-										<a href="<?php echo DOMAIN.str_replace(' ', '-', $val['pbrand']).'-' . str_replace(' ' , '-', $val['pname']) . '-' . $val['pcode'] . '/jid-' . $val['pid']; ?>">
+                                        
+<?php
+                                                $tempUrl = '';
+                                                if(!empty($val['attributes']['metal']))
+                                                {
+                                                    if($tempUrl !== ''){
+                                                        $tempUrl .= '-'.$val['attributes']['metal'];
+                                                    }
+                                                    else{
+                                                        $tempUrl .= $val['attributes']['metal'];
+                                                    }
+                                                }
+                                                if(!empty($val['attributes']['shape']))
+                                                {
+                                                    if($tempUrl !== '')
+                                                    {
+                                                        $tempUrl .= '-'.$val['attributes']['shape']; 
+                                                    }
+                                                    else
+                                                    {
+                                                        $tempUrl .= $val['attributes']['shape'];
+                                                    }
+                                                }
+                                                if(!empty($val['attributes']['gold_purity']))
+                                                {
+                                                    if($tempUrl !== '')
+                                                    {
+                                                        $tempUrl .= '-'.number_format($val['attributes']['gold_purity'],0).'-Karat'; 
+                                                    }
+                                                    else
+                                                    {
+                                                        $tempUrl .= number_format($val['attributes']['gold_purity'],0).'-Karat';
+                                                    }
+                                                }
+                                                if(!empty($val['attributes']['gold_weight'])){
+                                                    if($tempUrl !== '')
+                                                    {
+                                                        $tempUrl .= '-'.number_format($val['attributes']['gold_weight'],0).'-Grams'; 
+                                                    }
+                                                    else
+                                                    {
+                                                        $tempUrl .= number_format($val['attributes']['gold_weight'],0).'-Grams';
+                                                    }
+                                                }
+                                                if(!empty($val['attributes']['certified'])){
+                                                    if($tempUrl !== '')
+                                                    {
+                                                        $tempUrl .= '-'.$val['attributes']['certified']; 
+                                                    }
+                                                    else
+                                                    {
+                                                        $tempUrl .= $val['attributes']['certified'];
+                                                    }
+                                                }
+                                                
+                                                if($tempUrl !== '')
+                                                {
+?>
+                                                    <a href="<?php echo DOMAIN.$tempUrl. '/jid-' . $val['pid']; ?>">
+<?php                                                    
+                                                }
+                                                else
+                                                {
+?>
+                                                    <a href="<?php echo DOMAIN . $val['attributes']['certified'];?>/jid-<?php echo $val['pid']; ?>">
+<?php
+                                                }
+?>
+
                                         <div class="prdCommImg fLeft">
 <?php
 											$imgCount = count($data[$key]['images']);
@@ -248,10 +316,28 @@
                                         </div>
 										</a>
                                         <div class='prdActions fLeft'>
-                                            <a href="<?php echo DOMAIN.str_replace(' ', '-', $val['pbrand']).'-' . str_replace(' ' , '-', $val['pname']) . '-' . $val['pcode'] . '/jid-' . $val['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                            <a href="<?php echo DOMAIN.str_replace(' ', '-', $val['pbrand']).'-' . str_replace(' ' , '-', $val['pname']) . '-' . $val['pcode'] . '/jid-' . $val['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                            <a href="<?php echo DOMAIN.str_replace(' ', '-', $val['pbrand']).'-' . str_replace(' ' , '-', $val['pname']) . '-' . $val['pcode'] . '/jid-' . $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                            <a href="<?php echo DOMAIN.str_replace(' ', '-', $val['pbrand']).'-' . str_replace(' ' , '-', $val['pname']) . '-' . $val['pcode'] . '/jid-' . $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+<?php
+                                            if(!empty($tempUrl))
+                                            {
+?>
+                                                <a href="<?php echo DOMAIN.$tempUrl . '/jid-' . $val['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                <a href="<?php echo DOMAIN.$tempUrl . '/jid-' . $val['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                <a href="<?php echo DOMAIN.$tempUrl . '/jid-' . $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                <a href="<?php echo DOMAIN.$tempUrl . '/jid-' . $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+<?php
+                                            }
+                                            else
+                                            {
+?>
+                                                <a href="<?php echo DOMAIN.$val['attributes']['certified'] . '/jid-' . $val['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                <a href="<?php echo DOMAIN.$val['attributes']['certified'] . '/jid-' . $val['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                <a href="<?php echo DOMAIN.$val['attributes']['certified'] . '/jid-' . $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                <a href="<?php echo DOMAIN.$val['attributes']['certified'] . '/jid-' . $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+<?php
+                                            }
+?>
+                                                
+                                                
                                         </div>
                                     </div>
                                 </div>

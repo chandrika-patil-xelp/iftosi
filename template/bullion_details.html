@@ -92,7 +92,7 @@
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">GOLD PURITY</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo $prdInfo['attr_details']['gold_purity'].' Kts'; ?></div>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo $prdInfo['attr_details']['gold_purity'].' KTS'; ?></div>
                             </div>
 <?php
                             if(!empty($prdInfo['attr_details']['bullion_design']))
@@ -120,15 +120,15 @@
                                     if($prdInfo['attr_details']['gold_weight'] > 1000)
                                     {
                                         $gweights = $prdInfo['attr_details']['gold_weight']/1000;
-                                        $gweights = number_format($gweights,2);
+                                        $gweights = number_format($gweights,0);
                                     }
                                     else if($prdInfo['attr_details']['gold_weight'] == 1000)
                                     {
-                                        $gweights = '1 Kgs';
+                                        $gweights = '1 KG';
                                     }
                                     else
                                     {
-                                        $gweights = number_format($prdInfo['attr_details']['gold_weight'],2).' Gms'; 
+                                        $gweights = number_format($prdInfo['attr_details']['gold_weight'],0).' GMS'; 
                                     }
 ?>
                                 <div class="infoValue c666 fmOpenR font25"><?php echo $gweights; ?></div>
@@ -271,10 +271,10 @@
                             </div>
 <?php
                         }
-                        if($des[$key]['describe_name'] == 'gold_weight' && !empty($des[$key]['describe_name']))
+                        if($des[$key]['describe_name'] == 'bullion' && !empty($des[$key]['describe_name']))
                         {
 ?>
-                            <div class="prdInfoTitle fLeft"><?php echo "Gold Weight: ".$prdInfo['attr_details']['gold_weight'].' Gms'; ?></div>
+                            <div class="prdInfoTitle fLeft"><?php echo $des[$key]['describe_display_name']; ?></div>
                             <div class="prdInfoDiv fLeft">
 <?php
                             print_r($des[$key]['describe_text']);
@@ -282,21 +282,10 @@
                             </div>
 <?php
                         }
-                        if($des[$key]['describe_name'] == 'purity' && !empty($des[$key]['describe_name']))
+                        if($des[$key]['describe_name'] == 'hallmark' && !empty($des[$key]['describe_name']))
                         {
 ?>
-                            <div class="prdInfoTitle fLeft"><?php echo "Purity: ".$prdInfo['attr_details']['gold_purity'].' Kts'; ?></div>
-                            <div class="prdInfoDiv fLeft">
-<?php
-                            print_r($des[$key]['describe_text']);
-?>
-                            </div>
-<?php
-                        }
-                        if($des[$key]['describe_name'] == strtolower($prdInfo['attr_details']['type']) && !empty($des[$key]['describe_name']))
-                        {
-?>
-                            <div class="prdInfoTitle fLeft"><?php echo "Type: ".$prdInfo['attr_details']['type']; ?></div>
+                            <div class="prdInfoTitle fLeft"><?php echo 'What is a '.$des[$key]['describe_display_name'].' ?'; ?></div>
                             <div class="prdInfoDiv fLeft">
 <?php
                             print_r($des[$key]['describe_text']);
@@ -334,17 +323,17 @@
 <?php
                                                                                                         if($data3[$key]['gold_weight'] > 1000)
                                                                                                         {
-                                                                                                            $gweights = number_format(($data3[$key]['gold_weight']/1000),2);
-                                                                                                            echo $gweights.' Kg';
+                                                                                                            $gweights = number_format(($data3[$key]['gold_weight']/1000),0);
+                                                                                                            echo $gweights.' KGS';
                                                                                                         }
                                                                                                         else if($data3[$key]['gold_weight'] == 1000)
                                                                                                         {
-                                                                                                            $gweights = '1 Kg';
+                                                                                                            $gweights = '1 KG';
                                                                                                             echo $gweights;
                                                                                                         }
                                                                                                         else
                                                                                                         {
-                                                                                                            echo number_format($data3[$key]['gold_weight'],2).' Gms';
+                                                                                                            echo number_format($data3[$key]['gold_weight'],0).' GMS';
                                                                                                         }
 ?>
                                                                                                         </div>

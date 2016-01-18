@@ -58,17 +58,17 @@
                         <div class="majorInfoBox fLeft jewellery_details">
                            <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">DESIGN NO</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['product_barcode']=='')?'N/A':$prdInfo['product_barcode']; ?></div>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['product_barcode']=='')?'N/A':strtoupper($prdInfo['product_barcode']); ?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">METAL</div>
                                 <?php $metal= str_replace('~', ', ', $prdInfo['attr_details']['metal']); ?>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo ($metal == ''? 'N/A' : $metal); ?></div>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo ($metal == ''? 'N/A' : strtoupper($metal)); ?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">PURITY</div>
-                              <?php  $gpurity = $prdInfo['attr_details']['gold_purity']; ?>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo ($gpurity == ''?'N/A':$gpurity.' Kts');?></div>
+                              <?php  $gpurity = number_format($prdInfo['attr_details']['gold_purity'],0); ?>
+                                <div class="infoValue c666 fmOpenR font25"><?php echo ($gpurity == ''?'N/A':$gpurity.' KTS');?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">WEIGHT</div>
@@ -80,15 +80,15 @@
                                 }
                                 else if($prdInfo['attr_details']['gold_weight'] == 1000)
                                 {
-                                   echo $prdInfo['attr_details']['gold_weight'] = '1 Kgs';
+                                   echo $prdInfo['attr_details']['gold_weight'] = '1 KGS';
                                 }
                                 else if($prdInfo['attr_details']['gold_weight'] > 1000)
                                 {
-                                   echo $prdInfo['attr_details']['gold_weight'] = number_format(($prdInfo['attr_details']['gold_weight']/1000),2).' Kgs';
+                                   echo $prdInfo['attr_details']['gold_weight'] = number_format(($prdInfo['attr_details']['gold_weight']/1000),0).' KGS';
                                 }
                                 else if($prdInfo['attr_details']['gold_weight'] < 1000 && $prdInfo['attr_details']['gold_weight'] !== '0.00')
                                 {
-                                   echo $prdInfo['attr_details']['gold_weight'] = number_format($prdInfo['attr_details']['gold_weight'],2).' Gms';
+                                   echo $prdInfo['attr_details']['gold_weight'] = number_format($prdInfo['attr_details']['gold_weight'],0).' GMS';
                                 }
 ?>
                                 </div>
@@ -105,9 +105,13 @@
 									<div class="infoLabel fmOpenB font12 fmOpenB">NO. OF DIAMONDS</div>
 									<div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['nofd']==''?'N/A':$prdInfo['attr_details']['nofd']); ?></div>
 								</div>
+                                                                <div class="infoCommn fLeft fmOpenR">
+									<div class="infoLabel fmOpenB font12 fmOpenB">DIAMOND COLOUR</div>
+									<div class="infoValue c666 fmOpenR font25 txtOver" alt="<?php echo ($diamondsColor==''?'N/A': $diamondsColor); ?>" title="<?php echo ($diamondsColor==''?'N/A':$diamondsColor); ?>"><?php echo ($diamondsColor==''?'N/A':$diamondsColor); ?></div>
+								</div>
 								<div class="infoCommn fLeft fmOpenR ">
 									<div class="infoLabel fmOpenB font12 fmOpenB">DIAMOND WEIGHT</div>
-									<div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['dwt']=='')?'N/A':$prdInfo['attr_details']['dwt']; ?> CTS</div>
+                                                                        <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['dwt']=='')?'N/A':number_format($prdInfo['attr_details']['dwt'],0); ?> CTS</div>
 								</div>
 								<div class="infoCommn fLeft fmOpenR ">
 									<div class="infoLabel fmOpenB font12 fmOpenB">DIAMOND QUALITY</div>
@@ -127,12 +131,12 @@
 									<div class="infoValue c666 fmOpenR font25 txtOver" alt="<?php echo ($prdInfo['attr_details']['gemstone_type']=='')?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['gemstone_type'])); ?>" title="<?php echo ($prdInfo['attr_details']['gemstone_type']=='')?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['gemstone_type'])); ?>"><?php echo ($prdInfo['attr_details']['gemstone_type']=='')?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['gemstone_type'])); ?></div>
 								</div>
 								<div class="infoCommn fLeft fmOpenR ">
-									<div class="infoLabel fmOpenB font12 fmOpenB">GEMSTONES COLOR</div>
+									<div class="infoLabel fmOpenB font12 fmOpenB">GEMSTONES COLOUR</div>
 									<div class="infoValue c666 fmOpenR font25 txtOver" alt="<?php echo ($prdInfo['attr_details']['gemstone_color']=='')?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['gemstone_color'])); ?>" title="<?php echo ($prdInfo['attr_details']['gemstone_color']=='')?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['gemstone_color'])); ?>"><?php echo ($prdInfo['attr_details']['gemstone_color']=='')?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['gemstone_color'])); ?></div>
 								</div>
 								<div class="infoCommn fLeft fmOpenR ">
 									<div class="infoLabel fmOpenB font12 fmOpenB">GEMSTONES WEIGHT</div>
-									<div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['gemwt']=='')?'N/A':$prdInfo['attr_details']['gemwt']; ?> CTS</div>
+                                                                        <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['gemwt']=='')?'N/A':number_format($prdInfo['attr_details']['gemwt'],0); ?> CTS</div>
 								</div>
 								<div class="infoCommn fLeft fmOpenR ">
 									<div class="infoLabel fmOpenB font12 fmOpenB">NO. OF GEMSTONES</div>
@@ -270,84 +274,52 @@
         <div class='prdInfo fLeft'>
             <div class="wrapperMax fmOpenR">
 <?php
+                    $gemstone = explode('|!|',strtolower($prdInfo['attr_details']['gemstone_type']));
                     $cert = $prdInfo['attr_details']['certified'];
+                    $metal = explode(',',strtolower($metal));
+                    
                     foreach($des as $key=>$value)
                     {
-                        
-                        if($des[$key]['describe_name'] == strtolower($metal) && !empty($des[$key]['describe_name']))
+                        if($des[$key]['describe_name'] == "jewellery cert" && !empty($des[$key]['describe_name']))
                         {
 ?>
-                            <div class="prdInfoTitle fLeft"><?php echo "Metal: ".ucwords($metal); ?></div>
-                            <div class="prdInfoDiv fLeft">
-<?php
-                            print_r($des[$key]['describe_text']);
-?>
-                            </div>
-<?php
-                        }
-                        if($des[$key]['describe_name'] == strtolower($cert) && !empty($des[$key]['describe_name']))
-                        {
-?>
-                            <div class="prdInfoTitle fLeft"><?php echo "Certificate: ".ucwords($cert); ?></div>
-                            <div class="prdInfoDiv fLeft">
-<?php
-                            print_r($des[$key]['describe_text']);
-?>
-                            </div>
-<?php
-                        }
-                        if(strtolower($metal) == 'gold')
-                        {
-                            if($des[$key]['describe_name'] == 'gold_weight' && !empty($des[$key]['describe_name']))
-                            {
-?>
-                                <div class="prdInfoTitle fLeft"><?php echo "Gold Weight: ".$prdInfo['attr_details']['gold_weight']; ?></div>
+                                <div class="prdInfoTitle fLeft"><?php echo 'What is a '.$des[$key]['describe_display_name'].' ?'; ?></div>
                                 <div class="prdInfoDiv fLeft">
 <?php
                                 print_r($des[$key]['describe_text']);
 ?>
                                 </div>
 <?php
-                            }
                         }
-                        else if(strtolower($metal) == 'silver')
+                    }
+                    foreach($des as $key=>$value)
+                    {
+                        if($des[$key]['describe_name'] == 'hallmark' && !empty($des[$key]['describe_name']))
                         {
-                            if($des[$key]['describe_name'] == 'silver_weight' && !empty($des[$key]['describe_name']))
-                            {
+                    
 ?>
-                                <div class="prdInfoTitle fLeft"><?php echo "Silver Weight: ".$prdInfo['attr_details']['gold_weight']; ?></div>
+                                <div class="prdInfoTitle fLeft"><?php echo 'What is a '.$des[$key]['describe_display_name'].' ?'; ?></div>
                                 <div class="prdInfoDiv fLeft">
 <?php
                                 print_r($des[$key]['describe_text']);
 ?>
                                 </div>
 <?php
-                            }
                         }
-                        else
-                        {
-                            if($des[$key]['describe_name'] == 'weight' && !empty($des[$key]['describe_name']))
+                    }
+                    for($i=0;$i<count($gemstone);$i++)
+                    {
+                        foreach($des as $key=>$value)
+                        {       
+                            if($des[$key]['describe_name'] == $gemstone[$i] && !empty($des[$key]['describe_name']) && empty($prdInfo['attr_details']['diamond_shape']))
                             {
 ?>
-                                <div class="prdInfoTitle fLeft"><?php echo "Weight: ".$prdInfo['attr_details']['gold_weight']; ?></div>
-                                <div class="prdInfoDiv fLeft">
-<?php
-                                print_r($des[$key]['describe_text']);
-?>
-                                </div>
+                                <div class="prdInfoTitle fLeft"><?php echo 'Gemstone - '.str_replace('|!|', ', ', ucwords(strtolower($gemstone[$i])));?></div>
+                                    <div class="prdInfoDiv fLeft">
+                                    <?=$des[$key]['describe_text'];?>
+                                    </div>
 <?php
                             }
-                        }
-                        if($des[$key]['describe_name'] == 'purity' && !empty($des[$key]['describe_name']))
-                        {
-?>
-                            <div class="prdInfoTitle fLeft"><?php echo "Purity: ".$gpurity.' Kts'; ?></div>
-                            <div class="prdInfoDiv fLeft">
-<?php
-                            print_r($des[$key]['describe_text']);
-?>
-                            </div>
-<?php
                         }
                     }
 ?>
@@ -362,20 +334,24 @@ if(!empty($prdInfo['attr_details']['diamond_shape']) && $prdInfo['attr_details']
 
 foreach($des as $key=>$value)
                 {
-                    if($prdInfo['attr_details']['diamond_shape'] == ucwords(strtolower($key)))
+                    $shapes = explode('|!|',$prdInfo['attr_details']['diamond_shape']);
+                    for($i=0;$i<count($shapes);$i++)
                     {
+                        if($shapes[$i] == ucwords(strtolower($key)))
+                        {
 ?>      
-                      <div class="prdInfoDiv fLeft shapesPage2 ">
-                          <div class="shapesCommH fLeft">
-                              <div class="<?=ucwords(strtolower($key));?> shapeComm"></div>
-                              <div class="texHolder font13 fmOpenR">
+                          <div class="prdInfoDiv fLeft shapesPage2 ">
+                              <div class="shapesCommH fLeft">
+                                  <div class="<?=ucwords(strtolower($key));?> shapeComm"></div>
+                                  <div class="texHolder font13 fmOpenR">
 <?php
-                                echo $des[$key]['describe_text'];
+                                    echo $des[$key]['describe_text'];
 ?>
+                                  </div>
                               </div>
                           </div>
-                      </div>
 <?php
+                        }
                     }
                 }
 ?>
@@ -504,30 +480,85 @@ foreach($des as $key=>$value)
 <?php
 
 
-               foreach($des as $key=>$value)
+
+                    $clarity = explode('|!|',$prdInfo['attr_details']['clarity']);
+                    
+                    $colour = explode('|!|',$prdInfo['attr_details']['color']);
+                
+                for($i=0;$i<count($colour);$i++)
                 {
-                    if($des[$key]['describe_name'] == 'clarity' && !empty($des[$key]['describe_name']))
+
+                    foreach($des as $key=>$value)
                     {
+                        if($des[$key]['describe_name'] == $colour[$i] && !empty($des[$key]['describe_name']))
+                        {
 ?>
-                        <div class="prdInfoCont fLeft">
-                            <div class="prdInfoTitle fLeft"><?php echo $des[$key]['describe_display_name'].' - '.str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['clarity']));?></div>
-                            <div class="prdInfoDiv fLeft">
-                                <span class="fmOpenB">
+                            <div class="prdInfoCont fLeft">
+                                <div class="prdInfoTitle fLeft"><?php echo 'Colour - '.str_replace('|!|', ', ', strtoupper($colour[$i]));?></div>
+                                <div class="prdInfoDiv fLeft">
+                                    <span class="fmOpenB">
 <?php
-                                        if(!empty($des[$data['attr_details'][$key]]['describe_display_name']))
-                                        {
-                                            echo $des[$data['attr_details'][$key]]['describe_display_name'].': ';
-                                        }
-                                        else
-                                        {
-                                            echo str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['clarity'])).': ';
-                                        }
+                                            if(!empty($des[$key]['describe_display_name']))
+                                            {
+                                                echo $des[$key]['describe_display_name'].': ';
+                                            }
 ?>
-                                    </span>
-                                <?=$des[$key]['describe_text'];?>
+                                        </span>
+                                    <?=$des[$key]['describe_text'];?>
+                                </div>
                             </div>
-                        </div>
 <?php
+                        }
+                    }
+                }
+                for($i=0;$i<count($clarity);$i++)
+                {
+                    foreach($des as $key=>$value)
+                    {        
+                        if($des[$key]['describe_name'] == $clarity[$i] && !empty($des[$key]['describe_name']))
+                        {
+?>
+                            <div class="prdInfoCont fLeft">
+                                <div class="prdInfoTitle fLeft"><?php echo 'Clarity - '.str_replace('|!|', ', ', strtoupper($clarity[$i]));?></div>
+                                <div class="prdInfoDiv fLeft">
+                                    <span class="fmOpenB">
+<?php
+                                            if(!empty($des[$key]['describe_display_name']))
+                                            {
+                                                echo $des[$key]['describe_display_name'].': ';
+                                            }
+?>
+                                        </span>
+                                    <?=$des[$key]['describe_text'];?>
+                                </div>
+                            </div>
+<?php
+                        }
+                    }
+                }
+                for($i=0;$i<count($gemstone);$i++)
+                {
+                    foreach($des as $key=>$value)
+                    {       
+                        if($des[$key]['describe_name'] == $gemstone[$i] && !empty($des[$key]['describe_name']))
+                        {
+?>
+                            <div class="prdInfoCont fLeft">
+                                <div class="prdInfoTitle fLeft"><?php echo 'Gemstone - '.str_replace('|!|', ', ', ucwords(strtolower($gemstone[$i])));?></div>
+                                <div class="prdInfoDiv fLeft">
+                                    <span class="fmOpenB">
+<?php
+                                            if(!empty($des[$key]['describe_display_name']))
+                                            {
+                                                echo $des[$key]['describe_display_name'].': ';
+                                            }
+?>
+                                        </span>
+                                    <?=$des[$key]['describe_text'];?>
+                                </div>
+                            </div>
+<?php
+                        }
                     }
                 }
 ?>
@@ -549,7 +580,75 @@ foreach($des as $key=>$value)
 ?>
                                     <div class="prdComm fLeft jwRes transition100">
 					<div class="prdCommDiv fLeft transition100">
-						<a href="<?=DOMAIN.$data3[$key]['pname'].'-'.$data3[$key]['barcode'].'-'.$data3[$key]['pcode'].'/jid-'.$data3[$key]['pid']; ?>">
+                                            
+<?php
+                                                $tempUrl = '';
+                                                if(!empty($value['metal']))
+                                                {
+                                                    if($tempUrl !== ''){
+                                                        $tempUrl .= '-'.$value['metal'];
+                                                    }
+                                                    else{
+                                                        $tempUrl .= $value['metal'];
+                                                    }
+                                                }
+                                                if(!empty($value['shape']))
+                                                {
+                                                    if($tempUrl !== '')
+                                                    {
+                                                        $tempUrl .= '-'.$value['shape']; 
+                                                    }
+                                                    else
+                                                    {
+                                                        $tempUrl .= $value['shape'];
+                                                    }
+                                                }
+                                                if(!empty($value['gold_purity']))
+                                                {
+                                                    if($tempUrl !== '')
+                                                    {
+                                                        $tempUrl .= '-'.number_format($value['gold_purity'],0).'-Karat'; 
+                                                    }
+                                                    else
+                                                    {
+                                                        $tempUrl .= number_format($value['gold_purity'],0).'-Karat';
+                                                    }
+                                                }
+                                                if(!empty($value['gold_weight'])){
+                                                    if($tempUrl !== '')
+                                                    {
+                                                        $tempUrl .= '-'.number_format($value['gold_weight'],0).'-Grams'; 
+                                                    }
+                                                    else
+                                                    {
+                                                        $tempUrl .= number_format($value['gold_weight'],0).'-Grams';
+                                                    }
+                                                }
+                                                if(!empty($value['certified'])){
+                                                    if($tempUrl !== '')
+                                                    {
+                                                        $tempUrl .= '-'.$value['certified']; 
+                                                    }
+                                                    else
+                                                    {
+                                                        $tempUrl .= $value['certified'];
+                                                    }
+                                                }
+                                                
+                                                if($tempUrl !== '')
+                                                {
+?>
+                                                    <a href="<?php echo DOMAIN.$tempUrl. '/jid-' . $value['pid']; ?>">
+<?php                                                    
+                                                }
+                                                else
+                                                {
+?>
+                                                    <a href="<?php echo DOMAIN . $value['certified'];?>/jid-<?php echo $value['pid']; ?>">
+<?php
+                                                }
+?>                                            
+
                                                     <div class="prdCommImg fLeft" id="<?=$data3[$key]['pid'];?>">
 <?php
                                                         if($imgCount > 0)
@@ -569,7 +668,8 @@ foreach($des as $key=>$value)
 							<div class="prdDetails fLeft">
 							<div class="detComm">
 							<div class="detLabel fmOpenB fLeft">DESIGN NO.</div>
-							<div class="detValue fmOpenR fLeft"><?=$data3[$key]['barcode']; ?></div>
+                                                        
+							<div class="detValue fmOpenR fLeft"><?php echo $data3[$key]['product_main']['barcode']; ?></div>
 							</div>
 							</div>
 							<div class="prdPrice fLeft">
@@ -586,10 +686,26 @@ foreach($des as $key=>$value)
 							</div>
                                                 </a>
                                             <div class='prdActions fLeft'>
-                                                <a href="<?php echo DOMAIN.str_replace(' ' , '-', $data3[$key]['pdname']).'-'.$data3[$key]['barcode'] . '/jid-' . $data3[$key]['pid'];?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                <a href="<?php echo DOMAIN.str_replace(' ' , '-', $data3[$key]['pdname']).'-'.$data3[$key]['barcode'] . '/jid-' . $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                <a href="<?php echo DOMAIN.str_replace(' ' , '-', $data3[$key]['pdname']).'-'.$data3[$key]['barcode'] . '/jid-' . $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                <a href="<?php echo DOMAIN.str_replace(' ' , '-', $data3[$key]['pdname']).'-'.$data3[$key]['barcode'] . '/jid-' . $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+<?php
+                                                if(!empty($tempURL))
+                                                {
+?>
+                                                    <a href="<?php echo DOMAIN.$tempURL . '/jid-'  . $data3[$key]['pid'];?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                    <a href="<?php echo DOMAIN.$tempURL . '/jid-' . $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                    <a href="<?php echo DOMAIN.$tempURL . '/jid-' . $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                    <a href="<?php echo DOMAIN.$tempURL . '/jid-' . $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+<?php
+                                                }
+                                                else
+                                                {
+?>
+                                                    <a href="<?php echo DOMAIN.$value['certified'] . '/jid-' . $data3[$key]['pid'];?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                    <a href="<?php echo DOMAIN.$value['certified'] . '/jid-' . $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                    <a href="<?php echo DOMAIN.$value['certified'] . '/jid-' . $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                    <a href="<?php echo DOMAIN.$value['certified'] . '/jid-' . $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>    
+<?php
+                                                }
+?>
                                             </div>
                                         </div>
                                     </div>

@@ -300,6 +300,7 @@
                                                      tabl,
                                                      price,
                                                      p_disc,
+                                                     p_discb2b,
                                                      prop,
                                                      polish,
                                                      symmetry,
@@ -342,6 +343,7 @@
                                                   \"".$detls['table']."\",
                                                   \"".$detls['price']."\",
                                                   \"".$detls['discount']."\",
+                                                  \"".$detls['discountb2b']."\",
                                                   \"".$detls['prop']."\",
                                                   \"".$detls['polish']."\",
                                                   \"".$detls['symmetry']."\",
@@ -383,6 +385,7 @@
                                                             tabl          = \"".$detls['table']."\",
                                                             price         = \"".$detls['price']."\",
                                                             p_disc        = \"".$detls['discount']."\",
+                                                            p_discb2b        = \"".$detls['discountb2b']."\",
                                                             prop          = \"".$detls['prop']."\",
                                                             polish        = \"".$detls['polish']."\",
                                                             symmetry      = \"".$detls['symmetry']."\",
@@ -1439,6 +1442,7 @@
 						girdle,
 						base as baseprice,
 						p_disc as discount,
+						p_discb2b as discountb2b,
 						type,
 						bullion_design,
 						tabl as tab,
@@ -2072,20 +2076,23 @@
                 }
                 $cnt = count($pids);
                 $pid  = implode(',',$pids);
+                
+                
+                
                 if($cnt > 0)
                 {
                     $patsql="   SELECT
                                     distinct a.product_id,
-                                    if(a.shape = \"".$params['shape']."\",1,0) as sameshape,
-                                    if(a.clarity = \"".$params['clarity']."\",1,0) as sameclarity,
-                                    if(a.color = \"".$params['color']."\",1,0) as samecolor,
-                                    if(a.cut = \"".$params['cut']."\",1,0) as samecut,
+                                    if(a.shape = \"".urldecode($params['shape'])."\",1,0) as sameshape,
+                                    if(a.clarity = \"".urldecode($params['clarity'])."\",1,0) as sameclarity,
+                                    if(a.color = \"".urldecode($params['color'])."\",1,0) as samecolor,
+                                    if(a.cut = \"".urldecode($params['cut'])."\",1,0) as samecut,
                                     if(a.carat = \"".$params['carat']."\",1,0) as samecarat,
                                     if(a.gold_purity = \"".$params['purity']."\",1,0) as samepurity,
-                                    if(a.metal = \"".$params['metal']."\",1,0) as samemetal,
+                                    if(a.metal = \"".urldecode($params['metal'])."\",1,0) as samemetal,
                                     if(a.gold_weight = \"".$params['gwt']."\",1,0) as sameweight,
-                                    if(a.type = \"".$params['type']."\",1,0) as sametype,
-                                    if(a.certified = \"".$params['certified']."\",1,0) as samecertified,
+                                    if(a.type = \"".urldecode($params['type'])."\",1,0) as sametype,
+                                    if(a.certified = \"".urldecode($params['certified'])."\",1,0) as samecertified,
                                     a.product_id as pid,
                                     a.price as jprice,
                                     a.carat,
@@ -2209,36 +2216,20 @@
             $limit  = ($params['limit'] ? $params['limit'] : 25);
             if($params['catid'] == 10000)
             {
-                $needed = "'carat','color','clarity','cut',\"".$params['color']."\",\"".$params['carat']."\",\"".$params['clarity']."\",\"".$params['cut']."\",\"".$params['shape']."\"";
+                $needed = "'diamond certificate',\"".urldecode($params['color'])."\",\"".urldecode($params['carat'])."\",\"".urldecode($params['clarity'])."\",\"".urldecode($params['cut'])."\",\"".urldecode($params['shape'])."\"";
             }
             else if($params['catid'] == 10001)
             {
-                $needed = "\"".$params['cert']."\",'purity',\"".strtolower($params['metal'])."\",'gemstone_type',\"".$params['shape']."\",'carat','color','clarity','cut',\"".$params['color']."\",\"".$params['carat']."\",\"".$params['clarity']."\",\"".$params['cut']."\"";
-                if(strtolower($params['metal']) == 'gold')
-                {
-                    $needed .= ",'gold_weight'";
-                }
-                else if(strtolower($params['metal']) == 'silver')
-                {
-                    $needed .= ",'silver_weight'";
-                }
-                else
-                {
-                    $needed .= ",'weight'";
-                }
-
+                $params['shape'] = str_replace(',', '","', urldecode($params['shape']));
+                $params['clarity'] = str_replace(',', '","', urldecode($params['clarity']));
+                $params['colour'] = str_replace(',', '","', urldecode($params['colour']));
+                $params['gemstone_type'] = str_replace(',', '","', urldecode($params['gemstone_type']));
+                
+                $needed = "'jewellery cert','hallmark',\"".$params['shape']."\",\"".$params['colour']."\",\"".urldecode($params['gemstone_type'])."\",\"".urldecode($params['clarity'])."\",\"".urldecode($params['cut'])."\"";
             }
             else if($params['catid'] == 10002)
             {
-                $needed = "'purity','".strtolower($params['metal'])."','".$params['type']."'";
-                if(strtolower($params['metal']) == 'gold')
-                {
-                    $needed.= ",'gold_weight'";
-                }
-                else if(strtolower($params['metal']) == 'silver')
-                {
-                    $needed.= ",'silver_weight'";
-                }
+                $needed = "'hallmark','bullion'";
             }
 
                 $patsql="   SELECT
@@ -2418,7 +2409,11 @@
 						$vndrLL = $vl['telephones'];
 						$vndrAltEmail = $vl['alt_email'];
 						$vndrCity = $vl['office_city'];
-						$vndrDesig = $vl['position'];
+						$address = $vl['fulladdress'];
+						$area = $vl['area'];
+						$state = $vl['state'];
+						$city = $vl['city'];
+						$pincode = $vl['postal_code'];
 						$vndrMobile = $vl['contact_mobile'];
 						$vndrEmail = $vl['email'];
 						$vndrWebsite = $vl['website'];
@@ -2463,62 +2458,74 @@
 				$prdName = $value['product_display_name'];
 			}
 
-			$emailContent = "Dear $usrName,";
+			$emailContent = "Hello $usrName, Thank you for showing interest in";
 			$emailContent .= "<br/><br/>";
 			if(!empty($prdName))
 			{
-				$emailContent .= "You have enquired for $prdName, please find below the details of Product";
+				$emailContent .= "the $prdName you have enquired, The contact details of the vendor are";
 			}
 			else
 			{
-				$emailContent .= "You have enquired for a product, please find below the details";
+				$emailContent .= " the product you have enquired. The contact details of the vendor are";
 			}
 			$emailContent .= "<br/><br/>";
 
 			$emailContent .= "<table border='2'>";
 				$emailContent .= "<tr>";
 					$emailContent .= "<th>";
-						$emailContent .= "Product Id";
+						$emailContent .= "Vendor Name";
 					$emailContent .= "</th>";
 					$emailContent .= "<th>";
-						$emailContent .= "Price";
+						$emailContent .= "Address";
 					$emailContent .= "</th>";
 					$emailContent .= "<th>";
-						$emailContent .= "Carats";
+						$emailContent .= "Area";
 					$emailContent .= "</th>";
 					$emailContent .= "<th>";
-						$emailContent .= "Color";
+						$emailContent .= "City";
 					$emailContent .= "</th>";
 					$emailContent .= "<th>";
-						$emailContent .= "Shape";
+						$emailContent .= "State";
 					$emailContent .= "</th>";
 					$emailContent .= "<th>";
-						$emailContent .= "Polish";
+						$emailContent .= "Pincode";
 					$emailContent .= "</th>";
 					$emailContent .= "<th>";
-						$emailContent .= "Certificate";
+						$emailContent .= "Landline";
+					$emailContent .= "</th>";
+					$emailContent .= "<th>";
+						$emailContent .= "Mobile";
+					$emailContent .= "</th>";
+					$emailContent .= "<th>";
+						$emailContent .= "Vendor Email";
 					$emailContent .= "</th>";
 				$emailContent .= "</tr>";
 				$emailContent .= "<td>";
-					$emailContent .= $prdid;
+					$emailContent .= $vndrName;
 				$emailContent .= "</td>";
 				$emailContent .= "<td>";
-					$emailContent .= $prdPrice;
+					$emailContent .= $address;
 				$emailContent .= "</td>";
 				$emailContent .= "<td>";
-					$emailContent .= $prdCarat;
+					$emailContent .= $area;
 				$emailContent .= "</td>";
 				$emailContent .= "<td>";
-					$emailContent .= $prdColor;
+					$emailContent .= $city;
 				$emailContent .= "</td>";
 				$emailContent .= "<td>";
-					$emailContent .= $prdShape;
+					$emailContent .= $state;
 				$emailContent .= "</td>";
 				$emailContent .= "<td>";
-					$emailContent .= $prdPolish;
+					$emailContent .= $pincode;
 				$emailContent .= "</td>";
 				$emailContent .= "<td>";
-					$emailContent .= $prdCert;
+					$emailContent .= $vndrLL;
+				$emailContent .= "</td>";
+				$emailContent .= "<td>";
+					$emailContent .= $vndrMobile;
+				$emailContent .= "</td>";
+				$emailContent .= "<td>";
+					$emailContent .= $vndrEmail;
 				$emailContent .= "</td>";
 			$emailContent .= "</table>";
 
@@ -2527,33 +2534,44 @@
 			$emailContent .= "Regards,";
 			$emailContent .= "<br/>";
 			$emailContent .= "IFtoSI Team";
+			$emailContent .= "<br/>";
+			$emailContent .= "For any assistance, call…………. Email: info@iftosi.com";
 
 			$mailHeaders = "Content-type:text/html;charset=UTF-8" . "\r\n";
-			$mailHeaders .= "From: noreply@xelpmoc.in \r\n";
+			$mailHeaders .= "From: info@iftosi.com \r\n";
 
-			$smsText = "Dear $usrName,";
+			$smsText = "Dear $usrName, Thank you for showing interest in the product you have enquired. The contact details of the vendor are:";
 			$smsText .= "\r\n\r\n";
-			$smsText .= "Product Details:";
+			$smsText .= "Vendor Details:";
 			$smsText .= "\r\n\r\n";
-			$smsText .= "Id: ";
-			$smsText .= $prdid;
+			$smsText .= "Vendor Name: ";
+			$smsText .= $vndrName;
 			$smsText .= "\r\n";
-			$smsText .= "Price: ";
-			$smsText .= $prdPrice;
+			$smsText .= "Address: ";
+			$smsText .= $address;
 			$smsText .= "\r\n";
-			$smsText .= "Carats: ";
-			$smsText .= $prdCarat;
+			$smsText .= "Area: ";
+			$smsText .= $area;
 			$smsText .= "\r\n";
-			$smsText .= "Color: ";
-			$smsText .= $prdColor;
+			$smsText .= "City: ";
+			$smsText .= $city;
 			$smsText .= "\r\n";
-			$smsText .= "Shape: ";
-			$smsText .= $prdShape;
+			$smsText .= "State: ";
+			$smsText .= $state;
 			$smsText .= "\r\n";
-			$smsText .= "Polish: ";
-			$smsText .= $prdPolish;
+			$smsText .= "Pincode: ";
+			$smsText .= $pincode;
+			$smsText .= "\r\n";
+			$smsText .= "Landline: ";
+			$smsText .= $vndrLL;
+			$smsText .= "\r\n";
+			$smsText .= "Mobile: ";
+			$smsText .= $vndrMobile;
+			$smsText .= "\r\n";
+			$smsText .= "Email: ";
+			$smsText .= $vndrEmail;
 			$smsText .= "\r\n\r\n";
-			$smsText .= "IFtoSI Team";
+			$smsText .= "For any assistance, call…………. Email: info@iftosi.com";
 
 			$smsText = urlencode($smsText);
 			$sendSMS = str_replace('_MOBILE', $usrMobile, SMSAPI);

@@ -580,12 +580,23 @@
         public function actUser($params) // Activate Status
         {   
             $vsql="SELECT
-                                active_flag 
+                                active_flag,
+                                email,
+                                mobile
                    FROM 
                                 tbl_vendor_master  
                    WHERE 
                                 vendor_id=".$params['userid']."";
+            $vsqlReg="SELECT
+                                logmobile,
+                                email,
+                   FROM 
+                                tbl_registration  
+                   WHERE 
+                                user_id=".$params['userid']."";
             $vres=$this->query($vsql);
+            $vresReg=$this->query($vsqlReg);
+            $regrow = $this->fetchData($vresReg);
             if($this->numRows($vres)==1) //If user is registered
             {
                 $usql="UPDATE
@@ -604,6 +615,16 @@
                 $ures1=$this->query($usql1);
                 if($ures)
                 {
+                    if($params['active_flag'] == 1)
+                    {
+                        $email = $regrow['email'];
+                        $mobile = $regrow['logmobile'];
+                        
+                        global $comm;
+                        $url = APIDOMAIN."index.php?action=sendVActivateMailSMS&uid=".$params['userid']."&mobile=".$mobile."&email=".$email;
+                        $res  = $comm->executeCurl($url);
+                        $data = $res;
+                    }
                     $arr="User profile is activated";
                     $err=array('code'=>0,'msg'=>'Value has been changed');
                 }
@@ -952,6 +973,174 @@
 				mail($params['email'], $subject, $message, $headers);
 			}
 		}
+                
+        public function sendWelcomeMailSMS($params)
+        {
+            if($params['isVendor'] == 1)
+            {
+                $subject = 'Welcome To IFtoSI';
+                $message = 'Thank you '.$params['username'].', for registering on IFtoSI.com';
+                $message = 'Your details are under verification.';
+                $message .= "\r\n";
+                $message .= "Team IFtoSI";
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                $headers .= 'From: <info@iftosi.com>' . "\r\n";
+                
+                $smsText .= "Welcome To IFtoSI";
+                $smsText .= "\r\n\r\n";
+                $smsText = "Thank you ".$params['username'].", for registering on IFtoSI.com";
+                $smsText .= "\r\n\r\n";
+                $smsText .= "Your details are under verification.";
+                $smsText .= "\r\n\r\n";
+                $smsText .= "For any assistance, Call:…………. Email: info@iftosi.com";
+                $smsText .= "\r\n";
+                $smsText .= "Team IFtoSI";
+            }
+            else if($params['isVendor'] == 0)
+            {
+                $subject = 'Welcome To IFtoSI';
+                $message = 'Welcome '.$params['username'].', to IFtoSI.com';
+                $message = 'Save time, Save money';
+                $message .= "\r\n";
+                $message .= "IFtoSI.com the easiest way to buy solitaires, jewellery and bullion directly from the source.";
+                $message .= "For any assistance, Call:…………. Email: info@iftosi.com";
+                $message .= "\r\n";
+                $message .= "Team IFtoSI";
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                $headers .= 'From: <info@iftosi.com>' . "\r\n";
+                
+                $smsText .= "Welcome To IFtoSI";
+                $smsText .= "\r\n\r\n";
+                $smsText = "Welcome ".$params['username'].", to IFtoSI.com";
+                $smsText .= "\r\n\r\n";
+                $smsText .= "Save time, Save money";
+                $smsText .= "\r\n\r\n";
+                $smsText .= "IFtoSI.com the easiest way to buy solitaires, jewellery and bullion directly from the source.";
+                $smsText .= "\r\n\r\n";
+                $smsText .= "For any assistance, Call:…………. Email: info@iftosi.com";
+                $smsText .= "\r\n\r\n";
+                $smsText .= "Team IFtoSI";
+            }
+            if(!empty($params['email']))
+            {
+                    mail($params['email'], $subject, $message, $headers);
+            }
+            $smsText = urlencode($smsText);
+            $sendSMS = str_replace('_MOBILE', $params['mobile'], SMSAPI);
+            $sendSMS = str_replace('_MESSAGE', $smsText, $sendSMS);
+            $res = $comm->executeCurl($sendSMS, true);
+            if($res)
+            {
+                $arr = array();
+                $err = array('code'=>0,'msg'=>'SMS & EMAIL sent to the user');
+            }
+            else
+            {
+                $arr = array();
+                $err = array('code'=>0,'msg'=>'SMS & EMAIL is not sent to the user');
+            }
+            $result = array('result'=>$arr,'error'=>$err);
+            return $result;
+        }
+        
+        public function sendVActivateMailSMS($params)
+        {
+            if($params['isVendor'] == 1)
+            {
+                $subject = 'Vendor profile activated in IFtoSI';
+                $message = 'Your account has been verified.';
+                $message .= "\r\n";
+                $message = 'Get new buyers. Increase your reach to a wider range of customers. Kindly log on to iftosi.com to upload your products.';
+                $message .= "\r\n";
+                $message .= "For any assistance, call…………. Email: info@iftosi.com";
+                $message .= "\r\n";
+                $message .= "Team IFtoSI";
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                $headers .= 'From: <info@iftosi.com>' . "\r\n";
+                
+                $smsText .= "Vendor profile activated in IFtoSI";
+                $smsText .= "\r\n\r\n";
+                $smsText = "Your account has been verified.";
+                $smsText .= "\r\n\r\n";
+                $smsText = "Get new buyers. Increase your reach to a wider range of customers. Kindly log on to iftosi.com to upload your products.";
+                $smsText .= "\r\n\r\n";
+                $smsText .= "For any assistance, call…………. Email: info@iftosi.com";
+                $smsText .= "\r\n\r\n";
+                $smsText .= "Team IFtoSI";
+            }
+            if(!empty($params['email']))
+            {
+                    mail($params['email'], $subject, $message, $headers);
+            }
+            $smsText = urlencode($smsText);
+            $sendSMS = str_replace('_MOBILE', $params['mobile'], SMSAPI);
+            $sendSMS = str_replace('_MESSAGE', $smsText, $sendSMS);
+            $res = $comm->executeCurl($sendSMS, true);
+            if($res)
+            {
+                $arr = array();
+                $err = array('code'=>0,'msg'=>'SMS & EMAIL sent to the user');
+            }
+            else
+            {
+                $arr = array();
+                $err = array('code'=>0,'msg'=>'SMS & EMAIL is not sent to the user');
+            }
+            $result = array('result'=>$arr,'error'=>$err);
+            return $result;
+        }
+        
+        public function sendEnqMailSMS($params)
+        {
+                $subject = 'Recent enquiry to IFtoSI';
+                $message = 'Hello '.$params['username'].', '.$params['useremail'].' has shown interest in';
+                $message .= "\r\n";
+                $message = 'The buyer should contact you shortly.';
+                $message .= "\r\n";
+                $message .= "For any assistance, call…………. Email: info@iftosi.com";
+                $message .= "\r\n";
+                $message .= "Team IFtoSI";
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                $headers .= 'From: <info@iftosi.com>' . "\r\n";
+                
+                $smsText .= "Recent enquiry to IFtoSI";
+                $smsText .= "\r\n\r\n";
+                $smsText = "Hello ".$params['username'].", ".$params['useremail']." has shown interest in";
+                $smsText .= "\r\n\r\n";
+                $smsText .= "The buyer should contact you shortly.";
+                $smsText .= "\r\n\r\n";
+                $smsText .= "For any assistance, call…………. Email: info@iftosi.com";
+                $smsText .= "\r\n\r\n";
+                $smsText .= "Team IFtoSI";
+            
+            if(!empty($params['email']))
+            {
+                    mail($params['email'], $subject, $message, $headers);
+            }
+            
+            $smsText = urlencode($smsText);
+            $sendSMS = str_replace('_MOBILE', $params['mobile'], SMSAPI);
+            $sendSMS = str_replace('_MESSAGE', $smsText, $sendSMS);
+            $res = $comm->executeCurl($sendSMS, true);
+            
+            if($res)
+            {
+                $arr = array();
+                $err = array('code'=>0,'msg'=>'SMS & EMAIL sent to the user');
+            }
+            else
+            {
+                $arr = array();
+                $err = array('code'=>0,'msg'=>'SMS & EMAIL is not sent to the user');
+            }
+            $result = array('result'=>$arr,'error'=>$err);
+            return $result;
+        }
+                
 
 }
 ?>

@@ -32,7 +32,64 @@
 							?>
 									<div class='prdComm fLeft transition100'>
 										<div class="wisgDel" id="<?php echo $val['pid'];?>"></div>
-										<a href="<?php echo DOMAIN . strtolower($val['attributes']['certified']) . '-' . strtolower($val['attributes']['shape']) . '-clarity-' . $val['attributes']['clarity']; ?>/did-<?php echo $val['pid']; ?>/1">
+<?php
+                                                                                $tempUrl = '';
+                                                                                if(!empty($val['attributes']['shape']))
+                                                                                {
+                                                                                    if($tempUrl !== ''){
+                                                                                        $tempUrl .= '-'.$val['attributes']['shape']; 
+                                                                                    }
+                                                                                    else{
+                                                                                        $tempUrl .= $val['attributes']['shape'];
+                                                                                    }
+                                                                                }
+                                                                                if(!empty($val['attributes']['color']))
+                                                                                {
+                                                                                    if($tempUrl !== '')
+                                                                                    {
+                                                                                        $tempUrl .= '-colour-'.$val['attributes']['color']; 
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        $tempUrl .= 'colour-'.$val['attributes']['color'];
+                                                                                    }
+                                                                                }
+                                                                                if(!empty($val['attributes']['clarity']))
+                                                                                {
+                                                                                    if($tempUrl !== '')
+                                                                                    {
+                                                                                        $tempUrl .= '-clarity-'.$val['attributes']['clarity']; 
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        $tempUrl .= 'clarity-'.$val['attributes']['clarity'];
+                                                                                    }
+                                                                                }
+                                                                                if(!empty($val['attributes']['certified'])){
+                                                                                    if($tempUrl !== '')
+                                                                                    {
+                                                                                        $tempUrl .= '-certified-'.$val['attributes']['certified']; 
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        $tempUrl .= 'certified-'.$val['attributes']['certifed'];
+                                                                                    }
+                                                                                }
+
+                                                                                if($tempUrl !== '')
+                                                                                {
+?>
+										<a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $val['pid']; ?>/1">
+<?php                                                    
+                                                                                }
+                                                                                else
+                                                                                {
+?>
+                                                                                    <a href="<?php echo DOMAIN . $val['attributes']['shape']; ?>/did-<?php echo $val['pid']; ?>/1">
+<?php
+                                                                                }
+?>
+
 											<div class='prdCommDiv fLeft transition100'>
 												<div class='prdShape fLeft'>
 													<div class='prdShTitle fLeft fmOpenB'>SHAPE</div>

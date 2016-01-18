@@ -354,7 +354,7 @@ function Common() {
         else if (isLoggedIn === 'true' && is_vendor == 2) {}
 		else
 		{
-            window.location.href = DOMAIN + "index.php";
+            window.location.href = DOMAIN;
         }
     };
 

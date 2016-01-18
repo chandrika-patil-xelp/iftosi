@@ -265,7 +265,47 @@ function generateDiamondList(obj) {
     if(obj['shape'] != null || obj['shape'] !== undefined) {
         shape = obj.shape;
     }
-    str += '<span class="lwSpan"><a href="'+ DOMAIN + obj.cert +'-'+shape+'-clarity-'+obj.clarity+'/did-'+obj.id+'" target="_blank">View Details</a></span>';
+    var tempUrl = '';
+    if(shape !== null && shape !== undefined){
+        if(tempUrl !== ''){
+            tempUrl += '-'+shape; 
+        }
+        else{
+            tempUrl += shape;
+        }
+    }
+    if(obj.color !== null && obj.color !== undefined){
+        if(tempUrl !== ''){
+            tempUrl += '-colour-'+obj.color; 
+        }
+        else{
+            tempUrl += 'colour-'+obj.color;
+        }
+    }
+    if(obj.clarity !== null && obj.clarity !== undefined){
+        if(tempUrl !== ''){
+            tempUrl += '-clarity-'+obj.clarity; 
+        }
+        else{
+            tempUrl += 'clarity-'+obj.clarity;
+        }
+    }
+    if(obj.cert !== null && obj.cert !== undefined){
+        if(tempUrl !== ''){
+            tempUrl += '-certified-'+obj.cert; 
+        }
+        else{
+            tempUrl += 'certified-'+obj.cert;
+        }
+    }
+    if(tempUrl !== '')
+    {
+        str += '<span class="lwSpan"><a href="'+ DOMAIN+tempUrl+'/did-'+obj.id+'" target="_blank">View Details</a></span>';
+    }
+    else
+    {
+        str += '<span class="lwSpan"><a href="'+ DOMAIN +shape+'/did-'+obj.id+'" target="_blank">View Details</a></span>';
+    }
     str += '</div>';
     str += '<div class="shape fLeft">' + obj['shape'] + '</div>';
     str += '<div class="carats fLeft fmOpenB">' + obj['carat'] + '</div>';
@@ -404,6 +444,7 @@ function generateJewellList(obj) {
 		if(obj['category'] !== undefined && obj['category'] !== null && obj['category'] !== '' && typeof obj['category'] !== 'undefined')
 		{
 			var category = obj['category'][1]['cat_name'];
+                        var cats = category;
 		}
 		else
 		{
@@ -412,7 +453,14 @@ function generateJewellList(obj) {
         var metal = obj['metal'];
         if(category == 'Bangles/Bracelets')
         {
+            var cats1 = cats.split('/');
+            cats = cats1.join('-');
             category = '<span class="upSpan">Bangles / Bracelets</span>';
+        }
+        if(category == "Men's")
+        {
+            var cats2 = cats.split("'");
+            cats = cats2.join('-');
         }
         var barcode = obj['barcode'];
         if(barcode == undefined || barcode == null || barcode == '' || barcode == 'null') {
@@ -428,6 +476,50 @@ function generateJewellList(obj) {
         if(metal == undefined || metal == null || metal == '' || metal == 'null') {
             metal = 'N/A';
         }
+        
+        var tempUrl = '';
+        if(obj.metal !== null && obj.metal !== undefined){
+            if(tempUrl !== ''){
+                tempUrl += '-'+obj.metal; 
+            }
+            else{
+                tempUrl += obj.metal;
+            }
+        }
+        if(cats !== null && cats !== undefined){
+            if(tempUrl !== ''){
+                tempUrl += '-'+encodeURIComponent(cats); 
+            }
+            else{
+                tempUrl += encodeURIComponent(cats);
+            }
+        }
+        if(obj.gold_purity !== '' && obj.gold_purity !== 'null' && obj.gold_purity !== null && obj.gold_purity !== undefined && obj.gold_purity !== 'undefined'){
+            if(tempUrl !== ''){
+                tempUrl += '-'+obj.gold_purity+'-Karat'; 
+            }
+            else{
+                tempUrl += obj.gold_purity+'-Karat';
+            }
+        }
+        if(obj.gold_weight !== '' && obj.gold_weight !== 'null' && obj.gold_weight !== null && obj.gold_weight !== undefined && obj.gold_weight !== 'undefined'){
+            if(tempUrl !== ''){
+                tempUrl += '-'+common.number_format(obj.gold_weight,0)+'-Grams'; 
+            }
+            else{
+                tempUrl += common.number_format(obj.gold_weight,0)+'-Grams';
+            }
+        }
+        if(obj.cert !== null && obj.cert !== undefined && obj.cert !== ''){
+            if(tempUrl !== ''){
+                tempUrl += '-'+obj.cert; 
+            }
+            else{
+                tempUrl += obj.cert;
+            }
+        }
+        
+        
         var date = obj['update_time'].split(' ');
         var str = '<li>';
         str += '<div class="date fLeft"> ';
@@ -436,7 +528,15 @@ function generateJewellList(obj) {
         str += '</div>';
         str += '<div class="barcode fLeft">';
         str += '<span class="upSpan fmOpenB">' + barcode + '</span>';
-        str += '<span class="lwSpan"><a href="'+DOMAIN+metal.toLowerCase()+'-'+pro_name.toLowerCase()+'-'+barcode.toLowerCase()+'/jid-'+obj['id']+'" target="_blank">View Details</a></span>';
+        
+        if(tempUrl !== '')
+        {
+            str += '<span class="lwSpan"><a href="'+ DOMAIN + tempUrl+'/jid-'+obj['id']+'" target="_blank">View Details</a></span>';
+        }
+        else
+        {
+            str += '<span class="lwSpan"><a href="'+ DOMAIN +obj.cert+'/jid-'+obj['id']+'" target="_blank">View Details</a></span>';
+        }
         str += '</div>';
         str += '<div class="metal fLeft">' + metal.split('~')[0] + '</div>';
         str += '<div class="catg fLeft">' + shape +'</div>';
@@ -599,6 +699,48 @@ function generatBullionsList(obj) {
         type = '';
     }
     
+    
+        var tempUrl = '';
+        if(obj.metal !== null && obj.metal !== undefined){
+            if(tempUrl !== ''){
+                tempUrl += '-'+obj.metal; 
+            }
+            else{
+                tempUrl += obj.metal;
+            }
+        }
+        if(obj.type !== null && obj.type !== undefined){
+            if(tempUrl !== ''){
+                tempUrl += '-'+obj.type; 
+            }
+            else{
+                tempUrl += obj.type;
+            }
+        }
+        if(obj.gold_purity !== '' && obj.gold_purity !== 'null' && obj.gold_purity !== null && obj.gold_purity !== undefined && obj.gold_purity !== 'undefined'){
+            if(tempUrl !== ''){
+                var goldpty = obj.gold_purity.split('.');
+                tempUrl += '-'+goldpty[0]; 
+            }
+            else{
+                var goldpty = obj.gold_purity.split('.');
+                tempUrl += goldpty[0];
+            }
+        }
+        if(obj.gold_weight !== null && obj.gold_weight !== undefined && obj.gold_weight !== ''){
+            if(tempUrl !== ''){
+                var goldwt = obj.gold_weight.split('.');
+                goldwt = goldwt[0].split(',');
+                tempUrl += '-'+ goldwt+'-Grams'; 
+            }
+            else{
+                var goldwt = obj.gold_weight.split('.');
+                goldwt = goldwt[0].split(',');
+                tempUrl += goldwt+'-Grams';
+            }
+        }
+    
+    
     var date = obj['update_time'].split(' ');
     var str = '<li>';
     str += '<div class="date fLeft"> ';
@@ -607,7 +749,15 @@ function generatBullionsList(obj) {
     str += '</div>';
     str += '<div class="barcode fLeft">';
     str += '<span class="upSpan fmOpenB">' + barcode + '</span>';
-    str += '<span class="lwSpan"><a href="'+DOMAIN+obj.metal+'-'+obj.type+'-'+Math.ceil(obj['gold_weight'])+'-grams/bid-'+obj['id']+'" target="_blank">View Details</a></span>';
+    
+    if(tempUrl !== '')
+    {
+        str += '<span class="lwSpan"><a href="'+ DOMAIN + tempUrl + '/bid-'+obj['id']+'" target="_blank">View Details</a></span>';
+    }
+    else
+    {
+        str += '<span class="lwSpan"><a href="'+ DOMAIN + obj.metal +'/bid-'+obj['id']+'" target="_blank">View Details</a></span>';
+    }
     str += '</div>';
     str += '<div class="weight fLeft">'
     str += '<span class="upSpan">' + obj['type'] + '</span>';
