@@ -713,11 +713,24 @@ a{cursor:pointer;}
 .DiamondsWish{background: #8A0044;}
 .JewelleryWish{background: #380B34;}
 .BullionWish{background: #2A0E34;}
-.wConBtn{width: 100%;height: 40px;line-height: 40px;border-radius: 5px;cursor: pointer;color: #fff;font-size: 14px;padding: 0 40px;position: relative;background: #8A0044}
-.wConBtn::after{content:'';position:absolute;left:0;margin:auto;width:40px;height:40px;background:url(../img/common/1.svg)no-repeat;background-size: auto 100%;background-position:center;}
+.wConBtn{width: 100%;height: 40px;line-height: 40px;border-radius: 5px;cursor: pointer;color: #fff;font-size: 14px;padding:0px;position: relative;background: #8A0044;text-align: center;}
+.wConBtn::after{content:'';position:absolute;right:10px;margin:auto;width:40px;height:40px;background:url(../img/common/arrow_right_white.svg)no-repeat;background-size: auto 100%;background-position:center;}
 .wishlistPage .prdActions {height: 40px;}
 .wishlistPage .prdComm{position: relative;}
 .wisgDel{width: 30px;height: 30px;position: absolute;top: -10px;right: -10px;z-index: 100;background: #ebebde url(../img/common/close.svg)no-repeat;background-size: auto 70%;background-position: center 6px;cursor: pointer;border-radius: 50%;}
+
+.b2bPricesCont{}
+.b2bPricesCont .detLabel{color:#666}
+.b2bPricesCont .detValue {}
+.b2bPricesCont .prdPrice {    height: auto;line-height: 30px;}
+.b2bPricesCont .detComm {height: auto;line-height: 30px;float: left;}
+.wAuto.prdActions {height: auto;}
+
+.b2bprcLeft{width:100%;height:auto;}
+
+
+
+
 
 
 .tempDiv{width:100%;height: 40px;background: #ccc;margin-bottom: 20px}

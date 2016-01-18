@@ -84,7 +84,7 @@ if (count($data)) {
                                                         <div class="detValue fmOpenR fLeft"><?php echo $val['attributes']['certified']; ?></div>
                                                     </div>
                                                 </div>
-                                                <div class='prdPrice fLeft'>
+                                                <div class='prdPrice fLeft dn'>
                                                     <div class="detComm">
                                                         <div class="detLabel fmOpenB fLeft">BEST PRICE</div>
                                                         <?php
@@ -101,13 +101,30 @@ if (count($data)) {
                                                         </div>
                                                     </div>
                                                 </div>
-												</a>
-                                                <div class='prdActions fLeft'>
-                                                    <a href="<?php echo DOMAIN . strtolower($val['attributes']['certified']) . '-' . strtolower($val['attributes']['shape']) . '-clarity-' . $val['attributes']['clarity']; ?>/did-<?php echo $val['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                    <a href="<?php echo DOMAIN . strtolower($val['attributes']['certified']) . '-' . strtolower($val['attributes']['shape']) . '-clarity-' . $val['attributes']['clarity']; ?>/did-<?php echo $val['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                    <a href="<?php echo DOMAIN . strtolower($val['attributes']['certified']) . '-' . strtolower($val['attributes']['shape']) . '-clarity-' . $val['attributes']['clarity']; ?>/did-<?php echo $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                    <a href="<?php echo DOMAIN . strtolower($val['attributes']['certified']) . '-' . strtolower($val['attributes']['shape']) . '-clarity-' . $val['attributes']['clarity']; ?>/did-<?php echo $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                                <div class='b2bPricesCont fLeft'>   
+                                                    <div class="prdPrice fLeft">
+                                                        <div class="detComm">
+                                                            <div class="detLabel fmOpenB fLeft">CUST. PRICE</div>
+                                                                <div class="detValue fmOpenB fLeft"><span>₹</span>
+                                                                    17,844                                                        
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="prdPrice fLeft">
+                                                        <div class="detComm">
+                                                            <div class="detLabel fmOpenB fLeft">B2B PRICE</div>
+                                                                <div class="detValue fmOpenB fLeft"><span>₹</span>
+                                                                    17,844                                                        
+                                                                </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
+                                            </a>
+                                                <div class="prdActions fLeft wAuto">
+                                                        <div class="wConBtn fLeft">Contact Dealer</div>
+                                                </div>
+                                                
+                                                
                                             </div>
                                         </div>
         <?php
