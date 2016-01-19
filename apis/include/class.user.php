@@ -621,10 +621,8 @@
                         $email = $regrow['email'];
                         $mobile = $regrow['logmobile'];
                         
-                        global $comm;
-                        $url = APIDOMAIN."index.php?action=sendVActivateMailSMS&uid=".$params['userid']."&mobile=".$mobile."&email=".$email;
-                        $res  = $comm->executeCurl($url);
-                        $data = $res;
+                        $parms = array('uid'=>$params['userid'],'mobile'=>$mobile,'email'=>$email,'isVendor'=>1);
+                        $data = $this->sendVActivateMailSMS($parms);
                     }
                     $arr="User profile is activated";
                     $err=array('code'=>0,'msg'=>'Value has been changed');
@@ -1092,9 +1090,9 @@
                 
                 $smsText .= "Vendor profile activated in IFtoSI";
                 $smsText .= "\r\n\r\n";
-                $smsText = "Your account has been verified.";
+                $smsText .= "Your account has been verified.";
                 $smsText .= "\r\n\r\n";
-                $smsText = "Get new buyers. Increase your reach to a wider range of customers. Kindly log on to iftosi.com to upload your products.";
+                $smsText .= "Get new buyers. Increase your reach to a wider range of customers. Kindly log on to iftosi.com to upload your products.";
                 $smsText .= "\r\n\r\n";
                 $smsText .= "For any assistance, call: 022-32623263. Email: info@iftosi.com";
                 $smsText .= "\r\n\r\n";

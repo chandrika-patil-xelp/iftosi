@@ -101,9 +101,9 @@ switch ($action) {
 
             case 'updateStatus':
 
-                $vid = (!empty($_GET['uid'])) ? trim($_GET['uid']) : '';
+                $vid = (!empty($_GET['userid'])) ? trim($_GET['userid']) : '';
                 $af = (!empty($_GET['af'])) ? trim($_GET['af']) : 0;
-                $userUrl = APIDOMAIN . 'index.php?action=actUser&userid=' . $vid . '&active_flag=' . $af;
+                $userUrl = APIDOMAIN . 'index.php?action=actUser&userid=' . $vid . '&af=' . $af;
                 $resp = $comm->executeCurl($userUrl);
                 echo json_encode($resp);
                 break;
