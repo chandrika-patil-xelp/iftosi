@@ -295,16 +295,23 @@
                         }
                     }
 ?>
-                <div class="prdInfoTitle fLeft">Similar Products</div>
-                
-        <div class='w100 fLeft'>
+
 <?php
                     foreach($data3 as $key=>$value)
                     {
+                        $i=0;
+                        $max = count($data3);   
                         if($data3[$key]['samemetal'] == 1 || $data3[$key]['sametype'] == 1)
                         {
-?>                
-                        <div class='prdComm fLeft' style="opacity: 1; transform: translateX(1px);">
+                                if($i == 0)
+                                {
+?>
+                                    <div class="prdInfoTitle fLeft">Similar Products</div>
+                                    <div class='w100 fLeft'>
+<?php
+                                }
+?>
+                                    <div class='prdComm fLeft' style="opacity: 1; transform: translateX(1px);">
 										<div class='prdCommDiv fLeft transition100'>
 											<a href="<?php echo DOMAIN . strtolower($data3[$key]['metal']) . '-' . strtolower($data3[$key]['type']) . '-' . round($data3[$key]['gold_weight']); ?>-grams/bid-<?php echo $data3[$key]['pid']; ?>">
 											<div class="prdShape fLeft">
@@ -379,12 +386,15 @@
                         </div>
 <?php
                     }
+                        $i++;
+                        if($i == $max)
+                        {
+?>
+                            </div>
+<?php
+                        }
                     }
 ?>
-        </div>
-             
-                
-                
             </div>
         </div>
         <div class="wrapper fLeft">

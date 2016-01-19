@@ -499,14 +499,19 @@ foreach($des as $key=>$value)
 <?php          
             if($sugTotal > 0)
             {
-?>
-                <div class="prdInfoTitle fLeft">Similar Products</div>
-                <div class='w100 fLeft'>
-<?php
+                $i=0;
+                $max = count($data3);
                     foreach($data3 as $key=>$value)
                     {
                         if($data3[$key]['sameshape'] == 1 || $data3[$key]['sameclarity'] == 1 || $data3[$key]['samecolor'] == 1 || $data3[$key]['samecut'] == 1)
-                            {
+                        {
+                                if($i == 0)
+                                {
+?>
+                                    <div class="prdInfoTitle fLeft">Similar Products</div>
+                                    <div class='w100 fLeft'>
+<?php
+                                }
 ?>
                                         <div class='prdComm fLeft'>
                                             <div class='prdCommDiv fLeft transition100'>
@@ -641,11 +646,17 @@ foreach($des as $key=>$value)
                                         </div>
 <?php
                         }
+                        $i++;
+                        if($i == $max)
+                        {
+?>
+                            </div>
+<?php
+                        }
                     }
             }
 ?>
         </div>
-            </div>
         </div>
         <div class="wrapper fLeft">
             <div class="">

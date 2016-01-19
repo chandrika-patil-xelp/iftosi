@@ -38,6 +38,7 @@ class vendor extends DB
         $result = array('results' => $results, 'error' => $err);
         return $result;
     }
+    
     public function addVendorPrdInfo($params)
     {
         $dt= json_decode($params['dt'],1);
@@ -61,6 +62,32 @@ class vendor extends DB
         {
             $arr=array();
             $err = array('Code' => 1, 'Msg' => 'Product details Not Added!');
+        }
+        $result = array('results' => $arr, 'error' => $err);
+        return $result;
+    }
+    
+    public function getOwnerCheck($params)
+    {
+        $sql="  SELECT
+                        vendor_id 
+                FROM
+                        tbl_vendor_product_mapping
+                WHERE
+                        product_id = \"".$params['pid']."\"
+                AND
+                        vendor_id=\"".$params['uid']."\"";
+        
+        $res=$this->query($sql);
+        $row=$this->fetchData($res);
+        
+        if($row['vendor_id'] == $params['uid'])
+        {
+            $err = array('code' => 1, 'msg' => 'Product is of same vendor');
+        }
+        else
+        {
+            $err = array('code' => 0, 'msg' => 'Product and vendor are different');
         }
         $result = array('results' => $arr, 'error' => $err);
         return $result;

@@ -199,6 +199,7 @@
                                                                                     category_id,
                                                                                     price,
                                                                                     rating,
+                                                                                    b2bprice,
                                                                                     display_flag,
                                                                                     date_time)
                                         VALUES
@@ -206,12 +207,14 @@
                                                                                 \"".$catidies[$i]."\",
                                                                                 \"".$detls['price']."\",
                                                                                 \"".$detls['rating']."\",
+                                                                                \"".$detls['priceb2b']."\",
                                                                                 \"".$display_flag."\",
                                                                                     now())
                                 ON DUPLICATE KEY UPDATE
                                                         category_id             = \"".$catidies[$i]."\",
                                                         price                   = \"".$detls['price']."\",
                                                         rating                  = \"".$detls['rating']."\",
+                                                        b2bprice                = \"".$detls['priceb2b']."\",    
                                                     display_flag                = \"".$display_flag."\"";
                                 $pcres=$this->query($pcsql);
                            }
@@ -229,6 +232,7 @@
                                                                         product_model,
                                                                         product_brand,
                                                                         prd_price,
+                                                                        b2bprice,
                                                                         product_currency,
                                                                         product_keyword,                                                     
                                                                         product_desc,
@@ -248,6 +252,7 @@
                                                                    \"".$detls['product_model']."\",
                                                                    \"".$detls['product_brand']."\",
                                                                    \"".$detls['price']."\",
+                                                                   \"".$detls['priceb2b']."\",
                                                                    \"".$detls['product_currency']."\",
                                                                    \"".$detls['product_keywords']."\", 
                                                                    \"".$detls['product_desc']."\",
@@ -264,7 +269,8 @@
                                                     product_display_name         = \"".$detls['product_display_name']."\", 
                                                     product_model 		 = \"".$detls['product_model']."\", 
                                                     product_brand 		 = \"".$detls['product_brand']."\", 
-                                                    prd_price 		         = \"".$detls['price']."\",  
+                                                    prd_price 		         = \"".$detls['price']."\",
+                                                    b2bprice                     = \"".$detls['priceb2b']."\",    
                                                     product_currency             = \"".$detls['product_currency']."\", 
                                                     product_keyword              = \"".$detls['product_keywords']."\", 
                                                     product_desc                 = \"".$detls['product_desc']."\", 
@@ -289,7 +295,7 @@
                                     INTO 
                                                     tbl_product_search
                                                     (product_id,
-													diamond_shape,
+                                                     diamond_shape,
                                                      color,
                                                      carat,
                                                      shape,
@@ -333,7 +339,7 @@
                                                      active_flag)
                                     VALUES
                                                  (\"".$pid."\",
-												 \"".$detls['diamondShape']."\",
+                                                  \"".$detls['diamondShape']."\",
                                                   \"".$detls['color']."\",
                                                   \"".$detls['carat_weight']."\",
                                                   \"".$shape."\",
@@ -436,6 +442,7 @@
                                                                             (product_id,
                                                                             vendor_id,
                                                                             vendor_price,
+                                                                            b2bprice,
                                                                             vendor_quantity,
                                                                             vendor_currency,
                                                                             vendor_remarks,
@@ -447,6 +454,7 @@
                                                                        (\"".$pid."\",
                                                                         \"".$params['vid']."\",
                                                                         \"".$detls['price']."\",
+                                                                        \"".$detls['priceb2b']."\",
                                                                         \"".$detls['vendor_quantity']."\",
                                                                         \"".$detls['vendor_curr']."\",
                                                                         \"".$detls['vendor_remarks']."\",
@@ -455,7 +463,8 @@
                                                                             now(),
                                                                         \"".$display_flag."\")
                                         ON DUPLICATE KEY UPDATE
-                                                                            vendor_price = \"".$detls['price']."\"";
+                                                                            vendor_price = \"".$detls['price']."\",
+                                                                            b2bprice     = \"".$detls['priceb2b']."\"";
                             $vendres = $this->query($vendsql);
                             
                                 $arr = array('pid'=>$pid);
@@ -869,6 +878,7 @@
 								product_model as pmodel,
 								product_brand as pbrand,
 								prd_price as pprice,
+                                                                b2bprice,
 								product_currency as pcur,
 								prd_img as pimg
 							FROM 
@@ -953,7 +963,8 @@
 			
 			$sql = "SELECT 
 						*,product_id as pid,
-						price						
+						price,
+                                                b2bprice
 					FROM 
 						tbl_product_category_mapping 
 					".$where."
@@ -1142,6 +1153,7 @@
 								shape,
 								clarity,
 								price,
+                                                                b2b_price as b2bprice,
 								polish,
 								symmetry,
 								cno,
@@ -1221,6 +1233,7 @@
 								product_model as pmodel,
 								product_brand as pbrand,
 								prd_price as pprice,
+                                                                b2bprice,
 								product_currency as pcur,
 								prd_img as pimg
 							FROM 
@@ -1481,6 +1494,7 @@
 							product_id,
 							vendor_id,
 							vendor_price,
+                                                        b2bprice,
 							vendor_quantity,
 							vendor_currency,
 							vendor_remarks 
@@ -1586,6 +1600,7 @@
                     $reslt[$pid]['product_model'] = $row['product_model'];
                     $reslt[$pid]['product_brand'] = $row['product_brand'];
                     $reslt[$pid]['product_price'] = $row['prd_price'];
+                    $reslt[$pid]['b2bprice'] = $row['b2bprice'];
                     $reslt[$pid]['product_currency'] = $row['product_currency'];
                     $reslt[$pid]['product_warranty'] = $row['product_warranty'];
                     $reslt[$pid]['product_description'] = $row['product_desc'];
@@ -1642,6 +1657,7 @@
                             product_model as pmodel,
                             product_brand as pbrand,
                             prd_price as pprice,
+                            b2bprice,
                             product_currency as pcur,
                             desname as product_designer,
                             prd_img as pimg
@@ -1676,6 +1692,7 @@
                                 shape,
                                 clarity,
                                 price,
+                                b2b_price,
                                 polish,
                                 symmetry,
                                 cno
@@ -1805,6 +1822,7 @@
                                 product_id,
                                 vendor_id,
                                 vendor_price,
+                                b2bprice,
                                 vendor_quantity,
                                 vendor_currency,
                                 vendor_remarks
@@ -1892,6 +1910,7 @@
                                     product_model as model,
                                     product_brand as brand,
                                     prd_price as price,
+                                    b2bprice,
                                     product_currency as cur,
                                     desname as product_designer,
                                     prd_img as pimg 
