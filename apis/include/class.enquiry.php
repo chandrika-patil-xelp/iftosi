@@ -248,7 +248,7 @@ class enquiry extends DB
                     AND                
                                    vendor_id=".$params['vid']."
                     AND
-                                   vendor_id NOT IN(".$params['vid'].")
+                                   user_id NOT IN(".$params['vid'].")
                     ORDER BY
                                    date_time
                     DESC
