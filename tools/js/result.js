@@ -401,54 +401,7 @@ function getResultsData(data,sortby,showtree)
 			$.each(data.results.products, function(i, vl) {
 				html += '<div class="prdComm fLeft" style="opacity: 0; transform: translateX(1500px);">';
 					html += '<div class="prdCommDiv fLeft">';
-                                        
-                                                var tempUrl = '';
-                                                var shape = vl.attributes.shape;
-                                                var color = vl.attributes.color;
-                                                var clarity = vl.attributes.clarity;
-                                                var cert = vl.attributes.certified;
-                                                
-                                                if(shape !== null && shape !== undefined){
-                                                    if(tempUrl !== ''){
-                                                        tempUrl += '-'+shape; 
-                                                    }
-                                                    else{
-                                                        tempUrl += shape;
-                                                    }
-                                                }
-                                                if(color !== null && color !== undefined){
-                                                    if(tempUrl !== ''){
-                                                        tempUrl += '-colour-'+color; 
-                                                    }
-                                                    else{
-                                                        tempUrl += 'colour-'+color;
-                                                    }
-                                                }
-                                                if(clarity !== null && clarity !== undefined){
-                                                    if(tempUrl !== ''){
-                                                        tempUrl += '-clarity-'+clarity; 
-                                                    }
-                                                    else{
-                                                        tempUrl += 'clarity-'+clarity;
-                                                    }
-                                                }
-                                                if(cert !== null && cert !== undefined){
-                                                    if(tempUrl !== ''){
-                                                        tempUrl += '-certified-'+cert; 
-                                                    }
-                                                    else{
-                                                        tempUrl += 'certified-'+cert;
-                                                    }
-                                                }
-                                                if(tempUrl !== '')
-                                                {
-                                                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'">';
-                                                }
-                                                else
-                                                {
-                                                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'">';
-                                                }                                        
-                                                
+                        html += '<a href="'+DOMAIN+'index.php?case=b2bdetails&productid='+vl.pid+'">';
 						html += '<div class="prdShape fLeft">';
 							html += '<div class="prdShTitle fLeft fmOpenB">SHAPE</div>';
 							html += '<div class="prdShType fLeft fmOpenR">'+vl.attributes.shape+'</div>';
