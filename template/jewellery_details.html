@@ -307,265 +307,96 @@
 <?php
                         }
                     }
-                    for($i=0;$i<count($gemstone);$i++)
-                    {
-                        foreach($des as $key=>$value)
-                        {       
-                            if($des[$key]['describe_name'] == $gemstone[$i] && !empty($des[$key]['describe_name']) && empty($prdInfo['attr_details']['diamond_shape']))
-                            {
-?>
-                                <div class="prdInfoTitle fLeft"><?php echo 'Gemstone - '.str_replace('|!|', ', ', ucwords(strtolower($gemstone[$i])));?></div>
-                                    <div class="prdInfoDiv fLeft">
-                                    <?=$des[$key]['describe_text'];?>
-                                    </div>
-<?php
-                            }
-                        }
-                    }
-?>
-                
-<?php
-if(!empty($prdInfo['attr_details']['diamond_shape']) && $prdInfo['attr_details']['diamond_shape'] !== 'null' && $prdInfo['attr_details']['diamond_shape'] !== 'undefined')
-{
-    ?>
-
-                <div class="centerDiv">
-<?php
-
-foreach($des as $key=>$value)
-                {
-                    $shapes = explode('|!|',$prdInfo['attr_details']['diamond_shape']);
-                    for($i=0;$i<count($shapes);$i++)
-                    {
-                        if($shapes[$i] == ucwords(strtolower($key)))
-                        {
-?>      
-                          <div class="prdInfoDiv fLeft shapesPage2 ">
-                              <div class="shapesCommH fLeft">
-                                  <div class="<?=ucwords(strtolower($key));?> shapeComm"></div>
-                                  <div class="texHolder font13 fmOpenR">
-<?php
-                                    echo $des[$key]['describe_text'];
-?>
-                                  </div>
-                              </div>
-                          </div>
-<?php
-                        }
-                    }
-                }
-?>
-
-                  <div class="prdInfoTitle fLeft fmOpenR">Diamond Anatomy</div>
-                  <div class="fmOpenR tctContents fLeft">
-                      Once cut and polished, all diamonds possess a shared set of characteristics,
-                      often referred to as the anatomy of the diamond. While the individual proportions, angles and placement
-                      of these common characteristics vary for diamonds of different shapes, their definition is the same.
-                  </div>
-                  <div class="prdInfoTitle3 fLeft">Place your cursor over any term to learn more.</div>
-                  <div class="diamondterms fLeft">
-                      <div class="measurement fLeft">
-                          <div class="textDivH fLeft fmOpenB" id="t1">Crown</div>
-                          <div class="textDiv fLeft" id="t2">Table</div>
-                          <div class="textDiv fLeft" id="t3">Star Facets</div>
-                          <div class="textDiv fLeft" id="t4">Bezel Facets</div>
-                          <div class="textDiv fLeft" id="t5">Upper Girdle Facets</div>
-                          <div class="textDivH fLeft fmOpenB" id="t6">Girdle</div>
-                          <div class="textDivH fLeft fmOpenB" id="t7">Pavilion</div>
-                          <div class="textDiv fLeft" id="t8">Lower Girdle Facets</div>
-                          <div class="textDiv fLeft" id="t9">Pavilion Girdle</div>
-                          <div class="textDiv fLeft " id="t10">Culet</div>
-                          <div class="textDivH fLeft fmOpenB" >Key Measurements</div>
-                          <div class="textDiv fLeft" id="t11">Length</div>
-                          <div class="textDiv fLeft" id="t12">Depth</div>
-                          <div class="textDiv fLeft" id="t13">Width</div>
-                          <div class="textDiv fLeft" id="t14">Depth%</div>
-                          <div class="textDiv fLeft" id="t15">L/W Ration</div>
-                          <div class="textDiv fLeft" id="t16">Table%</div>
-                          <div class="textDiv fLeft" id="t17">Girdle Width</div>
-                          <div class="textDiv fLeft" id="t18">Crown Angel</div>
-                          <div class="textDiv fLeft" id="t19">Culet Size</div>
-                          <div class="textDiv fLeft" id="t20">Pavilion Angel</div>
-                      </div>
-                      <div class="diamondPic diamontCat1 fLeft" id="picchange"></div>
-                  </div>
-
-                  <div class="divsecondInfo fLeft">
-                      <div class="textDivLft fLeft  tx_change ">
-                          <div class="textDivH fLeft fmOpenB">Crown</div>
-                          <div class="textDiv fLeft dia-char">The entire portion of the diamond that sits above the girdle. The table as well as the star, bezel , and upper girdle facets are all part of the crown.
-                              usually constitutes the bulk of a diamonds weight.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB ">Table</div>
-                          <div class="textDiv fLeft">The uppermost , flat surface of a diamond which runs parallel to the plane of the girdle.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Star Facets</div>
-                          <div class="textDiv fLeft">The facets that sit adjacent to the table, responsible for directing light that enters the diamond down to the pavilion and lower girdle facets.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Bezel Facets</div>
-                          <div class="textDiv fLeft">The kite shaped facets that sit between the table and girdle, resposible for directing light that enters the diamond down to the pavilion and lower girdle facets.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Upper Girdle Facets</div>
-                          <div class="textDiv fLeft">The lowest facets on the crown, sitting just above the girdle. Responsible for directing light that enters the diamond down to the pavilion and lower girdle facets.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Girdle</div>
-                          <div class="textDiv fLeft">The outer edge of the diamond , where the crown meets the pavilion . the girdle may be faceted or smooth.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Pavilion </div>
-                          <div class="textDiv fLeft">The entire portion of the diamond that sits below the girdle. The lower girdle facets,pavilion facets , and culet are all part of the pavalion.
-                              usually constitutes the bulk of a diamonds weight.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Lower Girdle Facets</div>
-                          <div class="textDiv fLeft">The highest facets on the pavilion , sitting just below the girdle . Responsible fo redirectiong light that enters the diamond back out through the crown.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Pavilion Facets</div>
-                          <div class="textDiv fLeft">The facets that sit adjacent to the culet, responsible for redirecting light that enters the diamond back out through the crown.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Culet</div>
-                          <div class="textDiv fLeft">The culet is the small area at the bottom of the pavilion.The culet can be a point, or a very small facet sitting parallel to the table.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Length</div>
-                          <div class="textDiv fLeft">When viewed from above as a diamond would sit in a ring , length is the diameter measured from the "top" to "bottom".Stated in millimeters . Length is always the first of three numbers shown under "measurements" for each diamond. </div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Depth</div>
-                          <div class="textDiv fLeft">The distance from the table to the culet when the diamond is viewed from the side.State</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Width</div>
-                          <div class="textDiv fLeft">When viewed from above as a diamond would sit in a ring, width is the diameter measured from "side" to "side". Width is always the measure perpendicular to length. Stated in millimeters . Width is always the measure perpendicular to length. Stated in millimeters . Width is always the second of the three numbers shown under "measurements" for each diamond.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Depth %</div>
-                          <div class="textDiv fLeft">Calculated by dividing the dpth by the width. If a diamond is 3mm in depth , and has a midth of 4mm, the depth % is 75. Depth % is a measure of cut . The more shallow the cut of a diamond , teh higher the depth %.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Length / Width Ratio</div>
-                          <div class="textDiv fLeft">Calculated by dividing the length by the width.A perfectly round or square diamond has a L/W ratio of 1.00(since it's length and width are equal). </div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Table %</div>
-                          <div class="textDiv fLeft">Calculated by dividing the width of the table by the width of the diamond. If the table is 3mm wide , and the diamond is 4 mm in width , the table %is 75. The ;arger the table in relation to the diamond , the higher the table %.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Girdle Width</div>
-                          <div class="textDiv fLeft">A measure of the thickness of the diamond's girdle.The measure is taken only at the "valleys" of the girdle, never the peaks. Usually stated in terms of a nine point scale , from the Extremely Thin through Extremely Thick. If the girdle valleys vary in width, two values are given, one of the widest and one for the narrowest points.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Crown Angle</div>
-                          <div class="textDiv fLeft">Refers to the number of degrees between the plane of the table and bezel facets. The angle of the crown facets will determine how much light is reflected into the pavilion at an angle that will allow it to be reflected back up through the crown (where the observer cn perceive it).</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Culet Size</div>
-                          <div class="textDiv fLeft">The culet can vary in size from a single point , to a small facet . Culet size is usually expressed using a seven point scale , from None(a point) to Very Large. If the culet is too large, it might appear as an inclusion when the diamond is viewed from above.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Pavilion Angle</div>
-                          <div class="textDiv fLeft">Refers to the number of degrees between the planes of the table , and the pavilion facets. the angle determines how much of the light which has travelled into the lower part of the diamond will be successfully reflected back through the crown (where the observer can perceive it).</div>
-                      </div>
-                  </div>
-                </div>
-
-                <div class="prdInfoWrap fLeft">
-<?php
-
-
-
-                    $clarity = explode('|!|',$prdInfo['attr_details']['clarity']);
                     
-                    $colour = explode('|!|',$prdInfo['attr_details']['color']);
-                
-                for($i=0;$i<count($colour);$i++)
-                {
-
-                    foreach($des as $key=>$value)
-                    {
-                        if($des[$key]['describe_name'] == $colour[$i] && !empty($des[$key]['describe_name']))
-                        {
 ?>
-                            <div class="prdInfoCont fLeft">
-                                <div class="prdInfoTitle fLeft"><?php echo 'Colour - '.str_replace('|!|', ', ', strtoupper($colour[$i]));?></div>
-                                <div class="prdInfoDiv fLeft">
-                                    <span class="fmOpenB">
-<?php
-                                            if(!empty($des[$key]['describe_display_name']))
-                                            {
-                                                echo $des[$key]['describe_display_name'].': ';
-                                            }
-?>
-                                        </span>
-                                    <?=$des[$key]['describe_text'];?>
-                                </div>
-                            </div>
-<?php
-                        }
-                    }
-                }
-                for($i=0;$i<count($clarity);$i++)
-                {
-                    foreach($des as $key=>$value)
-                    {        
-                        if($des[$key]['describe_name'] == $clarity[$i] && !empty($des[$key]['describe_name']))
-                        {
-?>
-                            <div class="prdInfoCont fLeft">
-                                <div class="prdInfoTitle fLeft"><?php echo 'Clarity - '.str_replace('|!|', ', ', strtoupper($clarity[$i]));?></div>
-                                <div class="prdInfoDiv fLeft">
-                                    <span class="fmOpenB">
-<?php
-                                            if(!empty($des[$key]['describe_display_name']))
-                                            {
-                                                echo $des[$key]['describe_display_name'].': ';
-                                            }
-?>
-                                        </span>
-                                    <?=$des[$key]['describe_text'];?>
-                                </div>
-                            </div>
-<?php
-                        }
-                    }
-                }
-                for($i=0;$i<count($gemstone);$i++)
-                {
-                    foreach($des as $key=>$value)
-                    {       
-                        if($des[$key]['describe_name'] == $gemstone[$i] && !empty($des[$key]['describe_name']))
-                        {
-?>
-                            <div class="prdInfoCont fLeft">
-                                <div class="prdInfoTitle fLeft"><?php echo 'Gemstone - '.str_replace('|!|', ', ', ucwords(strtolower($gemstone[$i])));?></div>
-                                <div class="prdInfoDiv fLeft">
-                                    <span class="fmOpenB">
-<?php
-                                            if(!empty($des[$key]['describe_display_name']))
-                                            {
-                                                echo $des[$key]['describe_display_name'].': ';
-                                            }
-?>
-                                        </span>
-                                    <?=$des[$key]['describe_text'];?>
-                                </div>
-                            </div>
-<?php
-                        }
-                    }
-                }
-?>
+                    <div>
+                        <div class="prdInfoTitle fLeft">Jewellery Care Tips</div>
+                        <div class='subNumber font12 fmOpenB marT5'>1.</div>
+                        <div class="padL30 font13">
+                            <p class="marT5 lineHeight24">
+                                Jewellery care begins with the buying process itself. Don’t settle for an average quality make at an apparent bargain. Purchasing good quality and certified jewellery reduces its chances of wear and tear beforehand.
+                            </p>
+                        </div>
+                        <div class='subNumber font12 fmOpenB '>2.</div>
+                        <div class="padL30 font13">
+                            <p>
+                                While dressing-up jewellery should always be worn last and taken off first.
+                            </p>
+                        </div>
+                        <div class='subNumber font12 fmOpenB '>3.</div>
+                        <div class="padL30 font13">
+                            <p>
+                                Get into the habit of removing your jewellery before showering or bathing. 
+                            </p>
+                        </div>
+                        <div class='subNumber font12 fmOpenB '>4.</div>
+                        <div class="padL30 font13">
+                            <p>
+                                Avoid wearing jewellery when cleaning, gardening or performing sports activities. 
+                            </p>
+                        </div>
+                        <div class='subNumber font12 fmOpenB marT5'>5.</div>
+                        <div class="padL30 font13 lineHeight24">
+                            <p>
+                                Protect your jewellery from impact against hard and abrasive surfaces. Extreme temperatures, perfumes, cosmetics and household chemicals can damage jewellery.  
+                            </p>
+                        </div>
+                        <div class='subNumber font12 fmOpenB marT5'>6.</div>
+                        <div class="padL30 font13 lineHeight24">
+                            <p>
+                                When not in use, always keep the jewellery back into its original case or store each piece of jewellery separately in a compartmentalized jewellery box to prevent scratches or entanglement.  
+                            </p>
+                        </div>
+                        <div class='subNumber font12 fmOpenB marT5'>7.</div>
+                        <div class="padL30 font13 lineHeight24">
+                            <p>
+                                If the jewellery gets wet due to sweat or perfumes - just wipe gently with a soft muslin cloth. When cleaning, remember plain lukewarm water is safe to clean all jewellery. 
+                            </p>
+                        </div>
+                        <div class='subNumber font12 fmOpenB '>8.</div>
+                        <div class="padL30 font13 lineHeight24">
+                            <p>
+                                Examine your jewels regularly to ensure that the settings and clasps are up-to-the-mark, especially when it comes to studded jewellery.
+                            </p>
+                        </div>
+                        </div>
+                                <div>
+                        <div class="prdInfoTitle fLeft">Cleaning Your Jewellery</div>
+                        <p class="font13 margnTop0 lineHeight24">
+                            If you want to enjoy the pleasures of your bejeweled treasures for a long time, regular cleaning is important. Besides occasional-wear jewellery, even the daily wear jewellery needs a cleaning round since it is exposed to sweat, oil etc and can suffer discoloration. 
+                        </p>
+                        <p class="font13">Here are some jewellery cleaning tips:</p>
+                        <div class='subNumber font12 fmOpenB marT5'>1.</div>
+                        <div class="padL30 font13 lineHeight24">
+                            <p>
+                                Always use warm and not hot water to clean jewellery, as hot water can discolor your jewellery. Use a couple drops of mild liquid detergent, such as baby shampoo and rinse thoroughly with clean water. 
+                            </p>
+                        </div>
+                        <div class='subNumber font12 fmOpenB  marT5'>2.</div>
+                        <div class="padL30 font13 lineHeight24">
+                            <p>
+                                When using toothbrush to clean jewellery, ensure that the bristles are soft, as hard bristles can loosen the stones from their settings.   
+                            </p>
+                        </div>
+                        <div class='subNumber font12 fmOpenB marT5'>3.</div>
+                        <div class="padL30 font13 lineHeight24">
+                            <p>
+                                Dry it completely and lightly buff with a soft chamois cloth. Avoid tissue or paper towels because the fibers in it can cause scratches. Also use a lengthwise motion when washing or drying the jewellery, as a circular motion often causes scratching.
+                            </p>
+                        </div>
+                        <div class='subNumber font12 fmOpenB marT5'>4.</div>
+                        <div class="padL30 font13 lineHeight24">
+                            <p>
+                                   Instead of ammonia or detergent, you can use any special jewellery cleaning liquid available at jewellers. Read labels carefully before buying.
+                            </p>
+                        </div>
+                        <div class='subNumber font12 fmOpenB marT5'>5.</div>
+                        <div class="padL30 font13 lineHeight24">
+                            <p>
+                                   Diamonds have an affinity for grease and should be cleaned monthly to keep the fire at its brightest. Every year or so, give your diamond jewellery for professional cleaning. Jewellers use ultra sonic or steam cleaning and will also check the setting, so that the stone does not fall out.
+                            </p>
+                        </div>
                     </div>
-<?php
-            }
-?>            
 <?php            
                 if($sugTotal > 0)
                 {
