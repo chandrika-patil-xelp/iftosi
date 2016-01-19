@@ -494,7 +494,8 @@
                 {
                       $sql="SELECT 
                               business_type,
-                              is_complete
+                              is_complete,
+                              active_flag
                        FROM 
                               tbl_vendor_master
                        WHERE
@@ -506,6 +507,7 @@
                         {
                             $arr['busiType']=$vrow['business_type'];
                             $arr['isC']=$vrow['is_complete'];
+                            $arr['af']=$vrow['active_flag'];
                         }
                     }
                 }
@@ -551,7 +553,8 @@
                 {
                       $sql="SELECT 
                               business_type,
-                              is_complete
+                              is_complete,
+                              active_flag
                        FROM 
                               tbl_vendor_master
                        WHERE
@@ -563,6 +566,7 @@
                         {
                             $arr['busiType']=$vrow['business_type'];
                             $arr['isC']=$vrow['is_complete'];
+                            $arr['af']=$vrow['active_flag'];
                         }
                     }
                 }
@@ -599,11 +603,12 @@
             
             if($this->numRows($vres) == 1) //If user is registered
             {
-                $usql="UPDATE
+                $usql=" UPDATE
                                     tbl_vendor_master
-                       SET
-                                    active_flag=\"".$params['af']."\" 
-                       WHERE 
+                        SET
+                                    active_flag=\"".$params['af']."\",
+                                    is_complete= 2
+                        WHERE 
                                     vendor_id=".$params['userid'];
                 $usql1="UPDATE
                                     tbl_registration
@@ -871,6 +876,7 @@
             {
                     $subject = 'IFtoSI Forgot Password';
                     $message = 'Please Click on the link to change your password- ';
+                    $message = '\r\n';
                     $message = DOMAIN.'FP-'. $urlkey;
 
                     $headers = "MIME-Version: 1.0" . "\r\n";

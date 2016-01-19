@@ -278,18 +278,20 @@ function Common() {
             return;
         } else {
             $.ajax({url: DOMAIN + "apis/index.php?action=logUser&mobile=" + pr_mobile + "&password=" + pr_pass, success: function (result) {
-                    var obj = jQuery.parseJSON(result);
-                    var errCode = obj['error']['code'];
+                    var obj = eval('(' + result + ')');
+                    var errCode = obj.error.code;
+
                     if (errCode == 0) {
-                        var userid = obj['results']['uid'];
-                        var username = obj['results']['username'];
-                        var is_vendor = obj['results']['utype'];
-                        var email = obj['results']['email'];
-                        var isComp = obj['results']['isC'];
-                        var pass_flag = obj['results']['pass_flag'];
-                        var mobile = obj['results']['mobile'];
-                        var busiType = obj['results']['busiType'];
-                        
+                        var userid = obj.results.uid;
+                        var username = obj.results.username;
+                        var is_vendor = obj.results.utype;
+                        var email = obj.results.email;
+                        var isComp = obj.results.isC;
+                        var pass_flag = obj.results.pass_flag;
+                        var mobile = obj.results.mobile;
+                        var busiType = obj.results.busiType;
+                        var af = obj.results.af;
+
                         customStorage.addToStorage('isLoggedIn', true);
                         customStorage.addToStorage('l', mobile);
                         customStorage.addToStorage('mobile', mobile);
@@ -308,17 +310,22 @@ function Common() {
                         if (pass_flag != 0) {
                             window.location.assign(DOMAIN + 'Change-Password');return;
                         }
+
                         if (is_vendor == 1)
                         {
                             
-                            if (isComp === '2')
+                            if (isComp === '2' && af == '1')
                             {
                                 var catid = parseInt(busiType.charAt(0)) - 1;
                                 window.location.assign(DOMAIN + 'index.php?case=vendor_landing&catid=1000' + catid);
                             }
-                            else
+                            else if(isComp !== '1' && af == '1')
                             {
                                 window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid=' + userid);
+                            }
+                            else if(af != '1')
+                            {
+                                window.location.assign(DOMAIN + 'index.php?case=inactive_vendor&uid=' + userid);
                             }
                         }
                         else if (is_vendor == 2)

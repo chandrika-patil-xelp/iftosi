@@ -247,6 +247,8 @@ class enquiry extends DB
                                    active_flag <> 2
                     AND                
                                    vendor_id=".$params['vid']."
+                    AND
+                                   vendor_id NOT IN(".$params['vid'].")
                     ORDER BY
                                    date_time
                     DESC
