@@ -8,6 +8,26 @@ $action = $_GET['action'];
 switch($action)
     {
     
+//----------------------------Check Owner--------------------------------
+
+//  localhost/iftosi/apis/index.php?action=getOwnerCheck&uid=3&pid=2
+
+    case 'getOwnerCheck':
+        $uid=(!empty($params['uid'])) ? trim($params['uid']) : '';
+        $pid=(!empty($params['pid'])) ? trim($params['pid']) : '';
+        if(empty($pid) || empty($uid))
+        {
+            $arr = array();
+            $err = array('Code' => 1, 'Msg' => 'Some Parameters missing');
+            $result = array('results'=>$arr, 'error' => $err);
+            $res=$result;
+            break;
+        }
+        include APICLUDE.'class.vendor.php';
+        $obj	= new vendor($db['iftosi']);
+        $result	= $obj->getOwnerCheck($params);
+        $res = $result;
+        break;
 //----------------------------Change Pass--------------------------------
 
 //  localhost/iftosi/apis/index.php?action=changePassUrl&mobile=7309290529&uid=3&email=shubham.bajpai@xelpmoc.in
@@ -126,7 +146,7 @@ switch($action)
             break;
         }
         $obj= new user($db['iftosi']);
-        $result = $obj->sendRateMail($params);
+        $result = $obj->sendWelcomeMailSMS($params);
         $res = $result;
         break;
         

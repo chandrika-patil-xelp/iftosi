@@ -310,6 +310,7 @@ $(document).ready(function(){
         }
 });
 
+
 function getImagesData(prdList,simtrue)
 {
 	if(prdList !== undefined && prdList !== null && prdList !== '' && typeof prdList !== 'undefined' && prdList !== 'undefined' && prdList !== 'null')
@@ -1192,4 +1193,24 @@ function closeOtpForm()
         }
 }
 
-
+$(document).ready(function(){
+    var userid =  customStorage.readFromStorage('userid');
+    var params 	= '?action=getOwnerCheck&pid=' + pid + '&uid=' +userid;
+    var URL 	= DOMAIN + "apis/index.php";
+    $.ajax({url: URL+params, success: function(result)
+    {
+        var obj = jQuery.parseJSON(result);
+        
+        if(result !== undefined && result !== null && result !== '' && result !== 'undefined' && result !== 'null'&& typeof result !== 'undefined')
+        {
+                if(obj.error.code == 0 || obj.error.code === '0')
+                {
+                    $('.prdBtns').removeClass('dn');   
+                }
+                else
+                {
+                    $('.prdBtns').addClass('dn');
+                }
+        }
+    }});
+});

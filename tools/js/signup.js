@@ -242,7 +242,7 @@ function otpCheck()
                                             }
                                             else
                                             {
-                                               $.ajax({url: DOMAIN + "apis/index.php?action=sendWelcomeMailSMS&username="+pr_name +"&mobile="+pr_mobile +"&email="+pr_email +"&isVendor="+isVendor, success: function (result) {
+                                               $.ajax({url: DOMAIN + "apis/index.php?action=sendWelcomeMailSMS&username="+pr_name +"&mobile="+pr_mobile +"&email="+pr_email +"&isVendor="+userType, success: function (result) {
                                                     var obj = eval('('+result+')');
                                                     var errCode = obj.error.code;
                                                     if(errCode == 0)

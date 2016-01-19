@@ -897,17 +897,17 @@ function inStock(proId,ele) {
             $('#total'+catName).text(total);
             if(ele == 1)
             {
-                common.toast(1,"Product is in stock");
+                common.toast(4,"Product is in stock");
                 $('#isStock'+proId).addClass('inStockPrd').removeClass('soldStockPrd outStockPrd');
             }
             if(ele == 3)
             {
-                common.toast(1,"Product is out of stock");
+                common.toast(2,"Product is out of stock");
                 $('#isStock'+proId).addClass('outStockPrd').removeClass('inStockPrd soldStockPrd');
             }
             if(ele == 4)
             {
-                common.toast(1,"Product is sold");
+                common.toast(3,"Product is sold");
                 $('#isStock'+proId).addClass('soldStockPrd').removeClass('inStockPrd outStockPrd');
             }
 //            $('#'+stockid).toggleClass('outofstock');

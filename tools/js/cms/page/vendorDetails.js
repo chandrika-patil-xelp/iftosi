@@ -241,6 +241,41 @@ function validateForm() {
     }
 }
 
+$("#pincode").keyup(function() {
+
+    var pincode = $('#pincode').val();
+    if (!pincode) {
+        $('#area').val('');
+        $('#city').val('');
+        $('#state').val('');
+    }
+});
+
+$("#area").keyup(function() {
+
+    var area = $('#area').val();
+    if (!area) {
+        $('#pincode').val('');
+        $('#city').val('');
+        $('#state').val('');
+    }
+});
+
+$("#area").focus(function() {
+        $('#citySuggestDiv').addClass('dn');
+        $('#stateSuggestDiv').addClass('dn');
+});
+$("#city").focus(function() {
+        $('#areaSuggestDiv').addClass('dn');
+        $('#stateSuggestDiv').addClass('dn');
+});
+
+$("#state").focus(function() {
+    
+        $('#areaSuggestDiv').addClass('dn');
+        $('#citySuggestDiv').addClass('dn');
+});
+
 function validateStep2Form() {
     var str = 'This Field is Required';
     if (/1/.test(busiType)) {

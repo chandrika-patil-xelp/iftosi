@@ -329,10 +329,25 @@ function Common() {
         $('.close').click();
         $.toast.config.width = 400;
         $.toast.config.closeForStickyOnly = false;
-        if (mType == 0) {
+        if (mType == 0)
+        {
             $.toast(msg, {duration: 5000, type: "danger"});
-        } else if (mType == 1) {
+        } 
+        else if (mType == 1)
+        {
             $.toast(msg, {duration: 5000, type: "success"});
+        }
+        else if (mType == 2)
+        {
+            $.toast(msg, {duration: 5000, type: "stock"});
+        }
+        else if (mType == 3)
+        {
+            $.toast(msg, {duration: 5000, type: "sold"});
+        }
+        else if (mType == 4)
+        {
+            $.toast(msg, {duration: 5000, type: "instock"});
         }
         setTimeout(function () {
             $('.close').click();

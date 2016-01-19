@@ -757,11 +757,24 @@ function validateNum(){
                 $('#baseprice').focus();
 				isValid = false;
             }
+            if(isValid && (discountb2b == '' || isNaN(discountb2b)))
+            {
+                str ='B2B Discount field is not in expected form';
+                $('#discountb2b').focus();
+                isValid = false;
+            }
+            if(isValid && (discountb2b < discount))
+            {
+                str ='% Back To Vendor cannot be less than discount being provided to % Back To Customer';
+                $('#discountb2b').focus();
+                isValid = false;
+            }
 
-			if(isValid && (prdprice == '' || isNaN(prdprice))) {
-            str ='Price field is Required';
+            if(isValid && (prdprice == '' || isNaN(prdprice)))
+            {
+                str ='Price field is Required';
                 $('#prdprice').focus();
-				isValid = false;
+                isValid = false;
             }
 
             if(isValid == false && str != '')

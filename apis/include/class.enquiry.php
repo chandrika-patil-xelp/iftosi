@@ -81,8 +81,29 @@ class enquiry extends DB
                     
                         if($ires)
                         {
+                            
+                            global $comm;
+                            
+                            $getvdet = "SELECT 
+                                                logmobile,
+                                                email,
+                                                user_name 
+                                        FROM
+                                                tbl_registration 
+                                        WHERE 
+                                                user_id =".$params['vid'];
+                            $getvres = $this->query($getvdet);
+                            $getRow = $this->fetchData($getvres);
+                            
+                            
+                            $url = APIDOMAIN . 'index.php?action=sendEnqMailSMS&useremail='.$udetail['uemail'].'&mobile='.$getRow['logmobile'].'&email='.$getRow['email'].'&username='.$getRow['user_name'];
+                            $res = $comm->executeCurl($url);
+                            $fil = $res['error']['code'];
+                            if($fil == 0)
+                            {
                             $arr="Log Entry is successfully completed";
                             $err=array('Code'=>0,'Msg'=>'Data inserted');
+                            }
                         }
                         else
                         {
@@ -100,30 +121,54 @@ class enquiry extends DB
     
     public function viewLog($params)
     {
-        $sql="SELECT silver_rate,gold_rate,dollar_rate FROM tbl_vendor_master WHERE vendor_id='".$params['vid']."'";
-        $res=$this->query($sql);
-        if ($res)
-        {
-            $rates = $this->fetchData($res);
-            $dollarValue=dollarValue;
-            if(!empty($rates['dollar_rate']) && $rates['dollar_rate']!='0.00') {
-                $dollarValue = $rates['dollar_rate'];
-            }
-            $goldRate=goldRate;
-            if(!empty($rates['gold_rate']) && $rates['gold_rate']!='0.00') {
-                $goldRate = $rates['gold_rate'];
-            }
-            $silverRate=silverRate;
-            if(!empty($rates['silver_rate']) && $rates['silver_rate']!='0.00') {
-                $silverRate = $rates['silver_rate'];
-            }
-        }
-        
-        
-        # check the products under the requested vendor
         $page   = ($params['page'] ? $params['page'] : 1);
         $limit  = ($params['limit'] ? $params['limit'] : 15);
-        $viewprod=" SELECT
+        
+        $sqlVd="  SELECT 
+                            silver_rate,
+                            gold_rate,
+                            dollar_rate
+                FROM 
+                            tbl_vendor_master
+                WHERE 
+                            vendor_id='".$params['vid']."'";
+        
+        $resVd=$this->query($sqlVd);
+        
+        if ($resVd)
+        {
+            $rates = $this->fetchData($resVd);
+            
+            if(!empty($rates['dollar_rate']) && $rates['dollar_rate'] !== '0.00')
+            {
+                $dollarValue = $rates['dollar_rate'];
+            }
+            else 
+            {
+                $dollarValue=dollarValue;
+            }
+            
+            if(!empty($rates['gold_rate']) && $rates['gold_rate'] !== '0.00') 
+            {
+                $goldRate = $rates['gold_rate'];
+            }
+            else
+            {
+                $goldRate=goldRate;
+            }
+            
+            if(!empty($rates['silver_rate']) && $rates['silver_rate'] !== '0.00') 
+            {
+                $silverRate = $rates['silver_rate'];
+            }
+            else
+            {
+                $silverRate=silverRate;
+            }
+        }
+        # check the products under the requested vendor
+        
+        $viewEnq=" SELECT
                                    user_id,
                                    user_name,
                                    user_mobile,
@@ -135,128 +180,132 @@ class enquiry extends DB
                                    updatedby,
                                    update_time
                     FROM
-                                    tbl_product_enquiry
+                                   tbl_product_enquiry
                     WHERE
-                                    active_flag <> 2
+                                   active_flag <> 2
                     AND                
-                                    vendor_id=".$params['vid']."
+                                   vendor_id=".$params['vid']."
                     ORDER BY
-                                    update_time
+                                   date_time
                     DESC
                 ";
-        $viewres=$this->query($viewprod);
-        $totalEnqs=$this->numRows($viewres);
-        $arr['total_enqs']=$totalEnqs;
-        $total_pages = ceil($totalEnqs/$limit);
-        $arr['total_pages']=$total_pages;
         
         if (!empty($page))
         {
             $start = ($page * $limit) - $limit;
-            $viewprod.=" LIMIT " . $start . ",$limit";
+            $viewEnq.=" LIMIT " . $start . ",$limit";
         }
-        $viewres=$this->query($viewprod);
-        $chkres=$this->numRows($viewres);
-        if($chkres>0)
+        
+        $resEnq=$this->query($viewEnq);
+        $totalEnqs=$this->numRows($resEnq);
+        $total_pages = ceil($totalEnqs/$limit);
+        
+        if($totalEnqs > 0)
         {   
-            while($row=$this->fetchData($viewres))
+            $arr = array();
+            $i = 0;
+            while($rowEnq=$this->fetchData($resEnq))
             {   
-                $csql='SELECT
+                $sqlMaster='SELECT
                                 product_id,
                                 barcode,
-                                product_name,
-                                prd_price
+                                product_name
                         FROM
                                 tbl_product_master
                         WHERE 
                                 active_flag <> 2 
                         AND 
-                                product_id='.$row['product_id'];
-                $cres=$this->query($csql);
-                if($this->numRows($cres)>0)
+                                product_id='.$rowEnq['product_id'];
+                $resMaster=$this->query($sqlMaster);
+                if($this->numRows($resMaster) > 0)
                 {
-                    while($crow=$this->fetchData($cres))
+                    while($rowMaster = $this->fetchData($resMaster))
                     {
-                        $row['pro_dtls']=$crow;
-                        $prdPrice = $crow['prd_price'];
+                        $pid = $rowEnq['product_id'];
+                        $arr[$i]['enquiry'] = $rowEnq; 
+                        $arr[$i]['pro_dtls']=$rowMaster;
                     }
                 }
-                $csql=' SELECT 
+
+                $sqlSearch=' SELECT 
+                                product_id,
                                 gold_purity,
                                 certified,
+                                price,
                                 shape,
                                 clarity,
+                                color,
                                 type,
                                 gold_weight,
                                 carat,
                                 metal
                         FROM
-                                tbl_product_search
+                               tbl_product_search
                         WHERE
                                 active_flag <> 2
                         AND 
-                                product_id='.$row['product_id'];
-                $cres=$this->query($csql);
-                if($this->numRows($cres)>0)
+                                product_id='.$pid;
+                $resSearch=$this->query($sqlSearch);
+                if($this->numRows($resSearch) > 0)
                 {
-                    while($crows=$this->fetchData($cres))
+                    while($rowSearch = $this->fetchData($resSearch))
                     {
-                        $purity=$crows['gold_purity'];
-                        $metal=strtolower($crows['metal']);
-                        $weight=$crows['gold_weight'];
-                        $carat=$crows['carat'];
-                        $row['search']=$crows;
+                        $arr[$i]['search'] = $rowSearch;
                     }
                 }
-                $csql='SELECT 
+                $sqlCat='SELECT 
                                     b.cat_name,
-                                    b.catid
+                                    b.catid,
+                                    b.p_catid
                         FROM 
                                     tbl_product_category_mapping AS a,
                                     tbl_category_master AS b
                         WHERE 
-                                    a.product_id='.$row['product_id'].' 
+                                    a.product_id='.$pid.' 
                         AND 
                                     b.catid=a.category_id 
-                        AND 
-                                    b.p_catid in (0,10000,10001,10002)';
-                $cres=$this->query($csql);
-                if($this->numRows($cres)>0) {
-                    while($crow=$this->fetchData($cres))
+                        /* AND 
+                                    b.p_catid in (0,10000,10001,10002) */';
+                $resCat=$this->query($sqlCat);
+                if($this->numRows($resCat) > 0)
+                {
+                    while($rowCat = $this->fetchData($resCat))
                     {
-                        $row['pro_dtls']['cat_name'][]=$crow['cat_name'];
-                            $row['pro_dtls']['mCatid']=$crow['catid'];
-                            if($row['pro_dtls']['mCatid'] == 10000)
+                           $arr[$i]['categories']['cat_name']=$rowCat['cat_name'];
+                           $arr[$i]['categories']['mCatid']=$rowCat['catid'];
+                           $arr[$i]['categories']['pcatid']=($rowCat['p_catid'] == 0 ? $rowCat['catid'] : $rowCat['p_catid']);
+                            
+                           if($arr[$i]['categories']['pcatid'] == 10001)
                             {
-                                $row['pro_dtls']['prd_price']=$prdPrice*$dollarValue*$carat;
+
+                                $arr[$i]['search']['price'] = $arr[$i]['search']['price'];
                             }
-                            else if($row['pro_dtls']['mCatid'] == 10002)
+                            if($arr[$i]['categories']['pcatid'] == 10000)
                             {
-                                if($metal == 'gold')
+                                $arr[$i]['search']['price'] = $arr[$i]['search']['price']*$dollarValue*$arr[$i]['search']['carat'];
+                            }
+                            if($arr[$i]['categories']['pcatid'] == 10002)
+                            {
+                                if($arr[$i]['search']['metal'] == 'Gold')
                                 {
-                                    $metalRate=$goldRate;
-                                    $finalRate=($metalRate/10)*($purity/995);
-                                    $row['pro_dtls']['prd_price']=$finalRate*$weight;
+                                    $metalRate= $goldRate;
+                                    $finalRate= ($metalRate/10) * ($arr[$i]['search']['gold_purity']/995);
+                                    $arr[$i]['search']['price'] = $finalRate * $arr[$i]['search']['gold_weight'];
                                 }
-                                else if($metal == 'silver')
+                                else if($arr[$i]['search']['metal'] == 'Silver')
                                 {
                                     $metalRate=$silverRate;
-                                    $finalRate=($metalRate/1000)*($purity/999);
-                                    $row['pro_dtls']['prd_price']=$finalRate*$weight;
+                                    $finalRate=($metalRate/1000)*($arr[$i]['search']['gold_purity']/999);
+                                    $arr[$i]['search']['price']=$finalRate*$arr['search']['gold_weight'];
                                 }
                             }
-                            else if($row['pro_dtls']['mCatid'] == 10001)
-                            {
-                                $a = $crow['prd_price'];
-                                $row['pro_dtls']['prd_price'] = $a;
-                            }
-                           $row['pro_dtls']['prd_price'] = ceil($row['pro_dtls']['prd_price']);
-                           $row['pro_dtls']['prd_price'] = $this->IND_money_format($row['pro_dtls']['prd_price']);
-                        
+                            $arr[$i]['search']['price'] = ceil($arr[$i]['search']['price']);
+                            $arr[$i]['search']['price'] = $this->IND_money_format($arr[$i]['search']['price']);
                     }
                 }
-                $arr['enq'][]=$row;
+                $i++;
             }
+            $arr['enqs'][] = $arr;
             $err=array('Code'=>0,'Msg'=>'Values fetched successfully');
         }
         else
@@ -264,22 +313,27 @@ class enquiry extends DB
             $arr=array('total_enqs' => $totalEnqs, 'total_pages' => $total_pages);
             $err=array('Code'=>0,'Msg'=>'No Values fetched');
         }
-        $result=array('results'=>$arr,'error'=>$err);
+        $result=array('results'=>$arr,'error'=>$err,'total_enqs'=>$totalEnqs,'total_pages'=>$total_pages);
         return $result;
     }
+
     public function IND_money_format($money)
     {
         $len = strlen($money);
         $m = '';
         $money = strrev($money);
+        
         for($i=0;$i<$len;$i++)
         {
             if(( $i==3 || ($i>3 && ($i-1)%2==0) )&& $i != $len)
             {
                 $m .=',';
+                
             }
             $m .=$money[$i];
+            
         }
+
         return strrev($m);
     }
 }

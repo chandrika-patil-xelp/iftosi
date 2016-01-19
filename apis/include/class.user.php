@@ -976,6 +976,11 @@
                 
         public function sendWelcomeMailSMS($params)
         {
+            global $comm;
+            $smsText = '';
+            $subject = '';
+            $message = '';
+            $headers = '';
             if($params['isVendor'] == 1)
             {
                 $subject = 'Welcome To IFtoSI';
@@ -1027,6 +1032,13 @@
             {
                     mail($params['email'], $subject, $message, $headers);
             }
+            else
+            {
+                $arr = array();
+                $err = array('code'=>1,'msg'=>'Error in sending mail');
+                
+            }
+            
             $smsText = urlencode($smsText);
             $sendSMS = str_replace('_MOBILE', $params['mobile'], SMSAPI);
             $sendSMS = str_replace('_MESSAGE', $smsText, $sendSMS);
