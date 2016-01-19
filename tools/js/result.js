@@ -397,8 +397,7 @@ function getResultsData(data,sortby,showtree)
 	var tfhtml = '';
 	var prdIds = '';
 	if(data.results.products) {
-		
-		if(pageName == 'diamonds') {
+        if(dummyPage == 'b2bproducts') {
 			$.each(data.results.products, function(i, vl) {
 				html += '<div class="prdComm fLeft" style="opacity: 0; transform: translateX(1500px);">';
 					html += '<div class="prdCommDiv fLeft">';
@@ -473,38 +472,177 @@ function getResultsData(data,sortby,showtree)
 								html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.certified+'</div>';
 							html += '</div>';
 						html += '</div>';
-						html += '<div class="prdPrice fLeft">';
-							html += '<div class="detComm">';
-								html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
-                                                                if(vl.dollar_rate !== '0.00' && vl.dollar_rate !== undefined && vl.dollar_rate !== null && vl.dollarValue !== '') { dollarValue=vl.dollar_rate; }
-                                                                 
-                                                                 var price = Math.ceil(((vl.pprice * dollarValue) * vl.attributes.carat));
-								html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+ common.IND_money_format(price) +'</div>';
-							html += '</div>';
-						html += '</div>';
+                
+//						html += '<div class="prdPrice fLeft">';
+//							html += '<div class="detComm">';
+//								html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
+//                              if(vl.dollar_rate !== '0.00' && vl.dollar_rate !== undefined && vl.dollar_rate !== null && vl.dollarValue !== '') {
+//                                  dollarValue=vl.dollar_rate; 
+//                              }
+//                              var price = Math.ceil(((vl.pprice * dollarValue) * vl.attributes.carat));
+//								html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+ common.IND_money_format(price) +'</div>';
+//							html += '</div>';
+//						html += '</div>';
+                
+                        html += '<div class="b2bPricesCont fLeft">';   
+                            html += '<div class="prdPrice fLeft">';
+                                html += '<div class="detComm">';
+                                    html += '<div class="detLabel fmOpenB fLeft">CUST. PRICE</div>';
+                                    if(vl.dollar_rate !== '0.00' && vl.dollar_rate !== undefined && vl.dollar_rate !== null && vl.dollarValue !== '') {
+                                        dollarValue=vl.dollar_rate; 
+                                    }
+                                    var price = Math.ceil(((vl.pprice * dollarValue) * vl.attributes.carat));
+                                    html += '<div class="detValue fmOpenB fLeft"><span>₹</span>'+ common.IND_money_format(price) +'</div>';
+                                html += '</div>';
+                            html += '</div>';
+                            html += '<div class="prdPrice fLeft">';
+                                html += '<div class="detComm">';
+                                    html += '<div class="detLabel fmOpenB fLeft">B2B PRICE</div>';
+                                        if(vl.dollar_rate !== '0.00' && vl.dollar_rate !== undefined && vl.dollar_rate !== null && vl.dollarValue !== '') {
+                                        dollarValue=vl.dollar_rate; 
+                                    }
+                                    var price = Math.ceil(((vl.b2bprice * dollarValue) * vl.attributes.carat));
+                                    html += '<div class="detValue fmOpenB fLeft"><span>₹</span>'+ common.IND_money_format(price) +'</div>';
+                                html += '</div>';
+                            html += '</div>';
+                        html += '</div>';
+                
 						html += '</a>';
-						html += '<div class="prdActions fLeft">';
-                                                if(tempUrl !== '')
-                                                {
-                                                	html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
-							html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
-							html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
-							html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
-                                                }
-                                                else
-                                                {
-                                                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'">';
-                                                    	html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
-							html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
-							html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
-							html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
-                                                }
-						
-						html += '</div>';
+                
+                        html += '<div class="prdActions fLeft wAuto">';
+                            html += '<a href="'+DOMAIN+'index.php?case=b2bdetails&productid='+vl.pid+'&popup=1">';
+                                html += '<div class="wConBtn fLeft">Contact Dealer</div>';
+                            html += '</a>';
+                        html += '</div>';
+                
+//						html += '<div class="prdActions fLeft">';
+//                                                if(tempUrl !== '')
+//                                                {
+//                                                	html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
+//							html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
+//							html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
+//							html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
+//                                                }
+//                                                else
+//                                                {
+//                                                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'">';
+//                                                    	html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
+//							html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
+//							html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
+//							html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
+//                                                }
+//						
+//						html += '</div>';
+                
 					html += '</div>';
 				html += '</div>';
 			});
 		}
+        else if(pageName == 'diamonds') {
+            $.each(data.results.products, function(i, vl) {
+				html += '<div class="prdComm fLeft" style="opacity: 0; transform: translateX(1500px);">';
+                html += '<div class="prdCommDiv fLeft">';                 
+                var tempUrl = '';
+                var shape = vl.attributes.shape;
+                var color = vl.attributes.color;
+                var clarity = vl.attributes.clarity;
+                var cert = vl.attributes.certified;
+
+                if(shape !== null && shape !== undefined) {
+                    if(tempUrl !== ''){
+                        tempUrl += '-'+shape; 
+                    }
+                    else{
+                        tempUrl += shape;
+                    }
+                }
+                if(color !== null && color !== undefined) {
+                    if(tempUrl !== ''){
+                        tempUrl += '-colour-'+color; 
+                    }
+                    else{
+                        tempUrl += 'colour-'+color;
+                    }
+                }
+                if(clarity !== null && clarity !== undefined) {
+                    if(tempUrl !== ''){
+                        tempUrl += '-clarity-'+clarity; 
+                    }
+                    else{
+                        tempUrl += 'clarity-'+clarity;
+                    }
+                }
+                if(cert !== null && cert !== undefined) {
+                    if(tempUrl !== ''){
+                        tempUrl += '-certified-'+cert; 
+                    }
+                    else{
+                        tempUrl += 'certified-'+cert;
+                    }
+                }
+                if(tempUrl !== '') {
+                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'">';
+                }
+                else {
+                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'">';
+                }                                        
+
+                html += '<div class="prdShape fLeft">';
+                html += '<div class="prdShTitle fLeft fmOpenB">SHAPE</div>';
+                html += '<div class="prdShType fLeft fmOpenR">'+vl.attributes.shape+'</div>';
+                html += '<div class="'+vl.attributes.shape+' fRight"></div>';
+                html += '</div>';
+                html += '<div class="prdDetails fLeft">';
+                html += '<div class="detComm">';
+                html += '<div class="detLabel fmOpenB fLeft">COLOR</div>';
+                html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.color+'</div>';
+                html += '</div>';
+                html += '<div class="detComm">';
+                html += '<div class="detLabel fmOpenB fLeft">CARATS</div>';
+                html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.carat+'</div>';
+                html += '</div>';
+                html += '<div class="detComm">';
+                html += '<div class="detLabel fmOpenB fLeft">CLARITY</div>';
+                html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.clarity+'</div>';
+                html += '</div>';
+                html += '<div class="detComm">';
+                html += '<div class="detLabel fmOpenB fLeft">CERTIFICATE</div>';
+                html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.certified+'</div>';
+                html += '</div>';
+                html += '</div>';
+                html += '<div class="prdPrice fLeft">';
+                html += '<div class="detComm">';
+                html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
+                
+                if(vl.dollar_rate !== '0.00' && vl.dollar_rate !== undefined && vl.dollar_rate !== null && vl.dollarValue !== '') { 
+                    dollarValue=vl.dollar_rate; 
+                }
+                
+                var price = Math.ceil(((vl.pprice * dollarValue) * vl.attributes.carat));
+                html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+ common.IND_money_format(price) +'</div>';
+                html += '</div>';
+                html += '</div>';
+                html += '</a>';
+                html += '<div class="prdActions fLeft">';
+                if(tempUrl !== '') {
+                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                }
+                else {
+                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'">';
+                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                }
+
+                html += '</div>';
+                html += '</div>';
+                html += '</div>';
+            });
+        }
 		else if(pageName == 'jewellery') {
 			
 			$.each(data.results.products, function(i, vl) {
@@ -1694,10 +1832,14 @@ function FR(sortby,showtree) {
 	
 	var pgno = $('#pgno').val();
 	var uid = $('#uid').val();
+    
+    var dummyCall = '';
+    if(dummyPage == 'b2bproducts')
+        dummyCall = '&b2bsort=1';
 
 	if(sortby)
 	{
-		var params = 'action=ajx&case=filter&catid='+catid+'&sortby='+sortby+'&slist='+slist+'&clist='+clist+'&tlist='+tlist+'&ilist='+ilist+'&jlist='+jlist+'&ctid='+ctid+'&pgno='+pgno+"&uid="+uid;
+		var params = 'action=ajx&case=filter&catid='+catid+'&sortby='+sortby+'&slist='+slist+'&clist='+clist+'&tlist='+tlist+'&ilist='+ilist+'&jlist='+jlist+'&ctid='+ctid+'&pgno='+pgno+"&uid="+uid+dummyCall;
 		var URL = DOMAIN + "index.php";
 		suggestObj = $.getJSON(URL, params, function(data) {
 			getResultsData(data,sortby);   
@@ -1706,7 +1848,7 @@ function FR(sortby,showtree) {
 	else
 	{
 		$('#drpinp').text('Best Match');
-		var params = 'action=ajx&case=filter&catid='+catid+'&slist='+slist+'&clist='+clist+'&tlist='+tlist+'&ilist='+ilist+'&jlist='+jlist+'&ctid='+ctid+'&pgno='+pgno+"&uid="+uid;
+		var params = 'action=ajx&case=filter&catid='+catid+'&slist='+slist+'&clist='+clist+'&tlist='+tlist+'&ilist='+ilist+'&jlist='+jlist+'&ctid='+ctid+'&pgno='+pgno+"&uid="+uid+dummyCall;
 		var URL = DOMAIN + "index.php";
 		suggestObj = $.getJSON(URL, params, function(data) {
 			getResultsData(data);

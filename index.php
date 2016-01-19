@@ -54,13 +54,14 @@ switch ($action) {
                 $ctid = $_GET['ctid'];
                 $uid = $_GET['uid'];
                 $pid = $_GET['pid'];
+                $b2bsort = $_GET['b2bsort'];
 
                 if ($pid) {
                     $url = APIDOMAIN . 'index.php?action=removeFromWishlist&uid=' . $uid . '&pid=' . $pid;
                     $res = $comm->executeCurl($url);
                 }
 
-                $url = APIDOMAIN . 'index.php?action=getPrdByCatid&catid=' . $catid . '&page=' . $pgno . '&sortby=' . $sortby . '&slist=' . urlencode($slist) . '&clist=' . urlencode($clist) . '&tlist=' . urlencode($tlist) . '&ilist=' . urlencode($ilist) . '&jlist=' . urlencode($jlist) . '&ctid=' . $ctid . '&uid=' . $uid;
+                $url = APIDOMAIN . 'index.php?action=getPrdByCatid&catid=' . $catid . '&page=' . $pgno . '&sortby=' . $sortby . '&slist=' . urlencode($slist) . '&clist=' . urlencode($clist) . '&tlist=' . urlencode($tlist) . '&ilist=' . urlencode($ilist) . '&jlist=' . urlencode($jlist) . '&ctid=' . $ctid . '&uid=' . $uid . '&b2bsort=' . $b2bsort;
                 $res = $comm->executeCurl($url);
 
                 if (!empty($jlist)) {

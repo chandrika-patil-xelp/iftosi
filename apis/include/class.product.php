@@ -1143,6 +1143,7 @@
 							SELECT
 								distinct product_id,
                                                                 product_id as pid,
+                                                                b2b_price*carat as b2btotalprice,
                                                                 price*carat as totalprice,
                                                                 price as jprice,
                                                                 1*(SELECT gold_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as goldrate,
@@ -1174,7 +1175,9 @@
                                         {
                                             case 'pasc':
                                                     if($params['catid'] == 10000)
-                                                        $patsql.=" ORDER BY totalprice ASC ";
+                                                    {
+                                                        ($params['b2bsort'] ? $patsql.=" ORDER BY b2btotalprice ASC " : $patsql.=" ORDER BY totalprice ASC ");
+                                                    }
                                                     else if($params['catid'] == 10002)
                                                         $patsql.=" ORDER BY bprice ASC ";
                                                     else
@@ -1183,7 +1186,9 @@
 
                                             case 'pdesc':
                                                     if($params['catid'] == 10000)
-                                                        $patsql.=" ORDER BY totalprice DESC ";
+                                                    {
+                                                        ($params['b2bsort'] ? $patsql.=" ORDER BY b2btotalprice DESC " : $patsql.=" ORDER BY totalprice DESC ");
+                                                    }
                                                     else if($params['catid'] == 10002)
                                                         $patsql.=" ORDER BY bprice DESC ";
                                                     else

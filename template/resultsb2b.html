@@ -84,37 +84,38 @@ if (count($data)) {
                                                         <div class="detValue fmOpenR fLeft"><?php echo $val['attributes']['certified']; ?></div>
                                                     </div>
                                                 </div>
-                                                <div class='prdPrice fLeft dn'>
-                                                    <div class="detComm">
-                                                        <div class="detLabel fmOpenB fLeft">BEST PRICE</div>
-                                                        <?php
-                                                            $rate = $val['dollar_rate'];
-                                                            if( empty($val['dollar_rate']) || $val['dollar_rate'] == '0.00' || $val['dollar_rate'] == 0.00){
-                                                                $rate = dollarValue;
-                                                            }
-                                                        ?>
-                                                        <div class="detValue fmOpenB fLeft"><span>&#8377;</span>
-                                                        <?php 
-                                                            $price = ceil((($val['pprice'] * $rate)*$val['attributes']['carat']));
-                                                            echo $price = $comm->IND_money_format($price);
-                                                        ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                                 <div class='b2bPricesCont fLeft'>   
                                                     <div class="prdPrice fLeft">
                                                         <div class="detComm">
                                                             <div class="detLabel fmOpenB fLeft">CUST. PRICE</div>
+                                                                <?php
+                                                                    $rate = $val['dollar_rate'];
+                                                                    if( empty($val['dollar_rate']) || $val['dollar_rate'] == '0.00' || $val['dollar_rate'] == 0.00){
+                                                                        $rate = dollarValue;
+                                                                    }
+                                                                ?>
                                                                 <div class="detValue fmOpenB fLeft"><span>₹</span>
-                                                                    17,844                                                        
+                                                                    <?php 
+                                                                        $price = ceil((($val['pprice'] * $rate)*$val['attributes']['carat']));
+                                                                        echo $price = $comm->IND_money_format($price);
+                                                                    ?>                                                        
                                                                 </div>
                                                         </div>
                                                     </div>
                                                     <div class="prdPrice fLeft">
                                                         <div class="detComm">
                                                             <div class="detLabel fmOpenB fLeft">B2B PRICE</div>
+                                                                <?php
+                                                                    $rate = $val['dollar_rate'];
+                                                                    if( empty($val['dollar_rate']) || $val['dollar_rate'] == '0.00' || $val['dollar_rate'] == 0.00){
+                                                                        $rate = dollarValue;
+                                                                    }
+                                                                ?>
                                                                 <div class="detValue fmOpenB fLeft"><span>₹</span>
-                                                                    17,844                                                        
+                                                                   <?php 
+                                                                        $price = ceil((($val['b2bprice'] * $rate)*$val['attributes']['carat']));
+                                                                        echo $price = $comm->IND_money_format($price);
+                                                                    ?>                                                        
                                                                 </div>
                                                         </div>
                                                     </div>
