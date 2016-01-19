@@ -78,7 +78,7 @@ class enquiry extends DB
                                             'customer',
                                             now())";
                         $ires=$this->query($isql);
-                    
+                        
                         if($ires)
                         {
                             
@@ -95,18 +95,80 @@ class enquiry extends DB
                             $getvres = $this->query($getvdet);
                             $getRow = $this->fetchData($getvres);
                             
+                            $catidSql = "  SELECT 
+                                                category_id
+                                        FROM
+                                                tbl_product_category_mapping
+                                        WHERE 
+                                                product_id =\"".$params['pid']."\" 
+                                        
+                                        AND 
+                                                display_flag=1";
+                            $catidRes = $this->query($catidSql);
+                            $catidRow = $this->fetchData($catidRes);
+                            $catid = $catidRow['category_id'];
+
+                            $pidDetSql = "  SELECT
+                                                    *
+                                            FROM 
+                                                    tbl_product_search as a,
+                                                    tbl_product_master as b
+                                            WHERE
+                                                    a.product_id=\"".$params['pid']."\"
+                                            AND
+                                                    a.product_id = b.product_id
+                                            AND
+                                                    a.active_flag=1";
+
+                            $pidDetRes = $this->query($pidDetSql);
+
+                            if($pidDetRes)
+                            {
+                                while($row = $this->fetchData($pidDetRes))
+                                {
+                                    $pdet['pid'] = $row['product_id'];
+                                    $pdet['barcode']= $row['barcode'];
+                                    $pdet['shape']= $row['shape'];
+                                    $pdet['metal']= $row['metal'];
+                                    $pdet['gold_purity'] = $row['gold_purity'];
+                                    $pdet['gold_weight'] = $row['gold_weight'];
+                                    $pdet['type'] = $row['type'];
+                                    $pdet['certified'] = $row['certified'];
+                                    $pdet['carat'] = $row['carat'];
+                                    $pdet['cut'] = $row['cut'];
+                                    $pdet['clarity'] = $row['clarity'];
+                                    $pdet['color'] = $row['color'];
+                                    $pdet['price'] = $row['price'];
+                                }
+                                $vSql = "   SELECT 
+                                                    gold_rate,
+                                                    dollar_rate,
+                                                    silver_rate 
+                                            FROM 
+                                                    tbl_vendor_master
+                                            WHERE 
+                                                    vendor_id =".$params['vid'];
+                                $vRes = $this->query($vSql);
+                                $vRow = $this->fetchData($vRes);
+                                $pdet['goldRate'] = $vRow['gold_rate'];
+                                $pdet['silverRate'] = $vRow['silver_rate'];
+                                $pdet['dollarRate'] = $vRow['dollar_rate'];
+                            }
                             
-                            $url = APIDOMAIN . 'index.php?action=sendEnqMailSMS&useremail='.$udetail['uemail'].'&mobile='.$getRow['logmobile'].'&email='.$getRow['email'].'&username='.$getRow['user_name'];
+                            
+                            $url = APIDOMAIN . 'index.php?action=sendEnqMailSMS&useremail='.$udetail['uemail'].'&mobile='.$getRow['logmobile'].'&email='.$getRow['email'].'&username='.$getRow['user_name'].'&pdet='.urlencode(serialize($pdet)).'&catid='.$catid;
                             $res = $comm->executeCurl($url);
                             $fil = $res['error']['code'];
                             if($fil == 0)
                             {
-                            $arr="Log Entry is successfully completed";
-                            $err=array('Code'=>0,'Msg'=>'Data inserted');
+                                $arr="Log Entry is successfully completed";
+                                $err=array('Code'=>0,'Msg'=>'Data inserted');
                             }
                         }
                         else
                         {
+                            echo $url = APIDOMAIN . 'index.php?action=sendEnqMailSMS&useremail='.$udetail['uemail'].'&mobile='.$getRow['logmobile'].'&email='.$getRow['email'].'&username='.$getRow['user_name'];
+                            
                             $arr=array();
                             $err=array('Code'=>1,'Msg'=>'Error in completing the operation');
                         }

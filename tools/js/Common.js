@@ -218,7 +218,7 @@ function Common() {
         str += '<div id="pr_mobile_inpText" class="inpText fRight transition300">enter<br>mobile number or email</div>';
         str += '</div>  ';
         str += ' <div class="inputCont fLeft fmOpenR">';
-        str += '<input type="password" id="pr_pass" name="pr_pass" autocomplete="off" readonly maxlength="10" onKeyPress="common.eSubmit(event,\'lgSubmit\');" class="txtInput cOrange fmOpenR font14 passwordIcon">';
+        str += '<input type="password" id="pr_pass" name="pr_pass" autocomplete="off" readonly maxlength="20" onKeyPress="common.eSubmit(event,\'lgSubmit\');" class="txtInput cOrange fmOpenR font14 passwordIcon">';
         str += '<label for="pr_pass" class="inp-label transition100">PASSWORD</label>';
         str += '<div id="pr_pass_inpText" class="inpText fRight transition300">enter your<br>password</div>';
         str += '</div>  ';

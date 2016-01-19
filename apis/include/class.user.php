@@ -462,7 +462,7 @@
                           password,
                           is_vendor,
                           pass_flag,
-						  email
+                          email
                    FROM 
                           tbl_registration
                    WHERE
@@ -582,41 +582,42 @@
             $vsql="SELECT
                                 active_flag,
                                 email,
-                                mobile
+                                contact_mobile
                    FROM 
                                 tbl_vendor_master  
                    WHERE 
                                 vendor_id=".$params['userid']."";
             $vsqlReg="SELECT
                                 logmobile,
-                                email,
+                                email
                    FROM 
                                 tbl_registration  
                    WHERE 
                                 user_id=".$params['userid']."";
             $vres=$this->query($vsql);
             $vresReg=$this->query($vsqlReg);
-            $regrow = $this->fetchData($vresReg);
-            if($this->numRows($vres)==1) //If user is registered
+            
+            if($this->numRows($vres) == 1) //If user is registered
             {
                 $usql="UPDATE
                                     tbl_vendor_master
                        SET
-                                    active_flag=\"".$params['active_flag']."\" 
+                                    active_flag=\"".$params['af']."\" 
                        WHERE 
                                     vendor_id=".$params['userid'];
                 $usql1="UPDATE
                                     tbl_registration
                        SET
-                                    is_active=\"".$params['active_flag']."\" 
+                                    is_active=\"".$params['af']."\" 
                        WHERE 
                                     user_id=".$params['userid'];
                 $ures=$this->query($usql);
                 $ures1=$this->query($usql1);
                 if($ures)
                 {
-                    if($params['active_flag'] == 1)
+                    if($params['af'] == 1)
                     {
+                        $regrow = $this->fetchData($vresReg);
                         $email = $regrow['email'];
                         $mobile = $regrow['logmobile'];
                         
@@ -957,7 +958,12 @@
 
 		private function sendMail($params)
 		{
-			$subject = 'Your Password for IFtoSI';
+			global $comm;
+                        $subject = '';
+                        $message = '';
+                        $headers = '';
+                    
+                        $subject = 'Your Password for IFtoSI';
 			$message = 'Dear ' . $params['username'] . ',';
 			$message .= "\r\n";
 			$message .= "Your new password is " . $params['password'];
@@ -984,8 +990,12 @@
             if($params['isVendor'] == 1)
             {
                 $subject = 'Welcome To IFtoSI';
+                
                 $message = 'Thank you '.$params['username'].', for registering on IFtoSI.com';
+                $message .= "\r\n";
                 $message = 'Your details are under verification.';
+                $message .= "\r\n";
+                $message = 'For any assistance, Call: 022-32623263. Email: info@iftosi.com';
                 $message .= "\r\n";
                 $message .= "Team IFtoSI";
                 $headers = "MIME-Version: 1.0" . "\r\n";
@@ -998,7 +1008,7 @@
                 $smsText .= "\r\n\r\n";
                 $smsText .= "Your details are under verification.";
                 $smsText .= "\r\n\r\n";
-                $smsText .= "For any assistance, Call:…………. Email: info@iftosi.com";
+                $smsText .= "For any assistance, Call: 022-32623263. Email: info@iftosi.com";
                 $smsText .= "\r\n";
                 $smsText .= "Team IFtoSI";
             }
@@ -1009,7 +1019,8 @@
                 $message = 'Save time, Save money';
                 $message .= "\r\n";
                 $message .= "IFtoSI.com the easiest way to buy solitaires, jewellery and bullion directly from the source.";
-                $message .= "For any assistance, Call:…………. Email: info@iftosi.com";
+                $message .= "\r\n";
+                $message .= "For any assistance, Call: 022-32623263. Email: info@iftosi.com";
                 $message .= "\r\n";
                 $message .= "Team IFtoSI";
                 $headers = "MIME-Version: 1.0" . "\r\n";
@@ -1024,7 +1035,7 @@
                 $smsText .= "\r\n\r\n";
                 $smsText .= "IFtoSI.com the easiest way to buy solitaires, jewellery and bullion directly from the source.";
                 $smsText .= "\r\n\r\n";
-                $smsText .= "For any assistance, Call:…………. Email: info@iftosi.com";
+                $smsText .= "For any assistance, Call: 022-32623263. Email: info@iftosi.com";
                 $smsText .= "\r\n\r\n";
                 $smsText .= "Team IFtoSI";
             }
@@ -1059,6 +1070,12 @@
         
         public function sendVActivateMailSMS($params)
         {
+            global $comm;
+            $smsText = '';
+            $subject = '';
+            $message = '';
+            $headers = '';
+            
             if($params['isVendor'] == 1)
             {
                 $subject = 'Vendor profile activated in IFtoSI';
@@ -1066,7 +1083,7 @@
                 $message .= "\r\n";
                 $message = 'Get new buyers. Increase your reach to a wider range of customers. Kindly log on to iftosi.com to upload your products.';
                 $message .= "\r\n";
-                $message .= "For any assistance, call…………. Email: info@iftosi.com";
+                $message .= "For any assistance, call: 022-32623263. Email: info@iftosi.com";
                 $message .= "\r\n";
                 $message .= "Team IFtoSI";
                 $headers = "MIME-Version: 1.0" . "\r\n";
@@ -1079,7 +1096,7 @@
                 $smsText .= "\r\n\r\n";
                 $smsText = "Get new buyers. Increase your reach to a wider range of customers. Kindly log on to iftosi.com to upload your products.";
                 $smsText .= "\r\n\r\n";
-                $smsText .= "For any assistance, call…………. Email: info@iftosi.com";
+                $smsText .= "For any assistance, call: 022-32623263. Email: info@iftosi.com";
                 $smsText .= "\r\n\r\n";
                 $smsText .= "Team IFtoSI";
             }
@@ -1107,12 +1124,72 @@
         
         public function sendEnqMailSMS($params)
         {
+                $pdet = unserialize(urldecode($params['pdet']));
+                if($params['catid'] == 10000)
+                {
+                    $p[]  = $pdet['pid'];
+                    $p[]= $pdet['shape'];
+                    $p[] = $pdet['certified'];
+                    $p[] = $pdet['barcode'];
+                    $p[]  = $pdet['cut']; 
+                    $p[]= $pdet['carat']; 
+                    $p[] = $pdet['clarity']; 
+                    $p[]= $pdet['color'];
+                    $p[]= $pdet['carat']*$pdet['price']*$pdet['dollarRate'];
+                    $msgng = array(0=>'Product Id',1=>'Shape',2=>'Certificate',3=>'Barcode',4=>'Cut',5=>'Carat',6=>'Clarity',7=>'Colour',8=>'Price'); 
+                }
+                if($params['catid'] == 10001)
+                {
+                    $p[]  = $pdet['pid'];
+                    $p[]= $pdet['shape'];
+                    $p[] = $pdet['metal'];
+                    $p[] = $pdet['barcode'];
+                    $p[] = $pdet['gold_purity']; 
+                    $p[]  = $pdet['gold_weight']; 
+                    $p[] = $pdet['certified']; 
+                    $p[]= $pdet['price'];
+                    $msgng = array(0=>'Product Id',1=>'Shape',2=>'Metal',3=>'Barcode',4=>'Purity',5=>'Gold Weight',6=>'Certificate',7=>'Price'); 
+                }
+                if($params['catid'] == 10002)
+                {
+                    $p[]  = $pdet['pid'];
+                    $p[]= $pdet['type'];
+                    $p[] = $pdet['metal'];
+                    $p[] = $pdet['barcode'];
+                    $p[] = $pdet['gold_purity']; 
+                    $p[]  = $pdet['gold_weight']; 
+                    if($pdet['metal'] == 'Gold')
+                    {
+                        $p[]= $pdet['gold_weightt']*(($pdet['goldRate']/10)*($pdet['gold_purity']/995));
+                    }
+                    else if($pdet['metal'] == 'Silver')
+                    {
+                        $p[]= $pdet['gold_weight']*(($pdet['silverRate']/1000)*($pdet['gold_purity']/999));
+                    }
+                    $msgng = array(0=>'Product Id',1=>'Type',2=>'Metal',3=>'Barcode',4=>'Purity',5=>'Gold Weight',6=>'Price');
+                }
+                $msg ='';
+                for($i=0;$i<count($p);$i++)
+                {
+                    $msg .= $msgng[$i].' : '.$p[$i]." \r\n ";
+                }
+                
+                global $comm;
+                $smsText = '';
+                $subject = '';
+                $message = '';
+                $headers = '';
+            
                 $subject = 'Recent enquiry to IFtoSI';
+                $message = 'Hello '.$params['username'].', '.$params['useremail'].' has shown interest in';
+                $message .= "\r\n";
+                $message .= $msg;
+                $message .= "\r\n";
                 $message = 'Hello '.$params['username'].', '.$params['useremail'].' has shown interest in';
                 $message .= "\r\n";
                 $message = 'The buyer should contact you shortly.';
                 $message .= "\r\n";
-                $message .= "For any assistance, call…………. Email: info@iftosi.com";
+                $message .= "For any assistance, call: 022-32623263. Email: info@iftosi.com";
                 $message .= "\r\n";
                 $message .= "Team IFtoSI";
                 $headers = "MIME-Version: 1.0" . "\r\n";
@@ -1123,9 +1200,11 @@
                 $smsText .= "\r\n\r\n";
                 $smsText = "Hello ".$params['username'].", ".$params['useremail']." has shown interest in";
                 $smsText .= "\r\n\r\n";
+                $smsText .= $msg;
+                $smsText .= "\r\n\r\n";
                 $smsText .= "The buyer should contact you shortly.";
                 $smsText .= "\r\n\r\n";
-                $smsText .= "For any assistance, call…………. Email: info@iftosi.com";
+                $smsText .= "For any assistance, call: 022-32623263. Email: info@iftosi.com";
                 $smsText .= "\r\n\r\n";
                 $smsText .= "Team IFtoSI";
             
