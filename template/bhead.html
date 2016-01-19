@@ -69,6 +69,23 @@
             <link rel="stylesheet" href="<?php echo $css['normalize']; ?>">
             <script type="text/javascript" src="<?php echo $jvs['rngsld']; ?>"></script>
             <script type="text/javascript" src="<?=DOMAIN;?>tools/js/adminNav.js?v=<?=VERSION;?>"></script>
+            <script type="text/javascript">
+        if(dummyPage !== null && dummyPage !== 'null' && dummyPage !== 'undefined' && dummyPage !== undefined && dummyPage !== '' && dummyPage == 'b2bproducts')
+        {
+            var uid = customStorage.readFromStorage('userid');
+            if(uid !== '' || uid !== undefined || uid !== 'undefined' || uid !== null || uid !== 'null')
+            {
+                if((is_vendor !== '' || is_vendor !== undefined || is_vendor !== 'undefined' || is_vendor !== null || is_vendor !== 'null') && (is_vendor !== '1'))
+                {
+                    window.location.href=DOMAIN;
+                }
+            }
+            else if(uid == null && uid == 'null' && uid == 'undefined' && uid == undefined && uid == '' && dummyPage == 'b2bproducts')
+            {
+                window.location.href=DOMAIN;
+            }
+        }
+            </script>
         <?php
         }
         ?>    

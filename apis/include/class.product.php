@@ -2600,7 +2600,7 @@
 			$smsText .= "Email: ";
 			$smsText .= $vndrEmail;
 			$smsText .= "\r\n\r\n";
-			$smsText .= "For any assistance, call…………. Email: info@iftosi.com";
+			$smsText .= "For any assistance, call: 022-32623263. Email: info@iftosi.com";
 
 			$smsText = urlencode($smsText);
 			$sendSMS = str_replace('_MOBILE', $usrMobile, SMSAPI);

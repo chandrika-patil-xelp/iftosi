@@ -167,7 +167,7 @@ class enquiry extends DB
                         }
                         else
                         {
-                            echo $url = APIDOMAIN . 'index.php?action=sendEnqMailSMS&useremail='.$udetail['uemail'].'&mobile='.$getRow['logmobile'].'&email='.$getRow['email'].'&username='.$getRow['user_name'];
+                            $url = APIDOMAIN . 'index.php?action=sendEnqMailSMS&useremail='.$udetail['uemail'].'&mobile='.$getRow['logmobile'].'&email='.$getRow['email'].'&username='.$getRow['user_name'];
                             
                             $arr=array();
                             $err=array('Code'=>1,'Msg'=>'Error in completing the operation');
