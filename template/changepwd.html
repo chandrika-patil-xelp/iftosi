@@ -136,13 +136,20 @@
                                                 redirUrl = DOMAIN + 'index.php?case=vendor_Form&uid=' + userid;
                                             }
                                         }
+                                        else
+                                        {
+                                            redirUrl = DOMAIN;
+                                        }
                                 }
                                 else
                                 {
                                     customStorage.toast(0,'User password is not changed');
                                     redirUrl = DOMAIN;
                                 }
-                               setTimeout(function () { window.location.assign(redirUrl) },800);
+                               setTimeout(function ()
+                               { 
+                                   window.location.href = redirUrl
+                               },10);
                             }});
                     }
                     else
