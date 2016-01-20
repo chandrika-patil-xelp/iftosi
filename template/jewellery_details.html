@@ -6,628 +6,628 @@
             <div class="forBg bgWhite"></div>
             <div class='prdMainDetails'>
                 <div class="wrapperMax">
-<?php
+                    <?php
                     if(count($data1) == 0)
                     {
-?>
+                    ?>
                     <div class="imgsCont noImage"></div>
-<?php                    
+                    <?php                    
                     }
                     else
                     {
-?>                    
+                    ?>                    
                     <div id="detailsImgs" class="imgsCont">
-<?php
-/*
+                        <?php
+                        /*
                         <div class="leftArrow transition300" onclick="movePrImg(true)"></div>
                         <div class="rightArrow  transition300" onclick="movePrImg(false)"></div>
                         <div id='prdImage' class="forImg fLeft imgPreview" style="background: url(<?php echo IMGDOMAIN.$data1[0];?>) 50% 50% / cover no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
-                        <div id='gallery1' class="gallery fLeft transition300">
-                            <div class="carousel transition300">
-<?php
-                        for($i=0;$i<count($data1);$i++)
-                        {
-?>
-                                <div class="thumbnil transition300" style="background:#fff url(<?php echo IMGDOMAIN.$data1[$i];?>)no-repeat;background-size: contain;background-position: center;">
-                                </div>
-<?php
-                        }
-?>                               
+                    <div id='gallery1' class="gallery fLeft transition300">
+                        <div class="carousel transition300">
+                            <?php
+                            for($i=0;$i<count($data1);$i++)
+                            {
+                            ?>
+                            <div class="thumbnil transition300" style="background:#fff url(<?php echo IMGDOMAIN.$data1[$i];?>)no-repeat;background-size: contain;background-position: center;">
                             </div>
+                            <?php
+                            }
+                            ?>                               
                         </div>
-						*/
-?>
-						<div class="imgsCont noImage"></div>
                     </div>
-<?php
-                    }
-?>                    
-                    <div class="detCont">
-                        <div class="btnsCont fLeft">
-                            <div class="prdShape fLeft">
-                                <div class="prdShTitle fLeft fmOpenB">BEST PRICE</div>
-                                <?php $price =  ceil($prdInfo['attr_details']['price']); ?>
-                                <div class="prdShType fLeft fmOpenL"><span>&#8377;</span><?php echo $comm->IND_money_format($price); ?></div>
-                            </div>
-                            <div class="prdBtns fLeft dn">
-                                <div class="btnComm fLeft iconCall ripplelink poR" >Contact Jeweller</div>
-                                <div class="btnComm fLeft iconMessage ripplelink poR">Send SMS & E-Mail</div>
-                                <div class="btnComm fLeft iconWishlist ripplelink poR" id="addtowishlist"><?=($uid!==null) ? 'Added To Wishlist' : 'Add To Wishlist'; ?></div>                                
-                            </div>
+                    */
+                    ?>
+                    <div class="imgsCont noImage"></div>
+                </div>
+                <?php
+                }
+                ?>                    
+                <div class="detCont">
+                    <div class="btnsCont fLeft">
+                        <div class="prdShape fLeft">
+                            <div class="prdShTitle fLeft fmOpenB">BEST PRICE</div>
+                            <?php $price =  ceil($prdInfo['attr_details']['price']); ?>
+                            <div class="prdShType fLeft fmOpenL"><span>&#8377;</span><?php echo $comm->IND_money_format($price); ?></div>
                         </div>
-                        <div class="majorInfoBox fLeft jewellery_details">
-                           <div class="infoCommn fLeft fmOpenR ">
-                                <div class="infoLabel fmOpenB font12 fmOpenB">DESIGN NO</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['product_barcode']=='')?'N/A':strtoupper($prdInfo['product_barcode']); ?></div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR ">
-                                <div class="infoLabel fmOpenB font12 fmOpenB">METAL</div>
-                                <?php $metal= str_replace('~', ', ', $prdInfo['attr_details']['metal']); ?>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo ($metal == ''? 'N/A' : strtoupper($metal)); ?></div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR ">
-                                <div class="infoLabel fmOpenB font12 fmOpenB">PURITY</div>
-                              <?php  $gpurity = number_format($prdInfo['attr_details']['gold_purity'],0); ?>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo ($gpurity == ''?'N/A':$gpurity.' KTS');?></div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR ">
-                                <div class="infoLabel fmOpenB font12 fmOpenB">WEIGHT</div>
-                                <div class="infoValue c666 fmOpenR font25">
-<?php 
+                        <div class="prdBtns fLeft dn">
+                            <div class="btnComm fLeft iconCall ripplelink poR" >Contact Jeweller</div>
+                            <div class="btnComm fLeft iconMessage ripplelink poR">Send SMS & E-Mail</div>
+                            <div class="btnComm fLeft iconWishlist ripplelink poR" id="addtowishlist"><?=($uid!==null) ? 'Added To Wishlist' : 'Add To Wishlist'; ?></div>                                
+                        </div>
+                    </div>
+                    <div class="majorInfoBox fLeft jewellery_details">
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">DESIGN NO</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['product_barcode']=='')?'N/A':strtoupper($prdInfo['product_barcode']); ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">METAL</div>
+                            <?php $metal= str_replace('~', ', ', $prdInfo['attr_details']['metal']); ?>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo ($metal == ''? 'N/A' : strtoupper($metal)); ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">PURITY</div>
+                            <?php  $gpurity = number_format($prdInfo['attr_details']['gold_purity'],0); ?>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo ($gpurity == ''?'N/A':$gpurity.' KTS');?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">WEIGHT</div>
+                            <div class="infoValue c666 fmOpenR font25">
+                                <?php 
                                 if(empty($prdInfo['attr_details']['gold_weight']) || $prdInfo['attr_details']['gold_weight'] == '0.00')
                                 {
-                                   echo $prdInfo['attr_details']['gold_weight'] = 'N/A';
+                                echo $prdInfo['attr_details']['gold_weight'] = 'N/A';
                                 }
                                 else if($prdInfo['attr_details']['gold_weight'] == 1000)
                                 {
-                                   echo $prdInfo['attr_details']['gold_weight'] = '1 KGS';
+                                echo $prdInfo['attr_details']['gold_weight'] = '1 KGS';
                                 }
                                 else if($prdInfo['attr_details']['gold_weight'] > 1000)
                                 {
-                                   echo $prdInfo['attr_details']['gold_weight'] = number_format(($prdInfo['attr_details']['gold_weight']/1000),0).' KGS';
+                                echo $prdInfo['attr_details']['gold_weight'] = number_format(($prdInfo['attr_details']['gold_weight']/1000),0).' KGS';
                                 }
                                 else if($prdInfo['attr_details']['gold_weight'] < 1000 && $prdInfo['attr_details']['gold_weight'] !== '0.00')
                                 {
-                                   echo $prdInfo['attr_details']['gold_weight'] = number_format($prdInfo['attr_details']['gold_weight'],0).' GMS';
+                                echo $prdInfo['attr_details']['gold_weight'] = number_format($prdInfo['attr_details']['gold_weight'],0).' GMS';
                                 }
-?>
-                                </div>
+                                ?>
                             </div>
-<?php
-							if(!empty($prdInfo['attr_details']['diamond_shape']) && $prdInfo['attr_details']['diamond_shape'] !== 'null' && $prdInfo['attr_details']['diamond_shape'] !== 'undefined')
-							{
-?>
-								<div class="infoCommn fLeft fmOpenR">
-									<div class="infoLabel fmOpenB font12 fmOpenB">DIAMOND SHAPE</div>
-									<div class="infoValue c666 fmOpenR font25 txtOver" alt="<?php echo ($prdInfo['attr_details']['diamond_shape']==''?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['diamond_shape']))); ?>" title="<?php echo ($prdInfo['attr_details']['diamond_shape']==''?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['diamond_shape']))); ?>"><?php echo ($prdInfo['attr_details']['diamond_shape']==''?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['diamond_shape']))); ?></div>
-								</div>
-								<div class="infoCommn fLeft fmOpenR ">
-									<div class="infoLabel fmOpenB font12 fmOpenB">NO. OF DIAMONDS</div>
-									<div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['nofd']==''?'N/A':$prdInfo['attr_details']['nofd']); ?></div>
-								</div>
-                                                                <div class="infoCommn fLeft fmOpenR">
-									<div class="infoLabel fmOpenB font12 fmOpenB">DIAMOND COLOUR</div>
-									<div class="infoValue c666 fmOpenR font25 txtOver" alt="<?php echo ($diamondsColor==''?'N/A': $diamondsColor); ?>" title="<?php echo ($diamondsColor==''?'N/A':$diamondsColor); ?>"><?php echo ($diamondsColor==''?'N/A':$diamondsColor); ?></div>
-								</div>
-								<div class="infoCommn fLeft fmOpenR ">
-									<div class="infoLabel fmOpenB font12 fmOpenB">DIAMOND WEIGHT</div>
-                                                                        <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['dwt']=='')?'N/A':number_format($prdInfo['attr_details']['dwt'],0); ?> CTS</div>
-								</div>
-								<div class="infoCommn fLeft fmOpenR ">
-									<div class="infoLabel fmOpenB font12 fmOpenB">DIAMOND QUALITY</div>
-									<div class="infoValue c666 fmOpenR font25 txtOver" alt="<?php echo ($prdInfo['attr_details']['clarity']=='')?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['clarity'])); ?>" title="<?php echo ($prdInfo['attr_details']['clarity']=='')?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['clarity'])); ?>"><?php echo ($prdInfo['attr_details']['clarity']=='')?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['clarity'])); ?></div>
-								</div>
-<?php
-							}
-?>
+                        </div>
+                        <?php
+                        if(!empty($prdInfo['attr_details']['diamond_shape']) && $prdInfo['attr_details']['diamond_shape'] !== 'null' && $prdInfo['attr_details']['diamond_shape'] !== 'undefined')
+                        {
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">DIAMOND SHAPE</div>
+                            <div class="infoValue c666 fmOpenR font25 txtOver" alt="<?php echo ($prdInfo['attr_details']['diamond_shape']==''?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['diamond_shape']))); ?>" title="<?php echo ($prdInfo['attr_details']['diamond_shape']==''?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['diamond_shape']))); ?>"><?php echo ($prdInfo['attr_details']['diamond_shape']==''?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['diamond_shape']))); ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">NO. OF DIAMONDS</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['nofd']==''?'N/A':$prdInfo['attr_details']['nofd']); ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">DIAMOND COLOUR</div>
+                            <div class="infoValue c666 fmOpenR font25 txtOver" alt="<?php echo ($diamondsColor==''?'N/A': $diamondsColor); ?>" title="<?php echo ($diamondsColor==''?'N/A':$diamondsColor); ?>"><?php echo ($diamondsColor==''?'N/A':$diamondsColor); ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">DIAMOND WEIGHT</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['dwt']=='')?'N/A':number_format($prdInfo['attr_details']['dwt'],0); ?> CTS</div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">DIAMOND QUALITY</div>
+                            <div class="infoValue c666 fmOpenR font25 txtOver" alt="<?php echo ($prdInfo['attr_details']['clarity']=='')?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['clarity'])); ?>" title="<?php echo ($prdInfo['attr_details']['clarity']=='')?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['clarity'])); ?>"><?php echo ($prdInfo['attr_details']['clarity']=='')?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['clarity'])); ?></div>
+                        </div>
+                        <?php
+                        }
+                        ?>
 
-<?php
-							if(!empty($prdInfo['attr_details']['gemstone_type']) && $prdInfo['attr_details']['gemstone_type'] !== 'null' && $prdInfo['attr_details']['gemstone_type'] !== 'undefined')
-							{
-								$prdInfo['attr_details']['gemstone_color'] = strtoupper($prdInfo['attr_details']['gemstone_color']);
-?>
-								<div class="infoCommn fLeft fmOpenR ">
-									<div class="infoLabel fmOpenB font12 fmOpenB">GEMSTONES TYPE</div>
-									<div class="infoValue c666 fmOpenR font25 txtOver" alt="<?php echo ($prdInfo['attr_details']['gemstone_type']=='')?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['gemstone_type'])); ?>" title="<?php echo ($prdInfo['attr_details']['gemstone_type']=='')?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['gemstone_type'])); ?>"><?php echo ($prdInfo['attr_details']['gemstone_type']=='')?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['gemstone_type'])); ?></div>
-								</div>
-								<div class="infoCommn fLeft fmOpenR ">
-									<div class="infoLabel fmOpenB font12 fmOpenB">GEMSTONES COLOUR</div>
-									<div class="infoValue c666 fmOpenR font25 txtOver" alt="<?php echo ($prdInfo['attr_details']['gemstone_color']=='')?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['gemstone_color'])); ?>" title="<?php echo ($prdInfo['attr_details']['gemstone_color']=='')?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['gemstone_color'])); ?>"><?php echo ($prdInfo['attr_details']['gemstone_color']=='')?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['gemstone_color'])); ?></div>
-								</div>
-								<div class="infoCommn fLeft fmOpenR ">
-									<div class="infoLabel fmOpenB font12 fmOpenB">GEMSTONES WEIGHT</div>
-                                                                        <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['gemwt']=='')?'N/A':number_format($prdInfo['attr_details']['gemwt'],0); ?> CTS</div>
-								</div>
-								<div class="infoCommn fLeft fmOpenR ">
-									<div class="infoLabel fmOpenB font12 fmOpenB">NO. OF GEMSTONES</div>
-									<div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['num_gemstones']=='')?'N/A':$prdInfo['attr_details']['num_gemstones']; ?></div>
-								</div>
-<?php
-							}
-?>
-							<div class="infoCommn fLeft fmOpenR">
-								<div class="infoLabel fmOpenB  font12">CERTIFIED BY</div>
-								<div class="infoValue c666 font25 fmOpenR"><?php echo ($prdInfo['attr_details']['certified']=='')?'N/A':$prdInfo['attr_details']['certified']; ?></div>
-							</div>
+                        <?php
+                        if(!empty($prdInfo['attr_details']['gemstone_type']) && $prdInfo['attr_details']['gemstone_type'] !== 'null' && $prdInfo['attr_details']['gemstone_type'] !== 'undefined')
+                        {
+                        $prdInfo['attr_details']['gemstone_color'] = strtoupper($prdInfo['attr_details']['gemstone_color']);
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">GEMSTONES TYPE</div>
+                            <div class="infoValue c666 fmOpenR font25 txtOver" alt="<?php echo ($prdInfo['attr_details']['gemstone_type']=='')?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['gemstone_type'])); ?>" title="<?php echo ($prdInfo['attr_details']['gemstone_type']=='')?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['gemstone_type'])); ?>"><?php echo ($prdInfo['attr_details']['gemstone_type']=='')?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['gemstone_type'])); ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">GEMSTONES COLOUR</div>
+                            <div class="infoValue c666 fmOpenR font25 txtOver" alt="<?php echo ($prdInfo['attr_details']['gemstone_color']=='')?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['gemstone_color'])); ?>" title="<?php echo ($prdInfo['attr_details']['gemstone_color']=='')?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['gemstone_color'])); ?>"><?php echo ($prdInfo['attr_details']['gemstone_color']=='')?'N/A':str_replace('|!|', ', ', strtoupper($prdInfo['attr_details']['gemstone_color'])); ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">GEMSTONES WEIGHT</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['gemwt']=='')?'N/A':number_format($prdInfo['attr_details']['gemwt'],0); ?> CTS</div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">NO. OF GEMSTONES</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['num_gemstones']=='')?'N/A':$prdInfo['attr_details']['num_gemstones']; ?></div>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">CERTIFIED BY</div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo ($prdInfo['attr_details']['certified']=='')?'N/A':$prdInfo['attr_details']['certified']; ?></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id='vDetails' class="vendorDetails fLeft transition300 dn vTransit">
-                <div class="wrapperMax ">
-                    <div class="vdLeftCard fLeft">
-                        <div class="orgName fLeft fmOpenR"><?php echo $vndrDtls['OrganisationName']; ?></div>
-                        <div class="orgAdd fLeft fmOpenR">
-                            <?php echo trim($vndrAddr[0]); ?>
-							<?php
-								if(!empty($vndrAddr[1]))
-								{
-                                                                    echo trim($vndrAddr[1]).', '; 
-								}
-								if(!empty($vndrAddr[2]))
-								{
-                                                                    echo trim($vndrAddr[2]).', ';
-                                                            	}
-                                                                if(!empty($vndrAddr[3]))
-								{
-                                                                    echo trim($vndrAddr[3]).', '; 
-								}
-                                                                if(!empty($vndrAddr[4]))
-								{
-                                                                    echo trim($vndrAddr[4]).', ';
-                                                                }
-                                                                if(!empty($vndrDtls['area']))
-								{
-                                                                    echo trim($vndrDtls['area']).', ';
-								}
-                                                                if(!empty($vndrDtls['city']))
-								{
-                                                                    echo trim($vndrDtls['city']).', ';
-                                                                }
-								if(!empty($vndrDtls['state']))
-								{
-                                                                    echo trim($vndrDtls['state']).',';
-								}
-                                                                if(!empty($vndrDtls['postal_code']))
-								{
-                                                                    echo trim($vndrDtls['postal_code']).'.';
-								}
-							?>                
+        </div>
+        <div id='vDetails' class="vendorDetails fLeft transition300 dn vTransit">
+            <div class="wrapperMax ">
+                <div class="vdLeftCard fLeft">
+                    <div class="orgName fLeft fmOpenR"><?php echo $vndrDtls['OrganisationName']; ?></div>
+                    <div class="orgAdd fLeft fmOpenR">
+                        <?php echo trim($vndrAddr[0]); ?>
+                        <?php
+                        if(!empty($vndrAddr[1]))
+                        {
+                        echo trim($vndrAddr[1]).', '; 
+                        }
+                        if(!empty($vndrAddr[2]))
+                        {
+                        echo trim($vndrAddr[2]).', ';
+                        }
+                        if(!empty($vndrAddr[3]))
+                        {
+                        echo trim($vndrAddr[3]).', '; 
+                        }
+                        if(!empty($vndrAddr[4]))
+                        {
+                        echo trim($vndrAddr[4]).', ';
+                        }
+                        if(!empty($vndrDtls['area']))
+                        {
+                        echo trim($vndrDtls['area']).', ';
+                        }
+                        if(!empty($vndrDtls['city']))
+                        {
+                        echo trim($vndrDtls['city']).', ';
+                        }
+                        if(!empty($vndrDtls['state']))
+                        {
+                        echo trim($vndrDtls['state']).',';
+                        }
+                        if(!empty($vndrDtls['postal_code']))
+                        {
+                        echo trim($vndrDtls['postal_code']).'.';
+                        }
+                        ?>                
+                    </div>
+                    <div class="orgNo fLeft">
+                        <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Telephone No.</div>
+                        <div class="commtxt tel fmOpenR fLeft"><?php print_r(($vndrDtls['landline'] !== '') ? str_replace('|~|', ', ', $vndrDtls['landline']).', ' : '-, '); echo ($vndrDtls['telephones']) ? str_replace('~', ', ', $vndrDtls['telephones']) : '-';?></div>
+                    </div>
+                    <div class="orgNo fLeft">
+                        <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Email Address</div>
+                        <div class="commtxt email fmOpenR fLeft"><?php echo ($vndrDtls['alt_email']) ? str_replace('~', ', ', $vndrDtls['alt_email']) : '-'; ?></div>
+                    </div>
+                    <div class="orgNo fLeft">
+                        <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Website</div>
+                        <div class="commtxt email fmOpenR fLeft"><a href="<?php echo ($vndrDtls['website']) ? 'http://' . str_replace('http://' , '' , $vndrDtls['website']) : '';?>"><?php echo ($vndrDtls['website']) ? $vndrDtls['website'] : '-'; ?></a></div>
+                    </div>
+                    <div class="orgNo fLeft">
+                        <div class="commLeft fLeft">
+                            <div class="infoLabel fmOpenB font12 fmOpenB fLeft">VAT Number</div>
+                            <div class="commtxt email fmOpenR fLeft"><?php echo ($vndrDtls['Vat_Number']) ? $vndrDtls['Vat_Number'] : '-'; ?></div>
                         </div>
-                        <div class="orgNo fLeft">
-                            <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Telephone No.</div>
-                            <div class="commtxt tel fmOpenR fLeft"><?php print_r(($vndrDtls['landline'] !== '') ? str_replace('|~|', ', ', $vndrDtls['landline']).', ' : '-, '); echo ($vndrDtls['telephones']) ? str_replace('~', ', ', $vndrDtls['telephones']) : '-';?></div>
-                        </div>
-                        <div class="orgNo fLeft">
-                            <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Email Address</div>
-                            <div class="commtxt email fmOpenR fLeft"><?php echo ($vndrDtls['alt_email']) ? str_replace('~', ', ', $vndrDtls['alt_email']) : '-'; ?></div>
-                        </div>
-                        <div class="orgNo fLeft">
-                            <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Website</div>
-                            <div class="commtxt email fmOpenR fLeft"><a href="<?php echo ($vndrDtls['website']) ? 'http://' . str_replace('http://' , '' , $vndrDtls['website']) : '';?>"><?php echo ($vndrDtls['website']) ? $vndrDtls['website'] : '-'; ?></a></div>
-                        </div>
-                        <div class="orgNo fLeft">
-                            <div class="commLeft fLeft">
-                                <div class="infoLabel fmOpenB font12 fmOpenB fLeft">VAT Number</div>
-                                <div class="commtxt email fmOpenR fLeft"><?php echo ($vndrDtls['Vat_Number']) ? $vndrDtls['Vat_Number'] : '-'; ?></div>
-                            </div>
-                            <div class="commRight fLeft">
-                                <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Turnover (cr)</div>
-                                <div class="commtxt email fmOpenR fLeft"><?php echo ($vndrDtls['turnover']) ? $vndrDtls['turnover'] : '-'; ?></div>
-                            </div>
-                        </div>
-
-                        <div class="orgNo fLeft">
-                            <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Bankers</div>
-                            <div class="commtxt bankers fmOpenR fLeft"><?php echo ($vndrDtls['bankers']) ? str_replace('~', ', ', $vndrDtls['bankers']) : '-'; ?></div>
+                        <div class="commRight fLeft">
+                            <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Turnover (cr)</div>
+                            <div class="commtxt email fmOpenR fLeft"><?php echo ($vndrDtls['turnover']) ? $vndrDtls['turnover'] : '-'; ?></div>
                         </div>
                     </div>
-                    <div class="vdCenterCard fLeft">
-                        <div class="cntCard fLeft">
-                            <div class="vTitle fLeft fmOpenR" style="background-color: #5e0037;">Contact Person</div>
-                            <div class="cardCommCont"><div class="cardComm cntName orgName fLeft fmOpenR"><?php echo $vndrDtls['contact_person']; ?></div>
-                                <div class="fmOpenB desig">(<?php echo $vndrDtls['position']; ?>)</div>
-                                <div class="cardComm cntMb fmOpenB fLeft"><?php echo str_replace('~', ', ', $vndrDtls['contact_mobile']); ?></div>
-                                <div class="cardComm cntEmail fmOpenB fLeft"><?php echo str_replace('~', ', ', $vndrDtls['email']); ?></div>
-                            </div>
-                        </div>
-                        <div class="cntCard fLeft">
-                            <div class="vTitle fLeft fmOpenR" style="background-color: #380B34;">Bharat Diamond Bourse Certificate</div>
-                            <div class='cardCommCont'>
-                                <div class="cardComm fLeft fmOpenR"><?php echo ($vndrDtls['diamond_certificate']) ? $vndrDtls['diamond_certificate'] : '-'; ?></div>
-                            </div>
-                        </div>
 
-                        <div class="cntCard fLeft">
-                            <div class="vTitle fLeft fmOpenR" style="background-color: #2A0E34;">GJEPC Membership Certificate</div>
-                            <div class='cardCommCont'>
-                                <div class="cardComm fLeft fmOpenR"><?php echo ($vndrDtls['Membership_Certificate']) ? $vndrDtls['Membership_Certificate'] : '-'; ?></div>
-                            </div>
-                        </div>
-                        <div class="cntCard fLeft">
-                            <div class="vTitle fLeft fmOpenR" style="background-color: #171334;">Membership Of Other Diamond Bourses</div>
-                            <div class='cardCommCont'>
-                                <div class="cardComm fLeft fmOpenR"><?php echo ($vndrDtls['membership_around_world']) ? str_replace('~', ', ', $vndrDtls['membership_around_world']) : '-'; ?></div>
-                            </div>
+                    <div class="orgNo fLeft">
+                        <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Bankers</div>
+                        <div class="commtxt bankers fmOpenR fLeft"><?php echo ($vndrDtls['bankers']) ? str_replace('~', ', ', $vndrDtls['bankers']) : '-'; ?></div>
+                    </div>
+                </div>
+                <div class="vdCenterCard fLeft">
+                    <div class="cntCard fLeft">
+                        <div class="vTitle fLeft fmOpenR" style="background-color: #5e0037;">Contact Person</div>
+                        <div class="cardCommCont"><div class="cardComm cntName orgName fLeft fmOpenR"><?php echo $vndrDtls['contact_person']; ?></div>
+                            <div class="fmOpenB desig">(<?php echo $vndrDtls['position']; ?>)</div>
+                            <div class="cardComm cntMb fmOpenB fLeft"><?php echo str_replace('~', ', ', $vndrDtls['contact_mobile']); ?></div>
+                            <div class="cardComm cntEmail fmOpenB fLeft"><?php echo str_replace('~', ', ', $vndrDtls['email']); ?></div>
                         </div>
                     </div>
-                    <div  class="vdRightCard fLeft">
-                        <div class="cntCard fLeft shadoNone">
-                            <div class="vTitle fLeft fmOpenR" style="background-color: #ebebde;color:#666;">Office Locations</div>
-                            <div class='cardCommCont' style="padding: 10px;"><div id='googleMap' class="mapCont fLeft"></div></div>
+                    <div class="cntCard fLeft">
+                        <div class="vTitle fLeft fmOpenR" style="background-color: #380B34;">Bharat Diamond Bourse Certificate</div>
+                        <div class='cardCommCont'>
+                            <div class="cardComm fLeft fmOpenR"><?php echo ($vndrDtls['diamond_certificate']) ? $vndrDtls['diamond_certificate'] : '-'; ?></div>
                         </div>
-                        
-                        <div class="cntCard fLeft shadoNone">
-                            <div class="vTitle fLeft fmOpenR" style="background-color: #ebebde;color:#666;">Gallery</div>
-                            <div class='cardCommCont' style="padding: 10px;">
-                                <div class="gallery fLeft">
-                                    <div class="thumbnil fLeft" style="background:#fff url(<?=DOMAIN;?>tools/img/common/tumb5.jpg)no-repeat;background-size: contain;background-position: center;"></div><div class="thumbnil fLeft" style="background:#fff url(<?=DOMAIN;?>tools/img/common/tumb2.png)no-repeat;background-size: contain;background-position: center;"></div>
-                                    <div class="thumbnil fLeft" style="background:#fff url(<?=DOMAIN;?>tools/img/common/tumb3.jpg)no-repeat;background-size: contain;background-position: center;"></div>
-                                    <div id='moreimg' class="thumbnil fLeft poR" style="background:#8A0044"><span>+5 More</span></div>
-                                </div>
+                    </div>
+
+                    <div class="cntCard fLeft">
+                        <div class="vTitle fLeft fmOpenR" style="background-color: #2A0E34;">GJEPC Membership Certificate</div>
+                        <div class='cardCommCont'>
+                            <div class="cardComm fLeft fmOpenR"><?php echo ($vndrDtls['Membership_Certificate']) ? $vndrDtls['Membership_Certificate'] : '-'; ?></div>
+                        </div>
+                    </div>
+                    <div class="cntCard fLeft">
+                        <div class="vTitle fLeft fmOpenR" style="background-color: #171334;">Membership Of Other Diamond Bourses</div>
+                        <div class='cardCommCont'>
+                            <div class="cardComm fLeft fmOpenR"><?php echo ($vndrDtls['membership_around_world']) ? str_replace('~', ', ', $vndrDtls['membership_around_world']) : '-'; ?></div>
+                        </div>
+                    </div>
+                </div>
+                <div  class="vdRightCard fLeft">
+                    <div class="cntCard fLeft shadoNone">
+                        <div class="vTitle fLeft fmOpenR" style="background-color: #ebebde;color:#666;">Office Locations</div>
+                        <div class='cardCommCont' style="padding: 10px;"><div id='googleMap' class="mapCont fLeft"></div></div>
+                    </div>
+
+                    <div class="cntCard fLeft shadoNone">
+                        <div class="vTitle fLeft fmOpenR" style="background-color: #ebebde;color:#666;">Gallery</div>
+                        <div class='cardCommCont' style="padding: 10px;">
+                            <div class="gallery fLeft">
+                                <div class="thumbnil fLeft" style="background:#fff url(<?=DOMAIN;?>tools/img/common/tumb5.jpg)no-repeat;background-size: contain;background-position: center;"></div><div class="thumbnil fLeft" style="background:#fff url(<?=DOMAIN;?>tools/img/common/tumb2.png)no-repeat;background-size: contain;background-position: center;"></div>
+                                <div class="thumbnil fLeft" style="background:#fff url(<?=DOMAIN;?>tools/img/common/tumb3.jpg)no-repeat;background-size: contain;background-position: center;"></div>
+                                <div id='moreimg' class="thumbnil fLeft poR" style="background:#8A0044"><span>+5 More</span></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class='prdInfo fLeft'>
-            <div class="wrapperMax fmOpenR">
-<?php
-                    $gemstone = explode('|!|',strtolower($prdInfo['attr_details']['gemstone_type']));
-                    $cert = $prdInfo['attr_details']['certified'];
-                    $metal = explode(',',strtolower($metal));
-                    
-                    foreach($des as $key=>$value)
-                    {
-                        if($des[$key]['describe_name'] == "jewellery cert" && !empty($des[$key]['describe_name']))
-                        {
-?>
-                                <div class="prdInfoTitle fLeft"><?php echo 'What is a '.$des[$key]['describe_display_name'].' ?'; ?></div>
-                                <div class="prdInfoDiv fLeft">
-<?php
-                                print_r($des[$key]['describe_text']);
-?>
-                                </div>
-<?php
-                        }
-                    }
-                    foreach($des as $key=>$value)
-                    {
-                        if($des[$key]['describe_name'] == 'hallmark' && !empty($des[$key]['describe_name']))
-                        {
-                    
-?>
-                                <div class="prdInfoTitle fLeft"><?php echo 'What is a '.$des[$key]['describe_display_name'].' ?'; ?></div>
-                                <div class="prdInfoDiv fLeft">
-<?php
-                                print_r($des[$key]['describe_text']);
-?>
-                                </div>
-<?php
-                        }
-                    }
-                    
-?>
-                    <div>
-                        <div class="prdInfoTitle fLeft">Jewellery Care Tips</div>
-                        <div class='subNumber font12 fmOpenB marT5'>1.</div>
-                        <div class="padL30 font13">
-                            <p class="marT5 lineHeight24">
-                                Jewellery care begins with the buying process itself. Don’t settle for an average quality make at an apparent bargain. Purchasing good quality and certified jewellery reduces its chances of wear and tear beforehand.
-                            </p>
-                        </div>
-                        <div class='subNumber font12 fmOpenB '>2.</div>
-                        <div class="padL30 font13">
-                            <p>
-                                While dressing-up jewellery should always be worn last and taken off first.
-                            </p>
-                        </div>
-                        <div class='subNumber font12 fmOpenB '>3.</div>
-                        <div class="padL30 font13">
-                            <p>
-                                Get into the habit of removing your jewellery before showering or bathing. 
-                            </p>
-                        </div>
-                        <div class='subNumber font12 fmOpenB '>4.</div>
-                        <div class="padL30 font13">
-                            <p>
-                                Avoid wearing jewellery when cleaning, gardening or performing sports activities. 
-                            </p>
-                        </div>
-                        <div class='subNumber font12 fmOpenB marT5'>5.</div>
-                        <div class="padL30 font13 lineHeight24">
-                            <p>
-                                Protect your jewellery from impact against hard and abrasive surfaces. Extreme temperatures, perfumes, cosmetics and household chemicals can damage jewellery.  
-                            </p>
-                        </div>
-                        <div class='subNumber font12 fmOpenB marT5'>6.</div>
-                        <div class="padL30 font13 lineHeight24">
-                            <p>
-                                When not in use, always keep the jewellery back into its original case or store each piece of jewellery separately in a compartmentalized jewellery box to prevent scratches or entanglement.  
-                            </p>
-                        </div>
-                        <div class='subNumber font12 fmOpenB marT5'>7.</div>
-                        <div class="padL30 font13 lineHeight24">
-                            <p>
-                                If the jewellery gets wet due to sweat or perfumes - just wipe gently with a soft muslin cloth. When cleaning, remember plain lukewarm water is safe to clean all jewellery. 
-                            </p>
-                        </div>
-                        <div class='subNumber font12 fmOpenB '>8.</div>
-                        <div class="padL30 font13 lineHeight24">
-                            <p>
-                                Examine your jewels regularly to ensure that the settings and clasps are up-to-the-mark, especially when it comes to studded jewellery.
-                            </p>
-                        </div>
-                        </div>
-                                <div>
-                        <div class="prdInfoTitle fLeft">Cleaning Your Jewellery</div>
-                        <p class="font13 margnTop0 lineHeight24">
-                            If you want to enjoy the pleasures of your bejeweled treasures for a long time, regular cleaning is important. Besides occasional-wear jewellery, even the daily wear jewellery needs a cleaning round since it is exposed to sweat, oil etc and can suffer discoloration. 
-                        </p>
-                        <p class="font13">Here are some jewellery cleaning tips:</p>
-                        <div class='subNumber font12 fmOpenB marT5'>1.</div>
-                        <div class="padL30 font13 lineHeight24">
-                            <p>
-                                Always use warm and not hot water to clean jewellery, as hot water can discolor your jewellery. Use a couple drops of mild liquid detergent, such as baby shampoo and rinse thoroughly with clean water. 
-                            </p>
-                        </div>
-                        <div class='subNumber font12 fmOpenB  marT5'>2.</div>
-                        <div class="padL30 font13 lineHeight24">
-                            <p>
-                                When using toothbrush to clean jewellery, ensure that the bristles are soft, as hard bristles can loosen the stones from their settings.   
-                            </p>
-                        </div>
-                        <div class='subNumber font12 fmOpenB marT5'>3.</div>
-                        <div class="padL30 font13 lineHeight24">
-                            <p>
-                                Dry it completely and lightly buff with a soft chamois cloth. Avoid tissue or paper towels because the fibers in it can cause scratches. Also use a lengthwise motion when washing or drying the jewellery, as a circular motion often causes scratching.
-                            </p>
-                        </div>
-                        <div class='subNumber font12 fmOpenB marT5'>4.</div>
-                        <div class="padL30 font13 lineHeight24">
-                            <p>
-                                   Instead of ammonia or detergent, you can use any special jewellery cleaning liquid available at jewellers. Read labels carefully before buying.
-                            </p>
-                        </div>
-                        <div class='subNumber font12 fmOpenB marT5'>5.</div>
-                        <div class="padL30 font13 lineHeight24">
-                            <p>
-                                   Diamonds have an affinity for grease and should be cleaned monthly to keep the fire at its brightest. Every year or so, give your diamond jewellery for professional cleaning. Jewellers use ultra sonic or steam cleaning and will also check the setting, so that the stone does not fall out.
-                            </p>
-                        </div>
-                    </div>
-<?php            
-                if($sugTotal > 0)
-                {
-                    $i=0;
-                    $max = count($data3);      
-                    foreach($data3 as $key=>$value)
-                    {
-                        if($data3[$key]['samemetal'] == 1 || $data3[$key]['samepurity'] == 1 || $data3[$key]['sameweight'] == 1 || $data3[$key]['samecertified'] == 1 || $data3[$key]['sameshape'] == 1)
-                        {
-                            
-                                 if($i == 0)
-                                {
-?>
-                                    <div class="prdInfoTitle fLeft">Similar Products</div>
-                                    <div class='w100 fLeft'>
-<?php
-                                }
-?>
-                                    <div class="prdComm fLeft jwRes transition100">
-					<div class="prdCommDiv fLeft transition100">
-                                            
-<?php
-                                                $tempUrl = '';
-                                                if(!empty($value['metal']))
-                                                {
-                                                    if($tempUrl !== ''){
-                                                        $tempUrl .= '-'.$value['metal'];
-                                                    }
-                                                    else{
-                                                        $tempUrl .= $value['metal'];
-                                                    }
-                                                }
-                                                if(!empty($value['shape']))
-                                                {
-                                                    if($tempUrl !== '')
-                                                    {
-                                                        $tempUrl .= '-'.$value['shape']; 
-                                                    }
-                                                    else
-                                                    {
-                                                        $tempUrl .= $value['shape'];
-                                                    }
-                                                }
-                                                if(!empty($value['gold_purity']))
-                                                {
-                                                    if($tempUrl !== '')
-                                                    {
-                                                        $tempUrl .= '-'.number_format($value['gold_purity'],0).'-Karat'; 
-                                                    }
-                                                    else
-                                                    {
-                                                        $tempUrl .= number_format($value['gold_purity'],0).'-Karat';
-                                                    }
-                                                }
-                                                if(!empty($value['gold_weight'])){
-                                                    if($tempUrl !== '')
-                                                    {
-                                                        $tempUrl .= '-'.number_format($value['gold_weight'],0).'-Grams'; 
-                                                    }
-                                                    else
-                                                    {
-                                                        $tempUrl .= number_format($value['gold_weight'],0).'-Grams';
-                                                    }
-                                                }
-                                                if(!empty($value['certified'])){
-                                                    if($tempUrl !== '')
-                                                    {
-                                                        $tempUrl .= '-'.$value['certified']; 
-                                                    }
-                                                    else
-                                                    {
-                                                        $tempUrl .= $value['certified'];
-                                                    }
-                                                }
-                                                
-                                                if($tempUrl !== '')
-                                                {
-?>
-                                                    <a href="<?php echo DOMAIN.$tempUrl. '/jid-' . $value['pid']; ?>">
-<?php                                                    
-                                                }
-                                                else
-                                                {
-?>
-                                                    <a href="<?php echo DOMAIN . $value['certified'];?>/jid-<?php echo $value['pid']; ?>">
-<?php
-                                                }
-?>                                            
+    </div>
+    <div class='prdInfo fLeft'>
+        <div class="wrapperMax fmOpenR">
+            <?php
+            $gemstone = explode('|!|',strtolower($prdInfo['attr_details']['gemstone_type']));
+            $cert = $prdInfo['attr_details']['certified'];
+            $metal = explode(',',strtolower($metal));
 
-                                                    <div class="prdCommImg fLeft" id="<?=$data3[$key]['pid'];?>">
-<?php
-                                                        if($imgCount > 0)
-                                                        {
-?>
-                                                            <div class="for-1 noImage"></div>
-<?php
-                                                        }
-                                                        else
-                                                        {
-?>
-                                                            <div class="for-1 noImage"></div>
-<?php
-                                                        }
-?>
-							</div>
-							<div class="prdDetails fLeft">
-							<div class="detComm">
-							<div class="detLabel fmOpenB fLeft">DESIGN NO.</div>
-                                                        
-							<div class="detValue fmOpenR fLeft"><?php echo $data3[$key]['product_main']['barcode']; ?></div>
-							</div>
-							</div>
-							<div class="prdPrice fLeft">
-                                                        <div class="detComm">
-							<div class="detLabel fmOpenB fLeft">PRICE</div>
-							<div class="detValue fmOpenB fLeft">
-                                                            <span>&#8377;</span>
-<?php                                                             
-                                                            $price=ceil($data3[$key]['jprice']);
-                                                            echo $price = $comm->IND_money_format($price);
-?>
-                                                </div>
-							</div>
-							</div>
-                                                </a>
-                                            <div class='prdActions fLeft'>
-<?php
-                                                if(!empty($tempURL))
-                                                {
-?>
-                                                    <a href="<?php echo DOMAIN.$tempURL . '/jid-'  . $data3[$key]['pid'];?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                    <a href="<?php echo DOMAIN.$tempURL . '/jid-' . $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                    <a href="<?php echo DOMAIN.$tempURL . '/jid-' . $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                    <a href="<?php echo DOMAIN.$tempURL . '/jid-' . $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
-<?php
-                                                }
-                                                else
-                                                {
-?>
-                                                    <a href="<?php echo DOMAIN.$value['certified'] . '/jid-' . $data3[$key]['pid'];?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                    <a href="<?php echo DOMAIN.$value['certified'] . '/jid-' . $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                    <a href="<?php echo DOMAIN.$value['certified'] . '/jid-' . $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                    <a href="<?php echo DOMAIN.$value['certified'] . '/jid-' . $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>    
-<?php
-                                                }
-?>
-                                            </div>
+            foreach($des as $key=>$value)
+            {
+            if($des[$key]['describe_name'] == "jewellery cert" && !empty($des[$key]['describe_name']))
+            {
+            ?>
+            <div class="prdInfoTitle fLeft"><?php echo 'What is a '.$des[$key]['describe_display_name'].' ?'; ?></div>
+            <div class="prdInfoDiv fLeft">
+                <?php
+                print_r($des[$key]['describe_text']);
+                ?>
+            </div>
+            <?php
+            }
+            }
+            foreach($des as $key=>$value)
+            {
+            if($des[$key]['describe_name'] == 'hallmark' && !empty($des[$key]['describe_name']))
+            {
+
+            ?>
+            <div class="prdInfoTitle fLeft"><?php echo 'What is a '.$des[$key]['describe_display_name'].' ?'; ?></div>
+            <div class="prdInfoDiv fLeft">
+                <?php
+                print_r($des[$key]['describe_text']);
+                ?>
+            </div>
+            <?php
+            }
+            }
+
+            ?>
+            <div class="fLeft">
+                <div class="prdInfoTitle ">Jewellery Care Tips</div>
+                <div class='subNumber font12 fmOpenB marT5'>1.</div>
+                <div class="padL20 font13">
+                    <p class="marT5 lineHeight24">
+                        Jewellery care begins with the buying process itself. Don’t settle for an average quality make at an apparent bargain. Purchasing good quality and certified jewellery reduces its chances of wear and tear beforehand.
+                    </p>
+                </div>
+                <div class='subNumber font12 fmOpenB '>2.</div>
+                <div class="padL20 font13">
+                    <p>
+                        While dressing-up jewellery should always be worn last and taken off first.
+                    </p>
+                </div>
+                <div class='subNumber font12 fmOpenB '>3.</div>
+                <div class="padL20 font13">
+                    <p>
+                        Get into the habit of removing your jewellery before showering or bathing. 
+                    </p>
+                </div>
+                <div class='subNumber font12 fmOpenB '>4.</div>
+                <div class="padL20 font13 ">
+                    <p>
+                        Avoid wearing jewellery when cleaning, gardening or performing sports activities. 
+                    </p>
+                </div>
+                <div class='subNumber font12 fmOpenB marT5'>5.</div>
+                <div class="padL20 font13 lineHeight24">
+                    <p>
+                        Protect your jewellery from impact against hard and abrasive surfaces. Extreme temperatures, perfumes, cosmetics and household chemicals can damage jewellery.  
+                    </p>
+                </div>
+                <div class='subNumber font12 fmOpenB marT5'>6.</div>
+                <div class="padL20 font13 lineHeight24">
+                    <p>
+                        When not in use, always keep the jewellery back into its original case or store each piece of jewellery separately in a compartmentalized jewellery box to prevent scratches or entanglement.  
+                    </p>
+                </div>
+                <div class='subNumber font12 fmOpenB marT5'>7.</div>
+                <div class="padL20 font13 lineHeight24">
+                    <p>
+                        If the jewellery gets wet due to sweat or perfumes - just wipe gently with a soft muslin cloth. When cleaning, remember plain lukewarm water is safe to clean all jewellery. 
+                    </p>
+                </div>
+                <div class='subNumber font12 fmOpenB marT5'>8.</div>
+                <div class="padL20 font13 lineHeight24">
+                    <p>
+                        Examine your jewels regularly to ensure that the settings and clasps are up-to-the-mark, especially when it comes to studded jewellery.
+                    </p>
+                </div>
+            </div>
+            <div class="fLeft">
+                <div class="prdInfoTitle ">Cleaning Your Jewellery</div>
+                <p class="font13 margnTop0 lineHeight24">
+                    If you want to enjoy the pleasures of your bejeweled treasures for a long time, regular cleaning is important. Besides occasional-wear jewellery, even the daily wear jewellery needs a cleaning round since it is exposed to sweat, oil etc and can suffer discoloration. 
+                </p>
+                <p class="font13">Here are some jewellery cleaning tips:</p>
+                <div class='subNumber font12 fmOpenB marT5'>1.</div>
+                <div class="padL20 font13 lineHeight24">
+                    <p>
+                        Always use warm and not hot water to clean jewellery, as hot water can discolor your jewellery. Use a couple drops of mild liquid detergent, such as baby shampoo and rinse thoroughly with clean water. 
+                    </p>
+                </div>
+                <div class='subNumber font12 fmOpenB  marT5'>2.</div>
+                <div class="padL20 font13 lineHeight24">
+                    <p>
+                        When using toothbrush to clean jewellery, ensure that the bristles are soft, as hard bristles can loosen the stones from their settings.   
+                    </p>
+                </div>
+                <div class='subNumber font12 fmOpenB marT5'>3.</div>
+                <div class="padL20 font13 lineHeight24">
+                    <p>
+                        Dry it completely and lightly buff with a soft chamois cloth. Avoid tissue or paper towels because the fibers in it can cause scratches. Also use a lengthwise motion when washing or drying the jewellery, as a circular motion often causes scratching.
+                    </p>
+                </div>
+                <div class='subNumber font12 fmOpenB marT5'>4.</div>
+                <div class="padL20 font13 lineHeight24">
+                    <p>
+                        Instead of ammonia or detergent, you can use any special jewellery cleaning liquid available at jewellers. Read labels carefully before buying.
+                    </p>
+                </div>
+                <div class='subNumber font12 fmOpenB marT5'>5.</div>
+                <div class="padL20 font13 lineHeight24">
+                    <p>
+                        Diamonds have an affinity for grease and should be cleaned monthly to keep the fire at its brightest. Every year or so, give your diamond jewellery for professional cleaning. Jewellers use ultra sonic or steam cleaning and will also check the setting, so that the stone does not fall out.
+                    </p>
+                </div>
+            </div>
+            <?php            
+            if($sugTotal > 0)
+            {
+            $i=0;
+            $max = count($data3);      
+            foreach($data3 as $key=>$value)
+            {
+            if($data3[$key]['samemetal'] == 1 || $data3[$key]['samepurity'] == 1 || $data3[$key]['sameweight'] == 1 || $data3[$key]['samecertified'] == 1 || $data3[$key]['sameshape'] == 1)
+            {
+
+            if($i == 0)
+            {
+            ?>
+            <div class="prdInfoTitle fLeft">Similar Products</div>
+            <div class='w100 fLeft'>
+                <?php
+                }
+                ?>
+                <div class="prdComm fLeft jwRes transition100">
+                    <div class="prdCommDiv fLeft transition100">
+
+                        <?php
+                        $tempUrl = '';
+                        if(!empty($value['metal']))
+                        {
+                        if($tempUrl !== ''){
+                        $tempUrl .= '-'.$value['metal'];
+                        }
+                        else{
+                        $tempUrl .= $value['metal'];
+                        }
+                        }
+                        if(!empty($value['shape']))
+                        {
+                        if($tempUrl !== '')
+                        {
+                        $tempUrl .= '-'.$value['shape']; 
+                        }
+                        else
+                        {
+                        $tempUrl .= $value['shape'];
+                        }
+                        }
+                        if(!empty($value['gold_purity']))
+                        {
+                        if($tempUrl !== '')
+                        {
+                        $tempUrl .= '-'.number_format($value['gold_purity'],0).'-Karat'; 
+                        }
+                        else
+                        {
+                        $tempUrl .= number_format($value['gold_purity'],0).'-Karat';
+                        }
+                        }
+                        if(!empty($value['gold_weight'])){
+                        if($tempUrl !== '')
+                        {
+                        $tempUrl .= '-'.number_format($value['gold_weight'],0).'-Grams'; 
+                        }
+                        else
+                        {
+                        $tempUrl .= number_format($value['gold_weight'],0).'-Grams';
+                        }
+                        }
+                        if(!empty($value['certified'])){
+                        if($tempUrl !== '')
+                        {
+                        $tempUrl .= '-'.$value['certified']; 
+                        }
+                        else
+                        {
+                        $tempUrl .= $value['certified'];
+                        }
+                        }
+
+                        if($tempUrl !== '')
+                        {
+                        ?>
+                        <a href="<?php echo DOMAIN.$tempUrl. '/jid-' . $value['pid']; ?>">
+                            <?php                                                    
+                            }
+                            else
+                            {
+                            ?>
+                            <a href="<?php echo DOMAIN . $value['certified'];?>/jid-<?php echo $value['pid']; ?>">
+                                <?php
+                                }
+                                ?>                                            
+
+                                <div class="prdCommImg fLeft" id="<?=$data3[$key]['pid'];?>">
+                                    <?php
+                                    if($imgCount > 0)
+                                    {
+                                    ?>
+                                    <div class="for-1 noImage"></div>
+                                    <?php
+                                    }
+                                    else
+                                    {
+                                    ?>
+                                    <div class="for-1 noImage"></div>
+                                    <?php
+                                    }
+                                    ?>
+                                </div>
+                                <div class="prdDetails fLeft">
+                                    <div class="detComm">
+                                        <div class="detLabel fmOpenB fLeft">DESIGN NO.</div>
+
+                                        <div class="detValue fmOpenR fLeft"><?php echo $data3[$key]['product_main']['barcode']; ?></div>
+                                    </div>
+                                </div>
+                                <div class="prdPrice fLeft">
+                                    <div class="detComm">
+                                        <div class="detLabel fmOpenB fLeft">PRICE</div>
+                                        <div class="detValue fmOpenB fLeft">
+                                            <span>&#8377;</span>
+                                            <?php                                                             
+                                            $price=ceil($data3[$key]['jprice']);
+                                            echo $price = $comm->IND_money_format($price);
+                                            ?>
                                         </div>
                                     </div>
-<?php
-                        }
-                                $i++;
-                                if($i == $max)
+                                </div>
+                            </a>
+                            <div class='prdActions fLeft'>
+                                <?php
+                                if(!empty($tempURL))
                                 {
-?>
-                                    </div>
-<?php
+                                ?>
+                                <a href="<?php echo DOMAIN.$tempURL . '/jid-'  . $data3[$key]['pid'];?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                <a href="<?php echo DOMAIN.$tempURL . '/jid-' . $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                <a href="<?php echo DOMAIN.$tempURL . '/jid-' . $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                <a href="<?php echo DOMAIN.$tempURL . '/jid-' . $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                <?php
                                 }
-                        
-                        }
-?>
-                <?php } ?>
+                                else
+                                {
+                                ?>
+                                <a href="<?php echo DOMAIN.$value['certified'] . '/jid-' . $data3[$key]['pid'];?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                <a href="<?php echo DOMAIN.$value['certified'] . '/jid-' . $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                <a href="<?php echo DOMAIN.$value['certified'] . '/jid-' . $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                <a href="<?php echo DOMAIN.$value['certified'] . '/jid-' . $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>    
+                                <?php
+                                }
+                                ?>
+                            </div>
+                    </div>
                 </div>
-        </div>
-        
-        <div class="wrapper fLeft">
-            <div class="">
-                <?php include 'footer.html'; ?>
+                <?php
+                }
+                $i++;
+                if($i == $max)
+                {
+                ?>
             </div>
-        </div>
-        <?php include 'logo.html'; ?>    
-        <?php include 'leftmenu.html'; ?>    
-        <div id='dragTarget' class="drag-target" style="touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); left: 0px;"></div>
-        <div id='overlay' class="overlay transition300 transit-100Y1 dn"></div>
-        <div id='userForm' class="userForm transition300 dn">
-            <div class="lgTitle fLeft fmOpenR">Submit details to get SMS & EMAIL</div>
-            <div class="inputCont fLeft fmOpenR">
-                <input type="text" id="ur_mobile" name="ur_mobile" autocomplete="false" maxlength="10" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeypress="return common.isNumberKey(event);">
-                <label for="ur_mobile" class="inp-label transition100">MOBILE</label>
-                <div id="ur_mobile_inpText" class="inpText fRight transition300">enter<br>mobile number</div>
-            </div> 
-            <div class="inputCont fLeft fmOpenR">
-                <input type="text" id="ur_name" name="ur_name" autocomplete="false"  class="txtInput cOrange fmOpenR font14 nameIcon">
-                <label for="ur_name" class="inp-label transition100">NAME</label>
-                <div id="ur_name_inpText" class="inpText fRight transition300">enter<br>your name</div>
-            </div> 
-            <div class="inputCont fLeft fmOpenR">
-                <input type="text" id="ur_email" name="ur_email" autocomplete="false" onKeyPress="return common.eSubmit('event','userCancel');" class="txtInput cOrange fmOpenR font14 emailIcon">
-                <label for="ur_email" class="inp-label transition100">EMAIL</label>
-                <div id="ur_email_inpText" class="inpText fRight transition300">enter<br>your email</div>
-            </div> 
-            <div class="cancelLgBtn fLeft fmOpenR" id='userCancel'> CANCEL</div>
-            <div class="loginBtn fLeft fmOpenR" id='userSubmit'>SUBMIT</div>
+            <?php
+            }
+
+            }
+            ?>
+            <?php } ?>
         </div>
     </div>
-    <div id='imgGallery' class="imgGallery dn">
-        <div id='galleryClose' class="galleryClose ripplelink"></div>
-        <div class="galleryImg fLeft" style="background: url(<?php echo IMGDOMAIN.$data1[0];?>) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
-        <div class="imgListCont fLeft">
-<?php
-                                for($i=0;$i<count($data1);$i++)
-{
-?>            
-            <div class="imgThumbnil fLeft" style="background: url(<?php echo IMGDOMAIN.$data1[$i];?>) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
-<?php
-}
-?>
+
+    <div class="wrapper fLeft">
+        <div class="">
+            <?php include 'footer.html'; ?>
         </div>
     </div>
-    
-    <div id='imgvendorGallery' class="imgGallery dn">
-        <div id='galleryClose2' class="galleryClose ripplelink"></div>
-        <div class="galleryImg fLeft" style="background: url(<?php echo DOMAIN; ?>tools/img/common/tumb1.png) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
-        <div class="imgListCont fLeft">
-            <div class="imgThumbnil fLeft" style="background: url(<?php echo DOMAIN; ?>tools/img/common/tumb1.png) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
-            <div class="imgThumbnil fLeft" style="background: url(<?php echo DOMAIN; ?>tools/img/common/tumb2.png) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
-            <div class="imgThumbnil fLeft" style="background: url(<?php echo DOMAIN; ?>tools/img/common/tumb3.jpg) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
-        </div>
+    <?php include 'logo.html'; ?>    
+    <?php include 'leftmenu.html'; ?>    
+    <div id='dragTarget' class="drag-target" style="touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); left: 0px;"></div>
+    <div id='overlay' class="overlay transition300 transit-100Y1 dn"></div>
+    <div id='userForm' class="userForm transition300 dn">
+        <div class="lgTitle fLeft fmOpenR">Submit details to get SMS & EMAIL</div>
+        <div class="inputCont fLeft fmOpenR">
+            <input type="text" id="ur_mobile" name="ur_mobile" autocomplete="false" maxlength="10" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeypress="return common.isNumberKey(event);">
+            <label for="ur_mobile" class="inp-label transition100">MOBILE</label>
+            <div id="ur_mobile_inpText" class="inpText fRight transition300">enter<br>mobile number</div>
+        </div> 
+        <div class="inputCont fLeft fmOpenR">
+            <input type="text" id="ur_name" name="ur_name" autocomplete="false"  class="txtInput cOrange fmOpenR font14 nameIcon">
+            <label for="ur_name" class="inp-label transition100">NAME</label>
+            <div id="ur_name_inpText" class="inpText fRight transition300">enter<br>your name</div>
+        </div> 
+        <div class="inputCont fLeft fmOpenR">
+            <input type="text" id="ur_email" name="ur_email" autocomplete="false" onKeyPress="return common.eSubmit('event', 'userCancel');" class="txtInput cOrange fmOpenR font14 emailIcon">
+            <label for="ur_email" class="inp-label transition100">EMAIL</label>
+            <div id="ur_email_inpText" class="inpText fRight transition300">enter<br>your email</div>
+        </div> 
+        <div class="cancelLgBtn fLeft fmOpenR" id='userCancel'> CANCEL</div>
+        <div class="loginBtn fLeft fmOpenR" id='userSubmit'>SUBMIT</div>
     </div>
-    <div id='overlay1' class="overlay transition300 transit-100Y1 dn" ></div>
-        <div id="otpDiv" class="loginDiv transition300 dn" style="transform: scale(1);height:200px !important">
-            <div class="lgTitle fLeft fmOpenR">Enter OTP sent to your mobile</div>
-                <div class="inputCont fLeft fmOpenR">
-                    <input type="text" id="pr_otp" name="pr_otp" autocomplete="off" maxlength="6" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeypress="return common.isNumberKey(event);" onkeyup="return onEnterFormSubmit(event,1);" style="padding-right: 80px">
-                    <span onclick="otpGo();" class="resendOTP">RESEND</span>
-                    <label for="pr_otp" class="inp-label transition100">OTP</label>
-                </div>  
-                <div class="cancelLgBtn fLeft fmOpenR" id="otpCancel" onclick="closeOtpForm();">CANCEL</div>
-            <div class="loginBtn fLeft fmOpenR" id="otpSubmit" onclick="otpCheck();">Submit</div>
-        </div>
-    
+</div>
+<div id='imgGallery' class="imgGallery dn">
+    <div id='galleryClose' class="galleryClose ripplelink"></div>
+    <div class="galleryImg fLeft" style="background: url(<?php echo IMGDOMAIN.$data1[0];?>) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+    <div class="imgListCont fLeft">
+        <?php
+        for($i=0;$i<count($data1);$i++)
+        {
+        ?>            
+        <div class="imgThumbnil fLeft" style="background: url(<?php echo IMGDOMAIN.$data1[$i];?>) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+        <?php
+        }
+        ?>
+    </div>
+</div>
+
+<div id='imgvendorGallery' class="imgGallery dn">
+    <div id='galleryClose2' class="galleryClose ripplelink"></div>
+    <div class="galleryImg fLeft" style="background: url(<?php echo DOMAIN; ?>tools/img/common/tumb1.png) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+    <div class="imgListCont fLeft">
+        <div class="imgThumbnil fLeft" style="background: url(<?php echo DOMAIN; ?>tools/img/common/tumb1.png) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+        <div class="imgThumbnil fLeft" style="background: url(<?php echo DOMAIN; ?>tools/img/common/tumb2.png) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+        <div class="imgThumbnil fLeft" style="background: url(<?php echo DOMAIN; ?>tools/img/common/tumb3.jpg) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+    </div>
+</div>
+<div id='overlay1' class="overlay transition300 transit-100Y1 dn" ></div>
+<div id="otpDiv" class="loginDiv transition300 dn" style="transform: scale(1);height:200px !important">
+    <div class="lgTitle fLeft fmOpenR">Enter OTP sent to your mobile</div>
+    <div class="inputCont fLeft fmOpenR">
+        <input type="text" id="pr_otp" name="pr_otp" autocomplete="off" maxlength="6" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeypress="return common.isNumberKey(event);" onkeyup="return onEnterFormSubmit(event, 1);" style="padding-right: 80px">
+        <span onclick="otpGo();" class="resendOTP">RESEND</span>
+        <label for="pr_otp" class="inp-label transition100">OTP</label>
+    </div>  
+    <div class="cancelLgBtn fLeft fmOpenR" id="otpCancel" onclick="closeOtpForm();">CANCEL</div>
+    <div class="loginBtn fLeft fmOpenR" id="otpSubmit" onclick="otpCheck();">Submit</div>
+</div>
+
 
 <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['hammer']; ?>"></script>
