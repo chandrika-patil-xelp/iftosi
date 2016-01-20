@@ -63,8 +63,12 @@
     <script>
 
                     $('#submitBtn').click(function () {
-
                 var pr_mobile = $('#pr_mobile').val();
+                if(pr_mobile == undefined || pr_mobile == 'undefined' || pr_mobile == null || pr_mobile == 'null' || pr_mobile == '' || isNaN(pr_mobile) == true )
+                {
+                    customStorage.toast(0,'Mobile number is not in valid format');
+                    return false;
+                }
                 customStorage.addToStorage('mobile', pr_mobile);
                 if(pr_mobile !== undefined || pr_mobile !== 'undefined')
                 {

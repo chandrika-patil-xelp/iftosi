@@ -173,6 +173,11 @@ function otpCheck()
    //return false;
 
     var otpProvided =  $('#pr_otp').val();
+//    if(otpProvided == undefined || otpProvided == 'undefined' || otpProvided == null || otpProvided == 'null' || otpProvided == '' || isNaN(otpProvided))
+//    {
+//        customStorage.toast(0,'Please enter the correct OTP or click on resend button');
+//    }
+    
     var mobile = customStorage.readFromStorage('mobile');
 	var isValid= '';
 
