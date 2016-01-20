@@ -196,7 +196,14 @@ function otpCheck()
                             else
                             {
                                 customStorage.toast(1,errMsg);
-                                window.location.assign(DOMAIN + "Login");
+                                setTimeout(function () {
+                                    $('#overlay,#otpDiv').addClass('dn');
+                                    $("#otpDiv,#overlay").remove();
+                                }, 10);
+                                setTimeout(function ()
+                                {
+                                    window.location.assign(DOMAIN + "Login")
+                                },4000);
                             }
                         }});
                     }

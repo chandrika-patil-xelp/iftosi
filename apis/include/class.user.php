@@ -851,7 +851,8 @@
             $vsql = "   SELECT
                                 email,
                                 user_id,
-                                logmobile
+                                logmobile,
+                                user_name
                         FROM 
                                 tbl_registration
                         WHERE 
@@ -864,6 +865,7 @@
             $mobile = $row['logmobile'];
             $uid = $row['user_id'];
             $em = urlencode($row['email']);
+            $uname = urlencode($row['user_name']);
             
             global $comm;
             $url = APIDOMAIN."index.php?action=changePassUrl&uid=".$uid."&email=".$mobile."&mobile=".$em;
@@ -874,20 +876,46 @@
             
             if ($cnt1 > 0)
             {
-                    $subject = 'IFtoSI Forgot Password';
-                    $message = 'Please Click on the link to change your password- ';
-                    $message = '\r\n';
-                    $message = DOMAIN.'FP-'. $urlkey;
-
-                    $headers = "MIME-Version: 1.0" . "\r\n";
+                    $subject  = 'IFtoSI Password Change Request';
+                    $message  = "Dear ".$uname.", the link to change your password is as follows";
+                    $message .= '\r\n';
+                    $message .= DOMAIN.'FP-'. $urlkey;
+                    $message .= "For any assistance, Call: 022-32623263. Email: info@iftosi.com";
+                    $message .= '\r\n';
+                    $message .= "Team IFtoSI";
+                    $headers  = "MIME-Version: 1.0" . "\r\n";
                     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                     $headers .= 'From: <info@iftosi.com>' . "\r\n";
                     
                     $mail = mail($row['email'], $subject, $message, $headers);
                     if ($mail)
                     {
+                        $smsText .= "IFtoSI Password Change Request";
+                        $smsText .= "\r\n\r\n";
+                        $smsText .= "Dear ".$uname.", the link to change your password is as follows";
+                        $smsText .= "\r\n\r\n";
+                        $smsText .= DOMAIN.'FP-'. $urlkey;
+                        $smsText .= "\r\n\r\n";
+                        $smsText .= "For any assistance, Call: 022-32623263. Email: info@iftosi.com";
+                        $smsText .= "\r\n\r\n";
+                        $smsText .= "Team IFtoSI";
+                        
+                        $smsText = urlencode($smsText);
+                        $sendSMS = str_replace('_MOBILE', $mobile, SMSAPI);
+                        $sendSMS = str_replace('_MESSAGE', $smsText, $sendSMS);
+                        $res = $comm->executeCurl($sendSMS, true);
+                        if($res)
+                        {
+                            $arr = array();
+                            $err = array('Code' => 0, 'Msg' => 'Link for changing password is sent to: '.$row['email'].'');
+                        }
+                        else
+                        {
+                            $arr = array();
+                            $err = array('code'=>0,'msg'=>'SMS & EMAIL is not sent to the user');
+                        }
                         $arr = array();
-                        $err = array('Code' => 0, 'Msg' => 'Email sent with the password');
+                        $err = array('Code' => 0, 'Msg' => 'Link for changing password is sent to: '.$row['email'].'');
                     }
                     else
                     {
@@ -967,8 +995,8 @@
                         $message = '';
                         $headers = '';
                     
-                        $subject = 'Your Password for IFtoSI';
-			$message = 'Dear ' . $params['username'] . ',';
+                        $subject  = 'Your Password for IFtoSI';
+			$message  = 'Dear ' . $params['username'] . ',';
 			$message .= "\r\n";
 			$message .= "Your new password is " . $params['password'];
 			$message .= "\r\n \r\n";
@@ -997,18 +1025,18 @@
                 
                 $message = 'Thank you '.$params['username'].', for registering on IFtoSI.com';
                 $message .= "\r\n";
-                $message = 'Your details are under verification.';
+                $message .= 'Your details are under verification.';
                 $message .= "\r\n";
-                $message = 'For any assistance, Call: 022-32623263. Email: info@iftosi.com';
+                $message .= 'For any assistance, Call: 022-32623263. Email: info@iftosi.com';
                 $message .= "\r\n";
                 $message .= "Team IFtoSI";
-                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers  = "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                 $headers .= 'From: <info@iftosi.com>' . "\r\n";
                 
                 $smsText .= "Welcome To IFtoSI";
                 $smsText .= "\r\n\r\n";
-                $smsText = "Thank you ".$params['username'].", for registering on IFtoSI.com";
+                $smsText .= "Thank you ".$params['username'].", for registering on IFtoSI.com";
                 $smsText .= "\r\n\r\n";
                 $smsText .= "Your details are under verification.";
                 $smsText .= "\r\n\r\n";
@@ -1018,22 +1046,22 @@
             }
             else if($params['isVendor'] == 0)
             {
-                $subject = 'Welcome To IFtoSI';
-                $message = 'Welcome '.$params['username'].', to IFtoSI.com';
-                $message = 'Save time, Save money';
+                $subject  = 'Welcome To IFtoSI';
+                $message  = 'Welcome '.$params['username'].', to IFtoSI.com';
+                $message .= 'Save time, Save money';
                 $message .= "\r\n";
                 $message .= "IFtoSI.com the easiest way to buy solitaires, jewellery and bullion directly from the source.";
                 $message .= "\r\n";
                 $message .= "For any assistance, Call: 022-32623263. Email: info@iftosi.com";
                 $message .= "\r\n";
                 $message .= "Team IFtoSI";
-                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers  = "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                 $headers .= 'From: <info@iftosi.com>' . "\r\n";
                 
                 $smsText .= "Welcome To IFtoSI";
                 $smsText .= "\r\n\r\n";
-                $smsText = "Welcome ".$params['username'].", to IFtoSI.com";
+                $smsText .= "Welcome ".$params['username'].", to IFtoSI.com";
                 $smsText .= "\r\n\r\n";
                 $smsText .= "Save time, Save money";
                 $smsText .= "\r\n\r\n";

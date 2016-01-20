@@ -2434,8 +2434,9 @@
 				{
 					foreach($value as $ky => $vl)
 					{
-						$vndrName = $vl['OrganisationName'];
+                                            	$vndrName = $vl['OrganisationName'];
 						$vndrLL = $vl['telephones'];
+                                                $vndrLL = str_replace('~', ',', $vndrLL);
 						$vndrAltEmail = $vl['alt_email'];
 						$vndrCity = $vl['office_city'];
 						$address = $vl['fulladdress'];
@@ -2575,9 +2576,9 @@
 			$smsText .= "\r\n\r\n";
 			$smsText .= "Vendor Name: ";
 			$smsText .= $vndrName;
-			$smsText .= "\r\n";
-			$smsText .= "Address: ";
-			$smsText .= $address;
+//			$smsText .= "\r\n";
+//			$smsText .= "Address: ";
+//			$smsText .= $address;
 			$smsText .= "\r\n";
 			$smsText .= "Area: ";
 			$smsText .= $area;
@@ -2585,12 +2586,12 @@
 			$smsText .= "City: ";
 			$smsText .= $city;
 			$smsText .= "\r\n";
-			$smsText .= "State: ";
-			$smsText .= $state;
-			$smsText .= "\r\n";
-			$smsText .= "Pincode: ";
-			$smsText .= $pincode;
-			$smsText .= "\r\n";
+//			$smsText .= "State: ";
+//			$smsText .= $state;
+//			$smsText .= "\r\n";
+//			$smsText .= "Pincode: ";
+//			$smsText .= $pincode;
+//			$smsText .= "\r\n";
 			$smsText .= "Landline: ";
 			$smsText .= $vndrLL;
 			$smsText .= "\r\n";

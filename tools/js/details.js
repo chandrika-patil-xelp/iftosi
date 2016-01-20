@@ -1106,18 +1106,18 @@ function otpCheck()
                                                                                 $('#vDetails').removeClass('vTransit');
                                                                                 $('#vDetails').removeClass('dn');
                                                                                 $('body').animate({scrollTop: pos}, 150);
-																				if($("head").html().indexOf('http://maps.google.com/maps/api/js') === -1)
-																				{
-																					//setTimeout(function () {
-																							var mpscrpt = document.createElement("script");
-																							mpscrpt.type = "text/javascript";
-																							mpscrpt.src = "http://maps.google.com/maps/api/js";
-																							$("head").append(mpscrpt);
-																							setTimeout(function () {
-																								initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
-																							}, 220);
-																					//}, 220);
-																				}
+                                                                                if($("head").html().indexOf('http://maps.google.com/maps/api/js') === -1)
+                                                                                {
+                                                                                        //setTimeout(function () {
+                                                                                                        var mpscrpt = document.createElement("script");
+                                                                                                        mpscrpt.type = "text/javascript";
+                                                                                                        mpscrpt.src = "http://maps.google.com/maps/api/js";
+                                                                                                        $("head").append(mpscrpt);
+                                                                                                        setTimeout(function () {
+                                                                                                                initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
+                                                                                                        }, 220);
+                                                                                        //}, 220);
+                                                                                }
                                                                         }, 20);
 
 																		
