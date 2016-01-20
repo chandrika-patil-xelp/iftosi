@@ -438,11 +438,11 @@ function validateJForm()
 		var params
 		if((pid !== null)&&(pid !== undefined)&&(pid !== '') && pid !== 'undefined' && typeof pid !== 'undefined')
 		{
-			var params = 'action=addNewproduct&category_id='+catid+'&prdid='+pid+'&vid='+uid;
+			var params = 'category_id='+catid+'&prdid='+pid+'&vid='+uid;
 		}
 		else
 		{
-			var params = 'action=addNewproduct&category_id='+catid+'&vid='+uid;
+			var params = 'category_id='+catid+'&vid='+uid;
 		}
 
 		var dt = '';

@@ -629,7 +629,7 @@ class vendor extends DB
        // $cate_ids=  $this->getSubCat($catid);
         $psql='';
         if($catid == 10000) {
-            $psql='d.color, d.carat, d.shape, d.certified AS cert, d.clarity';
+            $psql='d.color, d.carat, d.shape, d.certified AS cert, d.clarity, d.b2b_price';
         } else if($catid == 10001) {
             $psql='d.shape,d.metal,c.lotref,d.gold_weight,d.dwt,d.gold_purity,d.certified as cert';
         } else if($catid == 10002) {

@@ -9,7 +9,7 @@
                     </div>
                 </div>
             </div>
-            <form id="changePwd" name="changePwd" action="<?php echo DOMAIN.'index.php?case=changepwd'; ?>" method="post">
+            <form id="changePwd" name="changePwd" action="<?php echo DOMAIN.'Change-Password'; ?>" method="post">
                 
             <div class='signupDiv' style="height:300px;">
                 <div class="wrapperMax">
@@ -51,13 +51,13 @@
     <script>
     var uid = customStorage.readFromStorage('userid');
     var key=$('#pr_keys').val();
-    console.log(key);
+    
     if (uid !== undefined || uid !== 'undefined' || uid !== '' || uid !== null || uid !== 'null' ||  uid !== '')
     {
         if(key == undefined || key == 'undefined' || key == null || key == 'null' || key == '')
         {
             
-            window.location.assign(DOMAIN + 'index.php');
+            window.location.assign(DOMAIN);
         }
     }
     $('#submitBtn').click(function ()

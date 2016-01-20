@@ -376,11 +376,11 @@ function Common() {
 		return flag;
 	};
 
-	this.validate_email = function(email, isFortigo) {
+	this.validate_email = function(email, isIFtoSI) {
 		var flag = true;
 		if(email == '' || email == null || email == undefined) {
 			flag = false;
-		} else if(isFortigo && email.indexOf('4tigo') == -1) {
+		} else if(isIFtoSI && email.indexOf('IFtoSI') == -1) {
 			flag = false;
 		} else {
 			flag = _this.isValidEmail(email);

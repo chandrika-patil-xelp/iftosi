@@ -48,7 +48,7 @@ var validMob = true;
     $('#signupCancel').click(function () {
         $("input").val('');
         $("#isVendor").removeAttr('checked');
-        setTimeout(function () {window.location.assign(DOMAIN + 'index.php'); },20);
+        setTimeout(function () {window.location.assign(DOMAIN); },20);
     });
     $('#signupSubmit').bind('click', function () {
         if(!$('#pr_citySuggestDiv').hasClass('dn'))

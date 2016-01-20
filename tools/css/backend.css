@@ -411,11 +411,11 @@ a{text-decoration: none;}
 
 /**UpdateD Products List*/
 .diamondPrds{}
-.diamondPrds .acct{width:30%;}
+.diamondPrds .acct{width:24%;}
 .diamondPrds .shape {width: 8%;}
 .diamondPrds .color {width: 5%;}
 .diamondPrds .cert {width: 8%;}
-.diamondPrds .price {width: 14%;}
+.diamondPrds .price {width: 10%;}
 
 
 .jewelleryPrds{}

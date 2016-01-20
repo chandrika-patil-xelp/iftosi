@@ -313,6 +313,7 @@ function generateDiamondList(obj) {
     str += '<div class="clarity fLeft">' + obj['clarity'] + '</div>';
     str += '<div class="cert fLeft">' + obj['cert'] + '</div>';
     str += '<div class="price fLeft fmOpenB">&#36;' + obj['price']+ '</div>';
+    str += '<div class="price fLeft fmOpenB">&#36;' + obj['b2b_price']+ '</div>';
     str += '<div class="acct fLeft">';
     if(obj['active_flag'] == 1 || obj['active_flag'] == 0){
         cl='inStockPrd';
