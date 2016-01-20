@@ -962,7 +962,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .smallField {border: 1px solid #ccc;box-sizing: border-box;font-size: 13px;font-family: openB;font-family: openR;max-height: 145px;overflow-y: auto;width: 100%;}
 .dropArrow {background-image: url("../img/down_arrow.svg");background-position: right center;background-repeat: no-repeat;background-size: auto 100%;}
 /* End of suggest */
-
+.padL20{padding-left:20px;}
 
 @media only screen and (min-width: 320px) and (max-width: 767px){
     /*Header*/
@@ -1231,7 +1231,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
         .ques {width: 90%;margin:10px 5%;}
         .shapesPage .shapeComm {position: absolute;left: 0;top: 0;width: 100px!important;height: 100px!important;padding-bottom: 100px;margin: 0;bottom: 0;margin: auto;}
         .shapesPage .texHolder {padding: 0;padding-left: 88px;line-height: 24px;color: #000;}
-        .signInUpTab{margin: 0 15px 0 0px;}
+        .signInUpTab{margin: 0 10px 0 0px;}
         .wishlist{margin: 0 0px;}
         .headRight{font-size: 11px;}
 
