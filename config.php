@@ -58,7 +58,7 @@ else
 }
 define('SMSAPI','http://alerts.sinfini.com/api/web2sms.php?workingkey=A31cf85c3cc3b65100bf9bd7fbe30cd90&to=+91_MOBILE&sender=SIDEMO&message=_MESSAGE');
 
-define('VERSION',6.11);
+define('VERSION',6.12);
 
 $dollarValue = 66.03;
 define('dollarValue',$dollarValue);

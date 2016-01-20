@@ -878,15 +878,15 @@
             {
                     $subject  = 'IFtoSI Password Change Request';
                     $message  = "Dear ".$uname.", the link to change your password is as follows";
-                    $message .= "<br><br>";
+                    $message .= "\r\n\r\n";
                     $message .= DOMAIN.'FP-'. $urlkey;
-                    $message .= "<br><br>";
+                    $message .= "\r\n\r\n";
                     $message .= "For any assistance, Call: 022-32623263. Email: info@iftosi.com";
-                    $message .= "<br><br>";
+                    $message .= "\r\n\r\n";
                     $message .= "Team IFtoSI";
-                    $headers  = "MIME-Version: 1.0" . "<br><br>";
-                    $headers .= "Content-type:text/html;charset=UTF-8" . "<br><br>";
-                    $headers .= 'From: <info@iftosi.com>' . "<br><br>";
+                    $headers  = "MIME-Version: 1.0" . "\r\n\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n\r\n";
+                    $headers .= 'From: info@iftosi.com' . "\r\n\r\n";
                     
                     $mail = mail($row['email'], $subject, $message, $headers);
                     if ($mail)
