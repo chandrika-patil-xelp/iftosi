@@ -24,12 +24,12 @@
     
     if($data['isComplete']){
         $files = $data['data'];
-        print_r($files);
+        //print_r($files);
     }
 
     if($data['hasErrors']){
         $errors = $data['errors'];
-        print_r($errors);
+        //print_r($errors);
     }
     
     function onFilesRemoveCallback($removed_files){
