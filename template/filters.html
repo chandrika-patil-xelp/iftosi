@@ -89,6 +89,7 @@
 	<?php
 	if(count($fil))
 	{
+        //echo "<pre>";print_r($fil);die;
 		foreach($fil as $key => $val)
 		{
 			if(!empty($val['attribute_range']))
@@ -104,9 +105,10 @@
 					$expdCarat = explode("-",$val1);
 					$expdCarat0 = $expdCarat[0];
 					$expdCarat1 = $expdCarat[1];
-					$expd0 = floor(($expd[0] * $dollarValue) * $expdCarat0);
+
+					$expd0 = floor($expd[0]);
 					$expd[0] = $expd0;
-					$expd1 = ceil(($expd[1] * $dollarValue) * $expdCarat1);
+					$expd1 = ceil($expd[1]);
 					$expd[1] = $expd1;
 
 					//$expd[0] = $expd[0] * $dollarValue;

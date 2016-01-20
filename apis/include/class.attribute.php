@@ -227,7 +227,8 @@ class attribute extends DB
     
     public function fetch_category_mapping($params)
     {
-        $mapsql="SELECT 
+        $mapsql="SELECT
+                    *,
 					attribute_id,
 					attr_unit,
 					attr_unit_pos,
@@ -282,6 +283,58 @@ class attribute extends DB
                     $attrs['attribute_values']		= $attributeMap[$row1['attr_id']]['attr_values'];
                     $attrs['attribute_range']		= $attributeMap[$row1['attr_id']]['attr_range'];
                     $attrs['attribute_display_type']		= $attributeMap[$row1['attr_id']]['display_type'];
+                    
+                    if($row1['attr_type_flag'] == 6)
+                    {
+                        $qryid="SELECT group_concat(product_id) as prids
+                                FROM 
+                                    tbl_product_category_mapping
+                                WHERE category_id=".$params['catid'];
+                        $resid = $this->query($qryid);
+                        if($resid)
+                        {
+                            $rowres = $this->fetchData($resid);
+                            $prids = $rowres['prids'];
+                        }
+
+                        if($row1['attr_name'] == 'price')
+                        {
+                            $qryrng = "SELECT 
+                                    MIN(".$row1['attr_name']."*carat*1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=product_id limit 1))) AS minval, 
+                                    MAX(".$row1['attr_name']."*carat*1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=product_id limit 1))) AS maxval 
+                                FROM 
+                                    tbl_product_search
+                                WHERE
+                                    product_id IN(".$prids.")
+                                AND
+                                    active_flag=1
+                                ";
+                            
+                        }
+                        else
+                        {
+                            $qryrng = "SELECT 
+                                            MIN(".$row1['attr_name'].") AS minval, 
+                                            MAX(".$row1['attr_name'].") AS maxval 
+                                        FROM 
+                                            tbl_product_search
+                                        WHERE
+                                            product_id IN(".$prids.")
+                                        AND
+                                            active_flag=1
+                                        ";
+                        }
+                        $resrng = $this->query($qryrng);
+                        
+                        if($resrng)
+                        {
+                            $rowrng = $this->fetchData($resrng);
+                            $maxvl = $rowrng['maxval'];
+                            $minvl = $rowrng['minval'];
+                            $attrs['attribute_range'] = $minvl.'-'.$maxvl;
+                        }
+                    }
+                    
                     $attribute[]					= $attrs;
                     $flag							= $row1['attr_type_flag'];       // FOR GIVING THE NAME OF TYPE FILTER
                  /*   switch($flag)

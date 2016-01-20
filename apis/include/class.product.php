@@ -977,6 +977,47 @@
 				{
 					$pid[] = $row['pid'];
 				}
+                
+                /* $allpids = implode(',',$pid);
+                if($allpids)
+                {
+                    
+                    $vendorsql = "SELECT 
+                                        vendor_id, product_id
+                                    FROM 
+                                        tbl_vendor_product_mapping 
+                                    WHERE 
+                                        product_id in (".$allpids.")";
+                    $vendorres = $this->query($vendorsql);
+                    if($vendorres)
+                    {
+                        while($vendorrow = $this->fetchData($vendorres))
+                        {
+                            $vidarr[] = $vendorrow['vendor_id'];
+                            $vendorArr[$vendorrow['product_id']] = $vendorrow['vendor_id'];
+                        }
+                        $vids = implode(',',$vidarr);
+                    }
+                    
+                    if($vids)
+                    {
+                        $vendorsql = "
+                                    SELECT 
+                                        vendor_id, dollar_rate 
+                                    FROM 
+                                        tbl_vendor_master 
+                                    WHERE 
+                                        vendor_id in (".$vids.")";
+                        $vendorres = $this->query($vendorsql);
+                        if($vendorres)
+                        {
+                            while($vendorrow = $this->fetchData($vendorres))
+                            {
+                                $dollarRt[$vendorrow['vendor_id']] = $vendorrow['dollar_rate'];
+                            }
+                        }
+                    }
+                } */
 				
 				
 				
@@ -984,6 +1025,7 @@
 				{
 					$sarr = explode('|@|',$params['slist']);
 					$extn = " AND shape in ('".implode("','",$sarr)."') ";
+                    $extnhv = '';
 				}
 				
 				if(!empty($params['tlist']))
@@ -993,15 +1035,16 @@
 					{
 						$expd = explode('|~|',$val);
 						$exd = explode(';',$expd[1]);
+                        //print_r($expd);
 						if($expd[0] == 'priceRange' && $params['catid'] == 10000)
 						{
 							$expCarat = explode('|~|',$sarr[0]);
-                                                        $exd1 = explode(';',$expCarat[1]);
-                                                    
-                                                        $exd[0] = ($exd[0]/dollarValue)/1;
-							$exd[1] = ($exd[1]/dollarValue)/$exd1[1];
+                            $exd1 = explode(';',$expCarat[1]);
+                            $extnhv = " HAVING dollar_price between ".$exd[0]." AND ".$exd[1]." ";
 						}
-						$extn .= " AND ".str_replace('Range','',$expd[0])." between \"".$exd[0]."\" AND \"".$exd[1]."\"";
+                        else
+                            $extn .= " AND ".str_replace('Range','',$expd[0])." between ".$exd[0]." AND ".$exd[1]." ";
+						
 					}
 					//$extn = " AND shape in ('".implode("','",$sarr)."') ";
 				}
@@ -1146,6 +1189,8 @@
                                                                 b2b_price*carat as b2btotalprice,
                                                                 price*carat as totalprice,
                                                                 price as jprice,
+                                                                carat*price*1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as dollar_price,
+                                                                1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as dollar_rate,
                                                                 1*(SELECT gold_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as goldrate,
                                                                 if(metal='Gold',(((((SELECT gold_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1))/995)/10)*gold_purity)*gold_weight),(((((SELECT silver_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1))/999)/1000)*gold_purity)*gold_weight)) as bprice,
 								carat,
@@ -1168,8 +1213,9 @@
 							WHERE 
 								product_id IN(".$pid.")
 							AND            
-								active_flag=1    
+								active_flag=1  
 							".$extn."
+                            ".$extnhv."
 							";
                                         switch($params['sortby'])
                                         {
