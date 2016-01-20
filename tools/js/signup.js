@@ -60,7 +60,7 @@ var validMob = true;
         var pr_email = $('#pr_email').val();
         var pr_pass = $('#pr_pass').val();
         var city = $('#pr_city').val();
-        var cityid = $('#pr_cid').val();
+        var cityid = $('#pr_cityid').val();
         var isVendor = $('#isVendor').is(':checked');
             isVendor = $('#isVendor').val();
         var amIVendor = $("input[type=checkbox]:checked").length;
@@ -84,6 +84,11 @@ var validMob = true;
                         else if(city == '') {
 				customStorage.toast(0,'City is mandatory!'); 
 				$('#pr_city').focus();
+				return false;
+			}
+                        else if(cityid == '') {
+				customStorage.toast(0,'Choose the city from the list'); 
+				$('#pr_cityid').focus();
 				return false;
 			}
                         else if(pr_mobile=='' || pr_mobile.length!=10 || isNaN(pr_mobile)) {
@@ -390,7 +395,7 @@ function arrangeData(data, id, divHolder, nextxt)
 
 function setSuggestValue(val, id, cid) {
     $(id).val(val);
-    $('#pr_cid').val(cid);
+    $('#pr_cityid').val(id);
     $(id).next( "label" ).addClass("labelActive");
     $(id).addClass('brGreen');
     setTimeout(function () {

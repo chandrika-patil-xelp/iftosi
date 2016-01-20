@@ -1395,11 +1395,12 @@ class vendor extends DB
         {
            $row = $this->fetchData($emailres);
         }
-        $sql="UPDATE tbl_vendor_master SET dollar_rate='".$params['dolRate']."' WHERE vendor_id='".$params['vid']."'";
-        $res=$this->query($sql);
-        if ($res)
+        
+        if(floatval($params['dolRate']) !== floatval($rates['results']['dollar_rate']))
         {
-            if($params['dolRate'] !== $rates['results']['dollar_rate'])
+            $sql="UPDATE tbl_vendor_master SET dollar_rate='".$params['dolRate']."' WHERE vendor_id='".$params['vid']."'";
+            $res=$this->query($sql);
+            if ($res)
             {
                 $temp = array('dollar_rate'=>'dollar_rate','vid'=>$params['vid'],'type'=>'Dollar','prevRate'=>$rates['results']['dollar_rate'],'to'=>$row['email']);
                 $mail = $this->sendRateMail($temp);
@@ -1416,14 +1417,14 @@ class vendor extends DB
             }
             else
             {
-                $arr = array('There is no change in the rate');
-                $err = array('code' => 0, 'msg' => 'Dollar Rate Updated successfully!');
+                $arr = array();
+                $err = array('code' => 1, 'msg' => 'Error in Updating Silver Rate');
             }
         }
         else
         {
-            $arr = array();
-            $err = array('code' => 1, 'msg' => 'Error in Updating Silver Rate');
+            $arr = array('There is no change in the rate');
+            $err = array('code' => 0, 'msg' => 'Dollar Rate Updated successfully!');
         }
         $result = array('results' => $arr, 'error' => $err);
         return $result;
@@ -1454,11 +1455,12 @@ class vendor extends DB
             {
                 $row = $this->fetchData($emailres);
             }
-            $sql="UPDATE tbl_vendor_master SET silver_rate='".$params['silRate']."' WHERE vendor_id='".$params['vid']."'";
-            $res=$this->query($sql);
-            if($res)
+            
+            if(floatval($params['silRate']) !== floatval($rates['results']['silver_rate']))
             {
-                if($params['silRate'] !== $rates['results']['silver_rate'])
+                $sql="UPDATE tbl_vendor_master SET silver_rate='".$params['silRate']."' WHERE vendor_id='".$params['vid']."'";
+                $res=$this->query($sql);
+                if($res)
                 {
                     $temp = array('silver_rate'=>'silver_rate','vid'=>$params['vid'],'type'=>'Silver','prevRate'=>$rates['results']['silver_rate'],'to'=>$row['email']);
                     $mail = $this->sendRateMail($temp);
@@ -1475,14 +1477,14 @@ class vendor extends DB
                 }
                 else
                 {
-                    $arr = array('There is no change in the rate');
-                    $err = array('code' => 0, 'msg' => 'Silver Rate Updated successfully!');
+                    $arr = array();
+                    $err = array('code' => 1, 'msg' => 'Error in Updating Silver Rate');
                 }
             }
             else
             {
-                $arr = array();
-                $err = array('code' => 1, 'msg' => 'Error in Updating Silver Rate');
+                $arr = array('There is no change in the rate');
+                $err = array('code' => 0, 'msg' => 'Silver Rate Updated successfully!');
             }
             $result = array('results' => $arr, 'error' => $err);
             return $result;
@@ -1508,21 +1510,22 @@ class vendor extends DB
             $rates = $this->getAllRatesByVID($params['vid']);
             $emailsql = "SELECT email from tbl_registration WHERE user_id =\"".$params['vid']."\"";
             $emailres = $this->query($emailsql);
-            $emailcnt = $this->numRows();
+            $emailcnt = $this->numRows($emailres);
             $row = $this->fetchData($emailres);
             
-            $sql="UPDATE
-                        tbl_vendor_master
-                SET 
-                        gold_rate=\"".$params['goldRate']."\"
-                WHERE
-                        vendor_id=\"".$params['vid']."\"";
-            $res=$this->query($sql);
-            if ($res)
+            $temp = array('gold_rate'=>'gold_rate','vid'=>$params['vid'],'type'=>'Gold','prevRate'=>$rates['results']['gold_rate'],'to'=>$row['email']);
+            
+            if(floatval($params['goldRate']) !== floatval($rates['results']['gold_rate']))
             {
-                $temp = array('gold_rate'=>'gold_rate','vid'=>$params['vid'],'type'=>'Gold','prevRate'=>$rates['results']['gold_rate'],'to'=>$row['email']);
-                if($params['goldRate'] !== $rates['results']['gold_rate'])
-                {
+                $sql="  UPDATE
+                                    tbl_vendor_master
+                        SET 
+                                    gold_rate=\"".$params['goldRate']."\"
+                        WHERE
+                                    vendor_id=\"".$params['vid']."\"";
+                $res=$this->query($sql);
+                if ($res)
+                {    
                     $mail = $this->sendRateMail($temp);
                     if($mail == 1)
                     {
@@ -1537,14 +1540,14 @@ class vendor extends DB
                 }
                 else
                 {
-                    $arr = array('There is no change in the rate');
-                    $err = array('code' => 0, 'msg' => 'Gold Rate Updated successfully!');
+                    $arr = array();
+                    $err = array('code' => 1, 'msg' => 'Error in Updating Gold Rate');
                 }
             }
             else
             {
-                $arr = array();
-                $err = array('code' => 1, 'msg' => 'Error in Updating Gold Rate');
+                $arr = array('There is no change in the rate');
+                $err = array('code' => 0, 'msg' => 'Gold Rate Updated successfully!');
             }
             $result = array('results' => $arr, 'error' => $err);
             return $result;

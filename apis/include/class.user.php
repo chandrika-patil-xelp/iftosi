@@ -300,6 +300,7 @@
                 }
             $vsql1='UPDATE tbl_registration SET ';
             $vsql1 .= " city = \"".$vfulldtls['city']."\"";
+            //$vsql1 .= " email = \"".$vfulldtls['email']."\"";
             
             $vsql='UPDATE tbl_vendor_master SET ';
             if (!empty($detls['orgname'])) {

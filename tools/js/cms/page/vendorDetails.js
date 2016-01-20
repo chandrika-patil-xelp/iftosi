@@ -32,32 +32,11 @@ $(document).ready(function () {
         var id = $(this).attr('id');
         if (id == 'forDiamond') {
             $('#diamondDet').toggleClass('dn');
-            if($('#'+id).hasClass('comSelected'))
-            {
-                pay = (pay + 30000);
-                $('#payammo').val(pay);
-            }
-            else
-            {
-                pay = (pay - 30000);
-                $('#payammo').val(pay);
-            }
         }
         else if (id == 'forJewellery') {
             $('#jewelleryDet').toggleClass('dn');
             $('#bullionDet').toggleClass('dn');
-            if($('#'+id).hasClass('comSelected'))
-            {
-                pay = parseInt(pay + 25000);
-                $('#payammo').val(pay);
             }
-            else
-            {
-                pay = (pay - 25000);
-                $('#payammo').val(pay);
-            }
-            
-        }
 //        else if (id == 'forBullion')
 //        {
 //            $('#bullionDet').toggleClass('dn');
@@ -72,8 +51,25 @@ $(document).ready(function () {
 //                $('#payammo').val(pay);
 //            }
 //        }
+            var finalAmt = 0;
+            $('.compComm').each(function () {
+                var tmpId = $(this).attr('id');
+                if($(this).hasClass('comSelected'))
+                {
+                    if(tmpId == 'forDiamond')
+                    {
+                        finalAmt += 30000;
+                    }
+                    else if(tmpId == 'forJewellery')
+                    {
+                        finalAmt += 25000;
+                    }
+                }
+            });
+            pay = finalAmt;
         $('#payingamt').html('&#8377 '+pay);
         $('#payammo2').html('&#8377 '+pay);
+        $('#payammo').val(pay);
         
     });
 

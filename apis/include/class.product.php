@@ -1268,8 +1268,8 @@
 						$pid = $row2['product_id'];
 						unset($row2['product_id']);
 						$attr[$pid]['attributes']=$row2;
-					}
-					
+                    }
+					$total = count($prodid);
 					if(!empty($prodid))
 					{
 						$pid = $pids = implode(',',$prodid);

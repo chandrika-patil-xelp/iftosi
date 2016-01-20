@@ -36,25 +36,23 @@
                     </div>
                 </div>
                 <?php
+                    $cost = $data[$i]['pay_amount'];
                     $expd = explode(',',$data[$i]['business_type']);
-                    $cost = 0;
+                    
                     $arr = array();
                     for($j=0;$j<count($expd);$j++)
                     {
                         if($expd[$j] == 1)
                         {
                             $arr[] = 'Diamonds';
-                            $cost += 30000;
                         }
                         if($expd[$j] == 2)
                         {
                             $arr[] = 'Jewellery';
-                            $cost += 15000;
                         }
                         if($expd[$j] == 3)
                         {
                             $arr[] = 'Bullion';
-                            $cost += 15000;
                         }
                     }
                     $package = implode(',',$arr);
@@ -185,24 +183,21 @@ function loadProductsCallback(res,pgno) {
             str += '        </div>';
             str += '    </div>';
             str += '</div>';
-            var cost=0;
+            var cost=obj['pay_amount'];
             var package=new Array();
             var business_type = obj['business_type'].split(',');
             for(var j = 0; j < business_type.length; j++) {
                 if(business_type[j] == 1)
                 {
                     package.push('Diamonds');
-                    cost += 30000;
                 }
                 if(business_type[j] == 2)
                 {
                     package.push('Jewellery');
-                    cost += 15000;
                 }
                 if(business_type[j] == 3)
                 {
                     package.push('Bullion');
-                    cost += 15000;
                 }
             }
             

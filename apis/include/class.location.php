@@ -377,7 +377,7 @@ class location extends DB
     
     public function cityName($params)
     {
-        $sql="SELECT DISTINCT(city) as n FROM tbl_area_master WHERE city LIKE '".$params['name']."%'";
+        $sql="SELECT DISTINCT(cityname) as n FROM tbl_city_master WHERE cityname LIKE '".$params['name']."%'";
         $res=$this->query($sql);
         
         if($res)
