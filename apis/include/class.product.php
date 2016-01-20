@@ -1168,21 +1168,23 @@
 				{
 						
 					$sql = "SELECT 
-								count(distinct product_id) as cnt 
+                                carat*b2b_price*1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=product_id limit 1)) as b2b_dollar_price,
+                                                                carat*price*1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=product_id limit 1)) as dollar_price
 							FROM 
 								tbl_product_search 
 							WHERE 
 								product_id IN(".$pid.")
 							AND
 								active_flag=1
-							".$extn."	
+							".$extn."
+                            ".$extnhv."
 							";
                                         
 					$res = $this->query($sql);
 					if($res)
 					{
-						$row = $this->fetchData($res);
-						$total = $row['cnt'];
+						//$row = $this->fetchData($res);
+						$total = $this->numRows($res);
 					}
 					
 					$patsql="
@@ -1269,7 +1271,7 @@
 						unset($row2['product_id']);
 						$attr[$pid]['attributes']=$row2;
                     }
-					$total = count($prodid);
+					//$total = count($prodid);
 					if(!empty($prodid))
 					{
 						$pid = $pids = implode(',',$prodid);
