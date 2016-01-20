@@ -1040,7 +1040,10 @@
 						{
 							$expCarat = explode('|~|',$sarr[0]);
                             $exd1 = explode(';',$expCarat[1]);
-                            $extnhv = " HAVING dollar_price between ".$exd[0]." AND ".$exd[1]." ";
+                            if($params['b2bsort'])
+                                $extnhv = " HAVING b2b_dollar_price between ".$exd[0]." AND ".$exd[1]." ";
+                            else
+                                $extnhv = " HAVING dollar_price between ".$exd[0]." AND ".$exd[1]." ";
 						}
                         else
                             $extn .= " AND ".str_replace('Range','',$expd[0])." between ".$exd[0]." AND ".$exd[1]." ";
@@ -1189,6 +1192,7 @@
                                                                 b2b_price*carat as b2btotalprice,
                                                                 price*carat as totalprice,
                                                                 price as jprice,
+                                                                carat*b2b_price*1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as b2b_dollar_price,
                                                                 carat*price*1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as dollar_price,
                                                                 1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as dollar_rate,
                                                                 1*(SELECT gold_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as goldrate,

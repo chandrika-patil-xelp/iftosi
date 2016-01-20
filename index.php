@@ -485,7 +485,7 @@ switch ($action) {
                 $catname = $res['results']['catname'];
 
 
-                $url = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=' . $catid;
+                $url = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=' . $catid . '&case=b2bproducts';
                 $res = $comm->executeCurl($url);
                 $fil = $res['results']['attributes'];
 

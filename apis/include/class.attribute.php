@@ -177,6 +177,9 @@ class attribute extends DB
 
     public function set_category_mapping($params)
     {
+        
+    print_r($params);die;
+        
 	$aid 		= $params['aid'];
 	$dflag 		= $params['dflag'];
 	$dpos 		= $params['dpos'];
@@ -228,7 +231,6 @@ class attribute extends DB
     public function fetch_category_mapping($params)
     {
         $mapsql="SELECT
-                    *,
 					attribute_id,
 					attr_unit,
 					attr_unit_pos,
@@ -299,9 +301,14 @@ class attribute extends DB
 
                         if($row1['attr_name'] == 'price')
                         {
+                            
+                            //print_r($params);die;
+                            if($params['case'] == 'b2bproducts')
+                            {
+                            
                             $qryrng = "SELECT 
-                                    MIN(".$row1['attr_name']."*carat*1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=product_id limit 1))) AS minval, 
-                                    MAX(".$row1['attr_name']."*carat*1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=product_id limit 1))) AS maxval 
+                                    MIN(b2b_".$row1['attr_name']."*if(carat,carat,1)*1*(SELECT if(carat,dollar_rate,1) FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=product_id limit 1))) AS minval, 
+                                    MAX(b2b_".$row1['attr_name']."*if(carat,carat,1)*1*(SELECT if(carat,dollar_rate,1) FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=product_id limit 1))) AS maxval 
                                 FROM 
                                     tbl_product_search
                                 WHERE
@@ -309,6 +316,21 @@ class attribute extends DB
                                 AND
                                     active_flag=1
                                 ";
+                            }
+                            else
+                            {
+                            
+                            $qryrng = "SELECT 
+                                    MIN(".$row1['attr_name']."*if(carat,carat,1)*1*(SELECT if(carat,dollar_rate,1) FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=product_id limit 1))) AS minval, 
+                                    MAX(".$row1['attr_name']."*if(carat,carat,1)*1*(SELECT if(carat,dollar_rate,1) FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=product_id limit 1))) AS maxval 
+                                FROM 
+                                    tbl_product_search
+                                WHERE
+                                    product_id IN(".$prids.")
+                                AND
+                                    active_flag=1
+                                ";
+                            }
                             
                         }
                         else
