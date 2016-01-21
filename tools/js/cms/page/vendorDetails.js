@@ -16,62 +16,84 @@ $(document).ready(function () {
     if ($('#conMobile').val() == '') {
         $('#conMobile').val(customStorage.readFromStorage('mobile'));
     }
-    $('.compComm').bind('click', function (e) {
-
-        var x = (document.all) ? event.x : e.pageX;
-        var y = (document.all) ? event.y : e.pageY;
-        
-        setTimeout(function () {
-            x = e.pageX = e.pageX + 100;
-            y = e.pageY = e.pageY + 100;
-        }, 1000);
+    
 
 //                $('#forDiamond,#forJewellery,#forBullion').removeClass('comSelected');
 //                $('#bullionDet,#jewelleryDet,#diamondDet').addClass('dn');
-        $(this).toggleClass('comSelected');
-        var id = $(this).attr('id');
-        if (id == 'forDiamond') {
-            $('#diamondDet').toggleClass('dn');
-        }
-        else if (id == 'forJewellery') {
-            $('#jewelleryDet').toggleClass('dn');
-            $('#bullionDet').toggleClass('dn');
-            }
-//        else if (id == 'forBullion')
-//        {
-//            $('#bullionDet').toggleClass('dn');
-//            if($('#'+id).hasClass('comSelected'))
-//            {
-//                pay = parseInt(pay + 15000);
-//                $('#payammo').val(pay);
-//            }
-//            else
-//            {
-//                pay = (pay - 15000);
-//                $('#payammo').val(pay);
-//            }
-//        }
-            var finalAmt = 0;
-            $('.compComm').each(function () {
-                var tmpId = $(this).attr('id');
-                if($(this).hasClass('comSelected'))
+    $.ajax({url: common.APIWebPath() + "index.php?action=statusChecker&uid="+uid, success: function (result)
+    {
+        var obj = eval('('+result+')');
+        var errCode = obj.error.code;
+        if(errCode == '0')
+        {
+            var af = obj.result;
+            if(af !== undefined && af !== 'undefined' && af !== null && af !== 'null' && af !== '')
+            {
+                if(af == 'no')
                 {
-                    if(tmpId == 'forDiamond')
+                    $('.compComm').click( function(e)
                     {
-                        finalAmt += 30000;
-                    }
-                    else if(tmpId == 'forJewellery')
-                    {
-                        finalAmt += 25000;
-                    }
+
+                            var x = (document.all) ? event.x : e.pageX;
+                            var y = (document.all) ? event.y : e.pageY;
+
+                            setTimeout(function () {
+                                x = e.pageX = e.pageX + 100;
+                                y = e.pageY = e.pageY + 100;
+                            }, 1000);
+
+                            var id = $(this).attr('id');
+                            $(this).toggleClass('comSelected');
+                            if (id == 'forDiamond') {
+                                $('#diamondDet').toggleClass('dn');
+                            }
+                            else if (id == 'forJewellery') {
+                                $('#jewelleryDet').toggleClass('dn');
+                                $('#bullionDet').toggleClass('dn');
+                                }
+
+                                var finalAmt = 0;
+                                $('.compComm').each(function () {
+                                    var tmpId = $(this).attr('id');
+                                    if($(this).hasClass('comSelected'))
+                                    {
+                                        if(tmpId == 'forDiamond')
+                                        {
+                                            finalAmt += 30000;
+                                        }
+                                        else if(tmpId == 'forJewellery')
+                                        {
+                                            finalAmt += 25000;
+                                        }
+                                    }
+                                });
+                                pay = finalAmt;
+                            $('#payingamt').html('&#8377 '+pay);
+                            $('#payammo2').html('&#8377 '+pay);
+                            $('#payammo').val(pay);
+
+                    });
+                    
+                    
                 }
-            });
-            pay = finalAmt;
-        $('#payingamt').html('&#8377 '+pay);
-        $('#payammo2').html('&#8377 '+pay);
-        $('#payammo').val(pay);
-        
+                else if(af == 'yes')
+                {
+                    $('.compComm').bind('click',function () {
+                        common.toast(0,'You are not allowed to change your plan once your profile is activated');
+                    });
+                }
+            }
+        }
+        if(errCode == 1)
+        {
+            common.toast(0,'You are not allowed to access this page');
+        }
+    }
     });
+    
+    
+    //    
+        
 
     $('#pan').bind('keyup', function () {
 		if($(this) !== undefined && typeof $(this) !== 'undefined' && $(this).val() !== undefined && typeof $(this).val() !== 'undefined')
@@ -102,7 +124,6 @@ function validateForm() {
     var panPat = /^([A-Z]|[a-z]){5}([0-9]){4}([A-Z]|[a-z]){1}?$/;
     var code = /([C,c,P,p,H,h,F,f,A,a,T,t,B,b,L,l,J,j,G,g,K,k])/;
     var code_chk = pancard.substring(3, 4);
-
     var str = '';
 
 	var isValid = true;
@@ -207,7 +228,7 @@ function validateForm() {
         $('#banker').focus();
 		isValid = false;
     }
-
+    
     if (isValid && str == '' && !$("#forDiamond").hasClass("comSelected") && !$("#forJewellery").hasClass("comSelected") && !$("#forBullion").hasClass("comSelected"))
 	{
         str = 'Select business type';
@@ -618,7 +639,6 @@ function submitStep3Form() {
 
                     var obj = jQuery.parseJSON(result);
                     var isactive = obj.results[1]['active_flag'];
-                                        console.log(isactive);
                     if(isactive == 1 || isactive == '1')
                     {
                         setTimeout(function() {

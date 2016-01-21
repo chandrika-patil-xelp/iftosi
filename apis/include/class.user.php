@@ -32,6 +32,26 @@
                     $cntres = $this->numRows();
                     if($cntres == 1 )
                     {
+                        if(!empty($params['pid']))
+                        {
+                            global $comm;
+                            
+                            $url = APIDOMAIN."index.php?action=getOwnerCheck&uid=".$row['user_id']."&pid=".$params['pid'];
+                            
+                            $res1  = $comm->executeCurl($url);
+                            
+                            $data = $res1['error'];
+                            
+                            if($data['code'] == 1)
+                            {
+                                $arr2['vtype'] = 'same';
+                            }
+                            else if($data['code'] == 0)
+                            {
+                                $arr2['vtype'] = 'diff';
+                            }
+                            
+                        }
                         $row=$this->fetchData($res);
                         $arr2['isComp']= $row['is_complete'];
                         $arr2['busiType']= $row['business_type'];
@@ -49,6 +69,7 @@
                 $arr=array('msg'=>$arr1,'userid'=>$arr2['user_id'],'userDet'=>$arr2);
                 $err=array('Code'=>1,'Msg'=>'Data matched','type'=>$err2);
             }
+            
             $result = array('results' => $arr, 'error' => $err);
             return $result;
         }
@@ -496,6 +517,9 @@
                       $sql="SELECT 
                               business_type,
                               is_complete,
+                              profile_active_date as pact,
+                              profile_expiry_date as pexp,
+                              DATEDIFF(profile_expiry_date,now()) as diff,
                               active_flag
                        FROM 
                               tbl_vendor_master
@@ -506,9 +530,39 @@
                     {
                         while($vrow=$this->fetchData($res))
                         {
-                            $arr['busiType']=$vrow['business_type'];
-                            $arr['isC']=$vrow['is_complete'];
-                            $arr['af']=$vrow['active_flag'];
+
+                            if($vrow['diff'] <= 0)
+                            {
+                                $updtSql = "UPDATE tbl_vendor_master set active_flag = 0 WHERE vendor_id =".$arr['uid'];
+                                $udtres = $this->query($updtSql);
+                                $Tparams = array('username'=>$arr['username'],'email'=>$arr['email'],'mobile'=>$arr['mobile'],'isVendor'=>$arr['utype']);
+                                $this->sendDeactMailSms($Tparams);
+                                
+                                if($udtres)
+                                {
+                                    $sql="  SELECT 
+                                                    business_type,
+                                                    is_complete,
+                                                    active_flag
+                                            FROM 
+                                                    tbl_vendor_master
+                                            WHERE
+                                                    vendor_id=".$arr['uid'];
+                                    $res=$this->query($sql);
+                                    while($Vrow = $this->fetchData($res))
+                                    {
+                                        $arr['busiType'] = $Vrow['business_type'];
+                                        $arr['isC']      = $Vrow['is_complete'];
+                                        $arr['af']       = $Vrow['active_flag'];
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                $arr['busiType']=$vrow['business_type'];
+                                $arr['isC']=$vrow['is_complete'];
+                                $arr['af']=$vrow['active_flag'];
+                            }
                         }
                     }
                 }
@@ -604,6 +658,7 @@
             
             if($this->numRows($vres) == 1) //If user is registered
             {
+                
                 $usql=" UPDATE
                                     tbl_vendor_master
                         SET
@@ -623,6 +678,16 @@
                 {
                     if($params['af'] == 1)
                     {
+                        $usql=" UPDATE
+                                    tbl_vendor_master
+                        SET
+                                    profile_active_date=now(),
+                                    profile_expiry_date= ADDDATE(profile_active_date, INTERVAL 1 YEAR)
+                        WHERE 
+                                    vendor_id=".$params['userid'];
+                        
+                        $dateRes = $this->query($usql);
+
                         $regrow = $this->fetchData($vresReg);
                         $email = $regrow['email'];
                         $mobile = $regrow['logmobile'];
@@ -1157,6 +1222,60 @@
             return $result;
         }
         
+        public function sendDeactMailSms($params)
+        {
+            global $comm;
+            $smsText = '';
+            $subject = '';
+            $message = '';
+            $headers = '';
+            
+            if($params['isVendor'] == 1)
+            {
+                $subject = 'Vendor profile deactivation in IFtoSI';
+                $message = 'Dear '.$params['username'].', your account has been deactivated since your one year subscription is over.';
+                $message .= "\r\n";
+                $message = 'Kindly re-subscribe for the new packeage you want to continue with. It was really a good experience for us to be connected with you';
+                $message .= "\r\n";
+                $message .= "For any assistance, call: 022-32623263. Email: info@iftosi.com";
+                $message .= "\r\n";
+                $message .= "Team IFtoSI";
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                $headers .= 'From: <info@iftosi.com>' . "\r\n";
+                
+                $smsText .= "Vendor profile deactivation in IFtoSI";
+                $smsText .= "\r\n\r\n";
+                $smsText .= "Dear ".$params['username'].", your account has been deactivated since your one year subscription is over.";
+                $smsText .= "\r\n\r\n";
+                $smsText .= "Kindly re-subscribe for the new packeage you want to continue with. It was really a good experience for us to be connected with you";
+                $smsText .= "\r\n\r\n";
+                $smsText .= "For any assistance, call: 022-32623263. Email: info@iftosi.com";
+                $smsText .= "\r\n\r\n";
+                $smsText .= "Team IFtoSI";
+            }
+            if(!empty($params['email']))
+            {
+                    mail($params['email'], $subject, $message, $headers);
+            }
+            $smsText = urlencode($smsText);
+            $sendSMS = str_replace('_MOBILE', $params['mobile'], SMSAPI);
+            $sendSMS = str_replace('_MESSAGE', $smsText, $sendSMS);
+            $res = $comm->executeCurl($sendSMS, true);
+            if($res)
+            {
+                $arr = array();
+                $err = array('code'=>0,'msg'=>'SMS & EMAIL sent to the user');
+            }
+            else
+            {
+                $arr = array();
+                $err = array('code'=>0,'msg'=>'SMS & EMAIL is not sent to the user');
+            }
+            $result = array('result'=>$arr,'error'=>$err);
+            return $result;
+        }
+        
         public function sendEnqMailSMS($params)
         {
                 $pdet = unserialize(urldecode($params['pdet']));
@@ -1262,6 +1381,35 @@
             {
                 $arr = array();
                 $err = array('code'=>0,'msg'=>'SMS & EMAIL is not sent to the user');
+            }
+            $result = array('result'=>$arr,'error'=>$err);
+            return $result;
+        }
+        
+        public function statusChecker($params)
+        {
+            $sqlCheck = "SELECT active_flag FROM tbl_vendor_master WHERE vendor_id=".$params['uid'];
+            $resCheck = $this->query($sqlCheck);
+            $rowCheck = $this->fetchData($resCheck);
+            $resCount = $this->numRows($resCheck);
+            if($resCount == 1)
+            {
+                $arr= $rowCheck['active_flag'];
+                if($arr == 1)
+                {
+                    $arr = 'yes';
+                }
+                else
+                {
+                    $arr = 'no';
+                }
+                    
+                $err = array('code'=>0,'msg'=>'Vendor status is fetched');
+            }
+            else
+            {
+                $arr= array();
+                $err = array('code'=>1,'msg'=>'Vendor status not found');
             }
             $result = array('result'=>$arr,'error'=>$err);
             return $result;

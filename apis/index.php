@@ -131,6 +131,24 @@ switch($action)
         $result = $obj->sendRateMail($params);
         $res = $result;
         break;         
+   
+        case 'sendDeactMailSms':
+        include APICLUDE.'class.user.php';
+        $username  = (!empty($params['username'])) ? trim($params['username']) : '';
+        $mobile  = (!empty($params['mobile'])) ? trim($params['mobile']) : '';
+        $email  = (!empty($params['email'])) ? trim(urlencode($params['email'])) : '';
+        $isVendor  = (!empty($params['isVendor'])) ? trim($params['isVendor']) : '';
+        if(empty($mobile) || empty($email) || empty($username) || empty($isVendor))
+        {
+            $resp = array();
+            $error = array('errCode' => 1, 'errMsg' => 'Invalid parameters');
+            $result = array('results' => $resp, 'error' => $error);
+            break;
+        }
+        $obj= new user($db['iftosi']);
+        $result = $obj->sendRateMail($params);
+        $res = $result;
+        break;         
             
    case 'sendWelcomeMailSMS':
         include APICLUDE.'class.user.php';
@@ -296,6 +314,22 @@ switch($action)
             $obj=new user($db['iftosi']);
             $tmp_params = array('email' => $email);
             $res = $obj->forgotPwd($tmp_params);
+            break;
+
+// localhost/iftosi/apis/index.php?action=forgotPwd&email=9655338337
+        case 'statusChecker':
+            include_once APICLUDE . 'class.user.php';
+            $uid = (!empty($params['uid'])) ? trim($params['uid']) : '';
+
+            if (empty($uid)) {
+                $resp = array();
+                $error = array('Code' => 1, 'Msg' => 'Invalid parameters');
+                $res = array('results' => $resp, 'error' => $error);
+                break;
+            }
+            $obj=new user($db['iftosi']);
+            $tmp_params = array('uid' => $uid);
+            $res = $obj->statusChecker($tmp_params);
             break;
 
 // localhost/iftosi/apis/index.php?action=changepwd&cpass=123456&npass=654321&rpass=654321

@@ -828,7 +828,7 @@ $("#upSubmit").on('click',(function(e) {
     } else {
         $('#upSubmit').text('Uploading Data');
         uploadStart=true;
-        $.ajax({url: DOMAIN + "/apis/index.php?action=bulkInsertProducts&vid="+uid,
+        $.ajax({url: DOMAIN + "apis/index.php?action=bulkInsertProducts&vid="+uid,
             type: "POST",             
             data: new FormData($('form')[0]), 
             contentType: false,

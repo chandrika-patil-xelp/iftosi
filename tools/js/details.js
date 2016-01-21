@@ -247,13 +247,27 @@ $(document).ready(function(){
                                 }
 				else
 				{
-					sendDetailsToUser();            
-					addToEnquiry();
+                                    $.ajax({url: DOMAIN + "apis/index.php?action=getOwnerCheck&uid="+uid+"&pid="+pid, success: function(result)
+                                        {
+                                            var obj = eval('('+result+')');
+                                            var eCode = obj.error.code;
+                                            if(eCode == 1 || eCode == '1')
+                                            {
+                                                customStorage.toast(0,'You can not have information of your own product');
+                                            }
+                                            else
+                                            {
+                                                sendDetailsToUser();            
+                                                addToEnquiry();                                                
+                                            }
+                                        }
+                                    });
+
 				}
 			}
 			else
 			{
-				showVendorDetails();
+                            	showVendorDetails();
 			}
 
             $('#userForm').velocity({scale:0},{delay:0,ease:'swing'});
@@ -692,7 +706,21 @@ function showVendorDetails(obj)
 	{
 		if(isWishList==true)
 		{
-			addToWishList();
+                    $.ajax({url: DOMAIN + "apis/index.php?action=getOwnerCheck&uid="+uid+"&pid="+pid, success: function(result)
+                        {
+                            var obj = eval('('+result+')');
+                            var eCode = obj.error.code;
+                            if(eCode == 1 || eCode == '1')
+                            {
+                                customStorage.toast(0,'You can not have information of your own product');
+                            }
+                            else
+                            {
+                                addToWishList();                                
+                            }
+                        }
+                    });
+
 		}
 		else if(isMail==true)
 		{
@@ -706,29 +734,42 @@ function showVendorDetails(obj)
 		}
 		else if((isMail==false)&&(isWishList==false))
 		{
-			var bottomPos = $('.prdMainDetails').position().top+$('.prdMainDetails').outerHeight(true);
-			var pos=bottomPos - 65;
+                        $.ajax({url: DOMAIN + "apis/index.php?action=getOwnerCheck&uid="+uid+"&pid="+pid, success: function(result)
+                        {
+                            var obj = eval('('+result+')');
+                            var eCode = obj.error.code;
+                            if(eCode == 1 || eCode == '1')
+                            {
+                                customStorage.toast(0,'You can not have information of your own product');
+                            }
+                            else
+                            {
+                                var bottomPos = $('.prdMainDetails').position().top+$('.prdMainDetails').outerHeight(true);
+                                var pos=bottomPos - 65;
 
-			setTimeout(function(){
-				$('#vDetails').removeClass('vTransit');
-				$('#vDetails').removeClass('dn');
-				$('html,body').animate({scrollTop: pos}, 150);
-				if($("head").html().indexOf('http://maps.google.com/maps/api/js') === -1)
-				{
-					//setTimeout(function () {
-						var mpscrpt = document.createElement("script");
-						mpscrpt.type = "text/javascript";
-						mpscrpt.src = "http://maps.google.com/maps/api/js";
-						$("head").append(mpscrpt);
+                                setTimeout(function(){
+                                        $('#vDetails').removeClass('vTransit');
+                                        $('#vDetails').removeClass('dn');
+                                        $('html,body').animate({scrollTop: pos}, 150);
+                                        if($("head").html().indexOf('http://maps.google.com/maps/api/js') === -1)
+                                        {
+                                                //setTimeout(function () {
+                                                        var mpscrpt = document.createElement("script");
+                                                        mpscrpt.type = "text/javascript";
+                                                        mpscrpt.src = "http://maps.google.com/maps/api/js";
+                                                        $("head").append(mpscrpt);
 
-						setTimeout(function () {
-							initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
-						}, 220);
-					//}, 220);
-				}
-			}, 20);
+                                                        setTimeout(function () {
+                                                                initMap(vndrLat*1,vndrLng*1,vndrFullAddr);
+                                                        }, 220);
+                                                //}, 220);
+                                        }
+                                }, 20);
 
-			addToEnquiry();
+                                addToEnquiry();
+                            }
+                        }
+                    });
 		}
 	}
 }
@@ -1030,7 +1071,7 @@ function otpCheck()
                                 var name = $('#ur_name').val().trim();
                                 var email = $('#ur_email').val().trim();
 
-                                var params = 'action=ajx&case=userCheck&mobile='+mobile+'&name='+encodeURIComponent(name)+'&email='+encodeURIComponent(email);
+                                var params = 'action=ajx&case=userCheck&mobile='+mobile+'&name='+encodeURIComponent(name)+'&email='+encodeURIComponent(email)+'&pid='+pid;
                                 var URL = DOMAIN + "index.php";
 
                                 $.getJSON(URL, params, function(data) {
@@ -1094,8 +1135,16 @@ function otpCheck()
 
                                                                 if((obj !== undefined && $(obj).hasClass('iconMessage')) || isMail)
                                                                 {
-                                                                        sendDetailsToUser();
-                                                                        addToEnquiry();
+                                                                        if(data.results.userDet.vtype == 'same')
+                                                                        {
+                                                                            customStorage.toast(0,'You can not have information of your own product');
+                                                                            $('.prdBtns').addClass('dn');
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            sendDetailsToUser();
+                                                                            addToEnquiry();
+                                                                        }
                                                                 }
                                                                 else
                                                                 {

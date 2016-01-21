@@ -86,8 +86,15 @@ switch ($action) {
                 $mobile = (!empty($_GET['mobile'])) ? trim($_GET['mobile']) : '';
                 $name = (!empty($_GET['name'])) ? trim(urldecode($_GET['name'])) : '';
                 $email = (!empty($_GET['email'])) ? trim(urldecode($_GET['email'])) : '';
-
-                $userUrl = APIDOMAIN . 'index.php?action=checkUser&mobile=' . $mobile;
+                $pid = (!empty($_GET['pid'])) ? trim(urldecode($_GET['pid'])) : '';
+                if(!empty($pid))
+                {
+                    $userUrl = APIDOMAIN . 'index.php?action=checkUser&mobile=' . $mobile.'&pid=' . $pid;
+                }
+                else
+                {
+                    $userUrl = APIDOMAIN . 'index.php?action=checkUser&mobile=' . $mobile;
+                }
                 $resp = $comm->executeCurl($userUrl);
 
                 if (!empty($resp) && !empty($resp['error']) && !empty($resp['results']) && empty($resp['error']['Code'])) {
@@ -390,13 +397,13 @@ switch ($action) {
                 $page = 'faq_sellers';
                 include 'template/faq_sellers.html';
                 break;
-            case 'new1':
-                $page = 'new1';
+            case 'approachOption':
+                $page = 'approachOption';
                 $uid = $_GET['uid'];
                 $url = APIDOMAIN . 'index.php?action=viewAll&uid=' . $uid;
                 $res = $comm->executeCurl($url);
                 $data = $res['results'][1];
-                include 'template/new.html';
+                include 'template/approachOption.html';
                 break;
 
             case 'changepwd':

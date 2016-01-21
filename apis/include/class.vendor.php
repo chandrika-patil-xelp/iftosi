@@ -23,9 +23,13 @@ class vendor extends DB
        // echo $sql;die;
         $res = $this->query($sql);
         if($res)
-        {
+        {   
             while($row = $this->fetchData($res))
             {
+                $dateString= $row['profile_expiry_date'];
+                $dt = new DateTime($dateString);
+                $row['profile_expiry_date'] = trim(strstr($dt->format('r'),'+',true));
+                
                 $arr[] = $row;
             }
             $results=array('vendors'=>$arr,"total_vendors"=>$total);
@@ -802,6 +806,10 @@ class vendor extends DB
                             }
                             if($j>=12 && $j<=15) {
                                 $value[$j]=$this->getAbbrValue($value[$j]);
+                            }
+                            if($j == 11)
+                            {
+                                $value[$j] = str_replace('-', '', $value[$j]);
                             }
                             $srch_val .= "'" . $value[$j] . "', ";
                         }
