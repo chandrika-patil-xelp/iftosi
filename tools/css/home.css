@@ -541,7 +541,7 @@ a{text-decoration: none;}
 .halfSize .checkDiv{width:50%;}
 
 
-.bottmInfo{width:100%;height:285px;padding: 60px 0;background: #380B34  url(../img/common/pattern.svg); background-size: auto 25px;border-top:50px solid #fff;}
+.bottmInfo{width:100%;height:285px;padding: 60px 0;background: #380B34  url(../img/common/pattern.svg); background-size: auto 25px;border-top:50px solid #fff;float: left;}
 .infoComm{width:25%;height: 100%;border-right:2px solid rgba(0,0,0,0.2);position: relative;}
 .infoComm:last-child{border:none;}
 .infoTxt{width:100%;height:55px;position: absolute;top:0;right: 0;bottom: 0;left: 0;margin: auto;text-align: center;}
@@ -963,6 +963,12 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .dropArrow {background-image: url("../img/down_arrow.svg");background-position: right center;background-repeat: no-repeat;background-size: auto 100%;}
 /* End of suggest */
 .padL20{padding-left:20px;}
+
+/*Vendor Sign Up*/
+
+.svnd {width: 100%;height: 130px;color: #4d4d4d;font-size: 35px;font-family: openL;text-align: center;line-height: 80px;background: #fff;padding-top: 50px;}
+.svnd .searchBtn{margin: 0;vertical-align: top;    margin: 20px 10px;}
+
 
 @media only screen and (min-width: 320px) and (max-width: 767px){
     /*Header*/
