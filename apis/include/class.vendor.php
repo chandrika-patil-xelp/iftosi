@@ -789,13 +789,13 @@ class vendor extends DB
                     $res = $this->query($query);
                     if ($res) {
                         $pro_id = mysql_insert_id();
-                        $sql = "INSERT INTO `tbl_product_category_mapping` (product_id, category_id, price, date_time) VALUES ('" . $pro_id . "','10000','" . $value[9] . "','" . $ts . "')";
+                        $sql = "INSERT INTO `tbl_product_category_mapping` (product_id, category_id, price,b2bprice, date_time) VALUES ('" . $pro_id . "','10000','" . $value[9] . "','" . $value[9] . "','" . $ts . "')";
                         //echo $sql.'<br>';
                         $res = $this->query($sql);
-                        $sql = "INSERT INTO `tbl_product_master` (product_id, barcode, lotref, lotno, prd_price, date_time) VALUES ('" . $pro_id . "','" . $value[0] . "','" . $value[1] . "','" . $value[2] . "','" . $value[9] . "','" . $ts . "')";
+                        $sql = "INSERT INTO `tbl_product_master` (product_id, barcode, lotref, lotno, prd_price,b2bprice, date_time) VALUES ('" . $pro_id . "','" . $value[0] . "','" . $value[1] . "','" . $value[2] . "','" . $value[9] . "','" . $value[9] . "','" . $ts . "')";
                         //echo $sql.'<br>';
                         $res = $this->query($sql);
-                        $sql = "INSERT INTO `tbl_vendor_product_mapping` (product_id, vendor_id, vendor_price, city, vendor_currency, date_time) VALUES ('" . $pro_id . "','" . $vid . "','" . $value[9] . "','" . $city . "','USD', '" . $ts . "')";
+                        $sql = "INSERT INTO `tbl_vendor_product_mapping` (product_id, vendor_id, vendor_price,b2bprice, city, vendor_currency, date_time) VALUES ('" . $pro_id . "','" . $vid . "','" . $value[9] . "','" . $value[9] . "','" . $city . "','USD', '" . $ts . "')";
                         //echo $sql.'<br>';
                         $res = $this->query($sql);
                         $srch_val = "'" . $pro_id . "', ";
@@ -810,11 +810,17 @@ class vendor extends DB
                             if($j == 11)
                             {
                                 $value[$j] = str_replace('-', '', $value[$j]);
+                                $b2bdisc = $value[$j];
+                                $b2bprice = $value[$j-2];
                             }
+                            
                             $srch_val .= "'" . $value[$j] . "', ";
                         }
                         $srch_val .="'".$shape."'";
-                        $sql = "INSERT INTO `tbl_product_search` (product_id, certified, cut, carat, color, clarity, base, price, value, p_disc, prop, polish, symmetry, fluo, td, tabl, measurement, cno, pa, cr_hgt, cr_ang, girdle, pd, shape) VALUES (" . rtrim($srch_val, ', ') . ")";
+                        $srch_val .=",'".$b2bdisc."'";
+                        $srch_val .=",'".$b2bprice."'";
+                        
+                        $sql = "INSERT INTO `tbl_product_search` (product_id, certified, cut, carat, color, clarity, base, price, value, p_disc, prop, polish, symmetry, fluo, td, tabl, measurement, cno, pa, cr_hgt, cr_ang, girdle, pd, shape,p_discb2b,b2b_price) VALUES (" . rtrim($srch_val, ', ') . ")";
                         //echo $sql.'<br>';
                         $res = $this->query($sql);
                         $totlIns++;

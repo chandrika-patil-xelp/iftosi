@@ -134,3 +134,4 @@ class admin extends DB
         return $result;
     }
 }
+?>
