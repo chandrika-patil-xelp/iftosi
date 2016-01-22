@@ -12,7 +12,7 @@ class sendingMail extends DB
         public function sendMail($params)
         {
           global $comm;
-
+            error_reporting(E_ALL);
             $subject ='Email testing IFtoSI';
 
             $str = "";
