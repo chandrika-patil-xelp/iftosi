@@ -10,12 +10,12 @@
         <div>TODO write content</div>
     </body>
 <script type="text/javascript" src="<?php echo $jvs['jqry']; ?>"></script>
- 
+
 <script>
         var DOMAIN = '<?=DOMAIN;?>';
 function checkMailbtn(str)
 {
-        var to = 'shubham.bajpai@xelpmoc.in';
+        var to = 'shitanshu@xelpmoc.in';
         $.ajax({url: DOMAIN + "apis/index.php?action=sendMail&str="+encodeURIComponent(str)+"&to="+encodeURIComponent(to), success: function(result)
             {
                 var obj = eval('('+result+')');
@@ -35,4 +35,3 @@ function checkMailbtn(str)
 checkMailbtn('hi');
         </script>
 </html>
-
