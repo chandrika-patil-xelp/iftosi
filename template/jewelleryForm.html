@@ -314,12 +314,12 @@
    <div style="clear: both;"></div>
    <?php } ?> <!--<div onclick="addShapeType()" id="addDiamondType" class="submitBtn fmOpenR ripplelink poR fRight">Add Diamond Type</div><div class="clearFill"></div>-->
                         
-                    <div class="divCon2 fLeft <?php echo ($attr['diamond_shape']) ? '' : 'dn'; ?> diamondProp">
+                    <div class="divCon2 fLeft <?php echo ($attr['diamond_shape'][0]) ? '' : 'dn'; ?> diamondProp">
                         <div  class="titleDiv txtCap fLeft">Diamond Weight (in CTS)*</div>
                         <input name="diamonds_weight" id="diamondweight" type="text" autocomplete="false" placeholder=" eg. 1.25" maxlength="8" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['dwt'];?>" class="txtInput fLeft fmOpenR font14 c666">
                     </div>
 
-					<div class="divCon2 fLeft <?php echo ($attr['diamond_shape']) ? '' : 'dn'; ?> diamondProp">
+					<div class="divCon2 fLeft <?php echo ($attr['diamond_shape'][0]) ? '' : 'dn'; ?> diamondProp">
                         <div  class="titleDiv txtCap fLeft">No. Of Diamonds*</div>
                         <input name="no_diamonds" id="no_diamonds" type="text" placeholder=" eg. 10" autocomplete="false" value="<?=$attr['nofd'];?>" onkeypress="common.isNumberKey(event);" class="txtInput fLeft fmOpenR font14 c666">
                     </div>

@@ -981,6 +981,12 @@ function checkDiamondShape(evt,id) {
         }
         $('.diamondProp_'+id).addClass('dn');
         $('.diamondProp_'+id+' input').removeAttr('checked');
+        console.log('evt1');
+        console.log(evt);
+        if(!$(evt).hasClass('shapeSelected') && id==1)
+        {
+            $('#addDiamondType').remove();
+        }
     } else {
         $(evt).removeClass('shapeSelected');
         var uthis = $(evt);
