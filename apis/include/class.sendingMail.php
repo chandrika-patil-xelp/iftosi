@@ -13,20 +13,20 @@ class sendingMail extends DB
         {
           global $comm;
             error_reporting(E_ALL);
-            $subject ='Email testing IFtoSI';
+            $subject ='account has been activated';
 
             $str = "";
             $str .= '<!DOCTYPE html>';
             $str .='<html>';
             $str .= '<head>';
-            $str .='<title>TODO supply a title</title>';
+            $str .='<title>account has been activated</title>';
             $str .='<meta charset="UTF-8">';
             $str .='<meta name="viewport" content="width=device-width, initial-scale=1.0">';
             $str .='</head>';
             $str .='<body>';
             $str .='<center>';
             $str .='<div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; letter-spacing: -0.02em; color:#333; padding: 10px; -webkit-font-smoothing: antialiased;font-family: Helvetica, Roboto, verdana, sans-serif-condensed, Tahoma;background-color:#8A0044">';
-            $str .='<div style="height: auto; width:100%; padding-bottom: 15px;"><img src="http://beta.xelpmoc.in/iftosi/tools/img/common/logo.svg" style="width:15%; max-width: 150px;"><span id="logoTxt" class="" style="color: rgb(255, 255, 255); left: 20px; bottom: 20px;"></div>';
+            $str .='<div style="height: auto; width:100%; padding-bottom: 15px;"><img src="'.DOMAIN.'tools/img/common/logo.svg" style="width:15%; max-width: 150px;"><span id="logoTxt" class="" style="color: rgb(255, 255, 255); left: 20px; bottom: 20px;"></div>';
             $str .='<div style="height: auto; border-radius: 15px; padding: 15px 4%;background: #fff;">';
             $str .='<div style="width:100%;">';
             $str .='<center>';
