@@ -13,23 +13,26 @@ class vendor extends DB
 
 
         $total_products = 0;
-        $sql = "SELECT * FROM tbl_vendor_master WHERE orgName is not null ORDER BY date_time DESC";
-        $res = $this->query($sql);
-        $total = $this->numRows($res);
+        $sql = "SELECT *,date_format(profile_expiry_date,'%D %M,%Y  %r') as expiry_show FROM tbl_vendor_master WHERE orgName is not null ORDER BY date_time DESC";
+        
         if (!empty($page)) {
             $start = ($page * $limit) - $limit;
             $sql.=" LIMIT " . $start . ",$limit";
         }
        // echo $sql;die;
         $res = $this->query($sql);
+        $total = $this->numRows($res);
+        
+        $arr = array();
         if($res)
         {   
             while($row = $this->fetchData($res))
             {
-                $dateString= $row['profile_expiry_date'];
-                $dt = new DateTime($dateString);
-                $row['profile_expiry_date'] = trim(strstr($dt->format('r'),'+',true));
-                
+                if(empty($row['profile_expiry_date']) || $row['profile_expiry_date'] == '0000-00-00 00:00:00')
+                {
+                    $row['expiry_show'] = 'Not Available';
+                }
+                    
                 $arr[] = $row;
             }
             $results=array('vendors'=>$arr,"total_vendors"=>$total);

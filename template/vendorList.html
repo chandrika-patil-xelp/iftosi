@@ -59,7 +59,7 @@
                 ?>
                 <div class="fLeft vndPackage"><?php echo $package?></div>
                 <div class="fLeft vndAmount"><?php echo $cost?></div>
-                <div class="fLeft vndExpDate">NA</div>
+                <div class="fLeft vndExpDate"><?=$data[$i]['profile_expiry_date'];?></div>
                 <div class="fLeft vndEdit">
                     <div class="toggle-button <?=($data[$i]['active_flag'] === '0') ? '' : 'toggle-button-selected';?>" onclick="changeStatus(<?=$data[$i]['vendor_id'];?>,this)">
                         <span class="fActive">Yes</span>
@@ -76,6 +76,7 @@
 </div>
 <script type="text/javascript" src="<?=DOMAIN;?>tools/js/adminNav.js?v=<?=VERSION;?>"></script>
 <script type="text/javascript" src="<?=DOMAIN;?>tools/js/Common.js?v=<?=VERSION;?>"></script>
+<script type="text/javascript" src="<?= $jvs['cms_jquery_toast'];?>"></script>
 <script>
  var uid = customStorage.readFromStorage('userid');
     var is_vendor = customStorage.readFromStorage('is_vendor');
@@ -118,7 +119,14 @@
                                 if(data.error !== '' && data.error !== null && data.error !== undefined && data.error !== 'undefined' && typeof data.error !== 'undefined' && data.error.code == 0)
                                 {
                                     $(obj).toggleClass('toggle-button-selected');
-                                    customStorage.toast(1, 'Vendor status is changed');
+                                    if(st == 1)
+                                    {
+                                        customStorage.toast(1, 'Vendor status is changed');
+                                    }
+                                    else if(st == 0)
+                                    {
+                                        customStorage.toast(0, 'Vendor status is changed');
+                                    }
                                 }
                             }
                         });
@@ -186,6 +194,7 @@ function loadProductsCallback(res,pgno) {
             var cost=obj['pay_amount'];
             var package=new Array();
             var business_type = obj['business_type'].split(',');
+            var expiry = obj.expiry_show;
             for(var j = 0; j < business_type.length; j++) {
                 if(business_type[j] == 1)
                 {
@@ -201,10 +210,9 @@ function loadProductsCallback(res,pgno) {
                 }
             }
             
-            
             str += '<div class="fLeft vndPackage">'+package.join()+'</div>';
             str += '<div class="fLeft vndAmount">'+cost+'</div>';
-            str += '<div class="fLeft vndExpDate">NA</div>';
+            str += '<div class="fLeft vndExpDate">'+expiry+'</div>';
             str += '<div class="fLeft vndEdit">';
             var className='';
             if(obj['active_flag']=='1'){
