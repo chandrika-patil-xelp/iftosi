@@ -1127,6 +1127,12 @@ switch ($action) {
                 $page = 'thumbnail';
                 include 'template/thumbnail.html';
                 break;
+            
+            case 'testMail':
+                $page = 'testMail';
+                include 'template/testMail.html';
+                break;
+            
             default:
                 $page = 'index';
 

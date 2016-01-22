@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>TODO write content</div>
+    </body>
+<script type="text/javascript" src="<?php echo $jvs['jqry']; ?>"></script>
+ 
+<script>
+        var DOMAIN = '<?=DOMAIN;?>';
+function checkMailbtn(str)
+{
+        var to = 'shubham.bajpai@xelpmoc.in';
+        $.ajax({url: DOMAIN + "apis/index.php?action=sendMail&str="+encodeURIComponent(str)+"&to="+encodeURIComponent(to), success: function(result)
+            {
+                var obj = eval('('+result+')');
+                console.log(obj);
+                var errCode = obj.error.code;
+                if(errCode == 0 || errCode == '0')
+                {
+                    alert('mail Sent');
+                }
+                else if(errCode == 1 || errCode == '1')
+                {
+                    alert('error in sending mail');
+                }
+            }
+        });
+}
+checkMailbtn('hi');
+        </script>
+</html>
+

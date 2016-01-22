@@ -1873,6 +1873,16 @@ echo '</pre>';
 			$obj = new product($db['iftosi']);
 			$res = $obj->getPrdImgsByIds($params);
 		break;
+            
+		case "sendMail":
+			include APICLUDE . 'class.sendingMail.php';
+                        $to=(!empty($params['to'])) ? trim(urldecode($params['to'])) : '';
+                        $str=(!empty($params['str'])) ? trim(urldecode($params['str'])) : '';
+                        
+                        $obj = new sendingMail($db['iftosi']);
+                        $res = $obj->sendMail($params);
+                        
+		break;
 
         default :
 
