@@ -7,7 +7,7 @@ $action = $_GET['action'];
 
 switch($action)
     {
-    
+
 //----------------------------Check Owner--------------------------------
 
 //  localhost/iftosi/apis/index.php?action=getOwnerCheck&uid=3&pid=2
@@ -50,7 +50,7 @@ switch($action)
         $result	= $obj->changePassUrl($params);
         $res = $result;
         break;
-    
+
 //  localhost/iftosi/apis/index.php?action=getUserDet&key=uvwxyz
     case 'getUserDet':
         $url=(!empty($params['key'])) ? trim($params['key']) : '';
@@ -66,8 +66,8 @@ switch($action)
         $obj	= new urlmaster($db['iftosi']);
         $result	= $obj->getUserDet($params);
         $res = $result;
-        break;  
-    
+        break;
+
 //----------------------------User--------------------------------
 
 //  localhost/iftosi/apis/index.php?action=checkUser&mobile=9987867578
@@ -116,7 +116,7 @@ switch($action)
             $result= $obj->checkUser($params);
             $res= $result;
             break;
-    
+
    case 'sendRateMail':
         include APICLUDE.'class.user.php';
         $vid  = (!empty($params['vid'])) ? trim($params['vid']) : '';
@@ -130,8 +130,8 @@ switch($action)
         $obj= new user($db['iftosi']);
         $result = $obj->sendRateMail($params);
         $res = $result;
-        break;         
-   
+        break;
+
         case 'sendDeactMailSms':
         include APICLUDE.'class.user.php';
         $username  = (!empty($params['username'])) ? trim($params['username']) : '';
@@ -148,8 +148,8 @@ switch($action)
         $obj= new user($db['iftosi']);
         $result = $obj->sendRateMail($params);
         $res = $result;
-        break;         
-            
+        break;
+
    case 'sendWelcomeMailSMS':
         include APICLUDE.'class.user.php';
         $username  = (!empty($params['username'])) ? trim($params['username']) : '';
@@ -167,14 +167,14 @@ switch($action)
         $result = $obj->sendWelcomeMailSMS($params);
         $res = $result;
         break;
-        
+
    case 'sendEnqMailSMS':
         include APICLUDE.'class.user.php';
         $username  = (!empty($params['username'])) ? trim($params['username']) : '';
         $email  = (!empty($params['email'])) ? trim($params['email']) : '';
         $mobile  = (!empty($params['mobile'])) ? trim($params['mobile']) : '';
         $useremail  = (!empty($params['useremail'])) ? trim($params['useremail']) : '';
-        
+
         if(empty($username) && empty($email) && empty($mobile) && empty($useremail))
         {
             $resp = array();
@@ -185,8 +185,8 @@ switch($action)
         $obj= new user($db['iftosi']);
         $result = $obj->sendEnqMailSMS($params);
         $res = $result;
-        break;        
-            
+        break;
+
     case 'sendOTP':
         include APICLUDE.'class.user.php';
         $mb = (!empty($params['mb'])) ? trim($params['mb']) : '';
@@ -201,7 +201,7 @@ switch($action)
         $result = $obj->sendOTP($params);
         $res = $result;
         break;
-        
+
 
     case 'validOTP':
         include APICLUDE.'class.user.php';
@@ -219,7 +219,7 @@ switch($action)
         $result = $obj->validOTP($params);
         $res = $result;
         break;
-        
+
 // localhost/iftosi/apis/index.php?action=userReg&username=Shushrut Kumar&password=mishra1.234&mobile=7309290529&email=shubham.bajpai@xelpmoc.in&isvendor=1
         case 'userReg':
             include APICLUDE.'class.user.php';
@@ -389,7 +389,7 @@ switch($action)
             $result =  $obj->actUser($params);
             $res= $result;
             break;
-            
+
 // localhost/iftosi/apis/index.php?action=activateVendor&user_id=3
         case 'activateVendor':
             include APICLUDE.'class.user.php';
@@ -825,7 +825,7 @@ switch($action)
             $result= $obj->checkArea($params);
             $res=$result;
             break;
-        
+
 // localhost/iftosi/apis/index.php?action=addCity&cname=Pakistan&sname=Punjab&cityname=lahore
         case 'addCity':
             include APICLUDE.'class.location.php';
@@ -901,7 +901,7 @@ switch($action)
 //  localhost/iftosi/apis/index.php?action=viewbyPincode&code=380001
         case 'viewbyAreaPincode':
             include APICLUDE.'class.location.php';
-            
+
             $area=(!empty($params['area'])) ? trim(urldecode($params['area'])) : '';
             if(empty($area))
             {
@@ -914,8 +914,8 @@ switch($action)
             $obj= new location($db['iftosi']);
             $result= $obj->viewbyAreaPincode($params);
             $res=$result;
-            break;            
-            
+            break;
+
 //  localhost/iftosi/apis/index.php?action=viewbyPincode&code=380001
         case 'viewbyPincode':
             include APICLUDE.'class.location.php';
@@ -1191,12 +1191,12 @@ switch($action)
             $result=$obj->addNewproduct($params);
             $res=$result;
             break;
-        
+
         case 'Vpactive':
             include APICLUDE.'class.vendor.php';
             $vid=(!empty($params['vid'])) ? trim(urldecode($params['vid'])) : '';
             $af=(!empty($params['af'])) ? trim(urldecode($params['af'])) : '';
-            
+
             if(empty($vid) && empty($af))
             {
                 $arr=array();
@@ -1208,7 +1208,7 @@ switch($action)
             $obj=new vendor($db['iftosi']);
             $result=$obj->Vpactive($params);
             $res=$result;
-            break;    
+            break;
 
         /*case 'imageUpdate':
             include APICLUDE.'class.product.php';
@@ -1346,7 +1346,7 @@ switch($action)
             $result=$obj->suggestProducts($params);
             $res=$result;
             break;
-        
+
 //  localhost/iftosi/apis/index.php?action=showDescription
         case 'showDescription':
             include APICLUDE.'class.product.php';
@@ -1827,14 +1827,14 @@ echo '</pre>';
             $res=$result;
             break;
 
-        
+
 
 //  localhost/iftosi/apis/index.php?action=getProdList
         case 'getProdList':
             include APICLUDE.'class.admin.php';
             $obj=new admin($db['iftosi']);
             $res=$obj->getProdList($params);
-            break;   
+            break;
 
 //  localhost/iftosi/apis/index.php?action=getImgByProd&pid=12000
         case 'getImgByProd':
@@ -1842,14 +1842,14 @@ echo '</pre>';
             $obj=new admin($db['iftosi']);
             $res=$obj->getImgByProd($params);
             break;
-        
+
 //  localhost/iftosi/apis/index.php?action=updateImageData&id=1&rea=dsdsd&seq=2
         case 'updateImageData':
             include APICLUDE.'class.admin.php';
             $obj=new admin($db['iftosi']);
             $res=$obj->updateImageData($params);
             break;
-        
+
 		case 'getLatLngByArea':
 			include APICLUDE . 'class.location.php';
 			$obj = new location($db['iftosi']);
@@ -1873,15 +1873,16 @@ echo '</pre>';
 			$obj = new product($db['iftosi']);
 			$res = $obj->getPrdImgsByIds($params);
 		break;
-            
+
 		case "sendMail":
+    error_reporting(E_ALL);
 			include APICLUDE . 'class.sendingMail.php';
                         $to=(!empty($params['to'])) ? trim(urldecode($params['to'])) : '';
                         $str=(!empty($params['str'])) ? trim(urldecode($params['str'])) : '';
-                        
+
                         $obj = new sendingMail($db['iftosi']);
                         $res = $obj->sendMail($params);
-                        
+
 		break;
 
         default :
