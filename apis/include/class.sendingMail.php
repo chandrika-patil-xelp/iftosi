@@ -11,13 +11,11 @@ class sendingMail extends DB
 
         public function sendMail($params)
         {
-          echo "here";
-
-            global $comm;
+          global $comm;
 
             $subject ='Email testing IFtoSI';
 
-            $str = '';
+            $str = "";
             $str .="<html>";
             $str .="<head>";
             $str .="<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>";
@@ -27,11 +25,10 @@ class sendingMail extends DB
             $str .="<body style='margin:0; padding: 0; background-color: #0090a5;'>";
             $str .="<center>";
             $str .="<div style='text-align: center; height: auto; font-size: 1em; margin:0; max-width: 600px; letter-spacing: -0.02em; color:#333; padding: 15px; -webkit-font-smoothing: antialiased;font-family: Helvetica, verdana, sans-serif-condensed, Tahoma;'>";
-            $str .="<div style='height: auto; width:100%; padding-bottom: 15px;'><img src='".$this->common->getWebPath()."assets/images/emailimg/nafex.png' style='width:55%; max-width: 250px;'></div>";
+            $str .="<div style='height: auto; width:100%; padding-bottom: 15px;'><img src='""assets/images/emailimg/nafex.png' style='width:55%; max-width: 250px;'></div>";
             $str .="<div style='height: auto; border-radius: 15px; border: 1px solid #e6e6e6; box-shadow: 0 0 30px 5px rgba(0,0,0,0.4); padding: 25px 6%;background: #fff;'>";
             $str .="<div style='width:100%;'>";
             $str .="<center>";
-            $str .="<div style='width:auto; vertical-align: top; height: 30px; display: inline-block; text-transform: uppercase; line-height: 30px; padding:10px 20px; letter-spacing: -0.03em; font-weight: bold; text-align: center; font-size: 20px; border-radius: 40px; background: #91bf34; color: #fff; box-shadow: 0 0 20px 0px rgba(0,0,0,0.3); border: 2px solid #fff'><img src='".$this->common->getWebPath()."assets/images/emailimg/thumbs3.png' style='height:30px;'>REGISTERED</div>";
             $str .="</center>";
             $str .="<div style='padding:25px 0 15px 0; line-height: 22px;'>";
             $str .="<div style='font-size:1.3em; color:#91bf34; line-height: 30px;'>Dispute No.:DIS607</div>";
@@ -116,7 +113,7 @@ class sendingMail extends DB
             $headers .= 'From: <info@iftosi.com>' . "\r\n";
 
                 mail('shitanshu@xelpmoc.in', $subject, $str, $headers);
-                $arr = 'mail sent to shitanshu@xelpmoc.in');
+                $arr = '123 mail sent to shitanshu@xelpmoc.in');
                 $err = array('code'=>0,'msg'=>'success in sending mail');
 
             $result = array('result'=>$arr,'error'=>$err);
