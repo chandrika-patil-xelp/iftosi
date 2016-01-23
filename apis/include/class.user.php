@@ -268,9 +268,8 @@
         {
             $dt= json_decode($params['dt'],1);
             $detls  = $dt['result'];
-            echo "hi";print_r($dt);
             $sql="SELECT is_vendor,user_id from tbl_registration where user_id=".$detls['uid'];
-            $res=$this->query($sql,1);
+            $res=$this->query($sql);
             $row=$this->fetchData($res);
             $isv=$row['is_vendor'];
             $uid=$row['user_id'];
