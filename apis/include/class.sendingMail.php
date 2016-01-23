@@ -163,11 +163,9 @@ class sendingMail extends DB
                       // $str .='<div style="padding-bottom: 15px; "><span style="font-size:0.9em; color:#d00000; padding: 5px 10px;background: #8A0044; color:#fff; letter-spacing: 0em;"><b>to exchange your Foreign Currency.</b></span></div>';
                       $str .='</center>';
                       $str .='<div style="padding:15px 0;">';
-                      $str .='<div style="color:#666; font-size: 1em;  line-height: 1.2em; padding-bottom: 25px; ">Your <b>account has been activated</b> with the following credentials </div>';
-                      $str .='<div style="display:inline-block; vertical-align: top; width:49%; border-right: 1px solid #ccc;">';
-                      $str .='<div style="padding: 0;font-size: 0.7em;  line-height: 1em; color: #8A0044; text-transform: uppercase; font-weight: bold; ">USERNAME</div>';
-                      $str .='<div style="color:#666; padding: 0 0 5px 0; font-size: 1.4em; line-height: 30px;"><b>9980051525</b></div>';
-                      $str .='</div>';
+
+
+
                       $str .='<div style="display:inline-block; vertical-align: top; width:49%;">';
                       $str .='<div style="padding: 0;font-size: 0.7em;  line-height: 1em; color: #8A0044; text-transform: uppercase; font-weight: bold; ">PASSWORD</div>';
                       $str .='<div style="color:#666; padding: 0 0 0px 0; font-size: 1.4em; line-height: 30px;"><b>479852</b></div>';
@@ -178,13 +176,13 @@ class sendingMail extends DB
                       $str .='<div style="width:97%; padding-left: 3%;">';
                       $str .='<div style="color:#666; font-size: 0.9em;  line-height: 1.7em;"><b>- Increase your reach to a wider range of customers.</b></div>';
                       $str .='<div style="color:#666; font-size: 0.9em;  line-height: 1.7em;"><b>-Kindly log on to <a href="iftosi.com" style="text-decoration:none;color:#8A0044">iftosi.com</a> to upload your products.</b></div>';
-                    
+
                       $str .='</div>';
                       $str .='<center style="padding: 15px 0">';
                       $str .='<div style="display:inline-block; vertical-align: middle; height: auto; width:32%;"></div>';
                       $str .='<div style="display:inline-block; vertical-align: middle; height: auto; width:32%;"></div>';
                       $str .='<div style="display:inline-block; vertical-align: middle; height: auto; width:32%;"></div>';
-                      $str .='<a href="http://www.IftoSi.com"><div style="height: auto; width:150px; padding-top: 15px;"><img src="http://www.digivac.com/wp-content/uploads/2015/01/appstore_button_google.png" style="width:100%;"></div></a>';
+                      
                       $str .='</center>';
                       $str .='</div>';
                       $str .='<div style="border-top: 1px solid #e6e6e6;padding: 20px 0 10px 0; color:#888; line-height: 22px;">';
