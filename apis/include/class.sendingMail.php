@@ -88,13 +88,8 @@ class sendingMail extends DB
           $str .='<div style="height: auto; width:100%; padding-bottom: 15px;"><img src="http://beta.xelpmoc.in/iftosi/tools/img/common/logo2.png" style="width:55%; max-width: 250px;"></div>';
           $str .='<div style="height: auto; border-radius: 15px; border: 1px solid #e6e6e6; box-shadow: 0 0 30px 5px rgba(0,0,0,0.4); padding: 25px 6%;background: #fff;">';
           $str .='<div style="width:100%;">';
-          $str .='<center>';
-          // $str .='<div style="width:auto; vertical-align: top; height: 30px; display: inline-block; text-transform: uppercase; line-height: 30px; padding:10px 20px; letter-spacing: -0.03em; font-weight: bold; text-align: center; font-size: 20px; border-radius: 40px; background: #91bf34; color: #fff; box-shadow: 0 0 20px 0px rgba(0,0,0,0.3); border: 2px solid #fff"><img src="http://www.nafex.co/assets/images/icons/thumbs3.svg" style="height:30px;"> STATUS</div>';
-          $str .='</center>';
           $str .='<div style="padding:25px 0 15px 0; line-height: 22px;">';
-          $str .='<div style="font-size:1.3em; color:#8A0044; line-height: 30px;">Dispute No.:DIS607</div>';
-          $str .='<span style="font-weight: bold;">Investoptima Equity Consultanta Pvt. Ltd</span><br>';
-          $str .='<span>Pune - Dhawal Tabib</span>';
+          $str .='<span style="">Dear Rishab , Thank you for showing interest in the product you have enquired. The contact details of the vendor are:</span>';     
           $str .='</div>';
           $str .='<div style="padding: 15px 0;color:#666; letter-spacing:0em; font-size: 0.9em;border-top: 1px solid #e6e6e6;">';
           $str .='<div style="padding: 10px 0; border-radius: 5px; background: #e6e6e6;">Date: <b>January 18, 2015 - 22:03</b></div>';
