@@ -433,7 +433,7 @@
             }
             $vsql.=" updatedby='vendor' WHERE vendor_id=".$uid."";
             $vsql1 .= " WHERE user_id=".$uid;
-            $vres = $this->query($vsql);
+            $vres = $this->query($vsql,1);
             $vres2 = $this->query($vsql1);
             if ($vres && $vres2) {
                 $arr = "Vendor table is updated";
