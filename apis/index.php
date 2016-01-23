@@ -1880,8 +1880,7 @@ echo '</pre>';
                         $str=(!empty($params['str'])) ? trim(urldecode($params['str'])) : '';
                         $obj = new sendingMail($db['iftosi']);
                         $res = $obj->sendMail($params);
-
-		break;
+    break;
 
         default :
 

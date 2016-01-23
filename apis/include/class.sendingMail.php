@@ -15,8 +15,10 @@ class sendingMail extends DB
             error_reporting(E_ALL);
             //$subject ='account has been activated';
             // $str = $this -> signUp();
+
               $subject ='Change of password';
-              $str = $this -> forgot_password();
+              $str = $this->forgot_password1();
+              
             $headers = "MIME-Version: 1.0" . "\r\n";
             $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
             $headers .= 'From: <info@iftosi.com>' . "\r\n";
@@ -33,7 +35,7 @@ class sendingMail extends DB
           $str ='';
 
         }
-        public function forgot_password()
+        public function forgot_password1()
         {
               $str = "";
                       $str .= '<!DOCTYPE html>';
@@ -65,8 +67,7 @@ class sendingMail extends DB
                       $str .= '</center>';
                       $str .= '</body>';
                       $str .= '</html>';
-            return $str;
-
+                      return $str;
         }
         public function signUp()
         {
@@ -123,7 +124,6 @@ class sendingMail extends DB
                       $str .='</center>';
                       $str .='</body>';
                       return $str;
-
         }
 }
 
