@@ -13,13 +13,13 @@ class sendingMail extends DB
         {
           global $comm;
             error_reporting(E_ALL);
-            //$subject ='account has been activated';
-            // $str = $this -> signUp();
+            $subject ='account has been activated';
+             $str = $this -> signUp();
               //
               // $subject ='Change of password';
               // $str = $this->forgot_password1();
-              $subject ='Welcome';
-              $str = $this->vendor_cont();
+              // $subject ='Welcome';
+              // $str = $this->vendor_cont();
 
             $headers = "MIME-Version: 1.0" . "\r\n";
             $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -176,8 +176,8 @@ class sendingMail extends DB
                       $str .='<div style="padding:15px 0; border-top: 1px solid #e6e6e6; text-align: left;">';
                       $str .='<div style="color:#666; font-size: 1.4em; width:100%;color: #f49712; text-align: left; line-height: 1.6em; letter-spacing: -0.03em;">Quickly log into your account to:</div>';
                       $str .='<div style="width:97%; padding-left: 3%;">';
-                      $str .='<div style="color:#666; font-size: 0.9em;  line-height: 1.7em;"><b>- Track your current order.</b></div>';
-                      $str .='<div style="color:#666; font-size: 0.9em;  line-height: 1.7em;"><b>- Avail various deals & discounts.</b></div>';
+                      $str .='<div style="color:#666; font-size: 0.9em;  line-height: 1.7em;"><b>- Increase your reach to a wider range of customers.</b></div>';
+                      $str .='<div style="color:#666; font-size: 0.9em;  line-height: 1.7em;"><b>-Kindly log on to <a href="iftosi.com" style="text-decoration:none;color:#8A0044">iftosi.com</a> to upload your products.</b></div>';
                       $str .= '<div style="color:#666; font-size: 0.9em;  line-height: 1.7em;"><b>- View your previous transaction history.</b></div>';
                       $str .='<div style="color:#666; font-size: 0.9em;  line-height: 1.7em;"><b>- Save time while placing a new request.</b></div>';
                       $str .='</div>';
@@ -188,6 +188,10 @@ class sendingMail extends DB
                       $str .='<a href="http://www.IftoSi.com"><div style="height: auto; width:150px; padding-top: 15px;"><img src="http://www.digivac.com/wp-content/uploads/2015/01/appstore_button_google.png" style="width:100%;"></div></a>';
                       $str .='</center>';
                       $str .='</div>';
+                      $str .='<div style="border-top: 1px solid #e6e6e6;padding: 20px 0 10px 0; color:#888; line-height: 22px;">';
+                      $str .=  '<div style="font-size:13px;width:48%;float:left;text-align: left; vertical-align: middle;padding-bottom:5px;">For any Assistance call: <a href="tel:+022-32623263" style="text-decoration: none; color:#888; font-weight: bold;">+022-32623263</a> </div>';
+                      $str .=  '<div style="font-size:13px;width:48%;float:left;text-align: left; vertical-align: middle;padding-bottom:5px;padding-left:10px;">Email: <a href="" style="text-decoration: none; color:#888; font-weight: bold;">info@iftosi.com</a> </div>';
+                      $str .=  '</div>';
                       $str .='<div style="color:#666; font-size: 0.8em;">- The IftoSi.com Team</div>';
                       $str .='</div>';
                       $str .='</div>';
