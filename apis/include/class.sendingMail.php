@@ -102,10 +102,12 @@ class sendingMail extends DB
           $str .='<div style="text-align: left; font-weight: bold; display: inline-block; width:49%; text-transform: capitalize; vertical-align: middle"><a href="tel:+919923288125 " style="text-decoration: none; color:#8A0044;">+91 8080212121</a></div>';
           $str .='</div>';
           $str .='<div style="border-top: 1px solid #e6e6e6;padding: 10px 0;">';
+          $str .='<div style="border-top: 1px solid #e6e6e6;padding: 10px 0;">';
           $str .='<div style="text-align: left; color:#888; text-transform: capitalize; display: inline-block; vertical-align: middle; width:48%;">City</div>';
           $str .='<div style="text-align: left; font-weight: bold; display: inline-block; vertical-align: middle; width:49%; text-transform: capitalize; color: #8A0044;">Pune</div>';
           $str .='</div>';
-        
+          $str .='</div>';
+          $str .='</div>';
           $str .='<div style="border-top: 1px solid #e6e6e6;padding: 20px 0 10px 0; color:#888; line-height: 22px;">';
           $str .='<div style="text-align: left; vertical-align: middle;padding-bottom:5px;">P.S: Kindly check your e-account Balance and recharge in order to constantly receive Leads. If any issues with the above, please raise a Dispute through our  or Call on <a href="tel:+919111111119" style="text-decoration: none; color:#888; font-weight: bold;">+91 91 111 111 19</a> </div>';
           $str .='</div>';
