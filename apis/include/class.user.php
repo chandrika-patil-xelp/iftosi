@@ -1252,15 +1252,15 @@
             
             if($params['isVendor'] == 1)
             {
-                $subject = 'Vendor profile deactivation in IFtoSI';
-                $message = 'Dear '.$params['username'].', your account has been deactivated since your one year subscription is over.';
+                $subject .= 'Vendor profile deactivation in IFtoSI';
+                $message .= 'Dear '.$params['username'].', your account has been deactivated since your one year subscription is over.';
                 $message .= "\r\n";
-                $message = 'Kindly re-subscribe for the new packeage you want to continue with. It was really a good experience for us to be connected with you';
+                $message .= 'Kindly re-subscribe for the new packeage you want to continue with. It was really a good experience for us to be connected with you';
                 $message .= "\r\n";
                 $message .= "For any assistance, call: 022-32623263. Email: info@iftosi.com";
                 $message .= "\r\n";
                 $message .= "Team IFtoSI";
-                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                 $headers .= 'From: <info@iftosi.com>' . "\r\n";
                 
@@ -1301,36 +1301,36 @@
                 $pdet = unserialize(urldecode($params['pdet']));
                 if($params['catid'] == 10000)
                 {
-                    $p[]  = $pdet['pid'];
-                    $p[]= $pdet['shape'];
+                    $p[] = $pdet['pid'];
+                    $p[] = $pdet['shape'];
                     $p[] = $pdet['certified'];
                     $p[] = $pdet['barcode'];
-                    $p[]  = $pdet['cut']; 
-                    $p[]= $pdet['carat']; 
+                    $p[] = $pdet['cut']; 
+                    $p[] = $pdet['carat']; 
                     $p[] = $pdet['clarity']; 
-                    $p[]= $pdet['color'];
-                    $p[]= $pdet['carat']*$pdet['price']*$pdet['dollarRate'];
+                    $p[] = $pdet['color'];
+                    $p[] = $pdet['carat']*$pdet['price']*$pdet['dollarRate'];
                     $msgng = array(0=>'Product Id',1=>'Shape',2=>'Certificate',3=>'Barcode',4=>'Cut',5=>'Carat',6=>'Clarity',7=>'Colour',8=>'Price'); 
                 }
                 if($params['catid'] == 10001)
                 {
                     $p[]  = $pdet['pid'];
-                    $p[]= $pdet['shape'];
-                    $p[] = $pdet['metal'];
-                    $p[] = $pdet['barcode'];
-                    $p[] = $pdet['gold_purity']; 
+                    $p[]  = $pdet['shape'];
+                    $p[]  = $pdet['metal'];
+                    $p[]  = $pdet['barcode'];
+                    $p[]  = $pdet['gold_purity']; 
                     $p[]  = $pdet['gold_weight']; 
-                    $p[] = $pdet['certified']; 
-                    $p[]= $pdet['price'];
+                    $p[]  = $pdet['certified']; 
+                    $p[]  = $pdet['price'];
                     $msgng = array(0=>'Product Id',1=>'Shape',2=>'Metal',3=>'Barcode',4=>'Purity',5=>'Gold Weight',6=>'Certificate',7=>'Price'); 
                 }
                 if($params['catid'] == 10002)
                 {
                     $p[]  = $pdet['pid'];
-                    $p[]= $pdet['type'];
-                    $p[] = $pdet['metal'];
-                    $p[] = $pdet['barcode'];
-                    $p[] = $pdet['gold_purity']; 
+                    $p[]  = $pdet['type'];
+                    $p[]  = $pdet['metal'];
+                    $p[]  = $pdet['barcode'];
+                    $p[]  = $pdet['gold_purity']; 
                     $p[]  = $pdet['gold_weight']; 
                     if($pdet['metal'] == 'Gold')
                     {
@@ -1355,24 +1355,22 @@
                 $headers = '';
             
                 $subject = 'Recent enquiry to IFtoSI';
-                $message = 'Hello '.$params['username'].', '.$params['useremail'].' has shown interest in';
+                $message .= 'Hello '.$params['username'].', '.$params['useremail'].' has shown interest in';
                 $message .= "\r\n";
                 $message .= $msg;
                 $message .= "\r\n";
-                $message = 'Hello '.$params['username'].', '.$params['useremail'].' has shown interest in';
-                $message .= "\r\n";
-                $message = 'The buyer should contact you shortly.';
+                $message  .= 'The buyer should contact you shortly.';
                 $message .= "\r\n";
                 $message .= "For any assistance, call: 022-32623263. Email: info@iftosi.com";
                 $message .= "\r\n";
                 $message .= "Team IFtoSI";
-                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers  = "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                 $headers .= 'From: <info@iftosi.com>' . "\r\n";
                 
                 $smsText .= "Recent enquiry to IFtoSI";
                 $smsText .= "\r\n\r\n";
-                $smsText = "Hello ".$params['username'].", ".$params['useremail']." has shown interest in";
+                $smsText .= "Hello ".$params['username'].", ".$params['useremail']." has shown interest in";
                 $smsText .= "\r\n\r\n";
                 $smsText .= $msg;
                 $smsText .= "\r\n\r\n";
