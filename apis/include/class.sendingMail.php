@@ -89,7 +89,7 @@ class sendingMail extends DB
           $str .='<div style="height: auto; border-radius: 15px; border: 1px solid #e6e6e6; box-shadow: 0 0 30px 5px rgba(0,0,0,0.4); padding: 25px 6%;background: #fff;">';
           $str .='<div style="width:100%;">';
           $str .='<div style="padding:25px 0 15px 0; line-height: 22px;">';
-          $str .='<span style="">Dear Rishab , Thank you for showing interest in the product you have enquired. The contact details of the vendor are:</span>';
+          $str .='<span style="font-family: Helvetica,verdana,sans-serif-condensed,Tahoma;color: #888;">Dear Rishab , Thank you for showing interest in the product you have enquired. The contact details of the vendor are:</span>';
           $str .='</div>';
           $str .='<div style="padding: 15px 0;color:#666; letter-spacing:0em; font-size: 0.9em;border-top: 1px solid #e6e6e6;">';
           $str .='<div style="padding: 10px 0; border-radius: 5px; background: #e6e6e6;">Date: <b>January 18, 2015 - 22:03</b></div>';
