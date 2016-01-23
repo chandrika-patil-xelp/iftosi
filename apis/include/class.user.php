@@ -1301,44 +1301,44 @@
                 $pdet = unserialize(urldecode($params['pdet']));
                 if($params['catid'] == 10000)
                 {
-                    $p[] = $pdet['pid'];
-                    $p[] = $pdet['shape'];
-                    $p[] = $pdet['certified'];
-                    $p[] = $pdet['barcode'];
-                    $p[] = $pdet['cut']; 
-                    $p[] = $pdet['carat']; 
-                    $p[] = $pdet['clarity']; 
-                    $p[] = $pdet['color'];
-                    $p[] = $pdet['carat']*$pdet['price']*$pdet['dollarRate'];
+                    $p[0] = $pdet['pid'];
+                    $p[1] = $pdet['shape'];
+                    $p[2] = $pdet['certified'];
+                    $p[3] = $pdet['barcode'];
+                    $p[4] = $pdet['cut']; 
+                    $p[5] = $pdet['carat']; 
+                    $p[6] = $pdet['clarity']; 
+                    $p[7] = $pdet['color'];
+                    $p[8] = $pdet['carat']*$pdet['price']*$pdet['dollarRate'];
                     $msgng = array(0=>'Product Id',1=>'Shape',2=>'Certificate',3=>'Barcode',4=>'Cut',5=>'Carat',6=>'Clarity',7=>'Colour',8=>'Price'); 
                 }
                 if($params['catid'] == 10001)
                 {
-                    $p[]  = $pdet['pid'];
-                    $p[]  = $pdet['shape'];
-                    $p[]  = $pdet['metal'];
-                    $p[]  = $pdet['barcode'];
-                    $p[]  = $pdet['gold_purity']; 
-                    $p[]  = $pdet['gold_weight']; 
-                    $p[]  = $pdet['certified']; 
-                    $p[]  = $pdet['price'];
+                    $p[0]  = $pdet['pid'];
+                    $p[1]  = $pdet['shape'];
+                    $p[2]  = $pdet['metal'];
+                    $p[3]  = $pdet['barcode'];
+                    $p[4]  = $pdet['gold_purity']; 
+                    $p[5]  = $pdet['gold_weight']; 
+                    $p[6]  = $pdet['certified']; 
+                    $p[7]  = $pdet['price'];
                     $msgng = array(0=>'Product Id',1=>'Shape',2=>'Metal',3=>'Barcode',4=>'Purity',5=>'Gold Weight',6=>'Certificate',7=>'Price'); 
                 }
                 if($params['catid'] == 10002)
                 {
-                    $p[]  = $pdet['pid'];
-                    $p[]  = $pdet['type'];
-                    $p[]  = $pdet['metal'];
-                    $p[]  = $pdet['barcode'];
-                    $p[]  = $pdet['gold_purity']; 
-                    $p[]  = $pdet['gold_weight']; 
+                    $p[0]  = $pdet['pid'];
+                    $p[1]  = $pdet['type'];
+                    $p[2]  = $pdet['metal'];
+                    $p[3]  = $pdet['barcode'];
+                    $p[4]  = $pdet['gold_purity']; 
+                    $p[5]  = $pdet['gold_weight']; 
                     if($pdet['metal'] == 'Gold')
                     {
-                        $p[]= $pdet['gold_weightt']*(($pdet['goldRate']/10)*($pdet['gold_purity']/995));
+                        $p[6]= $pdet['gold_weightt']*(($pdet['goldRate']/10)*($pdet['gold_purity']/995));
                     }
                     else if($pdet['metal'] == 'Silver')
                     {
-                        $p[]= $pdet['gold_weight']*(($pdet['silverRate']/1000)*($pdet['gold_purity']/999));
+                        $p[6]= $pdet['gold_weight']*(($pdet['silverRate']/1000)*($pdet['gold_purity']/999));
                     }
                     $msgng = array(0=>'Product Id',1=>'Type',2=>'Metal',3=>'Barcode',4=>'Purity',5=>'Gold Weight',6=>'Price');
                 }
