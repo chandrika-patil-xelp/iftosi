@@ -158,9 +158,9 @@ class sendingMail extends DB
                       $str .='<div style="width:100%;">';
                       $str .='<center>';
                       $str .='<div style="width:auto; vertical-align: top; height: auto; display: inline-block; text-transform: capitalize; line-height: 30px; padding:10px 20px; letter-spacing: -0.03em; font-weight: normal; text-align: center; font-size: 16px; border-radius: 40px; background-color:#8A0044; color: #fff; border: 2px solid #fff"><b>Ankur Gala</b></div>';
-                      $str .='<div style="padding: 0; line-height: 1.2em; padding: 10px 0 0 0 ; color:#666; font-size: 1.6em; letter-spacing: -0.03em; font-weight: 200;">Welcome to <b>IftoSi.com!</b></div>';
-                      $str .='<div><span style="font-size:0.9em; color:#d00000;padding: 5px 10px;background: #8A0044; color:#fff; letter-spacing: 0em;line-height: 2em;"><b>the smartest online platform </b></span></div>';
-                      $str .='<div style="padding-bottom: 15px; "><span style="font-size:0.9em; color:#d00000; padding: 5px 10px;background: #8A0044; color:#fff; letter-spacing: 0em;"><b>to exchange your Foreign Currency.</b></span></div>';
+                      // $str .='<div style="padding: 0; line-height: 1.2em; padding: 10px 0 0 0 ; color:#666; font-size: 1.6em; letter-spacing: -0.03em; font-weight: 200;">Welcome to <b>IftoSi.com!</b></div>';
+                      // $str .='<div><span style="font-size:0.9em; color:#d00000;padding: 5px 10px;background: #8A0044; color:#fff; letter-spacing: 0em;line-height: 2em;"><b>the smartest online platform </b></span></div>';
+                      // $str .='<div style="padding-bottom: 15px; "><span style="font-size:0.9em; color:#d00000; padding: 5px 10px;background: #8A0044; color:#fff; letter-spacing: 0em;"><b>to exchange your Foreign Currency.</b></span></div>';
                       $str .='</center>';
                       $str .='<div style="padding:15px 0;">';
                       $str .='<div style="color:#666; font-size: 1em;  line-height: 1.2em; padding-bottom: 25px; ">Your <b>account has been activated</b> with the following credentials </div>';
