@@ -59,7 +59,7 @@
                 ?>
                 <div class="fLeft vndPackage"><?php echo $package?></div>
                 <div class="fLeft vndAmount"><?php echo $cost?></div>
-                <div class="fLeft vndExpDate"><?=$data[$i]['profile_expiry_date'];?></div>
+                <div class="fLeft vndExpDate" id="vndExpDate<?=$data[$i]['vendor_id'];?>"><?=$data[$i]['profile_expiry_date'];?></div>
                 <div class="fLeft vndEdit">
                     <div class="toggle-button <?=($data[$i]['active_flag'] === '0') ? '' : 'toggle-button-selected';?>" onclick="changeStatus(<?=$data[$i]['vendor_id'];?>,this)">
                         <span class="fActive">Yes</span>
@@ -108,6 +108,12 @@
                 url: URL,
                 type: 'POST',
                 success: function(res) {
+                    var expObj = eval('('+res+')');
+                    var expiry = expObj.results.expiry;
+                    if(expiry !== null && expiry !== undefined && expiry !== 'undefined' && expiry !== 'null' && expiry !== '')
+                    {
+                        $('#vndExpDate'+uid).text(expiry);
+                    }
                     if(uid !== null)
                     {
                         var params = 'action=Vpactive&vid='+uid+'&af='+st;
@@ -192,6 +198,7 @@ function loadProductsCallback(res,pgno) {
             str += '    </div>';
             str += '</div>';
             var cost=obj['pay_amount'];
+            var vid = obj['vendor_id'];
             var package=new Array();
             var business_type = obj['business_type'].split(',');
             var expiry = obj.expiry_show;
@@ -212,7 +219,7 @@ function loadProductsCallback(res,pgno) {
             
             str += '<div class="fLeft vndPackage">'+package.join()+'</div>';
             str += '<div class="fLeft vndAmount">'+cost+'</div>';
-            str += '<div class="fLeft vndExpDate">'+expiry+'</div>';
+            str += '<div class="fLeft vndExpDate" id="vndExpDate'+vid+'">'+expiry+'</div>';
             str += '<div class="fLeft vndEdit">';
             var className='';
             if(obj['active_flag']=='1'){

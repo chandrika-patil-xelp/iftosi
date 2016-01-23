@@ -63,7 +63,18 @@
                     <div class='results_Filter'>
                         <?php include 'filters.html'; ?>
                         <div class='prdResults fRight'>
-                            <?php foreach($data as $key=>$val) { ?>
+                            
+<?php 
+                            if(empty($data))
+                            {
+?>
+                                <div class="noresDiv">
+                                    <div class="noresults font25 fLeft">There are no results available for your search.</div>
+                                    <div class="noresults font18 fLeft">Please try again.</div>
+                                </div>
+                            
+<?php                       }
+                            foreach($data as $key=>$val) { ?>
 									<div class='prdComm fLeft' style="opacity: 0; transform: translateX(1000px);">
 										<div class='prdCommDiv fLeft transition100'>
                                                                                     
@@ -183,7 +194,7 @@
                                                                                                         
 ?>
 													<div class="detValue fmOpenB fLeft"><span>&#8377;</span><?php
-                                                                                                        $price = ceil(($val['attributes']['gold_weight']*$metal_rate));
+                                                                                                        $price = ceil($val['attributes']['bprice']);
                                                                                                         echo $comm->IND_money_format($price);
                                                                                                         ?></div>
                                                                                                         

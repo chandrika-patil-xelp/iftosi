@@ -392,6 +392,16 @@ switch ($action) {
                 //echo "<pre>";print_r($data);die;
                 include 'template/inactiveVendor.html';
                 break;
+            
+            case 'expiredSub_vendor':
+                $page = 'expiredSub_vendor';
+                $uid = $_GET['uid'];
+                $url = APIDOMAIN . 'index.php?action=viewAll&uid='.$uid;
+                $res = $comm->executeCurl($url);
+                $data = $res['results'][1];
+                //echo "<pre>";print_r($data);die;
+                include 'template/expiredSub_vendor.html';
+                break;
 
              case 'faq_sellers':
                 $page = 'faq_sellers';
@@ -760,7 +770,6 @@ switch ($action) {
                 $totalDes = $res3['total'];
                 
                 //echo "<pre>".print_r($data3); die;
-                
                 include 'template/bullion_details.html';
                 break;
                 

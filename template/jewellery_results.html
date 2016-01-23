@@ -62,7 +62,16 @@
                     <div class='results_Filter'>
                         <?php include 'filters.html'; ?>
                         <div class='prdResults fRight'>
-                            <?php 
+<?php
+                                if(empty($data))
+                            {
+?>
+                                <div class="noresDiv">
+                                    <div class="noresults font25 fLeft">There are no results available for your search.</div>
+                                    <div class="noresults font18 fLeft">Please try again.</div>
+                                </div>
+                            
+<?php                       }
 							$prdList = '';
 							foreach($data as $key=>$val) {
 								if($prdList !== '')

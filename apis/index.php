@@ -1875,11 +1875,9 @@ echo '</pre>';
 		break;
 
 		case "sendMail":
-    error_reporting(E_ALL);
 			include APICLUDE . 'class.sendingMail.php';
                         $to=(!empty($params['to'])) ? trim(urldecode($params['to'])) : '';
                         $str=(!empty($params['str'])) ? trim(urldecode($params['str'])) : '';
-
                         $obj = new sendingMail($db['iftosi']);
                         $res = $obj->sendMail($params);
 

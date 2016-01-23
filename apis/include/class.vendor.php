@@ -219,7 +219,7 @@ class vendor extends DB
             $pId = implode(',',$pdet1);
             $psql='';
             if($catid == 10000) {
-                $psql='d.color, d.carat, d.shape, d.certified AS cert, d.clarity,d.price';
+                $psql='d.color, d.carat, d.shape, d.certified AS cert, d.clarity,d.price,d.b2b_price';
             } else if($catid == 10001) {
                 $psql='d.shape,d.metal,c.lotref,d.price,d.gold_weight,d.dwt as dwt';
             } else if($catid == 10002) {
@@ -272,6 +272,8 @@ class vendor extends DB
                 OR
                         d.price LIKE '".$params['bcode']."%'            
                 OR
+                        d.b2b_price LIKE '".$params['bcode']."%'            
+                OR
                         MATCH(d.type) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
                 OR
                         MATCH(bullion_design) AGAINST('" . $params['bcode'] . "*' IN BOOLEAN MODE)
@@ -317,6 +319,7 @@ class vendor extends DB
                 }
                 if ($catid == 10000) {
                     $price= $row1['price'];
+                    $priceb2b= $row1['b2b_price'];
                 }
                 if ($catid == 10001) {
                     $price1 = ceil($row1['price']);
@@ -364,6 +367,7 @@ class vendor extends DB
                 $arr1[$j]['update_time']=$row1['update_time'];
                 $arr1[$j]['active_flag']=$row1['active_flag'];
                 $arr1[$j]['price']=$price;
+                $arr1[$j]['b2b_price']=$priceb2b;
                 $arr1[$j]['product_name']=$row1['product_name'];
                 $arr1[$j]['barcode']=$row1['barcode'];
                 $arr1[$j]['bullion_design']=$row1['bullion_design'];

@@ -520,7 +520,8 @@
                               profile_active_date as pact,
                               profile_expiry_date as pexp,
                               DATEDIFF(profile_expiry_date,now()) as diff,
-                              active_flag
+                              active_flag,
+                              expire_flag
                        FROM 
                               tbl_vendor_master
                        WHERE
@@ -530,10 +531,9 @@
                     {
                         while($vrow=$this->fetchData($res))
                         {
-
                             if($vrow['diff'] <= 0)
                             {
-                                $updtSql = "UPDATE tbl_vendor_master set active_flag = 0 WHERE vendor_id =".$arr['uid'];
+                                $updtSql = "UPDATE tbl_vendor_master set active_flag = 0,expire_flag = 1 WHERE vendor_id =".$arr['uid'];
                                 $udtres = $this->query($updtSql);
                                 $Tparams = array('username'=>$arr['username'],'email'=>$arr['email'],'mobile'=>$arr['mobile'],'isVendor'=>$arr['utype']);
                                 $this->sendDeactMailSms($Tparams);
@@ -543,7 +543,9 @@
                                     $sql="  SELECT 
                                                     business_type,
                                                     is_complete,
-                                                    active_flag
+                                                    active_flag,
+                                                    expire_flag
+                                                    
                                             FROM 
                                                     tbl_vendor_master
                                             WHERE
@@ -554,6 +556,7 @@
                                         $arr['busiType'] = $Vrow['business_type'];
                                         $arr['isC']      = $Vrow['is_complete'];
                                         $arr['af']       = $Vrow['active_flag'];
+                                        $arr['expire_flag'] = $Vrow['expire_flag'];
                                     }
                                 }
                             }
@@ -562,6 +565,7 @@
                                 $arr['busiType']=$vrow['business_type'];
                                 $arr['isC']=$vrow['is_complete'];
                                 $arr['af']=$vrow['active_flag'];
+                                $arr['expire_flag'] = $vrow['expire_flag'];
                             }
                         }
                     }
@@ -609,12 +613,13 @@
                       $sql="SELECT 
                               business_type,
                               is_complete,
-                              active_flag
+                              active_flag,
+                              expire_flag
                        FROM 
                               tbl_vendor_master
                        WHERE
                               vendor_id=".$arr['uid'];
-                    $res=$this->query($sql);
+                    $res=$this->query($sqls);
                     if($this->numRows($res)==1)
                     {
                         while($vrow=$this->fetchData($res))
@@ -622,6 +627,7 @@
                             $arr['busiType']=$vrow['business_type'];
                             $arr['isC']=$vrow['is_complete'];
                             $arr['af']=$vrow['active_flag'];
+                            $arr['expire_flag']=$vrow['expire_flag'];
                         }
                     }
                 }
@@ -662,8 +668,7 @@
                 $usql=" UPDATE
                                     tbl_vendor_master
                         SET
-                                    active_flag=\"".$params['af']."\",
-                                    is_complete= 2
+                                    active_flag=\"".$params['af']."\"
                         WHERE 
                                     vendor_id=".$params['userid'];
                 $usql1="UPDATE
@@ -682,12 +687,28 @@
                                     tbl_vendor_master
                         SET
                                     profile_active_date=now(),
-                                    profile_expiry_date= ADDDATE(profile_active_date, INTERVAL 1 YEAR)
+                                    profile_expiry_date= ADDDATE(profile_active_date, INTERVAL 1 YEAR),
+                                    expire_flag=0
                         WHERE 
                                     vendor_id=".$params['userid'];
                         
                         $dateRes = $this->query($usql);
+                        
+                        $vexpSql="  SELECT
+                                            profile_expiry_date,
+                                            date_format(profile_expiry_date,'%D %M,%Y  %r') as expiry
+                                    FROM 
+                                            tbl_vendor_master  
+                                    WHERE 
+                                            vendor_id=".$params['userid']."";
+                        $vexpRes=$this->query($vexpSql);
+                        $RexpRow = $this->fetchData($vexpRes);
 
+                        if($RexpRow['profile_expiry_date'] == '0000-00-00 00:00:00')
+                        {
+                            $RexpRow['expiry'] = 'Not Available';
+                        }
+                        
                         $regrow = $this->fetchData($vresReg);
                         $email = $regrow['email'];
                         $mobile = $regrow['logmobile'];
@@ -695,7 +716,7 @@
                         $parms = array('uid'=>$params['userid'],'mobile'=>$mobile,'email'=>$email,'isVendor'=>1);
                         $data = $this->sendVActivateMailSMS($parms);
                     }
-                    $arr="User profile is activated";
+                    $arr=array('expiry'=>$RexpRow['expiry']);
                     $err=array('code'=>0,'msg'=>'Value has been changed');
                 }
                 else
@@ -1256,7 +1277,7 @@
             }
             if(!empty($params['email']))
             {
-                    mail($params['email'], $subject, $message, $headers);
+                    mail(urldecode($params['email']), $subject, $message, $headers);
             }
             $smsText = urlencode($smsText);
             $sendSMS = str_replace('_MOBILE', $params['mobile'], SMSAPI);

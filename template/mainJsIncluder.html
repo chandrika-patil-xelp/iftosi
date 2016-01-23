@@ -1,0 +1,239 @@
+<?php
+
+switch ($page) {
+                
+                
+                case 'bhead':
+                case 'about_us':
+                
+                case 'bullion_details':
+                case 'bullion':
+                case 'changepwd':
+                
+                case 'contact_us':
+                case 'diamond_shapes':
+                case 'diamond_details':
+                case 'b2bdetails':
+                case 'e_carat_weight':
+                case 'e_certification':
+                case 'e_certification1':
+                case 'e_certification2':
+                case 'e_color':
+                case 'e_color1':
+                case 'e_cut':
+                case 'e_cut1':
+                case 'e_cut2':
+                case 'e_cut3':
+                case 'e_cut4':
+                case 'e_cut5':
+                case 'e_glossary':
+                case 'e_shapes':
+                case 'education':
+                case 'education_asscher':
+                case 'education_clarity':
+                case 'education_cushion':
+                case 'education_emerald':
+                case 'education_heart':
+                case 'education_marq':
+                case 'education_oval':
+                case 'education_pear':
+                case 'education_princess':
+                case 'education_radiant':
+                case 'education_round':
+                case 'faq':
+                case 'forgot':
+                case 'index':
+                case 'jewellery_details':
+                case 'jewellery':
+                case 'jewellery_tips':
+                case 'login':
+                case 'membership':
+                case 'policy':
+                case 'diamonds':
+                case 'b2bproducts':
+                case 'shapes':
+                case 'signup':
+                case 'terms_conditions':
+                case 'wishlist':
+                
+?>
+
+                                <script type="text/javascript" src="<?php echo $jvs['jqry']; ?>"></script>
+                                <script type="text/javascript" src="<?php echo $jvs['jquery_toast']; ?>"></script>
+                                <script type="text/javascript" src="<?php echo $jvs['customStorage']; ?>"></script>
+                                <script type="text/javascript" src="<?php echo $jvs['signup']; ?>"></script>
+                                <script>
+                                            var dummyPage = '<?php echo $dummypage;?>';
+                                            var pageName = '<?php echo $page;?>';
+                                            var DOMAIN = '<?php echo DOMAIN;?>';
+                                            var APIDOMAIN = '<?php echo APIDOMAIN;?>';
+                                            var IMGDOMAIN = '<?php echo IMGDOMAIN;?>';
+
+                                            var totalCnt = '<?php echo $total;?>';
+                                            var pid = '<?php echo $pid;?>';
+                                            var vendor_id = '<?php echo $vndrId;?>';
+                                            var catid = '<?php echo $catid;?>';
+                                            var vndrFullAddr = '<?php echo $vndrDtls['fulladdress'];?>';
+                                            var vndrLat = '<?php echo $vndrDtls['latitude'];?>';
+                                            var vndrLng = '<?php echo $vndrDtls['longitude'];?>';
+                                            var dollarValue = '<?php echo $dollarValue;?>';
+                                            var goldRate = '<?php echo goldRate;?>';
+                                            var silverRate = '<?php echo silverRate;?>';
+                                            var is_vendor = customStorage.readFromStorage('is_vendor');
+                                            var popup = '<?php echo $popup;?>';
+                                </script>
+<?php
+                break;
+
+                case 'diamonds':
+                case 'jewellery':
+                case 'bullion':
+?>    
+
+                                <script type="text/javascript" src="<?php echo $jvs['rngsld']; ?>"></script>
+                                <script type="text/javascript" src="<?=DOMAIN;?>tools/js/adminNav.js?v=<?=VERSION;?>"></script>
+                                <script type="text/javascript">
+                                    if(dummyPage !== null && dummyPage !== 'null' && dummyPage !== 'undefined' && dummyPage !== undefined && dummyPage !== '' && dummyPage == 'b2bproducts')
+                                    {
+                                        var uid = customStorage.readFromStorage('userid');
+                                        if(uid !== '' || uid !== undefined || uid !== 'undefined' || uid !== null || uid !== 'null')
+                                        {
+                                            if((is_vendor !== '' || is_vendor !== undefined || is_vendor !== 'undefined' || is_vendor !== null || is_vendor !== 'null') && (is_vendor !== '1'))
+                                            {
+                                                window.location.href=DOMAIN;
+                                            }
+                                        }
+                                        else if(uid == null && uid == 'null' && uid == 'undefined' && uid == undefined && uid == '' && dummyPage == 'b2bproducts')
+                                        {
+                                            window.location.href=DOMAIN;
+                                        }
+                                    }
+                                </script>
+<?php
+                break;
+                
+                case 'backHead':
+                case 'inactive_vendor':
+                case 'vendor_Form':
+                case 'approachOption':
+                case 'loginsel':
+                    
+                    
+?>
+                                <script>
+                                        var DOMAIN = "<?php echo DOMAIN;?>";
+                                        var IMGDOMAIN = "<?php echo IMGDOMAIN;?>";
+                                        var APIDOMAIN = "<?php echo APIDOMAIN;?>";
+                                        var llCount = "<?=count($landline);?>";
+                                        var mNCount = "<?=count($alt_cmobile);?>";
+                                </script>
+                                <script type="text/javascript" src='<?php echo DOMAIN;?>tools/js/cms/lib/jquery.js?v=<?php echo VERSION; ?>'></script>
+                                <script type="text/javascript" src='<?php echo DOMAIN;?>tools/js/cms/lib/ripple.js?v=<?php echo VERSION; ?>'></script>
+                                <script type="text/javascript" src="<?php echo DOMAIN;?>tools/js/lib/CustomStorage.js?v=<?php echo VERSION; ?>"></script>
+                                <script type="text/javascript" src='<?php echo DOMAIN;?>tools/js/cms/Common.js?v=<?php echo VERSION; ?>'></script>
+<?php
+                break;
+            
+                case 'upload':
+?>
+                                <script type="text/javascript" src="<?php echo $jvs['jqry'];?>"></script>
+                                <script type="text/javascript" src="<?php echo IMGDOMAIN;?>js/jquery.filer.min.js?v=1.0.5"></script>
+                                <script type="text/javascript" src="<?php echo IMGDOMAIN;?>js/custom.js?v=1.0.5"></script>
+                                <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<?php
+                break;
+            
+                case 'home':
+?>
+                                <script type="text/javascript">
+                                    var min_carats = "<?=$min_carats;?>";
+                                    var max_carats = "<?=$max_carats;?>";
+                                    var min_price = "<?=$min_price;?>";
+                                    var max_price = "<?=$max_price;?>";
+                                </script>
+                                <script  src="assets/js/jquery1.9.1.min.js"></script>
+                                <script  src="assets/js/ion.rangeSlider.js"></script>
+                                <script  src="assets/js/jquery-ui.js"></script>
+                                <script  src="assets/js/autoSuggests.js"></script>
+                                <script  src="assets/js/materialize.js"></script>
+                                <script  src="assets/js/results.js"></script>
+                                <script  src="assets/js/parallax.js"></script>
+                                <script  src="assets/js/home.js"></script>
+<?php
+                break;
+            
+                case 'vendorHead':
+                case 'bullion_Form':
+                case 'diamond_Form':
+                case 'faqs_seller':
+                case 'jewellery_Form':
+                case 'product_list':
+                case 'thumbnail':
+                case 'vendorList':
+                case 'vendor_enquiries':
+                case 'vendor_landing':
+                case 'vendor_privacy':
+                case 'terms_conditions':
+                case 'vterms_condition':
+?>
+                            <script>
+                                var DOMAIN = "<?php echo DOMAIN;?>";
+                                var catid = "<?php echo (!empty($catid)) ? trim($catid) : '' ?>";
+                                var pid = '<?php echo (!empty($pid)) ? trim($pid) : ''?>';
+                                var vid = '<?php echo $vid;?>';
+                                var activePage = '<?php echo $case;?>';
+                                var APIDOMAIN = "<?php echo APIDOMAIN;?>";
+                                var IMGUPLOAD = "<?php echo IMGUPLOAD;?>";
+                                var pageName  = "<?php echo $page; ?>";
+                                var certificate_url  = "<?php echo $certificate_url; ?>";
+                                var llCount = 0;
+                                var mNCount = 0;
+                            </script>
+                            <script type="text/javascript" src='<?php echo DOMAIN;?>tools/js/cms/lib/jquery.js?v=<?php echo VERSION; ?>'></script>
+                            <script type="text/javascript" src='<?php echo DOMAIN;?>tools/js/cms/lib/ripple.js?v=<?php echo VERSION; ?>'></script>
+                            <script type="text/javascript" src="<?php echo DOMAIN;?>tools/js/lib/CustomStorage.js?v=<?php echo VERSION; ?>"></script>
+                            <script type="text/javascript" src='<?php echo DOMAIN;?>tools/js/cms/Common.js?v=<?php echo VERSION; ?>'></script>
+                            <script>
+                                var is_vendor = customStorage.readFromStorage('is_vendor');
+                                if(pageName == 'vendorList' || pageName == 'product_list')
+                                {
+                                    if(is_vendor == undefined || is_vendor == 'undefined' || is_vendor == null &&(is_vendor !== 2 || is_vendor !== '2'))
+                                    {
+                                        window.assign.href = DOMAIN;
+                                    }
+                                }
+
+                            if((activePage !== null && activePage !== 'null' && activePage !== 'undefined' && activePage !== undefined && activePage !== '') && activePage == 'vendor_landing')
+                            {
+                                var uid = customStorage.readFromStorage('userid');
+                                if(uid !== '' || uid !== undefined || uid !== 'undefined' || uid !== null || uid !== 'null')
+                                {
+                                    $.ajax({url: DOMAIN + "apis/index.php?action=viewAll&uid=" + uid, success: function (result) {
+                                            var obj = eval('(' + result + ')');
+                                            var errCode = obj.error.code;
+                                            if (errCode == 0)
+                                            {
+                                                var userid = obj.results[1].vendor_id;
+                                                var is_vendor = obj.results[0].is_vendor;
+                                                var af = obj.results[1].active_flag;
+                                                if(userid !== undefined && userid !== 'undefined' && userid !== null && userid !== 'null' && userid !== '')
+                                                {
+                                                    if(is_vendor !== '' && is_vendor !== undefined && is_vendor !== 'undefined' && is_vendor !== null && is_vendor !== 'null' && (is_vendor == 1 || is_vendor == '1'))
+                                                    {
+                                                        if(af !== '' && af !== undefined && af !== 'undefined' && af !== null && af !== 'null' && (af == '0' || af == 0))
+                                                        {
+                                                            window.location.href = DOMAIN+"index.php?case=inactive_vendor&uid="+userid;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                    }});
+                                }
+                            }
+                            </script>
+<?php
+                break;
+                default:
+                break;
+}
+?>

@@ -297,10 +297,13 @@
 ?>
 
 <?php
+            if($sugTotal > 0)
+            {
+                $i=0;
+                $max = count($data3);
+            
                     foreach($data3 as $key=>$value)
                     {
-                        $i=0;
-                        $max = count($data3);   
                         if($data3[$key]['samemetal'] == 1 || $data3[$key]['sametype'] == 1)
                         {
                                 if($i == 0)
@@ -385,8 +388,10 @@
 										</div>
                         </div>
 <?php
-                    }
+                        }
                         $i++;
+                    
+                        
                         if($i == $max)
                         {
 ?>
@@ -394,7 +399,9 @@
 <?php
                         }
                     }
+                    }
 ?>
+                </div>
             </div>
         </div>
         <div class="wrapper fLeft">
