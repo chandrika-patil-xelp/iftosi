@@ -1334,7 +1334,7 @@
                     $p[5]  = $pdet['gold_weight']; 
                     if($pdet['metal'] == 'Gold')
                     {
-                        $p[6]= $pdet['gold_weightt']*(($pdet['goldRate']/10)*($pdet['gold_purity']/995));
+                        $p[6]= $pdet['gold_weight']*(($pdet['goldRate']/10)*($pdet['gold_purity']/995));
                     }
                     else if($pdet['metal'] == 'Silver')
                     {
@@ -1345,15 +1345,19 @@
                 $msg ='';
                 for($i=0;$i<count($p);$i++)
                 {
-                    $msg .= $msgng[$i].' : '.$p[$i]." \r\n ";
+                    $msg .= $msgng[$i].' : '.$p[$i].", \r\n ";
                 }
-                
+
                 global $comm;
                 $smsText = '';
                 $subject = '';
                 $message = '';
                 $headers = '';
-            
+
+                $headers .= "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                $headers .= 'From: <info@iftosi.com>' . "\r\n";
+
                 $subject .= 'Recent enquiry to IFtoSI';
                 $message .= 'Hello '.$params['username'].', '.$params['useremail'].' has shown interest in';
                 $message .= "\r\n";
@@ -1364,9 +1368,6 @@
                 $message .= "For any assistance, call: 022-32623263. Email: info@iftosi.com";
                 $message .= "\r\n";
                 $message .= "Team IFtoSI";
-                $headers .= "MIME-Version: 1.0" . "\r\n";
-                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                $headers .= 'From: <info@iftosi.com>' . "\r\n";
                 
                 $smsText .= "Recent enquiry to IFtoSI";
                 $smsText .= "\r\n\r\n";
@@ -1379,7 +1380,7 @@
                 $smsText .= "For any assistance, call: 022-32623263. Email: info@iftosi.com";
                 $smsText .= "\r\n\r\n";
                 $smsText .= "Team IFtoSI";
-            
+
             if(!empty($params['email']))
             {
                     mail($params['email'], $subject, $message, $headers);

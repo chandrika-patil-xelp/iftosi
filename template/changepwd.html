@@ -100,7 +100,7 @@
                             customStorage.addToStorage('email',obj.results[0].email);
                             customStorage.addToStorage('is_vendor',obj.results[0].is_vendor);
                             customStorage.addToStorage('isLoggedIn',true);
-                            uid = customStorage.readFromStorage('userid');
+                            var userid = customStorage.readFromStorage('userid');
                             if(obj.results[0].is_vendor == 1)
                             {
                                 customStorage.addToStorage('email',obj.results[1].email);
