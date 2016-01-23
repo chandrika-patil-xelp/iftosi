@@ -178,8 +178,7 @@ class sendingMail extends DB
                       $str .='<div style="width:97%; padding-left: 3%;">';
                       $str .='<div style="color:#666; font-size: 0.9em;  line-height: 1.7em;"><b>- Increase your reach to a wider range of customers.</b></div>';
                       $str .='<div style="color:#666; font-size: 0.9em;  line-height: 1.7em;"><b>-Kindly log on to <a href="iftosi.com" style="text-decoration:none;color:#8A0044">iftosi.com</a> to upload your products.</b></div>';
-                      $str .= '<div style="color:#666; font-size: 0.9em;  line-height: 1.7em;"><b>- View your previous transaction history.</b></div>';
-                      $str .='<div style="color:#666; font-size: 0.9em;  line-height: 1.7em;"><b>- Save time while placing a new request.</b></div>';
+                    
                       $str .='</div>';
                       $str .='<center style="padding: 15px 0">';
                       $str .='<div style="display:inline-block; vertical-align: middle; height: auto; width:32%;"></div>';
