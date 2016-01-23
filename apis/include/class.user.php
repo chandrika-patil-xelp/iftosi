@@ -1111,14 +1111,14 @@
             {
                 $subject = 'Welcome To IFtoSI';
                 
-                $message = 'Thank you '.$params['username'].', for registering on IFtoSI.com';
+                $message .= 'Thank you '.$params['username'].', for registering on IFtoSI.com';
                 $message .= "\r\n";
                 $message .= 'Your details are under verification.';
                 $message .= "\r\n";
                 $message .= 'For any assistance, Call: 022-32623263. Email: info@iftosi.com';
                 $message .= "\r\n";
                 $message .= "Team IFtoSI";
-                $headers  = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                 $headers .= 'From: <info@iftosi.com>' . "\r\n";
                 
@@ -1134,8 +1134,8 @@
             }
             else if($params['isVendor'] == 0)
             {
-                $subject  = 'Welcome To IFtoSI';
-                $message  = 'Welcome '.$params['username'].', to IFtoSI.com';
+                $subject .= 'Welcome To IFtoSI';
+                $message .= 'Welcome '.$params['username'].', to IFtoSI.com';
                 $message .= 'Save time, Save money';
                 $message .= "\r\n";
                 $message .= "IFtoSI.com the easiest way to buy solitaires, jewellery and bullion directly from the source.";
@@ -1143,7 +1143,7 @@
                 $message .= "For any assistance, Call: 022-32623263. Email: info@iftosi.com";
                 $message .= "\r\n";
                 $message .= "Team IFtoSI";
-                $headers  = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                 $headers .= 'From: <info@iftosi.com>' . "\r\n";
                 
@@ -1198,15 +1198,15 @@
             
             if($params['isVendor'] == 1)
             {
-                $subject = 'Vendor profile activated in IFtoSI';
-                $message = 'Your account has been verified.';
+                $subject .= 'Vendor profile activated in IFtoSI';
+                $message .= 'Your account has been verified.';
                 $message .= "\r\n";
-                $message = 'Get new buyers. Increase your reach to a wider range of customers. Kindly log on to iftosi.com to upload your products.';
+                $message .= 'Get new buyers. Increase your reach to a wider range of customers. Kindly log on to iftosi.com to upload your products.';
                 $message .= "\r\n";
                 $message .= "For any assistance, call: 022-32623263. Email: info@iftosi.com";
                 $message .= "\r\n";
                 $message .= "Team IFtoSI";
-                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                 $headers .= 'From: <info@iftosi.com>' . "\r\n";
                 
@@ -1354,17 +1354,17 @@
                 $message = '';
                 $headers = '';
             
-                $subject = 'Recent enquiry to IFtoSI';
+                $subject .= 'Recent enquiry to IFtoSI';
                 $message .= 'Hello '.$params['username'].', '.$params['useremail'].' has shown interest in';
                 $message .= "\r\n";
                 $message .= $msg;
                 $message .= "\r\n";
-                $message  .= 'The buyer should contact you shortly.';
+                $message .= 'The buyer should contact you shortly.';
                 $message .= "\r\n";
                 $message .= "For any assistance, call: 022-32623263. Email: info@iftosi.com";
                 $message .= "\r\n";
                 $message .= "Team IFtoSI";
-                $headers  = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                 $headers .= 'From: <info@iftosi.com>' . "\r\n";
                 
