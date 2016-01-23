@@ -18,7 +18,7 @@ class sendingMail extends DB
 
               $subject ='Change of password';
               $str = $this->forgot_password1();
-              
+
             $headers = "MIME-Version: 1.0" . "\r\n";
             $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
             $headers .= 'From: <info@iftosi.com>' . "\r\n";
@@ -45,21 +45,22 @@ class sendingMail extends DB
                       $str .= '<meta name="viewport" content="width=device-width, user-scalable=no" >';
                       $str .= '<title>Our partner will call you</title>';
                       $str .= '</head>';
-                      $str .= '<body style="margin:0; padding: 0; background-color: #0090a5;">';
+                      $str .= '<body style="margin:0; padding: 0; background-color: #8A0044;">';
                       $str .= '<center>';
                       $str .= '<div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; letter-spacing: -0.02em; color:#333; padding: 15px; -webkit-font-smoothing: antialiased;font-family: Helvetica, verdana, sans-serif-condensed, Tahoma;">';
-                      $str .= '<div style="height: auto; width:100%; padding-bottom: 15px;"><img src="http://www.nafex.co/assets/images/icons/logo_nafex.svg" style="width:55%; max-width: 250px;"></div>';
+                      $str .= '<div style="height: auto; width:100%; padding-bottom: 15px;"><img src="http://beta.xelpmoc.in/iftosi/tools/img/common/logo.svg" style="width:55%; max-width: 250px;"></div>';
                       $str .= '<div style="height: auto; border-radius: 15px; border: 1px solid #e6e6e6; box-shadow: 0 0 30px 5px rgba(0,0,0,0.4); padding: 25px 6%;background: #fff;">';
                       $str .= '<div style="width:100%;">';
                       $str .= '<center>';
                       $str .= ' <div style="width:auto; vertical-align: top; height: 30px; display: inline-block; text-transform: uppercase; line-height: 30px; padding:10px 20px; letter-spacing: -0.03em; font-weight: bold; text-align: center; font-size: 20px; border-radius: 40px; background: #91bf34;; color: #fff; box-shadow: 0 0 20px 0px rgba(0,0,0,0.3); border: 2px solid #fff">Dear Rishab E</div>';
                       $str .= '</center>';
                       $str .= '<div style="padding:25px 0; line-height: 22px;">';
-                      $str .= '<span>Thank you for the confirmation on Nafex.com order</span>';
-                      $str .= '<div style="font-size: 1.4em; color:#91BF34; line-height: 30px;">NBC14034</div>';
+                      $str .= '<span>The link to change your password is as follows</span>';
+                      $str .= '<div style="font-size: 1.4em; color:#8A0044; line-height: 30px;"><a style="color:#8A0044;"href="http://iftosi.com/FP-345678">IftoSi</a></div>';
                       $str .= '</div>';
-                      $str .= '<div style="padding: 25px 0 0 0; line-height: 22px; border-top: 1px solid #e6e6e6;">Our partner will call you to close the transaction.</div>';
-                      $str .= '<div style=" padding: 0 0 25px 0;  line-height: 30px;"> Questions? Call 9 11 11 11 11 9 (8am-8pm) </div>';
+                      $str .= '<div style="padding: 25px 0 0 0; line-height: 22px; border-top: 1px solid #e6e6e6;">For any assistance</div>';
+                      $str .= '<div style=" padding: 0 0 25px 0;  line-height: 30px;">Call 022 - 32623263 </div>';
+                      $str .= '<div style=" padding: 0 0 25px 0;  line-height: 30px;">Email info@iftosi.com</div>';
                       $str .= '<div style="color:#666; font-size: 0.8em;">- The IftoSi.com Team</div>';
                       $str .= '</div>';
                       $str .= '</div>';
