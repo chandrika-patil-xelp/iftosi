@@ -48,7 +48,7 @@ class sendingMail extends DB
                       $str .= '<body style="margin:0; padding: 0; background-color: #8A0044;">';
                       $str .= '<center>';
                       $str .= '<div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; letter-spacing: -0.02em; color:#333; padding: 15px; -webkit-font-smoothing: antialiased;font-family: Helvetica, verdana, sans-serif-condensed, Tahoma;">';
-                      $str .= '<div style="height: auto; width:100%; padding-bottom: 15px;"><img src="http://admin.mailigen.com/upload/user/76251/images/depositphotos_15838001_original_2.jpg" style="width:55%; max-width: 150px;"></div>';
+                      $str .= '<div style="height: auto; width:100%; padding-bottom: 15px;"><img src="http://beta.xelpmoc.in/iftosi/tools/img/common/logo.svg" style="width:55%; max-width: 150px;"></div>';
                       $str .= '<div style="height: auto; border-radius: 15px; border: 1px solid #e6e6e6; box-shadow: 0 0 30px 5px rgba(0,0,0,0.4); padding: 25px 6%;background: #fff;">';
                       $str .= '<div style="width:100%;">';
                       $str .= '<center>';
