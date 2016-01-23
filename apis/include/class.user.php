@@ -531,7 +531,7 @@
                     {
                         while($vrow=$this->fetchData($res))
                         {
-                            if($vrow['diff'] <= 0)
+                            if($vrow['diff'] <= 0 && $vrow['pact'] !== '0000-00-00 00:00:00')
                             {
                                 $updtSql = "UPDATE tbl_vendor_master set active_flag = 0,expire_flag = 1 WHERE vendor_id =".$arr['uid'];
                                 $udtres = $this->query($updtSql);
