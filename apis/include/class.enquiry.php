@@ -156,7 +156,7 @@ class enquiry extends DB
                             }
                             
                             
-                            $url = APIDOMAIN . 'index.php?action=sendEnqMailSMS&useremail='.$udetail['uemail'].'&mobile='.$getRow['logmobile'].'&email='.$getRow['email'].'&username='.$getRow['user_name'].'&pdet='.urlencode(serialize($pdet)).'&catid='.$catid;
+                            $url = APIDOMAIN . 'index.php?action=sendEnqMailSMS&useremail='.$udetail['uemail'].'&mobile='.$getRow['logmobile'].'&email='.$getRow['email'].'&username='.$getRow['user_name'].'&pdet='.urlencode(serialize($pdet)).'&catid='.$catidRow['category_id'];
                             $res = $comm->executeCurl($url);
                             $fil = $res['error']['code'];
                             if($fil == 0)
