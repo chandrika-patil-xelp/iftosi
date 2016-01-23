@@ -92,7 +92,7 @@ class sendingMail extends DB
           $str .='<span style="font-family: Helvetica,verdana,sans-serif-condensed,Tahoma;color: #888;">Dear Rishab , Thank you for showing interest in the product you have enquired. The contact details of the vendor are:</span>';
           $str .='</div>';
           $str .='<div style="padding: 15px 0;color:#666; letter-spacing:0em; font-size: 0.9em;border-top: 1px solid #e6e6e6;">';
-          $str .='<div style="padding: 10px 0; border-radius: 5px; background: #e6e6e6;">Date: <b>January 18, 2015 - 22:03</b></div>';
+
           $str .='<div style="padding: 10px 0;">';
           $str .='<div style="text-align: left; color:#888; text-transform: capitalize; display: inline-block; vertical-align: middle; width:48%;">Vendor name</div>';
           $str .='<div style="text-align: left; font-weight: bold; display: inline-block; width:49%; vertical-align: middle; text-transform: capitalize; color: #8A0044;">Devilal Jewellers</div>';
@@ -102,10 +102,8 @@ class sendingMail extends DB
           $str .='<div style="text-align: left; font-weight: bold; display: inline-block; width:49%; text-transform: capitalize; vertical-align: middle"><a href="tel:+919923288125 " style="text-decoration: none; color:#8A0044;">+91 8080212121</a></div>';
           $str .='</div>';
           $str .='<div style="border-top: 1px solid #e6e6e6;padding: 10px 0;">';
-          $str .='<div style="text-align: left; color:#888; text-transform: capitalize; display: inline-block; vertical-align: middle; width:48%;">Area/City</div>';
-          $str .='<div style="text-align: left; font-weight: bold; display: inline-block; vertical-align: middle; width:49%; text-transform: capitalize; color: #8A0044;">';
-          $str .='<div>Dhawal Tabib,</div>';
-          $str .='<div>Pune</div>';
+          $str .='<div style="text-align: left; color:#888; text-transform: capitalize; display: inline-block; vertical-align: middle; width:48%;">City</div>';
+          $str .='<div style="text-align: left; font-weight: bold; display: inline-block; vertical-align: middle; width:49%; text-transform: capitalize; color: #8A0044;">Pune</div>';
           $str .='</div>';
           $str .='</div>';
           $str .='<div style="border-top: 1px solid #e6e6e6;padding: 20px 0 10px 0; color:#888; line-height: 22px;">';
