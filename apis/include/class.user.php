@@ -1322,7 +1322,7 @@
                     $p[5]  = $pdet['gold_weight']; 
                     $p[6]  = $pdet['certified']; 
                     $p[7]  = $pdet['price'];
-                    $msgng = array(0=>'Product Id',1=>'Shape',2=>'Metal',3=>'Barcode',4=>'Purity',5=>'Gold Weight',6=>'Certificate',7=>'Price'); 
+                    $msgng = array(0=>'Product Id',1=>'Jewellery Type',2=>'Metal',3=>'Barcode',4=>'Purity',5=>'Gold Weight',6=>'Certificate',7=>'Price'); 
                 }
                 if($params['catid'] == 10002)
                 {
