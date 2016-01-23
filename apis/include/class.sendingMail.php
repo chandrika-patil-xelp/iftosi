@@ -114,7 +114,7 @@ class sendingMail extends DB
           $str .='</div>';
           $str .='</div>';
           $str .='<div style="border-top: 1px solid #e6e6e6;padding: 20px 0 10px 0; color:#888; line-height: 22px;">';
-          $str .='<div style="text-align: left; vertical-align: middle;">P.S: Kindly check your e-account Balance and recharge in order to constantly receive Leads. If any issues with the above, please raise a Dispute through our 'Dispute Resolution Module' or Call on <a href="tel:+919111111119" style="text-decoration: none; color:#888; font-weight: bold;">+91 91 111 111 19</a> </div>';
+          $str .='<div style="text-align: left; vertical-align: middle;">P.S: Kindly check your e-account Balance and recharge in order to constantly receive Leads. If any issues with the above, please raise a Dispute through our  or Call on <a href="tel:+919111111119" style="text-decoration: none; color:#888; font-weight: bold;">+91 91 111 111 19</a> </div>';
           $str .='</div>';
           $str .='</div>';
           $str .='<div style="color:#666; font-size: 0.8em;">- The IftoSi.com Team</div>';
