@@ -270,7 +270,7 @@
             $detls  = $dt['result'];
             
             $sql="SELECT is_vendor,user_id from tbl_registration where user_id=".$detls['uid']."";
-            $res=$this->query($sql);
+            $res=$this->query($sql,1);
             $row=$this->fetchData($res);
             $isv=$row['is_vendor'];
             $uid=$row['user_id'];
@@ -433,7 +433,7 @@
             }
             $vsql.=" updatedby='vendor' WHERE vendor_id=".$uid."";
             $vsql1 .= " WHERE user_id=".$uid;
-            $vres = $this->query($vsql,1);
+            $vres = $this->query($vsql);
             $vres2 = $this->query($vsql1);
             if ($vres && $vres2) {
                 $arr = "Vendor table is updated";
