@@ -12,7 +12,7 @@ function loadEnqs(pgno) {
 }
 function loadEnqCallback(res,pgno)
 {
-    var obj = jQuery.parseJSON(res);
+    var obj = eval('('+res+')');
     if (obj.results !== undefined && obj.results !== 'undefined' && obj.results !== null && obj.results !== 'null' && obj.results !== '')
     {
         if (obj.total_enqs !== undefined && obj.total_enqs !== 'undefined' && obj.total_enqs !== null && obj.total_enqs !== 'null' && obj.total_enqs !== '')
@@ -175,27 +175,26 @@ function generateEnqList(obj)
 {
     if(obj !== undefined && obj !== 'undefined' && obj !== null && obj !== 'null')
     {
-        
         var date = obj.enquiry.update_time.split(' ');
-        var pro_dtls=obj.pro_dtls;
         var search = obj.search;
         var enquiry= obj.enquiry;  
-        var pro_name = pro_dtls.product_name;
-        var barcode = pro_dtls.barcode;
+        var barcode = search.barcode;
         var uname = enquiry.user_name;
         var umail = enquiry.user_email;
         var umob = enquiry.user_mobile;
         var certified = search.certified;
         var clarity = search.clarity;
         var shape = search.shape;
-        var subCatName = obj.categories.cat_name;
-        var categoryid = obj.categories.mCatid;
-        var pcatid     = obj.categories.pcatid;
+        var subCatName = obj.category.cat_name;
+        var product_id = search.product_id;
+        var type = search.type;
+        var weight = search.weight;
+        var metal = search.metal;
+        var color = search.color;
+        var purity = search.purity;
+        var price = search.price;
+        var categoryid = obj.category.mcatid;
         
-        if(pro_name == null) {
-            pro_name = '';
-        }
-
         if(barcode == null || barcode == '' || barcode == 'null') {
             barcode = 'N-A';
         }
@@ -226,155 +225,176 @@ function generateEnqList(obj)
         str += '</div>';
         str += '<div class="name fLeft">' + uname + '</div>';
         str += '<div class="email fLeft txtOverflow" title='+umail+'>'+ umail + '</div>';
-        str += '<div class="type fLeft">'+ subCatName;
         
-        //str += '<span class="lwSpan">' + obj.categories.cat_name + '</span>';
-        str += '</div>';
+        if(categoryid == '10000' || categoryid == 10000)
+        {
+                    str += '<div class="type fLeft">'+ subCatName;
+                    str += '</div>';
+        }
+        else
+        {
+            if(categoryid == '10002' || categoryid == 10002)
+            {
+                str += '<div class="type fLeft">';
+                    str += '<span class="upSpan">' + subCatName + '</span>';
+                    str += '<span class="lwSpan">' + type + '</span>';
+                str += '</div>';
+            }
+            else if(categoryid == '10001' || categoryid == 10001)
+            {
+                str += '<div class="type fLeft">';
+                    str += '<span class="upSpan">' + subCatName + '</span>';
+                    str += '<span class="lwSpan">' + shape + '</span>';
+                str += '</div>';
+            }
+        }
+ 
         str += '<div class="barcode fLeft">';
         str += '<span class="upSpan">' + barcode + '</span>';
-            if(pcatid == 10000)
+            if(categoryid == 10000)
                 {
                  
                     var tempUrl = '';
-                    if(search.shape !== null && search.shape !== undefined){
+                    if(shape !== null && shape !== undefined){
                         if(tempUrl !== ''){
-                            tempUrl += '-'+search.shape; 
+                            tempUrl += '-'+shape; 
                         }
                         else{
-                            tempUrl += search.shape;
+                            tempUrl += shape;
                         }
                     }
-                    if(search.color !== null && search.color !== undefined){
+                    if(color !== null && color !== undefined){
                         if(tempUrl !== ''){
-                        tempUrl += '-colour-'+search.color; 
+                        tempUrl += '-colour-'+color; 
                         }
                         else{
-                        tempUrl += 'colour-'+search.color;
+                        tempUrl += 'colour-'+color;
                         }
                     }
-                    if(search.clarity !== null && search.clarity !== undefined){
+                    if(clarity !== null && clarity !== undefined){
                         if(tempUrl !== ''){
-                        tempUrl += '-clarity-'+search.clarity; 
+                        tempUrl += '-clarity-'+clarity; 
                         }
                         else{
-                        tempUrl += 'clarity-'+search.clarity;
+                        tempUrl += 'clarity-'+clarity;
                         }
                     }
-                    if(search.certified !== null && search.certified !== undefined){
+                    if(certified !== null && certified !== undefined){
                         if(tempUrl !== ''){
-                        tempUrl += '-certified-'+search.certified; 
+                        tempUrl += '-certified-'+certified; 
                         }
                         else{
-                        tempUrl += 'certified-'+search.certified;
+                        tempUrl += 'certified-'+certified;
                         }
                     }
                     if(tempUrl !== '')
                     {
-                        str += '<span class="lwSpan"><a href="'+DOMAIN+ tempUrl+'/did-'+search.product_id+'" target="_blank">View Details</a></span>';
+                        str += '<span class="lwSpan"><a href="'+DOMAIN+ tempUrl+'/did-'+product_id+'" target="_blank">View Details</a></span>';
                     }
                     else
                     {
                         str += '<span class="lwSpan"><a href="'+ DOMAIN + search.shape +'/did-'+search.product_id+'" target="_blank">View Details</a></span>';
                     }
                 }
-                else if(pcatid == 10002)
+                else if(categoryid == 10002)
                 {
                     
                     var tempUrl = '';
-                    if(search.metal !== null && search.metal !== undefined){
+                    if(metal !== null && metal !== undefined){
                         if(tempUrl !== ''){
-                            tempUrl += '-'+search.metal; 
+                            tempUrl += '-'+metal; 
                         }
                         else{
-                            tempUrl += search.metal;
+                            tempUrl += metal;
                         }
                     }
-                    if(search.type !== null && search.type !== undefined){
+                    if(type !== null && type !== undefined){
                         if(tempUrl !== ''){
-                            tempUrl += '-'+search.type; 
+                            tempUrl += '-'+type; 
                         }
                         else{
-                            tempUrl += search.type;
+                            tempUrl += type;
                         }
                     }
-                    if(search.gold_purity !== '' && search.gold_purity !== 'null' && search.gold_purity !== null && search.gold_purity !== undefined && search.gold_purity !== 'undefined'){
+                    if(purity !== '' && purity !== 'null' && purity !== null && purity !== undefined && purity !== 'undefined'){
                         if(tempUrl !== ''){
-                            var goldpty = search.gold_purity.split('.');
+                            var goldpty = purity.split('.');
                             tempUrl += '-'+goldpty[0]+'-Karat'; 
                         }
                         else{
-                            var goldpty = search.gold_purity.split('.');
+                            var goldpty = purity.split('.');
                             tempUrl += goldpty[0]+'-Karat';
                         }
                     }
-                    if(search.gold_weight !== null && search.gold_weight !== undefined && search.gold_weight !== ''){
+                    if(weight !== null && weight !== undefined && weight !== ''){
                         if(tempUrl !== ''){
-                            var goldwt = search.gold_weight.split('.');
+                            var goldwt = weight.split('.');
                             goldwt = goldwt[0].split(',');
                             tempUrl += '-'+ goldwt+'-Grams'; 
                         }
                         else{
-                            var goldwt = search.gold_weight.split('.');
+                            var goldwt = weight.split('.');
                             goldwt = goldwt[0].split(',');
                             tempUrl += goldwt+'-Grams';
                         }
                     }
                     if(tempUrl !== '')
                     {
-                        str += '<span class="lwSpan"><a href="'+DOMAIN+ tempUrl+'/bid-'+search.product_id+'" target="_blank">View Details</a></span>';
+                        str += '<span class="lwSpan"><a href="'+DOMAIN+ tempUrl+'/bid-'+product_id+'" target="_blank">View Details</a></span>';
                     }
                     else
                     {
-                        str += '<span class="lwSpan"><a href="'+ DOMAIN + search.type +'/bid-'+search.product_id+'" target="_blank">View Details</a></span>';
+                        str += '<span class="lwSpan"><a href="'+ DOMAIN + type +'/bid-'+product_id+'" target="_blank">View Details</a></span>';
                     }
                 }
-                else if(pcatid == 10001)
+                else if(categoryid == 10001)
                 {
                     
                     var tempUrl = '';
-                    if(search.metal !== null && search.metal !== undefined){
+                    if(metal !== null && metal !== undefined){
                         if(tempUrl !== ''){
-                            tempUrl += '-'+search.metal; 
+                            tempUrl += '-'+metal; 
                         }
                         else{
-                            tempUrl += search.metal;
+                            tempUrl += metal;
                         }
                     }
-                    if(subCatName !== null && subCatName !== undefined && subCatName !== '' && subCatName !== 'undefined'){
+                    if(subCatName !== null && subCatName !== undefined && subCatName !== '' && subCatName !== 'undefined')
+                    {
                         if(tempUrl !== ''){
                             tempUrl += '-'+encodeURIComponent(subCatName); 
                         }
                         else{
-                            tempUrl += encodeURIComponent(subCatName);
+                            tempUrl += '-Jewellery';
                         }
                     }
                     if(search.gold_purity !== '' && search.gold_purity !== 'null' && search.gold_purity !== null && search.gold_purity !== undefined && search.gold_purity !== 'undefined'){
                         if(tempUrl !== ''){
-                            tempUrl += '-'+search.gold_purity+'-Karat'; 
+                            tempUrl += '-'+purity+'-Karat'; 
                         }
                         else{
-                            tempUrl += search.gold_purity+'-Karat';
+                            tempUrl += purity+'-Karat';
                         }
                     }
                     if(search.certified !== null && search.certified !== undefined && search.certified !== ''){
                         if(tempUrl !== ''){
-                            tempUrl += '-certificate-'+search.certified; 
+                            tempUrl += '-certificate-'+certified; 
                         }
                         else{
-                            tempUrl += 'certificate-'+search.certified;
+                            tempUrl += 'certificate-'+certified;
                         }
                     }
                     if(tempUrl !== '')
                     {
-                        str += '<span class="lwSpan"><a href="'+DOMAIN+ tempUrl+'/jid-'+search.product_id+'" target="_blank">View Details</a></span>';
+                        str += '<span class="lwSpan"><a href="'+DOMAIN+ tempUrl+'/jid-'+product_id+'" target="_blank">View Details</a></span>';
                     }
                     else
                     {
-                        str += '<span class="lwSpan"><a href="'+ DOMAIN + search.shape +'/jid-'+search.product_id+'" target="_blank">View Details</a></span>';
+                        str += '<span class="lwSpan"><a href="'+ DOMAIN + search.shape +'/jid-'+product_id+'" target="_blank">View Details</a></span>';
                     }
                 }
         str += '</div>';
-                str += '<div class="price fLeft bNone fmOpenB">&#8377;' + search.price + '</div>';
+                str += '<div class="price fLeft bNone fmOpenB">&#8377;' + price + '</div>';
         str += '</li>';
         return str;
     }

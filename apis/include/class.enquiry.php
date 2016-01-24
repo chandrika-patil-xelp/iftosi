@@ -398,4 +398,204 @@ class enquiry extends DB
 
         return strrev($m);
     }
+    
+    public function viewLog1($params)
+    {
+        
+        $vendorSql  = " SELECT 
+                                    dollar_rate,
+                                    silver_rate,
+                                    gold_rate 
+                        FROM
+                                    tbl_vendor_master
+                        WHERE
+                                    vendor_id =".$params['vid']."
+                        AND 
+                                    active_flag= 1";
+        $vendorRes = $this->query($vendorSql);
+        
+        if($vendorRes)
+        {
+            $vrow = $this->fetchData($vendorRes);
+                if($vrow['dollar_rate'] == '0.00' || empty($vrow['dollar_rate']))
+                {
+                    $vrow['dollar_rate'] = dollar_rate;
+                }
+                if($vrow['gold_rate'] == '0.00' || empty($vrow['gold_rate']))
+                {
+                    $vrow['dollar_rate'] = gold_rate;
+                }
+                if($vrow['silver_rate'] == '0.00' || empty($vrow['silver_rate']))
+                {
+                    $vrow['silver_rate'] = silver_rate;
+                }
+            $arr['vendor_rates'] = $vrow;
+        }
+        
+            
+        $Enqsql = " SELECT
+                                * 
+                    FROM
+                                tbl_product_enquiry
+                    WHERE
+                                vendor_id =".$params['vid']."
+                    AND 
+                                user_id NOT IN(".$params['vid'].")
+                    AND
+                                active_flag = 1
+                    ORDER BY 
+                                product_id ASC";
+        
+        $page   = ($params['page'] ? $params['page'] : 1);
+        $limit  = ($params['limit'] ? $params['limit'] : 15);
+        
+        if (!empty($page))
+        {
+            $start = ($page * $limit) - $limit;
+            $viewEnq.=" LIMIT " . $start . ",$limit";
+        }
+        
+        $EnqRes = $this->query($Enqsql);
+        $EnqCount = $this->numRows($EnqRes);
+        
+        if($EnqCount > 0 )
+        {   $i=0;
+            while($EnqRow = $this->fetchData($EnqRes))
+            {
+                $pid[] = $EnqRow['product_id'];
+                $arr[$i]['enquiry'] = $EnqRow;
+                $i++;
+            }
+            $pid = implode(',',$pid);
+            
+            $PcatSql = "SELECT
+                                    b.cat_name,
+                                    b.catid,
+                                    product_id
+                        FROM
+                                    tbl_product_category_mapping as a,
+                                    tbl_category_master as b
+                        WHERE
+                                    a.category_id = b.catid
+                        AND
+                                    b.p_catid = 0
+                        AND
+                                    a.product_id IN (".$pid.")
+                        AND
+                                    a.display_flag=1
+                        ORDER BY    
+                                    a.product_id ASC";
+            
+            $PcatRes = $this->query($PcatSql);
+            
+            if($PcatRes)
+            {
+                $j =0;
+                while($catRow = $this->fetchData($PcatRes))
+                {
+                    $cat['mcatid'] = $catRow['catid'];
+                    $cat['cat_name'] = $catRow['cat_name'];
+                    $arr[$j]['category'] = $cat;
+                    $j++;
+                }
+                 $prdSql = " SELECT
+                                    ps.product_id,
+                                    pc.category_id as category,
+                                    ps.gold_purity,
+                                    ps.certified,
+                                    ps.price,
+                                    ps.shape,
+                                    ps.clarity,
+                                    ps.color,
+                                    ps.type,
+                                    ps.gold_weight,
+                                    ps.carat,
+                                    ps.metal,
+                                    pm.barcode
+                            FROM
+                                    tbl_product_master as pm,
+                                    tbl_product_search as ps,
+                                    tbl_product_category_mapping as pc
+                            WHERE
+                                    pm.product_id = ps.product_id
+                            AND 
+                                    pc.product_id = ps.product_id
+                            AND 
+                                    pm.product_id
+                            IN 
+                                    (".$pid.")
+                            AND 
+                                    pc.category_id
+                            IN 
+                                    (10000,10001,10002)
+                            AND
+                                    ps.active_flag = 1
+                            ORDER BY
+                                    ps.product_id ASC";
+                $prdRes = $this->query($prdSql);
+                if($prdRes)
+                {
+                    $k = 0;
+                    while($prdRow = $this->fetchData($prdRes))
+                    {
+                        $arr[$k]['search']=array();
+                        $ar['product_id'] = $prdRow['product_id'];
+                        if($prdRow['category'] == '10000')
+                        {
+                            $ar['certified'] = $prdRow['certified'];
+                            $ar['shape'] = $prdRow['shape'];
+                            $ar['color'] = $prdRow['color'];
+                            $ar['carat'] = $prdRow['carat'];
+                            $ar['price'] = $this->IND_money_format(ceil($prdRow['price']*$prdRow['carat']*$arr['vendor_rates']['dollar_rate']));
+                            $ar['clarity'] = $prdRow['clarity'];
+                            $ar['barcode'] = $prdRow['barcode'];
+                        }
+                        if($prdRow['category'] == '10001')
+                        {
+                            $ar['certified'] = $prdRow['certified'];
+                            $ar['shape'] = $prdRow['shape'];
+                            $ar['price'] = $this->IND_money_format(ceil($prdRow['price']));
+                            $ar['metal'] = $prdRow['metal'];
+                            $ar['purity'] = $prdRow['gold_purity'];
+                            $ar['weight'] = $prdRow['weight'];
+                            $ar['barcode'] = $prdRow['barcode'];
+                        }
+                        if($prdRow['category'] == '10002')
+                        {
+                            $ar['certified'] = $prdRow['certified'];
+                            $ar['metal'] = $prdRow['metal'];
+                            $ar['purity'] = $prdRow['gold_purity'];
+                            $ar['weight'] = $prdRow['gold_weight'];
+                            if($ar['metal'] == 'Gold')
+                            {
+                                $ar['price'] = $this->IND_money_format(ceil(($arr['vendor_rates']['gold_rate']/10)*($ar['purity']/995)*($ar['weight'])));
+                            }
+                            else if($ar['metal'] == 'Silver')
+                            {
+                                $ar['price'] = $this->IND_money_format(ceil(($arr['vendor_rates']['silver_rate']/1000)*($ar['purity']/999)*($ar['weight'])));
+                            
+                            }
+                            $ar['type'] = $prdRow['type'];
+                            $ar['barcode'] = $prdRow['barcode'];
+                        }
+                        
+                        $arr[$k]['search']= $ar;
+                        $k++;
+                    }
+
+                }
+            }
+                $err = array('code'=>0,'msg'=>'Enquiry data fetched');
+        }
+        else
+        {
+            $arr = array();
+            $err = array('code'=>1,'msg'=>'No records found');
+        }
+
+        $total_pages = ceil($EnqCount/$limit);
+        $result = array('results'=>$arr,'error'=>$err,'total_enqs'=>$EnqCount,'total_pages'=>$total_pages);
+        return $result;
+    }
+    
 }

@@ -865,22 +865,28 @@ class vendor extends DB
         return $catid;
     }
 
-    public function deletePrd($params) {
-        $sql = "UPDATE tbl_vendor_product_mapping SET active_flag=2 WHERE product_id=" . $params['prdid']." AND vendor_id=" . $params['vid'];
-        $res = $this->query($sql);
-        if($res){
-        $sql = "UPDATE tbl_product_search SET active_flag=2 WHERE product_id=" . $params['prdid'];
-        $res1 = $this->query($sql);}
-        if($res1){
-        $sql = "UPDATE tbl_product_master SET active_flag=2 WHERE product_id=" . $params['prdid'];
-        $res2 = $this->query($sql);}
-        if($res2){
-        $sql = "UPDATE tbl_productid_generator SET active_flag=2 WHERE product_id=" . $params['prdid'];
-        $res3 = $this->query($sql);}
-        if($res3){
-        $sql = "UPDATE tbl_product_category_mapping SET display_flag=2 WHERE product_id=" . $params['prdid'];
-        $res = $this->query($sql);}
-        if ($res) {
+    public function deletePrd($params)
+    {
+        
+        $sql1 = "UPDATE tbl_vendor_product_mapping SET active_flag=2 WHERE product_id=" . $params['prdid']." AND vendor_id=" . $params['vid'];
+        $res = $this->query($sql1);
+    
+        $sql2 = "UPDATE tbl_product_search SET active_flag=2 WHERE product_id=" . $params['prdid'];
+        $res1 = $this->query($sql2);
+        
+        $sql3 = "UPDATE tbl_product_master SET active_flag=2 WHERE product_id=" . $params['prdid'];
+        $res2 = $this->query($sql3);
+        
+        $sql4 = "UPDATE tbl_productid_generator SET active_flag=2 WHERE product_id=" . $params['prdid'];
+        $res3 = $this->query($sql4);
+        
+        $sql5 = "UPDATE tbl_product_category_mapping SET display_flag=2 WHERE product_id=" . $params['prdid'];
+        $res4 = $this->query($sql5);
+        
+        $sql6 = "UPDATE tbl_product_enquiry SET active_flag=2 WHERE product_id=" . $params['prdid'];
+        $res5 = $this->query($sql6);
+        
+        if ($res5) {
             $arr = array();
             $err = array('Code' => 0, 'Msg' => 'Product deleted successfully!');
         } else {
@@ -903,86 +909,64 @@ class vendor extends DB
             }
             if($params['flag'] == 1)
             {
-                $sql = "UPDATE tbl_vendor_product_mapping SET active_flag=".$flag." WHERE product_id=" . $params['prdid']." AND vendor_id=" . $params['vid'];
-                $res = $this->query($sql);
-                if($res)
-                {
-                    $sql = "UPDATE tbl_product_search SET active_flag=".$flag." WHERE product_id=" . $params['prdid'];
-                    $res1 = $this->query($sql);
-                }
-                if($res1)
-                {
-                    $sql = "UPDATE tbl_product_master SET active_flag=".$flag." WHERE product_id=" . $params['prdid'];
-                    $res2 = $this->query($sql);
-                }
-                if($res2)
-                {
-                    $sql = "UPDATE tbl_productid_generator SET active_flag=".$flag." WHERE product_id=" . $params['prdid'];
-                    $res3 = $this->query($sql);
-                }
-                if($res3)
-                {
-                    $sql = "UPDATE tbl_product_category_mapping SET display_flag=".$flag." WHERE product_id=" . $params['prdid'];
-                    $res4 = $this->query($sql);
-                }
-                if($res4)
-                {
-                    $sql = "UPDATE tbl_designer_product_mapping SET active_flag=".$flag." WHERE product_id=".$params['prdid'];
-                    $res = $this->query($sql);
-                }
-                if($res)
-                {
-                    $arr = array();
-                    $err = array('Code' => 0, 'Msg' => 'Product status changed!');
-                }
-                else
-                {
-                    $arr = array();
-                    $err = array('code' => 1, 'msg' => 'Error in fetching data');
-                }
+                $sql1 = "UPDATE tbl_vendor_product_mapping SET active_flag=".$flag." WHERE product_id=" . $params['prdid']." AND vendor_id=" . $params['vid'];
+                $res = $this->query($sql1);
+
+                $sql2 = "UPDATE tbl_product_search SET active_flag=".$flag." WHERE product_id=" . $params['prdid'];
+                $res1 = $this->query($sql2);
+                
+                $sql3 = "UPDATE tbl_product_master SET active_flag=".$flag." WHERE product_id=" . $params['prdid'];
+                $res2 = $this->query($sql3);
+            
+                $sql4 = "UPDATE tbl_productid_generator SET active_flag=".$flag." WHERE product_id=" . $params['prdid'];
+                $res3 = $this->query($sql4);
+
+                $sql5 = "UPDATE tbl_product_category_mapping SET display_flag=".$flag." WHERE product_id=" . $params['prdid'];
+                $res4 = $this->query($sql5);
+
+                $sql6 = "UPDATE tbl_designer_product_mapping SET active_flag=".$flag." WHERE product_id=".$params['prdid'];
+                $res5 = $this->query($sql6);
+                
+                $sql7 = "UPDATE tbl_product_enquiry SET active_flag=".$flag." WHERE product_id=".$params['prdid'];
+                $res7 = $this->query($sql7);
+                
             }
             else
             {
-                $sql = "UPDATE tbl_vendor_product_mapping SET active_flag=".$params['flag']." WHERE product_id=" . $params['prdid']." AND vendor_id=" . $params['vid'];
-                $res = $this->query($sql);
-                if($res)
-                {
-                    $sql = "UPDATE tbl_product_search SET active_flag=".$params['flag']." WHERE product_id=" . $params['prdid'];
-                    $res1 = $this->query($sql);
-                }
-                if($res1)
-                {
-                    $sql = "UPDATE tbl_product_master SET active_flag=".$params['flag']." WHERE product_id=" . $params['prdid'];
-                    $res2 = $this->query($sql);
-                }
-                if($res2)
-                {
-                    $sql = "UPDATE tbl_productid_generator SET active_flag=".$params['flag']." WHERE product_id=" . $params['prdid'];
-                    $res3 = $this->query($sql);
-                }
-                if($res3)
-                {
-                    $sql = "UPDATE tbl_product_category_mapping SET display_flag=".$params['flag']." WHERE product_id=" . $params['prdid'];
-                    $res4 = $this->query($sql);
-                }
-                if($res4)
-                {
-                    $sql = "UPDATE tbl_designer_product_mapping SET active_flag=".$params['flag']." WHERE product_id=".$params['prdid'];
-                    $res = $this->query($sql);
-                }
-                if($res)
-                {
-                    $arr = array();
-                    $err = array('Code' => 0, 'Msg' => 'Product status changed!');
-                }
-                else
-                {
-                    $arr = array();
-                    $err = array('code' => 1, 'msg' => 'Error in fetching data');
-                }
+                $sql1 = "UPDATE tbl_vendor_product_mapping SET active_flag=".$params['flag']." WHERE product_id=" . $params['prdid']." AND vendor_id=" . $params['vid'];
+                $res = $this->query($sql1);
+
+                $sql2 = "UPDATE tbl_product_search SET active_flag=".$params['flag']." WHERE product_id=" . $params['prdid'];
+                $res2 = $this->query($sql2);
+
+                $sql3 = "UPDATE tbl_product_master SET active_flag=".$params['flag']." WHERE product_id=" . $params['prdid'];
+                $res3 = $this->query($sql3);
+
+                $sql4 = "UPDATE tbl_productid_generator SET active_flag=".$params['flag']." WHERE product_id=" . $params['prdid'];
+                $res4 = $this->query($sql4);
+
+                $sql5 = "UPDATE tbl_product_category_mapping SET display_flag=".$params['flag']." WHERE product_id=" . $params['prdid'];
+                $res5 = $this->query($sql5);
+
+                $sql6 = "UPDATE tbl_designer_product_mapping SET active_flag=".$params['flag']." WHERE product_id=".$params['prdid'];
+                $res6 = $this->query($sql6);
+
+                $sql7 = "UPDATE tbl_product_enquiry SET active_flag=".$params['flag']." WHERE product_id=".$params['prdid'];
+                $res7 = $this->query($sql7);
             }
-            $result = array('results' => $arr, 'error' => $err);
-            return $result;
+                
+            if($res7)
+            {
+                $arr = array();
+                $err = array('Code' => 0, 'Msg' => 'Product status changed!');
+            }
+            else
+            {
+                $arr = array();
+                $err = array('code' => 1, 'msg' => 'Error in fetching data');
+            }
+        $result = array('results' => $arr, 'error' => $err);
+        return $result;
     }
 
     public function getVPrdByCatid($params)
@@ -1618,38 +1602,27 @@ class vendor extends DB
             }
             $prid=implode(',',$pid);
             
-            $sql = "UPDATE tbl_vendor_product_mapping SET active_flag=".$params['af']." WHERE product_id IN(\"".$prid."\") AND vendor_id=".$params['vid']." AND active_flag NOT IN(2,3)";
-            $res = $this->query($sql);
-            if($res)
-            {
-                $sql = "UPDATE tbl_product_search SET active_flag=".$params['af']." WHERE product_id IN(".$prid.") AND active_flag NOT IN(2,3)";
-                $res1 = $this->query($sql);
-            }
-            if($res1)
-            {
-                $sql = "UPDATE tbl_product_master SET active_flag=".$params['af']." WHERE product_id IN(".$prid.") AND active_flag NOT IN(2,3)";
-                $res2 = $this->query($sql);
-            }
-            if($res2)
-            {
-                $sql = "UPDATE tbl_productid_generator SET active_flag=".$params['af']." WHERE product_id IN(".$prid.") AND active_flag NOT IN(2,3)";
-                $res3 = $this->query($sql);
-            }
-            if($res3)
-            {
-                $sql = "UPDATE tbl_product_category_mapping SET display_flag=".$params['af']." WHERE product_id IN(".$prid.") AND display_flag NOT IN(2,3)";
-                $res4 = $this->query($sql);
-            }
-            if($res4)
-            {
-                $sql = "UPDATE tbl_designer_product_mapping SET active_flag=".$params['af']." WHERE product_id IN(".$prid.")) AND active_flag NOT IN(2,3)";
-                $res5 = $this->query($sql);
-            }
-            if($res5)
-            {
-                $sql = "UPDATE tbl_product_enquiry SET active_flag=".$params['af']." WHERE product_id IN(".$prid.")) AND active_flag NOT IN(2,3)";
-                $res6 = $this->query($sql);
-            }
+            $sql1 = "UPDATE tbl_vendor_product_mapping SET active_flag=".$params['af']." WHERE product_id IN(".$prid.") AND vendor_id=".$params['vid']." AND active_flag NOT IN(2,3)";
+            $res = $this->query($sql1);
+   
+            $sql2 = "UPDATE tbl_product_search SET active_flag=".$params['af']." WHERE product_id IN(".$prid.") AND active_flag NOT IN(2,3)";
+            $res1 = $this->query($sql2);
+   
+            $sql3 = "UPDATE tbl_product_master SET active_flag=".$params['af']." WHERE product_id IN(".$prid.") AND active_flag NOT IN(2,3)";
+            $res2 = $this->query($sql3);
+            
+            $sql4 = "UPDATE tbl_productid_generator SET active_flag=".$params['af']." WHERE product_id IN(".$prid.") AND active_flag NOT IN(2,3)";
+            $res3 = $this->query($sql4);
+            
+            $sql5 = "UPDATE tbl_product_category_mapping SET display_flag=".$params['af']." WHERE product_id IN(".$prid.") AND display_flag NOT IN(2,3)";
+            $res4 = $this->query($sql5);
+            
+            $sql6 = "UPDATE tbl_designer_product_mapping SET active_flag=".$params['af']." WHERE product_id IN(".$prid.") AND active_flag NOT IN(2,3)";
+            $res5 = $this->query($sql6);
+            
+            $sql7 = "UPDATE tbl_product_enquiry SET active_flag=".$params['af']." WHERE product_id IN(".$prid.") AND active_flag NOT IN(2,3)";
+            $res6 = $this->query($sql7);
+            
             $arr=array();
             $err=array('code'=>0,'msg'=>'Product status changed too');
         }

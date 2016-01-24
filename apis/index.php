@@ -477,9 +477,10 @@ switch($action)
                 break;
             }
             $obj= new enquiry($db['iftosi']);
-            $result= $obj->viewLog($params);
+            $result= $obj->viewLog1($params);
             $res = $result;
             break;
+            
 
 //-----------------------------Vendor-----------------------------
 
