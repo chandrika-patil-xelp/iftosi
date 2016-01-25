@@ -1081,6 +1081,11 @@ switch ($action) {
                 $page = 'team';
                 include 'template/team.html';
                 break;
+            
+            case 'comingsoon':
+                $page = 'comingsoon';
+                include 'template/comingsoon.html';
+                break;
 
             case 'contact_us':
                 $page = 'contact_us';
