@@ -13,8 +13,6 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-RewriteCond %{HTTP_HOST} !^www\.iftosi\.com [NC]
-RewriteRule (.*) http://www.iftosi.com/$1 [L,R=301]
 ####################### FRONT END LINKS ######################
 
 RewriteRule ^((?i)about-us)$    index.php?case=about_us [L]

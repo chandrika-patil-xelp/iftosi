@@ -253,7 +253,8 @@ switch ($action) {
         switch ($case) {
             case 'signup':
                 $page = 'signup';
-                include 'template/signup.html';
+                //include 'template/signup.html';
+                include 'template/comingsoon.html';
                 break;
 
             case 'vsignup':
@@ -533,7 +534,8 @@ switch ($action) {
                 $lastpg = ceil($total / 15);
                 $adjacents = 2;
                 //echo "<pre>";print_r($total);die;
-                include 'template/results.html';
+                //include 'template/results.html';
+                include 'template/comingsoon.html';
                 break;
 
             case 'jewellery':
@@ -562,7 +564,8 @@ switch ($action) {
                     //echo '<pre>';print_r($data1);
                 }
                 //echo "<pre>";print_r($data);die;
-                include 'template/jewellery_results.html';
+                //include 'template/jewellery_results.html';
+                include 'template/comingsoon.html';
                 break;
             case 'bullion':
                 $page = 'bullion';
@@ -583,7 +586,8 @@ switch ($action) {
                 $totalCnt = $total;
                 $lastpg = ceil($total / 15);
                 $adjacents = 2;
-                include 'template/bullion_results.html';
+                //include 'template/bullion_results.html';
+                include 'template/comingsoon.html';
                 break;
 
 
@@ -726,7 +730,8 @@ switch ($action) {
                 $des = $desres['results'];
                 $totalDes = $res3['total'];
                 //echo "<pre>";print_r($des); die;
-                include 'template/diamond_details.html';
+                //include 'template/diamond_details.html';
+                include 'template/comingsoon.html';
                 break;
 
             case 'bullion_details':
@@ -770,7 +775,8 @@ switch ($action) {
                 $totalDes = $res3['total'];
 
                 //echo "<pre>".print_r($data3); die;
-                include 'template/bullion_details.html';
+                //include 'template/bullion_details.html';
+                include 'template/comingsoon.html';
                 break;
 
             case 'jewellery_details':
@@ -892,7 +898,8 @@ switch ($action) {
 
 
                 //echo "<pre>"; print_r($des); die;
-                include 'template/jewellery_details.html';
+                //include 'template/jewellery_details.html';
+                include 'template/comingsoon.html';
                 break;
 
             case 'diamond_Form':
@@ -953,11 +960,11 @@ switch ($action) {
                 $pdet = $result[$pid];
                 //echo "<pre>";print_r($attr['gemstone_color']);die;
 
-				$shapeUrl = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=10000';
+				        $shapeUrl = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=10000';
                 $shapeRes = $comm->executeCurl($shapeUrl);
                 $shapeAttrs = $shapeRes['results'];
 
-				$gemsUrl = APIDOMAIN . 'index.php?action=getGemstoneTypes';
+				        $gemsUrl = APIDOMAIN . 'index.php?action=getGemstoneTypes';
                 $gemsRes = $comm->executeCurl($gemsUrl);
                 $gemsAttrs = $gemsRes['results'];
 
