@@ -98,7 +98,7 @@ a{text-decoration: none;}
 
 .wishCount{position: relative;line-height: 30px;padding: 0 10px; background: #5E0037;color:#fff;margin:3px 0;border-radius: 3px;font-size: 10px;text-align: center;cursor:pointer;}
 .menuBtn {display: none;position: relative;width: 50px;height: 50px;background: url(../img/common/menu.svg)no-repeat;background-position: left center;background-size: auto 100%;margin-top: 5px;margin-left: -10px;}
-.filterBtn{display: none;position: relative;width: 50px;height: 50px;background: url(../img/common/filter2.svg)no-repeat;background-position: center 12px;background-size: auto 85%;margin-top: 5px;margin-left: 0;margin-right: -10px;}
+.filterBtn{display: none;position: relative;width: 50px;height: 50px;background: url(../img/common/filter.svg)no-repeat;background-position: center 12px;background-size: auto 85%;margin-top: 5px;margin-left: 0;margin-right: -10px;}
 
 .header .sortBox{width: 36px;max-width: 25%;height: 36px;line-height: 36px;margin: 0;}
 .dropdownBox {height: 36px;padding: 0;}
@@ -507,8 +507,8 @@ a{text-decoration: none;}
 
 
 /*Left Menu Results Page*/
-.leftMenu{width:250px;height:100%;position:fixed;top:0;box-shadow: 0 0 20px 5px rgba(0,0,0,0.2);z-index: 100;background-color: #fff;padding: 0 0 0 0;}
-.leftTransit{-webkit-transform: translateX(-250px);-moz-transform: translateX(-250px);-ms-transform: translateX(-250px);-o-transform: translateX(-250px);transform: translateX(-250px);}
+.leftMenu{width:250px;height:100%;position:fixed;top:0;box-shadow: 0 0 20px 5px rgba(0,0,0,0.2);z-index: 100;background-color: #fff;padding: 0 0 0 0;left: 0;}
+.leftTransit{-webkit-transform: translateX(-350px);-moz-transform: translateX(-350px);-ms-transform: translateX(-350px);-o-transform: translateX(-350px);transform: translateX(-350px);}
 
 .leftMenu ul{width:100%;height: auto;margin:0;padding:0;list-style: none;}
 .leftMenu ul li{width:100%;height: 45px;line-height:45px;border-bottom: 1px solid #ebebde;padding-left: 50px;font-size: 14px;color: #4d4d4d;padding-right:15px; }
@@ -1044,9 +1044,10 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .ttl2{font-size: 45px;}
 
 
+
 @media only screen and (min-width: 320px) and (max-width: 767px){
     /*Header*/
-        .header {height: 60px;padding: 0 15px;}
+        .header {height: 60px!important;padding: 0 15px!important;}
         .headRight {display: none;}
         .logo {width: 80px;height: 80px;font-size: 22px;top: 20px;}
         .menuBtn, .filterBtn {display: block;}
@@ -1098,7 +1099,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 
 
     /*Diamonds Results Page*/
-        .totalResultsDiv {height: 250px;line-height: 30px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: cover;padding: 150px 0 0 0;font-size: 30px;}
+        .totalResultsDiv {height: 320px;line-height: 30px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: cover;padding: 150px 0 0 0;font-size: 30px;}
         .resultsPage .shapesCont {padding: 10px 0;background: #fff;float: left;}
         .showHide {display: none;}
         .allResults {float: left;padding: 0 10px;}
@@ -1199,6 +1200,29 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
             .actionComm:nth-child(3):hover{background-color: #380B34;}
             .actionComm:nth-child(4):hover{background-color: #5e0037;}
             .actionComm:active{background-color: #8A0044}
+
+            
+            .homePage .bottmInfo {border-top:0px solid #fff!important;}
+            .resultsPage .bottmInfo {border-top:0px solid #fff!important;}
+            .srcTitle {line-height: 20px;font-size: 16px;}
+            .prdInfoTitle {font-size: 14px;}
+            .detailsPage .centerDiv {border-right: 0px solid #ccc;padding: 0;padding-right: 0;}
+            .shapesCommH {width: 100%;height: auto;min-height: 104px;padding: 20px;border-radius: 5px;margin-top: 0;background: #fff;position: relative;background-color: #ebebde;padding-top: 100px;text-align: center;} 
+            .shapesPage2 .shapeComm{position: absolute;left: 0;right: 0;top: 0;margin-top: 0;}    
+            .shapesPage2 .texHolder {padding-left: 0;}            
+            .prdInfoWrap {width: 100%;}
+            .detailsPage .prdComm {width: 100%!important;}
+            .prdInfoTitle3 {width: 100%;height: auto;line-height: 20px;font-size: 16px;color: #4d4d4d;margin: 10px 0;}
+            .detailsPage .diamondterms {width: 100%;height: auto;border: 0px solid #333;position: relative;padding-right: 0;margin-bottom: 10px;padding-top: 121px;}            
+            .detailsPage .diamontCat1{width: 80%;padding-bottom: 50%;height: 0;margin: 0 10%;position: absolute;top: 0;}
+            
+            .srcTitle {line-height: 20px;font-size: 14px;margin-bottom: 10px;}            
+            .listCont .prdComm{width:100%;}
+            .listCont .prdResults{padding: 0 15px;}
+            .wishTabsCont {width: 100%;height: auto;overflow-x: hidden;}            
+            .wishTabComm {width: 90%;padding: 0 35px;height: 40px;line-height: 40px;color: #fff;display: inline-block;margin: 5px 5%;border-radius: 5px;cursor: pointer;position: relative;}
+            .noresDiv {width: 100%;height: 160px;padding: 10px 0;text-align: center;color: #d4d4c8;border: 1px solid #d4d4c8;margin-bottom: 0;}
+            
             
 /*            team*/
             .rowRight{width: 100%;}
