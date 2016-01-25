@@ -1676,7 +1676,7 @@
                              FROM 
 								tbl_product_category_mapping
                              WHERE 
-								product_id =".$params['prdid']." AND display_flag <> 2 AND category_id!=".$params['catid']."";
+								product_id =".$params['prdid']." AND display_flag = 1 AND category_id!=".$params['catid']."";
                         $res5=$this->query($sql5);
                         if ($res5) {
                             while ($row5 = $this->fetchData($res5)) {
