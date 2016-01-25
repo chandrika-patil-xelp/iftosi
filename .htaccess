@@ -15,6 +15,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 ####################### FRONT END LINKS ######################
 
 RewriteRule ^((?i)about-us)$    index.php?case=about_us [L]
+RewriteRule ^((?i)team)$    index.php?case=team [L]
 RewriteRule ^((?i)membership)$    index.php?case=membership [L]
 RewriteRule ^((?i)education)$    index.php?case=education [L]
 RewriteRule ^((?i)faqs)$    index.php?case=faq [L]

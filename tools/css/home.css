@@ -33,6 +33,9 @@ body{padding: 0;margin: 0;}
 .font55{font-size: 55px;}
 .font65{font-size: 65px;}
 
+
+.c444{color:#4d4d4d!important}
+
 *{box-sizing: border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-ms-box-sizing:border-box;-o-box-sizing:border-box;-webkit-appearance: none;}
 div,span{-moz-user-select: none;-webkit-user-select: none;-ms-user-select: none;}
 
@@ -50,6 +53,8 @@ a{text-decoration: none;}
 .bgWhite{background: #fff;}
 .bgGray{background: #f0f0f0!important;}
 
+
+.mTop0{margin-top: 0!important;}
 /*Paddings*/
 .pL25px{padding-left: 25px!important;}
 
@@ -883,7 +888,7 @@ a{cursor:pointer;}
 .bgHolder{width:100%;height: 300px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding:220px 0 35px 0;}
 .heading{width:100%;height:auto; max-width:1200px; margin:auto;color:#fff;padding:0 10px 0 10px;}
 .abTex{ color:#333;height:600px ;padding:30px;}
-.texHolder{width:100%;height:auto;padding:20px;line-height: 30px;}
+.texHolder{width:100%;height:auto;padding:20px;line-height: 22px;font-size: 13px;}
 .wrapperA{width:100%;height:auto; display:inline-block;}
 .underLn{border-bottom:1px solid #EBEBDE;}
 .row{width:100%;height:auto;}
@@ -973,6 +978,66 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 
 .svnd {width: 100%;height: 130px;color: #4d4d4d;font-size: 35px;font-family: openL;text-align: center;line-height: 80px;background: #fff;padding-top: 50px;}
 .svnd .searchBtn{margin: 0;vertical-align: top;    margin: 20px 10px;}
+
+
+.rowLeft{width:20%;height: auto;}
+.rowLeft .sideDiv{width:100%!important;}
+.rowRight{width:80%;height: auto;}
+.pTop15{padding-top: 15px!important;}
+.mTop15{margin-top: 15px!important;}
+.mTop25{margin-top: 25px!important;}
+.licontent  li{cursor: pointer}
+.licontent  li:hover{color:#8A0044;}
+
+
+.team .texHolder a {text-decoration: none;color: inherit;}
+
+.teamComm{width:100%;height: auto;position:relative;padding: 15px 0;margin-bottom: 25px;}
+.teamPic{width:250px;height: 250px;border-radius: 50%;position: absolute;top:0;left:0;z-index: 10;}
+.teamtxt{width:100%;height: auto;padding-left: 220px;font-size: 14px;line-height: 22px;}
+
+.teamComm .subHead4{font-size: 30px}
+.desg{font-size: 14px;font-family: openB;color: #666}
+
+.tActive{color:#8A0044!important;}
+
+.imgMate1 {
+    background: url(../img/mate1.jpg)no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.imgMate2 {
+    background: url(../img/mate2.jpg)no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.imgMate3 {
+    background: url(../img/mate3.jpg)no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.imgMate4 {
+    background: url(../img/mate4.jpg)no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.teamCircle {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin: 0 40px 0 0;
+    border: 10px solid #ebebde;
+    position: absolute;
+    
+}
+
+.xelpmocLogo{width:100%;background: url(../img/xelpmoc.svg)no-repeat;background-size: 200px auto;background-position: left center;padding-left: 220px;}
+
+.xelP1{font-size: 20px;margin-bottom: 0px!important;}
+.xelogoHolder{width:220px;height: 55px;;position: absolute;left: 0;top:15px;cursor: pointer;}
+
+
 
 
 @media only screen and (min-width: 320px) and (max-width: 767px){

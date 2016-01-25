@@ -1076,6 +1076,11 @@ switch ($action) {
                 $page = 'about_us';
                 include 'template/about_us.html';
                 break;
+            
+            case 'team':
+                $page = 'team';
+                include 'template/team.html';
+                break;
 
             case 'contact_us':
                 $page = 'contact_us';
