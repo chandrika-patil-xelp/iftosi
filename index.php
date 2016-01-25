@@ -1046,14 +1046,23 @@ switch ($action) {
                 //echo "<pre>";print_r($vdet);die;
 
                 $totalCnt = $total;
-                $lastpg = floor($total / 15);
+                $lastpg = ceil($total / 15);
                 $adjacents = 2;
                 include 'template/vendor_landing_page.html';
                 break;
 
             case 'vendor_enquiries':
                 $page = 'Enquiries';
+                $uid = $_GET['uid']; 
                 $catid = (!empty($_GET['catid']) ? $_GET['catid'] : '');
+                
+                $url = APIDOMAIN . 'index.php?action=viewLog&vid=' . $uid;
+                $res = $comm->executeCurl($url);
+                
+                $total = $res['total_enqs'];
+                $lastpg = ceil($total / 15);
+                $adjacents = 2;
+                
                 include 'template/vendor_enquiries.html';
                 break;
 
@@ -1066,7 +1075,7 @@ switch ($action) {
                 $data = $res['results']['vendors'];
                 $total = $res['results']['total_vendors'];
                 $totalCnt = $total;
-                $lastpg = floor($total / 2);
+                $lastpg = ceil($total / 15);
                 $adjacents = 2;
                 //echo "<pre>";print_r($data);die;
                 include 'template/vendorList.html';
@@ -1138,7 +1147,7 @@ switch ($action) {
                 $data = $res['results']['products'];
                 $total = $res['results']['total_products'];
                 $totalCnt = $total;
-                $lastpg = floor($total / 15);
+                $lastpg = ceil($total / 15);
                 $adjacents = 2;
                 include 'template/product_list.html';
                 break;

@@ -444,6 +444,8 @@ class enquiry extends DB
                                 active_flag = 1
                     ORDER BY 
                                 date_time DESC";
+        $EnqRes = $this->query($Enqsql);
+        $EnqCount = $this->numRows($EnqRes);
         
         $page   = ($params['page'] ? $params['page'] : 1);
         $limit  = ($params['limit'] ? $params['limit'] : 15);
@@ -451,14 +453,14 @@ class enquiry extends DB
         if (!empty($page))
         {
             $start = ($page * $limit) - $limit;
-            $viewEnq.=" LIMIT " . $start . ",$limit";
+            $Enqsql.=" LIMIT " . $start . ",$limit";
         }
         
         $EnqRes = $this->query($Enqsql);
-        $EnqCount = $this->numRows($EnqRes);
-        
+        $total_pages = ceil($EnqCount/$limit);
         if($EnqCount > 0 )
-        {   $i=0;
+        {   
+            $i=0;
             while($EnqRow = $this->fetchData($EnqRes))
             {
                 $pid[] = $EnqRow['product_id'];
@@ -592,7 +594,7 @@ class enquiry extends DB
             $err = array('code'=>1,'msg'=>'No records found');
         }
 
-        $total_pages = ceil($EnqCount/$limit);
+        
         $result = array('results'=>$arr,'error'=>$err,'total_enqs'=>$EnqCount,'total_pages'=>$total_pages);
         return $result;
     }

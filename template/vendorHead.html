@@ -66,13 +66,18 @@
                             var userid = obj.results[1].vendor_id;
                             var is_vendor = obj.results[0].is_vendor;
                             var af = obj.results[1].active_flag;
+                            var ef = obj.results[1].expire_flag;
                             if(userid !== undefined && userid !== 'undefined' && userid !== null && userid !== 'null' && userid !== '')
                             {
                                 if(is_vendor !== '' && is_vendor !== undefined && is_vendor !== 'undefined' && is_vendor !== null && is_vendor !== 'null' && (is_vendor == 1 || is_vendor == '1'))
                                 {
-                                    if(af !== '' && af !== undefined && af !== 'undefined' && af !== null && af !== 'null' && (af == '0' || af == 0))
+                                    if(af !== '' && af !== undefined && af !== 'undefined' && af !== null && af !== 'null' && (af == '0' || af == 0) && (ef == '0' || ef == '0'))
                                     {
                                         window.location.href = DOMAIN+"index.php?case=inactive_vendor&uid="+userid;
+                                    }
+                                    else if((af == '0' || af == 0) && (ef == '1' || ef == '1'))
+                                    {
+                                        window.location.href = DOMAIN+"index.php?case=expiredSub_vendor&uid="+userid;
                                     }
                                 }
                             }

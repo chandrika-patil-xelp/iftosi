@@ -58,7 +58,26 @@
 var vid="<?php echo $uid; ?>";
 var busiType="<?php echo $data['business_type']; ?>";
 var username = customStorage.readFromStorage('username');
-$('#vendrInfo').text('Dear '+username+', Your one year subscription with IFtoSI comes to an end. Kindly re-subscribe for carrying on the plan. You may change your package if you want. Below given details was your earlier plan');
+$('#vendrInfo').text('Dear '+username+', your subscription with IFtoSI has expired. Kindly contact to our Customer Care');
 </script>
 
 <script type="text/javascript" src="<?=$jvs['jquery_toast'];?>"></script>
+
+<script type="text/javascript">
+$.ajax({url: common.APIWebPath() + "index.php?action=viewAll&uid=" + vid, success: function (result) {
+            var obj = eval('('+result+')');
+            var errCode = obj.error.code;
+            if(errCode == 0)
+            {
+                if((obj.results[1].expire_flag == 0 || obj.results[1].expire_flag == '0') && (obj.results[1].active_flag == 1 || obj.results[1].active_flag == '1'))
+                {
+                    var catid = obj.results[1].business_type.charAt(0);
+                    window.location.assign(DOMAIN + 'index.php?case=vendor_landing&catid=1000' + catid);
+                }
+                if((obj.results[1].expire_flag == 0 || obj.results[1].expire_flag == '0') && (obj.results[1].active_flag == 0 || obj.results[1].active_flag == '0'))
+                {
+                    window.location.assign(DOMAIN + 'index.php?case=inactive_vendor&uid=' + vid);
+                }
+            }
+	}});
+</script>

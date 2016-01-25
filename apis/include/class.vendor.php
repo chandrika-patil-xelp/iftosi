@@ -683,7 +683,8 @@ class vendor extends DB
         $res = $this->query($sql);
         $total_products = $this->numRows($res);
 
-        if (!empty($params['page'])) {
+        if (!empty($params['page']))
+        {
             $start = ($page * $limit) - $limit;
             $total_pages = ceil($total_products/$limit);
             $sql.=" LIMIT " . $start . ",$limit";

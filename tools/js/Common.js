@@ -108,8 +108,8 @@ function Common() {
             }
             else if (is_vendor == 2)
             {
-                userMenuStr += '<li id="productstab" class="transition100" onclick="return showProductList();">Products</li>';
-                userMenuStr += '<li id="vendorlist" class="transition100" onclick="return showProductList();">Vendor List</li>';
+                userMenuStr += '<a href="'+DOMAIN+'index.php?case=product_list&uid='+uid+'"><li id="productstab" class="transition100">Products</li></a>';
+                userMenuStr += '<a href="'+DOMAIN+'index.php?case=vendorList&uid='+uid+'"><li id="vendorlist" class="transition100">Vendor List</li></a>';
                 //userMenuStr += '<li class="transition100" onclick="redirectToWishlist();">Wishlist (<span id="wishListCnt"></span>)</li>';
                 $('#wishListHdr').addClass('dn');
 

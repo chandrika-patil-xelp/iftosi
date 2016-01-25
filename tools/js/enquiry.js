@@ -1,6 +1,7 @@
 var uid = customStorage.readFromStorage('userid');
 var loadEnq = true;
 //var pgno = 1;
+var curpgno = 1;
 
 loadEnqs(1);
 function loadEnqs(pgno) {
@@ -15,33 +16,22 @@ function loadEnqCallback(res,pgno)
     var obj = eval('('+res+')');
     if (obj.results !== undefined && obj.results !== 'undefined' && obj.results !== null && obj.results !== 'null' && obj.results !== '')
     {
-        if (obj.total_enqs !== undefined && obj.total_enqs !== 'undefined' && obj.total_enqs !== null && obj.total_enqs !== 'null' && obj.total_enqs !== '')
-        {
-             if (obj.total_pages !== undefined && obj.total_pages !== 'undefined' && obj.total_pages !== null && obj.total_pages !== 'null' && obj.total_pages !== '')
-            {   
-                
+        $('#pgno').val(pgno);
                 var total = (obj.total_enqs == 1 ? obj.total_enqs + ' Enquiry Listed' : obj.total_enqs + ' Enquiries Listed');
                 $('#totalEnqs').text(total);
                 
                 var total_pages = obj.total_pages;
-        
+                
                 var str = '';
-                if(total_pages !== 0 && total_pages !== '0')
+                var total = obj.total_enqs;
+                
+                if(total != 0 || total !== '0')
                 {
-                    if(total_pages == pgno)
+                    if(total_pages == curpgno)
                     {
                         loadEnq = false;
                     }
-                    var enqs = obj.total_enqs;
-                    if(enqs == false)
-                    {
-                        enqs = 0;
-                    }
-                    else
-                    {
-                        enqs = enqs;
-                    }
-                    var len = enqs;
+                    var len = obj.total_enqs;
                     var i = 0;
                     while (i < len)
                     {
@@ -49,24 +39,22 @@ function loadEnqCallback(res,pgno)
                         i++;
                     }
                     var html = pagination(obj,pgno);
-                    pgno++;
                 }
                 else
                 {
                     str += '<p class="noRecords"><span>Sorry! No Enquiries Found!</span></p>';
                     loadEnq = false;
                 }
-            }
-        }
-        $('#enqList').html(str);
-        $('#enqList').append(html);
-        $('.pgComm').click( function()
-        {
-            $('.pgComm').removeClass('pgActive');
-            $(this).addClass('pgActive');
-            loadEnqs($(this).text());
-            $('html,body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
-        });
+                    $('#enqList').html(str);
+                    $('#enqList').append(html);
+                    $('.pgComm').click( function()
+                    {
+                        $('.pgComm').removeClass('pgActive');
+                        $(this).addClass('pgActive');
+                        loadEnqs($(this).text());
+                        $('html,body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+                    });
+                    paginationPrevNext();
     }
     else
     {
@@ -74,104 +62,7 @@ function loadEnqCallback(res,pgno)
     }
 }
 
-function pagination(data,pgno)
-{
-	/* For Pagintion */
-	pgno = pgno*1;
-	var html = '';
-	var tc = (data.results.total_products ? data.results.total_products : data.results.total_enqs);
-	var lastpg = Math.ceil(tc/50);
-	var adjacents = 2;
-	
-	if(lastpg > 1)
-	{
-		html += '<div class="fLeft pagination fmOpenR">';
-			html += '<center>';
-				html += '<div class="pPrev poR ripplelink">Previous</div>';
-				if(lastpg < 7 + (adjacents * 2))
-				{
-					for(var i = 1; i <= lastpg; i++)
-					{
-						if(i == pgno)
-						{
-							html += '<div class="pgComm poR ripplelink pgActive">'+i+'</div>';
-						}
-						else
-						{
-							html += '<div class="pgComm poR ripplelink">'+i+'</div>';
-						}
-					}
-				}
-				else if(lastpg > 5 + (adjacents * 2))
-				{
-					if(pgno < 1 + (adjacents * 2))
-					{
-						for (var i = 1; i < 4 + (adjacents * 2); i++)
-						{
-							if(i == pgno)
-							{
-								html += '<div class="pgComm poR ripplelink pgActive">'+i+'</div>';
-							}
-							else
-							{
-								html += '<div class="pgComm poR ripplelink">'+i+'</div>';
-							}
-						}
-						html += '<div class="pgEmpty"></div>';
-						html += '<div class="pgEmpty"></div>';
-						html += '<div class="pgEmpty"></div>';
-						html += '<div class="pgComm poR ripplelink">'+lastpg+'</div>';
-					}
-					else if(lastpg - (adjacents * 2) > pgno && pgno > (adjacents * 2))
-					{
-						html += '<div class="pgComm poR ripplelink">1</div>';
-						html += '<div class="pgEmpty"></div>';
-						html += '<div class="pgEmpty"></div>';
-						html += '<div class="pgEmpty"></div>';
-						for (var i = pgno - adjacents; i <= pgno + adjacents; i++)
-						{
-							if(i == pgno)
-							{
-								html += '<div class="pgComm poR ripplelink pgActive">'+i+'</div>';
-							}
-							else
-							{
-								html += '<div class="pgComm poR ripplelink">'+i+'</div>';
-							}
-						}
-						html += '<div class="pgEmpty"></div>';
-						html += '<div class="pgEmpty"></div>';
-						html += '<div class="pgEmpty"></div>';
-						html += '<div class="pgComm poR ripplelink">'+lastpg+'</div>';
-					}
-					else
-					{
-						html += '<div class="pgComm poR ripplelink">1</div>';
-						html += '<div class="pgEmpty"></div>';
-						html += '<div class="pgEmpty"></div>';
-						html += '<div class="pgEmpty"></div>';
-						for (var i = lastpg - (2 + (adjacents * 2)); i <= lastpg; i++)
-						{
-							if(i == pgno)
-							{
-								html += '<div class="pgComm poR ripplelink pgActive">'+i+'</div>';
-							}
-							else
-							{
-								html += '<div class="pgComm poR ripplelink">'+i+'</div>';
-							}
-						}
-					}
-				}
-				html += '<div class="pNext poR ripplelink">Next</div>';
-			html += '</center>';
-		html += '</div>';
-	}
-	return html;
-}
-
-
-function generateEnqList(obj)
+function generateEnqList(obj,pgno)
 {
     if(obj !== undefined && obj !== 'undefined' && obj !== null && obj !== 'null')
     {
@@ -405,3 +296,209 @@ function generateEnqList(obj)
     }
         
 }
+
+function pagination(data,pgno)
+{
+	/* For Pagintion */
+	pgno = pgno*1;
+	var html = '';
+	var tc = data.total_enqs;
+        
+	var lastpg = Math.ceil(tc/50);
+	var adjacents = 2;
+	
+	if(lastpg > 1)
+	{
+		html += '<div class="fLeft pagination fmOpenR">';
+			html += '<center>';
+				html += '<div class="pPrev poR ripplelink">Previous</div>';
+				if(lastpg < 7 + (adjacents * 2))
+				{
+					for(var i = 1; i <= lastpg; i++)
+					{
+						if(i == pgno)
+						{
+							html += '<div class="pgComm poR ripplelink pgActive">'+i+'</div>';
+						}
+						else
+						{
+							html += '<div class="pgComm poR ripplelink">'+i+'</div>';
+						}
+					}
+				}
+				else if(lastpg > 5 + (adjacents * 2))
+				{
+					if(pgno < 1 + (adjacents * 2))
+					{
+						for (var i = 1; i < 4 + (adjacents * 2); i++)
+						{
+							if(i == pgno)
+							{
+								html += '<div class="pgComm poR ripplelink pgActive">'+i+'</div>';
+							}
+							else
+							{
+								html += '<div class="pgComm poR ripplelink">'+i+'</div>';
+							}
+						}
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgComm poR ripplelink">'+lastpg+'</div>';
+					}
+					else if(lastpg - (adjacents * 2) > pgno && pgno > (adjacents * 2))
+					{
+						html += '<div class="pgComm poR ripplelink">1</div>';
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgEmpty"></div>';
+						for (var i = pgno - adjacents; i <= pgno + adjacents; i++)
+						{
+							if(i == pgno)
+							{
+								html += '<div class="pgComm poR ripplelink pgActive">'+i+'</div>';
+							}
+							else
+							{
+								html += '<div class="pgComm poR ripplelink">'+i+'</div>';
+							}
+						}
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgComm poR ripplelink">'+lastpg+'</div>';
+					}
+					else
+					{
+						html += '<div class="pgComm poR ripplelink">1</div>';
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgEmpty"></div>';
+						html += '<div class="pgEmpty"></div>';
+						for (var i = lastpg - (2 + (adjacents * 2)); i <= lastpg; i++)
+						{
+							if(i == pgno)
+							{
+								html += '<div class="pgComm poR ripplelink pgActive">'+i+'</div>';
+							}
+							else
+							{
+								html += '<div class="pgComm poR ripplelink">'+i+'</div>';
+							}
+						}
+					}
+				}
+				html += '<div class="pNext poR ripplelink">Next</div>';
+			html += '</center>';
+		html += '</div>';
+	}
+	return html;
+}
+
+function paginationPrevNext()
+{
+    $('.pPrev').bind('click', function() {
+        
+            var curpgno = parseInt($('#pgno').val());
+                var pgval = curpgno - 1;
+                
+		if(curpgno > 1)
+		{
+                    
+                        $('#pgno').val(pgval);
+                        
+			if(pageName.indexOf("Enquiries") !== -1)
+			{
+                                loadEnqs(pgval);
+			}
+			else
+			{   
+				loadEnqs(1);
+			}
+		}
+            });
+            	$('.pNext').bind('click', function() {
+		var curpgno = parseInt($('#pgno').val());
+		var pgval = curpgno + 1;
+
+		if(curpgno < parseInt($('#total_pageno').val()))
+		{
+			$('#pgno').val(pgval);
+			if(pageName.indexOf("Enquiries") !== -1)
+			{
+				/*if(typeof $('.wishTabComm') !== 'undefined')
+				{
+					$(".productstab").each(function(){
+						if($(this).hasClass('sel'))
+						{
+							loadProducts($(this).attr('id'),pgval);
+						}
+					});
+				}*/
+                                loadEnqs(pgval);
+			}
+			else
+			{
+				loadEnqs(1);
+			}
+		}
+	});
+}
+$(document).ready(function() {	
+    loadEnqs(1);
+        $('.pPrev').bind('click', function() {
+
+            var curpgno = parseInt($('#pgno').val());
+            
+            	var pgval = curpgno - 1;
+		if(curpgno > 1)
+		{
+			$('#pgno').val(pgval);
+                        
+			if(pageName.indexOf("Enquiries") !== -1)
+			{
+				/*if(typeof $('.productstab') !== 'undefined')
+				{
+					$(".productstab").each(function(){
+						if($(this).hasClass('sel'))
+						{
+							loadProducts($(this).attr('id'),pgval);
+						}
+					});
+				}*/
+                                loadEnqs(pgval);
+			}
+			else
+			{   
+				loadEnqs(1);
+			}
+		}
+	});
+
+	$('.pNext').bind('click', function() {
+		var curpgno = parseInt($('#pgno').val());
+		var pgval = curpgno + 1;
+		if(curpgno < parseInt($('#total_pageno').val()))
+		{
+			$('#pgno').val(pgval);
+			
+			if(pageName.indexOf("Enquiries") !== -1)
+			{
+				/*if(typeof $('.wishTabComm') !== 'undefined')
+				{
+					$(".productstab").each(function(){
+						if($(this).hasClass('sel'))
+						{
+							loadProducts($(this).attr('id'),pgval);
+						}
+					});
+				}*/
+                    
+                                loadEnqs(pgval);
+			}
+			else
+			{
+				loadEnqs(1);
+			}
+		}
+	});
+    });

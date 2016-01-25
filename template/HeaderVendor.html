@@ -10,6 +10,10 @@
                 <input type="hidden" id="pgno" value="1" />
                 <input type="hidden" id="total_pageno" value="<?php echo $lastpg; ?>" />
             </div>
+<?php
+        if($page !== 'product_list' && $page !== 'thumbnail' && $page !== 'vendorList')
+        {
+?>
             <div class="fRight cFF fmOpenR font14 rateDiv" style="width:auto;margin: 10px">
                     <div class="rtCont fLeft"><span class="spTitle">Dollar Rate:</span><span class="spValue" id="dollarRateSpan">&#8377;</span></div>
                     <div class="rtCont fLeft"><span class="spTitle">Gold Rate:</span><span class="spValue" id="goldRateSpan">&#8377;</span></div>
@@ -18,6 +22,9 @@
 <!--                    <span id="" class="dn">Gold Rate : &#8377; </span>
                     <span id="" class="dn">Silver Rate : &#8377; </span>-->
                 </div>
+<?php
+        }
+?>
             
         </div>
     </div>
