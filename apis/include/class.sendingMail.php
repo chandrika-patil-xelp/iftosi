@@ -93,8 +93,8 @@ class sendingMail extends DB
             $str .= '</div>';
             $str .= '<div style="color:#666; letter-spacing:0em; font-size: 0.9em;">';
             $str .= '<div style="padding: 10px 0;border-top: 1px solid #e6e6e6;">';
-            $str .= '<div style="text-align: left; color:#888; text-transform: capitalize; display: inline-block; vertical-align: middle; width:48%;">Vendor name</div>';
-            $str .= '<div style="text-align: left; font-weight: bold; display: inline-block; width:49%; vertical-align: middle; text-transform: capitalize; color: #8A0044;">Devilal Jewellers</div>';
+            $str .= '<div style="text-align: left; color:#888; text-transform: capitalize; display: inline-block; vertical-align: middle; width:250px;">Vendor name</div>';
+            $str .= '<div style="text-align: left; font-weight: bold; display: inline-block; width:250px; vertical-align: middle; text-transform: capitalize; color: #8A0044;">Devilal Jewellers</div>';
             $str .= '</div>';
             $str .= '<div style="padding: 10px 0;border-top: 1px solid #e6e6e6;">';
             $str .= '<div style="text-align: left; color:#888; text-transform: capitalize; display: inline-block; vertical-align: middle; width:250px;">City</div>';
@@ -109,8 +109,8 @@ class sendingMail extends DB
             $str .= '<div style="text-align: left; font-weight: bold; display: inline-block; width:250px; text-transform: capitalize; vertical-align: middle"><a href="tel:+919923288125 " style="text-decoration: none; color:#8A0044;">+91 8080212121</a></div>';
             $str .= '</div>';
             $str .= '<div style="border-top: 1px solid #e6e6e6;padding: 10px 0">';
-            $str .= '<div style="text-align: left; color:#888; text-transform: capitalize; display: inline-block; width:48%; vertical-align: middle">Landline Number</div>';
-            $str .= '<div style="text-align: left; font-weight: bold; display: inline-block; width:49%; text-transform: capitalize; vertical-align: middle">';
+            $str .= '<div style="text-align: left; color:#888; text-transform: capitalize; display: inline-block; width:250px; vertical-align: middle">Landline Number</div>';
+            $str .= '<div style="text-align: left; font-weight: bold; display: inline-block; width:250px; text-transform: capitalize; vertical-align: middle">';
             $str .= '<a href="tel:+0222-32623263 " style="text-decoration: none; color:#8A0044;">+0222-32623263</a>';
             $str .= '<a href="tel:+0222-32623263 " style="text-decoration: none; color:#8A0044;">+0222-32623263</a>';
             $str .= '<a href="tel:+0222-32623263 " style="text-decoration: none; color:#8A0044;">+0222-32623263</a>';
@@ -118,8 +118,8 @@ class sendingMail extends DB
             $str .= '</div>';
             $str .= '</div>';
             $str .= '<div style="padding: 10px 0;border-top: 1px solid #e6e6e6;">';
-            $str .= '<div style="text-align: left; color:#888; text-transform: capitalize; display: inline-block; vertical-align: middle; width:48%;">Email</div>';
-            $str .= '<div style="text-align: left; font-weight: bold; display: inline-block; width:49%; vertical-align: middle;  color: #8A0044;">silentmajority@xelpmoc.in</div>';
+            $str .= '<div style="text-align: left; color:#888; text-transform: capitalize; display: inline-block; vertical-align: middle; width:250px;">Email</div>';
+            $str .= '<div style="text-align: left; font-weight: bold; display: inline-block; width:250px; vertical-align: middle;  color: #8A0044;">silentmajority@xelpmoc.in</div>';
             $str .= '</div>';
             $str .= '</div>';
             $str .= '</div>';
