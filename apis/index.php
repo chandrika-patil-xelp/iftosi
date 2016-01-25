@@ -146,7 +146,7 @@ switch($action)
             break;
         }
         $obj= new user($db['iftosi']);
-        $result = $obj->sendRateMail($params);
+        $result = $obj->sendDeactMailSms($params);
         $res = $result;
         break;
 

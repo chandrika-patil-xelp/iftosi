@@ -855,7 +855,8 @@ $("#upSubmit").on('click',(function(e) {
 //                }
 //                else {
 //                    common.toast(0,'Products are Failed to Update');
-//                }
+//                
+                uploadStart=false;
             }
         });
     }

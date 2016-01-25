@@ -1086,10 +1086,15 @@ switch ($action) {
                 $page = 'terms_conditions';
                 include 'template/terms_conditions.html';
                 break;
+            
+            case 'terms_of_listing':
+                $page = 'terms_of_listing';
+                include 'template/terms_of_listing.html';
+                break;
 
-            case 'vterms_condition':
-                $page = 'vterms_condition';
-                include 'template/vterms_condition.html';
+            case 'vterms_of_listing':
+                $page = 'vterms_of_listing';
+                include 'template/vterms_of_listing.html';
                 break;
 
 

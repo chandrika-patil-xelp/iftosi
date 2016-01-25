@@ -319,11 +319,11 @@ function generateEnqList(obj)
                     if(purity !== '' && purity !== 'null' && purity !== null && purity !== undefined && purity !== 'undefined'){
                         if(tempUrl !== ''){
                             var goldpty = purity.split('.');
-                            tempUrl += '-'+goldpty[0]+'-Karat'; 
+                            tempUrl += '-'+goldpty[0]; 
                         }
                         else{
                             var goldpty = purity.split('.');
-                            tempUrl += goldpty[0]+'-Karat';
+                            tempUrl += goldpty[0];
                         }
                     }
                     if(weight !== null && weight !== undefined && weight !== ''){
@@ -370,10 +370,10 @@ function generateEnqList(obj)
                     }
                     if(search.gold_purity !== '' && search.gold_purity !== 'null' && search.gold_purity !== null && search.gold_purity !== undefined && search.gold_purity !== 'undefined'){
                         if(tempUrl !== ''){
-                            tempUrl += '-'+purity+'-Karat'; 
+                            tempUrl += '-'+purity+'-Carat'; 
                         }
                         else{
-                            tempUrl += purity+'-Karat';
+                            tempUrl += purity+'-Carat';
                         }
                     }
                     if(search.certified !== null && search.certified !== undefined && search.certified !== ''){

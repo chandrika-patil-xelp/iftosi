@@ -886,6 +886,9 @@ class vendor extends DB
         $sql6 = "UPDATE tbl_product_enquiry SET active_flag=2 WHERE product_id=" . $params['prdid'];
         $res5 = $this->query($sql6);
         
+        $upsql="UPDATE tbl_wishlist SET wf=2 WHERE pid=".$params['prdid']."";
+        $upres=$this->query($upsql);
+        
         if ($res5) {
             $arr = array();
             $err = array('Code' => 0, 'Msg' => 'Product deleted successfully!');

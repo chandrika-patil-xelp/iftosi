@@ -22,7 +22,7 @@
                     </div>
 
                     <ul class="prdul fLeft fmOpenR" id="PoductsList">
-                        
+                        <li class="noRecords"><span >Sorry! No Enquiries Found!</span></li>
                     </ul>
                 </div>
             </div>
@@ -92,29 +92,28 @@ function loadProductsCallback(res,pgno) {
             if (barcode == null || barcode == '' || barcode == 'null') {
                 barcode = 'N-A';
             }
-            
-            var date = obj['update_time'].split(' ');
-            var str = '<li>';
-            str += '<div class="date fLeft"> ';
-            str += '<span class="upSpan">' + date[0] + '</span>';
-            str += '<span class="lwSpan">' + date[1] + '</span>';
-            str += '</div>';
-            str += '<div class="barcode fLeft">';
-            str += '<span class="upSpan">' + barcode + '</span>';
-            str += '<span class="lwSpan"><a href="' + DOMAIN + barcode + '/bid-' + obj['id'] + '" target="_blank">View Details</a></span>';
-            str += '</div>';
-            str += '<div class="btype fLeft textOverflow" title="'+ obj['orgName'] +'">'+ obj['orgName'] +'</div>';
-            str += '<div class="catg fLeft textOverflow" title="'+ obj['category'] +'"  >'+ obj['category'] +'</div>';
-            str += '<div class="shape fLeft">' + obj['total_img'] + '</div>';
-            str += '<div class="date fLeft">' + obj['pend_img'] + '</div>';
-            str += '<div class="shape fLeft">' + obj['appr_img'] + '</div>';
-            str += '<div class="shape fLeft">' + obj['rej_img'] + '</div>';
-            str += '<div class="acct2 fLeft">';
-            str += '<a href="' + DOMAIN + 'index.php?case=thumbnail&pid=' + obj['id'] + '"><div class="viewDetBtn poR ripplelink fmOpenR fRight">View Images</div></a>';
-            str += '</div>';
-            str += '</li>';
-            str += '';
-            return str;
+                var date = obj['update_time'].split(' ');
+                var str = '<li>';
+                str += '<div class="date fLeft"> ';
+                str += '<span class="upSpan">' + date[0] + '</span>';
+                str += '<span class="lwSpan">' + date[1] + '</span>';
+                str += '</div>';
+                str += '<div class="barcode fLeft">';
+                str += '<span class="upSpan">' + barcode + '</span>';
+                str += '<span class="lwSpan"><a href="' + DOMAIN + barcode + '/bid-' + obj['id'] + '" target="_blank">View Details</a></span>';
+                str += '</div>';
+                str += '<div class="btype fLeft textOverflow" title="'+ obj['orgName'] +'">'+ obj['orgName'] +'</div>';
+                str += '<div class="catg fLeft textOverflow" title="'+ obj['category'] +'"  >'+ obj['category'] +'</div>';
+                str += '<div class="shape fLeft">' + obj['total_img'] + '</div>';
+                str += '<div class="date fLeft">' + obj['pend_img'] + '</div>';
+                str += '<div class="shape fLeft">' + obj['appr_img'] + '</div>';
+                str += '<div class="shape fLeft">' + obj['rej_img'] + '</div>';
+                str += '<div class="acct2 fLeft">';
+                str += '<a href="' + DOMAIN + 'index.php?case=thumbnail&pid=' + obj['id'] + '"><div class="viewDetBtn poR ripplelink fmOpenR fRight">View Images</div></a>';
+                str += '</div>';
+                str += '</li>';
+                str += '';
+                return str;
         }
 
         function pagination(data, pgno) {

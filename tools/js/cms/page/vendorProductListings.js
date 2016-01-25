@@ -497,10 +497,10 @@ function generateJewellList(obj) {
         }
         if(obj.gold_purity !== '' && obj.gold_purity !== 'null' && obj.gold_purity !== null && obj.gold_purity !== undefined && obj.gold_purity !== 'undefined'){
             if(tempUrl !== ''){
-                tempUrl += '-'+obj.gold_purity+'-Karat'; 
+                tempUrl += '-'+obj.gold_purity+'-Carat'; 
             }
             else{
-                tempUrl += obj.gold_purity+'-Karat';
+                tempUrl += obj.gold_purity+'-Carat';
             }
         }
         if(obj.gold_weight !== '' && obj.gold_weight !== 'null' && obj.gold_weight !== null && obj.gold_weight !== undefined && obj.gold_weight !== 'undefined'){

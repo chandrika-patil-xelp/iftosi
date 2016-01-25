@@ -242,7 +242,7 @@ class enquiry extends DB
                     FROM
                                    tbl_product_enquiry
                     WHERE
-                                   active_flag <> 2
+                                   active_flag = 1
                     AND                
                                    vendor_id=".$params['vid']."
                     AND
@@ -275,7 +275,7 @@ class enquiry extends DB
                         FROM
                                 tbl_product_master
                         WHERE 
-                                active_flag <> 2 
+                                active_flag = 1 
                         AND 
                                 product_id='.$rowEnq['product_id'];
                 $resMaster=$this->query($sqlMaster);
@@ -304,7 +304,7 @@ class enquiry extends DB
                         FROM
                                tbl_product_search
                         WHERE
-                                active_flag <> 2
+                                active_flag = 1
                         AND 
                                 product_id='.$pid;
                 $resSearch=$this->query($sqlSearch);
@@ -325,9 +325,8 @@ class enquiry extends DB
                         WHERE 
                                     a.product_id='.$pid.' 
                         AND 
-                                    b.catid=a.category_id 
-                        /* AND 
-                                    b.p_catid in (0,10000,10001,10002) */';
+                                    b.catid=a.category_id ';
+                
                 $resCat=$this->query($sqlCat);
                 if($this->numRows($resCat) > 0)
                 {
@@ -444,7 +443,7 @@ class enquiry extends DB
                     AND
                                 active_flag = 1
                     ORDER BY 
-                                product_id ASC";
+                                date_time DESC";
         
         $page   = ($params['page'] ? $params['page'] : 1);
         $limit  = ($params['limit'] ? $params['limit'] : 15);
@@ -484,7 +483,7 @@ class enquiry extends DB
                         AND
                                     a.display_flag=1
                         ORDER BY    
-                                    a.product_id ASC";
+                                    a.date_time DESC";
             
             $PcatRes = $this->query($PcatSql);
             
@@ -531,7 +530,7 @@ class enquiry extends DB
                             AND
                                     ps.active_flag = 1
                             ORDER BY
-                                    ps.product_id ASC";
+                                    pc.date_time DESC";
                 $prdRes = $this->query($prdSql);
                 if($prdRes)
                 {

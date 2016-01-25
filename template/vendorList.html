@@ -77,7 +77,7 @@
 <script type="text/javascript" src="<?=DOMAIN;?>tools/js/adminNav.js?v=<?=VERSION;?>"></script>
 <script type="text/javascript" src="<?=DOMAIN;?>tools/js/Common.js?v=<?=VERSION;?>"></script>
 <script type="text/javascript" src="<?= $jvs['cms_jquery_toast'];?>"></script>
-<script>
+<script type="text/javascript">
  var uid = customStorage.readFromStorage('userid');
     var is_vendor = customStorage.readFromStorage('is_vendor');
     var userName = customStorage.readFromStorage('name');
@@ -170,7 +170,7 @@ function loadProductsCallback(res,pgno) {
             }
             var html = pagination(obj,pgno);
         } else {
-            str = '<p class="noRecords"><span>Sorry! No Products Found!</span></p>';
+            str = '<div class="noRecords"><span>Sorry! No Vendors Found!</span></p>';
             loadProduct = false;
         }
         $('#vendorLists').html(str);
@@ -439,6 +439,5 @@ function paginationPrevNext()
 		}
 	});
 </script>
-<script type="text/javascript" src="<?= $jvs['cms_jquery_toast'];?>"></script>
 </body>
 </html>

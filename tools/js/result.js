@@ -638,10 +638,10 @@ function getResultsData(data,sortby,showtree)
                                                 }
                                                 if(purity !== null && purity !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-'+purity+'-Karat'; 
+                                                        tempUrl += '-'+purity+'-Carat'; 
                                                     }
                                                     else{
-                                                        tempUrl += purity+'-Karat';
+                                                        tempUrl += purity+'-Carat';
                                                     }
                                                 }
                                                 if(weight !== null && weight !== undefined){
@@ -839,10 +839,10 @@ function getResultsData(data,sortby,showtree)
                                                 }
                                                 if(purity !== null && purity !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-'+purity+'-Karat'; 
+                                                        tempUrl += '-'+purity; 
                                                     }
                                                     else{
-                                                        tempUrl += purity+'-Karat';
+                                                        tempUrl += purity;
                                                     }
                                                 }
                                                 if(weight !== null && weight !== undefined){
@@ -915,11 +915,11 @@ function getResultsData(data,sortby,showtree)
 							html += '<div class="prdActions fLeft">';
                                                         if(tempUrl !== '')
                                                 {
-                                                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/1">';
+                                                    html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'/1">';
                                                 }
                                                 else
                                                 {
-                                                    html += '<a href="'+DOMAIN+type+'/did-'+vl.pid+'">';
+                                                    html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'">';
                                                 }
                                                         	html += '<div class="wConBtn fLeft">Contact Dealer</div>';
                                                             html += '</a>';
@@ -959,10 +959,10 @@ function getResultsData(data,sortby,showtree)
                                                 }
                                                 if(purity !== null && purity !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-'+purity+'-Karat'; 
+                                                        tempUrl += '-'+purity+'-Carat'; 
                                                     }
                                                     else{
-                                                        tempUrl += purity+'-Karat';
+                                                        tempUrl += purity+'-Carat';
                                                     }
                                                 }
                                                 if(weight !== null && weight !== undefined){
@@ -1096,10 +1096,10 @@ function getResultsData(data,sortby,showtree)
                                                 }
                                                 if(purity !== null && purity !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-'+purity+'-Karat'; 
+                                                        tempUrl += '-'+purity; 
                                                     }
                                                     else{
-                                                        tempUrl += purity+'-Karat';
+                                                        tempUrl += purity;
                                                     }
                                                 }
                                                 if(weight !== null && weight !== undefined){

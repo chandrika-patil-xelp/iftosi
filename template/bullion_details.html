@@ -316,7 +316,7 @@
 ?>
                                     <div class='prdComm fLeft' style="opacity: 1; transform: translateX(1px);">
 										<div class='prdCommDiv fLeft transition100'>
-											<a href="<?php echo DOMAIN . strtolower($data3[$key]['metal']) . '-' . strtolower($data3[$key]['type']) . '-' . round($data3[$key]['gold_weight']); ?>-grams/bid-<?php echo $data3[$key]['pid']; ?>">
+											<a href="<?php echo DOMAIN . strtolower($data3[$key]['metal']) . '-' . strtolower($data3[$key]['type']) . '-' . $data3[$key]['gold_purity']. '-' . round($data3[$key]['gold_weight']); ?>-grams/bid-<?php echo $data3[$key]['pid']; ?>">
 											<div class="prdShape fLeft">
 												<div class="prdShTitle fLeft fmOpenB">TYPE</div>
 												<div class="prdShType fLeft fmOpenR"><?php echo $data3[$key]['type'];?></div>
@@ -380,10 +380,10 @@
 											</div>
 											</a>
 											<div class='prdActions fLeft'>
-												<a href="<?php echo DOMAIN . strtolower($data3[$key]['metal']) . '-' . strtolower($data3[$key]['type']) . '-' . round($data3[$key]['gold_weight']); ?>-grams/bid-<?php echo $data3[$key]['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
-												<a href="<?php echo DOMAIN . strtolower($data3[$key]['metal']) . '-' . strtolower($data3[$key]['type']) . '-' . round($data3[$key]['gold_weight']); ?>-grams/bid-<?php echo $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
-												<a href="<?php echo DOMAIN . strtolower($data3[$key]['metal']) . '-' . strtolower($data3[$key]['type']) . '-' . round($data3[$key]['gold_weight']); ?>-grams/bid-<?php echo $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
-												<a href="<?php echo DOMAIN . strtolower($data3[$key]['metal']) . '-' . strtolower($data3[$key]['type']) . '-' . round($data3[$key]['gold_weight']); ?>-grams/bid-<?php echo $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+												<a href="<?php echo DOMAIN . strtolower($data3[$key]['metal']) . '-' . strtolower($data3[$key]['type']) . '-' . $data3[$key]['gold_purity']. '-' . round($data3[$key]['gold_weight']); ?>-grams/bid-<?php echo $data3[$key]['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
+												<a href="<?php echo DOMAIN . strtolower($data3[$key]['metal']) . '-' . strtolower($data3[$key]['type']) . '-' . $data3[$key]['gold_purity']. '-' . round($data3[$key]['gold_weight']); ?>-grams/bid-<?php echo $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
+												<a href="<?php echo DOMAIN . strtolower($data3[$key]['metal']) . '-' . strtolower($data3[$key]['type']) . '-' . $data3[$key]['gold_purity']. '-' . round($data3[$key]['gold_weight']); ?>-grams/bid-<?php echo $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
+												<a href="<?php echo DOMAIN . strtolower($data3[$key]['metal']) . '-' . strtolower($data3[$key]['type']) . '-' . $data3[$key]['gold_purity']. '-' . round($data3[$key]['gold_weight']); ?>-grams/bid-<?php echo $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
 											</div>
 										</div>
                         </div>
