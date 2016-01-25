@@ -302,6 +302,7 @@ function Common() {
                         customStorage.addToStorage('username', username);
                         customStorage.addToStorage('busiType', busiType);
                         var tmp_is_vendor = is_vendor;
+
                         if (is_vendor == 0 || is_vendor == "0")
                         {
                             tmp_is_vendor = -1;
@@ -311,10 +312,13 @@ function Common() {
                             window.location.assign(DOMAIN + 'Change-Password');return;
                         }
 
-                        if (is_vendor == 1)
+                        if (is_vendor == '1')
                         {
-                            
-                            if (isComp === '2' && af == '1')
+                            if((isComp == '0' || isComp == '1') && af == '0')
+                            {
+                                window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid=' + userid);
+                            }
+                            else if (isComp === '2' && af == '1')
                             {
                                 var catid = parseInt(busiType.charAt(0)) - 1;
                                 window.location.assign(DOMAIN + 'index.php?case=vendor_landing&catid=1000' + catid);
