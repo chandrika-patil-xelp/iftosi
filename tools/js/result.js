@@ -156,16 +156,19 @@ $(document).ready(function() {
 		/* Autocomplete code */
 		if ($(this).attr('id') == 'txtjArea')
 		{
-			if($(this).val() == '')
-			{
-				$('#ctid').val('');
-				FR();
-			}
-			else
-			{
-				var params = 'action=ajx&case=auto&str=' + escape($(this).val());
-				new Autosuggest($(this).val(), '#txtjArea', '#jasug', DOMAIN + "index.php", params, false, '', '#ctid', event);
-			}
+                    if(event.type.toLowerCase() != 'focus')
+                    {
+                        if($(this).val() == '')
+                        {
+                                $('#ctid').val('');
+                                FR();
+                        }
+                        else
+                        {
+                                var params = 'action=ajx&case=auto&str=' + escape($(this).val());
+                                new Autosuggest($(this).val(), '#txtjArea', '#jasug', DOMAIN + "index.php", params, false, '', '#ctid', event);
+                        }
+                    }
 		}
                 $(document).bind('click',function()
                 {
