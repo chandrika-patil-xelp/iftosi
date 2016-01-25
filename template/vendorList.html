@@ -20,12 +20,12 @@
             <div class="fLeft headExpDate">Expiry Date</div>
             <div class="fLeft headEdit">Activated</div>
         </div>
-        <div class="listContainer fLeft fmOpenB" id="vendorLists">
+        <div class="listContainer fLeft fmOpenB font14" id="vendorLists">
         <?php
         for($i=0; $i<count($data); $i++)
         {
         ?>
-            <div class="listComm fLeft fmOpenR">
+            <div class="listComm fLeft fmOpenR ">
                 <div class="fLeft vndName">
                    <div class="nameLocatCont fLeft txtOver hedofc" id="cn_14267019859310"><?php echo $data[$i]['orgName'];?> - <?php echo $data[$i]['city'];?></div>
                     <div class="mobileEmailCont fLeft cBlue txtOver">
@@ -57,7 +57,7 @@
                     }
                     $package = implode(',',$arr);
                 ?>
-                <div class="fLeft vndPackage"><?php echo $package?></div>
+                <div class="fLeft vndPackage txtOver"><?php echo $package?></div>
                 <div class="fLeft vndAmount"><?php echo $cost?></div>
                 <div class="fLeft vndExpDate" id="vndExpDate<?=$data[$i]['vendor_id'];?>"><?=$data[$i]['profile_expiry_date'];?></div>
                 <div class="fLeft vndEdit">
