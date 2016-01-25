@@ -10,7 +10,7 @@ if (pw < 768) {
 $(document).ready(function() {
     var uid = customStorage.readFromStorage('userid');
     $('input').bind('click',function(){$(this).attr('readonly',false);});
-    
+
     //$('.categoryCircle').velocity({scale: "0"}, {duration: 0, delay: 0});
     $('html,body').animate({scrollTop: 0});
     scene = document.getElementById('scene');
@@ -41,7 +41,7 @@ $(document).ready(function() {
 
     $('.shapeComm').bind('click', function() {
 		$(this).toggleClass('shapeSelected');
-		
+
 		var slistarr = new Array();
 		var i = 0;
         $('.shapeComm').each(function() {
@@ -66,6 +66,9 @@ $(document).ready(function() {
         $(this).addClass('sBtnActive');
     });
 
+    $('#dragTarget').click(function() {
+       showLeftMenu(false);
+    });
 });
 
 
@@ -77,11 +80,11 @@ $(window).load(function() {
 
 
 function showCategory() {
-	
+
 	$('.categoryCircle').each(function() {
 		$(this).velocity({scale: "1"}, {duration: 800, delay: 0, easing: 'spring'});
 	});
-	
+
     //$('#catDiamond').velocity({scale: "1"}, {duration: 800, delay: 0, easing: 'spring'});
     //$('#catJewellery').velocity({scale: "1"}, {duration: 800, delay: 150, easing: 'spring'});
     //$('#catBullion').velocity({scale: "1"}, {duration: 800, delay: 250, easing: 'spring'});
