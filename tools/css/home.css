@@ -1199,6 +1199,14 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
             .actionComm:nth-child(3):hover{background-color: #380B34;}
             .actionComm:nth-child(4):hover{background-color: #5e0037;}
             .actionComm:active{background-color: #8A0044}
+            
+/*            team*/
+            .rowRight{width: 100%;}
+            .teamtxt{padding-left: 0px; padding-top: 180px;}
+            .xelpmocLogo{padding-top: 120px;text-align: center;background-position: center;padding-left: 0px;}
+            .teamComm{padding: 15px;}
+            .teamComm .subHead4{font-size: 36px;line-height: 36px;}
+            
 
 }
 
@@ -1314,6 +1322,8 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
         .signInUpTab{margin: 0 10px 0 0px;}
         .wishlist{margin: 0 0px;}
         .headRight{font-size: 11px;}
+        .licontent{font-size: 11px;}
+        .sideDiv ul li {padding-left: 20px;padding-right: 0px;background-size: 20px 40px;}
 
 
 
