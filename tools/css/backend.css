@@ -721,7 +721,20 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .margnTop0{margin-top: 0px!important;}
 .lineHeight24{line-height: 24px;}
 .color0044{color: #8A0044;}
-.titleTxt{height: auto;
-    font-size: 30px;
-    line-height: 30px;
-    margin-top: 10px;}
+.titleTxt{height: auto;font-size: 30px;line-height: 30px;margin-top: 10px;}
+
+.moverlay{display: none;}
+
+
+@media only screen and (min-width: 320px) and (max-width: 1024px){
+    body{overflow: hidden;}
+    .moverlay{display: block;width:100%;height: 100%;min-height: 100%;background: #171334 url(../img/common/background.jpg)no-repeat;background-size:cover;position:fixed;top:0;left:0;z-index:100;}
+    .pageLinks,.mainContainer {display: none;}
+    .comingsoon{width:100%;height: 100%;min-height: 100%;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;position: relative;}
+    .csoonTxt{width:100%;height: 130px;position: absolute;top:0;bottom:0;left:0;right:0;margin: auto;text-align: center;font-family: openL;font-size:50px;color:#fff;}
+
+    .ttl1{font-size: 30px;line-height: 40px;}
+    .ttl2{font-size: 22px;}
+    .clogo {width: 80px;height: 80px;background: #8A0044 url(../img/common/logo.svg)no-repeat;background-size: auto 60%;background-position: center;position: fixed;left: 0;right: 0;margin: auto;top: 20px;z-index: 100;border-radius: 5px;font-size: 22px;color: #FFF;}    
+    .clogo span {display: block;width: 100%;height: 30px;line-height: 35px;text-align: center;position: absolute;bottom: -30px;}    
+}
