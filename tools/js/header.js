@@ -139,14 +139,14 @@ if (pw < 481) {
  });*/
 
 $(document).ready(function() {
-        if(pageName == 'wishlist')
-	{
-		var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
-		if(isLoggedIn == 'false' || isLoggedIn == false || isLoggedIn == '' || isLoggedIn == null || isLoggedIn == undefined)
-		{
-			window.location.href = DOMAIN;
-		}
-	}
+    if (pageName == 'wishlist')
+    {
+        var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
+        if (isLoggedIn == 'false' || isLoggedIn == false || isLoggedIn == '' || isLoggedIn == null || isLoggedIn == undefined)
+        {
+            window.location.href = DOMAIN;
+        }
+    }
 
     $(window).scroll(function() {
         $('#header,#logoTxt,#mMenuBtn,#hbgDiam,#hbgJewel,#hbgBull').velocity("stop");
@@ -163,15 +163,22 @@ $(document).ready(function() {
             $('.upperMenu').removeClass('transition300');
             $('.upperMenu').velocity({top: 60 + "px"}, {duration: 100, delay: 0});
             setTimeout(function() {
-               // $('.upperMenu').addClass('transition300');
+                // $('.upperMenu').addClass('transition300');
             }, 110);
 
 
         } else if (lastSc > sc) {
-            $('.logo').velocity({top: 30 + "px", height: 100 + "px", width: 100 + "px", backgroundPositionX: '50%'}, {duration: 0, delay: 0});
+            if(isMobile){
+                $('.logo').velocity({top: 30 + "px", height: 80 + "px", width: 80 + "px", backgroundPositionX: '50%'}, {duration: 0, delay: 0});
+            }
+            else if(!isMobile){
+                $('.logo').velocity({top: 30 + "px", height:100 + "px", width: 100 + "px", backgroundPositionX: '50%'}, {duration: 0, delay: 0});
+            }
+            
+            
             $('#logoTxt').velocity({left: 0 + "px", bottom: -30 + "px"}, {duration: 300, delay: 0});
 
-            if (pageName === 'diamond_details' || pageName === 'jewellery_details' || pageName === 'bullion_details' || pageName === 'diamond_shapes' || pageName === 'education_round'||pageName === 'education_pear'||pageName === 'education_oval'||pageName === 'education_emerald'||pageName === 'education_clarity'||pageName === 'education_asscher'||pageName === 'education_heart'||pageName === 'education_marq'||pageName === 'education_radiant'||pageName === 'e_certification'||pageName === 'e_certification1'||pageName === 'e_certification2'||pageName === 'e_carat_weight'||pageName === 'education_cushion'||pageName === 'education_princess'||pageName === 'e_color'||pageName === 'e_color1'||pageName === 'e_cut'||pageName === 'e_cut1'||pageName === 'e_cut2'||pageName === 'e_cut3'||pageName === 'e_cut4'||pageName === 'e_cut5'||pageName === 'e_shapes'||pageName==='jewellery_tips') {
+            if (pageName === 'diamond_details' || pageName === 'jewellery_details' || pageName === 'bullion_details' || pageName === 'diamond_shapes' || pageName === 'education_round' || pageName === 'education_pear' || pageName === 'education_oval' || pageName === 'education_emerald' || pageName === 'education_clarity' || pageName === 'education_asscher' || pageName === 'education_heart' || pageName === 'education_marq' || pageName === 'education_radiant' || pageName === 'e_certification' || pageName === 'e_certification1' || pageName === 'e_certification2' || pageName === 'e_carat_weight' || pageName === 'education_cushion' || pageName === 'education_princess' || pageName === 'e_color' || pageName === 'e_color1' || pageName === 'e_cut' || pageName === 'e_cut1' || pageName === 'e_cut2' || pageName === 'e_cut3' || pageName === 'e_cut4' || pageName === 'e_cut5' || pageName === 'e_shapes' || pageName === 'jewellery_tips') {
                 $('#logoTxt').css({color: '#4d4d4d'});
             }
             $('#header').velocity({height: "100px"}, {duration: 0, delay: 0, easing: 'swing'});
@@ -190,18 +197,18 @@ $(document).ready(function() {
 
 
     $('#hdrpinp,div.loggedIn').click(function() {
-		if(hisOpen)
-		{
-			hisOpen = false;
-			htoggleDropDown(false);
-		}
-		else
-		{
-			setTimeout(function() {
-				hisOpen = true;
-			}, 150);
-			htoggleDropDown(true);
-		}
+        if (hisOpen)
+        {
+            hisOpen = false;
+            htoggleDropDown(false);
+        }
+        else
+        {
+            setTimeout(function() {
+                hisOpen = true;
+            }, 150);
+            htoggleDropDown(true);
+        }
     });
 
     $('#hdropList li').click(function() {
@@ -220,37 +227,37 @@ $(document).ready(function() {
 //    });
 
     /*$('#hdropList').mouseleave(function(){
-        if (hisOpen) {
-            htoggleDropDown(false);
-        }
-        
-    });*/
+     if (hisOpen) {
+     htoggleDropDown(false);
+     }
+     
+     });*/
 
 
 //transform: translateY(50px);opacity: 0;
 
-    $('#jwMenu').velocity({translateY:"-20px", borderRadius:"35%",opacity:"0"});
+    $('#jwMenu').velocity({translateY: "-20px", borderRadius: "35%", opacity: "0"});
     var mInt;
     $('#hbgJewel').bind('mouseenter', function() {
         clearTimeout(mInt);
-        mInt=setTimeout(function() {
-        $('#hbgJewel').addClass('jwActive');
-        $('#jwMenu').removeClass('dn');
+        mInt = setTimeout(function() {
+            $('#hbgJewel').addClass('jwActive');
+            $('#jwMenu').removeClass('dn');
             setTimeout(function() {
                 $('#jwMenu').velocity('stop');
                 //$('#jwMenu').removeClass('upTransit');
-                $('#jwMenu').velocity({opacity:"1"},{delay:50,duration:150,easing:"swing"});
-                $('#jwMenu').velocity({translateY:"0px",borderRadius:"0px"},{queue: false,delay:00,duration:400,easing:"swing"});
+                $('#jwMenu').velocity({opacity: "1"}, {delay: 50, duration: 150, easing: "swing"});
+                $('#jwMenu').velocity({translateY: "0px", borderRadius: "0px"}, {queue: false, delay: 00, duration: 400, easing: "swing"});
 
-                }, 0);
+            }, 0);
         }, 100);
     });
-    
+
     $('#hbgJewel').bind('mouseleave', function() {
         $(this).removeClass('jwActive');
         //$('#jwMenu').addClass('upTransit');
-        $('#jwMenu').velocity({opacity:"0"},{delay:0,duration:0,easing:"swing"});
-        $('#jwMenu').velocity({borderRadius:"35%",translateY:"-20px",},{queue: false,delay:0,duration:0,easing:"swing"});
+        $('#jwMenu').velocity({opacity: "0"}, {delay: 0, duration: 0, easing: "swing"});
+        $('#jwMenu').velocity({borderRadius: "35%", translateY: "-20px", }, {queue: false, delay: 0, duration: 0, easing: "swing"});
         setTimeout(function() {
             $('#jwMenu').addClass('dn');
         }, 00);
@@ -259,10 +266,10 @@ $(document).ready(function() {
     var isVendor = customStorage.readFromStorage('is_vendor');
     var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
 
-	if(isVendor != '' && (isVendor == -1 || isVendor == "-1"))
-	{
-		isVendor = 0;
-	}
+    if (isVendor != '' && (isVendor == -1 || isVendor == "-1"))
+    {
+        isVendor = 0;
+    }
 
     if (isLoggedIn == 'true' || isLoggedIn == true)
     {
@@ -291,15 +298,15 @@ function htoggleDropDown(flag) {
 
 function redirectToWishlist()
 {
-	var uid = customStorage.readFromStorage('userid');
-	var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
+    var uid = customStorage.readFromStorage('userid');
+    var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
 
-	if((isLoggedIn == true || isLoggedIn == 'true') && uid !== undefined && uid !== null && uid !== '')
-	{
-		window.location.href = DOMAIN + 'wishlist/' + uid;
-	}
-	else
-	{
-		common.showLoginForm();
-	}
+    if ((isLoggedIn == true || isLoggedIn == 'true') && uid !== undefined && uid !== null && uid !== '')
+    {
+        window.location.href = DOMAIN + 'wishlist/' + uid;
+    }
+    else
+    {
+        common.showLoginForm();
+    }
 }
