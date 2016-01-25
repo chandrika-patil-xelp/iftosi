@@ -13,7 +13,7 @@ class vendor extends DB
 
 
         $total_products = 0;
-        $sql = "SELECT *,date_format(profile_expiry_date,'%D %M,%Y  %r') as expiry_show FROM tbl_vendor_master WHERE orgName is not null ORDER BY date_time DESC";
+        $sql = "SELECT *,date_format(profile_expiry_date,'%D %M, %Y') as expiry_show FROM tbl_vendor_master WHERE orgName is not null ORDER BY date_time DESC";
         
         if (!empty($page)) {
             $start = ($page * $limit) - $limit;
