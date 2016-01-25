@@ -1,17 +1,6 @@
 <?php include 'vendorHead.html'; ?>
 <div class="mainContainer fLeft vListPage">
-        <?php include 'HeaderVendor.html'; ?>
-<!--    <div class="topFixedCont">
-        <div class="vndHeader fLeft">
-            <div class="wrapperMax">
-                <div class="vndLogo fLeft fmOpenR pointer" onclick="window.location.assign(DOMAIN);"><b>IF</b>to<b>SI</b></div>
-                <div class="vndInfo fRight fmOpenR">
-                    Hi, <span id="userName"></span> |
-                    <div class="fRight pointer" onclick="common.doLogout();"><span>Logout</span></div>
-                </div>
-            </div>
-        </div>
-    </div>-->
+    <?php include 'HeaderVendor.html'; ?>
     <div id='vList' class="vList fLeft">
         <div class="listHeader fLeft fmOpenR">
             <div class="fLeft headName">Vendor Name</div>
@@ -59,7 +48,7 @@
                 ?>
                 <div class="fLeft vndPackage txtOver"><?php echo $package?></div>
                 <div class="fLeft vndAmount"><?php echo $cost?></div>
-                <div class="fLeft vndExpDate" id="vndExpDate<?=$data[$i]['vendor_id'];?>"><?=$data[$i]['profile_expiry_date'];?></div>
+                <div class="fLeft vndExpDate" id="vndExpDate<?=$data[$i]['vendor_id'];?>">NA</div>
                 <div class="fLeft vndEdit">
                     <div class="toggle-button <?=($data[$i]['active_flag'] === '0') ? '' : 'toggle-button-selected';?>" onclick="changeStatus(<?=$data[$i]['vendor_id'];?>,this)">
                         <span class="fActive">Yes</span>
