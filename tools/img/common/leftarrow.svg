@@ -1,2 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 125" enable-background="new 0 0 100 100" xml:space="preserve">
-<path d="M78.006,44.807L26.697,44.75L46.33,21.198c1.76-2.118,1.471-5.274-0.643-7.036C44.791,13.413,43.654,13,42.488,13   c-1.49,0-2.891,0.657-3.842,1.799l-26.49,31.775C11.41,47.471,11,48.608,11,49.774c0,1.17,0.412,2.308,1.158,3.201l26.486,31.771   C39.6,85.892,41,86.548,42.49,86.548c1.166,0,2.303-0.41,3.197-1.156c2.117-1.768,2.406-4.926,0.641-7.043l-19.67-23.597   l51.338,0.056c2.754,0,4.998-2.239,5.004-4.994C83.004,47.059,80.766,44.812,78.006,44.807z"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="60px" height="60px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 60001 60000"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil0 {fill:none}
+    .fil1 {fill:#171334}
+   ]]>
+  </style>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_1871045328">
+   <rect class="fil0" x="-1" width="60001" height="60001"/>
+   <g>
+    <g>
+     <path class="fil1" d="M35594 45002c-324,0 -646,-122 -893,-366l-5961 -5918c-253,-250 -254,-659 -4,-912 252,-253 659,-254 913,-2l5960 5916 2814 -2846 -10015 -9979c-239,-238 -370,-556 -370,-894 0,-338 131,-655 370,-894l10014 -10015 -2845 -2810 -13755 13685c-12,13 -23,24 -35,34 11,11 22,23 34,33l5968 5925c254,250 255,659 3,912 -250,253 -659,255 -911,3l-5969 -5923c-423,-419 -571,-598 -599,-829 -95,-381 270,-742 600,-1070l13788 -13684c494,-491 1296,-489 1788,2l2846 2847c238,237 368,555 368,893 0,339 -130,657 -368,894l-10015 10016 10015 9978c238,238 369,556 369,895 0,337 -131,655 -369,893l-2846 2846c-247,246 -571,370 -895,370z"/>
+    </g>
+   </g>
+  </g>
+ </g>
+</svg>
