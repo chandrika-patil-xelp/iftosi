@@ -1081,7 +1081,7 @@
 
 		private function sendMail($params)
 		{
-			global $comm;
+			/*global $comm;
                         $subject = '';
                         $message = '';
                         $headers = '';
@@ -1100,7 +1100,7 @@
 			if(!empty($params['email']))
 			{
 				mail($params['email'], $subject, $message, $headers);
-			}
+			}*/
 		}
                 
         public function sendWelcomeMailSMS($params)
