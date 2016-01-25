@@ -160,11 +160,11 @@ class sendingMail extends DB
                       $str .= "<span style='color:#fff; font-size: 25px; display: inline-block; width:auto;padding: 10px 20px;font-weight: light;background: #5E0037;letter-spacing: -0.03em;border-radius: 3px;'>Save Time, Save Money!</span>";
                       $str .= "</center>";
                       $str .= "<div style='font-size: 20px; width: 80%;padding: 30px 10% 10px 10%; color: #333;'>You discovered the <b>easiest</b> way to buy <b>solitaires, jewellery </b>and <b>bullion</b> directly from the source. </div>";
-                      //$str .= "<center>";
+                      $str .= "<center>";
                       $str .= "<img src='http://www.iftosi.com/tools/img/common/diamond.jpg' width='90px'>";
                       $str .= "<img src='http://www.iftosi.com/tools/img/common/jewellery.jpg' width='90px'>";
                       $str .= "<img src='http://www.iftosi.com/tools/img/common/bullions.jpg' width='90px'>";
-                      //$str .= "</center>";
+                      $str .= "</center>";
                       $str .= "<center>";
                       $str .= "<div style='padding:1px 20px; font-size: 22px; text-align: left; border-bottom: 1px dotted #ccc; max-width: 400px;'>";
                       $str .= "<div style='background: #fff; color:#2a0e34; padding: 20px 0 20px 0;'>";
