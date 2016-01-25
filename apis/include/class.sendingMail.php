@@ -75,9 +75,9 @@ class sendingMail extends DB
         function vendor_cont()
         {
           $str = "";
-            $str .= '<!DOCTYPE html>';
-            $str .= '<html>';
-            $str .= '<head>';
+           $str .= '<!DOCTYPE html>';
+           $str .= '<html>';
+           $str .= '<head>';
             $str .= '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>';
             $str .= '<meta name="viewport" content="width=device-width, user-scalable=no" >';
             $str .= '<title></title>';
@@ -100,13 +100,9 @@ class sendingMail extends DB
             $str .= '<div style="text-align: left; color:#888; text-transform: capitalize; display: inline-block; vertical-align: middle; width:250px;">City</div>';
             $str .= '<div style="text-align: left; font-weight: bold; display: inline-block; width:250px; vertical-align: middle; text-transform: capitalize; color: #8A0044;">Pune</div>';
             $str .= '</div>';
-            $str .= '<div style="padding: 10px 0;border-top: 1px solid #e6e6e6;">';
-            $str .= '<div style="text-align: left; color:#888; text-transform: capitalize; display: inline-block; vertical-align: middle; width:250px;">Area1</div>';
-            $str .= '<div style="text-align: left; font-weight: bold; display: inline-block; width:250px; vertical-align: middle; text-transform: capitalize; color: #8A0044;">Pune</div>';
-            $str .= '</div>';
-          //  $str .= '<div style="padding: 10px 0;border-top: 1px solid #e6e6e6;width:520px">';
-          //  $str .= '<div style="text-align: left; color:#888; text-transform: capitalize; display: inline-block; vertical-align: middle; width:250px;float:left";>Area</div>';
-          //  $str .= '<div style="text-align: left; font-weight: bold; display: inline-block; width:250px; vertical-align: middle; text-transform: capitalize; color: #8A0044;">Dhawal Tabib</div>';
+            $str .= '<div style="padding: 10px 0;border-top: 1px solid #e6e6e6;width:520px">';
+            $str .= '<div style="text-align: left; color:#888; text-transform: capitalize; display: inline-block; vertical-align: middle; width:250px;">Area</div>';
+            $str .= '<div style="text-align: left; font-weight: bold; display: inline-block; width:250px; vertical-align: middle; text-transform: capitalize; color: #8A0044;">Dhawal Tabib</div>';
             $str .= '</div>';
             $str .= '<div style="border-top: 1px solid #e6e6e6;padding: 10px 0">';
             $str .= '<div style="text-align: left; color:#888; text-transform: capitalize; display: inline-block; width:250px; vertical-align: middle">Mobile Number</div>';
