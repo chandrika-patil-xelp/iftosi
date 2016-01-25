@@ -92,11 +92,11 @@ class sendingMail extends DB
             $str .= '<span style="font-family: Helvetica,verdana,sans-serif-condensed,Tahoma;color: #888;">Dear Rishab , Thank you for showing interest in the product you have enquired. The contact details of the vendor are:</span>';
             $str .= '</div>';
             $str .= '<div style="color:#666; letter-spacing:0em; font-size: 0.9em;">';
-            $str .= '<div style="padding: 10px 0;border-top: 1px solid #e6e6e6;">';
+            $str .= '<div style="padding: 10px 0;border-top: 1px solid #e6e6e6;display: inline-block;">';
             $str .= '<div style="text-align: left; color:#888; text-transform: capitalize; display: inline-block; vertical-align: middle; width:250px;">Vendor name</div>';
             $str .= '<div style="text-align: left; font-weight: bold; display: inline-block; width:250px; vertical-align: middle; text-transform: capitalize; color: #8A0044;">Devilal Jewellers</div>';
             $str .= '</div>';
-            $str .= '<div style="padding: 10px 0;border-top: 1px solid #e6e6e6;">';
+            $str .= '<div style="padding: 10px 0;border-top: 1px solid #e6e6e6;display: inline-block;">';
             $str .= '<div style="text-align: left; color:#888; text-transform: capitalize; display: inline-block; vertical-align: middle; width:250px;">City</div>';
             $str .= '<div style="text-align: left; font-weight: bold; display: inline-block; width:250px; vertical-align: middle; text-transform: capitalize; color: #8A0044;">Pune</div>';
             $str .= '</div>';
@@ -124,8 +124,8 @@ class sendingMail extends DB
             $str .= '</div>';
             $str .= '</div>';
             $str .= '<div style="border-top: 1px solid #e6e6e6;padding: 20px 0 10px 0; color:#888; line-height: 22px;">';
-            $str .= '<div style="font-size:13px;width:250px;text-align: left; vertical-align: middle;padding-bottom:5px;">For any Assistance call: <a href="tel:+022-32623263" style="text-decoration: none; color:#888; font-weight: bold;">+022-32623263</a> </div>';
-            $str .= '<div style="font-size:13px;width:250px;float:left;text-align: left; vertical-align: middle;padding-bottom:5px;padding-left:10px;">Email: <a href="#" style="text-decoration: none; color:#888; font-weight: bold;">info@iftosi.com</a> </div>';
+            $str .= '<div style="font-size:13px;width:250px;text-align: left; vertical-align: middle;padding-bottom:5px; display:inline-block;">For any Assistance call: <a href="tel:+022-32623263" style="text-decoration: none; color:#888; font-weight: bold;">+022-32623263</a> </div>';
+            $str .= '<div style="font-size:13px;width:250px;float:left;text-align: left; vertical-align: middle;padding-bottom:5px;padding-left:10px; display:inline-block;">Email: <a href="#" style="text-decoration: none; color:#888; font-weight: bold;">info@iftosi.com</a> </div>';
             $str .= '</div>';
             $str .= '<div style="color:#666; font-size: 0.8em;">- The IftoSi.com Team</div>';
             $str .= '</div>';
