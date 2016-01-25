@@ -101,7 +101,7 @@ class sendingMail extends DB
             $str .= '<div style="text-align: left; font-weight: bold; display: inline-block; width:250px; vertical-align: middle; text-transform: capitalize; color: #8A0044;">Pune</div>';
             $str .= '</div>';
             $str .= '<div style="padding: 10px 0;border-top: 1px solid #e6e6e6;display: inline-block;">';
-            $str .= '<div style="text-align: left; color:#888; text-transform: capitalize; display: inline-block; vertical-align: middle; width:250px;">Area</div>';
+            $str .= '<div style="text-align: left; color:#888; text-transform: capitalize; display: inline-block; vertical-align: middle; width:250px;">Area1</div>';
             $str .= '<div style="text-align: left; font-weight: bold; display: inline-block; width:250px; vertical-align: middle; text-transform: capitalize; color: #8A0044;">Dhawal Tabib</div>';
             $str .= '</div>';
             $str .= '<div style="border-top: 1px solid #e6e6e6;padding: 10px 0">';
@@ -119,7 +119,7 @@ class sendingMail extends DB
             $str .= '</div>';
             $str .= '<div style="padding: 10px 0;border-top: 1px solid #e6e6e6;">';
             $str .= '<div style="text-align: left; color:#888; text-transform: capitalize; display: inline-block; vertical-align: middle; width:250px;">Email</div>';
-            $str .= '<div style="text-decoration:none;text-align: left; font-weight: bold; display: inline-block; width:250px; vertical-align: middle;  color: #8A0044;">silentmajority@xelpmoc.in</div>';
+            $str .= '<div style="text-decoration:none;text-align: left; font-weight: bold; display: inline-block; width:250px; vertical-align: middle;  color: #8A0044;">silentmajority[at]xelpmoc[dot]in</div>';
             $str .= '</div>';
             $str .= '</div>';
             $str .= '</div>';
