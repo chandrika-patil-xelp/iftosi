@@ -12,7 +12,7 @@
                             <center>
 <?php
                                         foreach($cat['subcat'] as $ky=>$val)
-                                        {  
+                                        {
                                             //echo "<pre>";print_r($val);die;
                                             if(strtolower($val)!=='')
                                                 {
@@ -24,13 +24,13 @@
                                                     if($typeId==$attr['shape']) {
                                                         $typeClass .=' shapeSelected';
                                                     }
-                                                    echo "<div id='".$typeId."' class='jshapeComm transition300 ripplelink ".$typeId."'>".$val['catname']."</div>";   
+                                                    echo "<div id='".$typeId."' class='jshapeComm transition300 ripplelink ".$typeId."'>".$val['catname']."</div>";
                                                 }
                                         }
-?>                          
+?>
                             </center>
                         </div>
-                    </div>    
+                    </div>
                                <!-- <div id="Rings" class="jshapeComm transition300 ripplelink Rings">Rings
                                 </div><div id="Earrings" class="jshapeComm transition300 ripplelink Earrings">Earrings
                                 </div><div id="Pendant" class="jshapeComm transition300 ripplelink Pendent">Pendant
@@ -38,62 +38,38 @@
                                 </div><div id="Bracelet" class="jshapeComm transition300 ripplelink Bracelet">Bangles / Bracelets
                                 </div> -->
 <?php
-                                    //$catIds =  explode(',', $pdet['catid']);
+
                                         foreach($cat['subcat'] as $key=>$values)
                                         {
-                                            if($values['catid']!=10007)
-                                            {   
-                                                /*$mainCatId=$values['catname'];
-                                                if($mainCatId=='Bangles/Bracelets') [
-                                                    $mainCatId='Bracelet';
-                                                }*/
-                                            
-?>                                              
+
+                                                $expd = explode('/',$values['catname']);
+                                                $values['catname'] = $expd[0];
+
+?>
                                                 <div class="divCon  fLeft fmOpenR subCatType <?php if($attr['shape']!=$values['catname']) { echo 'dn'; } ?> " id="<?=strtolower($values['catname']);?>Type">
                                                     <div  class="titleDiv txtCap fLeft"><?=ucwords(strtolower($values['catname']));?> Type*</div>
                                                     <div class='radioCont fLeft'>
-<?php                                                        
+<?php
                                                         foreach($values['subcats'] as $ky=>$val)
-                                                        {   
+                                                        {
 ?>
                                                             <div class="checkDiv fLeft">
-                                                            <input type="checkbox" name='subcat_type' class="filled-in" value="<?=$val['subcatid'];?>" id="<?php echo $values['catname'].'_'.$val['subcatid'];?>" <?=(in_array($val['subcatid'],$pdet['catid'])) ? 'checked="true"' : '';?> /> 
+                                                            <input type="checkbox" name='subcat_type' class="filled-in" value="<?=$val['subcatid'];?>" id="<?php echo $values['catname'].'_'.$val['subcatid'];?>" <?=(in_array($val['subcatid'],$pdet['catid'])) ? 'checked="true"' : '';?> />
                                                             <label for="<?=$values['catname'].'_'.$val['subcatid'];?>"><?php echo $val['subcatname'];?></label>
                                                         </div>
 <?php
                                                         }
-?>                                                  
+?>
                                                     </div>
                                                 </div>
-<?php                                             
-                                            }
-                                            if($values['catid']==10007)
-                                            { 
-?>                    
-                                                <div class="divCon  fLeft fmOpenR jw5 subCatType <?php if($attr['shape']!='Bracelet') { echo 'dn'; } ?>" id="braceletType">
-                                                <div  class="titleDiv txtCap fLeft">Bracelet Type*</div>
-                                                <div class='radioCont fLeft'> 
-<?php                                                        
-                                                foreach($values['subcats'] as $ky=>$val)
-                                                {
-?>                            
-                                                    <div class="checkDiv fLeft">
-                                                    <input type="checkbox" name='subcat_type' class="filled-in"  value="<?=$val['subcatid'];?>" id="<?=$val['subcatid'];?>" <?=(in_array($val['subcatid'],$pdet['catid'])) ? 'checked="true"' : '';?> />
-                                                    <label for="<?=$val['subcatid'];?>"><?php echo $val['subcatname'];?></label>
-                                                    </div>
 <?php
-                                                }
-?>                        
-                                            </div>
-                                            </div>
-<?php                                             
-                                            }
+                                          
                                         }
 ?>
-<div class="<?=(!empty($attr['product_id']) == True) ? '' : 'dn';?>" id="allcontent">                     
+<div class="<?=(!empty($attr['product_id']) == True) ? '' : 'dn';?>" id="allcontent">
                     <div class="divCon  fLeft jw3" id='certiicates'>
                         <div  class="titleDiv txtCap fLeft">Certficate*</div>
-                        <div class='radioCont fLeft'> 
+                        <div class='radioCont fLeft'>
 
                             <div class="checkDiv fLeft">
                                 <input type="radio" name='Certficate' class="filled-in" value="SGL" <?=($attr['certified'] == 'SGL') ? 'checked' : '';?> id="Certficate_SGL">
@@ -121,10 +97,10 @@
                             </div>
                         </div>
                     </div>
-                    
+
                      <div class="divCon  fLeft jw3">
                         <div  class="titleDiv txtCap fLeft">Metal*</div>
-                        <div class='radioCont fLeft'> 
+                        <div class='radioCont fLeft'>
                             <div class="checkDiv fLeft">
                                 <input type="radio" name='metal' class="filled-in" value="Gold" <?=($attr['metal'] == 'Gold') ? 'checked' : '';?> id="gold">
                                 <label for="gold">Gold</label>
@@ -144,11 +120,11 @@
 
 					if(empty($attr['dwt']) || $attr['dwt'] == '0')
                     {
-                       $attr['dwt'] = ''; 
+                       $attr['dwt'] = '';
                     }
                     if(empty($attr['nofd']) || $attr['dwt'] == '0' )
                     {
-                       $attr['nofd'] = ''; 
+                       $attr['nofd'] = '';
                     }
 ?>
     <div class="vCommTitle fLeft fmOpenL" style="font-size:25px">Select the diamond you want to add in product</div>
@@ -162,7 +138,7 @@
     ?>
         <div id="diamondShapeDiv">
 					<div class="divCon fLeft dAuto" id="diamondShapeCont_<?php echo $curDiv; ?>">
-						
+
 
 <?php
 						if(empty($attr['diamond_shape']))
@@ -206,7 +182,7 @@
 
                     <div class="divCon fLeft dAuto <?php echo ($attr['diamond_shape'][$curIndex]) ? '' : 'dn'; ?> diamondProp diamondProp_<?php echo $curDiv; ?>">
                         <div  class="titleDiv txtCap fLeft">Diamond Color*</div>
-                        <div class='radioCont fLeft'> 
+                        <div class='radioCont fLeft'>
                             <div class="checkDiv fLeft">
                                 <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="D" <?=($attr['color'][$curIndex] == 'D') ? 'checked' : '';?> id="color_D_<?php echo $curDiv; ?>">
                                 <label for="color_D_<?php echo $curDiv; ?>"> D</label>
@@ -257,10 +233,10 @@
                         </div>
                     </div>
                         </div>
-                        
+
                     <div class="divCon  fLeft jw3 <?php echo ($attr['diamond_shape'][$curIndex]) ? '' : 'dn'; ?> diamondProp diamondProp_<?php echo $curDiv; ?>">
                         <div  class="titleDiv txtCap fLeft">Diamond Quality*</div>
-                        <div class='radioCont fLeft'> 
+                        <div class='radioCont fLeft'>
                             <div class="checkDiv fLeft">
                                 <input type="radio" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="IF" <?=($attr['clarity'][$curIndex] == 'IF') ? 'checked' : '';?> id="clarity_IF_<?php echo $curDiv; ?>">
                                 <label for="clarity_IF_<?php echo $curDiv; ?>">IF</label>
@@ -302,7 +278,7 @@
     <div class="submitBtn fmOpenR ripplelink poR fRight addMore" id="addDiamondType" onclick="addShapeType()">Add Diamond Type</div>
    <div style="clear: both;"></div>
    <?php } ?> <!--<div onclick="addShapeType()" id="addDiamondType" class="submitBtn fmOpenR ripplelink poR fRight">Add Diamond Type</div><div class="clearFill"></div>-->
-                        
+
                     <div class="divCon2 fLeft <?php echo ($attr['diamond_shape'][0]) ? '' : 'dn'; ?> diamondProp">
                         <div  class="titleDiv txtCap fLeft">Diamond Weight (in CTS)*</div>
                         <input name="diamonds_weight" id="diamondweight" type="text" autocomplete="false" placeholder=" eg. 1.25" maxlength="8" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['dwt'];?>" class="txtInput fLeft fmOpenR font14 c666">
@@ -323,9 +299,9 @@
 
 					if(empty($attr['gemwt']) )
                     {
-                       $attr['gemwt'] = ''; 
+                       $attr['gemwt'] = '';
                     }
-                    
+
                     $curDiv=1;
 ?>
 
@@ -368,19 +344,19 @@
 						<input name="other_gem_type" type="text" id="other_gem_type" autocomplete="false" placeholder=" eg. ABC" value="<?php echo (!empty($attr['gemstone_type'][$curIndex]) && !in_array($attr['gemstone_type'][$curIndex], $gemsAttrsArr)) ? $attr['gemstone_type'][$curIndex] : ''; ?>" class="txtInput fLeft fmOpenR font14 c666">
 					</div>
 
-<?php                          
+<?php
                     if(strtolower($catres[3]['attr_name'])=='gemstone_color')
                     {
 ?>
 						<div class="divCon fLeft jw3 <?php echo ($attr['gemstone_type'][$curIndex]) ? '' : 'dn'; ?> gemstoneProp_<?php echo $curDiv; ?>">
 							<div  class="titleDiv txtCap fLeft"><?=$catres[3]['attr_display_name']?>*</div>
-								<div class='radioCont fLeft'>     
+								<div class='radioCont fLeft'>
 <?php
 								$gemvalues = explode(',',  strtolower($catres[3]['attr_values']));
 								foreach($gemvalues as $key=>$values)
 								{
 ?>
-                                
+
 									<div class="checkDiv fLeft">
 										<input type="radio" name='gemstone_color_<?php echo $curDiv; ?>' class="filled-in" value="<?=$gemvalues[$key]; ?>" <?php echo ($gemvalues[$key] == $attr['gemstone_color'][$curIndex]) ? 'checked' : '';?> id="<?=$gemvalues[$key].'_'.$curDiv; ?>">
 										<label for="<?=$gemvalues[$key].'_'.$curDiv; ?>"><?=  ucwords($gemvalues[$key]);?></label>
@@ -390,7 +366,7 @@
 ?>
 							</div>
 						</div>
-<?php 
+<?php
                     }
 ?>
                                 </div>
@@ -425,7 +401,7 @@
 						{
 							$goldpurity=$values['attr'][$key]['attr_name'];
 
-?>                        
+?>
                                                 <div class="divCon2  fLeft">
                                                     <div  class="titleDiv txtCap fLeft">Gold <?php echo $values['attr'][$key]['attr_display_name']; ?> (in Kt)*</div>
                                                     <input name="<?php echo strtolower($goldpurity); ?>" id="goldpurity" type="text" autocomplete="false" maxlength="3" onkeypress="return common.isNumberKey(event);" value="<?=$attr['gold_purity'];?>" placeholder="eg. 18" onkeypress="common.isNumberKey(event);" class="txtInput fLeft fmOpenR font14 c666">
@@ -443,26 +419,26 @@
                             <div  class="titleDiv txtCap fLeft">Design Number*</div>
                             <input name="barcode" id="barcode" type="text" placeholder=" eg. ABCD12" maxlength="20" autocomplete="false" class="txtInput fLeft fmOpenR font14 c666" value="<?=$pdet['product_barcode'];?>">
                     </div>
- <?php                
+ <?php
                                         foreach($cat['subcat'] as $key=>$values)
                                         {
                                             if(strtolower($values['attr'][$key]['attr_name'])=='price')
-                                            {    
-?>                       
+                                            {
+?>
                                                 <div class="divCon2  fLeft">
                                                     <div  class="titleDiv txtCap fLeft"><?php echo $values['attr'][$key]['attr_display_name']; ?> (in Rs)*</div>
                                                     <input name="<?php echo strtolower($values['attr'][$key]['attr_display_name']); ?>" autocomplete="false" id="prdprice" type="text" placeholder="eg. 12000" maxlength="16" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['price'];?>" class="txtInput fLeft fmOpenR font14 c666">
                                                 </div>
 <?php                                       }
                                         }
-?>                         
+?>
                     <div class="btnCont fLeft">
                         <center>
                             <div class="cancelBtn fmOpenR ripplelink poR" onclick="backbtn();">CANCEL</div>
                             <div class="submitBtn fmOpenR ripplelink poR" onclick="validateJForm()" id="Submitdiv">SUBMIT</div>
                         </center>
                     </div>
-                  </div> 
+                  </div>
                 </div>
             </div>
         </div>
@@ -494,11 +470,11 @@
         function showOther(id){
             $('#'+id).removeClass('dn');
         }
-        
+
         function hideOther(id){
             $('#'+id).addClass('dn');
         }
-        
+
         $(document).ready(function(){
             $('#certiicates label').click(function(){
                 setTimeout(function(){
@@ -511,10 +487,10 @@
                         $('#other_cerificate').val('');
                     }
                 },10);
-                
+
             });
         });
-    
+
     </script>
 </body>
 </html>

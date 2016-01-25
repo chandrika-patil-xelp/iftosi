@@ -77,7 +77,7 @@ var lastSc = 0;
 
 var GtmpId='';
 $(document).ready(function () {
-    
+
     $.ajax({url: DOMAIN + "apis/index.php?action=activateVendor&user_id=" + uid, success: function (result)
     {
         var obj = jQuery.parseJSON(result);
@@ -99,7 +99,7 @@ $(document).ready(function () {
         }
     }
     });
-    
+
     $('.vTabs').eq(1).click();
 
 var busiTypeSplt = busiType.split(',');
@@ -283,7 +283,7 @@ for(var i = 0; i< busiTypeSplt.length; i++)
                 $('#goldweight').val('');
                 if (tmpId == 'sbars') {
                     $('#silverweight').attr('placeholder','eg. Kgs Or Gms');
-                    
+
                 } else {
                     $('#silverweight').attr('placeholder','eg. Gms');
                 }
@@ -306,7 +306,7 @@ for(var i = 0; i< busiTypeSplt.length; i++)
             updateDollarRate();
         }
     });
-    
+
     $('#gold_rate').on('keyup', function(evnt) {
     var kcode = (evnt.which) ? evnt.which : evnt.keyCode;
         if(kcode == 13)
@@ -314,7 +314,7 @@ for(var i = 0; i< busiTypeSplt.length; i++)
             updateGoldRate();
         }
     });
-    
+
     $('#gold_rate1').on('keyup', function(evnt) {
     var kcode = (evnt.which) ? evnt.which : evnt.keyCode;
         if(kcode == 13)
@@ -322,7 +322,7 @@ for(var i = 0; i< busiTypeSplt.length; i++)
             updateGoldSilverRate();
         }
     });
-    
+
     $('#silver_rate').on('keyup', function(evnt) {
     var kcode = (evnt.which) ? evnt.which : evnt.keyCode;
         if(kcode == 13)
@@ -330,7 +330,7 @@ for(var i = 0; i< busiTypeSplt.length; i++)
             updateSilverRate();
         }
     });
-    
+
     $('#pr_otp').on('keyup', function(evnt) {
     var kcode = (evnt.which) ? evnt.which : evnt.keyCode;
         if(kcode == 13)
@@ -338,7 +338,7 @@ for(var i = 0; i< busiTypeSplt.length; i++)
             otpCheck();
         }
     });
-    
+
 
 });
 
@@ -424,7 +424,7 @@ $('#overlay').velocity({opacity:0},{delay:0,duration:0});
 $('#uploadDiv,#dollarRateDiv,#goldRateDiv,#silverRateDiv,#goldSilverRateDiv').velocity({scale: 0}, {delay: 0, duration: 0});
 
 $('#upProds').click(function () {
-    
+
     $.ajax({url: common.APIWebPath() + "index.php?action=getDollerRate&vid="+ uid, success: function (result) {
         var obj = jQuery.parseJSON(result);
             var dollarRate=obj['results']['dollar_rate'];
@@ -441,7 +441,7 @@ $('#upProds').click(function () {
                 loadDiamont = true;
             }
     }});
-    
+
 });
 
 var uploadButton = false;
@@ -518,7 +518,7 @@ $(document).ready(function() {
         $('.shapeSelected').removeClass('shapeSelected');
     });
       $.ajax({url: DOMAIN + "apis/index.php?action=getAllRatesByVID&vid="+uid, success: function(result) {
-		  
+
                 var obj = jQuery.parseJSON(result);
                 var errCode = obj['error']['code'];
                 if(errCode==0) {
@@ -541,18 +541,18 @@ $(document).ready(function() {
 					{
 						$('#silverRateSpan').html('&#8377; 0.00');
                                                 silverRate = obj.silver_rate;
-                                                
+
 					}
-					if(obj.gold_rate !== ''  &&  obj.gold_rate !== undefined  &&  obj.gold_rate !== 'undefined'  &&  obj.gold_rate !== 'null'  &&  obj.gold_rate !== null ){						
+					if(obj.gold_rate !== ''  &&  obj.gold_rate !== undefined  &&  obj.gold_rate !== 'undefined'  &&  obj.gold_rate !== 'null'  &&  obj.gold_rate !== null ){
                                             $('#goldRateSpan').html('&#8377; '+obj.gold_rate);
                                             goldRate = obj.gold_rate;
-                                            
+
 					}
 					else
 					{
 						$('#goldRateSpan').html('&#8377; 0.00');
                                                 goldRate = obj.gold_rate;
-                                                
+
 					}
 }
 }
@@ -562,7 +562,7 @@ $(document).ready(function() {
 
 
 function updateDollarRate() {
-    
+
     var dollar_rate = $("#dollar_rate").val();
     //dollar_rate=parseFloat(dollar_rate);
     if(dollar_rate=='' || dollar_rate <= 0 || dollar_rate == undefined) {
@@ -571,7 +571,7 @@ function updateDollarRate() {
     else if(dollar_rate.length >= 11 || dollar_rate > 9999999.99)
     {
         common.toast(0,'Please enter proper rate!');
-    }    
+    }
     else {
         $.ajax({url: DOMAIN + "/apis/index.php?action=updateDollerRate&vid="+uid+"&dolRate="+dollar_rate, success: function(result) {
                 var obj = jQuery.parseJSON(result);
@@ -594,7 +594,7 @@ function updateDollarRate() {
                                                 loadDiamonds(1);
                                             }
                                             closeAllForms();
-                                               
+
                                         }
                 }
                 else if(errCode==1)
@@ -634,10 +634,10 @@ function updateSilverRate() {
                 var errCode = obj['error']['code'];
                 if(errCode == 0) {
                     common.toast(1,obj['error']['msg']);
-                        //showJewelleryImps(GtmpId);                        
+                        //showJewelleryImps(GtmpId);
                     $('#silverRateSpan').html('&#8377; '+silver_rate);
                     silverRate = silver_rate;
-                    
+
                     closeAllForms();
 
                     loadBullions(1);
@@ -650,8 +650,8 @@ function updateSilverRate() {
     }
     else if(pageName === 'bullion-Form')
     {
-        
-        if(silver_rate == undefined || silver_rate == 'undefined' || silver_rate === '0.00' || silver_rate == 0.00 || silver_rate=='' || silver_rate <= 0 || isNaN(silver_rate)){        
+
+        if(silver_rate == undefined || silver_rate == 'undefined' || silver_rate === '0.00' || silver_rate == 0.00 || silver_rate=='' || silver_rate <= 0 || isNaN(silver_rate)){
                 common.toast(0,'Silver rate is must to fill');
             }
             else
@@ -663,8 +663,8 @@ function updateSilverRate() {
                         if(errCode==0) {
                         common.toast(1,obj['error']['msg']);
                         silverRate = silver_rate;
-                        showJewelleryImps(GtmpId);                        
-                    
+                        showJewelleryImps(GtmpId);
+
                        $('#silverRateSpan').html('&#8377; '+silver_rate);
                         closeAllForms();
                         } else if(errCode==1) {
@@ -688,7 +688,7 @@ function updateSilverRate() {
                 if(errCode == 0)
                 {
                     common.toast(1,obj['error']['msg']);
-                        //showJewelleryImps(GtmpId);                        
+                        //showJewelleryImps(GtmpId);
                     $('#silverRateSpan').html('&#8377; '+silver_rate);
                     silverRate = silver_rate;
                     closeAllForms();
@@ -724,7 +724,7 @@ function updateGoldRate() {
    if(gold_rate=='' || gold_rate <= 0 || gold_rate == undefined || isNaN(gold_rate) == true){
         common.toast(0,'Gold Rate is Must to fill');
         return false;
-    }   
+    }
     else {
         $.ajax({url: DOMAIN + "/apis/index.php?action=updateGoldRate&vid="+uid+"&goldRate="+gold_rate, success: function(result) {
             var obj = jQuery.parseJSON(result);
@@ -773,7 +773,7 @@ function updateGoldSilverRate() {
                                     loadBullions(1);
                                 }
 				closeAllForms();
-                                
+
 			} else if(errCode==1) {
 				common.toast(0,obj['error']['msg']);
 			}
@@ -822,15 +822,15 @@ var uploadStart=false;
 $("#upSubmit").on('click',(function(e) {
     if($("#up_file").val()=='' || ValidateFile()==false) {
         common.toast(0,'Please Select Valid CSV File');
-    } 
+    }
     else if(uploadStart) {
         common.toast(0,'Upload process is running');
     } else {
         $('#upSubmit').text('Uploading Data');
         uploadStart=true;
         $.ajax({url: DOMAIN + "apis/index.php?action=bulkInsertProducts&vid="+uid,
-            type: "POST",             
-            data: new FormData($('form')[0]), 
+            type: "POST",
+            data: new FormData($('form')[0]),
             contentType: false,
             cache: false,
             processData:false,
@@ -855,7 +855,7 @@ $("#upSubmit").on('click',(function(e) {
 //                }
 //                else {
 //                    common.toast(0,'Products are Failed to Update');
-//                
+//
                 uploadStart=false;
             }
         });
@@ -875,7 +875,7 @@ function ValidateFile() {
 
 function getcatid() {
     var btype = customStorage.readFromStorage('busiType');
-    
+
     if (btype !=='' || btype !== undefined || btype !== null ) {
         var catid = parseInt(btype.charAt(0))-1;
     }
@@ -892,7 +892,7 @@ function addDiamond() {
                 showDollarRateForm();
                 $('#dollarErr').removeClass('dn');
 //            }
-//    }}); 
+//    }});
             }
 function addBulion() {
     window.location.assign(DOMAIN+"index.php?case=bullion_Form&catid="+catid+"&vid="+uid);
