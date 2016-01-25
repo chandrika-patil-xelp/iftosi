@@ -155,7 +155,7 @@ class sendingMail extends DB
                       $str .= '<a href="http://nafex.com"><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="iftosi.png" style="width:100%;"></div></a>';
                       $str .= '<div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">';
                       $str .= '<div style="font-size: 20px;font-weight: bold;letter-spacing: -0.03em;padding: 40px 10px 5px 10px; color:#333;">Welcome Ankur!</div>';
-                      $str .= '<div style="font-size: 14px; color: #8a0044; font-weight: bold; padding-bottom: 30px;">+91 9980051525  |  ankur.gala@hotmail.com</div>';
+                      $str .= '<div style="font-size: 14px; color: #8a0044; font-weight: bold; padding-bottom: 30px;dislay:inline-block;">+91 9980051525  |  ankur.gala@hotmail.com</div>';
                       $str .= '<center>';
                       $str .= '<span style="color:#fff; font-size: 25px; display: inline-block; width:auto;padding: 10px 20px;font-weight: light;background: #5E0037;letter-spacing: -0.03em;border-radius: 3px;">Save Time, Save Money!</span>';
                       $str .= '</center>';
@@ -185,7 +185,7 @@ class sendingMail extends DB
                       $str .= '</div>';
                       $str .= '</div>';
                       $str .= '</center>';
-                      $str .= '<div style=" height:auto;padding: 20px 15px 40px 15px; color:#333; font-size: 15px;">For any assistance, <br>Call: <a href="tel:+912232623263" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;">022-32623263</a> | Email: <b>info@iftosi.com</b></div>';
+                      $str .= '<div style="text-decoration:none; height:auto;padding: 20px 15px 40px 15px; color:#333; font-size: 15px;">For any assistance, <br>Call: <a href="tel:+912232623263" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;">022-32623263</a> | Email: <b>info@iftosi.com</b></div>';
                       $str .= '</div>';
                       $str .= '<div style="color:#fff;font-size: 18px; padding: 20px 0">- Team <b>IF</b>to<b>SI</b>.com</div>';
                       $str .= '</div>';
