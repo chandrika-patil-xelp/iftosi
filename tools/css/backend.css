@@ -699,8 +699,8 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .dnArrow{height:50px;width:50px;position:absolute;top:0;left:0;}
 .padLeft{padding-left:50px !important;}
 .para{padding-bottom: 10px;line-height: 25px;}
-.padL30{padding:10px 20px}
-.subNumber{padding:0px 15px}
+.padL30{padding-left: 30px;}
+.subNumber{width: auto;float: left;color: #4d4d4d;}
 .vterms{}
 .texHolder.vterms{padding:100px 0px 50px 0px;}
 .padL10{padding:0px 20px}
@@ -712,3 +712,16 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .stepWrp{width:100%;height:auto;}
 .inactive_vendor{}
 .inactive_vendor .stTextComm {width:25%}
+
+.subHead4{font-size: 18px; padding: 15px 15px 10px 0;text-transform: capitalize;color:#8A0044;}
+.color0044{color: #8A0044;}
+.botmLine{margin: 0px 0px 10px 0px;width:100%;border-bottom: 1px dashed #ccc;}
+.marT5{margin-top: 5px;}
+.padLeft40{padding-left: 40px;}
+.margnTop0{margin-top: 0px!important;}
+.lineHeight24{line-height: 24px;}
+.color0044{color: #8A0044;}
+.titleTxt{height: auto;
+    font-size: 30px;
+    line-height: 30px;
+    margin-top: 10px;}
