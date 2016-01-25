@@ -167,6 +167,18 @@ switch($action)
         $result = $obj->sendWelcomeMailSMS($params);
         $res = $result;
         break;
+        
+   case 'sendVActivateMailSMS':
+        include APICLUDE.'class.user.php';
+        $username  = (!empty($params['username'])) ? trim($params['username']) : '';
+        $email  = (!empty($params['email'])) ? trim($params['email']) : '';
+        $mobile  = (!empty($params['mobile'])) ? trim($params['mobile']) : '';
+        $isV  = (!empty($params['isVendor'])) ? trim($params['isVendor']) : '';
+        
+        $obj= new user($db['iftosi']);
+        $result = $obj->sendVActivateMailSMS($params);
+        $res = $result;
+        break;
 
    case 'sendEnqMailSMS':
         include APICLUDE.'class.user.php';

@@ -646,14 +646,16 @@
             $vsql="SELECT
                                 active_flag,
                                 email,
-                                contact_mobile
+                                contact_mobile,
+                                orgName
                    FROM 
                                 tbl_vendor_master  
                    WHERE 
                                 vendor_id=".$params['userid']."";
             $vsqlReg="SELECT
                                 logmobile,
-                                email
+                                email,
+                                user_name
                    FROM 
                                 tbl_registration  
                    WHERE 
@@ -711,8 +713,9 @@
                         $regrow = $this->fetchData($vresReg);
                         $email = $regrow['email'];
                         $mobile = $regrow['logmobile'];
+                        $uname = $regrow['user_name'];
                         
-                        $parms = array('uid'=>$params['userid'],'mobile'=>$mobile,'email'=>$email,'isVendor'=>1);
+                        $parms = array('uid'=>$params['userid'],'mobile'=>$mobile,'email'=>$email,'isVendor'=>1,'username'=>$uname);
                         $data = $this->sendVActivateMailSMS($parms);
                     }
                     $arr=array('expiry'=>$RexpRow['expiry']);
@@ -1110,27 +1113,27 @@
             if($params['isVendor'] == 1)
             {
                 $subject = 'Welcome To IFtoSI';
-                
-                $message .= 'Thank you '.$params['username'].', for registering on IFtoSI.com';
-                $message .= "\r\n";
-                $message .= 'Your details are under verification.';
-                $message .= "\r\n";
-                $message .= 'For any assistance, Call: 022-32623263. Email: info@iftosi.com';
-                $message .= "\r\n";
-                $message .= "Team IFtoSI";
                 $headers .= "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                 $headers .= 'From: <info@iftosi.com>' . "\r\n";
                 
+                $tempParams = array('username'=>$params['username'],'email'=>$params['email'],'mobile'=>$params['mobile']);
+
+                $message = $this->signupContent($tempParams);
+
                 $smsText .= "Welcome To IFtoSI";
                 $smsText .= "\r\n\r\n";
-                $smsText .= "Thank you ".$params['username'].", for registering on IFtoSI.com";
+                $smsText .= "Thank you ".$params['username'];
                 $smsText .= "\r\n\r\n";
-                $smsText .= "Your details are under verification.";
+                $smsText .= "+91-".$params['mobile'];
+                $smsText .= "\r\n\r\n";
+                $smsText .= $params['email'];
+                $smsText .= "\r\n\r\n";
+                $smsText .= "Your application is in process. We will notify you once your account is activated";
                 $smsText .= "\r\n\r\n";
                 $smsText .= "For any assistance, Call: 022-32623263. Email: info@iftosi.com";
                 $smsText .= "\r\n";
-                $smsText .= "Team IFtoSI";
+                $smsText .= "Team IFtoSI.com";
             }
             else if($params['isVendor'] == 0)
             {
@@ -1199,22 +1202,19 @@
             if($params['isVendor'] == 1)
             {
                 $subject .= 'Vendor profile activated in IFtoSI';
-                $message .= 'Your account has been verified.';
-                $message .= "\r\n";
-                $message .= 'Get new buyers. Increase your reach to a wider range of customers. Kindly log on to iftosi.com to upload your products.';
-                $message .= "\r\n";
-                $message .= "For any assistance, call: 022-32623263. Email: info@iftosi.com";
-                $message .= "\r\n";
-                $message .= "Team IFtoSI";
+                
                 $headers .= "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                 $headers .= 'From: <info@iftosi.com>' . "\r\n";
                 
+                $tempParams = array('mobile'=>$params['mobile'],'email'=>$params['email'],'username'=>$params['username']);
+                $message .= $this->sendActVendorContent($tempParams);
+
                 $smsText .= "Vendor profile activated in IFtoSI";
                 $smsText .= "\r\n\r\n";
-                $smsText .= "Your account has been verified.";
+                $smsText .= "Congratulations, ".ucwords(strtolower($params['username']))."! Your account has been verified.";
                 $smsText .= "\r\n\r\n";
-                $smsText .= "Get new buyers. Increase your reach to a wider range of customers. Kindly log on to iftosi.com to upload your products.";
+                $smsText .= "Get new buyers. Increase your reach to a wider range of customers. Quickly log on to iftosi.com to upload your products.";
                 $smsText .= "\r\n\r\n";
                 $smsText .= "For any assistance, call: 022-32623263. Email: info@iftosi.com";
                 $smsText .= "\r\n\r\n";
@@ -1433,7 +1433,78 @@
             $result = array('result'=>$arr,'error'=>$err);
             return $result;
         }
-                
+        
+        public function signupContent($params)
+        {
+            $str = "";
+            
+            $str .= "<html>"; 
+            $str .= "<!DOCTYPE html>";
+            $str .= "<head>";
+            $str .= "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>";
+            $str .= "<meta name='viewport' content='width=device-width, user-scalable=no' >";
+            $str .= " <title>IFtoSI Sign-Up</title>";
+            $str .= "</head>";
+            $str .= "<body style='margin:0; padding: 0; background-color: #171334; '>";
+            $str .= "<center>";
+            $str .= "<div style='text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; letter-spacing: -0.02em; color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;'>";
+            $str .= "<a href='".DOMAIN."'><div style='vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase'><img src='".DOMAIN."iftosi.png' style='width:100%;'></div></a>";
+            $str .= "<div style='height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;'>";
+            $str .= "<a href='".DOMAIN."'><div style='vertical-align: top; height: auto; display: inline-block; padding:40px 0 20px 0; text-align: center;color: #d00000; text-transform: uppercase'><img src='".DOMAIN."waiting.png' style='width:70%;'></div></a>";
+            $str .= "<div style='font-size: 20px;letter-spacing: -0.03em;padding: 0px 10px 5px 10px; color:#333;'>Thank You ".ucwords(strtolower($params['username']))." </div>";
+            $str .= "<div style='font-size: 14px; color: #8a0044; font-weight: bold; padding-bottom: 30px;'> +91-".$params['mobile']." | ".$params['email']."</div>";
+            $str .= "<center>";
+            $str .= "<span style='color:#fff; font-size: 25px; display: inline-block; width:auto;padding: 10px 20px;font-weight: light;background: #5E0037;letter-spacing: -0.03em;border-radius: 3px;'>Sit back and relax!</span>";
+            $str .= "</center>";
+            $str .= "<div style='font-size: 16px; line-height: 26px; width: 80%;padding: 30px 10% 10px 10%; color: #333;'>Your application is in process, we will notify you once your account is activated.</div>";
+            $str .= "<center>";
+            $str .= "<img src='".DOMAIN."diamond.png' width='90px'>";
+            $str .= "<img src='".DOMAIN."bullions.png' width='90px'>";
+            $str .= "</center>";
+            $str .= "<div style=' height:auto;padding: 20px 15px 40px 15px;line-height: 22px; color:#333; font-size: 13px;'>For any assistance, <br>Call: <a href='tel:022-32623263' style='text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;'>022-32623263</a> | Email: <b>info@iftosi.com</b></div>";
+            $str .= "</div>";
+            $str .= "<div style='color:#fff;font-size: 18px;   padding: 20px 0'>- Team <b>IF</b>to<b>SI</b>.com</div>";
+            $str .= "</div>";
+            $str .= "</center>";
+            $str .= "</body>";
+            $str .= "</html>";
+            return $str;
+        }
+        
+        public function sendActVendorContent($params)
+        {
+            $str = "";
+            $str .= "<!DOCTYPE html>";
+            $str .= "<html>";
+            $str .= "<head>";
+            $str .= "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>";
+            $str .= "<meta name='viewport' content='width=device-width, user-scalable=no' >";
+            $str .= "<title>IFtoSI Sign-Up</title>";
+            $str .= "</head>";
+            $str .= "<body style='margin:0; padding: 0; background-color: #171334; '>";
+            $str .= "<center>";
+            $str .= "<div style='text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; letter-spacing: -0.02em; color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;'>";
+            $str .= "<a href='".DOMAIN."'><div style='vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase'><img src='".DOMAIN."iftosi.png' style='width:100%;'></div></a>";
+            $str .= "<div style='height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;'>";
+            $str .= "<a href='".DOMAIN."'><div style='vertical-align: top; height: auto; display: inline-block; padding:40px 0 20px 0; text-align: center;color: #d00000; text-transform: uppercase'><img src='".DOMAIN."verified.png' style='width:70%;'></div></a>";
+            $str .= "<div style='font-size: 20px;letter-spacing: -0.03em;padding: 0px 10px 5px 10px; color:#333;'>Congratulations, ".ucwords(strtolower($params['username']))."!</div>";
+            $str .= "<div style='font-size: 14px; color: #8a0044; font-weight: bold; padding-bottom: 30px;'>+91 - ".$params['mobile']." | ".$params['email']."</div>";
+            $str .= "<center>";
+            $str .= "<span style='color:#8a0044; font-size: 25px; display: inline-block; width:auto;padding: 10px 20px;font-weight: light;border: 2px dotted #8a0044;letter-spacing: -0.03em;border-radius: 3px;'>Verified Partner!</span>";
+            $str .= "</center>";
+            $str .= "<div style='font-size: 15px; line-height: 26px; width: 80%;padding: 30px 10% 20px 10%; color: #333;'>Get new buyers. Increase your reach to a wider range of customers. Quickly log on to <b>".DOMAIN."</b> to upload your products.</div>";
+            $str .= "<center>";
+            $str .= "<a href='".DOMAIN."Vendor-Sign-Up'><span style='color:#fff; font-size: 13px; font-weight:bold; text-transform: uppercase;display: inline-block; width:auto;padding: 10px 20px;font-weight: light;background: #4db800;letter-spacing: -0.03em;border-radius: 3px;'>Click here to login</span></a>";
+            $str .= "</center>";
+            $str .= "<div style=' height:auto;padding: 20px 15px 40px 15px;line-height: 22px; color:#333; font-size: 13px;'>For any assistance, <br>Call: <a href='tel:022-32623263' style='text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;'>022-32623263</a> | Email: <b>info@iftosi.com</b></div>";
+            $str .= "</div>";
+            $str .= "<div style='color:#fff;font-size: 18px; padding: 20px 0'>- Team <b>IF</b>to<b>SI</b>.com</div>";
+            $str .= "</div>";
+            $str .= "</center>";
+            $str .= "</body>";
+            $str .= "</html>";
+            return $str;
+        }
 
 }
 ?>
