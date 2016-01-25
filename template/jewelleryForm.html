@@ -12,30 +12,19 @@
                             <center>
 <?php
                                         foreach($cat['subcat'] as $ky=>$val)
-                                        {   
+                                        {  
+                                            //echo "<pre>";print_r($val);die;
                                             if(strtolower($val)!=='')
                                                 {
                                                     $typeClass='';
                                                     $typeId=$val['catname'];
-                                                    if($val['catname']=="Bangles/Bracelets")
-                                                    {
-                                                        //echo "<div id='Bracelet' class='jshapeComm transition300 ripplelink Bracelet'>".$val['catname']."</div>";
-                                                        $typeId=$typeClass='Bracelet';
-                                                    }
-                                                    else if(($val['catname']=="Pendents")||($val['catname']=="Necklaces"))
-                                                    {
-                                                        //echo "<div id='".$val['catname']."' class='jshapeComm transition300 ripplelink ".ucwords(strtolower(substr($val['catname'],0,-1)))."'>".$val['catname']."</div>";   
-                                                        $typeClass=ucwords(strtolower(substr($val['catname'],0,-1)));
-                                                    }
-                                                    else
-                                                    {
-                                                        //echo "<div id='".$val['catname']."' class='jshapeComm transition300 ripplelink ".ucwords(strtolower($val['catname']))."'>".$val['catname']."</div>";   
-                                                        $typeClass=ucwords(strtolower($val['catname']));
-                                                    }
+                                                    $expd = explode('/',$val['catname']);
+                                                    $typeId = $expd[0];
+                                                    $typeClass=ucwords(strtolower($expd[0]));
                                                     if($typeId==$attr['shape']) {
                                                         $typeClass .=' shapeSelected';
                                                     }
-                                                    echo "<div id='".$typeId."' class='jshapeComm transition300 ripplelink ".$typeClass."'>".$val['catname']."</div>";   
+                                                    echo "<div id='".$typeId."' class='jshapeComm transition300 ripplelink ".$typeId."'>".$val['catname']."</div>";   
                                                 }
                                         }
 ?>                          
