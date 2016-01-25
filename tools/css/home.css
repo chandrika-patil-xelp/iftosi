@@ -1141,7 +1141,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
         .pgComm,.pgEmpty{display: none;}
         .pagination {height: auto;padding: 0;}
         .hideShow {display: block;}
-
+        .pm015{padding: 0 15px!important}
         /*Jewellery Results*/
         .searchCon {width: 90%;}
         /*Bullion Results*/
@@ -1160,7 +1160,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
             .btnComm {width: 100%;min-width: 0px;margin: 0;border: 0;margin-bottom: 5px;text-align: center;padding: 0;height: 45px;line-height: 45px;}
             .infoCommn {width: 50%;}
             .infoCommn:last-child{margin-bottom: 0}
-            .prdInfo {padding: 0 15px;display: inline-block;margin-top: 0;}
+            .prdInfo {padding:0;display: inline-block;margin-top: 0;}
             .imgsCont.noImage {height: 250px;background: url(../img/noimage.svg) no-repeat 50% 50%;background-size: 45%;background-position: center;}            
             
             
@@ -1232,7 +1232,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
             .aboutus .bottmInfo {border-top:0px solid #fff!important;}
             .bottmInfo {border-top:0px solid #fff!important;}
             .srcTitle {line-height: 20px;font-size: 16px;}
-            .prdInfoTitle {font-size: 20px;}
+            .prdInfoTitle {font-size:18px;}
             .detailsPage .centerDiv {border-right: 0px solid #d4d4c8;padding: 0;padding-right: 0;}
             .shapesCommH {width: 100%;height: auto;min-height: 104px;padding: 20px;border-radius: 5px;margin-top: 0;background: #fff;position: relative;background-color: #ebebde;padding-top: 100px;text-align: center;} 
             .shapesPage2 .shapeComm{position: absolute;left: 0;right: 0;top: 0;margin-top: 0;}    
