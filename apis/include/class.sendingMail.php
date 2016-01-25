@@ -152,7 +152,7 @@ class sendingMail extends DB
                       $str .= "<body style='margin:0; padding: 0; background-color: #171334; '>";
                       $str .= "<center>";
                       $str .= "<div style='text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; letter-spacing: -0.02em; color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;'>";
-                      $str .= "<a href='http:nafex.com'><div style='vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase'><img src='iftosi.png' style='width:100%;'></div></a>";
+                      $str .= "<a href='http:iftosi.com'><div style='vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase'><img src='http://beta.xelpmoc.in/iftosi/tools/img/common/logo.svg' style='width:100%;'></div></a>";
                       $str .= "<div style='height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;'>";
                       $str .= "<div style='font-size: 20px;font-weight: bold;letter-spacing: -0.03em;padding: 40px 10px 5px 10px; color:#333;'>Welcome Ankur!</div>";
                       $str .= "<div style='font-size: 14px; color: #8a0044; font-weight: bold; padding-bottom: 30px;dislay:inline-block;'>+91 9980051525  |  ankur.gala@hotmail.com</div>";
