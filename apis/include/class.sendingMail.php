@@ -13,13 +13,13 @@ class sendingMail extends DB
         {
           global $comm;
             error_reporting(E_ALL);
-            $subject ='account has been activated';
-             $str = $this -> signUp();
+            // $subject ='account has been activated';
+            //  $str = $this -> signUp();
               //
               // $subject ='Change of password';
               // $str = $this->forgot_password1();
-              // $subject ='Welcome';
-              // $str = $this->vendor_cont();
+              $subject ='Welcome';
+              $str = $this->vendor_cont();
 
             $headers = "MIME-Version: 1.0" . "\r\n";
             $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
