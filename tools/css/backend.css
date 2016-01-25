@@ -711,7 +711,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .m010 {margin: 0 10px;}
 
 /* For Inactive Vendor Page */
-.notActDiv{width:100%;height: 200px;padding: 50px 0;text-align: center;color:#4d4d4d;border:0px solid #d4d4c8;margin-bottom: 50px; }
+.notActDiv{width: 100%;    height: auto;    padding: 150px 0 50px 0;    text-align: center;    color: #666;    background: url(../img/waiting.png)no-repeat;    background-position: center 30px;    background-size: auto 100px;    float: left;}
 .notActMsg{width:100%;}
 .stepWrp{width:100%;height:auto;}
 .inactive_vendor{}

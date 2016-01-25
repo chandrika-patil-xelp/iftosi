@@ -4,13 +4,6 @@
         <center><div class="backLogo fmOpenR" onclick="window.location.assign(DOMAIN);"><div><b>IF</b>to<b>SI</b></div></div></center>
         <div class="wrapper">
             <div class="wrapperMax vMax inactive_vendor">
-                <div id="stepsDiv" class="fmOpenR uppercase ">
-                        <div id="step1" class="font14 c666 stTextComm fLeft" ><span class="stepNo">1</span>Business Details </div>
-                        <div id="step2" class="font14 c666 stTextComm fLeft" ><span class="stepNo">2</span>Type Details</div>
-                        <div id="step3" class="font14 c666 stTextComm fLeft" ><span class="stepNo">3</span>Contact Details</div>
-                        <div id="step4" class="font14 c666 stTextComm fLeft" ><span class="stepNo">4</span>Payment Details</div>
-                        <div class="dStepCon fLeft"><div id="disStep" class="disStepComm transition300" style="width:100%"></div></div>
-                    </div>
                 <div class="formContainer fmOpenR vendorDetails">
                     
                     <div class="notActDiv">
@@ -58,7 +51,7 @@
 var vid="<?php echo $uid; ?>";
 var busiType="<?php echo $data['business_type']; ?>";
 var username = customStorage.readFromStorage('username');
-$('#vendrInfo').text('Dear '+username+', Your profile is not fully functional. For exciting features please pay the required price to the IFtoSI Account.Details being provided below');
+$('#vendrInfo').text('Dear '+username+',  your application is in process, we will notify you once your account is fully activated after successful annual subscription payment.');
 </script>
 
 <script type="text/javascript" src="<?=$jvs['jquery_toast'];?>"></script>
