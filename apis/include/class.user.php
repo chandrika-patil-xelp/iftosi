@@ -697,7 +697,7 @@
                         
                         $vexpSql="  SELECT
                                             profile_expiry_date,
-                                            date_format(profile_expiry_date,'%D %M,%Y  %r') as expiry
+                                            date_format(profile_expiry_date,'%D %M, %Y') as expiry
                                     FROM 
                                             tbl_vendor_master  
                                     WHERE 
