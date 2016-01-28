@@ -125,7 +125,8 @@ function Common() {
                 //userMenuStr += '<li class="transition100" onclick="window.location.assign(\''+DOMAIN+'index.php?case=vendor_dashboard\');">Dashboard</li>';
                 if(isComp === '2')
                 {
-                    $.ajax({url: DOMAIN + "apis/index.php?action=viewAll&uid=" + uid, success: function (result)
+                    var tmstmp = new Date().getTime();
+                    $.ajax({url: DOMAIN + "apis/index.php?action=viewAll&uid=" + uid+"&timestamp="+tmstmp, success: function (result)
                         {
                             var obj = jQuery.parseJSON(result);
                             var isactive = obj.results[1].active_flag;
@@ -277,7 +278,8 @@ function Common() {
             $('#pr_pass').focus();
             return;
         } else {
-            $.ajax({url: DOMAIN + "apis/index.php?action=logUser&mobile=" + pr_mobile + "&password=" + pr_pass, success: function (result) {
+            var tmstmp = new Date().getTime();
+            $.ajax({url: DOMAIN + "apis/index.php?action=logUser&mobile=" + pr_mobile + "&password=" + pr_pass+"&timestamp="+tmstmp, success: function (result) {
                     var obj = eval('(' + result + ')');
                     var errCode = obj.error.code;
                     if (errCode == 0) {
@@ -323,11 +325,11 @@ function Common() {
                                 var catid = parseInt(busiType.charAt(0)) - 1;
                                 window.location.assign(DOMAIN + 'index.php?case=vendor_landing&catid=1000' + catid);
                             }
-                            else if(isComp !== '1' && af == '1')
+                            else if(isComp !== '2' && af == '1')
                             {
                                 window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid=' + userid);
                             }
-                            else if(af !== '1'  && expire_flag !== '1')
+                            else if(af !== '1'  && expire_flag !== '1' && isComp == '2')
                             {
                                 window.location.assign(DOMAIN + 'index.php?case=inactive_vendor&uid=' + userid);
                             }
@@ -474,7 +476,8 @@ function Common() {
 
 		if(uid !== undefined && uid !== null && uid !== '')
 		{
-			var params = 'action=ajx&case=getWishListCount&userid='+encodeURIComponent(uid);
+                        var tmstmp = new Date().getTime();
+			var params = 'action=ajx&case=getWishListCount&userid='+encodeURIComponent(uid)+"&timestamp="+tmstmp;
 			var URL = DOMAIN + "index.php";
 			$.get(URL, params, function(data) {
 				if(data !== undefined && data !== null && data !== '')

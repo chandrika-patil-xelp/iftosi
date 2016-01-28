@@ -23,7 +23,7 @@ class admin extends DB
             FROM
                 tbl_product_image_mapping
             group by product_id
-            order by update_date";
+            order by uploaded_date";
         
         $cntRes = $this->query($subQuery);
         $total_products = $this->numRows($cntRes);
@@ -35,13 +35,23 @@ class admin extends DB
         if($this->numRows($subQueryRes)>0) {
             while ($row = $this->fetchData($subQueryRes)) {
                 $productIDs[] = $row['product_id'];
-                $isql = "SELECT product_id,barcode,update_time FROM tbl_product_master  WHERE product_id = ".$row['id'];
+                $isql = "SELECT a.product_id,a.barcode,a.update_time,b.shape,b.type,b.metal,b.carat,b.color,b.gold_purity,b.gold_weight,b.cut,b.clarity FROM tbl_product_master as a,tbl_product_search as b WHERE a.product_id = ".$row['id'];
                 $ires = $this->query($isql);
                 if( $this->numRows($ires)>0) {
                     $irow = $this->fetchData($ires);
                     $rowp[]=$row['product_id'];
                     $row['barcode']=$irow['barcode'];
                     $row['update_time']=$irow['update_time'];
+                    $row['shape'] = $irow['shape'];
+                    $row['type'] = $irow['type'];
+                    $row['metal'] = $irow['metal'];
+                    $row['purity'] = $irow['gold_purity'];
+                    $row['weight'] = number_format($irow['gold_weight'],0);
+                    $row['carat'] = $irow['carat'];
+                    $row['color'] = $irow['color'];
+                    $row['cut'] = $irow['cut'];
+                    $row['clarity'] = $irow['clarity'];
+                    $row['certified'] = $irow['clarity'];
                 }
                 else
                 {

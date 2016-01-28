@@ -508,15 +508,17 @@
 								product_image,
 								active_flag,
 								image_sequence,
-								update_date
-							)
+								uploaded_date,
+                                                                update_date
+                                                        )
 							VALUES
 							(
 								" . $pid . ",
 								\"" . $img . "\",
 								0,
 								" . $sequence . ",
-								NOW()
+								NOW(),
+                                                                NOW()
 							)";
             $res2 = $this->query($sql);
         }

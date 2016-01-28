@@ -92,7 +92,8 @@
                 st = 0;
             }
             //st = pLeft;
-            var URL = DOMAIN+ "index.php?action=ajx&case=updateStatus&userid=" + uid +"&af="+st;
+            var tmstmp = new Date().getTime();
+            var URL = DOMAIN+ "index.php?action=ajx&case=updateStatus&userid=" + uid +"&af="+st+"&timestamp="+tmstmp;
             $.ajax({
                 url: URL,
                 type: 'POST',
@@ -105,7 +106,7 @@
                     }
                     if(uid !== null)
                     {
-                        var params = 'action=Vpactive&vid='+uid+'&af='+st;
+                        var params = 'action=Vpactive&vid='+uid+'&af='+st+"&timestamp="+tmstmp;
                         var URL = APIDOMAIN + "index.php";
 
                         $.getJSON(URL, params, function(data) {
@@ -134,7 +135,8 @@
     var loadProduct = true;
     var currentPage = 1;
 function loadProducts(pgno) {
-    $.ajax({url: APIDOMAIN + "index.php?action=vendorlist&pgno=" + pgno + "&limit=50", success: function (result) {
+    var tmstmp = new Date().getTime();
+    $.ajax({url: APIDOMAIN + "index.php?action=vendorlist&pgno=" + pgno + "&limit=50"+"&timestamp="+tmstmp, success: function (result) {
         loadProductsCallback(result,pgno);
     }});
 }

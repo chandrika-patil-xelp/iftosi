@@ -45,7 +45,8 @@
 
 
 function loadProducts(pgno) {
-    $.ajax({url: common.APIWebPath() + "index.php?action=getProdList&page=" + pgno + "&limit=50", success: function (result) {
+    var tmstmp = new Date().getTime();
+    $.ajax({url: common.APIWebPath() + "index.php?action=getProdList&page=" + pgno + "&limit=50&timestamp="+tmstmp, success: function (result) {
         loadProductsCallback(result,pgno);
     }});
 }
@@ -89,9 +90,62 @@ function loadProductsCallback(res,pgno) {
         }
         function generatProductsList(obj) {
             var barcode = obj['barcode'];
-            if (barcode == null || barcode == '' || barcode == 'null') {
+            var catName = obj.category.split(',');
+            var tempUrl = '';
+            if(obj.shape == undefined || obj.shape == '')
+            {
+                obj.shape = '';
+            }
+            if(obj.metal == undefined || obj.metal == '')
+            {
+                obj.metal = '';
+            }
+            if(obj.type == undefined || obj.type == '')
+            {
+                obj.type = '';
+            }
+            if(obj.color == undefined || obj.color == '')
+            {
+                obj.color = '';
+            }
+            if(obj.clarity == undefined || obj.clarity == '')
+            {
+                obj.clarity = '';
+            }
+            if(obj.certified == undefined || obj.certified == '')
+            {
+                obj.certified = '';
+            }
+            if(obj.purity == undefined || obj.purity == '')
+            {
+                obj.purity = '';
+            }
+            if(obj.weight == undefined || obj.weight == '')
+            {
+                obj.weight = '';
+            }
+            if (barcode == null || barcode == '' || barcode == 'null')
+            {
                 barcode = 'N-A';
             }
+            if(catName[0] == 'Diamonds')
+            {
+                tempUrl += obj.shape+'-colour-'+obj.color+'-clarity-'+obj.clarity+'-certified-'+obj.certified;
+                tempUrl += '/did-';
+            }
+            if(catName[0] == 'Bullion')
+            {
+                tempUrl += obj.metal+'-'+obj.type+'-'+obj.purity+'-'+obj.weight+'-Grams';
+                tempUrl += '/bid-';
+            }
+            if(catName[0] == 'Jewellery')
+            {
+                tempUrl += obj.metal+'-'+obj.catName[1]+'-'+obj.purity+'-Carat-'+obj.weight+'-Grams-'+obj.certified;
+                tempUrl += '/jid-';
+            }
+            tempUrl = tempUrl.toString().replace('--', '-');
+            
+            
                 var date = obj['update_time'].split(' ');
                 var str = '<li>';
                 str += '<div class="date fLeft"> ';
@@ -100,7 +154,7 @@ function loadProductsCallback(res,pgno) {
                 str += '</div>';
                 str += '<div class="barcode fLeft">';
                 str += '<span class="upSpan">' + barcode + '</span>';
-                str += '<span class="lwSpan"><a href="' + DOMAIN + barcode + '/bid-' + obj['id'] + '" target="_blank">View Details</a></span>';
+                str += '<span class="lwSpan"><a href="' + DOMAIN + tempUrl +obj['id']+ '" target="_blank">View Details</a></span>';
                 str += '</div>';
                 str += '<div class="btype fLeft textOverflow" title="'+ obj['orgName'] +'">'+ obj['orgName'] +'</div>';
                 str += '<div class="catg fLeft textOverflow" title="'+ obj['category'] +'"  >'+ obj['category'] +'</div>';

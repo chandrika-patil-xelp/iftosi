@@ -57,12 +57,15 @@ $('#vendrInfo').text('Dear '+username+',  your application is in process, we wil
 <script type="text/javascript" src="<?=$jvs['jquery_toast'];?>"></script>
 
 <script type="text/javascript">
-$.ajax({url: common.APIWebPath() + "index.php?action=viewAll&uid=" + vid, success: function (result) {
+    
+var tmstmp = new Date().getTime();
+$.ajax({url: common.APIWebPath() + "index.php?action=viewAll&uid=" + vid+"&timestamp="+tmstmp , success: function (result) {
             var obj = eval('('+result+')');
             var errCode = obj.error.code;
             if(errCode == 0)
             {
-                if((obj.results[1].expire_flag == 0 || obj.results[1].expire_flag == '0') && (obj.results[1].active_flag == 1 || obj.results[1].active_flag == '1'))
+                var userid = obj.results[1].vendor_id;
+                if((obj.results[1].expire_flag == 0 || obj.results[1].expire_flag == '0') && (obj.results[1].active_flag == 1 || obj.results[1].active_flag == '1') && (obj.results[1].is_complete == '2' || obj.results[1].is_complete == 2))
                 {
                     var catid = obj.results[1].business_type.charAt(0);
                     window.location.assign(DOMAIN + 'index.php?case=vendor_landing&catid=1000' + catid);
@@ -70,6 +73,10 @@ $.ajax({url: common.APIWebPath() + "index.php?action=viewAll&uid=" + vid, succes
                 else if((obj.results[1].expire_flag == 1 || obj.results[1].expire_flag == '1') && (obj.results[1].active_flag == 0 || obj.results[1].active_flag == '0'))
                 {
                     window.location.assign(DOMAIN + 'index.php?case=expiredSub_vendor&uid='+ vid);
+                }
+                else if(obj.results[1].is_complete !== '2')
+                {
+                    window.location.href = DOMAIN+"index.php?case=vendor_Form&uid="+userid;
                 }
             }
 	}});
