@@ -254,7 +254,7 @@ switch ($action) {
             case 'signup':
                 $page = 'signup';
                 //include 'template/signup.html';
-				if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost'))
+				if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
 				{
 					include 'template/signup.html';
 				}
@@ -542,7 +542,7 @@ switch ($action) {
                 $adjacents = 2;
                 //echo "<pre>";print_r($total);die;
                 //include 'template/results.html';
-                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost'))
+                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
 				{
 					include 'template/results.html';
 				}
@@ -579,7 +579,7 @@ switch ($action) {
                 }
                 //echo "<pre>";print_r($data);die;
                 //include 'template/jewellery_results.html';
-                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost'))
+                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
 				{
 					include 'template/jewellery_results.html';
 				}
@@ -608,7 +608,7 @@ switch ($action) {
                 $lastpg = ceil($total / 15);
                 $adjacents = 2;
                 //include 'template/bullion_results.html';
-				if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost'))
+				if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
 				{
 					include 'template/bullion_results.html';
 				}
@@ -759,7 +759,7 @@ switch ($action) {
                 $totalDes = $res3['total'];
                 //echo "<pre>";print_r($des); die;
                 //include 'template/diamond_details.html';
-                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost'))
+                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
 				{
 					include 'template/diamond_details.html';
 				}
@@ -776,7 +776,7 @@ switch ($action) {
 
                 if (!empty($prdId)) {
                     $prdId = explode(' ', $prdId);
-                    $prdId = $pid = $prdId[1];
+                    $prdId = $pid = $prdId[0];
                     $prdInfoUrl = APIDOMAIN . 'index.php?action=getPrdById&prdid=' . $prdId;
                      $prdInfo = $comm->executeCurl($prdInfoUrl);
                     if (!empty($prdInfo) && !empty($prdInfo['results']) && !empty($prdInfo['error']) && empty($prdInfo['error']['errCode'])) {
@@ -811,7 +811,7 @@ switch ($action) {
 
                 //echo "<pre>".print_r($data3); die;
                 //include 'template/bullion_details.html';
-                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost'))
+                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
 				{
 					include 'template/bullion_details.html';
 				}
@@ -941,7 +941,7 @@ switch ($action) {
 
                 //echo "<pre>"; print_r($des); die;
                 //include 'template/jewellery_details.html';
-                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost'))
+                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
 				{
 					include 'template/jewellery_details.html';
 				}
@@ -1233,7 +1233,7 @@ switch ($action) {
                 $res = $comm->executeCurl($url);
                 $data = $res['results'];
                 //include 'template/index.html';
-                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost'))
+                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
 				{
 					include 'template/index.html';
 				}
