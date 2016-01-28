@@ -1232,7 +1232,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
             .prdInfoWrap {width: 100%;}
             .detailsPage .prdComm {width: 100%!important;margin-bottom: 10px;}
             .prdInfoTitle3 {border-top:1px dashed #d4d4c8;width: 100%;height: auto;line-height: 20px;font-size: 16px;color: #4d4d4d;margin: 10px 0;padding-top: 10px;}
-            .detailsPage .diamondterms {width: 100%;height: auto;border: 0px solid #333;position: relative;padding-right: 0;margin-bottom: 10px;padding-top: 121px;}            
+            .detailsPage .diamondterms {width: 100%;height: auto;border: 0px solid #333;position: relative;padding-right: 0;margin-bottom: 10px;padding-top: 220px;}            
             
             
             .srcTitle {line-height: 20px;font-size: 14px;margin-bottom: 10px;}            
@@ -1389,7 +1389,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
         .prdInfo {padding: 0 15px;}
 
         /*Jewellery Details Page*/
-        .jwdet .prdMainDetails {width: 100%;height: 601px;float: left;position: relative;padding: 0 15px 101px 15px;}
+        .jwdet .prdMainDetails {width: 100%;height: 655px;float: left;position: relative;padding: 0 15px 101px 15px;}
 
         /*Bullion Details Page*/
         .bulldet.bullion_details .imgsCont {width: 50%;}
@@ -1409,6 +1409,8 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
         .sideDiv ul li {padding-left: 20px;padding-right: 0px;background-size: 20px 40px;}
         .prdInfoWrap { width: 100%;}
         .detailsPage .prdComm{width:49%;}
+        .forImg{background-size: contain;}
+        .cardComm{height: auto;}
 
 
 
