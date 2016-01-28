@@ -390,6 +390,10 @@ switch ($action) {
                 $page = 'vendor_privacy';
                 include 'template/vprivacy.html';
                 break;
+             case 'gemstone':
+                $page = 'gemstone';
+                include 'template/gemstone.html';
+                break;
 
             case 'inactive_vendor':
                 $page = 'inactive_vendor';
