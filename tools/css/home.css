@@ -1043,15 +1043,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
     background-position: center;
 }
 
-.teamCircle {
-    width: 180px;
-    height: 180px;
-    border-radius: 3px;
-    margin: 0 40px 0 0;
-    border: 10px solid #ebebde;
-    position: absolute;
-    
-}
+.teamCircle {width: 180px;height: 180px;border-radius: 3px;margin: 0 40px 0 0;border: 10px solid #ebebde;position: absolute;}
 
 .xelpmocLogo{width:100%;background: url(../img/xelpmoc.svg)no-repeat;background-size: 200px auto;background-position: left center;padding-left: 220px;}
 
@@ -1415,6 +1407,8 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
         .headRight{font-size: 11px;}
         .licontent{font-size: 11px;}
         .sideDiv ul li {padding-left: 20px;padding-right: 0px;background-size: 20px 40px;}
+        .prdInfoWrap { width: 100%;}
+        .detailsPage .prdComm{width:49%;}
 
 
 
