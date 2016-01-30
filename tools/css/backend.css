@@ -599,7 +599,7 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 .smallField {border: 1px solid #ccc;box-sizing: border-box;font-size: 13px;font-weight: bold;font-family: openR;max-height: 145px;overflow-y: auto;width: 100%; margin: 0;padding:0;}
 .dropArrow {background-image: url("../img/down_arrow.svg");background-position: right center;background-repeat: no-repeat;background-size: auto 100%;}
 .suggestHolder {position: relative;}
-
+.serchBtn{height:30px;border-radius: 2px;}
 /*Moderation Module*/
 /*Product List*/
 .totalCnt{width:15%;}
