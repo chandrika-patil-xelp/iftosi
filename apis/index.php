@@ -1901,7 +1901,7 @@ echo '</pre>';
                     $to=(!empty($params['to'])) ? trim(urldecode($params['to'])) : '';
                     $str=(!empty($params['str'])) ? trim(urldecode($params['str'])) : '';
                     $obj = new manager($db['iftosi']);
-                    $res = $obj->manageVendors($params);
+                    $res = $obj->manageVendors();
         break;
 //-----------------------VendorSearching-------------------------------------------
 

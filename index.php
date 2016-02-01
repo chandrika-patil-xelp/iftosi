@@ -256,7 +256,7 @@ switch ($action) {
                 $page = 'signup';
                 //include 'template/signup.html';
 
-                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
+                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(DOMAIN, 'beta.xelpmoc.in/iftosi'))
                 {
                         include 'template/signup.html';
                 }

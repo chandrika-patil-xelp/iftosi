@@ -9,7 +9,7 @@ class manager extends DB
         parent::DB($db);
     }
 
-        public function manageVendors($params)
+        public function manageVendors()
         {
             global $comm;
 
