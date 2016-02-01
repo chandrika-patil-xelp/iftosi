@@ -126,7 +126,6 @@
                         {
                             if($isDuplicateMobile[$i] == $params['mobile'] && $isDuplicateEmail[$i] !== $params['email'] && $isV[$i] !== $params['isVendor'] && $isV[$i] !== '0')
                             {
-                                echo "here";
                                 $err2 = array('code'=>5,'flagMsg'=>'User with mobile number: '.$isDuplicateMobile[$i].', email id: '.$isDuplicateEmail[$i].' and this user type is not yet registered with us');
                             }
                             else
