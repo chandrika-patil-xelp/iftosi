@@ -52,7 +52,8 @@
         }
         function updateFlag(pid,id) {
             var flag=$('#'+id).val();
-            $.ajax({url: DOMAIN + "apis/index.php?action=updateImageData&id="+pid+"&flag="+flag, success: function (result) {
+            var tmstmp = new Date().getTime();
+            $.ajax({url: DOMAIN + "apis/index.php?action=updateImageData&id="+pid+"&flag="+flag+"&timestamp="+tmstmp, success: function (result) {
                 var obj = jQuery.parseJSON(result);
                 var errCode = obj['error']['Code'];
                 var errMsg = obj['error']['Msg'];
@@ -67,7 +68,8 @@
         function updateData(id) {
             var reason=$('#reason_'+id).val();
             var seq=$('#seq_'+id).val();
-            $.ajax({url: DOMAIN + "apis/index.php?action=updateImageData&id="+id+"&rea="+reason+"&seq="+seq, success: function (result) {
+            var tmstmp = new Date().getTime();
+            $.ajax({url: DOMAIN + "apis/index.php?action=updateImageData&id="+id+"&rea="+reason+"&seq="+seq+"&timestamp="+tmstmp, success: function (result) {
                 var obj = jQuery.parseJSON(result);
                 var errCode = obj['error']['Code'];
                 var errMsg = obj['error']['Msg'];

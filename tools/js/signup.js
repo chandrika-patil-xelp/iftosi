@@ -42,7 +42,18 @@ var validMob = true;
             $('#' + id + '_inpText').removeClass('op0');
         }
     });
-        
+
+function setCityId(e)
+{
+    if(e.keyCode == 13) {
+        $('#pr_cityid').val('1');
+    }
+}
+
+   
+$('#pr_mobile').focus(function (){
+    $('#pr_citySuggestDiv').addClass('dn');
+});
 
 
     $('#signupCancel').click(function () {
@@ -74,6 +85,7 @@ var validMob = true;
         {
             isVendor=-1;
         }
+        var uType = $('#isVendor').val();
 
 		setTimeout(function () {
 			if(pr_name.length==0 || isNaN(pr_name)!==true) {
@@ -118,9 +130,12 @@ var validMob = true;
 			}
                         else if(pr_mobile.length==10 && common.validateEmail('pr_email'))
                         {
-                                $.ajax({url: DOMAIN + "apis/index.php?action=checkUser&mobile=" + pr_mobile + "&email="+pr_email, success: function (result) {
+                            var tmstmp = new Date().getTime();
+                                $.ajax({url: DOMAIN + "apis/index.php?action=checkUser&mobile=" + pr_mobile + "&email="+pr_email+"&isVendor="+uType+"&timestamp="+tmstmp, success: function (result) {
                                         var obj = jQuery.parseJSON(result);
-                                        var errCode = obj['error']['type'];
+                                        
+                                        var errCode = obj.error.type.code;
+                                        
                                         if(errCode == 3)
                                         {
                                             customStorage.toast(0,'Mobile number is already registered!'); 
@@ -133,7 +148,15 @@ var validMob = true;
                                             $('#pr_email').focus();
                                             return false;
                                         }
-                                        else if(errCode == 0)
+                                        else if(errCode == 4)
+                                        {
+                                            customStorage.toast(0,obj.error.type.flagMsg);
+                                        }
+                                        else if(errCode == 5)
+                                        {
+                                            signUpProceed();
+                                        }
+                                        else if(obj.error.type == 0)
                                         {
                                             if(isVendor == -1)
                                             {
@@ -288,6 +311,69 @@ function otpCheck()
     });
 
 }
+
+function signUpProceed()
+{
+    
+    var pr_name = $('#pr_name').val();
+    var pr_mobile = $('#pr_mobile').val();
+    var pr_email = $('#pr_email').val();
+    var pr_pass = $('#pr_pass').val();
+    var pr_city = $('#pr_city').val();
+    //var isVendor = $('#isVendor').is(':checked');
+    var isVendor = $('#isVendor').val();
+    var amIVendor = $("input[type=checkbox]:checked").length;
+    isValid = false;
+    var userType = isVendor;
+    if(isVendor == 1)
+    {
+        isVendor=1;
+    }
+    else
+    {
+        isVendor=-1;
+    }
+    $.ajax({url: DOMAIN + "apis/index.php?action=userReg&username=" + pr_name +"&password=" + pr_pass +"&mobile=" + pr_mobile + "&cityname="+pr_city+"&email="+pr_email+'&isvendor='+userType, success: function (result) {
+        var obj = eval('('+result+')');
+        var errCode = obj.error.code;
+        if(errCode == 0)
+        {
+                var userid = obj.userid;
+                customStorage.addToStorage('isLoggedIn',true);
+                customStorage.addToStorage('userid',userid);
+                customStorage.addToStorage('mobile',pr_mobile);
+                customStorage.addToStorage('username',pr_name);
+                customStorage.addToStorage('is_vendor',isVendor);
+                customStorage.addToStorage('email',pr_email);
+                customStorage.addToStorage('name',pr_name);
+                customStorage.addToStorage('city',pr_city);
+                if(isVendor === 1)
+                {
+                        customStorage.removeFromStorage('busiType');
+                        window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid='+userid);
+                }
+                else
+                {
+                   $.ajax({url: DOMAIN + "apis/index.php?action=sendWelcomeMailSMS&username="+pr_name +"&mobile="+pr_mobile +"&email="+pr_email +"&isVendor="+userType, success: function (result) {
+                        var obj = eval('('+result+')');
+                        var errCode = obj.error.code;
+                        if(errCode == 0)
+                        {
+                            customStorage.toast(1,'Registration Successfully Done');
+                            setTimeout(function () {window.location.assign(DOMAIN); },2500);
+                        }
+                    }});
+                }
+        }
+        else
+        {
+                customStorage.toast(0,'Registration Unsuccessfull');
+        }
+    }
+    });
+    
+}
+
 
 
 function otpGo(pr_mobile)

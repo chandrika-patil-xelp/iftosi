@@ -33,9 +33,16 @@
         <div class="wrapperMax">
             <div class="vndTabs fLeft fmOpenR">
                 <div class="wrapperMax">
-                    <div id="productstab" class="fLeft vTabs transition300" onclick="showProductList()">Products</div>
-                        <div id="vendorlist" class="fLeft vTabs transition300">Vendor List</div>
-                         <input type="text" onkeyup="searchBarcode(this.value);" autocomplete="false" class="serchBtn prdSeachTxt fRight fmOpenR" placeholder="Search Vendor">
+                    <div id="vendorlist" class="fLeft vTabs transition300">Vendor List</div>
+                    <div id="productstab" class="fLeft vTabs transition300">Product Images</div>
+<?php
+                        if($page == 'vendorList')
+                        {
+?>
+                         <input type="text" onkeyup="searchVendor(this.value);" autocomplete="false" class="serchBtn prdSeachTxt fRight fmOpenR" placeholder="Search Vendor by Name/Email/Mobile"  id="searchVendor">
+<?php
+                        }
+?>
                 </div>
             </div>
         </div>

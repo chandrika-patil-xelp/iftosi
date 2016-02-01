@@ -69,7 +69,12 @@
                                 <div class="prdShType fLeft fmOpenL"><span>&#8377;</span>
                                 <?php
                                 $price = ceil(($data['attr_details']['b2bprice'] * $rate) * $data['attr_details']['carat']);
-                                echo $price = $comm->IND_money_format($price);
+                                $price = $comm->IND_money_format($price);
+                                if(empty($price) || $price == 0.00 || $price == '0.00' || $price == 0 || $price == '0')
+                                {
+                                    echo $price = 'N/A';
+                                }
+                                else{echo $price;}
                                 ?>
                                 </div>
                             </div>

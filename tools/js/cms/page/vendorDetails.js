@@ -20,7 +20,8 @@ $(document).ready(function () {
 
 //                $('#forDiamond,#forJewellery,#forBullion').removeClass('comSelected');
 //                $('#bullionDet,#jewelleryDet,#diamondDet').addClass('dn');
-    $.ajax({url: common.APIWebPath() + "index.php?action=statusChecker&uid="+uid, success: function (result)
+    var tmstmp = new Date().getTime();
+    $.ajax({url: common.APIWebPath() + "index.php?action=statusChecker&uid="+uid+"&timestamp"+tmstmp, success: function (result)
     {
         var obj = eval('('+result+')');
         var errCode = obj.error.code;
@@ -291,6 +292,12 @@ $("#state").focus(function() {
     
         $('#areaSuggestDiv').addClass('dn');
         $('#citySuggestDiv').addClass('dn');
+        $('#stateSuggestDiv').addClass('dn');
+});
+$("#state").focusout(function() {
+        $('#areaSuggestDiv').addClass('dn');
+        $('#citySuggestDiv').addClass('dn');
+        $('#stateSuggestDiv').addClass('dn');
 });
 
 function validateStep2Form() {
@@ -504,14 +511,15 @@ function submitForm() {
     var state = res.state;
     var fulladdress  = res.fulladd;
     var pincode     =  res.pincode;
-    $.ajax({url: common.APIWebPath() + "index.php?action=checkArea&fulladd="+encodeURIComponent(fulladdress)+"&area="+encodeURIComponent(area)+"&state="+encodeURIComponent(state)+"&city="+encodeURIComponent(city)+"&pincode="+encodeURIComponent(pincode), success: function (result)
+    var tmstmp = new Date().getTime();
+    $.ajax({url: common.APIWebPath() + "index.php?action=checkArea&fulladd="+encodeURIComponent(fulladdress)+"&area="+encodeURIComponent(area)+"&state="+encodeURIComponent(state)+"&city="+encodeURIComponent(city)+"&pincode="+encodeURIComponent(pincode)+"&timestamp="+tmstmp, success: function (result)
     {
         var obj = jQuery.parseJSON(result);
         var errCode = obj.results;
         if (errCode.status == 'Success')
         {
                     data = JSON.stringify(data);
-                    $.ajax({url: common.APIWebPath() + "index.php?action=udtProfile&payamt="+payamt+"&lat="+errCode.lat+"&lng="+errCode.lng+"&dt=" + encodeURIComponent(data), success: function (result) {
+                    $.ajax({url: common.APIWebPath() + "index.php?action=udtProfile&payamt="+payamt+"&lat="+errCode.lat+"&lng="+errCode.lng+"&dt=" + encodeURIComponent(data)+"&timestamp="+tmstmp, success: function (result) {
                             var obj = jQuery.parseJSON(result);
                             customStorage.addToStorage('busiType', busiType);
                             var errCode = obj['error']['code'];
@@ -566,7 +574,8 @@ function submitStep2Form() {
     {
         customStorage.addToStorage('isComp', 2);
     }
-    $.ajax({url: common.APIWebPath() + "index.php?action=udtProfile&isC=1&dt=" + encodeURIComponent(data), success: function (result) {
+    var tmstmp = new Date().getTime();
+    $.ajax({url: common.APIWebPath() + "index.php?action=udtProfile&isC=1&dt=" + encodeURIComponent(data)+"&timestamp="+tmstmp, success: function (result) {
             var obj = jQuery.parseJSON(result);
             var errCode = obj['error']['code'];
             var errMsg = obj['error']['msg'];
@@ -624,7 +633,8 @@ function submitStep3Form() {
     res['uid'] = uid;
     data['result'] = res;
     data = JSON.stringify(data);
-    $.ajax({url: common.APIWebPath() + "index.php?action=udtProfile&isC=2&dt=" + encodeURIComponent(data), success: function (result) {
+    var tmstmp = new Date().getTime();
+    $.ajax({url: common.APIWebPath() + "index.php?action=udtProfile&isC=2&dt=" + encodeURIComponent(data)+"&timestamp="+tmstmp, success: function (result) {
             var obj = jQuery.parseJSON(result);
             var errCode = obj['error']['code'];
             var errMsg = obj['error']['msg'];
@@ -634,7 +644,8 @@ function submitStep3Form() {
                 customStorage.addToStorage('isComp', isComp);
                 var bsType = parseInt(busiType.charAt(0));
                 bsType = bsType - 1;
-                $.ajax({url: common.APIWebPath() + "index.php?action=viewAll&uid="+res['uid'],success: function (result)
+                var tmstmp = new Date().getTime();
+                $.ajax({url: common.APIWebPath() + "index.php?action=viewAll&uid="+res['uid']+"&timestamp="+tmstmp,success: function (result)
                 {
 
                     var obj = jQuery.parseJSON(result);

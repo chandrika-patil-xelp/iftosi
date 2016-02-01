@@ -72,7 +72,7 @@ function checkMailbtn(str)
         $.ajax({url: DOMAIN + "apis/index.php?action=sendMail&str="+encodeURIComponent(str)+"&to="+encodeURIComponent(to), success: function(result)
             {
                 var obj = eval('('+result+')');
-                console.log(obj);
+                
                 var errCode = obj.error.code;
                 if(errCode == 0 || errCode == '0')
                 {

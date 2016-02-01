@@ -72,7 +72,8 @@
                 customStorage.addToStorage('mobile', pr_mobile);
                 if(pr_mobile !== undefined || pr_mobile !== 'undefined')
                 {
-                    $.ajax({url: DOMAIN + "apis/index.php?action=checkUser&mobile=" + pr_mobile, success: function (result) {
+                    var tmstmp = new Date().getTime();
+                    $.ajax({url: DOMAIN + "apis/index.php?action=checkUser&mobile=" + pr_mobile+"&timestamp="+tmstmp, success: function (result) {
                             var obj = jQuery.parseJSON(result);
                             var errCode = obj['error']['Code'];
                             if(errCode == 0)

@@ -458,7 +458,10 @@ function getResultsData(data,sortby,showtree)
                                         dollarValue=vl.dollar_rate; 
                                     }
                                     var price = Math.ceil(((vl.b2bprice * dollarValue) * vl.attributes.carat));
-                                    html += '<div class="detValue fmOpenB fLeft"><span>₹</span>'+ common.IND_money_format(price) +'</div>';
+                                    price = common.IND_money_format(price);
+                                    if(price == '0' || price == 0 || price == 0.00 || price == '0.00')
+                                    { price = 'N/A'; }
+                                    html += '<div class="detValue fmOpenB fLeft"><span>₹</span>'+ price +'</div>';
                                 html += '</div>';
                             html += '</div>';
                         html += '</div>';

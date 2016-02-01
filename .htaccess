@@ -27,6 +27,7 @@ RewriteRule ^((?i)terms-of-listing)$    index.php?case=terms_of_listing [L]
 RewriteRule ^((?i)privacy-policy)$    index.php?case=policy [L]
 RewriteRule ^((?i)vendor-privacy-policy)$    index.php?case=vendor_privacy [L]
 RewriteRule ^((?i)Coming-Soon)$    index.php?case=comingsoon [L]
+RewriteRule ^((?i)contact-us)$    index.php?case=contact_us [L]
 
 ####################### EDUCATION #############################
 RewriteRule ^((?i)round)$    index.php?case=education_round [L]

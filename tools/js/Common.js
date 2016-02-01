@@ -108,8 +108,8 @@ function Common() {
             }
             else if (is_vendor == 2)
             {
-                userMenuStr += '<a href="'+DOMAIN+'index.php?case=product_list&uid='+uid+'"><li id="productstab" class="transition100">Products</li></a>';
                 userMenuStr += '<a href="'+DOMAIN+'index.php?case=vendorList&uid='+uid+'"><li id="vendorlist" class="transition100">Vendor List</li></a>';
+                userMenuStr += '<a href="'+DOMAIN+'index.php?case=product_list&uid='+uid+'"><li id="productstab" class="transition100">Product Images</li></a>';
                 //userMenuStr += '<li class="transition100" onclick="redirectToWishlist();">Wishlist (<span id="wishListCnt"></span>)</li>';
                 $('#wishListHdr').addClass('dn');
 
@@ -212,7 +212,7 @@ function Common() {
     this.showLoginForm = function (vd) {
         var str = '<div id="overlay1" class="overlay transition300" style="opacity: 0;" onclick="common.closeLoginForm();"></div>';
         str += '<div id="loginDiv" class="loginDiv transition300" style="transform: scale(0);">';
-        str += '<div class="lgTitle fLeft fmOpenR">One account. All about Diamonds</div>';
+        str += '<div class="lgTitle fLeft fmOpenR">Sign In</div>';
         str += '<div class="inputCont fLeft fmOpenR">';
         str += '<input type="tel" id="pr_mobile" name="pr_mobile" autocomplete="off" class="txtInput cOrange fmOpenR font14 mobileIcon" readonly>';
         str += '<label for="pr_mobile" class="inp-label transition100">MOBILE OR EMAIL</label>';
@@ -340,7 +340,7 @@ function Common() {
                         }
                         else if (is_vendor == 2)
                         {
-                            window.location.assign(DOMAIN + 'index.php?case=product_list');
+                            window.location.assign(DOMAIN + 'index.php?case=vendorList&uid=' + userid);
                         }
                         else
                         {
@@ -502,7 +502,6 @@ function Common() {
 			window.location.href = url;
 		}
 	};
-
 	this.goToWishlist = function() {
 		var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
 		var is_vendor = customStorage.readFromStorage('is_vendor');

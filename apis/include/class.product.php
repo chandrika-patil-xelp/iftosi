@@ -29,7 +29,6 @@
                 $expd = explode('|@|',$detls1[$i]);
                 $detls[$expd[0]] = $expd[1];
             }
-            print_r($_POST['certFile']);
             
             if(($detls['shape']=='gBars')||($detls['shape']=='sBars')||($detls['shape']=='gCoins')||($detls['shape']=='sCoins'))
             {
@@ -335,6 +334,7 @@
                                                      rating,
                                                      budget,
                                                      b2b_price,
+                                                     is_plain_jewellery,
                                                      date_time,
                                                      active_flag)
                                     VALUES
@@ -379,6 +379,7 @@
                                                   \"".$detls['rating']."\",
                                                   \"".$detls['price']."\",
                                                   \"".$detls['priceb2b']."\",
+                                                  \"".$detls['isPlain']."\",
                                                       now(),
                                                   \"".$display_flag."\")
                                     ON DUPLICATE KEY UPDATE
@@ -421,7 +422,8 @@
                                                             bullion_design=\"".$detls['design']."\",    
                                                             rating        = \"".$detls['rating']."\",
                                                             budget        = \"".$detls['price']."\",    
-                                                            b2b_price        = \"".$detls['priceb2b']."\",    
+                                                            b2b_price        = \"".$detls['priceb2b']."\",
+                                                            is_plain_jewellery = \"".$detls['isPlain']."\",
                                                             active_flag   = \"".$display_flag."\"";    
                             $res = $this->query($sql);
                         
@@ -1037,7 +1039,7 @@
 					{
 						$expd = explode('|~|',$val);
 						$exd = explode(';',$expd[1]);
-                        //print_r($expd);
+                        
 						if($expd[0] == 'priceRange' && $params['catid'] == 10000)
 						{
 							$expCarat = explode('|~|',$sarr[0]);
@@ -1067,7 +1069,7 @@
 						{
 							$ex = explode('_',$vl);
                             $re='^[0-9]+$';
-                            if(preg_replace("/[^0-9]/","",$ex[count($ex)-1]) == $re)
+                            if(strpos($ex[count($ex)-1],'KT') !== false)
                             {
                                $inarr[] = preg_replace("/[^0-9]/","",$ex[count($ex)-1]);
                             }
@@ -1521,10 +1523,12 @@
 						p_discb2b as discountb2b,
 						b2b_price as b2bprice,
 						type,
+                        combination,
 						bullion_design,
 						tabl as tab,
 						num_gemstones,
-						certificate_url
+						certificate_url,
+                        is_plain_jewellery
                     FROM 
                         tbl_product_search
                     WHERE 

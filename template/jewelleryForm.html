@@ -66,7 +66,21 @@
                                           
                                         }
 ?>
-<div class="<?=(!empty($attr['product_id']) == True) ? '' : 'dn';?>" id="allcontent">
+            <div class="<?=(!empty($attr['product_id']) == True) ? '' : 'dn';?>" id="allcontent">                   
+                    <div class="divCon  fLeft jw3" id='typeChoice'>
+                        <div  class="titleDiv txtCap fLeft">Is it a Plain Gold Jewellery ?*</div>
+                        <div class='radioCont fLeft'>
+                            <div class="checkDiv fLeft" id="askGoldRate" onclick="isPlainJewellery();">
+                                <input type="radio" name='Plain' class="filled-in plain" value="Plain" <?=($attr['is_plain_jewellery'] == 'Plain') ? 'checked' : '';?> id="jewellery_plain" onclick="isPlainJewellery();">
+                                <label for="jewellery_plain">YES</label>
+                            </div>
+                            <div class="checkDiv fLeft" onclick="checkIfNotGold();">
+                                <input type="radio" name='Plain' class="filled-in plain" value="Mix" <?=($attr['is_plain_jewellery'] == 'Mix' || $attr['is_plain_jewellery'] == '') ? 'checked' : '';?> id="jewellery_mix">
+                                <label for="jewellery_mix">No</label>
+                            </div>
+                        </div>
+                    </div>
+                
                     <div class="divCon  fLeft jw3" id='certiicates'>
                         <div  class="titleDiv txtCap fLeft">Certficate*</div>
                         <div class='radioCont fLeft'>
@@ -89,10 +103,14 @@
                                 <label for="Certficate_IGI">IGI</label>
                             </div>
                             <div class="checkDiv fLeft">
-                                <input type="radio" name='Certficate' class="filled-in" id="Certficate_other" value="Other"  <?=(($attr['certified'] !== 'IGI')&&($attr['certified'] !== 'SGL')&&($attr['certified'] !== 'DGLA')&&($attr['certified'] !== 'EGL')&&(!empty($attr['certified']))) ? 'checked' : '';?>>
+                                <input type="radio" name='Certficate' class="filled-in" value="BIS" <?=($attr['certified'] == 'BIS') ? 'checked' : '';?> id="Certficate_BIS">
+                                <label for="Certficate_BIS">BIS</label>
+                            </div>
+                            <div class="checkDiv fLeft">
+                                <input type="radio" name='Certficate' class="filled-in" id="Certficate_other" value="Other"  <?=(($attr['certified'] !== 'IGI')&&($attr['certified'] !== 'SGL')&&($attr['certified'] !== 'DGLA')&&($attr['certified'] !== 'EGL')&&($attr['certified'] !== 'BIS')&&(!empty($attr['certified']))) ? 'checked' : '';?>>
                                 <label for="Certficate_other">Other</label>
                             </div>
-                            <div id='othCert' class="otherBox fLeft <?=(($attr['certified'] !== 'IGI')&&($attr['certified'] !== 'SGL')&&($attr['certified'] !== 'DGLA')&&($attr['certified'] !== 'EGL')&&(!empty($attr['certified']))) ? '' : 'dn';?>">
+                            <div id='othCert' class="otherBox fLeft <?=(($attr['certified'] !== 'IGI')&&($attr['certified'] !== 'SGL')&&($attr['certified'] !== 'DGLA')&&($attr['certified'] !== 'EGL')&&($attr['certified'] !== 'BIS')&&(!empty($attr['certified']))) ? '' : 'dn';?>">
                                <input name="other_cerificate" autocomplete="false" id="other_cerificate" type="text" placeholder="AGS,CIBJO, etc." value="<?=$attr['certified'];?>" class="othTxtinp fLeft fmOpenR font14 c666">
                             </div>
                         </div>
@@ -116,6 +134,37 @@
                         </div>
                     </div>
 <?php
+                foreach ($fil as $key=>$val)
+                {
+                            if($val['attribute_name'] == 'combination')
+                            {
+?>
+                                <div class="divCon  fLeft jw3">
+                                    <div  class="titleDiv txtCap fLeft"><?=$val['attribute_disp_name'];?>*</div>
+                                        <div class='radioCont fLeft'>
+<?php                
+                                        $attrValues= explode(',',$val['attribute_values']);
+                                        
+                                        for($i = 0 ; $i < count($attrValues) ; $i++)
+                                        {
+                                            $attrid = str_replace(' ', '_',$attrValues[$i]);
+?>
+                                            <div class="checkDiv fLeft">
+                                                <input type="radio" name='combination' class="filled-in" value="<?=$attrValues[$i];?>" <?=($attr['combination'] == $attrValues[$i]) ? 'checked' : '';?> id="<?=strtolower($attrid);?>">
+                                                <label for="<?=strtolower($attrid);?>"><?=ucwords(strtolower($attrValues[$i]));?></label>
+                                            </div>          
+<?php
+                                        }
+?>
+                                        </div>
+                    </div>
+<?php
+                            }
+                }
+?>
+
+
+<?php
 					/**************** Diamond Related Fields Start  ****************/
 
 					if(empty($attr['dwt']) || $attr['dwt'] == '0')
@@ -127,7 +176,7 @@
                        $attr['nofd'] = '';
                     }
 ?>
-    <div class="vCommTitle fLeft fmOpenL" style="font-size:25px">Select the diamond you want to add in product</div>
+    <div class="vCommTitle fLeft fmOpenL dShapeTitle" style="font-size:25px">Select the diamond you want to add in product</div>
     <div id="diamondShapeCont">
     <?php
         $attr['diamond_shape']=explode('|!|',$attr['diamond_shape']);
@@ -403,8 +452,8 @@
 
 ?>
                                                 <div class="divCon2  fLeft">
-                                                    <div  class="titleDiv txtCap fLeft">Gold <?php echo $values['attr'][$key]['attr_display_name']; ?> (in Kt)*</div>
-                                                    <input name="<?php echo strtolower($goldpurity); ?>" id="goldpurity" type="text" autocomplete="false" maxlength="3" onkeypress="return common.isNumberKey(event);" value="<?=$attr['gold_purity'];?>" placeholder="eg. 18" onkeypress="common.isNumberKey(event);" class="txtInput fLeft fmOpenR font14 c666">
+                                                    <div  class="titleDiv txtCap fLeft">Gold <?php echo $values['attr'][$key]['attr_display_name']; ?> (in KT)*</div>
+                                                    <input name="<?php echo strtolower($goldpurity); ?>" id="goldpurity" type="text" autocomplete="false" maxlength="3" onkeypress="return common.isNumberKey(event);" value="<?=$attr['gold_purity'];?>" placeholder="eg. 18" onkeypress="common.isNumberKey(event);" class="txtInput fLeft fmOpenR font14 c666" onfocusout="calculateJPrice();">
                                                 </div>
 <?php
 						}
@@ -412,12 +461,12 @@
 ?>
                     <div class="divCon2  fLeft">
                         <div  class="titleDiv txtCap fLeft">Weight (in Grams)*</div>
-                        <input id="goldweight" name="gold_weight" type="text" placeholder=" eg. 10,20,50" maxlength="8" autocomplete="false" value="<?=$attr['gold_weight'];?>" onkeypress="return common.isDecimalKey(event);" class="txtInput fLeft fmOpenR font14 c666">
+                        <input id="goldweight" name="gold_weight" type="text" placeholder=" eg. 10,20,50" maxlength="8" autocomplete="false" value="<?=$attr['gold_weight'];?>" onkeypress="return common.isDecimalKey(event);" class="txtInput fLeft fmOpenR font14 c666" onfocusout="calculateJPrice();">
                     </div>
 
                     <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Design Number*</div>
-                            <input name="barcode" id="barcode" type="text" placeholder=" eg. ABCD12" maxlength="20" autocomplete="false" class="txtInput fLeft fmOpenR font14 c666" value="<?=$pdet['product_barcode'];?>">
+                            <input name="barcode" id="barcode" type="text" placeholder=" eg. ABCD12" maxlength="20" autocomplete="false" class="txtInput fLeft fmOpenR font14 c666"  value="<?=$pdet['product_barcode'];?>" onfocusout="calculateJPrice();">
                     </div>
  <?php
                                         foreach($cat['subcat'] as $key=>$values)
@@ -427,7 +476,7 @@
 ?>
                                                 <div class="divCon2  fLeft">
                                                     <div  class="titleDiv txtCap fLeft"><?php echo $values['attr'][$key]['attr_display_name']; ?> (in Rs)*</div>
-                                                    <input name="<?php echo strtolower($values['attr'][$key]['attr_display_name']); ?>" autocomplete="false" id="prdprice" type="text" placeholder="eg. 12000" maxlength="16" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['price'];?>" class="txtInput fLeft fmOpenR font14 c666">
+                                                    <input name="<?php echo strtolower($values['attr'][$key]['attr_display_name']); ?>" autocomplete="false" id="prdprice" type="text" placeholder="eg. 12000" maxlength="16" onfocusout="return common.isDecimalNumber(event,this.value);" value="<?=$attr['price'];?>" class="txtInput fLeft fmOpenR font14 c666">
                                                 </div>
 <?php                                       }
                                         }
@@ -474,7 +523,7 @@
         function hideOther(id){
             $('#'+id).addClass('dn');
         }
-
+        
         $(document).ready(function(){
             $('#certiicates label').click(function(){
                 setTimeout(function(){
@@ -490,7 +539,6 @@
 
             });
         });
-
     </script>
 </body>
 </html>

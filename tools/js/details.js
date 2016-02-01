@@ -247,7 +247,8 @@ $(document).ready(function(){
                                 }
 				else
 				{
-                                    $.ajax({url: DOMAIN + "apis/index.php?action=getOwnerCheck&uid="+uid+"&pid="+pid, success: function(result)
+                                    var tmstmp = new Date().getTime();
+                                    $.ajax({url: DOMAIN + "apis/index.php?action=getOwnerCheck&uid="+uid+"&pid="+pid+"timestamp="+tmstmp, success: function(result)
                                         {
                                             var obj = eval('('+result+')');
                                             var eCode = obj.error.code;
@@ -706,7 +707,8 @@ function showVendorDetails(obj)
 	{
 		if(isWishList==true)
 		{
-                    $.ajax({url: DOMAIN + "apis/index.php?action=getOwnerCheck&uid="+uid+"&pid="+pid, success: function(result)
+                    var tmstmp = new Date().getTime();
+                    $.ajax({url: DOMAIN + "apis/index.php?action=getOwnerCheck&uid="+uid+"&pid="+pid+"&timestamp="+tmstmp, success: function(result)
                         {
                             var obj = eval('('+result+')');
                             var eCode = obj.error.code;
@@ -734,7 +736,8 @@ function showVendorDetails(obj)
 		}
 		else if((isMail==false)&&(isWishList==false))
 		{
-                        $.ajax({url: DOMAIN + "apis/index.php?action=getOwnerCheck&uid="+uid+"&pid="+pid, success: function(result)
+                    var tmstmp = new Date().getTime();
+                        $.ajax({url: DOMAIN + "apis/index.php?action=getOwnerCheck&uid="+uid+"&pid="+pid+"&tmstmp="+tmstmp, success: function(result)
                         {
                             var obj = eval('('+result+')');
                             var eCode = obj.error.code;
@@ -816,7 +819,8 @@ function addToEnquiry()
 	var userid = customStorage.readFromStorage('userid');
         if(userid !== null && vendor_id !== null && pid !== null)
         {
-            var params = 'action=ajx&case=addToEnquiry&uid='+userid+'&vid='+vendor_id+'&pid='+pid;
+            var tmstmp = new Date().getTime();
+            var params = 'action=ajx&case=addToEnquiry&uid='+userid+'&vid='+vendor_id+'&pid='+pid+'&timestamp='+tmstmp;
             var URL = DOMAIN + "index.php";
            
             $.getJSON(URL, params, function(data) {
@@ -842,7 +846,8 @@ function addToWishList()
 		var userid = customStorage.readFromStorage('userid');
 		if(userid !== null && vendor_id !== null && pid !== null)
 		{
-			var params = 'action=ajx&case=addToWishList&userid='+userid+'&vid='+vendor_id+'&prdid='+pid;
+                    var tmstmp = new Date().getTime();
+			var params = 'action=ajx&case=addToWishList&userid='+userid+'&vid='+vendor_id+'&prdid='+pid+'&timestamp='+tmstmp;
 			var URL = DOMAIN + "index.php";
 
 			$.getJSON(URL, params, function(data) {
@@ -914,7 +919,8 @@ function getWishList()
 	var userid = customStorage.readFromStorage('userid');
 	if(vendor_id !== '' && pid !== '' && userid !== '' && userid !== undefined && userid !== null)
 	{
-		var params = 'action=ajx&case=checkWish&userid='+userid+'&vid='+vendor_id+'&prdid='+pid;
+            var tmstmp = new Date().getTime();
+		var params = 'action=ajx&case=checkWish&userid='+userid+'&vid='+vendor_id+'&prdid='+pid+'&timestamp='+tmstmp;
 		var URL = DOMAIN + "index.php";
 
 		$.getJSON(URL, params, function(data) {
@@ -950,7 +956,8 @@ function getUserDetails()
 	var userid = customStorage.readFromStorage('userid');
 	if(userid !== '' && userid !== undefined && userid !== null)
 	{
-		var params = 'action=ajx&case=getUserDet&uid='+userid;
+            var tmstmp = new Date().getTime();
+		var params = 'action=ajx&case=getUserDet&uid='+userid+'&timestamp='+tmstmp;
 		var URL = DOMAIN + "index.php";
 		$.getJSON(URL, params, function(data) {
 			if(data !== null && data !== undefined && data !== '' && data !== 'null' && data !== 'undefined' && typeof data !== undefined)
@@ -1004,7 +1011,8 @@ function sendDetailsToUser()
     {
 	if(isValidName && isValidMobile && isValidEmail)
 	{
-		var params = 'action=ajx&case=sendDetailsToUser&usrName='+encodeURIComponent(usrName)+'&usrMobile='+encodeURIComponent(usrMobile)+'&usrEmail='+encodeURIComponent(usrEmail)+'&prdid='+encodeURIComponent(pid);
+            var tmstmp = new Date().getTime();
+		var params = 'action=ajx&case=sendDetailsToUser&usrName='+encodeURIComponent(usrName)+'&usrMobile='+encodeURIComponent(usrMobile)+'&usrEmail='+encodeURIComponent(usrEmail)+'&prdid='+encodeURIComponent(pid)+'&timestamp='+tmstmp;
 		var URL = DOMAIN + "index.php";
 		$.getJSON(URL, params, function(data) {
 			if(data !== undefined && data !== null && data !== '')
@@ -1058,20 +1066,20 @@ function otpCheck()
             var isValid = true;
             
             //var loggedin = customStorage.readfromStorage(isLoggedIn);
-           $.ajax({url: DOMAIN + "apis/index.php?action=validOTP&mobile="+mobile+"&vc="+otpProvided, success: function(result)
+            var tmstmp = new Date().getTime();
+           $.ajax({url: DOMAIN + "apis/index.php?action=validOTP&mobile="+mobile+"&vc="+otpProvided+"&timestamp="+tmstmp, success: function(result)
                {
                         var obj = jQuery.parseJSON(result);
                         var errCode = obj['error']['Msg'];
-
+                        
                         if(errCode == 'Data matched')
                         {
-                            
                                 isValid = true;
                                 var mobile = $('#ur_mobile').val().trim();
                                 var name = $('#ur_name').val().trim();
                                 var email = $('#ur_email').val().trim();
-
-                                var params = 'action=ajx&case=userCheck&mobile='+mobile+'&name='+encodeURIComponent(name)+'&email='+encodeURIComponent(email)+'&pid='+pid;
+                                var tmstmp = new Date().getTime();
+                                var params = 'action=ajx&case=userCheck&mobile='+mobile+'&name='+encodeURIComponent(name)+'&email='+encodeURIComponent(email)+'&pid='+pid+"&timestamp="+tmstmp;
                                 var URL = DOMAIN + "index.php";
 
                                 $.getJSON(URL, params, function(data) {
@@ -1079,51 +1087,72 @@ function otpCheck()
                                         {
                                                 if((data.error !== '' && data.error !== null && data.error !== undefined && data.error.Code == 0) || (data.error.Code == 1 && data.results.userid != ''))
                                                 {
-                                                        /*if(data.results.userDet[0].is_vendor == 1)
-                                                        {
-                                                                customStorage.toast(0, 'This feature is not available for vendors');
-                                                        }
-                                                        else
-                                                        {*/
                                                                 if(data.error.Msg === 'Data matched')
                                                                 {
-                                                                    customStorage.addToStorage('l', data.results.userDet.logmobile);
-                                                                    customStorage.addToStorage('mobile', data.results.userDet.logmobile);
-                                                                    customStorage.addToStorage('username', data.results.userDet.user_name);
-                                                                    customStorage.addToStorage('name', name);
-                                                                    customStorage.addToStorage('email', email);
-                                                                    customStorage.addToStorage('city', data.results.userDet.city);
-                                                                    customStorage.addToStorage('isLoggedIn',true);
-                                                                    var isVndr = data.results.userDet.is_vendor;
-                                                                    var isComp = data.results.userDet.is_complete;
-
-                                                                    if(isVndr == 0 || isVndr == '0')
-                                                                    {
-                                                                            isVndr = -1;
-                                                                    }
-                                                                    else if(isVndr == 1 || isVndr == '1')
-                                                                    {
-                                                                        customStorage.addToStorage('isComp', data.results.userDet.isComp);
-                                                                        customStorage.addToStorage('busiType', data.results.userDet.busiType);
-                                                                    }
-                                                                    customStorage.addToStorage('is_vendor',isVndr);
-                                                                    var uid = customStorage.addToStorage('userid', data.results.userid);
-                                                                }
-                                                                else
-                                                                {
-                                                                    customStorage.addToStorage('l', mobile);
-                                                                    customStorage.addToStorage('mobile', mobile);
-                                                                    customStorage.addToStorage('username', name);
-                                                                    customStorage.addToStorage('name', name);
-                                                                    customStorage.addToStorage('email', email);
-                                                                    customStorage.addToStorage('isLoggedIn',true);
-                                                                    var isVndr = data.results.userDet.is_vendor;
-                                                                    if(isVndr == 0 || isVndr == '0')
-                                                                    {
-                                                                            isVndr = -1;
-                                                                    }
-                                                                    customStorage.addToStorage('is_vendor',isVndr);
-                                                                    var uid = customStorage.addToStorage('userid', data.results.userid);
+                                                                        var userDt = null;
+                                                                        var custDt = null;
+                                                                        for(var i = 0; i < data.results.userDet.length; i++)
+                                                                        {
+                                                                            if(data.results.userDet[i].logmobile == mobile)
+                                                                            {
+                                                                                if(data.results.userDet[i].is_vendor.toString() == '1')
+                                                                                {
+                                                                                    userDt = data.results.userDet[i];
+                                                                                    break;
+                                                                                }
+                                                                                if(data.results.userDet[i].is_vendor.toString() == '0')
+                                                                                {
+                                                                                    custDt = data.results.userDet[i];
+                                                                                    break;
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                        if(userDt !== null && userDt !== 'null' && userDt !== undefined)
+                                                                        {   
+                                                                                customStorage.addToStorage('userid', userDt.user_id);
+                                                                                customStorage.addToStorage('l', userDt.logmobile);
+                                                                                customStorage.addToStorage('mobile', userDt.logmobile);
+                                                                                customStorage.addToStorage('username', userDt.user_name);
+                                                                                customStorage.addToStorage('name', userDt.user_name);
+                                                                                customStorage.addToStorage('email', userDt.email);
+                                                                                customStorage.addToStorage('city', userDt.city);
+                                                                                customStorage.addToStorage('isLoggedIn',true);
+                                                                                customStorage.addToStorage('busiType', userDt.busiType);
+                                                                                var isVndr = userDt.is_vendor;
+                                                                                var isComp = userDt.isComp;
+                                                                                customStorage.addToStorage('isComp', isComp);
+                                                                                customStorage.addToStorage('is_vendor',isVndr);
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            if(custDt == null || custDt == 'null')
+                                                                            {
+                                                                                customStorage.toast(0,data.error.type.flagMsg);
+                                                                                setTimeout(function()
+                                                                                    {
+                                                                                        closeOtpForm();
+                                                                                    },2000);
+                                                                                return false;
+                                                                            }
+                                                                            else if(custDt.logmobile == mobile)
+                                                                            {
+                                                                                customStorage.addToStorage('userid', custDt.user_id);
+                                                                                customStorage.addToStorage('l', custDt.logmobile);
+                                                                                customStorage.addToStorage('mobile', custDt.logmobile);
+                                                                                customStorage.addToStorage('username',custDt.user_name);
+                                                                                customStorage.addToStorage('name',custDt.user_name);
+                                                                                customStorage.addToStorage('email',custDt.user_name);
+                                                                                customStorage.addToStorage('city',custDt.user_name);
+                                                                                customStorage.addToStorage('isLoggedIn',true);
+                                                                                var isVndr = custDt.is_vendor;
+                                                                                if(isVndr == 0 || isVndr == '0')
+                                                                                {
+                                                                                    isVndr = -1;
+                                                                                    customStorage.addToStorage('is_vendor',isVndr);
+                                                                                }
+                                                                            }
+                                                                            
+                                                                        }
                                                                 }
                                                                 common.checkLogin();
                                                                 closeOtpForm();
@@ -1200,7 +1229,8 @@ function otpCheck()
 function otpGo()
 {
     var pr_mobile = $('#ur_mobile').val();
-    $.ajax({url: DOMAIN + "apis/index.php?action=sendOTP&mb="+pr_mobile, success: function(result)
+    var tmstmp = new Date().getTime();
+    $.ajax({url: DOMAIN + "apis/index.php?action=sendOTP&mb="+pr_mobile+"&timestamp="+tmstmp, success: function(result)
             {
                 var obj = jQuery.parseJSON(result);
                 
@@ -1244,7 +1274,8 @@ function closeOtpForm()
 
 $(document).ready(function(){
     var userid =  customStorage.readFromStorage('userid');
-    var params 	= '?action=getOwnerCheck&pid=' + pid + '&uid=' +userid;
+    var tmstmp = new Date().getTime();
+    var params 	= '?action=getOwnerCheck&pid=' + pid + '&uid=' +userid+'&timestamp='+tmstmp;
     var URL 	= DOMAIN + "apis/index.php";
     $.ajax({url: URL+params, success: function(result)
     {

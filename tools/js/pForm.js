@@ -212,10 +212,12 @@ function validateJForm()
     {
         submiter = true;
 	var shape=$('.jshapeComm');
+	var isPlain =  $('input[name=Plain]:checked').val();
 	var certificate =  $('input[name=Certficate]:checked').val();
 	var metal = $("input[name='metal']:checked").val();
 	var diamondShape = $('.shapeComm');
 	var color =  $('input[name=color]:checked').val();
+	var combination =  $('input[name=combination]:checked').val();
 	var clarity = $("input[name='clarity']:checked").val();
 	var dweight = $('#diamondweight').val().trim();
 	var no_diamonds=$('#no_diamonds').val().trim();
@@ -229,6 +231,7 @@ function validateJForm()
 	var prdprice=$('#prdprice').val().trim();
 	var othercert=$('#other_cerificate').val().trim();
 	var other_gem_type = $('#other_gem_type').val().trim();
+        var puritypatt = /(^|[^-\d])(14|18|22|24)\b/;
 	var subcat = '';
 	var isValid = true;
 
@@ -285,6 +288,12 @@ function validateJForm()
 	if(isValid && (metal === undefined || metal === null || metal === ''))
 	{
 		str = 'Please select metal type';
+                submiter = false;
+                isValid = false;
+	}
+	if(isValid && (combination === undefined || combination === null || combination === ''))
+	{
+		str = 'Please select combination';
                 submiter = false;
                 isValid = false;
 	}
@@ -399,6 +408,14 @@ function validateJForm()
                 isValid = false;
 		$('#goldpurity').focus();
 	}
+        
+        if(isValid && !purity.match(puritypatt))
+        {
+            common.toast(0,'Please choose the purity among 14 / 18 / 22 / 24');
+            submiter = false;
+            isValid = false;
+            $('#goldpurity').focus();
+        }
 
 	if(isValid && (goldweight === undefined || goldweight === null || goldweight === '' || isNaN(goldweight)))
 	{
@@ -493,6 +510,8 @@ function validateJForm()
 		values[14] = "gold_weight|@|"+encodeURIComponent(goldweight);
 		values[15] = "barcode|@|"+encodeURIComponent(barcode);
 		values[16] = "price|@|"+encodeURIComponent(prdprice);
+		values[17] = "isPlain|@|"+encodeURIComponent(isPlain);
+		values[18] = "combination|@|"+encodeURIComponent(combination);
 		dt = values.join('|~|');
 
 		params += "&dt="+dt;
@@ -868,7 +887,7 @@ function backbtn()
 			if(catidVal[1] !== undefined && catidVal[1] !== null && catidVal[1] !== '' && typeof catidVal[1] !== 'undefined')
 			{
 				catidVal = catidVal[1];
-				httpUrl = DOMAIN + '?case=vendor_landing&catid='+catidVal;
+				httpUrl = DOMAIN + 'index.php?case=vendor_landing&catid='+catidVal;
 				break;
 			}
 		}
@@ -981,8 +1000,8 @@ function checkDiamondShape(evt,id) {
         }
         $('.diamondProp_'+id).addClass('dn');
         $('.diamondProp_'+id+' input').removeAttr('checked');
-        console.log('evt1');
-        console.log(evt);
+        
+        
         if(!$(evt).hasClass('shapeSelected') && id==1)
         {
             $('#addDiamondType').remove();
@@ -1047,4 +1066,138 @@ function addGemsType() {
     str +='</div></div></div>';
     $('#addGemsType').remove();
     $('#gemsTypeCont').append(str);
+}
+
+$(document).ready(function()
+{
+    if($('input[name=Plain]:checked').val() == 'Plain')
+    {
+        checkIfGold();
+    }
+    else if($('input[name=Plain]:checked').val() == 'Mix')
+    {
+        checkIfNotGold();
+    }
+});
+
+function checkIfGold()
+{
+    if($('input[name=Plain]:checked').val() == 'Plain')
+    {
+        $("input[name='Certficate']").attr('disabled',true);
+        $('#Certficate_BIS').attr('disabled',false).prop('checked', true);
+        $('#Pendants_10026').attr('disabled', true).attr('checked', false);
+        $('#Bangles_10034').attr('disabled', true).attr('checked', false);
+        $('#Earrings_10020').attr('disabled', true).attr('checked', false);
+        $('#Rings_10012').attr('disabled', true).attr('checked', false);
+        
+        $("input[name='metal']").attr('disabled',true).attr('checked',false);
+        $("input[name='combination']").prop('disabled',true).attr('checked',false);
+        $('#plain_gold').prop('disabled', false).prop('checked',true);
+        $('#Certficate_other').attr('disabled',false);
+        $('#gold').attr('disabled', false).prop('checked',true);
+        $('.dShapeTitle').addClass('dn');
+        $('#diamondShapeCont').addClass('dn');
+    }
+}
+
+function checkIfNotGold()
+{
+    $("input[name='Certficate']").attr('disabled',false);
+    
+    $('#Pendants_10026').attr('disabled', false);
+    $('#Bangles_10034').attr('disabled', false);
+    $('#Earrings_10020').attr('disabled', false);
+    $('#Rings_10012').attr('disabled', false);
+    
+    $("input[name='metal']").prop('disabled',false);
+    $("input[name='combination']").prop('disabled',false);
+    $('.dShapeTitle').removeClass('dn');
+    $('#diamondShapeCont').removeClass('dn');
+    $('#prdprice').prop('readonly',false);
+}
+
+
+function isPlainJewellery()
+{
+        if($('input[name=Plain]:checked').val() == 'Plain')
+        {
+            $("input[name='Certficate']").prop('disabled',true);
+            $('#Certficate_BIS').prop('disabled',false).prop('checked', true);
+
+            $('#Pendants_10026').attr('disabled', true).attr('checked', false);
+            $('#Bangles_10034').attr('disabled', true).attr('checked', false);;
+            $('#Earrings_10020').attr('disabled', true).attr('checked', false);;
+            $('#Rings_10012').attr('disabled', true).attr('checked', false);;
+
+            $("input[name='metal']").prop('disabled',true).attr('checked',false);
+
+            $("input[name='combination']").prop('disabled',true).attr('checked',true);
+            $('#plain_gold').prop('disabled', false).prop('checked',true);
+
+            $('#Certficate_other').attr('disabled',false);
+            $('#gold').prop('disabled', false).prop('checked',true);
+            $('.dShapeTitle').addClass('dn');
+            $('.diamondProp').addClass('dn');
+            $('#diamondShapeCont').addClass('dn');
+
+            $('#prdprice').attr('readonly',true);
+        }
+        else
+        {
+            $("input[name='Certficate']").attr('disabled',false);
+
+            $('#Pendants_10026').attr('disabled', false);
+            $('#Bangles_10034').attr('disabled', false);
+            $('#Earrings_10020').attr('disabled', false);
+            $('#Rings_10012').attr('disabled', false);
+
+            $("input[name='metal']").prop('disabled',false);
+            $('#gold').prop('checked',false);
+
+            $("input[name='combination']").prop('disabled',false);
+            $('#plain_gold').prop('checked',false);
+
+            $('#Certficate_BIS').attr('checked', false);
+            $('.dShapeTitle').removeClass('dn');
+            $('.diamondProp').addClass('dn');
+            $('#diamondShapeCont').removeClass('dn');
+
+            $('#prdprice').attr('readonly',false);
+        }
+}
+function calculateJPrice()
+{
+    if($('input[name=Plain]:checked').val() == 'Plain')
+    {   $.ajax({url: APIDOMAIN + 'index.php?action=getGoldRate&vid='+uid,success: function(data)
+            {
+                var obj = eval('('+data+')');
+                var metalrt = obj.results.gold_rate;
+                var gwt = $('#goldweight').val();
+                var pty = $('#goldpurity').val();
+                var puritypatt = /(^|[^-\d])(14|18|22|24)\b/;
+                if(!pty.match(puritypatt))
+                {
+                    common.toast(0,'Please choose the purity among 14 / 18 / 22 / 24');
+                    $('#goldpurity').focus();
+                }
+                pty = parseInt(common.caratCheck(pty));
+                var prce = $('#prdprice').val();
+                if(isNaN(gwt) == false && gwt !== undefined && gwt !== '' && gwt !== null && gwt !== 'null' && isNaN(pty) == false && pty !== undefined && pty !== 'undefined' && pty !== null && pty !== 'null' && pty !== '')
+                {
+                    gwt = parseInt(gwt);
+                    metalrt = parseInt(metalrt);
+
+                    var price = (metalrt/10)*(pty/995)*gwt;
+                    price = Math.ceil(price);
+                    $('#prdprice').val(price);
+                }
+                else if(isNaN(prce) == true && prce == 'NaN' && prce == NaN)
+                {
+                    $('#prdprice').val('');
+                }
+            }
+        });
+
+    }
 }

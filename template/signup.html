@@ -28,10 +28,10 @@
                             </div>
 
                             <div class="inputCont fLeft fmOpenR">
-                                <input type="text" id="pr_city" name="pr_city" style="text-transform:capitalize;" value="<?php echo ucfirst($data['city']); ?>" class="txtInput cOrange fmOpenR font14 areaIcon">
+                                <input type="text" id="pr_city" name="pr_city" style="text-transform:capitalize;" value="<?php echo ucfirst($data['city']); ?>" class="txtInput cOrange fmOpenR font14 areaIcon" onkeyup="setCityId(event);">
                                 <label for="pr_city" class="inp-label fRight transition100">CITY</label>
                                 <div id="pr_city_inpText" class="inpText fRight transition300">enter<br>city name</div>
-                                <input type="hidden" id="pr_cityid" name="pr_cityid" value="">
+                                <input type="hidden" id="pr_cityid" name="pr_cityid">
                                 <div id="pr_citySuggestDiv" class="autoSuggestOuter"></div>
                             </div>
 

@@ -56,7 +56,7 @@ else
 	define('IMGUPLOAD','http://'.$_SERVER['HTTP_HOST'].'/iftosi/upload-image/');
 	define('IMGPATH','image-upload/');        
 }
-define('SMSAPI','http://alerts.sinfini.com/api/web2sms.php?workingkey=A31cf85c3cc3b65100bf9bd7fbe30cd90&to=+91_MOBILE&sender=SIDEMO&message=_MESSAGE');
+define('SMSAPI','http://alerts.sinfini.com/api/web2sms.php?workingkey=Ae24f0c241588043b00e0449d6e2a5664&to=+91_MOBILE&sender=IFTOSI&message=_MESSAGE');
 
 define('VERSION',6.32);
 
@@ -144,6 +144,7 @@ $jvs['vendor_Product'] 	= DOMAIN.'tools/js/cms/page/vendorProductListings.js?v='
 $jvs['clarity'] 	= DOMAIN.'tools/js/clarity.js?v='.VERSION;
 $jvs['anatomy'] 	= DOMAIN.'tools/js/anatomy.js?v='.VERSION;
 $jvs['enquiry'] 	= DOMAIN.'tools/js/enquiry.js?v='.VERSION;
+$jvs['vendorList'] 	= DOMAIN.'tools/js/vendorList.js?v='.VERSION;
 // Custom JS End
 
 

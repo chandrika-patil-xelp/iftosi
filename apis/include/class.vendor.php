@@ -46,6 +46,66 @@ class vendor extends DB
         return $result;
     }
     
+    public function getVendorBySearch($params)
+    {
+        $page   = ($params['pgno'] ? $params['pgno'] : 1);
+        $limit  = ($params['limit'] ? $params['limit'] : 50);
+
+
+        $total_vendors = 0;
+        
+        $sql = "    SELECT 
+                                *,
+                                date_format(profile_expiry_date,'%D %M, %Y') as expiry_show
+                    FROM
+                                tbl_vendor_master
+                    WHERE
+                                (
+                                    MATCH(orgName) AGAINST('" . urldecode($params['srchTxt']) . "*' IN BOOLEAN MODE)
+                    OR
+                                    MATCH(email) AGAINST('" . urldecode($params['srchTxt']) . "*' IN BOOLEAN MODE)
+                    OR
+                                    MATCH(contact_mobile) AGAINST('" . urlencode($params['srchTxt']) . "*' IN BOOLEAN MODE)
+                    OR
+                                    MATCH(city) AGAINST('" . urlencode($params['srchTxt']) . "*' IN BOOLEAN MODE)
+                                )
+                    AND
+                                    is_complete = 2
+                    ORDER BY
+                                date_time
+                    DESC";
+        
+        if (!empty($page)) {
+            $start = ($page * $limit) - $limit;
+            $sql.=" LIMIT " . $start . ",$limit";
+        }
+       
+        $res = $this->query($sql);
+        $total = $this->numRows($res);
+        
+        $arr = array();
+        if($res)
+        {   
+            while($row = $this->fetchData($res))
+            {
+                if(empty($row['profile_expiry_date']) || $row['profile_expiry_date'] == '0000-00-00 00:00:00')
+                {
+                    $row['expiry_show'] = 'Not Available';
+                }
+                    
+                $arr[] = $row;
+            }
+            $results=array('vendors'=>$arr,"total_vendors"=>$total);
+            $err = array('Code' => 0, 'Msg' => 'Vendor details fetched successfully!');
+        }
+        else {
+            $err = array('Code' => 1, 'Msg' => 'Something went wrong');
+        }
+        
+        $result = array('results' => $results, 'error' => $err);
+        return $result;
+    }
+    
     public function addVendorPrdInfo($params)
     {
         $dt= json_decode($params['dt'],1);
@@ -754,7 +814,7 @@ class vendor extends DB
         $vid=$params['vid'];
         $data=$params['data'];
         $type=$params['type'];
-        $defaultColNames = array('Barcode','Lot Ref','Lot No','Cert','Cut','Carats','Col','Cla','Base','Price','Value','P(Disc)','Prop','Pol','Sym','Fluo','T.D','Table','Measurement','Cert1 No','P.A','Cr Hgt','Cr Ang','Girdle','P.D');
+        $defaultColNames = array('Barcode','Lot Ref','Lot No','Cert','Cut','Carats','Col','Cla','Base','Price','Value','P(Disc)','PB2B(Disc)','Prop','Pol','Sym','Fluo','T.D','Table','Measurement','Cert1 No','P.A','Cr Hgt','Cr Ang','Girdle','P.D');
 
         $sql="SELECT city from tbl_vendor_master where vendor_id=\"".$vid."\"";
         $res=$this->query($sql);
@@ -779,10 +839,10 @@ class vendor extends DB
         } else {
             $validFormat = FALSE;
         }
-//        echo '<pre>';
-//        print_r($defaultColNames);
-//        print_r($colName);
-//        die();
+       // echo '<pre>';
+       // print_r($defaultColNames);
+        //print_r($colName);
+       // die();
         $i = $totlIns = 0;
         if ($validFormat) {
             while ($i < $len) {
@@ -796,39 +856,42 @@ class vendor extends DB
                     $query = "INSERT INTO `tbl_productid_generator` (`product_name`, date_time) VALUES ('Diamond','" . $ts . "')";
                     $res = $this->query($query);
                     if ($res) {
+                        
+                        $b2b_price = $value[8]*(ltrim($value[12],'-')/100);
+
                         $pro_id = mysql_insert_id();
-                        $sql = "INSERT INTO `tbl_product_category_mapping` (product_id, category_id, price,b2bprice, date_time) VALUES ('" . $pro_id . "','10000','" . $value[9] . "','" . $value[9] . "','" . $ts . "')";
+                        $sql = "INSERT INTO `tbl_product_category_mapping` (product_id, category_id, price,b2bprice, date_time) VALUES ('" . $pro_id . "','10000','" . $value[9] . "','" . $b2b_price . "','" . $ts . "')";
                         //echo $sql.'<br>';
                         $res = $this->query($sql);
-                        $sql = "INSERT INTO `tbl_product_master` (product_id, barcode, lotref, lotno, prd_price,b2bprice, date_time) VALUES ('" . $pro_id . "','" . $value[0] . "','" . $value[1] . "','" . $value[2] . "','" . $value[9] . "','" . $value[9] . "','" . $ts . "')";
+                        $sql = "INSERT INTO `tbl_product_master` (product_id, barcode, lotref, lotno, prd_price,b2bprice, date_time) VALUES ('" . $pro_id . "','" . $value[0] . "','" . $value[1] . "','" . $value[2] . "','" . $value[9] . "','" . $b2b_price . "','" . $ts . "')";
                         //echo $sql.'<br>';
                         $res = $this->query($sql);
-                        $sql = "INSERT INTO `tbl_vendor_product_mapping` (product_id, vendor_id, vendor_price,b2bprice, city, vendor_currency, date_time) VALUES ('" . $pro_id . "','" . $vid . "','" . $value[9] . "','" . $value[9] . "','" . $city . "','USD', '" . $ts . "')";
+                        $sql = "INSERT INTO `tbl_vendor_product_mapping` (product_id, vendor_id, vendor_price,b2bprice, city, vendor_currency, date_time) VALUES ('" . $pro_id . "','" . $vid . "','" . $value[9] . "','" . $b2b_price . "','" . $city . "','USD', '" . $ts . "')";
                         //echo $sql.'<br>';
                         $res = $this->query($sql);
                         $srch_val = "'" . $pro_id . "', ";
                         for ($j = 3; $j < count($value); $j++) {
                             if($j==4) {
                                 $shape=$value[$j];
-                                $value[$j]=$this->getAbbrValue($value[12]);
+                                $value[$j]=$this->getAbbrValue($value[13]);
                             }
-                            if($j>=12 && $j<=15) {
+                            if($j>=13 && $j<=16) {
                                 $value[$j]=$this->getAbbrValue($value[$j]);
                             }
                             if($j == 11)
                             {
                                 $value[$j] = str_replace('-', '', $value[$j]);
-                                $b2bdisc = $value[$j];
-                                $b2bprice = $value[$j-2];
                             }
-                            
+                            if($j == 12)
+                            {
+                                $value[$j] = str_replace('-', '', $value[$j]);
+                            }
                             $srch_val .= "'" . $value[$j] . "', ";
                         }
                         $srch_val .="'".$shape."'";
-                        $srch_val .=",'".$b2bdisc."'";
-                        $srch_val .=",'".$b2bprice."'";
+                        $srch_val .=",'".$b2b_price."'";
                         
-                        $sql = "INSERT INTO `tbl_product_search` (product_id, certified, cut, carat, color, clarity, base, price, value, p_disc, prop, polish, symmetry, fluo, td, tabl, measurement, cno, pa, cr_hgt, cr_ang, girdle, pd, shape,p_discb2b,b2b_price) VALUES (" . rtrim($srch_val, ', ') . ")";
+                        $sql = "INSERT INTO `tbl_product_search` (product_id, certified, cut, carat, color, clarity, base, price, value, p_disc,p_discb2b,prop, polish, symmetry, fluo, td, tabl, measurement, cno, pa, cr_hgt, cr_ang, girdle, pd, shape,b2b_price) VALUES (" . rtrim($srch_val, ', ') . ")";
                         //echo $sql.'<br>';
                         $res = $this->query($sql);
                         $totlIns++;
@@ -1397,7 +1460,7 @@ class vendor extends DB
     public function updateDollerRate($params)
     {
         $rates = $this->getAllRatesByVID($params['vid']);
-        $emailsql = "SELECT email from tbl_registration WHERE user_id =\"".$params['vid']."\"";
+        $emailsql = "SELECT email from tbl_registration WHERE user_id =".$params['vid'];
         $emailres = $this->query($emailsql);
         $emailcnt = $this->numRows($emailres);
         if($emailcnt > 0 )
@@ -1405,18 +1468,22 @@ class vendor extends DB
            $row = $this->fetchData($emailres);
         }
         
-        if(floatval($params['dolRate']) !== floatval($rates['results']['dollar_rate']))
+        $prevsql = "SELECT dollar_rate from tbl_vendor_master WHERE vendor_id =".$params['vid'];
+        $prevres = $this->query($prevsql);
+        $prevrow = $this->fetchData($prevres);
+        
+        if(floatval($params['dolRate']) !== floatval($prevrow['dollar_rate']))
         {
-            $sql="UPDATE tbl_vendor_master SET dollar_rate='".$params['dolRate']."' WHERE vendor_id='".$params['vid']."'";
+            $sql="UPDATE tbl_vendor_master SET dollar_rate=".$params['dolRate']." WHERE vendor_id=".$params['vid'];
             $res=$this->query($sql);
             if ($res)
             {
-                $temp = array('dollar_rate'=>'dollar_rate','vid'=>$params['vid'],'type'=>'Dollar','prevRate'=>$rates['results']['dollar_rate'],'to'=>$row['email']);
+                $temp = array('rate'=>'dollar_rate','vid'=>$params['vid'],'type'=>'Dollar','prevRate'=>floatval($prevrow['dollar_rate']),'to'=>$row['email']);
                 $mail = $this->sendRateMail($temp);
                 if($mail == 1)
                 {
                     $arr = array();
-                    $err = array('code' => 0, 'msg' => 'Dollar Rate Updated successfully!');
+                    $err = array('code' => 0, 'msg' => 'Dollar Rate Updated Successfully!');
                 }
                 else
                 {
@@ -1427,7 +1494,7 @@ class vendor extends DB
             else
             {
                 $arr = array();
-                $err = array('code' => 1, 'msg' => 'Error in Updating Silver Rate');
+                $err = array('code' => 1, 'msg' => 'Error in Updating Dollar Rate');
             }
         }
         else
@@ -1456,8 +1523,7 @@ class vendor extends DB
 
         public function updateSilverRate($params)
         {
-            $rates = $this->getAllRatesByVID($params['vid']);
-            $emailsql = "SELECT email from tbl_registration WHERE user_id =\"".$params['vid']."\"";
+            $emailsql = "SELECT email from tbl_registration WHERE user_id =".$params['vid'];
             $emailres = $this->query($emailsql);
             $emailcnt = $this->numRows($emailres);
             if($emailcnt > 0 )
@@ -1465,13 +1531,17 @@ class vendor extends DB
                 $row = $this->fetchData($emailres);
             }
             
-            if(floatval($params['silRate']) !== floatval($rates['results']['silver_rate']))
+            $prevsql = "SELECT silver_rate from tbl_vendor_master WHERE vendor_id =".$params['vid'];
+            $prevres = $this->query($prevsql);
+            $prevrow = $this->fetchData($prevres);
+            
+            if(floatval($params['silRate']) !== floatval($prevrow['silver_rate']))
             {
-                $sql="UPDATE tbl_vendor_master SET silver_rate='".$params['silRate']."' WHERE vendor_id='".$params['vid']."'";
+                $sql="UPDATE tbl_vendor_master SET silver_rate=".$params['silRate']." WHERE vendor_id=".$params['vid'];
                 $res=$this->query($sql);
                 if($res)
                 {
-                    $temp = array('silver_rate'=>'silver_rate','vid'=>$params['vid'],'type'=>'Silver','prevRate'=>$rates['results']['silver_rate'],'to'=>$row['email']);
+                    $temp = array('rate'=>'silver_rate','vid'=>$params['vid'],'type'=>'Silver','prevRate'=>$prevrow['silver_rate'],'to'=>$row['email']);
                     $mail = $this->sendRateMail($temp);
                     if($mail == 1)
                     {
@@ -1516,22 +1586,26 @@ class vendor extends DB
         
         public function updateGoldRate($params)
         {
-            $rates = $this->getAllRatesByVID($params['vid']);
-            $emailsql = "SELECT email from tbl_registration WHERE user_id =\"".$params['vid']."\"";
+            $emailsql = "SELECT email from tbl_registration WHERE user_id =".$params['vid'];
             $emailres = $this->query($emailsql);
             $emailcnt = $this->numRows($emailres);
             $row = $this->fetchData($emailres);
             
-            $temp = array('gold_rate'=>'gold_rate','vid'=>$params['vid'],'type'=>'Gold','prevRate'=>$rates['results']['gold_rate'],'to'=>$row['email']);
+            $prevsql = "SELECT gold_rate from tbl_vendor_master WHERE vendor_id =".$params['vid'];
+            $prevres = $this->query($prevsql);
+            $prevrow = $this->fetchData($prevres);
             
-            if(floatval($params['goldRate']) !== floatval($rates['results']['gold_rate']))
+            
+            $temp = array('rate'=>'gold_rate','vid'=>$params['vid'],'type'=>'Gold','prevRate'=>$prevrow['gold_rate'],'to'=>$row['email']);
+            
+            if(floatval($params['goldRate']) !== floatval($prevrow['gold_rate']))
             {
                 $sql="  UPDATE
                                     tbl_vendor_master
                         SET 
-                                    gold_rate=\"".$params['goldRate']."\"
+                                    gold_rate=".$params['goldRate']."
                         WHERE
-                                    vendor_id=\"".$params['vid']."\"";
+                                    vendor_id=".$params['vid'];
                 $res=$this->query($sql);
                 if ($res)
                 {    
@@ -1539,7 +1613,7 @@ class vendor extends DB
                     if($mail == 1)
                     {
                         $arr = array();
-                        $err = array('code' => 0, 'msg' => 'Gold Rate Updated successfully!');
+                        $err = array('code' => 0, 'msg' => 'Gold Rate Updated Successfully!');
                     }
                     else
                     {
@@ -1556,14 +1630,14 @@ class vendor extends DB
             else
             {
                 $arr = array('There is no change in the rate');
-                $err = array('code' => 0, 'msg' => 'Gold Rate Updated successfully!');
+                $err = array('code' => 0, 'msg' => 'Gold Rate Updated Successfully!');
             }
             $result = array('results' => $arr, 'error' => $err);
             return $result;
         }    
     
         public function getGoldRate($params) {
-        $sql="SELECT gold_rate,silver_rate FROM tbl_vendor_master WHERE vendor_id='".$params['vid']."'";
+        $sql="SELECT gold_rate,silver_rate FROM tbl_vendor_master WHERE vendor_id=".$params['vid'];
         $res=$this->query($sql);
         if ($res) {
             $row = $this->fetchData($res);
@@ -1586,7 +1660,7 @@ class vendor extends DB
             $err = array('code' => 0, 'msg' => 'Rates fetched successfully!');
         } else {
             $arr = array();
-            $err = array('code' => 1, 'msg' => 'Error in fatching Rates');
+            $err = array('code' => 1, 'msg' => 'Error in fetching Rates');
         }
         $result = array('results' => $arr, 'error' => $err);
         return $result;
@@ -1648,23 +1722,10 @@ class vendor extends DB
         {
             global $comm;
 
-            if(!empty($params['dollar_rate']))
-            {
-                $rate = $params['dollar_rate'];
-            }
-            else if(!empty($params['silver_rate']))
-            {
-                $rate = $params['silver_rate'];
-            }
-            else if(!empty($params['gold_rate']))
-            {
-                $rate = $params['gold_rate'];
-            }
-
             $sql = "SELECT
                             orgName,
                             contact_person,
-                            $rate
+                            ".$params['rate']."
                     FROM
                             tbl_vendor_master
                     WHERE
@@ -1677,7 +1738,7 @@ class vendor extends DB
                 {
                     $vDet['org_name'] = $row['orgName'];
                     $vDet['C_person'] = $row['contact_person'];
-                    $vDet['cur_rate'] = $row[$rate];
+                    $vDet['cur_rate'] = $row[$params['rate']];
                 }
                 $subject = $params['type'].' Rate for IFtoSI';
                 $message = 'Dear ' . $vDet['org_name'] . ',';

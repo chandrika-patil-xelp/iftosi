@@ -98,13 +98,8 @@ class filter extends DB
     public function refine($params)
     {
 		$dt = json_decode($params['dt'],1);
-echo '<pre>';
-print_r($dt);
-echo '</pre>';
+
 		$detls = $dt['result'];
-echo '<pre>';
-print_r($detls);
-echo '</pre>';
 
 		foreach($detls as $key => $value)
 		{

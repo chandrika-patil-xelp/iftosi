@@ -178,7 +178,6 @@ class attribute extends DB
     public function set_category_mapping($params)
     {
         
-    print_r($params);die;
         
 	$aid 		= $params['aid'];
 	$dflag 		= $params['dflag'];
@@ -259,7 +258,6 @@ class attribute extends DB
 				$i++;
             }
             $atribs=implode(',',$attrid);
-            //echo "<pre>";print_r($attributeMap);die;
             $attrsql="SELECT  
                                 attr_id,
                                 attr_name,

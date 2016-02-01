@@ -1893,9 +1893,36 @@ echo '</pre>';
                         $str=(!empty($params['str'])) ? trim(urldecode($params['str'])) : '';
                         $obj = new sendingMail($db['iftosi']);
                         $res = $obj->sendMail($params);
-    break;
+                break;
+            
+//----------------------Crons-------------------------------------------
+        case "manageVendors":
+                    include APICLUDE . 'class.manager.php';
+                    $to=(!empty($params['to'])) ? trim(urldecode($params['to'])) : '';
+                    $str=(!empty($params['str'])) ? trim(urldecode($params['str'])) : '';
+                    $obj = new manager($db['iftosi']);
+                    $res = $obj->manageVendors($params);
+        break;
+//-----------------------VendorSearching-------------------------------------------
 
-        default :
+        case 'getVendorBySearch':
+            include APICLUDE.'class.vendor.php';
+            $text=(!empty($params['srchTxt'])) ? trim(urldecode($params['srchTxt'])):'';
+            if(empty($text))
+            {
+                $arr=array();
+                $err=array('Code'=>1,'Invalid Parameter');
+                $result=array('result'=>$arr,'error'=>$err);
+                $res=$result;
+                break;
+           }
+           $obj = new vendor($db['iftosi']);
+           $result= $obj->getVendorBySearch($params);
+           $res=$result;
+           break;
+    
+//---------------------------------------------------------------------------    
+    default :
 
         break;
     }

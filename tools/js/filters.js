@@ -174,7 +174,8 @@ function mobileClearAll()
 function resetFilters()
 {
 	var catid = $('#catid').val();
-	var params = 'action=ajx&case=filter&catid='+catid+'&slist=&clist=&tlist=&ilist=&jlist=';
+        var tmstmp = new Date().getTime();
+	var params = 'action=ajx&case=filter&catid='+catid+'&slist=&clist=&tlist=&ilist=&jlist=&timestamp='+tmstmp;
 	var URL = DOMAIN + "index.php";
 	$.getJSON(URL, params, function(data) {
 		getResultsData(data);

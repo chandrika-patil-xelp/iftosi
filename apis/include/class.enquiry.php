@@ -98,10 +98,14 @@ class enquiry extends DB
                             $catidSql = "  SELECT 
                                                 category_id
                                         FROM
-                                                tbl_product_category_mapping
-                                        WHERE 
-                                                product_id =\"".$params['pid']."\" 
-                                        
+                                                tbl_product_category_mapping as pc,
+                                                tbl_category_master as cm
+                                        WHERE
+                                                pc.category_id = cm.catid
+                                        AND
+                                                product_id ='".$params['pid']."'
+                                        AND
+                                                cm.p_catid = 0
                                         AND 
                                                 display_flag=1";
                             $catidRes = $this->query($catidSql);
@@ -156,9 +160,58 @@ class enquiry extends DB
                             }
                             
                             
-                            $url = APIDOMAIN . 'index.php?action=sendEnqMailSMS&useremail='.$udetail['uemail'].'&mobile='.$getRow['logmobile'].'&email='.$getRow['email'].'&username='.$getRow['user_name'].'&pdet='.urlencode(serialize($pdet)).'&catid='.$catidRow['category_id'];
-                            $res = $comm->executeCurl($url);
-                            $fil = $res['error']['code'];
+                            if($catid == "10000")
+                            {
+
+                                $p[0] = $pdet['pid'];
+                                $p[1] = $pdet['shape'];
+                                $p[2] = $pdet['certified'];
+                                $p[3] = $pdet['barcode'];
+                                $p[4] = $pdet['cut']; 
+                                $p[5] = $pdet['carat']; 
+                                $p[6] = $pdet['clarity']; 
+                                $p[7] = $pdet['color'];
+                                $p[8] = $this->IND_money_format(round($pdet['carat']*$pdet['price']*$pdet['dollarRate']));
+                                $msgng = array(0=>'Product Id',1=>'Shape',2=>'Certificate',3=>'Barcode',4=>'Cut',5=>'Carat',6=>'Clarity',7=>'Colour',8=>'Price'); 
+                            }
+                            if($catid == "10001")
+                            {
+                                $p[0]  = $pdet['pid'];
+                                $p[1]  = $pdet['shape'];
+                                $p[2]  = $pdet['metal'];
+                                $p[3]  = $pdet['barcode'];
+                                $p[4]  = $pdet['gold_purity']; 
+                                $p[5]  = $pdet['gold_weight']; 
+                                $p[6]  = $pdet['certified']; 
+                                $p[7]  = $this->IND_money_format(round($pdet['price']));
+                                $msgng = array(0=>'Product Id',1=>'Jewellery Type',2=>'Metal',3=>'Barcode',4=>'Purity',5=>'Gold Weight',6=>'Certificate',7=>'Price'); 
+                            }
+                            if($catid == "10002")
+                            {
+                                $p[0]  = $pdet['pid'];
+                                $p[1]  = $pdet['type'];
+                                $p[2]  = $pdet['metal'];
+                                $p[3]  = $pdet['barcode'];
+                                $p[4]  = $pdet['gold_purity']; 
+                                $p[5]  = $pdet['gold_weight']; 
+                                if($pdet['metal'] == 'Gold')
+                                {
+                                    $p[6]= $this->IND_money_format(round($pdet['gold_weight']*(($pdet['goldRate']/10)*($pdet['gold_purity']/995))));
+                                }
+                                else if($pdet['metal'] == 'Silver')
+                                {
+                                    $p[6]= $this->IND_money_format(round($pdet['gold_weight']*(($pdet['silverRate']/1000)*($pdet['gold_purity']/999))));
+                                }
+                                $msgng = array(0=>'Product Id',1=>'Type',2=>'Metal',3=>'Barcode',4=>'Purity',5=>'Gold Weight',6=>'Price');
+                            }
+                            $msg ='';
+                            for($i=0;$i < count($p);$i++)
+                            {
+                                $msg .= $msgng[$i].' : '.$p[$i].",\r\n";
+                            }
+                            $tempParams = array('useremail'=>$udetail['uemail'],'mobile'=>$getRow['logmobile'],'email'=>$getRow['email'],'username'=>$getRow['user_name'],'pdet'=>urlencode($msg));
+                            $sendMail = $this->sendEnqMailSMS($tempParams);
+                            $fil = $sendMail['error']['code'];
                             if($fil == 0)
                             {
                                 $arr="Log Entry is successfully completed";
@@ -177,9 +230,71 @@ class enquiry extends DB
         return $result;
     }
     
+        public function sendEnqMailSMS($params)
+        {
+                $msg = urldecode($params['pdet']);
+                $msg = rtrim($msg, ",\r\n");
+                
+                global $comm;
+                $smsText = '';
+                $subject = '';
+                $message = '';
+                $headers = '';
+
+                $headers .= "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                $headers .= 'From: <info@iftosi.com>' . "\r\n";
+
+                $subject .= 'Recent enquiry to IFtoSI';
+                $message .= 'Hello '.$params['username'].', '.$params['useremail'].' has shown interest in';
+                $message .= "\r\n";
+                $message .= $msg;
+                $message .= "\r\n";
+                $message .= 'The buyer should contact you shortly.';
+                $message .= "\r\n";
+                $message .= "For any assistance, call: 022-32623263. Email: info@iftosi.com";
+                $message .= "\r\n";
+                $message .= "Team IFtoSI";
+                
+                $smsText .= "Recent enquiry to IFtoSI";
+                $smsText .= "\r\n\r\n";
+                $smsText .= "Hello ".$params['username'].", ".$params['useremail']." has shown interest in";
+                $smsText .= "\r\n";
+                $smsText .= $msg;
+                $smsText .= "\r\n\r\n";
+                $smsText .= "The buyer should contact you shortly.";
+                $smsText .= "\r\n\r\n";
+                $smsText .= "For any assistance, call: 022-32623263. Email: info@iftosi.com";
+                $smsText .= "\r\n\r\n";
+                $smsText .= "Team IFtoSI";
+
+            if(!empty($params['email']))
+            {
+                    mail($params['email'], $subject, $message, $headers);
+            }
+            
+            $smsText = urlencode($smsText);
+            $sendSMS = str_replace('_MOBILE', $params['mobile'], SMSAPI);
+            $sendSMS = str_replace('_MESSAGE', $smsText, $sendSMS);
+            $res = $comm->executeCurl($sendSMS, true);
+            
+            if($res)
+            {
+                $arr = array();
+                $err = array('code'=>0,'msg'=>'SMS & EMAIL sent to the user');
+            }
+            else
+            {
+                $arr = array();
+                $err = array('code'=>0,'msg'=>'SMS & EMAIL is not sent to the user');
+            }
+            $result = array('result'=>$arr,'error'=>$err);
+            return $result;
+        }
+    
     # view log by vendor for his product being viewed
     
-    public function viewLog($params)
+    public function viewLog1($params)
     {
         $page   = ($params['page'] ? $params['page'] : 1);
         $limit  = ($params['limit'] ? $params['limit'] : 15);
@@ -268,8 +383,8 @@ class enquiry extends DB
             $i = 0;
             while($rowEnq=$this->fetchData($resEnq))
             {   
+                $prid[$i] = $rowEnq['product_id'];
                 $sqlMaster='SELECT
-                                product_id,
                                 barcode,
                                 product_name
                         FROM
@@ -277,7 +392,7 @@ class enquiry extends DB
                         WHERE 
                                 active_flag = 1 
                         AND 
-                                product_id='.$rowEnq['product_id'];
+                                product_id='.$prid[$i];
                 $resMaster=$this->query($sqlMaster);
                 if($this->numRows($resMaster) > 0)
                 {
@@ -285,78 +400,89 @@ class enquiry extends DB
                     {
                         $pid = $rowEnq['product_id'];
                         $arr[$i]['enquiry'] = $rowEnq; 
-                        $arr[$i]['pro_dtls']=$rowMaster;
+                        
                     }
                 }
 
-                $sqlSearch=' SELECT 
-                                product_id,
-                                gold_purity,
-                                certified,
-                                price,
-                                shape,
-                                clarity,
-                                color,
-                                type,
-                                gold_weight,
-                                carat,
-                                metal
-                        FROM
-                               tbl_product_search
-                        WHERE
-                                active_flag = 1
-                        AND 
-                                product_id='.$pid;
+                $sqlSearch='    SELECT 
+                                        ps.product_id,
+                                        ps.gold_purity as purity,
+                                        ps.certified,
+                                        ps.price,
+                                        ps.shape,
+                                        ps.clarity,
+                                        ps.color,
+                                        ps.type,
+                                        ps.gold_weight,
+                                        ps.carat,
+                                        ps.metal,
+                                        pm.barcode
+                                FROM
+                                       tbl_product_search as ps,
+                                       tbl_product_master as pm
+                                WHERE
+                                       ps.product_id = pm.product_id
+                                AND
+                                        ps.active_flag = 1
+                                AND 
+                                        ps.product_id='.$prid[$i];
                 $resSearch=$this->query($sqlSearch);
                 if($this->numRows($resSearch) > 0)
                 {
                     while($rowSearch = $this->fetchData($resSearch))
                     {
                         $arr[$i]['search'] = $rowSearch;
+
                     }
                 }
-                $sqlCat='SELECT 
-                                    b.cat_name,
+                $PcatSql = "SELECT
+                                    b.cat_name as cat_name,
                                     b.catid,
-                                    b.p_catid
-                        FROM 
-                                    tbl_product_category_mapping AS a,
-                                    tbl_category_master AS b
-                        WHERE 
-                                    a.product_id='.$pid.' 
-                        AND 
-                                    b.catid=a.category_id ';
+                                    product_id
+                        FROM
+                                    tbl_product_category_mapping as a,
+                                    tbl_category_master as b
+                        WHERE
+                                    a.category_id = b.catid
+                        AND
+                                    b.p_catid = 0
+                        AND
+                                    a.product_id = ".$prid[$i]."
+                        AND
+                                    a.display_flag=1
+                        ORDER BY    
+                                    a.date_time DESC";
                 
-                $resCat=$this->query($sqlCat);
+                $resCat=$this->query($PcatSql);
                 if($this->numRows($resCat) > 0)
                 {
                     while($rowCat = $this->fetchData($resCat))
                     {
-                           $arr[$i]['categories']['cat_name']=$rowCat['cat_name'];
-                           $arr[$i]['categories']['mCatid']=$rowCat['catid'];
-                           $arr[$i]['categories']['pcatid']=($rowCat['p_catid'] == 0 ? $rowCat['catid'] : $rowCat['p_catid']);
+                           $cat['mcatid'] = $rowCat['catid'];
+                            $cat['cat_name'] = $rowCat['cat_name'];
+                            $arr[$i]['category'] = $cat;
                             
-                           if($arr[$i]['categories']['pcatid'] == 10001)
+                           if($arr[$i]['category']['mcatid'] == 10001)
                             {
 
                                 $arr[$i]['search']['price'] = $arr[$i]['search']['price'];
                             }
-                            if($arr[$i]['categories']['pcatid'] == 10000)
+                            if($arr[$i]['category']['mcatid'] == 10000)
                             {
                                 $arr[$i]['search']['price'] = $arr[$i]['search']['price']*$dollarValue*$arr[$i]['search']['carat'];
                             }
-                            if($arr[$i]['categories']['pcatid'] == 10002)
+                            if($arr[$i]['category']['mcatid'] == 10002)
                             {
                                 if($arr[$i]['search']['metal'] == 'Gold')
                                 {
                                     $metalRate= $goldRate;
-                                    $finalRate= ($metalRate/10) * ($arr[$i]['search']['gold_purity']/995);
+                                    $finalRate= ($metalRate/10) * ($arr[$i]['search']['purity']/995);
                                     $arr[$i]['search']['price'] = $finalRate * $arr[$i]['search']['gold_weight'];
                                 }
                                 else if($arr[$i]['search']['metal'] == 'Silver')
                                 {
                                     $metalRate=$silverRate;
-                                    $finalRate=($metalRate/1000)*($arr[$i]['search']['gold_purity']/999);
+                                    $finalRate=($metalRate/1000)*($arr[$i]['search']['purity']/999);
                                     $arr[$i]['search']['price']=$finalRate*$arr['search']['gold_weight'];
                                 }
                             }
@@ -366,7 +492,6 @@ class enquiry extends DB
                 }
                 $i++;
             }
-            $arr['enqs'][] = $arr;
             $err=array('Code'=>0,'Msg'=>'Values fetched successfully');
         }
         else
@@ -398,7 +523,7 @@ class enquiry extends DB
         return strrev($m);
     }
     
-    public function viewLog1($params)
+    public function viewLog($params)
     {
         
         $vendorSql  = " SELECT 
@@ -593,8 +718,6 @@ class enquiry extends DB
             $arr = array();
             $err = array('code'=>1,'msg'=>'No records found');
         }
-
-        
         $result = array('results'=>$arr,'error'=>$err,'total_enqs'=>$EnqCount,'total_pages'=>$total_pages);
         return $result;
     }

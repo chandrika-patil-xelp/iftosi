@@ -9,67 +9,154 @@
 
         public function checkUser($params)
         {
-            $csql="select * from tbl_registration where logmobile=\"".$params['mobile']."\" OR email = \"".$params['email']."\"";
+            $csql=" SELECT 
+                            *
+                    FROM
+                            tbl_registration
+                    WHERE
+                            logmobile=\"".$params['mobile']."\" 
+                    OR
+                            email = \"".$params['email']."\"";
+            if($params['isVendor'] !== null)
+            {
+                $csql .= " AND is_vendor = \"".$params['isVendor']."\"";
+            }
             $cres=$this->query($csql);
             $cnt1 = $this->numRows($cres);
+            
             if($cnt1==0)
             {
-                $arr='User Not yet Registered';
-                $err=array('Code'=>0,'Msg'=>'No Data matched','type'=>0);
+                $checkmail = "SELECT email,logmobile from tbl_registration where email=\"".$params['email']."\"";
+                $resMail = $this->query($checkmail);
+                if($this->numRows($resMail) > 0)
+                {
+                    $ct = 0;
+                    while($row2 = $this->fetchData($resMail))
+                    {
+                        $getData[$ct] = $row2;
+                        $ct++;
+                    }
+                    for($l = 0 ;$l < count($getData);$l++)
+                    {
+                        if($getData[$l]['email'] == $params['email'] && $getData[$l]['mobile'] !== $params['mobile'])
+                        {
+                            $err2 = array('code'=>4,'flagMsg'=>'User with email id: '.$params['email'].' is already registered with us');
+                            break;
+                        }
+                    }
+                    $arr=array('msg'=>$arr1,'userid'=>$arr2[0]['user_id'],'userDet'=>$arr2);
+                    $err=array('Code'=>1,'Msg'=>'Data matched','type'=>$err2);
+                }
+                else 
+                {
+                    $arr='User Not yet Registered';
+                    $err=array('Code'=>0,'Msg'=>'No Data matched','type'=>0);
+                }
             }
             else 
             {
-                $row=$this->fetchData($cres);
-                $arr2['userid']=$row['user_id'];
-                $isV=$row['is_vendor'];
-                $arr2=$row;
-                $isDuplicateEmail = $row['email'];
-                $isDuplicateMobile = $row['logmobile'];
-                if($isV == 1)
+                $i = 0;
+                while($row=$this->fetchData($cres))
                 {
-                    $sql = "SELECT is_complete,business_type from tbl_vendor_master where vendor_id =\"".$row['user_id']."\"";
-                    $res = $this->query($sql);
-                    $cntres = $this->numRows();
-                    if($cntres == 1 )
+                    $arr2[$i]['userid']=$row['user_id'];
+                    $isV[$i]=$row['is_vendor'];
+                    $arr2[$i]=$row;
+                    $isDuplicateEmail[$i] = $row['email'];
+                    $isDuplicateMobile[$i] = $row['logmobile'];
+                    $i++;
+                }
+                for($i=0;$i < count($arr2);$i++)
+                {
+                    if($isV[$i] == 1)
                     {
-                        if(!empty($params['pid']))
+                        $sql = "SELECT is_complete,business_type from tbl_vendor_master where vendor_id =\"".$arr2[$i]['user_id']."\"";
+                        $res = $this->query($sql);
+                        $cntres = $this->numRows();
+                        if($cntres == 1 )
                         {
-                            global $comm;
-                            
-                            $url = APIDOMAIN."index.php?action=getOwnerCheck&uid=".$row['user_id']."&pid=".$params['pid'];
-                            
-                            $res1  = $comm->executeCurl($url);
-                            
-                            $data = $res1['error'];
-                            
-                            if($data['code'] == 1)
+
+                            if(!empty($params['pid']))
                             {
-                                $arr2['vtype'] = 'same';
-                            }
-                            else if($data['code'] == 0)
-                            {
-                                $arr2['vtype'] = 'diff';
+                                global $comm;
+
+                                $url = APIDOMAIN."index.php?action=getOwnerCheck&uid=".$row['user_id']."&pid=".$params['pid'];
+
+                                $res1  = $comm->executeCurl($url);
+
+                                $data = $res1['error'];
+
+                                if($data['code'] == 1)
+                                {
+                                    $arr2[$i]['vtype'] = 'same';
+                                }
+                                else if($data['code'] == 0)
+                                {
+                                    $arr2[$i]['vtype'] = 'diff';
+                                }
                             }
                             
+                            $row1=$this->fetchData($res);
+                            $arr2[$i]['isComp']= $row1['is_complete'];
+                            $arr2[$i]['busiType']= $row1['business_type'];
                         }
-                        $row=$this->fetchData($res);
-                        $arr2['isComp']= $row['is_complete'];
-                        $arr2['busiType']= $row['business_type'];
+                    }
+                    
+                    if($params['isVendor'] !== '')
+                    {
+                        if($isDuplicateMobile[$i] == $params['mobile'] && $isV[$i] == $params['isVendor'])
+                        {   
+                            $err2 = array('code'=>4,'flagMsg'=>'User with mobile number: '.$isDuplicateMobile[$i].' and same user type is already registered with us');
+                            break;
+                        }
+                        if($isDuplicateMobile[$i] == $params['mobile'] && $isDuplicateEmail[$i] == $params['email'] && $isV[$i] == $params['isVendor'])
+                        {
+                            $err2 = array('code'=>4,'flagMsg'=>'User with mobile number: '.$isDuplicateMobile[$i].', having email id: '.$isDuplicateEmail[$i].' and same user type is already registered with us');
+                            break;
+                        }
+                        if($isDuplicateEmail[$i] == $params['email'] && $isDuplicateMobile[$i] !== $params['mobile'])
+                        {
+                            $err2 = array('code'=>4,'flagMsg'=>'User with email id: '.$isDuplicateEmail[$i].' is already registered with us');
+                            break;
+                        }
+                        if($isDuplicateMobile[$i] == $params['mobile'] && $isDuplicateEmail[$i] == $params['email'] && $isV[$i] !== $params['isVendor'])
+                        {
+                            $err2 = array('code'=>5,'flagMsg'=>'User with mobile number: '.$isDuplicateMobile[$i].', email id: '.$isDuplicateEmail[$i].' and this user type is not yet registered with us');
+                        }
+                        if($isDuplicateMobile[$i] == $params['mobile'] && $isDuplicateEmail[$i] !== $params['email'] && $isV[$i] !== $params['isVendor'])
+                        {
+                            if($isDuplicateMobile[$i] == $params['mobile'] && $isDuplicateEmail[$i] !== $params['email'] && $isV[$i] !== $params['isVendor'] && $isV[$i] !== '0')
+                            {
+                                echo "here";
+                                $err2 = array('code'=>5,'flagMsg'=>'User with mobile number: '.$isDuplicateMobile[$i].', email id: '.$isDuplicateEmail[$i].' and this user type is not yet registered with us');
+                            }
+                            else
+                            {
+                                $err2 = array('code'=>4,'flagMsg'=>'User with mobile number: '.$isDuplicateMobile[$i].' is already registered with us');
+                            }
+                            break;
+                        }
+                        if($isDuplicateMobile[$i] !== $params['mobile'] && $isDuplicateEmail[$i] == $params['email'] && $isV[$i] !== $params['isVendor'])
+                        {
+                           $err2 = array('code'=>4,'flagMsg'=>'User with email id: '.$isDuplicateEmail[$i].' is already registered with us');
+                           break;
+                        }
+                        
+                        
+                    }
+                    else if($isDuplicateMobile[$i] == $params['mobile'])
+                    {
+                        $err2 = 3;
+                    }
+                    else if($isDuplicateEmail[$i] == $params['email'])
+                    {
+                        $err2 = 2;
                     }
                 }
-                if($isDuplicateMobile == $params['mobile'])
-                {
-                    $err2 = 3;
-                }
-                else if($isDuplicateEmail == $params['email'])
-                {
-                    $err2 = 2;
-                }
+                
                 $arr1=array();
-                $arr=array('msg'=>$arr1,'userid'=>$arr2['user_id'],'userDet'=>$arr2);
+                $arr=array('msg'=>$arr1,'userid'=>$arr2[0]['user_id'],'userDet'=>$arr2);
                 $err=array('Code'=>1,'Msg'=>'Data matched','type'=>$err2);
             }
-            
             $result = array('results' => $arr, 'error' => $err);
             return $result;
         }
@@ -220,40 +307,40 @@
             
             if($params['isvendor'] == 1)
             {
-            $isql= "INSERT
-                    INTO
-                                tbl_vendor_master
-                               (vendor_id,
-                                email,
-                                date_time,
-                                is_complete,
-                                active_flag,
-                                city)
-                    VALUES
-                             (".$uid.",
-                             '".$params['email']."',
-                                now(),
-                                0,
-                                0,
-                            \"".$params['cityname']."\")";
-            $res=$this->query($isql);
-                if($res)
-                {
-                $arr="SignUp process Is Complete";
-                $err=array('code'=>0,'msg'=>"Insert Operation Done");
-				$this->sendMail($params);
-                }
-                else
-                {       
-                    $arr="Problem in SignUp";
-                    $err=array('code'=>1,'msg'=>"Error in insert operation");
-                }
+                $isql= "INSERT
+                        INTO
+                                    tbl_vendor_master
+                                   (vendor_id,
+                                    email,
+                                    date_time,
+                                    is_complete,
+                                    active_flag,
+                                    city)
+                        VALUES
+                                 (".$uid.",
+                                 '".$params['email']."',
+                                    now(),
+                                    0,
+                                    0,
+                                \"".$params['cityname']."\")";
+                $res=$this->query($isql);
+                    if($res)
+                    {
+                    $arr="SignUp process Is Complete";
+                    $err=array('code'=>0,'msg'=>"Insert Operation Done");
+                    //$this->sendMail($params);
+                    }
+                    else
+                    {       
+                        $arr="Problem in SignUp";
+                        $err=array('code'=>1,'msg'=>"Error in insert operation");
+                    }
             }
            else if($params['isvendor']==0)
             {
                 $arr="SignUp process Is Complete";
                 $err=array('code'=>0,'msg'=>"Insert Operation Done");
-				$this->sendMail($params);
+                
             }
             else
             {
@@ -476,7 +563,7 @@
                 
         public function logUser($params) // USER LOGIN CHECK
         {
-            $vsql="SELECT 
+            $vsql=" SELECT 
                           user_id,
                           user_name,
                           logmobile,
@@ -484,15 +571,15 @@
                           is_vendor,
                           pass_flag,
                           email
-                   FROM 
+                    FROM 
                           tbl_registration
-                   WHERE
+                    WHERE
                           ((logmobile=\"".$params['mobile']."\")
-                              OR
+                    OR
                           (email =\"".$params['mobile']."\"))
-                   AND 
+                    AND 
                           password=MD5('".$params['password']."')
-                   AND
+                    AND
                           is_active=1";
             $vres=$this->query($vsql);
             $cntres=$this->numRows($vres);
@@ -534,7 +621,7 @@
                             {
                                 $updtSql = "UPDATE tbl_vendor_master set active_flag = 0,expire_flag = 1 WHERE vendor_id =".$arr['uid'];
                                 $udtres = $this->query($updtSql);
-                                $Tparams = array('username'=>$arr['username'],'email'=>$arr['email'],'mobile'=>$arr['mobile'],'isVendor'=>$arr['utype']);
+                                $Tparams = array('username'=>  urlencode($arr['username']),'email'=>urlencode($arr['email']),'mobile'=>$arr['mobile'],'isVendor'=>$arr['utype']);
                                 $this->sendDeactMailSms($Tparams);
                                 
                                 if($udtres)
@@ -594,6 +681,61 @@
                         $arr['mobile']=$row['logmobile'];
                         $arr['email']=$row['email'];
                         $arr['pass_flag']=$row['pass_flag'];
+                        
+                        $sql="  SELECT 
+                                          business_type,
+                                          is_complete,
+                                          profile_active_date as pact,
+                                          profile_expiry_date as pexp,
+                                          DATEDIFF(profile_expiry_date,now()) as diff,
+                                          active_flag,
+                                          expire_flag
+                                FROM 
+                                          tbl_vendor_master
+                                WHERE
+                                          vendor_id=".$row['user_id'];
+                        $res=$this->query($sql);
+                        if($this->numRows($res) == 1)
+                        {
+                            while($vrow=$this->fetchData($res))
+                            {
+                                if($vrow['diff'] <= 0 && $vrow['pact'] !== '0000-00-00 00:00:00')
+                                {
+                                    $updtSql = "UPDATE tbl_vendor_master SET active_flag = 0,expire_flag = 1 WHERE vendor_id =".$arr['uid'];
+                                    $udtres = $this->query($updtSql);
+                                    $Tparams = array('username'=>urlencode($arr['username']),'email'=>urlencode($arr['email']),'mobile'=>$arr['mobile'],'isVendor'=>$arr['utype']);
+                                    $this->sendDeactMailSms($Tparams);
+                                    if($udtres)
+                                    {
+                                        $sql="  SELECT 
+                                                        business_type,
+                                                        is_complete,
+                                                        active_flag,
+                                                        expire_flag
+
+                                                FROM 
+                                                        tbl_vendor_master
+                                                WHERE
+                                                        vendor_id=".$arr['uid'];
+                                        $res=$this->query($sql);
+                                        while($Vrow = $this->fetchData($res))
+                                        {
+                                            $arr['busiType'] = $Vrow['business_type'];
+                                            $arr['isC']      = $Vrow['is_complete'];
+                                            $arr['af']       = $Vrow['active_flag'];
+                                            $arr['expire_flag'] = $Vrow['expire_flag'];
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    $arr['busiType']=$vrow['business_type'];
+                                    $arr['isC']=$vrow['is_complete'];
+                                    $arr['af']=$vrow['active_flag'];
+                                    $arr['expire_flag'] = $vrow['expire_flag'];
+                                }
+                            }
+                        }
                         break;
                     }
                 }
@@ -605,30 +747,6 @@
                     $arr['mobile']=$allRows[0]['logmobile'];
                     $arr['email']=$allRows[0]['email'];
                     $arr['pass_flag']=$allRows[0]['pass_flag'];
-                }
-
-                if($arr['utype'] == 1)
-                {
-                      $sql="SELECT 
-                              business_type,
-                              is_complete,
-                              active_flag,
-                              expire_flag
-                       FROM 
-                              tbl_vendor_master
-                       WHERE
-                              vendor_id=".$arr['uid'];
-                    $res=$this->query($sqls);
-                    if($this->numRows($res)==1)
-                    {
-                        while($vrow=$this->fetchData($res))
-                        {
-                            $arr['busiType']=$vrow['business_type'];
-                            $arr['isC']=$vrow['is_complete'];
-                            $arr['af']=$vrow['active_flag'];
-                            $arr['expire_flag']=$vrow['expire_flag'];
-                        }
-                    }
                 }
                $err=array('code'=>0,'msg'=>'Details Fetched successfully');
             }
@@ -739,7 +857,8 @@
         public function activateVendor($params) // Activate Status
         {   
             $vsql="SELECT
-                                active_flag 
+                                active_flag,
+                                date_format(profile_expiry_date,'%D %b, %Y') as expiry
                    FROM 
                                 tbl_vendor_master  
                    WHERE 
@@ -749,7 +868,10 @@
             if($this->numRows($vres) == 1) //If user is registered
             {
                 $flag=$row['active_flag'];
+                $exp=$row['expiry'];
                 $arr['flag']=$flag;
+                $arr['expiry']=$exp;
+                
                 $err=array('code'=>0,'msg'=>'vendor profile status retrieved');
             }
             else
@@ -1253,7 +1375,7 @@
             if($params['isVendor'] == 1)
             {
                 $subject .= 'Vendor profile deactivation in IFtoSI';
-                $message .= 'Dear '.$params['username'].', your account has been deactivated since your one year subscription is over.';
+                $message .= 'Dear '.urldecode($params['username']).', your account has been deactivated since your one year subscription is over.';
                 $message .= "\r\n";
                 $message .= 'Kindly re-subscribe for the new packeage you want to continue with. It was really a good experience for us to be connected with you';
                 $message .= "\r\n";
@@ -1266,7 +1388,7 @@
                 
                 $smsText .= "Vendor profile deactivation in IFtoSI";
                 $smsText .= "\r\n\r\n";
-                $smsText .= "Dear ".$params['username'].", your account has been deactivated since your one year subscription is over.";
+                $smsText .= "Dear ".urldecode($params['username']).", your account has been deactivated since your one year subscription is over.";
                 $smsText .= "\r\n\r\n";
                 $smsText .= "Kindly re-subscribe for the new packeage you want to continue with. It was really a good experience for us to be connected with you";
                 $smsText .= "\r\n\r\n";
@@ -1276,129 +1398,20 @@
             }
             if(!empty($params['email']))
             {
-                    mail(urldecode($params['email']), $subject, $message, $headers);
+                mail(urldecode($params['email']), $subject, $message, $headers);
             }
             $smsText = urlencode($smsText);
-            $sendSMS = str_replace('_MOBILE', $params['mobile'], SMSAPI);
+            $sendSMS = str_replace('_MOBILE', urldecode($params['mobile']), SMSAPI);
             $sendSMS = str_replace('_MESSAGE', $smsText, $sendSMS);
             $res = $comm->executeCurl($sendSMS, true);
             if($res)
             {
-                $arr = array();
+                $arr = array('success');
                 $err = array('code'=>0,'msg'=>'SMS & EMAIL sent to the user');
             }
             else
             {
-                $arr = array();
-                $err = array('code'=>0,'msg'=>'SMS & EMAIL is not sent to the user');
-            }
-            $result = array('result'=>$arr,'error'=>$err);
-            return $result;
-        }
-        
-        public function sendEnqMailSMS($params)
-        {
-                $pdet = unserialize(urldecode($params['pdet']));
-                if($params['catid'] == 10000)
-                {
-                    $p[0] = $pdet['pid'];
-                    $p[1] = $pdet['shape'];
-                    $p[2] = $pdet['certified'];
-                    $p[3] = $pdet['barcode'];
-                    $p[4] = $pdet['cut']; 
-                    $p[5] = $pdet['carat']; 
-                    $p[6] = $pdet['clarity']; 
-                    $p[7] = $pdet['color'];
-                    $p[8] = $pdet['carat']*$pdet['price']*$pdet['dollarRate'];
-                    $msgng = array(0=>'Product Id',1=>'Shape',2=>'Certificate',3=>'Barcode',4=>'Cut',5=>'Carat',6=>'Clarity',7=>'Colour',8=>'Price'); 
-                }
-                if($params['catid'] == 10001)
-                {
-                    $p[0]  = $pdet['pid'];
-                    $p[1]  = $pdet['shape'];
-                    $p[2]  = $pdet['metal'];
-                    $p[3]  = $pdet['barcode'];
-                    $p[4]  = $pdet['gold_purity']; 
-                    $p[5]  = $pdet['gold_weight']; 
-                    $p[6]  = $pdet['certified']; 
-                    $p[7]  = $pdet['price'];
-                    $msgng = array(0=>'Product Id',1=>'Jewellery Type',2=>'Metal',3=>'Barcode',4=>'Purity',5=>'Gold Weight',6=>'Certificate',7=>'Price'); 
-                }
-                if($params['catid'] == 10002)
-                {
-                    $p[0]  = $pdet['pid'];
-                    $p[1]  = $pdet['type'];
-                    $p[2]  = $pdet['metal'];
-                    $p[3]  = $pdet['barcode'];
-                    $p[4]  = $pdet['gold_purity']; 
-                    $p[5]  = $pdet['gold_weight']; 
-                    if($pdet['metal'] == 'Gold')
-                    {
-                        $p[6]= $pdet['gold_weight']*(($pdet['goldRate']/10)*($pdet['gold_purity']/995));
-                    }
-                    else if($pdet['metal'] == 'Silver')
-                    {
-                        $p[6]= $pdet['gold_weight']*(($pdet['silverRate']/1000)*($pdet['gold_purity']/999));
-                    }
-                    $msgng = array(0=>'Product Id',1=>'Type',2=>'Metal',3=>'Barcode',4=>'Purity',5=>'Gold Weight',6=>'Price');
-                }
-                $msg ='';
-                for($i=0;$i<count($p);$i++)
-                {
-                    $msg .= $msgng[$i].' : '.$p[$i].", \r\n ";
-                }
-
-                global $comm;
-                $smsText = '';
-                $subject = '';
-                $message = '';
-                $headers = '';
-
-                $headers .= "MIME-Version: 1.0" . "\r\n";
-                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                $headers .= 'From: <info@iftosi.com>' . "\r\n";
-
-                $subject .= 'Recent enquiry to IFtoSI';
-                $message .= 'Hello '.$params['username'].', '.$params['useremail'].' has shown interest in';
-                $message .= "\r\n";
-                $message .= $msg;
-                $message .= "\r\n";
-                $message .= 'The buyer should contact you shortly.';
-                $message .= "\r\n";
-                $message .= "For any assistance, call: 022-32623263. Email: info@iftosi.com";
-                $message .= "\r\n";
-                $message .= "Team IFtoSI";
-                
-                $smsText .= "Recent enquiry to IFtoSI";
-                $smsText .= "\r\n\r\n";
-                $smsText .= "Hello ".$params['username'].", ".$params['useremail']." has shown interest in";
-                $smsText .= "\r\n\r\n";
-                $smsText .= $msg;
-                $smsText .= "\r\n\r\n";
-                $smsText .= "The buyer should contact you shortly.";
-                $smsText .= "\r\n\r\n";
-                $smsText .= "For any assistance, call: 022-32623263. Email: info@iftosi.com";
-                $smsText .= "\r\n\r\n";
-                $smsText .= "Team IFtoSI";
-
-            if(!empty($params['email']))
-            {
-                    mail($params['email'], $subject, $message, $headers);
-            }
-            
-            $smsText = urlencode($smsText);
-            $sendSMS = str_replace('_MOBILE', $params['mobile'], SMSAPI);
-            $sendSMS = str_replace('_MESSAGE', $smsText, $sendSMS);
-            $res = $comm->executeCurl($sendSMS, true);
-            
-            if($res)
-            {
-                $arr = array();
-                $err = array('code'=>0,'msg'=>'SMS & EMAIL sent to the user');
-            }
-            else
-            {
-                $arr = array();
+                $arr = array('failure');
                 $err = array('code'=>0,'msg'=>'SMS & EMAIL is not sent to the user');
             }
             $result = array('result'=>$arr,'error'=>$err);
@@ -1506,5 +1519,26 @@
             return $str;
         }
 
+    public function IND_money_format($money)
+    {
+        $len = strlen($money);
+        $m = '';
+        $money = strrev($money);
+        
+        for($i=0;$i<$len;$i++)
+        {
+            if(( $i==3 || ($i>3 && ($i-1)%2==0) )&& $i != $len)
+            {
+                $m .=',';
+                
+            }
+            $m .=$money[$i];
+            
+        }
+
+        return strrev($m);
+    }        
+        
 }
+
 ?>

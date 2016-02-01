@@ -395,4 +395,13 @@ function Common() {
 	return m.split("").reverse().join("");
     };    
     
+    this.caratCheck = function (purity)
+    {
+            var carats = new Array();
+            carats['24'] = "995";
+            carats['18'] = "750";
+            carats['22'] = "916";
+            carats['14'] = "585";
+            return carats[purity];
+    };
 }

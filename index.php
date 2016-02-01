@@ -87,9 +87,10 @@ switch ($action) {
                 $name = (!empty($_GET['name'])) ? trim(urldecode($_GET['name'])) : '';
                 $email = (!empty($_GET['email'])) ? trim(urldecode($_GET['email'])) : '';
                 $pid = (!empty($_GET['pid'])) ? trim(urldecode($_GET['pid'])) : '';
+                $isV = (!empty($_GET['isVendor'])) ? trim($_GET['isVendor']) : '';
                 if(!empty($pid))
                 {
-                    $userUrl = APIDOMAIN . 'index.php?action=checkUser&mobile=' . $mobile.'&pid=' . $pid;
+                   $userUrl = APIDOMAIN . 'index.php?action=checkUser&mobile='.$mobile.'&email='.$email.'&pid=' . $pid;
                 }
                 else
                 {
@@ -254,14 +255,15 @@ switch ($action) {
             case 'signup':
                 $page = 'signup';
                 //include 'template/signup.html';
-				if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
-				{
-					include 'template/signup.html';
-				}
-				else
-				{
-					include 'template/comingsoon.html';
-				}
+
+                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
+                {
+                        include 'template/signup.html';
+                }
+                else
+                {
+                        include 'template/comingsoon.html';
+                }
                 break;
 
             case 'vsignup':
@@ -389,10 +391,6 @@ switch ($action) {
             case 'vendor_privacy':
                 $page = 'vendor_privacy';
                 include 'template/vprivacy.html';
-                break;
-             case 'gemstone':
-                $page = 'gemstone';
-                include 'template/gemstone.html';
                 break;
 
             case 'inactive_vendor':
@@ -547,13 +545,13 @@ switch ($action) {
                 //echo "<pre>";print_r($total);die;
                 //include 'template/results.html';
                 if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
-				{
-					include 'template/results.html';
-				}
-				else
-				{
-					include 'template/comingsoon.html';
-				}
+                {
+                        include 'template/results.html';
+                }
+                else
+                {
+                        include 'template/comingsoon.html';
+                }
                 break;
 
             case 'jewellery':
@@ -584,13 +582,13 @@ switch ($action) {
                 //echo "<pre>";print_r($data);die;
                 //include 'template/jewellery_results.html';
                 if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
-				{
-					include 'template/jewellery_results.html';
-				}
-				else
-				{
-					include 'template/comingsoon.html';
-				}
+                {
+                        include 'template/jewellery_results.html';
+                }
+                else
+                {
+                        include 'template/comingsoon.html';
+                }
                 break;
             case 'bullion':
                 $page = 'bullion';
@@ -612,14 +610,14 @@ switch ($action) {
                 $lastpg = ceil($total / 15);
                 $adjacents = 2;
                 //include 'template/bullion_results.html';
-				if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
-				{
-					include 'template/bullion_results.html';
-				}
-				else
-				{
-					include 'template/comingsoon.html';
-				}
+                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
+                {
+                        include 'template/bullion_results.html';
+                }
+                else
+                {
+                        include 'template/comingsoon.html';
+                }
                 break;
 
 
@@ -764,13 +762,13 @@ switch ($action) {
                 //echo "<pre>";print_r($des); die;
                 //include 'template/diamond_details.html';
                 if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
-				{
-					include 'template/diamond_details.html';
-				}
-				else
-				{
-					include 'template/comingsoon.html';
-				}
+                {
+                        include 'template/diamond_details.html';
+                }
+                else
+                {
+                        include 'template/comingsoon.html';
+                }
                 break;
 
             case 'bullion_details':
@@ -816,13 +814,13 @@ switch ($action) {
                 //echo "<pre>".print_r($data3); die;
                 //include 'template/bullion_details.html';
                 if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
-				{
-					include 'template/bullion_details.html';
-				}
-				else
-				{
-					include 'template/comingsoon.html';
-				}
+                {
+                        include 'template/bullion_details.html';
+                }
+                else
+                {
+                        include 'template/comingsoon.html';
+                }
                 break;
 
             case 'jewellery_details':
@@ -946,13 +944,13 @@ switch ($action) {
                 //echo "<pre>"; print_r($des); die;
                 //include 'template/jewellery_details.html';
                 if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
-				{
-					include 'template/jewellery_details.html';
-				}
-				else
-				{
-					include 'template/comingsoon.html';
-				}
+                {
+                        include 'template/jewellery_details.html';
+                }
+                else
+                {
+                        include 'template/comingsoon.html';
+                }
                 break;
 
             case 'diamond_Form':
@@ -1004,20 +1002,23 @@ switch ($action) {
                     $res = $comm->executeCurl($url);
                     $result = $res['results'];
                 }
-
+                $url = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=' . $catid;
+                $res = $comm->executeCurl($url);
+                $fil = $res['results']['attributes'];
+                //echo "<pre>";print_r($fil);die;
                 $url = APIDOMAIN . 'index.php?action=categoryHeir&catid=' . $catid;
                 $res = $comm->executeCurl($url);
                 $cat = $res['result'];
                 $catres = $cat['subcat'][0]['attr'];
                 $attr = $result[$pid]['attr_details'];
                 $pdet = $result[$pid];
-                //echo "<pre>";print_r($attr['gemstone_color']);die;
+                
 
-				        $shapeUrl = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=10000';
+                $shapeUrl = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=10000';
                 $shapeRes = $comm->executeCurl($shapeUrl);
                 $shapeAttrs = $shapeRes['results'];
 
-				        $gemsUrl = APIDOMAIN . 'index.php?action=getGemstoneTypes';
+                $gemsUrl = APIDOMAIN . 'index.php?action=getGemstoneTypes';
                 $gemsRes = $comm->executeCurl($gemsUrl);
                 $gemsAttrs = $gemsRes['results'];
 
@@ -1238,13 +1239,14 @@ switch ($action) {
                 $data = $res['results'];
                 //include 'template/index.html';
                 if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
-				{
-					include 'template/index.html';
-				}
-				else
-				{
-					include 'template/comingsoon.html';
-				}
+                {
+                        include 'template/index.html';
+                }
+                else
+                {
+                        include 'template/comingsoon.html';
+                }
+
                 break;
         }
         break;

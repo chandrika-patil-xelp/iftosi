@@ -7,7 +7,8 @@ loadEnqs(1);
 function loadEnqs(pgno) {
     	if(!pgno)
 		pgno = 1;
-    $.ajax({url: common.APIWebPath() + "index.php?action=viewLog&vid=" + uid + "&page=" + pgno + "&limit=50", success: function (result) {
+            var tmstmp = new Date().getTime();
+    $.ajax({url: common.APIWebPath() + "index.php?action=viewLog&vid=" + uid + "&page=" + pgno + "&limit=50"+"&timestamp="+tmstmp, success: function (result) {
             loadEnqCallback(result,pgno);
     }});
 }
@@ -25,7 +26,7 @@ function loadEnqCallback(res,pgno)
                 var str = '';
                 var total = obj.total_enqs;
                 
-                if(total != 0 || total !== '0')
+                if(total !== 0 && total !== '0')
                 {
                     if(total_pages == curpgno)
                     {
@@ -79,7 +80,7 @@ function generateEnqList(obj,pgno)
         var subCatName = obj.category.cat_name;
         var product_id = search.product_id;
         var type = search.type;
-        var weight = search.weight;
+        var weight = search.gold_weight;
         var metal = search.metal;
         var color = search.color;
         var purity = search.purity;
@@ -114,8 +115,8 @@ function generateEnqList(obj,pgno)
         str += '<span class="upSpan">' + date[0] + '</span>';
         str += '<span class="lwSpan">' + date[1] + '</span>';
         str += '</div>';
-        str += '<div class="name fLeft">' + uname + '</div>';
-        str += '<div class="email fLeft txtOverflow" title='+umail+'>'+ umail + '</div>';
+        str += '<div class="name fLeft txtOver">' + uname + '</div>';
+        str += '<div class="email fLeft txtOver" title='+umail+'>'+ umail + '</div>';
         
         if(categoryid == '10000' || categoryid == 10000)
         {
@@ -141,7 +142,7 @@ function generateEnqList(obj,pgno)
         }
  
         str += '<div class="barcode fLeft">';
-        str += '<span class="upSpan">' + barcode + '</span>';
+        str += '<span class="upSpan txtOver">' + barcode + '</span>';
             if(categoryid == 10000)
                 {
                  

@@ -114,7 +114,15 @@ if (count($data)) {
                                                                 <div class="detValue fmOpenB fLeft"><span>₹</span>
                                                                    <?php 
                                                                         $price = ceil((($val['b2bprice'] * $rate)*$val['attributes']['carat']));
-                                                                        echo $price = $comm->IND_money_format($price);
+                                                                        $price = $comm->IND_money_format($price);
+                                                                        if(empty($price) || $price == 0.00 || $price == '0.00' || $price == 0 || $price == '0')
+                                                                        {
+                                                                            echo $price = 'N/A';
+                                                                        }
+                                                                        else
+																		{
+																			echo $price;
+																		}
                                                                     ?>                                                        
                                                                 </div>
                                                         </div>

@@ -253,6 +253,16 @@ function generateDiamondList(obj) {
         barcode = 'N-A';
     }
     
+    var b2b_price = obj.b2b_price;
+    if(b2b_price == 'null' || b2b_price == undefined || b2b_price == null || b2b_price == '' || b2b_price == '' || b2b_price == '0.00')
+    {
+        b2b_price = 'N-A';
+    }
+    else
+    {
+        b2b_price = "&#36;"+b2b_price;
+    }
+    
     var date = obj['update_time'].split(' ');
     var str = '<li>';
     str += '<div class="date fLeft"> ';
@@ -313,7 +323,7 @@ function generateDiamondList(obj) {
     str += '<div class="clarity fLeft">' + obj['clarity'] + '</div>';
     str += '<div class="cert fLeft">' + obj['cert'] + '</div>';
     str += '<div class="price fLeft fmOpenB">&#36;' + obj['price']+ '</div>';
-    str += '<div class="price fLeft fmOpenB">&#36;' + obj['b2b_price']+ '</div>';
+    str += '<div class="price fLeft fmOpenB">' + b2b_price + '</div>';
     str += '<div class="acct fLeft">';
     if(obj['active_flag'] == 1 || obj['active_flag'] == 0){
         cl='inStockPrd';
@@ -347,7 +357,8 @@ function generateDiamondList(obj) {
 function loadJewels(pgno) {
 	if(!pgno)
 		pgno = 1;
-    $.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + pgno + "&limit=50&catid="+catid, success: function (result) {
+    var tmstmp = new Date().getTime();
+    $.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + pgno + "&limit=50&catid="+catid+"&timestamp="+tmstmp, success: function (result) {
             loadJewellCallback(result,pgno);
     }});
 }
@@ -590,7 +601,8 @@ function generateJewellList(obj) {
 function loadBullions(pgno) {
 	if(!pgno)
 		pgno = 1;
-    $.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + pgno + "&limit=50&catid="+catid, success: function (result) {
+            var tmstmp = new Date().getTime();
+    $.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + pgno + "&limit=50&catid="+catid+"&timestamp="+tmstmp, success: function (result) {
 		loadBullionsCallback(result,pgno);
 	}});
 }
@@ -882,7 +894,8 @@ function deleteProduct() {
 }
 
 function inStock(proId,ele) {
-    $.ajax({url: common.APIWebPath() + "index.php?action=togglePrdstatus&vid=" + uid + "&prdid=" + proId+"&flag="+ele, success: function (result) {
+    var tmstmp = new Date().getTime();
+    $.ajax({url: common.APIWebPath() + "index.php?action=togglePrdstatus&vid=" + uid + "&prdid=" + proId+"&flag="+ele+"&timestamp="+tmstmp, success: function (result) {
     var obj = jQuery.parseJSON(result);
         if(obj['error']['Code']==0) {
             var stockid="isStock"+proId;
@@ -940,7 +953,8 @@ function searchBarcode(val,pgno) {
     }
     if(val!='')
     {
-        $.ajax({url: common.APIWebPath() + "index.php?action=getVProductsByBcode&bcode="+ val +"&vid="+ uid +"&catid="+catid+"&page="+pgno+"&limit=50", success: function (result) {
+        var tmstmp = new Date().getTime();
+        $.ajax({url: common.APIWebPath() + "index.php?action=getVProductsByBcode&bcode="+ val +"&vid="+ uid +"&catid="+catid+"&page="+pgno+"&limit=50"+"&timestamp="+tmstmp, success: function (result) {
             searchBarcodeCallback(result,pgno);
         }});
         searchScrollValue = val;
