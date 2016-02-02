@@ -479,25 +479,16 @@ $('#askGoldRate').click(function ()
 
 function revertSelect()
 {
-    $('#jewellery_mix').prop('checked',true);
-    $('#Certficate_BIS').prop('checked', false);
-    
     $("input[name='Certficate']").attr('disabled',false);
-
     $('#Pendants_10026').attr('disabled', false);
     $('#Bangles_10034').attr('disabled', false);
     $('#Earrings_10020').attr('disabled', false);
     $('#Rings_10012').attr('disabled', false);
-
     $("input[name='metal']").prop('disabled',false);
-    $('#gold').prop('checked',false);
     $("input[name='combination']").prop('disabled',false);
-    $('#plain_gold').prop('checked',false);
-    
     $('.dShapeTitle').removeClass('dn');
     $('#diamondShapeCont').removeClass('dn');
-    $('.diamondProp').addClass('dn');
-    $('#prdprice').attr('readonly',false);
+    $('#prdprice').prop('readonly',false);
 }
 /* Section ends here */
 

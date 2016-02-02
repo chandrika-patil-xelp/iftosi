@@ -122,6 +122,10 @@
                         {
                             $err2 = array('code'=>5,'flagMsg'=>'User with mobile number: '.$isDuplicateMobile[$i].', email id: '.$isDuplicateEmail[$i].' and this user type is not yet registered with us');
                         }
+                        if($isDuplicateMobile[$i] == $params['mobile'] && $isV[$i] == '2')
+                        {
+                            $err2 = array('code'=>5,'flagMsg'=>'User with mobile number: '.$isDuplicateMobile[$i].' is registered with us as a super admin');
+                        }
                         if($isDuplicateMobile[$i] == $params['mobile'] && $isDuplicateEmail[$i] !== $params['email'] && $isV[$i] !== $params['isVendor'])
                         {
                             if($isDuplicateMobile[$i] == $params['mobile'] && $isDuplicateEmail[$i] !== $params['email'] && $isV[$i] !== $params['isVendor'] && $isV[$i] !== '0')

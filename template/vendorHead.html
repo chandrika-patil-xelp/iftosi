@@ -53,7 +53,7 @@
                 }
             }
             
-        if((activePage !== null && activePage !== 'null' && activePage !== 'undefined' && activePage !== undefined && activePage !== '') && activePage == 'vendor_landing')
+        if((activePage !== null && activePage !== 'null' && activePage !== 'undefined' && activePage !== undefined && activePage !== '') && (activePage == 'vendor_landing' || activePage == 'jewellery_Form' || activePage =='bullion_Form' || activePage == 'diamond_Form'))
         {
             var uid = customStorage.readFromStorage('userid');
             if(uid !== '' || uid !== undefined || uid !== 'undefined' || uid !== null || uid !== 'null')
