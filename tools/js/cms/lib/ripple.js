@@ -1,6 +1,7 @@
 $(function() {
     var useragent = navigator.userAgent;
-    if(useragent.toLowerCase().indexOf('firefox') === -1)
+    //if(useragent.toLowerCase().indexOf('firefox') === -1)
+    if(useragent.toLowerCase().indexOf('firefox') === false)
     {
         var ink, d, x, y;
         $(".ripplelink").bind('mousedown ontouchstart tap', function(e) {
