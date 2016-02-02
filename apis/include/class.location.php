@@ -216,6 +216,10 @@ class location extends DB
     public function viewbyPincode($params)
     {
         $vsql="SELECT area,city,state,country,latitude,longitude from tbl_area_master where pincode='".$params['code']."'";
+        if(!empty($params['city']))
+        {
+            $vsql .= " AND city ='".$params['city']."'";
+        }
         $vres=$this->query($vsql);
         $cres=$this->numRows($vres);
         if($cres>0)

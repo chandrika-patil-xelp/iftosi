@@ -2,7 +2,7 @@
 
 var common = new Common();
 common.checkLogin();
-
+var submiter1 = true;
 function Common() {
     var _this = this;
 
@@ -282,86 +282,94 @@ function Common() {
             $.ajax({url: DOMAIN + "apis/index.php?action=logUser&mobile=" + pr_mobile + "&password=" + pr_pass+"&timestamp="+tmstmp, success: function (result) {
                     var obj = eval('(' + result + ')');
                     var errCode = obj.error.code;
-                    if (errCode == 0) {
-                        var userid = obj.results.uid;
-                        var username = obj.results.username;
-                        var is_vendor = obj.results.utype;
-                        var expire_flag = obj.results.expire_flag;
-                        var email = obj.results.email;
-                        var isComp = obj.results.isC;
-                        var pass_flag = obj.results.pass_flag;
-                        var mobile = obj.results.mobile;
-                        var busiType = obj.results.busiType;
-                        var af = obj.results.af;
-
-                        customStorage.addToStorage('isLoggedIn', true);
-                        customStorage.addToStorage('l', mobile);
-                        customStorage.addToStorage('mobile', mobile);
-                        customStorage.addToStorage('name', username);
-                        customStorage.addToStorage('email', email);
-                        customStorage.addToStorage('isComp', isComp);
-                        customStorage.addToStorage('userid', userid);
-                        customStorage.addToStorage('username', username);
-                        customStorage.addToStorage('busiType', busiType);
-                        var tmp_is_vendor = is_vendor;
-
-                        if (is_vendor == 0 || is_vendor == "0")
+                    if (errCode == 0)
+                    {
+                        if(submiter1 == true)
                         {
-                            tmp_is_vendor = -1;
-                        }
-                        customStorage.addToStorage('is_vendor', tmp_is_vendor);
-                        if (pass_flag != 0) {
-                            window.location.assign(DOMAIN + 'Change-Password');return;
-                        }
+                            submiter1 = false;
+                        
+                            var userid = obj.results.uid;
+                            var username = obj.results.username;
+                            var is_vendor = obj.results.utype;
+                            var expire_flag = obj.results.expire_flag;
+                            var email = obj.results.email;
+                            var isComp = obj.results.isC;
+                            var pass_flag = obj.results.pass_flag;
+                            var mobile = obj.results.mobile;
+                            var busiType = obj.results.busiType;
+                            var af = obj.results.af;
 
-                        if (is_vendor == '1')
-                        {
-                            if((isComp == '0' || isComp == '1') && af == '0')
-                            {
-                                window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid=' + userid);
-                            }
-                            else if (isComp === '2' && af == '1')
-                            {
-                                var catid = parseInt(busiType.charAt(0)) - 1;
-                                window.location.assign(DOMAIN + 'index.php?case=vendor_landing&catid=1000' + catid);
-                            }
-                            else if(isComp !== '2' && af == '1')
-                            {
-                                window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid=' + userid);
-                            }
-                            else if(af !== '1'  && expire_flag !== '1' && isComp == '2')
-                            {
-                                window.location.assign(DOMAIN + 'index.php?case=inactive_vendor&uid=' + userid);
-                            }
-                            else if(af !== '1'  && (expire_flag == '1' || expire_flag == 1))
-                            {
-                                window.location.assign(DOMAIN + 'index.php?case=expiredSub_vendor&uid=' + userid);
-                            }
-                        }
-                        else if (is_vendor == 2)
-                        {
-                            window.location.assign(DOMAIN + 'index.php?case=vendorList&uid=' + userid);
-                        }
-                        else
-                        {
-                            customStorage.removeFromStorage('busiType');
-                            _this.checkLogin();
-                            _this.closeLoginForm();
+                            customStorage.addToStorage('isLoggedIn', true);
+                            customStorage.addToStorage('l', mobile);
+                            customStorage.addToStorage('mobile', mobile);
+                            customStorage.addToStorage('name', username);
+                            customStorage.addToStorage('email', email);
+                            customStorage.addToStorage('isComp', isComp);
+                            customStorage.addToStorage('userid', userid);
+                            customStorage.addToStorage('username', username);
+                            customStorage.addToStorage('busiType', busiType);
+                            var tmp_is_vendor = is_vendor;
 
-                            _this.changeStyle('all');
-
-                            if (vd)
+                            if (is_vendor == 0 || is_vendor == "0")
                             {
-                                var dthis = $('#userSubmit');
-                                showVendorDetails();
-                                $('#userForm').velocity({scale: 0}, {delay: 0, ease: 'swing'});
-                                $('#overlay').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
-                                setTimeout(function () {
-                                    $('#overlay,#userForm').addClass('dn');
-                                }, 1010);
+                                tmp_is_vendor = -1;
+                            }
+                            customStorage.addToStorage('is_vendor', tmp_is_vendor);
+                            if (pass_flag != 0) {
+                                window.location.assign(DOMAIN + 'Change-Password');return;
+                            }
+
+                            if (is_vendor == '1')
+                            {
+                                if((isComp == '0' || isComp == '1') && af == '0')
+                                {
+                                    window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid=' + userid);
+                                }
+                                else if (isComp === '2' && af == '1')
+                                {
+                                    var catid = parseInt(busiType.charAt(0)) - 1;
+                                    window.location.assign(DOMAIN + 'index.php?case=vendor_landing&catid=1000' + catid);
+                                }
+                                else if(isComp !== '2' && af == '1')
+                                {
+                                    window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid=' + userid);
+                                }
+                                else if(af !== '1'  && expire_flag !== '1' && isComp == '2')
+                                {
+                                    window.location.assign(DOMAIN + 'index.php?case=inactive_vendor&uid=' + userid);
+                                }
+                                else if(af !== '1'  && (expire_flag == '1' || expire_flag == 1))
+                                {
+                                    window.location.assign(DOMAIN + 'index.php?case=expiredSub_vendor&uid=' + userid);
+                                }
+                            }
+                            else if (is_vendor == 2)
+                            {
+                                window.location.assign(DOMAIN + 'index.php?case=vendorList&uid=' + userid);
+                            }
+                            else
+                            {
+                                customStorage.removeFromStorage('busiType');
+                                _this.checkLogin();
+                                _this.closeLoginForm();
+
+                                _this.changeStyle('all');
+
+                                if (vd)
+                                {
+                                    var dthis = $('#userSubmit');
+                                    showVendorDetails();
+                                    $('#userForm').velocity({scale: 0}, {delay: 0, ease: 'swing'});
+                                    $('#overlay').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
+                                    setTimeout(function () {
+                                        $('#overlay,#userForm').addClass('dn');
+                                        submiter1 = true;
+                                    }, 1010);
+                                }
                             }
                         }
-                    } else {
+                    }
+                        else {
                         customStorage.toast(0, 'Invalid Login Credentials');
                     }
                 }});

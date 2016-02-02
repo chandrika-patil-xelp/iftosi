@@ -1,6 +1,6 @@
 var input_selector = 'input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=number], input[type=search], textarea, input[type=radio]';
 var uid = customStorage.readFromStorage('userid');
-
+var submiter = true;
 
 if (vid !== uid || uid == '') {
     window.location.assign(DOMAIN);
@@ -443,14 +443,26 @@ function clickThis(id, isDirect) {
 		changeTab('step1');
 	}
     else if (id == 'step2' && validateForm()) {
-		submitForm(obj);
-		$('html,body').animate({ scrollTop: 0 }, 'slow');
+                if(submiter == true)
+                {
+                    submiter = false;
+                    submitForm(obj);
+                    $('html,body').animate({ scrollTop: 0 }, 'slow');
+                    
+                }
+                else
+                {
+                   common.toast(0, 'Please wait Submit is in process!'); 
+                }
     }
     else if (id == 'step3') {
 		if(isDirect !== undefined && isDirect !== null && isDirect !== '')
 		{
 			if(validateForm())
 			{
+                            if(submiter == true)
+                            {
+                                submiter = false;
 				submitForm();
 				setTimeout(function() {
                                     var isValidForm2 = validateStep2Form();
@@ -460,6 +472,12 @@ function clickThis(id, isDirect) {
                                             $('html,body').animate({ scrollTop: 0 }, 'slow');
                                     }
                                 }, 800);
+                                submiter = true;
+                            }
+                            else
+                            {
+                                common.toast(0, 'Please wait Submit is in process!'); 
+                            }
 			}
 		}
 		else
@@ -467,13 +485,31 @@ function clickThis(id, isDirect) {
 			var isValidForm2 = validateStep2Form();
 			if(isValidForm2)
 			{
+                            if(submiter == true)
+                            {
+                                submiter = false;
 				submitStep2Form(obj);
 				$('html,body').animate({ scrollTop: 0 }, 'slow');
+                                submiter = true;
+                            }
+                            else
+                            {
+                                common.toast(0, 'Please wait Submit is in process!'); 
+                            }
 			}
 		}
     }
     else if (id == 'step4' && validateStep3Form()) {
-		submitStep3Form(obj);
+                if(submiter == true)
+                {
+                    submiter = false;
+                    submitStep3Form(obj);
+                    submiter = true;
+                }
+                else
+                {
+                    common.toast(0, 'Please wait Submit is in process!'); 
+                }
     }
 }
 
@@ -532,6 +568,7 @@ function submitForm() {
                                 common.toast(0, errMsg);
                             }
                         }});
+        submiter = true;
         }
         else
         {
@@ -586,7 +623,7 @@ function submitStep2Form() {
                 common.toast(0, errMsg);
             }
         }});
-
+    submiter = true;
 }
 
 function submitStep3Form() {
@@ -678,6 +715,7 @@ function submitStep3Form() {
                 common.toast(0, errMsg);
             }
         }});
+    submiter = true;
 }
 
 function formatData(val) {
@@ -697,14 +735,17 @@ var lng = '';
 var lat = '';
 function loadAreaList() {
     var pincode = $('#pincode').val();
+    var city = $('#city').val();
     if (pincode.length == 6)
     {
-        $.ajax({url: common.APIWebPath() + "index.php?action=viewbyPincode&code=" + pincode, success: function (result)
+        $.ajax({url: common.APIWebPath() + "index.php?action=viewbyPincode&city="+city+"&code=" + pincode, success: function (result)
                 {
                     var obj = jQuery.parseJSON(result);
                     //var results = new Object;
                     var results = obj['results'];
-                    if (results !== '' && results[0]['city'] !== null && results[0]['city'] !== undefined && results[0]['area'] !== null && results[0]['area'] !== undefined && results[0]['state'] !== null && results[0]['state'] !== undefined)
+                    var errCode = obj.error.code;
+                    
+                    if (results !== null && results !== '' && results[0]['city'] !== null && results[0]['city'] !== undefined && results[0]['area'] !== null && results[0]['area'] !== undefined && results[0]['state'] !== null && results[0]['state'] !== undefined)
                     {
                         areaList = results;
                         $('#area').val(results[0]['area']);
@@ -713,6 +754,10 @@ function loadAreaList() {
                         country = results[0]['country'];
                         lat = results[0]['latitude'];
                         lng = results[0]['longitude'];
+                    }
+                    else if(results == null && errCode == 1)
+                    {
+                        common.toast(0,'There is no as such Pincode in the city you have mentioned');
                     }
                 }
             });

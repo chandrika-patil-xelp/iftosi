@@ -15,6 +15,7 @@ var isWishList = false;
 var isMail = false;
 var isContact = false;
 var isPidInWishlist = false;
+var submiter = true;
 var funcObj = '';
 $(document).ready(function(){
      setTimeout(function() {
@@ -230,54 +231,60 @@ $(document).ready(function(){
         }
         else
         {
-			if(isMail)
-			{
-				var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
-                                var mobile = customStorage.readFromStorage('mobile');
-                                if(isLoggedIn == '' || isLoggedIn == null || isLoggedIn == undefined || isLoggedIn == false || isLoggedIn == 'false')
-				{
-					//customStorage.addToStorage('mobile',ur_mobile);
-					//var pr_mobile = customStorage.readFromStorage('mobile');
-					otpGo();
-					
-				}
-                                else if(mobile !== ur_mobile)
-                                {
-                                    otpGo();
-                                }
-				else
-				{
-                                    var tmstmp = new Date().getTime();
-                                    $.ajax({url: DOMAIN + "apis/index.php?action=getOwnerCheck&uid="+uid+"&pid="+pid+"timestamp="+tmstmp, success: function(result)
-                                        {
-                                            var obj = eval('('+result+')');
-                                            var eCode = obj.error.code;
-                                            if(eCode == 1 || eCode == '1')
-                                            {
-                                                customStorage.toast(0,'You can not have information of your own product');
-                                            }
-                                            else
-                                            {
-                                                sendDetailsToUser();            
-                                                addToEnquiry();                                                
-                                            }
-                                        }
-                                    });
+            if(submiter == true)
+            {
+                submiter = false;
+                            if(isMail)
+                            {
+                                    var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
+                                    var mobile = customStorage.readFromStorage('mobile');
+                                    if(isLoggedIn == '' || isLoggedIn == null || isLoggedIn == undefined || isLoggedIn == false || isLoggedIn == 'false')
+                                    {
+                                            //customStorage.addToStorage('mobile',ur_mobile);
+                                            //var pr_mobile = customStorage.readFromStorage('mobile');
+                                            otpGo();
 
-				}
-			}
-			else
-			{
-                            	showVendorDetails();
-			}
+                                    }
+                                    else if(mobile !== ur_mobile)
+                                    {
+                                        otpGo();
+                                    }
+                                    else
+                                    {
+                                        var tmstmp = new Date().getTime();
+                                        $.ajax({url: DOMAIN + "apis/index.php?action=getOwnerCheck&uid="+uid+"&pid="+pid+"timestamp="+tmstmp, success: function(result)
+                                            {
+                                                var obj = eval('('+result+')');
+                                                var eCode = obj.error.code;
+                                                if(eCode == 1 || eCode == '1')
+                                                {
+                                                    customStorage.toast(0,'You can not have information of your own product');
+                                                }
+                                                else
+                                                {
+                                                    sendDetailsToUser();            
+                                                    addToEnquiry();                                                
+                                                }
+                                            }
+                                        });
 
-            $('#userForm').velocity({scale:0},{delay:0,ease:'swing'});
-            $('#overlay').velocity({opacity:0},{delay:100,ease:'swing'});
-            setTimeout(function(){
-                    $('#overlay, #userForm').addClass('dn');
-            },1010);
-            return true;
+                                    }
+                            }
+                            else
+                            {
+                                    showVendorDetails();
+                            }
+
+                $('#userForm').velocity({scale:0},{delay:0,ease:'swing'});
+                $('#overlay').velocity({opacity:0},{delay:100,ease:'swing'});
+                setTimeout(function(){
+                        $('#overlay, #userForm').addClass('dn');
+                        submiter = true;
+                },1010);
+                return true;
+            }
         }
+        
 	});
 
 	if(mobile !== '' && mobile !== null && mobile !== undefined && mobile !== 'null' && mobile !== 'undefined' && typeof mobile !== 'undefined')

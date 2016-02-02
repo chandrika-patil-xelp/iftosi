@@ -5,7 +5,7 @@ var isMobile = false;
 if (pw < 768) {
     isMobile = true;
 }
-
+var submiter = true;
 var validMob = true;
 
     if (isMobile) {
@@ -62,113 +62,122 @@ $('#pr_mobile').focus(function (){
         setTimeout(function () {window.location.assign(DOMAIN); },20);
     });
     $('#signupSubmit').bind('click', function () {
-        if(!$('#pr_citySuggestDiv').hasClass('dn'))
-        {
-            $('#pr_citySuggestDiv').addClass('dn');            
-        }
-        var pr_name = $('#pr_name').val();
-        var pr_mobile = $('#pr_mobile').val();
-        var pr_email = $('#pr_email').val();
-        var pr_pass = $('#pr_pass').val();
-        var city = $('#pr_city').val();
-        var cityid = $('#pr_cityid').val();
-        var isVendor = $('#isVendor').is(':checked');
-            isVendor = $('#isVendor').val();
-        var amIVendor = $("input[type=checkbox]:checked").length;
-        var isValid = false;
-        var userType = isVendor;
-        if(isVendor == 1 || isVendor == '1')
-        {
-            isVendor=1;
-        }
-        else
-        {
-            isVendor=-1;
-        }
-        var uType = $('#isVendor').val();
+        
+        
+            if(!$('#pr_citySuggestDiv').hasClass('dn'))
+            {
+                $('#pr_citySuggestDiv').addClass('dn');            
+            }
+            var pr_name = $('#pr_name').val();
+            var pr_mobile = $('#pr_mobile').val();
+            var pr_email = $('#pr_email').val();
+            var pr_pass = $('#pr_pass').val();
+            var city = $('#pr_city').val();
+            var cityid = $('#pr_cityid').val();
+            var isVendor = $('#isVendor').is(':checked');
+                isVendor = $('#isVendor').val();
+            var amIVendor = $("input[type=checkbox]:checked").length;
+            var isValid = false;
+            var userType = isVendor;
+            if(isVendor == 1 || isVendor == '1')
+            {
+                isVendor=1;
+            }
+            else
+            {
+                isVendor=-1;
+            }
+            var uType = $('#isVendor').val();
 
-		setTimeout(function () {
-			if(pr_name.length==0 || isNaN(pr_name)!==true) {
-				customStorage.toast(0,'Invalid format for Name'); 
-				$('#pr_name').focus();
-				return false;
-			}
-                        else if(city == '') {
-				customStorage.toast(0,'City is mandatory!'); 
-				$('#pr_city').focus();
-				return false;
-			}
-                        else if(cityid == '') {
-				customStorage.toast(0,'Choose the city from the list'); 
-				$('#pr_cityid').focus();
-				return false;
-			}
-                        else if(pr_mobile=='' || pr_mobile.length!=10 || isNaN(pr_mobile)) {
-				customStorage.toast(0,'Invalid format for Mobile'); 
-				$('#pr_mobile').focus();
-				return false;
-			}
-                        else if(pr_email=='') {
-				customStorage.toast(0,'Email is Required!'); 
-				$('#pr_email').focus();
-				return false;
-			}
-                        else if(!common.validateEmail('pr_email')) {
-				customStorage.toast(0,'Email is Not Valid!'); 
-				$('#pr_email').focus();
-				return false;
-			}
-                        else if(pr_pass=='') {
-				customStorage.toast(0,'Password is Required!'); 
-				$('#pr_pass').focus();
-				return false;
-			}
-                        else if(pr_pass.length <= 5 || pr_pass == 0) {
-				customStorage.toast(0,'Password must have minimum 6 characters!'); 
-				$('#pr_pass').focus();
-				return false;
-			}
-                        else if(pr_mobile.length==10 && common.validateEmail('pr_email'))
-                        {
-                            var tmstmp = new Date().getTime();
-                                $.ajax({url: DOMAIN + "apis/index.php?action=checkUser&mobile=" + pr_mobile + "&email="+pr_email+"&isVendor="+uType+"&timestamp="+tmstmp, success: function (result) {
-                                        var obj = jQuery.parseJSON(result);
-                                        
-                                        var errCode = obj.error.type.code;
-                                        
-                                        if(errCode == 3)
-                                        {
-                                            customStorage.toast(0,'Mobile number is already registered!'); 
-                                            $('#pr_mobile').focus();
-                                            return false;
-                                        }
-                                        else if(errCode == 2)
-                                        {
-                                            customStorage.toast(0,'Email id is already registered!'); 
-                                            $('#pr_email').focus();
-                                            return false;
-                                        }
-                                        else if(errCode == 4)
-                                        {
-                                            customStorage.toast(0,obj.error.type.flagMsg);
-                                        }
-                                        else if(errCode == 5)
-                                        {
-                                            signUpProceed();
-                                        }
-                                        else if(obj.error.type == 0)
-                                        {
-                                            if(isVendor == -1)
-                                            {
-                                                    userType = 0;
-                                            }
-                                            pr_mobile = customStorage.addToStorage('mobile',pr_mobile);
-                                            otpGo(pr_mobile);
-                                            requestOTP();
-                                        }
-                                    }});
-                        }
-		}, 250);
+                    setTimeout(function () {
+                            if(pr_name.length==0 || isNaN(pr_name)!==true) {
+                                    customStorage.toast(0,'Invalid format for Name'); 
+                                    $('#pr_name').focus();
+                                    return false;
+                            }
+                            else if(city == '') {
+                                    customStorage.toast(0,'City is mandatory!'); 
+                                    $('#pr_city').focus();
+                                    return false;
+                            }
+                            else if(cityid == '') {
+                                    customStorage.toast(0,'Choose the city from the list'); 
+                                    $('#pr_cityid').focus();
+                                    return false;
+                            }
+                            else if(pr_mobile=='' || pr_mobile.length!=10 || isNaN(pr_mobile)) {
+                                    customStorage.toast(0,'Invalid format for Mobile'); 
+                                    $('#pr_mobile').focus();
+                                    return false;
+                            }
+                            else if(pr_email=='') {
+                                    customStorage.toast(0,'Email is Required!'); 
+                                    $('#pr_email').focus();
+                                    return false;
+                            }
+                            else if(!common.validateEmail('pr_email')) {
+                                    customStorage.toast(0,'Email is Not Valid!'); 
+                                    $('#pr_email').focus();
+                                    return false;
+                            }
+                            else if(pr_pass=='') {
+                                    customStorage.toast(0,'Password is Required!'); 
+                                    $('#pr_pass').focus();
+                                    return false;
+                            }
+                            else if(pr_pass.length <= 5 || pr_pass == 0) {
+                                    customStorage.toast(0,'Password must have minimum 6 characters!'); 
+                                    $('#pr_pass').focus();
+                                    return false;
+                            }
+                            else if(pr_mobile.length==10 && common.validateEmail('pr_email'))
+                            {
+                                    var tmstmp = new Date().getTime();
+                                        $.ajax({url: DOMAIN + "apis/index.php?action=checkUser&mobile=" + pr_mobile + "&email="+pr_email+"&isVendor="+uType+"&timestamp="+tmstmp, success: function (result) {
+                                                var obj = jQuery.parseJSON(result);
+
+                                                var errCode = obj.error.type.code;
+
+                                                if(errCode == 3)
+                                                {
+                                                    customStorage.toast(0,'Mobile number is already registered!'); 
+                                                    $('#pr_mobile').focus();
+                                                    return false;
+                                                }
+                                                else if(errCode == 2)
+                                                {
+                                                    customStorage.toast(0,'Email id is already registered!'); 
+                                                    $('#pr_email').focus();
+                                                    return false;
+                                                }
+                                                else if(errCode == 4)
+                                                {
+                                                    customStorage.toast(0,obj.error.type.flagMsg);
+                                                }
+                                                else if(errCode == 5)
+                                                {
+                                                    if(isVendor == -1)
+                                                    {
+                                                            userType = 0;
+                                                    }
+                                                    pr_mobile = customStorage.addToStorage('mobile',pr_mobile);
+                                                    otpGo(pr_mobile);
+                                                    requestOTP();
+                                                }
+                                                else if(obj.error.type == 0)
+                                                {
+                                                    if(isVendor == -1)
+                                                    {
+                                                            userType = 0;
+                                                    }
+                                                    pr_mobile = customStorage.addToStorage('mobile',pr_mobile);
+                                                    otpGo(pr_mobile);
+                                                    requestOTP();
+                                                }
+                                            }});
+                                
+                            }
+                    }, 250);
     });
     
 function isValidMKey(evt, id) {
@@ -288,7 +297,10 @@ function otpCheck()
                                                     if(errCode == 0)
                                                     {
                                                         customStorage.toast(1,'Registration Successfully Done');
-                                                        setTimeout(function () {window.location.assign(DOMAIN); },2500);
+                                                        setTimeout(function () {
+                                                            window.location.assign(DOMAIN);
+                                                            submiter = true;
+                                                        },2500);
                                                     }
                                                 }});
                                             }

@@ -202,7 +202,7 @@ function submitForm(formid)
 }
     else
     {
-        submiter = false;
+        //submiter = false;
         common.toast(0, 'Submit button can be pressed only once');
     }
 }
@@ -548,7 +548,7 @@ function validateJForm()
     }
     else
     {
-        submiter = false;
+        //submiter = false;
         common.toast(0, 'Submit button can be pressed only once');
     }
 }

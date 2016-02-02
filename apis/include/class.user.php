@@ -55,6 +55,19 @@
             }
             else 
             {
+                
+                $admnSql = "SELECT * from tbl_registration where is_vendor=2 and is_active=1";
+                $admnRes = $this->query($admnSql);
+                if($admnRes)
+                {
+                    while($row = $this->fetchData($admnRes))
+                    {
+                        $adEmail[] = $row['email'];
+                        $adMobile[]= $row['logmobile'];
+                    }
+                }
+                
+                
                 $i = 0;
                 while($row=$this->fetchData($cres))
                 {
@@ -103,49 +116,47 @@
                     
                     if($params['isVendor'] !== '')
                     {
-                        if($isDuplicateMobile[$i] == $params['mobile'] && $isV[$i] == $params['isVendor'])
+                        if(in_array($params['mobile'],$adMobile))
+                        {   
+                            $err2 = array('code'=>4,'flagMsg'=>'User can not use this mobile number: '.$params['mobile']);
+                            break;
+                        }
+                        else if(in_array($params['email'],$adMobile))
+                        {   
+                            $err2 = array('code'=>4,'flagMsg'=>'User can not use this email id: '.$params['email']);
+                            break;
+                        }
+                        else if($isDuplicateMobile[$i] == $params['mobile'] && $isV[$i] == $params['isVendor'])
                         {   
                             $err2 = array('code'=>4,'flagMsg'=>'User with mobile number: '.$isDuplicateMobile[$i].' and same user type is already registered with us');
                             break;
                         }
-                        if($isDuplicateMobile[$i] == $params['mobile'] && $isDuplicateEmail[$i] == $params['email'] && $isV[$i] == $params['isVendor'])
+                        else if($isDuplicateMobile[$i] == $params['mobile'] && $isDuplicateEmail[$i] == $params['email'] && $isV[$i] == $params['isVendor'])
                         {
                             $err2 = array('code'=>4,'flagMsg'=>'User with mobile number: '.$isDuplicateMobile[$i].', having email id: '.$isDuplicateEmail[$i].' and same user type is already registered with us');
                             break;
                         }
-                        if($isDuplicateEmail[$i] == $params['email'] && $isDuplicateMobile[$i] !== $params['mobile'])
+                        else if($isDuplicateEmail[$i] == $params['email'] && $isDuplicateMobile[$i] !== $params['mobile'])
                         {
                             $err2 = array('code'=>4,'flagMsg'=>'User with email id: '.$isDuplicateEmail[$i].' is already registered with us');
                             break;
                         }
-                        if($isDuplicateMobile[$i] == $params['mobile'] && $isDuplicateEmail[$i] == $params['email'] && $isV[$i] !== $params['isVendor'])
+                        else if($isDuplicateMobile[$i] == $params['mobile'] && $isDuplicateEmail[$i] == $params['email'] && $isV[$i] !== $params['isVendor'])
                         {
                             $err2 = array('code'=>5,'flagMsg'=>'User with mobile number: '.$isDuplicateMobile[$i].', email id: '.$isDuplicateEmail[$i].' and this user type is not yet registered with us');
                         }
-                        if($isDuplicateMobile[$i] == $params['mobile'] && $isV[$i] == '2')
+                        else if($isDuplicateMobile[$i] == $params['mobile'] && $isDuplicateEmail[$i] !== $params['email'] && $isV[$i] !== $params['isVendor'])
                         {
-                            $err2 = array('code'=>5,'flagMsg'=>'User with mobile number: '.$isDuplicateMobile[$i].' is registered with us as a super admin');
-                        }
-                        if($isDuplicateMobile[$i] == $params['mobile'] && $isDuplicateEmail[$i] !== $params['email'] && $isV[$i] !== $params['isVendor'])
-                        {
-                            if($isDuplicateMobile[$i] == $params['mobile'] && $isDuplicateEmail[$i] !== $params['email'] && $isV[$i] !== $params['isVendor'] && $isV[$i] !== '0')
-                            {
-                                $err2 = array('code'=>5,'flagMsg'=>'User with mobile number: '.$isDuplicateMobile[$i].', email id: '.$isDuplicateEmail[$i].' and this user type is not yet registered with us');
-                            }
-                            else
-                            {
                                 $err2 = array('code'=>4,'flagMsg'=>'User with mobile number: '.$isDuplicateMobile[$i].' is already registered with us');
-                            }
-                            break;
+                                break;
                         }
-                        if($isDuplicateMobile[$i] !== $params['mobile'] && $isDuplicateEmail[$i] == $params['email'] && $isV[$i] !== $params['isVendor'])
+                        else if($isDuplicateMobile[$i] !== $params['mobile'] && $isDuplicateEmail[$i] == $params['email'] && $isV[$i] !== $params['isVendor'])
                         {
                            $err2 = array('code'=>4,'flagMsg'=>'User with email id: '.$isDuplicateEmail[$i].' is already registered with us');
                            break;
                         }
-                        
-                        
                     }
+                    
                     else if($isDuplicateMobile[$i] == $params['mobile'])
                     {
                         $err2 = 3;
@@ -153,6 +164,22 @@
                     else if($isDuplicateEmail[$i] == $params['email'])
                     {
                         $err2 = 2;
+                    }
+                }
+                if(in_array($params['mobile'],$isDuplicateMobile) && !in_array($params['email'],$isDuplicateEmail) && !in_array($params['isVendor'],$isV))
+                {
+                    if(!in_array($params['email'],$isDuplicateEmail))
+                    {
+                        $chkother = "SELECT logmobile,email from tbl_registration where logmobile != ".$params['mobile']." AND email = \"".$params['email']."\"";
+                        $resother = $this->query($chkother);
+                        if($this->numRows($resother) == 0)
+                        {
+                            $err2 = array('code'=>5,'flagMsg'=>'User with mobile number: '.$params['mobile'].', email id: '.$params['email'].' and this user type is not yet registered with us');
+                        }
+                        else
+                        {
+                            $err2 = array('code'=>4,'flagMsg'=>'User with email id: '.$params['email'].' is already registered with us');
+                        }
                     }
                 }
                 
