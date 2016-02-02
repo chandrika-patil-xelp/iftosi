@@ -2,7 +2,7 @@ var uid = customStorage.readFromStorage('userid');
 var busiType = customStorage.readFromStorage('busiType');
 var username = customStorage.readFromStorage('username');
 var is_vendor = customStorage.readFromStorage('is_vendor');
-var submiter = true;
+var submiter2 = true;
 if(is_vendor == 1 || is_vendor === '1')
 {
     $('#profileTab').removeClass('dn');
@@ -542,7 +542,7 @@ function closeAllForms() {
     $('#overlay').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
     setTimeout(function () {
         $('#overlay,#uploadDiv,#dollarRateDiv,#goldRateDiv,#silverRateDiv,#goldSilverRateDiv').addClass('dn');
-        submiter = true;
+        submiter2 = true;
     }, 1010);
     loadDiamont = true;
     
@@ -600,9 +600,9 @@ $(document).ready(function() {
 
 function updateDollarRate()
 {
-    if(submiter == true)
+    if(submiter2 == true)
     {
-        submiter = false;
+        submiter2 = false;
     
         var dollar_rate = $("#dollar_rate").val();
         //dollar_rate=parseFloat(dollar_rate);
@@ -665,9 +665,9 @@ function showSilverRateForm() {
 
 function updateSilverRate() {
     
-    if(submiter == true)
+    if(submiter2 == true)
     {
-        submiter = false;
+        submiter2 = false;
         var silver_rate = $("#silver_rate").val();
         if(pageName == 'Products')
         {
@@ -792,9 +792,9 @@ function updateGoldRate() {
     }
     else
     {
-            if(submiter === true)
+            if(submiter2 === true)
             {
-                submiter = false;
+                submiter2 = false;
                 var tmstmp = new Date().getTime();
                 $.ajax({url: DOMAIN + "/apis/index.php?action=updateGoldRate&vid="+uid+"&goldRate="+gold_rate+"&timestamp="+tmstmp, success: function(result) {
                     var obj = jQuery.parseJSON(result);
@@ -805,7 +805,7 @@ function updateGoldRate() {
                         //window.location.reload(1);
                         goldRate = gold_rate;
                         closeAllForms();
-                        submiter = true;
+                        submiter2 = true;
                         showJewelleryImps(GtmpId);
                     } else if(errCode==1) {
 
@@ -836,9 +836,9 @@ function updateGoldSilverRate() {
     {
         gold_rate = '0.00';
     }
-    if(submiter == true)
+    if(submiter2 == true)
     {
-        submiter = false;
+        submiter2 = false;
         var tmstmp = new Date().getTime();
         $.ajax({url: DOMAIN + "/apis/index.php?action=updateGoldRate&vid="+uid+"&goldRate="+gold_rate+"&timestamp="+tmstmp, success: function(result) {
                             var obj = jQuery.parseJSON(result);
@@ -854,6 +854,7 @@ function updateGoldSilverRate() {
                                         loadBullions(1);
                                     }
                                     closeAllForms();
+                                    submiter2 = true;
 
                             } else if(errCode==1) {
                                     common.toast(0,obj['error']['msg']);
