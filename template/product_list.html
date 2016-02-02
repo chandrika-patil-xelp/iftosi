@@ -140,7 +140,7 @@ function loadProductsCallback(res,pgno) {
             }
             if(catName[0] == 'Jewellery')
             {
-                tempUrl += obj.metal+'-'+obj.catName[1]+'-'+obj.purity+'-Carat-'+obj.weight+'-Grams-'+obj.certified;
+                tempUrl += obj.metal+'-'+catName[0]+'-'+catName[1]+'-'+obj.purity+'-Carat-'+obj.weight+'-Grams-'+obj.certified;
                 tempUrl += '/jid-';
             }
             tempUrl = tempUrl.toString().replace('--', '-');
@@ -163,7 +163,7 @@ function loadProductsCallback(res,pgno) {
                 str += '<div class="shape fLeft">' + obj['appr_img'] + '</div>';
                 str += '<div class="shape fLeft">' + obj['rej_img'] + '</div>';
                 str += '<div class="acct2 fLeft">';
-                str += '<a href="' + DOMAIN + 'index.php?case=thumbnail&pid=' + obj['id'] + '"><div class="viewDetBtn poR ripplelink fmOpenR fRight">View Images</div></a>';
+                str += '<a href="' + DOMAIN + 'index.php?case=thumbnail&pid=' + obj.id + '"><div class="viewDetBtn poR ripplelink fmOpenR fRight">View Images</div></a>';
                 str += '</div>';
                 str += '</li>';
                 str += '';

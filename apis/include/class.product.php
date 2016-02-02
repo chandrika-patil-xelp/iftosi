@@ -2842,7 +2842,7 @@
 					}
 				}
 
-				$sql = "SELECT product_id, product_image, active_flag FROM tbl_product_image_mapping WHERE product_id IN (".$expActPrdIds.") AND active_flag NOT IN (2, 4);";
+				$sql = "SELECT product_id, product_image, active_flag FROM tbl_product_image_mapping WHERE product_id IN (".$expActPrdIds.") AND active_flag NOT IN (2,3);";
 				$res = $this->query($sql);
 
 				if($res)
