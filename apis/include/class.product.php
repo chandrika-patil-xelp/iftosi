@@ -510,7 +510,7 @@
 								product_image,
 								active_flag,
 								image_sequence,
-								uploaded_date,
+								upload_date,
                                                                 update_date
                                                         )
 							VALUES
