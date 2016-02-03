@@ -21,6 +21,7 @@ function changeGemstoneType(obj,id)
 	{
 		$('.gemstoneProp_'+id).addClass('dn');
 		$('.otherGemstoneProp_'+id).addClass('dn');
+                $('#addGemsType').addClass('dn');
                 if(id!=1) {
                     $('#gemsTypeCont_'+id).parent().addClass('dn');
                 }

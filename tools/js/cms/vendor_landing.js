@@ -481,6 +481,7 @@ $('#askGoldRate').click(function ()
 function revertSelect()
 {
     $("input[name='Certficate']").attr('disabled',false);
+    $('#jewellery_mix').prop('checked', true);
     $('#Pendants_10026').attr('disabled', false);
     $('#Bangles_10034').attr('disabled', false);
     $('#Earrings_10020').attr('disabled', false);
