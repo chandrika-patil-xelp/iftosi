@@ -67,7 +67,13 @@
 						?>
 						<div class='jShapesCont resultsPage fmOpenL'>
 							<div class="allShapes resultsPage">
-								<center>
+                                                            <div class="prImgPrev" onclick="movePrImg(true);"></div>
+                                                            <div class="prImgNext" onclick="movePrImg(false);"></div>
+                                                            <center>
+								<div class="prImageStrip">
+                                                                    <ul class="carousel transition300">
+                                                                        
+                                                                            
 									<?php
 									$html = '';
 									foreach($v['subcat'] as $key => $val)
@@ -78,14 +84,19 @@
 										$cname = preg_replace('/[^a-zA-Z0-9]+/', ' ', $val['cat_name']);
 										$cname = ereg_replace("[ \t\n\r]+", " ", $cname);
 										$cname = strtolower(str_replace(" ", "-", $cname));
-
+                                                                                $html.='<li>';  
 										$html .= '<a href="'.DOMAIN.strtolower($v['cat_name']).'/'.$cname.'/ct-'.$val['catid'].'">';
 										$html .= '<div id="'.$val['catid'].'_'.$scat.'" class="jshapeComm transition300 ripplelink '.$scat.'">'.$val['cat_name'].'</div>';
 										$html .= '</a>';
+                                                                                $html.='</li>';
 									}
 									echo $html;
 									?>
-									</center>
+                                                                            
+                                                                        
+                                                                    </ul>
+									</div>
+                                                                </center>
 							</div>
 						</div>
 						<?php
@@ -145,5 +156,27 @@
     <script type="text/javascript" src="<?= $jvs['home']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['head']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['comm']; ?>"></script>
+    <script type="text/javascript">
+    var val = 0;
+        var moveCount = 0;
+        function movePrImg(flag) {
+            var totalThumbs = $(".carousel  li").length;
+            var liWidth = ($(".carousel  li").outerWidth());
+            if (!flag) {
+                if (moveCount < (totalThumbs - 5)) {
+                    val = val - liWidth;
+                    $(".carousel").css({transform: 'translateX(' + val + 'px)'});
+                    moveCount++;
+                }
+            }
+            else if (flag) {
+                if (moveCount > 0) {
+                    val = val + liWidth;
+                    $(".carousel").css({transform: 'translateX(' + val + 'px)'});
+                    moveCount--;
+                }
+            }
+        }
+    </script>
 </body>
 </html>
