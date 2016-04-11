@@ -208,7 +208,7 @@ a{text-decoration: none;}
 .shapeComm:hover::before {position: absolute;top: 0;width: 100%;height:5px;background: #8A0044;content: "";-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;left: 0;font-size: 16px;transition: 300ms ease-in-out;-moz-transition: 300ms ease-in-out;-ms-transition: 300ms ease-in-out;-webkit-transition: 300ms ease-in-out;-o-transition: 300ms ease-in-out;opacity: 1;}*/
 
 .resultsPage .shapeComm1{margin: 0 0.5%;width: 7.5%!important;padding-bottom: 7.5%;height:0!important;border: 2px solid #ebebde;}
-.resultsPage .shapeComm{margin: 0;width: 10%!important;padding-bottom: 10%;height: 0!important;border: 2px solid transparent;}
+.resultsPage .shapeComm{margin: 0;width: 9%!important;padding-bottom: 9%;height: 0!important;border: 2px solid transparent;}
 .resultsPage .shapeComm:hover{border:2px solid #8A0044;}
 
 .Round{background-position: 0% 0%;}
@@ -1064,8 +1064,9 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .carousel li {width: 20%;height: 100%;padding: 0;margin: 0;display: inline-block;margin: 0;padding: 0;white-space: nowrap;vertical-align: baseline;border-bottom: none;    border-right: none;}
 .thumbContainer {padding: 2px;cursor: pointer;height: 70px;margin-top: 2px;}
 li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
-.prImgPrev {width: 30px;height: 100%;background: #f0f0f0 url(../img/arrow_black.svg)no-repeat;background-size: auto 20px;background-position: center;position: absolute;left:0;z-index: 10;transform: rotateY(180deg);-webkit-transform: rotateY(180deg);ms-transform: rotateY(180deg);-moz-transform: rotateY(180deg);cursor: pointer;}
-.prImgNext {width: 30px; height: 100%; background: #f0f0f0 url(../img/arrow_black.svg)no-repeat;background-size: auto 20px;background-position: center;position: absolute;    right: 0px;    z-index: 10;   border-left: 0px solid #e6e6e6;cursor: pointer;}
+.prImgPrev {width: 30px;height: 100%;background-color: #f0f0f0;background-image:url(../img/arrow_black.svg);background-repeat: no-repeat;background-size: auto 20px;background-position: center;position: absolute;left:0;z-index: 10;transform: rotateY(180deg);-webkit-transform: rotateY(180deg);ms-transform: rotateY(180deg);-moz-transform: rotateY(180deg);cursor: pointer;}
+.prImgNext {width: 30px; height: 100%; background-color: #f0f0f0;background-image:  url(../img/arrow_black.svg);background-repeat: no-repeat;background-size: auto 20px;background-position: center;position: absolute;    right: 0px;    z-index: 10;   border-left: 0px solid #e6e6e6;cursor: pointer;}
+.bgfff{background-color:#fff;}
 
 @media only screen and (min-width: 320px) and (max-width: 767px){
     .teamTabs{display: block;}
