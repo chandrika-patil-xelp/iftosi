@@ -25,17 +25,23 @@
 			?>
             <div class='jShapesCont resultsPage showHide fmOpenL'>
                 <div class="allShapes resultsPage">
+                    <div class="prImgPrev bgfff" onclick="movePrImg(true);"></div>
+                    <div class="prImgNext bgfff" onclick="movePrImg(false);"></div>
                     <center>
+                        <div class="prImageStrip">
+                                                                    <ul class="carousel transition300">
 						<?php
 						$html = '';
 						foreach($showcat['subcat'] as $key => $val)
 						{
 							$exp = explode('/',$val['cat_name']);
 							$scat = trim($exp[0]);
-							$html .= '<div id="'.$val['catid'].'_'.$scat.'" class="jshapeComm transition300 ripplelink '.$scat.'">'.$val['cat_name'].'</div>';
+							$html .= '<li><div id="'.$val['catid'].'_'.$scat.'" class="jshapeComm transition300 ripplelink '.$scat.'">'.$val['cat_name'].'</div></li>';
 						}
 						echo $html;
 						?>
+                                                                        </ul>
+									</div>
 						</center>
                 </div>
             </div>
@@ -374,5 +380,27 @@
     <script type="text/javascript" src="<?= $jvs['result']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['head']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['filter']; ?>"></script>
+    <script type="text/javascript">
+    var val = 0;
+        var moveCount = 0;
+        function movePrImg(flag) {
+            var totalThumbs = $(".carousel  li").length;
+            var liWidth = ($(".carousel  li").outerWidth());
+            if (!flag) {
+                if (moveCount < (totalThumbs - 5)) {
+                    val = val - liWidth;
+                    $(".carousel").css({transform: 'translateX(' + val + 'px)'});
+                    moveCount++;
+                }
+            }
+            else if (flag) {
+                if (moveCount > 0) {
+                    val = val + liWidth;
+                    $(".carousel").css({transform: 'translateX(' + val + 'px)'});
+                    moveCount--;
+                }
+            }
+        }
+    </script>
 </body>
 </html>
