@@ -845,7 +845,10 @@ a{cursor:pointer;}
 .Pendants{background: url(../img/common/ifpendants.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(56, 11, 52,0.9);}
 .Necklaces{background: url(../img/common/ifnecklaces.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -70px 0px rgba(94, 0, 55,0.9);}
 .Bracelets{background: url(../img/common/ifbracelets.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(138, 0, 68,0.9);}
-.Bangles{background: url(../img/common/ifbracelets.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(138, 0, 68,0.9);border-right:0px solid;}
+.Bangles{background: url(../img/common/ifbracelets.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(138, 0, 68,0.9);}
+.NosePin{background: url(../img/common/nosepin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(138, 0, 68,0.9);}
+.Mangalsutra{background: url(../img/common/mangalsutra.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(138, 0, 68,0.9);}
+.Polki{background: url(../img/common/polki.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(138, 0, 68,0.9);}
 
 .jshapeComm.Rings:hover{background: url(../img/common/ifrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
 .jshapeComm.Earrings:hover{background: url(../img/common/ifearrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
@@ -853,6 +856,9 @@ a{cursor:pointer;}
 .jshapeComm.Necklaces:hover{background: url(../img/common/ifnecklaces.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
 .jshapeComm.Bracelets:hover{background: url(../img/common/ifbracelets.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
 .jshapeComm.Bangles:hover{background: url(../img/common/ifbracelets.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+.jshapeComm.NosePin:hover{background: url(../img/common/nosepin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+.jshapeComm.Mangalsutra:hover{background: url(../img/common/mangalsutra.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+.jshapeComm.Polki:hover{background: url(../img/common/polki.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
 
 .jshapeComm.shapeSelected.Rings{background: url(../img/common/ifrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
 .jshapeComm.shapeSelected.Earrings{background: url(../img/common/ifearrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
@@ -860,6 +866,10 @@ a{cursor:pointer;}
 .jshapeComm.shapeSelected.Necklaces{background: url(../img/common/ifnecklaces.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
 .jshapeComm.shapeSelected.Bracelets{background: url(../img/common/ifbracelets.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
 .jshapeComm.shapeSelected.Bangles{background: url(../img/common/ifbracelets.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+.jshapeComm.shapeSelected.NosePin{background: url(../img/common/nosepin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+.jshapeComm.shapeSelected.Mangalsutra{background: url(../img/common/mangalsutra.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+.jshapeComm.shapeSelected.Polki{background: url(../img/common/polki.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+
 
 .jshapeComm.shapeSelected.Rings:hover{background: url(../img/common/ifrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
 .jshapeComm.shapeSelected.Earrings:hover{background: url(../img/common/ifearrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
@@ -867,12 +877,16 @@ a{cursor:pointer;}
 .jshapeComm.shapeSelected.Necklaces:hover{background: url(../img/common/ifnecklaces.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
 .jshapeComm.shapeSelected.Bracelets:hover{background: url(../img/common/ifbracelets.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
 .jshapeComm.shapeSelected.Bangles:hover{background: url(../img/common/ifbracelets.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+.jshapeComm.shapeSelected.NosePin:hover{background: url(../img/common/nosepin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+.jshapeComm.shapeSelected.Mangalsutra:hover{background: url(../img/common/mangalsutra.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+.jshapeComm.shapeSelected.Polki:hover{background: url(../img/common/polki.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+
 
 .jshapeComm.shapeSelected span{color:#8A0044;}
 .jshapeComm.shapeSelected{background-color: #fff;border-right: 2px solid #FFF;padding-top: 75px;font-size: 30px;}
 .jshapeComm.shapeSelected::after{content: '';position: absolute;right: 0px; left:0px; bottom: 50px;margin: auto; width: 40px;height: 40px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;}
 
-.drag-target {height: 100%;width: 20px;position: fixed;top: 0;z-index: 1;}
+.drag-target {height: 100%;width: 0px;position: fixed;top: 0;z-index: 1;}
 .pFixed{position: fixed;}
 
 /*Bullion Results*/
@@ -1064,8 +1078,8 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .carousel li {width: 20%;height: 100%;padding: 0;margin: 0;display: inline-block;margin: 0;padding: 0;white-space: nowrap;vertical-align: baseline;border-bottom: none;    border-right: none;}
 .thumbContainer {padding: 2px;cursor: pointer;height: 70px;margin-top: 2px;}
 li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
-.prImgPrev {width: 30px;height: 100%;background-color: #f0f0f0;background-image:url(../img/arrow_black.svg);background-repeat: no-repeat;background-size: auto 20px;background-position: center;position: absolute;left:0;z-index: 10;transform: rotateY(180deg);-webkit-transform: rotateY(180deg);ms-transform: rotateY(180deg);-moz-transform: rotateY(180deg);cursor: pointer;}
-.prImgNext {width: 30px; height: 100%; background-color: #f0f0f0;background-image:  url(../img/arrow_black.svg);background-repeat: no-repeat;background-size: auto 20px;background-position: center;position: absolute;    right: 0px;    z-index: 10;   border-left: 0px solid #e6e6e6;cursor: pointer;}
+.prImgPrev {width: 30px;height: 100%;background-color: #f0f0f0;background-image:url(../img/arrow_black.svg);background-repeat: no-repeat;background-size: auto 20px;background-position: center;position: absolute;left:0;z-index: 1100;transform: rotateY(180deg);-webkit-transform: rotateY(180deg);ms-transform: rotateY(180deg);-moz-transform: rotateY(180deg);cursor: pointer;}
+.prImgNext {width: 30px; height: 100%; background-color: #f0f0f0;background-image:  url(../img/arrow_black.svg);background-repeat: no-repeat;background-size: auto 20px;background-position: center;position: absolute;    right: 0px;    z-index: 1100;   border-left: 0px solid #e6e6e6;cursor: pointer;}
 .bgfff{background-color:#fff;}
 
 @media only screen and (min-width: 320px) and (max-width: 767px){
