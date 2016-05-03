@@ -64,6 +64,19 @@ $.ajax({url: common.APIWebPath() + "index.php?action=viewAll&uid=" + vid+"&times
             var errCode = obj.error.code;
             if(errCode == 0)
             {
+                if(obj.results[1].expire_flag == undefined || obj.results[1].expire_flag == 'undefined' || obj.results[1].expire_flag == null || obj.results[1].expire_flag == 'null' || obj.results[1].expire_flag == '')
+                {
+                    obj.results[1].expire_flag = 0;
+                }
+                if(obj.results[1].active_flag == undefined || obj.results[1].active_flag == 'undefined' || obj.results[1].active_flag == null || obj.results[1].active_flag == 'null' || obj.results[1].active_flag == '')
+                {
+                    obj.results[1].active_flag = 0;
+                }
+                if(obj.results[1].is_complete == undefined || obj.results[1].is_complete == 'undefined' || obj.results[1].is_complete == null || obj.results[1].is_complete == 'null' || obj.results[1].is_complete == '')
+                {
+                    obj.results[1].is_complete = 0;
+                }
+                
                 var userid = obj.results[1].vendor_id;
                 if((obj.results[1].expire_flag == 0 || obj.results[1].expire_flag == '0') && (obj.results[1].active_flag == 1 || obj.results[1].active_flag == '1') && (obj.results[1].is_complete == '2' || obj.results[1].is_complete == 2))
                 {

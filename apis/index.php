@@ -67,6 +67,24 @@ switch($action)
         $result	= $obj->getUserDet($params);
         $res = $result;
         break;
+        
+    case 'makeDate':
+        $params['strdt'] = urlencode('1990-10-10 10:10:10');
+        
+        $stringDt = (!empty($params['strdt'])) ? trim(urldecode($params['strdt'])) : '';
+        if(empty($stringDt))
+        {
+            $arr = array();
+            $err = array('Code' => 1, 'Msg' => 'Parameters missing');
+            $result = array('results'=>$arr, 'error' => $err);
+            $res=$result;
+            break;
+        }
+        include APICLUDE.'class.manager.php';
+        $obj	= new manager($db['iftosi']);
+        $result	= $obj->makeDate($params);
+        $res = $result;
+        break;
 
 //----------------------------User--------------------------------
 

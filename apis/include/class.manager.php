@@ -80,5 +80,36 @@ class manager extends DB
             $result = array('result'=>$arr,'error'=>$err);
             return $result;
         }
+        
+        public function makeDate($params)
+        {
+            
+            if(!empty($params['strdt']))
+            {
+                $sql = "SELECT date_format('".urldecode($params['strdt'])."','%D %M,%Y|%h:%i %p') as dateForm";
+                $res = $this->query($sql);
+                if($res)
+                {
+                    $row = $this->fetchData($res);
+                    $otpt = $row['dateForm'];
+                    $dateArr = explode('|',$otpt);
+                    
+                    $arr = array('date'=>$dateArr[0],'time'=>$dateArr[1]);
+                    $err = array('code'=>0,'msg'=>'Date Format created');
+                }
+                else
+                {
+                    $arr = array();
+                    $err = array('code'=>1,'msg'=>'Error in date format creation');
+                }
+            }
+            else
+            {
+                $arr = array();
+                $err = array('code'=>1,'msg'=>'No date string is passed');
+            }
+            $result = array('result'=>$arr,'error'=>$err);
+            return $result;
+        }
 }
 ?>

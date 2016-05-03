@@ -129,7 +129,7 @@
 			}
 			else if(!empty($val['attribute_values']))
 			{
-				$expd = explode(",",$val['attribute_values']);
+				$expd = str_ireplace('|~|',', ',explode(",",$val['attribute_values']));
 	?>
 				<div class="filterCont fLeft <?php echo ($val['attribute_display_type'] == 1) ? 'halfSize' : '';?>">
 					<div class="fLeft optionTitle fmOpenR"><?php echo $val['attribute_disp_name'];?></div>

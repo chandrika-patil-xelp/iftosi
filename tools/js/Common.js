@@ -321,7 +321,7 @@ function Common() {
 
                             if (is_vendor == '1')
                             {
-                                if((isComp == '0' || isComp == '1') && af == '0')
+                                if((isComp == '0' || isComp == '1') && (af == '0' || af == '' ))
                                 {
                                     window.location.assign(DOMAIN + 'index.php?case=vendor_Form&uid=' + userid);
                                 }

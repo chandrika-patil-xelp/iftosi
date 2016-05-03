@@ -1071,6 +1071,9 @@ function addGemsType() {
 
 $(document).ready(function()
 {
+    
+    
+    
     if($('input[name=Plain]:checked').val() == 'Plain')
     {
         checkIfGold();
@@ -1079,6 +1082,30 @@ $(document).ready(function()
     {
         checkIfNotGold();
     }
+    
+    $('input[name=metal]').bind('click',function()
+    {
+        if($(this).attr('id') == 'gold')
+        {
+           $('.gtype').removeClass('dn');
+        }
+        else
+        {
+            $('.gtype').addClass('dn');
+        }
+    });
+    
+    $('.jshapeComm').bind('click',function()
+    {
+        if($(this).hasClass('shapeSelected') && $(this).attr('id') == 'Polki')
+        {
+            $('.noneDiv').removeClass('dn');              
+        }
+        else
+        {
+            $('.noneDiv').addClass('dn');
+        }
+    });
 });
 
 function checkIfGold()
