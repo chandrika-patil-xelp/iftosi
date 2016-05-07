@@ -152,6 +152,10 @@ a{text-decoration: none;}
 .Necklaces{background: url(../img/common/ifnecklaces.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -70px 0px rgba(94, 0, 55,0.9);}
 .Bracelets{background: url(../img/common/ifbracelets.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(138, 0, 68,0.9);}
 .Bangles{background: url(../img/common/ifbracelets.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(138, 0, 68,0.9);}
+.NosePin{background: url(../img/common/nosepin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(138, 0, 68,0.9);}
+.Mangalsutra{background: url(../img/common/mangalsutra.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(138, 0, 68,0.9);}
+.Polki{background: url(../img/common/polki.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(138, 0, 68,0.9);}
+
 
 .jshapeComm.Rings:hover{background: url(../img/common/ifrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
 .jshapeComm.Earrings:hover{background: url(../img/common/ifearrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
@@ -159,6 +163,10 @@ a{text-decoration: none;}
 .jshapeComm.Necklaces:hover{background: url(../img/common/ifnecklaces.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
 .jshapeComm.Bracelets:hover{background: url(../img/common/ifbracelets.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
 .jshapeComm.Bangles:hover{background: url(../img/common/ifbracelets.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+.jshapeComm.NosePin:hover{background: url(../img/common/nosepin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+.jshapeComm.Mangalsutra:hover{background: url(../img/common/mangalsutra.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+.jshapeComm.Polki:hover{background: url(../img/common/polki.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+
 
 .jshapeComm.shapeSelected.Rings{background: url(../img/common/ifrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
 .jshapeComm.shapeSelected.Earrings{background: url(../img/common/ifearrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
@@ -166,6 +174,11 @@ a{text-decoration: none;}
 .jshapeComm.shapeSelected.Necklaces{background: url(../img/common/ifnecklaces.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
 .jshapeComm.shapeSelected.Bracelets{background: url(../img/common/ifbracelets.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
 .jshapeComm.shapeSelected.Bangles{background: url(../img/common/ifbracelets.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+.jshapeComm.shapeSelected.NosePin{background: url(../img/common/nosepin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+.jshapeComm.shapeSelected.Mangalsutra{background: url(../img/common/mangalsutra.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+.jshapeComm.shapeSelected.Polki{background: url(../img/common/polki.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+
+
 
 .jshapeComm.shapeSelected.Rings:hover{background: url(../img/common/ifrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(23, 19, 52,0.8);}
 .jshapeComm.shapeSelected.Earrings:hover{background: url(../img/common/ifearrings.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(42, 14, 52,0.8);}
@@ -173,6 +186,11 @@ a{text-decoration: none;}
 .jshapeComm.shapeSelected.Necklaces:hover{background: url(../img/common/ifnecklaces.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -300px 100px rgba(94, 0, 55,0.8);}
 .jshapeComm.shapeSelected.Bracelets:hover{background: url(../img/common/ifbracelets.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
 .jshapeComm.shapeSelected.Bangles:hover{background: url(../img/common/ifbracelets.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+.jshapeComm.shapeSelected.NosePin:hover{background: url(../img/common/nosepin.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+.jshapeComm.shapeSelected.Mangalsutra:hover{background: url(../img/common/mangalsutra.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+.jshapeComm.shapeSelected.Polki:hover{background: url(../img/common/polki.jpg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -300px 100px rgba(138, 0, 68,0.8);}
+
+
 
 .jshapeComm.shapeSelected span{color:#8A0044;}
 .jshapeComm.shapeSelected{background-color: #fff;border-right: 2px solid #FFF;padding-top: 75px;font-size: 25px;}
