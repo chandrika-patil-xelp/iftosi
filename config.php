@@ -86,6 +86,10 @@ if(stristr($_SERVER['HTTP_HOST'], 'demo.iftosi.com'))
 {
 	$db['iftosi'] = array('localhost','xelpmoc_dmiftosi','1234567890','xelpmoc_dmiftosi');
 }
+else if(stristr($_SERVER['HTTP_HOST'],'iftosi.com') && stristr(REQURI, 'beta'))
+{
+	$db['iftosi'] = array('localhost','iftosi','iftosi@live','db_iftosi_beta');
+}
 else if(stristr($_SERVER['HTTP_HOST'],'iftosi.com'))
 {
 	//$db['iftosi'] = array('54.213.106.43','nafexdb','nafexdb','db_iftosi');
