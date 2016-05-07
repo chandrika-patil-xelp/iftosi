@@ -6,6 +6,7 @@ if(!stristr($_SERVER['HTTP_HOST'], '.iftosi.com') && !stristr($_SERVER['HTTP_HOS
 }
 */
 error_reporting(0);
+define('REQURI', $_SERVER['REQUEST_URI']);
 if(stristr($_SERVER['HTTP_HOST'],'demo.iftosi.com'))
 {
 
@@ -17,6 +18,18 @@ if(stristr($_SERVER['HTTP_HOST'],'demo.iftosi.com'))
 	define('APICLUDE',WEBROOT.'apis/include/');
 	define('IMGDOMAIN','http://'.$_SERVER['HTTP_HOST'].'/image-upload/');
 	define('IMGUPLOAD','http://'.$_SERVER['HTTP_HOST'].'/upload-image/');
+	define('IMGPATH','image-upload/');
+}
+else if(stristr($_SERVER['HTTP_HOST'],'iftosi.com') && stristr(REQURI, 'beta'))
+{
+	define('DOMAIN','http://'.$_SERVER['HTTP_HOST'].'/beta/');
+	define('APIDOMAIN','http://'.$_SERVER['HTTP_HOST'].'/beta/apis/');
+	define('WEBROOT',$_SERVER['DOCUMENT_ROOT'].'/beta/');
+	define('TEMPLATE',WEBROOT.'template/');
+	define('INCLUDES',WEBROOT.'include/');
+	define('APICLUDE',WEBROOT.'apis/include/');
+	define('IMGDOMAIN','http://'.$_SERVER['HTTP_HOST'].'/beta/image-upload/');
+	define('IMGUPLOAD','http://'.$_SERVER['HTTP_HOST'].'/beta/upload-image/');
 	define('IMGPATH','image-upload/');
 }
 else if(stristr($_SERVER['HTTP_HOST'],'iftosi.com'))
@@ -58,8 +71,7 @@ else
 }
 define('SMSAPI','http://alerts.sinfini.com/api/web2sms.php?workingkey=Ae24f0c241588043b00e0449d6e2a5664&to=+91_MOBILE&sender=IFTOSI&message=_MESSAGE');
 
-define('VERSION',6.40);
-define('REQURI', $_SERVER['REQUEST_URI']);
+define('VERSION',6.41);
 
 $dollarValue = 66.03;
 define('dollarValue',$dollarValue);
