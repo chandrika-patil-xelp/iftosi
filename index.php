@@ -256,7 +256,7 @@ switch ($action) {
                 $page = 'signup';
                 //include 'template/signup.html';
 
-                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(DOMAIN, 'beta.xelpmoc.in/iftosi'))
+                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(DOMAIN, 'beta.xelpmoc.in/iftosi') || stristr(REQURI, 'beta'))
                 {
                         include 'template/signup.html';
                 }
@@ -544,7 +544,7 @@ switch ($action) {
                 $adjacents = 2;
                 //echo "<pre>";print_r($total);die;
                 //include 'template/results.html';
-                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
+                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
                 {
                         include 'template/results.html';
                 }
@@ -581,7 +581,7 @@ switch ($action) {
                 }
                 //echo "<pre>";print_r($data);die;
                 //include 'template/jewellery_results.html';
-                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
+                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
                 {
                         include 'template/jewellery_results.html';
                 }
@@ -610,7 +610,7 @@ switch ($action) {
                 $lastpg = ceil($total / 15);
                 $adjacents = 2;
                 //include 'template/bullion_results.html';
-                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
+                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
                 {
                         include 'template/bullion_results.html';
                 }
@@ -761,7 +761,7 @@ switch ($action) {
                 $totalDes = $res3['total'];
                 //echo "<pre>";print_r($des); die;
                 //include 'template/diamond_details.html';
-                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
+                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
                 {
                         include 'template/diamond_details.html';
                 }
@@ -813,7 +813,7 @@ switch ($action) {
 
                 //echo "<pre>".print_r($data3); die;
                 //include 'template/bullion_details.html';
-                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
+                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
                 {
                         include 'template/bullion_details.html';
                 }
@@ -943,7 +943,7 @@ switch ($action) {
 
                 //echo "<pre>"; print_r($des); die;
                 //include 'template/jewellery_details.html';
-                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
+                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
                 {
                         include 'template/jewellery_details.html';
                 }
@@ -1238,7 +1238,7 @@ switch ($action) {
                 $res = $comm->executeCurl($url);
                 $data = $res['results'];
                 //include 'template/index.html';
-                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com'))
+                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
                 {
                         include 'template/index.html';
                 }

@@ -936,6 +936,14 @@ function getResultsData(data,sortby,showtree)
 		}
 		else if(pageName == 'wishlist-jewellery') {
 			$.each(data.results.products, function(i, vl) {
+				if(prdIds !== '')
+				{
+					prdIds += "," + vl.pid;
+				}
+				else
+				{
+					prdIds = vl.pid;
+				}
 				html += '<div class="prdComm fLeft jwRes transition100" style="opacity: 1; transform: translateX(0px);">';
 					html += '<div class="wisgDel" id="'+vl.pid+'"></div>';
 						html += '<div class="prdCommDiv fLeft transition100">';
@@ -1029,6 +1037,7 @@ function getResultsData(data,sortby,showtree)
 					
 				html += '</div>';
 			});
+			getImagesData(prdIds);
 		}
 		else if(pageName == 'wishlist') {
 			$.each(data.results.products, function(i, vl) {
