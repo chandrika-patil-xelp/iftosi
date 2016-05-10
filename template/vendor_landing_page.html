@@ -152,7 +152,11 @@
                 <div class="downloadLink fmOpenB fLeft">
                     <center>
                         <span><strong>Note: </strong>Upload file format should same as sample format</span>
-                        <a href="SampleDiamondsFile.xls">Download Sample File</a>
+                        <?php if($catid==10000) { ?>
+                            <a href="sampleDiamondList.xls">Download Sample File</a>
+                        <?php } else if($catid=10001) { ?>
+                            <a href="sampleJewelleryList.xlsx">Download Sample File</a>
+                        <?php } ?>
                     </center>
                 </div>
             </form>

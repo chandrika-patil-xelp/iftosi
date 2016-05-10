@@ -814,7 +814,8 @@ class vendor extends DB
         $vid=$params['vid'];
         $data=$params['data'];
         $type=$params['type'];
-        $defaultColNames = array('Barcode','Lot Ref','Lot No','Cert','Cut','Carats','Col','Cla','Base','Price','Value','P(Disc)','PB2B(Disc)','Prop','Pol','Sym','Fluo','T.D','Table','Measurement','Cert1 No','P.A','Cr Hgt','Cr Ang','Girdle','P.D');
+//        $defaultColNames = array('Barcode','Lot Ref','Lot No','Cert','Cut','Carats','Col','Cla','Base','Price','Value','P(Disc)','PB2B(Disc)','Prop','Pol','Sym','Fluo','T.D','Table','Measurement','Cert1 No','P.A','Cr Hgt','Cr Ang','Girdle','P.D');
+        $defaultColNames = array("Stock #","Availability","Shape","Weight","Color","Clarity","Cut Grade","Polish","Symmetry","Fluorescence Intensity","Fluorescence Color","Measurements","Lab","Report #","Treatment","Rapnet Price","Rapnet  Discount %","Cash Price","Cash Price Discount %","Fancy Color","Fancy Color Intensity","Fancy Color Overtone","Depth %","Table %","Girdle Thin","Girdle Thick","Girdle %","Girdle Condition","Culet Size","Culet Condition","Crown Height","Crown Angle","Pavilion Depth","Pavilion Angle","Laser Inscription","Cert Comment","Country","State","City","Is Matched Pair Separable","Pair Stock #","Allow RapLink Feed","Parcel Stones","Report Filename","Diamond Image","Sarine Loupe","Trade Show","Key to symbols","Shade ","Star Length","Center Inclusion","Black Inclusion","Milky","Member Comment","Report Issue Date","Report Type","Lab Location","Brand");
 
         $sql="SELECT city from tbl_vendor_master where vendor_id=\"".$vid."\"";
         $res=$this->query($sql);
@@ -832,17 +833,20 @@ class vendor extends DB
         $validFormat=TRUE;
         if (count($colName) == count($defaultColNames)) {
             for ($i = 0; $i < count($defaultColNames); $i++) {
-                if ($defaultColNames[$i] != $colName[$i]) {
+                if (strtoupper(trim($defaultColNames[$i])) != strtoupper(trim($colName[$i]))) {
                     $validFormat = FALSE;
                 }
             }
         } else {
             $validFormat = FALSE;
         }
-       // echo '<pre>';
-       // print_r($defaultColNames);
-        //print_r($colName);
-       // die();
+//        echo '<pre>';
+//        print_r($defaultColNames);
+//        print_r($colName);
+//        if ($validFormat) {
+//            echo '$validFormat';
+//        }
+//        die();
         $i = $totlIns = 0;
         if ($validFormat) {
             while ($i < $len) {
@@ -893,6 +897,264 @@ class vendor extends DB
                         
                         $sql = "INSERT INTO `tbl_product_search` (product_id, certified, cut, carat, color, clarity, base, price, value, p_disc,p_discb2b,prop, polish, symmetry, fluo, td, tabl, measurement, cno, pa, cr_hgt, cr_ang, girdle, pd, shape,b2b_price) VALUES (" . rtrim($srch_val, ', ') . ")";
                         //echo $sql.'<br>';
+                        $res = $this->query($sql);
+                        $totlIns++;
+                    }
+                }
+                $i++;
+            }
+            if ($res) {
+                $totlRecrds = $len - 1;
+                $arr = array('suc' => $totlIns, 'fail' => $totlRecrds - $totlIns);
+                $err = array('Code' => 0, 'Msg' => 'Products are updated Successfully');
+            } else {
+                $arr = array();
+                $err = array('Code' => 1, 'Msg' => 'Products are Failed to Update');
+            }
+        } else {
+            $arr = array();
+            $err = array('Code' => 1, 'Msg' => 'Invalid File Format');
+        }
+        $result = array('results' => $arr, 'error' => $err);
+        return $result;
+    }
+
+    public function uploadJewelleryProducts($params) {
+        $vid=$params['vid'];
+        $data=$params['data'];
+        $type=$params['type'];
+        $defaultColNames = array("Product details","Design No","Quantity","Metal","Metal Color","Purity","Gross Wt","Net Wt","Metal Amount","Color Stone type","Color Stone Wt","Color stone value","Diamonds","Shape","Clarity","Colour","Carat","No Of Diamond","Value of Diamonds","Labour","Other","Hallmark","Certificate","Collection Name","Price");
+
+        if($type=='csv') {
+            $rdv = explode("\n", $data);
+            $colName = explode(",", $rdv[0]);
+            $len = count($rdv) - 1;
+        } else {
+            $rdv=$data;
+            $colName=$data[0];
+            $len = count($rdv);
+        }
+        $validFormat=TRUE;
+        if (count($colName) == count($defaultColNames)) {
+            for ($i = 0; $i < count($defaultColNames); $i++) {
+                if (strtoupper(trim($defaultColNames[$i])) != strtoupper(trim($colName[$i]))) {
+                    $validFormat = FALSE;
+                }
+            }
+        } else {
+            $validFormat = FALSE;
+        }
+//        echo '<pre>';
+//        print_r($defaultColNames);
+//        print_r($colName);
+//        print_r($rdv[0]);
+//        echo 'type : '.$type;
+//        if ($validFormat) {
+//            echo '$validFormat';
+//        }
+//        die();
+        $i = $totlIns = 0;
+        if ($validFormat) {
+            while ($i < $len) {
+                if($type=='csv') {
+                    $value = explode(",", $rdv[$i]);
+                } else {
+                    $value=$rdv[$i];
+                }
+                if ($i != 0) {
+                    $ts = date('Y-m-d H:i');
+                    $query = "INSERT INTO `tbl_productid_generator` (`product_name`, date_time) VALUES ('Jewellery','" . $ts . "')";
+                    $res = $this->query($query);
+                    if ($res) {
+                        
+                        $b2b_price = $value[8];
+                        $pro_id = mysql_insert_id();
+                        $sql = "INSERT INTO `tbl_product_category_mapping` (product_id, category_id, price,b2bprice, date_time) VALUES ('" . $pro_id . "','10001','" . $value[24] . "','" . $b2b_price . "','" . $ts . "')";
+                        $res = $this->query($sql);
+                        
+                        $sql = "INSERT INTO `tbl_vendor_product_mapping` (product_id, vendor_id, vendor_price,b2bprice, city, vendor_currency, vendor_quantity, date_time) VALUES ('" . $pro_id . "','" . $vid . "','" . $value[24] . "','" . $b2b_price . "','" . $city . "','USD','".$value[2]."', '" . $ts . "')";
+                        $res = $this->query($sql);
+                        
+                        $sql = "INSERT INTO `tbl_product_master` (product_id, prd_price,b2bprice, date_time) VALUES ('" . $pro_id . "','" . $value[24] . "','" . $b2b_price . "','" . $ts . "')";
+                        $res = $this->query($sql);
+                        
+                        $sql = "INSERT INTO `tbl_product_more_info` SET 
+                            `product_id`='".$pro_id."',
+                            product_details='".$value[0]."', 
+                            design_no           ='".$value[1]."', 
+                            quantity            ='".$value[2]."', 
+                            metal_color         ='".$value[4]."', 
+                            net_weight          ='".$value[7]."', 
+                            metal_amount        ='".$value[8]."', 
+                            color_stone_value   ='".$value[11]."', 
+                            diamonds            ='".$value[12]."', 
+                            no_of_diamonds      ='".$value[17]."', 
+                            value_of_diamonds   ='".$value[18]."', 
+                            labour_charge       ='".$value[19]."', 
+                            other               ='".$value[20]."', 
+                            hallmark            ='".$value[21]."', 
+                            collection_name     ='".$value[23]."'";
+                        $res = $this->query($sql);
+
+                        $sql = "INSERT INTO `tbl_product_search` SET 
+                            product_id       ='".$pro_id."', 
+                            metal           ='".$value[3]."', 
+                            gold_purity     ='".$value[5]."', 
+                            gold_weight     ='".$value[6]."', 
+                            gemstone_type   ='".$value[9]."', 
+                            gemwt           ='".$value[10]."', 
+                            shape           ='".$value[13]."', 
+                            clarity         ='".$value[14]."', 
+                            color           ='".$value[15]."', 
+                            carat           ='".$value[16]."', 
+                            certified       ='".$value[22]."', 
+                            price='".$value[24]."'";
+                        $res = $this->query($sql);
+                        $totlIns++;
+                    }
+                }
+                $i++;
+            }
+            if ($res) {
+                $totlRecrds = $len - 1;
+                $arr = array('suc' => $totlIns, 'fail' => $totlRecrds - $totlIns);
+                $err = array('Code' => 0, 'Msg' => 'Products are updated Successfully');
+            } else {
+                $arr = array();
+                $err = array('Code' => 1, 'Msg' => 'Products are Failed to Update');
+            }
+        } else {
+            $arr = array();
+            $err = array('Code' => 1, 'Msg' => 'Invalid File Format');
+        }
+        $result = array('results' => $arr, 'error' => $err);
+        return $result;
+    }
+
+    public function uploadDiamondProducts($params) {
+        $vid=$params['vid'];
+        $data=$params['data'];
+        $type=$params['type'];
+        $defaultColNames = array("Stock #","Availability","Shape","Weight","Color","Clarity","Cut Grade","Polish","Symmetry","Fluorescence Intensity","Fluorescence Color","Measurements","Lab","Report #","Treatment","Rapnet Price","Rapnet  Discount %","Cash Price","Cash Price Discount %","Fancy Color","Fancy Color Intensity","Fancy Color Overtone","Depth %","Table %","Girdle Thin","Girdle Thick","Girdle %","Girdle Condition","Culet Size","Culet Condition","Crown Height","Crown Angle","Pavilion Depth","Pavilion Angle","Laser Inscription","Cert Comment","Country","State","City","Is Matched Pair Separable","Pair Stock #","Allow RapLink Feed","Parcel Stones","Report Filename","Diamond Image","Sarine Loupe","Trade Show","Key to symbols","Shade ","Star Length","Center Inclusion","Black Inclusion","Milky","Member Comment","Report Issue Date","Report Type","Lab Location","Brand");
+
+        if($type=='csv') {
+            $rdv = explode("\n", $data);
+            $colName = explode(",", $rdv[0]);
+            $len = count($rdv) - 1;
+        } else {
+            $rdv=$data;
+            $colName=$data[0];
+            $len = count($rdv);
+        }
+        $validFormat=TRUE;
+        if (count($colName) == count($defaultColNames)) {
+            for ($i = 0; $i < count($defaultColNames); $i++) {
+                if (strtoupper(trim($defaultColNames[$i])) != strtoupper(trim($colName[$i]))) {
+                    $validFormat = FALSE;
+                }
+            }
+        } else {
+            $validFormat = FALSE;
+        }
+//        echo '<pre>';
+//        print_r($defaultColNames);
+//        print_r($colName);
+//        print_r($data);
+//        echo 'type : '.$type;
+//        if ($validFormat) {
+//            echo '$validFormat';
+//        }
+//        die();
+        $i = $totlIns = 0;
+        if ($validFormat) {
+            while ($i < $len) {
+                if($type=='csv') {
+                    $value = explode(",", $rdv[$i]);
+                } else {
+                    $value=$rdv[$i];
+                }
+                if ($i != 0) {
+                    $ts = date('Y-m-d H:i');
+                    $query = "INSERT INTO `tbl_productid_generator` (`product_name`, date_time) VALUES ('Jewellery','" . $ts . "')";
+                    $res = $this->query($query);
+                    if ($res) {
+                        
+                        $b2b_price = $value[17] * (ltrim($value[18], '-') / 100);
+                        $pro_id = mysql_insert_id();
+                        $sql = "INSERT INTO `tbl_product_category_mapping` (product_id, category_id, price,b2bprice, date_time) VALUES ('" . $pro_id . "','10000','" . $value[17] . "','" . $b2b_price . "','" . $ts . "')";
+                        $res = $this->query($sql);
+                        
+                        $sql = "INSERT INTO `tbl_vendor_product_mapping` (product_id, vendor_id, vendor_price,b2bprice, city, vendor_currency, date_time) VALUES ('" . $pro_id . "','" . $vid . "','" . $value[17] . "','" . $b2b_price . "','" . $city . "','USD', '" . $ts . "')";
+                        $res = $this->query($sql);
+                        
+                        $sql = "INSERT INTO `tbl_product_master` (product_id,barcode, prd_price,b2bprice, date_time) VALUES ('" . $pro_id . "','".$value[13]."', '" . $value[17] . "','" . $b2b_price . "','" . $ts . "')";
+                        $res = $this->query($sql);
+
+                        $sql = "INSERT INTO `tbl_product_search` SET 
+                                product_id  = ".$pro_id.",
+                                shape       ='".$value[2]."',
+                                dwt         ='".$value[3]."',
+                                color       ='".$value[4]."',
+                                clarity     ='".$value[5]."',
+                                cut         ='".$this->getAbbrValue($value[6])."',
+                                polish      ='".$this->getAbbrValue($value[7])."',
+                                symmetry    ='".$this->getAbbrValue($value[8])."',
+                                measurement ='".$value[11]."',
+                                tabl        ='".$value[23]."',
+                                cr_hgt      ='".$value[30]."', 
+                                cr_ang      ='".$value[31]."', 
+                                pd          ='".$value[32]."', 
+                                pa          ='".$value[33]."'";
+                        $res = $this->query($sql);
+
+
+                        $sql = "INSERT INTO `tbl_product_more_info` SET 
+                                product_id              = ".$pro_id.",
+                                stock_no                ='".$value[0]."',
+                                availability            ='".$value[1]."',
+                                fluorescence_intensity  ='".$value[9]."',
+                                fluorescence_color      ='".$value[10]."',
+                                lab                     ='".$value[12]."',
+                                report_no               ='".$value[13]."',
+                                treatment               ='".$value[14]."',
+                                rapnet_price            ='".$value[15]."',
+                                rapnet_discount_percent ='".$value[16]."',
+                                cash_price              ='".$value[17]."',
+                                cash_price_discount_percent     ='".$value[18]."',
+                                fancy_color             ='".$value[19]."',
+                                fancy_color_intensity   ='".$value[20]."',
+                                fancy_color_overtone    ='".$value[21]."',
+                                depth_percent           ='".$value[22]."',
+                                girdle_thin             ='".$value[24]."',
+                                girdle_thick            ='".$value[25]."',
+                                girdle_percent          ='".$value[26]."',
+                                girdle_condition        ='".$value[27]."',
+                                culet_size              ='".$value[28]."',
+                                culet_condition         ='".$value[29]."',
+                                laser_inscription	='".$value[34]."', 
+                                certified               ='".$value[35]."', 
+                                country                 ='".$value[36]."', 
+                                state                   ='".$value[37]."', 
+                                city                    ='".$value[38]."', 
+                                matched_pair            ='".$value[39]."', 
+                                pair_stock              ='".$value[40]."', 
+                                allow_raplink_feed      ='".$value[41]."', 
+                                parcel_stones           ='".$value[42]."', 
+                                report_filename         ='".$value[43]."', 
+                                diamond_image           ='".$value[44]."', 
+                                sarine_loupe            ='".$value[45]."', 
+                                trade_show              ='".$value[46]."', 
+                                key_to_symbols          ='".$value[47]."', 
+                                shade                   ='".$value[48]."', 
+                                star_length             ='".$value[49]."', 
+                                center_inclusion        ='".$value[50]."', 
+                                black_inclusion         ='".$value[51]."', 
+                                milky                   ='".$value[52]."', 
+                                member_comment          ='".$value[53]."', 
+                                report_date             ='".$value[54]."', 
+                                report_type             ='".$value[55]."', 
+                                lab_location            ='".$value[56]."', 
+                                brand                   ='".$value[57]."'";
                         $res = $this->query($sql);
                         $totlIns++;
                     }

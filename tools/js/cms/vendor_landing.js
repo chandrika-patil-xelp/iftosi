@@ -913,7 +913,7 @@ $("#upSubmit").on('click',(function(e) {
         $('#upSubmit').text('Uploading Data');
         uploadStart=true;
         var tmstmp = new Date().getTime();
-        $.ajax({url: DOMAIN + "apis/index.php?action=bulkInsertProducts&vid="+uid+"&timestamp="+tmstmp,
+        $.ajax({url: DOMAIN + "apis/index.php?action=bulkInsertProducts&vid="+uid+"&timestamp="+tmstmp+"&catid="+catid,
             type: "POST",
             data: new FormData($('form')[0]),
             contentType: false,

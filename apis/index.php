@@ -708,6 +708,7 @@ switch($action)
             } else {
                 if($fileExt=='csv') {
                     $params['data'] = file_get_contents($_FILES['up_file']['tmp_name']);
+//                    echo '<pre>';print_r($params);die;
                 } else {
                     $path = WEBROOT.'upload/';
                     $filename = $path.$vid.'-'.date('d-m-Y').'.'.$fileExt;
@@ -728,7 +729,11 @@ switch($action)
                 }
                 $params['type']=$fileExt;
                 $obj = new vendor($db['iftosi']);
-                $result = $obj->bulkInsertProducts($params);
+                if($params['catid']==10000) {
+                    $result = $obj->uploadDiamondProducts($params);
+                } else if($params['catid']==10001) {
+                    $result = $obj->uploadJewelleryProducts($params);
+                }
             }
             $res= $result;
             break;
