@@ -103,10 +103,12 @@
                             var userid = customStorage.readFromStorage('userid');
                             if(obj.results[0].is_vendor == 1)
                             {
-                                customStorage.addToStorage('email',obj.results[1].email);
-                                customStorage.addToStorage('isComp',obj.results[1].is_complete);
-                                customStorage.addToStorage('busiType',obj.results[1].business_type);
-                                
+                                if(obj.results[1] !== undefined)
+                                {
+                                    customStorage.addToStorage('email',obj.results[1].email);
+                                    customStorage.addToStorage('isComp',obj.results[1].is_complete);
+                                    customStorage.addToStorage('busiType',obj.results[1].business_type);
+                                }
                             }
                             $.ajax({url: APIDOMAIN + "index.php?action=changepwd&npass="+rpass+"&rpass="+rpass+"&ukey="+key+"&uid="+uid, success: function (result)
                             {

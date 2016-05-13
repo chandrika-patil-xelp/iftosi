@@ -385,17 +385,31 @@
         {
             $dt= json_decode($params['dt'],1);
             $detls  = $dt['result'];
-            $sql="SELECT is_vendor,user_id from tbl_registration where user_id=".$detls['uid'];
+            $sql="SELECT is_vendor,user_id,logmobile from tbl_registration where user_id=".$detls['uid'];
             $res=$this->query($sql);
             $row=$this->fetchData($res);
             $isv=$row['is_vendor'];
             $uid=$row['user_id'];
-
+            $logmob=$row['logmobile'];
+            
+  /*          $vstat1  = "SELECT vendor_id from tbl_vendor_master where vendor_id=\"".$uid."\"";
+            $vres1   = $this->query($vstat1);
+            
+            /* IF USER ID IS NOT REGISTERED WITH THE VENDOR MASTER TABLE BUT WANTS TO SIGN UP AS VENDOR 
+            if($isv == 1)
+            {
+                if($this->numRows($vres1) == 0)
+                {
+                    $vstat1  = "INSERT INTO tbl_vendor_master(vendor_id,contact_mobile) VALUES(vendor_id = \"".$uid."\", contact_mobile=\"".$logmob."\")";
+                    $vres1   = $this->query($vstat1);
+                }
+            }*/
+            
             $vstat  = "SELECT is_complete from tbl_vendor_master where vendor_id=\"".$uid."\"";
             $vres   = $this->query($vstat);
             $statrow= $this->fetchData($vres);
             $completeStat = $statrow['is_complete'];
-          
+            
             if($isv == 1)
             {
                 $tmp_params = array('uid' => $detls['uid']);
@@ -1468,9 +1482,14 @@
                     
                 $err = array('code'=>0,'msg'=>'Vendor status is fetched');
             }
+            else if($resCount == 0)
+            {
+                $arr = 'no';
+                $err = array('code'=>0,'msg'=>'No details found');
+            }
             else
             {
-                $arr= array();
+                $arr = array();
                 $err = array('code'=>1,'msg'=>'Vendor status not found');
             }
             $result = array('result'=>$arr,'error'=>$err);
