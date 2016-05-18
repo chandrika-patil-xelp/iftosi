@@ -360,7 +360,7 @@
 
                             <div class="divCon2 fLeft <?php echo ($attr['diamond_shape'][0]) ? '' : 'dn'; ?>  diamondProp">
                                 <div  class="titleDiv txtCap fLeft">Value Of Diamonds*</div>
-                                <input name="no_diamonds" id="no_diamonds" type="text" placeholder=" eg. 10" autocomplete="false" value="<?= $attr['nofd']; ?>" onkeypress="common.isNumberKey(event);" class="txtInput fLeft fmOpenR font14 c666">
+                                <input name="no_diamonds" id="diamondsvalue" type="text" placeholder=" eg. 10" autocomplete="false" value="<?= $attr['nofd']; ?>" onkeypress="common.isNumberKey(event);" class="txtInput fLeft fmOpenR font14 c666">
                             </div>
 
                             <?php
@@ -460,7 +460,7 @@
 
                             <div class="divCon2  fLeft">
                                 <div  class="titleDiv txtCap fLeft">Other Material (in Grams)</div>
-                                <input id="goldweight" name="other_material" type="text" placeholder="Dori Weight, Alloy Weight, etc " autocomplete="false" value="<?= $attr['other_material']; ?>" onkeypress="return common.isDecimalKey(event);" class="txtInput fLeft fmOpenR font14 c666 weightCal">
+                                <input id="othermaterial" name="other_material" type="text" placeholder="Dori Weight, Alloy Weight, etc " autocomplete="false" value="<?= $attr['other_material']; ?>" onkeypress="return common.isDecimalKey(event);" class="txtInput fLeft fmOpenR font14 c666 weightCal">
                             </div>
                             
                             <div class="divCon2  fLeft">
@@ -489,12 +489,12 @@
                             
                             <div class="divCon2  fLeft">
                                 <div  class="titleDiv txtCap fLeft">Gross Weight (in Grams)*</div>
-                                <input id="goldweight" name="gross_weight" type="text" readonly="true" placeholder=" eg. 10,20,50" maxlength="8" autocomplete="false" value="<?= $attr['gross_weight']; ?>" onkeypress="return common.isDecimalKey(event);" class="txtInput fLeft fmOpenR font14 c666" onfocusout="">
+                                <input id="grossweight" name="gross_weight" type="text" readonly="true" placeholder=" eg. 10,20,50" maxlength="8" autocomplete="false" value="<?= $attr['gross_weight']; ?>" onkeypress="return common.isDecimalKey(event);" class="txtInput fLeft fmOpenR font14 c666" onfocusout="">
                             </div>
                             
                             <div class="divCon2  fLeft">
                                 <div  class="titleDiv txtCap fLeft">Net Weight (in Grams)*</div>
-                                <input id="goldweight" name="net_weight" type="text" readonly="true" placeholder=" eg. 10,20,50" maxlength="8" autocomplete="false" value="<?= $attr['net_weight']; ?>" onkeypress="return common.isDecimalKey(event);" class="txtInput fLeft fmOpenR font14 c666" onfocusout="">
+                                <input id="netweight" name="net_weight" type="text" readonly="true" placeholder=" eg. 10,20,50" maxlength="8" autocomplete="false" value="<?= $attr['net_weight']; ?>" onkeypress="return common.isDecimalKey(event);" class="txtInput fLeft fmOpenR font14 c666" onfocusout="">
                             </div>
 
                             <div class="divCon2  fLeft">
@@ -519,6 +519,8 @@
                                 <center>
                                     <div class="cancelBtn fmOpenR ripplelink poR" onclick="backbtn();">CANCEL</div>
                                     <div class="submitBtn fmOpenR ripplelink poR" onclick="validateJForm()" id="Submitdiv">SUBMIT</div>
+<!--                                  <div class="submitBtn fmOpenR ripplelink poR"  id="Submitdiv">SUBMIT</div>-->
+
                                 </center>
                             </div>
                         </div>

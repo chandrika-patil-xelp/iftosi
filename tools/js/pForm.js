@@ -1229,3 +1229,49 @@ function calculateJPrice()
 
     }
 }
+/*gangesh*/  
+function  onchange(){
+                         var wt=  $('#diamondweight').val();
+                         var num=  $('#no_diamonds').val();
+                         var prcrt=  $('#price_per_carat').val(); 
+                         var dimondadd = (wt * num)/5 ;
+                         var tot= dimondadd * prcrt;
+
+                                 $('#diamondsvalue').val(tot);
+                     
+                       
+                        var gemwt = $('#gemweight').val();                      
+                        var ngemstone=$('#num_gemstones').val();                                         
+                        var totgstone = (gemwt * ngemstone) /5 ;
+                     
+                                                        console.log("gemwt :" + gemwt);
+                                                        console.log("ngemstone:" +  ngemstone);                        
+                             
+                               $('#netweight').val(totgstone);
+                                         
+                        var gldweight = $('#goldweight').val();      
+                        var addgold =   parseFloat(totgstone) + parseFloat(gldweight);
+                          
+                                $('#netweight').val(addgold);
+                                                            console.log('addgold'+ addgold);
+                                                            console.log('dimondadd'+ dimondadd);
+                           var totstonedimond = parseFloat(addgold) + parseFloat(dimondadd); 
+                                totstonedimond=parseFloat(totstonedimond);
+                                                            console.log(totstonedimond);
+                                $('#netweight').val(totstonedimond);
+                           var lcharge = $('#labour_charge').val();
+                           var totalprice = parseFloat(tot) + parseFloat(lcharge);
+                           
+                                $('#prdprice').val(totalprice);
+                           
+                           var othermateril =$('#othermaterial').val();
+                           var ntwt =$('#netweight').val();
+                           var grossweight = parseFloat(othermateril) + parseFloat(ntwt);
+                         //  grossweight=parseFloat(grossweight);
+                           $('#grossweight').val(grossweight);
+                           
+          }
+$("#diamondweight,#no_diamonds,#price_per_carat,#diamondsvalue,#gemweight,#num_gemstones,#netweight,#goldweight,#labour_charge,#prdprice,#othermaterial,#grossweight").keyup(function(){
+ onchange();
+
+});
