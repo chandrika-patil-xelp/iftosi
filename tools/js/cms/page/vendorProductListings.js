@@ -324,7 +324,7 @@ function generateDiamondList(obj) {
     str += '<div class="cert fLeft">' + obj['cert'] + '</div>';
     str += '<div class="price fLeft fmOpenB">&#36;' + obj['price']+ '</div>';
     str += '<div class="price fLeft fmOpenB">' + b2b_price + '</div>';
-    str += '<div class="acct fLeft">';
+    str += '<div class="acct fLeft poR">';
     if(obj['active_flag'] == 1 || obj['active_flag'] == 0){
         cl='inStockPrd';
     }
@@ -334,6 +334,7 @@ function generateDiamondList(obj) {
     if(obj['active_flag'] == 4){
         cl='soldStockPrd';
     }
+     str += '<div class="dmyCnt fRight">';
     str += '<select id="isStock'+ obj['id'] +'" onchange="inStock(' + obj['id'] + ',this.value);" value='+obj['active_flag']+' class="txtSelect fmOpenB '+cl+' fLeft">';
     str += '<option '+((obj['active_flag']) == 1 ? "selected" : "")+' class="arrow txtCenter" value="1">In Stock</option>';
     str += '<option '+((obj['active_flag']) == 3 ? "selected" : "")+' class="arrow txtCenter" value="3">Out Of Stock</option>';
@@ -342,7 +343,19 @@ function generateDiamondList(obj) {
     str += '<div class="deltBtn poR fRight ripplelink" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
     str += '<a href="'+ DOMAIN +'index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn fRight poR ripplelink"></div></a>';
     str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn fRight poR ripplelink"></div></a>';
-    
+    str += '</div>';
+     str += '<div class="tltpBtn">';
+     str += '<div class="tltpbox transition300">';
+      str += '<div class="deltBtn poR fRight ripplelink" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
+    str += '<a href="'+ DOMAIN +'index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn fRight poR ripplelink"></div></a>';
+    str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn fRight poR ripplelink"></div></a>';
+         str += '<select id="isStock'+ obj['id'] +'" onchange="inStock(' + obj['id'] + ',this.value);" value='+obj['active_flag']+' class="txtSelect fmOpenB '+cl+' fLeft">';
+    str += '<option '+((obj['active_flag']) == 1 ? "selected" : "")+' class="arrow txtCenter" value="1">In Stock</option>';
+    str += '<option '+((obj['active_flag']) == 3 ? "selected" : "")+' class="arrow txtCenter" value="3">Out Of Stock</option>';
+    str += '<option '+((obj['active_flag']) == 4 ? "selected" : "")+' class="arrow txtCenter" value="4">Sold</option>';
+    str += '</select>'    
+      str += '</div>';
+     str += '</div>';
     
     
     
@@ -352,6 +365,7 @@ function generateDiamondList(obj) {
     str += '';
     return str;
 }
+
 
 
 function loadJewels(pgno) {
@@ -571,7 +585,7 @@ function generateJewellList(obj) {
         }
         str += '<div class="subType fLeft">' + gweights + '</div>';
         str += '<div class="price fLeft fmOpenB">&#8377;' + obj['price']+ '</div>';
-        str += '<div class="acct fLeft">';
+        str += '<div class="acct fLeft poR">';
         
         if(obj['active_flag'] == 1 || obj['active_flag'] == 0){
             cl='inStockPrd';
@@ -579,15 +593,27 @@ function generateJewellList(obj) {
         if(obj['active_flag'] == 3){
             cl='outStockPrd';
         }
+         str += '<div class="dmyCnt fRight">';
         str += '<select id="isStock'+ obj['id'] +'" onchange="inStock(' + obj['id'] + ',this.value);" value='+obj['active_flag']+' class="txtSelect fmOpenR fLeft '+cl+'">';
         str += '<option value="1" '+((obj['active_flag']) == 1 ? "selected" : "")+'>In Stock</option>';
         str += '<option value="3" '+((obj['active_flag']) == 3 ? "selected" : "")+'>Out Of Stock</option>';
         str += '</select>';
-        
         str += '<div class="deltBtn poR ripplelink fRight" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
         str += '<a href="'+ DOMAIN +'index.php?case=jewellery_Form&catid=10001&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn poR ripplelink fRight"></div></a>';
         str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn poR ripplelink fRight"></div></a>';
-        
+        str += '</div>';
+         str += '<div class="tltpBtn">';
+     str += '<div class="tltpbox transition300">';
+      str += '<div class="deltBtn poR fRight ripplelink" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
+    str += '<a href="'+ DOMAIN +'index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn fRight poR ripplelink"></div></a>';
+    str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn fRight poR ripplelink"></div></a>';
+         str += '<select id="isStock'+ obj['id'] +'" onchange="inStock(' + obj['id'] + ',this.value);" value='+obj['active_flag']+' class="txtSelect fmOpenB '+cl+' fLeft">';
+    str += '<option '+((obj['active_flag']) == 1 ? "selected" : "")+' class="arrow txtCenter" value="1">In Stock</option>';
+    str += '<option '+((obj['active_flag']) == 3 ? "selected" : "")+' class="arrow txtCenter" value="3">Out Of Stock</option>';
+    str += '<option '+((obj['active_flag']) == 4 ? "selected" : "")+' class="arrow txtCenter" value="4">Sold</option>';
+    str += '</select>'    
+      str += '</div>';
+     str += '</div>';
         
         //str += '<div class="soldBtn poR ripplelink fmOpenR '+cl+'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "Out Of Stock" : "Out Of Stock");+'</div>';
        
@@ -799,7 +825,7 @@ function generatBullionsList(obj) {
     }
     str += '<div class="btype fLeft">' + gweights + '</div>';
     str += '<div class="price fLeft fmOpenB">&#8377;' + obj['price']+ '</div>';
-    str += '<div class="acct fLeft">';
+    str += '<div class="acct fLeft poR">';
    
     
     
@@ -809,7 +835,7 @@ function generatBullionsList(obj) {
     if(obj['active_flag'] == 3){
         cl='outStockPrd';
     }
-    
+     str += '<div class="dmyCnt fRight">';
     str += '<select id="isStock'+ obj['id'] +'" onchange="inStock(' + obj['id'] + ',this.value);" value='+obj['active_flag']+' class="txtSelect fmOpenR fLeft '+cl+'">';
     str += '<option value="1" '+((obj['active_flag']) == 1 ? "selected" : "")+'>In Stock</option>';
     str += '<option value="3" '+((obj['active_flag']) == 3 ? "selected" : "")+'>Out Of Stock</option>';
@@ -817,7 +843,21 @@ function generatBullionsList(obj) {
     str += '<div class="deltBtn poR ripplelink fRight" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
     str += '<a href="'+ DOMAIN +'index.php?case=bullion_Form&catid=10002&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn poR ripplelink fRight"></div></a>';
     str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn poR ripplelink fRight"></div></a>';
-    
+     str += '</div>';
+      str += '<div class="tltpBtn">';
+     str += '<div class="tltpbox transition300">';
+      str += '<div class="deltBtn poR fRight ripplelink" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
+    str += '<a href="'+ DOMAIN +'index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn fRight poR ripplelink"></div></a>';
+    str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn fRight poR ripplelink"></div></a>';
+         str += '<select id="isStock'+ obj['id'] +'" onchange="inStock(' + obj['id'] + ',this.value);" value='+obj['active_flag']+' class="txtSelect fmOpenB '+cl+' fLeft">';
+    str += '<option '+((obj['active_flag']) == 1 ? "selected" : "")+' class="arrow txtCenter" value="1">In Stock</option>';
+    str += '<option '+((obj['active_flag']) == 3 ? "selected" : "")+' class="arrow txtCenter" value="3">Out Of Stock</option>';
+    str += '<option '+((obj['active_flag']) == 4 ? "selected" : "")+' class="arrow txtCenter" value="4">Sold</option>';
+    str += '</select>'    
+      str += '</div>';
+     str += '</div>';
+     
+     
     str += '</div>';
     str += '</li>';
     str += '';
