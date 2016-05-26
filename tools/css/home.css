@@ -1107,7 +1107,7 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
         .allShapes {width: 100%;height: auto;padding: 0;}
         .shapeComm {width: 100px!important;height: 100px!important;margin: 0;border: 2px solid #fff;position: relative;background-image: url(../img/shapes.svg);display: inline-block;vertical-align: bottom;text-align: center;cursor: pointer;background-size: 1000% auto;}
         .jShapesCont {height: auto;}
-        .jshapeComm {width: 50%;padding-top: 162px;font-size: 18px;}
+        .jshapeComm {width: 100%;padding-top: 162px;font-size: 18px;}
         .Rings {box-shadow: inset 0 -50px 0px rgba(23, 19, 52,0.9);}
         .Earrings {box-shadow: inset 0 -50px 0px rgba(42, 14, 52,0.9);}
         .Pendants {box-shadow: inset 0 -50px 0px rgba(56, 11, 52,0.9);}
@@ -1308,8 +1308,12 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
             
             
             .head1 {height: auto;line-height: 30px;width: 100%;float: left;text-align: center;}            
-            .head2 {width: 100%;float: left;text-align: center;}            
+            .head2 {width: 100%;float: left;text-align: center;}  
             
+            /*john*/
+            .container {overflow-x: hidden;}
+            .carousel {width: 100%;}
+            .carousel li {width: 100%;}
             
 
 }
@@ -1369,7 +1373,7 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 
         .homePage .shapeComm {width: 15%!important;padding-bottom: 15%;}
         .homePage .jShapesCont {width: 100%;height: auto;background: #fff;padding: 0px 0 0px 0;position: relative;z-index: 0;}
-        .homePage .jShapesCont .jshapeComm {margin: 0;width: 50%;height:300px;line-height: 220px;}
+        .homePage .jShapesCont .jshapeComm {margin: 0;width: 100%;height:300px;line-height: 220px;}
         .homePage .jShapesCont .jshapeComm.Bangles{margin: 0;width: 100%;}
 
         .jshapeComm:hover{line-height: 50px;padding-top: 45px;}
@@ -1381,6 +1385,10 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
         .infoTxt {width: 100%;height: 47px;}
         .infoUpper {width: 100%;height: 17px;font-size: 17px;line-height: 17px;color: #fff;}
         .infoLower {width: 100%;height: auto;font-size: 26px;line-height: 30px;}
+        
+        /*john*/
+        .carousel {width: 100%;}
+        .carousel li {width: 50%;}
 
         /*Diamond Results Page*/
         .allResults{padding: 0 15px;}
