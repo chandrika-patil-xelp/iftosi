@@ -227,11 +227,23 @@ function validateJForm()
 	var gemweight=$('#gemweight').val().trim();
 	var num_gemstones = $('#num_gemstones').val().trim();
 	var purity = $('#goldpurity').val().trim();
-	var goldweight=$('#goldweight').val().trim();
+        var goldweight=$('#netweight').val().trim();
 	var barcode=$('#barcode').val().trim();
 	var prdprice=$('#prdprice').val().trim();
 	var othercert=$('#other_cerificate').val().trim();
 	var other_gem_type = $('#other_gem_type').val().trim();
+        
+	var price_per_carat = $('#price_per_carat').val().trim();
+	var diamondsvalue = $('#diamondsvalue').val().trim();
+	var gemstonevalue = $('#gemstonevalue').val().trim();
+	var othermaterial = $('#othermaterial').val().trim();
+	var gold_weight = $('#netweight').val().trim();
+	var grossweight = $('#grossweight').val().trim();
+	var labour_charge = $('#labour_charge').val().trim();
+	var gprice_per_carat = $('#gprice_per_carat').val().trim();
+	
+        
+        
         var puritypatt = /(^|[^-\d])(14|18|22|24)\b/;
 	var subcat = '';
 	var isValid = true;
@@ -420,10 +432,10 @@ function validateJForm()
 
 	if(isValid && (goldweight === undefined || goldweight === null || goldweight === '' || isNaN(goldweight)))
 	{
-		str = 'Please enter weight';
+		str = 'Please enter net weight';
 		submiter = false;
                 isValid = false;
-		$('#goldweight').focus();
+		$('#netweight').focus();
 	}
 
 	if(isValid && (barcode === undefined || barcode === null || barcode === ''))
@@ -508,11 +520,20 @@ function validateJForm()
 		values[11] = "gemstone_weight|@|"+encodeURIComponent(gemweight);
 		values[12] = "num_gemstones|@|"+encodeURIComponent(num_gemstones);
 		values[13] = "gold_purity|@|"+encodeURIComponent(purity);
-		values[14] = "gold_weight|@|"+encodeURIComponent(goldweight);
+		values[14] = "gold_weight|@|"+encodeURIComponent(gold_weight);
 		values[15] = "barcode|@|"+encodeURIComponent(barcode);
 		values[16] = "price|@|"+encodeURIComponent(prdprice);
 		values[17] = "isPlain|@|"+encodeURIComponent(isPlain);
 		values[18] = "combination|@|"+encodeURIComponent(combination);
+                values[19] = "price_per_carat|@|"+encodeURIComponent(price_per_carat);
+		values[20] = "othermaterial|@|"+encodeURIComponent(othermaterial);
+		values[21] = "labour_charge|@|"+encodeURIComponent(labour_charge);
+		values[22] = "grossweight|@|"+encodeURIComponent(grossweight);
+		values[22] = "grossweight|@|"+encodeURIComponent(grossweight);
+		values[23] = "gprice_per_carat|@|"+encodeURIComponent(gprice_per_carat);
+                values[24] = "gemstonevalue|@|"+encodeURIComponent(gemstonevalue);
+		values[25] = "diamondsvalue|@|"+encodeURIComponent(diamondsvalue);
+                
 		dt = values.join('|~|');
 
 		params += "&dt="+dt;
@@ -845,7 +866,8 @@ function validateNum(){
 //            }
             if(a === 'gCoins' || a === 'gBars')
             {
-                if(isValid && (purity == '' || isNaN(purity) || !purity.match(patt2))){
+                if(isValid && (purity == '' || isNaN(purity) || !purity.match(patt2)))
+                {
                     str ='Gold Purity field is Invalid';
                     isValid = false;
                 }
@@ -991,6 +1013,7 @@ function addShapeType() {
     $('#diamondShapeCont').append(str);
     $('#addDiamondType').remove();
 }
+
 function checkDiamondShape(evt,id) {
 
     if($(evt).hasClass('shapeSelected'))
@@ -1071,7 +1094,16 @@ function addGemsType() {
 
 $(document).ready(function()
 {
+    $("#diamondweight,#gprice_per_carat,#no_diamonds,#price_per_carat,#diamondsvalue,#gemweight,#num_gemstones,#netweight,#labour_charge,#prdprice,#othermaterial,#grossweight,#netweight").bind('blur',function()
+    {
+        valueOnChange();
+    });
     
+    
+    if($('#NosePin').hasClass('Nosepin'))
+    {
+        $('#NosePin').addClass('NosePin');
+    }
     
     
     if($('input[name=Plain]:checked').val() == 'Plain')
@@ -1097,9 +1129,30 @@ $(document).ready(function()
     
     $('.jshapeComm').bind('click',function()
     {
-        if($(this).hasClass('shapeSelected') && $(this).attr('id') == 'Polki')
+        if($(this).hasClass('shapeSelected'))
         {
-            $('.noneDiv').removeClass('dn');              
+            $('.noneDiv').removeClass('dn');
+            
+            $.each($('input[name=combination]'),function()
+            {
+                if($('#Polki').hasClass('shapeSelected'))
+                {
+                    if($(this).attr('id') == 'gold___polki')
+                    {
+                        $('#gold___polki').attr('checked',true);
+                    }
+                    else
+                    {
+                        $(this).attr('checked',false);
+                        $(this).attr('disabled',true);
+                    }
+                }
+                else
+                {
+                    $(this).attr('disabled',false);
+                }
+            });
+
         }
         else
         {
@@ -1194,6 +1247,7 @@ function isPlainJewellery()
             $('#prdprice').attr('readonly',false);
         }
 }
+
 function calculateJPrice()
 {
     if($('input[name=Plain]:checked').val() == 'Plain')
@@ -1201,7 +1255,7 @@ function calculateJPrice()
             {
                 var obj = eval('('+data+')');
                 var metalrt = obj.results.gold_rate;
-                var gwt = $('#goldweight').val();
+                var gwt = $('#netweight').val();
                 var pty = $('#goldpurity').val();
                 var puritypatt = /(^|[^-\d])(14|18|22|24)\b/;
                 if(!pty.match(puritypatt))
@@ -1230,48 +1284,52 @@ function calculateJPrice()
     }
 }
 /*gangesh*/  
-function  onchange(){
-                         var wt=  $('#diamondweight').val();
-                         var num=  $('#no_diamonds').val();
-                         var prcrt=  $('#price_per_carat').val(); 
-                         var dimondadd = (wt * num)/5 ;
-                         var tot= dimondadd * prcrt;
-
-                                 $('#diamondsvalue').val(tot);
-                     
-                       
-                        var gemwt = $('#gemweight').val();                      
-                        var ngemstone=$('#num_gemstones').val();                                         
-                        var totgstone = (gemwt * ngemstone) /5 ;
-                     
-                                                        console.log("gemwt :" + gemwt);
-                                                        console.log("ngemstone:" +  ngemstone);                        
-                             
-                               $('#netweight').val(totgstone);
-                                         
-                        var gldweight = $('#goldweight').val();      
-                        var addgold =   parseFloat(totgstone) + parseFloat(gldweight);
-                          
-                                $('#netweight').val(addgold);
-                                                            console.log('addgold'+ addgold);
-                                                            console.log('dimondadd'+ dimondadd);
-                           var totstonedimond = parseFloat(addgold) + parseFloat(dimondadd); 
-                                totstonedimond=parseFloat(totstonedimond);
-                                                            console.log(totstonedimond);
-                                $('#netweight').val(totstonedimond);
-                           var lcharge = $('#labour_charge').val();
-                           var totalprice = parseFloat(tot) + parseFloat(lcharge);
-                           
-                                $('#prdprice').val(totalprice);
-                           
-                           var othermateril =$('#othermaterial').val();
-                           var ntwt =$('#netweight').val();
-                           var grossweight = parseFloat(othermateril) + parseFloat(ntwt);
-                         //  grossweight=parseFloat(grossweight);
-                           $('#grossweight').val(grossweight);
-                           
-          }
-$("#diamondweight,#no_diamonds,#price_per_carat,#diamondsvalue,#gemweight,#num_gemstones,#netweight,#goldweight,#labour_charge,#prdprice,#othermaterial,#grossweight").keyup(function(){
- onchange();
-
-});
+        function  valueOnChange()
+        {
+            var diamondweight           =   parseFloat($('#diamondweight').val());
+            var no_diamonds             =   parseFloat($('#no_diamonds').val());
+            var price_per_carat         =   parseFloat($('#price_per_carat').val());
+            var diamondsvalue           =   0;
+            var gemweight               =   parseFloat($('#gemweight').val());
+            var num_gemstones           =   parseFloat($('#num_gemstones').val());
+            var gprice_per_carat        =   parseFloat($('#gprice_per_carat').val());
+            var gemstonevalue           =   0;
+            var labour_charge           =   parseFloat($('#labour_charge').val());
+            var other_material          =   parseFloat($('#othermaterial').val());
+            var gross_weight            =   0;
+            var netweight               =   parseFloat($('#netweight').val());
+            
+            if(diamondweight && price_per_carat)
+            {
+                if(diamondweight !== 0 && price_per_carat !== 0)
+                {
+                    diamondsvalue = parseFloat(diamondweight * price_per_carat);
+                    gross_weight += parseFloat(diamondsvalue/5);
+                    
+                }
+                $('#diamondsvalue').val(diamondsvalue);
+                //$('#grossweight').val(parseFloat(gross_weight));
+            }
+            if(gprice_per_carat && gemweight)
+            {
+                if(gemweight !== 0 && gprice_per_carat !== 0)
+                {
+                    gemstonevalue = parseFloat(gemweight * gprice_per_carat);
+                    gross_weight += parseFloat(gemstonevalue/5);
+                }
+                $('#gemstonevalue').val(gemstonevalue);
+                //$('#grossweight').val(parseFloat(gross_weight));
+            }
+            if(other_material !== 0)
+            {
+                gross_weight += other_material;
+                //$('#grossweight').val(parseFloat(gross_weight));
+            }
+            if(netweight !== 0)
+            {
+                gross_weight += parseFloat(netweight);
+                //$('#grossweight').val(parseFloat(gross_weight));
+            }
+            $('#grossweight').val(parseFloat(gross_weight));
+        }
+        

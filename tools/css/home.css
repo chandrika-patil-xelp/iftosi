@@ -718,7 +718,7 @@ a{cursor:pointer;}
 
 
 /*User Form*/
-.userForm{width: 360px;height: 315px;position: fixed;margin: auto;top: 0px;left: 0;bottom: 0;right: 0;background: #fff;z-index: 116;padding: 25px;border-radius: 5px;}
+.userForm{width: 360px;height: 346px;position: fixed;margin: auto;top: 0px;left: 0;bottom: 0;right: 0;background: #fff;z-index: 116;padding: 25px;border-radius: 5px;}
 
 /*Gallery*/
 .imgGallery{width: 95%;height: 80%;position: fixed;top: 0;right: 0;bottom: 0;left: 0;margin: auto;background: #fff;z-index: 1000;box-shadow: 0 0 1000px 300px rgba(0,0,0,0.5);padding: 25px;border-radius: 3px;}
@@ -1081,6 +1081,10 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 .prImgPrev {width: 35px;height: 100%;background-color: #f0f0f0;background-image:url(../img/arrow_black.svg);background-repeat: no-repeat;background-size: auto 20px;background-position: center;position: absolute;left:0;z-index: 1100;transform: rotateY(180deg);-webkit-transform: rotateY(180deg);ms-transform: rotateY(180deg);-moz-transform: rotateY(180deg);cursor: pointer;}
 .prImgNext {width: 35px; height: 100%; background-color: #f0f0f0;background-image:  url(../img/arrow_black.svg);background-repeat: no-repeat;background-size: auto 20px;background-position: center;position: absolute;    right: 0px;    z-index: 1100;   border-left: 0px solid #e6e6e6;cursor: pointer;}
 .bgfff{background-color:#fff;}
+.hStngclass{}
+.hStngclass .userForm{height:346px;}
+.asStngClss{}
+.asStngClss .autoSuggestOuter{top: 45px;}
 
 @media only screen and (min-width: 320px) and (max-width: 767px){
     .teamTabs{display: block;}

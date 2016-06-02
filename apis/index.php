@@ -258,6 +258,7 @@ switch($action)
             $password=(!empty($params['password'])) ? trim(urldecode($params['password'])) : '';
             $mobile=(!empty($params['mobile'])) ? trim($params['mobile']) : '';
             $email=(!empty($params['email'])) ?  trim(urldecode($params['email'])) : '';
+            $city=(!empty($params['cityname'])) ?  trim(urldecode($params['cityname'])) : '';
             $isvendor = $params['isvendor'] =(!empty($params['isvendor'])) ? trim($params['isvendor']) : 0;
             if(empty($password))
             {
@@ -682,13 +683,6 @@ switch($action)
             require APICLUDE . 'PHPExcelReader/SpreadsheetReader.php';
             $file=(!empty($_FILES['up_file'])) ? $_FILES['up_file'] : '';
             $vid=(!empty($params['vid'])) ? trim($params['vid']) : '';
-//            $upload = move_uploaded_file($_FILES['up_file']['tmp_name'], $filename);
-//            print_r($upload);
-//            if($upload) {
-//                echo 'sd';
-//            $params['data'] = file_get_contents($_FILES['up_file']['tmp_name']);
-//            }
-//
             $alloweExt=array('xlsx','xls','csv');
             $up_file =$file['name'];
             $fileExt=end((explode('.',$up_file)));
@@ -698,41 +692,61 @@ switch($action)
                 $err=array('Code'=>1,'Msg' => 'Invalid Parameter');
                 $result=array('result'=>$arr,'error'=>$err);
             }
-            else if($_FILES['up_file']['size']>3145728) {
+            else if($_FILES['up_file']['size']>3145728)
+            {
                 $err=array('Code'=>1,'Msg' => 'Max File Size 3MB');
                 $result=array('result'=>$arr,'error'=>$err);
 
-            } else if (!in_array($fileExt, $alloweExt)) {
+            }
+            else if (!in_array($fileExt, $alloweExt))
+            {
                 $err=array('Code'=>1,'Msg' => 'File Type not Valid');
                 $result=array('result'=>$arr,'error'=>$err);
-            } else {
-                if($fileExt=='csv') {
+            }
+            else
+            {
+                if($fileExt=='csv')
+                {
                     $params['data'] = file_get_contents($_FILES['up_file']['tmp_name']);
-//                    echo '<pre>';print_r($params);die;
-                } else {
+                }
+                else
+                {
                     $path = WEBROOT.'upload/';
                     $filename = $path.$vid.'-'.date('d-m-Y').'.'.$fileExt;
                     $upload = move_uploaded_file($_FILES['up_file']['tmp_name'], $filename);
 
-                    if ($upload) {
+                    if ($upload)
+                    {
                         $Reader = new SpreadsheetReader($filename);
                         $Sheets = $Reader->Sheets();
 
                         $Reader->ChangeSheet(0);
-                        foreach ($Reader as $Key => $Row) {
+                        foreach ($Reader as $Key => $Row)
+                        {
                             $params['data'][] = $Row;
                         }
-                    } else {
+                    }
+                    else
+                    {
                         $err = array('Code' => 1, 'Msg' => 'File Upload Failed');
                         $result = array('result' => $arr, 'error' => $err);
                     }
                 }
                 $params['type']=$fileExt;
                 $obj = new vendor($db['iftosi']);
-                if($params['catid']==10000) {
+                
+                if($params['catid']==10000)
+                {
                     $result = $obj->uploadDiamondProducts($params);
-                } else if($params['catid']==10001) {
+                }
+                else if($params['catid']==10001)
+                {
                     $result = $obj->uploadJewelleryProducts($params);
+                }
+                else if($params['catid']==10002)
+                {
+                    
+                    $result = $obj->uploadBullionProducts($params);
                 }
             }
             $res= $result;

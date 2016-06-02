@@ -371,10 +371,12 @@ a{text-decoration: none;}
 
 .degno{width:10%;}
 .metal{width:7%;}
+.JEWELLERY .metal{width:12%}
+.JEWELLERY .barcode{width:17%}
 .catg {width:10%;}
 .subType {width:15%;}
-
-
+#jewelleryFheader .metal{width:12%}
+#jewelleryFheader .barcode{width:17%}
 .btype{width:11%;}
 .purity{width:11%;}
 .weight{width:12%;}

@@ -212,7 +212,7 @@
                     $arr['subcat'][$i]['catid']     = $row['catid'];
                     $arr['subcat'][$i]['catname']   = $row['cat_name'];
                     
-                    $sbCatSql="SELECT catid,cat_name FROM tbl_category_master WHERE p_catid=".$row['catid']."";
+                    $sbCatSql="SELECT catid,cat_name FROM tbl_category_master WHERE p_catid=".$row['catid']." ORDER BY catid ASC";
                     $sbCatRes=$this->query($sbCatSql);
                     $x=0;
                     $crr=array();

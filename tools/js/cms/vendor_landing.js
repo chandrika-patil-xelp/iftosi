@@ -442,7 +442,6 @@ $('#upProds').click(function () {
                 loadDiamont = true;
             }
     }});
-
 });
 
 var uploadButton = false;
@@ -903,44 +902,60 @@ function isValidFloatKey(obj, e, allowDecimal)
 }
 
 var uploadStart=false;
-$("#upSubmit").on('click',(function(e) {
-    if($("#up_file").val()=='' || ValidateFile()==false) {
+$("#upSubmit").on('click',(function(e)
+{
+    if($("#up_file").val()=='' || ValidateFile()==false)
+    {
         common.toast(0,'Please Select Valid CSV File');
     }
-    else if(uploadStart) {
+    else if(uploadStart)
+    {
         common.toast(0,'Upload process is running');
-    } else {
+    } 
+    else
+    {
         $('#upSubmit').text('Uploading Data');
         uploadStart=true;
         var tmstmp = new Date().getTime();
         $.ajax({url: DOMAIN + "apis/index.php?action=bulkInsertProducts&vid="+uid+"&timestamp="+tmstmp+"&catid="+catid,
             type: "POST",
             data: new FormData($('form')[0]),
+            async:false,
             contentType: false,
             cache: false,
             processData:false,
-            success: function(result) {
+            success: function(result)
+            {
                 $('#upSubmit').text('Upload');
                 var obj = jQuery.parseJSON(result);
                 $("#up_file").val('');
                 var errCode = obj['error']['Code'];
-                if(errCode==0) {
+                if(errCode==0) 
+                {
                     $("#DiamondsList").html('');
                     diamondPage = 1;
-                    loadDiamonds();
+                    
+                    if(catid == '10000')
+                    {
+                        loadDiamonds(1);
+                    }
+                    if(catid == '10001')
+                    {
+                        loadJewels(1);
+                    }
+                    else if(catid == '10002')
+                    {
+                        loadBullions(1);
+                    }
                     loadDiamond = false;
                     errCode=1;
                     closeAllForms();
-                } else if(errCode==1) {
+                }
+                else if(errCode==1)
+                {
                     errCode=0;
                 }
                 common.toast(errCode,obj['error']['Msg']);
-//                if(obj['error']['Code']==0) {
-//                    common.toast(1,'Products are updated Successfully');
-//                }
-//                else {
-//                    common.toast(0,'Products are Failed to Update');
-//
                 uploadStart=false;
             }
         });
@@ -948,11 +963,13 @@ $("#upSubmit").on('click',(function(e) {
 }));
 
 
-function ValidateFile() {
+function ValidateFile()
+{
     var allowedFiles = ["csv","xls","xlsx"];
     var fileUpload = document.getElementById("up_file").value;
     var fileExt = fileUpload.split('.').pop();
-    if (allowedFiles.indexOf(fileExt)!=-1) {
+    if (allowedFiles.indexOf(fileExt)!=-1)
+    {
         return true;
     }
     return false;

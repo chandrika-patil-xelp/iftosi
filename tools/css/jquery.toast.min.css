@@ -6,8 +6,8 @@
 .toast li.success{ color: white; background-color:#4DB800; border:none;  }
 
 
-.toast li.stock{ color: white; background-color:#B80F00; border:none;  }
-.toast li.instock{ color: white; background-color:#4DB800; border:none;  }
+.toast li.stock{ color: white; background-color:#B80F00; border:none; }
+.toast li.instock{ color: white; background-color:#4DB800; border:none; }
 .toast li.sold{ color: white; background-color:#5E0037; border:none;  }
 
 .toast button.close{ background: none; border: none; font-weight: bold; font-size: 30px; line-height: 16px; float: right; padding: 0; margin: 0; color: rgba(0,0,0,.25); cursor: pointer; outline: none;outline-style: none; }

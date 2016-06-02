@@ -304,7 +304,15 @@
     
         public function userReg($params) // USER LOGIN PROCESS
         {   
-           $isql = "INSERT INTO 
+            
+            $params['username'] = (!empty($params['username'])) ? trim(urldecode($params['username'])) : '';
+            $params['password'] = (!empty($params['password'])) ? trim(urldecode($params['password'])) : '';
+            $params['username'] = (!empty($params['mobile'])) ? trim(urldecode($params['mobile'])) : '';
+            $params['mobile'] = (!empty($params['email'])) ? trim(urldecode($params['email'])) : '';
+            $params['isvendor'] = (!empty($params['isvendor'])) ? trim(urldecode($params['isvendor'])) : '';
+            $params['cityname'] = (!empty($params['cityname'])) ? trim(urldecode($params['cityname'])) : '';
+                    
+            $isql = "INSERT INTO 
 						tbl_registration 
 						(
 							user_name,
@@ -320,16 +328,16 @@
 						)
 					VALUES
 						(
-							\"".$params['username']."\",
+							\"".addslashes(stripslashes($params['username']))."\",
                                                     MD5(\"".$params['password']."\"),
 							\"".$params['mobile']."\",
-							\"".$params['email']."\",
+							\"".addslashes(stripslashes($params['email']))."\",
 							\"".$params['isvendor']."\",
                                                             1,
-                                                        \"".$params['cityname']."\",
+                                                        \"".addslashes(stripslashes($params['cityname']))."\",
                                                             now(),
                                                             now(),
-							\"".$params['username']."\"
+							\"".addslashes(stripslashes($params['username']))."\"
 						)
 					";
             $ires=$this->query($isql);
@@ -348,11 +356,11 @@
                                     city)
                         VALUES
                                  (".$uid.",
-                                 '".$params['email']."',
+                                 '".addslashes(stripslashes($params['email']))."',
                                     now(),
                                     0,
                                     0,
-                                \"".$params['cityname']."\")";
+                                \"".addslashes(stripslashes($params['cityname']))."\")";
                 $res=$this->query($isql);
                     if($res)
                     {
@@ -1330,7 +1338,7 @@
             }
             if(!empty($params['email']))
             {
-                    mail($params['email'], $subject, $message, $headers);
+                mail($params['email'], $subject, $message, $headers);
             }
             else
             {

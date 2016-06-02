@@ -111,7 +111,7 @@
                 <div class="metal fLeft">Metal</div>
                 <div class="catg fLeft">Category</div>
                 <div class="degno fLeft">Diamond Wt</div>
-                <div class="subType fLeft">Gold Wt</div>
+<!--                <div class="subType fLeft">Gold Wt</div>-->
                 <div class="price fLeft">Price</div>
                 <div class="acct fLeft">Action</div>
             </div>  
@@ -152,10 +152,12 @@
                 <div class="downloadLink fmOpenB fLeft">
                     <center>
                         <span><strong>Note: </strong>Upload file format should same as sample format</span>
-                        <?php if($catid==10000) { ?>
+                        <?php if($catid == 10000) { ?>
                             <a href="sampleDiamondList.xls">Download Sample File</a>
-                        <?php } else if($catid=10001) { ?>
+                        <?php } else if($catid == 10001) { ?>
                             <a href="sampleJewelleryList.xlsx">Download Sample File</a>
+                        <?php } else if($catid == 10002) { ?>
+                            <a href="sampleBullionList.xlsx">Download Sample File</a>
                         <?php } ?>
                     </center>
                 </div>

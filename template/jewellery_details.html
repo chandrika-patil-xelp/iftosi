@@ -1,6 +1,6 @@
 <?php include 'bhead.html'; ?>
 <body>
-    <div id='baseCont' class="container fmOpenR detailsPage bgWhite jwdet">
+    <div id='baseCont' class="container fmOpenR detailsPage bgWhite jwdet hStngclass">
         <div class="wrapper">
             <?php include 'header.html'; ?>
             <div class="forBg bgWhite"></div>
@@ -76,19 +76,19 @@
                                 <?php 
                                 if(empty($prdInfo['attr_details']['gold_weight']) || $prdInfo['attr_details']['gold_weight'] == '0.00')
                                 {
-                                echo $prdInfo['attr_details']['gold_weight'] = 'N/A';
+                                    echo $prdInfo['attr_details']['gold_weight'] = 'N/A';
                                 }
                                 else if($prdInfo['attr_details']['gold_weight'] == 1000)
                                 {
-                                echo $prdInfo['attr_details']['gold_weight'] = '1 KGS';
+                                    echo $prdInfo['attr_details']['gold_weight'] = '1 KGS';
                                 }
                                 else if($prdInfo['attr_details']['gold_weight'] > 1000)
                                 {
-                                echo $prdInfo['attr_details']['gold_weight'] = number_format(($prdInfo['attr_details']['gold_weight']/1000),0).' KGS';
+                                    echo $prdInfo['attr_details']['gold_weight'] = ($prdInfo['attr_details']['gold_weight']/1000).' KGS';
                                 }
                                 else if($prdInfo['attr_details']['gold_weight'] < 1000 && $prdInfo['attr_details']['gold_weight'] !== '0.00')
                                 {
-                                echo $prdInfo['attr_details']['gold_weight'] = number_format($prdInfo['attr_details']['gold_weight'],0).' GMS';
+                                    echo $prdInfo['attr_details']['gold_weight'] = $prdInfo['attr_details']['gold_weight'].' GMS';
                                 }
                                 ?>
                             </div>
@@ -111,7 +111,7 @@
                         </div>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB font12 fmOpenB">DIAMOND WEIGHT</div>
-                            <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['dwt']=='')?'N/A':number_format($prdInfo['attr_details']['dwt'],0); ?> CTS</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['dwt']=='')?'N/A': $prdInfo['attr_details']['dwt']; ?> CTS</div>
                         </div>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB font12 fmOpenB">DIAMOND QUALITY</div>
@@ -136,7 +136,7 @@
                         </div>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB font12 fmOpenB">GEMSTONES WEIGHT</div>
-                            <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['gemwt']=='')?'N/A':number_format($prdInfo['attr_details']['gemwt'],0); ?> CTS</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['gemwt']=='')?'N/A': $prdInfo['attr_details']['gemwt']; ?> CTS</div>
                         </div>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB font12 fmOpenB">NO. OF GEMSTONES</div>
@@ -272,7 +272,7 @@
             </div>
         </div>
     </div>
-    <div class='prdInfo fLeft'>
+    <div class='prdInfo fLeft hStngclass'>
         <div class="wrapperMax fmOpenR pm015">
             <?php
             $gemstone = explode('|!|',strtolower($prdInfo['attr_details']['gemstone_type']));
@@ -586,6 +586,13 @@
             <label for="ur_name" class="inp-label transition100">NAME</label>
             <div id="ur_name_inpText" class="inpText fRight transition300">enter<br>your name</div>
         </div> 
+        <div class="inputCont fLeft fmOpenR asStngClss">
+                <input type="text" id="ur_city" name="ur_name" autocomplete="false"  class="txtInput cOrange fmOpenR font14 areaIcon " onkeyup="changeHIdVal();">
+                <label for="ur_city" class="inp-label transition100">CITY</label>
+                <div id="ur_city_inpText" class="inpText fRight transition300">select<br>your city</div>
+                <input type="hidden" id="ur_cityid" name="ur_cityid">
+                <div id="ur_citySuggestDiv" class="autoSuggestOuter dn"></div> 
+            </div>
         <div class="inputCont fLeft fmOpenR">
             <input type="text" id="ur_email" name="ur_email" autocomplete="false" onKeyPress="return common.eSubmit('event', 'userCancel');" class="txtInput cOrange fmOpenR font14 emailIcon">
             <label for="ur_email" class="inp-label transition100">EMAIL</label>
@@ -635,6 +642,7 @@
 <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['hammer']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
+<script type="text/javascript" src="<?= $jvs['auto']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['comm']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['details']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['head']; ?>"></script>

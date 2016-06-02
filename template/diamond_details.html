@@ -1,7 +1,7 @@
 <?php include 'bhead.html'; ?>
 <body>
     <div id='baseCont' class="container fmOpenR detailsPage bgWhite">
-        <div class="wrapper">
+        <div class="wrapper hStngclass">
             <?php include 'header.html'; ?>
             <div class="forBg bgWhite"></div>
             <div class='prdMainDetails'>
@@ -102,15 +102,15 @@
                             </div>
                             <div class="infoCommn fLeft fmOpenR">
                                 <div class="infoLabel fmOpenB  font12">TABLE</div>
-                                <div class="infoValue c666 font25 fmOpenR"><?php echo trim(number_format($data['attr_details']['tab'],1),'0'.'.').'%'; ?></div>
+                                <div class="infoValue c666 font25 fmOpenR"><?php echo trim($data['attr_details']['tab'],'0'.'.').'%'; ?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR">
                                 <div class="infoLabel fmOpenB  font12">CROWN ANGLE</div>
-                                <div class="infoValue c666 font25 fmOpenR"><?php echo trim(number_format($data['attr_details']['crownangle'],2),'0'.'.'); ?></div>
+                                <div class="infoValue c666 font25 fmOpenR"><?php echo trim($data['attr_details']['crownangle'],'0'.'.'); ?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR">
                                 <div class="infoLabel fmOpenB  font12">GIRDLE</div>
-                                <div class="infoValue c666 font25 fmOpenR"><?php echo trim(number_format($data['attr_details']['girdle'],2)); ?></div>
+                                <div class="infoValue c666 font25 fmOpenR"><?php echo trim($data['attr_details']['girdle']); ?></div>
                             </div>
                             <div class="infoCommn fLeft fmOpenR ">
                                 <div class="infoLabel fmOpenB font12 fmOpenB">Certificate</div>
@@ -269,7 +269,7 @@
                 </div>
             </div>
         </div>
-        <div class='prdInfo fLeft'>
+        <div class='prdInfo fLeft hStngclass'>
             
             <div class="wrapperMax fmOpenR pm015">
 <?php
@@ -675,6 +675,13 @@ foreach($des as $key=>$value)
                 <label for="ur_name" class="inp-label transition100">NAME</label>
                 <div id="ur_name_inpText" class="inpText fRight transition300">enter<br>your name</div>
             </div>
+            <div class="inputCont fLeft fmOpenR asStngClss">
+                <input type="text" id="ur_city" name="ur_city" autocomplete="false"  class="txtInput cOrange fmOpenR font14 areaIcon " onkeyup="changeHIdVal();">
+                <label for="ur_city" class="inp-label transition100">CITY</label>
+                <div id="ur_city_inpText" class="inpText fRight transition300">select<br>your city</div>
+                <input type="hidden" id="ur_cityid" name="ur_cityid">
+                <div id="ur_citySuggestDiv" class="autoSuggestOuter dn"></div>
+            </div>
             <div class="inputCont fLeft fmOpenR">
                 <input type="text" id="ur_email" name="ur_email" autocomplete="false" onKeyPress="return common.eSubmit(event, 'userSubmit');" class="txtInput cOrange fmOpenR font14 emailIcon">
                 <label for="ur_email" class="inp-label transition100">EMAIL</label>
@@ -723,6 +730,7 @@ for ($i = 0; $i < count($data1); $i++) {
     <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['hammer']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['auto']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['comm']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['details']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['head']; ?>"></script>

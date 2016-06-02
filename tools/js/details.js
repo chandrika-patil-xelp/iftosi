@@ -205,87 +205,106 @@ $(document).ready(function(){
         },1010);
     });
 
-	$('#userSubmit').bind('click',function() {
-        var ur_name = $('#ur_name').val();
-        var ur_mobile = $('#ur_mobile').val();
-        var ur_email = $('#ur_email').val();
-        if(ur_mobile=='' || ur_mobile.length!=10 || isNaN(ur_mobile)) {
-            customStorage.toast(0,'Invalid Format for Mobile'); 
-            $('#ur_mobile').focus();
-            return false;
-        }
-        else if(ur_name.length==0 || isNaN(ur_name)!==true) {
-            customStorage.toast(0,'Invalid Format for Name'); 
-            $('#ur_name').focus();
-            return false;
-        }
-        else if(ur_email=='') {
-            customStorage.toast(0,'Email is Required!'); 
-            $('#ur_email').focus();
-            return false;
-        } 
-        else if(!common.validateEmail('ur_email')) {
-            customStorage.toast(0,'Email is Not Valid!'); 
-            $('#ur_email').focus();
-            return false;
-        }
-        else
+	$('#userSubmit').bind('click',function()
         {
-            if(submiter == true)
+            var ur_name = $('#ur_name').val();
+            var ur_mobile = $('#ur_mobile').val();
+            var ur_city = $('#ur_city').val();
+            var ur_cityid = $('#ur_cityid').val();
+            var ur_email = $('#ur_email').val();
+
+            if(ur_mobile=='' || ur_mobile.length!=10 || isNaN(ur_mobile))
             {
-                submiter = false;
-                            if(isMail)
-                            {
-                                    var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
-                                    var mobile = customStorage.readFromStorage('mobile');
-                                    if(isLoggedIn == '' || isLoggedIn == null || isLoggedIn == undefined || isLoggedIn == false || isLoggedIn == 'false')
-                                    {
-                                            //customStorage.addToStorage('mobile',ur_mobile);
-                                            //var pr_mobile = customStorage.readFromStorage('mobile');
-                                            otpGo();
-
-                                    }
-                                    else if(mobile !== ur_mobile)
-                                    {
-                                        otpGo();
-                                    }
-                                    else
-                                    {
-                                        var tmstmp = new Date().getTime();
-                                        $.ajax({url: DOMAIN + "apis/index.php?action=getOwnerCheck&uid="+uid+"&pid="+pid+"timestamp="+tmstmp, success: function(result)
-                                            {
-                                                var obj = eval('('+result+')');
-                                                var eCode = obj.error.code;
-                                                if(eCode == 1 || eCode == '1')
-                                                {
-                                                    customStorage.toast(0,'You can not have information of your own product');
-                                                }
-                                                else
-                                                {
-                                                    sendDetailsToUser();            
-                                                    addToEnquiry();                                                
-                                                }
-                                            }
-                                        });
-
-                                    }
-                            }
-                            else
-                            {
-                                    showVendorDetails();
-                            }
-
-                $('#userForm').velocity({scale:0},{delay:0,ease:'swing'});
-                $('#overlay').velocity({opacity:0},{delay:100,ease:'swing'});
-                setTimeout(function(){
-                        $('#overlay, #userForm').addClass('dn');
-                        submiter = true;
-                },1010);
-                return true;
+                customStorage.toast(0,'Invalid Format for Mobile'); 
+                $('#ur_mobile').focus();
+                return false;
             }
-        }
-        
-	});
+            else if(ur_name.length==0 || isNaN(ur_name)!==true)
+            {
+                customStorage.toast(0,'Invalid Format for Name'); 
+                $('#ur_name').focus();
+                return false;
+            }
+            else if(ur_city=='')
+            {
+                customStorage.toast(0,'City is required'); 
+                $('#ur_city').focus();
+                return false;
+            }
+            else if(ur_cityid=='')
+            {
+                customStorage.toast(0,'Please select the city from list'); 
+                $('#ur_city').focus();
+                return false;
+            } 
+            else if(ur_email=='')
+            {
+                customStorage.toast(0,'Email is Required!'); 
+                $('#ur_email').focus();
+                return false;
+            } 
+            else if(!common.validateEmail('ur_email'))
+            {
+                customStorage.toast(0,'Email is Not Valid!'); 
+                $('#ur_email').focus();
+                return false;
+            }
+            else
+            {
+                if(submiter == true)
+                {
+                    submiter = false;
+                                if(isMail)
+                                {
+                                        var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
+                                        var mobile = customStorage.readFromStorage('mobile');
+                                        if(isLoggedIn == '' || isLoggedIn == null || isLoggedIn == undefined || isLoggedIn == false || isLoggedIn == 'false')
+                                        {
+                                                //customStorage.addToStorage('mobile',ur_mobile);
+                                                //var pr_mobile = customStorage.readFromStorage('mobile');
+                                                otpGo();
+
+                                        }
+                                        else if(mobile !== ur_mobile)
+                                        {
+                                            otpGo();
+                                        }
+                                        else
+                                        {
+                                            var tmstmp = new Date().getTime();
+                                            $.ajax({url: DOMAIN + "apis/index.php?action=getOwnerCheck&uid="+uid+"&pid="+pid+"timestamp="+tmstmp, success: function(result)
+                                                {
+                                                    var obj = eval('('+result+')');
+                                                    var eCode = obj.error.code;
+                                                    if(eCode == 1 || eCode == '1')
+                                                    {
+                                                        customStorage.toast(0,'You can not have information of your own product');
+                                                    }
+                                                    else
+                                                    {
+                                                        sendDetailsToUser();            
+                                                        addToEnquiry();                                                
+                                                    }
+                                                }
+                                            });
+
+                                        }
+                                }
+                                else
+                                {
+                                        showVendorDetails();
+                                }
+
+                    $('#userForm').velocity({scale:0},{delay:0,ease:'swing'});
+                    $('#overlay').velocity({opacity:0},{delay:100,ease:'swing'});
+                    setTimeout(function(){
+                            $('#overlay, #userForm').addClass('dn');
+                            submiter = true;
+                    },1010);
+                    return true;
+                }
+            }
+        });
 
 	if(mobile !== '' && mobile !== null && mobile !== undefined && mobile !== 'null' && mobile !== 'undefined' && typeof mobile !== 'undefined')
 	{
@@ -1085,8 +1104,9 @@ function otpCheck()
                                 var mobile = $('#ur_mobile').val().trim();
                                 var name = $('#ur_name').val().trim();
                                 var email = $('#ur_email').val().trim();
+                                var city = $('#ur_city').val().trim();
                                 var tmstmp = new Date().getTime();
-                                var params = 'action=ajx&case=userCheck&mobile='+mobile+'&name='+encodeURIComponent(name)+'&email='+encodeURIComponent(email)+'&pid='+pid+"&timestamp="+tmstmp;
+                                var params = 'action=ajx&case=userCheck&ur_city='+encodeURIComponent(city)+'&mobile='+mobile+'&name='+encodeURIComponent(name)+'&email='+encodeURIComponent(email)+'&pid='+pid+"&timestamp="+tmstmp;
                                 var URL = DOMAIN + "index.php";
 
                                 $.getJSON(URL, params, function(data) {

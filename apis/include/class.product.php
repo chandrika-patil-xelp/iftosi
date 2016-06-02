@@ -335,6 +335,13 @@
                                                      budget,
                                                      b2b_price,
                                                      is_plain_jewellery,
+                                                     price_per_carat,
+                                                     othermaterial,
+                                                     labour_charge,
+                                                     grossweight,
+                                                     gprice_per_carat,
+                                                     diamondsvalue,
+                                                     gemstonevalue,
                                                      date_time,
                                                      active_flag)
                                     VALUES
@@ -380,51 +387,65 @@
                                                   \"".$detls['price']."\",
                                                   \"".$detls['priceb2b']."\",
                                                   \"".$detls['isPlain']."\",
+                                                  \"".$detls['price_per_carat']."\",
+                                                  \"".$detls['othermaterial']."\",
+                                                  \"".$detls['labour_charge']."\",
+                                                  \"".$detls['grossweight']."\",
+                                                  \"".$detls['gprice_per_carat']."\",
+                                                  \"".$detls['diamondsvalue']."\",
+                                                  \"".$detls['gemstonevalue']."\",
                                                       now(),
                                                   \"".$display_flag."\")
                                     ON DUPLICATE KEY UPDATE
-                                                            diamond_shape         = \"".$detls['diamondShape']."\",
-                                                            color         = \"".$detls['color']."\",
-                                                            carat         = \"".$detls['carat_weight']."\",
-                                                            certified     = \"".$detls['Certficate']."\",
-                                                            shape         = \"".$shape."\",
-                                                            cut           = \"".$detls['cut']."\",
-                                                            clarity       = \"".$detls['clarity']."\",
-                                                            base          = \"".$detls['base_price']."\",
-                                                            tabl          = \"".$detls['table']."\",
-                                                            price         = \"".$detls['price']."\",
-                                                            p_disc        = \"".$detls['discount']."\",
-                                                            p_discb2b        = \"".$detls['discountb2b']."\",
-                                                            prop          = \"".$detls['prop']."\",
-                                                            polish        = \"".$detls['polish']."\",
-                                                            symmetry      = \"".$detls['symmetry']."\",
-                                                            fluo          = \"".$detls['flourecence']."\",
-                                                            td            = \"".$detls['td']."\",
-                                                            measurement   = \"".$detls['measurement']."\",
-                                                            cno           = \"".$detls['certno']."\",
-                                                            pa            = \"".$detls['pa']."\",
-                                                            cr_hgt        = \"".$detls['cr_height']."\",
-                                                            cr_ang        = \"".$detls['crown_angle']."\",
-                                                            girdle        = \"".$detls['girdle']."\",
-                                                            pd            = \"".$detls['pd']."\",
-                                                            metal         = \"".$detls['metal']."\",
-                                                            type          = \"".$type."\",
-                                                            gold_purity   = \"".$detls['gold_purity']."\",
-                                                            nofd          = \"".$detls['no_diamonds']."\",
-                                                            dwt           = \"".$detls['diamonds_weight']."\",
-                                                            gemwt         = \"".$detls['gemstone_weight']."\",
-                                                            quality       = \"".$detls['quality']."\",
-                                                            gold_weight   = \"".$detls['gold_weight']."\",
-                                                            combination   = \"".$detls['combination']."\",
-                                                            gemstone_color=\"".$detls['gemstone_color']."\",
-                                                            num_gemstones=\"".$detls['num_gemstones']."\",
-                                                            gemstone_type=\"".$detls['gemstone_type']."\",
-                                                            bullion_design=\"".$detls['design']."\",    
-                                                            rating        = \"".$detls['rating']."\",
-                                                            budget        = \"".$detls['price']."\",    
-                                                            b2b_price        = \"".$detls['priceb2b']."\",
-                                                            is_plain_jewellery = \"".$detls['isPlain']."\",
-                                                            active_flag   = \"".$display_flag."\"";    
+                                                            diamond_shape           = \"".$detls['diamondShape']."\",
+                                                            color                   = \"".$detls['color']."\",
+                                                            carat                   = \"".$detls['carat_weight']."\",
+                                                            certified               = \"".$detls['Certficate']."\",
+                                                            shape                   = \"".$shape."\",
+                                                            cut                     = \"".$detls['cut']."\",
+                                                            clarity                 = \"".$detls['clarity']."\",
+                                                            base                    = \"".$detls['base_price']."\",
+                                                            tabl                    = \"".$detls['table']."\",
+                                                            price                   = \"".$detls['price']."\",
+                                                            p_disc                  = \"".$detls['discount']."\",
+                                                            p_discb2b               = \"".$detls['discountb2b']."\",
+                                                            prop                    = \"".$detls['prop']."\",
+                                                            polish                  = \"".$detls['polish']."\",
+                                                            symmetry                = \"".$detls['symmetry']."\",
+                                                            fluo                    = \"".$detls['flourecence']."\",
+                                                            td                      = \"".$detls['td']."\",
+                                                            measurement             = \"".$detls['measurement']."\",
+                                                            cno                     = \"".$detls['certno']."\",
+                                                            pa                      = \"".$detls['pa']."\",
+                                                            cr_hgt                  = \"".$detls['cr_height']."\",
+                                                            cr_ang                  = \"".$detls['crown_angle']."\",
+                                                            girdle                  = \"".$detls['girdle']."\",
+                                                            pd                      = \"".$detls['pd']."\",
+                                                            metal                   = \"".$detls['metal']."\",
+                                                            type                    = \"".$type."\",
+                                                            gold_purity             = \"".$detls['gold_purity']."\",
+                                                            nofd                    = \"".$detls['no_diamonds']."\",
+                                                            dwt                     = \"".$detls['diamonds_weight']."\",
+                                                            gemwt                   = \"".$detls['gemstone_weight']."\",
+                                                            quality                 = \"".$detls['quality']."\",
+                                                            gold_weight             = \"".$detls['gold_weight']."\",
+                                                            combination             = \"".$detls['combination']."\",
+                                                            gemstone_color          = \"".$detls['gemstone_color']."\",
+                                                            num_gemstones           = \"".$detls['num_gemstones']."\",
+                                                            gemstone_type           = \"".$detls['gemstone_type']."\",
+                                                            bullion_design          = \"".$detls['design']."\",    
+                                                            rating                  = \"".$detls['rating']."\",
+                                                            budget                  = \"".$detls['price']."\",    
+                                                            b2b_price               = \"".$detls['priceb2b']."\",
+                                                            is_plain_jewellery      = \"".$detls['isPlain']."\",
+                                                            price_per_carat         = \"".$detls['price_per_carat']."\",
+                                                            othermaterial           = \"".$detls['othermaterial']."\",
+                                                            labour_charge           = \"".$detls['labour_charge']."\",
+                                                            grossweight             = \"".$detls['grossweight']."\",
+                                                            gprice_per_carat        = \"".$detls['gprice_per_carat']."\",
+                                                            diamondsvalue           = \"".$detls['diamondsvalue']."\",
+                                                            gemstonevalue           = \"".$detls['gemstonevalue']."\",
+                                                            active_flag             = \"".$display_flag."\"";    
                             $res = $this->query($sql);
                         
                             $vensql="  SELECT
@@ -1064,20 +1085,37 @@
 					{
 						$expd = explode('|~|',$val);
 						$exd = explode('|@|',$expd[1]);
+                                                
+                                                if(strpos($exd, 'combination') !== false)
+                                                {
+                                                    $exd1 = str_replace('00','&',$exd);
+                                                    $exd = str_replace('11',',',$exd1);
+                                                    $exd = str_replace('_',' ',$exd1);
+                                                    $exd = str_replace('combination ','',$exd);
+                                                    $combField = 'combination_';
+                                                }
+                                                
 						$inarr = array();
+                                                
 						foreach($exd as $ky => $vl)
 						{
+                                                        if(!empty($combField))
+                                                        {
+                                                           $vl = $combField.$vl;
+                                                        }
+                                                                
 							$ex = explode('_',$vl);
-                            $re='^[0-9]+$';
-                            if(strpos($ex[count($ex)-1],'KT') !== false)
-                            {
-                               $inarr[] = preg_replace("/[^0-9]/","",$ex[count($ex)-1]);
-                            }
-                            else
-                            {
-                               $inarr[] = $ex[count($ex)-1];
-                            }
-                            unset($ex[count($ex)-1]);
+                                                        $re='^[0-9]+$';
+                                                        
+                                                        if(strpos($ex[count($ex)-1],'KT') !== false)
+                                                        {
+                                                           $inarr[] = preg_replace("/[^0-9]/","",$ex[count($ex)-1]);
+                                                        }
+                                                        else
+                                                        {
+                                                           $inarr[] = $ex[count($ex)-1];
+                                                        }
+                                                        unset($ex[count($ex)-1]);
 							$field = implode('_',$ex);
 						}
 						$extn .= " AND ".$field." in ('".implode("','",$inarr)."') ";
@@ -1528,7 +1566,14 @@
 						tabl as tab,
 						num_gemstones,
 						certificate_url,
-                        is_plain_jewellery
+                                                is_plain_jewellery,
+                                                price_per_carat,
+                                                othermaterial,
+                                                labour_charge,
+                                                grossweight,
+                                                gprice_per_carat,
+                                                diamondsvalue,
+                                                gemstonevalue
                     FROM 
                         tbl_product_search
                     WHERE 

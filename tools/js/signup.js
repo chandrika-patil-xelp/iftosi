@@ -251,12 +251,12 @@ function otpCheck()
                     }
                     else
                     {
-
-                        var pr_name = $('#pr_name').val();
-                        var pr_mobile = $('#pr_mobile').val();
-                        var pr_email = $('#pr_email').val();
-                        var pr_pass = $('#pr_pass').val();
-                        var pr_city = $('#pr_city').val();
+                        
+                        var pr_name = encodeURIComponent($('#pr_name').val());
+                        var pr_mobile = encodeURIComponent($('#pr_mobile').val());
+                        var pr_email = encodeURIComponent($('#pr_email').val());
+                        var pr_pass = encodeURIComponent($('#pr_pass').val());
+                        var pr_city = encodeURIComponent($('#pr_city').val());
                         //var isVendor = $('#isVendor').is(':checked');
                         var isVendor = $('#isVendor').val();
                         var amIVendor = $("input[type=checkbox]:checked").length;
@@ -326,7 +326,6 @@ function otpCheck()
 
 function signUpProceed()
 {
-    
     var pr_name = $('#pr_name').val();
     var pr_mobile = $('#pr_mobile').val();
     var pr_email = $('#pr_email').val();
@@ -368,7 +367,7 @@ function signUpProceed()
                 {
                    $.ajax({url: DOMAIN + "apis/index.php?action=sendWelcomeMailSMS&username="+pr_name +"&mobile="+pr_mobile +"&email="+pr_email +"&isVendor="+userType, success: function (result) {
                         var obj = eval('('+result+')');
-                        var errCode = obj.error.code;
+                        var errCode = obj.error.code;   
                         if(errCode == 0)
                         {
                             customStorage.toast(1,'Registration Successfully Done');
@@ -475,20 +474,24 @@ $('#pr_city').bind('keyup focus', input_selector, function(event)
     new Autosuggest($(this).val(), '#pr_city', '#pr_citySuggestDiv', DOMAIN + "apis/index.php", params, true, '', '', event);
 });
 
+
 function arrangeData(data, id, divHolder, nextxt)
 {
     if (data.results)
     {
+        
         var suggest = "<ul class='smallField w100 fmRoboto transition300 font14 pointer border1'>";
         $.each(data.results, function(i, vl) {
+            if(id == '#pr_city')
                 suggest += "<li id='suggest" + i + "' class='autoSuggestRow w100 transition300 txtCaCase txtOverFlow txtOver' title="+vl.n+" style='text-transform:capitalize;' onClick='setSuggestValue(\""+vl.n+"\",\"#pr_city\",\""+vl.id+"\");'>"+vl.n+"</li>";
+            if(id == '#ur_city')
+                suggest += "<li id='suggest" + i + "' class='autoSuggestRow w100 transition300 txtCaCase txtOverFlow txtOver' title="+vl.n+" style='text-transform:capitalize;' onClick='setCityValue(\""+vl.n+"\",\"#ur_city\",\""+vl.id+"\");'>"+vl.n+"</li>";
         });
         suggest += "</ul>";  
         return suggest;
     }
     else
         return '';
-    
 }
 
 function setSuggestValue(val, id, cid) {
@@ -501,6 +504,16 @@ function setSuggestValue(val, id, cid) {
     }, 50);
 }
 
+function setCityValue(val, id, cid) {
+    $(id).val(val);
+    $('#ur_cityid').val(val);
+    $(id).next( "label" ).addClass("labelActive");
+    $(id).addClass('brGreen');
+    setTimeout(function () {
+        $('#ur_citySuggestDiv').addClass('dn');
+    }, 50);
+}
+
 function closeSuggest(id) {
     setTimeout(function () {
         $('#' + id).html('');
@@ -509,6 +522,7 @@ function closeSuggest(id) {
 $('body').click(function()
 {
     $('#pr_citySuggestDiv').addClass('dn');
+    $('#ur_citySuggestDiv').addClass('dn');
 });
 
 $(document).ready(function ()
@@ -518,4 +532,18 @@ $(document).ready(function ()
         {
             $('#vsignup').removeClass('dn');
         }
+
+    $('#ur_city').bind('keyup focus', input_selector, function(event)
+    {
+        var params = 'action=cityName&name=' + escape($(this).val());
+        new Autosuggest($(this).val(), '#ur_city', '#ur_citySuggestDiv', DOMAIN + "apis/index.php", params, true, '', '', event);
+    });
 });
+
+function changeHIdVal()
+{
+    if($('#ur_city').val() == '')
+    {
+        $('#ur_cityid').val('');
+    }
+}

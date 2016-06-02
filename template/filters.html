@@ -139,8 +139,27 @@
 						{
 						?>
 							<div class="checkDiv fLeft">
-								<input type="checkbox" class="filled-in" id="<?php echo $val['attribute_name'].'_'.$expd[$i];?>" />
-								<label for="<?php echo $val['attribute_name'].'_'.$expd[$i];?>"><?php echo $expd[$i];?></label>
+<?php
+                                                                $expds = str_replace(' ','_',$expd[$i]);
+                                                                if($val['attribute_name'] == 'combination')
+                                                                {
+                                                                    
+                                                                    $expds = str_replace('&','00',$expds);
+                                                                    $expds = str_replace(',','11',$expds);
+                                                                
+?>
+                                                                    <input type="checkbox" class="filled-in" id="<?php echo $val['attribute_name'].'_'.$expds;?>" />
+                                                                    <label for="<?php echo $val['attribute_name'].'_'.$expds;?>"><?php echo $expd[$i];?></label>
+<?php
+                                                                }
+                                                                else
+                                                                {
+?>
+                                                                    <input type="checkbox" class="filled-in" id="<?php echo $val['attribute_name'].'_'.$expd[$i];?>" />
+                                                                    <label for="<?php echo $val['attribute_name'].'_'.$expd[$i];?>"><?php echo $expd[$i];?></label>
+<?php
+                                                                }
+?>
 							</div>
 						<?php
 						}

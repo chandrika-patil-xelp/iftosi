@@ -469,7 +469,7 @@ function generateJewellList(obj) {
         var shape = obj['shape'];
 		if(obj['category'] !== undefined && obj['category'] !== null && obj['category'] !== '' && typeof obj['category'] !== 'undefined')
 		{
-			var category = obj['category'][1]['cat_name'];
+			var category = obj['category'][0]['cat_name'];
                         var cats = category;
 		}
 		else
@@ -583,7 +583,7 @@ function generateJewellList(obj) {
             obj.gold_weight = parseFloat(obj.gold_weight);
             var gweights = common.number_format(obj.gold_weight,2)+' Gms';
         }
-        str += '<div class="subType fLeft">' + gweights + '</div>';
+//        str += '<div class="subType fLeft">' + gweights + '</div>';
         str += '<div class="price fLeft fmOpenB">&#8377;' + obj['price']+ '</div>';
         str += '<div class="acct fLeft poR">';
         
@@ -931,45 +931,57 @@ function deleteProduct() {
 	closeConfirmDelete();
 }
 
-function inStock(proId,ele) {
+function inStock(proId,ele)
+{
     var tmstmp = new Date().getTime();
-    $.ajax({url: common.APIWebPath() + "index.php?action=togglePrdstatus&vid=" + uid + "&prdid=" + proId+"&flag="+ele+"&timestamp="+tmstmp, success: function (result) {
-    var obj = jQuery.parseJSON(result);
-        if(obj['error']['Code']==0) {
-            var stockid="isStock"+proId;
-            //$(ele).parent().parent().parent().remove();
-            if(catid==10000) {
-                catName='Diamonds';
-             } else if(catid==10001) {
-                catName='Jewells';
-            } else if(catid==10002) {
-                catName='Bullions';
-            }
-            var total=$('#total'+catName).text();
-            $('#total'+catName).text(total);
-            if(ele == 1)
+    $.ajax({url: common.APIWebPath() + "index.php?action=togglePrdstatus&vid=" + uid + "&prdid=" + proId+"&flag="+ele+"&timestamp="+tmstmp, success: function (result)
+        {
+            var obj = jQuery.parseJSON(result);
+            if(obj['error']['Code']==0)
             {
-                common.toast(4,"Product is in stock");
-                $('#isStock'+proId).addClass('inStockPrd').removeClass('soldStockPrd outStockPrd');
-            }
-            if(ele == 3)
-            {
-                common.toast(2,"Product is out of stock");
-                $('#isStock'+proId).addClass('outStockPrd').removeClass('inStockPrd soldStockPrd');
-            }
-            if(ele == 4)
-            {
-                common.toast(3,"Product is sold");
-                $('#isStock'+proId).addClass('soldStockPrd').removeClass('inStockPrd outStockPrd');
-            }
+                var stockid="#isStock"+proId;
+                //$(ele).parent().parent().parent().remove();
+                
+                if(catid==10000) 
+                {
+                    catName='Diamonds';
+                }
+                else if(catid==10001)
+                {
+                    catName='Jewells';
+                }
+                else if(catid==10002)
+                {
+                    catName='Bullions';
+                }
+                var total=$('#total'+catName).text();
+                $('#total'+catName).text(total);
+                if(ele == 1)
+                {
+                    common.toast(4,"Product is in stock");
+                    $(stockid).removeClass('soldStockPrd outStockPrd');
+                    $(stockid).addClass('inStockPrd');
+                }
+                if(ele == 3)
+                {
+                    common.toast(2,"Product is out of stock");
+                    $(stockid).removeClass('inStockPrd soldStockPrd');
+                    $(stockid).addClass('outStockPrd');
+                }
+                if(ele == 4)
+                {
+                    common.toast(3,"Product is sold");
+                    $(stockid).removeClass('inStockPrd outStockPrd');
+                    $(stockid).addClass('soldStockPrd');
+                }
 //            $('#'+stockid).toggleClass('outofstock');
-        } else {
-            common.toast(0,obj['error']['Msg']);
+            }
+            else
+            {
+                common.toast(0,obj['error']['Msg']);
+            }
         }
-    }});
-
-
-
+    });
 }
 
 var searchScrollValue= '';
@@ -978,6 +990,7 @@ var searchIDName = '';
 var searchPage = 1;
 var searchVal = '';
 $('.prdSeachTxt').val('');
+
 function searchBarcode(val,pgno) {
 	if(!pgno)
 		pgno = 1;
