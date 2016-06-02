@@ -1852,7 +1852,7 @@ class vendor extends DB
                                     SET 
                                             product_id  = ".$pro_id.",
                                             shape       = '".$this->getShapeAbbrValue($value[2])."',
-                                            dwt         = '".$value[3]."',
+                                            carat       = '".$value[3]."',
                                             certified   = '".$value[12]."',
                                             color       = '".$value[4]."',
                                             clarity     = '".$value[5]."',
