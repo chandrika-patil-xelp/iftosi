@@ -9,7 +9,11 @@
                     <div class="formContainer fmOpenR">
                         <div class="jShapesCont resultsPage showHide fmOpenL fLeft">
                             <div class="allShapes resultsPage">
+                                 <div class="prImgPrev bgfff" onclick="move_PrImg(true);"></div>
+                                 <div class="prImgNext bgfff" onclick="move_PrImg(false);"></div>
                                 <center>
+                                    <div class="prImageStrip">
+                                    <ul class="carousel1 transition300">
 <?php
                         $catIds =  explode(',', $pdet['catid']);    
                         /*foreach($fil['attributes'] as $key=>$values)
@@ -57,11 +61,11 @@
 									{
                                                                             if(($shapes=='gCoins')||($shapes=='gBars'))
                                                                             {
-                                                                                echo "<div id='g".$val['catname']."' class='w25 jshapeComm transition300 ripplelink g".ucwords(strtolower($val['catname']))." ".(('g'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Gold ".$val['catname']."</div>";
+                                                                                echo "<li><div id='g".$val['catname']."' class=' jshapeComm transition300 ripplelink g".ucwords(strtolower($val['catname']))." ".(('g'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Gold ".$val['catname']."</div></li>";
                                                                             }
                                                                             else
                                                                             {
-                                                                                echo "<div id='g".$val['catname']."' class='w25 jshapeComm transition300 ripplelink g".ucwords(strtolower($val['catname']))." ".(('g'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Gold ".$val['catname']."</div>";
+                                                                                echo "<li><div id='g".$val['catname']."' class=' jshapeComm transition300 ripplelink g".ucwords(strtolower($val['catname']))." ".(('g'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Gold ".$val['catname']."</div></li>";
                                                                             }
                                                                         }    
                                                                 }
@@ -72,15 +76,31 @@
 									{
                                                                             if(($shapes=='sCoins')||($shapes=='sBars'))
                                                                             {
-                                                                            	echo "<div id='s".$val['catname']."' class='w25 jshapeComm transition300 ripplelink s".ucwords(strtolower($val['catname']))." ".(('s'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Silver ".$val['catname']."</div>";
+                                                                            	echo "<li><div id='s".$val['catname']."' class=' jshapeComm transition300 ripplelink s".ucwords(strtolower($val['catname']))." ".(('s'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Silver ".$val['catname']."</div></li>";
                                                                             }
                                                                             else
                                                                             {
-                                                                            	echo "<div id='s".$val['catname']."' class='w25 jshapeComm transition300 ripplelink s".ucwords(strtolower($val['catname']))." ".(('s'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Silver ".$val['catname']."</div>";
+                                                                            	echo "<li><div id='s".$val['catname']."' class=' jshapeComm transition300 ripplelink s".ucwords(strtolower($val['catname']))." ".(('s'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Silver ".$val['catname']."</div></li>";
+                                                                            }
+                                                                        }
+								}
+                                                                foreach($cat['subcat'] as $ky=>$val)
+								{   
+									if(strtolower($val)!=='')
+									{
+                                                                            if(($shapes=='pCoins')||($shapes=='pBars'))
+                                                                            {
+                                                                            	echo "<li><div id='p".$val['catname']."' class=' jshapeComm transition300 ripplelink p".ucwords(strtolower($val['catname']))." ".(('p'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Platinum ".$val['catname']."</div></li>";
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                            	echo "<li><div id='p".$val['catname']."' class=' jshapeComm transition300 ripplelink p".ucwords(strtolower($val['catname']))." ".(('p'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Platinum ".$val['catname']."</div></li>";
                                                                             }
                                                                         }
 								}
 ?>
+                                        </ul>
+                                        </div>
                                 </center>
                             </div>
                         </div>                                        
@@ -192,6 +212,28 @@
         });
         
             
+    
+      var val1 = 0;
+        var moveCount1 = 0;
+        function move_PrImg(flag) {
+            var totalThumbs = $(".carousel1  li").length;
+            var liWidth = ($(".carousel1  li").outerWidth());
+          
+            if (!flag) {
+                if (moveCount1 < (totalThumbs - 4)) {
+                    val1 = val1 - liWidth;
+                    $(".carousel1").css({transform: 'translateX(' + val1 + 'px)'});
+                    moveCount1++;
+                }
+            }
+            else if (flag) {
+                if (moveCount1 > 0) {
+                    val1 = val1 + liWidth;
+                    $(".carousel1").css({transform: 'translateX(' + val1 + 'px)'});
+                    moveCount1--;
+                }
+            }
+        }
     
     </script>
 
