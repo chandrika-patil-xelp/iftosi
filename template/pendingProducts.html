@@ -1,0 +1,177 @@
+<?php include 'vendorHead.html'; ?>
+<div class="mainContainer fLeft">
+    <?php include 'HeaderVendor.html'; ?>
+    <div id='dashboard' class="contentCont fLeft dn dashboard">
+        <div class="wrapperMax">Dashboard</div>
+    </div>
+
+    <div id='product' class="contentCont fLeft">
+        <div class="wrapperMax">
+            <div class="wishTabsCont fLeft">
+                <center>
+          						<div id="10000" class="wishTabComm DiamondsWish sel">Diamonds <span id="count_10000">(<?=$dmdCnt;?>)</span></div>
+          						<div id="10001" class="wishTabComm JewelleryWish ">Jewellery <span id="count_10001">(0)</span></div>
+          						<div id="10002" class="wishTabComm BullionWish ">Bullion <span id="count_10002">(<?=$blCnt;?>)</span></div>
+                </center>
+            </div>
+            <div id='diamondPendingPrds' class="forPrds fLeft fmOpenR diamondPrds"><?php include 'vProducts_Diamond.html'; ?> </div>
+            <div id='jewelleryPendingPrds' class="forPrds fLeft fmOpenR jewelleryPrds dn"><?php include 'vProducts_jewellery.html'; ?> </div>
+            <div id='bullionPendingPrds' class="forPrds fLeft fmOpenR bullionPrds dn"><?php include 'vProducts_bullion.html'; ?> </div>
+        </div>
+    </div>
+    <div class="v_Filters transition300 transit100X">
+        <div class="closeFilter poR ripplelink" onclick="showEnqFilter()"></div>
+        <div class="filterCont fLeft halfSize">
+            <div class="fLeft optionTitle fmOpenR">Date</div>
+            <div class="filterByDate fLeft fmOpenRs">
+                <div class="datadiv fLeft">
+                    <div class="toorTxt fLeft">From Date</div>
+                    <input type="text" id="dateFrom" class="fLeft prdSeachTxt" readonly value="2015-09-15" onfocus="showCalander('dateFrom')" onkeyup="checkToHide(event);"></div>
+                <div class="datadiv fRight">
+                    <div class="toorTxt fLeft">To Date</div>
+                    <input type="text" id="dateTo"  class="fLeft prdSeachTxt" readonly value="2015-10-15" onfocus="showCalander('dateTo')" onkeyup="checkToHide(event);">
+                </div>
+                <div id="datepicker" class="dn"></div>
+            </div>
+        </div>
+        <div class="filterCont fLeft halfSize">
+            <div class="fLeft optionTitle fmOpenR">Price</div>
+            <div class="fLeft rangeCont">
+                <div class="fLeft rangeDiv">
+                    <input type="text" id="priceRange" class="fLeft rngInp irs-hidden-input" style="visibility: hidden;" readonly="">
+                </div>
+            </div>
+        </div>
+        <div class="filterCont fLeft ">
+            <div class="fLeft optionTitle fmOpenR">Category</div>
+            <div class="filterOptions fLeft fmOpenR">
+                <div class="checkDiv fLeft">
+                    <input type="checkbox" class="filled-in" id="diamonds">
+                    <label for="diamonds">Diamonds</label>
+                </div>
+                <div class="checkDiv fLeft">
+                    <input type="checkbox" class="filled-in" id="jewellery">
+                    <label for="jewellery">Jewellery</label>
+                </div>
+                <div class="checkDiv fLeft">
+                    <input type="checkbox" class="filled-in" id="bullions">
+                    <label for="bullions">Bullions</label>
+                </div>
+            </div>
+        </div>
+        <div class="filterCont fLeft c666 pointer">Clear All</div>
+    </div>
+
+    <div id='enqFheader' class="prdHeader fLeft transition100 pLHtransit dn">
+        <div class="wrapperMax">
+            <div class="prdListHeader fLeft fmOpenR">
+                <div class="date fLeft">Date</div>
+                <div class="name fLeft">Name</div>
+                <div class="email fLeft">Email</div>
+                <div class="type fLeft">Category</div>
+                <div class="barcode fLeft">Barcode</div>
+                <div class="price fLeft bNone">Price</div>
+            </div>
+        </div>
+    </div>
+    <!------Enquiry Contents End------>
+
+
+    <!------Product Headers------>
+    <div id='diamondFheader' class="prdHeader fLeft transition100 pLHtransit dn diamondPrds">
+        <div class="wrapperMax">
+            <div class="prdListHeader fLeft fmOpenR">
+                <div class="date fLeft">Date</div>
+                <div class="barcode fLeft">Barcode</div>
+                <div class="shape fLeft">Shape</div>
+                <div class="carats fLeft">Carats</div>
+                <div class="color fLeft">Color</div>
+                <div class="clarity fLeft">Clarity</div>
+                <div class="cert fLeft">Certificate</div>
+                <div class="price fLeft">Cust Price</div>
+                <div class="price fLeft">B2B Price</div>
+                <div class="acct fLeft">Action</div>
+            </div>
+        </div>
+    </div>
+    <div id='jewelleryFheader' class="prdHeader fLeft transition100 pLHtransit dn jewelleryPrds">
+        <div class="wrapperMax">
+            <div class="prdListHeader fLeft fmOpenR">
+                <div class="date fLeft">Date</div>
+                <div class="barcode fLeft">Design Number</div>
+                <div class="metal fLeft">Metal</div>
+                <div class="catg fLeft">Category</div>
+                <div class="degno fLeft">Diamond Wt</div>
+<!--                <div class="subType fLeft">Gold Wt</div>-->
+                <div class="price fLeft">Price</div>
+                <div class="acct fLeft">Action</div>
+            </div>
+        </div>
+    </div>
+    <div id='bullionFheader' class="prdHeader fLeft transition100 pLHtransit dn bullionPrds">
+        <div class="wrapperMax">
+            <div class="prdListHeader fLeft fmOpenR">
+                <div class="date fLeft">Date</div>
+                <div class="barcode fLeft">Design Number</div>
+                <div class="weight fLeft">Type</div>
+                <div class="metal fLeft">Metal</div>
+                <div class="purity fLeft">Purity</div>
+                <div class="btype fLeft">Weight</div>
+                <div class="price fLeft">Price</div>
+                <div class="acct fLeft">Action</div>
+            </div>
+        </div>
+    </div>
+    <!------Product Headers------>
+
+    <!------Settings Content------>
+    <div id='settings' class="contentCont fLeft dn settings dn">
+        <div class="wrapperMax">Settings</div>
+    </div>
+    <!------Settings Content End------>
+
+        <div id='uploadDiv' class="popDiv transition300 transit-200Y1 dn">
+            <form class="" action="" method="post" enctype="multipart/form-data">
+                <div class="downSampleBtn"><a class="commBtn uploadBtn">Download Sample Format</a></div>
+                <div class="upTitle fLeft fmOpenR">Choose files to Upload Products </div>
+                <div class="inputCont fLeft fmOpenR">
+                    <input type="file" id="up_file" name="up_file" class="" accept=".xls,.xlsx,.csv">
+                    <label for="up_file" style="border: 1px solid #999;" class="dn"><span class="commBtn cancelBtn">BROWSE</span></label>
+                </div>
+                <div class="commBtn cancelBtn fLeft fmOpenR" id='upCancel'> CANCEL</div>
+                <div class="commBtn upBtn fLeft fmOpenR" id='upSubmit'>UPLOAD</div>
+                <div class="downloadLink fmOpenB fLeft">
+                    <center>
+                        <span><strong>Note: </strong>Upload file format should same as sample format</span>
+                        <?php if($catid == 10000) { ?>
+                            <a href="sampleDiamondList.xls">Download Sample File</a>
+                        <?php } else if($catid == 10001) { ?>
+                            <a href="sampleJewelleryList.xlsx">Download Sample File</a>
+                        <?php } else if($catid == 10002) { ?>
+                            <a href="sampleBullionList.xlsx">Download Sample File</a>
+                        <?php } ?>
+                    </center>
+                </div>
+            </form>
+        </div>
+        <?php include 'rateForms.html'; ?>
+</div>
+<div class="moverlay">
+    <div class="csoonTxt fLeft">
+        <div class="ttl1">stay tuned...</div>
+        <div class="ttl2">we are coming soon <br>on mobile...</div>
+    </div>
+    <div class="clogo transition100 fmOpenR">
+        <span id="logoTxt"><b class="fmOpenB">IF</b>to<b class="fmOpenB">SI</b></span>
+    </div>
+</div>
+<?php include 'vfooter.html'; ?>
+<script type="text/javascript" src="<?=$jvs['velocity']; ?>"></script>
+<script type="text/javascript" src="<?=$jvs['jqryUi']; ?>"></script>
+<script type="text/javascript" src="<?=$jvs['jquery_toast'];?>"></script>
+<script type="text/javascript" src="<?=$jvs['cmsCommon'];?>"></script>
+<script type="text/javascript" src="<?=$jvs['vendorLanding'];?>"></script>
+<script type="text/javascript" src="<?=$jvs['vendor_Pending_Product'];?>"></script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+this.toast = function (mType, msg) {
+        $('.close').click();
+        $.toast.config.width = 400;
+        $.toast.config.closeForStickyOnly = false;
+        if (mType == 0)
+        {
+            $.toast(msg, {duration: 5000, type: "danger"});
+        } 
+        else if (mType == 1)
+        {
+            $.toast(msg, {duration: 5000, type: "success"});
+        }
+        else if (mType == 2)
+        {
+            $.toast(msg, {duration: 5000, type: "stock"});
+        }
+        else if (mType == 3)
+        {
+            $.toast(msg, {duration: 5000, type: "sold"});
+        }
+        else if (mType == 4)
+        {
+            $.toast(msg, {duration: 5000, type: "instock"});
+        }
+        setTimeout(function () {
+            $('.close').click();
+        }, 5000);
+    }
+	
+	
+	customStorage.toast(0, 'This feature is not available for Admin');
