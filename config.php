@@ -67,18 +67,25 @@ else
 	define('APICLUDE',WEBROOT.'apis/include/');
 	define('IMGDOMAIN','http://'.$_SERVER['HTTP_HOST'].'/iftosi/image-upload/');
 	define('IMGUPLOAD','http://'.$_SERVER['HTTP_HOST'].'/iftosi/upload-image/');
-	define('IMGPATH','image-upload/');        
+	define('IMGPATH','image-upload/');
 }
 define('SMSAPI','http://alerts.sinfini.com/api/web2sms.php?workingkey=Ae24f0c241588043b00e0449d6e2a5664&to=+91_MOBILE&sender=IFTOSI&message=_MESSAGE');
 
 define('VERSION',6.41);
 
 $dollarValue = 66.03;
+
 define('dollarValue',$dollarValue);
+
 $goldRate =  24050;
+
 define('goldRate',$goldRate);
+
 $silverRate = 35918.00;
 define('silverRate',$silverRate);
+
+$silverRate = 12000.00;
+define('platinumRate',$platinumRate);
 
 define('FAVICON', DOMAIN . 'tools/img/common/favicon.ico');
 
@@ -114,6 +121,7 @@ $css['rngsld'] = DOMAIN.'tools/css/rangeslider/ion.rangeSlider.css?v='.VERSION;
 $css['rngsldskin'] = DOMAIN.'tools/css/rangeslider/ion.rangeSlider.skinHTML5.css?v='.VERSION;
 $css['normalize'] = DOMAIN.'tools/css/rangeslider/normalize.css?v='.VERSION;
 $css['jquery_toast'] = DOMAIN.'tools/css/jquery.toast.min.css?v='.VERSION;
+$css['toastr'] = DOMAIN.'tools/css/lib/toastr.css?v='.VERSION;
 
 // CSS Libraries End
 
@@ -138,6 +146,7 @@ $jvs['hammer'] 		= DOMAIN.'tools/js/lib/hammer.js?v='.VERSION;
 $jvs['auto'] 		= DOMAIN.'tools/js/lib/autosuggest.js?v='.VERSION;
 $jvs['customStorage']   = DOMAIN.'tools/js/lib/CustomStorage.js?v='.VERSION;
 $jvs['jquery_toast']	= DOMAIN.'tools/js/lib/jquery.toast.min.js?v='.VERSION;
+$jvs['toastr']	= DOMAIN.'tools/js/lib/toastr.js?v='.VERSION;
 $jvs['cms_jquery_toast']	= DOMAIN.'tools/js/cms/lib/jquery.toast.min.js?v='.VERSION;
 
 // JS Libraries End
@@ -158,6 +167,7 @@ $jvs['vendorLanding'] 	= DOMAIN.'tools/js/cms/vendor_landing.js?v='.VERSION;
 $jvs['pForm']    	= DOMAIN.'tools/js/pForm.js?v='.VERSION;
 $jvs['cmsCommon'] 	= DOMAIN.'tools/js/cms/Common.js?v='.VERSION;
 $jvs['vendor_Product'] 	= DOMAIN.'tools/js/cms/page/vendorProductListings.js?v='.VERSION;
+$jvs['vendor_Pending_Product'] 	= DOMAIN.'tools/js/cms/page/vendor_Pending_products.js?v='.VERSION;
 $jvs['clarity'] 	= DOMAIN.'tools/js/clarity.js?v='.VERSION;
 $jvs['anatomy'] 	= DOMAIN.'tools/js/anatomy.js?v='.VERSION;
 $jvs['enquiry'] 	= DOMAIN.'tools/js/enquiry.js?v='.VERSION;

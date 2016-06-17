@@ -67,10 +67,10 @@ switch($action)
         $result	= $obj->getUserDet($params);
         $res = $result;
         break;
-        
+
     case 'makeDate':
         $params['strdt'] = urlencode('1990-10-10 10:10:10');
-        
+
         $stringDt = (!empty($params['strdt'])) ? trim(urldecode($params['strdt'])) : '';
         if(empty($stringDt))
         {
@@ -185,14 +185,14 @@ switch($action)
         $result = $obj->sendWelcomeMailSMS($params);
         $res = $result;
         break;
-        
+
    case 'sendVActivateMailSMS':
         include APICLUDE.'class.user.php';
         $username  = (!empty($params['username'])) ? trim($params['username']) : '';
         $email  = (!empty($params['email'])) ? trim($params['email']) : '';
         $mobile  = (!empty($params['mobile'])) ? trim($params['mobile']) : '';
         $isV  = (!empty($params['isVendor'])) ? trim($params['isVendor']) : '';
-        
+
         $obj= new user($db['iftosi']);
         $result = $obj->sendVActivateMailSMS($params);
         $res = $result;
@@ -511,7 +511,7 @@ switch($action)
             $result= $obj->viewLog1($params);
             $res = $result;
             break;
-            
+
 
 //-----------------------------Vendor-----------------------------
 
@@ -546,6 +546,24 @@ switch($action)
             }
             $obj=new vendor($db['iftosi']);
             $result=$obj->getVProductsByCatid($params);
+            $res=$result;
+            break;
+
+//  localhost/iftosi/apis/index.php?action=getVproducts&vid=9975887206&page=&limit=
+        case 'getVPendingProducts':
+            include APICLUDE.'class.vendor.php';
+            $vid=(!empty($params['vid'])) ? trim($params['vid']) : '';
+            if(empty($vid))
+            {
+                $arr = array();
+                $err = array('Code' => 1, 'Msg' => 'Invalid parameters');
+                $result = array('results' => $arr, 'error' => $err);
+                $res=$result;
+                break;
+            }
+            $obj=new vendor($db['iftosi']);
+
+            $result=$obj->getVPendingProducts($params);
             $res=$result;
             break;
 
@@ -734,7 +752,7 @@ switch($action)
                 }
                 $params['type']=$fileExt;
                 $obj = new vendor($db['iftosi']);
-                
+
                 if($params['catid']==10000)
                 {
                     $result = $obj->uploadDiamondProducts($params);
@@ -745,7 +763,7 @@ switch($action)
                 }
                 else if($params['catid']==10002)
                 {
-                    
+
                     $result = $obj->uploadBullionProducts($params);
                 }
             }
@@ -795,6 +813,25 @@ switch($action)
             }
             $res= $result;
         break;
+
+// localhost/iftosi/apis/index.php?action=updateSilverRate&vid=2&dolRate=50.50
+        case 'updatePlatinumRate':
+            include APICLUDE.'class.vendor.php';
+            $vid          =(!empty($params['vid'])) ? trim($params['vid']) : '';
+            $platinumRate =(!empty($params['platRate'])) ? trim($params['platRate']) : '';
+            if(!empty($vid) && !empty($silverRate))
+            {
+                $obj      = new vendor($db['iftosi']);
+                $result   = $obj->updatePlatinumRate($params);
+            }
+            else
+            {
+                $err = array('Code' => 1, 'Msg' => 'Invalid Parameters');
+                $result = array('results' => array(), 'error' => $err);
+            }
+            $res= $result;
+        break;
+
 
 // localhost/iftosi/apis/index.php?action=getSilverRate&vid=2
         case 'getSilverRate':
@@ -1134,6 +1171,22 @@ switch($action)
             }
             $obj = new auto($db['iftosi']);
             $result=$obj->searchbox($params);
+            $res=$result;
+            break;
+
+//  localhost/iftosi/apis/index.php?action=suggestCity&str=de&page=1&limit=3
+        case 'girdleSuggest':
+            include APICLUDE.'class.auto.php';
+            $obj = new auto($db['iftosi']);
+            $result=$obj->girdleSuggest($params);
+            $res=$result;
+            break;
+
+//  localhost/iftosi/apis/index.php?action=suggestCity&str=de&page=1&limit=3
+        case 'bankSuggest':
+            include APICLUDE.'class.auto.php';
+            $obj = new auto($db['iftosi']);
+            $result=$obj->bankSuggest($params);
             $res=$result;
             break;
 
@@ -1931,7 +1984,7 @@ echo '</pre>';
                         $obj = new sendingMail($db['iftosi']);
                         $res = $obj->sendMail($params);
                 break;
-            
+
 //----------------------Crons-------------------------------------------
         case "manageVendors":
                     include APICLUDE . 'class.manager.php';
@@ -1957,8 +2010,8 @@ echo '</pre>';
            $result= $obj->getVendorBySearch($params);
            $res=$result;
            break;
-    
-//---------------------------------------------------------------------------    
+
+//---------------------------------------------------------------------------
     default :
 
         break;

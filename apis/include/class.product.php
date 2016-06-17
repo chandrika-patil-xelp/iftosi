@@ -9,7 +9,12 @@
 
         public function addNewproduct($params)
         {
-            $vendSql = "Select * from tbl_vendor_master where vendor_id = ".$params['vid'];
+            $vendSql = "SELECT
+                                *
+                        FROM
+                                tbl_vendor_master
+                        WHERE
+                                vendor_id = ".$params['vid'];
             $vendres = $this->query($vendSql);
             if($vendres)
             {
@@ -17,11 +22,8 @@
                 $display_flag = $vendrow['active_flag'];
             }
 
-
             $detl=$params['dt'];
             $len=strlen($detl);
-
-
             $detls1=explode('|~|',$params['dt']);
 
             for($i=0;$i<count($detls1);$i++)
@@ -30,469 +32,542 @@
                 $detls[$expd[0]] = $expd[1];
             }
 
-            if(($detls['shape']=='gBars')||($detls['shape']=='sBars')||($detls['shape']=='gCoins')||($detls['shape']=='sCoins'))
+            if(!empty($detls['prdcprice']))
             {
-                $type=substr($detls['shape'],1,-1);
-                $temp=$detls['shape'];
-                $shape=$detls['shape'];
+                $detls['prdPrice'] = $detls['prdcprice'];
+            }
+
+            if(($detls['shape']=='gBars') || ($detls['shape']=='sBars') || ($detls['shape']=='gCoins') || ($detls['shape']=='sCoins') || ($detls['shape']=='pBars') || ($detls['shape']=='pCoins'))
+            {
+                $type   = substr($detls['shape'],1,-1);
+                $temp   = $detls['shape'];
+                $shape  = $detls['shape'];
+
                 if(($temp=='gBars')||($temp=='gCoins'))
                 {
-                    $detls['metal']='Gold';
-                }
-                else if(($temp=='sBars')||($temp=='sCoins'))
-                {
-                    $detls['metal']='Silver';
+                    $detls['metal'] = 'Gold';
                 }
 
-                $catname=substr($detls['shape'],1);
-                $catname=$catname;
-               $catidsql="Select catid from tbl_category_master where cat_name='".$catname."'";
+                else if(($temp=='sBars')||($temp=='sCoins'))
+                {
+                    $detls['metal'] = 'Silver';
+                }
+
+                else if(($temp=='pBars')||($temp=='pCoins'))
+                {
+                    $detls['metal'] = 'Platinum';
+                }
+
+                $catname  = substr($detls['shape'],1);
+                $catname  = $catname;
+                $catidsql="SELECT
+                                    catid
+                           FROM
+                                    tbl_category_master
+                           WHERE
+                                    cat_name='".$catname."'";
                 $catidres=$this->query($catidsql);
-               $catidrow=$this->fetchData($catidres);
+                $catidrow=$this->fetchData($catidres);
                 $catids1=$catidrow['catid'];
             }
             else
             {
-                $shape=$detls['shape'];
-                $catids1=$detls['subcatid'];
+                $shape    = $detls['shape'];
+                $catids1  = $detls['subcatid'];
             }
 
-            $maincatsql="SELECT p_catid from tbl_category_master where catid IN(\"".$catids1."\")";
+            $maincatsql="SELECT
+                                  p_catid
+                         FROM
+                                  tbl_category_master
+                         WHERE
+                                  catid IN(\"".$catids1."\")";
             $maincatres=$this->query($maincatsql);
             $maincatrow=$this->fetchData($maincatres);
 
-            $temp=count($catids);
+            $temp    = count($catids);
             $catids1.=','.$maincatrow['p_catid'];
             $catids1.=','.$params['category_id'];
 
-            $catids=explode(',',$catids1);
+            $catids = explode(',',$catids1);
 
             $detls['measurement']=$detls['measurement1'].'*'.$detls['measurement2'].'*'.$detls['measurement3'];
-                    //  Inserting the values in brand table
-
 
                     $sql = "INSERT
                             INTO
-                                        tbl_brandid_generator
-                                                               (name,
-                                                                category_id,
-                                                                date_time,
-                                                                aflg)
+                                         tbl_brandid_generator
+                                         (name,
+                                          category_id,
+                                          date_time,
+                                          aflg)
                             VALUES
-                                                            (\"".$detls['brand']."\",
-                                                             \"".$params['category_id']."\",
-                                                                 now(),
-                                                             \"".$display_flag."\")";
-
+                                      (\"".$detls['brand']."\",
+                                       \"".$params['category_id']."\",
+                                           now(),
+                                       \"".$display_flag."\")";
                     $res = $this->query($sql);
                     if(!empty($params['prdid']))
-                {
-                    $sql  = "SELECT
-                                                            product_id
-                             FROM
-                                        tbl_product_master
-                             WHERE
-                                                            product_id =\"".$params['prdid']."\"
-                             AND
-                                                            active_flag=\"".$display_flag."\"
-                             ORDER BY
-                                                            update_time
-                             DESC
-                             LIMIT 10";
-                    $res  = $this->query($sql);
-                    $cnt2 = $this->numRows($res);
-                       $row=$this->fetchData($res);
-                        $pid=$row['product_id'];
-                }
-                else if(empty($params['prdid']))
-                {
-                  //  If product not present in generator table new product insertion process starts
-                  $sql = "INSERT
-                          INTO
-                                  tbl_productid_generator
-                                                                  (product_name,
-                                                                  product_brand,
-                                                                  date_time)
-                          VALUES
-                                                              (\"".$detls['product_name']."\",
-                                                               \"".$detls['product_brand']."\",
-                                                                   now())";
-                  $res = $this->query($sql);
-                  $pid = $this->lastInsertedId();
-                }
-                if(!empty($pid))
-                {   // Checks for the designer name along with product id
-                   $chksql="SELECT
-                                                           designer_id,
-                                                           desname
-                            FROM
-                                   tbl_designer_product_mapping
-                            WHERE
-                                                            active_flag=\"".$display_flag."\"
-                            AND
-                                                            product_id=".$pid."";
-
-                   $chkdes=$this->query($chksql);
-                   $cntres=$this->numRows($chkdes);
-                   if($cntres==0)
-                   {
-                    //  For product designer tabe insertion
-                   $dessql="INSERT
-                            INTO
-                            tbl_designer_product_mapping
-                                                                    (product_id,
-                                                                    desname,
-                                                                    active_flag,
-                                                                    date_time)
-                            VALUES
-                                                                (\"".$pid."\",
-                                                                 \"".$detls['desname']."\",
-                                                                 \"".$display_flag."\",
-                                                                     now())";
-
-                   $desres = $this->query($dessql);
-                   }
-                   else
-                   {
-
-                       $row = $this->fetchData($chkdes);
-                       $did=$row['designer_id'];
-
-                   //   designer product table value updating if product already present
-                    $dessql="UPDATE
-                                        tbl_designer_product_mapping
-                            SET
-                                                                        desname=\"".$detls['desname']."\"
-                            WHERE
-                                                                        designer_id=\"".$did."\"";
-                    $desres = $this->query($dessq);
-
-                   }
-                    //  For category product mapping
-
-
-                       $catids = explode(',',$catids1);
-                       foreach($catids as $key=>$val)
-                       {
-                           if(!empty($val))
-                           {
-                                $catidies[] = trim($val);
-                           }
-
-                        }
-                        if(!empty($catidies))
-                        {
-                            $catids1 = implode('","', array_unique($catidies));
-                        }
-                        $updtcatsql="UPDATE tbl_product_category_mapping set display_flag=0 where category_id NOT IN(\"".$catids1."\") and product_id=\"".$pid."\"";
-                        $updtcatres=$this->query($updtcatsql);
-                        $detls['discount'] = str_replace('-', '', $detls['discount']);
-                        for($i=0;$i<count($catidies);$i++)
-                        {
-                            if(!empty($catidies[$i]))
-                            {
-                                $pcsql="INSERT
-                                        INTO
-                                                    tbl_product_category_mapping
-                                                                                   (product_id,
-                                                                                    category_id,
-                                                                                    price,
-                                                                                    rating,
-                                                                                    b2bprice,
-                                                                                    display_flag,
-                                                                                    date_time)
-                                        VALUES
-                                                                               (\"".$pid."\",
-                                                                                \"".$catidies[$i]."\",
-                                                                                \"".$detls['price']."\",
-                                                                                \"".$detls['rating']."\",
-                                                                                \"".$detls['priceb2b']."\",
-                                                                                \"".$display_flag."\",
-                                                                                    now())
-                                ON DUPLICATE KEY UPDATE
-                                                        category_id             = \"".$catidies[$i]."\",
-                                                        price                   = \"".$detls['price']."\",
-                                                        rating                  = \"".$detls['rating']."\",
-                                                        b2bprice                = \"".$detls['priceb2b']."\",
-                                                    display_flag                = \"".$display_flag."\"";
-                                $pcres=$this->query($pcsql);
-                           }
-                        }
-                    //  For product values filling
-                        $sql="  INSERT
-                                INTO
-                                                tbl_product_master
-                                                                        (product_id,
-                                                                        barcode,
-                                                                        lotref,
-                                                                        lotno,
-                                                                        product_name,
-                                                                        product_display_name,
-                                                                        product_model,
-                                                                        product_brand,
-                                                                        prd_price,
-                                                                        b2bprice,
-                                                                        product_currency,
-                                                                        product_keyword,
-                                                                        product_desc,
-                                                                        prd_wt,
-                                                                        prd_img,
-                                                                        product_warranty,
-                                                                        desname,
-                                                                        date_time,
-                                                                        active_flag)
-                                                VALUES
-                                                                 ( \"".$pid."\",
-                                                                   \"".$detls['barcode']."\",
-                                                                   \"".$detls['lot_ref']."\",
-                                                                   \"".$detls['lot_no']."\",
-                                                                   \"".$detls['product_name']."\",
-                                                                   \"".$detls['product_display_name']."\",
-                                                                   \"".$detls['product_model']."\",
-                                                                   \"".$detls['product_brand']."\",
-                                                                   \"".$detls['price']."\",
-                                                                   \"".$detls['priceb2b']."\",
-                                                                   \"".$detls['product_currency']."\",
-                                                                   \"".$detls['product_keywords']."\",
-                                                                   \"".$detls['product_desc']."\",
-                                                                   \"".$detls['product_wt']."\",
-                                                                   \"".$detls['prd_img']."\",
-                                                                   \"".$detls['product_warranty']."\",
-                                                                   \"".$detls['desname']."\",
-                                                                       now(),
-                                                                   \"".$display_flag."\")
-                                ON DUPLICATE KEY UPDATE
-                                                    barcode                      = \"".$detls['barcode']."\",
-                                                    lotref                       = \"".$detls['lot_ref']."\",
-                                                    lotno                        = \"".$detls['lot_no']."\",
-                                                    product_display_name         = \"".$detls['product_display_name']."\",
-                                                    product_model 		 = \"".$detls['product_model']."\",
-                                                    product_brand 		 = \"".$detls['product_brand']."\",
-                                                    prd_price 		         = \"".$detls['price']."\",
-                                                    b2bprice                     = \"".$detls['priceb2b']."\",
-                                                    product_currency             = \"".$detls['product_currency']."\",
-                                                    product_keyword              = \"".$detls['product_keywords']."\",
-                                                    product_desc                 = \"".$detls['product_desc']."\",
-                                                    prd_wt                       = \"".$detls['product_wt']."\",
-                                                    prd_img                      = \"".$detls['prd_img']."\",
-                                                    product_warranty             = \"".$detls['product_warranty']."\",
-                                                    desname                      = \"".$detls['desname']."\",
-                                                    active_flag                      = \"".$display_flag."\"";
-                    $res = $this->query($sql);
-
-                   //----------------------------------------------For product search table---------------------------------------------------
-                            //  For tbl_product_search
-        // Few attributes remaining-- type,metal,purity,nofd,dwt,gemwt,quality,goldwt
-                    if($detls['Certficate']=='Other'){$detls['Certficate']=$detls['other_cerificate'];}
-                    if($detls['design']=='Other'){$detls['design']=$detls['bullion_design'];}
-                    if($shape == 'sCoins' || $shape == 'sBars')
                     {
-                        if(!empty($detls['silver_purity'])){ $detls['gold_purity'] = $detls['silver_purity'];}
-                        if(!empty($detls['silver_weight'])){ $detls['gold_weight'] = $detls['silver_weight'];}
+                        $sql  = "SELECT
+                                            product_id
+                                 FROM
+                                            tbl_product_master
+                                 WHERE
+                                            product_id =\"".$params['prdid']."\"
+                                 AND
+                                            active_flag=\"".$display_flag."\"
+                                 ORDER BY
+                                            update_time
+                                 DESC
+                                 LIMIT 10";
+                        $res  = $this->query($sql);
+                        $cnt2 = $this->numRows($res);
+                        $row  = $this->fetchData($res);
+                        $pid  = $row['product_id'];
                     }
-                        $sql = "INSERT
-                                    INTO
-                                                    tbl_product_search
-                                                    (product_id,
-                                                     diamond_shape,
-                                                     color,
-                                                     carat,
-                                                     shape,
-                                                     certified,
-                                                     cut,
-                                                     clarity,
-                                                     base,
-                                                     tabl,
-                                                     price,
-                                                     p_disc,
-                                                     p_discb2b,
-                                                     prop,
-                                                     polish,
-                                                     symmetry,
-                                                     fluo,
-                                                     td,
-                                                     measurement,
-                                                     cno,
-                                                     pa,
-                                                     cr_hgt,
-                                                     cr_ang,
-                                                     girdle,
-                                                     pd,
-                                                     type,
-                                                     metal,
-                                                     gold_purity,
-                                                     nofd,
-                                                     dwt,
-                                                     gemwt,
-                                                     quality,
-                                                     gold_weight,
-                                                     gemstone_color,
-                                                     num_gemstones,
-                                                     gemstone_type,
-                                                     combination,
-                                                     bullion_design,
-                                                     rating,
-                                                     budget,
-                                                     b2b_price,
-                                                     is_plain_jewellery,
-                                                     price_per_carat,
-                                                     othermaterial,
-                                                     labour_charge,
-                                                     grossweight,
-                                                     gprice_per_carat,
-                                                     diamondsvalue,
-                                                     gemstonevalue,
-                                                     date_time,
-                                                     active_flag)
-                                    VALUES
-                                                 (\"".$pid."\",
-                                                  \"".$detls['diamondShape']."\",
-                                                  \"".$detls['color']."\",
-                                                  \"".$detls['carat_weight']."\",
-                                                  \"".$shape."\",
-                                                  \"".$detls['Certficate']."\",
-                                                  \"".$detls['cut']."\",
-                                                  \"".$detls['clarity']."\",
-                                                  \"".$detls['base_price']."\",
-                                                  \"".$detls['table']."\",
-                                                  \"".$detls['price']."\",
-                                                  \"".$detls['discount']."\",
-                                                  \"".$detls['discountb2b']."\",
-                                                  \"".$detls['prop']."\",
-                                                  \"".$detls['polish']."\",
-                                                  \"".$detls['symmetry']."\",
-                                                  \"".$detls['flourecence']."\",
-                                                  \"".$detls['td']."\",
-                                                  \"".$detls['measurement']."\",
-                                                  \"".$detls['certno']."\",
-                                                  \"".$detls['pa']."\",
-                                                  \"".$detls['crown_height']."\",
-                                                  \"".$detls['crown_angle']."\",
-                                                  \"".$detls['girdle']."\",
-                                                  \"".$detls['pd']."\",
-                                                  \"".$type."\",
-                                                  \"".$detls['metal']."\",
-                                                  \"".$detls['gold_purity']."\",
-                                                  \"".$detls['no_diamonds']."\",
-                                                  \"".$detls['diamonds_weight']."\",
-                                                  \"".$detls['gemstone_weight']."\",
-                                                  \"".$detls['quality']."\",
-                                                  \"".$detls['gold_weight']."\",
-                                                  \"".$detls['gemstone_color']."\",
-                                                  \"".$detls['num_gemstones']."\",
-                                                  \"".$detls['gemstone_type']."\",
-                                                  \"".$detls['combination']."\",
-                                                  \"".$detls['design']."\",
-                                                  \"".$detls['rating']."\",
-                                                  \"".$detls['price']."\",
-                                                  \"".$detls['priceb2b']."\",
-                                                  \"".$detls['isPlain']."\",
-                                                  \"".$detls['price_per_carat']."\",
-                                                  \"".$detls['othermaterial']."\",
-                                                  \"".$detls['labour_charge']."\",
-                                                  \"".$detls['grossweight']."\",
-                                                  \"".$detls['gprice_per_carat']."\",
-                                                  \"".$detls['diamondsvalue']."\",
-                                                  \"".$detls['gemstonevalue']."\",
-                                                      now(),
-                                                  \"".$display_flag."\")
-                                    ON DUPLICATE KEY UPDATE
-                                                            diamond_shape           = \"".$detls['diamondShape']."\",
-                                                            color                   = \"".$detls['color']."\",
-                                                            carat                   = \"".$detls['carat_weight']."\",
-                                                            certified               = \"".$detls['Certficate']."\",
-                                                            shape                   = \"".$shape."\",
-                                                            cut                     = \"".$detls['cut']."\",
-                                                            clarity                 = \"".$detls['clarity']."\",
-                                                            base                    = \"".$detls['base_price']."\",
-                                                            tabl                    = \"".$detls['table']."\",
-                                                            price                   = \"".$detls['price']."\",
-                                                            p_disc                  = \"".$detls['discount']."\",
-                                                            p_discb2b               = \"".$detls['discountb2b']."\",
-                                                            prop                    = \"".$detls['prop']."\",
-                                                            polish                  = \"".$detls['polish']."\",
-                                                            symmetry                = \"".$detls['symmetry']."\",
-                                                            fluo                    = \"".$detls['flourecence']."\",
-                                                            td                      = \"".$detls['td']."\",
-                                                            measurement             = \"".$detls['measurement']."\",
-                                                            cno                     = \"".$detls['certno']."\",
-                                                            pa                      = \"".$detls['pa']."\",
-                                                            cr_hgt                  = \"".$detls['cr_height']."\",
-                                                            cr_ang                  = \"".$detls['crown_angle']."\",
-                                                            girdle                  = \"".$detls['girdle']."\",
-                                                            pd                      = \"".$detls['pd']."\",
-                                                            metal                   = \"".$detls['metal']."\",
-                                                            type                    = \"".$type."\",
-                                                            gold_purity             = \"".$detls['gold_purity']."\",
-                                                            nofd                    = \"".$detls['no_diamonds']."\",
-                                                            dwt                     = \"".$detls['diamonds_weight']."\",
-                                                            gemwt                   = \"".$detls['gemstone_weight']."\",
-                                                            quality                 = \"".$detls['quality']."\",
-                                                            gold_weight             = \"".$detls['gold_weight']."\",
-                                                            combination             = \"".$detls['combination']."\",
-                                                            gemstone_color          = \"".$detls['gemstone_color']."\",
-                                                            num_gemstones           = \"".$detls['num_gemstones']."\",
-                                                            gemstone_type           = \"".$detls['gemstone_type']."\",
-                                                            bullion_design          = \"".$detls['design']."\",
-                                                            rating                  = \"".$detls['rating']."\",
-                                                            budget                  = \"".$detls['price']."\",
-                                                            b2b_price               = \"".$detls['priceb2b']."\",
-                                                            is_plain_jewellery      = \"".$detls['isPlain']."\",
-                                                            price_per_carat         = \"".$detls['price_per_carat']."\",
-                                                            othermaterial           = \"".$detls['othermaterial']."\",
-                                                            labour_charge           = \"".$detls['labour_charge']."\",
-                                                            grossweight             = \"".$detls['grossweight']."\",
-                                                            gprice_per_carat        = \"".$detls['gprice_per_carat']."\",
-                                                            diamondsvalue           = \"".$detls['diamondsvalue']."\",
-                                                            gemstonevalue           = \"".$detls['gemstonevalue']."\",
-                                                            active_flag             = \"".$display_flag."\"";
-                            $res = $this->query($sql);
-
-                            $vensql="  SELECT
-                                                            city
+                    else if(empty($params['prdid']))
+                    {
+                        //  If product not present in generator table new product insertion process starts
+                          $sql = "INSERT
+                                  INTO
+                                          tbl_productid_generator
+                                          (product_name,
+                                          product_brand,
+                                          date_time)
+                                  VALUES
+                                      (\"".$detls['product_name']."\",
+                                       \"".$detls['product_brand']."\",
+                                           now())";
+                          $res = $this->query($sql);
+                          $pid = $this->lastInsertedId();
+                    }
+                    if(!empty($pid))
+                    {   // Checks for the designer name along with product id
+                           $chksql="SELECT
+                                           designer_id,
+                                           desname
                                     FROM
-                                        tbl_vendor_master
+                                           tbl_designer_product_mapping
                                     WHERE
-                                                            vendor_id=\"".$params['vid']."\"";
-                            $venres=$this->query($vensql);
-                            $venrow=$this->fetchData($venres);
-                            $city=$row['city'];
-
-//------------------------------------------------------------------------------------------------------------------------
-                            $vendsql="  INSERT
+                                           active_flag=\"".$display_flag."\"
+                                    AND
+                                           product_id=".$pid."";
+                           $chkdes = $this->query($chksql);
+                           $cntres = $this->numRows($chkdes);
+                           if($cntres==0)
+                           {
+                              //  For product designer tabe insertion
+                               $dessql="INSERT
                                         INTO
-                                                tbl_vendor_product_mapping
-                                                                            (product_id,
-                                                                            vendor_id,
-                                                                            vendor_price,
-                                                                            b2bprice,
-                                                                            vendor_quantity,
-                                                                            vendor_currency,
-                                                                            vendor_remarks,
-                                                                            city,
-                                                                            updatedby,
-                                                                            date_time,
-                                                                            active_flag)";
-                            $vendsql.=  "VALUES
-                                                                       (\"".$pid."\",
-                                                                        \"".$params['vid']."\",
-                                                                        \"".$detls['price']."\",
-                                                                        \"".$detls['priceb2b']."\",
-                                                                        \"".$detls['vendor_quantity']."\",
-                                                                        \"".$detls['vendor_curr']."\",
-                                                                        \"".$detls['vendor_remarks']."\",
-                                                                        \"".$city."\",
-                                                                           'vendor',
-                                                                            now(),
-                                                                        \"".$display_flag."\")
-                                        ON DUPLICATE KEY UPDATE
-                                                                            vendor_price = \"".$detls['price']."\",
-                                                                            b2bprice     = \"".$detls['priceb2b']."\"";
-                            $vendres = $this->query($vendsql);
+                                                tbl_designer_product_mapping
+                                                (product_id,
+                                                desname,
+                                                active_flag,
+                                                date_time)
+                                        VALUES
+                                            (\"".$pid."\",
+                                             \"".$detls['desname']."\",
+                                             \"".$display_flag."\",
+                                                 now())";
+                               $desres = $this->query($dessql);
+                           }
+                           else
+                           {
 
-                                $arr = array('pid'=>$pid);
-                                $err=array('code'=>0,'msg'=>'Product added successfully');
-//------------------------------------------------------------------------------------------------------------
+                               $row = $this->fetchData($chkdes);
+                               $did = $row['designer_id'];
+                               //   designer product table value updating if product already present
+                                $dessql="UPDATE
+                                                  tbl_designer_product_mapping
+                                        SET
+                                                  desname=\"".$detls['desname']."\"
+                                        WHERE
+                                                  designer_id=\"".$did."\"";
+                                $desres = $this->query($dessq);
+
+                            }
+                        //  For category product mapping
+                           $catids = explode(',',$catids1);
+                           foreach($catids as $key=>$val)
+                           {
+                               if(!empty($val))
+                               {
+                                    $catidies[] = trim($val);
+                               }
+                            }
+                            if(!empty($catidies))
+                            {
+                                $catids1 = implode('","', array_unique($catidies));
+                            }
+                            $updtcatsql="UPDATE
+                                                  tbl_product_category_mapping
+                                         SET
+                                                  display_flag=0
+                                         WHERE
+                                                  category_id NOT IN(\"".$catids1."\")
+                                         AND
+                                                  product_id=\"".$pid."\"";
+
+                            $updtcatres = $this->query($updtcatsql);
+                            $detls['discount'] = str_replace('-', '', $detls['discount']);
+
+                            for($i=0;$i<count($catidies);$i++)
+                            {
+                                if(!empty($catidies[$i]))
+                                {
+                                    $pcsql="INSERT
+                                            INTO
+                                                    tbl_product_category_mapping
+                                                   (product_id,
+                                                    category_id,
+                                                    price,
+                                                    rating,
+                                                    b2bprice,
+                                                    display_flag,
+                                                    date_time)
+                                            VALUES
+                                               (\"".$pid."\",
+                                                \"".$catidies[$i]."\",
+                                                \"".$detls['price']."\",
+                                                \"".$detls['rating']."\",
+                                                \"".$detls['priceb2b']."\",
+                                                \"".$display_flag."\",
+                                                    now())
+                                    ON DUPLICATE KEY UPDATE
+                                            category_id             = \"".$catidies[$i]."\",
+                                            price                   = \"".$detls['price']."\",
+                                            rating                  = \"".$detls['rating']."\",
+                                            b2bprice                = \"".$detls['priceb2b']."\",
+                                            display_flag            = \"".$display_flag."\"";
+                                    $pcres=$this->query($pcsql);
+                               }
+                            }
+
+                            //  For product values filling
+                            $sql="  INSERT
+                                    INTO
+                                            tbl_product_master
+                                            (product_id,
+                                            barcode,
+                                            lotref,
+                                            lotno,
+                                            product_name,
+                                            product_display_name,
+                                            product_model,
+                                            product_brand,
+                                            prd_price,
+                                            b2bprice,
+                                            product_currency,
+                                            product_keyword,
+                                            product_desc,
+                                            prd_wt,
+                                            prd_img,
+                                            product_warranty,
+                                            desname,
+                                            date_time,
+                                            active_flag)
+                                    VALUES
+                                       ( \"".$pid."\",
+                                         \"".$detls['barcode']."\",
+                                         \"".$detls['lot_ref']."\",
+                                         \"".$detls['lot_no']."\",
+                                         \"".$detls['product_name']."\",
+                                         \"".$detls['product_display_name']."\",
+                                         \"".$detls['product_model']."\",
+                                         \"".$detls['product_brand']."\",
+                                         \"".$detls['price']."\",
+                                         \"".$detls['priceb2b']."\",
+                                         \"".$detls['product_currency']."\",
+                                         \"".$detls['product_keywords']."\",
+                                         \"".$detls['product_desc']."\",
+                                         \"".$detls['product_wt']."\",
+                                         \"".$detls['prd_img']."\",
+                                         \"".$detls['product_warranty']."\",
+                                         \"".$detls['desname']."\",
+                                             now(),
+                                         \"".$display_flag."\")
+                                   ON DUPLICATE KEY UPDATE
+                                            barcode                      = \"".$detls['barcode']."\",
+                                            lotref                       = \"".$detls['lot_ref']."\",
+                                            lotno                        = \"".$detls['lot_no']."\",
+                                            product_display_name         = \"".$detls['product_display_name']."\",
+                                            product_model 	             = \"".$detls['product_model']."\",
+                                            product_brand            		 = \"".$detls['product_brand']."\",
+                                            prd_price        		         = \"".$detls['price']."\",
+                                            b2bprice                     = \"".$detls['priceb2b']."\",
+                                            product_currency             = \"".$detls['product_currency']."\",
+                                            product_keyword              = \"".$detls['product_keywords']."\",
+                                            product_desc                 = \"".$detls['product_desc']."\",
+                                            prd_wt                       = \"".$detls['product_wt']."\",
+                                            prd_img                      = \"".$detls['prd_img']."\",
+                                            product_warranty             = \"".$detls['product_warranty']."\",
+                                            desname                      = \"".$detls['desname']."\",
+                                            active_flag                  = \"".$display_flag."\"";
+
+                          $res = $this->query($sql);
+    //----------------------------------------------For product search table For tbl_product_search --------------------
+
+                        // Few attributes remaining-- type,metal,purity,nofd,dwt,gemwt,quality,goldwt
+
+                          if($detls['Certficate'] == 'Other')
+                          {
+                              $detls['other_certificate'] = $detls['other_certificate'];
+                          }
+                          if($detls['design'] == 'Other')
+                          {
+                              $detls['design'] = $detls['bullion_design'];
+                          }
+                          if($shape == 'sCoins' || $shape == 'sBars')
+                          {
+                              if(!empty($detls['silver_purity']))
+                              {
+                                  $detls['gold_purity'] = $detls['silver_purity'];
+                              }
+                              if(!empty($detls['silver_weight']))
+                              {
+                                  $detls['gold_weight'] = $detls['silver_weight'];
+                              }
+                          }
+                          if($shape == 'pCoins' || $shape == 'pBars')
+                          {
+                              if(!empty($detls['platinumpurity']))
+                              {
+                                  $detls['gold_purity'] = $detls['platinumpurity'];
+                              }
+                              if(!empty($detls['platinumweight']))
+                              {
+                                  $detls['gold_weight'] = $detls['platinumweight'];
+                              }
+                          }
+                              $sql = "  INSERT
+                                        INTO
+                                                tbl_product_search
+                                                (product_id,
+                                                 diamond_shape,
+                                                 color,
+                                                 carat,
+                                                 shape,
+                                                 certified,
+                                                 other_certificate,
+                                                 cut,
+                                                 clarity,
+                                                 base,
+                                                 tabl,
+                                                 price,
+                                                 p_disc,
+                                                 p_discb2b,
+                                                 prop,
+                                                 polish,
+                                                 symmetry,
+                                                 fluo,
+                                                 td,
+                                                 measurement,
+                                                 cno,
+                                                 pa,
+                                                 cr_hgt,
+                                                 cr_ang,
+                                                 girdle,
+                                                 pd,
+                                                 type,
+                                                 metal,
+                                                 gold_purity,
+                                                 nofd,
+                                                 dwt,
+                                                 gemwt,
+                                                 quality,
+                                                 gold_weight,
+                                                 gemstone_color,
+                                                 num_gemstones,
+                                                 gemstone_type,
+                                                 combination,
+                                                 bullion_design,
+                                                 rating,
+                                                 budget,
+                                                 b2b_price,
+                                                 is_plain_jewellery,
+                                                 price_per_carat,
+                                                 othermaterial,
+                                                 labour_charge,
+                                                 grossweight,
+                                                 gprice_per_carat,
+                                                 diamondsvalue,
+                                                 gemstonevalue,
+                                                 gold_value,
+                                                 polki_color,
+                                                 polki_quality,
+                                                 polki_weight,
+                                                 polkino,
+                                                 polki_price_per_carat,
+                                                 polki_value,
+                                                 gold_type,
+                                                 date_time,
+                                                 active_flag)
+                                          VALUES
+                                             (\"".$pid."\",
+                                              \"".$detls['diamondShape']."\",
+                                              \"".$detls['color']."\",
+                                              \"".$detls['carat_weight']."\",
+                                              \"".$shape."\",
+                                              \"".$detls['Certficate']."\",
+                                              \"".$detls['other_certificate']."\",
+                                              \"".$detls['cut']."\",
+                                              \"".$detls['clarity']."\",
+                                              \"".$detls['base_price']."\",
+                                              \"".$detls['table']."\",
+                                              \"".$detls['price']."\",
+                                              \"".$detls['discount']."\",
+                                              \"".$detls['discountb2b']."\",
+                                              \"".$detls['prop']."\",
+                                              \"".$detls['polish']."\",
+                                              \"".$detls['symmetry']."\",
+                                              \"".$detls['flourecence']."\",
+                                              \"".$detls['td']."\",
+                                              \"".$detls['measurement']."\",
+                                              \"".$detls['certno']."\",
+                                              \"".$detls['pa']."\",
+                                              \"".$detls['crown_height']."\",
+                                              \"".$detls['crown_angle']."\",
+                                              \"".$detls['girdle']."\",
+                                              \"".$detls['pd']."\",
+                                              \"".$type."\",
+                                              \"".$detls['metal']."\",
+                                              \"".$detls['gold_purity']."\",
+                                              \"".$detls['no_diamonds']."\",
+                                              \"".$detls['diamonds_weight']."\",
+                                              \"".$detls['gemstone_weight']."\",
+                                              \"".$detls['quality']."\",
+                                              \"".$detls['gold_weight']."\",
+                                              \"".$detls['gemstone_color']."\",
+                                              \"".$detls['num_gemstones']."\",
+                                              \"".$detls['gemstone_type']."\",
+                                              \"".$detls['combination']."\",
+                                              \"".$detls['design']."\",
+                                              \"".$detls['rating']."\",
+                                              \"".$detls['price']."\",
+                                              \"".$detls['priceb2b']."\",
+                                              \"".$detls['isPlain']."\",
+                                              \"".$detls['price_per_carat']."\",
+                                              \"".$detls['othermaterial']."\",
+                                              \"".$detls['labour_charge']."\",
+                                              \"".$detls['grossweight']."\",
+                                              \"".$detls['gprice_per_carat']."\",
+                                              \"".$detls['diamondsvalue']."\",
+                                              \"".$detls['gemstonevalue']."\",
+                                              \"".$detls['gold_value']."\",
+                                              \"".$detls['polki_color']."\",
+                                              \"".$detls['polki_quality']."\",
+                                              \"".$detls['polki_weight']."\",
+                                              \"".$detls['polkino']."\",
+                                              \"".$detls['polki_price_per_carat']."\",
+                                              \"".$detls['polki_value']."\",
+                                              \"".$detls['gold_type']."\",
+                                                  now(),
+                                              \"".$display_flag."\")
+                                          ON DUPLICATE KEY UPDATE
+                                                diamond_shape           = \"".$detls['diamondShape']."\",
+                                                color                   = \"".$detls['color']."\",
+                                                carat                   = \"".$detls['carat_weight']."\",
+                                                certified               = \"".$detls['Certficate']."\",
+                                                other_certificate       = \"".$detls['other_certificate']."\",
+                                                shape                   = \"".$shape."\",
+                                                cut                     = \"".$detls['cut']."\",
+                                                clarity                 = \"".$detls['clarity']."\",
+                                                base                    = \"".$detls['base_price']."\",
+                                                tabl                    = \"".$detls['table']."\",
+                                                price                   = \"".$detls['price']."\",
+                                                p_disc                  = \"".$detls['discount']."\",
+                                                p_discb2b               = \"".$detls['discountb2b']."\",
+                                                prop                    = \"".$detls['prop']."\",
+                                                polish                  = \"".$detls['polish']."\",
+                                                symmetry                = \"".$detls['symmetry']."\",
+                                                fluo                    = \"".$detls['flourecence']."\",
+                                                td                      = \"".$detls['td']."\",
+                                                measurement             = \"".$detls['measurement']."\",
+                                                cno                     = \"".$detls['certno']."\",
+                                                pa                      = \"".$detls['pa']."\",
+                                                cr_hgt                  = \"".$detls['cr_height']."\",
+                                                cr_ang                  = \"".$detls['crown_angle']."\",
+                                                girdle                  = \"".$detls['girdle']."\",
+                                                pd                      = \"".$detls['pd']."\",
+                                                metal                   = \"".$detls['metal']."\",
+                                                type                    = \"".$type."\",
+                                                gold_purity             = \"".$detls['gold_purity']."\",
+                                                nofd                    = \"".$detls['no_diamonds']."\",
+                                                dwt                     = \"".$detls['diamonds_weight']."\",
+                                                gemwt                   = \"".$detls['gemstone_weight']."\",
+                                                quality                 = \"".$detls['quality']."\",
+                                                gold_weight             = \"".$detls['gold_weight']."\",
+                                                combination             = \"".$detls['combination']."\",
+                                                gemstone_color          = \"".$detls['gemstone_color']."\",
+                                                num_gemstones           = \"".$detls['num_gemstones']."\",
+                                                gemstone_type           = \"".$detls['gemstone_type']."\",
+                                                bullion_design          = \"".$detls['design']."\",
+                                                rating                  = \"".$detls['rating']."\",
+                                                budget                  = \"".$detls['price']."\",
+                                                b2b_price               = \"".$detls['priceb2b']."\",
+                                                is_plain_jewellery      = \"".$detls['isPlain']."\",
+                                                price_per_carat         = \"".$detls['price_per_carat']."\",
+                                                othermaterial           = \"".$detls['othermaterial']."\",
+                                                labour_charge           = \"".$detls['labour_charge']."\",
+                                                grossweight             = \"".$detls['grossweight']."\",
+                                                gprice_per_carat        = \"".$detls['gprice_per_carat']."\",
+                                                diamondsvalue           = \"".$detls['diamondsvalue']."\",
+                                                gemstonevalue           = \"".$detls['gemstonevalue']."\",
+                                                gold_value              = \"".$detls['gold_value']."\",
+                                                polki_color             = \"".$detls['polki_color']."\",
+                                                polki_quality           = \"".$detls['polki_quality']."\",
+                                                polki_weight            = \"".$detls['polki_weight']."\",
+                                                polkino                 = \"".$detls['polkino']."\",
+                                                polki_price_per_carat   = \"".$detls['polki_price_per_carat']."\",
+                                                polki_value             = \"".$detls['polki_value']."\",
+                                                gold_type               = \"".$detls['gold_type']."\",
+                                                active_flag             = \"".$display_flag."\"";
+                                  $res = $this->query($sql);
+
+                                $vensql="  SELECT
+                                                  city
+                                           FROM
+                                                  tbl_vendor_master
+                                           WHERE
+                                                  vendor_id=\"".$params['vid']."\"";
+                                $venres=$this->query($vensql);
+                                $venrow=$this->fetchData($venres);
+
+                                $city=$row['city'];
+                                $vendsql="  INSERT
+                                            INTO
+                                                        tbl_vendor_product_mapping
+                                                        (product_id,
+                                                        vendor_id,
+                                                        vendor_price,
+                                                        b2bprice,
+                                                        vendor_quantity,
+                                                        vendor_currency,
+                                                        vendor_remarks,
+                                                        city,
+                                                        updatedby,
+                                                        date_time,
+                                                        active_flag)
+                                           VALUES
+                                                   (\"".$pid."\",
+                                                    \"".$params['vid']."\",
+                                                    \"".$detls['price']."\",
+                                                    \"".$detls['priceb2b']."\",
+                                                    \"".$detls['vendor_quantity']."\",
+                                                    \"".$detls['vendor_curr']."\",
+                                                    \"".$detls['vendor_remarks']."\",
+                                                    \"".$city."\",
+                                                       'vendor',
+                                                        now(),
+                                                    \"".$display_flag."\")
+                                            ON DUPLICATE KEY UPDATE
+                                                    vendor_price = \"".$detls['price']."\",
+                                                    b2bprice     = \"".$detls['priceb2b']."\"";
+
+                                $vendres = $this->query($vendsql);
+
+                                    $arr = array('pid'=>$pid);
+                                    $err=array('code'=>0,'msg'=>'Product added successfully');
                 }
                 else
                 {
@@ -732,788 +807,836 @@
 
         public function getPrdByCatid($params)
         {
-			$page   = ($params['page'] ? $params['page'] : 1);
-			$limit  = ($params['limit'] ? $params['limit'] : 15);
+      			$page   = ($params['page'] ? $params['page'] : 1);
+      			$limit  = ($params['limit'] ? $params['limit'] : 15);
 
-			if($params['uid'])
-			{
-				$page   = ($params['page'] ? $params['page'] : 1);
-				$limit  = ($params['limit'] ? $params['limit'] : 16);
-
-
-				$sql = "SELECT
-							group_concat(pid) as pid
-						FROM
-							tbl_wishlist
-						WHERE
-							uid = ".$params['uid']."
-						AND
-							wf = 1
-						ORDER BY
-							date_time DESC ";
-				$res = $this->query($sql);
-
-				if($res)
-				{
-					$row = $this->fetchData($res);
-					$pid = $row['pid'];
-				}
-
-				if($pid)
-				{
-					if($params['catid'])
-					{
-						$sql = "SELECT
-								group_concat(product_id) as pid
-							FROM
-								tbl_product_category_mapping
-							WHERE
-								category_id = ".$params['catid']."
-							AND
-								product_id in (".$pid.")
-                                                        AND
-                                                                display_flag = 1
-							";
-						$res = $this->query($sql);
-						if($res)
-						{
-							$row = $this->fetchData($res);
-							$pid = $row['pid'];
-						}
-					}
-
-					$sql = "SELECT
-								count(distinct product_id) as cnt
-							FROM
-								tbl_product_search
-							WHERE
-								product_id IN(".$pid.")
-							AND
-								active_flag=1
-							";
-					$res = $this->query($sql);
-					if($res)
-					{
-						$row = $this->fetchData($res);
-						$total = $row['cnt'];
-					}
-
-					$patsql="
-							SELECT
-								distinct product_id,
-								carat,
-								color,
-								certified,
-								shape,
-								clarity,
-								price,
-								polish,
-								symmetry,
-                                                                b2b_price as b2bprice,
-								cno,
-								gold_purity,
-								CEIL(gold_weight) AS gold_weight,
-								type,
-								metal
-							FROM
-								tbl_product_search
-							WHERE
-								product_id IN(".$pid.")
-                                                        AND
-                                                                active_flag=1
-							".$extn."
-							ORDER BY
-								field(product_id,".$pid.")
-							";
-
-					if (!empty($page))
-					{
-						$start = ($page * $limit) - $limit;
-						$patsql.=" LIMIT " . $start . ",$limit";
-					}
-
-					$patres=$this->query($patsql);
-					$i=0;
-					while($row2=$this->fetchData($patres))
-					{
-                                                    $prodid[] = $row2['product_id'];
-                                                    $pid = $row2['product_id'];
-                                                    unset($row2['product_id']);
-                                                    $attr[$pid]['attributes']=$row2;
+      			if($params['uid'])
+      			{
+      				$page   = ($params['page'] ? $params['page'] : 1);
+      				$limit  = ($params['limit'] ? $params['limit'] : 16);
 
 
-                                            if(!empty($prodid))
-                                            {
-                                                    $pid = $pids = implode(',',$prodid);
-                                            }
-                                            else
-                                            {
-                                                    $pid = $pids = '';
-                                            }
+      				$sql = "SELECT
+      							group_concat(pid) as pid
+      						FROM
+      							tbl_wishlist
+      						WHERE
+      							uid = ".$params['uid']."
+      						AND
+      							wf = 1
+      						ORDER BY
+      							date_time DESC ";
+      				$res = $this->query($sql);
 
+      				if($res)
+      				{
+        					$row = $this->fetchData($res);
+        					$pid = $row['pid'];
+      				}
 
-                                            $sqlV = "SELECT DISTINCT(vendor_id) from tbl_vendor_product_mapping where product_id = \"".$prodid[$i]."\" and active_flag=1";
-                                            $resV = $this->query($sqlV);
+      				if($pid)
+      				{
+        					if($params['catid'])
+        					{
+          						$sql = "SELECT
+          								            group_concat(product_id) as pid
+          							      FROM
+          								            tbl_product_category_mapping
+          							      WHERE
+          								            category_id = ".$params['catid']."
+          							      AND
+          								            product_id in (".$pid.")
+                              AND
+                                      display_flag = 1";
+          						$res = $this->query($sql);
+          						if($res)
+          						{
+            							$row = $this->fetchData($res);
+            							$pid = $row['pid'];
+          						}
+        					}
 
-                                            $resCnt = $this->numRows($resV);
+      					$sql = "SELECT
+      								          count(distinct product_id) as cnt
+      							    FROM
+      								          tbl_product_search
+      							    WHERE
+      								          product_id IN(".$pid.")
+      							    AND
+      								          active_flag=1";
+      					$res = $this->query($sql);
+      					if($res)
+      					{
+        						$row = $this->fetchData($res);
+        						$total = $row['cnt'];
+      					}
+      					$patsql="
+      							       SELECT
+                    								distinct product_id,
+                    								carat,
+                    								color,
+                    								certified,
+                    								shape,
+                    								clarity,
+                    								price,
+                    								polish,
+                    								symmetry,
+                                    b2b_price as b2bprice,
+                    								cno,
+                    								gold_purity,
+                    								CEIL(gold_weight) AS gold_weight,
+                    								type,
+                    								metal
+      						        FROM
+      								              tbl_product_search
+      							      WHERE
+      								              product_id IN(".$pid.")
+                          AND
+                                    active_flag=1
+                          AND
+                                    complete_flag=1
+      							                ".$extn."
+      							      ORDER BY
+      								              field(product_id,".$pid.")";
 
-                                            if($resV > 0)
-                                            {
-                                                while($rowV = $this->fetchData($resV))
-                                                {
+      					if (!empty($page))
+      					{
+        						$start = ($page * $limit) - $limit;
+        						$patsql.=" LIMIT " . $start . ",$limit";
+      					}
 
-                                                    $Vrate = "SELECT vendor_id,dollar_rate,silver_rate,gold_rate from tbl_vendor_master where vendor_id = ".$rowV['vendor_id']." AND active_flag=1";
-                                                    $Vres = $this->query($Vrate);
-                                                    $vratecnt = $this->numRows($Vres);
-                                                    if($vratecnt > 0)
-                                                    {
-                                                        while($rateV = $this->fetchData($Vres))
-                                                        {
-                                                            $rates[$prodid[$i]]= $rateV;
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                            $i++;
-                                        }
+      					$patres=$this->query($patsql);
+      					$i=0;
+      					while($row2=$this->fetchData($patres))
+      					{
+                    $prodid[] = $row2['product_id'];
+                    $pid = $row2['product_id'];
+                    unset($row2['product_id']);
+                    $attr[$pid]['attributes']=$row2;
 
-                                        $pimgsql = "
-							SELECT
-                                                                product_id,
-								group_concat(product_image separator '|~|') AS images
-							FROM
-								tbl_product_image_mapping
-							WHERE
-								product_id IN(".$pids.")
-                                                        AND
-                                                                active_flag=1
-                                                        GROUP BY
-                                                                product_id
-							ORDER BY
-								field(product_id,".$pids.");
-							";
-					$pimgres=$this->query($pimgsql);
-
-					$psql = "
-							SELECT
-								product_id as pid,
-								barcode as pcode,
-								product_name as pname,
-								product_display_name as pdname,
-								product_model as pmodel,
-								product_brand as pbrand,
-								prd_price as pprice,
-                                                                b2bprice,
-								product_currency as pcur,
-								prd_img as pimg
-							FROM
-								tbl_product_master
-							WHERE
-								product_id IN(".$pid.")
-                                                        AND
-                                                                active_flag=1
-							ORDER BY
-								field(product_id,".$pid.");
-							";
-					$pres=$this->query($psql);
-					while($row1=$this->fetchData($pres))
-					{
-						$pid = $row1['pid'];
-						$arr1[$pid]=$row1;
-						$arr1[$pid]['attributes'] = $attr[$pid]['attributes'];
-                                                $arr1[$pid]['images'] = $pimg[$pid]['image'];
-                                                $arr1[$pid]['vdetail'] = $rates[$pid];
-					}
-
-					while($row2=$this->fetchData($pimgres))
-					{
-						$prid = $row2['product_id'];
-						$arr1[$prid]['images'] = explode('|~|',$row2['images']);
-					}
-
-                                        $tmp_arr1 = (!empty($arr1)) ? (array_values($arr1)) : null;
-					$arr1 = array('filters'=>$data,'products'=>$tmp_arr1,'total'=>$total,'getdata'=>$params,'catname'=>'Wishlist');
-					$err = array('errCode'=>0,'errMsg'=>'Details fetched successfully');
-				}
-				else
-				{
-					$arr1 = array();
-					$err = array('errCode'=>1,'errMsg'=>'No records found');
-				}
-				$result = array('results'=>$arr1,'error'=>$err);
-				return $result;
-			}
-
-			$sql = "select cat_name as name from tbl_category_master where catid=\"".$params['catid']."\"";
-			$res = $this->query($sql);
-			if($res)
-			{
-				$row = $this->fetchData($res);
-				$catname = $row['name'];
-			}
-
-			if(!empty($params['ilist']))
-			{
-				$ilist = str_replace('|@|',',',$params['ilist']);
-				$where = " WHERE category_id in (".$ilist.") ";
-			}
-			else if(!empty($params['jlist']))
-			{
-				$expd = explode('|@|',$params['jlist']);
-				foreach($expd as $key => $val)
-				{
-					$exd = explode('_',$val);
-                                        $ids[] = $exd[0];
-                                }
-				$ilist = implode(',',$ids);
-				$where = " WHERE category_id in (".$ilist.") ";
-			}
-			else
-			{
-				$where = " WHERE category_id in (".$params['catid'].") ";
-			}
-
-			$sql = "SELECT
-						count(distinct product_id) as cnt
-					FROM
-						tbl_product_category_mapping
-					".$where."
-					and display_flag=1";
-			$res = $this->query($sql);
-			if($res)
-			{
-				$row = $this->fetchData($res);
-				$total = $row['cnt'];
-			}
-
-			$sql = "SELECT
-						*,product_id as pid,
-						price,
-                                                b2bprice
-					FROM
-						tbl_product_category_mapping
-					".$where."
-					AND display_flag=1";
-			$res = $this->query($sql);
-			$cres=$this->numRows($res);
-			if($cres>0)
-			{
-				while ($row = $this->fetchData($res))
-				{
-					$pid[] = $row['pid'];
-				}
-
-                /* $allpids = implode(',',$pid);
-                if($allpids)
-                {
-
-                    $vendorsql = "SELECT
-                                        vendor_id, product_id
-                                    FROM
-                                        tbl_vendor_product_mapping
-                                    WHERE
-                                        product_id in (".$allpids.")";
-                    $vendorres = $this->query($vendorsql);
-                    if($vendorres)
+                    if(!empty($prodid))
                     {
-                        while($vendorrow = $this->fetchData($vendorres))
-                        {
-                            $vidarr[] = $vendorrow['vendor_id'];
-                            $vendorArr[$vendorrow['product_id']] = $vendorrow['vendor_id'];
-                        }
-                        $vids = implode(',',$vidarr);
+                        $pid = $pids = implode(',',$prodid);
+                    }
+                    else
+                    {
+                        $pid = $pids = '';
                     }
 
-                    if($vids)
+                    $sqlV = "SELECT
+                                      DISTINCT(vendor_id)
+                             FROM
+                                      tbl_vendor_product_mapping
+                             WHERE
+                                      product_id = \"".$prodid[$i]."\"
+                             AND
+                                      active_flag=1";
+
+                    $resV = $this->query($sqlV);
+                    $resCnt = $this->numRows($resV);
+
+                    if($resV > 0)
                     {
-                        $vendorsql = "
-                                    SELECT
-                                        vendor_id, dollar_rate
-                                    FROM
-                                        tbl_vendor_master
-                                    WHERE
-                                        vendor_id in (".$vids.")";
-                        $vendorres = $this->query($vendorsql);
-                        if($vendorres)
+                        while($rowV = $this->fetchData($resV))
                         {
-                            while($vendorrow = $this->fetchData($vendorres))
+                            $Vrate = "SELECT
+                                              vendor_id,
+                                              dollar_rate,
+                                              silver_rate,
+                                              gold_rate
+                                      FROM
+                                              tbl_vendor_master
+                                      WHERE
+                                              vendor_id = ".$rowV['vendor_id']."
+                                      AND
+                                              active_flag=1";
+                            $Vres = $this->query($Vrate);
+                            $vratecnt = $this->numRows($Vres);
+                            if($vratecnt > 0)
                             {
-                                $dollarRt[$vendorrow['vendor_id']] = $vendorrow['dollar_rate'];
+                                while($rateV = $this->fetchData($Vres))
+                                {
+                                    $rates[$prodid[$i]]= $rateV;
+                                }
                             }
                         }
                     }
-                } */
+                    $i++;
+                }
 
+                $pimgsql = "SELECT
+                                    product_id,
+      								              group_concat(product_image separator '|~|') AS images
+      							        FROM
+      								              tbl_product_image_mapping
+      							        WHERE
+      								              product_id IN(".$pids.")
+                            AND
+                                    active_flag=1
+                            GROUP BY
+                                    product_id
+      							        ORDER BY
+      								              field(product_id,".$pids.")";
+      					$pimgres=$this->query($pimgsql);
 
+      					$psql = "SELECT
+                								product_id AS pid,
+                								barcode AS pcode,
+                								product_name AS pname,
+                								product_display_name AS pdname,
+                								product_model AS pmodel,
+                								product_brand AS pbrand,
+                								prd_price AS pprice,
+                                b2bprice,
+                								product_currency AS pcur,
+                								prd_img AS pimg
+      							    FROM
+      								          tbl_product_master
+      							    WHERE
+      								          product_id IN(".$pid.")
+                        AND
+                                active_flag=1
+      							    ORDER BY
+      								          field(product_id,".$pid.")";
+      					$pres=$this->query($psql);
+      					while($row1=$this->fetchData($pres))
+      					{
+        						$pid = $row1['pid'];
+        						$arr1[$pid]=$row1;
+        						$arr1[$pid]['attributes'] = $attr[$pid]['attributes'];
+                    $arr1[$pid]['images'] = $pimg[$pid]['image'];
+                    $arr1[$pid]['vdetail'] = $rates[$pid];
+      					}
+      					while($row2=$this->fetchData($pimgres))
+      					{
+        						$prid = $row2['product_id'];
+        						$arr1[$prid]['images'] = explode('|~|',$row2['images']);
+      					}
+                $tmp_arr1 = (!empty($arr1)) ? (array_values($arr1)) : null;
+      					$arr1 = array('filters'=>$data,'products'=>$tmp_arr1,'total'=>$total,'getdata'=>$params,'catname'=>'Wishlist');
+      					$err = array('errCode'=>0,'errMsg'=>'Details fetched successfully');
+      				}
+      				else
+      				{
+      					$arr1 = array();
+      					$err = array('errCode'=>1,'errMsg'=>'No records found');
+      				}
+      				$result = array('results'=>$arr1,'error'=>$err);
+      				return $result;
+      			}
 
-				if(!empty($params['slist']))
-				{
-					$sarr = explode('|@|',$params['slist']);
-					$extn = " AND shape in ('".implode("','",$sarr)."') ";
-                    $extnhv = '';
-				}
+      			$sql = "SELECT
+                              cat_name as name
+                    FROM
+                              tbl_category_master
+                    WHERE
+                              catid=\"".$params['catid']."\"";
+      			$res = $this->query($sql);
+      			if($res)
+      			{
+        				$row = $this->fetchData($res);
+        				$catname = $row['name'];
+      			}
 
-				if(!empty($params['tlist']))
-				{
-					$sarr = explode('|$|',$params['tlist']);
-					foreach($sarr as $key => $val)
-					{
-						$expd = explode('|~|',$val);
-						$exd = explode(';',$expd[1]);
+      			if(!empty($params['ilist']))
+      			{
+        				$ilist = str_replace('|@|',',',$params['ilist']);
+        				$where = " WHERE category_id in (".$ilist.") ";
+      			}
+      			else if(!empty($params['jlist']))
+      			{
+        				$expd = explode('|@|',$params['jlist']);
+      				  foreach($expd as $key => $val)
+      				  {
+      					    $exd = explode('_',$val);
+                    $ids[] = $exd[0];
+                }
+        				$ilist = implode(',',$ids);
+        				$where = " WHERE category_id in (".$ilist.") ";
+      			}
+      			else
+      			{
+      				  $where = " WHERE category_id in (".$params['catid'].") ";
+      			}
 
-						if($expd[0] == 'priceRange' && $params['catid'] == 10000)
-						{
-							$expCarat = explode('|~|',$sarr[0]);
+      			$sql = "SELECT
+                            product_id AS pid,
+                            (SELECT complete_flag FROM tbl_product_search WHERE product_id = pid) AS complete_status
+      					    FROM
+      						          tbl_product_category_mapping
+      					            ".$where."
+                    AND
+                            display_flag=1
+                    HAVING
+                            complete_status=1";
+      			$res = $this->query($sql);
+      			if($res)
+      			{
+        				$total = $this->numRows($res);
+      			}
+
+      			$sql = "SELECT
+      						          *,
+                            product_id as pid,
+      						          price,
+                            b2bprice
+      					    FROM
+      						          tbl_product_category_mapping
+      					    ".$where."
+      					    AND
+                            display_flag=1";
+      			$res = $this->query($sql);
+      			$cres=$this->numRows($res);
+      			if($cres>0)
+      			{
+      				while ($row = $this->fetchData($res))
+      				{
+      					  $pid[] = $row['pid'];
+      				}
+      				if(!empty($params['slist']))
+      				{
+        					$sarr = explode('|@|',$params['slist']);
+        					$extn = " AND shape in ('".implode("','",$sarr)."') ";
+                  $extnhv = '';
+      				}
+
+      				if(!empty($params['tlist']))
+      				{
+        					$sarr = explode('|$|',$params['tlist']);
+        					foreach($sarr as $key => $val)
+        					{
+          						$expd = explode('|~|',$val);
+          						$exd = explode(';',$expd[1]);
+
+          						if($expd[0] == 'priceRange' && $params['catid'] == 10000)
+          						{
+              							$expCarat = explode('|~|',$sarr[0]);
                             $exd1 = explode(';',$expCarat[1]);
                             if($params['b2bsort'])
                                 $extnhv = " HAVING b2b_dollar_price between ".$exd[0]." AND ".$exd[1]." ";
                             else
                                 $extnhv = " HAVING dollar_price between ".$exd[0]." AND ".$exd[1]." ";
-						}
-                        else
-                            $extn .= " AND ".str_replace('Range','',$expd[0])." between ".$exd[0]." AND ".$exd[1]." ";
+          						}
+                      else
+                          $extn .= " AND ".str_replace('Range','',$expd[0])." between ".$exd[0]." AND ".$exd[1]." ";
+        					}
+      				}
 
-					}
-					//$extn = " AND shape in ('".implode("','",$sarr)."') ";
-				}
+      				if(!empty($params['clist']))
+      				{
+        					$sarr = explode('|$|',$params['clist']);
+        					foreach($sarr as $key => $val)
+        					{
+          						$expd = explode('|~|',$val);
+          						$exd = explode('|@|',$expd[1]);
+                      if(strpos($exd, 'combination') !== false)
+                      {
+                          $exd1 = str_replace('00','&',$exd);
+                          $exd = str_replace('11',',',$exd1);
+                          $exd = str_replace('_',' ',$exd1);
+                          $exd = str_replace('combination ','',$exd);
+                          $combField = 'combination_';
+                      }
+                      $inarr = array();
+          						foreach($exd as $ky => $vl)
+          						{
+                          if(!empty($combField))
+                          {
+                             $vl = $combField.$vl;
+                          }
+                          $ex = explode('_',$vl);
+                          $re='^[0-9]+$';
+                          if(strpos($ex[count($ex)-1],'KT') !== false)
+                          {
+                             $inarr[] = preg_replace("/[^0-9]/","",$ex[count($ex)-1]);
+                          }
+                          else
+                          {
+                             $inarr[] = $ex[count($ex)-1];
+                          }
+                          unset($ex[count($ex)-1]);
+          				  			$field = implode('_',$ex);
+          						}
+          						$extn .= " AND ".$field." in ('".implode("','",$inarr)."') ";
+        					}
+      				}
 
-				if(!empty($params['clist']))
-				{
-					$sarr = explode('|$|',$params['clist']);
+      				$allpids = $pid = implode(',',$pid);
+      				$city_area = $params['ctid'];
+      				if(!empty($city_area))
+      				{
+        					$city_area = explode('_', $city_area);
+        					if($city_area[1] == 'area')
+        					{
+          						$tbl_name = 'tbl_area_master';
+          						$colmn_nm = 'city AS cityname, latitude AS lat, longitude AS lng';
+          						$whr_cond = 'id';
+        					}
+                  else if($city_area[1] == 'vendor')
+        					{
+          						$tbl_name = 'tbl_vendor_master';
+          						$colmn_nm = 'orgName';
+          						$whr_cond = 'vendor_id';
+        					}
+        					else
+        					{
+          						$tbl_name = 'tbl_city_master';
+          						$colmn_nm = 'cityname';
+          						$whr_cond = 'cityid';
+        					}
+      				}
 
-					foreach($sarr as $key => $val)
-					{
-						$expd = explode('|~|',$val);
-						$exd = explode('|@|',$expd[1]);
+      				if($params['ctid'])
+      				{
+        					$sqlct = "SELECT
+                                    $colmn_nm
+        							      FROM
+                                    $tbl_name
+        							      WHERE
+                                    $whr_cond = ".$city_area[0];
+        					$resct = $this->query($sqlct);
+        					if($resct)
+        					{
+          						$rowct = $this->fetchData($resct);
+          						$vndrIds = array();
 
-                                                if(strpos($exd, 'combination') !== false)
-                                                {
-                                                    $exd1 = str_replace('00','&',$exd);
-                                                    $exd = str_replace('11',',',$exd1);
-                                                    $exd = str_replace('_',' ',$exd1);
-                                                    $exd = str_replace('combination ','',$exd);
-                                                    $combField = 'combination_';
-                                                }
+          						if($rowct)
+          						{
+                          if($city_area[1] == 'vendor')
+                          {
+                              $vndrIds = $whr_cond;
+                          }
+                          else
+                          {
+                              $lat = $rowct['lat'];
+                              $lng = $rowct['lng'];
+                              $cityname = $rowct['cityname'];
+                              $vndrSql = "SELECT
+                                                  vendor_id,
+                                                  city,
+                                                  ( 3959 * acos( cos( radians(" . $lat . ") ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(" . $lng . ") ) + sin( radians(" . $lat . ") ) * sin( radians( lat ) ) ) ) AS distance ";
+                              $vndrSql .="FROM
+                                                  tbl_vendor_master
+                                          HAVING
+                                                  distance > 0
+                                          AND
+                                                  city='" . $cityname . "'";
+                              $vndrRes = $this->query($vndrSql);
+                              if($vndrRes)
+                              {
+                                  while($vndrRow = $this->fetchData($vndrRes))
+                                  {
+                                      $vndrIds[] = $vndrRow['vendor_id'];
+                                  }
+                              }
+                          }
+                          $vndrIds = implode('","', $vndrIds);
+          						}
+        							$sqlpct = "
+                									SELECT
+        								                    product_id as pid
+        									        FROM
+        								                    tbl_vendor_product_mapping
+        									        WHERE
+        								                    product_id in (".$allpids.")
+                                  AND
+                                            active_flag=1
+        									        AND
+        										                vendor_id in (\"".$vndrIds."\")";
+        							$respct = $this->query($sqlpct);
+        							if($respct)
+        							{
+          								while ($rowpct = $this->fetchData($respct))
+          								{
+          									$pids[] = $rowpct['pid'];
+          								}
+        								  $allpids = $pid = implode(',', $pids);
+        							}
+        					}
+        			}
+      				$page   = ($params['page'] ? $params['page'] : 1);
+      				$limit  = ($params['limit'] ? $params['limit'] : 15);
+      				if($pid)
+      				{
 
-						$inarr = array();
+                  $sql = "SELECT
+                                  *,
+                                  b2b_price*IF(carat,carat,1)*IF(dollarval,dollarval,".dollarValue.") as b2b_dollar_price,
+                                  price*IF(carat,carat,1)*IF(dollarval,dollarval,".dollarValue.") as dollar_price
+                          FROM (
+                                  SELECT
+                                          product_id AS pid,
+                                          price,
+                                          b2b_price,
+                                          carat,
+                                          (SELECT vendor_id FROM `tbl_vendor_product_mapping` WHERE active_flag=1 AND product_id = pid LIMIT 1) AS vid,
+                                          (SELECT dollar_rate FROM tbl_vendor_master WHERE vendor_id = vid) AS dollarval,
+                                          active_flag,
+                                          color,
+                                          clarity,
+                                          cut,
+                                          polish,
+                                          symmetry,
+                                          fluo,
+                                          cut,
+                                          fluo,
+                                          combination,
+                                          gemstone_color
+                                    FROM
+                                          tbl_product_search
+                                    WHERE
+                                          product_id IN(".$pid.")
+                                    AND
+                                          complete_flag=1
+                            ) t
+                        WHERE
+                              active_flag=1
+                        AND
+                              complete_flag=1
+                            ".$extn."
+                            ".$extnhv."";
+        					$res = $this->query($sql);
+        					if($res)
+        					{
+        						  $total = $this->numRows($res);
+        					}
 
-						foreach($exd as $ky => $vl)
-						{
-                                                        if(!empty($combField))
-                                                        {
-                                                           $vl = $combField.$vl;
-                                                        }
+        					$patsql="
+        							       SELECT
+                      								distinct product_id,
+                                      product_id as pid,
+                                      b2b_price*carat as b2btotalprice,
+                                      price*carat as totalprice,
+                                      price as jprice,
+                                      carat*b2b_price*1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as b2b_dollar_price,
+                                      carat*price*1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as dollar_price,
+                                      1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as dollar_rate,
+                                      1*(SELECT gold_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as goldrate,
+                                      if(metal='Gold',(((((SELECT gold_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1))/995)/10)*gold_purity)*gold_weight),(((((SELECT silver_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1))/999)/1000)*gold_purity)*gold_weight)) as bprice,
+                      								carat,
+                      								color,
+                      								certified,
+                      								shape,
+                      								clarity,
+                      								price,
+                                      b2b_price as b2bprice,
+                      								polish,
+                      								symmetry,
+                      								cno,
+                      								gold_purity,
+                      								gold_weight as gold_weight,
+                      								type,
+                      								metal,
+                      								bullion_design
+        							       FROM
+        								              tbl_product_search
+        							       WHERE
+        								              product_id IN(".$pid.")
+        							      AND
+        								              active_flag=1
+        							      ".$extn."
+                            ".$extnhv."";
 
-							$ex = explode('_',$vl);
-                                                        $re='^[0-9]+$';
+                      $patsql = "SELECT
+                                        *,
+                                        b2b_price*IF(carat,carat,1)*IF(dollarval,dollarval,".dollarValue.") as b2b_dollar_price,
+                                        price*IF(carat,carat,1)*IF(dollarval,dollarval,".dollarValue.") as dollar_price
+                                 FROM
+                                        (
+                                          SELECT
+                                                  distinct product_id,
+                                                  product_id as pid,
+                                                  b2b_price*carat as b2btotalprice,
+                                                  price*carat as totalprice,
+                                                  price as jprice,
+                                                  price,
+                                                  b2b_price,
+                                                  (SELECT vendor_id FROM tbl_vendor_product_mapping WHERE active_flag=1 AND product_id = pid LIMIT 1) AS vid,
+                                                  (SELECT dollar_rate FROM tbl_vendor_master WHERE vendor_id = vid) AS dollarval,
+                                                  (SELECT dollar_rate FROM tbl_vendor_master WHERE vendor_id = vid) AS dollar_rate,
+                                                  (SELECT gold_rate FROM tbl_vendor_master where vendor_id = vid) AS goldrate,
+                                                  (SELECT silver_rate FROM `tbl_vendor_master` where vendor_id = vid) AS silverate,
+                                                  if(metal='Gold',(((((SELECT gold_rate FROM tbl_vendor_master where vendor_id = vid)/995)/10)*gold_purity)*gold_weight),(((((SELECT silver_rate FROM `tbl_vendor_master` where vendor_id = vid)/999)/1000)*gold_purity)*gold_weight)) AS bprice,
+                                                  active_flag,
+                                                  carat,
+                                  								color,
+                                                  cut,
+                                                  fluo,
+                                                  combination,
+                                                  gemstone_color,
+                                  								certified,
+                                  								shape,
+                                  								clarity,
+                                                  b2b_price as b2bprice,
+                                  								polish,
+                                  								symmetry,
+                                  								cno,
+                                  								gold_purity,
+                                  								gold_weight as gold_weight,
+                                  								type,
+                                  								metal,
+                                  								bullion_design
+                                          FROM
+                                                  tbl_product_search
+                                          WHERE
+                                                  product_id IN(".$pid.")
+                                          AND
+                                                  complete_flag=1
+                                      ) t
+                                WHERE
+                                active_flag=1
+                                ".$extn."
+                                ".$extnhv."";
+                  switch($params['sortby'])
+                  {
+                      case 'pasc':
+                              if($params['catid'] == 10000)
+                              {
+                                  ($params['b2bsort'] ? $patsql.=" ORDER BY b2btotalprice ASC " : $patsql.=" ORDER BY totalprice ASC ");
+                              }
+                              else if($params['catid'] == 10002)
+                              {
+                                  $patsql.=" ORDER BY bprice ASC ";
+                              }
+                              else
+                              {
+                                  $patsql.=" ORDER BY jprice ASC ";
+                              }
+                              break;
 
-                                                        if(strpos($ex[count($ex)-1],'KT') !== false)
-                                                        {
-                                                           $inarr[] = preg_replace("/[^0-9]/","",$ex[count($ex)-1]);
-                                                        }
-                                                        else
-                                                        {
-                                                           $inarr[] = $ex[count($ex)-1];
-                                                        }
-                                                        unset($ex[count($ex)-1]);
-							$field = implode('_',$ex);
-						}
-						$extn .= " AND ".$field." in ('".implode("','",$inarr)."') ";
-					}
-				}
+                      case 'pdesc':
+                              if($params['catid'] == 10000)
+                              {
+                                  ($params['b2bsort'] ? $patsql.=" ORDER BY b2btotalprice DESC " : $patsql.=" ORDER BY totalprice DESC ");
+                              }
+                              else if($params['catid'] == 10002)
+                              {
+                                  $patsql.=" ORDER BY bprice DESC ";
+                              }
 
-				$allpids = $pid = implode(',',$pid);
+                              else
+                              {
+                                  $patsql.=" ORDER BY jprice DESC ";
+                              }
+                              break;
+                      case 'rate':
+                              $patsql.=" ORDER BY rating DESC ";
+                      break;
 
-				$city_area = $params['ctid'];
-				if(!empty($city_area))
-				{
-					$city_area = explode('_', $city_area);
-					if($city_area[1] == 'area')
-					{
-						$tbl_name = 'tbl_area_master';
-						$colmn_nm = 'city AS cityname, latitude AS lat, longitude AS lng';
-						$whr_cond = 'id';
-					}
-					else
-					{
-						$tbl_name = 'tbl_city_master';
-						$colmn_nm = 'cityname';
-						$whr_cond = 'cityid';
-					}
-				}
+                      default:
+                              $patsql.=" ORDER BY field(product_id,".$pid."), product_id ASC ";
+                      break;
+                  }
 
-				if($params['ctid'])
-				{
-					$sqlct = "SELECT $colmn_nm
-							FROM $tbl_name
-							WHERE $whr_cond = ".$city_area[0];
-					$resct = $this->query($sqlct);
-					if($resct)
-					{
-						$rowct = $this->fetchData($resct);
-						$vndrIds = array();
+        					if (!empty($page))
+        					{
+        						$start = ($page * $limit) - $limit;
+        						$patsql.=" LIMIT " . $start . ",$limit";
+        					}
 
-						if($rowct)
-						{
-							$lat = $rowct['lat'];
-							$lng = $rowct['lng'];
-							$cityname = $rowct['cityname'];
-							$vndrSql = "select vendor_id, city, ( 3959 * acos( cos( radians(" . $lat . ") ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(" . $lng . ") ) + sin( radians(" . $lat . ") ) * sin( radians( lat ) ) ) ) as distance ";
-							$vndrSql .="from tbl_vendor_master having distance > 0 and city='" . $cityname . "'";
-							$vndrRes = $this->query($vndrSql);
-							if($vndrRes)
-							{
-								while($vndrRow = $this->fetchData($vndrRes))
-								{
-									$vndrIds[] = $vndrRow['vendor_id'];
-								}
-							}
-						}
+        					$patres=$this->query($patsql);
 
-						$vndrIds = implode('","', $vndrIds);
+        					while($row2=$this->fetchData($patres))
+        					{
+          						$prodid[] = $row2['product_id'];
+          						$pid = $row2['product_id'];
+          						unset($row2['product_id']);
+          						$attr[$pid]['attributes']=$row2;
+                  }
+        					if(!empty($prodid))
+        					{
+        						  $pid = $pids = implode(',',$prodid);
+        					}
+        					else
+        					{
+        						  $pid = $pids = '';
+        					}
+        					$psql = "
+        							       SELECT
+                      								product_id as pid,
+                      								barcode as pcode,
+                      								product_name as pname,
+                      								product_display_name as pdname,
+                      								product_model as pmodel,
+                      								product_brand as pbrand,
+                      								prd_price as pprice,
+                                      b2bprice,
+                      								product_currency as pcur,
+                      								prd_img as pimg
+        							       FROM
+        								              tbl_product_master
+        							       WHERE
+        								              product_id IN(".$pid.")
+        							       AND
+        								              active_flag=1
+        							       ORDER BY
+        								              field(product_id,".$pid.");";
+        					$pres=$this->query($psql);
+        					while($row1=$this->fetchData($pres))
+        					{
+          						$pid = $row1['pid'];
+          						$arr1[$pid]=$row1;
+          						if($params['catid']==10000 || $params['catid']==10002)
+          						{
+            							$dollarSql = "SELECT
+                                                dollar_rate,
+                                                gold_rate,
+                                                silver_rate,
+                                                platinum_rate
+                                        FROM
+                                                `tbl_vendor_master`
+                                        WHERE
+                                                vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id='".$pid."')";
+            							$dollarRes=$this->query($dollarSql);
+            							$dollarRow=$this->fetchData($dollarRes);
+            							$arr1[$pid]['dollar_rate']=$dollarRow['dollar_rate'];
+            							$arr1[$pid]['gold_rate']=$dollarRow['gold_rate'];
+            							$arr1[$pid]['silver_rate']=$dollarRow['silver_rate'];
+                          $arr1[$pid]['platinum_rate']=$dollarRow['platinum_rate'];
+          						}
+          						$arr1[$pid]['attributes'] = $attr[$pid]['attributes'];
+          						$arr1[$pid]['images'] = $pimg[$row1['pid']]['images'];
+        					}
 
-						/*if(!empty($vndrIds))
-						{*/
-							$sqlpct = "
-									SELECT
-										product_id as pid
-									FROM
-										tbl_vendor_product_mapping
-									WHERE
-										product_id in (".$allpids.")
-                                                                        AND
-                                                                                active_flag=1
-									AND
-										vendor_id in (\"".$vndrIds."\")";
+        					$pimgsql = "
+        							         SELECT
+        								                product_id,
+        								                group_concat(product_image separator '|~|') AS images
+        							         FROM
+        								                tbl_product_image_mapping
+        							         WHERE
+        								                product_id IN(".$pids.")
+        							         AND
+        								                active_flag=1
+        							         GROUP BY
+        								                product_id
+        							         ORDER BY
+        								                field(product_id,".$pids.");";
+        					$pimgres=$this->query($pimgsql);
+        					while($row2=$this->fetchData($pimgres))
+        					{
+          						$prid                  = $row2['product_id'];
+          						$arr1[$prid]['images'] = explode('|~|',$row2['images']);
+        					}
+        					$sql = "
+                						SELECT
+                      							attribute_id,
+                      							attr_values,
+                      							attr_range,
+                      							attr_unit,
+                      							attr_unit_pos
+                						FROM
+                							      tbl_attribute_category_mapping
+                						WHERE
+                							      category_id=".$params['catid']."
+                						AND
+                							      attr_filter_flag=1
+                						ORDER BY
+                							      attr_filter_position ASC";
+        					$res = $this->query($sql);
+        					if($res)
+        					{
+          						while($row = $this->fetchData($res))
+          						{
+            							$attrid[] = $row['attribute_id'];
+            							$attrmap[$row['attribute_id']] = $row;
+          						}
+          						$attrids 	= implode(',',$attrid);
+        					}
 
-							$respct = $this->query($sqlpct);
-							if($respct)
-							{
-								while ($rowpct = $this->fetchData($respct))
-								{
-									$pids[] = $rowpct['pid'];
-								}
-								$allpids = $pid = implode(',', $pids);
-							}
-						/*}
-						else
-						{
-							$allpids = $pid = array();
-						}*/
-					}
-				}
+        					$sql="
+              						SELECT
+                    							attr_id,
+                    							attr_name,
+                    							attr_display_name,
+                    							attr_type_flag
+              						FROM
+              							      tbl_attribute_master
+              						WHERE
+              							      attr_id IN(".$attrids.")
+              						ORDER BY
+              							      attr_display_name ASC";
+              					$res = $this->query($sql);
+        					if($res)
+        					{
+          						$i=0;
+          						while($row = $this->fetchData($res))
+          						{
+            							switch ($row['attr_type_flag'])
+            							{
+              								case 6: //$pids
+              									$qry = "SELECT
+                        												MIN(".$row['attr_name'].") AS minval,
+                        												MAX(".$row['attr_name'].") AS maxval
+                  											FROM
+              												          tbl_product_search
+              											    WHERE
+              												          product_id IN(".$allpids.")
+                                        AND
+                                                active_flag=1";
+              									$res1 = $this->query($qry);
+              									if($res1)
+              									{
+                										$row1 = $this->fetchData($res1);
+                										$data[$i]['range']['id'] 		= $row['attr_id'];
+                										$data[$i]['range']['name'] 		= $row['attr_name'];
+                										$data[$i]['range']['dname'] 	= $row['attr_display_name'];
+                										$data[$i]['range']['value'] 	= $row1['minval'].';'.$row1['maxval'];
+                										$data[$i]['range']['ovalue'] 	= $attrmap[$row['attr_id']]['attr_range'];
+                										$i++;
+              									}
+              								break;
 
-				$page   = ($params['page'] ? $params['page'] : 1);
-				$limit  = ($params['limit'] ? $params['limit'] : 15);
-
-				if($pid)
-				{
-
-					$sql = "SELECT
-                                carat*b2b_price*1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=product_id limit 1)) as b2b_dollar_price,
-                                                                carat*price*1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=product_id limit 1)) as dollar_price
-							FROM
-								tbl_product_search
-							WHERE
-								product_id IN(".$pid.")
-							AND
-								active_flag=1
-							".$extn."
-                            ".$extnhv."
-							";
-
-					$res = $this->query($sql);
-					if($res)
-					{
-						//$row = $this->fetchData($res);
-						$total = $this->numRows($res);
-					}
-
-					$patsql="
-							SELECT
-								distinct product_id,
-                                                                product_id as pid,
-                                                                b2b_price*carat as b2btotalprice,
-                                                                price*carat as totalprice,
-                                                                price as jprice,
-                                                                carat*b2b_price*1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as b2b_dollar_price,
-                                                                carat*price*1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as dollar_price,
-                                                                1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as dollar_rate,
-                                                                1*(SELECT gold_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as goldrate,
-                                                                if(metal='Gold',(((((SELECT gold_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1))/995)/10)*gold_purity)*gold_weight),(((((SELECT silver_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1))/999)/1000)*gold_purity)*gold_weight)) as bprice,
-								carat,
-								color,
-								certified,
-								shape,
-								clarity,
-								price,
-                                                                b2b_price as b2bprice,
-								polish,
-								symmetry,
-								cno,
-								gold_purity,
-								gold_weight as gold_weight,
-								type,
-								metal,
-								bullion_design
-							FROM
-								tbl_product_search
-							WHERE
-								product_id IN(".$pid.")
-							AND
-								active_flag=1
-							".$extn."
-                            ".$extnhv."
-							";
-                                        switch($params['sortby'])
-                                        {
-                                            case 'pasc':
-                                                    if($params['catid'] == 10000)
-                                                    {
-                                                        ($params['b2bsort'] ? $patsql.=" ORDER BY b2btotalprice ASC " : $patsql.=" ORDER BY totalprice ASC ");
-                                                    }
-                                                    else if($params['catid'] == 10002)
-                                                        $patsql.=" ORDER BY bprice ASC ";
-                                                    else
-                                                        $patsql.=" ORDER BY jprice ASC ";
-                                            break;
-
-                                            case 'pdesc':
-                                                    if($params['catid'] == 10000)
-                                                    {
-                                                        ($params['b2bsort'] ? $patsql.=" ORDER BY b2btotalprice DESC " : $patsql.=" ORDER BY totalprice DESC ");
-                                                    }
-                                                    else if($params['catid'] == 10002)
-                                                        $patsql.=" ORDER BY bprice DESC ";
-                                                    else
-                                                        $patsql.=" ORDER BY jprice DESC ";
-                                            break;
-
-                                            case 'rate':
-                                                    $patsql.=" ORDER BY rating DESC ";
-                                            break;
-
-                                            default:
-                                                    $patsql.=" ORDER BY field(product_id,".$pid."), product_id ASC ";
-                                            break;
-                                        }
-
-					if (!empty($page))
-					{
-						$start = ($page * $limit) - $limit;
-						$patsql.=" LIMIT " . $start . ",$limit";
-					}
-
-					$patres=$this->query($patsql);
-
-					while($row2=$this->fetchData($patres))
-					{
-						$prodid[] = $row2['product_id'];
-						$pid = $row2['product_id'];
-						unset($row2['product_id']);
-						$attr[$pid]['attributes']=$row2;
-                    }
-					//$total = count($prodid);
-					if(!empty($prodid))
-					{
-						$pid = $pids = implode(',',$prodid);
-					}
-					else
-					{
-						$pid = $pids = '';
-					}
-
-					$psql = "
-							SELECT
-								product_id as pid,
-								barcode as pcode,
-								product_name as pname,
-								product_display_name as pdname,
-								product_model as pmodel,
-								product_brand as pbrand,
-								prd_price as pprice,
-                                                                b2bprice,
-								product_currency as pcur,
-								prd_img as pimg
-							FROM
-								tbl_product_master
-							WHERE
-								product_id IN(".$pid.")
-							AND
-								active_flag=1
-							ORDER BY
-								field(product_id,".$pid.");
-							";
-					$pres=$this->query($psql);
-					while($row1=$this->fetchData($pres))
-					{
-						$pid = $row1['pid'];
-						$arr1[$pid]=$row1;
-						if($params['catid']==10000 || $params['catid']==10002)
-						{
-							$dollarSql = "SELECT dollar_rate, gold_rate, silver_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id='".$pid."')";
-							$dollarRes=$this->query($dollarSql);
-							$dollarRow=$this->fetchData($dollarRes);
-							$arr1[$pid]['dollar_rate']=$dollarRow['dollar_rate'];
-							$arr1[$pid]['gold_rate']=$dollarRow['gold_rate'];
-							$arr1[$pid]['silver_rate']=$dollarRow['silver_rate'];
-						}
-						$arr1[$pid]['attributes'] = $attr[$pid]['attributes'];
-						$arr1[$pid]['images'] = $pimg[$row1['pid']]['images'];
-					}
-
-					$pimgsql = "
-							SELECT
-								product_id,
-								group_concat(product_image separator '|~|') AS images
-							FROM
-								tbl_product_image_mapping
-							WHERE
-								product_id IN(".$pids.")
-							AND
-								active_flag=1
-							GROUP BY
-								product_id
-							ORDER BY
-								field(product_id,".$pids.");
-							";
-					$pimgres=$this->query($pimgsql);
-					while($row2=$this->fetchData($pimgres))
-					{
-						$prid                  = $row2['product_id'];
-						$arr1[$prid]['images'] = explode('|~|',$row2['images']);
-					}
-
-					/* For filters */
-
-					$sql = "
-						SELECT
-							attribute_id,
-							attr_values,
-							attr_range,
-							attr_unit,
-							attr_unit_pos
-						FROM
-							tbl_attribute_category_mapping
-						WHERE
-							category_id=".$params['catid']."
-						AND
-							attr_filter_flag=1
-						ORDER BY
-							attr_filter_position ASC";
-					$res = $this->query($sql);
-					if($res)
-					{
-						while($row = $this->fetchData($res))
-						{
-							$attrid[] = $row['attribute_id'];
-							$attrmap[$row['attribute_id']] = $row;
-						}
-						$attrids 	= implode(',',$attrid);
-					}
-
-					$sql="
-						SELECT
-							attr_id,
-							attr_name,
-							attr_display_name,
-							attr_type_flag
-						FROM
-							tbl_attribute_master
-						WHERE
-							attr_id IN(".$attrids.")
-						ORDER BY
-							attr_display_name ASC";
-
-					$res = $this->query($sql);
-
-					if($res)
-					{
-						$i=0;
-						while($row = $this->fetchData($res))
-						{
-							switch ($row['attr_type_flag'])
-							{
-								case 6: //$pids
-									$qry = "SELECT
-												MIN(".$row['attr_name'].") AS minval,
-												MAX(".$row['attr_name'].") AS maxval
-											FROM
-												tbl_product_search
-											WHERE
-												product_id IN(".$allpids.")
-                                                                                        AND
-                                                                                                active_flag=1
-											";
-									$res1 = $this->query($qry);
-									if($res1)
-									{
-										$row1 = $this->fetchData($res1);
-										$data[$i]['range']['id'] 		= $row['attr_id'];
-										$data[$i]['range']['name'] 		= $row['attr_name'];
-										$data[$i]['range']['dname'] 	= $row['attr_display_name'];
-										$data[$i]['range']['value'] 	= $row1['minval'].';'.$row1['maxval'];
-										$data[$i]['range']['ovalue'] 	= $attrmap[$row['attr_id']]['attr_range'];
-										$i++;
-									}
-								break;
-
-								case 7:
-
-									$qry = "SELECT
-												group_concat(DISTINCT ".$row['attr_name'].") as name
-											FROM
-												tbl_product_search
-											WHERE
-												product_id IN(".$allpids.")
-                                                                                        AND
-                                                                                                active_flag=1
-											";
-									$res1 = $this->query($qry);
-									if($res1)
-									{
-										$arr = array();
-										$row1 = $this->fetchData($res1);
-										$expd = explode(',',$attrmap[$row['attr_id']]['attr_values']);
-										$expd1 = explode(',',$row1['name']);
-										foreach($expd1 as $key=>$val)
-										{
-											$arr[array_search($val,$expd)] = $val;
-										}
-										ksort($arr);
-										$arr = array_values($arr);
-										$data[$i]['checkbox']['id'] 	= $row['attr_id'];
-										$data[$i]['checkbox']['name'] 	= $row['attr_name'];
-										$data[$i]['checkbox']['dname'] 	= $row['attr_display_name'];
-										$data[$i]['checkbox']['value'] 	= implode(',',$arr);
-										$data[$i]['checkbox']['ovalue'] = $attrmap[$row['attr_id']]['attr_values'];
-										$i++;
-									}
-								break;
-
-								case 8:
-								break;
-							}
-						}
-					}
-
-					/* *********** */
-
-					$tmp_arr1 = (!empty($arr1)) ? (array_values($arr1)) : null;
-					$arr1 = array('filters'=>$data,'products'=>$tmp_arr1,'total'=>$total,'getdata'=>$params,'catname'=>$catname);
-					$err = array('errCode'=>0,'errMsg'=>'Details fetched successfully');
-				}
-				else
-				{
-					$arr1 = array();
-					$err = array('errCode'=>1,'errMsg'=>'No records found');
-				}
-			}
-			else
-			{
-				$arr1 = array();
-				$err = array('errCode'=>1,'errMsg'=>'No records found');
-			}
+              								case 7:
+                  									$qry = "SELECT
+                  												          group_concat(DISTINCT ".$row['attr_name'].") as name
+                  											    FROM
+                  												          tbl_product_search
+                  											    WHERE
+                  												          product_id IN(".$allpids.")
+                                            AND
+                                                    active_flag=1";
+                  									$res1 = $this->query($qry);
+                  									if($res1)
+                  									{
+                    										$arr = array();
+                    										$row1 = $this->fetchData($res1);
+                    										$expd = explode(',',$attrmap[$row['attr_id']]['attr_values']);
+                    										$expd1 = explode(',',$row1['name']);
+                    										foreach($expd1 as $key=>$val)
+                    										{
+                    											  $arr[array_search($val,$expd)] = $val;
+                    										}
+                    										ksort($arr);
+                    										$arr = array_values($arr);
+                    										$data[$i]['checkbox']['id'] 	  = $row['attr_id'];
+                    										$data[$i]['checkbox']['name'] 	= $row['attr_name'];
+                    										$data[$i]['checkbox']['dname'] 	= $row['attr_display_name'];
+                    										$data[$i]['checkbox']['value'] 	= implode(',',$arr);
+                    										$data[$i]['checkbox']['ovalue'] = $attrmap[$row['attr_id']]['attr_values'];
+                    										$i++;
+                  									}
+              								      break;
+            								  case 8:
+              								      break;
+            							}
+          						}
+        					}
+        					$tmp_arr1 = (!empty($arr1)) ? (array_values($arr1)) : null;
+        					$arr1 = array('filters'=>$data,'products'=>$tmp_arr1,'total'=>$total,'getdata'=>$params,'catname'=>$catname);
+        					$err = array('errCode'=>0,'errMsg'=>'Details fetched successfully');
+        				}
+        				else
+        				{
+        					$arr1 = array();
+        					$err = array('errCode'=>1,'errMsg'=>'No records found');
+        				}
+      			}
+      			else
+      			{
+        				$arr1 = array();
+        				$err = array('errCode'=>1,'errMsg'=>'No records found');
+      			}
             $result = array('results'=>$arr1,'error'=>$err);
             return $result;
         }
@@ -1530,42 +1653,44 @@
                 $sql.=" LIMIT " . $start . ",$limit";
             }
             $sql2 = "SELECT
-						product_id,
-						diamond_shape,
-						carat,
-						color,
-						certified,
-						metal,
-						shape,
-						clarity,
-						price,
-						polish,
-						symmetry,
-						cno,
-						cut,
-						nofd,
-						gemwt,
-						gold_purity,
-						dwt,
-						fluo as fluorescence,
-						measurement,
-						td as tab,
-						gold_weight,
-						gemstone_color,
-						gemstone_type,
-						quality,
-						cr_ang as crownangle,
-						girdle,
-						base as baseprice,
-						p_disc as discount,
-						p_discb2b as discountb2b,
-						b2b_price as b2bprice,
-						type,
-                        combination,
-						bullion_design,
-						tabl as tab,
-						num_gemstones,
-						certificate_url,
+                                    						product_id,
+                                    						diamond_shape,
+                                    						carat,
+                                    						color,
+                                    						certified,
+                                                other_certificate,
+                                                certificate_url,
+                                    						metal,
+                                    						shape,
+                                    						clarity,
+                                    						price,
+                                    						polish,
+                                    						symmetry,
+                                    						cno,
+                                    						cut,
+                                    						nofd,
+                                    						gemwt,
+                                    						gold_purity,
+                                    						dwt,
+                                    						fluo as fluorescence,
+                                    						measurement,
+                                    						td as tab,
+                                    						gold_weight,
+                                    						gemstone_color,
+                                    						gemstone_type,
+                                    						quality,
+                                    						cr_ang as crownangle,
+                                    						girdle,
+                                    						base as baseprice,
+                                    						p_disc as discount,
+                                    						p_discb2b as discountb2b,
+                                    						b2b_price as b2bprice,
+                                    						type,
+                                                combination,
+                                    						bullion_design,
+                                    						tabl as tab,
+                                    						num_gemstones,
+                                    						certificate_url,
                                                 is_plain_jewellery,
                                                 price_per_carat,
                                                 othermaterial,
@@ -1573,6 +1698,7 @@
                                                 grossweight,
                                                 gprice_per_carat,
                                                 diamondsvalue,
+                                                gold_value,
                                                 gemstonevalue
                     FROM
                         tbl_product_search

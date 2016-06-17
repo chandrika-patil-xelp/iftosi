@@ -978,9 +978,9 @@ switch ($action) {
 
                 $attr = $result[$pid]['attr_details'];
                 $pdet = $result[$pid];
-				$certificate_url = $attr['certificate_url'];
-				$certificate_url = explode('/', $certificate_url);
-				$certificate_url = $certificate_url[count($certificate_url) - 1];
+        				$certificate_url = $attr['certificate_url'];
+        				$certificate_url = explode('/', $certificate_url);
+        				$certificate_url = $certificate_url[count($certificate_url) - 1];
                 //echo "<pre>";print_r($attr);die;
                 include 'template/diamondForm.html';
                 break;
@@ -1013,7 +1013,10 @@ switch ($action) {
                 $catres = $cat['subcat'][0]['attr'];
                 $attr = $result[$pid]['attr_details'];
                 $pdet = $result[$pid];
-                
+
+                $certificate_url = $attr['certificate_url'];
+        				$certificate_url = explode('/', $certificate_url);
+        				$certificate_url = $certificate_url[count($certificate_url) - 1];
 
                 $shapeUrl = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=10000';
                 $shapeRes = $comm->executeCurl($shapeUrl);
@@ -1050,10 +1053,8 @@ switch ($action) {
                 $url = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=' . $catid;
                 $res = $comm->executeCurl($url);
                 $fil = $res['results'];
-
                 $attr = $result[$pid]['attr_details'];
                 $pdet = $result[$pid];
-              //echo "<pre>";print_r($pdet);die;
                 include 'template/bullionForm.html';
                 break;
 
@@ -1063,7 +1064,8 @@ switch ($action) {
                 $url = APIDOMAIN . 'index.php?action=viewAll&uid=' . $uid;
                 $res = $comm->executeCurl($url);
                 $data = $res['results'][1];
-                //echo "<pre>";print_r($data);die;
+                $banker = $data['banker'];
+                //echo "<pre>";print_r($banker);die;
                 include 'template/vendorDetails.html';
                 break;
 
@@ -1127,6 +1129,16 @@ switch ($action) {
 
                 include 'template/vendor_enquiries.html';
                 break;
+
+            case 'pending':
+                $page = 'Pending';
+                $uid = $_GET['uid'];
+                $catid = (!empty($_GET['catid']) ? $_GET['catid'] : '');
+                $pgno = (!empty($_GET['pgno']) ? $_GET['pgno'] : 1);
+                include 'template/pendingProducts.html';
+                break;
+
+
 
             case 'vendorList':
                 $page = 'vendorList';
@@ -1239,15 +1251,7 @@ switch ($action) {
                 $res = $comm->executeCurl($url);
                 $data = $res['results'];
                 //include 'template/index.html';
-                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
-                {
                         include 'template/index.html';
-                }
-                else
-                {
-                        include 'template/comingsoon.html';
-                }
-
                 break;
         }
         break;

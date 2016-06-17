@@ -400,20 +400,6 @@
             $isv=$row['is_vendor'];
             $uid=$row['user_id'];
             $logmob=$row['logmobile'];
-
-  /*          $vstat1  = "SELECT vendor_id from tbl_vendor_master where vendor_id=\"".$uid."\"";
-            $vres1   = $this->query($vstat1);
-
-            /* IF USER ID IS NOT REGISTERED WITH THE VENDOR MASTER TABLE BUT WANTS TO SIGN UP AS VENDOR
-            if($isv == 1)
-            {
-                if($this->numRows($vres1) == 0)
-                {
-                    $vstat1  = "INSERT INTO tbl_vendor_master(vendor_id,contact_mobile) VALUES(vendor_id = \"".$uid."\", contact_mobile=\"".$logmob."\")";
-                    $vres1   = $this->query($vstat1);
-                }
-            }*/
-
             $vstat  = "SELECT is_complete from tbl_vendor_master where vendor_id=\"".$uid."\"";
             $vres   = $this->query($vstat);
             $statrow= $this->fetchData($vres);
@@ -444,11 +430,12 @@
                         $vatno = $vfulldtls['vatno'];
                         $landline = $vfulldtls['landline'];
                         $banker = $vfulldtls['banker'];
+                        $ifsc = $vfulldtls['ifsc'];
                         $pancard = $vfulldtls['pancard'];
                         $business_type = $vfulldtls['business_type'];
                         $showroom_name = $vfulldtls['showroom_name'];
 
-                        if(!empty($vendor_id) && !empty($orgName) && !empty($address1) && !empty($area) && !empty($postal_code) && !empty($city) && !empty($country) && !empty($state) && !empty($position) && !empty($contact_person) && !empty($contact_mobile) && !empty($email) && !empty($memship_Cert) && !empty($vatno) && !empty($landline) && !empty($banker) && !empty($pancard) && !empty($business_type) && !empty($showroom_name) && ($params['isC'] == 2 || $params['isC'] == '2' || $completeStat == 2 || $completeStat == '2'))
+                        if(!empty($vendor_id) && !empty($orgName) && !empty($address1) && !empty($area) && !empty($postal_code) && !empty($city) && !empty($country) && !empty($state) && !empty($position) && !empty($contact_person) && !empty($contact_mobile) && !empty($email) && !empty($memship_Cert) && !empty($vatno) && !empty($landline) && !empty($banker) && !empty($ifsc) && !empty($pancard) && !empty($business_type) && !empty($showroom_name) && ($params['isC'] == 2 || $params['isC'] == '2' || $completeStat == 2 || $completeStat == '2'))
                         {
                                 $params['isC'] = 2;
                         }
@@ -548,6 +535,9 @@
             }
             if (!empty($detls['banker'])) {
                 $vsql .= " banker = '".$detls['banker']."',";
+            }
+            if (!empty($detls['ifsc'])) {
+                $vsql .= " ifsc = '".$detls['ifsc']."',";
             }
             if (!empty($detls['pan'])) {
                 $vsql .= " pancard = '".$detls['pan']."',";
@@ -1475,7 +1465,12 @@
 
         public function statusChecker($params)
         {
-            $sqlCheck = "SELECT active_flag FROM tbl_vendor_master WHERE vendor_id=".$params['uid'];
+            $sqlCheck = " SELECT
+                                  active_flag
+                          FROM
+                                  tbl_vendor_master
+                          WHERE
+                                  vendor_id=".$params['uid'];
             $resCheck = $this->query($sqlCheck);
             $rowCheck = $this->fetchData($resCheck);
             $resCount = $this->numRows($resCheck);

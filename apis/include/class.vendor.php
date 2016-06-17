@@ -1,5 +1,5 @@
 <?php
-//include APICLUDE.'common/db.class.php';
+include APICLUDE.'common/db.class.php';
 class vendor extends DB
 {
     function __construct($db)
@@ -677,11 +677,15 @@ class vendor extends DB
         $catid = ($params['catid'] ? $params['catid'] : 10000);
         $limit = ($params['limit'] ? $params['limit'] : 15);
         $total_pages = $chkcnt = $total_products = 0;
-        $sql="SELECT "
-                . "silver_rate, "
-                . "gold_rate, "
-                . "dollar_rate "
-                . "FROM tbl_vendor_master WHERE vendor_id='".$params['vid']."'";
+        $sql="SELECT
+                      silver_rate,
+                      gold_rate,
+                      dollar_rate,
+                      platinum_rate
+              FROM
+                      tbl_vendor_master
+              WHERE
+                      vendor_id='".$params['vid']."'";
         $res=$this->query($sql);
         if ($res)
         {
@@ -703,6 +707,11 @@ class vendor extends DB
             if(!empty($rates['silver_rate']) && $rates['silver_rate']!='0.00')
             {
                 $silverRate = $rates['silver_rate'];
+            }
+            $platinumRate=platinumRate;
+            if(!empty($rates['platinum_rate']) && $rates['platinum_rate']!='0.00')
+            {
+                $platinumRate = $rates['platinum_rate'];
             }
         }
        // $cate_ids=  $this->getSubCat($catid);
@@ -731,15 +740,11 @@ class vendor extends DB
                                     c.active_flag,
                                     ".$psql."
                 FROM
-                                    tbl_vendor_product_mapping
-                AS a,
-                                    tbl_product_category_mapping
-                AS b,
-                                    tbl_product_master
-                AS c,
-                                    tbl_product_search
-                AS d
-                where
+                                    tbl_vendor_product_mapping AS a,
+                                    tbl_product_category_mapping AS b,
+                                    tbl_product_master AS c,
+                                    tbl_product_search AS d
+                WHERE
                                     a.product_id=b.product_id
                 AND
                                     b.product_id=c.product_id
@@ -747,6 +752,8 @@ class vendor extends DB
                                     c.product_id=d.product_id
                 AND
                                     b.category_id = " . $catid . "
+                AND
+                                    d.complete_flag = 1
                 AND
                                     a.vendor_id=" . $params['vid'] . "
                 AND
@@ -759,11 +766,11 @@ class vendor extends DB
         $total_products = $this->numRows($res);
         if (!empty($params['page']))
         {
-            $start = ($page * $limit) - $limit;
-            $total_pages = ceil($total_products/$limit);
+            $start        = ($page * $limit) - $limit;
+            $total_pages  = ceil($total_products/$limit);
             $sql.=" LIMIT " . $start . ",$limit";
-            $res = $this->query($sql);
-            $chkcnt = $this->numRows($res);
+            $res          = $this->query($sql);
+            $chkcnt       = $this->numRows($res);
         }
         if ($chkcnt > 0)
         {
@@ -798,26 +805,31 @@ class vendor extends DB
                 }
                 if ($catid == 10002)
                 {
-                    $purity=$row['gold_purity'];
-                    $metal=strtolower($row['metal']);
-                    $weight=$row['gold_weight'];
+                    $purity = $row['gold_purity'];
+                    $metal  = strtolower($row['metal']);
+                    $weight = $row['gold_weight'];
 
                     $metalRate=$silverRate;
 
                     if($metal=='gold')
                     {
-                        $metalRate=$goldRate;
+                        $metalRate = $goldRate;
                         $rate = ((($metalRate/995)*$purity)/10)*$weight;
-                        //$metalRate=$goldRate;
-                        //$finalRate=($metalRate/10)*($purity/995);
                         $price = ceil($rate);
                         $row['price'] = $this->IND_money_format($price);
                     }
-                    else if($metal=='silver')
+                    if($metal=='silver')
                     {
                         $metalRate=$silverRate;
                         $finalRate=($metalRate/1000)*($purity/999);
                         $price=ceil($finalRate*$weight);
+                        $row['price'] = $this->IND_money_format($price);
+                    }
+                    if($metal == 'platinum')
+                    {
+                        $metalRate = $platinumRate;
+                        $rate = ((($metalRate/999)*$purity)/10)*$weight;
+                        $price = ceil($rate);
                         $row['price'] = $this->IND_money_format($price);
                     }
                 }
@@ -842,8 +854,8 @@ class vendor extends DB
 
     public function getVPendingProducts($params)
     {
-      echo "HERE";
         global $comm;
+        $cntDiamond = $cntBullion = $cntJewellery = 0;
         $page = ($params['page'] ? $params['page'] : 1);
         $catid = ($params['catid'] ? $params['catid'] : 10000);
         $limit = ($params['limit'] ? $params['limit'] : 15);
@@ -852,13 +864,14 @@ class vendor extends DB
         $sql="SELECT
                     silver_rate,
                     gold_rate,
-                    dollar_rate
+                    dollar_rate,
+                    platinum_rate
                FROM
                     tbl_vendor_master
                WHERE
                     vendor_id='".$params['vid']."'";
 
-        $res=$this->query($sql,1);
+        $res=$this->query($sql);
         if ($res)
         {
             $rates = $this->fetchData($res);
@@ -875,28 +888,18 @@ class vendor extends DB
                 $goldRate = $rates['gold_rate'];
             }
             $silverRate=silverRate;
-
             if(!empty($rates['silver_rate']) && $rates['silver_rate']!='0.00')
             {
                 $silverRate = $rates['silver_rate'];
             }
+            $platinumRate=platinumRate;
+            if(!empty($rates['platinum_rate']) && $rates['platinum_rate'] != '0.00')
+            {
+                $platinumRate = $rates['platinum_rate'];
+            }
         }
        // $cate_ids=  $this->getSubCat($catid);
-        $psql='';
-
-        if($catid == 10000)
-        {
-            $psql='d.color, d.carat, d.shape, d.certified AS cert, d.clarity, d.b2b_price';
-        }
-        else if($catid == 10001)
-        {
-            $psql='d.shape,d.metal,c.lotref,d.gold_weight,d.dwt,d.gold_purity,d.certified as cert';
-        }
-        else if($catid == 10002)
-        {
-            $psql='d.type, d.metal, d.gold_purity, d.gold_weight,d.bullion_design';
-        }
-
+        $psql='*';
         $sql = "select
                         DISTINCT a.product_id
                 AS id,
@@ -906,7 +909,7 @@ class vendor extends DB
                         c.barcode,
                         c.update_time,
                         c.active_flag,
-                        ".$psql."
+                        d.".$psql."
                 FROM
                         tbl_vendor_product_mapping AS a,
                         tbl_product_category_mapping AS b,
@@ -993,6 +996,13 @@ class vendor extends DB
                         $price=ceil($finalRate*$weight);
                         $row['price'] = $this->IND_money_format($price);
                     }
+                    else if($metal=='platinum')
+                    {
+                        $metalRate=$platinumRate;
+                        $finalRate=($metalRate/10)*($purity/999);
+                        $price=ceil($finalRate*$weight);
+                        $row['price'] = $this->IND_money_format($price);
+                    }
                 }
                 if($catid == '10000')
                 {
@@ -1004,31 +1014,57 @@ class vendor extends DB
                 }
                 if($catid == '10002')
                 {
-                    if(empty($row['shape'])
+                    if(empty($row['shape']))
                     {
-                        $arr1[] = $row;
+                        $arr2[] = $row;
                         $cntBullion++;
                     }
                     else
                     {
                         if($row['shape'] == 'gCoins' || $row['shape'] == 'gBars')
                         {
-                            if(empty($row['bullion_design'] || empty($row['gold_purity'] || empty($row['gold_weight'])
+                            if(empty($row['bullion_design']) || empty($row['gold_purity']) || empty($row['gold_weight']))
                             {
                                 $arr2[] = $row;
+                                $cntBullion++;
                             }
                         }
-                        else if($row['shape'] == 'sCoins' || $row['shape'] == 'sBars')
+                        if($row['shape'] == 'sCoins' || $row['shape'] == 'sBars')
                         {
-                            if(empty($row['bullion_design'] || empty($row['gold_purity'] || empty($row['gold_weight'])
+                            if(empty($row['bullion_design']) || empty($row['gold_purity']) || empty($row['gold_weight']))
                             {
                                 $arr2[] = $row;
+                                $cntBullion++;
                             }
                         }
-                        $cntBullion++;
+                        if($row['shape'] == 'pCoins' || $row['shape'] == 'pBars')
+                        {
+                            if(empty($row['bullion_design']) || empty($row['gold_purity']) || empty($row['gold_weight']))
+                            {
+                                $arr2[] = $row;
+                                $cntBullion++;
+                            }
+                        }
                     }
                 }
-                $arr = array('total_products' => $total_products, 'total_pages' => $total_pages, 'Dproducts' => $arr1,'Bproducts' => $arr2,'Dcnt' => $cntDiamond,'Bcnt' => $cntBullion++;);
+                if($catid == '10001')
+                {
+                    if(empty($row['shape']))
+                    {
+                        $arr3[] = $row;
+                        $cntJewellery++;
+                    }
+                    else
+                    {
+                        $tmparr = $this->validateJewel($row,$cntJewellery);
+                        if(!empty($tmparr['result']['result']))
+                        {
+                            $arr3[] = $tmparr['result']['result'];
+                            $cntJewellery = $tmparr['count'];
+                        }
+                    }
+                }
+                $arr = array('total_products' => $total_products, 'total_pages' => $total_pages,'Dproducts' => $arr1,'Jproducts' => $arr3,'Bproducts' => $arr2,'Dcnt' => $cntDiamond,'Bcnt' => $cntBullion,'Jcnt' => $cntJewellery);
                 $err = array('code' => 0, 'msg' => 'Details fetched successfully');
              }
         }
@@ -1039,6 +1075,148 @@ class vendor extends DB
         }
         $result = array('results' => $arr, 'error' => $err);
         return $result;
+    }
+
+
+    public function validateJewel($cols,$cntJ)
+    {
+        if(empty($cols['combination']))
+        {
+            $rest['result'] = $cols;
+            $cntJ++;
+        }
+        else
+        {
+            switch($cols['combination'])
+            {
+                case 'GOLD & DIAMONDS':
+                      if(empty($cols['certified']) || empty($cols['certificate_url']) || empty($cols['metal']) || empty($cols['gold_type']) || empty($cols['diamond_shape']) || empty($cols['color']) || empty($cols['clarity']) || empty($cols['dwt']) || empty($cols['nofd']) || empty($cols['price_per_carat']) || empty($cols['diamondsvalue']) || empty($cols['gold_purity']) || empty($cols['barcode']) || empty($cols['gold_weight']) || empty($cols['gold_value']) || empty($cols['grossweight']) || empty($cols['price']))
+                      {
+                          $rest['result'] = $cols;
+                          $cntJ++;
+                      }
+                      break;
+                case 'PLATINUM & DIAMONDS':
+                      if(empty($cols['certified']) || empty($cols['certificate_url']) || empty($cols['metal']) || empty($cols['diamond_shape']) || empty($cols['color']) || empty($cols['clarity']) || empty($cols['dwt']) || empty($cols['nofd']) || empty($cols['price_per_carat']) || empty($cols['diamondsvalue']) || empty($cols['gold_purity']) || empty($cols['barcode']) || empty($cols['gold_weight']) || empty($cols['gold_value']) || empty($cols['grossweight']) || empty($cols['price']))
+                      {
+                          $rest['result'] = $cols;
+                          $cntJ++;
+                      }
+                      break;
+                case 'SILVER & DIAMONDS':
+                        if(empty($cols['certified']) || empty($cols['certificate_url']) || empty($cols['metal']) || empty($cols['diamond_shape']) || empty($cols['color']) || empty($cols['clarity']) || empty($cols['dwt']) || empty($cols['nofd']) || empty($cols['price_per_carat']) || empty($cols['diamondsvalue']) || empty($cols['gold_purity']) || empty($cols['barcode']) || empty($cols['gold_weight']) || empty($cols['gold_value']) || empty($cols['grossweight']) || empty($cols['price']))
+                        {
+                            $rest['result'] = $cols;
+                            $cntJ++;
+                        }
+                        break;
+                case 'GOLD, DIAMONDS & GEMSTONES':
+                        if(empty($cols['certified']) || empty($cols['certificate_url']) || empty($cols['metal']) || empty($cols['diamond_shape']) || empty($cols['color']) || empty($cols['clarity']) || empty($cols['dwt']) || empty($cols['nofd']) || empty($cols['price_per_carat']) || empty($cols['diamondsvalue']) || empty($cols['gemstone_type']) || empty($cols['gemstone_color']) || empty($cols['gemwt']) || empty($cols['num_gemstones'])  || empty($cols['gprice_per_carat']) || empty($cols['gemstonevalue']) || empty($cols['gold_purity']) || empty($cols['barcode']) || empty($cols['gold_weight']) || empty($cols['gold_value']) || empty($cols['grossweight']) || empty($cols['price']))
+                        {
+                            $rest['result'] = $cols;
+                            $cntJ++;
+                        }
+                        break;
+                case 'PLATINUM, DIAMONDS & GEMSTONES':
+                        if(empty($cols['certified']) || empty($cols['certificate_url']) || empty($cols['metal']) || empty($cols['diamond_shape']) || empty($cols['color']) || empty($cols['clarity']) || empty($cols['dwt']) || empty($cols['nofd']) || empty($cols['price_per_carat']) || empty($cols['diamondsvalue']) || empty($cols['gemstone_type']) || empty($cols['gemstone_color']) || empty($cols['gemwt']) || empty($cols['num_gemstones'])  || empty($cols['gprice_per_carat']) || empty($cols['gemstonevalue']) || empty($cols['gold_purity']) || empty($cols['barcode']) || empty($cols['gold_weight']) || empty($cols['gold_value']) || empty($cols['grossweight']) || empty($cols['price']))
+                        {
+                            $rest['result'] = $cols;
+                            $cntJ++;
+                        }
+                        break;
+                case 'SILVER, DIAMONDS & GEMSTONES':
+                        if(empty($cols['certified']) || empty($cols['certificate_url']) || empty($cols['metal']) || empty($cols['diamond_shape']) || empty($cols['color']) || empty($cols['clarity']) || empty($cols['dwt']) || empty($cols['nofd']) || empty($cols['price_per_carat']) || empty($cols['diamondsvalue']) || empty($cols['gemstone_type']) || empty($cols['gemstone_color']) || empty($cols['gemwt']) || empty($cols['num_gemstones'])  || empty($cols['gprice_per_carat']) || empty($cols['gemstonevalue']) || empty($cols['gold_purity']) || empty($cols['barcode']) || empty($cols['gold_weight']) || empty($cols['gold_value']) || empty($cols['grossweight']) || empty($cols['price']))
+                        {
+                            $rest['result'] = $cols;
+                            $cntJ++;
+                        }
+                        break;
+                case 'GOLD & GEMSTONES':
+                        if(empty($cols['certified']) || empty($cols['certificate_url']) || empty($cols['metal']) || empty($cols['gold_type']) ||  empty($cols['gemstone_type']) || empty($cols['gemstone_color']) || empty($cols['gemwt']) || empty($cols['num_gemstones'])  || empty($cols['gprice_per_carat']) || empty($cols['gemstonevalue']) || empty($cols['gold_purity']) || empty($cols['barcode']) || empty($cols['gold_weight']) || empty($cols['gold_value']) || empty($cols['grossweight']) || empty($cols['price']))
+                        {
+                            $rest['result'] = $cols;
+                            $cntJ++;
+                        }
+                        break;
+                case 'SILVER & GEMSTONES':
+                        if(empty($cols['metal']) ||  empty($cols['gemstone_type']) || empty($cols['gemstone_color']) || empty($cols['gemwt']) || empty($cols['num_gemstones'])  || empty($cols['gprice_per_carat']) || empty($cols['gemstonevalue']) || empty($cols['gold_purity']) || empty($cols['barcode']) || empty($cols['gold_weight']) || empty($cols['gold_value']) || empty($cols['grossweight']) || empty($cols['price']))
+                        {
+                            $rest['result'] = $cols;
+                            $cntJ++;
+                        }
+                        break;
+                case 'GOLD & SWAROVSKI ZIRCONIA':
+                        if(empty($cols['certified']) || empty($cols['certificate_url']) || empty($cols['metal']) || empty($cols['gold_type']) ||  empty($cols['gemstone_type']) || empty($cols['gemstone_color']) || empty($cols['gemwt']) || empty($cols['num_gemstones'])  || empty($cols['gprice_per_carat']) || empty($cols['gemstonevalue']) || empty($cols['gold_purity']) || empty($cols['barcode']) || empty($cols['gold_weight']) || empty($cols['gold_value']) || empty($cols['grossweight']) || empty($cols['price']))
+                        {
+                            $rest['result'] = $cols;
+                            $cntJ++;
+                        }
+                        break;
+                case 'SILVER & SWAROVSKI ZIRCONIA':
+                        if(empty($cols['metal']) ||  empty($cols['gemstone_type']) || empty($cols['gemstone_color']) || empty($cols['gemwt']) || empty($cols['num_gemstones'])  || empty($cols['gprice_per_carat']) || empty($cols['gemstonevalue']) || empty($cols['gold_purity']) || empty($cols['barcode']) || empty($cols['gold_weight']) || empty($cols['gold_value']) || empty($cols['grossweight']) || empty($cols['price']))
+                        {
+                            $rest['result'] = $cols;
+                            $cntJ++;
+                        }
+                        break;
+                case 'GOLD & CZ':
+                        if(empty($cols['certified']) || empty($cols['certificate_url']) || empty($cols['metal']) || empty($cols['gold_type']) ||  empty($cols['gemstone_type']) || empty($cols['gemstone_color']) || empty($cols['gemwt']) || empty($cols['num_gemstones'])  || empty($cols['gprice_per_carat']) || empty($cols['gemstonevalue']) || empty($cols['gold_purity']) || empty($cols['barcode']) || empty($cols['gold_weight']) || empty($cols['gold_value']) || empty($cols['grossweight']) || empty($cols['price']))
+                        {
+                            $rest['result'] = $cols;
+                            $cntJ++;
+                        }
+                        break;
+                case 'SILVER & CZ':
+                        if(empty($cols['metal']) ||  empty($cols['gemstone_type']) || empty($cols['gemstone_color']) || empty($cols['gemwt']) || empty($cols['num_gemstones'])  || empty($cols['gprice_per_carat']) || empty($cols['gemstonevalue']) || empty($cols['gold_purity']) || empty($cols['barcode']) || empty($cols['gold_weight']) || empty($cols['gold_value']) || empty($cols['grossweight']) || empty($cols['price']))
+                        {
+                            $rest['result'] = $cols;
+                            $cntJ++;
+                        }
+                        break;
+                case 'PLAIN GOLD':
+                        if(empty($cols['certified']) || empty($cols['certificate_url']) || empty($cols['metal']) || empty($cols['gold_type'])  || empty($cols['gold_purity']) || empty($cols['barcode']) || empty($cols['gold_weight']) || empty($cols['gold_value']) || empty($cols['grossweight']) || empty($cols['price']))
+                        {
+                            $rest['result'] = $cols;
+                            $cntJ++;
+                        }
+                        break;
+                case 'PLAIN PLATINUM':
+                        if(empty($cols['metal']) || empty($cols['gold_purity']) || empty($cols['barcode']) || empty($cols['gold_weight']) || empty($cols['gold_value']) || empty($cols['grossweight']) || empty($cols['price']))
+                        {
+                            $rest['result'] = $cols;
+                            $cntJ++;
+                        }
+                        break;
+                case 'PLAIN SILVER':
+                        if(empty($cols['metal']) || empty($cols['gold_purity']) || empty($cols['barcode']) || empty($cols['gold_weight']) || empty($cols['gold_value']) || empty($cols['grossweight']) || empty($cols['price']))
+                        {
+                            $rest['result'] = $cols;
+                            $cntJ++;
+                        }
+                        break;
+                case 'GOLD & POLKI':
+                        if(!empty($cols['certified']) && $cols['certified'] !== 'None' && empty($cols['certificate_url']))
+                        {
+                            $rest['result'] = $cols;
+                            $cntJ++;
+                        }
+                        else
+                        {
+                            if(empty($cols['gold_type']) || empty($cols['polki_color']) || empty($cols['polki_quality']) || empty($cols['polki_weight']) || empty($cols['polkino']) || empty($cols['polki_price_per_carat']) || empty($cols['polki_value']) || empty($cols['gold_purity']) || empty($cols['barcode']) || empty($cols['gold_weight']) || empty($cols['gold_value']) || empty($cols['grossweight']) || empty($cols['price']))
+                            {
+                                $rest['result'] = $cols;
+                                $cntJ++;
+                            }
+                        }
+                        break;
+                  default :
+                        $rest['result'] = 0;
+                        $cntJ;
+                        break;
+            }
+        }
+        $res = array('result'=>$rest,'count'=>$cntJ);
+        return $res;
     }
 
     public function bulkInsertProducts($params)
@@ -2077,6 +2255,15 @@ class vendor extends DB
 
                         $res = $this->query($sql);
 
+                        if(empty($value[2]) || empty($value[3]) || empty($value[12]) || empty($value[4]) || empty($value[5]) || empty($value[6]) || empty($value[26]) || empty($value[7]) || empty($value[8]) || empty($value[9]) || empty($value[11]) || empty($value[15]) || empty($value[16]) || empty($value[17]) || empty($value[18]) || empty($value[23]) || empty($value[26]) || empty($value[31]))
+                        {
+                            $complete_flag = 0;
+                        }
+                        else
+                        {
+                            $complete_flag = 1;
+                        }
+
                         $sql = "    INSERT
                                     INTO
                                             `tbl_product_search`
@@ -2102,8 +2289,8 @@ class vendor extends DB
                                             base        = '".$value[15]."',
                                             b2b_price   = '".$value[17]."',
                                             p_disc      = '".$value[16]."',
-                                            p_discb2b   = '".$value[18]."'
-                                ";
+                                            complete_flag = $complete_flag,
+                                            p_discb2b   = '".$value[18]."'";
 
                         $res = $this->query($sql);
 
@@ -2861,35 +3048,153 @@ class vendor extends DB
             return $result;
         }
 
-        public function getSilverRate($params) {
-        $sql="SELECT silver_rate FROM tbl_vendor_master WHERE vendor_id='".$params['vid']."'";
-        $res=$this->query($sql);
-        if ($res) {
-            $row = $this->fetchData($res);
-            $arr = $row;
-            $err = array('code' => 0, 'msg' => 'Silver Rate Updated successfully!');
-        } else {
-            $arr = array();
-            $err = array('code' => 1, 'msg' => 'Error in Updating Silver Rate');
+        public function updatePlatinumRate($params)
+        {
+            $emailsql = "SELECT
+                                email
+                         FROM
+                                tbl_registration
+                         WHERE
+                                user_id =".$params['vid'];
+
+            $emailres = $this->query($emailsql);
+            $emailcnt = $this->numRows($emailres);
+
+            if($emailcnt > 0 )
+            {
+                $row = $this->fetchData($emailres);
+            }
+
+            $prevsql = "SELECT
+                                platinum_rate
+                        FROM
+                                tbl_vendor_master
+                        WHERE
+                                vendor_id =".$params['vid'];
+            $prevres = $this->query($prevsql);
+            $prevrow = $this->fetchData($prevres);
+
+            if(floatval($params['platRate']) !== floatval($prevrow['platinum_rate']))
+            {
+                $sql="UPDATE
+                              tbl_vendor_master
+                      SET
+                              platinum_rate=".$params['platRate']."
+                      WHERE
+                              vendor_id=".$params['vid'];
+                $res=$this->query($sql);
+                if($res)
+                {
+                    $temp = array
+                                (
+                                    'rate'=>'platinum_rate',
+                                    'vid'=>$params['vid'],
+                                    'type'=>'Platinum',
+                                    'prevRate'=>$prevrow['platinum_rate'],
+                                    'to'=>$row['email']
+                                );
+                    $mail = $this->sendRateMail($temp);
+                    if($mail == 1)
+                    {
+                        $arr = array();
+                        $err = array
+                                    (
+                                        'code' => 0,
+                                        'msg' => 'Silver Rate Updated successfully!'
+                                    );
+                    }
+                    else
+                    {
+                        $arr = array();
+                        $err = array
+                                    (
+                                        'code' => 1,
+                                        'msg' => 'Error in Updating Silver Rate'
+                                    );
+                    }
+                }
+                else
+                {
+                    $arr = array();
+                    $err = array
+                                (
+                                    'code' => 1,
+                                    'msg' => 'Error in Updating Silver Rate'
+                                );
+                }
+            }
+            else
+            {
+                $arr = array
+                            (
+                                'There is no change in the rate'
+                            );
+                $err = array
+                            (
+                                'code' => 0,
+                                'msg' => 'Silver Rate Updated successfully!'
+                            );
+            }
+            $result = array
+                            (
+                                'results' => $arr,
+                                'error' => $err
+                            );
+            return $result;
         }
-        $result = array('results' => $arr, 'error' => $err);
-        return $result;
+
+        public function getSilverRate($params)
+        {
+            $sql="SELECT
+                          silver_rate
+                  FROM
+                          tbl_vendor_master
+                  WHERE
+                          vendor_id='".$params['vid']."'";
+            $res=$this->query($sql);
+            if ($res)
+            {
+                $row = $this->fetchData($res);
+                $arr = $row;
+                $err = array('code' => 0, 'msg' => 'Silver Rate Updated successfully!');
+            }
+            else
+            {
+                $arr = array();
+                $err = array('code' => 1, 'msg' => 'Error in Updating Silver Rate');
+            }
+            $result = array('results' => $arr, 'error' => $err);
+            return $result;
         }
 
         public function updateGoldRate($params)
         {
-            $emailsql = "SELECT email from tbl_registration WHERE user_id =".$params['vid'];
+            $emailsql = "SELECT
+                                email
+                         FROM
+                                tbl_registration
+                         WHERE
+                                user_id =".$params['vid'];
             $emailres = $this->query($emailsql);
             $emailcnt = $this->numRows($emailres);
             $row = $this->fetchData($emailres);
 
-            $prevsql = "SELECT gold_rate from tbl_vendor_master WHERE vendor_id =".$params['vid'];
+            $prevsql = "SELECT
+                                gold_rate
+                        FROM
+                                tbl_vendor_master
+                        WHERE
+                                vendor_id =".$params['vid'];
             $prevres = $this->query($prevsql);
             $prevrow = $this->fetchData($prevres);
-
-
-            $temp = array('rate'=>'gold_rate','vid'=>$params['vid'],'type'=>'Gold','prevRate'=>$prevrow['gold_rate'],'to'=>$row['email']);
-
+            $temp = array
+                          (
+                              'rate'=>'gold_rate',
+                              'vid'=>$params['vid'],
+                              'type'=>'Gold',
+                              'prevRate'=>$prevrow['gold_rate'],
+                              'to'=>$row['email']
+                          );
             if(floatval($params['goldRate']) !== floatval($prevrow['gold_rate']))
             {
                 $sql="  UPDATE
@@ -2928,92 +3233,170 @@ class vendor extends DB
             return $result;
         }
 
-        public function getGoldRate($params) {
-        $sql="SELECT gold_rate,silver_rate FROM tbl_vendor_master WHERE vendor_id=".$params['vid'];
-        $res=$this->query($sql);
-        if ($res) {
-            $row = $this->fetchData($res);
-            $arr = $row;
-            $err = array('code' => 0, 'msg' => 'Gold Rate Updated successfully!');
-        } else {
-            $arr = array();
-            $err = array('code' => 1, 'msg' => 'Error in Updating Gold Rate');
-        }
-        $result = array('results' => $arr, 'error' => $err);
-        return $result;
-        }
-
-        public function getAllRatesByVID($params) {
-        $sql="SELECT silver_rate, gold_rate, dollar_rate FROM tbl_vendor_master WHERE vendor_id='".$params['vid']."'";
-        $res=$this->query($sql);
-        if ($res) {
-            $row = $this->fetchData($res);
-            $arr = $row;
-            $err = array('code' => 0, 'msg' => 'Rates fetched successfully!');
-        } else {
-            $arr = array();
-            $err = array('code' => 1, 'msg' => 'Error in fetching Rates');
-        }
-        $result = array('results' => $arr, 'error' => $err);
-        return $result;
-        }
-
-        public function Vpactive($params) {
-
-        $vprds="SELECT product_id from tbl_vendor_product_mapping where vendor_id=".$params['vid'];
-        $vprdsres=$this->query($vprds);
-        $cntvpres=$this->numRows($vprdsres);
-
-        if($cntvpres>0)
+        public function getGoldRate($params)
         {
-            while($chkrow=$this->fetchData($chkactres))
+            $sql="SELECT
+                          gold_rate,
+                          silver_rate
+                  FROM
+                          tbl_vendor_master
+                  WHERE
+                          vendor_id=".$params['vid'];
+            $res=$this->query($sql);
+            if ($res)
             {
-                $pid[] = $chkrow['product_id'];
+                $row = $this->fetchData($res);
+                $arr = $row;
+                $err = array('code' => 0, 'msg' => 'Gold Rate Updated successfully!');
             }
-            $prid=implode(',',$pid);
-
-            $sql1 = "UPDATE tbl_vendor_product_mapping SET active_flag=".$params['af']." WHERE product_id IN(".$prid.") AND vendor_id=".$params['vid']." AND active_flag NOT IN(2,3)";
-            $res = $this->query($sql1);
-
-            $sql2 = "UPDATE tbl_product_search SET active_flag=".$params['af']." WHERE product_id IN(".$prid.") AND active_flag NOT IN(2,3)";
-            $res1 = $this->query($sql2);
-
-            $sql3 = "UPDATE tbl_product_master SET active_flag=".$params['af']." WHERE product_id IN(".$prid.") AND active_flag NOT IN(2,3)";
-            $res2 = $this->query($sql3);
-
-            $sql4 = "UPDATE tbl_productid_generator SET active_flag=".$params['af']." WHERE product_id IN(".$prid.") AND active_flag NOT IN(2,3)";
-            $res3 = $this->query($sql4);
-
-            $sql5 = "UPDATE tbl_product_category_mapping SET display_flag=".$params['af']." WHERE product_id IN(".$prid.") AND display_flag NOT IN(2,3)";
-            $res4 = $this->query($sql5);
-
-            $sql6 = "UPDATE tbl_designer_product_mapping SET active_flag=".$params['af']." WHERE product_id IN(".$prid.") AND active_flag NOT IN(2,3)";
-            $res5 = $this->query($sql6);
-
-            $sql7 = "UPDATE tbl_product_enquiry SET active_flag=".$params['af']." WHERE product_id IN(".$prid.") AND active_flag NOT IN(2,3)";
-            $res6 = $this->query($sql7);
-
-            $arr=array();
-            $err=array('code'=>0,'msg'=>'Product status changed too');
+            else
+            {
+                $arr = array();
+                $err = array('code' => 1, 'msg' => 'Error in Updating Gold Rate');
+            }
+            $result = array('results' => $arr, 'error' => $err);
+            return $result;
         }
-        else
+
+        public function getAllRatesByVID($params)
         {
-            $arr=array();
-            $err=array('code'=>0,'msg'=>'Product status changed too');
+            $sql="SELECT
+                          silver_rate,
+                          gold_rate,
+                          dollar_rate,
+                          platinum_rate
+                   FROM
+                          tbl_vendor_master
+                   WHERE
+                          vendor_id='".$params['vid']."'";
+            $res=$this->query($sql);
+            if ($res)
+            {
+                $row = $this->fetchData($res);
+                $arr = $row;
+                $err = array('code' => 0, 'msg' => 'Rates fetched successfully!');
+            }
+            else
+            {
+                $arr = array();
+                $err = array('code' => 1, 'msg' => 'Error in fetching Rates');
+            }
+            $result = array('results' => $arr, 'error' => $err);
+            return $result;
         }
-        $result=array('result'=>$arr,'error'=>$err);
-        return $result;
+
+        public function Vpactive($params)
+        {
+
+            $vprds="SELECT
+                            product_id
+                    FROM
+                            tbl_vendor_product_mapping
+                    WHERE
+                            vendor_id=".$params['vid'];
+            $vprdsres=$this->query($vprds);
+            $cntvpres=$this->numRows($vprdsres);
+
+            if($cntvpres>0)
+            {
+                while($chkrow=$this->fetchData($chkactres))
+                {
+                    $pid[] = $chkrow['product_id'];
+                }
+                $prid=implode(',',$pid);
+
+                $sql1 = "UPDATE
+                                  tbl_vendor_product_mapping
+                         SET
+                                  active_flag=".$params['af']."
+                         WHERE
+                                  product_id IN(".$prid.")
+                         AND
+                                  vendor_id=".$params['vid']."
+                         AND
+                                  active_flag NOT IN(2,3)";
+                $res = $this->query($sql1);
+
+                $sql2 = "UPDATE
+                                  tbl_product_search
+                         SET
+                                  active_flag=".$params['af']."
+                         WHERE
+                                  product_id IN(".$prid.")
+                         AND
+                                  active_flag NOT IN(2,3)";
+                $res1 = $this->query($sql2);
+                $sql3 = "UPDATE
+                                  tbl_product_master
+                         SET
+                                  active_flag=".$params['af']."
+                         WHERE
+                                  product_id IN(".$prid.")
+                         AND
+                                  active_flag NOT IN(2,3)";
+                $res2 = $this->query($sql3);
+
+                $sql4 = "UPDATE
+                                  tbl_productid_generator
+                         SET
+                                  active_flag=".$params['af']."
+                         WHERE
+                                  product_id IN(".$prid.")
+                         AND
+                                  active_flag NOT IN(2,3)";
+                $res3 = $this->query($sql4);
+
+                $sql5 = "UPDATE
+                                  tbl_product_category_mapping
+                         SET
+                                  display_flag=".$params['af']."
+                         WHERE
+                                  product_id IN(".$prid.")
+                         AND
+                                  display_flag NOT IN(2,3)";
+                $res4 = $this->query($sql5);
+
+                $sql6 = "UPDATE
+                                  tbl_designer_product_mapping
+                         SET
+                                  active_flag=".$params['af']."
+                         WHERE
+                                  product_id IN(".$prid.")
+                         AND
+                                  active_flag NOT IN(2,3)";
+                $res5 = $this->query($sql6);
+
+                $sql7 = "UPDATE
+                                  tbl_product_enquiry
+                         SET
+                                  active_flag=".$params['af']."
+                         WHERE
+                                  product_id IN(".$prid.")
+                         AND
+                                  active_flag NOT IN(2,3)";
+                $res6 = $this->query($sql7);
+
+                $arr=array();
+                $err=array('code'=>0,'msg'=>'Product status changed too');
+            }
+            else
+            {
+                $arr=array();
+                $err=array('code'=>0,'msg'=>'Product status changed too');
+            }
+            $result=array('result'=>$arr,'error'=>$err);
+            return $result;
         }
 
         private function getAbbrValue($val)
         {
-            $propValArr=array('EX'=>'Excellent','VG'=>'Very Good','GD'=>"Good",'FAIR'=>'Fair','NO'=>'None','NN'=>'None','MED'=>'Medium','FNT'=>'Faint','STG'=>'Strong','VSTG'=>'Very Strong');
+            $propValArr=array(''=>'','EX'=>'Excellent','VG'=>'Very Good','GD'=>"Good",'FAIR'=>'Fair','NO'=>'None','NN'=>'None','MED'=>'Medium','FNT'=>'Faint','STG'=>'Strong','VSTG'=>'Very Strong');
             return $propValArr[$val];
         }
 
         private function getShapeAbbrValue($val)
         {
-            $propValArr=array('MQ'=>'Marquise','Marquise'=>'Marquise','Asscher'=>'Asscher','Round'=>'Round','RO' => 'Round','RBC' => 'Round','BR'=> 'Round','RD'=> 'Round','RND'=> 'Round','B'=> 'Round','RB'=> 'Round','PRN' => 'Princess','Princess'=>'Princess','PR'=> 'Princess','PRIN'=> 'Princess','PN'=> 'Princess','PC'=> 'Princess','MDSQB'=> 'Princess','SMB'=> 'Princess','PS' => 'Pear','Pear'=>'Pear','PSH'=> 'Pear','PB'=> 'Pear','PM'=> 'Pear','HS' => 'Heart','Heart'=>'Heart','HT'=> 'Heart','MHRC'=> 'Heart','OV' => 'Oval','Oval'=>'Oval','OMB' => 'Oval','EM' => 'Emerald','EC' => 'Emerald','Radiant'=>'Radiant','Cushion' => 'Cushion','CUBR' => 'CUSHION','CUMOD' => 'CUSHION');
+            $propValArr=array(''=>'','MQ'=>'Marquise','Marquise'=>'Marquise','Asscher'=>'Asscher','Round'=>'Round','RO' => 'Round','RBC' => 'Round','BR'=> 'Round','RD'=> 'Round','RND'=> 'Round','B'=> 'Round','RB'=> 'Round','PRN' => 'Princess','Princess'=>'Princess','PR'=> 'Princess','PRIN'=> 'Princess','PN'=> 'Princess','PC'=> 'Princess','MDSQB'=> 'Princess','SMB'=> 'Princess','PS' => 'Pear','Pear'=>'Pear','PSH'=> 'Pear','PB'=> 'Pear','PM'=> 'Pear','HS' => 'Heart','Heart'=>'Heart','HT'=> 'Heart','MHRC'=> 'Heart','OV' => 'Oval','Oval'=>'Oval','OMB' => 'Oval','EM' => 'Emerald','EC' => 'Emerald','Radiant'=>'Radiant','Cushion' => 'Cushion','CUBR' => 'CUSHION','CUMOD' => 'CUSHION');
             return $propValArr[$val];
         }
 

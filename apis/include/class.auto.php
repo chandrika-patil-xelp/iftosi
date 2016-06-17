@@ -2,14 +2,23 @@
 include APICLUDE.'common/db.class.php';
 class auto extends DB
 {
-        function __construct($db) 
+        function __construct($db)
         {
                 parent::DB($db);
         }
 
     public function searchbox($params)
     {
-	$sql="SELECT *,product_name,MATCH(product_name) AGAINST ('" . $params['srch'] . "*' IN BOOLEAN MODE) AS startwith FROM tbl_product_master where MATCH(product_name) AGAINST ('".$params['srch']."*' IN BOOLEAN MODE) ORDER BY startwith ASC";
+	      $sql="SELECT
+                      *,
+                      product_name,
+                      MATCH(product_name) AGAINST ('" . $params['srch'] . "*' IN BOOLEAN MODE) AS startwith
+              FROM
+                      tbl_product_master
+              WHERE
+                      MATCH(product_name) AGAINST ('".$params['srch']."*' IN BOOLEAN MODE)
+              ORDER BY startwith ASC";
+
         $page   = $params['page'];
         $limit  = $params['limit'];
         if (!empty($page))
@@ -38,30 +47,32 @@ class auto extends DB
                 $arr = array();
                 $err = array('Code'=> 1,'Msg'=>'Search Query Failed');
         }
-    $result=array('results'=>$arr,'error'=>$err);
-    return $result;
+        $result=array('results'=>$arr,'error'=>$err);
+        return $result;
     }
-    
+
     public function suggestCity($params)
     {
-		$sql="SELECT 
-				cityid as id,
-				if(cityname = '".$params['str']."',1,0) AS exact,
-				if(cityname like '".$params['str']."%',1,0) AS startwith,
-				MATCH(cityname) AGAINST ('" . $params['str'] . "*' IN BOOLEAN MODE) AS score,
-				cityname AS name,
-				'' AS city,
-				cityid AS cid
-			FROM 
-				tbl_city_master 
-			WHERE 
-				MATCH(cityname) AGAINST ('".$params['str']."*' IN BOOLEAN MODE) 
-			ORDER BY 
-				exact DESC, startwith DESC, score DESC";
-				
+		    $sql="SELECT
+          				cityid as id,
+          				if(cityname = '".$params['str']."',1,0) AS exact,
+          				if(cityname like '".$params['str']."%',1,0) AS startwith,
+          				MATCH(cityname) AGAINST ('" . $params['str'] . "*' IN BOOLEAN MODE) AS score,
+          				cityname AS name,
+          				'' AS city,
+          				cityid AS cid
+			    FROM
+				          tbl_city_master
+			    WHERE
+				          MATCH(cityname) AGAINST ('".$params['str']."*' IN BOOLEAN MODE)
+			    ORDER BY
+				          exact DESC,
+                  startwith DESC,
+                  score DESC";
+
         $limit=$params['limit'];
         $sql.=" LIMIT $limit";
-		
+
         $res=$this->query($sql);
         if($this->numRows($res)>0)
         {
@@ -70,31 +81,33 @@ class auto extends DB
                 $arr[]= $row;
             }
         }
-		
+
 		$sql="SELECT
-				a.id, 
-				if(a.area = '".$params['str']."',1,0) AS exact,
-				if(a.area like '".$params['str']."%',1,0) AS startwith,
-				MATCH(a.area) AGAINST ('" . $params['str'] . "*' IN BOOLEAN MODE) AS score,
-				a.area AS name,
-				a.dcity AS city,
-				b.cityid AS cid
-			FROM 
-				tbl_area_master a
-			JOIN
-				tbl_city_master b
-			ON
-				a.dcity = b.cityname
-			WHERE 
-				MATCH(a.area) AGAINST ('".$params['str']."*' IN BOOLEAN MODE)
-			AND
-				display_flag = 0
-			ORDER BY 
-				exact DESC, startwith DESC, score DESC";
-		
+          				a.id,
+          				if(a.area = '".$params['str']."',1,0) AS exact,
+          				if(a.area like '".$params['str']."%',1,0) AS startwith,
+          				MATCH(a.area) AGAINST ('" . $params['str'] . "*' IN BOOLEAN MODE) AS score,
+          				a.area AS name,
+          				a.dcity AS city,
+          				b.cityid AS cid
+			    FROM
+				          tbl_area_master a
+			    JOIN
+				          tbl_city_master b
+			    ON
+				          a.dcity = b.cityname
+			    WHERE
+				          MATCH(a.area) AGAINST ('".$params['str']."*' IN BOOLEAN MODE)
+		      AND
+				          display_flag = 0
+			    ORDER BY
+				          exact DESC,
+                  startwith DESC,
+                  score DESC";
+
         $limit = $params['limit']-count($arr);
         $sql.=" LIMIT $limit";
-		
+
         $res=$this->query($sql);
         if($this->numRows($res)>0)
         {
@@ -103,7 +116,7 @@ class auto extends DB
                 $arr[]= $row;
             }
         }
-		
+
 		if(count($arr))
 		{
 			 $err=array('Code'=> 0,'Msg'=>'Values are fetched');
@@ -116,10 +129,18 @@ class auto extends DB
     $result=array('results'=>$arr,'error'=>$err);
     return $result;
     }
-    
+
     public function suggestBrand($params)
     {
-	$sql="SELECT name,MATCH(name) AGAINST ('" . $params['str'] . "*' IN BOOLEAN MODE) as startwith FROM tbl_brandid_generator where MATCH(name) AGAINST ('".$params['str']."*' IN BOOLEAN MODE) ORDER BY startwith";
+	      $sql="SELECT
+                      name,
+                      MATCH(name) AGAINST ('" . $params['str'] . "*' IN BOOLEAN MODE) as startwith
+              FROM
+                      tbl_brandid_generator
+              WHERE
+                      MATCH(name) AGAINST ('".$params['str']."*' IN BOOLEAN MODE)
+              ORDER BY startwith";
+
         $page=$params['page'];
         $limit=$params['limit'];
         if (!empty($page))
@@ -127,7 +148,7 @@ class auto extends DB
             $start = ($page * $limit) - $limit;
             $sql.=" LIMIT " . $start . ",$limit";
         }
-        
+
         $res=$this->query($sql);
         if($this->numRows($res))
         {
@@ -145,10 +166,18 @@ class auto extends DB
     $result=array('results'=>$arr,'error'=>$err);
     return $result;
     }
-    
+
     public function suggestCat($params)
     {
-	$sql="SELECT cat_name,MATCH(cat_name) AGAINST ('" . $params['str'] . "*' IN BOOLEAN MODE) AS startwith FROM tbl_category_master where MATCH(cat_name) AGAINST ('".$params['str']."*' IN BOOLEAN MODE) ORDER BY startwith ASC";
+	      $sql="SELECT
+                      cat_name,
+                      MATCH(cat_name) AGAINST ('" . $params['str'] . "*' IN BOOLEAN MODE) AS startwith
+              FROM
+                      tbl_category_master
+              WHERE
+                      MATCH(cat_name) AGAINST ('".$params['str']."*' IN BOOLEAN MODE)
+              ORDER BY
+                      startwith ASC";
         $page=$params['page'];
         $limit=$params['limit'];
         if (!empty($page))
@@ -156,14 +185,14 @@ class auto extends DB
             $start = ($page * $limit) - $limit;
            $sql.=" LIMIT " . $start . ",$limit";
         }
-        
-        
+
+
         $res=$this->query($sql);
         $chkres=$this->numRows($res);
         if($chkres>0)
         {$i=0;
             while($row=$this->mysqlFetchArr($res))
-            {   
+            {
                 $arr[]= $row;
                 $i++;
             }
@@ -177,40 +206,95 @@ class auto extends DB
     $result=array('results'=>$arr,'error'=>$err);
     return $result;
     }
-   
-    /* 
-    public function suggestOff($params)
+
+    public function girdleSuggest($params)
     {
-	$sql="SELECT offername,MATCH(offername) AGAINST ('" . $params['str'] . "*' IN BOOLEAN MODE) as startwith FROM tbl_offer_master where MATCH(offername) AGAINST ('".$params['str']."*' IN BOOLEAN MODE) ORDER BY startwith DESC LIMIT";
+	      $sql="SELECT
+                      name AS nm,
+                      display_name AS n
+              FROM
+                      tbl_available_autosuggest_lists
+              WHERE
+                      active_flag=1
+              ORDER BY
+                      id ASC";
         $page=$params['page'];
         $limit=$params['limit'];
         if (!empty($page))
         {
             $start = ($page * $limit) - $limit;
-      echo      $sql.=" LIMIT " . $start . ",$limit";
+           $sql.=" LIMIT " . $start . ",$limit";
         }
         $res=$this->query($sql);
-        if($this->numRows($res)>0)
+        $chkres=$this->numRows($res);
+        if($chkres>0)
         {
+            $i=0;
             while($row=$this->fetchData($res))
             {
                 $arr[]= $row;
+                $i++;
             }
-            $err=array('Code'=> 0,'Msg'=>'Values are fetched');
+            $err=array('code'=> 0,'msg'=>'Values are fetched');
         }
         else
         {
                 $arr = "No records matched";
-                $err = array('Code'=> 1,'Msg'=>'Search Query Failed');
+                $err = array('code'=> 1,'msg'=>'Search Query Failed');
         }
-    $result=array('results'=>$arr,'error'=>$err);
-    return $result;
+        $result=array('results'=>$arr,'error'=>$err);
+        return $result;
     }
-*/
-    
+
+    public function bankSuggest($params)
+    {
+	      $sql="SELECT
+                      DISTINCT(bank_name) as n
+              FROM
+                      tbl_bank_master
+              WHERE
+                      active_flag=1
+              ORDER BY
+                      id ASC";
+        $page=$params['page'];
+        $limit=$params['limit'];
+        if (!empty($page))
+        {
+            $start = ($page * $limit) - $limit;
+           $sql.=" LIMIT " . $start . ",$limit";
+        }
+        $res=$this->query($sql);
+        $chkres=$this->numRows($res);
+        if($chkres>0)
+        {
+            $i=0;
+            while($row=$this->fetchData($res))
+            {
+                $arr[]= $row;
+                $i++;
+            }
+            $err=array('code'=> 0,'msg'=>'Values are fetched');
+        }
+        else
+        {
+                $arr = "No records matched";
+                $err = array('code'=> 1,'msg'=>'Search Query Failed');
+        }
+        $result=array('results'=>$arr,'error'=>$err);
+        return $result;
+    }
+
     public function suggestVendor($params)
     {
-	$sql="SELECT vendor_name,MATCH(vendor_name) AGAINST ('" . $params['str'] . "*' IN BOOLEAN MODE) as startwith FROM tbl_vendor_master where MATCH(vendor_name) AGAINST ('".$params['str']."*' IN BOOLEAN MODE) ORDER BY startwith DESC";
+	      $sql="SELECT
+                      vendor_name,
+                      MATCH(vendor_name) AGAINST ('" . $params['str'] . "*' IN BOOLEAN MODE) as startwith
+              FROM
+                      tbl_vendor_master
+              WHERE
+                      MATCH(vendor_name) AGAINST ('".$params['str']."*' IN BOOLEAN MODE)
+              ORDER BY
+                      startwith DESC";
         $page=$params['page'];
         $limit=$params['limit'];
         if (!empty($page))
@@ -235,24 +319,57 @@ class auto extends DB
     $result=array('results'=>$arr,'error'=>$err);
     return $result;
     }
-    public function suggestAreaCity($params) {
+
+    public function suggestAreaCity($params)
+    {
         $page=(!empty($params['page'])) ? trim(urldecode($params['page'])) : 1;
         $limit=(!empty($params['limit'])) ? trim(urldecode($params['limit'])) : 7;
+
+
+        $sql ="SELECT
+                      vendor_id as id,
+                      if(orgName = '".$params['str']."',1,0) AS exact,
+                      if(orgName like '".$params['str']."%',1,0) AS startwith,
+                      MATCH(orgName) AGAINST ('" . $params['str'] . "*' IN BOOLEAN MODE) AS score,
+                      orgName AS name,
+                      city
+              FROM
+                      tbl_vendor_master
+              WHERE
+                      MATCH(orgName) AGAINST ('".$params['str']."*' IN BOOLEAN MODE)
+              AND
+                      active_flag = 1
+              ORDER BY
+                      exact DESC,
+                      startwith DESC,
+                      score DESC";
+
+       $page = $params['page'];
+       $limit = $params['limit'];
+       if (!empty($page)) {
+           $start = ($page * $limit) - $limit;
+           $sql.=" LIMIT " . $start . ",$limit";
+       }
+
+       $res = $this->query($sql,1);
+
          $sql ="SELECT
-				id, 
-				if(area = '".$params['str']."',1,0) AS exact,
-				if(area like '".$params['str']."%',1,0) AS startwith,
-				MATCH(area) AGAINST ('" . $params['str'] . "*' IN BOOLEAN MODE) AS score,
-				area AS name,
-				dcity AS city
-			FROM 
-				tbl_area_master
-			WHERE 
-				MATCH(area) AGAINST ('".$params['str']."*' IN BOOLEAN MODE)
-			AND
-				display_flag = 0
-			ORDER BY 
-				exact DESC, startwith DESC, score DESC";
+                				id,
+                				if(area = '".$params['str']."',1,0) AS exact,
+                				if(area like '".$params['str']."%',1,0) AS startwith,
+                				MATCH(area) AGAINST ('" . $params['str'] . "*' IN BOOLEAN MODE) AS score,
+                				area AS name,
+                				dcity AS city
+			          FROM
+				                tbl_area_master
+			          WHERE
+				                MATCH(area) AGAINST ('".$params['str']."*' IN BOOLEAN MODE)
+			          AND
+				                display_flag = 0
+			          ORDER BY
+				                exact DESC,
+                        startwith DESC,
+                        score DESC";
         $page = $params['page'];
         $limit = $params['limit'];
         if (!empty($page)) {
@@ -273,7 +390,7 @@ class auto extends DB
         return $result;
     }
 
-    
-    
+
+
 }
 ?>
