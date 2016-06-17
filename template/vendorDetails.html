@@ -1,4 +1,4 @@
-<?php 
+<?php
 if(!empty($data['landline'])) {
     $landline=explode('|~|',$data['landline']);
     for($i=0; $i<count($landline); $i++) {
@@ -78,9 +78,19 @@ if(!empty($data['mdbw'])) {
                         </div>
                         <div class="divCon  fLeft">
                             <div  class="titleDiv txtCap fLeft">Bankers *</div>
-                            <?php $banker = str_replace('~', ',', $data['banker']); ?>
-                            <input name="" type="text" id="banker" value="<?php echo $banker; ?>" autocomplete="false" placeholder=" e.g. INDUS IND BANK, KOTAK BANK, STATE BANK OF INDIA" class="txtInput fLeft fmOpenR font14 c666">
+                            <div class="suggestHolder">
+                                <input name="" type="text" id="banker" value="" autocomplete="false" placeholder=" e.g. INDUS IND BANK, KOTAK BANK, STATE BANK OF INDIA" class="txtInput fLeft fmOpenR font14 c666">
+                                <div id="bankerSuggestDiv" class="autoSuggestOuter sugTopDiv"></div>
+                            </div>
+                            <div class="fLeft bankNames col100 dn" id="bankNames"></div>
+                            <input type="hidden" name="allBankNames" id="allBankNames" />
                         </div>
+
+                        <div class="divCon fRight">
+                            <div  class="titleDiv txtCap fLeft">IFSC Code*</div>
+                            <input name="ifsc" type="text" id="ifsc" value="<?php echo $data['ifsc']; ?>" autocomplete="false" placeholder=" e.g. SBI0000120,SBI000012" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+
                         <div class="formTitle fLeft fmOpenL">Select your business type *</div>
                         <div class="comparisonDiv fLeft">
                             <div id='forDiamond' class="compComm fLeft <?php if(in_array('1',$business_type)) { echo 'comSelected'; } ?>">
@@ -88,21 +98,21 @@ if(!empty($data['mdbw'])) {
                                 <div class="compPrice fLeft fmOpenR">
                                     <span>&#8377;30,000/year</span><br>for Diamond companies.
                                 </div>
-                                
+
                             </div>
                             <div id='forJewellery' class="compComm fLeft <?php if((in_array('2',$business_type)) && (in_array('2',$business_type)))  { echo 'comSelected'; } ?>">
                                <div class="compTitle fLeft fmOpenL">Jewellery</div>
                                <div class="compTitle fLeft fmOpenL">&</div>
                                <div class="compTitle fLeft fmOpenL">Bullion</div>
                                 <div class="compPrice fLeft fmOpenR">
-                                    <span>&#8377;25,000/year</span><br>for Jewellery companies. 
+                                    <span>&#8377;25,000/year</span><br>for Jewellery companies.
                                 </div>
                             </div>
                             <div id='commingSoon' class="compCommDis fLeft">
                                 <div class="compDisTitle fLeft fmOpenL">Coming <br> Soon</div>
                                 <div class="compDisPrice fLeft fmOpenR">
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class='bankDetails fLeft'>
@@ -132,14 +142,14 @@ if(!empty($data['mdbw'])) {
                                 <div class="label1 fmOpenB">Branch</div>
                                 <div class="label2 fmOpenR">Juhu Versova Link Road Branch,<br>Andheri West, Mumbai</div>
                             </div>
-                            
+
                         </div>
-                        
-                        
-                        
-                        
-                        
-                        
+
+
+
+
+
+
                         <div class="btnCont fLeft">
                             <center>
                                 <a href="<?php echo DOMAIN;?>"><div class="cancelBtn fmOpenR poR">CANCEL</div></a>
@@ -181,11 +191,11 @@ if(!empty($data['mdbw'])) {
                             <div class="divCon  fLeft">
                                 <div  class="titleDiv txtCap fLeft">Number of Showrooms In India</div>
                                 <input name="showroomno" id="showroomno" autocomplete="false" type="text" value="<?php echo($data['no_showrooms']==0)? '' : $data['no_showrooms']; ?>" maxlength="4" onkeypress="return common.isNumberKey(event)" placeholder=" eg. 20" class="txtInput fLeft fmOpenR font14 c666">
-                            </div>  
+                            </div>
                             <div class="divCon  fLeft">
                                 <div  class="titleDiv txtCap fLeft">Membership Of Council / Jewellers Association *</div>
                                 <input name="mdbw" id="mdbw" type="text" autocomplete="false" value="<?php echo $mdbw[0]; ?>" placeholder=" eg. GGT" class="txtInput fLeft fmOpenR font14 c666">
-                            </div> 
+                            </div>
                         </div>
 
                         <div id='bullionDet' class="detailsComm fLeft <?php if(!in_array('2',$business_type) && !in_array('3',$business_type)) { echo 'dn'; } ?>">
@@ -193,8 +203,8 @@ if(!empty($data['mdbw'])) {
                             <div class="divCon  fLeft">
                                 <div  class="titleDiv txtCap fLeft">Membership Of Council / Jewellers Association *</div>
                                 <input name="bul_mdbw" id="bul_mdbw" autocomplete="false" type="text" value="<?php echo $mdbw[1]; ?>" placeholder=" eg. GGT" class="txtInput fLeft fmOpenR font14 c666">
-                            </div>  
-                        </div>  
+                            </div>
+                        </div>
                         <div class="btnCont fLeft">
                             <center>
                                 <div class="cancelBtn fmOpenR poR" onclick="changeTab('step1');">CANCEL</div>
@@ -248,7 +258,7 @@ if(!empty($data['mdbw'])) {
                                 </div>
                             </div>
                             <div id="altNo">
-                                <?php 
+                                <?php
                                     for($i=1;$i<count($landlines); $i++) {
                                 ?>
                                 <div id="altNo_<?php echo $i; ?>" class="divCon fLeft c666">
@@ -259,7 +269,7 @@ if(!empty($data['mdbw'])) {
                                         <div class="fRight delBtn pointer" onclick="common.delNumber(<?php echo $i; ?>)"></div></div></div>
                                 <?php } ?>
                             </div>
-                            
+
                             <div class='bankDetails fLeft'>
                             <div class="formTitle fLeft fmOpenL txtLeft">IFtoSI Bank Details</div>
                             <div class="bankComm fLeft">
@@ -287,16 +297,16 @@ if(!empty($data['mdbw'])) {
                                 <div class="label1 fmOpenB">Branch</div>
                                 <div class="label2 fmOpenR">Juhu Versova Link Road Branch,<br>Andheri West, Mumbai</div>
                             </div>
-                            
+
                         </div>
-                            
+
                             <div class="btnCont fLeft">
                                 <center>
                                     <div class="cancelBtn fmOpenR poR" onclick="changeTab('step2');">CANCEL</div>
                                     <div class="submitBtn fmOpenR poR"  onclick="clickThis('step4');">SUBMIT</div>
                                 </center>
                             </div>
-                        </div>    
+                        </div>
                     </div>
                 </div>
             </div>

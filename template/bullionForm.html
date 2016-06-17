@@ -9,174 +9,196 @@
                     <div class="formContainer fmOpenR">
                         <div class="jShapesCont resultsPage showHide fmOpenL fLeft">
                             <div class="allShapes resultsPage">
-                                 <div class="prImgPrev bgfff" onclick="move_PrImg(true);"></div>
-                                 <div class="prImgNext bgfff" onclick="move_PrImg(false);"></div>
+                                <div class="prImgPrev bgfff" onclick="move_PrImg(true);"></div>
+                                <div class="prImgNext bgfff" onclick="move_PrImg(false);"></div>
                                 <center>
                                     <div class="prImageStrip">
-                                    <ul class="carousel1 transition300">
-<?php
-                        $catIds =  explode(',', $pdet['catid']);    
-                        /*foreach($fil['attributes'] as $key=>$values)
-                        {
-                            if(strtolower($values['attribute_disp_name'])=='type')
-                            {
-                                $attr_values = $values['attribute_values'];
-                                $attr_values = explode(',', $attr_values);
-                                $i=0;
-                                foreach($attr_values as $shape)
-                                {
-                                    $a=explode(' ',$shape);
-                                    $firstval=  explode(',','g,s');
-                                    $typeid= $firstval[$i].$a[1];
-                                    $shapename=ucwords(strtolower(substr($shape,0,-1)));
-                                    $i++;
-                                    $idtemp=$typeid.$shapename;
-                                    $type=$result[$pid]['attr_details']['type'];
-                                    $check=($shapename==$type) ? 'shapeSelected' :'';
-                                  echo "<div id='".$idtemp."' class='jshapeComm transition300 ripplelink SubCaTtype ".$check." ".$idtemp."'>".$shapename."</div>";
-                                 }}}
-                                 */
-                                 //var_dump($cat); die;
-                                                                $shapes= $attr['shape'];
-                                                                $type=$val['catname'];
-                                                                $shows='';
-                                                                $showg='';
-                                                                 if(!empty($params['prdid']))
-                                                                {
-                                                                    if(($shapes=='gCoins')||($shapes=='gBars'))
-                                                                    {
-                                                                        $showg='';
-                                                                        $shows='dn';
-                                                                    }
-                                                                   else if(($shapes=='sBars')||($shapes=='sCoins'))
-                                                                    {
-                                                                        $shows='';
-                                                                        $showg='dn';
-                                                                    }
-                                                                }
-                                                                 
-                                                                foreach($cat['subcat'] as $ky=>$val)
-								{   
-                                                                    if(strtolower($val)!=='')
-									{
-                                                                            if(($shapes=='gCoins')||($shapes=='gBars'))
-                                                                            {
-                                                                                echo "<li><div id='g".$val['catname']."' class=' jshapeComm transition300 ripplelink g".ucwords(strtolower($val['catname']))." ".(('g'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Gold ".$val['catname']."</div></li>";
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                echo "<li><div id='g".$val['catname']."' class=' jshapeComm transition300 ripplelink g".ucwords(strtolower($val['catname']))." ".(('g'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Gold ".$val['catname']."</div></li>";
-                                                                            }
-                                                                        }    
-                                                                }
+                                        <ul class="carousel1 transition300">
+                                          <?php
+                                            $catIds =  explode(',', $pdet['catid']);
 
-								foreach($cat['subcat'] as $ky=>$val)
-								{   
-									if(strtolower($val)!=='')
-									{
-                                                                            if(($shapes=='sCoins')||($shapes=='sBars'))
-                                                                            {
-                                                                            	echo "<li><div id='s".$val['catname']."' class=' jshapeComm transition300 ripplelink s".ucwords(strtolower($val['catname']))." ".(('s'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Silver ".$val['catname']."</div></li>";
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                            	echo "<li><div id='s".$val['catname']."' class=' jshapeComm transition300 ripplelink s".ucwords(strtolower($val['catname']))." ".(('s'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Silver ".$val['catname']."</div></li>";
-                                                                            }
-                                                                        }
-								}
-                                                                foreach($cat['subcat'] as $ky=>$val)
-								{   
-									if(strtolower($val)!=='')
-									{
-                                                                            if(($shapes=='pCoins')||($shapes=='pBars'))
-                                                                            {
-                                                                            	echo "<li><div id='p".$val['catname']."' class=' jshapeComm transition300 ripplelink p".ucwords(strtolower($val['catname']))." ".(('p'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Platinum ".$val['catname']."</div></li>";
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                            	echo "<li><div id='p".$val['catname']."' class=' jshapeComm transition300 ripplelink p".ucwords(strtolower($val['catname']))." ".(('p'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Platinum ".$val['catname']."</div></li>";
-                                                                            }
-                                                                        }
-								}
+                                            foreach($fil['attributes'] as $key=>$values)
+                                            {
+                                                if(strtolower($values['attribute_disp_name'])=='type')
+                                                {
+                                                    $attr_values = $values['attribute_values'];
+                                                    $attr_values = explode(',', $attr_values);
+                                                    $i=0;
+                                                    foreach($attr_values as $shape)
+                                                    {
+                                                        $a=explode(' ',$shape);
+                                                        $firstval=  explode(',','g,s');
+                                                        $typeid= $firstval[$i].$a[1];
+                                                        $shapename=ucwords(strtolower(substr($shape,0,-1)));
+                                                        $i++;
+                                                        $idtemp=$typeid.$shapename;
+                                                        $type=$result[$pid]['attr_details']['type'];
+                                                        $check=($shapename==$type) ?'shapeSelected' :'';
+                                                        echo "<div id='".$idtemp."' class='jshapeComm transition300 ripplelink SubCaTtype ".$check." ".$idtemp."'>".$shapename."</div>";
+                                                    }
+                                                 }
+                                            }
+                                                //var_dump($cat); die;
+                                                $shapes= $attr['shape'];
+                                                $type=$val['catname'];
+                                                $shows='';
+                                                $showg='';
+                                                $showp='';
+                                                if(!empty($params['prdid']))
+                                                {
+                                                    if(($shapes=='gCoins')||($shapes=='gBars'))
+                                                    {
+                                                        $showg='';
+                                                        $showp='dn';
+                                                        $shows='dn';
+                                                    }
+                                                    else if(($shapes=='sBars')||($shapes=='sCoins'))
+                                                    {
+                                                        $shows='';
+                                                        $showg='dn';
+                                                        $showp='dn';
+                                                    }
+                                                    else if(($shapes=='pBars')||($shapes=='pCoins'))
+                                                    {
+                                                        $shows='dn';
+                                                        $showg='dn';
+                                                        $showp='';
+                                                    }
+                                                }
+                                                foreach($cat['subcat'] as $ky=>$val)
+        								                        {
+                                                    if(strtolower($val)!=='')
+        									                          {
+                                                        if(($shapes=='gCoins')||($shapes=='gBars'))
+                                                        {
+                                                            echo "<li><div id='g".$val['catname']."' class=' jshapeComm transition300 ripplelink g".ucwords(strtolower($val['catname']))." ".(('g'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Gold ".$val['catname']."</div></li>";
+                                                        }
+                                                        else
+                                                        {
+                                                            echo "<li><div id='g".$val['catname']."' class=' jshapeComm transition300 ripplelink g".ucwords(strtolower($val['catname']))." ".(('g'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Gold ".$val['catname']."</div></li>";
+                                                        }
+                                                    }
+                                                }
+
+                                								foreach($cat['subcat'] as $ky=>$val)
+                                								{
+
+        									                          if(strtolower($val)!=='')
+        									                          {
+
+                                                        if(($shapes=='sCoins')||($shapes=='sBars'))
+                                                        {
+                                                          	echo "<li><div id='s".$val['catname']."' class=' jshapeComm transition300 ripplelink s".ucwords(strtolower($val['catname']))." ".(('s'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Silver ".$val['catname']."</div></li>";
+                                                        }
+                                                        else
+                                                        {
+                                                          	echo "<li><div id='s".$val['catname']."' class=' jshapeComm transition300 ripplelink s".ucwords(strtolower($val['catname']))." ".(('s'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Silver ".$val['catname']."</div></li>";
+                                                        }
+                                                    }
+                                								}
+
+                                                foreach($cat['subcat'] as $ky=>$val)
+                                  							{
+                                  									if(strtolower($val)!=='')
+                                  									{
+                                                        if(($shapes=='pCoins')||($shapes=='pBars'))
+                                                        {
+                                                        	  echo "<li><div id='p".$val['catname']."' class=' jshapeComm transition300 ripplelink p".ucwords(strtolower($val['catname']))." ".(('p'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Platinum ".$val['catname']."</div></li>";
+                                                        }
+                                                        else
+                                                        {
+                                                        	  echo "<li><div id='p".$val['catname']."' class=' jshapeComm transition300 ripplelink p".ucwords(strtolower($val['catname']))." ".(('p'.$val['catname']==$shapes) ? 'shapeSelected':'')."'>Platinum ".$val['catname']."</div></li>";
+                                                        }
+                                                    }
+        								                        }
 ?>
                                         </ul>
-                                        </div>
+                                    </div>
                                 </center>
                             </div>
-                        </div>                                        
- <div class="<?=(!empty($attr['product_id']) == True) ? '' : 'dn';?>" id="allcontent">                       
-<!--                                    <div id="gbar" class="jshapeComm transition300 ripplelink gBar"><span class="ink animate" style="height: 337px; width: 337px; top: -73.5px; left: 114.5px;"></span>Gold Bar    
-                                    </div><div id="sBar" class="jshapeComm transition300 ripplelink sBar">Silver Bar
-                                    </div><div id="gCoin" class="jshapeComm transition300 ripplelink gCoin">Gold Coin
-                                    </div><div id="sCoin" class="jshapeComm transition300 ripplelink sCoin">Silver Coin
-                                    </div>-->
-<?php                        
-                                        foreach($fil['attributes'] as $key=>$values)
-                                        {
-                                            if(strtolower($values['attribute_disp_name'])=='design')
-                                            {
-?>                              
-                                                <div class="divCon  fLeft dAuto_" id="b_Designs">
-                                                    <div  class="titleDiv txtCap fLeft">Bullion Design*</div>
-                                                        <div class='radioCont fLeft'> 
-<?php
-                                                            $attr_values = $values['attribute_values'];
-                                                            $attr_values = explode(',', $attr_values);
-                                                            foreach($attr_values as $design)
-                                                            {                                                                                                    
-?>
-                                                                <div class="checkDiv fLeft">
-                                                                    <input type="radio" autocomplete="false" name='design' <?=($attr['bullion_design'] == $design) ? 'checked' : '';?> class="filled-in"  value="<?=$design;?>" id="<?=ucwords(strtolower($design)); ?>">
-                                                                    <label for="<?=ucwords(strtolower($design));?>"> <?=$design; ?></label>
-                                                                </div>
-<?php                                                       }
-?>
-                                                                <div class="checkDiv fLeft checkOth">
-                                                                    <input type="radio" name='design' class="filled-in" id="designOther" value="Other" <?=!in_array($attr['bullion_design'],$attr_values) && !empty($attr['bullion_design']) ? 'checked' : '';?>>
-                                                                    <label for="designOther">Other</label>
-                                                                </div>
-                                                                <div id='otherDes' class="otherBox fLeft <?=!in_array($attr['bullion_design'],$attr_values) && !empty($attr['bullion_design']) ? '' : 'dn';?>">
-                                                                   <input name="bullion_design" autocomplete="false" id="otherdesign" type="text" placeholder="AGS,CIBJO, etc." value="<?=!in_array($attr['bullion_design'],$attr_values) && !empty($attr['bullion_design']) ? $attr['bullion_design'] : '';?>" class="othTxtinp fLeft fmOpenR font14 c666">
-                                                                </div>
-
-                                </div>
                         </div>
-<?php                                             
-                                            }
-                                        }
+                        <div class="<?=(!empty($attr['product_id']) == True) ? '' : 'dn';?>" id="allcontent">
+<?php
+                        foreach($fil['attributes'] as $key=>$values)
+                        {
+                            if(strtolower($values['attribute_disp_name'])=='design')
+                            {
 ?>
-
-                        <div class="divCon2  fLeft goldprop allprop <?=$showg;?>">
-                                    <div  class="titleDiv txtCap fLeft">Gold Purity*</div>
-                                    <input name="gold_purity" id="goldpurity" type="text" autocomplete="false" placeholder=" eg. 999 or 995" maxlength="3" onkeyup="return common.isNumberKey(event);" value="<?=$attr['gold_purity'];?>" class="txtInput fLeft fmOpenR font14 c666">
+                                <div class="divCon  fLeft dAuto_" id="b_Designs">
+                                    <div class="titleDiv txtCap fLeft">Bullion Design*</div>
+                                    <div class='radioCont fLeft'>
+<?php
+                                        $attr_values = $values['attribute_values'];
+                                        $attr_values = explode(',', $attr_values);
+                                        foreach($attr_values as $design)
+                                        {
+    ?>
+                                            <div class="checkDiv fLeft">
+                                                <input type="radio" autocomplete="false" name='design' <?php echo ($attr['bullion_design']==$design) ? 'checked' : '';?> class="filled-in" value="<?=$design;?>" id="<?=ucwords(strtolower($design)); ?>">
+                                                        <label for="<?=ucwords(strtolower($design));?>">
+                                                            <?=$design; ?>
+                                                        </label>
+                                            </div>
+<?php
+                                         }
+?>
+                                            <div class="checkDiv fLeft checkOth">
+                                                <input type="radio" name='design' class="filled-in" id="designOther" value="Other" <?=!in_array($attr[ 'bullion_design'],$attr_values) && !empty($attr[ 'bullion_design']) ? 'checked' : '';?>>
+                                                <label for="designOther">Other</label>
+                                            </div>
+                                            <div id='otherDes' class="otherBox fLeft <?=!in_array($attr['bullion_design'],$attr_values) && !empty($attr['bullion_design']) ? '' : 'dn';?>">
+                                                <input name="bullion_design" autocomplete="false" id="otherdesign" type="text" placeholder="AGS,CIBJO, etc." value="<?=!in_array($attr['bullion_design'],$attr_values) && !empty($attr['bullion_design']) ? $attr['bullion_design'] : '';?>" class="othTxtinp fLeft fmOpenR font14 c666">
+                                            </div>
                                     </div>
-                                    <?php if($attr['gold_weight'] == 0.00 || $attr['gold_weight'] === '0.000'){ $attr['gold_weight'] = ''; } ?>
+                                </div>
+<?php
+                            }
+                        }
+?>
+                                <div class="divCon2  fLeft goldprop allprop <?=$showg;?>">
+                                    <div class="titleDiv txtCap fLeft">Gold Purity*</div>
+                                    <input name="gold_purity" id="goldpurity" type="text" autocomplete="false" placeholder=" eg. 999 or 995" maxlength="3" onkeyup="return common.isNumberKey(event);" value="<?=$attr['gold_purity'];?>" class="txtInput fLeft fmOpenR font14 c666">
+                                </div>
+<?php
+                        if($attr['gold_weight'] == 0.00 || $attr['gold_weight'] === '0.000')
+                        {
+                             $attr['gold_weight'] = '';
+                        }
+?>
                         <div class="divCon2  fLeft goldprop allprop <?=$showg;?>">
-                            <div  class="titleDiv txtCap fLeft">Gold Weight (in Grams)*</div>
+                            <div class="titleDiv txtCap fLeft">Gold Weight (in Grams)*</div>
                             <input name="gold_weight" id="goldweight" type="text" autocomplete="false" placeholder=" eg. 10 Gms" value="<?=$attr['gold_weight'];?>" maxlength="8" onkeypress="return common.isDecimalNumber(event,this.value);" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon2  fLeft silverprop allprop <?=$shows;?> ">
-                            <div  class="titleDiv txtCap fLeft">Silver Purity*</div>
-                            <input name="silver_purity" id="silverpurity" autocomplete="false" type="text" placeholder=" eg. 999 or 995" maxlength="3" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['gold_purity'];?>"  class="txtInput fLeft fmOpenR font14 c666">
+                            <div class="titleDiv txtCap fLeft">Silver Purity*</div>
+                            <input name="silver_purity" id="silverpurity" autocomplete="false" type="text" placeholder=" eg. 999 or 995" maxlength="3" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['gold_purity'];?>" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
                         <div class="divCon2  fLeft silverprop allprop <?=$shows;?>">
-                            <div  class="titleDiv txtCap fLeft">Silver Weight (in Grams)*</div>
+                            <div class="titleDiv txtCap fLeft">Silver Weight (in Grams)*</div>
                             <input name="silver_weight" id="silverweight" type="text" autocomplete="false" placeholder=" eg. 10 Gms" maxlength="8" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['gold_weight'];?>" class="txtInput fLeft fmOpenR font14 c666">
                         </div>
+                        <div class="divCon2  fLeft platinumprop allprop <?=$showp;?> ">
+                            <div class="titleDiv txtCap fLeft">Platinum Purity*</div>
+                            <input name="platinumpurity" id="platinumpurity" autocomplete="false" type="text" placeholder=" eg. 999 or 995" maxlength="3" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['gold_purity'];?>" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
+                        <div class="divCon2  fLeft platinumprop allprop <?=$showp;?>">
+                            <div class="titleDiv txtCap fLeft">Platinum Weight (in Grams)*</div>
+                            <input name="platinumweight" id="platinumweight" type="text" autocomplete="false" placeholder=" eg. 10 Gms" maxlength="8" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['gold_weight'];?>" class="txtInput fLeft fmOpenR font14 c666">
+                        </div>
                         <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Design Number</div>
+                            <div class="titleDiv txtCap fLeft">Design Number</div>
                             <input name="barcode" id="barcode" type="text" autocomplete="false" placeholder=" eg. ALXPK12" maxlength="10" class="txtInput fLeft fmOpenR font14 c666" value="<?=$pdet['product_barcode'];?>">
                         </div>
                         <div class="btnCont fLeft">
                             <center>
-                            <!--    <a href="<?php echo DOMAIN ?>index.php?case=vendor_landing">--> <div class="cancelBtn fmOpenR ripplelink poR" onclick="backbtn();" id='backBtnDiv'>CANCEL</div></a>
-                            <!--    <a href="<?php echo DOMAIN?>index.php?case=vendor_landing"> --> <div class="submitBtn fmOpenR ripplelink poR" onclick="validateBForm()" id="Submitdiv">SUBMIT</div></a>
+                                <div class="cancelBtn fmOpenR ripplelink poR" onclick="backbtn();" id='backBtnDiv'>CANCEL</div>
+                                <div class="submitBtn fmOpenR ripplelink poR" onclick="validateBForm()" id="Submitdiv">SUBMIT</div>
                             </center>
                         </div>
-                     </div>   
                     </div>
                 </div>
             </div>
+        </div>
     </div>
     <?php include 'rateForms.html'; ?>
 </div>
@@ -186,56 +208,67 @@
 <script type="text/javascript" src="<?=$jvs['jquery_toast'];?>"></script>
 <script type="text/javascript" src="<?=$jvs['pForm'];?>"></script>
 <script>
-        function showOther(id){
-            $('#'+id).removeClass('dn');
-        }
-        
-        function hideOther(id){
-            $('#'+id).addClass('dn');
-        }
-        
-        $(document).ready(function(){
-            $('#b_Designs label').click(function(){
-                setTimeout(function(){
-               var id=$('#b_Designs input[type=radio]:checked').attr('id');
-               if(id==='designOther'){
-                        $('#otherdesign').val('');
-                        showOther('otherDes');
-                        
-                    }else{
-                        hideOther('otherDes');
-                        $('#otherdesign').val('');
-                    }
-            },10);
-                
-            });
+    $(document).ready(function()
+    {
+        $('#b_Designs label').click(function()
+        {
+            setTimeout(function()
+            {
+                var id = $('#b_Designs input[type=radio]:checked').attr('id');
+                if (id === 'designOther')
+                {
+                    $('#otherdesign').val('');
+                    showOther('otherDes');
+                }
+                else
+                {
+                    hideOther('otherDes');
+                    $('#otherdesign').val('');
+                }
+            }, 10);
         });
-        
-            
-    
-      var val1 = 0;
-        var moveCount1 = 0;
-        function move_PrImg(flag) {
-            var totalThumbs = $(".carousel1  li").length;
-            var liWidth = ($(".carousel1  li").outerWidth());
-          
-            if (!flag) {
-                if (moveCount1 < (totalThumbs - 4)) {
-                    val1 = val1 - liWidth;
-                    $(".carousel1").css({transform: 'translateX(' + val1 + 'px)'});
-                    moveCount1++;
-                }
-            }
-            else if (flag) {
-                if (moveCount1 > 0) {
-                    val1 = val1 + liWidth;
-                    $(".carousel1").css({transform: 'translateX(' + val1 + 'px)'});
-                    moveCount1--;
-                }
+    });
+
+    function showOther(id)
+    {
+        $('#' + id).removeClass('dn');
+    }
+    function hideOther(id)
+    {
+        $('#' + id).addClass('dn');
+    }
+
+    var val1 = 0;
+    var moveCount1 = 0;
+
+    function move_PrImg(flag)
+    {
+        var totalThumbs = $(".carousel1  li").length;
+        var liWidth = ($(".carousel1  li").outerWidth());
+
+        if (!flag)
+        {
+            if (moveCount1 < (totalThumbs - 4))
+            {
+                val1 = val1 - liWidth;
+                $(".carousel1").css({
+                    transform: 'translateX(' + val1 + 'px)'
+                });
+                moveCount1++;
             }
         }
-    
+        else if (flag)
+        {
+            if (moveCount1 > 0)
+            {
+                val1 = val1 + liWidth;
+                $(".carousel1").css({
+                    transform: 'translateX(' + val1 + 'px)'
+                });
+                moveCount1--;
+            }
+        }
+    }
     </script>
-
 </body>
 </html>

@@ -295,8 +295,8 @@ a{text-decoration: none;}
 
 
 
-.otherBox{width:300px;height:35px;margin-top: -5px;}
-.othTxtinp{width:300px;height: 100%;border:1px solid #d4d4c8;outline: none;padding: 0 15px;border-radius: 5px}
+.otherBox{height:35px;margin-top: -5px;}
+.othTxtinp{height: 100%;border:1px solid #d4d4c8;outline: none;padding: 0 15px;border-radius: 5px}
 
 /*Vendor Details*/
 .vMax{max-width: 600px!important;}
@@ -490,7 +490,8 @@ a{text-decoration: none;}
 .dropdownBox ul li:hover a{color:#fff;text-decoration: none;}
 
 /*Contents*/
-.contentCont{width:100%;height: auto;background: #fff;padding:100px 15px 50px 15px;position: relative;z-index: 0;}
+.contentCont{width:100%;height: auto;background: #fff;padding:100px 15px 50px 15px;position: relative;z-index: 0;transition:300ms}
+.contentCont.pad55{transform:translateY(55px)}
 .forEnq{width:100%;height: auto;}
 .date{width:9%;}
 .name{width:20%;}
@@ -630,6 +631,7 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 .smallField {border: 1px solid #ccc;box-sizing: border-box;font-size: 13px;font-weight: bold;font-family: openR;max-height: 145px;overflow-y: auto;width: 100%; margin: 0;padding:0;}
 .dropArrow {background-image: url("../img/down_arrow.svg");background-position: right center;background-repeat: no-repeat;background-size: auto 100%;}
 .suggestHolder {position: relative;}
+.suggestGirdle .autoSuggestOuter{width:60%;right:0;top:40px;margin:0}
 .serchBtn{height:30px;border-radius: 2px;}
 /*Moderation Module*/
 /*Product List*/
@@ -676,7 +678,8 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 
 
 
-.rateDiv { height: 40px;padding: 7px 0;font-size: 13px;}
+.rateDiv { height: 45px;padding: 7px 0;font-size: 13px;width:100%;position:absolute;left:0;right:0;margin:auto;top:100%;background-color:#2A0E34;display:none}
+.rateDiv .rtCont{display:inline-block}
 
 .spTitle{color: rgba(255,255,255,0.6);padding: 0;height: 25px;display: block;float: left;margin: 0 10px 0 0px;line-height: 25px;}
 .spValue{background: rgba(255,255,255,1) url(../img/common/edit.svg)no-repeat;background-position: 95% center;background-size: auto 90%;font-family: openB;padding: 0 30px 0 10px;border-radius: 15px;color: #4d4d4d;height: 25px;display: block;float: left;cursor: pointer;margin: 0 10px 0 0px;line-height: 25px;}
@@ -772,6 +775,46 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 .prImgPrev {width: 30px;height: 100%;background: #fff url(../img/arrow_black.svg)no-repeat;background-size: auto 20px;background-position: center;position: absolute;left:0;z-index: 10;transform: rotateY(180deg);-webkit-transform: rotateY(180deg);ms-transform: rotateY(180deg);-moz-transform: rotateY(180deg);cursor: pointer;}
 .prImgNext {width: 30px; height: 100%; background: #fff url(../img/arrow_black.svg)no-repeat;background-size: auto 20px;background-position: center;position: absolute;    right: 0px;    z-index: 10;   border-left: 0px solid #e6e6e6;cursor: pointer;}
 
+/* Tag clouds  starts*/
+.mselect{}
+.submitbtn:hover{background-color:#d53e1e}
+.txtTitle2 {width: 100%;height: auto;font-family: openR;font-size: 14px;margin-bottom: 5px;line-height: 20px;color: #4d4d4d;float: left;}
+.mBot10 {margin-bottom: 10px;}
+.mSelectBox {width:100%;height: auto;}
+.tagcloud {width: auto;height: 30px!important;line-height: 30px;background: #fff url(../img/cancelBlack.svg)no-repeat;background-position: 95% 5px;background-size: auto 70%;color: #4d4d4d;padding: 0 25px 0 10px;margin: 5px 1% 5px 0;font-size: 11px;font-family: openB;text-align: center;border-radius: 2px;border: 1px solid #666;position: relative;}
+.tagcloud::after{content: '';width:24px;height: 28px;position: absolute;right:0;top:0;cursor: pointer;}
+.tagcloud:hover{text-decoration: line-through; background-color: #F5F5F2;}
+.fileName{float:left;height:35px; width:auto;min-width:75px; max-width:140px;padding:0px 10px; font-family: openR;line-height:35px; text-overflow: ellipsis; overflow:hidden;font-size:13px;border:1px solid #666; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}
+/* Tag clouds end */
+
+/* delecte diamond section*/
+.deleteElements {width: 40px;height: 40px;background: url(../img/delete.svg)no-repeat;background-size: auto 100%;cursor: pointer;border-radius: 2px;}
+.deleteElements:hover {background-color:#f0f0f0;}
+
+/* pending product categories*/
+.wishTabsCont{width:100%;height: 50px;padding: 5px 0;}
+.wishTabComm{width:auto;padding: 0 35px;height: 40px;line-height: 40px;color:#fff;display:inline-block;margin: 0 5px;border-radius: 5px;cursor: pointer;position: relative;}
+.wishTabComm::after{content:'';width:40px;height:40px;background:url(../img/common/tickCircle.svg)no-repeat;background-size: auto 25px;background-position: center 10px;position: absolute;right:-100px;top:0;transition: 300ms ease-in-out;-moz-transition: 300ms ease-in-out;-ms-transition: 300ms ease-in-out;-webkit-transition: 300ms ease-in-out;-o-transition: 300ms ease-in-out;}
+.sel.wishTabComm::after{right:0}
+/*Wishlist*/
+.wishlistPage{background-color: #fff;padding-bottom: 0;}
+.listCont{width: 100%;height: auto}
+.listCont .prdResults {display: inline-block;margin-top: 30px;width: 100%;}
+.listCont .prdComm {width: 24%;height: auto;border: 5px solid #ebebde;margin: 0 0 1% 1%;}
+
+.wishTabComm span{width:auto;font-size: 15px;font-family: openL;}
+.DiamondsWish{background: #8A0044;}
+.JewelleryWish{background: #380B34;}
+.BullionWish{background: #2A0E34;}
+.wConBtn{width: 100%;height: 40px;line-height: 40px;border-radius: 5px;cursor: pointer;color: #fff;font-size: 14px;padding:0px;position: relative;background: #8A0044;text-align: center;}
+.wConBtn::after{content:'';position:absolute;right:10px;margin:auto;width:40px;height:40px;background:url(../img/common/arrow_right_white.svg)no-repeat;background-size: auto 100%;background-position:center;}
+.wishlistPage .prdActions {height: 40px;}
+.wishlistPage .prdComm{position: relative;}
+.wisgDel{width: 30px;height: 30px;position;}
+
+.transformer684{transform: translateX(-684px);}
+.transformer570{transform: translateX(-570px);}
+
 /*john*/
 .dmyCnt{width:auto;height:40px;padding:0px !important;}
 .tltpBtn{display:none;}
@@ -784,15 +827,15 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 
     .ttl1{font-size: 30px;line-height: 40px;}
     .ttl2{font-size: 22px;}
-    .clogo {width: 80px;height: 80px;background: #8A0044 url(../img/common/logo.svg)no-repeat;background-size: auto 60%;background-position: center;position: fixed;left: 0;right: 0;margin: auto;top: 20px;z-index: 100;border-radius: 5px;font-size: 22px;color: #FFF;}    
-    .clogo span {display: block;width: 100%;height: 30px;line-height: 35px;text-align: center;position: absolute;bottom: -30px;}    
+    .clogo {width: 80px;height: 80px;background: #8A0044 url(../img/common/logo.svg)no-repeat;background-size: auto 60%;background-position: center;position: fixed;left: 0;right: 0;margin: auto;top: 20px;z-index: 100;border-radius: 5px;font-size: 22px;color: #FFF;}
+    .clogo span {display: block;width: 100%;height: 30px;line-height: 35px;text-align: center;position: absolute;bottom: -30px;}
 }
 @media only screen and (max-width: 1279px) and (min-width: 1025px){
-    
+
     /*header*/
     .vndLogo {position: relative;left: 10px;}
     .vndInfo {position: relative;right: 10px}
-    
+
     .dmyCnt{display:none;}
   .tltpBtn{width:40px;height:40px;position:absolute;top:0;right:0;background:url(../img/common/more.svg)no-repeat;background-position:center;background-size:auto 90%;padding:0px !important;cursor:pointer;overflow: visible !important;display:block;}
   .tltpbox{width:250px;height:40px;position:absolute;background-color:#fff;z-index:15;display:block;padding:0px !important;opacity:0;transform:translateX(0px);right:0px;box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;}

@@ -31,6 +31,7 @@
             var llCount = 0;
             var mNCount = 0;
         </script>
+
         <link rel='stylesheet' type="text/css" href='<?php echo DOMAIN;?>tools/css/backend.css?v=<?php echo VERSION; ?>'>
         <link rel='stylesheet' type="text/css" href='<?php echo DOMAIN;?>tools/css/ripple.css?v=<?php echo VERSION; ?>'>
         <script type="text/javascript" src='<?php echo DOMAIN;?>tools/js/cms/lib/jquery.js?v=<?php echo VERSION; ?>'></script>
@@ -40,7 +41,8 @@
         <link rel="stylesheet" href="<?= $css['normalize']; ?>">
         <link href="<?php echo IMGDOMAIN;?>css/themes/jquery.filer-dragdropbox-theme.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="<?= $jvs['rngsld']; ?>"></script>
-        <link rel="stylesheet" href="<?php echo DOMAIN;?>tools/css/jquery.toast.min.css?v=<?php echo VERSION; ?>" />
+        <link rel='stylesheet' href="<?php echo $css['toastr']; ?>">
+        <script src="<?php echo $jvs['toastr'];?>"></script>
         <script type="text/javascript" src="<?php echo DOMAIN;?>tools/js/lib/CustomStorage.js?v=<?php echo VERSION; ?>"></script>
         <script type="text/javascript" src='<?php echo DOMAIN;?>tools/js/cms/Common.js?v=<?php echo VERSION; ?>'></script>
         <script>
@@ -52,7 +54,7 @@
                     window.assign.href = DOMAIN;
                 }
             }
-            
+
         if((activePage !== null && activePage !== 'null' && activePage !== 'undefined' && activePage !== undefined && activePage !== '') && (activePage == 'vendor_landing' || activePage == 'jewellery_Form' || activePage =='bullion_Form' || activePage == 'diamond_Form'))
         {
             var uid = customStorage.readFromStorage('userid');
@@ -76,7 +78,7 @@
                             {
                                 obj.results[1].is_complete = 0;
                             }
-                            
+
                             var userid = obj.results[0].uid;
                             var is_vendor = obj.results[0].is_vendor;
                             var af = obj.results[1].active_flag;

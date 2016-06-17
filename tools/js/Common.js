@@ -77,7 +77,7 @@ function Common() {
                     case '1':var catid=10000;
                     break;
                     case '2':var catid=10001;
-                    break;        
+                    break;
                     case '3':var catid=10002;
                     break;
                     default: break;
@@ -85,7 +85,7 @@ function Common() {
             }
         }
         var userMenuStr='';
-        
+
         if (isLoggedIn === 'true') {
             if(nm !== undefined || nm !== 'undefined' || nm !== null || nm !== 'null' || nm !== '')
             {
@@ -130,7 +130,7 @@ function Common() {
                         {
                             var obj = jQuery.parseJSON(result);
                             var isactive = obj.results[1].active_flag;
-                            
+
                             if (isactive == 1 || isactive == '1')
                             {
                                 var catid1=customStorage.readFromStorage('busiType').charAt(0);
@@ -173,7 +173,7 @@ function Common() {
         }
     };
         $(document).click(function (e) {
-           
+
             if($('#hdropList').is(":visible"))
             {
                 hisOpen = false;
@@ -237,7 +237,7 @@ function Common() {
             $(this).addClass('brOrange');//.removeClass('brRed');
             $('.bsText').addClass('op0');
         });
-        
+
         $('input[type=tel], input[type=password]').bind('blur',function() {
             if ($(this).val().length === 0 && $(this).attr('placeholder') === undefined) {
                 $(this).siblings('label, i').removeClass('labelActive');
@@ -287,7 +287,7 @@ function Common() {
                         if(submiter1 == true)
                         {
                             submiter1 = false;
-                        
+
                             var userid = obj.results.uid;
                             var username = obj.results.username;
                             var is_vendor = obj.results.utype;
@@ -532,7 +532,7 @@ function Common() {
 			window.location.href = DOMAIN + '?case=login';
 		}
 	};
-        
+
     this.IND_money_format = function(money)
     {
 	var m = '';
@@ -548,7 +548,7 @@ function Common() {
 	}
 
 	return m.split("").reverse().join("");
-    };    
+    };
 
 	this.showCertificate = function(url)
 	{
@@ -575,4 +575,3 @@ function showProductList()
         });
     }
 }
-

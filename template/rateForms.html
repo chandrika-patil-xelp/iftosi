@@ -9,7 +9,7 @@
                 <div class="commBtn upBtn fLeft fmOpenR" onclick="updateDollarRate();">UPDATE</div>
                 <div id="dollarErr" class="rateErr dn"><span> Update Dollar Rate to add Diamonds</span></div>
         </div>
-        
+
         <div id='silverRateDiv' class="popDiv transition300 transit-200Y1 dn" style="height: 280px;">
                 <div class="upTitle fLeft fmOpenR">Silver Rate </div>
                 <div id="silverMsg" class="fLeft info txtCenter" style="margin-bottom: 10px"><span> Update Silver Rate for 999 purity per 1 KG</span></div>
@@ -19,9 +19,19 @@
                 <div class="commBtn cancelBtn fLeft fmOpenR" id='upCancel' onclick="closeAllForms(2);"> CANCEL</div>
                 <div class="commBtn upBtn fLeft fmOpenR" onclick="updateSilverRate();">UPDATE</div>
                 <div id="silverErr" class="rateErr dn"><span>Silver Rate to add Products</span></div>
-           
         </div>
-        
+
+        <div id='platinumRateDiv' class="popDiv transition300 transit-200Y1 dn" style="height: 280px;">
+                <div class="upTitle fLeft fmOpenR">Platinum Rate </div>
+                <div id="platinumMsg" class="fLeft info txtCenter" style="margin-bottom: 10px"><span> Update Platinum Rate for 999 purity per 1 Gram</span></div>
+                <div class="inputCont fLeft fmOpenR">
+                    <input type="text" id="platinum_rate" name="platinum_rate" autocomplete="off" class="inpTxt fRight fmOpenR" maxlength="15" onkeypress="return isValidFloatKey(this, event, true);" placeholder="Platinum Rate For 999" autofocus="">
+                </div>
+                <div class="commBtn cancelBtn fLeft fmOpenR" id='upCancel' onclick="closeAllForms(2);"> CANCEL</div>
+                <div class="commBtn upBtn fLeft fmOpenR" onclick="updatePlatinumRate();">UPDATE</div>
+                <div id="platinumErr" class="rateErr dn"><span>Platinum Rate to add Products</span></div>
+        </div>
+
         <div id='goldSilverRateDiv' class="popDiv transition300 transit-200Y1 dn" style="height:280px">
                <div class="upTitle fLeft fmOpenR">Update Gold Rate </div>
                <div id="goldMsg" class="fLeft info txtCenter" style="margin-bottom: 10px"><span> Update Gold Rate for 995 purity per 10 Grams</span></div>
@@ -32,7 +42,7 @@
                 <div class="commBtn upBtn fLeft fmOpenR" onclick="updateGoldSilverRate();">UPDATE</div>
                 <div id="goldErr" class="rateErr dn"><span> Update Gold Rate to add Products</span></div>
         </div>
-        
+
         <div id='goldRateDiv' class="popDiv transition300 transit-200Y1 dn" style="height:280px">
                <div class="upSpan fLeft fmOpenR upTitle" style="padding-bottom: 0;height: auto;">Update Gold Rate </div>
                <div id="goldMsg" class="fLeft txtCenter" style="margin-bottom: 10px"><span> Update Gold Rate for 995 purity per 10 Grams</span></div>
@@ -49,4 +59,3 @@
             <div class="commBtn cancelBtn fLeft fmOpenR" id='delCancel' onclick="closeConfirmDelete();"> CANCEL</div>
             <div class="commBtn upBtn fLeft fmOpenR" onclick="deleteProduct();"> OK</div>
         </div>
-        

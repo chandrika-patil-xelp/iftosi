@@ -59,7 +59,7 @@ function loadDiamonds(pgno) {
 	if(!pgno)
 		pgno = 1;
 	$.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + pgno + "&limit=50&catid="+catid, success: function (result) {
-		
+
 		loadDiamondCallback(result,pgno);
 	}});
 }
@@ -69,7 +69,7 @@ function loadDiamondCallback(res,pgno) {
         var total = obj['results']['total_products'];
         $('#totalDiamonds').text(total);
         var total_pages = obj['results']['total_pages'];
-        
+
         var str = '';
         if(total != 0) {
 			if(pgno <= total_pages)
@@ -94,9 +94,9 @@ function loadDiamondCallback(res,pgno) {
 			$('#DiamondsList').html(str);
 			$('#DiamondsList').append(html);
         }
-		
+
 		$('.pgComm').click( function(){
-			
+
 			$('.pgComm').removeClass('pgActive');
 			$(this).addClass('pgActive');
 			loadDiamonds($(this).text());
@@ -141,7 +141,7 @@ function loadDiamondCallback(res,pgno) {
 				pgval = parseInt($('#total_pageno').val());
 			}
 		});
-		
+
     } else {
         loadDiamont = false;
     }
@@ -154,7 +154,7 @@ function pagination(data,pgno){
 	var tc = data.results.total_products;
 	var lastpg = Math.ceil(tc/50);
 	var adjacents = 2;
-	
+
 	if(lastpg > 1)
 	{
 		html += '<div class="fLeft pagination fmOpenR">';
@@ -252,7 +252,7 @@ function generateDiamondList(obj) {
     if(barcode == 'null' || barcode == undefined || barcode == null || barcode == '' || barcode == '' ) {
         barcode = 'N-A';
     }
-    
+
     var b2b_price = obj.b2b_price;
     if(b2b_price == 'null' || b2b_price == undefined || b2b_price == null || b2b_price == '' || b2b_price == '' || b2b_price == '0.00')
     {
@@ -262,7 +262,7 @@ function generateDiamondList(obj) {
     {
         b2b_price = "&#36;"+b2b_price;
     }
-    
+
     var date = obj['update_time'].split(' ');
     var str = '<li>';
     str += '<div class="date fLeft"> ';
@@ -278,7 +278,7 @@ function generateDiamondList(obj) {
     var tempUrl = '';
     if(shape !== null && shape !== undefined){
         if(tempUrl !== ''){
-            tempUrl += '-'+shape; 
+            tempUrl += '-'+shape;
         }
         else{
             tempUrl += shape;
@@ -286,7 +286,7 @@ function generateDiamondList(obj) {
     }
     if(obj.color !== null && obj.color !== undefined){
         if(tempUrl !== ''){
-            tempUrl += '-colour-'+obj.color; 
+            tempUrl += '-colour-'+obj.color;
         }
         else{
             tempUrl += 'colour-'+obj.color;
@@ -294,7 +294,7 @@ function generateDiamondList(obj) {
     }
     if(obj.clarity !== null && obj.clarity !== undefined){
         if(tempUrl !== ''){
-            tempUrl += '-clarity-'+obj.clarity; 
+            tempUrl += '-clarity-'+obj.clarity;
         }
         else{
             tempUrl += 'clarity-'+obj.clarity;
@@ -302,7 +302,7 @@ function generateDiamondList(obj) {
     }
     if(obj.cert !== null && obj.cert !== undefined){
         if(tempUrl !== ''){
-            tempUrl += '-certified-'+obj.cert; 
+            tempUrl += '-certified-'+obj.cert;
         }
         else{
             tempUrl += 'certified-'+obj.cert;
@@ -353,12 +353,12 @@ function generateDiamondList(obj) {
     str += '<option '+((obj['active_flag']) == 1 ? "selected" : "")+' class="arrow txtCenter" value="1">In Stock</option>';
     str += '<option '+((obj['active_flag']) == 3 ? "selected" : "")+' class="arrow txtCenter" value="3">Out Of Stock</option>';
     str += '<option '+((obj['active_flag']) == 4 ? "selected" : "")+' class="arrow txtCenter" value="4">Sold</option>';
-    str += '</select>'    
+    str += '</select>'
       str += '</div>';
      str += '</div>';
-    
-    
-    
+
+
+
 //    str += '<div class="soldBtn poR ripplelink fmOpenR '+cl+'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "Out Of Stock" : "Out Of Stock");+'</div>';
     str += '</div>';
     str += '</li>';
@@ -382,7 +382,7 @@ function loadJewellCallback(res,pgno) {
         var total = obj['results']['total_products'];
         $('#totalJewells').text(total);
         var total_pages = obj['results']['total_pages'];
-            
+
         var str = '';
         if(total!=0) {
 			if(pgno <= total_pages)
@@ -407,9 +407,9 @@ function loadJewellCallback(res,pgno) {
 			$('#JewellsList').html(str);
 			$('#JewellsList').append(html);
         }
-		
+
 		$('.pgComm').click( function(){
-			
+
 			$('.pgComm').removeClass('pgActive');
 			$(this).addClass('pgActive');
 			loadJewels($(this).text());
@@ -456,14 +456,14 @@ function loadJewellCallback(res,pgno) {
 				pgval = parseInt($('#total_pageno').val());
 			}
 		});
-		
+
     } else {
         loadJewel = false;
     }
 }
 function generateJewellList(obj) {
     if(obj !== undefined && obj !== null && obj !== '')
-    {   
+    {
         var cl='';
         var pro_name = obj['product_name'];
         var shape = obj['shape'];
@@ -498,15 +498,15 @@ function generateJewellList(obj) {
         if(shape == undefined || shape == null || shape == '' || shape == 'null') {
             shape = 'N/A';
         }
-        
+
         if(metal == undefined || metal == null || metal == '' || metal == 'null') {
             metal = 'N/A';
         }
-        
+
         var tempUrl = '';
         if(obj.metal !== null && obj.metal !== undefined){
             if(tempUrl !== ''){
-                tempUrl += '-'+obj.metal; 
+                tempUrl += '-'+obj.metal;
             }
             else{
                 tempUrl += obj.metal;
@@ -514,7 +514,7 @@ function generateJewellList(obj) {
         }
         if(cats !== null && cats !== undefined){
             if(tempUrl !== ''){
-                tempUrl += '-'+encodeURIComponent(cats); 
+                tempUrl += '-'+encodeURIComponent(cats);
             }
             else{
                 tempUrl += encodeURIComponent(cats);
@@ -522,7 +522,7 @@ function generateJewellList(obj) {
         }
         if(obj.gold_purity !== '' && obj.gold_purity !== 'null' && obj.gold_purity !== null && obj.gold_purity !== undefined && obj.gold_purity !== 'undefined'){
             if(tempUrl !== ''){
-                tempUrl += '-'+obj.gold_purity+'-Carat'; 
+                tempUrl += '-'+obj.gold_purity+'-Carat';
             }
             else{
                 tempUrl += obj.gold_purity+'-Carat';
@@ -530,7 +530,7 @@ function generateJewellList(obj) {
         }
         if(obj.gold_weight !== '' && obj.gold_weight !== 'null' && obj.gold_weight !== null && obj.gold_weight !== undefined && obj.gold_weight !== 'undefined'){
             if(tempUrl !== ''){
-                tempUrl += '-'+common.number_format(obj.gold_weight,0)+'-Grams'; 
+                tempUrl += '-'+common.number_format(obj.gold_weight,0)+'-Grams';
             }
             else{
                 tempUrl += common.number_format(obj.gold_weight,0)+'-Grams';
@@ -538,14 +538,14 @@ function generateJewellList(obj) {
         }
         if(obj.cert !== null && obj.cert !== undefined && obj.cert !== ''){
             if(tempUrl !== ''){
-                tempUrl += '-'+obj.cert; 
+                tempUrl += '-'+obj.cert;
             }
             else{
                 tempUrl += obj.cert;
             }
         }
-        
-        
+
+
         var date = obj['update_time'].split(' ');
         var str = '<li>';
         str += '<div class="date fLeft"> ';
@@ -554,7 +554,7 @@ function generateJewellList(obj) {
         str += '</div>';
         str += '<div class="barcode fLeft">';
         str += '<span class="upSpan fmOpenB">' + barcode + '</span>';
-        
+
         if(tempUrl !== '')
         {
             str += '<span class="lwSpan"><a href="'+ DOMAIN + tempUrl+'/jid-'+obj['id']+'" target="_blank">View Details</a></span>';
@@ -586,7 +586,7 @@ function generateJewellList(obj) {
 //        str += '<div class="subType fLeft">' + gweights + '</div>';
         str += '<div class="price fLeft fmOpenB">&#8377;' + obj['price']+ '</div>';
         str += '<div class="acct fLeft poR">';
-        
+
         if(obj['active_flag'] == 1 || obj['active_flag'] == 0){
             cl='inStockPrd';
         }
@@ -610,12 +610,12 @@ function generateJewellList(obj) {
          str += '<select id="isStock'+ obj['id'] +'" onchange="inStock(' + obj['id'] + ',this.value);" value='+obj['active_flag']+' class="txtSelect fmOpenR fLeft '+cl+'">';
         str += '<option value="1" '+((obj['active_flag']) == 1 ? "selected" : "")+'>In Stock</option>';
         str += '<option value="3" '+((obj['active_flag']) == 3 ? "selected" : "")+'>Out Of Stock</option>';
-        str += '</select>';   
+        str += '</select>';
       str += '</div>';
      str += '</div>';
-        
+
         //str += '<div class="soldBtn poR ripplelink fmOpenR '+cl+'" id="isStock'+ obj['id'] +'" onclick="inStock(' + obj['id'] + ',this)">'+((obj['active_flag']==3 ) ? "Out Of Stock" : "Out Of Stock");+'</div>';
-       
+
         str += '</div>';
         str += '</li>';
         str += '';
@@ -637,7 +637,7 @@ function loadBullionsCallback(res,pgno) {
         var total = obj['results']['total_products'];
         $('#totalBullions').text(total);
         var total_pages = obj['results']['total_pages'];
-        
+
         var str = '';
         if(total!=0) {
 			if(pgno <= total_pages)
@@ -709,7 +709,7 @@ function loadBullionsCallback(res,pgno) {
 				pgval = parseInt($('#total_pageno').val());
 			}
 		});
-		
+
     } else {
         loadBullion = false;
     }
@@ -736,12 +736,12 @@ function generatBullionsList(obj) {
     if(type == null || type == '' || type == 'null' || type == 'unfined' || type == undefined) {
         type = '';
     }
-    
-    
+
+
         var tempUrl = '';
         if(obj.metal !== null && obj.metal !== undefined){
             if(tempUrl !== ''){
-                tempUrl += '-'+obj.metal; 
+                tempUrl += '-'+obj.metal;
             }
             else{
                 tempUrl += obj.metal;
@@ -749,7 +749,7 @@ function generatBullionsList(obj) {
         }
         if(obj.type !== null && obj.type !== undefined){
             if(tempUrl !== ''){
-                tempUrl += '-'+obj.type; 
+                tempUrl += '-'+obj.type;
             }
             else{
                 tempUrl += obj.type;
@@ -758,7 +758,7 @@ function generatBullionsList(obj) {
         if(obj.gold_purity !== '' && obj.gold_purity !== 'null' && obj.gold_purity !== null && obj.gold_purity !== undefined && obj.gold_purity !== 'undefined'){
             if(tempUrl !== ''){
                 var goldpty = obj.gold_purity.split('.');
-                tempUrl += '-'+goldpty[0]; 
+                tempUrl += '-'+goldpty[0];
             }
             else{
                 var goldpty = obj.gold_purity.split('.');
@@ -769,7 +769,7 @@ function generatBullionsList(obj) {
             if(tempUrl !== ''){
                 var goldwt = obj.gold_weight.split('.');
                 goldwt = goldwt[0].split(',');
-                tempUrl += '-'+ goldwt+'-Grams'; 
+                tempUrl += '-'+ goldwt+'-Grams';
             }
             else{
                 var goldwt = obj.gold_weight.split('.');
@@ -777,8 +777,8 @@ function generatBullionsList(obj) {
                 tempUrl += goldwt+'-Grams';
             }
         }
-    
-    
+
+
     var date = obj['update_time'].split(' ');
     var str = '<li>';
     str += '<div class="date fLeft"> ';
@@ -787,7 +787,7 @@ function generatBullionsList(obj) {
     str += '</div>';
     str += '<div class="barcode fLeft">';
     str += '<span class="upSpan fmOpenB">' + barcode + '</span>';
-    
+
     if(tempUrl !== '')
     {
         str += '<span class="lwSpan"><a href="'+ DOMAIN + tempUrl + '/bid-'+obj['id']+'" target="_blank">View Details</a></span>';
@@ -803,10 +803,10 @@ function generatBullionsList(obj) {
     str += '</div>';
     str += '<div class="metal fLeft">' + obj['metal'].split('~')[0] + '</div>';
     str += '<div class="purity fLeft">' + obj['gold_purity'] + '</div>';
-    
+
     if(obj.gold_weight == 1000)
     {
-        
+
         var gweights = '1 Kgs';
     }
     else if(obj.gold_weight > 1000)
@@ -814,7 +814,7 @@ function generatBullionsList(obj) {
         obj.gold_weight = parseFloat(obj.gold_weight);
         var gweights = (obj.gold_weight/1000);
         gweights = common.number_format(gweights,2)+' Kgs';
-        
+
     }
     else
     {
@@ -825,9 +825,9 @@ function generatBullionsList(obj) {
     str += '<div class="btype fLeft">' + gweights + '</div>';
     str += '<div class="price fLeft fmOpenB">&#8377;' + obj['price']+ '</div>';
     str += '<div class="acct fLeft poR">';
-   
-    
-    
+
+
+
     if(obj['active_flag'] == 1 || obj['active_flag'] == 0){
             cl='inStockPrd';
     }
@@ -851,11 +851,11 @@ function generatBullionsList(obj) {
          str += '<select id="isStock'+ obj['id'] +'" onchange="inStock(' + obj['id'] + ',this.value);" value='+obj['active_flag']+' class="txtSelect fmOpenR fLeft '+cl+'">';
     str += '<option value="1" '+((obj['active_flag']) == 1 ? "selected" : "")+'>In Stock</option>';
     str += '<option value="3" '+((obj['active_flag']) == 3 ? "selected" : "")+'>Out Of Stock</option>';
-    str += '</select>';   
+    str += '</select>';
       str += '</div>';
      str += '</div>';
-     
-     
+
+
     str += '</div>';
     str += '</li>';
     str += '';
@@ -874,7 +874,7 @@ function closeConfirmDelete()
 		$('#overlay,#confirmDelete').addClass('dn');
                 window.location.reload();
 	}, 1010);
-        
+
 }
 
 function showConfirmDelete(proId, ele)
@@ -941,8 +941,8 @@ function inStock(proId,ele)
             {
                 var stockid="#isStock"+proId;
                 //$(ele).parent().parent().parent().remove();
-                
-                if(catid==10000) 
+
+                if(catid==10000)
                 {
                     catName='Diamonds';
                 }
@@ -1021,7 +1021,7 @@ function searchBarcodeCallback(res,pgno) {
     if (obj['results'] !== '') {
         var total = obj['results']['total_products'];
         //$('#total'+searchIDName).text(total);
-        
+
         $('#'+searchIDName+'List').addClass('dn');
         $('#s'+searchIDName+'List').removeClass('dn');
         if(total!=0) {
@@ -1054,9 +1054,9 @@ function searchBarcodeCallback(res,pgno) {
                 //$('#s'+searchIDName+'List').append(str);
 				$('#s'+searchIDName+'List').html(str);
 				$('#s'+searchIDName+'List').append(html);
-				
+
 				$('.pgComm').click( function(){
-					
+
 					$('.pgComm').removeClass('pgActive');
 					$(this).addClass('pgActive');
 					searchBarcode(searchVal,$(this).text());

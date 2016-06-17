@@ -16,8 +16,24 @@
         <div class="price fLeft">Price</div>
         <div class="acct fLeft">Action</div>
     </div>
-    <ul class='prdul fLeft fmOpenR' id="JewellsList">
-        
-    </ul>
-    <ul class='prdul fLeft fmOpenR dn' id="sJewellsList"></ul>
-</div>
+
+<?php
+          if($page == 'Pending')
+          {
+?>
+              <ul class='prdul fLeft fmOpenR' id="JewellsPList">
+              </ul>
+              <ul class='prdul fLeft fmOpenR dn' id="sJewellsPList"></ul>
+          </div>
+<?php
+          }
+          else
+          {
+?>
+              <ul class='prdul fLeft fmOpenR' id="JewellsList">
+              </ul>
+              <ul class='prdul fLeft fmOpenR dn' id="sJewellsList"></ul>
+          </div>
+<?php
+          }
+?>

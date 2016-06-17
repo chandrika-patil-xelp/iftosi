@@ -85,11 +85,11 @@
             </div>
         </div> -->
     </div>
-	
+
 	<?php
 	if(count($fil))
 	{
-        //echo "<pre>";print_r($fil);die;
+
 		foreach($fil as $key => $val)
 		{
 			if(!empty($val['attribute_range']))
@@ -101,7 +101,7 @@
 
 					if(strtolower($val['attribute_name']) == 'price' && $page == 'diamonds')
 				{
-					$val1 = $fil[0]['attribute_range'];                                        
+					$val1 = $fil[0]['attribute_range'];
 					$expdCarat = explode("-",$val1);
 					$expdCarat0 = $expdCarat[0];
 					$expdCarat1 = $expdCarat[1];
@@ -143,10 +143,10 @@
                                                                 $expds = str_replace(' ','_',$expd[$i]);
                                                                 if($val['attribute_name'] == 'combination')
                                                                 {
-                                                                    
+
                                                                     $expds = str_replace('&','00',$expds);
                                                                     $expds = str_replace(',','11',$expds);
-                                                                
+
 ?>
                                                                     <input type="checkbox" class="filled-in" id="<?php echo $val['attribute_name'].'_'.$expds;?>" />
                                                                     <label for="<?php echo $val['attribute_name'].'_'.$expds;?>"><?php echo $expd[$i];?></label>

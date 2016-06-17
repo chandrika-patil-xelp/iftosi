@@ -1,11 +1,12 @@
 <div class="prdResults fLeft">
     <div class='prdSearchDiv fLeft'>
         <div class="formTitle fLeft fmOpenR m0"><span id="totalBullions">0</span> bullion(s) listed</div>
-        <div class="addPrdBtn fRight poR ripplelink"  onclick="showgoldSilverRateForm()">Update Gold Rate</div>
-        <div class="addPrdBtn fRight poR ripplelink" id="upSilRt">Update Silver Rate</div>
+        <div class="addPrdBtn fRight poR ripplelink"  onclick="showgoldSilverRateForm()">Gold Rate</div>
+        <div class="addPrdBtn fRight poR ripplelink" id="upSilRt">Silver Rate</div>
+        <div class="addPrdBtn fRight poR ripplelink" id="upPlatRt">Platinum Rate</div>
         <div class="addPrdBtn fRight poR ripplelink" id="upProds">Upload Products</div>
         <a onclick='addBulion();'><div class="addPrdBtn fRight poR ripplelink">Add Bullion</div></a>
-        
+
         <input type="text" onkeyup="searchBarcode(this.value);" class="prdSeachTxt fRight fmOpenR" autocomplete="false" placeholder=" Search your Product">
         <!--  <div class="vFilBtn fRight poR ripplelink"></div>
         -->
@@ -20,30 +21,23 @@
         <div class="price fLeft">Price</div>
         <div class="acct fLeft">Action</div>
     </div>
-    <ul class='prdul fLeft fmOpenR' id="BullionsList">
-        <!--
-            <li>
-                <div class="date fLeft"> 
-                    <span class="upSpan">20/10/2015</span>
-                    <span class="lwSpan">8:10 Pm</span>
-                </div>
-                <div class="barcode fLeft">
-                    <span class="upSpan">CW0H8IE9</span>
-                    <span class="lwSpan"><a href="<?=DOMAIN;?>gia-round-clarity-IF/did-10000">View Details</a></span>
-                </div>
-                <div class="btype fLeft">Coin</div>
-                <div class="metal fLeft">Gold</div>
-                <div class="purity fLeft">999</div>
-                <div class="weight fLeft">50 Gms</div>
-                <div class="price fLeft fmOpenB">&#8377;1,000,000,000</div>
-                <div class="acct fLeft">
-                    <center>
-                        <div class="deltBtn poR ripplelink"></div>
-                        <div class="editBtn poR ripplelink"></div>
-                        <div class="soldBtn poR ripplelink fmOpenR">SOLD</div>
-                    </center>
-                </div>
-            </li>-->
-    </ul>
-    <ul class='prdul fLeft fmOpenR dn' id="sBullionsList"></ul>
-</div>
+<?php
+          if($page == 'Pending')
+          {
+?>
+            <ul class='prdul fLeft fmOpenR' id="BullionsPList">
+            </ul>
+            <ul class='prdul fLeft fmOpenR dn' id="sBullionsPList"></ul>
+            </div>
+<?php
+          }
+          else
+          {
+?>
+              <ul class='prdul fLeft fmOpenR' id="BullionsList">
+              </ul>
+              <ul class='prdul fLeft fmOpenR dn' id="sBullionsList"></ul>
+              </div>
+<?php
+          }
+?>

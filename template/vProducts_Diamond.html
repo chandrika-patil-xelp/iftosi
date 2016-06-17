@@ -3,7 +3,7 @@
         <div class="formTitle fLeft fmOpenR m0"><span id="totalDiamonds">0</span> diamond(s) listed</div>
         <div class="addPrdBtn fRight poR ripplelink" id="upDolRt">Update Dollar Rate</div>
         <div class="addPrdBtn fRight poR ripplelink" id="upProds">Upload Products</div>
-        
+
         <div class="addPrdBtn fRight poR ripplelink" onclick='addDiamond();'>Add Diamond</div>
         <input type="text" onkeyup="searchBarcode(this.value);" autocomplete="false" class="prdSeachTxt fRight fmOpenR" placeholder="Search your Product">
       <!--  <div class="vFilBtn fRight poR ripplelink"></div>
@@ -20,31 +20,24 @@
         <div class="price fLeft">Cust Price</div>
         <div class="price fLeft">B2B Price</div>
         <div class="acct fLeft">Action</div>
-    </div>    
-    <ul class='prdul fLeft fmOpenR' id="DiamondsList">
-            <!--<li>
-                <div class="date fLeft"> 
-                    <span class="upSpan">20/10/2015</span>
-                    <span class="lwSpan">8:10 Pm</span>
-                </div>
-                <div class="barcode fLeft">
-                    <span class="upSpan">CW0H8IE9</span>
-                    <span class="lwSpan"><a href="<?=DOMAIN;?>gia-round-clarity-IF/did-10000">View Details</a></span>
-                </div>
-                <div class="shape fLeft">Round</div>
-                <div class="color fLeft">F</div>
-                <div class="carats fLeft">0.33</div>
-                <div class="clarity fLeft">IF</div>
-                <div class="cert fLeft">GIA</div>
-                <div class="price fLeft fmOpenB">&#8377;1,000,000,000</div>
-                <div class="acct fLeft">
-                    <center>
-                        <div class="deltBtn poR ripplelink"></div>
-                        <div class="editBtn poR ripplelink"></div>
-                        <div class="soldBtn poR ripplelink fmOpenR">SOLD</div>
-                    </center>
-                </div>
-            </li>-->
-    </ul>
-    <ul class='prdul fLeft fmOpenR dn' id="sDiamondsList"></ul>
-</div>
+    </div>
+<?php
+      if($page == 'Pending')
+      {
+?>
+          <ul class='prdul fLeft fmOpenR' id="DiamondsPList">
+          </ul>
+          <ul class='prdul fLeft fmOpenR dn' id="sDiamondsPList"></ul>
+          </div>
+<?php
+      }
+      else
+      {
+?>
+        <ul class='prdul fLeft fmOpenR' id="DiamondsList">
+        </ul>
+        <ul class='prdul fLeft fmOpenR dn' id="sDiamondsList"></ul>
+        </div>
+<?php
+      }
+?>

@@ -110,7 +110,7 @@ function Common() {
         }
     return s.join(dec);
     };
-    
+
     this.checkLandline = function (stdid, landlineid) {
         var stdcode = $('#' + stdid).val();
         var lnum = $('#' + landlineid).val();
@@ -182,9 +182,9 @@ function Common() {
 //        if (_this.nmbCount == 2) {
 //            $('.falmb .addBtn').addClass('dn');
 //        }
-        
+
         if(this.checkMobile('conMobile')) {
-            
+
             if($('#altmbNo1').hasClass('dn')) {
                 if($('#altmbNo2_Mobile').val()!='') {
                     var flag = this.checkMobile('altmbNo2_Mobile');
@@ -208,7 +208,7 @@ function Common() {
         if (_this.nmbCount == 2) {
             $('.falmb .addBtn').addClass('dn');
         }
-//        
+//
 //        if (_this.nmbCount == 1) {
 //            var flag = this.checkMobile('conMobile');
 //            if (flag) {
@@ -238,7 +238,7 @@ function Common() {
         var num = $('#' + id).val();
         var len = num.length;
         if ((num.charAt(0) == '9') && (len == 10) || (num.charAt(0) == '8') && (len == 10) || (num.charAt(0) == '7') && (len == 10)) {
-            
+
             var conMobile = $('#conMobile').val();
             var altmbNo1_Mobile = $('#altmbNo1_Mobile').val();
             var altmbNo2_Mobile = $('#altmbNo2_Mobile').val();
@@ -326,28 +326,31 @@ function Common() {
     };
 
     this.toast = function (mType, msg) {
+      common.msg(mType, msg);
+
         $('.close').click();
+        return false;
         $.toast.config.width = 400;
         $.toast.config.closeForStickyOnly = false;
         if (mType == 0)
         {
-            $.toast(msg, {duration: 5000, type: "danger"});
-        } 
+            $.toastr(msg, {duration: 5000, type: "danger"});
+        }
         else if (mType == 1)
         {
-            $.toast(msg, {duration: 5000, type: "success"});
+            $.toastr(msg, {duration: 5000, type: "success"});
         }
         else if (mType == 2)
         {
-            $.toast(msg, {duration: 5000, type: "stock"});
+            $.toastr(msg, {duration: 5000, type: "stock"});
         }
         else if (mType == 3)
         {
-            $.toast(msg, {duration: 5000, type: "sold"});
+            $.toastr(msg, {duration: 5000, type: "sold"});
         }
         else if (mType == 4)
         {
-            $.toast(msg, {duration: 5000, type: "instock"});
+            $.toastr(msg, {duration: 5000, type: "instock"});
         }
         setTimeout(function () {
             $('.close').click();
@@ -377,24 +380,24 @@ function Common() {
         customStorage.removeAll();
         window.location.href = window.location;
     };
-    
+
      this.IND_money_format = function(money)
     {
-	var m = '';
-	money = money.toString().split("").reverse();
-	var len = money.length;
-	for(var i=0;i<len;i++)
-	{
-		if(( i == 3 || (i > 3 && ( i - 1) % 2 == 0) ) && i !== len)
-		{
-			m += ',';
-		}
-		m += money[i];
-	}
+        var m = '';
+        money = money.toString().split("").reverse();
+        var len = money.length;
+        for(var i=0;i<len;i++)
+        {
+        if(( i == 3 || (i > 3 && ( i - 1) % 2 == 0) ) && i !== len)
+        {
+        	m += ',';
+        }
+        m += money[i];
+	  }
 
 	return m.split("").reverse().join("");
-    };    
-    
+    };
+
     this.caratCheck = function (purity)
     {
             var carats = new Array();
@@ -404,4 +407,78 @@ function Common() {
             carats['14'] = "585";
             return carats[purity];
     };
+
+    this.msg = function(t, e) {
+      toastr.remove();
+            if(t==0 || t==2)
+                t='danger';
+
+            if(t==3)
+                t='info';
+
+            if(t==4)
+                t='success';
+
+            $("danger" === t ? function() {
+                toastr.error(e)
+            } : "info" === t ? function() {
+                toastr.info(e)
+            } : "success" === t ? function() {
+                toastr.success(e)
+            } : function() {
+                //toastr.warning(e)
+            });
+    }, toastr.options = {
+                    closeButton: !0,
+                    debug: !1,
+                    newestOnTop: !0,
+                    progressBar: 1,
+                    positionClass: "toast-top-right",
+                    preventDuplicates: true,
+                    showDuration: "100",
+                    hideDuration: "800",
+                    timeOut: "1000",
+                    extendedTimeOut: "1000",
+                    showEasing: "",
+                    hideEasing: "",
+                    showMethod: "slideDown",
+                    hideMethod: "slideUp"
+                }, this.decodeMsg = function(t) {
+                    return decodeURIComponent(t.replace(/\+/g, " "))
+                }, this.encodeMsg = function(t) {
+                    return encodeURIComponent(t)
+                }, this.uid = function() {
+                    var t = webstore.get("uid");
+                    return t
+                }, this.appendDiv = function(t, e, n) {
+                    if ("" != n) {
+                        var o = document.getElementById(t);
+                        o.innerHTML = e ? n : o.innerHTML + n
+                    }
+                }, this.replaceURLWithHTMLLinks = function(t) {
+                    var e = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+                    return t.replace(e, "<a href='$1' target='_blank'>$1</a>")
+                }, this.getParameterByName = function(t) {
+                    t = t.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                    var e = new RegExp("[\\?&]" + t + "=([^&#]*)"),
+                        n = e.exec(location.search);
+                    return null == n ? "" : decodeURIComponent(n[1].replace(/\+/g, " "))
+                }, this.redirect = function(t) {
+                    window.location = t
+                }, this.capitaliseFirstLetter = function(t) {
+                    var e = t.value;
+                    "" != e && (t.value = e.charAt(0).toUpperCase() + e.slice(1))
+                }, this.capitalize = function(t) {
+                    var e = t.value.toLowerCase();
+                    "" != e && (t.value = e.replace(/\w\S*/g, function(t) {
+                        return t.charAt(0).toUpperCase() + t.substr(1).toLowerCase()
+                    }))
+                }, this.castLowerCase = function(t) {
+                    document.getElementById(t).value = document.getElementById(t).value.toLowerCase()
+                };
+
+
+
+
+
 }

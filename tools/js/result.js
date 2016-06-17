@@ -9,9 +9,9 @@ if (pw < 768) {
 }
 
 $(document).ready(function() {
-	
+
 	$(".wishTabComm").bind('click',function(){
-		
+
 		$(".wishTabComm").removeClass('sel');
 		$(this).addClass('sel');
 		var catid 	= $(this).attr("id");
@@ -20,7 +20,7 @@ $(document).ready(function() {
 		$('#catid').val(catid);
 		showWish(catid,pgno,uid,1);
 	});
-	
+
 	$(".wisgDel").bind('click',function(e){
 		e.stopImmediatePropagation();
 		var catid 	= $('#catid').val();
@@ -28,8 +28,8 @@ $(document).ready(function() {
 		var uid 	= $('#uid').val();
 		showWish(catid,pgno,uid,1,$(this).attr('id'));
 	});
-	
-	
+
+
     setTimeout(function() {
         var samt = 100;
         if (isMobile) {
@@ -37,8 +37,8 @@ $(document).ready(function() {
         }
        // $('body').animate({scrollTop: samt}, 300);
     }, 100);
-    
-    
+
+
     if(pw<1024 && pw>480){
         $('.fTitle').click(function(){
             $('#filters').toggleClass('transit-100X');
@@ -56,13 +56,13 @@ $(document).ready(function() {
         var val = $(this).val();
         var text = $(this).text();
         $('#drpinp').text(text);
-		
+
 		var sortby = $(this).attr('id');
 		var catid = $("#catid").val();
 		$('#sortbyvl').val(sortby);
                 $('#pgno').val(1);
 		FR(sortby);
-		
+
         isOpen = false;
         toggleDropDown(false);
     });
@@ -72,17 +72,17 @@ $(document).ready(function() {
 //           // toggleDropDown(false);
 //        }
 //    });
-    
+
     $('#dropList').mouseleave(function(){
-        
+
         if (isOpen) {
            toggleDropDown(false);
         }
-        
+
     });
-    
-    
-	
+
+
+
 	if($('#slist').val())
 	{
 		var sla = $('#slist').val().split('|@|');
@@ -91,7 +91,7 @@ $(document).ready(function() {
 		});
 		$('#slist').val('');
 	}
-	
+
     $('.shapeComm').bind('click', function() {
         $(this).toggleClass('shapeSelected');
 		var cnt = getRandomInt(-500,500);
@@ -117,11 +117,11 @@ $(document).ready(function() {
             isStop = true;
         }
     });
-   
+
     $('#dragTarget').click(function() {
         showLeftMenu(false);
     });
-    
+
     /*$('.prox').mouseover(function()
 	{
 		var tmpClass = $(this).attr('class');
@@ -149,9 +149,9 @@ $(document).ready(function() {
 			$(this).parent().siblings('.proxImg').css({'background':img});
 		}
     });*/
-	
+
 	var inputField = 'input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=number], input[type=search], textarea, input[type=radio]';
-	
+
 	$(inputField).bind('keyup focus', inputField, function(event) {
 		/* Autocomplete code */
 		if ($(this).attr('id') == 'txtjArea')
@@ -175,7 +175,7 @@ $(document).ready(function() {
                     $('#jasug').addClass('dn');
                 });
 	});
-	
+
 	$('.pgComm').bind('click', function() {
 		if(!$(this).hasClass('pgActive'))
 		{
@@ -318,18 +318,18 @@ function showWish(catid,pgno,uid,nojump,pid)
 		pid = '';
 	if(!nojump)
 		$('html,body').animate({scrollTop: $('.wishTabsCont').offset().top-60}, 300);
-	
+
 	var params 	= 'action=ajx&case=filter&catid='+catid+'&pgno='+pgno+"&uid="+uid+"&pid="+pid;
 	var URL 	= DOMAIN + "index.php";
 	$.getJSON(URL, params, function(data) {
-		
-		
+
+
 		if(data.results.length == 0)
 			data.results.total = 0;
 		if(data.results.total === null)
 			data.results.total = 0;
 		$('#count_'+catid).text('('+data.results.total+')');
-		
+
 		if(catid == 10000)
 			pageName = 'wishlist-diamonds';
 		else if(catid == 10001)
@@ -337,7 +337,7 @@ function showWish(catid,pgno,uid,nojump,pid)
 		else
 			pageName = 'wishlist-bullion';
 		getResultsData(data);
-                
+
                 var params = 'action=ajx&case=getWishListCount&userid='+encodeURIComponent(uid);
                 var URL = DOMAIN + "index.php";
                 $.get(URL, params, function(data)
@@ -428,24 +428,24 @@ function getResultsData(data,sortby,showtree)
 								html += '<div class="detValue fmOpenR fLeft">'+vl.attributes.certified+'</div>';
 							html += '</div>';
 						html += '</div>';
-                
+
 //						html += '<div class="prdPrice fLeft">';
 //							html += '<div class="detComm">';
 //								html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
 //                              if(vl.dollar_rate !== '0.00' && vl.dollar_rate !== undefined && vl.dollar_rate !== null && vl.dollarValue !== '') {
-//                                  dollarValue=vl.dollar_rate; 
+//                                  dollarValue=vl.dollar_rate;
 //                              }
 //                              var price = Math.ceil(((vl.pprice * dollarValue) * vl.attributes.carat));
 //								html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+ common.IND_money_format(price) +'</div>';
 //							html += '</div>';
 //						html += '</div>';
-                
-                        html += '<div class="b2bPricesCont fLeft">';   
+
+                        html += '<div class="b2bPricesCont fLeft">';
                             html += '<div class="prdPrice fLeft">';
                                 html += '<div class="detComm">';
                                     html += '<div class="detLabel fmOpenB fLeft">CUST. PRICE</div>';
                                     if(vl.dollar_rate !== '0.00' && vl.dollar_rate !== undefined && vl.dollar_rate !== null && vl.dollarValue !== '') {
-                                        dollarValue=vl.dollar_rate; 
+                                        dollarValue=vl.dollar_rate;
                                     }
                                     var price = Math.ceil(((vl.pprice * dollarValue) * vl.attributes.carat));
                                     html += '<div class="detValue fmOpenB fLeft"><span>₹</span>'+ common.IND_money_format(price) +'</div>';
@@ -455,7 +455,7 @@ function getResultsData(data,sortby,showtree)
                                 html += '<div class="detComm">';
                                     html += '<div class="detLabel fmOpenB fLeft">B2B PRICE</div>';
                                         if(vl.dollar_rate !== '0.00' && vl.dollar_rate !== undefined && vl.dollar_rate !== null && vl.dollarValue !== '') {
-                                        dollarValue=vl.dollar_rate; 
+                                        dollarValue=vl.dollar_rate;
                                     }
                                     var price = Math.ceil(((vl.b2bprice * dollarValue) * vl.attributes.carat));
                                     price = common.IND_money_format(price);
@@ -465,15 +465,15 @@ function getResultsData(data,sortby,showtree)
                                 html += '</div>';
                             html += '</div>';
                         html += '</div>';
-                
+
 						html += '</a>';
-                
+
                         html += '<div class="prdActions fLeft wAuto">';
                             html += '<a href="'+DOMAIN+'index.php?case=b2bdetails&productid='+vl.pid+'&popup=1">';
                                 html += '<div class="wConBtn fLeft">Contact Dealer</div>';
                             html += '</a>';
                         html += '</div>';
-                
+
 //						html += '<div class="prdActions fLeft">';
 //                                                if(tempUrl !== '')
 //                                                {
@@ -490,9 +490,9 @@ function getResultsData(data,sortby,showtree)
 //							html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
 //							html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
 //                                                }
-//						
+//
 //						html += '</div>';
-                
+
 					html += '</div>';
 				html += '</div>';
 			});
@@ -500,7 +500,7 @@ function getResultsData(data,sortby,showtree)
         else if(pageName == 'diamonds') {
             $.each(data.results.products, function(i, vl) {
 				html += '<div class="prdComm fLeft" style="opacity: 0; transform: translateX(1500px);">';
-                html += '<div class="prdCommDiv fLeft">';                 
+                html += '<div class="prdCommDiv fLeft">';
                 var tempUrl = '';
                 var shape = vl.attributes.shape;
                 var color = vl.attributes.color;
@@ -509,7 +509,7 @@ function getResultsData(data,sortby,showtree)
 
                 if(shape !== null && shape !== undefined) {
                     if(tempUrl !== ''){
-                        tempUrl += '-'+shape; 
+                        tempUrl += '-'+shape;
                     }
                     else{
                         tempUrl += shape;
@@ -517,7 +517,7 @@ function getResultsData(data,sortby,showtree)
                 }
                 if(color !== null && color !== undefined) {
                     if(tempUrl !== ''){
-                        tempUrl += '-colour-'+color; 
+                        tempUrl += '-colour-'+color;
                     }
                     else{
                         tempUrl += 'colour-'+color;
@@ -525,7 +525,7 @@ function getResultsData(data,sortby,showtree)
                 }
                 if(clarity !== null && clarity !== undefined) {
                     if(tempUrl !== ''){
-                        tempUrl += '-clarity-'+clarity; 
+                        tempUrl += '-clarity-'+clarity;
                     }
                     else{
                         tempUrl += 'clarity-'+clarity;
@@ -533,7 +533,7 @@ function getResultsData(data,sortby,showtree)
                 }
                 if(cert !== null && cert !== undefined) {
                     if(tempUrl !== ''){
-                        tempUrl += '-certified-'+cert; 
+                        tempUrl += '-certified-'+cert;
                     }
                     else{
                         tempUrl += 'certified-'+cert;
@@ -544,7 +544,7 @@ function getResultsData(data,sortby,showtree)
                 }
                 else {
                     html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'">';
-                }                                        
+                }
 
                 html += '<div class="prdShape fLeft">';
                 html += '<div class="prdShTitle fLeft fmOpenB">SHAPE</div>';
@@ -572,11 +572,11 @@ function getResultsData(data,sortby,showtree)
                 html += '<div class="prdPrice fLeft">';
                 html += '<div class="detComm">';
                 html += '<div class="detLabel fmOpenB fLeft">BEST PRICE</div>';
-                
-                if(vl.dollar_rate !== '0.00' && vl.dollar_rate !== undefined && vl.dollar_rate !== null && vl.dollarValue !== '') { 
-                    dollarValue=vl.dollar_rate; 
+
+                if(vl.dollar_rate !== '0.00' && vl.dollar_rate !== undefined && vl.dollar_rate !== null && vl.dollarValue !== '') {
+                    dollarValue=vl.dollar_rate;
                 }
-                
+
                 var price = Math.ceil(((vl.pprice * dollarValue) * vl.attributes.carat));
                 html += '<div class="detValue fmOpenB fLeft"><span>&#8377;</span>'+ common.IND_money_format(price) +'</div>';
                 html += '</div>';
@@ -603,9 +603,9 @@ function getResultsData(data,sortby,showtree)
             });
         }
 		else if(pageName == 'jewellery') {
-			
+
 			$.each(data.results.products, function(i, vl) {
-				
+
 				var price = Math.ceil(vl.attributes.price);
 				if(prdIds !== '')
 				{
@@ -615,20 +615,20 @@ function getResultsData(data,sortby,showtree)
 				{
 					prdIds = vl.pid;
 				}
-                                
+
 					html += '<div class="prdComm fLeft jwRes transition100" style="opacity: 1; transform: translateX(0px);">';
 						html += '<div class="prdCommDiv fLeft transition100">';
-                                                
+
                                                 var tempUrl = '';
                                                 var metal = vl.attributes.metal;
                                                 var shape = vl.attributes.shape;
                                                 var purity = parseInt(vl.attributes.gold_purity);
                                                 var weight = parseInt(vl.attributes.gold_weight);
                                                 var cert = vl.attributes.certified;
-                                                
+
                                                 if(metal !== null && metal !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-'+metal; 
+                                                        tempUrl += '-'+metal;
                                                     }
                                                     else{
                                                         tempUrl += metal;
@@ -636,7 +636,7 @@ function getResultsData(data,sortby,showtree)
                                                 }
                                                 if(shape !== null && shape !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-'+shape; 
+                                                        tempUrl += '-'+shape;
                                                     }
                                                     else{
                                                         tempUrl += shape;
@@ -644,7 +644,7 @@ function getResultsData(data,sortby,showtree)
                                                 }
                                                 if(purity !== null && purity !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-'+purity+'-Carat'; 
+                                                        tempUrl += '-'+purity+'-Carat';
                                                     }
                                                     else{
                                                         tempUrl += purity+'-Carat';
@@ -652,7 +652,7 @@ function getResultsData(data,sortby,showtree)
                                                 }
                                                 if(weight !== null && weight !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-'+weight+'-Grams'; 
+                                                        tempUrl += '-'+weight+'-Grams';
                                                     }
                                                     else{
                                                         tempUrl += weight+'-Grams';
@@ -660,7 +660,7 @@ function getResultsData(data,sortby,showtree)
                                                 }
                                                 if(cert !== null && cert !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-'+cert; 
+                                                        tempUrl += '-'+cert;
                                                     }
                                                     else{
                                                         tempUrl += cert;
@@ -703,12 +703,12 @@ function getResultsData(data,sortby,showtree)
                                                             html += '<a href="'+DOMAIN+cert+'/jid-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
                                                             html += '<a href="'+DOMAIN+cert+'/jid-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
                                                             html += '<a href="'+DOMAIN+cert+'/jid-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
-                                                            html += '<a href="'+DOMAIN+cert+'/jid-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';                                                           
+                                                            html += '<a href="'+DOMAIN+cert+'/jid-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
                                                         }
                                                         html += '</div>';
 						html += '</div>';
 					html += '</div>';
-				
+
 			});
 			getImagesData(prdIds);
 		}
@@ -717,18 +717,18 @@ function getResultsData(data,sortby,showtree)
 				html += '<div class="prdComm fLeft transition100">';
 					html += '<div class="wisgDel" id="'+vl.pid+'"></div>';
 						html += '<div class="prdCommDiv fLeft transition100">';
-                                                
-                                                
-                                                
+
+
+
                                                 var tempUrl = '';
                                                 var shape = vl.attributes.shape;
                                                 var color = vl.attributes.color;
                                                 var clarity = vl.attributes.clarity;
                                                 var cert = vl.attributes.certified;
-                                                
+
                                                 if(shape !== null && shape !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-'+shape; 
+                                                        tempUrl += '-'+shape;
                                                     }
                                                     else{
                                                         tempUrl += shape;
@@ -736,7 +736,7 @@ function getResultsData(data,sortby,showtree)
                                                 }
                                                 if(color !== null && color !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-colour-'+color; 
+                                                        tempUrl += '-colour-'+color;
                                                     }
                                                     else{
                                                         tempUrl += 'colour-'+color;
@@ -744,7 +744,7 @@ function getResultsData(data,sortby,showtree)
                                                 }
                                                 if(clarity !== null && clarity !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-clarity-'+clarity; 
+                                                        tempUrl += '-clarity-'+clarity;
                                                     }
                                                     else{
                                                         tempUrl += 'clarity-'+clarity;
@@ -752,7 +752,7 @@ function getResultsData(data,sortby,showtree)
                                                 }
                                                 if(cert !== null && cert !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-certified-'+cert; 
+                                                        tempUrl += '-certified-'+cert;
                                                     }
                                                     else{
                                                         tempUrl += 'certified-'+cert;
@@ -766,7 +766,7 @@ function getResultsData(data,sortby,showtree)
                                                 {
                                                     html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'">';
                                                 }
-                                                
+
                                                 html += '<div class="prdShape fLeft">';
                                                         html += '<div class="prdShTitle fLeft fmOpenB">SHAPE</div>';
                                                         html += '<div class="prdShType fLeft fmOpenR">'+vl.attributes.shape+'</div>';
@@ -820,16 +820,16 @@ function getResultsData(data,sortby,showtree)
 				html += '<div class="prdComm fLeft transition100" style="opacity: 1; transform: translateX(0px);">';
 					html += '<div class="wisgDel" id="'+vl.pid+'"></div>';
 						html += '<div class="prdCommDiv fLeft transition100">';
-                                                
+
                                                 var tempUrl = '';
                                                 var metal = vl.attributes.metal;
                                                 var type = vl.attributes.type;
                                                 var purity = parseInt(vl.attributes.gold_purity);
                                                 var weight = parseInt(vl.attributes.gold_weight);
-                                                
+
                                                 if(metal !== null && metal !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-'+metal; 
+                                                        tempUrl += '-'+metal;
                                                     }
                                                     else{
                                                         tempUrl += metal;
@@ -837,7 +837,7 @@ function getResultsData(data,sortby,showtree)
                                                 }
                                                 if(type !== null && type !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-'+type; 
+                                                        tempUrl += '-'+type;
                                                     }
                                                     else{
                                                         tempUrl += type;
@@ -845,7 +845,7 @@ function getResultsData(data,sortby,showtree)
                                                 }
                                                 if(purity !== null && purity !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-'+purity; 
+                                                        tempUrl += '-'+purity;
                                                     }
                                                     else{
                                                         tempUrl += purity;
@@ -853,13 +853,13 @@ function getResultsData(data,sortby,showtree)
                                                 }
                                                 if(weight !== null && weight !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-'+weight+'-Grams'; 
+                                                        tempUrl += '-'+weight+'-Grams';
                                                     }
                                                     else{
                                                         tempUrl += weight+'-Grams';
                                                     }
                                                 }
-                                                
+
                                                 if(tempUrl !== '')
                                                 {
                                                     html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'">';
@@ -902,14 +902,14 @@ function getResultsData(data,sortby,showtree)
 								html += '<div class="detComm">';
 									html += '<div class="detLabel fmOpenB fLeft">PRICE</div>';
                                                                         var metal_price = vl.attributes.price;
-                                                                        
+
                                                                             if(vl.vdetail !== null && vl.vdetail.gold_rate !== 'undefined'  && vl.vdetail.gold_rate !== undefined && vl.vdetail.gold_rate !== null && vl.vdetail.gold_rate !== 'null' && vl.vdetail.gold_rate !== '0.00'  && vl.vdetail.gold_rate !== '' ) { goldRate=vl.vdetail.gold_rate; }
                                                                             if(vl.vdetail !== null && vl.vdetail.silver_rate !== '0.00' && vl.vdetail.silver_rate !== undefined && vl.vdetail.silver_rate !== null && vl.vdetail.silver_rate !== '') { silverRate=vl.vdetail.silver_rate; }
-                                                                            if((vl.attributes.metal.toLowerCase()) === 'gold'){ metal_rate=goldRate; 
+                                                                            if((vl.attributes.metal.toLowerCase()) === 'gold'){ metal_rate=goldRate;
                                                                             metal_rate=(metal_rate/10)*(vl.attributes.gold_purity/995);
                                                                             metal_price = vl.attributes.gold_weight * metal_rate;
                                                                             }
-                                                                            else if((vl.attributes.metal.toLowerCase()) === 'silver'){ metal_rate=silverRate; 
+                                                                            else if((vl.attributes.metal.toLowerCase()) === 'silver'){ metal_rate=silverRate;
                                                                             metal_rate=(metal_rate/1000)*(vl.attributes.gold_purity/999);
                                                                             metal_price = vl.attributes.gold_weight * metal_rate;
                                                                             }
@@ -947,17 +947,17 @@ function getResultsData(data,sortby,showtree)
 				html += '<div class="prdComm fLeft jwRes transition100" style="opacity: 1; transform: translateX(0px);">';
 					html += '<div class="wisgDel" id="'+vl.pid+'"></div>';
 						html += '<div class="prdCommDiv fLeft transition100">';
-                                                
+
                                                 var tempUrl = '';
                                                 var metal = vl.attributes.metal;
                                                 var shape = vl.attributes.shape;
                                                 var purity = parseInt(vl.attributes.gold_purity);
                                                 var weight = parseInt(vl.attributes.gold_weight);
                                                 var cert = vl.attributes.certified;
-                                                
+
                                                 if(metal !== null && metal !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-'+metal; 
+                                                        tempUrl += '-'+metal;
                                                     }
                                                     else{
                                                         tempUrl += metal;
@@ -965,7 +965,7 @@ function getResultsData(data,sortby,showtree)
                                                 }
                                                 if(shape !== null && shape !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-'+shape; 
+                                                        tempUrl += '-'+shape;
                                                     }
                                                     else{
                                                         tempUrl += shape;
@@ -973,7 +973,7 @@ function getResultsData(data,sortby,showtree)
                                                 }
                                                 if(purity !== null && purity !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-'+purity+'-Carat'; 
+                                                        tempUrl += '-'+purity+'-Carat';
                                                     }
                                                     else{
                                                         tempUrl += purity+'-Carat';
@@ -981,7 +981,7 @@ function getResultsData(data,sortby,showtree)
                                                 }
                                                 if(weight !== null && weight !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-'+weight+'-Grams'; 
+                                                        tempUrl += '-'+weight+'-Grams';
                                                     }
                                                     else{
                                                         tempUrl += weight+'-Grams';
@@ -989,7 +989,7 @@ function getResultsData(data,sortby,showtree)
                                                 }
                                                 if(cert !== null && cert !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-'+cert; 
+                                                        tempUrl += '-'+cert;
                                                     }
                                                     else{
                                                         tempUrl += cert;
@@ -1003,7 +1003,7 @@ function getResultsData(data,sortby,showtree)
                                                 {
                                                     html += '<a href="'+DOMAIN+cert+'/jid-'+vl.pid+'">';
                                                 }
-                                                
+
 							html += '<div id="'+vl.pid+'_imgs" class="prdCommImg fLeft">';
 								html += getImageData(vl.images);
 							html += '</div>';
@@ -1031,10 +1031,10 @@ function getResultsData(data,sortby,showtree)
                                                                 html += '<a href="'+DOMAIN+cert+'/did-'+vl.pid+'">';
                                                             }
                                                         html += '<div class="wConBtn fLeft">Contact Dealer</div>';
-                                                        html += '</a>'; 
+                                                        html += '</a>';
 							html += '</div>';
 						html += '</div>';
-					
+
 				html += '</div>';
 			});
 			getImagesData(prdIds);
@@ -1086,16 +1086,16 @@ function getResultsData(data,sortby,showtree)
 			$.each(data.results.products, function(i, vl) {
 				html += '<div class="prdComm fLeft jwRes" style="opacity: 0; transform: translateX(1000px);">';
 					html += '<div class="prdCommDiv fLeft transition100">';
-                                                
+
                                                 var tempUrl = '';
                                                 var metal = vl.attributes.metal;
                                                 var type = vl.attributes.type;
                                                 var purity = parseInt(vl.attributes.gold_purity);
                                                 var weight = parseInt(vl.attributes.gold_weight);
-                                                
+
                                                 if(metal !== null && metal !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-'+metal; 
+                                                        tempUrl += '-'+metal;
                                                     }
                                                     else{
                                                         tempUrl += metal;
@@ -1103,7 +1103,7 @@ function getResultsData(data,sortby,showtree)
                                                 }
                                                 if(type !== null && type !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-'+type; 
+                                                        tempUrl += '-'+type;
                                                     }
                                                     else{
                                                         tempUrl += type;
@@ -1111,7 +1111,7 @@ function getResultsData(data,sortby,showtree)
                                                 }
                                                 if(purity !== null && purity !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-'+purity; 
+                                                        tempUrl += '-'+purity;
                                                     }
                                                     else{
                                                         tempUrl += purity;
@@ -1119,13 +1119,13 @@ function getResultsData(data,sortby,showtree)
                                                 }
                                                 if(weight !== null && weight !== undefined){
                                                     if(tempUrl !== ''){
-                                                        tempUrl += '-'+weight+'-Grams'; 
+                                                        tempUrl += '-'+weight+'-Grams';
                                                     }
                                                     else{
                                                         tempUrl += weight+'-Grams';
                                                     }
                                                 }
-                                                
+
                                                 if(tempUrl !== '')
                                                 {
                                                     html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'">';
@@ -1177,10 +1177,10 @@ function getResultsData(data,sortby,showtree)
                                                                     silverRate=vl.silver_rate;
                                                                 }
                                                                 var metal_rate = silverRate;
-                                                                
+
                                                                 if((vl.attributes.metal.toLowerCase()) === 'gold')
                                                                 {
-                                                                    metal_rate=goldRate; 
+                                                                    metal_rate=goldRate;
                                                                     metal_rate=(metal_rate/10)*(vl.attributes.gold_purity/995);
                                                                     metal_price = vl.attributes.gold_weight * metal_rate;
                                                                 }
@@ -1208,7 +1208,7 @@ function getResultsData(data,sortby,showtree)
                                                             html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
                                                             html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
                                                             html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
-                                                            html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';                                                           
+                                                            html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
                                                         }
                                                 html += '</div>';
 					html += '</div>';
@@ -1233,7 +1233,7 @@ function getResultsData(data,sortby,showtree)
 			html += '</div>';
 		}
 	}
-	
+
 	var treedata = data.results.treedata;
 	treedata = '';
 	if(treedata)
@@ -1241,10 +1241,10 @@ function getResultsData(data,sortby,showtree)
 		var thtml = '';
 		var getdata = data.results.getdata.jlist;
 		var gdarr = getdata.split('|@|');
-		
+
 		if($('#idlist').html().trim()) {
-			
-			$.each(treedata.subcat, function(i,v) {					
+
+			$.each(treedata.subcat, function(i,v) {
 				for(var k=0;k<gdarr.length;k++)
 				{
 					var igdarr = gdarr[k].split('_');
@@ -1267,11 +1267,11 @@ function getResultsData(data,sortby,showtree)
 					}
 				}
 			});
-			
+
 			$('#mainCat').append(thtml);
 		}
 		else {
-			
+
 			thtml += '<div class="fLeft optionTitle fmOpenR">Category</div>';
 			thtml += '<div id="wrapper" class="fLeft">';
 				thtml += '<div class="tree transition300">';
@@ -1279,7 +1279,7 @@ function getResultsData(data,sortby,showtree)
 						thtml += '<li><a>'+treedata.cat_name+'</a>';
 							thtml += '<ul id="mainCat">';
 								$.each(treedata.subcat, function(i,v) {
-									
+
 									for(var k=0;k<gdarr.length;k++)
 									{
 										var igdarr = gdarr[k].split('_');
@@ -1307,10 +1307,10 @@ function getResultsData(data,sortby,showtree)
 					thtml += '</ul>';
 				thtml += '</div>';
 			thtml += '</div>';
-			
+
 			$('#idlist').html(thtml);
 		}
-		
+
 		$('.tree li').each(function() {
             if ($(this).children('ul').length > 0) {
                 $(this).addClass('parent');
@@ -1335,7 +1335,7 @@ function getResultsData(data,sortby,showtree)
 				FR('',1);
 				if (event && $.isFunction(event.stopImmediatePropagation))
 					event.stopImmediatePropagation();
-				else 
+				else
 					window.event.cancelBubble=true;
 			});
 		});
@@ -1346,9 +1346,9 @@ function getResultsData(data,sortby,showtree)
 	{
 		$.each(data.results.filters, function(i, v) {
 			$.each(v, function(k, vl) {
-				
-				
-				
+
+
+
 				/* if(k == 'range')
 				{
 					var dvl = vl.value.split(';');
@@ -1375,7 +1375,7 @@ function getResultsData(data,sortby,showtree)
 						cidarr[k] = $(this).attr('id');
 						k++;
 					});
-					
+
 					for(var i=0;i<dvl.length;i++)
 					{
 						var a = dvl1.indexOf(dvl[i]);
@@ -1399,14 +1399,14 @@ function getResultsData(data,sortby,showtree)
 					{
 						$('#'+cidarr[i]).attr('checked',true);
 					}
-					
+
 					$(jid+' :input[type=checkbox]').each(function() {
 						$(this).bind('click', function(event) {
                                                         $('#pgno').val(1);
 							FR();
 							if (event && $.isFunction(event.stopImmediatePropagation))
 								event.stopImmediatePropagation();
-							else 
+							else
 								window.event.cancelBubble=true;
 						});
 					});
@@ -1414,7 +1414,7 @@ function getResultsData(data,sortby,showtree)
 			});
 		});
 	}
-	
+
 	/* For Pagintion */
 	totalCount = data.results.total;
 	var pgno = $('#pgno').val()*1;
@@ -1425,7 +1425,7 @@ function getResultsData(data,sortby,showtree)
 	//lastpg = 10;
 	var adjacents = 2;
 	$('#total_pageno').val(lastpg);
-	
+
 	if(lastpg > 1)
 	{
 		html += '<div class="fLeft pagination fmOpenR">';
@@ -1511,20 +1511,20 @@ function getResultsData(data,sortby,showtree)
 		html += '</div>';
 	}
 	/* ************* */
-	
+
 	//$('#filters').html(fhtml);
-	
+
 	/*$(".rngInp").each(function () {
-		
+
 		var id = $(this).attr('id');
 		var min_price = $('#'+id+'Min').val()*1;
 		var max_price = $('#'+id+'Max').val()*1;
-		
+
 		if((max_price - min_price) > 100)
 			var step = '';
 		else
 			var step = 0.01;
-		
+
 		$(this).ionRangeSlider({
 			type: "double",
 			grid: true,
@@ -1541,18 +1541,18 @@ function getResultsData(data,sortby,showtree)
 				FR();
 			}
 		});
-		
+
 		$('.filterCont :input[type=checkbox]').each(function() {
 			$(this).bind('click', function(event) {
 				FR();
 				if (event && $.isFunction(event.stopImmediatePropagation))
 					event.stopImmediatePropagation();
-				else 
+				else
 					window.event.cancelBubble=true;
 			});
 		});
 	}); */
-	
+
 	$('.prdResults').html(html);
 	$('.prdResults').offset();
 	if(sortby)
@@ -1564,12 +1564,12 @@ function getResultsData(data,sortby,showtree)
 		else
 			$('html,body').animate({scrollTop: $('.listCont').offset().top-120}, 300);
 	}
-		
-	
+
+
 	setTimeout(function(){
 		showPrd();
 	},10);
-	
+
 	$('.pgComm').bind('click', function() {
 		if(!$(this).hasClass('pgActive'))
 		{
@@ -1679,10 +1679,10 @@ function getResultsData(data,sortby,showtree)
 			$(this).parent().siblings('.proxImg').css({'background':img});
 		}
     });*/
-	
+
 	if(data.results.total === null)
 		data.results.total = 0;
-	
+
 	$('#resultCount').numerator({
 		toValue: data.results.total,
 		delimiter: ',',
@@ -1693,7 +1693,7 @@ function getResultsData(data,sortby,showtree)
 }
 
 function number_format (number, decimals, dec_point, thousands_sep) {
-  
+
   number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
   var n = !isFinite(+number) ? 0 : +number,
     prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
@@ -1726,9 +1726,9 @@ function FR(sortby,showtree) {
 	var clistarr = new Array();
 	var tlistarr = new Array();
 	var ilistarr = new Array();
-	
+
 	var catid = $("#catid").val();
-	
+
 	var i = 0;
 	$('.shapeComm').each(function() {
 		if($(this).hasClass('shapeSelected')) {
@@ -1737,7 +1737,7 @@ function FR(sortby,showtree) {
 		}
 	});
 	var slist = slistarr.join('|@|');
-	
+
 	var i = 0;
 	$('.jshapeComm').each(function() {
 		if($(this).hasClass('shapeSelected')) {
@@ -1746,16 +1746,16 @@ function FR(sortby,showtree) {
 		}
 	});
 	var jlist = jlistarr.join('|@|');
-	
+
 	var idlist = '';
-	
+
 	var j=0;
 	var k = 0;
 	$('.filterCont').each(function() {
 		var tempclistarr = new Array();
 		var tempilistarr = new Array();
 		var i = 0;
-		
+
 		var id = $(this).find('input:checked').parent().parent().attr('id');
 		if(typeof id === 'undefined')
 		{
@@ -1781,11 +1781,11 @@ function FR(sortby,showtree) {
 			ilistarr[j] = tempilistarr.join('|@|');
 			j++;
 		}
-		
+
 	});
 	var clist = clistarr.join('|$|');
 	var ilist = ilistarr.join('|$|');
-	
+
 	var i = 0;
 	$('.filterCont .rangeCont :input[type=text]').each(function() {
 		if($(this).val()) {
@@ -1795,12 +1795,12 @@ function FR(sortby,showtree) {
 		}
 	});
 	var tlist = tlistarr.join('|$|');
-	
+
 	var ctid = $('#ctid').val();
-	
+
 	var pgno = $('#pgno').val();
 	var uid = $('#uid').val();
-    
+
     var dummyCall = '';
     if(dummyPage == 'b2bproducts')
         dummyCall = '&b2bsort=1';
@@ -1810,7 +1810,7 @@ function FR(sortby,showtree) {
 		var params = 'action=ajx&case=filter&catid='+catid+'&sortby='+sortby+'&slist='+slist+'&clist='+clist+'&tlist='+tlist+'&ilist='+ilist+'&jlist='+jlist+'&ctid='+ctid+'&pgno='+pgno+"&uid="+uid+dummyCall;
 		var URL = DOMAIN + "index.php";
 		suggestObj = $.getJSON(URL, params, function(data) {
-			getResultsData(data,sortby);   
+			getResultsData(data,sortby);
 		});
 	}
 	else
@@ -1867,7 +1867,7 @@ if(ele !== null)
 	});
 }
 
-//prdComm 
+//prdComm
 
 showPrd();
 function showPrd() {
@@ -1880,7 +1880,7 @@ function showPrd() {
         setTimeout(function(){
             $('.prdComm').addClass('transition100');
         },time);
-    
+
 }
 
 

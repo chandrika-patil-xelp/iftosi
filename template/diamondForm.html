@@ -24,7 +24,7 @@
                                                     <div id="<?=ucwords(strtolower($shape));?>" class="shapeComm transition300 <?=($attr['shape'] == $shape) ? 'shapeSelected' : '';?> ripplelink <?=$shape;?>">
                                                     </div>
 <?php
-                                                }                                                
+                                                }
                                             }
                                         }
 ?>
@@ -35,10 +35,10 @@
                         </div>
                                       <!--  <div id="Round" class="shapeComm transition300 ripplelink Round">
                                         </div>
-                                        
+
                                         <div id="Pear" class="shapeComm transition300 ripplelink Pear">
                                         </div>
-                                        
+
                                         <div id="Princess" class="shapeComm transition300 ripplelink Princess">
                                         </div>
                                         <div id="Marquise" class="shapeComm transition300 ripplelink Marquise">
@@ -54,10 +54,10 @@
                                         <div id="Radiant" class="shapeComm transition300 ripplelink Radiant">
                                         </div>
                                       -->
-<div class="<?=(!empty($attr['product_id']) == True) ? '' : 'dn';?>" id="allcontent">                                    
+<div class="<?=(!empty($attr['product_id']) == True) ? '' : 'dn';?>" id="allcontent">
                         <div class="divCon  fLeft dAuto">
                             <div  class="titleDiv txtCap fLeft">Color*</div>
-                            <div class='radioCont fLeft'> 
+                            <div class='radioCont fLeft'>
 <?php
                                         foreach($fil['attributes'] as $key=>$values)
                                         {
@@ -81,7 +81,7 @@
                          </div>
                         <div class="divCon  fLeft dAuto">
                             <div  class="titleDiv txtCap fLeft">Clarity*</div>
-                            <div class='radioCont fLeft'> 
+                            <div class='radioCont fLeft'>
 <?php
                                         foreach($fil['attributes'] as $key=>$values)
                                         {
@@ -91,8 +91,8 @@
                                                 $attr_values = explode(',', $attr_values);
                                                 foreach($attr_values as $clarity)
                                                 {
-                                                                                                    
-?>                                               
+
+?>
                                                 <div class="checkDiv fLeft">
                                                     <input type="radio" name='clarity' autocomplete="false" class="filled-in" value="<?=$clarity?>" <?=($attr['clarity'] == $clarity) ? 'checked' : '';?> id="clarity_<?=ucwords(strtolower($clarity));?>">
                                                     <label for="clarity_<?=ucwords(strtolower($clarity));?>"><?=$clarity?></label>
@@ -100,8 +100,8 @@
 <?php                                           }
                                             }
                                         }
-?>     
-                          
+?>
+
                             </div>
                         </div>
 <?php
@@ -112,63 +112,63 @@
 ?>
                                             <div class="divCon  fLeft d5">
                                              <div  class="titleDiv txtCap fLeft">Cut*</div>
-                                                <div class='radioCont fLeft'>    
+                                                <div class='radioCont fLeft'>
 <?php
                                                     $attr_values = $values['attribute_values'];
                                                 $attr_values = explode(',', $attr_values);
                                                 foreach($attr_values as $cut)
                                                 {
-                                                                                                    
+
 ?>                                                      <div class="checkDiv fLeft">
                                                             <input type="radio" name='cut' autocomplete="false" class="filled-in" <?=($attr['cut'] == $cut) ? 'checked' : '';?> value="<?=$cut;?>" id="cut_<?=ucwords(strtolower($cut)); ?>">
                                                             <label for="cut_<?=ucwords(strtolower($cut));?>"> <?=$cut; ?></label>
-                                                        </div>       
+                                                        </div>
 <?php                                           }
 ?>
                                                 </div>
                                             </div>
-<?php                                             
+<?php
                                             }
                                         }
                                         foreach($fil['attributes'] as $key=>$values)
                                         {
                                             if(strtolower($values['attribute_disp_name'])=='symmetry')
                                             {
-?>                        
+?>
                                             <div class="divCon  fLeft d5">
                                                 <div  class="titleDiv txtCap fLeft"><?=$values['attribute_disp_name'];?>*</div>
-                                                        <div class='radioCont fLeft'> 
+                                                        <div class='radioCont fLeft'>
 <?php
                                                 $attr_values = $values['attribute_values'];
                                                 $attr_values = explode(',', $attr_values);
                                                 foreach($attr_values as $sym)
-                                                {                                                                                                    
-?>                                                              
+                                                {
+?>
                                                                 <div class="checkDiv fLeft">
                                                                     <input type="radio" name='symmetry' autocomplete="false" class="filled-in" <?=($attr['symmetry'] == $sym) ? 'checked' : '';?> value="<?=$sym;?>" id="sym_<?=ucwords(strtolower($sym)); ?>">
                                                                     <label for="sym_<?=ucwords(strtolower($sym));?>"> <?=$sym; ?></label>
-                                                                </div>                                                               
+                                                                </div>
 <?php                                           }
 ?>
                                                          </div>
                                             </div>
-<?php                                             
+<?php
                                             }
                                         }
                                         foreach($fil['attributes'] as $key=>$values)
                                         {
                                             if(strtolower($values['attribute_disp_name'])=='polish')
                                             {
-?>                  
+?>
                                                 <div class="divCon  fLeft d5">
                                                     <div  class="titleDiv txtCap fLeft">Polish*</div>
-                                                        <div class='radioCont fLeft'> 
+                                                        <div class='radioCont fLeft'>
 <?php
                                                             $attr_values = $values['attribute_values'];
                                                             $attr_values = explode(',', $attr_values);
                                                             foreach($attr_values as $polish)
-                                                            {                                                                                                    
-?>                                                          
+                                                            {
+?>
                                                                 <div class="checkDiv fLeft">
                                                                     <input type="radio" name='polish' autocomplete="false" class="filled-in" value="<?=$polish;?>" <?=($attr['polish'] == $polish) ? 'checked' : '';?> id="polish_<?=ucwords(strtolower($polish)); ?>">
                                                                     <label for="polish_<?=ucwords(strtolower($polish));?>"> <?=$polish; ?></label>
@@ -177,22 +177,22 @@
 ?>
                                                         </div>
                                                 </div>
-<?php                                             
+<?php
                                             }
                                         }
                                         foreach($fil['attributes'] as $key=>$values)
                                         {
                                             if(strtolower($values['attribute_disp_name'])=='fluorescence')
                                             {
-?>                               
+?>
                                                 <div class="divCon  fLeft d5">
                                                     <div  class="titleDiv txtCap fLeft">Fluorescence*</div>
-                                                        <div class='radioCont fLeft'> 
+                                                        <div class='radioCont fLeft'>
 <?php
                                                             $attr_values = $values['attribute_values'];
                                                             $attr_values = explode(',', $attr_values);
                                                             foreach($attr_values as $fluoresence)
-                                                            {                                                                                                    
+                                                            {
 ?>
                                                                 <div class="checkDiv fLeft">
                                                                     <input type="radio" autocomplete="false" name='flourecence' class="filled-in" <?=($attr['fluorescence'] == $fluoresence) ? 'checked' : '';?> value="<?=$fluoresence;?>" id="flourecence_<?=ucwords(strtolower($fluoresence)); ?>">
@@ -202,13 +202,13 @@
 ?>
                                                         </div>
                                                 </div>
-<?php                                             
+<?php
                                             }
                                         }
                                         ?>
                                          <div class="divCon  fLeft dAuto">
                                             <div  class="titleDiv txtCap fLeft">Certificate*</div>
-                                                <div class='radioCont fLeft'> 
+                                                <div class='radioCont fLeft'>
                                                     <div class="checkDiv fLeft">
                                                         <input type="radio" autocomplete="false" name='Certficate' <?=($attr['certified'] == 'GIA') ? 'checked' : '';?> class="filled-in" id="Certficate_GIA" value="GIA">
                                                             <label for="Certficate_GIA">GIA</label>
@@ -233,25 +233,25 @@
 												<label for="certfile" class="addPrdBtn fLeft poR ripplelink ">Upload</label><span id="filePath" class ="<?=($certificate_url) ? '' : 'dn';?> fLeft padRight" style="line-height:35px; padding-left: 10px" ><?=$certificate_url;?></span>
 												<img src="" id="uploadurl">
                                             </div>
-    <?php                                    
+    <?php
                                         foreach($fil['attributes'] as $key=>$values)
                                         {
                                             if(strtolower($values['attribute_disp_name'])=='carat')
-                                            {    
+                                            {
 ?>
                                                 <div class="divCon2  fLeft">
                                                     <div  class="titleDiv txtCap fLeft">Carat*</div>
                                                     <input name="carat_weight" autocomplete="false" id="caratweight" type="text" placeholder="eg. 1.00" class="txtInput fLeft fmOpenR font14 c666" maxlength="5"  onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['carat'];?>" onkeypress="return common.isDecimalKey(event)">
                                                 </div>
 <?php                                            }
-                                        }   
-?>                                            
+                                        }
+?>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Measurement*</div>
                             <div class="mInputDiv fLeft">
 <?php
                                     $measurement=explode('*',$attr['measurement']);
-?>                                    
+?>
                                 <input name="measurement1" id="measure1" autocomplete="false" type="text" placeholder=" eg. 10" maxlength="5" class="mtxtInput fLeft fmOpenR font14 c666" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?php echo $measurement[0];?>">
                                 <span class='fLeft'>X</span>
                                 <input name="measurement2" id="measure2" type="text" autocomplete="false" placeholder=" eg. 20" maxlength="5" class="mtxtInput fLeft fmOpenR font14 c666" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?php echo $measurement[1]; ?>">
@@ -269,19 +269,22 @@
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">Girdle*</div>
-                            <input name="girdle" id="girdle" type="text" autocomplete="false" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666" maxlength="5" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['girdle'];?>">
+                            <div class="suggestGirdle suggestHolder">
+                                <input name="girdle" id="girdle" type="text" autocomplete="false" placeholder=" eg. 1.33" class="txtInput fLeft fmOpenR font14 c666"  value="<?=($attr['girdle'] == '0.00') ? '' :  $attr['girdle'];?>">
+                                <div id="girdleSuggestDiv" class="autoSuggestOuter"></div>
+                              </div>
                         </div>
 
                         <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Bar Code*</div>
+                            <div  class="titleDiv txtCap fLeft">Bar Code</div>
                             <input name="barcode" id="barcode" type="text" autocomplete="false" placeholder=" eg. ALXPK12" class="txtInput fLeft fmOpenR font14 c666" maxlength="20" value="<?=$pdet['product_barcode'];?>">
                         </div>
                         <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Lot Number*</div>
+                            <div  class="titleDiv txtCap fLeft">Lot Number</div>
                             <input name="lot_no" id="lotnumber" autocomplete="false" type="text" placeholder=" eg. 56" onkeypress="return common.isDecimalNumber(event,this.value);" maxlength="10" class="txtInput fLeft fmOpenR font14 c666" value="<?=$pdet['product_lotno'];?>">
                         </div>
                         <div class="divCon2  fLeft">
-                            <div  class="titleDiv txtCap fLeft">Lot Reference*</div>
+                            <div  class="titleDiv txtCap fLeft">Lot Reference</div>
                             <input name="lot_ref" id="lotreference" autocomplete="false" type="text" placeholder=" eg. IFtoSI -012" class="txtInput fLeft fmOpenR font14 c666" maxlength="10" value="<?=$pdet['product_lotref'];?>">
                         </div>
                         <div class="divCon2  fLeft">
@@ -294,14 +297,14 @@
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft"> Customer Price*</div>
-                            <input name="price" id="prdprice" type="text" placeholder=" eg. 1200000" autocomplete="false" class="txtInput fLeft fmOpenR font14 c666" readonly maxlength="16" onkeypress="return common.isDecimalNumber(event,this.value);" onChange="(function(el){el.value=parseFloat(el.value).toFixed(15);})(this);" value="<?=$pdet['product_price'];?>">
+                            <input name="price" id="prdcprice" type="text" placeholder=" eg. 1200000" autocomplete="false" class="txtInput fLeft fmOpenR font14 c666" readonly maxlength="16" onkeypress="return common.isDecimalNumber(event,this.value);" onChange="(function(el){el.value=parseFloat(el.value).toFixed(15);})(this);" value="<?=$pdet['product_price'];?>">
                         </div>
                         <div class="divCon2  fLeft">
                             <div  class="titleDiv txtCap fLeft">% Back to Vendor </div>
                             <input name="discountb2b" id="discountb2b" type="text" placeholder=" eg. 25%" autocomplete="false"  class="txtInput fLeft fmOpenR font14 c666" maxlength="5" minlength="1" onkeyup="calculateB2BPrice()" onkeypress="return common.isDecimalNumber(event,this.value);" value="<?=$attr['discountb2b'];?>">
                         </div>
                         <div class="divCon2  fLeft">
-                            
+
                             <div  class="titleDiv txtCap fLeft">Vendor Price*</div>
                             <input name="priceb2b" id="prdb2bprice" type="text" placeholder=" eg. 1200000" autocomplete="false" class="txtInput fLeft fmOpenR font14 c666" readonly maxlength="16" onkeypress="return common.isDecimalNumber(event,this.value);" onChange="(function(el){el.value=parseFloat(el.value).toFixed(15);})(this);" value="<?=$attr['b2bprice'];?>">
                         </div>
@@ -312,7 +315,7 @@
                             </center>
                         </div>
                     </div>
-               
+
             </div>
         </form>
     </div>
@@ -321,43 +324,10 @@
 </div>
 <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['jqryUi']; ?>"></script>
+<script type="text/javascript" src="<?=$jvs['auto'];?>"></script>
 <script type="text/javascript" src="<?=$jvs['vendorLanding'];?>"></script>
 <script type="text/javascript" src="<?=$jvs['pForm'];?>"></script>
 <script type="text/javascript" src="<?=$jvs['jquery_toast']?>"></script>
 <script type="text/javascript">var DOMAIN = '<?php echo DOMAIN;?>';</script>
-<script>
-    function uploadCert(val)
-	{
-		var certFile = val.split(/[\\\/]/g).pop();
-		certFile = certFile.replace(' ','_');
-		certFile = certFile.replace('(','');
-		certFile = certFile.replace(')','');
-
-		if(certFile !== undefined || certFile !== 'undefined' || certFile !== null || certFile !== 'null' || certFile !== '')
-		{
-		
-			if(certFile.length > 20)
-			{
-				certFile = certFile.split(".");
-                                var fileExt = certFile[certFile.length-1];
-                                certFile = certFile[0].substring(0,10)+'..'+fileExt;
-			}
-			if (certFile.substring(3,11) == 'fakepath')
-			{   
-				$('#filePath').removeClass('dn');
-				$('#filePath').text(certFile);
-			}
-			else
-			{
-				$('#filePath').removeClass('dn');
-				$('#filePath').text(certFile);
-			}
-
-			certificate_url = '';
-		}
-    }
-
-
-    </script>
 </body>
 </html>

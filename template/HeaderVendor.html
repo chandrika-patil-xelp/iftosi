@@ -1,12 +1,12 @@
 <div class="topFixedCont">
     <div class="vndHeader fLeft">
-        <div class="wrapperMax">
+        <div class="wrapperMax ">
             <div class="vndLogo fLeft fmOpenR pointer" onclick="window.location.assign(DOMAIN);"><b>IF</b>to<b>SI</b></div>
             <div class="vndInfo fRight fmOpenR">
-                Hi, <span id="userName"></span> 
+                Hi, <span id="userName"></span>
                 <spn class="vendorSt vDactive dn">Deactive</spn>
                 <div class="fRight pointer" onclick="common.doLogout();"><span class="m010">Logout</span></div>
-                
+
                 <input type="hidden" id="pgno" value="1" />
                 <input type="hidden" id="total_pageno" value="<?php echo $lastpg; ?>" />
             </div>
@@ -14,18 +14,20 @@
         if($page !== 'product_list' && $page !== 'thumbnail' && $page !== 'vendorList')
         {
 ?>
-            <div class="fRight cFF fmOpenR font14 rateDiv" style="width:auto;margin: 10px">
-                    <div class="rtCont fLeft"><span class="spTitle">Dollar Rate:</span><span class="spValue" id="dollarRateSpan">&#8377;</span></div>
-                    <div class="rtCont fLeft"><span class="spTitle">Gold Rate:</span><span class="spValue" id="goldRateSpan">&#8377;</span></div>
-                    <div class="rtCont fLeft"><span class="spTitle">Silver Rate:</span><span class="spValue" id="silverRateSpan">&#8377;</span></div>
-                    
+            <div class="fRight cFF fmOpenR font14 rateDiv ">
+                <center>
+                    <div class="rtCont "><span class="spTitle">Dollar Rate:</span><span class="spValue" id="dollarRateSpan">&#8377;</span></div>
+                    <div class="rtCont "><span class="spTitle">Gold Rate:</span><span class="spValue" id="goldRateSpan">&#8377;</span></div>
+                    <div class="rtCont "><span class="spTitle">Silver Rate:</span><span class="spValue" id="silverRateSpan">&#8377;</span></div>
+                    <div class="rtCont "><span class="spTitle">Platinum Rate:</span><span class="spValue" id="platinumRateSpan">&#8377;</span></div>
+                </center>
 <!--                    <span id="" class="dn">Gold Rate : &#8377; </span>
                     <span id="" class="dn">Silver Rate : &#8377; </span>-->
                 </div>
 <?php
         }
 ?>
-            
+
         </div>
     </div>
     <?php  if($page=='product_list' || $page=='thumbnail' || $page == 'vendorList') { ?>
@@ -65,14 +67,23 @@
                     </div>
                     <div id='enqTab' class="fLeft vTabs transition300"><a href="<?php echo DOMAIN; ?>index.php?case=vendor_enquiries">Enquiries</a></div>
                     <div id='profileTab' class="fLeft vTabs transition300" onclick="return showVendorProfile();">Profile</div>
-                    <div class="fLeft vTabs"><a href="<?php echo DOMAIN;?>index.php?case=b2bproducts&catid=10000" target="_blank">B2B Prices</a></div>
+<?php
+                    if($_GET['catid'] == '10000')
+                    {
+?>
+                        <div class="fLeft vTabs"><a href="<?php echo DOMAIN;?>index.php?case=b2bproducts&catid=10000" target="_blank">B2B Prices</a></div>
+<?php
+                    }
+?>
+                        <div class="fLeft vTabs"><a href="<?php echo DOMAIN;?>index.php?case=pending&catid=10000&vid=<?=$_GET['vid'];?>">Pending Products</a></div>
+                        <div class="fLeft vTabs " id="rate_m">Rate Manager</div>
                    <!-- <div id='setTab' class="fLeft vTabs transition300">Settings</div>-->
                 </div>
 <!--                <div class="fRight cFF fmOpenR font14 rateDiv" style="width:auto">
                     <div class="rtCont fLeft"><span class="spTitle">Dollar Rate:</span><span class="spValue" id="dollarRateSpan">&#8377;</span></div>
                     <div class="rtCont fLeft"><span class="spTitle">Gold Rate:</span><span class="spValue" id="goldRateSpan">&#8377;</span></div>
                     <div class="rtCont fLeft"><span class="spTitle">Silver Rate:</span><span class="spValue" id="silverRateSpan">&#8377;</span></div>
-                    
+
                     <span id="" class="dn">Gold Rate : &#8377; </span>
                     <span id="" class="dn">Silver Rate : &#8377; </span>
                 </div>-->
