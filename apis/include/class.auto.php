@@ -332,7 +332,8 @@ class auto extends DB
                       if(orgName like '".$params['str']."%',1,0) AS startwith,
                       MATCH(orgName) AGAINST ('" . $params['str'] . "*' IN BOOLEAN MODE) AS score,
                       orgName AS name,
-                      city
+                      city,
+                      0 AS isArea
               FROM
                       tbl_vendor_master
               WHERE
@@ -351,7 +352,21 @@ class auto extends DB
            $sql.=" LIMIT " . $start . ",$limit";
        }
 
-       $res = $this->query($sql,1);
+       $res = $this->query($sql);
+       if ($this->numRows($res) > 0) {
+
+           $limit = $limit - $this->numRows($res);
+
+           while ($row = $this->fetchData($res)) {
+               $arr[] = $row;
+           }
+           $err = array('Code' => 0, 'Msg' => 'Values are fetched');
+       } else {
+           $arr = "No records matched";
+           $err = array('Code' => 1, 'Msg' => 'Search Query Failed');
+       }
+
+
 
          $sql ="SELECT
                 				id,
@@ -359,7 +374,8 @@ class auto extends DB
                 				if(area like '".$params['str']."%',1,0) AS startwith,
                 				MATCH(area) AGAINST ('" . $params['str'] . "*' IN BOOLEAN MODE) AS score,
                 				area AS name,
-                				dcity AS city
+                				dcity AS city,
+                        1 AS isArea
 			          FROM
 				                tbl_area_master
 			          WHERE
