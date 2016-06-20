@@ -47,7 +47,15 @@ function loadPDiamondCallback(res,pgno)
     var obj = jQuery.parseJSON(res);
     if (obj['results'] != '')
     {
-        var total = obj['results']['Dcnt'];
+        if(obj['results'] !== undefined && obj['results']['Dcnt'] !== undefined)
+        {
+            var total = obj['results']['Dcnt'];
+        }
+        else
+        {
+            var total = obj['results']['total_products'];
+        }
+
         $('#totalDiamonds').text(total);
         $('#count_10000').text('('+total+')')
         var total_pages = obj['results']['total_pages'];
@@ -385,6 +393,15 @@ function loadPJewellCallback(res,pgno)
     var obj = jQuery.parseJSON(res);
     if (obj['results'] != '')
     {
+        if(obj['results'] !== undefined && obj['results']['Jcnt'] !== undefined)
+        {
+            var total = obj['results']['Jcnt'];
+        }
+        else
+        {
+            var total = obj['results']['total_products'];
+        }
+
         var total = obj['results']['Jcnt'];
         $('#totalJewells').text(total);
         $('#count_10001').text('('+total+')');
@@ -667,7 +684,15 @@ function loadPBullionsCallback(res,pgno)
     var obj = jQuery.parseJSON(res);
     if (obj['results'] != '')
     {
-        var total = obj['results']['Bcnt'];
+        if(obj['results'] !== undefined && obj['results']['Bcnt'] !== undefined)
+        {
+            var total = obj['results']['Bcnt'];
+        }
+        else
+        {
+            var total = obj['results']['total_products'];
+        }
+
         $('#totalBullions').text(total);
         $('#count_10002').text('('+total+')');
         var total_pages = obj['results']['total_pages'];

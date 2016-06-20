@@ -636,6 +636,10 @@
                                 <input name="barcode" id="barcode" type="text" placeholder=" eg. ABCD12" maxlength="20" autocomplete="false" class="txtInput fLeft fmOpenR font14 c666"  value="<?= $pdet['product_barcode']; ?>" onfocusout="calculateJPrice();">
                             </div>
                             <div class="divCon2  fLeft">
+                                <div  class="titleDiv txtCap fLeft">Collection Name*</div>
+                                <input name="product_brand" id="product_brand" type="text" placeholder=" eg. ABCD12" maxlength="20" autocomplete="false" class="txtInput fLeft fmOpenR font14 c666"  value="<?= $pdet['product_brand']; ?>">
+                            </div>
+                            <div class="divCon2  fLeft">
                                 <div  class="titleDiv txtCap fLeft">Net Weight (in Grams)*</div>
                                 <input id="netweight" name="net_weight" type="text" placeholder=" eg. 10,20,50" maxlength="8" autocomplete="false" value="<?= round($attr['gold_weight'],3); ?>" onkeypress="return common.isDecimalKey(event);" class="txtInput fLeft fmOpenR font14 c666" onfocusout="">
                             </div>

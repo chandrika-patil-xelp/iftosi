@@ -225,6 +225,7 @@ function validateJForm()
 				var isPlain =  $('input[name=Plain]:checked').val();
 				var certificate =  $('input[name=Certficate]:checked').val();
 				var other_certificate =  $('#other_cerificate').val();
+				var product_brand =  $('#product_brand').val();
 				var metal = $("input[name='metal']:checked").val();
 				var diamondShape = $('.shapeComm');
 				var color =  $('input[name=color]:checked').val();
@@ -596,6 +597,7 @@ function validateJForm()
 							values[32] = "polki_price_per_carat|@|"+encodeURIComponent(polki_price_per_carat);
 							values[33] = "polki_value|@|"+encodeURIComponent(polki_value);
 							values[34] = "gold_type|@|"+encodeURIComponent(gold_type);
+							values[35] = "product_brand|@|"+encodeURIComponent(product_brand);
 
 							dt = values.join('|~|');
 							params += "&dt="+dt;

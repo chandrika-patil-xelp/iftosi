@@ -1675,6 +1675,10 @@ class vendor extends DB
                                     'Gross Weight(in Grams)',
                                     'Product Price'
                                 );
+
+
+        print_r($data);die;
+
         if($type=='csv')
         {
             $rdv = explode("\n", $data);
@@ -1687,6 +1691,9 @@ class vendor extends DB
             $colName=$data[0];
             $len = count($rdv);
         }
+
+
+
         $validFormat=TRUE;
         if(count($colName) == count($defaultColNames))
         {
@@ -1702,8 +1709,8 @@ class vendor extends DB
         {
             $validFormat = FALSE;
         }
-
         $i = $totlIns = 0;
+        echo count($colName);
         if ($validFormat)
         {
             while ($i < $len)
@@ -1715,8 +1722,14 @@ class vendor extends DB
                 else
                 {
                     $value=$rdv[$i];
+                    $isBlank = false;
+                    if(!array_sum($value))
+                    {
+                       $isBlank = true;
+                    }
                 }
-                if ($i != 0)
+
+                if ($i != 0 && $isBlank == false)
                 {
                     $ts = date('Y-m-d H:i');
                     $query = "
@@ -1794,14 +1807,16 @@ class vendor extends DB
                                                 prd_price,
                                                 b2bprice,
                                                 barcode,
+                                                product_brand,
                                                 date_time
                                             )
                                     VALUES
                                             (
-                                                '" . $pro_id . "',
+                                                '" . $pro_id    . "',
                                                 '" . $value[31] . "',
                                                 '" . $value[31] . "',
-                                                '".  $value[1]."',
+                                                '" . $value[1]  . "',
+                                                '" . $value[27] . "',
                                                 '" . $ts . "'
                                             )";
 
@@ -1840,7 +1855,6 @@ class vendor extends DB
                                             num_gemstones         =   '".$value[23]."',
                                             othermaterial         =   '".$value[24]."',
                                             labour_charge         =   '".$value[25]."',
-                                            collection            =   '".$value[27]."',
                                             gold_purity           =   '".$value[28]."',
                                             gold_weight           =   '".$value[29]."',
                                             grossweight           =   '".$value[30]."',
@@ -1850,6 +1864,10 @@ class vendor extends DB
                         $res = $this->query($sql);
                         $totlIns++;
                     }
+                }
+                else
+                {
+                    $res = false;
                 }
                 $i++;
             }
@@ -1866,6 +1884,15 @@ class vendor extends DB
                                 'Code' => 0,
                                 'Msg' => 'Products are updated Successfully'
                             );
+            }
+            else if($res == false)
+            {
+              $arr = array();
+              $err = array
+                          (
+                              'Code' => 0,
+                              'Msg' => 'Products are updated Successfully with blank values'
+                          );
             }
             else
             {
@@ -1956,11 +1983,17 @@ class vendor extends DB
                 }
                 else
                 {
+                    $isBlank = false;
                     $value=$rdv[$i];
+                    if(!array_sum($value))
+                    {
+                       $isBlank = true;
+                    }
                 }
-                if ($i != 0)
+                if ($i != 0 && $isBlank == false)
                 {
                     $ts = date('Y-m-d H:i');
+
                     $query = "
                                 INSERT
                                 INTO
@@ -2102,6 +2135,10 @@ class vendor extends DB
                         $totlIns++;
                     }
                 }
+                else
+                {
+                    $res = false;
+                }
                 $i++;
             }
             if ($res)
@@ -2116,6 +2153,16 @@ class vendor extends DB
                             (
                                 'Code' => 0,
                                 'Msg' => 'Products are updated Successfully'
+                            );
+            }
+            else if($res == false)
+            {
+                $arr = array
+                            ();
+                $err = array
+                            (
+                                'Code' => 0,
+                                'Msg' => 'Products are updated Successfully with some blank fields'
                             );
             }
             else
@@ -2250,8 +2297,13 @@ class vendor extends DB
                 else
                 {
                     $value=$rdv[$i];
+                    $isBlank = false;
+                    if(!array_sum($value))
+                    {
+                       $isBlank = true;
+                    }
                 }
-                if ($i != 0)
+                if ($i != 0 && $isBlank == false)
                 {
                     $ts = date('Y-m-d H:i');
                     $query = "  INSERT
@@ -2431,6 +2483,10 @@ class vendor extends DB
                         $totlIns++;
                     }
                 }
+                else
+                {
+                    $res = false;
+                }
                 $i++;
             }
             if ($res)
@@ -2447,6 +2503,15 @@ class vendor extends DB
                                 'Code' => 0,
                                 'Msg' => 'Products are updated Successfully'
                             );
+            }
+            else if($res == false)
+            {
+              $arr = array();
+              $err = array
+                          (
+                              'Code' => 0,
+                              'Msg' => 'Products are updated Successfully'
+                          );
             }
             else
             {
