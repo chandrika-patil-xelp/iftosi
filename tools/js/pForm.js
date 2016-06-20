@@ -1479,8 +1479,9 @@ function calculateJPrice()
 												$('#Certficate_BIS').prop('checked',true).attr('disabled',false);
 												$('#gold').prop('checked',true).attr('disabled',false);
 												$('.gtype').removeClass('dn');
-												$('#gemsTypeCont_1').addClass('dn');
-												$('#gemstone_type option').removeClass('dn');
+												$('.dShapeTitle').removeClass('dn');
+												$('#diamondShapeCont').removeClass('dn');
+												$('#gemsTypeCont').addClass('dn');
 												$('.rateValue').text('Gold Value*');
 												break;
 								case 'PLATINUM & DIAMONDS':
@@ -1489,8 +1490,9 @@ function calculateJPrice()
 												$("input[name='Certficate']").prop('checked',false).attr('disabled',false);
 												$('#platinum').prop('checked',true).attr('disabled',false);
 												$('.gtype').addClass('dn');
-												$('#gemsTypeCont_1').addClass('dn');
-												$('#gemstone_type option').removeClass('dn');
+												$('.dShapeTitle').removeClass('dn');
+												$('#diamondShapeCont').removeClass('dn');
+												$('#gemsTypeCont').addClass('dn');
 												$('.rateValue').text('Platinum Value*');
 												break;
 								case 'SILVER & DIAMONDS':
@@ -1499,8 +1501,9 @@ function calculateJPrice()
 												$("input[name='Certficate']").prop('checked',false).attr('disabled',false);
 												$('#silver').prop('checked',true).attr('disabled',false);
 												$('.gtype').addClass('dn');
-												$('#gemsTypeCont_1').addClass('dn');
-												$('#gemstone_type option').removeClass('dn');
+												$('.dShapeTitle').removeClass('dn');
+												$('#diamondShapeCont').removeClass('dn');
+												$('#gemsTypeCont').addClass('dn');
 												$('.rateValue').text('Silver Value*');
 												break;
 								case 'GOLD, DIAMONDS & GEMSTONES':
@@ -1510,8 +1513,9 @@ function calculateJPrice()
 												$('#Certficate_BIS').prop('checked',true).attr('disabled',false);
 												$('#gold').prop('checked',true).attr('disabled',false);
 												$('.gtype').removeClass('dn');
-												$('#gemsTypeCont_1').removeClass('dn');
-												$('#gemstone_type option').removeClass('dn');
+												$('.dShapeTitle').removeClass('dn');
+												$('#diamondShapeCont').removeClass('dn');
+												$('#gemsTypeCont').removeClass('dn');
 												$('.rateValue').text('Gold Value*');
 												break;
 								case 'PLATINUM, DIAMONDS & GEMSTONES':
@@ -1520,8 +1524,9 @@ function calculateJPrice()
 												$("input[name='Certficate']").prop('checked',false).attr('disabled',false);
 												$('#platinum').prop('checked',true).attr('disabled',false);
 												$('.gtype').addClass('dn');
-												$('#gemsTypeCont_1').removeClass('dn');
-												$('#gemstone_type option').removeClass('dn');
+												$('.dShapeTitle').removeClass('dn');
+												$('#diamondShapeCont').removeClass('dn');
+												$('#gemsTypeCont').removeClass('dn');
 												$('.rateValue').text('Platinum Value*');
 												break;
 								case 'SILVER, DIAMONDS & GEMSTONES':
@@ -1529,9 +1534,10 @@ function calculateJPrice()
 												$("input[name='metal']").attr('disabled',true);
 												$("input[name='Certficate']").prop('checked',false).attr('disabled',false);
 												$('#silver').prop('checked',true).attr('disabled',false);
-												$('.gtype').removeClass('dn');
-												$('#gemsTypeCont_1').removeClass('dn');
-												$('#gemstone_type option').removeClass('dn');
+												$('.gtype').addClass('dn');
+												$('.dShapeTitle').removeClass('dn');
+												$('#diamondShapeCont').removeClass('dn');
+												$('#gemsTypeCont').removeClass('dn');
 												$('.rateValue').text('Silver Value*');
 												break;
 								case 'GOLD & GEMSTONES':
@@ -1543,8 +1549,7 @@ function calculateJPrice()
 												$('.gtype').removeClass('dn');
 												$('.dShapeTitle').addClass('dn');
 												$('#diamondShapeCont').addClass('dn');
-												$('#gemsTypeCont_1').removeClass('dn');
-												$('#gemstone_type option').removeClass('dn');
+												$('#gemsTypeCont').removeClass('dn');
 												$('.rateValue').text('Gold Value*');
 												break;
 								case 'SILVER & GEMSTONES':
@@ -1557,8 +1562,7 @@ function calculateJPrice()
 												$('.gtype').addClass('dn');
 												$('.dShapeTitle').addClass('dn');
 												$('#diamondShapeCont').addClass('dn');
-												$('#gemsTypeCont_1').removeClass('dn');
-												$('#gemstone_type option').removeClass('dn');
+												$('#gemsTypeCont').removeClass('dn');
 												$('.rateValue').text('Silver Value*');
 												break;
 								case 'GOLD & SWAROVSKI ZIRCONIA':
@@ -1570,7 +1574,7 @@ function calculateJPrice()
 												$('.gtype').removeClass('dn');
 												$('.dShapeTitle').addClass('dn');
 												$('#diamondShapeCont').addClass('dn');
-												$('#gemsTypeCont_1').removeClass('dn');
+												$('#gemsTypeCont').removeClass('dn');
 												$('#gemstone_type').val('SWAROVSKI ZIRCONIA');
 												$('#gemstone_type option').addClass('dn');
 												changeGemstoneType('SWAROVSKI ZIRCONIA',1);
@@ -1585,6 +1589,7 @@ function calculateJPrice()
 												$('.gtype').addClass('dn');
 												$('.dShapeTitle').addClass('dn');
 												$('#diamondShapeCont').addClass('dn');
+												$('#gemsTypeCont').removeClass('dn');
 												$('#gemsTypeCont_1').removeClass('dn');
 												$('#gemstone_type').val('SWAROVSKI ZIRCONIA');
 												$('#gemstone_type option').addClass('dn');
@@ -1599,6 +1604,7 @@ function calculateJPrice()
 												$('.gtype').removeClass('dn');
 												$('.dShapeTitle').addClass('dn');
 												$('#diamondShapeCont').addClass('dn');
+												$('#gemsTypeCont').removeClass('dn');
 												$('#gemsTypeCont_1').removeClass('dn');
 												$('#gemstone_type').val('Cz');
 												$('#gemstone_type option').addClass('dn');
@@ -1614,6 +1620,7 @@ function calculateJPrice()
 												$('.gtype').addClass('dn');
 												$('.dShapeTitle').addClass('dn');
 												$('#diamondShapeCont').addClass('dn');
+												$('#gemsTypeCont').removeClass('dn');
 												$('#gemsTypeCont_1').removeClass('dn');
 												$('#gemstone_type').val('Cz');
 												$('#gemstone_type option').addClass('dn');
@@ -1627,10 +1634,9 @@ function calculateJPrice()
 												$('#Certficate_BIS').prop('checked',true).attr('disabled',false);
 												$('#gold').prop('checked',true).attr('disabled',false);
 												$('.gtype').removeClass('dn');
-												$('#gemsTypeCont_1').addClass('dn');
+												$('#gemsTypeCont').addClass('dn');
 												$('.dShapeTitle').addClass('dn');
 												$('#diamondShapeCont').addClass('dn');
-												$('#gemstone_type option').addClass('dn');
 												$('.rateValue').text('Gold Value*');
 												break;
 								case 'PLAIN PLATINUM':
@@ -1642,9 +1648,9 @@ function calculateJPrice()
 												$('#platinum').prop('checked',true).attr('disabled',false);
 												$('.gtype').addClass('dn');
 												$('#gemsTypeCont_1').addClass('dn');
+												$('#gemsTypeCont').addClass('dn');
 												$('.dShapeTitle').addClass('dn');
 												$('#diamondShapeCont').addClass('dn');
-												$('#gemstone_type option').addClass('dn');
 												$('.rateValue').text('Platinum Value*');
 												break;
 								case 'PLAIN SILVER':
@@ -1657,7 +1663,7 @@ function calculateJPrice()
 												$('#gemsTypeCont_1').addClass('dn');
 												$('.dShapeTitle').addClass('dn');
 												$('#diamondShapeCont').addClass('dn');
-												$('#gemstone_type option').addClass('dn');
+												$('#gemsTypeCont').addClass('dn');
 												$('.rateValue').text('Silver Value*');
 												break;
 								case 'GOLD & POLKI':
@@ -1669,6 +1675,7 @@ function calculateJPrice()
 												$('#gold').prop('checked',true).attr('disabled',false);
 												$('.gtype').removeClass('dn');
 												$('#gemsTypeCont_1').removeClass('dn');
+												$('#gemsTypeCont').removeClass('dn');
 												$('.dShapeTitle').addClass('dn');
 												$('#diamondShapeCont').addClass('dn');
 												$('#gemstone_type option').removeClass('dn');

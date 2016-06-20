@@ -1,7 +1,7 @@
 /*
 
 	Autosuggest Component By Xelpmoc and Team.
-	
+
 	Parameters
 	str: String for search
 	txt: Text Box ID to be with # attached
@@ -9,7 +9,7 @@
 	filepath: File Path
 	params: Get Parameters as a String
 	vcheck: Do you want data to be retrived when the search string is empty (if yes pass true else pass false)
-	
+
 	Callback Function
 	arrangeData(data): Callback function with data passed to it. Should be written at your end.
 
@@ -25,7 +25,7 @@ var autodata = '';
 var JSONcache = new Array();
 
 Autosuggest = function(str,txt,suggest,filepath,params,vcheck,nextxt,hiddenid,evnt) {
-	
+
 	if (handleKeys(evnt,txt,suggest,nextxt,'',hiddenid,params)==true)
 	{
 		return false;
@@ -34,7 +34,7 @@ Autosuggest = function(str,txt,suggest,filepath,params,vcheck,nextxt,hiddenid,ev
 }
 
 SUGGESTION = function(URL,parameter,divHolder,txt,vcheck,nextxt) {
-	
+
 	if(!vcheck)
 	{
 		if($(txt).val() == '')
@@ -57,7 +57,7 @@ SUGGESTION = function(URL,parameter,divHolder,txt,vcheck,nextxt) {
 			return false;
 		}
 	auto = true;
-	
+
 	if(JSONcache[parameter])
 	{
 		var Jdata = JSONcache[parameter];
@@ -76,7 +76,7 @@ SUGGESTION = function(URL,parameter,divHolder,txt,vcheck,nextxt) {
 	else
 	{
 		SUGGESTObject = $.getJSON(URL, parameter, function(data) {
-			
+
 			if(data && data.results)
 			{
 				autodata = arrangeData(data,txt,divHolder,nextxt);
@@ -99,14 +99,12 @@ function timout() {
 	timeauto = null;
 }
 
-function setAutoData(cid,cval,id,divHolder,nextxt,hiddenid)
+function setAutoData(cid,cval,id,divHolder,nextxt,hiddenid,isArea)
 {
-    
-	//common.addToStorage(id.replace('#',''),cval);
+
             $(id).val(cval.trim());
         if(typeof(hiddenid) !== "undefined") {
                 $(hiddenid).val(cid);
-                //common.addToStorage(hiddenid.replace('#',''),cid);
         }
 	setTimeout(function (){
 		focusfn();
@@ -115,7 +113,7 @@ function setAutoData(cid,cval,id,divHolder,nextxt,hiddenid)
 		$(divHolder).addClass('dn');
 		$(divHolder).html();
 	},20);
-        
+
         if(id == '#txtjArea')
         {
             makeCall(id,cid);
@@ -168,7 +166,7 @@ var handleKeys = function(evt,txt,divHolder,nextxt,divSelection,hiddenid,params)
 		return true;
 	}
 	if (keyCode == 38 || keyCode == 40) {
-		
+
 		var li_Index="-1";
 		$(divHolder+' ul li').each(function(index,data) {
 			if($(data).hasClass("autoSuggestRowSelect")==true) {
@@ -187,7 +185,7 @@ var handleKeys = function(evt,txt,divHolder,nextxt,divSelection,hiddenid,params)
 				li_Index = 0;
 			else
 				li_Index++;
-                                
+
 		}
 		$(divHolder+' ul li').each(function(index,data) {
 			if (index  == li_Index) {

@@ -737,7 +737,6 @@ switch($action)
                     {
                         $Reader = new SpreadsheetReader($filename);
                         $Sheets = $Reader->Sheets();
-
                         $Reader->ChangeSheet(0);
                         foreach ($Reader as $Key => $Row)
                         {
@@ -763,7 +762,6 @@ switch($action)
                 }
                 else if($params['catid']==10002)
                 {
-
                     $result = $obj->uploadBullionProducts($params);
                 }
             }

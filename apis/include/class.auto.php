@@ -322,6 +322,7 @@ class auto extends DB
 
     public function suggestAreaCity($params)
     {
+        $arr = $arr1 = array();
         $page=(!empty($params['page'])) ? trim(urldecode($params['page'])) : 1;
         $limit=(!empty($params['limit'])) ? trim(urldecode($params['limit'])) : 7;
 
@@ -368,7 +369,7 @@ class auto extends DB
 
 
 
-         $sql ="SELECT
+         $sql1 ="SELECT
                 				id,
                 				if(area = '".$params['str']."',1,0) AS exact,
                 				if(area like '".$params['str']."%',1,0) AS startwith,
@@ -390,23 +391,29 @@ class auto extends DB
         $limit = $params['limit'];
         if (!empty($page)) {
             $start = ($page * $limit) - $limit;
-            $sql.=" LIMIT " . $start . ",$limit";
+            $sql1.=" LIMIT " . $start . ",$limit";
         }
-        $res = $this->query($sql);
-        if ($this->numRows($res) > 0) {
-            while ($row = $this->fetchData($res)) {
-                $arr[] = $row;
+        $res1 = $this->query($sql1);
+        if ($this->numRows($res1) > 0) {
+            while($row1 = $this->fetchData($res1))
+            {
+                $arr1[] = $row1;
             }
             $err = array('Code' => 0, 'Msg' => 'Values are fetched');
         } else {
             $arr = "No records matched";
             $err = array('Code' => 1, 'Msg' => 'Search Query Failed');
         }
-        $result = array('results' => $arr, 'error' => $err);
+
+        if(is_array($arr) && is_array($arr1))
+            $arr2 = array_merge($arr,$arr1);
+        else if(is_array($arr))
+            $arr2 = $arr;
+        else
+            $arr2 = $arr1;
+
+        $result = array('results' => $arr2, 'error' => $err);
         return $result;
     }
-
-
-
 }
 ?>

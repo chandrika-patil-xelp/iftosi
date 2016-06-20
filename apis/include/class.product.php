@@ -1204,7 +1204,7 @@
           						{
                           if($city_area[1] == 'vendor')
                           {
-                              $vndrIds = $whr_cond;
+                              $vndrIds = $city_area[0];
                           }
                           else
                           {
@@ -1229,8 +1229,9 @@
                                       $vndrIds[] = $vndrRow['vendor_id'];
                                   }
                               }
+                              $vndrIds = implode('","', $vndrIds);
                           }
-                          $vndrIds = implode('","', $vndrIds);
+
           						}
         							$sqlpct = "
                 									SELECT
@@ -1274,10 +1275,8 @@
                                           active_flag,
                                           color,
                                           clarity,
-                                          cut,
                                           polish,
                                           symmetry,
-                                          fluo,
                                           cut,
                                           fluo,
                                           combination,
@@ -1291,8 +1290,6 @@
                             ) t
                         WHERE
                               active_flag=1
-                        AND
-                              complete_flag=1
                             ".$extn."
                             ".$extnhv."";
         					$res = $this->query($sql);

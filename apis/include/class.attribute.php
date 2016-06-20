@@ -230,22 +230,22 @@ class attribute extends DB
     public function fetch_category_mapping($params)
     {
         $mapsql="SELECT
-					attribute_id,
-					attr_unit,
-					attr_unit_pos,
-					trim(attr_values) as attr_values,
-					trim(attr_range) as attr_range,
-					display_type
-				FROM
-					tbl_attribute_category_mapping
-				WHERE
-					category_id=".$params['catid']."
-				AND
-					attr_display_flag = 1
-				AND
-					attr_filter_flag = 1
-				ORDER BY
-					attr_filter_position ASC ";
+              					attribute_id,
+              					attr_unit,
+              					attr_unit_pos,
+              					trim(attr_values) as attr_values,
+              					trim(attr_range) as attr_range,
+              					display_type
+				         FROM
+					              tbl_attribute_category_mapping
+				         WHERE
+					              category_id=".$params['catid']."
+				         AND
+					              attr_display_flag = 1
+				         AND
+					              attr_filter_flag = 1
+				         ORDER BY
+					              attr_filter_position ASC ";
         $mapres=$this->query($mapsql);
         $cres=$this->numRows($mapres);
         if($cres>0)
@@ -253,9 +253,9 @@ class attribute extends DB
             $i=0;
             while($row=$this->fetchData($mapres))
             {
-				$attrid[] = $row['attribute_id'];
-				$attributeMap[$row['attribute_id']] = $row;
-				$i++;
+        				$attrid[] = $row['attribute_id'];
+        				$attributeMap[$row['attribute_id']] = $row;
+        				$i++;
             }
             $atribs=implode(',',$attrid);
             $attrsql="SELECT
