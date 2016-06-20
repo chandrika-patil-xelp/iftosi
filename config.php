@@ -71,7 +71,7 @@ else
 }
 define('SMSAPI','http://alerts.sinfini.com/api/web2sms.php?workingkey=Ae24f0c241588043b00e0449d6e2a5664&to=+91_MOBILE&sender=IFTOSI&message=_MESSAGE');
 
-define('VERSION',6.41);
+define('VERSION',6.42);
 
 $dollarValue = 66.03;
 
@@ -84,7 +84,7 @@ define('goldRate',$goldRate);
 $silverRate = 35918.00;
 define('silverRate',$silverRate);
 
-$silverRate = 12000.00;
+$platinumRate = 12000.00;
 define('platinumRate',$platinumRate);
 
 define('FAVICON', DOMAIN . 'tools/img/common/favicon.ico');
