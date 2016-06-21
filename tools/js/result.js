@@ -376,8 +376,8 @@ function arrangeData(adata, id, divHolder, nextxt)
             if (id == '#txtjArea')
 			{
 				var dtval = (vl.city) ? vl.name+' ('+vl.city+')' : vl.name;
-				var dtid = (vl.city) ? vl.id+'_area' : vl.id;
-				html += '<li class="autoSuggstions transition300 txtCap" onmousedown="setAutoData(\'' + dtid + '\',\'' + vl.name + '\',\'' + id + '\',\'' + divHolder + '\',\'\',\'#ctid\');" id="' + dtid + '">'+dtval+'</li>';
+				var dtid = (vl.isArea == '1') ? vl.id+'_area' : vl.id+'_vendor';
+				html += '<li class="autoSuggstions transition300 txtCap" onmousedown="setAutoData(\'' + dtid + '\',\'' + vl.name + '\',\'' + id + '\',\'' + divHolder + '\',\'\',\'#ctid\',\'' + vl.isArea + '\');" id="' + dtid + '">'+dtval+'</li>';
 			}
         });
         html += '</ul>';
@@ -1795,7 +1795,6 @@ function FR(sortby,showtree) {
 		}
 	});
 	var tlist = tlistarr.join('|$|');
-
 	var ctid = $('#ctid').val();
 
 	var pgno = $('#pgno').val();

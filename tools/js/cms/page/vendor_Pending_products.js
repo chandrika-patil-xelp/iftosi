@@ -14,18 +14,23 @@ $(document).ready(function()
 
     $('.wishTabComm').bind('click',function()
     {
+        $('.wishTabComm').removeClass('sel');
         if($(this).attr('id') ==10002)
         {
+            $(this).addClass('sel');
+
             $('#diamondPendingPrds,#jewelleryPendingPrds').addClass('dn');
             $('#bullionPendingPrds').removeClass('dn');
         }
         if($(this).attr('id') ==10000)
         {
+            $(this).addClass('sel');
             $('#bullionPendingPrds,#jewelleryPendingPrds').addClass('dn');
             $('#diamondPendingPrds').removeClass('dn');
         }
         if($(this).attr('id') ==10001)
         {
+            $(this).addClass('sel');
             $('#bullionPendingPrds,#diamondPendingPrds').addClass('dn');
             $('#jewelleryPendingPrds').removeClass('dn');
         }
@@ -224,6 +229,7 @@ function pagination(data,pgno)
         						{
           							if(i == pgno)
           							{
+                          var str = '<li>';
           								  html += '<div class="pgComm poR ripplelink pgActive">'+i+'</div>';
           							}
           							else
@@ -243,6 +249,7 @@ function pagination(data,pgno)
 function generateDiamondList(obj)
 {
     var cl='';
+    var str = '';
     var pro_name = obj['product_name'];
     if(pro_name == null || pro_name == '' || pro_name == 'null')
     {
@@ -263,7 +270,7 @@ function generateDiamondList(obj)
         b2b_price = "&#36;"+b2b_price;
     }
     var date = obj['update_time'].split(' ');
-    var str = '<li>';
+    str += '<li>';
         str += '<div class="date fLeft"> ';
             str += '<span class="upSpan">' + date[0] + '</span>';
             str += '<span class="lwSpan">' + date[1] + '</span>';
@@ -355,15 +362,15 @@ function generateDiamondList(obj)
             str += '<option '+((obj['active_flag']) == 3 ? "selected" : "")+' class="arrow txtCenter" value="3">Out Of Stock</option>';
             str += '<option '+((obj['active_flag']) == 4 ? "selected" : "")+' class="arrow txtCenter" value="4">Sold</option>';
           str += '</select>'
-        str += '<div class="deltBtn poR fRight ripplelink" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
-        str += '<a href="'+ DOMAIN +'index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn fRight poR ripplelink"></div></a>';
-        str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn fRight poR ripplelink"></div></a>';
+        str += '<div class="deltBtn showLeftHelp poR fRight " onclick="showConfirmDelete(' + obj['id'] + ',this)"><span class="tool_tip_left_35">Delete Product</span></div>';
+        str += '<a href="'+ DOMAIN +'index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn showLeftHelp fRight poR"><span class="tool_tip_left_35">Edit Product</span></div></a>';
+        str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn showLeftHelp fRight poR"><span class="tool_tip_left_35">Upload Image</span></div></a>';
       str += '</div>';
       str += '<div class="tltpBtn">';
         str += '<div class="tltpbox transition300">';
           str += '<div class="deltBtn poR fRight ripplelink" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
-          str += '<a href="'+ DOMAIN +'index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn fRight poR ripplelink"></div></a>';
-          str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn fRight poR ripplelink"></div></a>';
+          str += '<a href="'+ DOMAIN +'index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn fRight poR"></div></a>';
+          str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn fRight poR"></div></a>';
           str += '<select id="isStock'+ obj['id'] +'" onchange="inStock(' + obj['id'] + ',this.value);" value='+obj['active_flag']+' class="txtSelect fmOpenB '+cl+' fLeft">';
             str += '<option '+((obj['active_flag']) == 1 ? "selected" : "")+' class="arrow txtCenter" value="1">In Stock</option>';
             str += '<option '+((obj['active_flag']) == 3 ? "selected" : "")+' class="arrow txtCenter" value="3">Out Of Stock</option>';
@@ -393,9 +400,9 @@ function loadPJewellCallback(res,pgno)
     var obj = jQuery.parseJSON(res);
     if (obj['results'] != '')
     {
-        if(obj['results'] !== undefined && obj['results']['Jcnt'] !== undefined)
+        if(obj['results'] !== undefined && obj['results']['Bcnt'] !== undefined)
         {
-            var total = obj['results']['Jcnt'];
+            var total = obj['results']['Bcnt'];
         }
         else
         {
@@ -595,8 +602,9 @@ function generateJewellList(obj)
                 tempUrl += obj.cert;
             }
         }
+        var str = '';
         var date = obj['update_time'].split(' ');
-        var str = '<li>';
+          str += '<li>';
                 str += '<div class="date fLeft"> ';
                     str += '<span class="upSpan">' + date[0] + '</span>';
                     str += '<span class="lwSpan">'+ date[1] +'</span>';
@@ -646,15 +654,15 @@ function generateJewellList(obj)
                         str += '<option value="1" '+((obj['active_flag']) == 1 ? "selected" : "")+'>In Stock</option>';
                         str += '<option value="3" '+((obj['active_flag']) == 3 ? "selected" : "")+'>Out Of Stock</option>';
                     str += '</select>';
-                    str += '<div class="deltBtn poR ripplelink fRight" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
-                    str += '<a href="'+ DOMAIN +'index.php?case=jewellery_Form&catid=10001&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn poR ripplelink fRight"></div></a>';
-                    str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn poR ripplelink fRight"></div></a>';
+                    str += '<div class="deltBtn showLeftHelp poR fRight" onclick="showConfirmDelete(' + obj['id'] + ',this)"><span class="tool_tip_left_35">Delete Product</span></div>';
+                    str += '<a href="'+ DOMAIN +'index.php?case=jewellery_Form&catid=10001&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn showLeftHelp poR fRight"><span class="tool_tip_left_35">Edit Product</span></div></a>';
+                    str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn showLeftHelp poR fRight"><span class="tool_tip_left_35">Upload Image</span></div></a>';
                 str += '</div>';
                 str += '<div class="tltpBtn">';
                     str += '<div class="tltpbox transition300">';
-                        str += '<div class="deltBtn poR fRight ripplelink" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
-                        str += '<a href="'+ DOMAIN +'index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn fRight poR ripplelink"></div></a>';
-                        str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn fRight poR ripplelink"></div></a>';
+                        str += '<div class="deltBtn poR fRight " onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
+                        str += '<a href="'+ DOMAIN +'index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn fRight poR "></div></a>';
+                        str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn fRight poR"></div></a>';
                         str += '<select id="isStock'+ obj['id'] +'" onchange="inStock(' + obj['id'] + ',this.value);" value='+obj['active_flag']+' class="txtSelect fmOpenR fLeft '+cl+'">';
                             str += '<option value="1" '+((obj['active_flag']) == 1 ? "selected" : "")+'>In Stock</option>';
                             str += '<option value="3" '+((obj['active_flag']) == 3 ? "selected" : "")+'>Out Of Stock</option>';
@@ -915,15 +923,15 @@ function generatBullionsList(obj)
                     str += '<option value="1" '+((obj['active_flag']) == 1 ? "selected" : "")+'>In Stock</option>';
                     str += '<option value="3" '+((obj['active_flag']) == 3 ? "selected" : "")+'>Out Of Stock</option>';
                 str += '</select>';
-                str += '<div class="deltBtn poR ripplelink fRight" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
-                str += '<a href="'+ DOMAIN +'index.php?case=bullion_Form&catid=10002&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn poR ripplelink fRight"></div></a>';
-                str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn poR ripplelink fRight"></div></a>';
+                str += '<div class="deltBtn showLeftHelp poR fRight" onclick="showConfirmDelete(' + obj['id'] + ',this)"><span class="tool_tip_left_35">Delete Product</span></div>';
+                str += '<a href="'+ DOMAIN +'index.php?case=bullion_Form&catid=10002&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn showLeftHelp poR ripplelink fRight"><span class="tool_tip_left_35">Edit Product</span></div></a>';
+                str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn showLeftHelp poR fRight"><span class="tool_tip_left_35">Upload Image</span></div></a>';
             str += '</div>';
             str += '<div class="tltpBtn">';
                 str += '<div class="tltpbox transition300">';
-                    str += '<div class="deltBtn poR fRight ripplelink" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
+                    str += '<div class="deltBtn poR fRight" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
                     str += '<a href="'+ DOMAIN +'index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn fRight poR ripplelink"></div></a>';
-                    str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn fRight poR ripplelink"></div></a>';
+                    str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn fRight poR"></div></a>';
                     str += '<select id="isStock'+ obj['id'] +'" onchange="inStock(' + obj['id'] + ',this.value);" value='+obj['active_flag']+' class="txtSelect fmOpenR fLeft '+cl+'">';
                         str += '<option value="1" '+((obj['active_flag']) == 1 ? "selected" : "")+'>In Stock</option>';
                         str += '<option value="3" '+((obj['active_flag']) == 3 ? "selected" : "")+'>Out Of Stock</option>';
@@ -1078,25 +1086,26 @@ $('.prdSeachTxt').val('');
 
 function searchBarcode(val,pgno)
 {
+    var cid = parseInt($('.wishTabComm').closest('.sel').attr('id'));
   	if(!pgno)
   		pgno = 1;
   	searchVal = val;
-      if(catid==10000)
+      if(cid==10000)
       {
-          searchIDName='Diamonds';
+          searchIDName='DiamondsPList';
       }
-      else if(catid==10001)
+      else if(cid==10001)
       {
-          searchIDName='Jewells';
+          searchIDName='JewellsPList';
       }
-      else if(catid==10002)
+      else if(cid==10002)
       {
-          searchIDName='Bullions';
+          searchIDName='BullionsPList';
       }
       if(val!='')
       {
           var tmstmp = new Date().getTime();
-          $.ajax({url: common.APIWebPath() + "index.php?action=getVProductsByBcode&bcode="+ val +"&vid="+ uid +"&catid="+catid+"&page="+pgno+"&limit=50"+"&timestamp="+tmstmp, success: function (result)
+          $.ajax({url: common.APIWebPath() + "index.php?action=getVPendingSearch&bcode="+ val +"&vid="+ uid +"&catid="+cid+"&page="+pgno+"&limit=50"+"&timestamp="+tmstmp, success: function (result)
                 {
                     searchBarcodeCallback(result,pgno);
                 }
@@ -1105,25 +1114,27 @@ function searchBarcode(val,pgno)
       }
       else
       {
-          $('#'+searchIDName+'List').removeClass('dn');
-          $('#s'+searchIDName+'List').html('').addClass('dn');
+          $('#'+searchIDName).removeClass('dn');
+          $('#s'+searchIDName).html('').addClass('dn');
       }
 }
 function searchBarcodeCallback(res,pgno)
 {
     var obj = jQuery.parseJSON(res);
+    var cid = parseInt($('.wishTabComm').closest('.sel').attr('id'));
+
     if (obj['results'] !== '')
     {
         var total = obj['results']['total_products'];
-        $('#'+searchIDName+'List').addClass('dn');
-        $('#s'+searchIDName+'List').removeClass('dn');
+        $('#'+searchIDName).addClass('dn');
+        $('#s'+searchIDName).removeClass('dn');
         if(total!=0)
         {
             searchScroll = true;
             var len = obj['results']['products'].length;
             var i = 0;
             var catName;
-            if(catid==10000)
+            if(cid==10000)
             {
                 var str = '';
                 while (i < len)
@@ -1132,7 +1143,7 @@ function searchBarcodeCallback(res,pgno)
                     i++;
                 }
             }
-            else if(catid==10001)
+            else if(cid==10001)
             {
                 var str = '';
                 while (i < len)
@@ -1141,7 +1152,7 @@ function searchBarcodeCallback(res,pgno)
                     i++;
                 }
             }
-            else if(catid==10002)
+            else if(cid==10002)
             {
                 var str = '';
                 while (i < len)
@@ -1153,8 +1164,8 @@ function searchBarcodeCallback(res,pgno)
 			      var html = pagination(obj,pgno);
             if(str !== undefined && str !== null && str !== '')
             {
-        				$('#s'+searchIDName+'List').html(str);
-        				$('#s'+searchIDName+'List').append(html);
+        				$('#s'+searchIDName).html(str);
+        				$('#s'+searchIDName).append(html);
         				$('.pgComm').click( function()
                 {
           					$('.pgComm').removeClass('pgActive');
@@ -1169,13 +1180,13 @@ function searchBarcodeCallback(res,pgno)
         {
             searchScroll = false;
             var str = '<p class="noRecords"><span>Sorry! No Products Found!</span></p>';
-            $('#s'+searchIDName+'List').html(str);
+            $('#s'+searchIDName).html(str);
         }
     }
     else
     {
         searchScroll = false;
         var str = '<p class="noRecords"><span>Sorry! No Products Found!</span></p>';
-        $('#s' + searchIDName + 'List').html(str);
+        $('#s' + searchIDName).html(str);
     }
 }

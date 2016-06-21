@@ -7,11 +7,19 @@
                 <div class="searchCon h50">
                     <div class="areaCont fLeft fmOpenR">
                         <div class="srcTitle fLeft">Solitaires At Best Prices From Trusted Dealers</div>
+                        <input type="text" id="txtjArea" class="fliterTxt fLeft fmOpenR transition300" autocomplete="false" placeholder=" Search city / area / vendor here" >
+                        <div class="autoSuggestOuter fmOpenR dn" id="jasug">
+                            <ul>
+                                <li class="autoSuggstions transition300 txtCap" onclick="setData(this)">andheri</li>
+                                <li class="autoSuggstions transition300 txtCap" onclick="setData(this)">andheri west</li>
+                                <li class="autoSuggstions transition300 txtCap" onclick="setData(this)">andheri east</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            
+
+
             <?php
             if (count($fil)) {
                 foreach ($fil as $key => $val) {
@@ -73,7 +81,7 @@
 if (count($data)) {
     foreach ($data as $key => $val) {
         ?>
-                                    
+
                                         <div class='prdComm fLeft'>
                                             <div class='prdCommDiv fLeft transition100'>
 <?php
@@ -81,7 +89,7 @@ if (count($data)) {
                                                 if(!empty($val['attributes']['shape']))
                                                 {
                                                     if($tempUrl !== ''){
-                                                        $tempUrl .= '-'.$val['attributes']['shape']; 
+                                                        $tempUrl .= '-'.$val['attributes']['shape'];
                                                     }
                                                     else{
                                                         $tempUrl .= $val['attributes']['shape'];
@@ -91,7 +99,7 @@ if (count($data)) {
                                                 {
                                                     if($tempUrl !== '')
                                                     {
-                                                        $tempUrl .= '-colour-'.$val['attributes']['color']; 
+                                                        $tempUrl .= '-colour-'.$val['attributes']['color'];
                                                     }
                                                     else
                                                     {
@@ -102,7 +110,7 @@ if (count($data)) {
                                                 {
                                                     if($tempUrl !== '')
                                                     {
-                                                        $tempUrl .= '-clarity-'.$val['attributes']['clarity']; 
+                                                        $tempUrl .= '-clarity-'.$val['attributes']['clarity'];
                                                     }
                                                     else
                                                     {
@@ -112,19 +120,19 @@ if (count($data)) {
                                                 if(!empty($val['attributes']['certified'])){
                                                     if($tempUrl !== '')
                                                     {
-                                                        $tempUrl .= '-certified-'.$val['attributes']['certified']; 
+                                                        $tempUrl .= '-certified-'.$val['attributes']['certified'];
                                                     }
                                                     else
                                                     {
                                                         $tempUrl .= 'certified-'.$val['attributes']['certifed'];
                                                     }
                                                 }
-                                                
+
                                                 if($tempUrl !== '')
                                                 {
 ?>
                                                     <a href="<?php echo DOMAIN . $tempUrl;?>/did-<?php echo $val['pid']; ?>">
-<?php                                                    
+<?php
                                                 }
                                                 else
                                                 {
@@ -166,7 +174,7 @@ if (count($data)) {
                                                             }
                                                         ?>
                                                         <div class="detValue fmOpenB fLeft"><span>&#8377;</span>
-                                                        <?php 
+                                                        <?php
                                                             $price = ceil((($val['pprice'] * $rate)*$val['attributes']['carat']));
                                                             echo $price = $comm->IND_money_format($price);
                                                         ?>
@@ -179,7 +187,7 @@ if (count($data)) {
                                                     if(!empty($tempUrl))
                                                     {
 ?>
-                                                    
+
                                                         <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $val['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
                                                         <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $val['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
                                                         <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
@@ -214,6 +222,7 @@ if (count($data)) {
         <?php include 'leftmenu.html'; ?>
     </div>
     <div id='dragTarget' class="drag-target" style="touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); left: 0px;"></div>
+    <script type="text/javascript" src="<?= $jvs['auto']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['jqrynum']; ?>"></script>

@@ -244,6 +244,7 @@ function pagination(data,pgno){
 
 function generateDiamondList(obj) {
     var cl='';
+    var str = '';
     var pro_name = obj['product_name'];
     if(pro_name == null || pro_name == '' || pro_name == 'null') {
         pro_name = obj['barcode'];
@@ -264,23 +265,27 @@ function generateDiamondList(obj) {
     }
 
     var date = obj['update_time'].split(' ');
-    var str = '<li>';
-    str += '<div class="date fLeft"> ';
+    str += '<li>';
+    str += '<div class="date fLeft">';
     str += '<span class="upSpan">' + date[0] + '</span>';
     str += '<span class="lwSpan">' + date[1] + '</span>';
     str += '</div>';
     str += '<div class="barcode fLeft">';
     str += '<span class="upSpan fmOpenB">' + barcode + '</span>';
     var shape = '';
-    if(obj['shape'] != null || obj['shape'] !== undefined) {
+    if(obj['shape'] != null || obj['shape'] !== undefined)
+    {
         shape = obj.shape;
     }
     var tempUrl = '';
-    if(shape !== null && shape !== undefined){
-        if(tempUrl !== ''){
+    if(shape !== null && shape !== undefined)
+    {
+        if(tempUrl !== '')
+        {
             tempUrl += '-'+shape;
         }
-        else{
+        else
+        {
             tempUrl += shape;
         }
     }
@@ -340,13 +345,13 @@ function generateDiamondList(obj) {
     str += '<option '+((obj['active_flag']) == 3 ? "selected" : "")+' class="arrow txtCenter" value="3">Out Of Stock</option>';
     str += '<option '+((obj['active_flag']) == 4 ? "selected" : "")+' class="arrow txtCenter" value="4">Sold</option>';
     str += '</select>'
-    str += '<div class="deltBtn poR fRight ripplelink" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
-    str += '<a href="'+ DOMAIN +'index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn fRight poR ripplelink"></div></a>';
-    str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn fRight poR ripplelink"></div></a>';
+    str += '<div class="deltBtn showLeftHelp poR fRight ripplelink" onclick="showConfirmDelete(' + obj['id'] + ',this)"><span class="tool_tip_left_35">Delete Product</span></div>';
+    str += '<a href="'+ DOMAIN +'index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn showLeftHelp fRight poR ripplelink"><span class="tool_tip_left_35">Edit Product</span></div></a>';
+    str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn showLeftHelp fRight poR ripplelink"><span class="tool_tip_left_35">Upload Image</span></div></a>';
     str += '</div>';
      str += '<div class="tltpBtn">';
      str += '<div class="tltpbox transition300">';
-      str += '<div class="deltBtn poR fRight ripplelink" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
+      str += '<div class="deltBtn  poR fRight ripplelink" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
     str += '<a href="'+ DOMAIN +'index.php?case=diamond_Form&catid=10000&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn fRight poR ripplelink"></div></a>';
     str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn fRight poR ripplelink"></div></a>';
          str += '<select id="isStock'+ obj['id'] +'" onchange="inStock(' + obj['id'] + ',this.value);" value='+obj['active_flag']+' class="txtSelect fmOpenB '+cl+' fLeft">';
@@ -598,9 +603,9 @@ function generateJewellList(obj) {
         str += '<option value="1" '+((obj['active_flag']) == 1 ? "selected" : "")+'>In Stock</option>';
         str += '<option value="3" '+((obj['active_flag']) == 3 ? "selected" : "")+'>Out Of Stock</option>';
         str += '</select>';
-        str += '<div class="deltBtn poR ripplelink fRight" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
-        str += '<a href="'+ DOMAIN +'index.php?case=jewellery_Form&catid=10001&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn poR ripplelink fRight"></div></a>';
-        str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn poR ripplelink fRight"></div></a>';
+        str += '<div class="deltBtn showLeftHelp poR fRight" onclick="showConfirmDelete(' + obj['id'] + ',this)"><span class="tool_tip_left_35">Delete Product</span></div>';
+        str += '<a href="'+ DOMAIN +'index.php?case=jewellery_Form&catid=10001&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn showLeftHelp poR fRight"><span class="tool_tip_left_35">Edit Product</span></div></a>';
+        str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn showLeftHelp poR ripplelink fRight"><span class="tool_tip_left_35">Upload Image</span></div></a>';
         str += '</div>';
          str += '<div class="tltpBtn">';
      str += '<div class="tltpbox transition300">';
@@ -839,9 +844,9 @@ function generatBullionsList(obj) {
     str += '<option value="1" '+((obj['active_flag']) == 1 ? "selected" : "")+'>In Stock</option>';
     str += '<option value="3" '+((obj['active_flag']) == 3 ? "selected" : "")+'>Out Of Stock</option>';
     str += '</select>';
-    str += '<div class="deltBtn poR ripplelink fRight" onclick="showConfirmDelete(' + obj['id'] + ',this)"></div>';
-    str += '<a href="'+ DOMAIN +'index.php?case=bullion_Form&catid=10002&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn poR ripplelink fRight"></div></a>';
-    str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn poR ripplelink fRight"></div></a>';
+    str += '<div class="deltBtn showLeftHelp poR ripplelink fRight" onclick="showConfirmDelete(' + obj['id'] + ',this)"><span class="tool_tip_left_35">Delete Product</span></div>';
+    str += '<a href="'+ DOMAIN +'index.php?case=bullion_Form&catid=10002&prdid='+ obj['id'] +'" target="_blank"><div class="editBtn showLeftHelp poR ripplelink fRight"><span class="tool_tip_left_35">Edit Product</span></div></a>';
+    str += '<a href="'+ DOMAIN + 'upload-image/pid-'+ obj['id'] +'&c='+catid+'" target="_blank"><div class="uploadBtn showLeftHelp poR ripplelink fRight"><span class="tool_tip_left_35">Upload Image</span></div></a>';
      str += '</div>';
       str += '<div class="tltpBtn">';
      str += '<div class="tltpbox transition300">';
