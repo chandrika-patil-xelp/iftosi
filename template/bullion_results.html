@@ -6,8 +6,8 @@
             <div class="totalResultsDiv">
                 <div class="searchCon">
                     <div class="areaCont fLeft fmOpenR">
-                        <div class="srcTitle fLeft">Save Time, Simply Search By Area / City</div>
-                        <input type="text" id="txtjArea" class="fliterTxt fLeft fmOpenR transition300" placeholder=" Search city / area here" >
+                        <div class="srcTitle fLeft">Save Time, Simply Search By Area / City / Vendor</div>
+                        <input type="text" id="txtjArea" class="fliterTxt fLeft fmOpenR transition300" placeholder=" Search city / area / vendor here" >
                         <div class="autoSuggestOuter fmOpenR dn" id="jasug">
                             <ul>
                                 <li class="autoSuggstions transition300 txtCap" onclick="setData(this)">andheri</li>
@@ -19,7 +19,7 @@
                 </div>
             </div>
 			<?php
-			
+
 			if(count($bulcat['subcat']) && ($bulcat['catid'] == $_GET['catid']))
 			{
 			?>
@@ -42,7 +42,7 @@
 			<?php
 			}
 			?>
-            
+
             <div class="allResults">
                 <div class="wrapperMax">
                     <div class="filterTitleDiv">
@@ -64,8 +64,8 @@
                     <div class='results_Filter'>
                         <?php include 'filters.html'; ?>
                         <div class='prdResults fRight'>
-                            
-<?php 
+
+<?php
                             if(empty($data))
                             {
 ?>
@@ -73,12 +73,12 @@
                                     <div class="noresults font25 fLeft">There are no results available for your search.</div>
                                     <div class="noresults font18 fLeft">Please try again.</div>
                                 </div>
-                            
+
 <?php                       }
                             foreach($data as $key=>$val) { ?>
 									<div class='prdComm fLeft' style="opacity: 0; transform: translateX(1000px);">
 										<div class='prdCommDiv fLeft transition100'>
-                                                                                    
+
 <?php
                                                                                         $tempUrl = '';
                                                                                         if(!empty($val['attributes']['metal']))
@@ -94,7 +94,7 @@
                                                                                         {
                                                                                             if($tempUrl !== '')
                                                                                             {
-                                                                                                $tempUrl .= '-'.$val['attributes']['type']; 
+                                                                                                $tempUrl .= '-'.$val['attributes']['type'];
                                                                                             }
                                                                                             else
                                                                                             {
@@ -105,7 +105,7 @@
                                                                                         {
                                                                                             if($tempUrl !== '')
                                                                                             {
-                                                                                                $tempUrl .= '-'.number_format($val['attributes']['gold_purity'],0); 
+                                                                                                $tempUrl .= '-'.number_format($val['attributes']['gold_purity'],0);
                                                                                             }
                                                                                             else
                                                                                             {
@@ -115,7 +115,7 @@
                                                                                         if(!empty($val['attributes']['gold_weight'])){
                                                                                             if($tempUrl !== '')
                                                                                             {
-                                                                                                $tempUrl .= '-'.number_format($val['attributes']['gold_weight'],0).'-Grams'; 
+                                                                                                $tempUrl .= '-'.number_format($val['attributes']['gold_weight'],0).'-Grams';
                                                                                             }
                                                                                             else
                                                                                             {
@@ -126,7 +126,7 @@
                                                                                         {
 ?>
                                                                                             <a href="<?php echo DOMAIN.$tempUrl. '/bid-' . $val['pid']; ?>">
-<?php                                                    
+<?php
                                                                                         }
                                                                                         else
                                                                                         {
@@ -170,36 +170,36 @@
 											<div class='prdPrice fLeft'>
 												<div class="detComm">
 													<div class="detLabel fmOpenB fLeft">PRICE</div>
-<?php 
+<?php
                                                                                                         if(empty($val['silver_rate']) || $val['silver_rate']=='0.00')
-                                                                                                        { 
+                                                                                                        {
                                                                                                             $val['silver_rate'] = silverRate;
-                                                                                                        } 
+                                                                                                        }
                                                                                                         if(empty($val['gold_rate']) || $val['gold_rate']=='0.00')
-                                                                                                        { 
+                                                                                                        {
                                                                                                             $val['gold_rate'] = goldRate;
                                                                                                         }
-                                                                                                        
+
                                                                                                         $pro_metal = strtolower($val['attributes']['metal']);
                                                                                                         if($pro_metal=='gold')
-                                                                                                        { 
+                                                                                                        {
                                                                                                             $metal_rate=$val['gold_rate'];
                                                                                                         $metal_rate=($metal_rate/10)*($val['attributes']['gold_purity']/995);
                                                                                                         }
                                                                                                         else if($pro_metal=='silver')
-                                                                                                        { 
+                                                                                                        {
                                                                                                             $metal_rate=$val['silver_rate'];
-                                                                                                         
+
                                                                                                         $metal_rate=($metal_rate/1000)*($val['attributes']['gold_purity']/999);
                                                                                                         }
-                                                                                                        
+
 ?>
 													<div class="detValue fmOpenB fLeft"><span>&#8377;</span><?php
                                                                                                         $price = ceil($val['attributes']['bprice']);
                                                                                                         echo $comm->IND_money_format($price);
                                                                                                         ?></div>
-                                                                                                        
-                                                                                                        
+
+
 												</div>
 											</div>
 											</a>

@@ -747,7 +747,7 @@ switch($action)
                 else
                 {
                     $path = WEBROOT.'upload/';
-                    $filename = $path.$vid.'-'.date('d-m-Y').'.'.$fileExt;
+                    $filename = $path.$vid.'-'.date('d-m-Y').'-'.microtime().'.'.$fileExt;
                     $upload = move_uploaded_file($_FILES['up_file']['tmp_name'], $filename);
 
                     if ($upload)
@@ -775,6 +775,7 @@ switch($action)
                 }
                 else if($params['catid']==10001)
                 {
+                    $params['data'][0] = array_slice($params['data'][0],0,32);
                     $result = $obj->uploadJewelleryProducts($params);
                 }
                 else if($params['catid']==10002)

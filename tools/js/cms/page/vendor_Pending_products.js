@@ -6,8 +6,14 @@ var diamondPage = 1;
 var jewellPage = 1;
 var bullionPage = 1;
 
+var diamondCount = 0;
+var jewelCount = 0;
+var bullionCount = 0;
+
 $(document).ready(function()
 {
+    $('#upDolRt').addClass('dn');
+    $('.addPrdBtn').addClass('dn');
     loadDiamonds(1);
     loadBullions(1);
     loadJewels(1);
@@ -18,24 +24,40 @@ $(document).ready(function()
         if($(this).attr('id') ==10002)
         {
             $(this).addClass('sel');
-
             $('#diamondPendingPrds,#jewelleryPendingPrds').addClass('dn');
             $('#bullionPendingPrds').removeClass('dn');
+            bindButton();
         }
         if($(this).attr('id') ==10000)
         {
             $(this).addClass('sel');
             $('#bullionPendingPrds,#jewelleryPendingPrds').addClass('dn');
             $('#diamondPendingPrds').removeClass('dn');
+            bindButton();
         }
         if($(this).attr('id') ==10001)
         {
             $(this).addClass('sel');
             $('#bullionPendingPrds,#diamondPendingPrds').addClass('dn');
             $('#jewelleryPendingPrds').removeClass('dn');
+            bindButton();
         }
+
     });
 });
+
+function bindButton()
+{
+    $('#upProds').bind('click',function()
+    {
+        $('#overlay,#uploadDiv').removeClass('dn');
+        setTimeout(function ()
+        {
+            $('#overlay').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
+            $('#uploadDiv').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
+        }, 10);
+    });
+}
 
 function loadDiamonds(pgno)
 {
@@ -55,10 +77,12 @@ function loadPDiamondCallback(res,pgno)
         if(obj['results'] !== undefined && obj['results']['Dcnt'] !== undefined)
         {
             var total = obj['results']['Dcnt'];
+            diamondCount = total;
         }
         else
         {
             var total = obj['results']['total_products'];
+            diamondCount = total;
         }
 
         $('#totalDiamonds').text(total);
@@ -402,11 +426,13 @@ function loadPJewellCallback(res,pgno)
     {
         if(obj['results'] !== undefined && obj['results']['Bcnt'] !== undefined)
         {
-            var total = obj['results']['Bcnt'];
+            var total = obj['results']['Jcnt'];
+            jewelCount = total;
         }
         else
         {
             var total = obj['results']['total_products'];
+            jewelCount = total;
         }
 
         var total = obj['results']['Jcnt'];
@@ -695,10 +721,12 @@ function loadPBullionsCallback(res,pgno)
         if(obj['results'] !== undefined && obj['results']['Bcnt'] !== undefined)
         {
             var total = obj['results']['Bcnt'];
+            bullionCount = total;
         }
         else
         {
             var total = obj['results']['total_products'];
+            bullionCount = total;
         }
 
         $('#totalBullions').text(total);
@@ -1086,21 +1114,39 @@ $('.prdSeachTxt').val('');
 
 function searchBarcode(val,pgno)
 {
-    var cid = parseInt($('.wishTabComm').closest('.sel').attr('id'));
+    var cid = '10000';
+    var cnt = 0;
+    var cntBar = 'Diamonds';
+    var dmdCnt = $('#totalDiamonds').text();
+    var jwlCnt = $('#totalJewells').text();
+    var blCnt = $('#totalBullions').text();
+    $('.wishTabComm').each(function()
+    {
+        if($(this).hasClass('sel'))
+        {
+            cid = $(this).attr('id');
+        }
+    });
   	if(!pgno)
   		pgno = 1;
   	searchVal = val;
       if(cid==10000)
       {
           searchIDName='DiamondsPList';
+          cntBar = 'Diamonds';
+          cnt = $('#totalDiamonds').text();
       }
       else if(cid==10001)
       {
           searchIDName='JewellsPList';
+          cntBar = 'Jewells';
+          cnt = $('#totalJewells').text();
       }
       else if(cid==10002)
       {
           searchIDName='BullionsPList';
+          cntBar = 'Bullions';
+          cnt = $('#totalBullions').text();
       }
       if(val!='')
       {
@@ -1114,14 +1160,36 @@ function searchBarcode(val,pgno)
       }
       else
       {
+          if(cid == '10000')
+          {
+              $('#total'+cntBar).text(diamondCount);
+          }
+          else if(cid == '10001')
+          {
+              $('#total'+cntBar).text(jewelCount);
+          }
+          else if(cid == '10002')
+          {
+              $('#total'+cntBar).text(bullionCount);
+          }
+
           $('#'+searchIDName).removeClass('dn');
+
+
           $('#s'+searchIDName).html('').addClass('dn');
       }
 }
 function searchBarcodeCallback(res,pgno)
 {
     var obj = jQuery.parseJSON(res);
-    var cid = parseInt($('.wishTabComm').closest('.sel').attr('id'));
+    var cid = '10000';
+    $('.wishTabComm').each(function()
+    {
+        if($(this).hasClass('sel'))
+        {
+            cid = $(this).attr('id');
+        }
+    });
 
     if (obj['results'] !== '')
     {
@@ -1139,6 +1207,7 @@ function searchBarcodeCallback(res,pgno)
                 var str = '';
                 while (i < len)
                 {
+                    $('#totalDiamonds').text(total);
                     str += generateDiamondList(obj['results']['products'][i]);
                     i++;
                 }
@@ -1148,6 +1217,7 @@ function searchBarcodeCallback(res,pgno)
                 var str = '';
                 while (i < len)
                 {
+                    $('#totalJewells').text(total);
                     str += generateJewellList(obj['results']['products'][i]);
                     i++;
                 }
@@ -1157,6 +1227,7 @@ function searchBarcodeCallback(res,pgno)
                 var str = '';
                 while (i < len)
                 {
+                    $('#totalBullions').text(total);
                     str += generatBullionsList(obj['results']['products'][i]);
                     i++;
                 }
@@ -1178,6 +1249,18 @@ function searchBarcodeCallback(res,pgno)
         }
         else if(searchPage==1)
         {
+            if(cid == '10000')
+            {
+                $('#totalDiamonds').text(total);
+            }
+            else if(cid == '10001')
+            {
+                $('#totalJewells').text(total);
+            }
+            else if(cid == '10002')
+            {
+                $('#totalBullions').text(total);
+            }
             searchScroll = false;
             var str = '<p class="noRecords"><span>Sorry! No Products Found!</span></p>';
             $('#s'+searchIDName).html(str);

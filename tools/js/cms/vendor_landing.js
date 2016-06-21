@@ -28,6 +28,7 @@ if ( catid == '10002')
     active = 'bullionFheader';
 }
 
+
 var activeVTab='';
 switch(activePage)
 {
@@ -37,10 +38,17 @@ switch(activePage)
     case 'vendor_enquiries':
         activeVTab ='enqTab';
     break;
+    case 'pending':
+        activeVTab ='pendingPrd';
+    break;
+    case 'rate_manager':
+        activeVTab ='rate_m';
+    break;
     default :
         activeVTab ='';
     break;
 }
+
 
 $('#'+activeVTab).addClass('vSelected');
 

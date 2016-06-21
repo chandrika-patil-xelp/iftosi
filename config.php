@@ -167,6 +167,7 @@ $jvs['vendorLanding'] 	= DOMAIN.'tools/js/cms/vendor_landing.js?v='.VERSION;
 $jvs['pForm']    	= DOMAIN.'tools/js/pForm.js?v='.VERSION;
 $jvs['cmsCommon'] 	= DOMAIN.'tools/js/cms/Common.js?v='.VERSION;
 $jvs['vendor_Product'] 	= DOMAIN.'tools/js/cms/page/vendorProductListings.js?v='.VERSION;
+$jvs['search'] 	= DOMAIN.'tools/js/cms/page/searchjs.js?v='.VERSION;
 $jvs['vendor_Pending_Product'] 	= DOMAIN.'tools/js/cms/page/vendor_Pending_products.js?v='.VERSION;
 $jvs['clarity'] 	= DOMAIN.'tools/js/clarity.js?v='.VERSION;
 $jvs['anatomy'] 	= DOMAIN.'tools/js/anatomy.js?v='.VERSION;
