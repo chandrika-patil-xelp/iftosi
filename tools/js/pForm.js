@@ -1450,12 +1450,12 @@ function calculateJPrice()
 		}
 		if($('#diamondsvalue').val() !== undefined && $('#diamondsvalue').val() !== null && $('#diamondsvalue').val() !== '' && $('.shapeComm').hasClass('shapeSelected') == true)
 		{
-					diamondValue = parseFloat($('#diamondsvalue').val());
+					diamondValue = parseFloat($('#diamondsvalue').val())/5;
 					totalPrice = totalPrice + diamondValue;
 		}
 		if($('#gemstonevalue').val() !== undefined && $('#gemstonevalue').val() !== null && $('#gemstonevalue').val() !== '' && $('#gemstone_type').val() !== '')
 		{
-					gemValue = parseFloat($('#gemstonevalue').val());
+					gemValue = parseFloat($('#gemstonevalue').val())/5;
 					totalPrice = totalPrice + gemValue;
 		}
 		if($('#labour_charge').val() !== undefined && $('#labour_charge').val() !== null && $('#labour_charge').val() !== '')

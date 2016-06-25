@@ -1818,17 +1818,14 @@ class vendor extends DB
                                     'Polki Quality',
                                     'Polki Weight (in CTS)',
                                     'Polki Price / Carat',
-                                    'Value of Polki',
                                     'Diamonds',
                                     'Clarity',
                                     'Colour',
                                     'Carat',
                                     'No Of Diamond',
                                     'Diamond Price / Carat',
-                                    'Value of Diamonds',
                                     'Color Stone Type',
                                     'Color Stone Wt',
-                                    'Value Of Stone',
                                     'Stone Price / Carat',
                                     'No. Of Stones',
                                     'Other Material (in Grams)',
@@ -1837,8 +1834,7 @@ class vendor extends DB
                                     'Collection Name',
                                     'Purity(in KT)',
                                     'Net Weight (in Grams)',
-                                    'Gross Weight(in Grams)',
-                                    'Product Price'
+                                    'Gross Weight(in Grams)'
                                 );
         if($type=='csv')
         {
@@ -1848,11 +1844,11 @@ class vendor extends DB
         }
         else
         {
-            $rdv=$data;
-            $colName=$data[0];
+            $rdv = $data;
+            $data[0] = array_slice($data[0],0,28);
+            $colName = $data[0];
             $len = count($rdv);
         }
-
         $validFormat=TRUE;
 
         if(count($colName) == count($defaultColNames))
@@ -1909,6 +1905,36 @@ class vendor extends DB
                     $res = $this->query($query);
                     if ($res)
                     {
+
+                        $sql = "
+                                  SELECT
+                                          gold_rate,
+                                          platinum_rate,
+                                          silver_rate
+                                  FROM
+                                          tbl_vendor_master
+                                  WHERE
+                                          vendor_id = \"".$vid."\"";
+                        $vRes = $this->query($sql);
+                        if($vRes)
+                        {
+                            $row = $this->fetchData($vRes);
+                            if($value[5] == 'Gold')
+                            {
+                                $rate = $row['gold_rate'];
+                            }
+                            if($value[5] == 'Silver')
+                            {
+                                $rate = $row['silver_rate'];
+                            }
+                            if($value[5] == 'Platinum')
+                            {
+                                $rate = $row['Platinum_rate'];
+                            }
+                        }
+                        $total_price = $this->calculatePrice($value,$rate);
+                        $total_weight= $this->calculateWeight($value);
+
                         $pro_id = mysql_insert_id();
                         $sql = "
                                     INSERT
@@ -1925,13 +1951,11 @@ class vendor extends DB
                                             (
                                                 '" . $pro_id . "',
                                                     '10001',
-                                                '" . $value[31] . "',
-                                                '" . $value[31] . "',
+                                                  ".$total_price.",
+                                                  ".$total_price.",
                                                 '" . $ts . "'
                                             )";
-
                         $res = $this->query($sql);
-
                         $sql = "
                                     INSERT
                                     INTO
@@ -1949,15 +1973,13 @@ class vendor extends DB
                                             (
                                                 '" . $pro_id . "',
                                                 '" . $vid . "',
-                                                '" . $value[31] . "',
-                                                '" . $value[31] . "',
+                                                 ".$total_price.",
+                                                 ".$total_price.",
                                                     (SELECT city FROM tbl_vendor_master WHERE vendor_id=".$vid."),
                                                     'USD',
                                                 '" . $ts . "'
                                             )";
-
                         $res = $this->query($sql);
-
                         $sql = "
                                     INSERT
                                     INTO
@@ -1973,8 +1995,8 @@ class vendor extends DB
                                     VALUES
                                             (
                                                 '" . $pro_id    . "',
-                                                '" . $value[31] . "',
-                                                '" . $value[31] . "',
+                                                 ".$total_price.",
+                                                 ".$total_price.",
                                                 '" . $value[1]  . "',
                                                 '" . $value[27] . "',
                                                 '" . $ts . "'
@@ -1983,6 +2005,10 @@ class vendor extends DB
                         $res = $this->query($sql);
 
                         $complete_flag = $this->validateJewelFields($value);
+                        if(!empty($value[9]) && !empty($value[10]))
+                        {
+                            $polkiValue = floatval($value[9])*floatval($value[10]);
+                        }
 
                         $sql = "
                                     INSERT
@@ -1991,7 +2017,7 @@ class vendor extends DB
                                     SET
                                             product_id            =   '".$pro_id."',
                                             shape                 =   '".$value[0]."',
-                                            combination           =   '".$value[2]."',
+                                            combination           =   '".$this->getAbbrValue($value[2])."',
                                             certified             =   '".$value[3]."',
                                             other_certificate     =   '".$value[4]."',
                                             metal                 =   '".$value[5]."',
@@ -2000,7 +2026,7 @@ class vendor extends DB
                                             polki_quality         =   '".$value[8]."',
                                             polki_weight          =   '".$value[9]."',
                                             polki_price_per_carat =   '".$value[10]."',
-                                            polki_value           =   '".$value[11]."',
+                                            polki_value           =   '".$polkiValue."',
                                             diamond_shape         =   '".$value[12]."',
                                             clarity               =   '".$value[13]."',
                                             color                 =   '".$value[14]."',
@@ -2017,9 +2043,9 @@ class vendor extends DB
                                             labour_charge         =   '".$value[25]."',
                                             gold_purity           =   '".$value[28]."',
                                             gold_weight           =   '".$value[29]."',
-                                            grossweight           =   '".$value[30]."',
-                                            price                 =   '".$value[31]."',
-                                            complete_flag         =   $complete_flag";
+                                            grossweight           =    ".$total_weight.",
+                                            price                 =    ".$total_price.",
+                                            complete_flag         =      $complete_flag";
 
                         $res = $this->query($sql);
                         $totlIns++;
@@ -2079,6 +2105,50 @@ class vendor extends DB
                             'error' => $err
                         );
         return $result;
+    }
+
+    public function calculatePrice($params,$rate)
+    {
+        $price = 0;
+        if(!empty($params[15]) && !empty($params[17]))
+        {
+            $price = $price + ((floatval($params[15])/5)*$params[17]);
+        }
+        if(!empty($params[20]) && !empty($params[22]))
+        {
+            $price = $price + ((floatval($params[20])/5)*$params[22]);
+        }
+        if(!empty($params[25]))
+        {
+            $price = $price + floatval($params[25]);
+        }
+        if(!empty($params[29]))
+        {
+            $price = $price + floatval($params[29])*floatval($rate);
+        }
+        return $price;
+    }
+
+    public function calculateWeight($params,$rate)
+    {
+        $weight = 0;
+        if(!empty($params[15]))
+        {
+            $weight = $weight + (floatval($params[15])/5);
+        }
+        if(!empty($params[20]))
+        {
+            $weight = $weight + (floatval($params[20])/5);
+        }
+        if(!empty($params[24]))
+        {
+            $weight = $weight + floatval($params[25]);
+        }
+        if(!empty($params[29]))
+        {
+            $weight = $weight + floatval($params[29]);
+        }
+        return $weight;
     }
 
     public function uploadBullionProducts($params)
@@ -2375,9 +2445,7 @@ class vendor extends DB
                                     'Treatment',
                                     'IFtoSI Price',
                                     'IFtoSI B2B Discount',
-                                    'IFtoSI B2B Price',
                                     'IFtoSI B2C Discount',
-                                    ' B2C Price',
                                     'Fancy Color',
                                     'Fancy Color Intensity',
                                     'Fancy Color Overtone',
@@ -2462,6 +2530,25 @@ class vendor extends DB
                        $isBlank = true;
                     }
                 }
+
+                if(!empty($value[15]) && !empty($value[14]))
+                {
+                    $b2bprice = $value[14]-($value[14]/$value[15]);
+                }
+                else
+                {
+                    $b2bprice = 0;
+                }
+
+                if(!empty($value[17]) && !empty($value[14]))
+                {
+                    $b2cprice = $value[14]-($value[14]/$value[17]);
+                }
+                else
+                {
+                    $b2cprice = 0;
+                }
+
                 if ($i != 0 && $isBlank == false)
                 {
                     $ts = date('Y-m-d H:i');
@@ -2499,8 +2586,8 @@ class vendor extends DB
                                             (
                                                 '" . $pro_id . "',
                                                     '10000',
-                                                '" . $value[18] . "',
-                                                '" . $value[16] . "',
+                                                 " . $b2cprice . ",
+                                                 " . $b2cprice . ",
                                                      1,
                                                 '" . $ts . "'
                                             )";
@@ -2523,9 +2610,9 @@ class vendor extends DB
                                             (
                                                 '" . $pro_id . "',
                                                 '" . $vid . "',
-                                                '" . $value[18] . "',
-                                                '" . $value[16] . "',
-                                                '" . $value[35] . "',
+                                                 " . $b2cprice . ",
+                                                 " . $b2cprice . ",
+                                                '" . $value[33] . "',
                                                     'USD',
                                                 '" . $ts . "'
                                             )";
@@ -2545,9 +2632,9 @@ class vendor extends DB
                                     VALUES
                                             (
                                                 '" . $pro_id . "',
-                                                '" . $value[12]."',
-                                                '" . $value[18] . "',
-                                                '" . $value[16] . "',
+                                                '" . $value[0]."',
+                                                 " . $b2cprice . ",
+                                                 " . $b2cprice . ",
                                                 '" . $ts . "'
                                             )";
 
@@ -2569,30 +2656,28 @@ class vendor extends DB
                                             product_id    = ".$pro_id.",
                                             shape         = '".$value[2]."',
                                             carat         = '".$value[3]."',
-                                            certified     = '".$value[12]."',
+                                            certified     = '".$value[11]."',
+                                            cno           = '".$value[12]."',
                                             color         = '".$value[4]."',
                                             clarity       = '".$value[5]."',
                                             cut           = '".$value[6]."',
-                                            girdle        = '".$value[25]."',
+                                            girdle        = '".$value[22]."',
                                             fluo          = '".$value[9]."',
                                             polish        = '".$value[7]."',
                                             symmetry      = '".$value[8]."',
                                             measurement   = '".$value[10]."',
-                                            tabl          = '".$value[23]."',
-                                            cr_hgt        = '".$value[27]."',
-                                            cr_ang        = '".$value[28]."',
-                                            pd            = '".$value[29]."',
-                                            pa            = '".$value[30]."',
-                                            price         = '".$value[18]."',
+                                            tabl          = '".$value[21]."',
+                                            cr_hgt        = '".$value[25]."',
+                                            cr_ang        = '".$value[26]."',
+                                            pd            = '".$value[27]."',
+                                            pa            = '".$value[28]."',
+                                            price         =  ".$b2cprice.",
                                             base          = '".$value[14]."',
-                                            b2b_price     = '".$value[16]."',
-                                            p_disc        = '".$value[17]."',
+                                            b2b_price     =  ".$b2bprice.",
+                                            p_disc        = '".$value[16]."',
                                             complete_flag =    $complete_flag,
                                             p_discb2b     = '".$value[15]."'";
-
                         $res = $this->query($sql);
-
-
                         $sql = "    INSERT
                                     INTO
                                             `tbl_product_more_info`
@@ -2606,38 +2691,36 @@ class vendor extends DB
                                             treatment               = '".$value[13]."',
                                             rapnet_price            = '".$value[14]."',
                                             rapnet_discount_percent = '".$value[15]."',
-                                            cash_price              = '".$value[18]."',
-                                            cash_price_discount_percent     = '".$value[17]."',
-                                            fancy_color             = '".$value[19]."',
-                                            fancy_color_intensity   = '".$value[20]."',
-                                            fancy_color_overtone    = '".$value[21]."',
-                                            depth_percent           = '".$value[22]."',
-                                            girdle_condition        = '".$value[24]."',
-                                            culet_size              = '".$value[25]."',
-                                            culet_condition         = '".$value[26]."',
-                                            laser_inscription       = '".$value[31]."',
+                                            fancy_color             = '".$value[17]."',
+                                            fancy_color_intensity   = '".$value[18]."',
+                                            fancy_color_overtone    = '".$value[19]."',
+                                            depth_percent           = '".$value[20]."',
+                                            girdle_condition        = '".$value[22]."',
+                                            culet_size              = '".$value[23]."',
+                                            culet_condition         = '".$value[24]."',
+                                            laser_inscription       = '".$value[29]."',
                                             certified               = '".$value[12]."',
-                                            country                 = '".$value[33]."',
-                                            state                   = '".$value[34]."',
-                                            city                    = '".$value[35]."',
-                                            matched_pair            = '".$value[36]."',
-                                            pair_stock              = '".$value[37]."',
-                                            parcel_stones           = '".$value[38]."',
-                                            report_filename         = '".$value[39]."',
-                                            diamond_image           = '".$value[40]."',
-                                            sarine_loupe            = '".$value[41]."',
-                                            trade_show              = '".$value[42]."',
-                                            key_to_symbols          = '".$value[43]."',
-                                            shade                   = '".$value[44]."',
-                                            star_length             = '".$value[45]."',
-                                            center_inclusion        = '".$value[46]."',
-                                            black_inclusion         = '".$value[47]."',
-                                            milky                   = '".$value[48]."',
-                                            member_comment          = '".$value[49]."',
-                                            report_date             = '".$value[50]."',
-                                            report_type             = '".$value[51]."',
-                                            lab_location            = '".$value[52]."',
-                                            brand                   = '".$value[53]."'";
+                                            country                 = '".$value[31]."',
+                                            state                   = '".$value[32]."',
+                                            city                    = '".$value[33]."',
+                                            matched_pair            = '".$value[34]."',
+                                            pair_stock              = '".$value[35]."',
+                                            parcel_stones           = '".$value[36]."',
+                                            report_filename         = '".$value[37]."',
+                                            diamond_image           = '".$value[38]."',
+                                            sarine_loupe            = '".$value[39]."',
+                                            trade_show              = '".$value[40]."',
+                                            key_to_symbols          = '".$value[41]."',
+                                            shade                   = '".$value[42]."',
+                                            star_length             = '".$value[43]."',
+                                            center_inclusion        = '".$value[44]."',
+                                            black_inclusion         = '".$value[45]."',
+                                            milky                   = '".$value[46]."',
+                                            member_comment          = '".$value[47]."',
+                                            report_date             = '".$value[48]."',
+                                            report_type             = '".$value[49]."',
+                                            lab_location            = '".$value[50]."',
+                                            brand                   = '".$value[51]."'";
                         $res = $this->query($sql);
                         $totlIns++;
                     }
@@ -3700,7 +3783,7 @@ class vendor extends DB
 
         private function getAbbrValue($val)
         {
-            $propValArr=array(''=>'','EX'=>'Excellent','VG'=>'Very Good','GD'=>"Good",'FAIR'=>'Fair','NO'=>'None','NN'=>'None','MED'=>'Medium','FNT'=>'Faint','STG'=>'Strong','VSTG'=>'Very Strong');
+            $propValArr=array(''=>'','GD/DIA'=>'GOLD & DIAMONDS','PL/DIA'=>'PLATINUM & DIAMONDS','SL/DIA'=>'SILVER & DIAMONDS','GD/DIA/CS'=>'GOLD,DIAMONDS & GEMSTONES','PL/DIA/CS'=>'PLATINUM,DIAMONDS & GEMSTONES','SL/DIA/CS'=>'SILVER,DIAMONDS & GEMSTONES','GD/CS'=>'GOLD & GEMSTONES','SL/CS'=>'SILVER & GEMSTONES','GD/SWCZ'=>'GOLD & SWAROVSKI ZIRCONIA','SL/SWCZ'=>'SILVER & SWAROVSKI ZIRCONIA','PLAIN GD'=>'GOLD & CZ','SL/CZ'=>'SILVER & CZ','PLAIN GD'=>'PLAIN GOLD','PLAIN PL'=>'PLAIN PLATINUM','PLAIN SL'=>'PLAIN SILVER','GD/POL'=>'GOLD & POLKI');
             return $propValArr[$val];
         }
 
