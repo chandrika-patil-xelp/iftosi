@@ -1,3 +1,17 @@
+var arrColors = colors.split('|@|');
+var arrClaritys = clarity.split('|@|');
+var lengthClarity = arrClaritys.length;
+var lengthColor = arrColors.length;
+var arrColor = [];
+var arrClarity = [];
+for(var j=0;j<lengthColor;j++)
+{
+		arrColor["color_"+j] = arrColors[j].split(' ');
+}
+for(var k=0;k<lengthClarity;k++)
+{
+	arrClarity["clarity_"+k] = arrClaritys[k].split(' ');
+}
 function changeGemstoneType(obj,id)
 {
 	var gemType = $(obj).val();
@@ -252,7 +266,7 @@ function validateJForm()
 				var gold_value = $('#gold_value').val().trim();
 				var labour_charge = $('#labour_charge').val().trim();
 				var gprice_per_carat = $('#gprice_per_carat').val().trim();
-
+				var gold_type = $('input[name="gold_type"]:checked').val();
 				var polki_color = $('input[name=polki_color]:checked').val();
 				var polki_quality = $('input[name=polki_clarity]:checked').val();
 				var polki_weight = $('#polki_weight').val().trim();
@@ -340,11 +354,13 @@ function validateJForm()
 						{
 	                if($('#diamondShapeCont_'+i+' .shapeComm').hasClass('shapeSelected'))
 									{
-	                    var color =  $('input[name=color_'+i+']:checked').val();
-	                    var clarity = $('input[name=clarity_'+i+']:checked').val();
-	                    vcolor.push(color);
+											var values1 = '';
+											var values2 = '';
+											var color =  colorGathering(i,values1);
+											var clarity = clarityGathering(i,values2);
+											vcolor.push(color);
 	                    vclarity.push(clarity);
-	                    if(color === undefined || color === null || color === '')
+											if(color === undefined || color === null || color === '')
 	                    {
                           str = 'Please select diamond color';
                           submiter = false;
@@ -359,7 +375,6 @@ function validateJForm()
 	                    }
 	                }
 							}
-
 							if(isValid && (dweight === undefined || dweight === null || dweight === ''))
 							{
 									str = 'Please enter diamond weight in carats';
@@ -640,6 +655,23 @@ function validateJForm()
     }
 }
 
+function colorGathering(i,values1)
+{
+		$('input[name=color_'+i+']:checked').each(function(i,val)
+		{
+					values1 += $(this).val()+'-';
+		});
+		return values1.slice(0, -1);;
+}
+
+function clarityGathering(i,values2)
+{
+		$('input[name=clarity_'+i+']:checked').each(function(i,val)
+		{
+					values2 += $(this).val()+'-';
+		});
+		return values2.slice(0, -1);
+}
 
 function calculatePrice()
 {
@@ -1079,6 +1111,8 @@ function addShapeType()
 				$('#diamondShapeCont').removeClass('dn');
 		}
     var DivLen = ($('#diamondShapeCont #diamondShapeDiv').length)+1;
+		arrClarity['clarity_'+DivLen] = [];
+		arrColor['color_'+DivLen] = [];
     var str ='<div id="diamondShapeDiv" class="diamondShapeDiv"><div id="diamondShapeCont_'+DivLen+'" class="divCon fLeft dAuto" style="margin-top:0px;">';
         str +='<div class="shapesCont">';
             str +='<div class="wrapperMax">';
@@ -1092,33 +1126,63 @@ function addShapeType()
                         str +='</center></div></div></div></div>';
 
                 str +='<div class="divCon fLeft dAuto diamondProp dn diamondProp_'+DivLen+'"><div class="titleDiv txtCap fLeft">Diamond Color *</div>';
-                str +='<div class="radioCont fLeft"> ';
-                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="D" id="color_D_'+DivLen+'" type="radio"><label for="color_D_'+DivLen+'"> D</label></div>';
-                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="E" id="color_E_'+DivLen+'" type="radio"><label for="color_E_'+DivLen+'">E</label></div>';
-                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="F" id="color_F_'+DivLen+'" type="radio"><label for="color_F_'+DivLen+'">F</label></div>';
-                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="G" id="color_G_'+DivLen+'" type="radio"><label for="color_G_'+DivLen+'">G</label></div>';
-                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="H" id="color_H_'+DivLen+'" type="radio"><label for="color_H_'+DivLen+'">H</label></div>';
-                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="I" id="color_I_'+DivLen+'" type="radio"><label for="color_I_'+DivLen+'">I</label></div>';
-                    str +='<div class="checkDiv fLeft"><input name="colorAfter_'+DivLen+'" class="filled-in" value="L" id="color_L_'+DivLen+'" type="radio"><label for="color_L_'+DivLen+'">L</label></div>';
-                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="M" id="color_M_'+DivLen+'" type="radio"><label for="color_M_'+DivLen+'">M</label></div>';
-                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="N" id="color_N_'+DivLen+'" type="radio"><label for="color_N_'+DivLen+'">N</label></div>';
-                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="O" id="color_O_'+DivLen+'" type="radio"><label for="color_O_'+DivLen+'">O</label></div>';
+                str +='<div class="radioCont fLeft dmdColor'+DivLen+'"> ';
+                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="D" id="color_D_'+DivLen+'" type="checkbox"><label for="color_D_'+DivLen+'"> D</label></div>';
+                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="E" id="color_E_'+DivLen+'" type="checkbox"><label for="color_E_'+DivLen+'">E</label></div>';
+                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="F" id="color_F_'+DivLen+'" type="checkbox"><label for="color_F_'+DivLen+'">F</label></div>';
+                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="G" id="color_G_'+DivLen+'" type="checkbox"><label for="color_G_'+DivLen+'">G</label></div>';
+                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="H" id="color_H_'+DivLen+'" type="checkbox"><label for="color_H_'+DivLen+'">H</label></div>';
+                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="I" id="color_I_'+DivLen+'" type="checkbox"><label for="color_I_'+DivLen+'">I</label></div>';
+                    str +='<div class="checkDiv fLeft"><input name="colorAfter_'+DivLen+'" class="filled-in" value="L" id="color_L_'+DivLen+'" type="checkbox"><label for="color_L_'+DivLen+'">L</label></div>';
+                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="M" id="color_M_'+DivLen+'" type="checkbox"><label for="color_M_'+DivLen+'">M</label></div>';
+                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="N" id="color_N_'+DivLen+'" type="checkbox"><label for="color_N_'+DivLen+'">N</label></div>';
+                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="O" id="color_O_'+DivLen+'" type="checkbox"><label for="color_O_'+DivLen+'">O</label></div>';
             str +='</div></div>';
             str +='<div class="divCon  fLeft jw3 diamondProp dn diamondProp_'+DivLen+'">';
                 str +='<div class="titleDiv txtCap fLeft">Diamond Quality *</div>';
-                str +='<div class="radioCont fLeft"> ';
-                    str +='<div class="checkDiv fLeft"><input type="radio" id="clarity_IF_'+DivLen+'" value="IF" class="filled-in" name="clarity_'+DivLen+'"><label for="clarity_IF_'+DivLen+'">IF</label></div>';
-                    str +='<div class="checkDiv fLeft"><input type="radio" id="clarity_VVS1_'+DivLen+'" value="VVS1" class="filled-in" name="clarity_'+DivLen+'"><label for="clarity_VVS1_'+DivLen+'">VVS1</label></div>';
-                    str +='<div class="checkDiv fLeft"><input type="radio" id="clarity_VVS2_'+DivLen+'" value="VVS2" class="filled-in" name="clarity_'+DivLen+'"><label for="clarity_VVS2_'+DivLen+'">VVS2</label></div>';
-                    str +='<div class="checkDiv fLeft"><input type="radio" id="clarity_VS1_'+DivLen+'" value="VS1" class="filled-in" name="clarity_'+DivLen+'"><label for="clarity_VS1_'+DivLen+'">VS1</label></div>';
-                    str +='<div class="checkDiv fLeft"><input type="radio" id="clarity_VS2_'+DivLen+'" value="VS2" class="filled-in" name="clarity_'+DivLen+'"><label for="clarity_VS2_'+DivLen+'">VS2</label></div>';
-                    str +='<div class="checkDiv fLeft"><input type="radio" id="clarity_SI1_'+DivLen+'" value="SI1" class="filled-in" name="clarity_'+DivLen+'"><label for="clarity_SI1_'+DivLen+'">SI1</label></div>';
-                    str +='<div class="checkDiv fLeft"><input type="radio" id="clarity_SI2_'+DivLen+'" value="SI2" class="filled-in" name="clarity_'+DivLen+'"><label for="clarity_SI2_'+DivLen+'">SI2</label></div>';
-                    str +='<div class="checkDiv fLeft"><input type="radio" id="clarity_I1_'+DivLen+'" value="I1" class="filled-in" name="clarity_'+DivLen+'"><label for="clarity_I1_'+DivLen+'">I1</label></div>';
+                str +='<div class="radioCont fLeft dmdClarity'+DivLen+'"> ';
+                    str +='<div class="checkDiv fLeft"><input type="checkbox" id="clarity_IF_'+DivLen+'" value="IF" class="filled-in" name="clarity_'+DivLen+'"><label for="clarity_IF_'+DivLen+'">IF</label></div>';
+                    str +='<div class="checkDiv fLeft"><input type="checkbox" id="clarity_VVS_'+DivLen+'" value="VVS" class="filled-in" name="clarity_'+DivLen+'"><label for="clarity_VVS_'+DivLen+'">VVS</label></div>';
+                    str +='<div class="checkDiv fLeft"><input type="checkbox" id="clarity_VS_'+DivLen+'" value="VS" class="filled-in" name="clarity_'+DivLen+'"><label for="clarity_VS_'+DivLen+'">VS</label></div>';
+                    str +='<div class="checkDiv fLeft"><input type="checkbox" id="clarity_SI_'+DivLen+'" value="SI" class="filled-in" name="clarity_'+DivLen+'"><label for="clarity_SI_'+DivLen+'">SI</label></div>';
+                    str +='<div class="checkDiv fLeft"><input type="checkbox" id="clarity_I_'+DivLen+'" value="I" class="filled-in" name="clarity_'+DivLen+'"><label for="clarity_I_'+DivLen+'">I</label></div>';
                 str +='</div></div></div>';
-
     $('#diamondShapeCont').append(str);
-    $('.inDiamondAddMore').remove();
+		$('.addMore').remove();
+
+		$('.diamondProp_'+DivLen+' .dmdClarity'+DivLen+' input[type="checkbox"]').bind('click',function(i,val)
+		{
+
+				if(arrClarity['clarity_'+DivLen].length < 2 )
+				{
+						if($(this).is(':checked'))
+						{
+								arrClarity['clarity_'+DivLen].push($(this).val());
+						}
+				}
+				else
+				{
+						$('.dmdClarity'+DivLen+' input[value="'+arrClarity['clarity_'+DivLen][0]+'"]').prop('checked',false);
+						arrClarity['clarity_'+DivLen].shift();
+						arrClarity['clarity_'+DivLen].push($(this).val());
+				}
+		});
+		$('.diamondProp_'+DivLen+' .dmdColor'+DivLen+' input[type="checkbox"]').bind('click',function(i,val)
+		{
+				if(arrColor['color_'+DivLen].length < 2 )
+				{
+						if($(this).is(':checked'))
+						{
+								arrColor['color_'+DivLen].push($(this).val());
+						}
+				}
+				else
+				{
+						$('.dmdColor'+DivLen+' input[value="'+arrColor['color_'+DivLen][0]+'"]').attr('checked',false);
+						arrColor['color_'+DivLen].shift();
+						arrColor['color_'+DivLen].push($(this).val());
+				}
+		});
 }
 
 function checkDiamondShape(evt,id)
@@ -1203,6 +1267,7 @@ function addGemsType()
     $('#gemsTypeCont').append(str);
 }
 
+
 $(document).ready(function()
 {
 			$('.jshapeComm').each(function()
@@ -1224,6 +1289,40 @@ $(document).ready(function()
 					var price = calculateJPrice();
 					$('#prdprice').val(price);
     });
+
+		$('#diamondShapeDiv .dmdColor input[type="checkbox"]').bind('click',function(i,val)
+		{
+				if(arrColor['color_0'].length < 2 )
+				{
+						if($(this).is(':checked'))
+						{
+								arrColor['color_0'].push($(this).val());
+						}
+				}
+				else
+				{
+						$('.dmdColor input[value="'+arrColor['color_0'][0]+'"]').attr('checked',false);
+						arrColor['color_0'].shift();
+						arrColor['color_0'].push($(this).val());
+				}
+		});
+
+		$('#diamondShapeDiv .dmdQuality input[type="checkbox"]').bind('click',function(i,val)
+		{
+				if(arrClarity['clarity_0'].length < 2 )
+				{
+						if($(this).is(':checked'))
+						{
+								arrClarity['clarity_0'].push($(this).val());
+						}
+				}
+				else
+				{
+						$('.dmdQuality input[value="'+arrClarity['clarity_0'][0]+'"]').prop('checked',false);
+						arrClarity['clarity_0'].shift();
+						arrClarity['clarity_0'].push($(this).val());
+				}
+		});
 
 		$('#certiicates label').click(function ()
 		{

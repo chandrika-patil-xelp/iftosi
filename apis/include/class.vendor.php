@@ -1800,6 +1800,44 @@ class vendor extends DB
         return $result;
     }
 
+    public function generateId()
+    {
+        $cdt = date('Ymd');
+        $mcrTime = microtime();
+        $mcrTime = explode(' ', $mcrTime);
+
+        if(!empty($mcrTime[1]))
+        {
+          unset($mcrTime[1]);
+        }
+
+        $mcrTime = $mcrTime[0];
+
+        $mcrTime = explode('.', $mcrTime);
+        if(!empty($mcrTime[0]))
+        {
+          unset($mcrTime[0]);
+        }
+
+        if(!empty($mcrTime[1]))
+        {
+          $mcrTime = $mcrTime[1];
+        }
+
+        if(!empty($mcrTime))
+        {
+          return $cdt.$mcrTime;
+        }
+        else
+        {
+          $curdate = date('YmdHis');
+          $rNo = mt_rand(11, 99);
+
+          $genId = $rNo . $curdate;
+          return $genId;
+        }
+    }
+
     public function uploadJewelleryProducts($params)
     {
         $vid=$params['vid'];
@@ -1819,12 +1857,15 @@ class vendor extends DB
                                     'Polki Weight (in CTS)',
                                     'Polki Price / Carat',
                                     'Diamonds',
-                                    'Clarity',
-                                    'Colour',
+                                    'Clarity1',
+                                    'Clarity2',
+                                    'Colour1',
+                                    'Colour2',
                                     'Carat',
                                     'No Of Diamond',
                                     'Diamond Price / Carat',
                                     'Color Stone Type',
+                                    'Stone Color',
                                     'Color Stone Wt',
                                     'Stone Price / Carat',
                                     'No. Of Stones',
@@ -1833,8 +1874,7 @@ class vendor extends DB
                                     'Hallmark',
                                     'Collection Name',
                                     'Purity(in KT)',
-                                    'Net Weight (in Grams)',
-                                    'Gross Weight(in Grams)'
+                                    'Net Weight (in Grams)'
                                 );
         if($type=='csv')
         {
@@ -1845,7 +1885,7 @@ class vendor extends DB
         else
         {
             $rdv = $data;
-            $data[0] = array_slice($data[0],0,28);
+            $data[0] = array_slice($data[0],0,30);
             $colName = $data[0];
             $len = count($rdv);
         }
@@ -1855,7 +1895,6 @@ class vendor extends DB
         {
             for ($i = 0; $i < count($defaultColNames); $i++)
             {
-
                 if (strtoupper(trim($defaultColNames[$i])) != strtoupper(trim($colName[$i])))
                 {
                     $validFormat = FALSE;
@@ -1867,6 +1906,7 @@ class vendor extends DB
             $validFormat = FALSE;
         }
         $i = $totlIns = 0;
+
         if ($validFormat)
         {
             while ($i < $len)
@@ -1884,178 +1924,219 @@ class vendor extends DB
                        $isBlank = true;
                     }
                 }
-
-                if ($i != 0 && $isBlank == false)
+                if(!empty($value[0]))
                 {
-                    $ts = date('Y-m-d H:i');
-                    $query = "
-                                INSERT
-                                INTO
-                                        `tbl_productid_generator`
-                                        (
-                                            `product_name`,
-                                            date_time
-                                        )
-                                VALUES
-                                        (
-                                            'Jewellery',
-                                            '" . $ts . "'
-                                        )";
+                  if ($i != 0 && $isBlank == false)
+                  {
+                      $ts = date('Y-m-d H:i');
+                      $pro_id = $this->generateId();
+                      $query = "
+                                  INSERT
+                                  INTO
+                                          `tbl_productid_generator`
+                                          (
+                                              product_id,
+                                              `product_name`,
+                                              date_time
+                                          )
+                                  VALUES
+                                          (
+                                              ".$pro_id.",
+                                              'Jewellery',
+                                              '" . $ts . "'
+                                          )";
+                      $res = $this->query($query);
+                      if ($res)
+                      {
+                          $sql = "
+                                    SELECT
+                                            gold_rate,
+                                            platinum_rate,
+                                            silver_rate
+                                    FROM
+                                            tbl_vendor_master
+                                    WHERE
+                                            vendor_id = \"".$vid."\"";
+                          $vRes = $this->query($sql);
+                          if($vRes)
+                          {
+                              $row = $this->fetchData($vRes);
+                              if($value[5] == 'Gold')
+                              {
+                                  $rate = $row['gold_rate'];
+                              }
+                              if($value[5] == 'Silver')
+                              {
+                                  $rate = $row['silver_rate'];
+                              }
+                              if($value[5] == 'Platinum')
+                              {
+                                  $rate = $row['Platinum_rate'];
+                              }
+                          }
+                          $total_price = $this->calculatePrice($value,$rate);
+                          $total_weight= $this->calculateWeight($value);
 
-                    $res = $this->query($query);
-                    if ($res)
-                    {
+                          $sql = "
+                                      INSERT
+                                      INTO
+                                              `tbl_product_category_mapping`
+                                              (
+                                                  product_id,
+                                                  category_id,
+                                                  price,
+                                                  b2bprice,
+                                                  date_time
+                                              )
+                                      VALUES
+                                              (
+                                                  '" . $pro_id . "',
+                                                      '10001',
+                                                    ".$total_price.",
+                                                    ".$total_price.",
+                                                  '" . $ts . "'
+                                              )";
+                          $res = $this->query($sql);
+                          $sql = "
+                                      INSERT
+                                      INTO
+                                              `tbl_vendor_product_mapping`
+                                              (
+                                                  product_id,
+                                                  vendor_id,
+                                                  vendor_price,
+                                                  b2bprice,
+                                                  city,
+                                                  vendor_currency,
+                                                  date_time
+                                              )
+                                      VALUES
+                                              (
+                                                  '" . $pro_id . "',
+                                                  '" . $vid . "',
+                                                   ".$total_price.",
+                                                   ".$total_price.",
+                                                      (SELECT city FROM tbl_vendor_master WHERE vendor_id=".$vid."),
+                                                      'USD',
+                                                  '" . $ts . "'
+                                              )";
+                          $res = $this->query($sql);
+                          $sql = "
+                                      INSERT
+                                      INTO
+                                              `tbl_product_master`
+                                              (
+                                                  product_id,
+                                                  prd_price,
+                                                  b2bprice,
+                                                  barcode,
+                                                  product_brand,
+                                                  date_time
+                                              )
+                                      VALUES
+                                              (
+                                                  '" . $pro_id    . "',
+                                                   ".$total_price.",
+                                                   ".$total_price.",
+                                                  '" . $value[1]  . "',
+                                                  '" . $value[27] . "',
+                                                  '" . $ts . "'
+                                              )";
 
-                        $sql = "
-                                  SELECT
-                                          gold_rate,
-                                          platinum_rate,
-                                          silver_rate
-                                  FROM
-                                          tbl_vendor_master
-                                  WHERE
-                                          vendor_id = \"".$vid."\"";
-                        $vRes = $this->query($sql);
-                        if($vRes)
-                        {
-                            $row = $this->fetchData($vRes);
-                            if($value[5] == 'Gold')
-                            {
-                                $rate = $row['gold_rate'];
-                            }
-                            if($value[5] == 'Silver')
-                            {
-                                $rate = $row['silver_rate'];
-                            }
-                            if($value[5] == 'Platinum')
-                            {
-                                $rate = $row['Platinum_rate'];
-                            }
-                        }
-                        $total_price = $this->calculatePrice($value,$rate);
-                        $total_weight= $this->calculateWeight($value);
+                          $res = $this->query($sql);
 
-                        $pro_id = mysql_insert_id();
-                        $sql = "
-                                    INSERT
-                                    INTO
-                                            `tbl_product_category_mapping`
-                                            (
-                                                product_id,
-                                                category_id,
-                                                price,
-                                                b2bprice,
-                                                date_time
-                                            )
-                                    VALUES
-                                            (
-                                                '" . $pro_id . "',
-                                                    '10001',
-                                                  ".$total_price.",
-                                                  ".$total_price.",
-                                                '" . $ts . "'
-                                            )";
-                        $res = $this->query($sql);
-                        $sql = "
-                                    INSERT
-                                    INTO
-                                            `tbl_vendor_product_mapping`
-                                            (
-                                                product_id,
-                                                vendor_id,
-                                                vendor_price,
-                                                b2bprice,
-                                                city,
-                                                vendor_currency,
-                                                date_time
-                                            )
-                                    VALUES
-                                            (
-                                                '" . $pro_id . "',
-                                                '" . $vid . "',
-                                                 ".$total_price.",
-                                                 ".$total_price.",
-                                                    (SELECT city FROM tbl_vendor_master WHERE vendor_id=".$vid."),
-                                                    'USD',
-                                                '" . $ts . "'
-                                            )";
-                        $res = $this->query($sql);
-                        $sql = "
-                                    INSERT
-                                    INTO
-                                            `tbl_product_master`
-                                            (
-                                                product_id,
-                                                prd_price,
-                                                b2bprice,
-                                                barcode,
-                                                product_brand,
-                                                date_time
-                                            )
-                                    VALUES
-                                            (
-                                                '" . $pro_id    . "',
-                                                 ".$total_price.",
-                                                 ".$total_price.",
-                                                '" . $value[1]  . "',
-                                                '" . $value[27] . "',
-                                                '" . $ts . "'
-                                            )";
+                          $complete_flag = $this->validateJewelFields($value);
+                          if(!empty($value[9]) && !empty($value[10]))
+                          {
+                              $polkiValue = floatval($value[9])*floatval($value[10]);
+                          }
 
-                        $res = $this->query($sql);
+                          $value[12] = $value[12].'-'.$value[13];
+                          $value[14] = $value[14].'-'.$value[15];
 
-                        $complete_flag = $this->validateJewelFields($value);
-                        if(!empty($value[9]) && !empty($value[10]))
-                        {
-                            $polkiValue = floatval($value[9])*floatval($value[10]);
-                        }
+                          for($j=$i+1;$j<$len;$j++)
+                          {
+                              if(empty($rdv[$j][0]))
+                              {
+                                  if(!empty($rdv[$j][11]))
+                                  {
+                                      $value[11].= ','.$rdv[$j][11];
+                                  }
+                                  if(!empty($rdv[$j][12] && $rdv[$j][13]))
+                                  {
+                                      $value[12].= ','.$rdv[$j][12].'-'.$rdv[$j][13];
+                                  }
+                                  if(!empty($rdv[$j][14]) && !empty($rdv[$j][15]))
+                                  {
+                                      $value[14].= ','.$rdv[$j][14].'-'.$rdv[$j][15];
+                                  }
+                                  if(!empty($rdv[$j][19]))
+                                  {
+                                      $value[19].= ','.$rdv[$j][19];
+                                  }
+                                  if(!empty($rdv[$j][20]))
+                                  {
+                                      $value[20].= ','.$rdv[$j][20];
+                                  }
+                              }
+                          }
+                          $value[11] = rtrim($value[11],',');
+                          $value[12] = str_replace(',-','',rtrim($value[12],','));
+                          $value[14] = str_replace(',-','',rtrim($value[14],','));
+                          $value[19] = rtrim($value[19],',');
+                          $value[20] = rtrim($value[20],',');
 
-                        $sql = "
-                                    INSERT
-                                    INTO
-                                            `tbl_product_search`
-                                    SET
-                                            product_id            =   '".$pro_id."',
-                                            shape                 =   '".$value[0]."',
-                                            combination           =   '".$this->getAbbrValue($value[2])."',
-                                            certified             =   '".$value[3]."',
-                                            other_certificate     =   '".$value[4]."',
-                                            metal                 =   '".$value[5]."',
-                                            gold_type             =   '".$value[6]."',
-                                            polki_color           =   '".$value[7]."',
-                                            polki_quality         =   '".$value[8]."',
-                                            polki_weight          =   '".$value[9]."',
-                                            polki_price_per_carat =   '".$value[10]."',
-                                            polki_value           =   '".$polkiValue."',
-                                            diamond_shape         =   '".$value[12]."',
-                                            clarity               =   '".$value[13]."',
-                                            color                 =   '".$value[14]."',
-                                            dwt                   =   '".$value[15]."',
-                                            nofd                  =   '".$value[16]."',
-                                            price_per_carat       =   '".$value[17]."',
-                                            diamondsvalue         =   '".$value[18]."',
-                                            gemstone_type         =   '".$value[19]."',
-                                            gemwt                 =   '".$value[20]."',
-                                            gemstonevalue         =   '".$value[21]."',
-                                            gprice_per_carat      =   '".$value[22]."',
-                                            num_gemstones         =   '".$value[23]."',
-                                            othermaterial         =   '".$value[24]."',
-                                            labour_charge         =   '".$value[25]."',
-                                            gold_purity           =   '".$value[28]."',
-                                            gold_weight           =   '".$value[29]."',
-                                            grossweight           =    ".$total_weight.",
-                                            price                 =    ".$total_price.",
-                                            complete_flag         =      $complete_flag";
-
-                        $res = $this->query($sql);
-                        $totlIns++;
-                    }
+                          $sql = "
+                                      INSERT
+                                      INTO
+                                              `tbl_product_search`
+                                      SET
+                                              product_id            =   '".$pro_id."',
+                                              shape                 =   '".$value[0]."',
+                                              combination           =   '".$this->getAbbrValue($value[2])."',
+                                              certified             =   '".$value[3]."',
+                                              other_certificate     =   '".$value[4]."',
+                                              metal                 =   '".$value[5]."',
+                                              gold_type             =   '".$value[6]."',
+                                              polki_color           =   '".$value[7]."',
+                                              polki_quality         =   '".$value[8]."',
+                                              polki_weight          =   '".$value[9]."',
+                                              polki_price_per_carat =   '".$value[10]."',
+                                              polki_value           =   '".$polkiValue."',
+                                              diamond_shape         =   '".$value[11]."',
+                                              clarity               =   '".$value[12]."',
+                                              color                 =   '".$value[14]."',
+                                              dwt                   =   '".$value[16]."',
+                                              nofd                  =   '".$value[17]."',
+                                              price_per_carat       =   '".$value[18]."',
+                                              diamondsvalue         =   '".$value[18]*$value[16]."',
+                                              gemstone_type         =   '".$value[19]."',
+                                              gemstone_color        =   '".$value[20]."',
+                                              gemwt                 =   '".$value[21]."',
+                                              gemstonevalue         =   '".$value[22]*$value[21]."',
+                                              gprice_per_carat      =   '".$value[22]."',
+                                              num_gemstones         =   '".$value[23]."',
+                                              othermaterial         =   '".$value[24]."',
+                                              labour_charge         =   '".$value[25]."',
+                                              gold_purity           =   '".$value[28]."',
+                                              gold_weight           =   '".$value[29]."',
+                                              grossweight           =    ".$total_weight.",
+                                              price                 =    ".$total_price.",
+                                              complete_flag         =      $complete_flag";
+                          $res = $this->query($sql);
+                          $totlIns++;
+                      }
+                  }
+                  else
+                  {
+                      $res = false;
+                  }
+                  $i++;
                 }
                 else
                 {
-                    $res = false;
+                    $i++;
                 }
-                $i++;
             }
             if ($res)
             {
@@ -2110,13 +2191,13 @@ class vendor extends DB
     public function calculatePrice($params,$rate)
     {
         $price = 0;
-        if(!empty($params[15]) && !empty($params[17]))
+        if(!empty($params[16]) && !empty($params[18]))
         {
-            $price = $price + ((floatval($params[15])/5)*$params[17]);
+            $price = $price + ((floatval($params[16])/5)*$params[18]);
         }
-        if(!empty($params[20]) && !empty($params[22]))
+        if(!empty($params[22]) && !empty($params[23]))
         {
-            $price = $price + ((floatval($params[20])/5)*$params[22]);
+            $price = $price + ((floatval($params[23])/5)*$params[22]);
         }
         if(!empty($params[25]))
         {
@@ -2132,17 +2213,17 @@ class vendor extends DB
     public function calculateWeight($params,$rate)
     {
         $weight = 0;
-        if(!empty($params[15]))
+        if(!empty($params[16]))
         {
-            $weight = $weight + (floatval($params[15])/5);
+            $weight = $weight + (floatval($params[16])/5);
         }
-        if(!empty($params[20]))
+        if(!empty($params[21]))
         {
-            $weight = $weight + (floatval($params[20])/5);
+            $weight = $weight + (floatval($params[21])/5);
         }
         if(!empty($params[24]))
         {
-            $weight = $weight + floatval($params[25]);
+            $weight = $weight + floatval($params[24]);
         }
         if(!empty($params[29]))
         {
@@ -2452,7 +2533,6 @@ class vendor extends DB
                                     'Depth %',
                                     'Table %',
                                     'Girdle',
-                                    'Culet Size',
                                     'Culet Condition',
                                     'Crown Height',
                                     'Crown Angle',
@@ -2465,22 +2545,16 @@ class vendor extends DB
                                     'City',
                                     'Is Matched Pair Separable',
                                     'Pair Stock #',
-                                    'Parcel Stones',
                                     'Report Filename',
                                     'Diamond Image',
                                     'Sarine Loupe',
-                                    'Trade Show',
-                                    'Key to symbols',
-                                    'Shade',
-                                    'Star Length',
                                     'Center Inclusion',
                                     'Black Inclusion',
                                     'Milky',
                                     'Member Comment',
                                     'Report Issue Date',
                                     'Report Type',
-                                    'Lab Location',
-                                    'Brand'
+                                    'Lab Location'
                                 );
 
         if($type=='csv')
@@ -2540,9 +2614,9 @@ class vendor extends DB
                     $b2bprice = 0;
                 }
 
-                if(!empty($value[17]) && !empty($value[14]))
+                if(!empty($value[16]) && !empty($value[14]))
                 {
-                    $b2cprice = $value[14]-($value[14]/$value[17]);
+                    $b2cprice = $value[14]-($value[14]/$value[16]);
                 }
                 else
                 {
@@ -2667,10 +2741,10 @@ class vendor extends DB
                                             symmetry      = '".$value[8]."',
                                             measurement   = '".$value[10]."',
                                             tabl          = '".$value[21]."',
-                                            cr_hgt        = '".$value[25]."',
-                                            cr_ang        = '".$value[26]."',
-                                            pd            = '".$value[27]."',
-                                            pa            = '".$value[28]."',
+                                            cr_hgt        = '".$value[24]."',
+                                            cr_ang        = '".$value[25]."',
+                                            pd            = '".$value[26]."',
+                                            pa            = '".$value[27]."',
                                             price         =  ".$b2cprice.",
                                             base          = '".$value[14]."',
                                             b2b_price     =  ".$b2bprice.",

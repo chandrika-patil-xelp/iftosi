@@ -83,12 +83,25 @@
                                     {
                                         $attrid = str_replace(' ', '_', $attrValues[$i]);
                                         $attrid = str_replace('&', '_', $attrid);
+
+                                        if($attrValues[$i] !== 'GOLD & POLKI')
+                                        {
 ?>
-                                        <div class="checkDiv fLeft">
-                                            <input type="radio" name='combination' class="filled-in" value="<?= $attrValues[$i]; ?>" <?= ($attr['combination'] == $attrValues[$i]) ? 'checked' : ''; ?> id="<?= strtolower($attrid); ?>">
-                                            <label for="<?= strtolower($attrid); ?>"><?= ucwords(strtolower($attrValues[$i])); ?></label>
-                                        </div>
+                                            <div class="checkDiv fLeft">
+                                                <input type="radio" name='combination' class="filled-in" value="<?= $attrValues[$i]; ?>" <?= ($attr['combination'] == $attrValues[$i]) ? 'checked' : ''; ?> id="<?= strtolower($attrid); ?>">
+                                                <label for="<?= strtolower($attrid); ?>"><?= ucwords(strtolower($attrValues[$i])); ?></label>
+                                            </div>
 <?php
+                                        }
+                                        else
+                                        {
+?>
+                                            <div class="checkDiv fLeft <?php echo ($attr['combination'] == 'GOLD & POLKI') ? '':'dn';?>">
+                                                <input type="radio" name='combination' class="filled-in" value="<?= $attrValues[$i]; ?>" <?= ($attr['combination'] == $attrValues[$i]) ? 'checked' : ''; ?> id="<?= strtolower($attrid); ?>">
+                                                <label for="<?= strtolower($attrid); ?>"><?= ucwords(strtolower($attrValues[$i])); ?></label>
+                                            </div>
+<?php
+                                        }
                                       }
 ?>
                                       </div>
@@ -179,15 +192,15 @@
                             <div class="titleDiv txtCap fLeft">Gold Type*</div>
                                 <div class="radioCont fLeft">
                                     <div class="checkDiv fLeft">
-                                        <input type="radio" name="gold_type" class="filled-in" value="White Gold" id="white_gold">
+                                        <input type="radio" name="gold_type" class="filled-in" value="White Gold" <?= ($attr['gold_type'] == 'White Gold') ? 'checked' : ''; ?> id="white_gold">
                                         <label for="white_gold">White Gold</label>
                                     </div>
                                     <div class="checkDiv fLeft">
-                                        <input type="radio" name="gold_type" class="filled-in" value="Yellow Gold" id="yellow_gold">
+                                        <input type="radio" name="gold_type" class="filled-in" value="Yellow Gold" <?= ($attr['gold_type'] == 'Yellow Gold') ? 'checked' : ''; ?> id="yellow_gold">
                                         <label for="yellow_gold">Yellow Gold</label>
                                     </div>
                                     <div class="checkDiv fLeft">
-                                        <input type="radio" name="gold_type" class="filled-in" value="Pink Gold" id="pink_gold">
+                                        <input type="radio" name="gold_type" class="filled-in" value="Pink Gold" <?= ($attr['gold_type'] == 'Pink Gold') ? 'checked' : ''; ?> id="pink_gold">
                                         <label for="pink_gold">Pink Gold</label>
                                     </div>
                                 </div>
@@ -327,6 +340,7 @@
 <?php
                                 $attr['diamond_shape'] = explode('|!|', $attr['diamond_shape']);
                                 $attr['color'] = explode('|!|', $attr['color']);
+
                                 $attr['clarity'] = explode('|!|', $attr['clarity']);
                                 for ($curIndex = 0; $curIndex < count($attr['diamond_shape']); $curIndex++)
                                 {
@@ -371,95 +385,86 @@
                                             }
                                             ?>
                                         </div>
-
-                                        <div class="divCon fLeft dAuto <?php echo ($attr['diamond_shape'][$curIndex]) ? '' : 'dn'; ?> diamondProp diamondProp_<?php echo $curDiv; ?>">
+                                        <?php
+                                                $arr1['color'] = explode(' ',$attr['color'][$curIndex]);
+                                                $arr1['clarity'] = explode(' ',$attr['clarity'][$curIndex]);
+                                         ?>
+                                        <div class="divCon fLeft dAuto dmdColor <?php echo ($attr['diamond_shape'][$curIndex]) ? '' : 'dn'; ?> diamondProp diamondProp_<?php echo $curDiv; ?>">
                                             <div  class="titleDiv txtCap fLeft">Diamond Color*</div>
                                             <div class='radioCont fLeft'>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="D" <?= ($attr['color'][$curIndex] == 'D') ? 'checked' : ''; ?> id="color_D_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="D" <?= ($arr1['color'][0] == 'D' || $arr1['color'][1] == 'D') ? 'checked' : ''; ?> id="color_D_<?php echo $curDiv; ?>">
                                                     <label for="color_D_<?php echo $curDiv; ?>"> D</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="E" <?= ($attr['color'][$curIndex] == 'E') ? 'checked' : ''; ?> id="color_E_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="E" <?= ($arr1['color'][0] == 'E' || $arr1['color'][1] == 'E') ? 'checked' : ''; ?> id="color_E_<?php echo $curDiv; ?>">
                                                     <label for="color_E_<?php echo $curDiv; ?>">E</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="F" <?= ($attr['color'][$curIndex] == 'F') ? 'checked' : ''; ?> id="color_F_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="F" <?= ($arr1['color'][0] == 'F' || $arr1['color'][1] == 'F') ? 'checked' : ''; ?> id="color_F_<?php echo $curDiv; ?>">
                                                     <label for="color_F_<?php echo $curDiv; ?>">F</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="G" <?= ($attr['color'][$curIndex] == 'G') ? 'checked' : ''; ?> id="color_G_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="G" <?= ($arr1['color'][0] == 'G' || $arr1['color'][1] == 'G') ? 'checked' : ''; ?> id="color_G_<?php echo $curDiv; ?>">
                                                     <label for="color_G_<?php echo $curDiv; ?>">G</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="H" <?= ($attr['color'][$curIndex] == 'H') ? 'checked' : ''; ?> id="color_H_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="H" <?= ($arr1['color'][0] == 'H' || $arr1['color'][1] == 'H') ? 'checked' : ''; ?> id="color_H_<?php echo $curDiv; ?>">
                                                     <label for="color_H_<?php echo $curDiv; ?>">H</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="I" <?= ($attr['color'][$curIndex] == 'I') ? 'checked' : ''; ?> id="color_I_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="I" <?= ($arr1['color'][0] == 'I' || $arr1['color'][1] == 'I') ? 'checked' : ''; ?> id="color_I_<?php echo $curDiv; ?>">
                                                     <label for="color_I_<?php echo $curDiv; ?>">I</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="J" <?= ($attr['color'][$curIndex] == 'J') ? 'checked' : ''; ?> id="color_J_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="J" <?= ($arr1['color'][0] == 'J' || $arr1['color'][1] == 'J') ? 'checked' : ''; ?> id="color_J_<?php echo $curDiv; ?>">
                                                     <label for="color_J_<?php echo $curDiv; ?>">J</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="K" <?= ($attr['color'][$curIndex] == 'K') ? 'checked' : ''; ?> id="color_K_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="K" <?= ($arr1['color'][0] == 'K' || $arr1['color'][1] == 'K') ? 'checked' : ''; ?> id="color_K_<?php echo $curDiv; ?>">
                                                     <label for="color_K_<?php echo $curDiv; ?>">K</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="L" <?= ($attr['color'][$curIndex] == 'L') ? 'checked' : ''; ?> id="color_L_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="L" <?= ($arr1['color'][0] == 'L' || $arr1['color'][1] == 'L') ? 'checked' : ''; ?> id="color_L_<?php echo $curDiv; ?>">
                                                     <label for="color_L_<?php echo $curDiv; ?>">L</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="M" <?= ($attr['color'][$curIndex] == 'M') ? 'checked' : ''; ?> id="color_M_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="M" <?= ($arr1['color'][0] == 'M' || $arr1['color'][1] == 'M') ? 'checked' : ''; ?> id="color_M_<?php echo $curDiv; ?>">
                                                     <label for="color_M_<?php echo $curDiv; ?>">M</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="N" <?= ($attr['color'][$curIndex] == 'N') ? 'checked' : ''; ?> id="color_N_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="N" <?= ($arr1['color'][0] == 'N' || $arr1['color'][1] == 'N') ? 'checked' : ''; ?> id="color_N_<?php echo $curDiv; ?>">
                                                     <label for="color_N_<?php echo $curDiv; ?>">N</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="radio" name='color_<?php echo $curDiv; ?>' class="filled-in" value="O" <?= ($attr['color'][$curIndex] == 'O') ? 'checked' : ''; ?> id="color_O_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="O" <?= ($arr1['color'][0] == 'O' || $arr1['color'][1] == 'O') ? 'checked' : ''; ?> id="color_O_<?php echo $curDiv; ?>">
                                                     <label for="color_O_<?php echo $curDiv; ?>">O</label>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="divCon  fLeft jw3 <?php echo ($attr['diamond_shape'][$curIndex]) ? '' : 'dn'; ?> diamondProp diamondProp_<?php echo $curDiv; ?>">
+                                        <div class="divCon  fLeft jw3 dmdQuality <?php echo ($attr['diamond_shape'][$curIndex]) ? '' : 'dn'; ?> diamondProp diamondProp_<?php echo $curDiv; ?>">
                                             <div  class="titleDiv txtCap fLeft">Diamond Quality*</div>
                                             <div class='radioCont fLeft'>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="radio" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="IF" <?= ($attr['clarity'][$curIndex] == 'IF') ? 'checked' : ''; ?> id="clarity_IF_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="IF" <?= ($arr1['clarity'][0] == 'IF' || $arr1['clarity'][1] == 'IF') ? 'checked' : ''; ?> id="clarity_IF_<?php echo $curDiv; ?>">
                                                     <label for="clarity_IF_<?php echo $curDiv; ?>">IF</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="radio" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="VVS1" <?= ($attr['clarity'][$curIndex] == 'VVS1') ? 'checked' : ''; ?> id="clarity_VVS1_<?php echo $curDiv; ?>">
-                                                    <label for="clarity_VVS1_<?php echo $curDiv; ?>">VVS1</label>
+                                                    <input type="checkbox" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="VVS" <?= ($arr1['clarity'][0] == 'VVS' || $arr1['clarity'][1] == 'VVS') ? 'checked' : ''; ?> id="clarity_VVS_<?php echo $curDiv; ?>">
+                                                    <label for="clarity_VVS_<?php echo $curDiv; ?>">VVS</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="radio" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="VVS2" <?= ($attr['clarity'][$curIndex] == 'VVS2') ? 'checked' : ''; ?> id="clarity_VVS2_<?php echo $curDiv; ?>">
-                                                    <label for="clarity_VVS2_<?php echo $curDiv; ?>">VVS2</label>
+                                                    <input type="checkbox" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="VS" <?= ($arr1['clarity'][0] == 'VS' || $arr1['clarity'][1] == 'VS') ? 'checked' : ''; ?> id="clarity_VS_<?php echo $curDiv; ?>">
+                                                    <label for="clarity_VS_<?php echo $curDiv; ?>">VS</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="radio" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="VS1" <?= ($attr['clarity'][$curIndex] == 'VS1') ? 'checked' : ''; ?> id="clarity_VS1_<?php echo $curDiv; ?>">
-                                                    <label for="clarity_VS1_<?php echo $curDiv; ?>">VS1</label>
+                                                    <input type="checkbox" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="SI" <?= ($arr1['clarity'][0] == 'SI' || $arr1['clarity'][1] == 'SI') ? 'checked' : ''; ?> id="clarity_SI_<?php echo $curDiv; ?>">
+                                                    <label for="clarity_SI_<?php echo $curDiv; ?>">SI</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="radio" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="VS2" <?= ($attr['clarity'][$curIndex] == 'VS2') ? 'checked' : ''; ?> id="clarity_VS2_<?php echo $curDiv; ?>">
-                                                    <label for="clarity_VS2_<?php echo $curDiv; ?>">VS2</label>
-                                                </div>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="radio" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="SI1" <?= ($attr['clarity'][$curIndex] == 'SI1') ? 'checked' : ''; ?> id="clarity_SI1_<?php echo $curDiv; ?>">
-                                                    <label for="clarity_SI1_<?php echo $curDiv; ?>">SI1</label>
-                                                </div>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="radio" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="SI2" <?= ($attr['clarity'][$curIndex] == 'SI2') ? 'checked' : ''; ?> id="clarity_SI2_<?php echo $curDiv; ?>">
-                                                    <label for="clarity_SI2_<?php echo $curDiv; ?>">SI2</label>
-                                                </div>
-                                                <div class="checkDiv fLeft">
-                                                    <input type="radio" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="I1" <?= ($attr['clarity'][$curIndex] == 'I1') ? 'checked' : ''; ?> id="clarity_I1_<?php echo $curDiv; ?>">
-                                                    <label for="clarity_I1_<?php echo $curDiv; ?>">I1</label>
+                                                    <input type="checkbox" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="I" <?= ($arr1['clarity'][0] == 'I' || $arr1['clarity'][1] == 'I') ? 'checked' : ''; ?> id="clarity_I_<?php echo $curDiv; ?>">
+                                                    <label for="clarity_I_<?php echo $curDiv; ?>">I</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -695,6 +700,8 @@ function convertJSObj($array) {
     var shapeTypes = '<?php echo json_encode($filval); ?>';
     var gemsTypes = '<?php echo convertJSObj($gemsAttrs); ?>';
     var gemsValues = '<?php echo json_encode($gemvalues); ?>';
+    var colors = '<?php echo $colors; ?>';
+    var clarity = '<?php echo $clarity; ?>';
 </script>
 <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['jqryUi']; ?>"></script>

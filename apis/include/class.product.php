@@ -1696,6 +1696,7 @@
                                                 gprice_per_carat,
                                                 diamondsvalue,
                                                 gold_value,
+                                                gold_type,
                                                 gemstonevalue
                     FROM
                         tbl_product_search

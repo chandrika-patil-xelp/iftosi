@@ -1012,6 +1012,8 @@ switch ($action) {
                 $cat = $res['result'];
                 $catres = $cat['subcat'][0]['attr'];
                 $attr = $result[$pid]['attr_details'];
+                $colors = $attr['color'];
+                $clarity = $attr['clarity'];
                 $pdet = $result[$pid];
 
                 $certificate_url = $attr['certificate_url'];
