@@ -1169,7 +1169,7 @@ function addShapeType()
 		});
 		$('.diamondProp_'+DivLen+' .dmdColor'+DivLen+' input[type="checkbox"]').bind('click',function(i,val)
 		{
-				if(arrColor['color_'+DivLen].length < 2 )
+				if(arrColor['color_'+DivLen].length < 3 )
 				{
 						if($(this).is(':checked'))
 						{
@@ -1208,14 +1208,19 @@ function checkDiamondShape(evt,id)
         var wholeDiv='#diamondShapeCont_'+id+' .shapeComm';
         $(wholeDiv).each(function ()
 				{
-            if ($(wholeDiv).hasClass('shapeSelected') && $(wholeDiv).attr('id') != uthis.attr('id'))
-                $(wholeDiv).removeClass('shapeSelected');
+            if($(wholeDiv).hasClass('shapeSelected') && $(wholeDiv).attr('id') != uthis.attr('id'))
+						{
+							$(wholeDiv).removeClass('shapeSelected');
+						}
+						else
+						{
+								$(wholeDiv).removeClass('shapeSelected');
+						}
         });
         $(evt).toggleClass('shapeSelected');
-
         if($(evt).hasClass('shapeSelected'))
         {
-				    $('.inDiamondAddMore').remove();
+						$('.inDiamondAddMore').remove();
             $('#diamondShapeCont').append('<div onclick="addShapeType()" id="addDiamondType" class="submitBtn fmOpenR ripplelink poR fRight addMore inDiamondAddMore">Add Diamond Type</div><div style="clear: both;"></div>');
             $('.diamondProp_'+id).removeClass('dn');
         }
@@ -1230,7 +1235,7 @@ function checkDiamondShape(evt,id)
 		{
         if ($(this).hasClass('shapeSelected'))
 				{
-            $('.divCon2.diamondProp').removeClass('dn');
+            $('.divCon2 .diamondProp').removeClass('dn');
         }
     });
 }
@@ -1292,7 +1297,7 @@ $(document).ready(function()
 
 		$('#diamondShapeDiv .dmdColor input[type="checkbox"]').bind('click',function(i,val)
 		{
-				if(arrColor['color_0'].length < 2 )
+				if(arrColor['color_0'].length < 3 )
 				{
 						if($(this).is(':checked'))
 						{
@@ -1323,7 +1328,6 @@ $(document).ready(function()
 						arrClarity['clarity_0'].push($(this).val());
 				}
 		});
-
 		$('#certiicates label').click(function ()
 		{
 				setTimeout(function ()

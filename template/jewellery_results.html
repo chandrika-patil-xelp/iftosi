@@ -35,7 +35,14 @@
 						foreach($showcat['subcat'] as $key => $val)
 						{
 							$exp = explode('/',$val['cat_name']);
-							$scat = trim($exp[0]);
+              if($exp[0] == 'Ring' || $exp[0] == 'Earring' || $exp[0] == 'Pendant' || $exp[0] == 'Necklace' || $exp[0] == 'Bangle')
+              {
+                $scat = trim($exp[0].'s');
+              }
+              else
+              {
+                $scat = trim($exp[0]);
+              }
 							$html .= '<li><div id="'.$val['catid'].'_'.$scat.'" class="jshapeComm transition300 ripplelink '.$scat.'">'.$val['cat_name'].'</div></li>';
 						}
 						echo $html;

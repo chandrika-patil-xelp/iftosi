@@ -72,19 +72,26 @@
                                                             <center>
 								<div class="prImageStrip">
                                                                     <ul class="carousel transition300">
-                                                                        
-                                                                            
+
+
 									<?php
 									$html = '';
 									foreach($v['subcat'] as $key => $val)
 									{
 										$exp = explode('/',$val['cat_name']);
-										$scat = trim($exp[0]);
+                    if($exp[0] == 'Ring' || $exp[0] == 'Earring' || $exp[0] == 'Pendant' || $exp[0] == 'Necklace' || $exp[0] == 'Bangle')
+                    {
+                      $scat = trim($exp[0].'s');
+                    }
+                    else
+                    {
+                      $scat = trim($exp[0]);
+                    }
 
 										$cname = preg_replace('/[^a-zA-Z0-9]+/', ' ', $val['cat_name']);
 										$cname = ereg_replace("[ \t\n\r]+", " ", $cname);
 										$cname = strtolower(str_replace(" ", "-", $cname));
-                                                                                $html.='<li>';  
+                                                                                $html.='<li>';
 										$html .= '<a href="'.DOMAIN.strtolower($v['cat_name']).'/'.$cname.'/ct-'.$val['catid'].'">';
 										$html .= '<div id="'.$val['catid'].'_'.$scat.'" class="jshapeComm transition300 ripplelink '.$scat.'">'.$val['cat_name'].'</div>';
 										$html .= '</a>';
@@ -92,8 +99,8 @@
 									}
 									echo $html;
 									?>
-                                                                            
-                                                                        
+
+
                                                                     </ul>
 									</div>
                                                                 </center>
