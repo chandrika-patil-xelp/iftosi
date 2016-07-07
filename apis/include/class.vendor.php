@@ -1861,6 +1861,7 @@ class vendor extends DB
                                     'Clarity2',
                                     'Colour1',
                                     'Colour2',
+                                    'Colour3',
                                     'Carat',
                                     'No Of Diamond',
                                     'Diamond Price / Carat',
@@ -1885,7 +1886,7 @@ class vendor extends DB
         else
         {
             $rdv = $data;
-            $data[0] = array_slice($data[0],0,30);
+            $data[0] = array_slice($data[0],0,31);
             $colName = $data[0];
             $len = count($rdv);
         }
@@ -2039,7 +2040,7 @@ class vendor extends DB
                                                    ".$total_price.",
                                                    ".$total_price.",
                                                   '" . $value[1]  . "',
-                                                  '" . $value[27] . "',
+                                                  '" . $value[28] . "',
                                                   '" . $ts . "'
                                               )";
 
@@ -2052,7 +2053,7 @@ class vendor extends DB
                           }
 
                           $value[12] = $value[12].'-'.$value[13];
-                          $value[14] = $value[14].'-'.$value[15];
+                          $value[14] = $value[14].'-'.$value[15].'-'.$value[16];
 
                           for($j=$i+1;$j<$len;$j++)
                           {
@@ -2066,13 +2067,9 @@ class vendor extends DB
                                   {
                                       $value[12].= ','.$rdv[$j][12].'-'.$rdv[$j][13];
                                   }
-                                  if(!empty($rdv[$j][14]) && !empty($rdv[$j][15]))
+                                  if(!empty($rdv[$j][14]) && !empty($rdv[$j][15]) && !empty($rdv[$j][16]))
                                   {
-                                      $value[14].= ','.$rdv[$j][14].'-'.$rdv[$j][15];
-                                  }
-                                  if(!empty($rdv[$j][19]))
-                                  {
-                                      $value[19].= ','.$rdv[$j][19];
+                                      $value[14].= ','.$rdv[$j][14].'-'.$rdv[$j][15].'-'.$rdv[$j][16];
                                   }
                                   if(!empty($rdv[$j][20]))
                                   {
@@ -2083,7 +2080,6 @@ class vendor extends DB
                           $value[11] = rtrim($value[11],',');
                           $value[12] = str_replace(',-','',rtrim($value[12],','));
                           $value[14] = str_replace(',-','',rtrim($value[14],','));
-                          $value[19] = rtrim($value[19],',');
                           $value[20] = rtrim($value[20],',');
 
                           $sql = "
@@ -2106,20 +2102,20 @@ class vendor extends DB
                                               diamond_shape         =   '".$value[11]."',
                                               clarity               =   '".$value[12]."',
                                               color                 =   '".$value[14]."',
-                                              dwt                   =   '".$value[16]."',
-                                              nofd                  =   '".$value[17]."',
-                                              price_per_carat       =   '".$value[18]."',
-                                              diamondsvalue         =   '".$value[18]*$value[16]."',
-                                              gemstone_type         =   '".$value[19]."',
-                                              gemstone_color        =   '".$value[20]."',
-                                              gemwt                 =   '".$value[21]."',
-                                              gemstonevalue         =   '".$value[22]*$value[21]."',
-                                              gprice_per_carat      =   '".$value[22]."',
-                                              num_gemstones         =   '".$value[23]."',
-                                              othermaterial         =   '".$value[24]."',
-                                              labour_charge         =   '".$value[25]."',
-                                              gold_purity           =   '".$value[28]."',
-                                              gold_weight           =   '".$value[29]."',
+                                              dwt                   =   '".$value[17]."',
+                                              nofd                  =   '".$value[18]."',
+                                              price_per_carat       =   '".$value[19]."',
+                                              diamondsvalue         =   '".$value[19]*$value[17]."',
+                                              gemstone_type         =   '".$value[20]."',
+                                              gemstone_color        =   '".$value[21]."',
+                                              gemwt                 =   '".$value[22]."',
+                                              gemstonevalue         =   '".$value[22]*$value[23]."',
+                                              gprice_per_carat      =   '".$value[23]."',
+                                              num_gemstones         =   '".$value[24]."',
+                                              othermaterial         =   '".$value[25]."',
+                                              labour_charge         =   '".$value[26]."',
+                                              gold_purity           =   '".$value[29]."',
+                                              gold_weight           =   '".$value[30]."',
                                               grossweight           =    ".$total_weight.",
                                               price                 =    ".$total_price.",
                                               complete_flag         =      $complete_flag";
@@ -2191,21 +2187,21 @@ class vendor extends DB
     public function calculatePrice($params,$rate)
     {
         $price = 0;
-        if(!empty($params[16]) && !empty($params[18]))
+        if(!empty($params[17]) && !empty($params[19]))
         {
-            $price = $price + ((floatval($params[16])/5)*$params[18]);
+            $price = $price + ((floatval($params[17])/5)*$params[19]);
         }
         if(!empty($params[22]) && !empty($params[23]))
         {
-            $price = $price + ((floatval($params[23])/5)*$params[22]);
+            $price = $price + ((floatval($params[22])/5)*$params[23]);
         }
-        if(!empty($params[25]))
+        if(!empty($params[26]))
         {
-            $price = $price + floatval($params[25]);
+            $price = $price + floatval($params[26]);
         }
-        if(!empty($params[29]))
+        if(!empty($params[30]))
         {
-            $price = $price + floatval($params[29])*floatval($rate);
+            $price = $price + floatval($params[30])*floatval($rate);
         }
         return $price;
     }
@@ -2213,21 +2209,21 @@ class vendor extends DB
     public function calculateWeight($params,$rate)
     {
         $weight = 0;
-        if(!empty($params[16]))
+        if(!empty($params[17]))
         {
-            $weight = $weight + (floatval($params[16])/5);
+            $weight = $weight + (floatval($params[17])/5);
         }
-        if(!empty($params[21]))
+        if(!empty($params[22]))
         {
-            $weight = $weight + (floatval($params[21])/5);
+            $weight = $weight + (floatval($params[22])/5);
         }
-        if(!empty($params[24]))
+        if(!empty($params[25]))
         {
-            $weight = $weight + floatval($params[24]);
+            $weight = $weight + floatval($params[25]);
         }
-        if(!empty($params[29]))
+        if(!empty($params[30]))
         {
-            $weight = $weight + floatval($params[29]);
+            $weight = $weight + floatval($params[30]);
         }
         return $weight;
     }
