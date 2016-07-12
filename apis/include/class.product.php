@@ -339,6 +339,14 @@
                                   $detls['gold_weight'] = $detls['platinumweight'];
                               }
                           }
+                          if(!empty($detls['color']))
+                          {
+                              $detls['color'] = str_replace(' ','-',$detls['color']);
+                          }
+                          if(!empty($detls['clarity']))
+                          {
+                              $detls['clarity'] = str_replace(' ','-',$detls['clarity']);
+                          }
                               $sql = "  INSERT
                                         INTO
                                                 tbl_product_search
@@ -384,7 +392,7 @@
                                                  rating,
                                                  budget,
                                                  b2b_price,
-                                                 is_plain_jewellery,
+                                                 isBugget,
                                                  price_per_carat,
                                                  othermaterial,
                                                  labour_charge,
@@ -445,7 +453,7 @@
                                               \"".$detls['rating']."\",
                                               \"".$detls['price']."\",
                                               \"".$detls['priceb2b']."\",
-                                              \"".$detls['isPlain']."\",
+                                              \"".$detls['isBugget']."\",
                                               \"".$detls['price_per_carat']."\",
                                               \"".$detls['othermaterial']."\",
                                               \"".$detls['labour_charge']."\",
@@ -505,7 +513,7 @@
                                                 rating                  = \"".$detls['rating']."\",
                                                 budget                  = \"".$detls['price']."\",
                                                 b2b_price               = \"".$detls['priceb2b']."\",
-                                                is_plain_jewellery      = \"".$detls['isPlain']."\",
+                                                isBugget                = \"".$detls['isBugget']."\",
                                                 price_per_carat         = \"".$detls['price_per_carat']."\",
                                                 othermaterial           = \"".$detls['othermaterial']."\",
                                                 labour_charge           = \"".$detls['labour_charge']."\",
@@ -1697,7 +1705,8 @@
                                                 diamondsvalue,
                                                 gold_value,
                                                 gold_type,
-                                                gemstonevalue
+                                                gemstonevalue,
+                                                isBugget
                     FROM
                         tbl_product_search
                     WHERE
@@ -1717,6 +1726,12 @@
                     if ($row2 && !empty($row2['product_id']))
                     {
                         $prid[]=$row['product_id'];
+                        $shapers = explode('|!|',$row2['diamond_shape']);
+                        if($shapers[0] == 'Emerald' && $row2['isBugget'] == 'True')
+                        {
+                            $shapers[0] = 'Bugget';
+                        }
+                        $row2['diamond_shape'] = implode('|!|',$shapers);
                         $details=$row2;
                     }
                 }

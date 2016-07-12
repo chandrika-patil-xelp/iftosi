@@ -833,6 +833,11 @@ function updateSilverRate()
                         {
                             loadBullions(1);
                         }
+                        if(activePage  == 'jewellery_Form')
+                        {
+                            calculateJPrice();
+                            valueOnChange();
+                        }
                     }
                     else if(errCode == 1)
                     {
@@ -938,6 +943,11 @@ function updatePlatinumRate()
                               if(pageName  == 'Products' && catid == '10002' && pageName !== undefined && pageName  !== 'undefined')
                               {
                                   loadBullions(1);
+                              }
+                              if(activePage  == 'jewellery_Form')
+                              {
+                                  calculateJPrice();
+                                  valueOnChange();
                               }
                           }
                           else if(errCode == 1)
@@ -1105,6 +1115,11 @@ function updateGoldSilverRate()
                         if(pageName  == 'Products' && catid == '10002' && pageName !== undefined && pageName  !== 'undefined')
                         {
                             loadBullions(1);
+                        }
+                        if(activePage  == 'jewellery_Form')
+                        {
+                            calculateJPrice();
+                            valueOnChange();
                         }
                         closeAllForms();
                         submiter2 = true;

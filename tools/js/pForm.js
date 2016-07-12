@@ -1,17 +1,11 @@
-var arrColors = colors.split('|@|');
-var arrClaritys = clarity.split('|@|');
-var lengthClarity = arrClaritys.length;
-var lengthColor = arrColors.length;
+var arrColors = [];
+var arrClaritys = [];
 var arrColor = [];
 var arrClarity = [];
-for(var j=0;j<lengthColor;j++)
-{
-		arrColor["color_"+j] = arrColors[j].split(' ');
-}
-for(var k=0;k<lengthClarity;k++)
-{
-	arrClarity["clarity_"+k] = arrClaritys[k].split(' ');
-}
+var col = [];
+var cla = [];
+var cntDiv = 1;
+
 function changeGemstoneType(obj,id)
 {
 	var gemType = $(obj).val();
@@ -271,11 +265,13 @@ function validateJForm()
 				var polki_quality = $('input[name=polki_clarity]:checked').val();
 				var polki_weight = $('#polki_weight').val().trim();
 				var polkino = $('#polkino').val().trim();
+				var isBugget = $('input[name="bugget"]:checked').val();
 				var polki_price_per_carat = $('#polki_price_per_carat').val().trim();
 				var polki_value = $('#polki_value').val().trim();
-        var puritypatt = /(^|[^-\d])(14|18|22|24)\b/;
+        var puritypatt = /(^|[^-\d])(14|18|22|24|995|999)\b/;
 				var subcat = '';
 				var isValid = true;
+				var str = '';
 				shape.each(function()
 				{
 						if($(this).hasClass('shapeSelected'))
@@ -330,6 +326,13 @@ function validateJForm()
                     str = 'Please enter certificate';
 								}
 						}
+						var tmp_certificate_url = $('#filePath').html();
+						if(isValid && (tmp_certificate_url === undefined || tmp_certificate_url === null || tmp_certificate_url === ''))
+						{
+								str ='Please upload product certificate';
+								isValid = false;
+						}
+
 				}
 
 				if(isValid && (metal === undefined || metal === null || metal === ''))
@@ -345,8 +348,8 @@ function validateJForm()
             isValid = false;
 				}
 
-	      var vclarity=new Array();
-	      var vcolor=new Array();
+	      var vclarity = new Array();
+	      var vcolor   =   new Array();
 				if(isValid && diamondShape.hasClass('shapeSelected'))
 				{
             var DivLen = ($('#diamondShapeCont #diamondShapeDiv').length)+1;
@@ -360,6 +363,7 @@ function validateJForm()
 											var clarity = clarityGathering(i,values2);
 											vcolor.push(color);
 	                    vclarity.push(clarity);
+
 											if(color === undefined || color === null || color === '')
 	                    {
                           str = 'Please select diamond color';
@@ -390,6 +394,7 @@ function validateJForm()
 									isValid = false;
 									$('#no_diamonds').focus();
 							}
+
 					}
 					else
 					{
@@ -442,6 +447,7 @@ function validateJForm()
 		              $('#num_gemstones').focus();
 				      }
 					}
+
 					if(isValid && (purity === undefined || purity === null || purity === '' || isNaN(purity)))
 					{
 							str = 'Please enter purity';
@@ -456,6 +462,7 @@ function validateJForm()
 	            isValid = false;
 	            $('#goldpurity').focus();
 	        }
+
 					if(isValid && (goldweight === undefined || goldweight === null || goldweight === '' || isNaN(goldweight)))
 					{
 							str = 'Please enter net weight';
@@ -522,6 +529,7 @@ function validateJForm()
 									$('#polki_value').focus();
 							}
 					}
+
 					if(isValid === false)
 					{
 							common.toast(0, str);
@@ -613,7 +621,7 @@ function validateJForm()
 							values[33] = "polki_value|@|"+encodeURIComponent(polki_value);
 							values[34] = "gold_type|@|"+encodeURIComponent(gold_type);
 							values[35] = "product_brand|@|"+encodeURIComponent(product_brand);
-
+							values[36] = "isBugget|@|"+encodeURIComponent(isBugget);
 							dt = values.join('|~|');
 							params += "&dt="+dt;
 
@@ -1079,7 +1087,7 @@ function removeThis()
 				$('.diamondShapeDiv').addClass('dn');
 		}
 		$('.addMore').remove();
-		$('.PolkiShapeCont').append('<div onclick="addShapeType()" id="addDiamondType" class="submitBtn fmOpenR ripplelink poR fRight addMore inPolkiAddMore">Add Diamond Type</div>');
+		$('.PolkiShapeCont').append('<div onclick="()" id="addDiamondType" class="submitBtn fmOpenR ripplelink poR fRight addMore inPolkiAddMore">Add Diamond Type</div>');
 }
 
 function ValidateFile()
@@ -1111,9 +1119,15 @@ function addShapeType()
 				$('#diamondShapeCont').removeClass('dn');
 		}
     var DivLen = ($('#diamondShapeCont #diamondShapeDiv').length)+1;
-		arrClarity['clarity_'+DivLen] = [];
-		arrColor['color_'+DivLen] = [];
-    var str ='<div id="diamondShapeDiv" class="diamondShapeDiv"><div id="diamondShapeCont_'+DivLen+'" class="divCon fLeft dAuto" style="margin-top:0px;">';
+		if(!arrClarity['clarity_'+cntDiv])
+		{
+				arrClarity['clarity_'+cntDiv] = [];
+		}
+		if(!arrColor['color_'+cntDiv])
+		{
+				arrColor['color_'+cntDiv] = [];
+		}
+    var str ='<div id="diamondShapeDiv" class="diamondShapeDiv diamondGens"><div id="diamondShapeCont_'+DivLen+'" class="divCon fLeft dAuto" style="margin-top:0px;">';
         str +='<div class="shapesCont">';
             str +='<div class="wrapperMax">';
                 str +='<div class="allShapes">';
@@ -1133,7 +1147,7 @@ function addShapeType()
                     str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="G" id="color_G_'+DivLen+'" type="checkbox"><label for="color_G_'+DivLen+'">G</label></div>';
                     str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="H" id="color_H_'+DivLen+'" type="checkbox"><label for="color_H_'+DivLen+'">H</label></div>';
                     str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="I" id="color_I_'+DivLen+'" type="checkbox"><label for="color_I_'+DivLen+'">I</label></div>';
-                    str +='<div class="checkDiv fLeft"><input name="colorAfter_'+DivLen+'" class="filled-in" value="L" id="color_L_'+DivLen+'" type="checkbox"><label for="color_L_'+DivLen+'">L</label></div>';
+                    str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="L" id="color_L_'+DivLen+'" type="checkbox"><label for="color_L_'+DivLen+'">L</label></div>';
                     str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="M" id="color_M_'+DivLen+'" type="checkbox"><label for="color_M_'+DivLen+'">M</label></div>';
                     str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="N" id="color_N_'+DivLen+'" type="checkbox"><label for="color_N_'+DivLen+'">N</label></div>';
                     str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="O" id="color_O_'+DivLen+'" type="checkbox"><label for="color_O_'+DivLen+'">O</label></div>';
@@ -1148,41 +1162,17 @@ function addShapeType()
                     str +='<div class="checkDiv fLeft"><input type="checkbox" id="clarity_I_'+DivLen+'" value="I" class="filled-in" name="clarity_'+DivLen+'"><label for="clarity_I_'+DivLen+'">I</label></div>';
                 str +='</div></div></div>';
     $('#diamondShapeCont').append(str);
+		$(".dmdColor"+DivLen+" input[name='color_"+DivLen+"']").bind('click',function()
+		{
+				checks($(this),'color_'+DivLen,"arrColor");
+		});
+
+		$(".dmdClarity"+DivLen+" input[name='clarity_"+DivLen+"']").bind('click',function()
+		{
+				checks($(this),'clarity_'+DivLen,"arrClarity");
+		});
 		$('.addMore').remove();
-
-		$('.diamondProp_'+DivLen+' .dmdClarity'+DivLen+' input[type="checkbox"]').bind('click',function(i,val)
-		{
-
-				if(arrClarity['clarity_'+DivLen].length < 2 )
-				{
-						if($(this).is(':checked'))
-						{
-								arrClarity['clarity_'+DivLen].push($(this).val());
-						}
-				}
-				else
-				{
-						$('.dmdClarity'+DivLen+' input[value="'+arrClarity['clarity_'+DivLen][0]+'"]').prop('checked',false);
-						arrClarity['clarity_'+DivLen].shift();
-						arrClarity['clarity_'+DivLen].push($(this).val());
-				}
-		});
-		$('.diamondProp_'+DivLen+' .dmdColor'+DivLen+' input[type="checkbox"]').bind('click',function(i,val)
-		{
-				if(arrColor['color_'+DivLen].length < 3 )
-				{
-						if($(this).is(':checked'))
-						{
-								arrColor['color_'+DivLen].push($(this).val());
-						}
-				}
-				else
-				{
-						$('.dmdColor'+DivLen+' input[value="'+arrColor['color_'+DivLen][0]+'"]').attr('checked',false);
-						arrColor['color_'+DivLen].shift();
-						arrColor['color_'+DivLen].push($(this).val());
-				}
-		});
+		cntDiv++;
 }
 
 function checkDiamondShape(evt,id)
@@ -1199,7 +1189,7 @@ function checkDiamondShape(evt,id)
         if(!$(evt).hasClass('shapeSelected') && id==1)
         {
             $('.inDiamondAddMore').remove();
-        }
+				}
     }
 		else
 		{
@@ -1220,6 +1210,7 @@ function checkDiamondShape(evt,id)
         $(evt).toggleClass('shapeSelected');
         if($(evt).hasClass('shapeSelected'))
         {
+
 						$('.inDiamondAddMore').remove();
             $('#diamondShapeCont').append('<div onclick="addShapeType()" id="addDiamondType" class="submitBtn fmOpenR ripplelink poR fRight addMore inDiamondAddMore">Add Diamond Type</div><div style="clear: both;"></div>');
             $('.diamondProp_'+id).removeClass('dn');
@@ -1230,14 +1221,14 @@ function checkDiamondShape(evt,id)
         }
     }
 
-    $('.divCon2.diamondProp').addClass('dn');
-    $('.shapeComm').each(function ()
+    if($('#diamondShapeCont_1 .shapeComm').hasClass('shapeSelected'))
 		{
-        if ($(this).hasClass('shapeSelected'))
-				{
-            $('.divCon2 .diamondProp').removeClass('dn');
-        }
-    });
+				$('.diamondProp').removeClass('dn');
+    }
+		else
+		{
+				$('.diamondProp').addClass('dn');
+		}
 }
 
 
@@ -1272,9 +1263,59 @@ function addGemsType()
     $('#gemsTypeCont').append(str);
 }
 
+function checks(obj,name,type)
+{
+		var arrType = $(obj).attr('name');
+		$('input[name="'+name+'"]:checked').each(function(i,vl)
+		{
+				if(i >2)
+				{
+						var vl = $(this).val();
+						if(type == 'arrColor')
+						{
+								common.toast(0,'Diamond colors cannot be greater than three');
+						}
+						$(obj).closest('.radioCont').find('input[value="'+vl+'"]').attr('checked',false);
+				}
+				else if (type == 'arrClarity' && i >1)
+				{
+						var vl = $(this).val();
+						common.toast(0,'Diamond clarity cannot be greater than two');
+						$(obj).closest('.radioCont').find('input[value="'+vl+'"]').attr('checked',false);
+				}
+		});
+}
 
 $(document).ready(function()
 {
+	if(typeof colors != 'undefined' && colors != undefined && colors != '')
+	{
+		arrColors = colors.split('|!|');
+	}
+
+	if(typeof clarity != 'undefined' && clarity != undefined && clarity != '')
+	{
+		arrClaritys = clarity.split('|!|');
+	}
+
+	if(typeof arrColors != 'undefined' && arrColors != undefined && arrColors.length)
+	{
+			for(var j=0;j<arrColors.length;j++)
+			{
+							col[j] = arrColors[j].split('-');
+							arrColor["color_"+j] = col[j];
+			}
+	}
+
+	if(typeof arrClaritys != 'undefined' && arrClaritys != undefined && arrClaritys.length)
+	{
+		for(var k=0;k<arrClaritys.length;k++)
+		{
+						cla[k] = arrClaritys[k].split('-');
+						arrClarity["clarity_"+k] = cla[k];
+		}
+	}
+
 			$('.jshapeComm').each(function()
 			{
 					if($(this).hasClass('shapeSelected') && ($(this).attr('id') == 'Polki' || $(this).attr('id') == 'NosePin' || $(this).attr('id') == 'Mangalsutra'))
@@ -1287,7 +1328,7 @@ $(document).ready(function()
 					}
 			});
 
-    $(document).bind('focus onchange blur click',function()
+    $(document).bind('focus blur click',function()
     {
         	var weight = valueOnChange();
 					$('#grossweight').val(parseFloat(weight));
@@ -1295,39 +1336,6 @@ $(document).ready(function()
 					$('#prdprice').val(price);
     });
 
-		$('#diamondShapeDiv .dmdColor input[type="checkbox"]').bind('click',function(i,val)
-		{
-				if(arrColor['color_0'].length < 3 )
-				{
-						if($(this).is(':checked'))
-						{
-								arrColor['color_0'].push($(this).val());
-						}
-				}
-				else
-				{
-						$('.dmdColor input[value="'+arrColor['color_0'][0]+'"]').attr('checked',false);
-						arrColor['color_0'].shift();
-						arrColor['color_0'].push($(this).val());
-				}
-		});
-
-		$('#diamondShapeDiv .dmdQuality input[type="checkbox"]').bind('click',function(i,val)
-		{
-				if(arrClarity['clarity_0'].length < 2 )
-				{
-						if($(this).is(':checked'))
-						{
-								arrClarity['clarity_0'].push($(this).val());
-						}
-				}
-				else
-				{
-						$('.dmdQuality input[value="'+arrClarity['clarity_0'][0]+'"]').prop('checked',false);
-						arrClarity['clarity_0'].shift();
-						arrClarity['clarity_0'].push($(this).val());
-				}
-		});
 		$('#certiicates label').click(function ()
 		{
 				setTimeout(function ()
@@ -1429,8 +1437,19 @@ $(document).ready(function()
 						$('.certUrl').addClass('dn');
 				}
 		})
-
 });
+
+for(var j=0;j<arrColors.length;j++)
+{
+		var col = [];
+		col[j] = arrColors[j].split('-');
+		arrColor["color_"+j] = col[j];
+}
+for(var k=0;k<arrClaritys.length;k++)
+{
+		cla[k] = arrClaritys[k].split('-');
+		arrClarity["clarity_"+k] = cla[k];
+}
 
 function checkIfGold()
 {
@@ -1522,7 +1541,7 @@ function calculateJPrice()
 					          var metalrt = obj.results.gold_rate;
 					          var gwt = $('#netweight').val();
 					          var pty = $('#goldpurity').val();
-					          var puritypatt = /(^|[^-\d])(14|18|22|24)\b/;
+					          var puritypatt = /(^|[^-\d])(14|18|22|24|995|999)\b/;
 					          if(!pty.match(puritypatt))
 					          {
 					              common.toast(0,'Please choose the purity among 14 / 18 / 22 / 24');
@@ -1537,7 +1556,7 @@ function calculateJPrice()
 
 					              var price = (metalrt/10)*(pty/995)*gwt;
 					              price = Math.ceil(price);
-					              $('#prdprice').val(price);
+					              $('#prdprice').val(price.toFixed(2));
 					          }
 					          else if(isNaN(prce) == true && prce == 'NaN' && prce == NaN)
 					          {
@@ -1571,7 +1590,7 @@ function calculateJPrice()
 					netValue = parseFloat($('#gold_value').val());
 					totalPrice = totalPrice + netValue;
 		}
-		return totalPrice;
+		return totalPrice.toFixed(2);
 }
 				function checkedCriteria()
 				{
@@ -1581,13 +1600,15 @@ function calculateJPrice()
 								case 'GOLD & DIAMONDS':
 												$('.noneDiv').addClass('dn');
 												$("input[name='metal']").attr('disabled',true);
-												$('#Certficate_BIS').prop('checked',true).attr('disabled',false);
+												//$('#Certficate_BIS').prop('checked',true).attr('disabled',false);
 												$('#gold').prop('checked',true).attr('disabled',false);
 												$('.gtype').removeClass('dn');
 												$('.dShapeTitle').removeClass('dn');
+												$('#typeChoice').removeClass('dn');
 												$('#diamondShapeCont').removeClass('dn');
 												$('#gemsTypeCont').addClass('dn');
 												$('.rateValue').text('Gold Value*');
+												$('.certUrl').removeClass('dn');
 												break;
 								case 'PLATINUM & DIAMONDS':
 												$('.noneDiv').addClass('dn');
@@ -1597,7 +1618,9 @@ function calculateJPrice()
 												$('.gtype').addClass('dn');
 												$('.dShapeTitle').removeClass('dn');
 												$('#diamondShapeCont').removeClass('dn');
+												$('#typeChoice').removeClass('dn');
 												$('#gemsTypeCont').addClass('dn');
+												$('.certUrl').removeClass('dn');
 												$('.rateValue').text('Platinum Value*');
 												break;
 								case 'SILVER & DIAMONDS':
@@ -1608,19 +1631,23 @@ function calculateJPrice()
 												$('.gtype').addClass('dn');
 												$('.dShapeTitle').removeClass('dn');
 												$('#diamondShapeCont').removeClass('dn');
+												$('#typeChoice').removeClass('dn');
 												$('#gemsTypeCont').addClass('dn');
+												$('.certUrl').removeClass('dn');
 												$('.rateValue').text('Silver Value*');
 												break;
 								case 'GOLD, DIAMONDS & GEMSTONES':
 												$('.noneDiv').addClass('dn');
 												$("input[name='metal']").attr('disabled',true);
 												$("input[name='Certficate']").prop('checked',false).attr('disabled',false);
-												$('#Certficate_BIS').prop('checked',true).attr('disabled',false);
+												// $('#Certficate_BIS').prop('checked',true).attr('disabled',false);
 												$('#gold').prop('checked',true).attr('disabled',false);
 												$('.gtype').removeClass('dn');
 												$('.dShapeTitle').removeClass('dn');
 												$('#diamondShapeCont').removeClass('dn');
 												$('#gemsTypeCont').removeClass('dn');
+												$('.certUrl').removeClass('dn');
+												$('#typeChoice').removeClass('dn');
 												$('.rateValue').text('Gold Value*');
 												break;
 								case 'PLATINUM, DIAMONDS & GEMSTONES':
@@ -1632,6 +1659,8 @@ function calculateJPrice()
 												$('.dShapeTitle').removeClass('dn');
 												$('#diamondShapeCont').removeClass('dn');
 												$('#gemsTypeCont').removeClass('dn');
+												$('.certUrl').removeClass('dn');
+												$('#typeChoice').removeClass('dn');
 												$('.rateValue').text('Platinum Value*');
 												break;
 								case 'SILVER, DIAMONDS & GEMSTONES':
@@ -1643,6 +1672,8 @@ function calculateJPrice()
 												$('.dShapeTitle').removeClass('dn');
 												$('#diamondShapeCont').removeClass('dn');
 												$('#gemsTypeCont').removeClass('dn');
+												$('#typeChoice').removeClass('dn');
+												$('.certUrl').removeClass('dn');
 												$('.rateValue').text('Silver Value*');
 												break;
 								case 'GOLD & GEMSTONES':
@@ -1654,6 +1685,9 @@ function calculateJPrice()
 												$('.gtype').removeClass('dn');
 												$('.dShapeTitle').addClass('dn');
 												$('#diamondShapeCont').addClass('dn');
+												$('.diamondProp').addClass('dn');
+												$('.certUrl').addClass('dn');
+												$('#typeChoice').addClass('dn');
 												$('#gemsTypeCont').removeClass('dn');
 												$('.rateValue').text('Gold Value*');
 												break;
@@ -1665,8 +1699,10 @@ function calculateJPrice()
 												$('.certUrl').addClass('dn');
 												$('#silver').prop('checked',true).attr('disabled',false);
 												$('.gtype').addClass('dn');
+												$('#typeChoice').addClass('dn');
 												$('.dShapeTitle').addClass('dn');
 												$('#diamondShapeCont').addClass('dn');
+												$('.diamondProp').addClass('dn');
 												$('#gemsTypeCont').removeClass('dn');
 												$('.rateValue').text('Silver Value*');
 												break;
@@ -1679,9 +1715,12 @@ function calculateJPrice()
 												$('.gtype').removeClass('dn');
 												$('.dShapeTitle').addClass('dn');
 												$('#diamondShapeCont').addClass('dn');
+												$('.diamondProp').addClass('dn');
 												$('#gemsTypeCont').removeClass('dn');
+												$('#typeChoice').addClass('dn');
 												$('#gemstone_type').val('SWAROVSKI ZIRCONIA');
 												$('#gemstone_type option').addClass('dn');
+												$('.certUrl').addClass('dn');
 												changeGemstoneType('SWAROVSKI ZIRCONIA',1);
 												$('.rateValue').text('Gold Value*');
 												break;
@@ -1692,12 +1731,15 @@ function calculateJPrice()
 												$('#Certficate_None').prop('checked',true).attr('disabled',false);
 												$('#silver').prop('checked',true).attr('disabled',false);
 												$('.gtype').addClass('dn');
+												$('#typeChoice').addClass('dn');
 												$('.dShapeTitle').addClass('dn');
 												$('#diamondShapeCont').addClass('dn');
+												$('.diamondProp').addClass('dn');
 												$('#gemsTypeCont').removeClass('dn');
 												$('#gemsTypeCont_1').removeClass('dn');
 												$('#gemstone_type').val('SWAROVSKI ZIRCONIA');
 												$('#gemstone_type option').addClass('dn');
+												$('.certUrl').addClass('dn');
 												changeGemstoneType('SWAROVSKI ZIRCONIA',1);
 												$('.rateValue').text('Silver Value*');
 												break;
@@ -1707,12 +1749,15 @@ function calculateJPrice()
 												$('#Certficate_BIS').prop('checked',true).attr('disabled',false);
 												$('#gold').prop('checked',true).attr('disabled',false);
 												$('.gtype').removeClass('dn');
+												$('#typeChoice').addClass('dn');
 												$('.dShapeTitle').addClass('dn');
 												$('#diamondShapeCont').addClass('dn');
-												$('#gemsTypeCont').removeClass('dn');
+												$('.diamondProp').addClass('dn');
 												$('#gemsTypeCont_1').removeClass('dn');
 												$('#gemstone_type').val('Cz');
 												$('#gemstone_type option').addClass('dn');
+												$('#gemsTypeCont').removeClass('dn');
+												$('.certUrl').addClass('dn');
 												changeGemstoneType('Cz',1);
 												$('.rateValue').text('GOld Value*');
 												break;
@@ -1722,12 +1767,15 @@ function calculateJPrice()
 												$("input[name='Certficate']").prop('checked',false).attr('disabled',true);
 												$('#Certficate_None').prop('checked',true).attr('disabled',false);
 												$('#silver').prop('checked',true).attr('disabled',false);
+												$('#typeChoice').addClass('dn');
 												$('.gtype').addClass('dn');
 												$('.dShapeTitle').addClass('dn');
 												$('#diamondShapeCont').addClass('dn');
+												$('.diamondProp').addClass('dn');
 												$('#gemsTypeCont').removeClass('dn');
 												$('#gemsTypeCont_1').removeClass('dn');
 												$('#gemstone_type').val('Cz');
+												$('.certUrl').addClass('dn');
 												$('#gemstone_type option').addClass('dn');
 												changeGemstoneType('Cz',1);
 												$('.rateValue').text('Silver Value*');
@@ -1739,9 +1787,12 @@ function calculateJPrice()
 												$('#Certficate_BIS').prop('checked',true).attr('disabled',false);
 												$('#gold').prop('checked',true).attr('disabled',false);
 												$('.gtype').removeClass('dn');
+												$('#typeChoice').addClass('dn');
 												$('#gemsTypeCont').addClass('dn');
 												$('.dShapeTitle').addClass('dn');
+												$('.diamondProp').addClass('dn');
 												$('#diamondShapeCont').addClass('dn');
+												$('.certUrl').addClass('dn');
 												$('.rateValue').text('Gold Value*');
 												break;
 								case 'PLAIN PLATINUM':
@@ -1754,8 +1805,11 @@ function calculateJPrice()
 												$('.gtype').addClass('dn');
 												$('#gemsTypeCont_1').addClass('dn');
 												$('#gemsTypeCont').addClass('dn');
+												$('#typeChoice').addClass('dn');
 												$('.dShapeTitle').addClass('dn');
+												$('.diamondProp').addClass('dn');
 												$('#diamondShapeCont').addClass('dn');
+												$('.certUrl').addClass('dn');
 												$('.rateValue').text('Platinum Value*');
 												break;
 								case 'PLAIN SILVER':
@@ -1765,10 +1819,13 @@ function calculateJPrice()
 												$("input[name='metal']").attr('disabled',true);
 												$('#silver').prop('checked',true).attr('disabled',false);
 												$('.gtype').addClass('dn');
+												$('#typeChoice').addClass('dn');
 												$('#gemsTypeCont_1').addClass('dn');
 												$('.dShapeTitle').addClass('dn');
 												$('#diamondShapeCont').addClass('dn');
+												$('.diamondProp').addClass('dn');
 												$('#gemsTypeCont').addClass('dn');
+												$('.certUrl').addClass('dn');
 												$('.rateValue').text('Silver Value*');
 												break;
 								case 'GOLD & POLKI':
@@ -1782,8 +1839,11 @@ function calculateJPrice()
 												$('#gemsTypeCont_1').removeClass('dn');
 												$('#gemsTypeCont').removeClass('dn');
 												$('.dShapeTitle').addClass('dn');
+												$('#typeChoice').addClass('dn');
+												$('.diamondProp').addClass('dn');
 												$('#diamondShapeCont').addClass('dn');
 												$('#gemstone_type option').removeClass('dn');
+												$('.certUrl').addClass('dn');
 												$('.rateValue').text('Gold Value*');
 												break;
 								default:
@@ -1814,19 +1874,19 @@ function calculateJPrice()
 						{
 								polkivalue 	 = parseFloat(polkiweight * polki_price_per_carat);
 								total_weight = total_weight + parseFloat(polkiweight/5);
-								$('#polkivalue').val(polkivalue);
+								$('#polkivalue').val(polkivalue.toFixed(3));
 						}
 						if(diamondweight !== undefined && diamondweight !== null && diamondweight !== 0 && price_per_carat !== undefined && price_per_carat !== null && price_per_carat !== 0 && isNaN(price_per_carat) == false)
             {
                 diamondsvalue = parseFloat(diamondweight * price_per_carat);
                 total_weight = total_weight + parseFloat(diamondweight/5);
-								$('#diamondsvalue').val(diamondsvalue);
+								$('#diamondsvalue').val(diamondsvalue.toFixed(2));
             }
             if(gemweight !== undefined && gemweight !== null && gemweight !== '' && isNaN(gemweight) == false && gprice_per_carat !== undefined && gprice_per_carat !== null && gprice_per_carat !== 0 &&  isNaN(gprice_per_carat) == false)
             {
                 gemstonevalue = parseFloat(gemweight * gprice_per_carat);
                 total_weight = total_weight + parseFloat(gemweight/5);
-								$('#gemstonevalue').val(gemstonevalue);
+								$('#gemstonevalue').val(gemstonevalue.toFixed(2));
             }
             if(other_material !== undefined && other_material !== null && other_material !== '' && isNaN(other_material) == false)
             {
@@ -1840,25 +1900,25 @@ function calculateJPrice()
 										total_weight  = total_weight + parseFloat(netweight);
 										var gold_rate = parseFloat($('#goldRateSpan').text().replace ( /[^\d.]/g, '' ));
 										var perGramPrice = parseFloat(gold_rate/10);
-										$('#gold_value').val(parseFloat(perGramPrice*netweight));
+										$('#gold_value').val(parseFloat(perGramPrice*netweight).toFixed(2));
 								}
 								else if(metaltype == 'Silver')
 								{
 										total_weight  = total_weight + parseFloat(netweight);
 										var silver_rate = parseFloat($('#silverRateSpan').text().replace ( /[^\d.]/g, '' ));
-										var perGramPrice = parseFloat(silver_rate/10);
-										$('#gold_value').val(parseFloat(perGramPrice*netweight));
+										var perGramPrice = parseFloat(silver_rate/1000);
+										$('#gold_value').val(parseFloat(perGramPrice*netweight).toFixed(2));
 								}
 								else if(metaltype == 'Platinum')
 								{
 										total_weight  = total_weight + parseFloat(netweight);
 										var platinum_rate = parseFloat($('#platinumRateSpan').text().replace ( /[^\d.]/g, '' ));
-										var perGramPrice = parseFloat(platinum_rate/10);
-										$('#gold_value').val(parseFloat(perGramPrice*netweight));
+										var perGramPrice = parseFloat(platinum_rate);
+										$('#gold_value').val(parseFloat(perGramPrice*netweight).toFixed(2));
 
 								}
             }
-						return total_weight;
+						return total_weight.toFixed(3);
         }
 
 				var msuggest = '';
@@ -1968,3 +2028,23 @@ function calculateJPrice()
 						certificate_url = '';
 				}
     }
+
+		function isBugget()
+		{
+				$('input[name="bugget"]:checked').each(function()
+				{
+						if($(this).val() == 'True')
+						{
+								$('#diamondShapeCont_1  .shapeComm').removeClass('shapeSelected');
+								$('#diamondShapeCont_1  #Emerald_1').addClass('shapeSelected');
+								$('#not_bugget').attr('checked',false);
+								$('.diamondProp').removeClass('dn');
+						}
+						else
+						{
+								$('#diamondShapeCont_1  .shapeComm').removeClass('shapeSelected');
+								$('.diamondProp').addClass('dn');
+								$('#not_bugget').attr('checked',true);
+						}
+				});
+		}

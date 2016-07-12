@@ -1002,6 +1002,7 @@ switch ($action) {
                     $url = APIDOMAIN . 'index.php?action=getPrdById&catid=' . $catid . '&prdid=' . $pid;
                     $res = $comm->executeCurl($url);
                     $result = $res['results'];
+                    //echo "<pre>";print_r($result);die;
                 }
                 $url = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=' . $catid;
                 $res = $comm->executeCurl($url);

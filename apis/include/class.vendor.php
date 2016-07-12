@@ -1221,6 +1221,8 @@ class vendor extends DB
                         d.complete_flag = 0
                 HAVING
                         vendor_id IN (" . $params['vid'] . ")
+                AND
+                        active_flag <> 2
                 ORDER BY
                         update_time
                 DESC ";
@@ -1907,9 +1909,9 @@ class vendor extends DB
             $validFormat = FALSE;
         }
         $i = $totlIns = 0;
-
         if ($validFormat)
         {
+
             while ($i < $len)
             {
                 if($type=='csv')
@@ -1925,8 +1927,10 @@ class vendor extends DB
                        $isBlank = true;
                     }
                 }
+
                 if(!empty($value[0]))
                 {
+
                   if ($i != 0 && $isBlank == false)
                   {
                       $ts = date('Y-m-d H:i');
@@ -1964,11 +1968,11 @@ class vendor extends DB
                               $row = $this->fetchData($vRes);
                               if($value[5] == 'Gold')
                               {
-                                  $rate = $row['gold_rate'];
+                                  $rate = $row['gold_rate']/10;
                               }
                               if($value[5] == 'Silver')
                               {
-                                  $rate = $row['silver_rate'];
+                                  $rate = $row['silver_rate']/1000;
                               }
                               if($value[5] == 'Platinum')
                               {
@@ -2061,15 +2065,15 @@ class vendor extends DB
                               {
                                   if(!empty($rdv[$j][11]))
                                   {
-                                      $value[11].= ','.$rdv[$j][11];
+                                      $value[11].= '|!|'.$rdv[$j][11];
                                   }
                                   if(!empty($rdv[$j][12] && $rdv[$j][13]))
                                   {
-                                      $value[12].= ','.$rdv[$j][12].'-'.$rdv[$j][13];
+                                      $value[12].= '|!|'.$rdv[$j][12].'-'.$rdv[$j][13];
                                   }
                                   if(!empty($rdv[$j][14]) && !empty($rdv[$j][15]) && !empty($rdv[$j][16]))
                                   {
-                                      $value[14].= ','.$rdv[$j][14].'-'.$rdv[$j][15].'-'.$rdv[$j][16];
+                                      $value[14].= '|!|'.$rdv[$j][14].'-'.$rdv[$j][15].'-'.$rdv[$j][16];
                                   }
                                   if(!empty($rdv[$j][20]))
                                   {
@@ -2081,7 +2085,6 @@ class vendor extends DB
                           $value[12] = str_replace(',-','',rtrim($value[12],','));
                           $value[14] = str_replace(',-','',rtrim($value[14],','));
                           $value[20] = rtrim($value[20],',');
-
                           $sql = "
                                       INSERT
                                       INTO
@@ -2093,7 +2096,7 @@ class vendor extends DB
                                               certified             =   '".$value[3]."',
                                               other_certificate     =   '".$value[4]."',
                                               metal                 =   '".$value[5]."',
-                                              gold_type             =   '".$value[6]."',
+                                              gold_type             =   '".$value[6]." Gold',
                                               polki_color           =   '".$value[7]."',
                                               polki_quality         =   '".$value[8]."',
                                               polki_weight          =   '".$value[9]."',
@@ -2105,17 +2108,18 @@ class vendor extends DB
                                               dwt                   =   '".$value[17]."',
                                               nofd                  =   '".$value[18]."',
                                               price_per_carat       =   '".$value[19]."',
-                                              diamondsvalue         =   '".$value[19]*$value[17]."',
+                                              diamondsvalue         =   '".round($value[19]*$value[17],2)."',
                                               gemstone_type         =   '".$value[20]."',
                                               gemstone_color        =   '".$value[21]."',
                                               gemwt                 =   '".$value[22]."',
-                                              gemstonevalue         =   '".$value[22]*$value[23]."',
+                                              gemstonevalue         =   '".round($value[22]*$value[23],2)."',
                                               gprice_per_carat      =   '".$value[23]."',
                                               num_gemstones         =   '".$value[24]."',
                                               othermaterial         =   '".$value[25]."',
                                               labour_charge         =   '".$value[26]."',
                                               gold_purity           =   '".$value[29]."',
                                               gold_weight           =   '".$value[30]."',
+                                              gold_value            =   '".round($value[30]*$rate,2)."',
                                               grossweight           =    ".$total_weight.",
                                               price                 =    ".$total_price.",
                                               complete_flag         =      $complete_flag";
@@ -2600,10 +2604,9 @@ class vendor extends DB
                        $isBlank = true;
                     }
                 }
-
                 if(!empty($value[15]) && !empty($value[14]))
                 {
-                    $b2bprice = $value[14]-($value[14]/$value[15]);
+                    $b2bprice = $value[14]-($value[14]*($value[15]/100));
                 }
                 else
                 {
@@ -2612,7 +2615,7 @@ class vendor extends DB
 
                 if(!empty($value[16]) && !empty($value[14]))
                 {
-                    $b2cprice = $value[14]-($value[14]/$value[16]);
+                    $b2cprice = $value[14]-($value[14]*($value[16]/100));
                 }
                 else
                 {
