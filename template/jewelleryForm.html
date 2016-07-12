@@ -197,22 +197,35 @@
                                 </div>
                             </div>
                             <div class="divCon  fLeft jw3 gtype dn">
-                            <div class="titleDiv txtCap fLeft">Gold Type*</div>
-                                <div class="radioCont fLeft">
+                              <div class="titleDiv txtCap fLeft">Gold Type*</div>
+                                  <div class="radioCont fLeft">
+                                      <div class="checkDiv fLeft">
+                                          <input type="radio" name="gold_type" class="filled-in" value="White Gold" <?= ($attr['gold_type'] == 'White Gold') ? 'checked' : ''; ?> id="white_gold">
+                                          <label for="white_gold">White Gold</label>
+                                      </div>
+                                      <div class="checkDiv fLeft">
+                                          <input type="radio" name="gold_type" class="filled-in" value="Yellow Gold" <?= ($attr['gold_type'] == 'Yellow Gold') ? 'checked' : ''; ?> id="yellow_gold">
+                                          <label for="yellow_gold">Yellow Gold</label>
+                                      </div>
+                                      <div class="checkDiv fLeft">
+                                          <input type="radio" name="gold_type" class="filled-in" value="Pink Gold" <?= ($attr['gold_type'] == 'Pink Gold') ? 'checked' : ''; ?> id="pink_gold">
+                                          <label for="pink_gold">Pink Gold</label>
+                                      </div>
+                                  </div>
+                            </div>
+                            <div class="divCon  fLeft jw3 dn" id='typeChoice'>
+                                <div  class="titleDiv txtCap fLeft">Has Bugget / Choki ?*</div>
+                                <div class='radioCont fLeft'>
                                     <div class="checkDiv fLeft">
-                                        <input type="radio" name="gold_type" class="filled-in" value="White Gold" <?= ($attr['gold_type'] == 'White Gold') ? 'checked' : ''; ?> id="white_gold">
-                                        <label for="white_gold">White Gold</label>
+                                        <input type="radio" name='bugget' class="filled-in" value="True" <?= ($attr['isBugget'] == True) ? 'checked' : ''; ?> id="bugget" onclick="isBugget();">
+                                        <label for="bugget">YES</label>
                                     </div>
                                     <div class="checkDiv fLeft">
-                                        <input type="radio" name="gold_type" class="filled-in" value="Yellow Gold" <?= ($attr['gold_type'] == 'Yellow Gold') ? 'checked' : ''; ?> id="yellow_gold">
-                                        <label for="yellow_gold">Yellow Gold</label>
-                                    </div>
-                                    <div class="checkDiv fLeft">
-                                        <input type="radio" name="gold_type" class="filled-in" value="Pink Gold" <?= ($attr['gold_type'] == 'Pink Gold') ? 'checked' : ''; ?> id="pink_gold">
-                                        <label for="pink_gold">Pink Gold</label>
+                                        <input type="radio" name='bugget' class="filled-in" value="False" <?= ($attr['isBugget'] == False || empty($attr['isBugget'])) ? 'checked' : ''; ?> id="not_bugget" onclick="isBugget();">
+                                        <label for="not_bugget">No</label>
                                     </div>
                                 </div>
-                            </div>
+                          </div>
 <?php
                             if (empty($attr['dwt']) || $attr['dwt'] == '0')
                             {
@@ -333,19 +346,19 @@
 <!-- Polki segment if clicked on polki set category -->
 
                             </div>
-
                             <div class="vCommTitle fLeft fmOpenL dShapeTitle" style="font-size:25px"><span>Select the diamond you want to add in product</span><span class="deleteElements dn closeBlock fRight transition300" onclick="removeThis()"></span></div>
                             <div id="diamondShapeCont">
 <?php
+
                                 $attr['diamond_shape'] = explode('|!|', $attr['diamond_shape']);
                                 $attr['color'] = explode('|!|', $attr['color']);
-
                                 $attr['clarity'] = explode('|!|', $attr['clarity']);
                                 for ($curIndex = 0; $curIndex < count($attr['diamond_shape']); $curIndex++)
                                 {
+
                                     $curDiv = $curIndex + 1;
 ?>
-                                    <div id="diamondShapeDiv">
+                                    <div id="diamondShapeDiv" class="diamondGens">
                                         <div class="divCon fLeft dAuto" id="diamondShapeCont_<?php echo $curDiv; ?>">
                                             <?php
                                             if (empty($attr['diamond_shape'])) {
@@ -385,58 +398,59 @@
                                             ?>
                                         </div>
                                         <?php
-                                                $arr1['color'] = explode(' ',$attr['color'][$curIndex]);
-                                                $arr1['clarity'] = explode(' ',$attr['clarity'][$curIndex]);
+                                                $arr1['color'] = explode('-',$attr['color'][$curIndex]);
+                                                $arr1['clarity'] = explode('-',$attr['clarity'][$curIndex]);
+
                                          ?>
                                         <div class="divCon fLeft dAuto dmdColor <?php echo ($attr['diamond_shape'][$curIndex]) ? '' : 'dn'; ?> diamondProp diamondProp_<?php echo $curDiv; ?>">
                                             <div  class="titleDiv txtCap fLeft">Diamond Color*</div>
                                             <div class='radioCont fLeft'>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="D" <?= ($arr1['color'][0] == 'D' || $arr1['color'][1] == 'D' || $arr1['color'][2] == 'D') ? 'checked' : ''; ?> id="color_D_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' onclick="checks(this,'color_<?php echo $curDiv; ?>','arrColor')" class="filled-in" value="D" <?= ($arr1['color'][0] == 'D' || $arr1['color'][1] == 'D' || $arr1['color'][2] == 'D') ? 'checked' : ''; ?> id="color_D_<?php echo $curDiv; ?>">
                                                     <label for="color_D_<?php echo $curDiv; ?>"> D</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="E" <?= ($arr1['color'][0] == 'E' || $arr1['color'][1] == 'E' || $arr1['color'][2] == 'E') ? 'checked' : ''; ?> id="color_E_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="E" onclick="checks(this,'color_<?php echo $curDiv; ?>','arrColor')" <?= ($arr1['color'][0] == 'E' || $arr1['color'][1] == 'E' || $arr1['color'][2] == 'E') ? 'checked' : ''; ?> id="color_E_<?php echo $curDiv; ?>">
                                                     <label for="color_E_<?php echo $curDiv; ?>">E</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="F" <?= ($arr1['color'][0] == 'F' || $arr1['color'][1] == 'F' || $arr1['color'][2] == 'F') ? 'checked' : ''; ?> id="color_F_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="F" onclick="checks(this,'color_<?php echo $curDiv; ?>','arrColor')" <?= ($arr1['color'][0] == 'F' || $arr1['color'][1] == 'F' || $arr1['color'][2] == 'F') ? 'checked' : ''; ?> id="color_F_<?php echo $curDiv; ?>">
                                                     <label for="color_F_<?php echo $curDiv; ?>">F</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="G" <?= ($arr1['color'][0] == 'G' || $arr1['color'][1] == 'G' || $arr1['color'][2] == 'G') ? 'checked' : ''; ?> id="color_G_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="G" onclick="checks(this,'color_<?php echo $curDiv; ?>','arrColor')" <?= ($arr1['color'][0] == 'G' || $arr1['color'][1] == 'G' || $arr1['color'][2] == 'G') ? 'checked' : ''; ?> id="color_G_<?php echo $curDiv; ?>">
                                                     <label for="color_G_<?php echo $curDiv; ?>">G</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="H" <?= ($arr1['color'][0] == 'H' || $arr1['color'][1] == 'H' || $arr1['color'][2] == 'H') ? 'checked' : ''; ?> id="color_H_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="H" onclick="checks(this,'color_<?php echo $curDiv; ?>','arrColor')" <?= ($arr1['color'][0] == 'H' || $arr1['color'][1] == 'H' || $arr1['color'][2] == 'H') ? 'checked' : ''; ?> id="color_H_<?php echo $curDiv; ?>">
                                                     <label for="color_H_<?php echo $curDiv; ?>">H</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="I" <?= ($arr1['color'][0] == 'I' || $arr1['color'][1] == 'I' || $arr1['color'][2] == 'I') ? 'checked' : ''; ?> id="color_I_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="I" onclick="checks(this,'color_<?php echo $curDiv; ?>','arrColor')" <?= ($arr1['color'][0] == 'I' || $arr1['color'][1] == 'I' || $arr1['color'][2] == 'I') ? 'checked' : ''; ?> id="color_I_<?php echo $curDiv; ?>">
                                                     <label for="color_I_<?php echo $curDiv; ?>">I</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="J" <?= ($arr1['color'][0] == 'J' || $arr1['color'][1] == 'J' || $arr1['color'][2] == 'J') ? 'checked' : ''; ?> id="color_J_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="J" onclick="checks(this,'color_<?php echo $curDiv; ?>','arrColor')" <?= ($arr1['color'][0] == 'J' || $arr1['color'][1] == 'J' || $arr1['color'][2] == 'J') ? 'checked' : ''; ?> id="color_J_<?php echo $curDiv; ?>">
                                                     <label for="color_J_<?php echo $curDiv; ?>">J</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="K" <?= ($arr1['color'][0] == 'K' || $arr1['color'][1] == 'K' || $arr1['color'][2] == 'K') ? 'checked' : ''; ?> id="color_K_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="K" onclick="checks(this,'color_<?php echo $curDiv; ?>','arrColor')" <?= ($arr1['color'][0] == 'K' || $arr1['color'][1] == 'K' || $arr1['color'][2] == 'K') ? 'checked' : ''; ?> id="color_K_<?php echo $curDiv; ?>">
                                                     <label for="color_K_<?php echo $curDiv; ?>">K</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="L" <?= ($arr1['color'][0] == 'L' || $arr1['color'][1] == 'L' || $arr1['color'][2] == 'L') ? 'checked' : ''; ?> id="color_L_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="L" onclick="checks(this,'color_<?php echo $curDiv;?>','arrColor')" <?= ($arr1['color'][0] == 'L' || $arr1['color'][1] == 'L' || $arr1['color'][2] == 'L') ? 'checked' : ''; ?> id="color_L_<?php echo $curDiv; ?>">
                                                     <label for="color_L_<?php echo $curDiv; ?>">L</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="M" <?= ($arr1['color'][0] == 'M' || $arr1['color'][1] == 'M' || $arr1['color'][2] == 'M') ? 'checked' : ''; ?> id="color_M_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="M" onclick="checks(this,'color_<?php echo $curDiv; ?>','arrColor')" <?= ($arr1['color'][0] == 'M' || $arr1['color'][1] == 'M' || $arr1['color'][2] == 'M') ? 'checked' : ''; ?> id="color_M_<?php echo $curDiv; ?>">
                                                     <label for="color_M_<?php echo $curDiv; ?>">M</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="N" <?= ($arr1['color'][0] == 'N' || $arr1['color'][1] == 'N' || $arr1['color'][2] == 'N') ? 'checked' : ''; ?> id="color_N_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="N" onclick="checks(this,'color_<?php echo $curDiv; ?>','arrColor')" <?= ($arr1['color'][0] == 'N' || $arr1['color'][1] == 'N' || $arr1['color'][2] == 'N') ? 'checked' : ''; ?> id="color_N_<?php echo $curDiv; ?>">
                                                     <label for="color_N_<?php echo $curDiv; ?>">N</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="O" <?= ($arr1['color'][0] == 'O' || $arr1['color'][1] == 'O' || $arr1['color'][2] == 'O') ? 'checked' : ''; ?> id="color_O_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='color_<?php echo $curDiv; ?>' class="filled-in" value="O" onclick="checks(this,'color_<?php echo $curDiv; ?>','arrColor')" <?= ($arr1['color'][0] == 'O' || $arr1['color'][1] == 'O' || $arr1['color'][2] == 'O') ? 'checked' : ''; ?> id="color_O_<?php echo $curDiv; ?>">
                                                     <label for="color_O_<?php echo $curDiv; ?>">O</label>
                                                 </div>
                                             </div>
@@ -446,23 +460,23 @@
                                             <div  class="titleDiv txtCap fLeft">Diamond Quality*</div>
                                             <div class='radioCont fLeft'>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="checkbox" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="IF" <?= ($arr1['clarity'][0] == 'IF' || $arr1['clarity'][1] == 'IF') ? 'checked' : ''; ?> id="clarity_IF_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="IF" onclick="checks(this,'clarity_<?php echo $curDiv; ?>','arrClarity')" <?= ($arr1['clarity'][0] == 'IF' || $arr1['clarity'][1] == 'IF') ? 'checked' : ''; ?> id="clarity_IF_<?php echo $curDiv; ?>">
                                                     <label for="clarity_IF_<?php echo $curDiv; ?>">IF</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="checkbox" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="VVS" <?= ($arr1['clarity'][0] == 'VVS' || $arr1['clarity'][1] == 'VVS') ? 'checked' : ''; ?> id="clarity_VVS_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="VVS" onclick="checks(this,'clarity_<?php echo $curDiv; ?>','arrClarity')"  <?= ($arr1['clarity'][0] == 'VVS' || $arr1['clarity'][1] == 'VVS') ? 'checked' : ''; ?> id="clarity_VVS_<?php echo $curDiv; ?>">
                                                     <label for="clarity_VVS_<?php echo $curDiv; ?>">VVS</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="checkbox" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="VS" <?= ($arr1['clarity'][0] == 'VS' || $arr1['clarity'][1] == 'VS') ? 'checked' : ''; ?> id="clarity_VS_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="VS" onclick="checks(this,'clarity_<?php echo $curDiv; ?>','arrClarity')" <?= ($arr1['clarity'][0] == 'VS' || $arr1['clarity'][1] == 'VS') ? 'checked' : ''; ?> id="clarity_VS_<?php echo $curDiv; ?>">
                                                     <label for="clarity_VS_<?php echo $curDiv; ?>">VS</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="checkbox" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="SI" <?= ($arr1['clarity'][0] == 'SI' || $arr1['clarity'][1] == 'SI') ? 'checked' : ''; ?> id="clarity_SI_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="SI" onclick="checks(this,'clarity_<?php echo $curDiv; ?>','arrClarity')" <?= ($arr1['clarity'][0] == 'SI' || $arr1['clarity'][1] == 'SI') ? 'checked' : ''; ?> id="clarity_SI_<?php echo $curDiv; ?>">
                                                     <label for="clarity_SI_<?php echo $curDiv; ?>">SI</label>
                                                 </div>
                                                 <div class="checkDiv fLeft">
-                                                    <input type="checkbox" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="I" <?= ($arr1['clarity'][0] == 'I' || $arr1['clarity'][1] == 'I') ? 'checked' : ''; ?> id="clarity_I_<?php echo $curDiv; ?>">
+                                                    <input type="checkbox" name='clarity_<?php echo $curDiv; ?>' class="filled-in" value="I" onclick="checks(this,'clarity_<?php echo $curDiv; ?>','arrClarity')" <?= ($arr1['clarity'][0] == 'I' || $arr1['clarity'][1] == 'I') ? 'checked' : ''; ?> id="clarity_I_<?php echo $curDiv; ?>">
                                                     <label for="clarity_I_<?php echo $curDiv; ?>">I</label>
                                                 </div>
                                             </div>
@@ -647,9 +661,10 @@
                                 <div  class="titleDiv txtCap fLeft">Net Weight (in Grams)*</div>
                                 <input id="netweight" name="net_weight" type="text" placeholder=" eg. 10,20,50" maxlength="8" autocomplete="false" value="<?= round($attr['gold_weight'],3); ?>" onkeypress="return common.isDecimalKey(event);" class="txtInput fLeft fmOpenR font14 c666" onfocusout="">
                             </div>
+
                             <div class="divCon2  fLeft">
                                 <div  class="titleDiv txtCap fLeft rateValue">Gold Value*</div>
-                                <input id="gold_value" name="gold_value" type="text" placeholder=" eg. 10,20,50" maxlength="8" autocomplete="false" value="<?= round($attr['gold_value'],3); ?>" onkeypress="return common.isDecimalKey(event);" class="txtInput fLeft fmOpenR font14 c666" onfocusout="">
+                                <input id="gold_value" name="gold_value" type="text" placeholder=" eg. 10,20,50" maxlength="8" autocomplete="false" value="<?= round($attr['gold_value'],2); ?>" onkeypress="return common.isDecimalKey(event);" class="txtInput fLeft fmOpenR font14 c666" onfocusout="">
                             </div>
                             <div class="divCon2  fLeft">
                                 <div  class="titleDiv txtCap fLeft">Gross Weight (in Grams)*</div>

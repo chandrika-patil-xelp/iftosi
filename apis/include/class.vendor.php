@@ -1911,7 +1911,6 @@ class vendor extends DB
         $i = $totlIns = 0;
         if ($validFormat)
         {
-
             while ($i < $len)
             {
                 if($type=='csv')
@@ -2077,7 +2076,11 @@ class vendor extends DB
                                   }
                                   if(!empty($rdv[$j][20]))
                                   {
-                                      $value[20].= ','.$rdv[$j][20];
+                                      $value[20].= '|!|'.$rdv[$j][20];
+                                  }
+                                  if(!empty($rdv[$j][21]))
+                                  {
+                                      $value[21].= '|!|'.$rdv[$j][21];
                                   }
                               }
                           }
