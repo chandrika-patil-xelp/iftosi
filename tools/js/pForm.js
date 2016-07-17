@@ -1607,6 +1607,7 @@ function calculateJPrice()
 												$('#typeChoice').removeClass('dn');
 												$('#diamondShapeCont').removeClass('dn');
 												$('#gemsTypeCont').addClass('dn');
+												$('#gemstone_type option').removeClass('dn');
 												$('.rateValue').text('Gold Value*');
 												$('.certUrl').removeClass('dn');
 												break;
@@ -1620,6 +1621,7 @@ function calculateJPrice()
 												$('#diamondShapeCont').removeClass('dn');
 												$('#typeChoice').removeClass('dn');
 												$('#gemsTypeCont').addClass('dn');
+												$('#gemstone_type option').removeClass('dn');
 												$('.certUrl').removeClass('dn');
 												$('.rateValue').text('Platinum Value*');
 												break;
@@ -1633,6 +1635,7 @@ function calculateJPrice()
 												$('#diamondShapeCont').removeClass('dn');
 												$('#typeChoice').removeClass('dn');
 												$('#gemsTypeCont').addClass('dn');
+												$('#gemstone_type option').removeClass('dn');
 												$('.certUrl').removeClass('dn');
 												$('.rateValue').text('Silver Value*');
 												break;
@@ -1646,6 +1649,7 @@ function calculateJPrice()
 												$('.dShapeTitle').removeClass('dn');
 												$('#diamondShapeCont').removeClass('dn');
 												$('#gemsTypeCont').removeClass('dn');
+												$('#gemstone_type option').removeClass('dn');
 												$('.certUrl').removeClass('dn');
 												$('#typeChoice').removeClass('dn');
 												$('.rateValue').text('Gold Value*');
@@ -1659,6 +1663,7 @@ function calculateJPrice()
 												$('.dShapeTitle').removeClass('dn');
 												$('#diamondShapeCont').removeClass('dn');
 												$('#gemsTypeCont').removeClass('dn');
+												$('#gemstone_type option').removeClass('dn');
 												$('.certUrl').removeClass('dn');
 												$('#typeChoice').removeClass('dn');
 												$('.rateValue').text('Platinum Value*');
@@ -1672,6 +1677,7 @@ function calculateJPrice()
 												$('.dShapeTitle').removeClass('dn');
 												$('#diamondShapeCont').removeClass('dn');
 												$('#gemsTypeCont').removeClass('dn');
+												$('#gemstone_type option').removeClass('dn');
 												$('#typeChoice').removeClass('dn');
 												$('.certUrl').removeClass('dn');
 												$('.rateValue').text('Silver Value*');
@@ -1689,6 +1695,7 @@ function calculateJPrice()
 												$('.certUrl').addClass('dn');
 												$('#typeChoice').addClass('dn');
 												$('#gemsTypeCont').removeClass('dn');
+												$('#gemstone_type option').removeClass('dn');
 												$('.rateValue').text('Gold Value*');
 												break;
 								case 'SILVER & GEMSTONES':
@@ -1704,6 +1711,7 @@ function calculateJPrice()
 												$('#diamondShapeCont').addClass('dn');
 												$('.diamondProp').addClass('dn');
 												$('#gemsTypeCont').removeClass('dn');
+												$('#gemstone_type option').removeClass('dn');
 												$('.rateValue').text('Silver Value*');
 												break;
 								case 'GOLD & SWAROVSKI ZIRCONIA':
@@ -1754,11 +1762,11 @@ function calculateJPrice()
 												$('#diamondShapeCont').addClass('dn');
 												$('.diamondProp').addClass('dn');
 												$('#gemsTypeCont_1').removeClass('dn');
-												$('#gemstone_type').val('Cz');
+												$('#gemstone_type').val('CZ');
 												$('#gemstone_type option').addClass('dn');
 												$('#gemsTypeCont').removeClass('dn');
 												$('.certUrl').addClass('dn');
-												changeGemstoneType('Cz',1);
+												changeGemstoneType('CZ',1);
 												$('.rateValue').text('GOld Value*');
 												break;
 								case 'SILVER & CZ':
@@ -1774,7 +1782,7 @@ function calculateJPrice()
 												$('.diamondProp').addClass('dn');
 												$('#gemsTypeCont').removeClass('dn');
 												$('#gemsTypeCont_1').removeClass('dn');
-												$('#gemstone_type').val('Cz');
+												$('#gemstone_type').val('CZ');
 												$('.certUrl').addClass('dn');
 												$('#gemstone_type option').addClass('dn');
 												changeGemstoneType('Cz',1);
