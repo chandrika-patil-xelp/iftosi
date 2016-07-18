@@ -327,7 +327,7 @@ function validateJForm()
 								}
 						}
 						var tmp_certificate_url = $('#filePath').html();
-						if(isValid && (tmp_certificate_url === undefined || tmp_certificate_url === null || tmp_certificate_url === ''))
+						if(isValid && (tmp_certificate_url == undefined || tmp_certificate_url == null || tmp_certificate_url == '') && (certificate !== undefined && certificate !== null && certificate !== 'undefined' && certificate !== 'null' && certificate !== 'BIS' && certificate !== 'NONE'))
 						{
 								str ='Please upload product certificate';
 								isValid = false;
@@ -634,7 +634,16 @@ function validateJForm()
 														if(data.error.code !== undefined && data.error.code !== null && data.error.code !== '' && typeof data.error.code !== 'undefined' && data.error.code == 0)
 														{
 																submiter = false;
-																uploadCertificate(data.results.pid);
+																if(tmp_certificate_url !== undefined && tmp_certificate_url !== null && tmp_certificate_url !== 'undefined' && tmp_certificate_url !== 'null' && tmp_certificate_url !== '')
+																{
+																		uploadCertificate(data.results.pid);
+																}
+																setTimeout(function()
+																{
+																		common.toast(1, 'Product has been added successfully');
+																		window.location.href = DOMAIN+'index.php?case=vendor_landing&catid=10001';
+																},2000);
+
 														}
 														else
 														{
@@ -1607,6 +1616,7 @@ function calculateJPrice()
 												$('#typeChoice').removeClass('dn');
 												$('#diamondShapeCont').removeClass('dn');
 												$('#gemsTypeCont').addClass('dn');
+												$('.gemstoneProp').addClass('dn');
 												$('#gemstone_type option').removeClass('dn');
 												$('.rateValue').text('Gold Value*');
 												$('.certUrl').removeClass('dn');
@@ -1621,6 +1631,7 @@ function calculateJPrice()
 												$('#diamondShapeCont').removeClass('dn');
 												$('#typeChoice').removeClass('dn');
 												$('#gemsTypeCont').addClass('dn');
+												$('.gemstoneProp').addClass('dn');
 												$('#gemstone_type option').removeClass('dn');
 												$('.certUrl').removeClass('dn');
 												$('.rateValue').text('Platinum Value*');
@@ -1635,6 +1646,7 @@ function calculateJPrice()
 												$('#diamondShapeCont').removeClass('dn');
 												$('#typeChoice').removeClass('dn');
 												$('#gemsTypeCont').addClass('dn');
+												$('.gemstoneProp').addClass('dn');
 												$('#gemstone_type option').removeClass('dn');
 												$('.certUrl').removeClass('dn');
 												$('.rateValue').text('Silver Value*');
@@ -1642,7 +1654,7 @@ function calculateJPrice()
 								case 'GOLD, DIAMONDS & GEMSTONES':
 												$('.noneDiv').addClass('dn');
 												$("input[name='metal']").attr('disabled',true);
-												$("input[name='Certficate']").prop('checked',false).attr('disabled',false);
+												$("input[name='Certficate']").attr('disabled',false);
 												// $('#Certficate_BIS').prop('checked',true).attr('disabled',false);
 												$('#gold').prop('checked',true).attr('disabled',false);
 												$('.gtype').removeClass('dn');
@@ -1657,7 +1669,7 @@ function calculateJPrice()
 								case 'PLATINUM, DIAMONDS & GEMSTONES':
 												$('.noneDiv').addClass('dn');
 												$("input[name='metal']").attr('disabled',true);
-												$("input[name='Certficate']").prop('checked',false).attr('disabled',false);
+												$("input[name='Certficate']").attr('disabled',false);
 												$('#platinum').prop('checked',true).attr('disabled',false);
 												$('.gtype').addClass('dn');
 												$('.dShapeTitle').removeClass('dn');
@@ -1671,7 +1683,7 @@ function calculateJPrice()
 								case 'SILVER, DIAMONDS & GEMSTONES':
 												$('.noneDiv').addClass('dn');
 												$("input[name='metal']").attr('disabled',true);
-												$("input[name='Certficate']").prop('checked',false).attr('disabled',false);
+												$("input[name='Certficate']").attr('disabled',false);
 												$('#silver').prop('checked',true).attr('disabled',false);
 												$('.gtype').addClass('dn');
 												$('.dShapeTitle').removeClass('dn');
@@ -1767,7 +1779,7 @@ function calculateJPrice()
 												$('#gemsTypeCont').removeClass('dn');
 												$('.certUrl').addClass('dn');
 												changeGemstoneType('CZ',1);
-												$('.rateValue').text('GOld Value*');
+												$('.rateValue').text('Gold Value*');
 												break;
 								case 'SILVER & CZ':
 												$('.noneDiv').removeClass('dn');
@@ -1799,6 +1811,7 @@ function calculateJPrice()
 												$('#gemsTypeCont').addClass('dn');
 												$('.dShapeTitle').addClass('dn');
 												$('.diamondProp').addClass('dn');
+												$('.gemstoneProp').addClass('dn');
 												$('#diamondShapeCont').addClass('dn');
 												$('.certUrl').addClass('dn');
 												$('.rateValue').text('Gold Value*');
@@ -1814,6 +1827,7 @@ function calculateJPrice()
 												$('#gemsTypeCont_1').addClass('dn');
 												$('#gemsTypeCont').addClass('dn');
 												$('#typeChoice').addClass('dn');
+												$('.gemstoneProp').addClass('dn');
 												$('.dShapeTitle').addClass('dn');
 												$('.diamondProp').addClass('dn');
 												$('#diamondShapeCont').addClass('dn');
@@ -1831,6 +1845,7 @@ function calculateJPrice()
 												$('#gemsTypeCont_1').addClass('dn');
 												$('.dShapeTitle').addClass('dn');
 												$('#diamondShapeCont').addClass('dn');
+												$('.gemstoneProp').addClass('dn');
 												$('.diamondProp').addClass('dn');
 												$('#gemsTypeCont').addClass('dn');
 												$('.certUrl').addClass('dn');
@@ -1923,7 +1938,6 @@ function calculateJPrice()
 										var platinum_rate = parseFloat($('#platinumRateSpan').text().replace ( /[^\d.]/g, '' ));
 										var perGramPrice = parseFloat(platinum_rate);
 										$('#gold_value').val(parseFloat(perGramPrice*netweight).toFixed(2));
-
 								}
             }
 						return total_weight.toFixed(3);

@@ -1003,6 +1003,7 @@ switch ($action) {
                     $res = $comm->executeCurl($url);
                     $result = $res['results'];
                 }
+                //echo "<pre>";print_r($result);die;
                 $url = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=' . $catid;
                 $res = $comm->executeCurl($url);
                 $fil = $res['results']['attributes'];
@@ -1010,6 +1011,7 @@ switch ($action) {
                 $url = APIDOMAIN . 'index.php?action=categoryHeir&catid=' . $catid;
                 $res = $comm->executeCurl($url);
                 $cat = $res['result'];
+
                 $catres = $cat['subcat'][0]['attr'];
                 $attr = $result[$pid]['attr_details'];
                 $colors = $attr['color'];

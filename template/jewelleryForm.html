@@ -36,6 +36,10 @@
                                                     {
                                                         $typeClass .=' shapeSelected';
                                                     }
+                                                    else if($attr['shape'] == 'Bangle/Bracelet' && $typeId == 'Bangle')
+                                                    {
+                                                          $typeClass .=' shapeSelected';
+                                                    }
                                                     echo "<li><div id='" . $typeId . "' class='jshapeComm transition300 ripplelink " . $typeClass . " '>" . $val['catname'] . "</div></li>";
                                                 }
                                             }
@@ -217,11 +221,11 @@
                                 <div  class="titleDiv txtCap fLeft">Has Bugget / Choki ?*</div>
                                 <div class='radioCont fLeft'>
                                     <div class="checkDiv fLeft">
-                                        <input type="radio" name='bugget' class="filled-in" value="True" <?= ($attr['isBugget'] == True) ? 'checked' : ''; ?> id="bugget" onclick="isBugget();">
+                                        <input type="radio" name='bugget' class="filled-in" value="True" <?= ($attr['isBugget'] == 'True') ? 'checked' : ''; ?> id="bugget" onclick="isBugget();">
                                         <label for="bugget">YES</label>
                                     </div>
                                     <div class="checkDiv fLeft">
-                                        <input type="radio" name='bugget' class="filled-in" value="False" <?= ($attr['isBugget'] == False || empty($attr['isBugget'])) ? 'checked' : ''; ?> id="not_bugget" onclick="isBugget();">
+                                        <input type="radio" name='bugget' class="filled-in" value="False" <?= ($attr['isBugget'] == 'False' || empty($attr['isBugget'])) ? 'checked' : ''; ?> id="not_bugget" onclick="isBugget();">
                                         <label for="not_bugget">No</label>
                                     </div>
                                 </div>
@@ -372,8 +376,6 @@
                                             foreach ($shapeAttrs['attributes'] as $key => $value) {
                                                 if (strtolower($value['attribute_name']) == 'shape') {
 
-                                                    //echo $value['attribute_values'];die;
-
                                                     ?>
                                                     <div class='shapesCont'>
                                                         <div class="wrapperMax">
@@ -381,9 +383,22 @@
                                                                 <center>
                                                                     <?php
                                                                     $filval = explode(",", $value['attribute_values']);
-                                                                    foreach ($filval as $ky => $vl) {
+                                                                    foreach ($filval as $ky => $vl)
+                                                                    {
+                                                                      if($attr['diamond_shape'][$curIndex] == 'Bugget' && $attr['isBugget'] == 'True')
+                                                                      {
+                                                                    ?>
+                                                                          <div id="<?php echo $vl; ?>_<?php echo $curDiv; ?>" class="shapeComm transition300 ripplelink <?php echo $vl; ?> <?php echo (strtolower($vl) == 'emerald') ? 'shapeSelected' : ''; ?>" onclick="checkDiamondShape(this,<?php echo $curDiv; ?>);">
+                                                                    <?php
+                                                                       }
+                                                                      else if($attr['diamond_shape'][$curIndex] !== 'Bugget')
+                                                                      {
+                                                                    ?>
+                                                                          <div id="<?php echo $vl; ?>_<?php echo $curDiv; ?>" class="shapeComm transition300 ripplelink <?php echo $vl; ?> <?php echo (strtolower($attr['diamond_shape'][$curIndex]) == strtolower($vl)) ? 'shapeSelected' : ''; ?>" onclick="checkDiamondShape(this,<?php echo $curDiv; ?>);">
+                                                                    <?php
+                                                                      }
                                                                         ?>
-                                                                        <div id="<?php echo $vl; ?>_<?php echo $curDiv; ?>" class="shapeComm transition300 ripplelink <?php echo $vl; ?> <?php echo (strtolower($attr['diamond_shape'][$curIndex]) == strtolower($vl)) ? 'shapeSelected' : ''; ?>" onclick="checkDiamondShape(this,<?php echo $curDiv; ?>);">
+
                                                                         </div>
                                                                         <?php
                                                                     }

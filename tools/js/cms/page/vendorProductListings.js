@@ -877,7 +877,7 @@ function closeConfirmDelete()
 	$('#overlay').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
 	setTimeout(function () {
 		$('#overlay,#confirmDelete').addClass('dn');
-    window.location.reload();
+    //window.location.reload();
 	}, 1010);
 
 }

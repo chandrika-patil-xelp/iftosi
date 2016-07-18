@@ -2057,20 +2057,29 @@ class vendor extends DB
 
                           $value[12] = $value[12].'-'.$value[13];
                           $value[14] = $value[14].'-'.$value[15].'-'.$value[16];
-
+                          $isbugget == 'False';
+                          if($value[11] == 'Bugget')
+                          {
+                              $isbugget = 'True';
+                          }
+                          $cnt = 0;
                           for($j=$i+1;$j<$len;$j++)
                           {
-                              if(empty($rdv[$j][0]))
+                              if(empty($rdv[$j][0]) && $cnt !== 1)
                               {
                                   if(!empty($rdv[$j][11]))
                                   {
+                                      if($rdv[$j][11] == 'Bugget')
+                                      {
+                                        $isbugget = 'True';
+                                      }
                                       $value[11].= '|!|'.$rdv[$j][11];
                                   }
-                                  if(!empty($rdv[$j][12] && $rdv[$j][13]))
+                                  if(!empty($rdv[$j][12] || $rdv[$j][13]))
                                   {
                                       $value[12].= '|!|'.$rdv[$j][12].'-'.$rdv[$j][13];
                                   }
-                                  if(!empty($rdv[$j][14]) && !empty($rdv[$j][15]) && !empty($rdv[$j][16]))
+                                  if(!empty($rdv[$j][14]) || !empty($rdv[$j][15]) || !empty($rdv[$j][16]))
                                   {
                                       $value[14].= '|!|'.$rdv[$j][14].'-'.$rdv[$j][15].'-'.$rdv[$j][16];
                                   }
@@ -2083,11 +2092,19 @@ class vendor extends DB
                                       $value[21].= '|!|'.$rdv[$j][21];
                                   }
                               }
+                              else
+                              {
+                                  $cnt = 1;
+                              }
                           }
                           $value[11] = rtrim($value[11],',');
                           $value[12] = str_replace(',-','',rtrim($value[12],','));
                           $value[14] = str_replace(',-','',rtrim($value[14],','));
                           $value[20] = rtrim($value[20],',');
+                          // if(!empty($value[0]) && $value[0] == 'Bangle/Bracelet')
+                          // {
+                          //     $value[0] = 'Bangle';
+                          // }
                           $sql = "
                                       INSERT
                                       INTO
@@ -2125,6 +2142,7 @@ class vendor extends DB
                                               gold_value            =   '".round($value[30]*$rate,2)."',
                                               grossweight           =    ".$total_weight.",
                                               price                 =    ".$total_price.",
+                                              isBugget              =    '".$isbugget."',
                                               complete_flag         =      $complete_flag";
                           $res = $this->query($sql);
                           $totlIns++;
@@ -3859,7 +3877,7 @@ class vendor extends DB
 
         private function getAbbrValue($val)
         {
-            $propValArr=array(''=>'','GD/DIA'=>'GOLD & DIAMONDS','PT/DIA'=>'PLATINUM & DIAMONDS','SL/DIA'=>'SILVER & DIAMONDS','GD/DIA/CS'=>'GOLD,DIAMONDS & GEMSTONES','PT/DIA/CS'=>'PLATINUM,DIAMONDS & GEMSTONES','SL/DIA/CS'=>'SILVER,DIAMONDS & GEMSTONES','GD/CS'=>'GOLD & GEMSTONES','SL/CS'=>'SILVER & GEMSTONES','GD/SWCZ'=>'GOLD & SWAROVSKI ZIRCONIA','SL/SWCZ'=>'SILVER & SWAROVSKI ZIRCONIA','PLAIN GD'=>'GOLD & CZ','SL/CZ'=>'SILVER & CZ','PLAIN GD'=>'PLAIN GOLD','PLAIN PT'=>'PLAIN PLATINUM','PLAIN SL'=>'PLAIN SILVER','GD/POL'=>'GOLD & POLKI');
+            $propValArr=array(''=>'','GD/DIA'=>'GOLD & DIAMONDS','PT/DIA'=>'PLATINUM & DIAMONDS','SL/DIA'=>'SILVER & DIAMONDS','GD/DIA/CS'=>'GOLD, DIAMONDS & GEMSTONES','PT/DIA/CS'=>'PLATINUM, DIAMONDS & GEMSTONES','SL/DIA/CS'=>'SILVER, DIAMONDS & GEMSTONES','GD/CS'=>'GOLD & GEMSTONES','SL/CS'=>'SILVER & GEMSTONES','GD/SWCZ'=>'GOLD & SWAROVSKI ZIRCONIA','SL/SWCZ'=>'SILVER & SWAROVSKI ZIRCONIA','PLAIN GD'=>'GOLD & CZ','SL/CZ'=>'SILVER & CZ','PLAIN GD'=>'PLAIN GOLD','PLAIN PT'=>'PLAIN PLATINUM','PLAIN SL'=>'PLAIN SILVER','GD/POL'=>'GOLD & POLKI');
             return $propValArr[$val];
         }
 

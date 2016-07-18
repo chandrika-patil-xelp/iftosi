@@ -9,7 +9,7 @@ var bullionPage = 1;
 var diamondCount = 0;
 var jewelCount = 0;
 var bullionCount = 0;
-
+var catAct;
 $(document).ready(function()
 {
     $('#upDolRt').addClass('dn');
@@ -74,18 +74,18 @@ function loadPDiamondCallback(res,pgno)
     var obj = jQuery.parseJSON(res);
     if (obj['results'] != '')
     {
-        if(obj['results'] !== undefined && obj['results']['Dcnt'] !== undefined)
-        {
-            var total = obj['results']['Dcnt'];
-            diamondCount = total;
-        }
-        else
+        if(obj['results'] !== undefined && obj['results']['total_products'] !== undefined)
         {
             var total = obj['results']['total_products'];
             diamondCount = total;
         }
+        else
+        {
+            var total = obj['results']['Dcnt'];
+            diamondCount = total;
+        }
 
-        $('#totalDiamonds').text(total);
+        $('#totalDiamonds').text(obj['results']['Dcnt']);
         $('#count_10000').text('('+total+')')
         var total_pages = obj['results']['total_pages'];
         var str = '';
@@ -126,7 +126,7 @@ function loadPDiamondCallback(res,pgno)
   			$('#pgno').val($(this).text());
   			if($(this).text() >= 1 && $(this).text() <= total_pages)
   			{
-  				  $('html,body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+  				  $('html,body').animate({scrollTop: $('.diamondPendingPrds').offset().top-100}, 300);
   			}
 		});
 
@@ -140,7 +140,7 @@ function loadPDiamondCallback(res,pgno)
     				loadDiamonds(pgval);
     				if(pgval >= 1 && pgval <= total_pages)
     				{
-    					$('html,body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+    					$('html,body').animate({scrollTop: $('#diamondPendingPrds').offset().top-100}, 300);
     				}
   			}
   			else
@@ -159,7 +159,7 @@ function loadPDiamondCallback(res,pgno)
     				loadDiamonds(pgval);
     				if(pgval >= 1 && pgval <= total_pages)
     				{
-    					$('html,body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+    					$('html,body').animate({scrollTop: $('#diamondPendingPrds').offset().top-100}, 300);
     				}
   			}
   			else
@@ -409,6 +409,7 @@ function generateDiamondList(obj)
 
 function loadJewels(pgno)
 {
+
 	if(!pgno)
 		pgno = 1;
     var tmstmp = new Date().getTime();
@@ -424,19 +425,17 @@ function loadPJewellCallback(res,pgno)
     var obj = jQuery.parseJSON(res);
     if (obj['results'] != '')
     {
-        if(obj['results'] !== undefined && obj['results']['Bcnt'] !== undefined)
-        {
-            var total = obj['results']['Jcnt'];
-            jewelCount = total;
-        }
-        else
+        if(obj['results'] !== undefined && obj['results']['total_products'] !== undefined)
         {
             var total = obj['results']['total_products'];
             jewelCount = total;
         }
-
-        var total = obj['results']['Jcnt'];
-        $('#totalJewells').text(total);
+        else
+        {
+            var total = obj['results']['Jcnt'];
+            jewelCount = total;
+        }
+        $('#totalJewells').text(obj['results']['Jcnt']);
         $('#count_10001').text('('+total+')');
 
         var total_pages = obj['results']['total_pages'];
@@ -477,7 +476,7 @@ function loadPJewellCallback(res,pgno)
   			$('#pgno').val($(this).text());
   			if($(this).text() >= 1 && $(this).text() <= total_pages)
   			{
-  			    $('html,body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+  			    $('html,body').animate({scrollTop: $('#jewelleryPendingPrds').offset().top-100}, 300);
   			}
 		});
 
@@ -491,7 +490,7 @@ function loadPJewellCallback(res,pgno)
     				loadJewels(pgval);
     				if(pgval >= 1 && pgval <= total_pages)
     				{
-    					$('html,body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+    					$('html,body').animate({scrollTop: $('#jewelleryPendingPrds').offset().top-100}, 300);
     				}
   			}
   			else
@@ -510,7 +509,7 @@ function loadPJewellCallback(res,pgno)
     				loadJewels(pgval);
     				if(pgval >= 1 && pgval <= total_pages)
     				{
-    					$('html,body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+    					$('html,body').animate({scrollTop: $('#jewelleryPendingPrds').offset().top-100}, 300);
     				}
   			}
   			else
@@ -716,20 +715,19 @@ function loadBullions(pgno)
 function loadPBullionsCallback(res,pgno)
 {
     var obj = jQuery.parseJSON(res);
-    if (obj['results'] != '')
+    if(obj['results'] != '')
     {
-        if(obj['results'] !== undefined && obj['results']['Bcnt'] !== undefined)
-        {
-            var total = obj['results']['Bcnt'];
-            bullionCount = total;
-        }
-        else
+        if(obj['results'] !== undefined && obj['results']['total_products'] !== undefined)
         {
             var total = obj['results']['total_products'];
             bullionCount = total;
         }
-
-        $('#totalBullions').text(total);
+        else
+        {
+            var total = obj['results']['Bcnt'];
+            bullionCount = total;
+        }
+        $('#totalBullions').text(obj['results']['Bcnt']);
         $('#count_10002').text('('+total+')');
         var total_pages = obj['results']['total_pages'];
         var str = '';
@@ -770,7 +768,7 @@ function loadPBullionsCallback(res,pgno)
       			$('#pgno').val($(this).text());
       			if($(this).text() >= 1 && $(this).text() <= total_pages)
       			{
-      				  $('html,body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+      				  $('html,body').animate({scrollTop: $('#bullionPendingPrds').offset().top-100}, 300);
       			}
     		});
         $('.pPrev').bind('click', function()
@@ -783,7 +781,7 @@ function loadPBullionsCallback(res,pgno)
         				loadBullions(pgval);
         				if(pgval >= 1 && pgval <= total_pages)
         				{
-        					$('html,body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+        					$('html,body').animate({scrollTop: $('#bullionPendingPrds').offset().top-100}, 300);
         				}
       			}
       			else
@@ -802,7 +800,7 @@ function loadPBullionsCallback(res,pgno)
         				loadBullions(pgval);
         				if(pgval >= 1 && pgval <= total_pages)
         				{
-        					$('html,body').animate({scrollTop: $('.prdResults').offset().top-100}, 300);
+        					$('html,body').animate({scrollTop: $('#bullionPendingPrds').offset().top-100}, 300);
         				}
       			}
       			else
@@ -982,7 +980,6 @@ function closeConfirmDelete()
   	setTimeout(function ()
     {
   		  $('#overlay,#confirmDelete').addClass('dn');
-        window.location.reload();
   	}, 1010);
 }
 
@@ -1002,19 +999,20 @@ function deleteProduct()
 {
   	var proId = productDelId;
   	var ele = productDelEle;
+    catAct = $('.wishTabComm').closest('.sel').attr('id');
     $.ajax({url: common.APIWebPath() + "index.php?action=vDeletePrd&vid=" + uid + "&prdid=" + proId, success: function (result)
           {
               var obj = jQuery.parseJSON(result);
               if(obj['error']['Code']==0)
               {
                   $(ele).parent().parent().parent().remove();
-                  if(catid==10000)
+                  if(catAct=='10000')
                   {
                       catName='Diamonds';
-                  } else if(catid==10001)
+                  } else if(catAct=='10001')
                   {
                       catName='Jewells';
-                  } else if(catid==10002)
+                  } else if(catAct=='10002')
                   {
                       catName='Bullions';
                   }
@@ -1029,16 +1027,17 @@ function deleteProduct()
                   if(count<15)
                   {
                       $("#"+catName+"List").html('');
-                      if(catid==10000)
+                      if(catAct=='10000')
                       {
                           diamondPage = 1;
                           loadDiamonds();
-                      } else if(catid==10001)
+                      }
+                      else if(catAct=='10001')
                       {
                           jewellPage = 1;
                           loadJewels();
                       }
-                      else if(catid==10002)
+                      else if(catAct=='10002')
                       {
                           bullionPage = 1;
                           loadBullions();
