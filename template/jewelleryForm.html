@@ -60,8 +60,6 @@
                         {
                             $expd = explode('/', $values['catname']);
                             $values['catname'] = $expd[0];
-
-
                             ?>
                             <div class="divCon  fLeft fmOpenR subCatType <?php
                             if($attr['shape'] != $values['catname'])
@@ -677,7 +675,7 @@
                                 <input name="barcode" id="barcode" type="text" placeholder=" eg. ABCD12" maxlength="20" autocomplete="false" class="txtInput fLeft fmOpenR font14 c666"  value="<?= $pdet['product_barcode']; ?>" onfocusout="calculateJPrice();">
                             </div>
                             <div class="divCon2  fLeft">
-                                <div  class="titleDiv txtCap fLeft">Collection Name*</div>
+                                <div  class="titleDiv txtCap fLeft">Collection Name</div>
                                 <input name="product_brand" id="product_brand" type="text" placeholder=" eg. ABCD12" maxlength="20" autocomplete="false" class="txtInput fLeft fmOpenR font14 c666"  value="<?= $pdet['product_brand']; ?>">
                             </div>
                             <div class="divCon2  fLeft">
