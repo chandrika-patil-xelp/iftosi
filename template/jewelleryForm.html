@@ -50,14 +50,22 @@
                             </div>
                         </div>
 <?php
+
+                        if($attr['shape'] == 'Bangle/Bracelet')
+                        {
+                            $attrShp = explode('/',$attr['shape']);
+                            $attr['shape'] = $attrShp[0];
+                        }
                         foreach ($cat['subcat'] as $key => $values)
                         {
-
                             $expd = explode('/', $values['catname']);
                             $values['catname'] = $expd[0];
+
+
                             ?>
                             <div class="divCon  fLeft fmOpenR subCatType <?php
-                            if ($attr['shape'] != $values['catname']) {
+                            if($attr['shape'] != $values['catname'])
+                            {
                                 echo 'dn';
                             }
                             ?> " id="<?= strtolower($values['catname']); ?>Type">
