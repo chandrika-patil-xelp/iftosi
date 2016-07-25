@@ -183,7 +183,7 @@
                                                   desname=\"".$detls['desname']."\"
                                         WHERE
                                                   designer_id=\"".$did."\"";
-                                $desres = $this->query($dessq);
+                                $desres = $this->query($dessql);
 
                             }
                         //  For category product mapping
@@ -215,6 +215,11 @@
                             {
                                 if(!empty($catidies[$i]))
                                 {
+                                    $detls['rating'] = 0.00;
+                                    if(empty($detls['priceb2b']))
+                                    {
+                                        $detls['priceb2b'] = 0.00;
+                                    }
                                     $pcsql="INSERT
                                             INTO
                                                     tbl_product_category_mapping
@@ -242,7 +247,15 @@
                                     $pcres=$this->query($pcsql);
                                }
                             }
-
+                            if(empty($detls['lot_no']))
+                            {
+                                $detls['lot_no'] = 0;
+                            }
+                            if(empty($detls['product_wt']))
+                            {
+                                $detls['product_wt'] = 0.00;
+                            }
+                            
                             //  For product values filling
                             $sql="  INSERT
                                     INTO
@@ -347,6 +360,90 @@
                           {
                               $detls['clarity'] = str_replace(' ','-',$detls['clarity']);
                           }
+                          
+                          
+                          if(empty($detls['carat_weight']))
+                          {
+                              $detls['carat_weight'] = 0.00;
+                          }
+                          if(empty($detls['base_price']))
+                          {
+                              $detls['base_price'] = 0;
+                          }
+                          if(empty($detls['base_price']))
+                          {
+                              $detls['table'] = 0.00;
+                          }
+                          if(empty($detls['discount']))
+                          {
+                              $detls['discount'] = 0;
+                          }
+                          if(empty($detls['discountb2b']))
+                          {
+                              $detls['discountb2b'] = 0;
+                          }
+                          if(empty($detls['td']))
+                          {
+                              $detls['td'] = 0.00;
+                          }
+                          if(empty($detls['pa']))
+                          {
+                              $detls['pa'] = 0.00;
+                          }
+                          if(empty($detls['crown_height']))
+                          {
+                              $detls['crown_height'] = 0.00;
+                          }
+                          if(empty($detls['crown_angle']))
+                          {
+                              $detls['crown_angle'] = 0;
+                          }
+                          if(empty($detls['girdle']))
+                          {
+                              $detls['girdle'] = '';
+                          }
+                          if(empty($detls['pd']))
+                          {
+                              $detls['pd'] = 0.00;
+                          }
+                          if(empty($detls['no_diamonds']))
+                          {
+                              $detls['no_diamonds'] = 0;
+                          }
+                          if(empty($detls['diamonds_weight']))
+                          {
+                              $detls['diamonds_weight'] = 0;
+                          }
+                          if(empty($detls['gemstone_weight']))
+                          {
+                              $detls['gemstone_weight'] = 0;
+                          }
+                          if(empty($detls['num_gemstones']))
+                          {
+                              $detls['num_gemstones'] = 0;
+                          }
+                          if(empty($detls['polki_weight']))
+                          {
+                              $detls['polki_weight'] = 0;
+                          }
+                          if(empty($detls['polkino']))
+                          {
+                              $detls['polkino'] = 0;
+                          }
+                          if(empty($detls['polki_price_per_carat']))
+                          {
+                              $detls['polki_price_per_carat'] = 0;
+                          }
+                          if(empty($detls['polki_value']))
+                          {
+                              $detls['polki_value'] = 0;
+                          }
+                          if(empty($detls['cr_height']))
+                          {
+                              $detls['cr_height'] = 0;
+                          }
+                          
+                          
                               $sql = "  INSERT
                                         INTO
                                                 tbl_product_search
@@ -408,7 +505,6 @@
                                                  polki_price_per_carat,
                                                  polki_value,
                                                  gold_type,
-                                                 date_time,
                                                  active_flag)
                                           VALUES
                                              (\"".$pid."\",
@@ -469,7 +565,6 @@
                                               \"".$detls['polki_price_per_carat']."\",
                                               \"".$detls['polki_value']."\",
                                               \"".$detls['gold_type']."\",
-                                                  now(),
                                               \"".$display_flag."\")
                                           ON DUPLICATE KEY UPDATE
                                                 diamond_shape           = \"".$detls['diamondShape']."\",
@@ -529,6 +624,7 @@
                                                 polki_price_per_carat   = \"".$detls['polki_price_per_carat']."\",
                                                 polki_value             = \"".$detls['polki_value']."\",
                                                 gold_type               = \"".$detls['gold_type']."\",
+                                                complete_flag           = 1,
                                                 active_flag             = \"".$display_flag."\"";
                                   $res = $this->query($sql);
 

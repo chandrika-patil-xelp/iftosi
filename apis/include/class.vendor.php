@@ -1878,7 +1878,7 @@ class vendor extends DB
                                     'Collection Name',
                                     'Purity(in KT)',
                                     'Net Weight (in Grams)',
-                                    'Making Charge'
+									'Making Charge'
                                 );
 
         if($type=='csv')
@@ -1932,6 +1932,7 @@ class vendor extends DB
 
                   if ($i != 0 && $isBlank == false)
                   {
+                      $isbugget == 'False';
                       $ts = date('Y-m-d H:i');
                       $pro_id = $this->generateId();
                       $query = "
@@ -1966,7 +1967,6 @@ class vendor extends DB
                           {
 
                               $purityArr = array('24'=>999,'23'=>958,'22'=>916,'21'=>875,'18'=>750,'17'=>708,'14'=>585,'10'=>417,'9'=>375,'8'=>333);
-
                               $row = $this->fetchData($vRes);
                               if(empty($purityArr[$value[29]]))
                               {
@@ -1975,6 +1975,7 @@ class vendor extends DB
                               if($value[5] == 'Gold')
                               {
                                   $rate = ($row['gold_rate']/10)*($purityArr[$value[29]]/995);
+                                  $rate = round($rate, 2);
                               }
                               if($value[5] == 'Silver')
                               {
@@ -2064,7 +2065,7 @@ class vendor extends DB
 
                           $value[12] = $value[12].'-'.$value[13];
                           $value[14] = $value[14].'-'.$value[15].'-'.$value[16];
-                          $isbugget == 'False';
+                          
                           if($value[11] == 'Bugget')
                           {
                               $isbugget = 'True';
@@ -2108,6 +2109,46 @@ class vendor extends DB
                           $value[12] = str_replace(',-','',rtrim($value[12],','));
                           $value[14] = str_replace(',-','',rtrim($value[14],','));
                           $value[20] = rtrim($value[20],',');
+                          if(empty($value[9]))
+                          {
+                              $value[9] = 0.00;
+                          }
+                          if(empty($value[10]))
+                          {
+                              $value[10] = 0.00;
+                          }
+                          if(empty($polkiValue))
+                          {
+                              $polkiValue = 0.00;
+                          }
+                          if(empty($value[17]))
+                          {
+                              $value[17] = 0.00;
+                          }
+                          if(empty($value[18]))
+                          {
+                              $value[18] = 0;
+                          }
+                          if(empty($value[19]))
+                          {
+                              $value[19] = 0.00;
+                          }
+                          if(empty($value[22]))
+                          {
+                              $value[22] = 0.00;
+                          }
+                          if(empty($value[23]))
+                          {
+                              $value[23] = 0.00;
+                          }
+                          if(empty($value[24]))
+                          {
+                              $value[24] = 0;
+                          }
+                          if(empty($value[25]))
+                          {
+                              $value[25] = 0;
+                          }
                           // if(!empty($value[0]) && $value[0] == 'Bangle/Bracelet')
                           // {
                           //     $value[0] = 'Bangle';
@@ -2126,7 +2167,7 @@ class vendor extends DB
                                               gold_type             =   '".$value[6]." Gold',
                                               polki_color           =   '".$value[7]."',
                                               polki_quality         =   '".$value[8]."',
-                                              polki_weight          =   '".$value[9]."',
+                                              polki_weight          =   ".$value[9].",
                                               polki_price_per_carat =   '".$value[10]."',
                                               polki_value           =   '".$polkiValue."',
                                               diamond_shape         =   '".$value[11]."',

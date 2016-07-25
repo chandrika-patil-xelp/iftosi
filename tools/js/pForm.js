@@ -1593,7 +1593,15 @@ function calculateJPrice()
 		if($('#labour_charge').val() !== undefined && $('#labour_charge').val() !== null && $('#labour_charge').val() !== '')
 		{
 					labourValue = parseFloat($('#labour_charge').val());
-					totalPrice = totalPrice + labourValue;
+                                        if(parseFloat($('#netweight').val()) !== null || parseFloat($('#netweight').val()) !== 0 || parseFloat($('#netweight').val()) !== '' && ($('input[type="metal"]:checked').val() == 'Gold'))
+                                        {
+                                            totalPrice = totalPrice + (labourValue*parseFloat($('#netweight').val()));
+                                        }
+                                        else
+                                        {
+                                            totalPrice = totalPrice + labourValue;
+                                        }
+					
 		}
 		if($('#netweight').val() !== undefined && $('#netweight').val() !== null && $('#netweight').val() !== '' && $('#gold_value') !== '' && $('#gold_value') !== undefined && $('#gold_value') !== null && isNaN($('#gold_value')) !== false)
 		{
@@ -1924,12 +1932,14 @@ function calculateJPrice()
 								{
 										total_weight  	 = total_weight + parseFloat(netweight);
 										var gold_rate 	 = parseFloat($('#goldRateSpan').text().replace ( /[^\d.]/g, '' ));
-										var purity 			 = $('#netweight').val();
-										if(purityArr[purity] == '' || purityArr[purity] == undefined || purityArr[purity] == null || purityArr[purity] == 'undefined' || purityArr[purity] == 'null')
+										var netweight 	 = $('#netweight').val();
+                                                                                var purityG = $('#goldpurity').val();
+                                                                                
+										if(purityArr[purityG] == '' || purityArr[purityG] == undefined || purityArr[purityG] == null || purityArr[purityG] == 'undefined' || purityArr[purityG] == 'null')
 										{
-												purityArr[purity] == 995;
+												purityArr[purityG] == 995;
 										}
-										var perGramPrice = parseFloat(gold_rate/10)*(purityArr[purity]/995);
+										var perGramPrice = parseFloat(gold_rate/10)*(purityArr[purityG]/995);
 										$('#gold_value').val(parseFloat(perGramPrice*netweight).toFixed(2));
 								}
 								else if(metaltype == 'Silver')
