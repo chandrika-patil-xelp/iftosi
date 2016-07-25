@@ -1893,6 +1893,7 @@ function calculateJPrice()
 						var polkivalue							=		0;
             var netweight               =   parseFloat($('#netweight').val());
 
+						var purityArr = {'24':999,'23':958,'22':916,'21':875,'18':750,'17':708,'14':585,'10':417,'9':375,'8':333};
 
 						if(polkiweight !== undefined && polkiweight !== null && polkiweight !== 0 && polki_price_per_carat !== undefined && polki_price_per_carat !== null && polki_price_per_carat !== 0 && isNaN(polki_price_per_carat) == false)
 						{
@@ -1921,9 +1922,14 @@ function calculateJPrice()
 								var metaltype = $('input[name="metal"]:checked').val();
 								if(metaltype == 'Gold')
 								{
-										total_weight  = total_weight + parseFloat(netweight);
-										var gold_rate = parseFloat($('#goldRateSpan').text().replace ( /[^\d.]/g, '' ));
-										var perGramPrice = parseFloat(gold_rate/10);
+										total_weight  	 = total_weight + parseFloat(netweight);
+										var gold_rate 	 = parseFloat($('#goldRateSpan').text().replace ( /[^\d.]/g, '' ));
+										var purity 			 = $('#netweight').val();
+										if(purityArr[purity] == '' || purityArr[purity] == undefined || purityArr[purity] == null || purityArr[purity] == 'undefined' || purityArr[purity] == 'null')
+										{
+												purityArr[purity] == 995;
+										}
+										var perGramPrice = parseFloat(gold_rate/10)*(purityArr[purity]/995);
 										$('#gold_value').val(parseFloat(perGramPrice*netweight).toFixed(2));
 								}
 								else if(metaltype == 'Silver')

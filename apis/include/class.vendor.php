@@ -1873,12 +1873,14 @@ class vendor extends DB
                                     'Stone Price / Carat',
                                     'No. Of Stones',
                                     'Other Material (in Grams)',
-                                    'Labour Charge',
+                                    'Labour Charge / Gram',
                                     'Hallmark',
                                     'Collection Name',
                                     'Purity(in KT)',
-                                    'Net Weight (in Grams)'
+                                    'Net Weight (in Grams)',
+                                    'Making Charge'
                                 );
+
         if($type=='csv')
         {
             $rdv = explode("\n", $data);
@@ -1888,12 +1890,11 @@ class vendor extends DB
         else
         {
             $rdv = $data;
-            $data[0] = array_slice($data[0],0,31);
+            $data[0] = array_slice($data[0],0,32);
             $colName = $data[0];
             $len = count($rdv);
         }
         $validFormat=TRUE;
-
         if(count($colName) == count($defaultColNames))
         {
             for ($i = 0; $i < count($defaultColNames); $i++)
@@ -1926,7 +1927,6 @@ class vendor extends DB
                        $isBlank = true;
                     }
                 }
-
                 if(!empty($value[0]))
                 {
 
@@ -1964,10 +1964,17 @@ class vendor extends DB
                           $vRes = $this->query($sql);
                           if($vRes)
                           {
+
+                              $purityArr = array('24'=>999,'23'=>958,'22'=>916,'21'=>875,'18'=>750,'17'=>708,'14'=>585,'10'=>417,'9'=>375,'8'=>333);
+
                               $row = $this->fetchData($vRes);
+                              if(empty($purityArr[$value[29]]))
+                              {
+                                  $purityArr[$value[29]] = 995;
+                              }
                               if($value[5] == 'Gold')
                               {
-                                  $rate = $row['gold_rate']/10;
+                                  $rate = ($row['gold_rate']/10)*($purityArr[$value[29]]/995);
                               }
                               if($value[5] == 'Silver')
                               {
@@ -2220,13 +2227,24 @@ class vendor extends DB
         {
             $price = $price + ((floatval($params[22])/5)*$params[23]);
         }
-        if(!empty($params[26]))
-        {
-            $price = $price + floatval($params[26]);
-        }
         if(!empty($params[30]))
         {
             $price = $price + floatval($params[30])*floatval($rate);
+        }
+        if(!empty($params[31]) && empty($params[26]))
+        {
+            $price  = $price + floatval($params[31]);
+        }
+        else
+        {
+            if(!empty($params[30]))
+            {
+                $price  = $price + (floatval($params[26])*floatval($params[30]));
+            }
+            else
+            {
+                $price  = $price + floatval($params[26]);
+            }
         }
         return $price;
     }
