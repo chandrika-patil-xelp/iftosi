@@ -327,12 +327,12 @@ function validateJForm()
 								}
 						}
 						var tmp_certificate_url = $('#filePath').html();
-						if(isValid && (tmp_certificate_url == undefined || tmp_certificate_url == null || tmp_certificate_url == '') && (certificate !== undefined && certificate !== null && certificate !== 'undefined' && certificate !== 'null' && certificate !== 'BIS' && certificate !== 'NONE'))
-						{
-								str ='Please upload product certificate';
-								submiter = false;
-								isValid = false;
-						}
+						// if(isValid && (tmp_certificate_url == undefined || tmp_certificate_url == null || tmp_certificate_url == '') && (certificate !== undefined && certificate !== null && certificate !== 'undefined' && certificate !== 'null' && certificate !== 'BIS' && certificate !== 'NONE'))
+						// {
+						// 		str ='Please upload product certificate';
+						// 		submiter = false;
+						// 		isValid = false;
+						// }
 
 				}
 
