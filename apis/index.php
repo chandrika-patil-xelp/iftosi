@@ -755,6 +755,7 @@ switch($action)
                         $Reader = new SpreadsheetReader($filename);
                         $Sheets = $Reader->Sheets();
                         $Reader->ChangeSheet(0);
+
                         foreach ($Reader as $Key => $Row)
                         {
                             $params['data'][] = $Row;

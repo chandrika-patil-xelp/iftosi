@@ -1592,16 +1592,15 @@ function calculateJPrice()
 		}
 		if($('#labour_charge').val() !== undefined && $('#labour_charge').val() !== null && $('#labour_charge').val() !== '')
 		{
-					labourValue = parseFloat($('#labour_charge').val());
-                                        if(parseFloat($('#netweight').val()) !== null || parseFloat($('#netweight').val()) !== 0 || parseFloat($('#netweight').val()) !== '' && ($('input[type="metal"]:checked').val() == 'Gold'))
-                                        {
-                                            totalPrice = totalPrice + (labourValue*parseFloat($('#netweight').val()));
-                                        }
-                                        else
-                                        {
-                                            totalPrice = totalPrice + labourValue;
-                                        }
-					
+				labourValue = parseFloat($('#labour_charge').val());
+        if(parseFloat($('#netweight').val()) !== null || parseFloat($('#netweight').val()) !== 0 || parseFloat($('#netweight').val()) !== '' && ($('input[type="metal"]:checked').val() == 'Gold'))
+        {
+            totalPrice = totalPrice + (labourValue*parseFloat($('#netweight').val()));
+        }
+        else
+        {
+            totalPrice = totalPrice + labourValue;
+        }
 		}
 		if($('#netweight').val() !== undefined && $('#netweight').val() !== null && $('#netweight').val() !== '' && $('#gold_value') !== '' && $('#gold_value') !== undefined && $('#gold_value') !== null && isNaN($('#gold_value')) !== false)
 		{
@@ -1934,7 +1933,7 @@ function calculateJPrice()
 										var gold_rate 	 = parseFloat($('#goldRateSpan').text().replace ( /[^\d.]/g, '' ));
 										var netweight 	 = $('#netweight').val();
                                                                                 var purityG = $('#goldpurity').val();
-                                                                                
+
 										if(purityArr[purityG] == '' || purityArr[purityG] == undefined || purityArr[purityG] == null || purityArr[purityG] == 'undefined' || purityArr[purityG] == 'null')
 										{
 												purityArr[purityG] == 995;

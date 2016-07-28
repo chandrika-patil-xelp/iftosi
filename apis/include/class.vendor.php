@@ -1878,7 +1878,7 @@ class vendor extends DB
                                     'Collection Name',
                                     'Purity(in KT)',
                                     'Net Weight (in Grams)',
-									'Making Charge'
+									                  'Making Charge'
                                 );
 
         if($type=='csv')
@@ -1894,6 +1894,7 @@ class vendor extends DB
             $colName = $data[0];
             $len = count($rdv);
         }
+
         $validFormat=TRUE;
         if(count($colName) == count($defaultColNames))
         {
@@ -1909,6 +1910,7 @@ class vendor extends DB
         {
             $validFormat = FALSE;
         }
+
         $i = $totlIns = 0;
         if ($validFormat)
         {
@@ -1965,7 +1967,6 @@ class vendor extends DB
                           $vRes = $this->query($sql);
                           if($vRes)
                           {
-
                               $purityArr = array('24'=>999,'23'=>958,'22'=>916,'21'=>875,'18'=>750,'17'=>708,'14'=>585,'10'=>417,'9'=>375,'8'=>333);
                               $row = $this->fetchData($vRes);
                               if(empty($purityArr[$value[29]]))
@@ -1986,7 +1987,85 @@ class vendor extends DB
                                   $rate = $row['Platinum_rate'];
                               }
                           }
-                          $total_price = $this->calculatePrice($value,$rate);
+                          $totalDmdVal = $value[19]*$value[17];
+                          $totalDCarat = $value[17];
+                          $totalDPPC   = $value[19];
+                          $totalNumDmd = $value[18];
+
+                          $totalGemVal = $value[22]*$value[23];
+                          $totalNOG    = $value[24];
+                          $totalGWt    = $value[22];
+                          $totalGPPC   = $value[23];
+
+                          $calGem      = true;
+                          $calDmd      = true;
+                          $cnt = 0;
+                          for($j=$i+1;$j<$len;$j++)
+                          {
+                              if(empty($rdv[$j][0]) && $cnt !== 1)
+                              {
+                                  if(!empty($rdv[$j][11]))
+                                  {
+                                      if($rdv[$j][11] == 'Bugget')
+                                      {
+                                        $isbugget = 'True';
+                                      }
+                                      $value[11].= '|!|'.$rdv[$j][11];
+                                  }
+                                  if(!empty($rdv[$j][12] || $rdv[$j][13]))
+                                  {
+                                      $value[12].= '|!|'.$rdv[$j][12].'-'.$rdv[$j][13];
+                                  }
+                                  if(!empty($rdv[$j][14]) || !empty($rdv[$j][15]) || !empty($rdv[$j][16]))
+                                  {
+                                      $value[14].= '|!|'.$rdv[$j][14].'-'.$rdv[$j][15].'-'.$rdv[$j][16];
+                                  }
+                                  if(!empty($rdv[$j][20]))
+                                  {
+                                      $value[20].= '|!|'.$rdv[$j][20];
+                                  }
+                                  if(!empty($rdv[$j][21]))
+                                  {
+                                      $value[21].= '|!|'.$rdv[$j][21];
+                                  }
+                                  if(!empty($rdv[$j][17]))
+                                  {
+                                      $totalDCarat = $totalDCarat+$rdv[$j][17];
+                                      $totalNumDmd = $totalNumDmd+$rdv[$j][17];
+                                  }
+                                  if(!empty($rdv[$j][17]) && !empty($rdv[$j][19]))
+                                  {
+                                      $calDmd = false;
+                                      $totalDmdVal = $totalDmdVal + ($rdv[$j][17]*$rdv[$j][19]);
+                                  }
+                                  if(!empty($rdv[$j][22]) && !empty($rdv[$j][23]))
+                                  {
+                                      $calGem = false;
+                                      $totalGemVal = $totalGemVal + ($rdv[$j][22]*$rdv[$j][23]);
+                                  }
+                                  if(!empty($rdv[$j][22]))
+                                  {
+                                      $totalGWt = $totalGWt + $rdv[$j][22];
+                                  }
+                                  if(!empty($rdv[$j][24]))
+                                  {
+                                      $totalNOG = $totalNOG + $rdv[$j][24];
+                                  }
+                              }
+                              else
+                              {
+                                  $cnt = 1;
+                              }
+                          }
+                          if($calGem == false)
+                          {
+                              $totalGPPC = $totalGemVal/$totalGWt;
+                          }
+                          if($calDmd == false)
+                          {
+                              $totalDPPC = $totalDmdVal/$totalDCarat;
+                          }
+                          $total_price = $this->calculatePrice($value,$rate,$totalDmdVal,$totalGemVal);
                           $total_weight= $this->calculateWeight($value);
 
                           $sql = "
@@ -2063,48 +2142,19 @@ class vendor extends DB
                               $polkiValue = floatval($value[9])*floatval($value[10]);
                           }
 
+                          if($value[5] == 'Gold' && empty($value[26]) && !empty($value[31]))
+                          {
+                              $value[26] = floatval($value[31])/floatval($value[30]);
+                          }
+
                           $value[12] = $value[12].'-'.$value[13];
                           $value[14] = $value[14].'-'.$value[15].'-'.$value[16];
-                          
+
                           if($value[11] == 'Bugget')
                           {
                               $isbugget = 'True';
                           }
-                          $cnt = 0;
-                          for($j=$i+1;$j<$len;$j++)
-                          {
-                              if(empty($rdv[$j][0]) && $cnt !== 1)
-                              {
-                                  if(!empty($rdv[$j][11]))
-                                  {
-                                      if($rdv[$j][11] == 'Bugget')
-                                      {
-                                        $isbugget = 'True';
-                                      }
-                                      $value[11].= '|!|'.$rdv[$j][11];
-                                  }
-                                  if(!empty($rdv[$j][12] || $rdv[$j][13]))
-                                  {
-                                      $value[12].= '|!|'.$rdv[$j][12].'-'.$rdv[$j][13];
-                                  }
-                                  if(!empty($rdv[$j][14]) || !empty($rdv[$j][15]) || !empty($rdv[$j][16]))
-                                  {
-                                      $value[14].= '|!|'.$rdv[$j][14].'-'.$rdv[$j][15].'-'.$rdv[$j][16];
-                                  }
-                                  if(!empty($rdv[$j][20]))
-                                  {
-                                      $value[20].= '|!|'.$rdv[$j][20];
-                                  }
-                                  if(!empty($rdv[$j][21]))
-                                  {
-                                      $value[21].= '|!|'.$rdv[$j][21];
-                                  }
-                              }
-                              else
-                              {
-                                  $cnt = 1;
-                              }
-                          }
+
                           $value[11] = rtrim($value[11],',');
                           $value[12] = str_replace(',-','',rtrim($value[12],','));
                           $value[14] = str_replace(',-','',rtrim($value[14],','));
@@ -2173,16 +2223,16 @@ class vendor extends DB
                                               diamond_shape         =   '".$value[11]."',
                                               clarity               =   '".$value[12]."',
                                               color                 =   '".$value[14]."',
-                                              dwt                   =   '".$value[17]."',
-                                              nofd                  =   '".$value[18]."',
-                                              price_per_carat       =   '".$value[19]."',
-                                              diamondsvalue         =   '".round($value[19]*$value[17],2)."',
+                                              dwt                   =   '".$totalDCarat."',
+                                              nofd                  =   '".$totalNumDmd."',
+                                              price_per_carat       =   '".$totalDPPC."',
+                                              diamondsvalue         =   '".round($totalDmdVal,2)."',
                                               gemstone_type         =   '".$value[20]."',
                                               gemstone_color        =   '".$value[21]."',
-                                              gemwt                 =   '".$value[22]."',
-                                              gemstonevalue         =   '".round($value[22]*$value[23],2)."',
-                                              gprice_per_carat      =   '".$value[23]."',
-                                              num_gemstones         =   '".$value[24]."',
+                                              gemwt                 =   '".$totalGWt."',
+                                              gemstonevalue         =   '".round($totalGemVal,2)."',
+                                              gprice_per_carat      =   '".$totalGPPC."',
+                                              num_gemstones         =   '".$totalNOG."',
                                               othermaterial         =   '".$value[25]."',
                                               labour_charge         =   '".$value[26]."',
                                               gold_purity           =   '".$value[29]."',
@@ -2257,21 +2307,36 @@ class vendor extends DB
         return $result;
     }
 
-    public function calculatePrice($params,$rate)
+    public function calculatePrice($params,$rate,$totalDmdVal,$totalGemVal)
     {
         $price = 0;
         if(!empty($params[17]) && !empty($params[19]))
         {
-            $price = $price + ((floatval($params[17])/5)*$params[19]);
+            if(!empty($totalDmdVal))
+            {
+                $price = $price + $totalDmdVal;
+            }
+            else
+            {
+                $price = $price + ((floatval($params[17])/5)*$params[19]);
+            }
         }
         if(!empty($params[22]) && !empty($params[23]))
         {
-            $price = $price + ((floatval($params[22])/5)*$params[23]);
+          if(!empty($totalGemVal))
+          {
+              $price = $price + $totalGemVal;
+          }
+          else
+          {
+              $price = $price + ((floatval($params[22])/5)*$params[23]);
+          }
         }
         if(!empty($params[30]))
         {
             $price = $price + floatval($params[30])*floatval($rate);
         }
+
         if(!empty($params[31]) && empty($params[26]))
         {
             $price  = $price + floatval($params[31]);
