@@ -16,7 +16,7 @@
         <link rel="icon" type="image/png" sizes="32x32" href="<?php echo DOMAIN;?>tools/img/favicons/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="96x96" href="<?php echo DOMAIN;?>tools/img/favicons/favicon-96x96.png">
         <link rel="icon" type="image/png" sizes="16x16" href="<?php echo DOMAIN;?>tools/img/favicons/favicon-16x16.png">
-        
+
         <meta charset="utf-8">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -25,9 +25,12 @@
         <link rel="stylesheet" href="<?php echo $css['home']; ?>">
         <link rel="stylesheet" href="<?php echo $css['ripple']; ?>">
         <link rel="stylesheet" href="<?php echo $css['jquery_toast']; ?>">
+        <link rel='stylesheet' href="<?php echo $css['toastr']; ?>">
+
         <script type="text/javascript" src="<?php echo $jvs['jqry']; ?>"></script>
         <script type="text/javascript" src="<?php echo $jvs['jquery_toast']; ?>"></script>
         <script type="text/javascript" src="<?php echo $jvs['customStorage']; ?>"></script>
+        <script src="<?php echo $jvs['toastr'];?>"></script>
         <script type="text/javascript" src="<?php echo $jvs['signup']; ?>"></script>
 
 <?php
@@ -44,7 +47,7 @@
             var DOMAIN = '<?php echo DOMAIN;?>';
             var APIDOMAIN = '<?php echo APIDOMAIN;?>';
             var IMGDOMAIN = '<?php echo IMGDOMAIN;?>';
-            
+
             var totalCnt = '<?php echo $total;?>';
             var pid = '<?php echo $pid;?>';
             var vendor_id = '<?php echo $vndrId;?>';
@@ -58,8 +61,8 @@
             var is_vendor = customStorage.readFromStorage('is_vendor');
             var popup = '<?php echo $popup;?>';
           </script>
-        
-        
+
+
         <?php
         //echo $vndrId;
         if ($page == 'diamonds' || $page == 'jewellery' || $page == 'bullion') {
@@ -88,5 +91,5 @@
             </script>
         <?php
         }
-        ?>    
+        ?>
     </head>

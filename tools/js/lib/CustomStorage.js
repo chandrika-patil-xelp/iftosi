@@ -63,20 +63,51 @@ function CustomStorage() {
         return unescape(str);
     }
 
+    // this.toast = function (mType, msg) {
+    //     $('.close').click();
+    //     $.toast.config.width = 400;
+    //     $.toast.config.closeForStickyOnly = false;
+    //     if (mType == 0) {
+    //         $.toast(msg, {duration: 5000, type: "danger"});
+    //     } else if (mType == 1) {
+    //         $.toast(msg, {duration: 5000, type: "success"});
+    //     }
+    //     setTimeout(function () {
+    //         $('.close').click();
+    //     }, 5000);
+    // }
+
     this.toast = function (mType, msg) {
+      common.msg(mType, msg);
+
         $('.close').click();
+        return false;
         $.toast.config.width = 400;
         $.toast.config.closeForStickyOnly = false;
-        if (mType == 0) {
-            $.toast(msg, {duration: 5000, type: "danger"});
-        } else if (mType == 1) {
-            $.toast(msg, {duration: 5000, type: "success"});
+        if (mType == 0)
+        {
+            $.toastr(msg, {duration: 5000, type: "danger"});
+        }
+        else if (mType == 1)
+        {
+            $.toastr(msg, {duration: 5000, type: "success"});
+        }
+        else if (mType == 2)
+        {
+            $.toastr(msg, {duration: 5000, type: "stock"});
+        }
+        else if (mType == 3)
+        {
+            $.toastr(msg, {duration: 5000, type: "sold"});
+        }
+        else if (mType == 4)
+        {
+            $.toastr(msg, {duration: 5000, type: "instock"});
         }
         setTimeout(function () {
             $('.close').click();
         }, 5000);
     }
-
 	this.removeAll = function () {
 		if (typeof (Storage) !== "undefined")
             localStorage.clear();

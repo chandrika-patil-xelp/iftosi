@@ -555,6 +555,75 @@ function Common() {
 		var win = window.open(url, '_blank');
 		win.focus();
 	}
+
+  this.msg = function(t, e) {
+    toastr.remove();
+          // if(t==0 || t==2)
+          //     t='danger';
+
+          if(t==0 || t == 2)
+              t='info';
+
+          if(t==4)
+              t='success';
+
+          $("danger" === t ? function() {
+              toastr.error(e)
+          } : "info" === t ? function() {
+              toastr.info(e)
+          } : "success" === t ? function() {
+              toastr.success(e)
+          } : function() {
+              //toastr.warning(e)
+          });
+  }, toastr.options = {
+                  closeButton: !0,
+                  debug: !1,
+                  newestOnTop: !0,
+                  progressBar: 1,
+                  positionClass: "toast-top-right",
+                  preventDuplicates: true,
+                  showDuration: "100",
+                  hideDuration: "800",
+                  timeOut: "1000",
+                  extendedTimeOut: "1000",
+                  showEasing: "",
+                  hideEasing: "",
+                  showMethod: "slideDown",
+                  hideMethod: "slideUp"
+              }, this.decodeMsg = function(t) {
+                  return decodeURIComponent(t.replace(/\+/g, " "))
+              }, this.encodeMsg = function(t) {
+                  return encodeURIComponent(t)
+              }, this.uid = function() {
+                  var t = webstore.get("uid");
+                  return t
+              }, this.appendDiv = function(t, e, n) {
+                  if ("" != n) {
+                      var o = document.getElementById(t);
+                      o.innerHTML = e ? n : o.innerHTML + n
+                  }
+              }, this.replaceURLWithHTMLLinks = function(t) {
+                  var e = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+                  return t.replace(e, "<a href='$1' target='_blank'>$1</a>")
+              }, this.getParameterByName = function(t) {
+                  t = t.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                  var e = new RegExp("[\\?&]" + t + "=([^&#]*)"),
+                      n = e.exec(location.search);
+                  return null == n ? "" : decodeURIComponent(n[1].replace(/\+/g, " "))
+              }, this.redirect = function(t) {
+                  window.location = t
+              }, this.capitaliseFirstLetter = function(t) {
+                  var e = t.value;
+                  "" != e && (t.value = e.charAt(0).toUpperCase() + e.slice(1))
+              }, this.capitalize = function(t) {
+                  var e = t.value.toLowerCase();
+                  "" != e && (t.value = e.replace(/\w\S*/g, function(t) {
+                      return t.charAt(0).toUpperCase() + t.substr(1).toLowerCase()
+                  }))
+              }, this.castLowerCase = function(t) {
+                  document.getElementById(t).value = document.getElementById(t).value.toLowerCase()
+              };
 }
 function showVendorProfile()
 {
