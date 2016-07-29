@@ -257,14 +257,14 @@ switch ($action) {
                 $page = 'signup';
                 //include 'template/signup.html';
 
-                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(DOMAIN, 'beta.xelpmoc.in/iftosi') || stristr(REQURI, 'beta'))
-                {
+                /*if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(DOMAIN, 'beta.xelpmoc.in/iftosi') || stristr(REQURI, 'beta'))
+                {*/
                         include 'template/signup.html';
-                }
+                /*}
                 else
                 {
                         include 'template/comingsoon.html';
-                }
+                }*/
                 break;
 
             case 'vsignup':
@@ -545,14 +545,14 @@ switch ($action) {
                 $adjacents = 2;
                 //echo "<pre>";print_r($total);die;
                 //include 'template/results.html';
-                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
-                {
+                /*if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
+                {*/
                         include 'template/results.html';
-                }
+                /*}
                 else
                 {
                         include 'template/comingsoon.html';
-                }
+                }*/
                 break;
 
             case 'jewellery':
@@ -582,14 +582,14 @@ switch ($action) {
                 }
                 //echo "<pre>";print_r($data);die;
                 //include 'template/jewellery_results.html';
-                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
-                {
+                /*if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
+                {*/
                         include 'template/jewellery_results.html';
-                }
+                /*}
                 else
                 {
                         include 'template/comingsoon.html';
-                }
+                }*/
                 break;
             case 'bullion':
                 $page = 'bullion';
@@ -611,14 +611,14 @@ switch ($action) {
                 $lastpg = ceil($total / 15);
                 $adjacents = 2;
                 //include 'template/bullion_results.html';
-                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
-                {
+                /*if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
+                {*/
                         include 'template/bullion_results.html';
-                }
+                /*}
                 else
                 {
                         include 'template/comingsoon.html';
-                }
+                }*/
                 break;
 
 
@@ -762,14 +762,14 @@ switch ($action) {
                 $totalDes = $res3['total'];
                 //echo "<pre>";print_r($des); die;
                 //include 'template/diamond_details.html';
-                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
-                {
+                /*if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
+                {*/
                         include 'template/diamond_details.html';
-                }
+                /*}
                 else
                 {
                         include 'template/comingsoon.html';
-                }
+                }*/
                 break;
 
             case 'bullion_details':
@@ -814,14 +814,14 @@ switch ($action) {
 
                 //echo "<pre>".print_r($data3); die;
                 //include 'template/bullion_details.html';
-                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
-                {
+                /*if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
+                {*/
                         include 'template/bullion_details.html';
-                }
+                /*}
                 else
                 {
                         include 'template/comingsoon.html';
-                }
+                }*/
                 break;
 
             case 'jewellery_details':
@@ -944,14 +944,14 @@ switch ($action) {
 
                 //echo "<pre>"; print_r($des); die;
                 //include 'template/jewellery_details.html';
-                if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
-                {
+                /*if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
+                {*/
                         include 'template/jewellery_details.html';
-                }
+                /*}
                 else
                 {
                         include 'template/comingsoon.html';
-                }
+                }*/
                 break;
 
             case 'diamond_Form':
