@@ -126,7 +126,7 @@ a{text-decoration: none;}
 
 .loggedIn{margin-right: 0!important;}
 .header ul {width: 160px!important;left: -120px!important;}
-.upperMenu {width: 100%;height: auto;background: #171334 url(../img/common/pattern.svg); background-size: auto 25px; position: fixed;top: 100px;z-index: 0;left: 0;right: 0;margin: auto;padding: 0 20px 40px 20px;overflow: hidden;margin-left: 0;}
+.upperMenu {width: 100%;height:100%;background: #171334 url(../img/common/pattern.svg); background-size: auto 25px; position: fixed;top: 100px;z-index: 0;left: 0;right: 0;margin: auto;padding: 0 20px 60px 20px;overflow: hidden;margin-left: 0;}
 .upTransit{-webkit-transform: translateY(50px);-moz-transform: translateY(50px);-ms-transform: translateY(50px);transform: translateY(50px);opacity: 0;}
 
 .forJwMenu{width:100%;height: auto;display: none;}
@@ -135,7 +135,7 @@ a{text-decoration: none;}
 
 .menuTittle{width:100%;height: 70px;color: #fff;font-size: 40px;padding: 0 10px;}
 .menuTittle a{color:#fff;}
-.menuListCont{width:100%;height: 400px;padding: 25px;cursor: default}
+.menuListCont{width:100%;height:auto;padding: 25px;cursor: default;float:left;}
 .mItemDiv{width:20%;height: auto;color: #fff;cursor: pointer;}
 .mItemTitle__{width:100%;height:35px;line-height:35px;color: #fff;font-size: 20px;background: url(../img/common/right.svg)no-repeat; background-position: -3px -3px ; background-size: auto 30px; }
 .mItemTitle {
