@@ -382,14 +382,14 @@ a{text-decoration: none;}
 
 
 /*No Results */
-.noresDiv{width:100%;height: 160px;padding: 50px 0;text-align: center;color:#d4d4c8;border:1px solid #d4d4c8;margin-bottom: 50px;}
+.noresDiv{width:100%;height: 180px;padding: 90px  0 30px 0;text-align: center;color:#d4d4c8;border:1px solid #d4d4c8;margin-bottom: 50px;background-image: url(../img/common/norecords.svg);background-repeat: no-repeat;background-size: 90px auto;background-position:center top;border-radius:2px}
 .noresults{width:100%;}
 
 /*Autosuggests*/
 .areaCont{width:100%;position: relative;height: auto;}
 .autoSuggestOuter {position: absolute;top: 80px;left: 0;z-index: 10000000;background: #fff;width: 100%;box-sizing: border-box;text-align: left;box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.2);-webkit-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.2);-moz-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.2);-ms-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.2);-o-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.2);}
 .autoSuggestOuter ul {margin: 0;padding: 0;list-style: none;}
-.autoSuggstions{width: 100%;height: 35px;line-height: 35px;border-bottom: 1px solid #e6e6e6;cursor: pointer;font-size: 14px;color: #666;padding: 0 15px;}
+.autoSuggstions{width: 100%;height: 35px;line-height: 35px;border-bottom: 1px solid #e6e6e6;cursor: pointer;font-size: 12px;color: #666;padding: 0 15px;font-family:openR}
 .autoSuggstions:hover{color:#8A0044;}
 .hover{color:#8A0044;font-family: openB;}
 
@@ -1089,7 +1089,7 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 
 @media only screen and (min-width: 320px) and (max-width: 767px){
     .teamTabs{display: block;}
-    
+
     /*Header*/
         .header {height: 60px!important;padding: 0 15px!important;}
         .headRight {display: none;}
@@ -1179,9 +1179,9 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
             .infoCommn {width: 50%;}
             .infoCommn:last-child{margin-bottom: 0}
             .prdInfo {padding:0;display: inline-block;margin-top: 0;}
-            .imgsCont.noImage {height: 250px;background: url(../img/noimage.svg) no-repeat 50% 50%;background-size: 45%;background-position: center;}            
-            
-            
+            .imgsCont.noImage {height: 250px;background: url(../img/noimage.svg) no-repeat 50% 50%;background-size: 45%;background-position: center;}
+
+
         /*Jewellery DEtails Page*/    /*Bullion DEtails Page*/
             .jewellery_details .infoCommn {width:50%!important;}
             .prdInfoDiv:last-child{padding-bottom: 20px;}
@@ -1210,7 +1210,7 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
             .cntEmail {width: 100%;}
 
         /*Login*/
-            
+
             .loginDiv {width: 100%;padding: 25px;border-radius: 0;}
             .lgTitle {height:auto;line-height: 25px;}
 
@@ -1245,30 +1245,30 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
             .actionComm:nth-child(4):hover{background-color: #5e0037;}
             .actionComm:active{background-color: #8A0044}
 
-            
+
             .homePage .bottmInfo {border-top:0px solid #fff!important;}
             .aboutus .bottmInfo {border-top:0px solid #fff!important;}
             .bottmInfo {border-top:0px solid #fff!important;}
             .srcTitle {line-height: 20px;font-size: 16px;}
             .prdInfoTitle {font-size:18px;}
             .detailsPage .centerDiv {border-right: 0px solid #d4d4c8;padding: 0;padding-right: 0;}
-            .shapesCommH {width: 100%;height: auto;min-height: 104px;padding: 20px;border-radius: 5px;margin-top: 0;background: #fff;position: relative;background-color: #ebebde;padding-top: 100px;text-align: center;} 
-            .shapesPage2 .shapeComm{position: absolute;left: 0;right: 0;top: 0;margin-top: 0;}    
-            .shapesPage2 .texHolder {padding-left: 0;}            
+            .shapesCommH {width: 100%;height: auto;min-height: 104px;padding: 20px;border-radius: 5px;margin-top: 0;background: #fff;position: relative;background-color: #ebebde;padding-top: 100px;text-align: center;}
+            .shapesPage2 .shapeComm{position: absolute;left: 0;right: 0;top: 0;margin-top: 0;}
+            .shapesPage2 .texHolder {padding-left: 0;}
             .prdInfoWrap {width: 100%;}
             .detailsPage .prdComm {width: 100%!important;margin-bottom: 10px;}
             .prdInfoTitle3 {border-top:1px dashed #d4d4c8;width: 100%;height: auto;line-height: 20px;font-size: 16px;color: #4d4d4d;margin: 10px 0;padding-top: 10px;}
-            .detailsPage .diamondterms {width: 100%;height: auto;border: 0px solid #333;position: relative;padding-right: 0;margin-bottom: 10px;padding-top: 220px;}            
-            
-            
-            .srcTitle {line-height: 20px;font-size: 14px;margin-bottom: 10px;}            
+            .detailsPage .diamondterms {width: 100%;height: auto;border: 0px solid #333;position: relative;padding-right: 0;margin-bottom: 10px;padding-top: 220px;}
+
+
+            .srcTitle {line-height: 20px;font-size: 14px;margin-bottom: 10px;}
             .listCont .prdComm{width:100%;}
             .listCont .prdResults{padding: 0 15px;}
-            .wishTabsCont {width: 100%;height: auto;overflow-x: hidden;}            
+            .wishTabsCont {width: 100%;height: auto;overflow-x: hidden;}
             .wishTabComm {width: 90%;padding: 0 35px;height: 40px;line-height: 40px;color: #fff;display: inline-block;margin: 5px 5%;border-radius: 5px;cursor: pointer;position: relative;}
             .noresDiv {width: 100%;height: 160px;padding: 10px 0;text-align: center;color: #d4d4c8;border: 1px solid #d4d4c8;margin-bottom: 0;}
-            
-            
+
+
             /*team*/
             .rowRight{width: 100%;}
             .teamtxt{padding-left: 0px; padding-top: 180px;}
@@ -1283,10 +1283,10 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
             .head2.login{padding: 0 5px;    font-size: 22px;}
             .svnd {width: 100%;height: auto;color: #4d4d4d;font-size: 14px;font-family: openR;text-align: center;line-height: 40px;background: #fff;padding-top: 20px;}
             .svnd .searchBtn {margin: 0;vertical-align: top;margin: 0px 10px 20px 10px;}
-            
-            
+
+
             .teamComm.mTop25 {margin-top: 0px!important;}
-            
+
             .detailsPage .diamontCat1{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
             .detailsPage .diamontCat2{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
             .detailsPage .diamontCat3{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
@@ -1308,18 +1308,18 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
            .detailsPage .diamontCat19{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
            .detailsPage .diamontCat20{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
            .detailsPage .diamontCat21{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
-          .termsLink {width: 100%;height: auto;margin-top: 8px;}  
+          .termsLink {width: 100%;height: auto;margin-top: 8px;}
             .sortSelect {width: 100%;height: 45px;line-height: 45px;}
-            
-            
-            .head1 {height: auto;line-height: 30px;width: 100%;float: left;text-align: center;}            
-            .head2 {width: 100%;float: left;text-align: center;}  
-            
+
+
+            .head1 {height: auto;line-height: 30px;width: 100%;float: left;text-align: center;}
+            .head2 {width: 100%;float: left;text-align: center;}
+
             /*john*/
             .container {overflow-x: hidden;}
             .carousel {width: 100%;}
             .carousel li {width: 100%;}
-            
+
 
 }
 
@@ -1390,7 +1390,7 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
         .infoTxt {width: 100%;height: 47px;}
         .infoUpper {width: 100%;height: 17px;font-size: 17px;line-height: 17px;color: #fff;}
         .infoLower {width: 100%;height: auto;font-size: 26px;line-height: 30px;}
-        
+
         /*john*/
         .carousel {width: 100%;}
         .carousel li {width: 50%;}
