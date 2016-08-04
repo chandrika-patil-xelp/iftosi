@@ -668,11 +668,11 @@ function getResultsData(data,sortby,showtree)
                                                 }
                                                 if(tempUrl !== '')
                                                 {
-                                                    html += '<a href="'+DOMAIN+tempUrl+'/jid-'+vl.pid+'">';
+                                                    html += '<a href="'+DOMAIN+tempUrl+'/jid-'+vl.pid+'" target="_blank">';
                                                 }
                                                 else
                                                 {
-                                                    html += '<a href="'+DOMAIN+cert+'/jid-'+vl.pid+'">';
+                                                    html += '<a href="'+DOMAIN+cert+'/jid-'+vl.pid+'" target="_blank">';
                                                 }
 								html += '<div id="'+vl.pid+'_imgs" class="prdCommImg fLeft">';
 									html += getImageData(vl.images);
@@ -760,11 +760,11 @@ function getResultsData(data,sortby,showtree)
                                                 }
                                                 if(tempUrl !== '')
                                                 {
-                                                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'">';
+                                                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'" target="_blank">';
                                                 }
                                                 else
                                                 {
-                                                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'">';
+                                                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'" target="_blank">';
                                                 }
 
                                                 html += '<div class="prdShape fLeft">';
@@ -862,11 +862,11 @@ function getResultsData(data,sortby,showtree)
 
                                                 if(tempUrl !== '')
                                                 {
-                                                    html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'">';
+                                                    html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'" target="_blank">';
                                                 }
                                                 else
                                                 {
-                                                    html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'">';
+                                                    html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'" target="_blank">';
                                                 }
                                             		html += '<div class="prdShape fLeft">';
 								html += '<div class="prdShTitle fLeft fmOpenB">TYPE</div>';
@@ -997,11 +997,11 @@ function getResultsData(data,sortby,showtree)
                                                 }
                                                 if(tempUrl !== '')
                                                 {
-                                                    html += '<a href="'+DOMAIN+tempUrl+'/jid-'+vl.pid+'">';
+                                                    html += '<a href="'+DOMAIN+tempUrl+'/jid-'+vl.pid+'" target="_blank">';
                                                 }
                                                 else
                                                 {
-                                                    html += '<a href="'+DOMAIN+cert+'/jid-'+vl.pid+'">';
+                                                    html += '<a href="'+DOMAIN+cert+'/jid-'+vl.pid+'" target="_blank">';
                                                 }
 
 							html += '<div id="'+vl.pid+'_imgs" class="prdCommImg fLeft">';
@@ -1128,11 +1128,11 @@ function getResultsData(data,sortby,showtree)
 
                                                 if(tempUrl !== '')
                                                 {
-                                                    html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'">';
+                                                    html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'" target="_blank">';
                                                 }
                                                 else
                                                 {
-                                                    html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'">';
+                                                    html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'" target="_blank">';
                                                 }
 							html += '<div class="prdShape fLeft">';
 								html += '<div class="prdShTitle fLeft fmOpenB">TYPE</div>';
