@@ -1220,10 +1220,20 @@ function getResultsData(data,sortby,showtree)
 	{
 		if(pageName.indexOf("wishlist") !== -1)
 		{
-			html += '<div class="noresDiv">';
-				html += '<div class="noresults font25 fLeft">There are no products to display.</div>';
-				html += '<div class="noresults font18 fLeft">Please add products to your wishlist.</div>';
-			html += '</div>';
+      var divid = '';
+      $('.wishTabComm').each(function()
+      {
+          if($(this).hasClass('sel'))
+          {
+              divid = ($(this).attr('id') == '10000' ? 'Diamond' : ($(this).attr('id') == '10001' ? 'Jewellery' : 'Bullion'));
+              return divid;
+          }
+      });
+
+        html += '<div class="noresDiv">';
+          html += '<div class="noresults font25 fLeft">There is no '+divid+' to display.</div>';
+          html += '<div class="noresults font18 fLeft">Please add '+divid+' to your wishlist.</div>';
+        html += '</div>';
 		}
 		else
 		{

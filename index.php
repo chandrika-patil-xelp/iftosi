@@ -915,16 +915,6 @@ switch ($action) {
 
                 $prdVars = $prdInfo['attr_details'];
 
-
-                foreach($data3 as $imagekey=>$imgval)
-                {
-                    $urlI = APIDOMAIN . 'index.php?action=imagedisplay&pid='.$imagekey;
-                    $resI = $comm->executeCurl($urlI);
-                    $dataI[] = $resI['results'];
-                    $smPrdList[] .= $imagekey;
-                }
-                $smPrdList = implode(',',$smPrdList);
-
                 $diamondsShape  = implode(',',$diamondsShape);
                 $diamondsClarity  = implode(',',$diamondsClarity);
                 $diamondsColor  = implode(',',$diamondsColor);
@@ -941,6 +931,14 @@ switch ($action) {
                 $data3 = $res3['results'];
                 $sugTotal = $res3['total'];
 
+                foreach($data3 as $imagekey=>$imgval)
+                {
+                    $urlI = APIDOMAIN . 'index.php?action=imagedisplay&pid='.$imagekey;
+                    $resI = $comm->executeCurl($urlI);
+                    $dataI[] = $resI['results'];
+                    $smPrdList[] .= $imagekey;
+                }
+                $smPrdList = implode(',',$smPrdList);
 
                 //echo "<pre>"; print_r($des); die;
                 //include 'template/jewellery_details.html';

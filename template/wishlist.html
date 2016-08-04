@@ -14,7 +14,7 @@
                     <div class="wishTabsCont fLeft">
                         <center>
 							<?php
-                            foreach($cdata as $k => $v) 
+                            foreach($cdata as $k => $v)
 							{
                             ?>
 								<div id="<?php echo $v['category_id'];?>" class="wishTabComm <?php echo $v['category_name'];?>Wish <?php echo ($firstid == $v['category_id'] ? 'sel' : '');?>"><?php echo $v['category_name'];?> <span id="count_<?php echo $v['category_id'];?>">(<?php echo ($carr[$v['category_id']] ? $carr[$v['category_id']] : 0);?>)</span></div>
@@ -37,7 +37,7 @@
                                                                                 if(!empty($val['attributes']['shape']))
                                                                                 {
                                                                                     if($tempUrl !== ''){
-                                                                                        $tempUrl .= '-'.$val['attributes']['shape']; 
+                                                                                        $tempUrl .= '-'.$val['attributes']['shape'];
                                                                                     }
                                                                                     else{
                                                                                         $tempUrl .= $val['attributes']['shape'];
@@ -47,7 +47,7 @@
                                                                                 {
                                                                                     if($tempUrl !== '')
                                                                                     {
-                                                                                        $tempUrl .= '-colour-'.$val['attributes']['color']; 
+                                                                                        $tempUrl .= '-colour-'.$val['attributes']['color'];
                                                                                     }
                                                                                     else
                                                                                     {
@@ -58,7 +58,7 @@
                                                                                 {
                                                                                     if($tempUrl !== '')
                                                                                     {
-                                                                                        $tempUrl .= '-clarity-'.$val['attributes']['clarity']; 
+                                                                                        $tempUrl .= '-clarity-'.$val['attributes']['clarity'];
                                                                                     }
                                                                                     else
                                                                                     {
@@ -68,7 +68,7 @@
                                                                                 if(!empty($val['attributes']['certified'])){
                                                                                     if($tempUrl !== '')
                                                                                     {
-                                                                                        $tempUrl .= '-certified-'.$val['attributes']['certified']; 
+                                                                                        $tempUrl .= '-certified-'.$val['attributes']['certified'];
                                                                                     }
                                                                                     else
                                                                                     {
@@ -80,7 +80,7 @@
                                                                                 {
 ?>
 										<a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $val['pid']; ?>/1">
-<?php                                                    
+<?php
                                                                                 }
                                                                                 else
                                                                                 {
@@ -118,7 +118,7 @@
 													<div class="detComm">
 														<div class="detLabel fmOpenB fLeft">BEST PRICE</div>
                                                                                                                 <?php if(!empty($val['vdetail']['dollar_rate']) && $val['vdetail']['dollar_rate'] !== '0.00'){ $vrate = $val['vdetail']['dollar_rate']; } else { $vrate = $dollarValue; } ?>
-                                                                                                                <?php $price = (($val['pprice'] * $vrate)*$val['attributes']['carat']); 
+                                                                                                                <?php $price = (($val['pprice'] * $vrate)*$val['attributes']['carat']);
                                                                                                                       $price = ceil($price);
                                                                                                                       $price = $comm->IND_money_format($price);
                                                                                                                ?>
@@ -131,8 +131,8 @@
 											</div>
 										</a>
 									</div>
-									
-								<?php 
+
+								<?php
 								$i++;
 								}
 							}
@@ -140,13 +140,13 @@
 							{
 							?>
 								<div class="noresDiv">
-									<div class="noresults font25 fLeft">There are no products to display.</div>
-									<div class="noresults font18 fLeft">Please add products to your wishlist.</div>
+									<div class="noresults font25 fLeft upSet">There is no Diamond product in your wishlist.</div>
+									<div class="noresults font18 fLeft downSet">Please add diamonds to your wishlist.</div>
 								</div>
 							<?php
 							}
 							?>
-                        
+
                         <!-- <div class="tempDiv fLeft">Jewellery</div>
                             <div class="prdComm fLeft jwRes transition100" style="opacity: 1; transform: translateX(0px);">
                                 <div class="wisgDel"></div>
@@ -182,7 +182,7 @@
                                     </div>
                                 </div>
                             </div>
-                        
+
                         <div class="tempDiv fLeft">Bullion</div>
                         <div class="prdComm fLeft transition100" style="opacity: 1; transform: translateX(0px);">
                             <div class="wisgDel"></div>
@@ -213,8 +213,8 @@
                                 </div>
                             </div>
                         </div> -->
-                        
-                        
+
+
                         <?php include 'pagination.html';?>
                     </div>
                 </div>
