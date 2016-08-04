@@ -202,8 +202,8 @@ function Common() {
 		$('#wishListHdr').removeClass('dn');
     };
     this.closeLoginForm = function () {
-        $('#loginDiv').velocity({scale: 0,borderRadius:'100%'}, {delay: 0, ease: 'swing'});
-        $('#overlay1').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
+        $('#loginDiv').velocity({opacity:0}, {delay: 0,duration: 100, ease: 'swing'});
+        $('#overlay1').velocity({opacity: 0}, {delay: 300,duration: 300, ease: 'swing'});
         setTimeout(function () {
             $('#overlay1,#loginDiv').addClass('dn');
             $("#loginDiv,#overlay1").remove();
@@ -211,7 +211,7 @@ function Common() {
     }
     this.showLoginForm = function (vd) {
         var str = '<div id="overlay1" class="overlay transition300" style="opacity: 0;" onclick="common.closeLoginForm();"></div>';
-        str += '<div id="loginDiv" class="loginDiv transition300" style="transform: scale(0);">';
+        str += '<div id="loginDiv" class="loginDiv transition300" style="opacity:0">';
         str += '<div class="lgTitle fLeft fmOpenR">Sign In</div>';
         str += '<div class="inputCont fLeft fmOpenR">';
         str += '<input type="tel" id="pr_mobile" name="pr_mobile" autocomplete="off" class="txtInput cOrange fmOpenR font14 mobileIcon" readonly>';
@@ -247,7 +247,7 @@ function Common() {
             }
         });
 
-        $('#loginDiv').velocity({scale: 0, borderRadius:'100%'}, {delay: 0, duration: 0});
+      $('#loginDiv').velocity({opacity: 0 }, {delay: 0, duration: 0});
         $('#overlay1').velocity({opacity: 0}, {delay: 0, duration: 0});
         var mobile = customStorage.readFromStorage('mobile');
         var name = customStorage.readFromStorage('name');
@@ -258,7 +258,7 @@ function Common() {
             $('#overlay1,#loginDiv').removeClass('dn');
             setTimeout(function () {
                 $('#overlay1').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
-                $('#loginDiv').velocity({scale: 1,borderRadius:'2px'}, {delay: 80, duration: 100, ease: 'swing'});
+                $('#loginDiv').velocity({opacity: 1}, {delay: 200, duration: 100, ease: 'swing'});
             }, 10);
         }
         else

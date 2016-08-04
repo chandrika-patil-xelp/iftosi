@@ -1269,7 +1269,7 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
             .listCont .prdResults{padding: 0 15px;}
             .wishTabsCont {width: 100%;height: auto;overflow-x: hidden;}
             .wishTabComm {width: 90%;padding: 0 35px;height: 40px;line-height: 40px;color: #fff;display: inline-block;margin: 5px 5%;border-radius: 5px;cursor: pointer;position: relative;}
-            .noresDiv {width: 100%;height: 160px;padding: 10px 0;text-align: center;color: #d4d4c8;border: 1px solid #d4d4c8;margin-bottom: 0;}
+            .noresDiv {height: 200px;text-align: center;color: #d4d4c8;border: 1px solid #d4d4c8;margin-bottom: 0;}
 
 
             /*team*/
