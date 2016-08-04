@@ -404,7 +404,7 @@ function getResultsData(data,sortby,showtree)
 			$.each(data.results.products, function(i, vl) {
 				html += '<div class="prdComm fLeft" style="opacity: 0; transform: translateX(1500px);">';
 					html += '<div class="prdCommDiv fLeft">';
-                        html += '<a href="'+DOMAIN+'index.php?case=b2bdetails&productid='+vl.pid+'">';
+                        html += '<a href="'+DOMAIN+'index.php?case=b2bdetails&productid='+vl.pid+'" target="_blank">';
 						html += '<div class="prdShape fLeft">';
 							html += '<div class="prdShTitle fLeft fmOpenB">SHAPE</div>';
 							html += '<div class="prdShType fLeft fmOpenR">'+vl.attributes.shape+'</div>';
@@ -540,10 +540,10 @@ function getResultsData(data,sortby,showtree)
                     }
                 }
                 if(tempUrl !== '') {
-                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'">';
+                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'" target="_blank">';
                 }
                 else {
-                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'">';
+                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'" target="_blank">';
                 }
 
                 html += '<div class="prdShape fLeft">';
