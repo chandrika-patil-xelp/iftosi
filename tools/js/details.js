@@ -5,7 +5,7 @@ var ph=$(window).height();
 var isMobile=false;
 var input_selector = 'input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=number], input[type=search], textarea, input[type=radio]';
 if(pw<768){
-    isMobile=true; 
+    isMobile=true;
 }
 var mobile = customStorage.readFromStorage('mobile');
 var name = customStorage.readFromStorage('name');
@@ -25,31 +25,31 @@ $(document).ready(function(){
         }
       //  $('body').animate({scrollTop: samt}, 300);
     }, 100);
-    
+
     /* $("#gallery1").bind("click", function(){
         var img=$(this).css("background-image");
         $("#prdImage").css({'background':"url("+img+") 50% 50% / cover no-repeat scroll padding-box border-box rgb(255, 255, 255);"});
     });
-    
+
     $('.imgThumbnil').click(function(){
         var img=$(this).css('background-image');
         $('.galleryImg').css({'background':"url("+img+") 50% 50% / cover no-repeat scroll padding-box border-box rgb(255, 255, 255);"});
     });
-    
+
     $('.imgPreview').click(function(){
         var img=$(this).css('background-image');
         $('.galleryImg').css({'background':"url("+img+") 50% 50% / cover no-repeat scroll padding-box border-box rgb(255, 255, 255);"});
     }); */
-   
+
     $('#galleryClose').click(function(){
        $('#imgGallery').addClass('dn');
     });
-    
+
     $('#prdImage').click(function(){
        $('#imgGallery').removeClass('dn');
     });
-    
-        
+
+
     $(input_selector).bind('focus',function() {
         $(this).siblings('label, i').addClass('labelActive');
         $(this).addClass('brOrange');//.removeClass('brRed');
@@ -64,11 +64,11 @@ $(document).ready(function(){
             $(this).removeClass(' ').addClass('brGreen');
         }
     });
-    
+
     $('#dragTarget').click(function() {
         showLeftMenu(false);
     });
-    
+
     $('.iconWishlist').click(function(){
 		var isVendor = customStorage.readFromStorage('is_vendor');
 		var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
@@ -96,9 +96,9 @@ $(document).ready(function(){
 				showVendorDetails(this);
 			}
 		}
-                
+
 		else
-		{   
+		{
 			if(isVendor == 2 || isVendor == '2')
 			{
 				customStorage.toast(0, 'This feature is not available for Admin');
@@ -107,7 +107,7 @@ $(document).ready(function(){
 			{
 				customStorage.toast(0, 'This feature is not available for vendors');
 			}*/
-			
+
 		}
     });
 
@@ -145,7 +145,7 @@ $(document).ready(function(){
 				setTimeout(function(){
 					$('#overlay').velocity({opacity:1},{delay:0,duration:300,ease:'swing'});
 					$('#userForm').velocity({scale:1},{delay:80,duration:100,ease:'swing'});
-				},10); 
+				},10);
 				if($(this).hasClass('iconMessage'))
 				{
 					isMail = true;
@@ -195,8 +195,8 @@ $(document).ready(function(){
 			}*/
 		}
     });
-    
-    
+
+
     $('#userCancel').bind('click',function(){
         $('#userForm').velocity({scale:0},{delay:0,ease:'swing'});
         $('#overlay').velocity({opacity:0},{delay:100,ease:'swing'});
@@ -215,37 +215,37 @@ $(document).ready(function(){
 
             if(ur_mobile=='' || ur_mobile.length!=10 || isNaN(ur_mobile))
             {
-                customStorage.toast(0,'Invalid Format for Mobile'); 
+                customStorage.toast(0,'Invalid Format for Mobile');
                 $('#ur_mobile').focus();
                 return false;
             }
             else if(ur_name.length==0 || isNaN(ur_name)!==true)
             {
-                customStorage.toast(0,'Invalid Format for Name'); 
+                customStorage.toast(0,'Invalid Format for Name');
                 $('#ur_name').focus();
                 return false;
             }
             else if(ur_city=='')
             {
-                customStorage.toast(0,'City is required'); 
+                customStorage.toast(0,'City is required');
                 $('#ur_city').focus();
                 return false;
             }
             else if(ur_cityid=='')
             {
-                customStorage.toast(0,'Please select the city from list'); 
+                customStorage.toast(0,'Please select the city from list');
                 $('#ur_city').focus();
                 return false;
-            } 
+            }
             else if(ur_email=='')
             {
-                customStorage.toast(0,'Email is Required!'); 
+                customStorage.toast(0,'Email is Required!');
                 $('#ur_email').focus();
                 return false;
-            } 
+            }
             else if(!common.validateEmail('ur_email'))
             {
-                customStorage.toast(0,'Email is Not Valid!'); 
+                customStorage.toast(0,'Email is Not Valid!');
                 $('#ur_email').focus();
                 return false;
             }
@@ -282,8 +282,8 @@ $(document).ready(function(){
                                                     }
                                                     else
                                                     {
-                                                        sendDetailsToUser();            
-                                                        addToEnquiry();                                                
+                                                        sendDetailsToUser();
+                                                        addToEnquiry();
                                                     }
                                                 }
                                             });
@@ -344,7 +344,7 @@ $(document).ready(function(){
 	}
 
 	getImagesData(prdList);
-        
+
         if(similarPrdList !== undefined && similarPrdList !== 'undefined' && similarPrdList !== null && similarPrdList !== '')
         {
             getImagesData(similarPrdList,true);
@@ -360,7 +360,7 @@ function getImagesData(prdList,simtrue)
 		var URL 	= DOMAIN + "index.php";
 		$.getJSON(URL, params, function(data)
 		{
-                    
+
 			if(data !== undefined && data !== null && data !== '' && data !== 'undefined' && data !== 'null'&& typeof data !== 'undefined')
 			{
                                 if(simtrue == true)
@@ -405,27 +405,27 @@ function showImages(data)
 			imgArr = new Array();
 			k = 0;
 		});
-        
+
 
 		$('#gallery1 .thumbnil').click(function(){
 			var imgvl=$(this).css('background-image');
 			$('#prdImage').css({'background-image': imgvl});
 		});
-		
+
 		$('.imgThumbnil').click(function(){
 			var imgvl=$(this).css('background-image');
 			$('.galleryImg').css({'background-image': imgvl});
 		});
-		
+
 		$('.imgPreview').click(function(){
 			var imgvl=$(this).css('background-image');
 			$('.galleryImg').css({'background-image': imgvl});
 		});
-	   
+
 		$('#galleryClose').click(function(){
 		   $('#imgGallery').addClass('dn');
 		});
-		
+
 		$('#prdImage').click(function(){
 		   $('#imgGallery').removeClass('dn');
 		});
@@ -443,7 +443,7 @@ function showSimillarImages(data)
 	{
 		$.each(data.results, function(i, val) {
 			$.each(val.images, function(j, vl){
-                            	if(vl.active_flag === '0' || vl.active_flag === 0)
+        if(vl.active_flag === '0' || vl.active_flag === 0)
 				{
 					if(val.vid == vid)
 					{
@@ -455,8 +455,8 @@ function showSimillarImages(data)
 					imgArr[k] = vl.image;
 				}
 				k++;
-                        });
-                        var a = Object.keys(data.results)[0];
+      });
+                        var a = i;
 			var imgHtml = getSimilarDtlsImageData(imgArr);
 			$('#'+a).html(imgHtml);
 			imgArr = new Array();
@@ -708,7 +708,7 @@ function showVendorDetails(obj)
 	var email = customStorage.readFromStorage('email');
 	var uid = customStorage.readFromStorage('userid');
 	var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
-        
+
 	if(isLoggedIn == '' || isLoggedIn == null || isLoggedIn == undefined || isLoggedIn == false || isLoggedIn == 'false')
 	{
 		var mobile = $('#ur_mobile').val().trim();
@@ -720,14 +720,14 @@ function showVendorDetails(obj)
 
 		if(mobCond && nmCond && emCond)
 		{
-                    
+
 			funcObj = obj;
 			//common.checkMobile('ur_mobile');
 			//customStorage.addToStorage('mobile',mobile);
 			//pr_mobile = customStorage.readFromStorage('mobile');
 			otpGo();
 		}
-			
+
 	}
 	else
 	{
@@ -744,7 +744,7 @@ function showVendorDetails(obj)
                             }
                             else
                             {
-                                addToWishList();                                
+                                addToWishList();
                             }
                         }
                     });
@@ -822,7 +822,7 @@ function initMap(lat,lng,contentString) {
 		map: map,
 		title: 'Hello World!'
 	});
-	
+
 	google.maps.event.addListener(marker, 'click', function() {
         infowindow.setContent(contentString);
         infowindow.open(map, marker);
@@ -848,7 +848,7 @@ function addToEnquiry()
             var tmstmp = new Date().getTime();
             var params = 'action=ajx&case=addToEnquiry&uid='+userid+'&vid='+vendor_id+'&pid='+pid+'&timestamp='+tmstmp;
             var URL = DOMAIN + "index.php";
-           
+
             $.getJSON(URL, params, function(data) {
 				if(data !== null && data !== undefined && data !== '' && data !== 'null' && data !== 'undefined' && typeof data !== 'undefined')
 				{
@@ -922,7 +922,7 @@ $('#signInUpTab').click(function () {
 
     }
 });
-    
+
 $('#overlay').bind('click', function () {
     closeAllForms();
 });
@@ -988,10 +988,10 @@ function getUserDetails()
 		$.getJSON(URL, params, function(data) {
 			if(data !== null && data !== undefined && data !== '' && data !== 'null' && data !== 'undefined' && typeof data !== undefined)
 			{
-                           
+
 				if(data.error !== '' && data.error !== null && data.error !== undefined || data.error !== 'undefined')
 				{
-                                     
+
 					if(data.results !== '' && data.results.length > 0)
 					{
 						$('#ur_mobile').val(data.results[0].logmobile);
@@ -1032,7 +1032,7 @@ function sendDetailsToUser()
 	{
 		isValidEmail = common.validate_email(usrEmail);
 	}
-        
+
     if(isVendor !== 2 && isVendor !== '2')
     {
 	if(isValidName && isValidMobile && isValidEmail)
@@ -1090,14 +1090,14 @@ function otpCheck()
    {
             var mobile = $('#ur_mobile').val();
             var isValid = true;
-            
+
             //var loggedin = customStorage.readfromStorage(isLoggedIn);
             var tmstmp = new Date().getTime();
            $.ajax({url: DOMAIN + "apis/index.php?action=validOTP&mobile="+mobile+"&vc="+otpProvided+"&timestamp="+tmstmp, success: function(result)
                {
                         var obj = jQuery.parseJSON(result);
                         var errCode = obj['error']['Msg'];
-                        
+
                         if(errCode == 'Data matched')
                         {
                                 isValid = true;
@@ -1135,7 +1135,7 @@ function otpCheck()
                                                                             }
                                                                         }
                                                                         if(userDt !== null && userDt !== 'null' && userDt !== undefined)
-                                                                        {   
+                                                                        {
                                                                                 customStorage.addToStorage('userid', userDt.user_id);
                                                                                 customStorage.addToStorage('l', userDt.logmobile);
                                                                                 customStorage.addToStorage('mobile', userDt.logmobile);
@@ -1178,7 +1178,7 @@ function otpCheck()
                                                                                     customStorage.addToStorage('is_vendor',isVndr);
                                                                                 }
                                                                             }
-                                                                            
+
                                                                         }
                                                                 }
                                                                 common.checkLogin();
@@ -1225,9 +1225,9 @@ function otpCheck()
                                                                                 }
                                                                         }, 20);
 
-																		
 
-                                                                        
+
+
                                                                         addToEnquiry();
                                                                 }
                                                         //}
@@ -1242,7 +1242,7 @@ function otpCheck()
                             requestOTP();
                         }
                 }
-                
+
             });
     }
     else
@@ -1260,9 +1260,9 @@ function otpGo()
     $.ajax({url: DOMAIN + "apis/index.php?action=sendOTP&mb="+pr_mobile+"&timestamp="+tmstmp, success: function(result)
             {
                 var obj = jQuery.parseJSON(result);
-                
+
                 var errCode = obj.code;
-                
+
                 if(errCode == 1)
                 {
                     customStorage.toast(1,'OTP is sent to your mobile number');
@@ -1278,14 +1278,14 @@ function otpGo()
 
 function closeOtpForm()
 {
-        
+
         if(pageName == 'signup' || pageName == 'forgot')
         {
             window.history.back();
         }
         else
         {
-            
+
 //            $('#overlay1').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
 //            $('#otpDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
             setTimeout(function () {
@@ -1294,7 +1294,7 @@ function closeOtpForm()
                 $('#overlay1,#otpDiv').addClass('dn');
                 //$("#otpDiv,#overlay1").remove();
             }, 10);
-    
+
             isValid = true;
         }
 }
@@ -1307,12 +1307,12 @@ $(document).ready(function(){
     $.ajax({url: URL+params, success: function(result)
     {
         var obj = jQuery.parseJSON(result);
-        
+
         if(result !== undefined && result !== null && result !== '' && result !== 'undefined' && result !== 'null'&& typeof result !== 'undefined')
         {
                 if(obj.error.code == 0 || obj.error.code === '0')
                 {
-                    $('.prdBtns').removeClass('dn');   
+                    $('.prdBtns').removeClass('dn');
                 }
                 else
                 {
