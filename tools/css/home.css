@@ -511,7 +511,7 @@ a{text-decoration: none;}
 .filterCont:nth-child(9){margin-bottom: 20px;}
 .optionTitle{width:100%;font-size:25px;letter-spacing: -0.05em;color:#4d4d4d;margin-bottom: 10px;}
 .fliterTxt{width:100%;height: 35px; line-height: 35px;text-transform: capitalize; color: #4d4d4d; font-size: 13px; border:1px solid rgba(0,0,0,0.2); border-radius: 3px; outline: none;outline-style: none;margin: 5px 0px 10px 0;padding: 0 10px;-webkit-appearance: none; color:#333; }
-.filterOptions{width:100%;height: auto;overflow-y: auto;padding-left:10px; font-size: 14px;color: #4d4d4d}
+.filterOptions{width:100%;height: auto;overflow-y: auto;padding-left:10px; font-size: 11px;color: #4d4d4d}
 .mfHeader {display: none;width: 100%;height: 60px;background: #ebebde;position: fixed;top: 0;z-index: 15;font-size: 14px;box-shadow: 0; border-bottom: 1px solid #d4d4c8;}
 
 .backToRes {width: auto;height: 100%;background: url(../img/common/leftarrow.svg)no-repeat;background-size: auto 80%;background-position: left center;padding: 0 10px 0 45px;line-height: 60px;}
