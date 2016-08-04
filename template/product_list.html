@@ -41,7 +41,7 @@
     }
     var loadProduct = true;
     var currentPage = 1;
-    
+
 
 
 function loadProducts(pgno) {
@@ -57,7 +57,7 @@ function loadProductsCallback(res,pgno) {
         var total = obj['results']['total_products'];
         $('#totalProducts').text(total);
         var total_pages = obj['results']['total_pages'];
-        
+
         var str = '';
         if(total!=0) {
             if(total_pages==currentPage) {
@@ -144,8 +144,8 @@ function loadProductsCallback(res,pgno) {
                 tempUrl += '/jid-';
             }
             tempUrl = tempUrl.toString().replace('--', '-');
-            
-            
+
+
                 var date = obj['update_time'].split(' ');
                 var str = '<li>';
                 str += '<div class="date fLeft"> ';
@@ -163,7 +163,7 @@ function loadProductsCallback(res,pgno) {
                 str += '<div class="shape fLeft">' + obj['appr_img'] + '</div>';
                 str += '<div class="shape fLeft">' + obj['rej_img'] + '</div>';
                 str += '<div class="acct2 fLeft">';
-                str += '<a href="' + DOMAIN + 'index.php?case=thumbnail&pid=' + obj.id + '"><div class="viewDetBtn poR ripplelink fmOpenR fRight">View Images</div></a>';
+                str += '<a href="' + DOMAIN + 'index.php?case=thumbnail&pid=' + obj.id + '" target="_blank"><div class="viewDetBtn poR ripplelink fmOpenR fRight">View Images</div></a>';
                 str += '</div>';
                 str += '</li>';
                 str += '';
@@ -269,7 +269,7 @@ function loadProductsCallback(res,pgno) {
 function paginationPrevNext()
 {
     $('.pPrev').bind('click', function() {
-        
+
             var curpgno = parseInt($('#pgno').val());
                 var pgval = curpgno - 1;
 		if(curpgno > 1)
@@ -289,7 +289,7 @@ function paginationPrevNext()
                                 loadProducts(pgval);
 			}
 			else
-			{   
+			{
 				loadProducts(1);
 			}
 		}
@@ -321,7 +321,7 @@ function paginationPrevNext()
 		}
 	});
 }
-$(document).ready(function() {	
+$(document).ready(function() {
     loadProducts(1);
         $('.pPrev').bind('click', function() {
 
@@ -344,7 +344,7 @@ $(document).ready(function() {
                                 loadProducts(pgval);
 			}
 			else
-			{   
+			{
 				loadProducts(1);
 			}
 		}
@@ -356,7 +356,7 @@ $(document).ready(function() {
 		if(curpgno < parseInt($('#total_pageno').val()))
 		{
 			$('#pgno').val(pgval);
-			
+
 			if(pageName.indexOf("product_list") !== -1)
 			{
 				/*if(typeof $('.wishTabComm') !== 'undefined')

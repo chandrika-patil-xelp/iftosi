@@ -3,18 +3,18 @@
 include APICLUDE.'common/db.class.php';
 class admin extends DB
 {
-    
+
     function __construct($db)
     {
         parent::DB($db);
     }
-	
+
     public function getProdList($params)
     {
         $page = (!empty($params['page']) ? $params['page'] : 1);
         $limit = (!empty($params['limit']) ? $params['limit'] : 15);
 
-        $subQuery = "SELECT 
+        $subQuery = "SELECT
                 product_id AS id,
                 count(product_id) AS total_img,
                 sum(active_flag = 0) as pend_img,
@@ -23,8 +23,8 @@ class admin extends DB
             FROM
                 tbl_product_image_mapping
             group by product_id
-            order by upload_date";
-        
+            order by upload_date DESC";
+
         $cntRes = $this->query($subQuery);
         $total_products = $this->numRows($cntRes);
         if (!empty($page)) {
@@ -58,7 +58,7 @@ class admin extends DB
                     $row['barcode']='N-A';
                     $row['update_time']='N-A';
                 }
-                
+
                 $isqlV = "SELECT a.orgName FROM tbl_vendor_master as a,tbl_vendor_product_mapping as b WHERE a.vendor_id = b.vendor_id AND product_id = ".$row['id'];
                 $iresV = $this->query($isqlV);
                 if( $this->numRows($iresV)>0) {
@@ -70,20 +70,20 @@ class admin extends DB
                     $row['orgName']='N/A';
                 }
                  $rowCd = array();
-                   
+
                 $isqlCid = "SELECT category_id FROM tbl_product_category_mapping WHERE product_id = ".$row['id'];
                 $iresCid = $this->query($isqlCid);
                 while($irowV = $this->fetchData($iresCid)) {
                    $rowCd[]=$irowV['category_id'];
                 }
-                
+
                $rowCid =  implode(',',$rowCd);
-                
+
                 $isqlC = "SELECT cat_name FROM tbl_category_master WHERE catid IN (".$rowCid.")";
                 $iresC = $this->query($isqlC);
                 $category = array();
                 while($irowC = $this->fetchData($iresC)) {
-                    
+
                     $category[]=$irowC['cat_name'];
                 }
                 $row['category'] = implode(',',$category);
@@ -98,7 +98,7 @@ class admin extends DB
         $result=array('results'=>$results,'error'=>$err);
         return $result;
     }
-    
+
     public function getImgByProd($params)
     {
         $query="SELECT * FROM tbl_product_image_mapping WHERE product_id = ".$params['pid']." ORDER BY image_sequence ";
@@ -106,7 +106,7 @@ class admin extends DB
         $total=$this->numRows($res);
         if($total>0) {
             while ($row = $this->fetchData($res)) {
-                
+
                 $result[]=$row;
             }
             $results=array('imgs'=>$result,"total_imgs"=>$total);
@@ -121,7 +121,7 @@ class admin extends DB
     public function updateImageData($params)
     {
         $query="UPDATE tbl_product_image_mapping SET ";
-        
+
         if(!empty($params['seq'])) {
             $query .="image_sequence='".$params['seq']."', ";
         }
