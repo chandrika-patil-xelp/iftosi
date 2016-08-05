@@ -395,6 +395,17 @@ function makeCall(id, cid) {
 
 function getResultsData(data,sortby,showtree)
 {
+  var updateSlider = '';
+  if(sortby == 'dontUpdateSlider')
+  {
+      updateSlider = sortby;
+      sortby = '';
+  }
+  if(showtree == 'dontUpdateSlider')
+  {
+      updateSlider = showtree;
+      showtree = '';
+  }
 	var html = '';
 	var fhtml = '';
 	var tfhtml = '';
@@ -603,6 +614,23 @@ function getResultsData(data,sortby,showtree)
             });
         }
 		else if(pageName == 'jewellery') {
+
+      // if(updateSlider != 'dontUpdateSlider')
+      // {
+      //     $.each(data.results.filters, function(i, vl) {
+      //         $.each(vl, function(j,vz){
+      //             if(j == 'range')
+      //             {
+      //                 var slider = $('#'+vz.name+'Range').data("ionRangeSlider");
+      //                 var vls = vz.value.split(';');
+      //                 slider.update({
+      //                     from: Math.floor(vls[0]),
+      //                     to: Math.ceil(vls[1]),
+      //                 });
+      //             }
+      //         });
+      //     });
+      // }
 
 			$.each(data.results.products, function(i, vl) {
 
@@ -1814,12 +1842,19 @@ function FR(sortby,showtree) {
     if(dummyPage == 'b2bproducts')
         dummyCall = '&b2bsort=1';
 
+  var updateSlider = '';
+  if(sortby == 'dontUpdateSlider')
+  {
+      updateSlider = 'dontUpdateSlider';
+      sortby = '';
+  }
 	if(sortby)
 	{
+
 		var params = 'action=ajx&case=filter&catid='+catid+'&sortby='+sortby+'&slist='+slist+'&clist='+clist+'&tlist='+tlist+'&ilist='+ilist+'&jlist='+jlist+'&ctid='+ctid+'&pgno='+pgno+"&uid="+uid+dummyCall;
 		var URL = DOMAIN + "index.php";
 		suggestObj = $.getJSON(URL, params, function(data) {
-			getResultsData(data,sortby);
+			getResultsData(data,sortby,'dontUpdateSlider');
 		});
 	}
 	else
@@ -1828,7 +1863,7 @@ function FR(sortby,showtree) {
 		var params = 'action=ajx&case=filter&catid='+catid+'&slist='+slist+'&clist='+clist+'&tlist='+tlist+'&ilist='+ilist+'&jlist='+jlist+'&ctid='+ctid+'&pgno='+pgno+"&uid="+uid+dummyCall;
 		var URL = DOMAIN + "index.php";
 		suggestObj = $.getJSON(URL, params, function(data) {
-			getResultsData(data);
+			getResultsData(data,updateSlider);
 		});
 	}
 }

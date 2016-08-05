@@ -255,7 +255,7 @@
                             {
                                 $detls['product_wt'] = 0.00;
                             }
-                            
+
                             //  For product values filling
                             $sql="  INSERT
                                     INTO
@@ -360,8 +360,8 @@
                           {
                               $detls['clarity'] = str_replace(' ','-',$detls['clarity']);
                           }
-                          
-                          
+
+
                           if(empty($detls['carat_weight']))
                           {
                               $detls['carat_weight'] = 0.00;
@@ -442,8 +442,8 @@
                           {
                               $detls['cr_height'] = 0;
                           }
-                          
-                          
+
+
                               $sql = "  INSERT
                                         INTO
                                                 tbl_product_search
@@ -1183,12 +1183,15 @@
       						          *,
                             product_id as pid,
       						          price,
-                            b2bprice
+                            b2bprice,
+                            (SELECT complete_flag FROM tbl_product_search WHERE product_id = pid) AS complete_status
       					    FROM
       						          tbl_product_category_mapping
       					    ".$where."
       					    AND
-                            display_flag=1";
+                            display_flag=1
+                    HAVING
+                            complete_status=1";
       			$res = $this->query($sql);
       			$cres=$this->numRows($res);
       			if($cres>0)
@@ -1365,9 +1368,7 @@
       				{
 
                   $sql = "SELECT
-                                  *,
-                                  b2b_price*IF(carat,carat,1)*IF(dollarval,dollarval,".dollarValue.") as b2b_dollar_price,
-                                  price*IF(carat,carat,1)*IF(dollarval,dollarval,".dollarValue.") as dollar_price
+                                  count(*) as cnt
                           FROM (
                                   SELECT
                                           product_id AS pid,
@@ -1399,44 +1400,45 @@
         					$res = $this->query($sql);
         					if($res)
         					{
-        						  $total = $this->numRows($res);
+                      $resrow = $this->fetchData($resrow);
+        						  $total = $resrow['cnt'];
         					}
 
-        					$patsql="
-        							       SELECT
-                      								distinct product_id,
-                                      product_id as pid,
-                                      b2b_price*carat as b2btotalprice,
-                                      price*carat as totalprice,
-                                      price as jprice,
-                                      carat*b2b_price*1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as b2b_dollar_price,
-                                      carat*price*1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as dollar_price,
-                                      1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as dollar_rate,
-                                      1*(SELECT gold_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as goldrate,
-                                      if(metal='Gold',(((((SELECT gold_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1))/995)/10)*gold_purity)*gold_weight),(((((SELECT silver_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1))/999)/1000)*gold_purity)*gold_weight)) as bprice,
-                      								carat,
-                      								color,
-                      								certified,
-                      								shape,
-                      								clarity,
-                      								price,
-                                      b2b_price as b2bprice,
-                      								polish,
-                      								symmetry,
-                      								cno,
-                      								gold_purity,
-                      								gold_weight as gold_weight,
-                      								type,
-                      								metal,
-                      								bullion_design
-        							       FROM
-        								              tbl_product_search
-        							       WHERE
-        								              product_id IN(".$pid.")
-        							      AND
-        								              active_flag=1
-        							      ".$extn."
-                            ".$extnhv."";
+        					// $patsql="
+        					// 		       SELECT
+                  //     								distinct product_id,
+                  //                     product_id as pid,
+                  //                     b2b_price*carat as b2btotalprice,
+                  //                     price*carat as totalprice,
+                  //                     price as jprice,
+                  //                     carat*b2b_price*1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as b2b_dollar_price,
+                  //                     carat*price*1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as dollar_price,
+                  //                     1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as dollar_rate,
+                  //                     1*(SELECT gold_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as goldrate,
+                  //                     if(metal='Gold',(((((SELECT gold_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1))/995)/10)*gold_purity)*gold_weight),(((((SELECT silver_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1))/999)/1000)*gold_purity)*gold_weight)) as bprice,
+                  //     								carat,
+                  //     								color,
+                  //     								certified,
+                  //     								shape,
+                  //     								clarity,
+                  //     								price,
+                  //                     b2b_price as b2bprice,
+                  //     								polish,
+                  //     								symmetry,
+                  //     								cno,
+                  //     								gold_purity,
+                  //     								gold_weight as gold_weight,
+                  //     								type,
+                  //     								metal,
+                  //     								bullion_design
+        					// 		       FROM
+        					// 			              tbl_product_search
+        					// 		       WHERE
+        					// 			              product_id IN(".$pid.")
+        					// 		      AND
+        					// 			              active_flag=1
+        					// 		      ".$extn."
+                  //           ".$extnhv."";
 
                       $patsql = "SELECT
                                         *,
@@ -1476,7 +1478,8 @@
                                   								gold_weight as gold_weight,
                                   								type,
                                   								metal,
-                                  								bullion_design
+                                  								bullion_design,
+                                                  date_time
                                           FROM
                                                   tbl_product_search
                                           WHERE
@@ -1525,7 +1528,7 @@
                       break;
 
                       default:
-                              $patsql.=" ORDER BY field(product_id,".$pid."), product_id ASC ";
+                              $patsql.=" ORDER BY field(product_id,".$pid."), date_time DESC ";
                       break;
                   }
 
@@ -1683,7 +1686,7 @@
                 										$data[$i]['range']['name'] 		= $row['attr_name'];
                 										$data[$i]['range']['dname'] 	= $row['attr_display_name'];
                 										$data[$i]['range']['value'] 	= $row1['minval'].';'.$row1['maxval'];
-                										$data[$i]['range']['ovalue'] 	= $attrmap[$row['attr_id']]['attr_range'];
+                										$data[$i]['range']['ovalue'] 	= $row1['minval'].';'.$row1['maxval'];
                 										$i++;
               									}
               								break;

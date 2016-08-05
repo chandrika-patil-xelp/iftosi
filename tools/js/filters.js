@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$(".rngInp").each(function () {
-		
+
 		var id = $(this).attr('id');
 		var min_price = $('#'+id+'Min').val() * 1;
 		var max_price = $('#'+id+'Max').val() * 1;
@@ -9,7 +9,7 @@ $(document).ready(function() {
 			var step = '';
 		else
 			var step = 0.01;
-		
+
 		$(this).ionRangeSlider({
 			type: "double",
 			grid: true,
@@ -41,18 +41,18 @@ $(document).ready(function() {
 			step: step,
 			onFinish: function(data) {
                                 $('#pgno').val(1);
-				FR();
+				FR('dontUpdateSlider');
 			}
 		});
 	});
-	
+
 	$('.filterCont :input[type=checkbox]').each(function() {
 		$(this).bind('click', function(event) {
                         $('#pgno').val(1);
 			FR();
 			if (event && $.isFunction(event.stopImmediatePropagation))
 				event.stopImmediatePropagation();
-			else 
+			else
 				window.event.cancelBubble=true;
 		});
 	});
@@ -191,25 +191,25 @@ function resetFiltersMenu(data)
 	{
 		$.each(data.results.filters, function(i, v) {
 			$.each(v, function(k, vl) {
-				
+
 				if(k == 'range')
 				{
 					var id = vl.name+'Range';
 					var min_price = $('#'+id+'Min').val()*1;
 					var max_price = $('#'+id+'Max').val()*1;
-					
+
 					if((max_price - min_price) > 100)
 						var step = '';
 					else
 						var step = 0.01;
-						
+
 					var slider = $('#'+id).data("ionRangeSlider");
 					slider.update({
 						from: Math.floor(min_price),
 						to: Math.ceil(max_price),
 					});
 				}
-				
+
 				if(k == 'checkbox')
 				{
 					$('.filterCont :input[type=checkbox]').each(function() {

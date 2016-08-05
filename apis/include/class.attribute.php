@@ -229,6 +229,39 @@ class attribute extends DB
 
     public function fetch_category_mapping($params)
     {
+        $sql = "SELECT product_id as pid, (SELECT complete_flag FROM tbl_product_search WHERE product_id = pid) AS complete_status from tbl_product_category_mapping where category_id = ".$params['catid']." AND
+                display_flag=1
+        HAVING
+                complete_status=1";
+        $res = $this->query($sql);
+        if($res)
+        {
+            while($row = $this->fetchData($res))
+            {
+                $allId[] = $row['pid'];
+            }
+            if(count($allId))
+                $allpids = implode(',',$allId);
+        }
+
+        if($allpids)
+        {
+            $sql = "SELECT
+                            MIN(price) AS minval,
+                            MAX(price) AS maxval
+                    FROM
+                            tbl_product_search
+                    WHERE
+                            product_id IN(".$allpids.")";
+            $res = $this->query($sql);
+            if($res)
+            {
+                $row = $this->fetchData($res);
+                $priceminval = floor($row['minval']);
+                $pricemaxval = ceil($row['maxval']);
+            }
+        }
+
         $mapsql="SELECT
               					attribute_id,
               					attr_unit,
@@ -275,16 +308,16 @@ class attribute extends DB
             {
                 while($row1=$this->fetchData($res))
                 {
-                    //echo "<pre>";print_R($attributeMap);die;
+                    // echo "<pre>";print_R($attributeMap);die;
                     //echo "<pre>";print_r($row1);
-                    $attrs['atrribute_id']			= $row1['attr_id'];
-                    $attrs['attribute_name']		= $row1['attr_name'];
-                    $attrs['attribute_disp_name']	= $row1['attr_display_name'];
-                    $attrs['attribute_unit']		= $attributeMap[$row1['attr_id']]['attr_unit'];
-					          $attrs['attribtue_unit_pos']	= $attributeMap[$row1['attr_id']]['attr_unit_pos'];
-                    $attrs['attribute_values']		= $attributeMap[$row1['attr_id']]['attr_values'];
-                    $attrs['attribute_range']		   = $attributeMap[$row1['attr_id']]['attr_range'];
-                    $attrs['attribute_display_type']		= $attributeMap[$row1['attr_id']]['display_type'];
+                    $attrs['atrribute_id']			    = $row1['attr_id'];
+                    $attrs['attribute_name']		    = $row1['attr_name'];
+                    $attrs['attribute_disp_name']	  = $row1['attr_display_name'];
+                    $attrs['attribute_unit']		    = $attributeMap[$row1['attr_id']]['attr_unit'];
+					          $attrs['attribtue_unit_pos']	  = $attributeMap[$row1['attr_id']]['attr_unit_pos'];
+                    $attrs['attribute_values']		  = $attributeMap[$row1['attr_id']]['attr_values'];
+                    $attrs['attribute_range']		    = $attributeMap[$row1['attr_id']]['attr_range'];
+                    $attrs['attribute_display_type']= $attributeMap[$row1['attr_id']]['display_type'];
 
                     if($row1['attr_type_flag'] == 6)
                     {
@@ -298,6 +331,7 @@ class attribute extends DB
                             $rowres = $this->fetchData($resid);
                             $prids = $rowres['prids'];
                         }
+                        $prids = trim($prids,',');
 
                         if($row1['attr_name'] == 'price')
                         {
@@ -360,8 +394,15 @@ class attribute extends DB
                         if($resrng)
                         {
                             $rowrng = $this->fetchData($resrng);
-                            $maxvl = $rowrng['maxval'];
-                            $minvl = $rowrng['minval'];
+                            if($priceminval && $pricemaxval)
+                            {
+                                $maxvl = $pricemaxval;
+                                $minvl = $priceminval;
+                            }
+                            else {
+                                $maxvl = $rowrng['maxval'];
+                                $minvl = $rowrng['minval'];
+                            }
                             $attrs['attribute_range'] = $minvl.'-'.$maxvl;
                         }
                     }
