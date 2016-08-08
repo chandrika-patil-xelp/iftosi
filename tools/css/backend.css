@@ -812,8 +812,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .wConBtn::after{content:'';position:absolute;right:10px;margin:auto;width:40px;height:40px;background:url(../img/common/arrow_right_white.svg)no-repeat;background-size: auto 100%;background-position:center;}
 .wishlistPage .prdActions {height: 40px;}
 .wishlistPage .prdComm{position: relative;}
-.wisgDel{width: 30px;height: 30px;position;}
-
+.wisgDel{width: 30px;height: 30px;}
 .transformer684{transform: translateX(-684px);}
 .transformer570{transform: translateX(-570px);}
 
@@ -908,3 +907,16 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
   .mtxtInput {width: 75px;padding: 0 10px;}
   .mInputDiv span {padding: 0 10px;}
 }
+
+
+
+/*john*/
+.bRnone{border-right:none !important;}
+.cstmrCnt{width:100%;height:auto;min-height:500px;padding-top: 100px;;}
+.cntctCard{width:100%;height:auto;background-color:#fff;}
+.cPrsnHdr{width:100%;height:45px;line-height:45px;color:#666;background-color:#ebebde;}
+.div20{width:20%;height:100%;line-height:45px;color:#666;font-size:13px;padding:0px 10px;border-right:1px solid #d4d4c8;}
+.div30{width:30%;height:100%;line-height:45px;color:#666;font-size:13px;padding:0px 10px;border-right:1px solid #d4d4c8;}
+.div10{width:10%;height:100%;line-height:45px;color:#666;font-size:13px;padding:0px 10px;border-right:1px solid #d4d4c8;}
+.cDtls{width:100%;height:auto; padding-top:5px;}
+.cList{width:100%;height:50px;border-bottom:1px solid #e6e6e6;}
