@@ -393,7 +393,10 @@ switch ($action) {
                 $page = 'vendor_privacy';
                 include 'template/vprivacy.html';
                 break;
-
+             case 'customerDtls':
+                $page = 'customerDtls';
+                include 'template/customerDtls.html';
+                break;
             case 'inactive_vendor':
                 $page = 'inactive_vendor';
                 $uid = $_GET['uid'];
