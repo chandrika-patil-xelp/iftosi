@@ -55,7 +55,7 @@ class site extends DB
                   $resqry = $this->query($qry);
                   $rowCname = $this->fetchData($resqry);
                   $catName = $rowCname['cat_name'];
-                  $url = DOMAIN;
+                  $url = 'http://www.iftosi.com/';
                   if($catName == "Jewellery")
                   {
                     if(!empty($row['metal']))
@@ -69,6 +69,10 @@ class site extends DB
                     if(!empty($row['gold_purity']))
                     {
                       $url .= $row['gold_purity'].'-Carat-';
+                    }
+                    if(!empty($row['gold_weight']))
+                    {
+                      $url .= floor($row['gold_weight']).'-Grams-';
                     }
                     if(!empty($row['certified']))
                     {
@@ -127,14 +131,17 @@ class site extends DB
                   $data .= '</url>';
           } // while ends here
           $data .= '</urlset>';
-          $filename = "sitemap/jewellery.xml";
-          $myfile = fopen(WEBROOT.$filename, "w") or die("Unable to open file!");
+          $filename = WEBROOT."jewellery.xml";
+
+          //echo $filename;
+
+          $myfile = fopen($filename, "w") or die("Unable to open file");
           fwrite($myfile, $data);
           fclose($myfile);
-          $datasitemap .= '<sitemap>';
-          $datasitemap .= '<loc>http://www.iftosi.com/'.$filename.'</loc>';
-          $datasitemap .= '<lastmod>'.date('c').'</lastmod>';
-          $datasitemap .= '</sitemap>';
+          // $datasitemap .= '<sitemap>';
+          // $datasitemap .= '<loc>http://www.iftosi.com/'.$fname.'</loc>';
+          // $datasitemap .= '<lastmod>'.date('c').'</lastmod>';
+          // $datasitemap .= '</sitemap>';
         }
         echo "Success";
     }
