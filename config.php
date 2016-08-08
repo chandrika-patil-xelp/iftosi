@@ -65,13 +65,13 @@ else
 	define('TEMPLATE',WEBROOT.'template/');
 	define('INCLUDES',WEBROOT.'include/');
 	define('APICLUDE',WEBROOT.'apis/include/');
-	define('IMGDOMAIN','http://'.$_SERVER['HTTP_HOST'].'/iftosi/image-upload/');
+	define('IMGDOMAIN','http://www.iftosi.com/image-upload/');
 	define('IMGUPLOAD','http://'.$_SERVER['HTTP_HOST'].'/iftosi/upload-image/');
 	define('IMGPATH','image-upload/');
 }
 define('SMSAPI','http://alerts.sinfini.com/api/web2sms.php?workingkey=Ae24f0c241588043b00e0449d6e2a5664&to=+91_MOBILE&sender=IFTOSI&message=_MESSAGE');
 
-define('VERSION',8.10);
+define('VERSION',8.30);
 
 $dollarValue = 66.03;
 
