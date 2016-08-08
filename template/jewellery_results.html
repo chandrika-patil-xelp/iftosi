@@ -206,11 +206,11 @@
 															for($imgi = 0 ; $imgi < $imgCount ; $imgi++)
 															{
 ?>
-																<div class="prox for-<?php echo $imgCount;?>" style="background: #ccc url(<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>)no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
+																<div class="prox for-<?php echo $imgCount;?>" style="background: #ccc url('<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>')no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
 <?php
 															}
 ?>
-															<div class="proxImg fLeft" style="background: #fff url(<?php echo IMGDOMAIN . $data[$key]['images'][0]; ?>)no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
+															<div class="proxImg fLeft" style="background: #fff url('<?php echo IMGDOMAIN . $data[$key]['images'][0]; ?>')no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
 <?php
 														break;
                                                     case 5:
@@ -224,19 +224,19 @@
 ?>
 																</div>
 																<div class="prox for-<?php echo $imgCount;?>Right">
-																	<div class="prox for-<?php echo $imgCount;?>" style="background: #ccc url(<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>)no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
+																	<div class="prox for-<?php echo $imgCount;?>" style="background: #ccc url('<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>')no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
 																</div>
 <?php
 															}
 															else
 															{
 ?>
-																<div class="prox for-<?php echo $imgCount;?>" style="background: #ccc url(<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>)no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
+																<div class="prox for-<?php echo $imgCount;?>" style="background: #ccc url('<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>')no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
 <?php
 															}
 														}
 ?>
-														<div class="proxImg fLeft" style="background: #fff url(<?php echo IMGDOMAIN . $data[$key]['images'][0]; ?>)no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
+														<div class="proxImg fLeft" style="background: #fff url('<?php echo IMGDOMAIN . $data[$key]['images'][0]; ?>')no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
 
                                                     <?php    break;
                                                     case 7:
@@ -247,7 +247,7 @@
 															{
 ?>
 																<div class="for-<?php echo $imgCount;?>Upper">
-																	<div class="prox for-<?php echo $imgCount;?>"  style="background: #ccc url(<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>)no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
+																	<div class="prox for-<?php echo $imgCount;?>"  style="background: #ccc url('<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>')no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
 																</div>
 <?php
 															}
@@ -260,7 +260,7 @@
 <?php
 																}
 ?>
-																	<div class="prox for-<?php echo $imgCount;?>" style="background: #fff url(<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>)no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
+																	<div class="prox for-<?php echo $imgCount;?>" style="background: #fff url('<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>')no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
 <?php
 																if($curi == $imgCount - 2)
 																{
@@ -272,7 +272,7 @@
 															}
 														}
 ?>
-                                                        <div class="proxImg fLeft" style="background: #fff url(<?php echo IMGDOMAIN . $data[$key]['images'][0]; ?>)no-repeat;background-size:contain;background-position:center;background-color:#FFF;"></div>
+                                                        <div class="proxImg fLeft" style="background: #fff url('<?php echo IMGDOMAIN . $data[$key]['images'][0]; ?>')no-repeat;background-size:contain;background-position:center;background-color:#FFF;"></div>
                                                         <?php break;
 
                                                     case 11:
@@ -287,7 +287,7 @@
 																if($imgi < 3)
 																{
 ?>
-																	<div class="prox for-<?php echo $imgCount;?>" style="background: #fff url(<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>)no-repeat;background-size:contain;background-position:center;background-color:#FFF;"></div>
+																	<div class="prox for-<?php echo $imgCount;?>" style="background: #fff url('<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>')no-repeat;background-size:contain;background-position:center;background-color:#FFF;"></div>
 <?php
 																	if($imgi == 2)
 																	{
@@ -305,7 +305,7 @@
 <?php
 																}
 ?>
-																	<div class="prox for-<?php echo $imgCount;?>" style="background: #fff url(<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>)no-repeat;background-size:contain;background-position:center;background-color:#FFF;"></div>
+																	<div class="prox for-<?php echo $imgCount;?>" style="background: #fff url('<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>')no-repeat;background-size:contain;background-position:center;background-color:#FFF;"></div>
 <?php
 																if($imgi == $imgCount - 1)
 																{
@@ -316,7 +316,7 @@
 															}
 														}
 ?>
-														<div class="proxImg fLeft" style="background: #fff url(<?php echo IMGDOMAIN . $data[$key]['images'][0]; ?>)no-repeat;background-size:contain;background-position:center;background-color:#FFF;"></div>
+														<div class="proxImg fLeft" style="background: #fff url('<?php echo IMGDOMAIN . $data[$key]['images'][0]; ?>')no-repeat;background-size:contain;background-position:center;background-color:#FFF;"></div>
                                                         <?php break;
                                                 }
 */
