@@ -521,7 +521,15 @@ switch ($action) {
                 $lastpg = ceil($total / 15);
                 $adjacents = 2;
                 //echo "<pre>";print_r($total);die;
-                include 'template/resultsb2b.html';
+                if($totalCnt > 0)
+                {
+                        include 'template/resultsb2b.html';
+                }
+                else
+                {
+                        include 'template/comingsoon.html';
+                }
+                //include 'template/resultsb2b.html';
                 break;
 
             case 'diamonds':
@@ -545,14 +553,14 @@ switch ($action) {
                 $adjacents = 2;
                 //echo "<pre>";print_r($total);die;
                 //include 'template/results.html';
-                /*if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
-                {*/
+                if($totalCnt > 0)
+                {
                         include 'template/results.html';
-                /*}
+                }
                 else
                 {
                         include 'template/comingsoon.html';
-                }*/
+                }
                 break;
 
             case 'jewellery':
@@ -611,14 +619,14 @@ switch ($action) {
                 $lastpg = ceil($total / 15);
                 $adjacents = 2;
                 //include 'template/bullion_results.html';
-                /*if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
-                {*/
+                if($totalCnt > 0)
+                {
                         include 'template/bullion_results.html';
-                /*}
+                }
                 else
                 {
                         include 'template/comingsoon.html';
-                }*/
+                }
                 break;
 
 
