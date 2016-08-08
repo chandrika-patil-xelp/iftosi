@@ -11,7 +11,7 @@
                 <input type="hidden" id="total_pageno" value="<?php echo $lastpg; ?>" />
             </div>
 <?php
-        if($page !== 'product_list' && $page !== 'thumbnail' && $page !== 'vendorList')
+        if($page !== 'product_list' && $page !== 'thumbnail' && $page !== 'vendorList' && $page !== 'customerDtls')
         {
 ?>
             <div class="fRight cFF fmOpenR font14 rateDiv ">
@@ -30,15 +30,16 @@
 
         </div>
     </div>
-    <?php  if($page=='product_list' || $page=='thumbnail' || $page == 'vendorList') { ?>
+    <?php  if($page=='product_list' || $page=='thumbnail' || $page == 'vendorList' || $page == 'customerDtls') { ?>
     <div class="vndTabs fLeft fmOpenR">
         <div class="wrapperMax">
             <div class="vndTabs fLeft fmOpenR">
                 <div class="wrapperMax">
                     <div id="vendorlist" class="fLeft vTabs transition300">Vendor List</div>
                     <div id="productstab" class="fLeft vTabs transition300">Product Images</div>
+                    <div id="customerList" class="fLeft vTabs transition300">Customer List</div>
 <?php
-                        if($page == 'vendorList')
+                        if($page == 'vendorList' || $page == 'customerDtls')
                         {
 ?>
                          <input type="text" onkeyup="searchVendor(this.value);" autocomplete="false" class="serchBtn prdSeachTxt fRight fmOpenR" placeholder="Search Vendor by Name/Email/Mobile"  id="searchVendor">
