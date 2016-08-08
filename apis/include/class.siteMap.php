@@ -127,7 +127,7 @@ class site extends DB
                   $data .= '</url>';
           } // while ends here
           $data .= '</urlset>';
-          $filename = "sitemap/sitemap.xml";
+          $filename = "sitemap/jewellery.xml";
           $myfile = fopen(WEBROOT.$filename, "w") or die("Unable to open file!");
           fwrite($myfile, $data);
           fclose($myfile);
@@ -136,6 +136,6 @@ class site extends DB
           $datasitemap .= '<lastmod>'.date('c').'</lastmod>';
           $datasitemap .= '</sitemap>';
         }
-        return $datasitemap;
+        echo "Success";
     }
 }
