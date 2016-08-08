@@ -7,7 +7,13 @@ $action = $_GET['action'];
 
 switch($action)
     {
-
+//---------------------------- SiteMap Generation------------------------
+    case 'sitemapper':
+           include APICLUDE.'class.siteMap.php';
+           $obj = new site($db['iftosi']);
+           $result = $obj->sitemapper($params);
+           $res = $result;
+         break;
 //----------------------------Check Owner--------------------------------
 
 //  localhost/iftosi/apis/index.php?action=getOwnerCheck&uid=3&pid=2
