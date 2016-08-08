@@ -13,6 +13,9 @@ $(document).ready(function () {
 			$('#vendorlist').bind('click',function(){
 			window.location.href=DOMAIN+'index.php?case=vendorList&uid='+uid;
 			});
+                        $('#customerList').bind('click',function(){
+			window.location.href=DOMAIN+'index.php?case=customerDtls&uid='+uid;
+			});
 		}
 	}
 });
