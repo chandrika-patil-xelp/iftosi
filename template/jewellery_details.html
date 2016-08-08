@@ -21,14 +21,14 @@
                         /*
                         <div class="leftArrow transition300" onclick="movePrImg(true)"></div>
                         <div class="rightArrow  transition300" onclick="movePrImg(false)"></div>
-                        <div id='prdImage' class="forImg fLeft imgPreview" style="background: url(<?php echo IMGDOMAIN.$data1[0];?>) 50% 50% / cover no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+                        <div id='prdImage' class="forImg fLeft imgPreview" style="background: url('<?php echo IMGDOMAIN.$data1[0];?>') 50% 50% / cover no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
                     <div id='gallery1' class="gallery fLeft transition300">
                         <div class="carousel transition300">
                             <?php
                             for($i=0;$i<count($data1);$i++)
                             {
                             ?>
-                            <div class="thumbnil transition300" style="background:#fff url(<?php echo IMGDOMAIN.$data1[$i];?>)no-repeat;background-size: contain;background-position: center;">
+                            <div class="thumbnil transition300" style="background:#fff url('<?php echo IMGDOMAIN.$data1[$i];?>') no-repeat;background-size: contain;background-position: center;">
                             </div>
                             <?php
                             }
@@ -608,13 +608,13 @@
 </div>
 <div id='imgGallery' class="imgGallery dn">
     <div id='galleryClose' class="galleryClose ripplelink"></div>
-    <div class="galleryImg fLeft" style="background: url(<?php echo IMGDOMAIN.$data1[0];?>) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+    <div class="galleryImg fLeft" style="background: url('<?php echo IMGDOMAIN.$data1[0];?>') 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
     <div class="imgListCont fLeft">
         <?php
         for($i=0;$i<count($data1);$i++)
         {
         ?>
-        <div class="imgThumbnil fLeft" style="background: url(<?php echo IMGDOMAIN.$data1[$i];?>) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+        <div class="imgThumbnil fLeft" style="background: url('<?php echo IMGDOMAIN.$data1[$i];?>') 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
         <?php
         }
         ?>

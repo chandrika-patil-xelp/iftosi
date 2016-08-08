@@ -1965,9 +1965,9 @@ function getImageData(imgData, isImgs)
 					tmpHtml = '';
 					for(imgi = 0; imgi < imgLen; imgi++)
 					{
-						tmpHtml += "<div class='prox for-"+imgLen+"' onmouseover='showMouseOver(this);' style='background: #ccc url(" + IMGDOMAIN + imgData[imgi] + ") no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div>";
+						tmpHtml += "<div class='prox for-"+imgLen+"' onmouseover='showMouseOver(this);' style='background: #ccc url(\"" + IMGDOMAIN + imgData[imgi] + "\") no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div>";
 					}
-					tmpHtml += "<div class='proxImg fLeft' style='background: #fff url(" + IMGDOMAIN + imgData[0] + ")no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div>";
+					tmpHtml += "<div class='proxImg fLeft' style='background: #fff url(\"" + IMGDOMAIN + imgData[0] + "\")no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div>";
 				break;
 				case 5:
 					tmpHtml = "<div class='prox for-"+imgLen+"Left'>";
@@ -1976,14 +1976,14 @@ function getImageData(imgData, isImgs)
 						if(imgi == imgLen - 1)
 						{
 							tmpHtml += "</div>";
-							tmpHtml += "<div class='prox for-"+imgLen+"Right'><div onmouseover='showMouseOver(this);' class='prox for-"+imgLen+"' style='background: #ccc url(" + IMGDOMAIN + imgData[imgi] + ")no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div></div>";
+							tmpHtml += "<div class='prox for-"+imgLen+"Right'><div onmouseover='showMouseOver(this);' class='prox for-"+imgLen+"' style='background: #ccc url(\"" + IMGDOMAIN + imgData[imgi] + "\")no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div></div>";
 						}
 						else
 						{
-							tmpHtml += "<div class='prox for-"+imgLen+"' onmouseover='showMouseOver(this);' style='background: #ccc url(" + IMGDOMAIN + imgData[imgi] + ")no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div>";
+							tmpHtml += "<div class='prox for-"+imgLen+"' onmouseover='showMouseOver(this);' style='background: #ccc url(\"" + IMGDOMAIN + imgData[imgi] + "\")no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div>";
 						}
 					}
-					tmpHtml += "<div class='proxImg fLeft' style='background: #fff url(" + IMGDOMAIN + imgData[0] + ")no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div>";
+					tmpHtml += "<div class='proxImg fLeft' style='background: #fff url(\"" + IMGDOMAIN + imgData[0] + "\")no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div>";
 				break;
 				case 7:
 					tmpHtml = "";
@@ -1992,7 +1992,7 @@ function getImageData(imgData, isImgs)
 					{
 						if(imgi == 0)
 						{
-							tmpHtml += "<div class='for-" + imgLen + "Upper'><div class='prox for-" + imgLen + "' onmouseover='showMouseOver(this);' style='background: #ccc url(" + IMGDOMAIN + imgData[imgi] + ")no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div></div>";
+							tmpHtml += "<div class='for-" + imgLen + "Upper'><div class='prox for-" + imgLen + "' onmouseover='showMouseOver(this);' style='background: #ccc url(\"" + IMGDOMAIN + imgData[imgi] + "\")no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div></div>";
 						}
 						else
 						{
@@ -2000,7 +2000,7 @@ function getImageData(imgData, isImgs)
 							{
 								tmpHtml += "<div class='for-" + imgLen + "Lower'>";
 							}
-							tmpHtml += "<div class='prox for-" + imgLen + "' onmouseover='showMouseOver(this);' style='background: #fff url(" + IMGDOMAIN + imgData[imgi] + ")no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div>";
+							tmpHtml += "<div class='prox for-" + imgLen + "' onmouseover='showMouseOver(this);' style='background: #fff url(\"" + IMGDOMAIN + imgData[imgi] + "\")no-repeat;background-size: contain;background-position:center;background-color:#FFF;'></div>";
 
 							if(curi == imgLen - 2)
 							{
@@ -2010,7 +2010,7 @@ function getImageData(imgData, isImgs)
 							curi++;
 						}
 					}
-					tmpHtml += "<div class='proxImg fLeft' style='background: #fff url(" + IMGDOMAIN + imgData[0] + ")no-repeat;background-size:contain;background-position:center;background-color:#FFF;'></div>";
+					tmpHtml += "<div class='proxImg fLeft' style='background: #fff url(\"" + IMGDOMAIN + imgData[0] + "\")no-repeat;background-size:contain;background-position:center;background-color:#FFF;'></div>";
 				break;
 				case 11:
 					var curi = 0;
@@ -2022,7 +2022,7 @@ function getImageData(imgData, isImgs)
 						{
 							if(imgi < 3)
 							{
-								tmpHtml += "<div class='prox for-"+imgLen+"' onmouseover='showMouseOver(this);' style='background: #fff url(" + IMGDOMAIN + imgData[imgi] + ")no-repeat;background-size:contain;background-position:center;background-color:#FFF;'></div>";
+								tmpHtml += "<div class='prox for-"+imgLen+"' onmouseover='showMouseOver(this);' style='background: #fff url(\"" + IMGDOMAIN + imgData[imgi] + "\")no-repeat;background-size:contain;background-position:center;background-color:#FFF;'></div>";
 
 								if(imgi == 2)
 								{
@@ -2038,7 +2038,7 @@ function getImageData(imgData, isImgs)
 								tmpHtml += "<div class='prox for-"+imgLen+"Right'>";
 							}
 
-							tmpHtml += "<div class='prox for-"+imgLen+"' onmouseover='showMouseOver(this);' style='background: #fff url(" + IMGDOMAIN + imgData[imgi] + ")no-repeat;background-size:contain;background-position:center;background-color:#FFF;'></div>";
+							tmpHtml += "<div class='prox for-"+imgLen+"' onmouseover='showMouseOver(this);' style='background: #fff url(\"" + IMGDOMAIN + imgData[imgi] + "\")no-repeat;background-size:contain;background-position:center;background-color:#FFF;'></div>";
 
 							if(imgi == imgLen - 1)
 							{
@@ -2046,7 +2046,7 @@ function getImageData(imgData, isImgs)
 							}
 						}
 					}
-					tmpHtml += "<div class='proxImg fLeft' style='background: #fff url(" + IMGDOMAIN + imgData[0] + ")no-repeat;background-size:contain;background-position:center;background-color:#FFF;'></div>";
+					tmpHtml += "<div class='proxImg fLeft' style='background: #fff url(\"" + IMGDOMAIN + imgData[0] + "\")no-repeat;background-size:contain;background-position:center;background-color:#FFF;'></div>";
 				break;
 			}
 		}

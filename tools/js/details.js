@@ -625,12 +625,12 @@ function getDtlsImageData(imgData)
 		{
 			tmpHtml = '<div class="leftArrow transition300" onclick="movePrImg(true);"></div>';
 			tmpHtml += '<div class="rightArrow  transition300" onclick="movePrImg(false);"></div>';
-			tmpHtml += '<div id="prdImage" class="forImg fLeft imgPreview" style="background: url('+IMGDOMAIN + imgData[0]+') 50% 50% / cover no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>';
+			tmpHtml += '<div id="prdImage" class="forImg fLeft imgPreview" style="background: url(\''+IMGDOMAIN + imgData[0]+'\') 50% 50% / cover no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>';
 			tmpHtml += '<div id="gallery1" class="gallery fLeft transition300">';
             tmpHtml += '<div class="carousel transition300">';
 			for(var imgi = 0; imgi < imgData.length; imgi++)
 			{
-				tmpHtml += '<div class="thumbnil transition300" style="background:#fff url('+IMGDOMAIN+imgData[imgi]+')no-repeat;background-size: contain;background-position: center;">';
+				tmpHtml += '<div class="thumbnil transition300" style="background:#fff url(\''+IMGDOMAIN+imgData[imgi]+'\')no-repeat;background-size: contain;background-position: center;">';
 				tmpHtml += '</div>';
 			}
 			tmpHtml += '</div>';
