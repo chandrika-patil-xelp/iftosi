@@ -651,7 +651,9 @@ function getResultsData(data,sortby,showtree)
                                                 var metal = vl.attributes.metal;
                                                 var shape = vl.attributes.shape;
                                                 var purity = parseInt(vl.attributes.gold_purity);
-                                                var weight = parseInt(vl.attributes.gold_weight);
+                                                //var weight = parseInt(vl.attributes.gold_weight);
+                                                var weight = Math.floor(vl.attributes.gold_weight);
+
                                                 var cert = vl.attributes.certified;
 
                                                 if(metal !== null && metal !== undefined){

@@ -136,11 +136,11 @@
                                                 if(!empty($val['attributes']['gold_weight'])){
                                                     if($tempUrl !== '')
                                                     {
-                                                        $tempUrl .= '-'.number_format($val['attributes']['gold_weight'],0).'-Grams';
+                                                        $tempUrl .= '-'.floor($val['attributes']['gold_weight']).'-Grams';
                                                     }
                                                     else
                                                     {
-                                                        $tempUrl .= number_format($val['attributes']['gold_weight'],0).'-Grams';
+                                                        $tempUrl .= floor($val['attributes']['gold_weight']).'-Grams';
                                                     }
                                                 }
                                                 if(!empty($val['attributes']['certified'])){
