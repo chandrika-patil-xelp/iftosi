@@ -913,13 +913,13 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 /*john*/
 .bRnone{border-right:none !important;}
 .cstmrCnt{width:100%;height:auto;min-height:500px;padding-top: 80px;}
-.cntctCard{width:100%;height:auto;background: #e6e6e6;padding: 15px;}
-.cPrsnHdr{width:100%;height:45px;line-height:45px;color:#666;background-color:#f0f0f0;padding: 0px 15px;}
+.cntctCard{width:100%;height:auto;background: #e6e6e6;padding: 15px;margin-top: 45px;}
+.cPrsnHdr{width:100%;height:45px;line-height:45px;color:#666;background-color:#f0f0f0;padding: 0px 15px;position: fixed;top: 100px;left: 0;}
 .div20{width:20%;height:100%;line-height:45px;color:#666;font-size:13px;padding:0px 10px;border-right:1px solid #d4d4c8;}
 .div25{width:25%;height:100%;line-height:45px;color:#666;font-size:13px;padding:0px 10px;border-right:1px solid #d4d4c8;}
 .div15{width:15%;height:100%;line-height:45px;color:#666;font-size:13px;padding:0px 10px;border-right:1px solid #d4d4c8;}
 .div18{width:18%;height:100%;line-height:45px;color:#666;font-size:13px;padding:0px 10px;border-right:1px solid #d4d4c8;}
 .div22{width:22%;height:100%;line-height:45px;color:#666;font-size:13px;padding:0px 10px;border-right:1px solid #d4d4c8;}
-.cDtls{width:100%;height:auto;}
+.cDtls{width:100%;height:auto;margin-bottom: 5px;}
 .cList{width:100%;height:60px;background-color:#fff;}
 .cList div{font-size:14px !important;line-height:60px !important}
