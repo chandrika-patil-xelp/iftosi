@@ -29,7 +29,7 @@
                     <div class="prImgNext bgfff" onclick="movePrImg(false);"></div>
                     <center>
                         <div class="prImageStrip">
-                                                                    <ul class="carousel transition300">
+                                                                    <ul class="carousel transition300" id="touch" style="touch-action:pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); left: 0px;">
 						<?php
 						$html = '';
 						foreach($showcat['subcat'] as $key => $val)
@@ -388,26 +388,79 @@
     <script type="text/javascript" src="<?= $jvs['head']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['filter']; ?>"></script>
     <script type="text/javascript">
-    var val = 0;
-        var moveCount = 0;
-        function movePrImg(flag) {
-            var totalThumbs = $(".carousel  li").length;
-            var liWidth = ($(".carousel  li").outerWidth());
-            if (!flag) {
-                if (moveCount < (totalThumbs - 5)) {
-                    val = val - liWidth;
-                    $(".carousel").css({transform: 'translateX(' + val + 'px)'});
-                    moveCount++;
-                }
-            }
-            else if (flag) {
-                if (moveCount > 0) {
-                    val = val + liWidth;
-                    $(".carousel").css({transform: 'translateX(' + val + 'px)'});
-                    moveCount--;
-                }
-            }
-        }
+         var val = 0;
+                                var moveCount = 0;
+                                var ele = document.getElementById('touch');
+                                var mc = new Hammer(ele);
+                                var swipeCnt = 0;
+                                mc.on("panend", function (ev) {
+                                    if (ev.direction === Hammer.DIRECTION_LEFT)
+                                    {
+                                        movePrImg(false);
+                                    }else if(ev.direction === Hammer.DIRECTION_RIGHT){
+                                           movePrImg(true);
+                                    }
+                                });
+
+                                function movePrImg(flag) {
+                                    var totalThumbs = $(".carousel  li").length;
+                                    var liWidth = ($(".carousel  li").outerWidth());
+                                    var mobile = $(window).width();
+                                    if (!flag && mobile <= 425) {
+                                        if (moveCount < (totalThumbs - 1)) {
+                                            val = val - liWidth;
+                                            console.log(liWidth);
+                                            $(".carousel").css({transform: 'translateX(' + val + 'px)'});
+                                            moveCount++;
+                                        }
+                                    } else if (!flag && mobile <= 768) {
+                                        if (moveCount < (totalThumbs - 2)) {
+                                            val = val - liWidth;
+                                            $(".carousel").css({transform: 'translateX(' + val + 'px)'});
+                                            moveCount++;
+                                        }
+                                    } else if (!flag && mobile <= 1024) {
+                                        if (moveCount < (totalThumbs - 5)) {
+                                            val = val - liWidth;
+                                            $(".carousel").css({transform: 'translateX(' + val + 'px)'});
+                                            moveCount++;
+                                        }
+
+                                    } else if (!flag && mobile > 1024) {
+                                        if (moveCount < (totalThumbs - 5)) {
+                                            val = val - liWidth;
+                                            $(".carousel").css({transform: 'translateX(' + val + 'px)'});
+                                            moveCount++;
+                                        }
+                                    } else if (flag) {
+                                        if (moveCount > 0) {
+                                            val = val + liWidth;
+                                            $(".carousel").css({transform: 'translateX(' + val + 'px)'});
+                                            moveCount--;
+                                        }
+                                    }
+
+                                }
+//    var val = 0;
+//        var moveCount = 0;
+//        function movePrImg(flag) {
+//            var totalThumbs = $(".carousel  li").length;
+//            var liWidth = ($(".carousel  li").outerWidth());
+//            if (!flag) {
+//                if (moveCount < (totalThumbs - 5)) {
+//                    val = val - liWidth;
+//                    $(".carousel").css({transform: 'translateX(' + val + 'px)'});
+//                    moveCount++;
+//                }
+//            }
+//            else if (flag) {
+//                if (moveCount > 0) {
+//                    val = val + liWidth;
+//                    $(".carousel").css({transform: 'translateX(' + val + 'px)'});
+//                    moveCount--;
+//                }
+//            }
+//        }
     </script>
 </body>
 </html>
