@@ -1094,234 +1094,238 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
     .teamTabs{display: block;}
 
     /*Header*/
-        .header {height: 60px!important;padding: 0 15px!important;}
-        .headRight {display: none;}
-        .logo {width: 80px;height: 80px;font-size: 28px;top: 20px;}
-        .menuBtn, .filterBtn {display: block;}
-        .sortBox, .sTitle {display: none;}
-        .headCatCont {display: none;}
+    .header {height: 60px!important;padding: 0 15px!important;}
+    .headRight {display: none;}
+    .logo {width: 80px;height: 80px;font-size: 28px;top: 20px;}
+    .menuBtn, .filterBtn {display: block;}
+    .sortBox, .sTitle {display: none;}
+    .headCatCont {display: none;}
     /*Header*/
 
     /*Central Part*/
-        .categoryCont {height: auto;background-size: auto 100%;padding: 180px 10px 50px 10px;}
-        .buyTxt {width: 80%;color: #fff;line-height: 30px;font-size: 30px;margin-bottom: 15px;}
-        .prllx {margin: 0;padding: 15px;width: 100%;list-style: none;}
-        .prllx li {width: 100%;display: inline-block !important;position: relative!important;margin: 10px 0;height: 60px;}
-        .categoryCircle {-webkit-transform: scale(1)!important;-moz-transform: scale(1)!important;-ms-transform: scale(1)!important;transform: scale(1)!important;width: 100%;position: relative;height: 100%;font-size: 20px;color: #8A0044;letter-spacing: -0.05em;padding-top: 0;border-radius: 5px;display: inline-block;vertical-align: middle;cursor: pointer;border-width: 0;border-style: solid;border-color: #42c1b9;box-shadow: 0 0 0 0 rgba(105,0,79,0.6);line-height: 60px;text-align: left;padding-left: 65px;}
-        .bgDiamonds {background: #fff url(../img/common/diamond.jpg)no-repeat;background-size: auto 100%;background-position: left center;}
-        .bgJewellery {background: #fff url(../img/common/jewellery.jpg)no-repeat;background-size: auto 100%;background-position: left center;}
-        .bgBullion {background: #fff url(../img/common/bullions.jpg)no-repeat;background-size: auto 100%;background-position: left center;}
-        .shapesTitle {width: 100%;height: auto;line-height: 30px;padding: 10px 0;font-size: 20px;text-align: center;margin-bottom: 10px;padding: 0 10%;}
-        .allShapes {width: 100%;height: auto;padding: 0;}
-        .shapeComm {width: 100px!important;height: 100px!important;margin: 0;border: 2px solid #fff;position: relative;background-image: url(../img/shapes.svg);display: inline-block;vertical-align: bottom;text-align: center;cursor: pointer;background-size: 1000% auto;}
-        .jShapesCont {height: auto;}
-        .jshapeComm {width: 100%;padding-top: 162px;font-size: 18px;}
-        .Rings {box-shadow: inset 0 -50px 0px rgba(23, 19, 52,0.9);}
-        .Earrings {box-shadow: inset 0 -50px 0px rgba(42, 14, 52,0.9);}
-        .Pendants {box-shadow: inset 0 -50px 0px rgba(56, 11, 52,0.9);}
-        .Necklaces {box-shadow: inset 0 -50px 0px rgba(94, 0, 55,0.9);}
-        .Bangles {box-shadow: inset 0 -50px 0px rgba(138, 0, 68,0.9);}
-        .homePage .Bangles {width: 100%;border-right: 0px;}
-        .homePage .Earrings {border-right: 0px;}
-        .homePage .Necklaces {border-right: 0px;}
-        .homePage .bresults .jshapeComm{width:100%!important;border-right: 0px;}
-        .homePage .shapesCont{padding-bottom: 0}
+    .categoryCont {height: auto;background-size: auto 100%;padding: 180px 10px 50px 10px;}
+    .buyTxt {width: 80%;color: #fff;line-height: 30px;font-size: 30px;margin-bottom: 15px;}
+    .prllx {margin: 0;padding: 15px;width: 100%;list-style: none;}
+    .prllx li {width: 100%;display: inline-block !important;position: relative!important;margin: 10px 0;height: 60px;}
+    .categoryCircle {-webkit-transform: scale(1)!important;-moz-transform: scale(1)!important;-ms-transform: scale(1)!important;transform: scale(1)!important;width: 100%;position: relative;height: 100%;font-size: 20px;color: #8A0044;letter-spacing: -0.05em;padding-top: 0;border-radius: 5px;display: inline-block;vertical-align: middle;cursor: pointer;border-width: 0;border-style: solid;border-color: #42c1b9;box-shadow: 0 0 0 0 rgba(105,0,79,0.6);line-height: 60px;text-align: left;padding-left: 65px;}
+    .bgDiamonds {background: #fff url(../img/common/diamond.jpg)no-repeat;background-size: auto 100%;background-position: left center;}
+    .bgJewellery {background: #fff url(../img/common/jewellery.jpg)no-repeat;background-size: auto 100%;background-position: left center;}
+    .bgBullion {background: #fff url(../img/common/bullions.jpg)no-repeat;background-size: auto 100%;background-position: left center;}
+    .shapesTitle {width: 100%;height: auto;line-height: 30px;padding: 10px 0;font-size: 20px;text-align: center;margin-bottom: 10px;padding: 0 10%;}
+    .allShapes {width: 100%;height: auto;padding: 0;}
+    .shapeComm {width: 100px!important;height: 100px!important;margin: 0;border: 2px solid #fff;position: relative;background-image: url(../img/shapes.svg);display: inline-block;vertical-align: bottom;text-align: center;cursor: pointer;background-size: 1000% auto;}
+    .jShapesCont {height: auto;}
+    .jshapeComm {width: 100%;padding-top: 162px;font-size: 18px;}
+    .Rings {box-shadow: inset 0 -50px 0px rgba(23, 19, 52,0.9);}
+    .Earrings {box-shadow: inset 0 -50px 0px rgba(42, 14, 52,0.9);}
+    .Pendants {box-shadow: inset 0 -50px 0px rgba(56, 11, 52,0.9);}
+    .Necklaces {box-shadow: inset 0 -50px 0px rgba(94, 0, 55,0.9);}
+    .Bangles {box-shadow: inset 0 -50px 0px rgba(138, 0, 68,0.9);}
+    .NosePin {box-shadow: inset 0 -50px 0px rgba(138, 0, 68,0.9);}
+    .Mangalsutra {box-shadow: inset 0 -50px 0px rgba(138, 0, 68,0.9);}
+    .Polki{box-shadow: inset 0 -50px 0px rgba(138, 0, 68,0.9);} 
+
+    .homePage .Bangles {width: 100%;border-right: 0px;}
+    .homePage .Earrings {border-right: 0px;}
+    .homePage .Necklaces {border-right: 0px;}
+    .homePage .bresults .jshapeComm{width:100%!important;border-right: 0px;}
+    .homePage .shapesCont{padding-bottom: 0}
     /*Central Part*/
 
     /*Footer*/
-        .bottmInfo {width: 100%;height: auto;padding: 0px 0;float: left;}
-        .infoComm {width: 100%;height: 100px;border-right: none;position: relative;float: none!important;border-bottom: 1px solid rgba(255,255,255,0.2);}
-        .homePage .infoComm:first-child{border-top:2px solid #fff;}
-        .infoTxt {width: 100%;height: 41px;}
-        .infoUpper {font-size: 16px;line-height: 16px;}
-        .infoLower {font-size: 25px;line-height: 25px;}
+    .bottmInfo {width: 100%;height: auto;padding: 0px 0;float: left;}
+    .infoComm {width: 100%;height: 100px;border-right: none;position: relative;float: none!important;border-bottom: 1px solid rgba(255,255,255,0.2);}
+    .homePage .infoComm:first-child{border-top:2px solid #fff;}
+    .infoTxt {width: 100%;height: 41px;}
+    .infoUpper {font-size: 16px;line-height: 16px;}
+    .infoLower {font-size: 25px;line-height: 25px;}
     /*Footer*/
 
     /*Results Filter*/
-            .mfHeader {display: block;margin-left: -15px;}
-            .mfFooter {position: fixed;width: 100%;height: 60px;line-height: 60px;padding: 0;border-radius: 0;margin-left: -15px;}
-            #applyDbtn {display: block;}
-            #resetDbtn {display: none;}
+    .mfHeader {display: block;margin-left: -15px;}
+    .mfFooter {position: fixed;width: 100%;height: 60px;line-height: 60px;padding: 0;border-radius: 0;margin-left: -15px;}
+    #applyDbtn {display: block;}
+    #resetDbtn {display: none;}
 
 
 
     /*Diamonds Results Page*/
-        .totalResultsDiv {height: 320px;line-height: 30px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: cover;padding: 150px 0 0 0;font-size: 30px;}
-        .resultsPage .shapesCont {padding: 10px 0;background: #fff;float: left;}
-        .showHide {display: none;}
-        .allResults {float: left;padding: 0 10px;}
-        .filterTitleDiv {width: 100%;height: 60px;border-bottom: 0px solid #d4d4d4;margin-bottom: 0;}
-        .fTitle {display: none;}
-        .rCount {width: 100%;font-size: 16px;text-align: center;margin: 10px 0 0 0;}
-        #resultCount {display: block;font-size: 40px;line-height: 40px;text-align: center;}
-        .results_Filter {padding: 0 0 0 0;}
-        .transit-100X {-o-transform: translateX(100%);-ms-transform: translateX(100%);-moz-transform: translateX(100%);-webkit-transform: translateX(100%);transform: translateX(100%);}
-        .filterList {width: 100%;height: 100%;position: fixed;left: 0px;top: 0;z-index: 115;background: #fff;padding: 70px 15px 50px 15px;overflow: scroll;box-shadow: inset 0 0 20px rgba(0,0,0,0.3);}
-        .prdResults {width: 100%;}
-        .prdComm {width: 100%;height: auto;border: 5px solid #ebebde;margin: 10px 0;}
-        .pgComm,.pgEmpty{display: none;}
-        .pagination {height: auto;padding: 0;}
-        .hideShow {display: block;}
-        .pm015{padding: 0 15px!important}
-        /*Jewellery Results*/
-        .searchCon {width: 90%;}
-        /*Bullion Results*/
+    .totalResultsDiv {height: 320px;line-height: 30px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: cover;padding: 150px 0 0 0;font-size: 30px;}
+    .resultsPage .shapesCont {padding: 10px 0;background: #fff;float: left;}
+    .showHide {display: none;}
+    .allResults {float: left;padding: 0 10px;}
+    .filterTitleDiv {width: 100%;height: 60px;border-bottom: 0px solid #d4d4d4;margin-bottom: 0;}
+    .fTitle {display: none;}
+    .rCount {width: 100%;font-size: 16px;text-align: center;margin: 10px 0 0 0;}
+    #resultCount {display: block;font-size: 40px;line-height: 40px;text-align: center;}
+    .results_Filter {padding: 0 0 0 0;}
+    .transit-100X {-o-transform: translateX(100%);-ms-transform: translateX(100%);-moz-transform: translateX(100%);-webkit-transform: translateX(100%);transform: translateX(100%);}
+    .filterList {width: 100%;height: 100%;position: fixed;left: 0px;top: 0;z-index: 115;background: #fff;padding: 70px 15px 50px 15px;overflow: scroll;box-shadow: inset 0 0 20px rgba(0,0,0,0.3);}
+    .prdResults {width: 100%;}
+    .prdComm {width: 100%;height: auto;border: 5px solid #ebebde;margin: 10px 0;}
+    .pgComm,.pgEmpty{display: none;}
+    .pagination {height: auto;padding: 0;}
+    .hideShow {display: block;}
+    .pm015{padding: 0 15px!important}
+    /*Jewellery Results*/
+    .searchCon {width: 90%;}
+    /*Bullion Results*/
 
-         /*Diamonds Details Page*/
-            .forBg {width: 100%;height: 250px;}
-            .prdMainDetails {height: auto;margin-top: -90px;margin-bottom: 0;}
-            .prdMainDetails .wrapperMax {padding-left: 0;position: initial;}
-            .imgsCont {width: 90%;position: relative;margin: 0 5%;height: 330px;padding: 10px;}
-            .bullion_details .imgsCont {width:90%;position: relative;margin: 0 5%;height: 330px;padding: 10px;}
-            .detCont {width: 100%;height: auto;padding: 15px;display: inline-block;padding-bottom: 0;}
-            .bullion_details .detCont {width:100%;height: auto;padding: 15px 15px 0px 25px;float: left;}
-            .btnsCont {height: auto;}
-            .btnsCont .prdShape {border: none;width: 100%;}
-            .prdBtns {width: 100%;height: auto;}
-            .btnComm {width: 100%;min-width: 0px;margin: 0;border: 0;margin-bottom: 5px;text-align: center;padding: 0;height: 45px;line-height: 45px;}
-            .infoCommn {width: 50%;}
-            .infoCommn:last-child{margin-bottom: 0}
-            .prdInfo {padding:0;display: inline-block;margin-top: 0;}
-            .imgsCont.noImage {height: 250px;background: url(../img/noimage.svg) no-repeat 50% 50%;background-size: 45%;background-position: center;}
-
-
-        /*Jewellery DEtails Page*/    /*Bullion DEtails Page*/
-            .jewellery_details .infoCommn {width:50%!important;}
-            .prdInfoDiv:last-child{padding-bottom: 20px;}
-
-        /*Inner Pages*/
-            .bgHolder {width: 100%;height: 190px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding: 0px 0 35px 0;}
-            .heading.font40 {font-size: 22px;}
-            .bgHolder .heading {width: 100%;height: auto;max-width: 1200px;margin: auto;color: #fff;padding: 150px 0px 0 0px;text-align: center;}
-            .texHolder {padding: 0 20px;}
-            .faqs {padding: 20px;}
-
-        /*Education*/
-            .faq .shapesComm {width: 90%;margin: 0 5% 5% 5%;padding-top:0 }
-            .shapesPage .shapeComm{margin-top: 0;width: 100px!important;height: 100px!important;position: initial;}
-            .shapesPage .texHolder{padding: 0;}
-            .shapesPage h3{text-align: center;}
-            .forImg {width: 100%;height: 230px;}
-            .imgGallery{display: none;}
-            .thumbnil {width: 24%;height: 0;border: 1px solid #333;margin: 0 0.5%;cursor: pointer;padding-bottom: 25%;}
-            .leftArrow,.rightArrow {top: 235px;}
-            .prdInfoDiv{margin-bottom: 10px;}
+    /*Diamonds Details Page*/
+    .forBg {width: 100%;height: 250px;}
+    .prdMainDetails {height: auto;margin-top: -90px;margin-bottom: 0;}
+    .prdMainDetails .wrapperMax {padding-left: 0;position: initial;}
+    .imgsCont {width: 90%;position: relative;margin: 0 5%;height: 330px;padding: 10px;}
+    .bullion_details .imgsCont {width:90%;position: relative;margin: 0 5%;height: 330px;padding: 10px;}
+    .detCont {width: 100%;height: auto;padding: 15px;display: inline-block;padding-bottom: 0;}
+    .bullion_details .detCont {width:100%;height: auto;padding: 15px 15px 0px 25px;float: left;}
+    .btnsCont {height: auto;}
+    .btnsCont .prdShape {border: none;width: 100%;}
+    .prdBtns {width: 100%;height: auto;}
+    .btnComm {width: 100%;min-width: 0px;margin: 0;border: 0;margin-bottom: 5px;text-align: center;padding: 0;height: 45px;line-height: 45px;}
+    .infoCommn {width: 50%;}
+    .infoCommn:last-child{margin-bottom: 0}
+    .prdInfo {padding:0;display: inline-block;margin-top: 0;}
+    .imgsCont.noImage {height: 250px;background: url(../img/noimage.svg) no-repeat 50% 50%;background-size: 45%;background-position: center;}
 
 
-            .userForm {width: 100%;border-radius: 0;}
-            .cntEmail {width: 100%;}
-            .cntEmail {width: 100%;}
+    /*Jewellery DEtails Page*/    /*Bullion DEtails Page*/
+    .jewellery_details .infoCommn {width:50%!important;}
+    .prdInfoDiv:last-child{padding-bottom: 20px;}
 
-        /*Login*/
+    /*Inner Pages*/
+    .bgHolder {width: 100%;height: 190px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding: 0px 0 35px 0;}
+    .heading.font40 {font-size: 22px;}
+    .bgHolder .heading {width: 100%;height: auto;max-width: 1200px;margin: auto;color: #fff;padding: 150px 0px 0 0px;text-align: center;}
+    .texHolder {padding: 0 20px;}
+    .faqs {padding: 20px;}
 
-            .loginDiv {width: 100%;padding: 25px;border-radius: 0;}
-            .lgTitle {height:auto;line-height: 25px;}
-
-        /*SignUp page*/
-            .signupPage {ackground: #171334 url(../img/common/pattern.svg)repeat;background-size: auto 25px;padding: 120px 0 50px 0;height: auto;}
-            .signupDiv .wrapperMax {max-width: 100%;border: 0px solid #333;margin-top: 0;padding: 20px;border-radius: 0;height: auto;z-index: 115;position: relative;float: left;}
-            .bgHolder {width: 100%;height: 190px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding: 0px 0 35px 0;}
-            .bgHolder .heading {width: 100%;height: auto;max-width: 1200px;margin: auto;color: #fff;padding: 150px 0px 0 0px;text-align: center;}
-            .heading.font40 {font-size: 22px;}
-            .faqs {padding: 20px;}
-            .texHolder {padding: 0 20px;}
-            .signupCl1 {width:100%;font-size: 30px;}
-            .signupCl2 {width: 100%;margin-top: 10px;padding: 15px;}
-            .head3{display: none;}
-            .head1{height: auto;line-height: 30px;width: auto;float: left;}
-            .signupDiv{position: relative;z-index: 0;height: 400px!important;}
-            .head2{width: auto;float: left;border-bottom: none;line-height: 30px;padding-left: 8px;padding-bottom: 10px;padding-top: 10px;}
-        /*Vendor Details*/
-            .vendorDetails {width: 100%;height:auto;margin-bottom: 20px;margin-top: 0;}
-            .vendorDetails .wrapperMax {padding-right: 0;position: initial;}
-            .vdLeftCard {width: 100%;}
-            .vdCenterCard {width: 100%;height: auto;padding:0 15px;}
-            .vdRightCard {width: 100%;height: auto;position:initial;padding:0 15px;}
-            .cardComm {width: 100%;height: auto;line-height: 25px;font-size: 14px;margin-top: 10px;color: #4d4d4d;}
-            .vdRightCard .cntCard:last-child{display: none;}
-            .prdInfoDiv ul li div:nth-child(2) {width: 100%;height: auto;line-height: 22px;font-size: 13px;padding-left: 0px;}
-            .prdComm:hover .actionComm{border-radius:0%}
-            .actionComm:hover{border-radius: 0%;}
-            .actionComm:nth-child(1):hover{background-color: #171334;}
-            .actionComm:nth-child(2):hover{background-color: #2A0E34;}
-            .actionComm:nth-child(3):hover{background-color: #380B34;}
-            .actionComm:nth-child(4):hover{background-color: #5e0037;}
-            .actionComm:active{background-color: #8A0044}
+    /*Education*/
+    .faq .shapesComm {width: 90%;margin: 0 5% 5% 5%;padding-top:0 }
+    .shapesPage .shapeComm{margin-top: 0;width: 100px!important;height: 100px!important;position: initial;}
+    .shapesPage .texHolder{padding: 0;}
+    .shapesPage h3{text-align: center;}
+    .forImg {width: 100%;height: 230px;}
+    .imgGallery{display: none;}
+    .thumbnil {width: 24%;height: 0;border: 1px solid #333;margin: 0 0.5%;cursor: pointer;padding-bottom: 25%;}
+    .leftArrow,.rightArrow {top: 235px;}
+    .prdInfoDiv{margin-bottom: 10px;}
 
 
-            .homePage .bottmInfo {border-top:0px solid #fff!important;}
-            .aboutus .bottmInfo {border-top:0px solid #fff!important;}
-            .bottmInfo {border-top:0px solid #fff!important;}
-            .srcTitle {line-height: 20px;font-size: 16px;}
-            .prdInfoTitle {font-size:18px;}
-            .detailsPage .centerDiv {border-right: 0px solid #d4d4c8;padding: 0;padding-right: 0;}
-            .shapesCommH {width: 100%;height: auto;min-height: 104px;padding: 20px;border-radius: 5px;margin-top: 0;background: #fff;position: relative;background-color: #ebebde;padding-top: 100px;text-align: center;}
-            .shapesPage2 .shapeComm{position: absolute;left: 0;right: 0;top: 0;margin-top: 0;}
-            .shapesPage2 .texHolder {padding-left: 0;}
-            .prdInfoWrap {width: 100%;}
-            .detailsPage .prdComm {width: 100%!important;margin-bottom: 10px;}
-            .prdInfoTitle3 {border-top:1px dashed #d4d4c8;width: 100%;height: auto;line-height: 20px;font-size: 16px;color: #4d4d4d;margin: 10px 0;padding-top: 10px;}
-            .detailsPage .diamondterms {width: 100%;height: auto;border: 0px solid #333;position: relative;padding-right: 0;margin-bottom: 10px;padding-top: 220px;}
+    .userForm {width: 100%;border-radius: 0;}
+    .cntEmail {width: 100%;}
+    .cntEmail {width: 100%;}
+
+    /*Login*/
+
+    .loginDiv {width: 100%;padding: 25px;border-radius: 0;}
+    .lgTitle {height:auto;line-height: 25px;}
+
+    /*SignUp page*/
+    .signupPage {ackground: #171334 url(../img/common/pattern.svg)repeat;background-size: auto 25px;padding: 120px 0 50px 0;height: auto;}
+    .signupDiv .wrapperMax {max-width: 100%;border: 0px solid #333;margin-top: 0;padding: 20px;border-radius: 0;height: auto;z-index: 115;position: relative;float: left;}
+    .bgHolder {width: 100%;height: 190px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding: 0px 0 35px 0;}
+    .bgHolder .heading {width: 100%;height: auto;max-width: 1200px;margin: auto;color: #fff;padding: 150px 0px 0 0px;text-align: center;}
+    .heading.font40 {font-size: 22px;}
+    .faqs {padding: 20px;}
+    .texHolder {padding: 0 20px;}
+    .signupCl1 {width:100%;font-size: 30px;}
+    .signupCl2 {width: 100%;margin-top: 10px;padding: 15px;}
+    .head3{display: none;}
+    .head1{height: auto;line-height: 30px;width: auto;float: left;}
+    .signupDiv{position: relative;z-index: 0;height: 400px!important;}
+    .head2{width: auto;float: left;border-bottom: none;line-height: 30px;padding-left: 8px;padding-bottom: 10px;padding-top: 10px;}
+    /*Vendor Details*/
+    .vendorDetails {width: 100%;height:auto;margin-bottom: 20px;margin-top: 0;}
+    .vendorDetails .wrapperMax {padding-right: 0;position: initial;}
+    .vdLeftCard {width: 100%;}
+    .vdCenterCard {width: 100%;height: auto;padding:0 15px;}
+    .vdRightCard {width: 100%;height: auto;position:initial;padding:0 15px;}
+    .cardComm {width: 100%;height: auto;line-height: 25px;font-size: 14px;margin-top: 10px;color: #4d4d4d;}
+    .vdRightCard .cntCard:last-child{display: none;}
+    .prdInfoDiv ul li div:nth-child(2) {width: 100%;height: auto;line-height: 22px;font-size: 13px;padding-left: 0px;}
+    .prdComm:hover .actionComm{border-radius:0%}
+    .actionComm:hover{border-radius: 0%;}
+    .actionComm:nth-child(1):hover{background-color: #171334;}
+    .actionComm:nth-child(2):hover{background-color: #2A0E34;}
+    .actionComm:nth-child(3):hover{background-color: #380B34;}
+    .actionComm:nth-child(4):hover{background-color: #5e0037;}
+    .actionComm:active{background-color: #8A0044}
 
 
-            .srcTitle {line-height: 20px;font-size: 14px;margin-bottom: 10px;}
-            .listCont .prdComm{width:100%;}
-            .listCont .prdResults{padding: 0 15px;}
-            .wishTabsCont {width: 100%;height: auto;overflow-x: hidden;}
-            .wishTabComm {width: 90%;padding: 0 35px;height: 40px;line-height: 40px;color: #fff;display: inline-block;margin: 5px 5%;border-radius: 5px;cursor: pointer;position: relative;}
-            .noresDiv {height: 200px;text-align: center;color: #d4d4c8;border: 1px solid #d4d4c8;margin-bottom: 0;}
+    .homePage .bottmInfo {border-top:0px solid #fff!important;}
+    .aboutus .bottmInfo {border-top:0px solid #fff!important;}
+    .bottmInfo {border-top:0px solid #fff!important;}
+    .srcTitle {line-height: 20px;font-size: 16px;}
+    .prdInfoTitle {font-size:18px;}
+    .detailsPage .centerDiv {border-right: 0px solid #d4d4c8;padding: 0;padding-right: 0;}
+    .shapesCommH {width: 100%;height: auto;min-height: 104px;padding: 20px;border-radius: 5px;margin-top: 0;background: #fff;position: relative;background-color: #ebebde;padding-top: 100px;text-align: center;}
+    .shapesPage2 .shapeComm{position: absolute;left: 0;right: 0;top: 0;margin-top: 0;}
+    .shapesPage2 .texHolder {padding-left: 0;}
+    .prdInfoWrap {width: 100%;}
+    .detailsPage .prdComm {width: 100%!important;margin-bottom: 10px;}
+    .prdInfoTitle3 {border-top:1px dashed #d4d4c8;width: 100%;height: auto;line-height: 20px;font-size: 16px;color: #4d4d4d;margin: 10px 0;padding-top: 10px;}
+    .detailsPage .diamondterms {width: 100%;height: auto;border: 0px solid #333;position: relative;padding-right: 0;margin-bottom: 10px;padding-top: 220px;}
 
 
-            /*team*/
-            .rowRight{width: 100%;}
-            .teamtxt{padding-left: 0px; padding-top: 180px;}
-            .xelpmocLogo {padding-top: 60px;text-align: center;background-position: top center;padding-left: 0px;}
-            .teamComm{padding: 15px;margin-bottom: 0;}
-            .teamComm .subHead4{font-size: 36px;line-height: 36px;}
-            .comingsoon{background-size: cover;}
-
-            .ttl1{font-size: 30px;line-height: 40px;}
-            .ttl2{font-size: 22px;}
-            .head1.login{    font-size: 22px;}
-            .head2.login{padding: 0 5px;    font-size: 22px;}
-            .svnd {width: 100%;height: auto;color: #4d4d4d;font-size: 14px;font-family: openR;text-align: center;line-height: 40px;background: #fff;padding-top: 20px;}
-            .svnd .searchBtn {margin: 0;vertical-align: top;margin: 0px 10px 20px 10px;}
+    .srcTitle {line-height: 20px;font-size: 14px;margin-bottom: 10px;}
+    .listCont .prdComm{width:100%;}
+    .listCont .prdResults{padding: 0 15px;}
+    .wishTabsCont {width: 100%;height: auto;overflow-x: hidden;}
+    .wishTabComm {width: 90%;padding: 0 35px;height: 40px;line-height: 40px;color: #fff;display: inline-block;margin: 5px 5%;border-radius: 5px;cursor: pointer;position: relative;}
+    .noresDiv {height: 200px;text-align: center;color: #d4d4c8;border: 1px solid #d4d4c8;margin-bottom: 0;}
 
 
-            .teamComm.mTop25 {margin-top: 0px!important;}
+    /*team*/
+    .rowRight{width: 100%;}
+    .teamtxt{padding-left: 0px; padding-top: 180px;}
+    .xelpmocLogo {padding-top: 60px;text-align: center;background-position: top center;padding-left: 0px;}
+    .teamComm{padding: 15px;margin-bottom: 0;}
+    .teamComm .subHead4{font-size: 36px;line-height: 36px;}
+    .comingsoon{background-size: cover;}
 
-            .detailsPage .diamontCat1{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
-            .detailsPage .diamontCat2{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
-            .detailsPage .diamontCat3{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
-            .detailsPage .diamontCat4{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
-            .detailsPage .diamontCat5{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
-            .detailsPage .diamontCat6{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
-            .detailsPage .diamontCat7{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
-            .detailsPage .diamontCat8{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
-            .detailsPage .diamontCat9{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
-           .detailsPage .diamontCat10{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
-           .detailsPage .diamontCat11{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
-           .detailsPage .diamontCat12{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
-           .detailsPage .diamontCat13{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
-           .detailsPage .diamontCat14{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
-           .detailsPage .diamontCat15{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
-           .detailsPage .diamontCat16{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
-           .detailsPage .diamontCat17{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
-           .detailsPage .diamontCat18{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
-           .detailsPage .diamontCat19{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
-           .detailsPage .diamontCat20{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
-           .detailsPage .diamontCat21{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
-          .termsLink {width: 100%;height: auto;margin-top: 8px;}
-            .sortSelect {width: 100%;height: 45px;line-height: 45px;}
+    .ttl1{font-size: 30px;line-height: 40px;}
+    .ttl2{font-size: 22px;}
+    .head1.login{    font-size: 22px;}
+    .head2.login{padding: 0 5px;    font-size: 22px;}
+    .svnd {width: 100%;height: auto;color: #4d4d4d;font-size: 14px;font-family: openR;text-align: center;line-height: 40px;background: #fff;padding-top: 20px;}
+    .svnd .searchBtn {margin: 0;vertical-align: top;margin: 0px 10px 20px 10px;}
 
 
-            .head1 {height: auto;line-height: 30px;width: 100%;float: left;text-align: center;}
-            .head2 {width: 100%;float: left;text-align: center;}
+    .teamComm.mTop25 {margin-top: 0px!important;}
 
-            /*john*/
-            .container {overflow-x: hidden;}
-            .carousel {width: 100%;}
-            .carousel li {width: 100%;}
+    .detailsPage .diamontCat1{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
+    .detailsPage .diamontCat2{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
+    .detailsPage .diamontCat3{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
+    .detailsPage .diamontCat4{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
+    .detailsPage .diamontCat5{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
+    .detailsPage .diamontCat6{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
+    .detailsPage .diamontCat7{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
+    .detailsPage .diamontCat8{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
+    .detailsPage .diamontCat9{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
+    .detailsPage .diamontCat10{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
+    .detailsPage .diamontCat11{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
+    .detailsPage .diamontCat12{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
+    .detailsPage .diamontCat13{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
+    .detailsPage .diamontCat14{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
+    .detailsPage .diamontCat15{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
+    .detailsPage .diamontCat16{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
+    .detailsPage .diamontCat17{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
+    .detailsPage .diamontCat18{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
+    .detailsPage .diamontCat19{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
+    .detailsPage .diamontCat20{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
+    .detailsPage .diamontCat21{width: 80%;padding-bottom: 35%;height: 0;margin: 0 10%;position: absolute;top: 0;}
+    .termsLink {width: 100%;height: auto;margin-top: 8px;}
+    .sortSelect {width: 100%;height: 45px;line-height: 45px;}
+
+
+    .head1 {height: auto;line-height: 30px;width: 100%;float: left;text-align: center;}
+    .head2 {width: 100%;float: left;text-align: center;}
+
+    /*john*/
+    .container {overflow-x: hidden;}
+    .carousel {width: 100%;}
+    .carousel li {width: 100%;}
 
 
 }
@@ -1329,37 +1333,47 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 
 @media only screen and (min-width: 960px) and (max-width: 1024px){
     /*Header*/
-        .header {padding-right: 15px;}
-        .prllx {width: 100%;}
-        .shapesCont {width: 100%;height: 315px;background: #FFF;padding: 15px 0;position: relative;z-index: 0;}
-        .shapeComm {width: 10%!important;padding-bottom: 10%;margin: 0;}
-        .Rings{box-shadow: inset 0 -40px 0px rgba(23, 19, 52,1);}
-        .Earrings{box-shadow: inset 0 -40px 0px rgba(42, 14, 52,1);}
-        .Pendants{box-shadow: inset 0 -40px 0px rgba(56, 11, 52,1);}
-        .Necklaces{box-shadow: inset 0 -40px 0px rgba(94, 0, 55,1);}
-        .Bracelets{box-shadow: inset 0 -40px 0px rgba(138, 0, 68,1);}
-        .Bangles{box-shadow: inset 0 -40px 0px rgba(138, 0, 68,1);}
-        .jshapeComm {height: 200px;padding-top: 160px;font-size: 20px;line-height: 40px;}
-        .bresults .jshapeComm {padding-top: 148px;}
-        .homePage .jShapesCont{height:auto;}
-        .bottmInfo {height: 205px;padding: 30px 0;}
+    .header {padding-right: 15px;}
+    .prllx {width: 100%;}
+    .shapesCont {width: 100%;height: 315px;background: #FFF;padding: 15px 0;position: relative;z-index: 0;}
+    .shapeComm {width: 10%!important;padding-bottom: 10%;margin: 0;}
+    .Rings{box-shadow: inset 0 -40px 0px rgba(23, 19, 52,1);}
+    .Earrings{box-shadow: inset 0 -40px 0px rgba(42, 14, 52,1);}
+    .Pendants{box-shadow: inset 0 -40px 0px rgba(56, 11, 52,1);}
+    .Necklaces{box-shadow: inset 0 -40px 0px rgba(94, 0, 55,1);}
+    .Bracelets{box-shadow: inset 0 -40px 0px rgba(138, 0, 68,1);}
+    .Bangles{box-shadow: inset 0 -40px 0px rgba(138, 0, 68,1);}
+    .jshapeComm {height: 200px;padding-top: 160px;font-size: 20px;line-height: 40px;}
+    .bresults .jshapeComm {padding-top: 148px;}
+    .homePage .jShapesCont{height:auto;}
+    .bottmInfo {height: 205px;padding: 30px 0;}
+
+    /*home page*/
+    .NosePin{box-shadow: inset 0 -40px 0px rgba(138, 0, 68,0.9);}
+    .Mangalsutra{box-shadow: inset 0 -40px 0px rgba(138, 0, 68,0.9);}
+    .Polki{box-shadow: inset 0 -40px 0px rgba(138, 0, 68,0.9);} 
+    .ans{padding: 0px 60px 0px 60px;}
+    .sideDiv ul li{padding: 0 20px;}
+
+
+
 
     /*Diamonds, Jewellery, Bullions Results Page*/
-        .allResults { padding: 0 15px;}
-        .resultsPage .shapesCont {width: 100%;height: auto;}
-        .filterList {width: 30%;}
-        .prdResults {width: 70%;}
-        .prdComm{width:49%;margin:0.5%;}
-        .pgEmpty,.pgComm{display: none;}
+    .allResults { padding: 0 15px;}
+    .resultsPage .shapesCont {width: 100%;height: auto;}
+    .filterList {width: 30%;}
+    .prdResults {width: 70%;}
+    .prdComm{width:49%;margin:0.5%;}
+    .pgEmpty,.pgComm{display: none;}
     /*Diamonds Details Page*/
-        .prdMainDetails{height: auto;padding: 0 20px;float: left;}
-        .detCont {width: 100%;height: auto;padding: 15px 15px 0px 25px;float: left;}
-        .prdMainDetails .wrapperMax {float: left;}
-        .imgsCont {width: 360px;height: 393px;position: absolute;left: 0;top: 0;border: 1px solid #d4d4c8;margin: auto;bottom: 0;}
-        .prdInfo {padding: 0 20px;}
-        .vendorDetails {width: 100%;height: auto;padding:0 20px;margin-bottom: 0;}
-        .vendorDetails .cardComm {width: 100%;height: auto;}
-        .vdRightCard .cntCard:last-child{display: none;}
+    .prdMainDetails{height: auto;padding: 0 20px;float: left;}
+    .detCont {width: 100%;height: auto;padding: 15px 15px 0px 25px;float: left;}
+    .prdMainDetails .wrapperMax {float: left;}
+    .imgsCont {width: 360px;height: 393px;position: absolute;left: 0;top: 0;border: 1px solid #d4d4c8;margin: auto;bottom: 0;}
+    .prdInfo {padding: 0 20px;}
+    .vendorDetails {width: 100%;height: auto;padding:0 20px;margin-bottom: 0;}
+    .vendorDetails .cardComm {width: 100%;height: auto;}
+    .vdRightCard .cntCard:last-child{display: none;}
 
     /*Inner Page*/
     .shapesPage{padding: 0 15px;}
@@ -1369,89 +1383,98 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 
 @media only screen and (min-width: 768px) and (max-width: 959px){
     /*Header*/
-        .header{padding: 0 15px;}
+    .header{padding: 0 15px;}
+    .faqs{padding: 20px 20px;}
 
     /*Home*/
-        .categoryCont {height: 489px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: cover;padding: 200px 0 50px 0;}
-        .prllx {width: 100%;}
-        .prllx li {width: 150px;margin: 0 10px;}
-        .categoryCircle {width: 150px;height: 150px;font-size: 16px;padding-top: 95px;}
-        .homePage .shapesCont {width: 100%;height: auto;background: #FFF;padding: 15px 0;position: relative;z-index: 0;}
-        .searchBtn {margin: 5px 0 0 0;}
+    .categoryCont {height: 489px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: cover;padding: 200px 0 50px 0;}
+    .prllx {width: 100%;}
+    .prllx li {width: 150px;margin: 0 10px;}
+    .categoryCircle {width: 150px;height: 150px;font-size: 16px;padding-top: 95px;}
+    .homePage .shapesCont {width: 100%;height: auto;background: #FFF;padding: 15px 0;position: relative;z-index: 0;}
+/*    .searchBtn {margin: 5px 0 0 0;}*/
 
-        .homePage .shapeComm {width: 15%!important;padding-bottom: 15%;}
-        .homePage .jShapesCont {width: 100%;height: auto;background: #fff;padding: 0px 0 0px 0;position: relative;z-index: 0;}
-        .homePage .jShapesCont .jshapeComm {margin: 0;width: 100%;height:300px;line-height: 220px;}
-        .homePage .jShapesCont .jshapeComm.Bangles{margin: 0;width: 100%;}
+    .homePage .shapeComm {width: 15%!important;padding-bottom: 15%;}
+    .homePage .jShapesCont {width: 100%;height: auto;background: #fff;padding: 0px 0 0px 0;position: relative;z-index: 0;}
+    .homePage .jShapesCont .jshapeComm {margin: 0;width: 100%;height:300px;line-height: 220px;}
+    .homePage .jShapesCont .jshapeComm.Bangles{margin: 0;width: 100%;}
 
-        .jshapeComm:hover{line-height: 50px;padding-top: 45px;}
-        .homePage .jshapeComm.Earrings{border-right:0px}
-        .homePage .jshapeComm.Necklaces{border-right:0px}
-        .homePage .jshapeComm.Bangles{border-right:0px}
+    .jshapeComm:hover{line-height: 50px;padding-top: 45px;}
+    .homePage .jshapeComm.Earrings{border-right:0px}
+    .homePage .jshapeComm.Necklaces{border-right:0px}
+    .homePage .jshapeComm.Bangles{border-right:0px}
 
-        .bottmInfo {width: 100%;height: 160px;padding: 30px 0;background: #380B34;}
-        .infoTxt {width: 100%;height: 47px;}
-        .infoUpper {width: 100%;height: 17px;font-size: 17px;line-height: 17px;color: #fff;}
-        .infoLower {width: 100%;height: auto;font-size: 26px;line-height: 30px;}
+    .bottmInfo {width: 100%;height: 160px;padding: 30px 0;background: #380B34;}
+    .infoTxt {width: 100%;height: 47px;}
+    .infoUpper {width: 100%;height: 17px;font-size: 17px;line-height: 17px;color: #fff;}
+    .infoLower {width: 100%;height: auto;font-size: 26px;line-height: 30px;}
 
-        /*john*/
-        .carousel {width: 100%;}
-        .carousel li {width: 50%;}
+    .ans{padding: 0px 60px 0px 60px;}
+    /*    .sideDiv ul li{padding: 0 20px;}*/
 
-        /*Diamond Results Page*/
-        .allResults{padding: 0 15px;}
-        .fTitle {width: 20%;}
-        .rCount {width: auto;font-size: 20px;}
-        .rCount  span{font-family: openB}
-        .filterList {width: 300px;height: auto;min-height: 100%;left: 0;background: #fff;padding-bottom: 25px;position: absolute;box-shadow: 0 0 20px 5px rgba(0,0,0,0.2);z-index: 10;top: -20px;padding: 15px;}
-        .filterList.transit-100X {-webkit-transform: translateX(-350px);-moz-transform: translateX(-350px);-ms-transform: translateX(-350px);-o-transform: translateX(-350px);transform: translateX(-350px);}
-        .prdResults {width: 100%;}
-        .prdComm {width: 49%;height: auto;border: 5px solid #ebebde;margin: 0.5%;background: #fff;}
-        .pgComm ,.pgEmpty{display: none;}
+    /*john*/
+    .carousel {width: 100%;}
+    .carousel li {width: 50%;}
 
-        /*Jewellery Result*/
-        .jshapeComm {font-size: 16px;font-family: openR;letter-spacing: initial;}
-        .searchCon {width: 60%;}
+    /*Diamond Results Page*/
+    .allResults{padding: 0 15px;}
+    .fTitle {width: 20%;}
+    .rCount {width: auto;font-size: 20px;}
+    .rCount  span{font-family: openB}
+    .filterList {width: 300px;height: auto;min-height: 100%;left: 0;background: #fff;padding-bottom: 25px;position: absolute;box-shadow: 0 0 20px 5px rgba(0,0,0,0.2);z-index: 10;top: -20px;padding: 15px;}
+    .filterList.transit-100X {-webkit-transform: translateX(-350px);-moz-transform: translateX(-350px);-ms-transform: translateX(-350px);-o-transform: translateX(-350px);transform: translateX(-350px);}
+    .prdResults {width: 100%;}
+    .prdComm {width: 49%;height: auto;border: 5px solid #ebebde;margin: 0.5%;background: #fff;}
+    .pgComm ,.pgEmpty{display: none;}
+
+    /*Jewellery Result*/
+    .jshapeComm {font-size: 16px;font-family: openR;letter-spacing: initial;}
+    .searchCon {width: 60%;}
 
 
-        /*Diamond Details */
-        .prdMainDetails {width: 100%;height: 704px;float: left;position: relative;padding: 0 15px 305px 15px;}
-        .prdMainDetails .wrapperMax{position: initial;padding-left: 400px;}
-        .rightArrow,.leftArrow{top:305px}
-        .imgsCont {width: 400px;height: 400px;position: absolute;top: 0;border: 1px solid #d4d4c8;left: 15px;}
-        .majorInfoBox {width: 100%;height: auto;margin-top: 45px;color: #4d4d4d;position: absolute;left: 0;width: 100%;top: 406px;padding: 15px;margin-top: 0;}
-        .btnsCont .prdShape {border: none;width: 100%;max-width: 100%;}
-        .btnComm {width: 70%;height: 45px;line-height: 45px;margin: 10px 15% 0 0%;text-align: center;}
-        .prdBtns {width: 100%;height: auto;margin-top: 20px;}
-        .prdInfo {padding: 0 15px;}
+    /*Diamond Details */
+    .prdMainDetails {width: 100%;height: 704px;float: left;position: relative;padding: 0 15px 305px 15px;}
+    .prdMainDetails .wrapperMax{position: initial;padding-left: 400px;}
+    .rightArrow,.leftArrow{top:305px}
+    .imgsCont {width: 400px;height: 400px;position: absolute;top: 0;border: 1px solid #d4d4c8;left: 15px;}
+    .majorInfoBox {width: 100%;height: auto;margin-top: 45px;color: #4d4d4d;position: absolute;left: 0;width: 100%;top: 406px;padding: 15px;margin-top: 0;}
+    .btnsCont .prdShape {border: none;width: 100%;max-width: 100%;}
+    .btnComm {width: 70%;height: 45px;line-height: 45px;margin: 10px 15% 0 0%;text-align: center;}
+    .prdBtns {width: 100%;height: auto;margin-top: 20px;}
+    .prdInfo {padding: 0 15px;}
 
-        /*Jewellery Details Page*/
-        .jwdet .prdMainDetails {width: 100%;height: 655px;float: left;position: relative;padding: 0 15px 101px 15px;}
+    /*Jewellery Details Page*/
+    .jwdet .prdMainDetails {width: 100%;height: 655px;float: left;position: relative;padding: 0 15px 101px 15px;}
 
-        /*Bullion Details Page*/
-        .bulldet.bullion_details .imgsCont {width: 50%;}
-        .bulldet.bullion_details .detCont {width: 50%;}
-        .bulldet.bullion_details .infoCommn {width: 50%!important;}
-        .bulldet .majorInfoBox{position: initial;    padding-left: 0;}
-        .bulldet .prdMainDetails{height: 408px;padding-bottom: 15px;}
+    /*Bullion Details Page*/
+    .bulldet.bullion_details .imgsCont {width: 50%;}
+    .bulldet.bullion_details .detCont {width: 50%;}
+    .bulldet.bullion_details .infoCommn {width: 50%!important;}
+    .bulldet .majorInfoBox{position: initial;    padding-left: 0;}
+    .bulldet .prdMainDetails{height: 408px;padding-bottom: 15px;}
 
-        .shapesPage{padding: 0 15px;}
-        .ques {width: 90%;margin:10px 5%;}
-        .shapesPage .shapeComm {position: absolute;left: 0;top: 0;width: 100px!important;height: 100px!important;padding-bottom: 100px;margin: 0;bottom: 0;margin: auto;}
-        .shapesPage .texHolder {padding: 0;padding-left: 88px;line-height: 24px;color: #000;}
-        .signInUpTab{margin: 0 10px 0 0px;}
-        .wishlist{margin: 0 0px;}
-        .headRight{font-size: 11px;}
-        .licontent{font-size: 11px;}
-        .sideDiv ul li {padding-left: 20px;padding-right: 0px;background-size: 20px 40px;}
-        .prdInfoWrap { width: 100%;}
-        .detailsPage .prdComm{width:49%;}
-        .forImg{background-size: contain;}
-        .cardComm{height: auto;}
+    .shapesPage{padding: 0 15px;}
+    .ques {width: 90%;margin:10px 5%;}
+    .shapesPage .shapeComm {position: absolute;left: 0;top: 0;width: 100px!important;height: 100px!important;padding-bottom: 100px;margin: 0;bottom: 0;margin: auto;}
+    .shapesPage .texHolder {padding: 0;padding-left: 88px;line-height: 24px;color: #000;}
+    .signInUpTab{margin: 0 10px 0 0px;}
+    .wishlist{margin: 0 0px;}
+    .headRight{font-size: 11px;}
+    .licontent{font-size: 11px;}
+    .sideDiv ul li {padding-left: 20px;padding-right: 0px;background-size: 30px 30px;}
+    .prdInfoWrap { width: 100%;}
+    .detailsPage .prdComm{width:49%;}
+    .forImg{background-size: contain;}
+    .cardComm{height: auto;}
 
+    .results_Filter{overflow: auto;}
+    .svnd .searchBtn {margin: 0;vertical-align: top;margin:0px 10px;}
+    .signupDiv{padding: 15px;}
+    
 
 
 }
+
 
 /*
 
