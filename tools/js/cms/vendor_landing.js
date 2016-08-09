@@ -461,23 +461,23 @@ function toggleDropDown(flag, id)
     }
 }
 
-$('#priceRange').ionRangeSlider({
-    type: "double",
-    grid: true,
-    min: 1000,
-    max: 1000000,
-    from: 0,
-    to: 500000,
-    decorate_both: false,
-    prettify_separator: ",",
-    force_edges: true,
-    drag_interval: true,
-    step: 1,
-    onFinish: function (data)
-    {
-        //FR();
-    }
-});
+// $('#priceRange').ionRangeSlider({
+//     type: "double",
+//     grid: true,
+//     min: 1000,
+//     max: 1000000,
+//     from: 0,
+//     to: 500000,
+//     decorate_both: false,
+//     prettify_separator: ",",
+//     force_edges: true,
+//     drag_interval: true,
+//     step: 1,
+//     onFinish: function (data)
+//     {
+//         //FR();
+//     }
+// });
 
 
 function showEnqFilter()
