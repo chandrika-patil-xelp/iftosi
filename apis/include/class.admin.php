@@ -146,6 +146,9 @@ class admin extends DB
 
     public function customerList($params)
     {
+        $page = (!empty($params['pgno'])) ? $params['pgno'] : 1;
+        $limit = (!empty($params['limit'])) ? $params['limit'] : 50;
+
         if(empty($params['srchTxt']))
         {
           $ssql="SELECT
@@ -195,13 +198,16 @@ class admin extends DB
                 ORDER BY date_time DESC";
         }
 
-            $res=$this->query($ssql);
-            $cont=$this->numRows($res);
+            $res = $this->query($ssql);
+            $cont = $this->numRows($res);
             if (!empty($page))
             {
                 $start = ($page * $limit) - $limit;
-                $sql.=" LIMIT " . $start . ",$limit";
+                $ssql.=" LIMIT " . $start . ",$limit";
             }
+
+            $res = $this->query($ssql);
+
             if($res)
             {
                 while ($row = $this->fetchData($res))
