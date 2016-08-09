@@ -163,7 +163,7 @@ class admin extends DB
                         is_vendor=0
                 AND
                         is_active=1
-                ORDER BY joinDate DESC";
+                ORDER BY date_time DESC";
         }
         else
         {
@@ -192,7 +192,7 @@ class admin extends DB
                         is_vendor=0
                 AND
                         is_active=1
-                ORDER BY joinDate DESC";
+                ORDER BY date_time DESC";
         }
 
             $res=$this->query($ssql);

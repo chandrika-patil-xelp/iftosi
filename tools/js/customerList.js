@@ -57,7 +57,7 @@ function loadCustomerCallback(res,pgno)
             $('.pgComm').removeClass('pgActive');
             $(this).addClass('pgActive');
             loadcustomer($(this).text());
-            $('html,body').animate({scrollTop: $('.listContainer').offset().top - 100}, 300);
+            $('html,body').animate({scrollTop: $('.cstmrCnt').offset().top - 100}, 300);
         });
         paginationPrevNext();
     }
@@ -188,7 +188,7 @@ function paginationPrevNext()
         if(curpgno > 1)
         {
             $('#pgno').val(pgval);
-            if(pageName.indexOf("customerList") !== -1)
+            if(pageName.indexOf("customerDtls") !== -1)
             {
                 loadcustomer(pgval);
             }
@@ -205,7 +205,7 @@ function paginationPrevNext()
         if(curpgno < parseInt($('#total_pageno').val()))
         {
             $('#pgno').val(pgval);
-            if(pageName.indexOf("customerList") !== -1)
+            if(pageName.indexOf("customerDtls") !== -1)
             {
                 loadcustomer(pgval);
             }
@@ -224,7 +224,7 @@ $('.pPrev').bind('click', function()
     if(curpgno > 1)
     {
         $('#pgno').val(pgval);
-        if(pageName.indexOf("customerList") !== -1)
+        if(pageName.indexOf("customerDtls") !== -1)
         {
             loadcustomer(pgval);
         }
@@ -242,7 +242,7 @@ $('.pNext').bind('click', function()
     if(curpgno < parseInt($('#total_pageno').val()))
     {
         $('#pgno').val(pgval);
-        if(pageName.indexOf("customerList") !== -1)
+        if(pageName.indexOf("customerDtls") !== -1)
         {
             loadcustomer(pgval);
         }
