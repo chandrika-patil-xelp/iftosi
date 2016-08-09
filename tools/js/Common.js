@@ -110,6 +110,7 @@ function Common() {
             {
                 userMenuStr += '<a href="'+DOMAIN+'index.php?case=vendorList&uid='+uid+'"><li id="vendorlist" class="transition100">Vendor List</li></a>';
                 userMenuStr += '<a href="'+DOMAIN+'index.php?case=product_list&uid='+uid+'"><li id="productstab" class="transition100">Product Images</li></a>';
+                userMenuStr += '<a href="'+DOMAIN+'index.php?case=customerDtls&uid='+uid+'"><li id="customerList" class="transition100">Customer List</li></a>';
                 //userMenuStr += '<li class="transition100" onclick="redirectToWishlist();">Wishlist (<span id="wishListCnt"></span>)</li>';
                 $('#wishListHdr').addClass('dn');
 

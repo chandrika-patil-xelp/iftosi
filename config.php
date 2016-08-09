@@ -174,6 +174,7 @@ $jvs['clarity'] 	= DOMAIN.'tools/js/clarity.js?v='.VERSION;
 $jvs['anatomy'] 	= DOMAIN.'tools/js/anatomy.js?v='.VERSION;
 $jvs['enquiry'] 	= DOMAIN.'tools/js/enquiry.js?v='.VERSION;
 $jvs['vendorList'] 	= DOMAIN.'tools/js/vendorList.js?v='.VERSION;
+$jvs['customerList'] 	= DOMAIN.'tools/js/customerList.js?v='.VERSION;
 // Custom JS End
 
 

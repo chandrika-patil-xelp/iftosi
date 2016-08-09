@@ -143,5 +143,92 @@ class admin extends DB
         $result=array('results'=>$results,'error'=>$err);
         return $result;
     }
+
+    public function customerList($params)
+    {
+        if(empty($params['srchTxt']))
+        {
+          $ssql="SELECT
+                        user_id AS uid,
+                        user_name AS name,
+                        email,
+                        logmobile AS mobile,
+                        city,
+                        city AS cty,
+                        (SELECT state FROM tbl_area_master WHERE city=cty ORDER BY city DESC LIMIT 1) AS state,
+                        date_format(date_time,'%d %M, %Y') AS joinDate
+                FROM
+                        tbl_registration
+                WHERE
+                        is_vendor=0
+                AND
+                        is_active=1";
+        }
+        else
+        {
+          $ssql="SELECT
+                        user_id AS uid,
+                        user_name AS name,
+                        email,
+                        logmobile AS mobile,
+                        city,
+                        city AS cty,
+                        (SELECT state FROM tbl_area_master WHERE city=cty ORDER BY city DESC LIMIT 1) AS state,
+                        date_format(date_time,'%d %M, %Y') AS joinDate
+                FROM
+                        tbl_registration
+                WHERE
+                        (
+                            user_name LIKE '" . urldecode($params['srchTxt']) . "%'
+                OR
+                            email LIKE '" . urldecode($params['srchTxt']) . "%'
+                OR
+                            logmobile LIKE '" . urlencode($params['srchTxt']) . "%'
+                OR
+                            city LIKE '" . urlencode($params['srchTxt']) . "%'
+                        )
+                AND
+                        is_vendor=0
+                AND
+                        is_active=1";
+        }
+
+            $res=$this->query($ssql);
+            $cont=$this->numRows($res);
+            if (!empty($page))
+            {
+                $start = ($page * $limit) - $limit;
+                $sql.=" LIMIT " . $start . ",$limit";
+            }
+            if($res)
+            {
+                while ($row = $this->fetchData($res))
+                {
+                    if(empty($row['city']))
+                    {
+                        $row['city'] = 'N/A';
+                    }
+                    if(empty($row['state']))
+                    {
+                        $row['state'] = 'N/A';
+                    }
+                    if(!empty($row['name']))
+                    {
+                        $row['name'] = ucwords($row['name']);
+                    }
+                    $result[]=$row;
+                }
+                $err = array('Code' => 0, 'Msg' => 'Details fetched successfully');
+            }
+            else
+            {
+                $result = array();
+                $err = array('Code' => 1, 'Msg' => 'Error in fetching data');
+            }
+            $results=array('results'=>$result,'error'=>$err,'total_customers'=>$cont);
+            return $results;
+    }
+
+
 }
 ?>

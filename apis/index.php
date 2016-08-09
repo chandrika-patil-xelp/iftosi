@@ -2033,6 +2033,13 @@ echo '</pre>';
            $result= $obj->getVendorBySearch($params);
            $res=$result;
            break;
+//http://localhost/iftosi/apis/index.php?action=customerList
+        case 'customerList':
+          include APICLUDE.'class.admin.php';
+          $obj = new admin($db['iftosi']);
+          $result= $obj->customerList($params);
+          $res=$result;
+          break;
 
 //---------------------------------------------------------------------------
     default :
