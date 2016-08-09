@@ -71,7 +71,7 @@ else
 }
 define('SMSAPI','http://alerts.sinfini.com/api/web2sms.php?workingkey=Ae24f0c241588043b00e0449d6e2a5664&to=+91_MOBILE&sender=IFTOSI&message=_MESSAGE');
 
-define('VERSION',8.50);
+define('VERSION',8.60);
 
 $dollarValue = 66.03;
 
