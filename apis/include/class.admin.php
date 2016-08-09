@@ -162,7 +162,8 @@ class admin extends DB
                 WHERE
                         is_vendor=0
                 AND
-                        is_active=1";
+                        is_active=1
+                ORDER BY joinDate DESC";
         }
         else
         {
@@ -190,7 +191,8 @@ class admin extends DB
                 AND
                         is_vendor=0
                 AND
-                        is_active=1";
+                        is_active=1
+                ORDER BY joinDate DESC";
         }
 
             $res=$this->query($ssql);
@@ -211,6 +213,10 @@ class admin extends DB
                     if(empty($row['state']))
                     {
                         $row['state'] = 'N/A';
+                    }
+                    if(empty($row['mobile']))
+                    {
+                        $row['mobile'] = 'N/A';
                     }
                     if(!empty($row['name']))
                     {
