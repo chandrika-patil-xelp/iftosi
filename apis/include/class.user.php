@@ -304,7 +304,6 @@
 
         public function userReg($params) // USER LOGIN PROCESS
         {
-
             $params['username'] = (!empty($params['username'])) ? trim(urldecode($params['username'])) : '';
             $params['password'] = (!empty($params['password'])) ? trim(urldecode($params['password'])) : '';
             $params['mobile'] = (!empty($params['mobile'])) ? trim(urldecode($params['mobile'])) : '';

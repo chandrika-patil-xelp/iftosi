@@ -86,7 +86,7 @@ switch ($action) {
                 $mobile = (!empty($_GET['mobile'])) ? trim($_GET['mobile']) : '';
                 $name = (!empty($_GET['name'])) ? trim(urldecode($_GET['name'])) : '';
                 $email = (!empty($_GET['email'])) ? trim(urldecode($_GET['email'])) : '';
-                $city = (!empty($_GET['city'])) ? trim(urldecode($_GET['city'])) : '';
+                $city = (!empty($_GET['ur_city'])) ? trim(urldecode($_GET['ur_city'])) : '';
                 $pid = (!empty($_GET['pid'])) ? trim(urldecode($_GET['pid'])) : '';
                 $isV = (!empty($_GET['isVendor'])) ? trim($_GET['isVendor']) : '';
                 if(!empty($pid))
@@ -101,7 +101,7 @@ switch ($action) {
 
                 if (!empty($resp) && !empty($resp['error']) && !empty($resp['results']) && empty($resp['error']['Code'])) {
                     if ($resp['results'] == 'User Not yet Registered') {
-                        $regUserUrl = APIDOMAIN . 'index.php?action=userReg&mobile=' . $mobile . '&username=' . urlencode($name) . '&email=' . urlencode($email). '&cityname=' . urlencode($city);
+                        $regUserUrl = APIDOMAIN . 'index.php?action=userReg&mobile='.$mobile.'&username='.urlencode($name).'&email='.urlencode($email).'&cityname='.urlencode($city);
                         $resp = $comm->executeCurl($regUserUrl);
                     }
                 }
