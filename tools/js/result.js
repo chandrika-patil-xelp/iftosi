@@ -165,7 +165,7 @@ $(document).ready(function() {
                         }
                         else
                         {
-                                var params = 'action=ajx&case=auto&str=' + escape($(this).val());
+                                var params = 'action=ajx&case=auto&str=' + escape($(this).val())+'&pageName='+pageName;
                                 new Autosuggest($(this).val(), '#txtjArea', '#jasug', DOMAIN + "index.php", params, false, '', '#ctid', event);
                         }
                     }

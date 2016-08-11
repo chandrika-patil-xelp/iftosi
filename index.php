@@ -22,7 +22,8 @@ switch ($action) {
 
             case 'auto':
                 $str = $_GET['str'];
-                $url = APIDOMAIN . 'index.php?action=suggestAreaCity&str=' . urlencode($str) . '&page=1&limit=5';
+                $pagename = $_GET['pageName'];
+                $url = APIDOMAIN . 'index.php?action=suggestAreaCity&str=' . urlencode($str) . '&page=1&limit=5&pageName='.$pagename;
                 $res = $comm->executeCurl($url, 1);
                 echo $res;
                 break;

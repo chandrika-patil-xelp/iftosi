@@ -325,14 +325,26 @@ class auto extends DB
         $arr = $arr1 = array();
         $page=(!empty($params['page'])) ? trim(urldecode($params['page'])) : 1;
         $limit=(!empty($params['limit'])) ? trim(urldecode($params['limit'])) : 7;
-
-
+        $searchIn = (!empty($params['pageName'])) ? trim(urldecode($params['pageName'])) : '';
+        if($searchIn == 'diamonds')
+        {
+          $searchIn = '1';
+        }
+        if($searchIn == 'jewellery')
+        {
+          $searchIn = '2';
+        }
+        if($searchIn == 'bullion')
+        {
+          $searchIn = '3';
+        }
         $sql ="SELECT
                       vendor_id as id,
                       if(orgName = '".$params['str']."',1,0) AS exact,
                       if(orgName like '".$params['str']."%',1,0) AS startwith,
                       MATCH(orgName) AGAINST ('" . $params['str'] . "*' IN BOOLEAN MODE) AS score,
                       orgName AS name,
+                      business_type,
                       city,
                       0 AS isArea
               FROM
@@ -341,6 +353,8 @@ class auto extends DB
                       MATCH(orgName) AGAINST ('".$params['str']."*' IN BOOLEAN MODE)
               AND
                       active_flag = 1
+              AND
+                      MATCH(business_type) AGAINST ('".$searchIn."' IN BOOLEAN MODE)
               ORDER BY
                       exact DESC,
                       startwith DESC,

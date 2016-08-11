@@ -1236,11 +1236,11 @@ switch($action)
             $srch=(!empty($params['str'])) ? trim(urldecode($params['str'])) : '';
             if(empty($srch))
             {
-            $arr=array();
-            $err=array('code'=> 1,'Msg'=> 'Invalid parameters');
-            $result=array('results'=> $arr,'error'=>$err);
-            $res=$result;
-            break;
+                $arr=array();
+                $err=array('code'=> 1,'Msg'=> 'Invalid parameters');
+                $result=array('results'=> $arr,'error'=>$err);
+                $res=$result;
+                break;
             }
             $obj = new auto($db['iftosi']);
             $result=$obj->suggestAreaCity($params);

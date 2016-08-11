@@ -1238,11 +1238,20 @@
           						$exd = explode('|@|',$expd[1]);
                       if(strpos($exd, 'combination') !== false)
                       {
-                          $exd1 = str_replace('00','&',$exd);
-                          $exd = str_replace('11',',',$exd1);
-                          $exd = str_replace('_',' ',$exd1);
+                          $gig = str_replace('00','&',$expd[1]);
+                          $gig = str_replace('11',',',$gig);
+                          $gig = str_replace('_',' ',$gig);
+                          $gig = str_replace('combination ',' ',$gig);
+                          $gig = str_replace(',',' ',$gig);
+                          $gig = str_replace(' ','* ',trim(preg_replace('!\s+!', ' ',str_replace('&','',$gig))));
+                          $exd = str_replace('00','&',$exd);
+                          $exd = str_replace('11',',',$exd);
+                          $exd = str_replace('_',' ',$exd);
                           $exd = str_replace('combination ','',$exd);
                           $combField = 'combination_';
+
+                          if($exd)
+                            $otherGem .= " match(gemstone_type) against('".$gig."*' in boolean mode) ";
                       }
                       $inarr = array();
           						foreach($exd as $ky => $vl)
@@ -1264,7 +1273,10 @@
                           unset($ex[count($ex)-1]);
           				  			$field = implode('_',$ex);
           						}
-          						$extn .= " AND ".$field." in ('".implode("','",$inarr)."') ";
+                      if($field == 'combination')
+                          $extn .= " AND (".$otherGem." OR ".$field." in ('".implode("','",$inarr)."')) ";
+                      else
+          						    $extn .= " AND ".$field." in ('".implode("','",$inarr)."') ";
         					}
       				}
 
@@ -1385,7 +1397,8 @@
                                           cut,
                                           fluo,
                                           combination,
-                                          gemstone_color
+                                          gemstone_color,
+                                          gemstone_type
                                     FROM
                                           tbl_product_search
                                     WHERE
@@ -1479,7 +1492,8 @@
                                   								type,
                                   								metal,
                                   								bullion_design,
-                                                  date_time
+                                                  date_time,
+                                                  gemstone_type
                                           FROM
                                                   tbl_product_search
                                           WHERE
