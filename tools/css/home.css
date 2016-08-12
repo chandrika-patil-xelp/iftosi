@@ -1090,6 +1090,15 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 .asStngClss{}
 .asStngClss .autoSuggestOuter{top: 45px;}
 
+/*for contact us page*/
+.contctCont{width:100%;height:auto;}
+.addrCont{width:25%;height:auto;color:#222;}
+.addTxt{width:100%;height:auto;padding:0px 0px 0px 30px;font-size:13px;color:#666;}
+.locDiv{width:100%;height:auto;padding:5px 0px 5px 30px;font-size:15px;background-image:url('../img/common/location4d.svg');background-repeat:no-repeat;background-size:auto 30px;background-position:0px center;color:#666;}
+.mailDiv{width:100%;height:auto;padding:5px 0px 5px 30px;font-size:15px;background-image:url('../img/common/new/email4d.svg');background-repeat:no-repeat;background-size:auto 25px;background-position:0px center;color:#666;}
+.addTxt1{color:#8A0044;font-size:15px;width:100%;height:auto;padding:0px 0px 0px 30px;}
+.callDiv{width:100%;height:auto;padding:5px 0px 5px 30px;font-size:15px;background-image:url('../img/26.svg');background-repeat:no-repeat;background-size:auto 30px;background-position:0px center;color:#666;}
+
 @media only screen and (min-width: 320px) and (max-width: 767px){
     .teamTabs{display: block;}
 
@@ -1326,7 +1335,7 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
     .container {overflow-x: hidden;}
     .carousel {width: 100%;}
     .carousel li {width: 100%;}
-
+    .addrCont{width:100%;padding:10px 0px;}
 
 }
 
@@ -1392,7 +1401,7 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
     .prllx li {width: 150px;margin: 0 10px;}
     .categoryCircle {width: 150px;height: 150px;font-size: 16px;padding-top: 95px;}
     .homePage .shapesCont {width: 100%;height: auto;background: #FFF;padding: 15px 0;position: relative;z-index: 0;}
-/*    .searchBtn {margin: 5px 0 0 0;}*/
+    /*    .searchBtn {margin: 5px 0 0 0;}*/
 
     .homePage .shapeComm {width: 15%!important;padding-bottom: 15%;}
     .homePage .jShapesCont {width: 100%;height: auto;background: #fff;padding: 0px 0 0px 0;position: relative;z-index: 0;}
@@ -1470,7 +1479,8 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
     .results_Filter{overflow: auto;}
     .svnd .searchBtn {margin: 0;vertical-align: top;margin:0px 10px;}
     .signupDiv{padding: 15px;}
-    
+    .addrCont{width:50%;}
+
 
 
 }

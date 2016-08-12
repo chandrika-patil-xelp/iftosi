@@ -23,7 +23,7 @@ switch ($action) {
             case 'auto':
                 $str = $_GET['str'];
                 $pagename = $_GET['pageName'];
-                $url = APIDOMAIN . 'index.php?action=suggestAreaCity&str=' . urlencode($str) . '&page=1&limit=5&pageName='.$pagename;
+                $url = APIDOMAIN . 'index.php?action=suggestAreaCity&str=' . urlencode($str) . '&page=1&limit=5&pageName=' . $pagename;
                 $res = $comm->executeCurl($url, 1);
                 echo $res;
                 break;
@@ -90,19 +90,16 @@ switch ($action) {
                 $city = (!empty($_GET['ur_city'])) ? trim(urldecode($_GET['ur_city'])) : '';
                 $pid = (!empty($_GET['pid'])) ? trim(urldecode($_GET['pid'])) : '';
                 $isV = (!empty($_GET['isVendor'])) ? trim($_GET['isVendor']) : '';
-                if(!empty($pid))
-                {
-                   $userUrl = APIDOMAIN . 'index.php?action=checkUser&mobile='.$mobile.'&email='.$email.'&pid=' . $pid;
-                }
-                else
-                {
+                if (!empty($pid)) {
+                    $userUrl = APIDOMAIN . 'index.php?action=checkUser&mobile=' . $mobile . '&email=' . $email . '&pid=' . $pid;
+                } else {
                     $userUrl = APIDOMAIN . 'index.php?action=checkUser&mobile=' . $mobile;
                 }
                 $resp = $comm->executeCurl($userUrl);
 
                 if (!empty($resp) && !empty($resp['error']) && !empty($resp['results']) && empty($resp['error']['Code'])) {
                     if ($resp['results'] == 'User Not yet Registered') {
-                        $regUserUrl = APIDOMAIN . 'index.php?action=userReg&mobile='.$mobile.'&username='.urlencode($name).'&email='.urlencode($email).'&cityname='.urlencode($city);
+                        $regUserUrl = APIDOMAIN . 'index.php?action=userReg&mobile=' . $mobile . '&username=' . urlencode($name) . '&email=' . urlencode($email) . '&cityname=' . urlencode($city);
                         $resp = $comm->executeCurl($regUserUrl);
                     }
                 }
@@ -208,19 +205,16 @@ switch ($action) {
                 echo $total;
                 break;
 
-			case 'getImages':
-				$prdIds= (!empty($params['prdIds']) && !stristr($params['prdIds'], 'undefined') && !stristr($params['prdIds'], 'null')) ? trim(urldecode($params['prdIds'])) : '';
-				if(!empty($prdIds))
-				{
-					$url = APIDOMAIN . "index.php?action=getPrdImgsByIds&prdIds=" . urlencode($prdIds);
+            case 'getImages':
+                $prdIds = (!empty($params['prdIds']) && !stristr($params['prdIds'], 'undefined') && !stristr($params['prdIds'], 'null')) ? trim(urldecode($params['prdIds'])) : '';
+                if (!empty($prdIds)) {
+                    $url = APIDOMAIN . "index.php?action=getPrdImgsByIds&prdIds=" . urlencode($prdIds);
                     $res = $comm->executeCurl($url);
-				}
-				else
-				{
-					$res = array('results' => array(), 'error' => array('code' => 0, 'msg' => 'No Product IDs found'));
-				}
-				echo json_encode($res);
-			break;
+                } else {
+                    $res = array('results' => array(), 'error' => array('code' => 0, 'msg' => 'No Product IDs found'));
+                }
+                echo json_encode($res);
+                break;
         }
         break;
 
@@ -230,9 +224,9 @@ switch ($action) {
         $res = $comm->executeCurl($url);
         $headcat = $res['results'];
 
-		$leftMenuUrl = APIDOMAIN . 'index.php?action=getCatList&page=1&limit=3';
-		$leftMenuRes = $comm->executeCurl($leftMenuUrl);
-		$leftMenuData = $leftMenuRes['results'];
+        $leftMenuUrl = APIDOMAIN . 'index.php?action=getCatList&page=1&limit=3';
+        $leftMenuRes = $comm->executeCurl($leftMenuUrl);
+        $leftMenuData = $leftMenuRes['results'];
 
         if (count($headcat)) {
             foreach ($headcat['root'] as $key => $val) {
@@ -258,14 +252,14 @@ switch ($action) {
                 $page = 'signup';
                 //include 'template/signup.html';
 
-                /*if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(DOMAIN, 'beta.xelpmoc.in/iftosi') || stristr(REQURI, 'beta'))
-                {*/
-                        include 'template/signup.html';
-                /*}
-                else
-                {
-                        include 'template/comingsoon.html';
-                }*/
+                /* if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(DOMAIN, 'beta.xelpmoc.in/iftosi') || stristr(REQURI, 'beta'))
+                  { */
+                include 'template/signup.html';
+                /* }
+                  else
+                  {
+                  include 'template/comingsoon.html';
+                  } */
                 break;
 
             case 'vsignup':
@@ -276,16 +270,16 @@ switch ($action) {
                 $page = 'forgot';
                 include 'template/forgotPsw.html';
                 break;
-             case 'diamond_shapes':
+            case 'diamond_shapes':
                 $page = 'diamond_shapes';
                 include 'template/diamond.html';
                 break;
 
-             case 'jewellery_tips':
+            case 'jewellery_tips':
                 $page = 'jewellery_tips';
                 include 'template/jewellery_tips.html';
                 break;
-             case 'education_round':
+            case 'education_round':
                 $page = 'education_round';
                 include 'template/education_round.html';
                 break;
@@ -301,7 +295,7 @@ switch ($action) {
                 $page = 'education_emerald';
                 include 'template/education_emerald.html';
                 break;
-             case 'education_clarity':
+            case 'education_clarity':
                 $page = 'education_clarity';
                 include 'template/education_clarity.html';
                 break;
@@ -309,7 +303,7 @@ switch ($action) {
                 $page = 'education_asscher';
                 include 'template/education_asscher.html';
                 break;
-             case 'education_heart':
+            case 'education_heart':
                 $page = 'education_heart';
                 include 'template/education_heart.html';
                 break;
@@ -337,7 +331,7 @@ switch ($action) {
                 $page = 'e_carat_weight';
                 include 'template/e_carat_weight.html';
                 break;
-             case 'education_cushion':
+            case 'education_cushion':
                 $page = 'education_cushion';
                 include 'template/education_cushion.html';
                 break;
@@ -349,15 +343,15 @@ switch ($action) {
                 $page = 'e_color';
                 include 'template/e_color.html';
                 break;
-             case 'e_color1':
+            case 'e_color1':
                 $page = 'e_color1';
                 include 'template/e_color1.html';
                 break;
-             case 'e_cut':
+            case 'e_cut':
                 $page = 'e_cut';
                 include 'template/e_cut.html';
                 break;
-             case 'e_cut1':
+            case 'e_cut1':
                 $page = 'e_cut1';
                 include 'template/e_cut1.html';
                 break;
@@ -394,14 +388,14 @@ switch ($action) {
                 $page = 'vendor_privacy';
                 include 'template/vprivacy.html';
                 break;
-             case 'customerDtls':
+            case 'customerDtls':
                 $page = 'customerDtls';
                 include 'template/customerDtls.html';
                 break;
             case 'inactive_vendor':
                 $page = 'inactive_vendor';
                 $uid = $_GET['uid'];
-                $url = APIDOMAIN . 'index.php?action=viewAll&uid='.$uid;
+                $url = APIDOMAIN . 'index.php?action=viewAll&uid=' . $uid;
                 $res = $comm->executeCurl($url);
                 $data = $res['results'][1];
                 //echo "<pre>";print_r($data);die;
@@ -411,14 +405,14 @@ switch ($action) {
             case 'expiredSub_vendor':
                 $page = 'expiredSub_vendor';
                 $uid = $_GET['uid'];
-                $url = APIDOMAIN . 'index.php?action=viewAll&uid='.$uid;
+                $url = APIDOMAIN . 'index.php?action=viewAll&uid=' . $uid;
                 $res = $comm->executeCurl($url);
                 $data = $res['results'][1];
                 //echo "<pre>";print_r($data);die;
                 include 'template/expiredSub_vendor.html';
                 break;
 
-             case 'faq_sellers':
+            case 'faq_sellers':
                 $page = 'faq_sellers';
                 include 'template/faq_sellers.html';
                 break;
@@ -447,7 +441,7 @@ switch ($action) {
 //                }
                 $page = 'Change Password';
                 $urlkey = $_GET['key'];
-                $urlkey = explode(' ',$urlkey);
+                $urlkey = explode(' ', $urlkey);
                 $urlkey = $urlkey[1];
                 include 'template/changepwd.html';
                 break;
@@ -525,13 +519,10 @@ switch ($action) {
                 $lastpg = ceil($total / 15);
                 $adjacents = 2;
                 //echo "<pre>";print_r($total);die;
-                if($totalCnt > 0)
-                {
-                        include 'template/resultsb2b.html';
-                }
-                else
-                {
-                        include 'template/comingsoon.html';
+                if ($totalCnt > 0) {
+                    include 'template/resultsb2b.html';
+                } else {
+                    include 'template/comingsoon.html';
                 }
                 //include 'template/resultsb2b.html';
                 break;
@@ -557,13 +548,10 @@ switch ($action) {
                 $adjacents = 2;
                 //echo "<pre>";print_r($total);die;
                 //include 'template/results.html';
-                if($totalCnt > 0)
-                {
-                        include 'template/results.html';
-                }
-                else
-                {
-                        include 'template/comingsoon.html';
+                if ($totalCnt > 0) {
+                    include 'template/results.html';
+                } else {
+                    include 'template/comingsoon.html';
                 }
                 break;
 
@@ -594,14 +582,14 @@ switch ($action) {
                 }
                 //echo "<pre>";print_r($data);die;
                 //include 'template/jewellery_results.html';
-                /*if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
-                {*/
-                        include 'template/jewellery_results.html';
-                /*}
-                else
-                {
-                        include 'template/comingsoon.html';
-                }*/
+                /* if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
+                  { */
+                include 'template/jewellery_results.html';
+                /* }
+                  else
+                  {
+                  include 'template/comingsoon.html';
+                  } */
                 break;
             case 'bullion':
                 $page = 'bullion';
@@ -623,13 +611,10 @@ switch ($action) {
                 $lastpg = ceil($total / 15);
                 $adjacents = 2;
                 //include 'template/bullion_results.html';
-                if($totalCnt > 0)
-                {
-                        include 'template/bullion_results.html';
-                }
-                else
-                {
-                        include 'template/comingsoon.html';
+                if ($totalCnt > 0) {
+                    include 'template/bullion_results.html';
+                } else {
+                    include 'template/comingsoon.html';
                 }
                 break;
 
@@ -676,28 +661,26 @@ switch ($action) {
                 $certificate_url = explode('/', $certificate_url);
                 $certificate_url = $certificate_url[count($certificate_url) - 1];
 
-                $url1 = APIDOMAIN . 'index.php?action=imagedisplay&pid='.$pid.'&vid='.$vndrDtls['vid'];
+                $url1 = APIDOMAIN . 'index.php?action=imagedisplay&pid=' . $pid . '&vid=' . $vndrDtls['vid'];
                 $res1 = $comm->executeCurl($url1);
                 $data1 = $res1['results'];
                 $datacnt = $res1['count'];
 
                 $prdVars = $prdVars['attr_details'];
-                $sug   = APIDOMAIN."index.php?action=suggestProducts&pid=".$pid."&catid=10000&clarity=".urlencode($prdVars['clarity'])."&carat=".$prdVars['carat']."&shape=".urlencode($prdVars['shape'])."&cut=".urlencode($prdVars['cut'])."&color=".urlencode($prdVars['color'])."&fluo=".urlencode($prdVars['fluorescence'])."&sym = ".urlencode($prdVars['symmetry'])."&polish=".urlencode($prdVars['polish']);
-                $res3  = $comm->executeCurl($sug);
+                $sug = APIDOMAIN . "index.php?action=suggestProducts&pid=" . $pid . "&catid=10000&clarity=" . urlencode($prdVars['clarity']) . "&carat=" . $prdVars['carat'] . "&shape=" . urlencode($prdVars['shape']) . "&cut=" . urlencode($prdVars['cut']) . "&color=" . urlencode($prdVars['color']) . "&fluo=" . urlencode($prdVars['fluorescence']) . "&sym = " . urlencode($prdVars['symmetry']) . "&polish=" . urlencode($prdVars['polish']);
+                $res3 = $comm->executeCurl($sug);
                 $data3 = $res3['results'];
                 $sugTotal = 0;
 
-                $ValArr=array('EX'=>'Excellent','VG'=>'Very Good','GD'=>"Good",'FAIR'=>'Fair','NN'=>'None','MED'=>'Medium','FNT'=>'Faint','STG'=>'Strong','VSTG'=>'Very Strong');
-                foreach($ValArr as $ky=>$value)
-                {
-                    if($data['attr_details']['cut'] == $ky)
-                    {
-                       $prdVars['cut'] = $ValArr[$ky];
+                $ValArr = array('EX' => 'Excellent', 'VG' => 'Very Good', 'GD' => "Good", 'FAIR' => 'Fair', 'NN' => 'None', 'MED' => 'Medium', 'FNT' => 'Faint', 'STG' => 'Strong', 'VSTG' => 'Very Strong');
+                foreach ($ValArr as $ky => $value) {
+                    if ($data['attr_details']['cut'] == $ky) {
+                        $prdVars['cut'] = $ValArr[$ky];
                     }
                 }
 
-                $desurl   = APIDOMAIN."index.php?action=showDescription&pid=".$pid."&catid=10000&color=".urlencode($prdVars['color'])."&cut=".urlencode($prdVars['cut'])."&clarity=".urlencode($prdVars['clarity'])."&shape=".urlencode($prdVars['shape']);
-                $desres  = $comm->executeCurl($desurl);
+                $desurl = APIDOMAIN . "index.php?action=showDescription&pid=" . $pid . "&catid=10000&color=" . urlencode($prdVars['color']) . "&cut=" . urlencode($prdVars['cut']) . "&clarity=" . urlencode($prdVars['clarity']) . "&shape=" . urlencode($prdVars['shape']);
+                $desres = $comm->executeCurl($desurl);
                 $des = $desres['results'];
                 $totalDes = $res3['total'];
                 //echo "<pre>";print_r($des); die;
@@ -748,40 +731,38 @@ switch ($action) {
                 $certificate_url = explode('/', $certificate_url);
                 $certificate_url = $certificate_url[count($certificate_url) - 1];
 
-                $url1 = APIDOMAIN . 'index.php?action=imagedisplay&pid='.$pid.'&vid='.$vndrDtls['vid'];
+                $url1 = APIDOMAIN . 'index.php?action=imagedisplay&pid=' . $pid . '&vid=' . $vndrDtls['vid'];
                 $res1 = $comm->executeCurl($url1);
                 $data1 = $res1['results'];
                 $datacnt = $res1['count'];
 
                 $prdVars = $prdVars['attr_details'];
-                $sug   = APIDOMAIN."index.php?action=suggestProducts&pid=".$pid."&catid=10000&clarity=".urlencode($prdVars['clarity'])."&carat=".$prdVars['carat']."&shape=".urlencode($prdVars['shape'])."&cut=".urlencode($prdVars['cut'])."&color=".urlencode($prdVars['color'])."&fluo=".urlencode($prdVars['fluorescence'])."&sym = ".urlencode($prdVars['symmetry'])."&polish=".urlencode($prdVars['polish']);
-                $res3  = $comm->executeCurl($sug);
+                $sug = APIDOMAIN . "index.php?action=suggestProducts&pid=" . $pid . "&catid=10000&clarity=" . urlencode($prdVars['clarity']) . "&carat=" . $prdVars['carat'] . "&shape=" . urlencode($prdVars['shape']) . "&cut=" . urlencode($prdVars['cut']) . "&color=" . urlencode($prdVars['color']) . "&fluo=" . urlencode($prdVars['fluorescence']) . "&sym = " . urlencode($prdVars['symmetry']) . "&polish=" . urlencode($prdVars['polish']);
+                $res3 = $comm->executeCurl($sug);
                 $data3 = $res3['results'];
                 $sugTotal = $res3['total'];
 
-                $ValArr=array('EX'=>'Excellent','VG'=>'Very Good','GD'=>"Good",'FAIR'=>'Fair','NN'=>'None','MED'=>'Medium','FNT'=>'Faint','STG'=>'Strong','VSTG'=>'Very Strong');
-                foreach($ValArr as $ky=>$value)
-                {
-                    if($data['attr_details']['cut'] == $ky)
-                    {
-                       $prdVars['cut'] = $ValArr[$ky];
+                $ValArr = array('EX' => 'Excellent', 'VG' => 'Very Good', 'GD' => "Good", 'FAIR' => 'Fair', 'NN' => 'None', 'MED' => 'Medium', 'FNT' => 'Faint', 'STG' => 'Strong', 'VSTG' => 'Very Strong');
+                foreach ($ValArr as $ky => $value) {
+                    if ($data['attr_details']['cut'] == $ky) {
+                        $prdVars['cut'] = $ValArr[$ky];
                     }
                 }
 
-                $desurl   = APIDOMAIN."index.php?action=showDescription&pid=".$pid."&catid=10000&color=".urlencode($prdVars['color'])."&cut=".urlencode($prdVars['cut'])."&clarity=".urlencode($prdVars['clarity'])."&shape=".urlencode($prdVars['shape']);
-                $desres  = $comm->executeCurl($desurl);
+                $desurl = APIDOMAIN . "index.php?action=showDescription&pid=" . $pid . "&catid=10000&color=" . urlencode($prdVars['color']) . "&cut=" . urlencode($prdVars['cut']) . "&clarity=" . urlencode($prdVars['clarity']) . "&shape=" . urlencode($prdVars['shape']);
+                $desres = $comm->executeCurl($desurl);
                 $des = $desres['results'];
                 $totalDes = $res3['total'];
                 //echo "<pre>";print_r($des); die;
                 //include 'template/diamond_details.html';
-                /*if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
-                {*/
-                        include 'template/diamond_details.html';
-                /*}
-                else
-                {
-                        include 'template/comingsoon.html';
-                }*/
+                /* if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
+                  { */
+                include 'template/diamond_details.html';
+                /* }
+                  else
+                  {
+                  include 'template/comingsoon.html';
+                  } */
                 break;
 
             case 'bullion_details':
@@ -793,9 +774,9 @@ switch ($action) {
                     $prdId = explode(' ', $prdId);
                     $prdId = $pid = $prdId[0];
                     $prdInfoUrl = APIDOMAIN . 'index.php?action=getPrdById&prdid=' . $prdId;
-                     $prdInfo = $comm->executeCurl($prdInfoUrl);
+                    $prdInfo = $comm->executeCurl($prdInfoUrl);
                     if (!empty($prdInfo) && !empty($prdInfo['results']) && !empty($prdInfo['error']) && empty($prdInfo['error']['errCode'])) {
-                       $prdVars = $prdInfo = $prdInfo['results'][$prdId];
+                        $prdVars = $prdInfo = $prdInfo['results'][$prdId];
                         $vndrInfo = $prdInfo['vendor_details'];
                         foreach ($vndrInfo as $key => $value) {
                             $vndrId = $key;
@@ -814,26 +795,26 @@ switch ($action) {
                 $data1 = $res1['results'];
 
                 $prdVars = $prdVars['attr_details'];
-                $sug   = APIDOMAIN."index.php?action=suggestProducts&pid=".$pid."&catid=10002&metal=".urlencode($prdVars['metal'])."&type=".urlencode($prdVars['type']);
-                $res3  = $comm->executeCurl($sug);
+                $sug = APIDOMAIN . "index.php?action=suggestProducts&pid=" . $pid . "&catid=10002&metal=" . urlencode($prdVars['metal']) . "&type=" . urlencode($prdVars['type']);
+                $res3 = $comm->executeCurl($sug);
                 $data3 = $res3['results'];
                 $sugTotal = $res3['total'];
 
-                $desurl   = APIDOMAIN."index.php?action=showDescription&pid=".$pid."&catid=10002&metal=".urlencode($prdVars['metal'])."&type=".strtolower(urlencode($prdVars['type']));
-                $desres  = $comm->executeCurl($desurl);
+                $desurl = APIDOMAIN . "index.php?action=showDescription&pid=" . $pid . "&catid=10002&metal=" . urlencode($prdVars['metal']) . "&type=" . strtolower(urlencode($prdVars['type']));
+                $desres = $comm->executeCurl($desurl);
                 $des = $desres['results'];
                 $totalDes = $res3['total'];
 
                 //echo "<pre>".print_r($data3); die;
                 //include 'template/bullion_details.html';
-                /*if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
-                {*/
-                        include 'template/bullion_details.html';
-                /*}
-                else
-                {
-                        include 'template/comingsoon.html';
-                }*/
+                /* if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
+                  { */
+                include 'template/bullion_details.html';
+                /* }
+                  else
+                  {
+                  include 'template/comingsoon.html';
+                  } */
                 break;
 
             case 'jewellery_details':
@@ -841,24 +822,20 @@ switch ($action) {
                 $prdInfo = array();
                 $prdName = (!empty($_GET['productname'])) ? $_GET['productname'] : '';
                 $prdId = $orgPrdId = (!empty($_GET['productid'])) ? $_GET['productid'] : '';
-                if (!empty($prdId))
-                {
+                if (!empty($prdId)) {
                     $prdId = explode(' ', $prdId);
                     $prdList = $prdId = $pid = $prdId[1];
                     $prdInfoUrl = APIDOMAIN . 'index.php?action=getPrdById&prdid=' . $prdId;
                     $prdInfo = $comm->executeCurl($prdInfoUrl);
-                    if (!empty($prdInfo) && !empty($prdInfo['results']) && !empty($prdInfo['error']) && empty($prdInfo['error']['errCode']))
-                    {
+                    if (!empty($prdInfo) && !empty($prdInfo['results']) && !empty($prdInfo['error']) && empty($prdInfo['error']['errCode'])) {
                         $prdDet = $prdInfo = $prdInfo['results'][$prdId];
                         $vndrInfo = $prdInfo['vendor_details'];
-                        foreach ($vndrInfo as $key => $value)
-                        {
+                        foreach ($vndrInfo as $key => $value) {
                             $vndrId = $key;
                             $vndrDtls = $value;
                         }
                         $vndrDtls['fulladdress'] = explode(",", $vndrDtls['fulladdress']);
-                        foreach ($vndrDtls['fulladdress'] as $key => $value)
-                        {
+                        foreach ($vndrDtls['fulladdress'] as $key => $value) {
                             $vndrDtls['fulladdress'][$key] = trim($value);
                         }
                         $vndrDtls['fulladdress'] = implode(', ', $vndrDtls['fulladdress']);
@@ -873,10 +850,8 @@ switch ($action) {
                 $gemsRes = $comm->executeCurl($gemsUrl);
                 $gemsAttrs = $gemsRes['results'];
 
-                foreach($gemsAttrs as $key => $value)
-                {
-                    if(strtolower($prdInfo['attr_details']['gemstone_type']) == $value['name'])
-                    {
+                foreach ($gemsAttrs as $key => $value) {
+                    if (strtolower($prdInfo['attr_details']['gemstone_type']) == $value['name']) {
                         $prdInfo['attr_details']['gemstone_type'] = $value['display_name'];
                         break;
                     }
@@ -890,13 +865,10 @@ switch ($action) {
                 $diamondsClarity = array_unique($diamondsClarity);
 
 
-                $tempcheck1 = strpos($prdInfo['attr_details']['color'],'~');
-                if($tempcheck1 == true)
-                {
-                    $diamondsColor = explode('~',$prdInfo['attr_details']['color']);
-                }
-                else
-                {
+                $tempcheck1 = strpos($prdInfo['attr_details']['color'], '~');
+                if ($tempcheck1 == true) {
+                    $diamondsColor = explode('~', $prdInfo['attr_details']['color']);
+                } else {
                     $diamondsColor = explode('|!|', $prdInfo['attr_details']['color']);
                 }
 
@@ -904,13 +876,10 @@ switch ($action) {
 
 
                 $metal = $prdInfo['attr_details']['metal'];
-                $tempcheck2 = strpos($metal,'~');
-                if($tempcheck2 == true)
-                {
-                    $metal = explode('~',$metal);
-                }
-                else
-                {
+                $tempcheck2 = strpos($metal, '~');
+                if ($tempcheck2 == true) {
+                    $metal = explode('~', $metal);
+                } else {
                     $metal = explode('|!|', $prdInfo['attr_details']['metal']);
                 }
                 $metal = array_unique($metal);
@@ -927,41 +896,40 @@ switch ($action) {
 
                 $prdVars = $prdInfo['attr_details'];
 
-                $diamondsShape  = implode(',',$diamondsShape);
-                $diamondsClarity  = implode(',',$diamondsClarity);
-                $diamondsColor  = implode(',',$diamondsColor);
-                $metal = implode(',',$metal);
-                $gemstoneType = implode(',',$gemstoneType);
+                $diamondsShape = implode(',', $diamondsShape);
+                $diamondsClarity = implode(',', $diamondsClarity);
+                $diamondsColor = implode(',', $diamondsColor);
+                $metal = implode(',', $metal);
+                $gemstoneType = implode(',', $gemstoneType);
 
-                $desurl   = APIDOMAIN."index.php?action=showDescription&pid=".$pid."&catid=10001&gemstone_type=".strtolower(urlencode($gemstoneType))."&metal=".strtolower(urlencode($metal))."&clarity=".urlencode($diamondsClarity)."&colour=".urlencode($diamondsColor)."&cert=".strtolower($prdVars['certified'])."&shape=".$diamondsShape."";
-                $desres  = $comm->executeCurl($desurl);
+                $desurl = APIDOMAIN . "index.php?action=showDescription&pid=" . $pid . "&catid=10001&gemstone_type=" . strtolower(urlencode($gemstoneType)) . "&metal=" . strtolower(urlencode($metal)) . "&clarity=" . urlencode($diamondsClarity) . "&colour=" . urlencode($diamondsColor) . "&cert=" . strtolower($prdVars['certified']) . "&shape=" . $diamondsShape . "";
+                $desres = $comm->executeCurl($desurl);
                 $des = $desres['results'];
                 $totalDes = $res3['total'];
 
-                $sug   = APIDOMAIN."index.php?action=suggestProducts&pid=".$pid."&catid=10001&metal=".strtolower(urlencode($metal))."&purity=".$prdVars['gold_purity']."&gwt=".$prdVars['gold_weight']."&shape=".urlencode($diamondsShape)."&certified=".strtolower(urlencode($prdVars['certified']));
-                $res3  = $comm->executeCurl($sug);
+                $sug = APIDOMAIN . "index.php?action=suggestProducts&pid=" . $pid . "&catid=10001&metal=" . strtolower(urlencode($metal)) . "&purity=" . $prdVars['gold_purity'] . "&gwt=" . $prdVars['gold_weight'] . "&shape=" . urlencode($diamondsShape) . "&certified=" . strtolower(urlencode($prdVars['certified']));
+                $res3 = $comm->executeCurl($sug);
                 $data3 = $res3['results'];
                 $sugTotal = $res3['total'];
 
-                foreach($data3 as $imagekey=>$imgval)
-                {
-                    $urlI = APIDOMAIN . 'index.php?action=imagedisplay&pid='.$imagekey;
+                foreach ($data3 as $imagekey => $imgval) {
+                    $urlI = APIDOMAIN . 'index.php?action=imagedisplay&pid=' . $imagekey;
                     $resI = $comm->executeCurl($urlI);
                     $dataI[] = $resI['results'];
                     $smPrdList[] .= $imagekey;
                 }
-                $smPrdList = implode(',',$smPrdList);
+                $smPrdList = implode(',', $smPrdList);
 
                 //echo "<pre>"; print_r($des); die;
                 //include 'template/jewellery_details.html';
-                /*if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
-                {*/
-                        include 'template/jewellery_details.html';
-                /*}
-                else
-                {
-                        include 'template/comingsoon.html';
-                }*/
+                /* if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(REQURI, 'beta'))
+                  { */
+                include 'template/jewellery_details.html';
+                /* }
+                  else
+                  {
+                  include 'template/comingsoon.html';
+                  } */
                 break;
 
             case 'diamond_Form':
@@ -988,9 +956,9 @@ switch ($action) {
 
                 $attr = $result[$pid]['attr_details'];
                 $pdet = $result[$pid];
-        				$certificate_url = $attr['certificate_url'];
-        				$certificate_url = explode('/', $certificate_url);
-        				$certificate_url = $certificate_url[count($certificate_url) - 1];
+                $certificate_url = $attr['certificate_url'];
+                $certificate_url = explode('/', $certificate_url);
+                $certificate_url = $certificate_url[count($certificate_url) - 1];
                 //echo "<pre>";print_r($attr);die;
                 include 'template/diamondForm.html';
                 break;
@@ -1029,8 +997,8 @@ switch ($action) {
                 $pdet = $result[$pid];
 
                 $certificate_url = $attr['certificate_url'];
-        				$certificate_url = explode('/', $certificate_url);
-        				$certificate_url = $certificate_url[count($certificate_url) - 1];
+                $certificate_url = explode('/', $certificate_url);
+                $certificate_url = $certificate_url[count($certificate_url) - 1];
 
                 $shapeUrl = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=10000';
                 $shapeRes = $comm->executeCurl($shapeUrl);
@@ -1158,7 +1126,7 @@ switch ($action) {
                 $page = 'vendorList';
                 $pgno = (!empty($_GET['pgno']) ? $_GET['pgno'] : 1);
                 $limit = (!empty($_GET['limit']) ? $_GET['limit'] : 2);
-                $url = APIDOMAIN . 'index.php?action=vendorlist&pgno='.$pgno.'&limit='.$limit;
+                $url = APIDOMAIN . 'index.php?action=vendorlist&pgno=' . $pgno . '&limit=' . $limit;
                 $res = $comm->executeCurl($url);
                 $data = $res['results']['vendors'];
                 $total = $res['results']['total_vendors'];
@@ -1172,6 +1140,10 @@ switch ($action) {
             case 'about_us':
                 $page = 'about_us';
                 include 'template/about_us.html';
+                break;
+            case 'contact_us':
+                $page = 'contact_us';
+                include 'template/contactUs.html';
                 break;
 
             case 'team':
@@ -1230,7 +1202,7 @@ switch ($action) {
             case 'product_list':
                 $page = 'product_list';
                 $pgno = (!empty($_GET['pgno']) ? $_GET['pgno'] : 1);
-                $url = APIDOMAIN . 'index.php?action=getProdList&page='.$pgno;
+                $url = APIDOMAIN . 'index.php?action=getProdList&page=' . $pgno;
                 $res = $comm->executeCurl($url);
                 $data = $res['results']['products'];
                 $total = $res['results']['total_products'];
@@ -1241,7 +1213,7 @@ switch ($action) {
                 break;
 
             case 'thumbnail':
-                $url = APIDOMAIN . 'index.php?action=getImgByProd&pid='.$params['pid'];
+                $url = APIDOMAIN . 'index.php?action=getImgByProd&pid=' . $params['pid'];
                 $res = $comm->executeCurl($url);
                 $result = $res['results'];
 //                echo '<pre>';                print_r($result);die();
@@ -1265,7 +1237,7 @@ switch ($action) {
                 $res = $comm->executeCurl($url);
                 $data = $res['results'];
                 //include 'template/index.html';
-                        include 'template/index.html';
+                include 'template/index.html';
                 break;
         }
         break;
