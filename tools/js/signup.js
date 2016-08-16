@@ -14,7 +14,7 @@ var validMob = true;
             $('html,body').animate({scrollTop: npos}, 100);
         });
     }
-    
+
     $(input_selector).bind('focus',function() {
         $(this).siblings('label, i').addClass('labelActive');
         $(this).addClass('brOrange');//.removeClass('brRed');
@@ -29,7 +29,7 @@ var validMob = true;
             $(this).removeClass(' ').addClass('brGreen');
         }
     });
-    
+
      $(input_selector).bind('keyup',function() {
         var val = $(this).val();
         var len = val.length;
@@ -50,7 +50,7 @@ function setCityId(e)
     }
 }
 
-   
+
 $('#pr_mobile').focus(function (){
     $('#pr_citySuggestDiv').addClass('dn');
 });
@@ -62,11 +62,11 @@ $('#pr_mobile').focus(function (){
         setTimeout(function () {window.location.assign(DOMAIN); },20);
     });
     $('#signupSubmit').bind('click', function () {
-        
-        
+
+
             if(!$('#pr_citySuggestDiv').hasClass('dn'))
             {
-                $('#pr_citySuggestDiv').addClass('dn');            
+                $('#pr_citySuggestDiv').addClass('dn');
             }
             var pr_name = $('#pr_name').val();
             var pr_mobile = $('#pr_mobile').val();
@@ -91,42 +91,42 @@ $('#pr_mobile').focus(function (){
 
                     setTimeout(function () {
                             if(pr_name.length==0 || isNaN(pr_name)!==true) {
-                                    customStorage.toast(0,'Invalid format for Name'); 
+                                    customStorage.toast(0,'Invalid format for Name');
                                     $('#pr_name').focus();
                                     return false;
                             }
                             else if(city == '') {
-                                    customStorage.toast(0,'City is mandatory!'); 
+                                    customStorage.toast(0,'City is mandatory!');
                                     $('#pr_city').focus();
                                     return false;
                             }
                             else if(cityid == '') {
-                                    customStorage.toast(0,'Choose the city from the list'); 
+                                    customStorage.toast(0,'Choose the city from the list');
                                     $('#pr_cityid').focus();
                                     return false;
                             }
                             else if(pr_mobile=='' || pr_mobile.length!=10 || isNaN(pr_mobile)) {
-                                    customStorage.toast(0,'Invalid format for Mobile'); 
+                                    customStorage.toast(0,'Invalid format for Mobile');
                                     $('#pr_mobile').focus();
                                     return false;
                             }
                             else if(pr_email=='') {
-                                    customStorage.toast(0,'Email is Required!'); 
+                                    customStorage.toast(0,'Email is Required!');
                                     $('#pr_email').focus();
                                     return false;
                             }
                             else if(!common.validateEmail('pr_email')) {
-                                    customStorage.toast(0,'Email is Not Valid!'); 
+                                    customStorage.toast(0,'Email is Not Valid!');
                                     $('#pr_email').focus();
                                     return false;
                             }
                             else if(pr_pass=='') {
-                                    customStorage.toast(0,'Password is Required!'); 
+                                    customStorage.toast(0,'Password is Required!');
                                     $('#pr_pass').focus();
                                     return false;
                             }
                             else if(pr_pass.length <= 5 || pr_pass == 0) {
-                                    customStorage.toast(0,'Password must have minimum 6 characters!'); 
+                                    customStorage.toast(0,'Password must have minimum 6 characters!');
                                     $('#pr_pass').focus();
                                     return false;
                             }
@@ -140,13 +140,13 @@ $('#pr_mobile').focus(function (){
 
                                                 if(errCode == 3)
                                                 {
-                                                    customStorage.toast(0,'Mobile number is already registered!'); 
+                                                    customStorage.toast(0,'Mobile number is already registered!');
                                                     $('#pr_mobile').focus();
                                                     return false;
                                                 }
                                                 else if(errCode == 2)
                                                 {
-                                                    customStorage.toast(0,'Email id is already registered!'); 
+                                                    customStorage.toast(0,'Email id is already registered!');
                                                     $('#pr_email').focus();
                                                     return false;
                                                 }
@@ -175,11 +175,11 @@ $('#pr_mobile').focus(function (){
                                                     requestOTP();
                                                 }
                                             }});
-                                
+
                             }
                     }, 250);
     });
-    
+
 function isValidMKey(evt, id) {
     var val = $('#' + id).val();
     var len = val.length;
@@ -214,7 +214,7 @@ function otpCheck()
 //    {
 //        customStorage.toast(0,'Please enter the correct OTP or click on resend button');
 //    }
-    
+
     var mobile = customStorage.readFromStorage('mobile');
 	var isValid= '';
 
@@ -251,7 +251,7 @@ function otpCheck()
                     }
                     else
                     {
-                        
+
                         var pr_name = encodeURIComponent($('#pr_name').val());
                         var pr_mobile = encodeURIComponent($('#pr_mobile').val());
                         var pr_email = encodeURIComponent($('#pr_email').val());
@@ -279,11 +279,11 @@ function otpCheck()
                                             customStorage.addToStorage('isLoggedIn',true);
                                             customStorage.addToStorage('userid',userid);
                                             customStorage.addToStorage('mobile',pr_mobile);
-                                            customStorage.addToStorage('username',pr_name);
-                                            customStorage.addToStorage('is_vendor',isVendor);
-                                            customStorage.addToStorage('email',pr_email);
-                                            customStorage.addToStorage('name',pr_name);
-                                            customStorage.addToStorage('city',pr_city);
+                                            customStorage.addToStorage('username',decodeURIComponent(pr_name));
+                                            customStorage.addToStorage('is_vendor',decodeURIComponent(isVendor));
+                                            customStorage.addToStorage('email',decodeURIComponent(pr_email));
+                                            customStorage.addToStorage('name',decodeURIComponent(pr_name));
+                                            customStorage.addToStorage('city',decodeURIComponent(pr_city));
                                             if(isVendor === 1)
                                             {
                                                     customStorage.removeFromStorage('busiType');
@@ -291,7 +291,7 @@ function otpCheck()
                                             }
                                             else
                                             {
-                                               $.ajax({url: DOMAIN + "apis/index.php?action=sendWelcomeMailSMS&username="+pr_name +"&mobile="+pr_mobile +"&email="+pr_email +"&isVendor="+userType, success: function (result) {
+                                               $.ajax({url: DOMAIN + "apis/index.php?action=sendWelcomeMailSMS&username="+decodeURIComponent(pr_name) +"&mobile="+decodeURIComponent(pr_mobile) +"&email="+decodeURIComponent(pr_email)+"&isVendor="+decodeURIComponent(userType), success: function (result) {
                                                     var obj = eval('('+result+')');
                                                     var errCode = obj.error.code;
                                                     if(errCode == 0)
@@ -311,7 +311,7 @@ function otpCheck()
                                     }
                             }
                         });
-                        
+
                     }
                 }
                 else if(errCode == 1 || errCode == '1')
@@ -367,7 +367,7 @@ function signUpProceed()
                 {
                    $.ajax({url: DOMAIN + "apis/index.php?action=sendWelcomeMailSMS&username="+pr_name +"&mobile="+pr_mobile +"&email="+pr_email +"&isVendor="+userType, success: function (result) {
                         var obj = eval('('+result+')');
-                        var errCode = obj.error.code;   
+                        var errCode = obj.error.code;
                         if(errCode == 0)
                         {
                             customStorage.toast(1,'Registration Successfully Done');
@@ -382,7 +382,7 @@ function signUpProceed()
         }
     }
     });
-    
+
 }
 
 
@@ -403,11 +403,11 @@ function otpGo(pr_mobile)
         $.ajax({url: DOMAIN + "apis/index.php?action=sendOTP&mb="+pr_mobile, success: function(result)
             {
                 var obj = jQuery.parseJSON(result);
-                
+
                 var errCode = obj.code;
                 if(errCode == 1)
                 {
-                    
+
                     isValid = true;
                     customStorage.toast(1,'OTP is sent to your mobile number');
                     return isValid;
@@ -469,7 +469,7 @@ function checkOtp()
 
 /* For suggestions of City */
 $('#pr_city').bind('keyup focus', input_selector, function(event)
-{		
+{
     var params = 'action=cityName&name=' + escape($(this).val());
     new Autosuggest($(this).val(), '#pr_city', '#pr_citySuggestDiv', DOMAIN + "apis/index.php", params, true, '', '', event);
 });
@@ -479,7 +479,7 @@ function arrangeData(data, id, divHolder, nextxt)
 {
     if (data.results)
     {
-        
+
         var suggest = "<ul class='smallField w100 fmRoboto transition300 font14 pointer border1'>";
         $.each(data.results, function(i, vl) {
             if(id == '#pr_city')
@@ -487,7 +487,7 @@ function arrangeData(data, id, divHolder, nextxt)
             if(id == '#ur_city')
                 suggest += "<li id='suggest" + i + "' class='autoSuggestRow w100 transition300 txtCaCase txtOverFlow txtOver' title="+vl.n+" style='text-transform:capitalize;' onClick='setCityValue(\""+vl.n+"\",\"#ur_city\",\""+vl.id+"\");'>"+vl.n+"</li>";
         });
-        suggest += "</ul>";  
+        suggest += "</ul>";
         return suggest;
     }
     else
