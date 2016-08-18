@@ -385,7 +385,7 @@ switch ($action) {
                 break;
 
             case 'vendor_privacy':
-                $page = 'vendor_privacy';
+                $page = 'IFtoSI - Vendor Privacy';
                 include 'template/vprivacy.html';
                 break;
             case 'customerDtls':
@@ -1138,11 +1138,11 @@ switch ($action) {
                 break;
 
             case 'about_us':
-                $page = 'about_us';
+                $page = 'about-us';
                 include 'template/about_us.html';
                 break;
             case 'contact_us':
-                $page = 'contact_us';
+                $page = 'contact-Us';
                 include 'template/contactUs.html';
                 break;
 
@@ -1156,13 +1156,8 @@ switch ($action) {
                 include 'template/comingsoon.html';
                 break;
 
-            case 'contact_us':
-                $page = 'contact_us';
-                include 'template/contact_us.html';
-                break;
-
             case 'terms_conditions':
-                $page = 'terms_conditions';
+                $page = 'terms-and-conditions';
                 include 'template/terms_conditions.html';
                 break;
 
@@ -1172,7 +1167,7 @@ switch ($action) {
                 break;
 
             case 'vterms_of_listing':
-                $page = 'vterms_of_listing';
+                $page = 'IFtoSI - Vendor Terms Of Listing';
                 include 'template/vterms_of_listing.html';
                 break;
 
@@ -1183,7 +1178,7 @@ switch ($action) {
                 break;
 
             case 'faqs_seller':
-                $page = 'faq';
+                $page = 'IFtoSI - Seller FAQs';
                 include 'template/faq_sellers.html';
                 break;
             case 'education':
