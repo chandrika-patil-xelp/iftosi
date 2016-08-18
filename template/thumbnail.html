@@ -9,11 +9,11 @@
                 <div class="formTitle fLeft fmOpenR m0"><span id="totalDiamonds"><?php echo $result['total_imgs']; ?></span> image(s) available</div>
             </div>
             <?php $data=$result['imgs']; for($i=0;$i<count($data);$i++) {
-                $image = DOMAIN.'image-upload/'.$data[$i]['product_image'];
-            
+                $image = IMGDOMAIN.$data[$i]['product_image'];
+
             ?>
             <div class="thumbnilComm fLeft">
-                <div id='thumb1' class="actThumbnail fLeft" onclick="openTab('<?php echo $image; ?>')" style='background: url(<?php echo $image; ?>) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);'></div>
+                <div id='thumb1' class="actThumbnail fLeft" onclick="openTab('<?php echo $image; ?>')" style='background: url("<?php echo $image; ?>") 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);'></div>
                 <div class="comment fRight">
                     <textarea class="txtComment fmOpenR" id="reason_<?php echo $data[$i]['id']; ?>"  onchange="updateData(<?php echo $data[$i]['id']; ?>);" placeholder=" Comment ( if any )"><?php echo $data[$i]['reason']; ?></textarea>
                 </div>
@@ -33,11 +33,11 @@
                 </div>
             </div>
              <?php }?>
-            
+
         </div>
     </div>
     </div>
-<script type="text/javascript" src="<?=DOMAIN;?>tools/js/adminNav.js?v=<?=VERSION;?>"></script>    
+<script type="text/javascript" src="<?=DOMAIN;?>tools/js/adminNav.js?v=<?=VERSION;?>"></script>
 <script type="text/javascript" src="<?= $jvs['cms_jquery_toast'];?>"></script>
     <script>
         var uid = customStorage.readFromStorage('userid');
@@ -64,7 +64,7 @@
                 }
             }});
         }
-        
+
         function updateData(id) {
             var reason=$('#reason_'+id).val();
             var seq=$('#seq_'+id).val();
@@ -81,6 +81,6 @@
             }});
         }
     </script>
-    
+
 </body>
 </html>
