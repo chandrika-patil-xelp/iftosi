@@ -1,8 +1,23 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>IFtoSI - <?php echo strtoupper($page) ?></title>
-<!--        <link rel='shortcut icon' type='image/x-icon' href='<?php echo FAVICON; ?>' />-->
+        <?php
+              if($page == 'jewellery_details')
+              {
+        ?>
+                    <title>IFtoSI - <?php echo $meta_title; ?></title>
+                    <meta name="title" content="<?php echo $meta_title; ?>">
+        <?php
+              }
+              else
+              {
+        ?>
+                  <title>IFtoSI - <?php echo $page ?></title>
+        <?php
+              }
+        ?>
+
+        <link rel='shortcut icon' type='image/x-icon' href='<?php echo FAVICON; ?>' />
         <link rel="apple-touch-icon" sizes="57x57" href="<?php echo DOMAIN;?>tools/img/favicons/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="<?php echo DOMAIN;?>tools/img/favicons/apple-icon-60x60.png">
         <link rel="apple-touch-icon" sizes="72x72" href="<?php echo DOMAIN;?>tools/img/favicons/apple-icon-72x72.png">
