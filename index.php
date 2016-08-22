@@ -822,25 +822,55 @@ switch ($action) {
                 $prdInfo = array();
                 $prdName = (!empty($_GET['productname'])) ? $_GET['productname'] : '';
                 $prdId = $orgPrdId = (!empty($_GET['productid'])) ? $_GET['productid'] : '';
-                if (!empty($prdId)) {
+                if (!empty($prdId))
+                {
                     $prdId = explode(' ', $prdId);
                     $prdList = $prdId = $pid = $prdId[1];
                     $prdInfoUrl = APIDOMAIN . 'index.php?action=getPrdById&prdid=' . $prdId;
                     $prdInfo = $comm->executeCurl($prdInfoUrl);
-                    if (!empty($prdInfo) && !empty($prdInfo['results']) && !empty($prdInfo['error']) && empty($prdInfo['error']['errCode'])) {
+                    if (!empty($prdInfo) && !empty($prdInfo['results']) && !empty($prdInfo['error']) && empty($prdInfo['error']['errCode']))
+                    {
                         $prdDet = $prdInfo = $prdInfo['results'][$prdId];
                         $vndrInfo = $prdInfo['vendor_details'];
-                        foreach ($vndrInfo as $key => $value) {
+                        foreach ($vndrInfo as $key => $value)
+                        {
                             $vndrId = $key;
                             $vndrDtls = $value;
                         }
                         $vndrDtls['fulladdress'] = explode(",", $vndrDtls['fulladdress']);
-                        foreach ($vndrDtls['fulladdress'] as $key => $value) {
+                        foreach ($vndrDtls['fulladdress'] as $key => $value)
+                        {
                             $vndrDtls['fulladdress'][$key] = trim($value);
                         }
                         $vndrDtls['fulladdress'] = implode(', ', $vndrDtls['fulladdress']);
                         $vndrAddr = explode(',', $vndrDtls['fulladdress']);
                     }
+                    //echo "<pre>";print_r($prdDet['attr_details']);die;
+                    if(!empty($prdDet['attr_details']))
+                    {
+                          if(!empty($prdDet['attr_details']['gold_purity']))
+                          {
+                              $meta_title .= $prdDet['attr_details']['gold_purity'].' KTS ';
+                          }
+                          if(!empty($prdDet['attr_details']['metal']))
+                          {
+                              $meta_title .= $prdDet['attr_details']['metal'].' ';
+                          }
+                          if(!empty($prdDet['attr_details']['shape']))
+                          {
+                              $meta_title .= $prdDet['attr_details']['shape'].' ';
+                          }
+                          if(!empty($prdDet['attr_details']['diamond_shape']))
+                          {
+                              $diamonds = str_replace('|!|',',',$prdDet['attr_details']['diamond_shape']);
+                              $meta_title .= 'With '.$diamonds.' Diamonds';
+                          }
+                          if(!empty($prdDet['attr_details']['certified']))
+                          {
+                              $meta_title .= ' Certified By '.$prdDet['attr_details']['certified'];
+                          }
+                    }
+
                 }
                 $url1 = APIDOMAIN . 'index.php?action=imagedisplay&pid=' . $pid;
                 $res1 = $comm->executeCurl($url1);
