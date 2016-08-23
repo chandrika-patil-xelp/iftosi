@@ -850,7 +850,7 @@ switch ($action) {
                     {
                           if(!empty($prdDet['attr_details']['gold_purity']))
                           {
-                              $meta_title .= $prdDet['attr_details']['gold_purity'].' KTS ';
+                              $meta_title .= $prdDet['attr_details']['gold_purity'].' Karats ';
                           }
                           if(!empty($prdDet['attr_details']['metal']))
                           {
@@ -862,10 +862,10 @@ switch ($action) {
                           }
                           if(!empty($prdDet['attr_details']['diamond_shape']))
                           {
-                              $diamonds = str_replace('|!|',',',$prdDet['attr_details']['diamond_shape']);
+                              $diamonds =  implode(', ',array_unique(explode('|!|',$prdInfo['attr_details']['diamond_shape'])));
                               $meta_title .= 'With '.$diamonds.' Diamonds';
                           }
-                          if(!empty($prdDet['attr_details']['certified']))
+                          if(!empty($prdDet['attr_details']['certified']) && $prdDet['attr_details']['certified'] !== 'Other')
                           {
                               $meta_title .= ' Certified By '.$prdDet['attr_details']['certified'];
                           }
