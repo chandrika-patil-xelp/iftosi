@@ -1224,6 +1224,7 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
     .userForm {width: 100%;border-radius: 0;}
     .cntEmail {width: 100%;}
     .cntEmail {width: 100%;}
+    
 
     /*Login*/
 
@@ -1231,7 +1232,7 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
     .lgTitle {height:auto;line-height: 25px;}
 
     /*SignUp page*/
-    .signupPage {ackground: #171334 url(../img/common/pattern.svg)repeat;background-size: auto 25px;padding: 120px 0 50px 0;height: auto;}
+    .signupPage {background: #171334 url(../img/common/pattern.svg)repeat;background-size: auto 25px;padding: 120px 0 50px 0;height: auto;}
     .signupDiv .wrapperMax {max-width: 100%;border: 0px solid #333;margin-top: 0;padding: 20px;border-radius: 0;height: auto;z-index: 115;position: relative;float: left;}
     .bgHolder {width: 100%;height: 190px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: 100% auto;padding: 0px 0 35px 0;}
     .bgHolder .heading {width: 100%;height: auto;max-width: 1200px;margin: auto;color: #fff;padding: 150px 0px 0 0px;text-align: center;}
