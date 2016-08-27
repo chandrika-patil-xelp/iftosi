@@ -260,6 +260,21 @@ class attribute extends DB
                 $priceminval = floor($row['minval']);
                 $pricemaxval = ceil($row['maxval']);
             }
+
+            $sql = "SELECT
+                            MIN(carat) AS minCval,
+                            MAX(carat) AS maxCval
+                    FROM
+                            tbl_product_search
+                    WHERE
+                            product_id IN(".$allpids.")";
+            $res = $this->query($sql);
+            if($res)
+            {
+                $row = $this->fetchData($res);
+                $caratminval = floor($row['minCval']);
+                $caratmaxval = ceil($row['maxCval']);
+            }
         }
 
         $mapsql="SELECT
@@ -388,18 +403,23 @@ class attribute extends DB
                                             active_flag=1
                                         ";
                         }
-                        //echo "<br>".$qryrng;
                         $resrng = $this->query($qryrng);
 
                         if($resrng)
                         {
                             $rowrng = $this->fetchData($resrng);
-                            if($priceminval && $pricemaxval)
+                            if($priceminval && $pricemaxval && $row1['attr_name'] == 'price' && $params['catid'] == '10001')
                             {
                                 $maxvl = $pricemaxval;
                                 $minvl = $priceminval;
                             }
-                            else {
+                            if($priceminval && $pricemaxval && $row1['attr_name'] == 'price' && $params['catid'] == '10000')
+                            {
+                              $maxvl = round($rowrng['maxval'],2);
+                              $minvl = round($rowrng['minval'],2);
+                            }
+                            if($caratminval && $caratmaxval && $row1['attr_name'] == 'carat')
+                            {
                                 $maxvl = $rowrng['maxval'];
                                 $minvl = $rowrng['minval'];
                             }

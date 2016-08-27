@@ -1222,7 +1222,7 @@
                             if($params['b2bsort'])
                                 $extnhv = " HAVING b2b_dollar_price between ".$exd[0]." AND ".$exd[1]." ";
                             else
-                                $extnhv = " HAVING dollar_price between ".$exd[0]." AND ".$exd[1]." ";
+                                $extnhv = " HAVING dollar_price between ".$exd[0]." AND ".$exd[1]."";
           						}
                       else
                           $extn .= " AND ".str_replace('Range','',$expd[0])." between ".$exd[0]." AND ".$exd[1]." ";
@@ -1236,7 +1236,7 @@
         					{
           						$expd = explode('|~|',$val);
           						$exd = explode('|@|',$expd[1]);
-                      if(strpos($exd, 'combination') !== false)
+                      if(stristr($exd[0],'combination'))
                       {
                           $gig = str_replace('00','&',$expd[1]);
                           $gig = str_replace('11',',',$gig);
@@ -1262,7 +1262,7 @@
                           }
                           $ex = explode('_',$vl);
                           $re='^[0-9]+$';
-                          if(strpos($ex[count($ex)-1],'KT') !== false)
+                          if(stripos($ex[count($ex)-1],'KT') !== false)
                           {
                              $inarr[] = preg_replace("/[^0-9]/","",$ex[count($ex)-1]);
                           }
@@ -1276,7 +1276,25 @@
                       if($field == 'combination')
                           $extn .= " AND (".$otherGem." OR ".$field." in ('".implode("','",$inarr)."')) ";
                       else
-          						    $extn .= " AND ".$field." in ('".implode("','",$inarr)."') ";
+                      {
+                          if(count($inarr) == 1)
+                          {
+                            if($field == 'gold_purity' && ($inarr[0] == 'Platinum' || $inarr[0] == 'Silver'))
+                            {
+                                $extn .= " AND metal in ('".implode("','",$inarr)."') ";
+                            }
+                            else
+                            {
+
+                                $extn .= " AND ".$field." in ('".implode("','",$inarr)."') ";
+                            }
+                          }
+                          else
+                          {
+                              $extn .= " AND ".$field." in ('".implode("','",$inarr)."') ";
+                          }
+
+                      }
         					}
       				}
 
@@ -1380,20 +1398,28 @@
       				{
 
                   $sql = "SELECT
-                                  count(*) as cnt
+                                  count(*) as cnt,
+                                  dollar_price
                           FROM (
                                   SELECT
                                           product_id AS pid,
                                           price,
                                           b2b_price,
+                                          shape,
                                           carat,
                                           (SELECT vendor_id FROM `tbl_vendor_product_mapping` WHERE active_flag=1 AND product_id = pid LIMIT 1) AS vid,
                                           (SELECT dollar_rate FROM tbl_vendor_master WHERE vendor_id = vid) AS dollarval,
+                                          carat*b2b_price*1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as b2b_dollar_price,
+                                          carat*price*1*(SELECT dollar_rate FROM `tbl_vendor_master` where vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id=pid limit 1)) as dollar_price,
                                           active_flag,
                                           color,
                                           clarity,
+                                          metal,
                                           polish,
                                           symmetry,
+                                          gold_purity,
+                                          gold_weight,
+                                          bullion_design,
                                           cut,
                                           fluo,
                                           combination,
@@ -1607,6 +1633,7 @@
                                                 vendor_id=(SELECT vendor_id FROM `tbl_vendor_product_mapping` where active_flag=1 AND product_id='".$pid."')";
             							$dollarRes=$this->query($dollarSql);
             							$dollarRow=$this->fetchData($dollarRes);
+
             							$arr1[$pid]['dollar_rate']=$dollarRow['dollar_rate'];
             							$arr1[$pid]['gold_rate']=$dollarRow['gold_rate'];
             							$arr1[$pid]['silver_rate']=$dollarRow['silver_rate'];

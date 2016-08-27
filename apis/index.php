@@ -268,9 +268,9 @@ switch($action)
             $isvendor = $params['isvendor'] =(!empty($params['isvendor'])) ? trim($params['isvendor']) : 0;
             if(empty($password))
             {
-				$tmp_params = array('length' => 6, 'mobile' => $mobile);
-				$password = $obj->generatePassword($tmp_params);	// Password Length. Numeric.
-			}
+        				$tmp_params = array('length' => 6, 'mobile' => $mobile);
+        				$password = $obj->generatePassword($tmp_params);	// Password Length. Numeric.
+			      }
             if(empty($username)  ||  empty($password)  ||  empty($mobile)  ||  empty($email))
             {
                 $arr = array();
