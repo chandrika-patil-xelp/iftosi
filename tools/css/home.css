@@ -460,7 +460,7 @@ a{text-decoration: none;}
 .for-12{width:25%;height: 33.5%;background: #333;float: left;}
 .prox{opacity: 0;position: relative;z-index: 1;cursor: pointer;}
 
-.proxImg{width:100%;height: 100%;position: absolute;top:0;left:0;background: #ebebde;}
+.proxImg{width:100%;height: 100%;position: absolute;top:0;left:0;}
 
 .prdDetails{width:100%;height: auto;border-bottom: 1px solid #ebebde;padding-bottom:5px;}
 .detComm{width: 100%;height: 30px;line-height: 30px;}
@@ -1098,6 +1098,12 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 .mailDiv{width:100%;height:auto;padding:5px 0px 5px 30px;font-size:15px;background-image:url('../img/common/new/email4d.svg');background-repeat:no-repeat;background-size:auto 25px;background-position:0px center;color:#666;}
 .addTxt1{color:#8A0044;font-size:15px;width:100%;height:auto;padding:0px 0px 0px 30px;}
 .callDiv{width:100%;height:auto;padding:5px 0px 5px 30px;font-size:15px;background-image:url('../img/26.svg');background-repeat:no-repeat;background-size:auto 30px;background-position:0px center;color:#666;}
+
+
+.imgLoader{width: 100%;
+    height: 100%;
+    position: absolute;background:#fff url("../img/Loader_3.gif")no-repeat;background-position: center;    background-size: auto 50%;}
+
 
 @media only screen and (min-width: 320px) and (max-width: 767px){
     .teamTabs{display: block;}

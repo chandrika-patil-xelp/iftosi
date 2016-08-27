@@ -9,7 +9,7 @@ function Common() {
     this.validateEmail = function (email) {
         var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (!email.match(mailformat)) {
-            return 1;
+            return 1; 
         }
         return 0;
     };
