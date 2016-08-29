@@ -534,12 +534,13 @@ a{text-decoration: none;}
 /*Left Menu Results Page*/
 .leftMenu{width:250px;height:100%;position:fixed;top:0;box-shadow: 0 0 20px 5px rgba(0,0,0,0.2);z-index: 100;background-color: #fff;padding: 180px 0 0 0;left: 0;background:#fff  url(../img/common/iftosilogo.svg)no-repeat;background-position:center top;background-size: auto }
 .leftTransit{-webkit-transform: translateX(-350px);-moz-transform: translateX(-350px);-ms-transform: translateX(-350px);-o-transform: translateX(-350px);transform: translateX(-350px);}
-
-.leftMenu ul{width:100%;height: auto;margin:0;padding:0;list-style: none;}
-.leftMenu ul li{width:100%;height: 50px;line-height:50px;border-bottom: 1px solid #ebebde;padding-left: 50px;font-size: 14px;color: #171334;padding-right:15px; }
+.menuList{width:100%;height:100%; overflow:hidden;overflow-y:scroll;padding-bottom:50px;}
+.leftMenu .menuList ul{width:100%;height: auto;margin:0;padding:0;list-style: none;}
+.leftMenu .menuList ul li{width:100%;height: 50px;line-height:50px;border-bottom: 1px solid #ebebde;padding-left: 50px;font-size: 14px;color: #171334;padding-right:15px; }
 .iHome{background: url(../img/common/home.svg)no-repeat;background-size: auto 35px;background-position: 10px center;}
 .iWishlist{background: url(../img/common/wishlist.svg)no-repeat;background-size: auto 35px;background-position: 10px center;}
 .iLogin{background: url(../img/common/new/spassword.svg)no-repeat;background-size: auto 35px;background-position: 10px center;}
+.isignup{background:url(../img/common/new/signup.svg)no-repeat;background-size: auto 30px;background-position: 10px center;}
 .iLogout{background: url(../img/common/logout.svg)no-repeat;background-size: auto 35px;background-position: 10px center;}
 .iDiamonds{background:  url(../img/common/diamond.jpg)no-repeat;background-size: auto 40px;background-position: 5px center;}
 .iJewellery{background: url(../img/common/jewellery.jpg)no-repeat;background-size: auto 35px;background-position: 5px center;}
@@ -1129,6 +1130,7 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
     .shapesTitle {width: 100%;height: auto;line-height: 30px;padding: 10px 0;font-size: 20px;text-align: center;margin-bottom: 10px;padding: 0 10%;}
     .allShapes {width: 100%;height: auto;padding: 0;}
     .shapeComm {width: 100px!important;height: 100px!important;margin: 0;border: 2px solid #fff;position: relative;background-image: url(../img/shapes.svg);display: inline-block;vertical-align: bottom;text-align: center;cursor: pointer;background-size: 1000% auto;}
+    .shapeComm:hover{border:1px solid #fff;}
     .jShapesCont {height: auto;}
     .jshapeComm {width: 100%;padding-top: 162px;font-size: 18px;}
     .Rings {box-shadow: inset 0 -50px 0px rgba(23, 19, 52,0.9);}
@@ -1343,6 +1345,12 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
     .carousel {width: 100%;}
     .carousel li {width: 100%;}
     .addrCont{width:100%;padding:10px 0px;}
+    .jshapeComm.Rings:hover {box-shadow: inset 0 -50px 0px rgba(23, 19, 52,0.9);}
+    .jshapeComm:hover {padding-top: 155px;font-size: 18px;}
+    .jshapeComm.gCoins:hover {box-shadow: inset 0 -50px 0px rgba(56, 11, 52,0.9);}
+    .jshapeComm.gCoins{box-shadow: inset 0 -50px 0px rgba(56, 11, 52,0.9);}
+    .jshapeComm.gBars{box-shadow: inset 0 -50px 0px rgba(56, 11, 52,0.9);}
+    .jshapeComm.gBars:hover{box-shadow: inset 0 -50px 0px rgba(56, 11, 52,0.9);}
 
 }
 
