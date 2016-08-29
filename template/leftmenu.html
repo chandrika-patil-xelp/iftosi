@@ -1,4 +1,5 @@
 <div id='leftMenu' class='leftMenu transition300 leftTransit'>
+    <div class="menuList fLeft">
     <ul class="fLeft fmOpenR">
         <li class='iHome' id="homePg" onclick="common.goToUrl('<?php echo DOMAIN; ?>')">Home</li>
         <!--<li class='iDiamonds' id="dmdsPg">Diamonds</li>
@@ -34,7 +35,8 @@
 <!--    <li class='iWishlist' id="wshlstPg" onclick="common.goToWishlist();">Wishlist<span class="fRight" id="lftWshCnt">25</span></li>-->
         <li class='iWishlist' id="wshlstPg" onclick="redirectToWishlist();">Wishlist<span class="fRight" id="lftWshCnt"></span></li>
         <li class='iLogin dn' id="lgnPg" onclick="common.goToUrl('<?php echo DOMAIN .'login'; ?>')">Sign In</li>
-        <li class='iLogin'  onclick="common.goToUrl('<?php echo DOMAIN .'signup'; ?>')">Sign Up</li>
+        <li class='isignup'  onclick="common.goToUrl('<?php echo DOMAIN .'signup'; ?>')">Sign Up</li>
         <li class='iLogout dn' id="lgotPg" onclick="common.doLogout();">Logout <span class="fRight dn" id="usrNm"></span></li>
     </ul>
+    </div>
 </div>
