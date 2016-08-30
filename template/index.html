@@ -159,7 +159,7 @@
     <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['home']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['head']; ?>"></script>
-    <script type="text/javascript" src="<?= $jvs['comm']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['comm']; ?>"></script>	
     <script type="text/javascript">
 
                                 var val = 0;
@@ -215,10 +215,14 @@
                                     }
 
                                 }
-
-
-
-
+ </script>
+  <script>       
+        var supportsOrientationChange = "onorientationchange" in window,
+           orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
+      
+        window.addEventListener(orientationEvent, function() {
+           window.location.reload()
+       }, false);
 
     </script>
 </body>
