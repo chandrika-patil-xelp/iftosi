@@ -359,6 +359,25 @@ a{text-decoration: none;}
     padding-left: 35px;
     background-size: auto 100%;
 }
+.allResults .modrt {
+    background: url(../img/common/sort.svg)no-repeat;
+    background-position: left center;
+    padding-left: 35px;
+    background-size: auto 100%;
+}
+.allResults .lowHigh {
+    background: url(../img/common/sort.svg)no-repeat;
+    background-position: left center;
+    padding-left: 35px;
+    background-size: auto 100%;
+}
+.allResults .highLow {
+    background: url(../img/common/sort.svg)no-repeat;
+    background-position: left center;
+    padding-left: 35px;
+    background-size: auto 100%;
+}
+
 
 .sortBox{width:180px;max-width: 25%;height: 40px;line-height: 40px;margin: 10px 0}
 .dropdownBox{width: 100%;position: relative;z-index: 10;padding: 10px;}
@@ -674,8 +693,8 @@ a{cursor:pointer;}
 .bullion_details .imgsCont {height: 393px;position: relative;left: 0;top: 0;border: 1px solid #d4d4c8;float: left;}
 
 .bullion_details .thumbnil {width: 24%;height: 83px;border: 1px solid #d4d4c8;margin: 0.5%;cursor: pointer;display: inline-block;}
-.bullion_details .leftArrow {top: 0px;}
-.bullion_details .rightArrow {top: 0px;}
+/*.bullion_details .leftArrow {top: 0px;}
+.bullion_details .rightArrow {top: 0px;}*/
 .bullion_details .detCont {width: 60%;height: 390px;padding: 15px 15px 0px 25px;float: left;}
 .bullion_details .btnsCont {width: 100%;height: auto;}
 
@@ -1707,3 +1726,5 @@ education
 #pr_citySuggestDiv{top:40px!important}
 #pr_citySuggestDiv{top:40px!important}
 #pr_citySuggestDiv{top:40px!important}
+
+.borderColor{border-color:#380B34;}
