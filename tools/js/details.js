@@ -406,8 +406,10 @@ function showImages(data)
 			k = 0;
 		});
 
-
 		$('#gallery1 .thumbnil').click(function(){
+                        $(this).addClass("borderColor");
+                        $(this).prevAll().removeClass("borderColor");
+                         $(this).nextAll().removeClass("borderColor");
 			var imgvl=$(this).css('background-image');
 			$('#prdImage').css({'background-image': imgvl});
 		});
