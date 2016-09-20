@@ -1,4 +1,5 @@
-var input_selector = 'input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=number], input[type=search], textarea, input[type=radio]';
+
+var input_selector = 'input[type=text],  input[type=password], input[type=email], input[type=url], input[type=tel], input[type=number], input[type=search], textarea, input[type=radio]';
 var pw = $(window).width();
 var ph = $(window).height();
 var isMobile = false;
@@ -22,10 +23,12 @@ var validMob = true;
     });
 
     $(input_selector).bind('blur',function() {
-        if ($(this).val().length === 0 && $(this).attr('placeholder') === undefined) {
+        if ($(this).val().length === 0 && $(this).attr('placeholder') === undefined)
+        {
             $(this).siblings('label, i').removeClass('labelActive');
             $(this).removeClass('brOrange brGreen');//.addClass('brRed');
-        } else {
+        } else 
+        {
             $(this).removeClass(' ').addClass('brGreen');
         }
     });
@@ -62,12 +65,14 @@ $('#pr_mobile').focus(function (){
         setTimeout(function () {window.location.assign(DOMAIN); },20);
     });
     $('#signupSubmit').bind('click', function () {
-
-
+        
+        
             if(!$('#pr_citySuggestDiv').hasClass('dn'))
             {
                 $('#pr_citySuggestDiv').addClass('dn');
             }
+            
+            
             var pr_name = $('#pr_name').val();
             var pr_mobile = $('#pr_mobile').val();
             var pr_email = $('#pr_email').val();
@@ -79,6 +84,7 @@ $('#pr_mobile').focus(function (){
             var amIVendor = $("input[type=checkbox]:checked").length;
             var isValid = false;
             var userType = isVendor;
+            var n = /^[A-Za-z\+*?\s]+$/;
             if(isVendor == 1 || isVendor == '1')
             {
                 isVendor=1;
@@ -90,12 +96,12 @@ $('#pr_mobile').focus(function (){
             var uType = $('#isVendor').val();
 
                     setTimeout(function () {
-                            if(pr_name.length==0 || isNaN(pr_name)!==true) {
+                            if(pr_name.length==0 || isNaN(pr_name)!==true || (n.test(pr_name)== false)) {
                                     customStorage.toast(0,'Invalid format for Name');
                                     $('#pr_name').focus();
                                     return false;
                             }
-                            else if(city == '') {
+                            else if(city == '' || !(pr_name.match(n))) {
                                     customStorage.toast(0,'City is mandatory!');
                                     $('#pr_city').focus();
                                     return false;
