@@ -910,7 +910,7 @@ a{cursor:pointer;}
 .jshapeComm.shapeSelected{background-color: #fff;border-right: 2px solid #FFF;padding-top: 75px;font-size: 30px;}
 .jshapeComm.shapeSelected::after{content: '';position: absolute;right: 0px; left:0px; bottom: 50px;margin: auto; width: 40px;height: 40px;background: url(../img/common/tick2.svg)no-repeat;background-position: center;background-size: auto 100%; transition: 100ms ease-in-out;}
 
-.drag-target {height: 100%;width: 0px;position: fixed;top: 0;z-index: 1;}
+.drag-target{height: 100%;width: 0px;position: fixed;top: 0;z-index: 100;}
 .pFixed{position: fixed;}
 
 /*Bullion Results*/
@@ -1519,7 +1519,8 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 
 }
 
-
+.hStngclass .filterBtn{display: none;} 
+.bullion_details .filterBtn{display: none;}
 /*
 
 @media only screen and (min-width: 1768px) and (max-width: 1959px){
@@ -1650,18 +1651,6 @@ Home Page
 .categoryCont {height: 489px;padding: 200px 0 50px 0;  }
 .jshapeComm {height: 150px; padding-top: 110px;font-size: 18px; line-height: 40px;}
 }*/
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
