@@ -203,6 +203,7 @@ function Common() {
 		$('#wishListHdr').removeClass('dn');
     };
     this.closeLoginForm = function () {
+        $('#baseCont').removeClass("pFixed");
         $('#loginDiv').velocity({opacity:0}, {delay: 0,duration: 100, ease: 'swing'});
         $('#overlay1').velocity({opacity: 0}, {delay: 300,duration: 300, ease: 'swing'});
         setTimeout(function () {
@@ -211,7 +212,7 @@ function Common() {
         }, 1010);
     }
     this.showLoginForm = function (vd) {
-        var str = '<div id="overlay1" class="overlay transition300" style="opacity: 0;" onclick="common.closeLoginForm();"></div>';
+        var str = '<div id="overlay1" class="overlay transition300" style="opacity: 0;"></div>';
         str += '<div id="loginDiv" class="loginDiv transition300" style="opacity:0">';
         str += '<div class="lgTitle fLeft fmOpenR">Sign In</div>';
         str += '<div class="inputCont fLeft fmOpenR">';
