@@ -119,7 +119,7 @@ $(document).ready(function () {
     $('#userForm').velocity({scale: 0}, {delay: 0, duration: 0});
 
     $('.iconCall,.iconMessage').click(function () {
-
+        $('#ur_citySuggestDiv').addClass("dn");
         $('#baseCont').addClass("pFixed");
         $('#ur_mobile,#ur_name,#ur_city,#ur_email').val("");
         $('#ur_mobile,#ur_name,#ur_city,#ur_email').blur();
@@ -226,6 +226,7 @@ $(document).ready(function () {
 
 
     $('#userCancel').bind('click', function () {
+          $('#baseCont').removeClass("pFixed");
         $('#userForm').velocity({scale: 0}, {delay: 0, ease: 'swing'});
         $('#overlay').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
         $('#baseCont').removeClass("pFixed");
@@ -768,9 +769,10 @@ function showVendorDetails(obj)
 
         } else if (isMail == true)
         {
+            
             $('#overlay,#userForm').removeClass('dn');
             setTimeout(function () {
-                $('#baseCont').addClass("pFixed");
+                $('#baseCont').removeClass("pFixed");
                 $('#overlay').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
                 $('#userForm').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
             }, 10);
@@ -779,6 +781,7 @@ function showVendorDetails(obj)
         } else if ((isMail == false) && (isWishList == false))
         {
             var tmstmp = new Date().getTime();
+            $('#baseCont').removeClass("pFixed");
             $.ajax({url: DOMAIN + "apis/index.php?action=getOwnerCheck&uid=" + uid + "&pid=" + pid + "&tmstmp=" + tmstmp, success: function (result)
                 {
                     var obj = eval('(' + result + ')');
@@ -1320,5 +1323,10 @@ $(document).ready(function () {
 });
 
  $(".overlay").click(function(){
+//     $('#ur_citySuggestDiv').removeClass("dn");
      $('#baseCont').removeClass("pFixed");
  });
+ 
+  $('#mMenuBtn').click(function(){
+            $('.menuList').scrollTop(0);
+        });

@@ -646,3 +646,7 @@ function showProductList()
         });
     }
 }
+
+  $('#mMenuBtn').click(function(){
+            $('.menuList').scrollTop(0);
+        });
