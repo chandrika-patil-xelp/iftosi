@@ -773,7 +773,7 @@ function showVendorDetails(obj)
             
             $('#overlay,#userForm').removeClass('dn');
             setTimeout(function () {
-                $('#baseCont').removeClass("pFixed");
+                $('#baseCont').removeClass( "pFixed");
                 $('#overlay').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
                 $('#userForm').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
             }, 10);
@@ -949,10 +949,10 @@ $('#overlay').bind('click', function () {
 //});
 
 function closeAllForms() {
-    $('#loginDiv,#userForm').velocity({scale: 0}, {delay: 0, ease: 'swing'});
-    $('#overlay').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
+//    $('#loginDiv,#userForm').velocity({scale: 0}, {delay: 0, ease: 'swing'});
+//    $('#overlay').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
     setTimeout(function () {
-        $('#overlay,#loginDiv,#userForm').addClass('dn');
+//        $('#overlay,#loginDiv,#userForm').addClass('dn');
     }, 1010);
 }
 
@@ -1323,11 +1323,9 @@ $(document).ready(function () {
         }});
 });
 
- $(".overlay").click(function(){
-//     $('#ur_citySuggestDiv').removeClass("dn");
-     $('#baseCont').removeClass("pFixed");
- });
- 
-  $('#mMenuBtn').click(function(){
+
+  $('#mMenuBtn,#clrfix').click(function(){
             $('.menuList').scrollTop(0);
+            $('html,body').scrollTop(0);
         });
+     
