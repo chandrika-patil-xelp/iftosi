@@ -103,6 +103,7 @@ $(document).ready(function () {
             }
         } else
         {
+            
              $('#baseCont').addClass("pFixed");
             if (isVendor == 2 || isVendor == '2')
             {
@@ -751,9 +752,11 @@ function showVendorDetails(obj)
 
     } else
     {
+       
         if (isWishList == true)
         {
             var tmstmp = new Date().getTime();
+            
             $.ajax({url: DOMAIN + "apis/index.php?action=getOwnerCheck&uid=" + uid + "&pid=" + pid + "&timestamp=" + tmstmp, success: function (result)
                 {
                     var obj = eval('(' + result + ')');
@@ -769,11 +772,10 @@ function showVendorDetails(obj)
             });
 
         } else if (isMail == true)
-        {
-            
+        {         
             $('#overlay,#userForm').removeClass('dn');
             setTimeout(function () {
-                $('#baseCont').removeClass( "pFixed");
+                $('#baseCont').addClass("pFixed");
                 $('#overlay').velocity({opacity: 1}, {delay: 0, duration: 300, ease: 'swing'});
                 $('#userForm').velocity({scale: 1}, {delay: 80, duration: 100, ease: 'swing'});
             }, 10);
