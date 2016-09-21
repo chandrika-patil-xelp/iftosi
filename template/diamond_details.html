@@ -666,7 +666,7 @@ foreach($des as $key=>$value)
         <div id='userForm' class="userForm dn">
             <div class="lgTitle fLeft fmOpenR">Submit details to get SMS & EMAIL</div>
             <div class="inputCont fLeft fmOpenR">
-                <input type="text" id="ur_mobile" name="ur_mobile" autocomplete="false" maxlength="10" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeypress="return common.isNumberKey(event);">
+                <input type="text" id="ur_mobile" name="ur_mobile" autocomplete="false" maxlength="10" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeypress="return common.isNumberKey(event);" onkeyup="isValidMKey(event, this.id);">
                 <label for="ur_mobile" class="inp-label transition100">MOBILE</label>
                 <div id="ur_mobile_inpText" class="inpText fRight transition300">enter<br>mobile number</div>
             </div>
