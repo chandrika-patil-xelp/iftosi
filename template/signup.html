@@ -1,6 +1,6 @@
 <?php include 'bhead.html'; ?>
 <body>
-    <div id='baseCont' class="container fmOpenR signupPage">
+    <div id='baseCont' class="container fmOpenR signupPage" onclick="showLeftMenu(false)">
         <div class="wrapper">
             <div id="header" class="header transition300">
                 <div class="wrapperMax">
@@ -18,7 +18,7 @@
                             <div class="head3 fmOpenR headIcon1">Add products to wishlist</div>
                             <div class="head3 fmOpenR headIcon2">Get vendor details instantly</div>
                             <div class="head3 fmOpenR headIcon3">Browse exclusive products</div>
-                           
+
                         </div>
                         <div class="signupCl2 fRight">
                             <div class="inputCont fLeft fmOpenR">
@@ -51,19 +51,18 @@
                                 <div id="pr_pass_inpText" class="inpText fRight transition300">enter your<br>password</div>
                             </div>  
                             <input type="password"  style="display:none">
-                            
+
                             <input type="hidden" id="isVendor" class="filled-in amIVendor" value="0" name="isBuyer">
-                            
+
                             <div class="font12 txtCenter fLeft termsLink">By clicking on Sign Up below, <br><b>you agree to our <a href="<?php echo DOMAIN?>Terms-Of-Service" alt="Terms Of Service" title="Terms of Service">Terms of Service</a></b></div>
                             <div class="cancelLgBtn fLeft fmOpenR ripplelink poR" id='signupCancel'> CANCEL</div>
                             <div class="loginBtn fLeft fmOpenR ripplelink poR" id='signupSubmit'>SIGN UP</div>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
-            
-            <div id='overlay' class="overlay transition300 transit-100Y1 dn" ></div>
+            <div id='overlay' class="overlay transition300 transit-100Y1 dn"></div>
             <div id="otpDiv" class="loginDiv transition300 dn" style="transform: scale(1);height:200px !important">
                 <div class="lgTitle fLeft fmOpenR">Enter OTP sent to your mobile</div>
                 <div class="inputCont fLeft fmOpenR">
@@ -79,14 +78,14 @@
     </div>
     <a href="<?php echo DOMAIN?>Vendor-Sign-Up" alt="Vendor SignUp" class="" title="Vendor SignUp" id="vsignup"><div class="svnd fLeft">Are you a vendor? Click here to sign up <div class="searchBtn fmOpenR transition100">SIGN UP</div></div></a>
     <script type="text/javascript">
-    $(document).ready(function ()
-    {
-        var uid = customStorage.readFromStorage('userid');
-        if(uid !== undefined && uid !== 'undefined' && uid !== null && uid !== 'null' && uid !== '')
+        $(document).ready(function ()
         {
-            window.location.href=DOMAIN;
-        }
-    });
+            var uid = customStorage.readFromStorage('userid');
+            if (uid !== undefined && uid !== 'undefined' && uid !== null && uid !== 'null' && uid !== '')
+            {
+                window.location.href = DOMAIN;
+            }
+        });
     </script>
     <?php include 'footer.html'; ?>
     <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
