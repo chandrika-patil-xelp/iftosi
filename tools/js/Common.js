@@ -161,6 +161,7 @@ function Common() {
 			setTimeout(function()
                         {
                                 $('#lgnPg').addClass('dn');
+                                $('.isignup').addClass('dn');
                                 userMenuStr += '<li class="transition100" onclick="common.doLogout();">Log Out</li>';
                                 $('#hdropList').html(userMenuStr);
                                 _this.getWishListCount();
@@ -265,6 +266,7 @@ function Common() {
         }
         else
         {
+            
 
         }
     }
