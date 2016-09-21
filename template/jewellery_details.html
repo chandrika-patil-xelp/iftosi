@@ -56,10 +56,10 @@
                         </div>
                     </div>
                     <div class="majorInfoBox fLeft jewellery_details">
-                      <div class="infoCommn fLeft fmOpenR ">
-                          <div class="infoLabel fmOpenB font12 fmOpenB">Type</div>
-                          <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['shape']=='') ? 'N/A':strtoupper($prdInfo['attr_details']['shape']); ?></div>
-                      </div>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Type</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['shape']=='') ? 'N/A':strtoupper($prdInfo['attr_details']['shape']); ?></div>
+                        </div>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB font12 fmOpenB">DESIGN NO</div>
                             <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['product_barcode']=='')?'N/A':strtoupper($prdInfo['product_barcode']); ?></div>
@@ -80,19 +80,19 @@
                                 <?php
                                 if(empty($prdInfo['attr_details']['gold_weight']) || $prdInfo['attr_details']['gold_weight'] == '0.00')
                                 {
-                                    echo $prdInfo['attr_details']['gold_weight'] = 'N/A';
+                                echo $prdInfo['attr_details']['gold_weight'] = 'N/A';
                                 }
                                 else if($prdInfo['attr_details']['gold_weight'] == 1000)
                                 {
-                                    echo $prdInfo['attr_details']['gold_weight'] = '1 KGS';
+                                echo $prdInfo['attr_details']['gold_weight'] = '1 KGS';
                                 }
                                 else if($prdInfo['attr_details']['gold_weight'] > 1000)
                                 {
-                                    echo $prdInfo['attr_details']['gold_weight'] = ($prdInfo['attr_details']['gold_weight']/1000).' KGS';
+                                echo $prdInfo['attr_details']['gold_weight'] = ($prdInfo['attr_details']['gold_weight']/1000).' KGS';
                                 }
                                 else if($prdInfo['attr_details']['gold_weight'] < 1000 && $prdInfo['attr_details']['gold_weight'] !== '0.00')
                                 {
-                                    echo $prdInfo['attr_details']['gold_weight'] = $prdInfo['attr_details']['gold_weight'].' GMS';
+                                echo $prdInfo['attr_details']['gold_weight'] = $prdInfo['attr_details']['gold_weight'].' GMS';
                                 }
                                 ?>
                             </div>
@@ -201,7 +201,7 @@
                     <div class="orgNo fLeft">
                         <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Telephone No.</div>
                         <div class="commtxt tel fmOpenR fLeft"><?php print_r(($vndrDtls['landline'] !== '') ? str_replace('|~|', ', ', $vndrDtls['landline']).', ' : '');
-                        echo ($vndrDtls['telephones']) ? rtrim(str_replace('~', ', ', $vndrDtls['telephones']), ', ') : '';?></div>
+                            echo ($vndrDtls['telephones']) ? rtrim(str_replace('~', ', ', $vndrDtls['telephones']), ', ') : '';?></div>
                     </div>
                     <div class="orgNo fLeft">
                         <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Email Address</div>
@@ -414,12 +414,12 @@
 
             if($i == 0)
             {
-?>
+            ?>
             <div class="prdInfoTitle fLeft">Similar Products</div>
             <div class='w100 fLeft'>
-<?php
-            }
-?>
+                <?php
+                }
+                ?>
                 <div class="prdComm fLeft jwRes transition100">
                     <div class="prdCommDiv fLeft transition100">
 
@@ -492,17 +492,20 @@
                                 ?>
 
                                 <div class="prdCommImg fLeft" id="<?=$data3[$key]['pid'];?>">
+                                    <div class="imgLoader" id="imgLdr"></div>
                                     <?php
                                     if($imgCount > 0)
                                     {
                                     ?>
                                     <div class="for-1 noImage"></div>
+                                    <div class="imgLoader" id="imgLdr"></div>
                                     <?php
                                     }
                                     else
                                     {
                                     ?>
                                     <div class="for-1 noImage"></div>
+                                    <div class="imgLoader" id="imgLdr"></div>
                                     <?php
                                     }
                                     ?>
@@ -551,21 +554,21 @@
                             </div>
                     </div>
                 </div>
-<?php
-            }
+                <?php
+                }
                 $i++;
                 if($i == $max)
                 {
-?>
+                ?>
             </div>
-<?php
-                }
+            <?php
+            }
 
             }
-?>
-<?php
+            ?>
+            <?php
             }
-?>
+            ?>
         </div>
     </div>
 
@@ -581,7 +584,7 @@
     <div id='userForm' class="userForm dn">
         <div class="lgTitle fLeft fmOpenR">Submit details to get SMS & EMAIL</div>
         <div class="inputCont fLeft fmOpenR">
-            <input type="text" id="ur_mobile" name="ur_mobile" autocomplete="false" maxlength="10" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeypress="return common.isNumberKey(event);">
+            <input type="text" id="ur_mobile" name="ur_mobile" autocomplete="false" maxlength="10" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeypress="return common.isNumberKey(event);" onkeyup="isValidMKey(event, this.id);">
             <label for="ur_mobile" class="inp-label transition100">MOBILE</label>
             <div id="ur_mobile_inpText" class="inpText fRight transition300">enter<br>mobile number</div>
         </div>
@@ -591,12 +594,12 @@
             <div id="ur_name_inpText" class="inpText fRight transition300">enter<br>your name</div>
         </div>
         <div class="inputCont fLeft fmOpenR asStngClss">
-                <input type="text" id="ur_city" name="ur_name" autocomplete="false"  class="txtInput cOrange fmOpenR font14 areaIcon " onkeyup="changeHIdVal();">
-                <label for="ur_city" class="inp-label transition100">CITY</label>
-                <div id="ur_city_inpText" class="inpText fRight transition300">select<br>your city</div>
-                <input type="hidden" id="ur_cityid" name="ur_cityid">
-                <div id="ur_citySuggestDiv" class="autoSuggestOuter dn"></div>
-            </div>
+            <input type="text" id="ur_city" name="ur_name" autocomplete="false"  class="txtInput cOrange fmOpenR font14 areaIcon " onkeyup="changeHIdVal();">
+            <label for="ur_city" class="inp-label transition100">CITY</label>
+            <div id="ur_city_inpText" class="inpText fRight transition300">select<br>your city</div>
+            <input type="hidden" id="ur_cityid" name="ur_cityid">
+            <div id="ur_citySuggestDiv" class="autoSuggestOuter dn"></div>
+        </div>
         <div class="inputCont fLeft fmOpenR">
             <input type="text" id="ur_email" name="ur_email" autocomplete="false" onKeyPress="return common.eSubmit('event', 'userCancel');" class="txtInput cOrange fmOpenR font14 emailIcon">
             <label for="ur_email" class="inp-label transition100">EMAIL</label>
@@ -652,5 +655,16 @@
 <script type="text/javascript" src="<?= $jvs['head']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['dmap']; ?>"></script>
 <script type="text/javascript" src="<?= $jvs['anatomy']; ?>"></script>
+
+<script>
+
+        $("#imgLdr").show();
+        $(".prdCommImg").mouseover(function () {
+            var imgId = $(this).attr("id");
+            alert(imgId);
+            $("#imgLdr").hide();
+        });
+
+</script>
 </body>
 </html>
