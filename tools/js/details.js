@@ -76,7 +76,7 @@ $(document).ready(function () {
 
     $('.iconWishlist').click(function () {
 
-        $('#baseCont').addClass("pFixed");
+       
         var isVendor = customStorage.readFromStorage('is_vendor');
         var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
 
@@ -103,6 +103,7 @@ $(document).ready(function () {
             }
         } else
         {
+             $('#baseCont').addClass("pFixed");
             if (isVendor == 2 || isVendor == '2')
             {
                 customStorage.toast(0, 'This feature is not available for Admin');
