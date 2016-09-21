@@ -84,6 +84,7 @@ var switchFlag = true;
 function showSideNav(flag) {
     if (flag) {
         $('#filters').removeClass('transit-100X');
+      
         switchFlag = false;
     } else {
         $('#filters').addClass('transit-100X');
@@ -167,8 +168,12 @@ function removeFilters(id) {
 
 function mobileClearAll()
 {
+    setTimeout(function () {
+    $('html, body').scrollTop(0);
+    },500);
 	resetFilters();
 	swichFilter();
+         
 }
 
 function resetFilters()
