@@ -279,7 +279,7 @@ function Common() {
             customStorage.toast(0, 'Login Password Should Not Be Empty');
             $('#pr_pass').focus();
             return;
-        } else {
+        } else { 
             var tmstmp = new Date().getTime();
             $.ajax({url: DOMAIN + "apis/index.php?action=logUser&mobile=" + pr_mobile + "&password=" + pr_pass+"&timestamp="+tmstmp, success: function (result) {
                     var obj = eval('(' + result + ')');
@@ -649,4 +649,4 @@ function showProductList()
 
   $('#mMenuBtn').click(function(){
             $('.menuList').scrollTop(0);
-        });
+    });
