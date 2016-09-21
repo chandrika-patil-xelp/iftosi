@@ -1,7 +1,7 @@
 <div id='filters' class='filterList fLeft transit-100X transition300'>
     <div id='mfHeader' class="mfHeader fLeft fmOpenR">
         <div class="backToRes fLeft ripplelink poR" onclick="swichFilter();">Back to results</div>
-        <div class="clearFill fRight ripplelink poR" onclick="mobileClearAll();">Clear</div>
+        <div class="clearFill fRight ripplelink poR" id="clrfix" onclick="mobileClearAll();">Clear</div>
     </div>
     <div class="filterCont fLeft hideShow">
         <div class="fLeft optionTitle fmOpenR">Sort By</div>
@@ -209,8 +209,9 @@
         });
     });
     
-    $('#applyDbtn').click(function(){
+    $('#applyDbtn').click(function(){    
      $('html, body').scrollTop(0);
     });
     
+   
 </script>
