@@ -246,12 +246,12 @@ $(document).ready(function () {
         var ur_email = $('#ur_email').val();
         var n = /^[A-Za-z\+*?\s]+$/;
 
-        if (ur_mobile == '' || ur_mobile.length != 10 || isNaN(ur_mobile) || (n.test(ur_name) == false))
+        if (ur_mobile == '' || ur_mobile.length != 10 || isNaN(ur_mobile))
         {
             customStorage.toast(0, 'Invalid Format for Mobile');
             $('#ur_mobile').focus();
             return false;
-        } else if (ur_name.length == 0 || isNaN(ur_name) !== true)
+        } else if (ur_name.length == 0 || isNaN(ur_name) !== true  || (n.test(ur_name) === false))
         {
             customStorage.toast(0, 'Invalid Format for Name');
             $('#ur_name').focus();
@@ -685,6 +685,8 @@ mc.on("panleft panright tap press", function (ev) {
         showLeftMenu(true);
     } else if (ev.type == 'panleft') {
         showLeftMenu(false);
+    }else if(ev.type === 'panup'){
+        alert("jnvkij");
     }
 });
 
@@ -753,10 +755,9 @@ function showVendorDetails(obj)
     } else
     {
        
-        if (isWishList == true)
+        if (isWishList === true)
         {
             var tmstmp = new Date().getTime();
-            
             $.ajax({url: DOMAIN + "apis/index.php?action=getOwnerCheck&uid=" + uid + "&pid=" + pid + "&timestamp=" + tmstmp, success: function (result)
                 {
                     var obj = eval('(' + result + ')');
@@ -783,6 +784,7 @@ function showVendorDetails(obj)
              addToEnquiry();*/
         } else if ((isMail == false) && (isWishList == false))
         {
+            
             var tmstmp = new Date().getTime();
             $('#baseCont').removeClass("pFixed");
             $.ajax({url: DOMAIN + "apis/index.php?action=getOwnerCheck&uid=" + uid + "&pid=" + pid + "&tmstmp=" + tmstmp, success: function (result)
@@ -791,6 +793,7 @@ function showVendorDetails(obj)
                     var eCode = obj.error.code;
                     if (eCode == 1 || eCode == '1')
                     {
+                         $('html,body').animate({scrollTop: pos}, 150);
                         customStorage.toast(0, 'You can not have information of your own product');
                     } else
                     {
