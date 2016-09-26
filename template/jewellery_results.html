@@ -1,6 +1,6 @@
 <?php include 'bhead.html'; ?>
 <body>
-    <div id='baseCont' class="container fmOpenR bgWhite resultsPage">
+    <div id='baseCont' class="container fmOpenR bgWhite resultsPage ">
         <div class="wrapper">
             <?php include 'header.html'?>
             <div class="totalResultsDiv">
@@ -18,43 +18,43 @@
                     </div>
                 </div>
             </div>
-			<?php
+            <?php
 
-			if(count($showcat['subcat']) && ($showcat['catid'] == $_GET['catid']))
-			{
-			?>
+            if(count($showcat['subcat']) && ($showcat['catid'] == $_GET['catid']))
+            {
+            ?>
             <div class='jShapesCont resultsPage showHide fmOpenL'>
                 <div class="allShapes resultsPage">
                     <div class="prImgPrev bgfff" onclick="movePrImg(true);"></div>
                     <div class="prImgNext bgfff" onclick="movePrImg(false);"></div>
                     <center>
                         <div class="prImageStrip">
-                                                                    <ul class="carousel transition300" id="touch" style="touch-action:pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); left: 0px;">
-						<?php
-						$html = '';
-						foreach($showcat['subcat'] as $key => $val)
-						{
-							$exp = explode('/',$val['cat_name']);
-              if($exp[0] == 'Ring' || $exp[0] == 'Earring' || $exp[0] == 'Pendant' || $exp[0] == 'Necklace' || $exp[0] == 'Bangle')
-              {
-                $scat = trim($exp[0].'s');
-              }
-              else
-              {
-                $scat = trim($exp[0]);
-              }
-							$html .= '<li><div id="'.$val['catid'].'_'.$scat.'" class="jshapeComm transition300 ripplelink '.$scat.'">'.$val['cat_name'].'</div></li>';
-						}
-						echo $html;
-						?>
-                                                                        </ul>
-									</div>
-						</center>
+                            <ul class="carousel transition300" id="touch" style="touch-action:pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); left: 0px;">
+                                <?php
+                                $html = '';
+                                foreach($showcat['subcat'] as $key => $val)
+                                {
+                                $exp = explode('/',$val['cat_name']);
+                                if($exp[0] == 'Ring' || $exp[0] == 'Earring' || $exp[0] == 'Pendant' || $exp[0] == 'Necklace' || $exp[0] == 'Bangle')
+                                {
+                                $scat = trim($exp[0].'s');
+                                }
+                                else
+                                {
+                                $scat = trim($exp[0]);
+                                }
+                                $html .= '<li><div id="'.$val['catid'].'_'.$scat.'" class="jshapeComm transition300 ripplelink '.$scat.'">'.$val['cat_name'].'</div></li>';
+                                }
+                                echo $html;
+                                ?>
+                            </ul>
+                        </div>
+                    </center>
                 </div>
             </div>
-			<?php
-			}
-			?>
+            <?php
+            }
+            ?>
             <div class="allResults">
                 <div class="wrapperMax">
                     <div class="filterTitleDiv">
@@ -71,303 +71,310 @@
                                 </ul>
                             </div>
                         </div>
+                        <div class="fRight"></div>
                         <div class="fRight sTitle">Sort by</div>
                     </div>
                     <div class='results_Filter'>
                         <?php include 'filters.html'; ?>
                         <div class='prdResults fRight'>
-<?php
-                                if(empty($data))
+                            <?php
+                            if(empty($data))
                             {
-?>
-                                <div class="noresDiv">
-                                    <div class="noresults font25 fLeft">There are no results available for your search.</div>
-                                    <div class="noresults font18 fLeft">Please try again.</div>
-                                </div>
+                            ?>
+                            <div class="noresDiv">
+                                <div class="noresults font25 fLeft">There are no results available for your search.</div>
+                                <div class="noresults font18 fLeft">Please try again.</div>
+                            </div>
 
-<?php                       }
-							$prdList = '';
-							foreach($data as $key=>$val) {
-								if($prdList !== '')
-								{
-									$prdList .= ',' . $val['pid'];
-								}
-								else
-								{
-									$prdList .= $val['pid'];
-								}
-?>
-                                <div class='prdComm fLeft jwRes' style="opacity: 0; transform: translateX(1000px);">
-                                    <div class='prdCommDiv fLeft transition100'>
+                            <?php                       }
+                            $prdList = '';
+                            foreach($data as $key=>$val) {
+                            if($prdList !== '')
+                            {
+                            $prdList .= ',' . $val['pid'];
+                            }
+                            else
+                            {
+                            $prdList .= $val['pid'];
+                            }
+                            ?>
+                            <div class='prdComm fLeft jwRes' style="opacity: 0; transform: translateX(1000px);">
+                                <div class='prdCommDiv fLeft transition100'>
 
-<?php
-                                                $tempUrl = '';
-                                                if(!empty($val['attributes']['metal']))
-                                                {
-                                                    if($tempUrl !== ''){
-                                                        $tempUrl .= '-'.$val['attributes']['metal'];
-                                                    }
-                                                    else{
-                                                        $tempUrl .= $val['attributes']['metal'];
-                                                    }
-                                                }
-                                                if(!empty($val['attributes']['shape']))
-                                                {
-                                                    if($tempUrl !== '')
-                                                    {
-                                                        $tempUrl .= '-'.$val['attributes']['shape'];
-                                                    }
-                                                    else
-                                                    {
-                                                        $tempUrl .= $val['attributes']['shape'];
-                                                    }
-                                                }
-                                                if(!empty($val['attributes']['gold_purity']))
-                                                {
-                                                    if($tempUrl !== '')
-                                                    {
-                                                        $tempUrl .= '-'.number_format($val['attributes']['gold_purity'],0).'-Carat';
-                                                    }
-                                                    else
-                                                    {
-                                                        $tempUrl .= number_format($val['attributes']['gold_purity'],0).'-Carat';
-                                                    }
-                                                }
-                                                if(!empty($val['attributes']['gold_weight'])){
-                                                    if($tempUrl !== '')
-                                                    {
-                                                        $tempUrl .= '-'.floor($val['attributes']['gold_weight']).'-Grams';
-                                                    }
-                                                    else
-                                                    {
-                                                        $tempUrl .= floor($val['attributes']['gold_weight']).'-Grams';
-                                                    }
-                                                }
-                                                if(!empty($val['attributes']['certified'])){
-                                                    if($tempUrl !== '')
-                                                    {
-                                                        $tempUrl .= '-'.$val['attributes']['certified'];
-                                                    }
-                                                    else
-                                                    {
-                                                        $tempUrl .= $val['attributes']['certified'];
-                                                    }
-                                                }
+                                    <?php
+                                    $tempUrl = '';
+                                    if(!empty($val['attributes']['metal']))
+                                    {
+                                    if($tempUrl !== ''){
+                                    $tempUrl .= '-'.$val['attributes']['metal'];
+                                    }
+                                    else{
+                                    $tempUrl .= $val['attributes']['metal'];
+                                    }
+                                    }
+                                    if(!empty($val['attributes']['shape']))
+                                    {
+                                    if($tempUrl !== '')
+                                    {
+                                    $tempUrl .= '-'.$val['attributes']['shape'];
+                                    }
+                                    else
+                                    {
+                                    $tempUrl .= $val['attributes']['shape'];
+                                    }
+                                    }
+                                    if(!empty($val['attributes']['gold_purity']))
+                                    {
+                                    if($tempUrl !== '')
+                                    {
+                                    $tempUrl .= '-'.number_format($val['attributes']['gold_purity'],0).'-Carat';
+                                    }
+                                    else
+                                    {
+                                    $tempUrl .= number_format($val['attributes']['gold_purity'],0).'-Carat';
+                                    }
+                                    }
+                                    if(!empty($val['attributes']['gold_weight'])){
+                                    if($tempUrl !== '')
+                                    {
+                                    $tempUrl .= '-'.floor($val['attributes']['gold_weight']).'-Grams';
+                                    }
+                                    else
+                                    {
+                                    $tempUrl .= floor($val['attributes']['gold_weight']).'-Grams';
+                                    }
+                                    }
+                                    if(!empty($val['attributes']['certified'])){
+                                    if($tempUrl !== '')
+                                    {
+                                    $tempUrl .= '-'.$val['attributes']['certified'];
+                                    }
+                                    else
+                                    {
+                                    $tempUrl .= $val['attributes']['certified'];
+                                    }
+                                    }
 
-                                                if($tempUrl !== '')
+                                    if($tempUrl !== '')
+                                    {
+                                    ?>
+                                    <a href="<?php echo DOMAIN.$tempUrl. '/jid-' . $val['pid']; ?>" target="_blank">
+                                        <?php
+                                        }
+                                        else
+                                        {
+                                        ?>
+                                        <a href="<?php echo DOMAIN . $val['attributes']['certified'];?>/jid-<?php echo $val['pid']; ?>" target="_blank">
+                                            <?php
+                                            }
+                                            ?>
+
+                                            <div id="<?=$data[$key]['pid'];?>_imgs" class="prdCommImg fLeft">
+                                                <div class="imgLoader" id="imgLdr"></div>
+                                                <?php 
+                                                $imgCount = count($data[$key]['images']);
+                                                if($imgCount > 0)
                                                 {
-?>
-                                                    <a href="<?php echo DOMAIN.$tempUrl. '/jid-' . $val['pid']; ?>" target="_blank">
-<?php
+                                                ?>
+                                                <div class="for-1 noImage"></div>
+                                                <!--                                                      <div class="imgLoader" id="imgLdr"></div>-->
+                                                <?php
                                                 }
                                                 else
                                                 {
-?>
-                                                    <a href="<?php echo DOMAIN . $val['attributes']['certified'];?>/jid-<?php echo $val['pid']; ?>" target="_blank">
-<?php
+                                                ?>
+                                                <div class="for-1 noImage"></div>
+                                                <!--                                                      <div class="imgLoader" id="imgLdr"></div>-->
+                                                <?php
                                                 }
-?>
-
-                                        <div id="<?=$data[$key]['pid'];?>_imgs" class="prdCommImg fLeft">
-<?php
-											$imgCount = count($data[$key]['images']);
-											if($imgCount > 0)
-											{
-?>
-												<div class="for-1 noImage"></div>
-<?php
-											}
-											else
-											{
-?>
-												<div class="for-1 noImage"></div>
-<?php
-											}
-/*
-												$imgCount = count($data[$key]['images']);
-												if($imgCount > 12)
-												{
-													$imgCount = 12;
-												}
+                                                /*
+                                                $imgCount = count($data[$key]['images']);
+                                                if($imgCount > 12)
+                                                {
+                                                $imgCount = 12;
+                                                }
                                                 switch($imgCount)
-												{
-                                                    case 0:?>
-                                                        <div class="for-1 noImage"></div>
-                                                        <?php break;
-                                                    case 1:
-													case 2:
-													case 3:
-													case 4:
-													case 6:
-													case 8:
-													case 9:
-													case 10:
-													case 12:
-															for($imgi = 0 ; $imgi < $imgCount ; $imgi++)
-															{
-?>
-																<div class="prox for-<?php echo $imgCount;?>" style="background: #ccc url('<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>')no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
-<?php
-															}
-?>
-															<div class="proxImg fLeft" style="background: #fff url('<?php echo IMGDOMAIN . $data[$key]['images'][0]; ?>')no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
-<?php
-														break;
-                                                    case 5:
-?>
-														<div class="prox for-<?php echo $imgCount;?>Left">
-<?php
-														for($imgi = 0 ; $imgi < $imgCount ; $imgi++)
-														{
-															if($imgi == $imgCount - 1)
-															{
-?>
-																</div>
-																<div class="prox for-<?php echo $imgCount;?>Right">
-																	<div class="prox for-<?php echo $imgCount;?>" style="background: #ccc url('<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>')no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
-																</div>
-<?php
-															}
-															else
-															{
-?>
-																<div class="prox for-<?php echo $imgCount;?>" style="background: #ccc url('<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>')no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
-<?php
-															}
-														}
-?>
-														<div class="proxImg fLeft" style="background: #fff url('<?php echo IMGDOMAIN . $data[$key]['images'][0]; ?>')no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
-
-                                                    <?php    break;
-                                                    case 7:
-														$curi = 0;
-														for($imgi = 0 ; $imgi < $imgCount ; $imgi++)
-														{
-															if($imgi == 0)
-															{
-?>
-																<div class="for-<?php echo $imgCount;?>Upper">
-																	<div class="prox for-<?php echo $imgCount;?>"  style="background: #ccc url('<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>')no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
-																</div>
-<?php
-															}
-															else
-															{
-																if($curi == 0)
-																{
-?>
-																	<div class="for-<?php echo $imgCount;?>Lower">
-<?php
-																}
-?>
-																	<div class="prox for-<?php echo $imgCount;?>" style="background: #fff url('<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>')no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
-<?php
-																if($curi == $imgCount - 2)
-																{
-?>
-																	</div>
-<?php
-																}
-																$curi++;
-															}
-														}
-?>
-                                                        <div class="proxImg fLeft" style="background: #fff url('<?php echo IMGDOMAIN . $data[$key]['images'][0]; ?>')no-repeat;background-size:contain;background-position:center;background-color:#FFF;"></div>
-                                                        <?php break;
-
-                                                    case 11:
-														$curi = 0;
-?>
-														<div class="prox for-<?php echo $imgCount;?>Left">
-<?php
-														for($imgi = 0 ; $imgi < $imgCount ; $imgi++)
-														{
-															if($curi == 0)
-															{
-																if($imgi < 3)
-																{
-?>
-																	<div class="prox for-<?php echo $imgCount;?>" style="background: #fff url('<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>')no-repeat;background-size:contain;background-position:center;background-color:#FFF;"></div>
-<?php
-																	if($imgi == 2)
-																	{
-																		$curi++;
-																	}
-																}
-															}
-															else
-															{
-																if($imgi == 3)
-																{
-?>
-																	</div>
-																	<div class="prox for-<?php echo $imgCount;?>Right">
-<?php
-																}
-?>
-																	<div class="prox for-<?php echo $imgCount;?>" style="background: #fff url('<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>')no-repeat;background-size:contain;background-position:center;background-color:#FFF;"></div>
-<?php
-																if($imgi == $imgCount - 1)
-																{
-?>
-																	</div>
-<?php
-																}
-															}
-														}
-?>
-														<div class="proxImg fLeft" style="background: #fff url('<?php echo IMGDOMAIN . $data[$key]['images'][0]; ?>')no-repeat;background-size:contain;background-position:center;background-color:#FFF;"></div>
-                                                        <?php break;
+                                                {
+                                                case 0:?>
+                                                <div class="for-1 noImage"></div>
+                                                <div class="imgLoader" id="imgLdr"></div>
+                                                <?php break;
+                                                case 1:
+                                                case 2:
+                                                case 3:
+                                                case 4:
+                                                case 6:
+                                                case 8:
+                                                case 9:
+                                                case 10:
+                                                case 12:
+                                                for($imgi = 0 ; $imgi < $imgCount ; $imgi++)
+                                                {
+                                                ?>
+                                                <div class="prox for-<?php echo $imgCount;?>" style="background: #ccc url('<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>')no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
+                                                <?php
                                                 }
-*/
-                                            ?>
-                                        </div>
-                                        <div class="prdDetails fLeft">
-                                            <div class="detComm">
-                                                <div class="detLabel fmOpenB fLeft">DESIGN NO.</div>
-                                                <div class="detValue fmOpenR fLeft"><?php echo $val['pcode'];?></div>
+                                                ?>
+                                                <div class="proxImg fLeft" style="background: #fff url('<?php echo IMGDOMAIN . $data[$key]['images'][0]; ?>')no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
+                                                <?php
+                                                break;
+                                                case 5:
+                                                ?>
+                                                <div class="prox for-<?php echo $imgCount;?>Left">
+                                                    <?php
+                                                    for($imgi = 0 ; $imgi < $imgCount ; $imgi++)
+                                                    {
+                                                    if($imgi == $imgCount - 1)
+                                                    {
+                                                    ?>
+                                                </div>
+                                                <div class="prox for-<?php echo $imgCount;?>Right">
+                                                    <div class="prox for-<?php echo $imgCount;?>" style="background: #ccc url('<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>')no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
+                                                </div>
+                                                <?php
+                                                }
+                                                else
+                                                {
+                                                ?>
+                                                <div class="prox for-<?php echo $imgCount;?>" style="background: #ccc url('<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>')no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
+                                                <?php
+                                                }
+                                                }
+                                                ?>
+                                                <div class="proxImg fLeft" style="background: #fff url('<?php echo IMGDOMAIN . $data[$key]['images'][0]; ?>')no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
+
+                                                <?php    break;
+                                                case 7:
+                                                $curi = 0;
+                                                for($imgi = 0 ; $imgi < $imgCount ; $imgi++)
+                                                {
+                                                if($imgi == 0)
+                                                {
+                                                ?>
+                                                <div class="for-<?php echo $imgCount;?>Upper">
+                                                    <div class="prox for-<?php echo $imgCount;?>"  style="background: #ccc url('<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>')no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
+                                                </div>
+                                                <?php
+                                                }
+                                                else
+                                                {
+                                                if($curi == 0)
+                                                {
+                                                ?>
+                                                <div class="for-<?php echo $imgCount;?>Lower">
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                    <div class="prox for-<?php echo $imgCount;?>" style="background: #fff url('<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>')no-repeat;background-size: contain;background-position:center;background-color:#FFF;"></div>
+                                                    <?php
+                                                    if($curi == $imgCount - 2)
+                                                    {
+                                                    ?>
+                                                </div>
+                                                <?php
+                                                }
+                                                $curi++;
+                                                }
+                                                }
+                                                ?>
+                                                <div class="proxImg fLeft" style="background: #fff url('<?php echo IMGDOMAIN . $data[$key]['images'][0]; ?>')no-repeat;background-size:contain;background-position:center;background-color:#FFF;"></div>
+                                                <?php break;
+
+                                                case 11:
+                                                $curi = 0;
+                                                ?>
+                                                <div class="prox for-<?php echo $imgCount;?>Left">
+                                                    <?php
+                                                    for($imgi = 0 ; $imgi < $imgCount ; $imgi++)
+                                                    {
+                                                    if($curi == 0)
+                                                    {
+                                                    if($imgi < 3)
+                                                    {
+                                                    ?>
+                                                    <div class="prox for-<?php echo $imgCount;?>" style="background: #fff url('<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>')no-repeat;background-size:contain;background-position:center;background-color:#FFF;"></div>
+                                                    <?php
+                                                    if($imgi == 2)
+                                                    {
+                                                    $curi++;
+                                                    }
+                                                    }
+                                                    }
+                                                    else
+                                                    {
+                                                    if($imgi == 3)
+                                                    {
+                                                    ?>
+                                                </div>
+                                                <div class="prox for-<?php echo $imgCount;?>Right">
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                    <div class="prox for-<?php echo $imgCount;?>" style="background: #fff url('<?php echo IMGDOMAIN . $data[$key]['images'][$imgi]; ?>')no-repeat;background-size:contain;background-position:center;background-color:#FFF;"></div>
+                                                    <?php
+                                                    if($imgi == $imgCount - 1)
+                                                    {
+                                                    ?>
+                                                </div>
+                                                <?php
+                                                }
+                                                }
+                                                }
+                                                ?>
+                                                <div class="proxImg fLeft" style="background: #fff url('<?php echo IMGDOMAIN . $data[$key]['images'][0]; ?>')no-repeat;background-size:contain;background-position:center;background-color:#FFF;"></div>
+                                                <?php break;
+                                                }
+                                                */
+                                                ?>
                                             </div>
-                                        </div>
-                                        <div class='prdPrice fLeft'>
-                                            <div class="detComm">
-                                                <div class="detLabel fmOpenB fLeft">PRICE</div>
-                                                <div class="detValue fmOpenB fLeft"><span>&#8377;</span><?php $price=ceil($val['attributes']['price']);
-                                                                                                              echo $price = $comm->IND_money_format($price);
-                                                                                                        ?>
+                                            <div class="prdDetails fLeft">
+                                                <div class="detComm">
+                                                    <div class="detLabel fmOpenB fLeft">DESIGN NO.</div>
+                                                    <div class="detValue fmOpenR fLeft"><?php echo $val['pcode'];?></div>
                                                 </div>
                                             </div>
-                                        </div>
-										</a>
+                                            <div class='prdPrice fLeft'>
+                                                <div class="detComm">
+                                                    <div class="detLabel fmOpenB fLeft">PRICE</div>
+                                                    <div class="detValue fmOpenB fLeft">
+                                                        <span class="rupeeImg"></span>
+                                                        <?php $price=ceil($val['attributes']['price']);
+                                                        echo $price = $comm->IND_money_format($price);
+                                                        ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
                                         <div class='prdActions fLeft'>
-<?php
+                                            <?php
                                             if(!empty($tempUrl))
                                             {
-?>
-                                                <a href="<?php echo DOMAIN.$tempUrl . '/jid-' . $val['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                <a href="<?php echo DOMAIN.$tempUrl . '/jid-' . $val['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                <a href="<?php echo DOMAIN.$tempUrl . '/jid-' . $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                <a href="<?php echo DOMAIN.$tempUrl . '/jid-' . $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
-<?php
+                                            ?>
+                                            <a href="<?php echo DOMAIN.$tempUrl . '/jid-' . $val['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                            <a href="<?php echo DOMAIN.$tempUrl . '/jid-' . $val['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                            <a href="<?php echo DOMAIN.$tempUrl . '/jid-' . $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                            <a href="<?php echo DOMAIN.$tempUrl . '/jid-' . $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                            <?php
                                             }
                                             else
                                             {
-?>
-                                                <a href="<?php echo DOMAIN.$val['attributes']['certified'] . '/jid-' . $val['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                <a href="<?php echo DOMAIN.$val['attributes']['certified'] . '/jid-' . $val['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                <a href="<?php echo DOMAIN.$val['attributes']['certified'] . '/jid-' . $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                <a href="<?php echo DOMAIN.$val['attributes']['certified'] . '/jid-' . $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
-<?php
+                                            ?>
+                                            <a href="<?php echo DOMAIN.$val['attributes']['certified'] . '/jid-' . $val['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                            <a href="<?php echo DOMAIN.$val['attributes']['certified'] . '/jid-' . $val['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                            <a href="<?php echo DOMAIN.$val['attributes']['certified'] . '/jid-' . $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                            <a href="<?php echo DOMAIN.$val['attributes']['certified'] . '/jid-' . $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                            <?php
                                             }
-?>
+                                            ?>
 
 
                                         </div>
-                                    </div>
                                 </div>
+                            </div>
 
-                                <?php $i++;
+                            <?php $i++;
                             } ?>
-							<?php include 'pagination.html';?>
+                            <?php include 'pagination.html';?>
                         </div>
                     </div>
                 </div>
@@ -378,7 +385,7 @@
         <?php include 'leftmenu.html'; ?>
     </div>
     <div id='dragTarget' class="drag-target" style="touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); left: 0px;"></div>
-	<script type="text/javascript" src="<?= $jvs['auto']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['auto']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['jqrynum']; ?>"></script>
@@ -388,59 +395,82 @@
     <script type="text/javascript" src="<?= $jvs['head']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['filter']; ?>"></script>
     <script type="text/javascript">
-         var val = 0;
-                                var moveCount = 0;
-                                var ele = document.getElementById('touch');
-                                var mc = new Hammer(ele);
-                                var swipeCnt = 0;
-                                mc.on("panend", function (ev) {
-                                    if (ev.direction === Hammer.DIRECTION_LEFT)
-                                    {
-                                        movePrImg(false);
-                                    }else if(ev.direction === Hammer.DIRECTION_RIGHT){
-                                           movePrImg(true);
-                                    }
-                                });
 
-                                function movePrImg(flag) {
-                                    var totalThumbs = $(".carousel  li").length;
-                                    var liWidth = ($(".carousel  li").outerWidth());
-                                    var mobile = $(window).width();
-                                    if (!flag && mobile <= 425) {
-                                        if (moveCount < (totalThumbs - 1)) {
-                                            val = val - liWidth;
-                                            console.log(liWidth);
-                                            $(".carousel").css({transform: 'translateX(' + val + 'px)'});
-                                            moveCount++;
-                                        }
-                                    } else if (!flag && mobile <= 768) {
-                                        if (moveCount < (totalThumbs - 2)) {
-                                            val = val - liWidth;
-                                            $(".carousel").css({transform: 'translateX(' + val + 'px)'});
-                                            moveCount++;
-                                        }
-                                    } else if (!flag && mobile <= 1024) {
-                                        if (moveCount < (totalThumbs - 5)) {
-                                            val = val - liWidth;
-                                            $(".carousel").css({transform: 'translateX(' + val + 'px)'});
-                                            moveCount++;
-                                        }
+                        $('#bmatch').click(function () {
+                            $('.sTitle').addClass("lowHigh");
+                        });
 
-                                    } else if (!flag && mobile > 1024) {
-                                        if (moveCount < (totalThumbs - 5)) {
-                                            val = val - liWidth;
-                                            $(".carousel").css({transform: 'translateX(' + val + 'px)'});
-                                            moveCount++;
-                                        }
-                                    } else if (flag) {
-                                        if (moveCount > 0) {
-                                            val = val + liWidth;
-                                            $(".carousel").css({transform: 'translateX(' + val + 'px)'});
-                                            moveCount--;
-                                        }
-                                    }
+                        $('#pasc').click(function () {
+                            $('.sTitle').addClass("highLow");
+                            $('.sTitle').removeClass("lowHigh");
+                        });
 
+
+                        $('#pasc').click(function () {
+                            $('.sTitle').addClass("lowHigh");
+                        });
+
+
+                        $("#imgLdr").show();
+                        $(".prdCommImg").on('load', function () {
+                            var imgId = $(this).attr("id");
+                            alert(imgId);
+                            $("#imgLdr").hide();
+                        });
+
+                        var val = 0;
+                        var moveCount = 0;
+                        var ele = document.getElementById('touch');
+                        var mc = new Hammer(ele);
+                        var swipeCnt = 0;
+                        mc.on("panend", function (ev) {
+                            if (ev.direction === Hammer.DIRECTION_LEFT)
+                            {
+                                movePrImg(false);
+                            } else if (ev.direction === Hammer.DIRECTION_RIGHT) {
+                                movePrImg(true);
+                            }
+                        });
+
+                        function movePrImg(flag) {
+                            var totalThumbs = $(".carousel  li").length;
+                            var liWidth = ($(".carousel  li").outerWidth());
+                            var mobile = $(window).width();
+                            if (!flag && mobile <= 425) {
+                                if (moveCount < (totalThumbs - 1)) {
+                                    val = val - liWidth;
+                                    console.log(liWidth);
+                                    $(".carousel").css({transform: 'translateX(' + val + 'px)'});
+                                    moveCount++;
                                 }
+                            } else if (!flag && mobile <= 768) {
+                                if (moveCount < (totalThumbs - 2)) {
+                                    val = val - liWidth;
+                                    $(".carousel").css({transform: 'translateX(' + val + 'px)'});
+                                    moveCount++;
+                                }
+                            } else if (!flag && mobile <= 1024) {
+                                if (moveCount < (totalThumbs - 5)) {
+                                    val = val - liWidth;
+                                    $(".carousel").css({transform: 'translateX(' + val + 'px)'});
+                                    moveCount++;
+                                }
+
+                            } else if (!flag && mobile > 1024) {
+                                if (moveCount < (totalThumbs - 5)) {
+                                    val = val - liWidth;
+                                    $(".carousel").css({transform: 'translateX(' + val + 'px)'});
+                                    moveCount++;
+                                }
+                            } else if (flag) {
+                                if (moveCount > 0) {
+                                    val = val + liWidth;
+                                    $(".carousel").css({transform: 'translateX(' + val + 'px)'});
+                                    moveCount--;
+                                }
+                            }
+
+                        }
 //    var val = 0;
 //        var moveCount = 0;
 //        function movePrImg(flag) {
@@ -464,11 +494,11 @@
     </script>
     <script>
         var supportsOrientationChange = "onorientationchange" in window,
-           orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
+                orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
 
-       window.addEventListener(orientationEvent, function() {
-           window.location.reload()
-       }, false);
+        window.addEventListener(orientationEvent, function () {
+            window.location.reload()
+        }, false);
 
     </script>
 </body>
