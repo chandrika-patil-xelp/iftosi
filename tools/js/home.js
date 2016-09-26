@@ -117,13 +117,43 @@ var ele1 = document.getElementById('leftMenu');
 if (ele1 !== null)
 {
     var mc = new Hammer(ele1);
-    mc.on("panleft panright tap press", function (ev) {
+    mc.on("panleft panright tap press panup", function (ev) {
+//              showLeftMenu(true);  
         //ele.textContent = ev.type +" gesture detected.";
-        if (ev.type == 'panright') {
+        if (ev.type === 'panright') {
+            console.log(ev.type);
             showLeftMenu(true);
-        } else if (ev.type == 'panleft') {
+        } else if (ev.type === 'panleft') {
+                console.log(ev.type);
             showLeftMenu(false);
+        }else if(ev.target){
+            console.log(ev.target);
+            showLeftMenu(true);
+        }else if(ev.type === 'panup'){
+            console.log(ev.type); 
+              showLeftMenu(true);
         }
     });
 }
+
+var myElement = document.getElementById('leftMenu');
+var mc = new Hammer(leftMenu);
+mc.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+mc.on("panup pandown", function(ev) {
+  showLeftMenu(true);
+});
+
+
+
+//  $('.leftMenu').hammer().on('panup', function(){
+//              showLeftMenu(true);
+//    });
+//    $('.leftMenu').hammer().on('pandown', function(){
+//              showLeftMenu(true);
+//    });
+
+//
+//$('.menuList').mouseover(function(){
+//    $('.leftMenu').addClass('leftTransit');
+//});
 
