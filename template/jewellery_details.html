@@ -47,7 +47,7 @@
                         <div class="prdShape fLeft">
                             <div class="prdShTitle fLeft fmOpenB">BEST PRICE</div>
                             <?php $price =  ceil($prdInfo['attr_details']['price']); ?>
-                            <div class="prdShType fLeft fmOpenL"><span>&#8377;</span><?php echo $comm->IND_money_format($price); ?></div>
+                            <div class="prdShType fLeft fmOpenL"><span class='rupeeImg'></span><?php echo $comm->IND_money_format($price); ?></div>
                         </div>
                         <div class="prdBtns fLeft dn">
                             <div class="btnComm fLeft iconCall ripplelink poR" >Contact Jeweller</div>
@@ -521,11 +521,12 @@
                                     <div class="detComm">
                                         <div class="detLabel fmOpenB fLeft">PRICE</div>
                                         <div class="detValue fmOpenB fLeft">
-                                            <span>&#8377;</span>
+                                            <span class="rupeeImg"></span>
                                             <?php
                                             $price=ceil($data3[$key]['jprice']);
                                             echo $price = $comm->IND_money_format($price);
                                             ?>
+                                        
                                         </div>
                                     </div>
                                 </div>
