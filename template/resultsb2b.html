@@ -94,11 +94,13 @@ if (count($data)) {
                                                                         $rate = dollarValue;
                                                                     }
                                                                 ?>
-                                                                <div class="detValue fmOpenB fLeft"><span>₹</span>
+                                                                <div class="detValue fmOpenB fLeft">
+                                                                    <span class='rupeeImg'></span>
                                                                     <?php 
                                                                         $price = ceil((($val['pprice'] * $rate)*$val['attributes']['carat']));
                                                                         echo $price = $comm->IND_money_format($price);
-                                                                    ?>                                                        
+                                                                    ?>   
+                                                                   
                                                                 </div>
                                                         </div>
                                                     </div>
@@ -111,7 +113,7 @@ if (count($data)) {
                                                                         $rate = dollarValue;
                                                                     }
                                                                 ?>
-                                                                <div class="detValue fmOpenB fLeft"><span>₹</span>
+                                                                <div class="detValue fmOpenB fLeft"><span class="fLeft rupeeImg"></span>
                                                                    <?php 
                                                                         $price = ceil((($val['b2bprice'] * $rate)*$val['attributes']['carat']));
                                                                         $price = $comm->IND_money_format($price);
