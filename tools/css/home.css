@@ -490,7 +490,13 @@ a{text-decoration: none;}
 .prdPrice .detComm{line-height: 50px;}
 .prdPrice .detLabel{color:#8A0044}
 .prdPrice .detValue{color:#8A0044;font-size: 22px;}
-.detValue span{color: #8A0044;font-size: 22px;margin-right: 2px;}
+.detValue span{color: #8A0042;
+    font-size: 22px;
+    margin-right: 2px;
+    margin-top: 4px;
+    width: 20px;
+    height: 25px;
+    float: left;margin-left: -7px;}
 
 .prdActions{width:100%;height:60px;}
 .actionComm{width:25%;height:60px;border:1px solid #fff;cursor: pointer;}
@@ -914,6 +920,8 @@ a{cursor:pointer;}
 .pFixed{position: fixed;}
 
 /*Bullion Results*/
+.bullion{}
+.bullion .detValue span{margin-top: 14px;}
 .bresults .jshapeComm{width:50%!important;}
 .gBars{background: url(../img/common/gBar.jpeg)no-repeat;background-size: cover;background-position:center;box-shadow: inset 0 -70px 0px rgba(23, 19, 52,0.9);}
 .sBar{background: url(../img/common/sBar.jpg)no-repeat;background-size: cover;background-position: center;box-shadow: inset 0 -70px 0px rgba(42, 14, 52,0.9);}
@@ -1126,6 +1134,7 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 
 
 @media only screen and (min-width: 320px) and (max-width: 767px){
+    .thumbnil.borderColor{border-color:#380B34;}
     .teamTabs{display: block;}
 
     /*Header*/
@@ -1375,7 +1384,9 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 
 
 @media only screen and (min-width: 960px) and (max-width: 1024px){
+    
     /*Header*/
+    .thumbnil.borderColor{border-color:#380B34;}
     .header {padding-right: 15px;}
     .prllx {width: 100%;}
     .shapesCont {width: 100%;height: 315px;background: #FFF;padding: 15px 0;position: relative;z-index: 0;}
@@ -1428,7 +1439,7 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
     /*Header*/
     .header{padding: 0 15px;}
     .faqs{padding: 20px 20px;}
-
+    .borderColor{border-color:#380B34;}
     /*Home*/
     .categoryCont {height: 489px;background: #171334 url(../img/common/background.jpg)no-repeat;background-size: cover;padding: 200px 0 50px 0;}
     .prllx {width: 100%;}
@@ -1519,8 +1530,20 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 
 }
 
+
+.rupeeImg{background: url(../img/common/rupee.svg)no-repeat;background-size: auto 100%;}
 .hStngclass .filterBtn{display: none;} 
 .bullion_details .filterBtn{display: none;}
+.prdShType span{
+    color: #8A0042;
+    font-size: 30px;
+    width: auto;
+    height: 40px;
+    float: left;
+    padding-left: 30px;
+    background-size: auto 90%;
+    background-position: left 1px;margin-left: -10px;}
+
 /*
 
 @media only screen and (min-width: 1768px) and (max-width: 1959px){
