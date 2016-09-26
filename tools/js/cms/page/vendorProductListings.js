@@ -327,8 +327,8 @@ function generateDiamondList(obj) {
     str += '<div class="color fLeft">' + obj['color'] + '</div>';
     str += '<div class="clarity fLeft">' + obj['clarity'] + '</div>';
     str += '<div class="cert fLeft">' + obj['cert'] + '</div>';
-    str += '<div class="price fLeft fmOpenB">&#36;' + obj['price']+ '</div>';
-    str += '<div class="price fLeft fmOpenB">' + b2b_price + '</div>';
+    str += '<div class="price fLeft fmOpenB"><span class="fRight rupeeImg">' + obj['price']+ '</span></div>';
+    str += '<div class="price fLeft fmOpenB"><span class="fRight rueeImg">' + b2b_price + '</span></div>';
     str += '<div class="acct fLeft poR">';
     if(obj['active_flag'] == 1 || obj['active_flag'] == 0){
         cl='inStockPrd';
@@ -553,7 +553,7 @@ function generateJewellList(obj) {
 
         var date = obj['update_time'].split(' ');
         var str = '<li>';
-        str += '<div class="date fLeft"> ';
+        str += '<div class="date fLeft">';
         str += '<span class="upSpan">' + date[0] + '</span>';
         str += '<span class="lwSpan">'+ date[1] +'</span>';
         str += '</div>';
@@ -589,7 +589,7 @@ function generateJewellList(obj) {
             var gweights = common.number_format(obj.gold_weight,2)+' Gms';
         }
 //        str += '<div class="subType fLeft">' + gweights + '</div>';
-        str += '<div class="price fLeft fmOpenB">&#8377;' + obj['price']+ '</div>';
+        str += '<div class="price fLeft fmOpenB"><span class="fRight rupeeImg">' + obj['price']+ '</span></div>';
         str += '<div class="acct fLeft poR">';
 
         if(obj['active_flag'] == 1 || obj['active_flag'] == 0){
@@ -828,7 +828,7 @@ function generatBullionsList(obj) {
         var gweights = obj.gold_weight + ' Gms';
     }
     str += '<div class="btype fLeft">' + gweights + '</div>';
-    str += '<div class="price fLeft fmOpenB">&#8377;' + obj['price']+ '</div>';
+    str += '<div class="price fLeft fmOpenB"><span class="fRight rupeeImg">' + obj['price']+ '</span></div>';
     str += '<div class="acct fLeft poR">';
 
 
