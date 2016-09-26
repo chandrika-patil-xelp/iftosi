@@ -1,6 +1,6 @@
 <?php include 'bhead.html'; ?>
 <body>
-    <div id='baseCont' class="container fmOpenR bgWhite resultsPage">
+    <div id='baseCont' class="container fmOpenR bgWhite resultsPage bullion">
         <div class="wrapper">
             <?php include 'header.html'?>
             <div class="totalResultsDiv">
@@ -18,30 +18,30 @@
                     </div>
                 </div>
             </div>
-			<?php
+            <?php
 
-			if(count($bulcat['subcat']) && ($bulcat['catid'] == $_GET['catid']))
-			{
-			?>
+            if(count($bulcat['subcat']) && ($bulcat['catid'] == $_GET['catid']))
+            {
+            ?>
             <div class='jShapesCont resultsPage showHide fmOpenL'>
                 <div class="allShapes resultsPage bresults">
                     <center>
-						<?php
-						$html = '';
-						foreach($bulcat['subcat'] as $key => $val)
-						{
-							$exp = explode('/',$val['cat_name']);
-							$scat = trim($exp[0]);
-							$html .= '<div id="'.$val['catid'].'_'.$scat.'" class="jshapeComm transition300 ripplelink g'.$scat.'">'.$val['cat_name'].'</div>';
-						}
-						echo $html;
-						?>
-						</center>
+                        <?php
+                        $html = '';
+                        foreach($bulcat['subcat'] as $key => $val)
+                        {
+                        $exp = explode('/',$val['cat_name']);
+                        $scat = trim($exp[0]);
+                        $html .= '<div id="'.$val['catid'].'_'.$scat.'" class="jshapeComm transition300 ripplelink g'.$scat.'">'.$val['cat_name'].'</div>';
+                        }
+                        echo $html;
+                        ?>
+                    </center>
                 </div>
             </div>
-			<?php
-			}
-			?>
+            <?php
+            }
+            ?>
 
             <div class="allResults">
                 <div class="wrapperMax">
@@ -65,171 +65,171 @@
                         <?php include 'filters.html'; ?>
                         <div class='prdResults fRight'>
 
-<?php
+                            <?php
                             if(empty($data))
                             {
-?>
-                                <div class="noresDiv">
-                                    <div class="noresults font25 fLeft">There are no results available for your search.</div>
-                                    <div class="noresults font18 fLeft">Please try again.</div>
-                                </div>
+                            ?>
+                            <div class="noresDiv">
+                                <div class="noresults font25 fLeft">There are no results available for your search.</div>
+                                <div class="noresults font18 fLeft">Please try again.</div>
+                            </div>
 
-<?php                       }
+                            <?php                       }
                             foreach($data as $key=>$val) { ?>
-									<div class='prdComm fLeft' style="opacity: 0; transform: translateX(1000px);">
-										<div class='prdCommDiv fLeft transition100'>
+                            <div class='prdComm fLeft' style="opacity: 0; transform: translateX(1000px);">
+                                <div class='prdCommDiv fLeft transition100'>
 
-<?php
-                                                                                        $tempUrl = '';
-                                                                                        if(!empty($val['attributes']['metal']))
-                                                                                        {
-                                                                                            if($tempUrl !== ''){
-                                                                                                $tempUrl .= '-'.$val['attributes']['metal'];
-                                                                                            }
-                                                                                            else{
-                                                                                                $tempUrl .= $val['attributes']['metal'];
-                                                                                            }
-                                                                                        }
-                                                                                        if(!empty($val['attributes']['type']))
-                                                                                        {
-                                                                                            if($tempUrl !== '')
-                                                                                            {
-                                                                                                $tempUrl .= '-'.$val['attributes']['type'];
-                                                                                            }
-                                                                                            else
-                                                                                            {
-                                                                                                $tempUrl .= $val['attributes']['type'];
-                                                                                            }
-                                                                                        }
-                                                                                        if(!empty($val['attributes']['gold_purity']))
-                                                                                        {
-                                                                                            if($tempUrl !== '')
-                                                                                            {
-                                                                                                $tempUrl .= '-'.number_format($val['attributes']['gold_purity'],0);
-                                                                                            }
-                                                                                            else
-                                                                                            {
-                                                                                                $tempUrl .= number_format($val['attributes']['gold_purity'],0);
-                                                                                            }
-                                                                                        }
-                                                                                        if(!empty($val['attributes']['gold_weight'])){
-                                                                                            if($tempUrl !== '')
-                                                                                            {
-                                                                                                $tempUrl .= '-'.number_format($val['attributes']['gold_weight'],0).'-Grams';
-                                                                                            }
-                                                                                            else
-                                                                                            {
-                                                                                                $tempUrl .= number_format($val['attributes']['gold_weight'],0).'-Grams';
-                                                                                            }
-                                                                                        }
-                                                                                        if($tempUrl !== '')
-                                                                                        {
-?>
-                                                                                            <a href="<?php echo DOMAIN.$tempUrl. '/bid-' . $val['pid']; ?>" target="_blank">
-<?php
-                                                                                        }
-                                                                                        else
-                                                                                        {
-?>
-                                                                                            <a href="<?php echo DOMAIN . $val['attributes']['type'];?>/bid-<?php echo $val['pid']; ?>" target="_blank">
-<?php
-                                                                                        }
-?>
-                                                                                	<div class="prdShape fLeft">
-												<div class="prdShTitle fLeft fmOpenB">TYPE</div>
-												<div class="prdShType fLeft fmOpenR"><?php echo $val['attributes']['type'];?></div>
-												<div class="coinIc fRight"></div>
-											</div>
-											<div class="prdDetails fLeft">
-												<div class="detComm">
-													<div class="detLabel fmOpenB fLeft">METAL</div>
-													<div class="detValue fmOpenR fLeft"><?php echo $val['attributes']['metal'];?></div>
-												</div>
-												<div class="detComm">
-													<div class="detLabel fmOpenB fLeft">WEIGHT</div>
-													<div class="detValue fmOpenR fLeft">
-<?php
-                                                                                                        if($val['attributes']['gold_weight'] > 1000)
-                                                                                                        {
-                                                                                                            $gweights = number_format(($val['attributes']['gold_weight']/1000),2);
-                                                                                                            echo $gweights.' Kg';
-                                                                                                        }
-                                                                                                        else if($val['attributes']['gold_weight'] == 1000)
-                                                                                                        {
-                                                                                                            $gweights = '1 Kg';
-                                                                                                            echo $gweights;
-                                                                                                        }
-                                                                                                        else
-                                                                                                        {
-                                                                                                            echo number_format($val['attributes']['gold_weight'],2).' Gms';
-                                                                                                        }
-?>
-                                                                                                        </div>
-												</div>
-											</div>
-											<div class='prdPrice fLeft'>
-												<div class="detComm">
-													<div class="detLabel fmOpenB fLeft">PRICE</div>
-<?php
-                                                                                                        if(empty($val['silver_rate']) || $val['silver_rate']=='0.00')
-                                                                                                        {
-                                                                                                            $val['silver_rate'] = silverRate;
-                                                                                                        }
-                                                                                                        if(empty($val['gold_rate']) || $val['gold_rate']=='0.00')
-                                                                                                        {
-                                                                                                            $val['gold_rate'] = goldRate;
-                                                                                                        }
+                                    <?php
+                                    $tempUrl = '';
+                                    if(!empty($val['attributes']['metal']))
+                                    {
+                                    if($tempUrl !== ''){
+                                    $tempUrl .= '-'.$val['attributes']['metal'];
+                                    }
+                                    else{
+                                    $tempUrl .= $val['attributes']['metal'];
+                                    }
+                                    }
+                                    if(!empty($val['attributes']['type']))
+                                    {
+                                    if($tempUrl !== '')
+                                    {
+                                    $tempUrl .= '-'.$val['attributes']['type'];
+                                    }
+                                    else
+                                    {
+                                    $tempUrl .= $val['attributes']['type'];
+                                    }
+                                    }
+                                    if(!empty($val['attributes']['gold_purity']))
+                                    {
+                                    if($tempUrl !== '')
+                                    {
+                                    $tempUrl .= '-'.number_format($val['attributes']['gold_purity'],0);
+                                    }
+                                    else
+                                    {
+                                    $tempUrl .= number_format($val['attributes']['gold_purity'],0);
+                                    }
+                                    }
+                                    if(!empty($val['attributes']['gold_weight'])){
+                                    if($tempUrl !== '')
+                                    {
+                                    $tempUrl .= '-'.number_format($val['attributes']['gold_weight'],0).'-Grams';
+                                    }
+                                    else
+                                    {
+                                    $tempUrl .= number_format($val['attributes']['gold_weight'],0).'-Grams';
+                                    }
+                                    }
+                                    if($tempUrl !== '')
+                                    {
+                                    ?>
+                                    <a href="<?php echo DOMAIN.$tempUrl. '/bid-' . $val['pid']; ?>" target="_blank">
+                                        <?php
+                                        }
+                                        else
+                                        {
+                                        ?>
+                                        <a href="<?php echo DOMAIN . $val['attributes']['type'];?>/bid-<?php echo $val['pid']; ?>" target="_blank">
+                                            <?php
+                                            }
+                                            ?>
+                                            <div class="prdShape fLeft">
+                                                <div class="prdShTitle fLeft fmOpenB">TYPE</div>
+                                                <div class="prdShType fLeft fmOpenR"><?php echo $val['attributes']['type'];?></div>
+                                                <div class="coinIc fRight"></div>
+                                            </div>
+                                            <div class="prdDetails fLeft">
+                                                <div class="detComm">
+                                                    <div class="detLabel fmOpenB fLeft">METAL</div>
+                                                    <div class="detValue fmOpenR fLeft"><?php echo $val['attributes']['metal'];?></div>
+                                                </div>
+                                                <div class="detComm">
+                                                    <div class="detLabel fmOpenB fLeft">WEIGHT</div>
+                                                    <div class="detValue fmOpenR fLeft">
+                                                        <?php
+                                                        if($val['attributes']['gold_weight'] > 1000)
+                                                        {
+                                                        $gweights = number_format(($val['attributes']['gold_weight']/1000),2);
+                                                        echo $gweights.' Kg';
+                                                        }
+                                                        else if($val['attributes']['gold_weight'] == 1000)
+                                                        {
+                                                        $gweights = '1 Kg';
+                                                        echo $gweights;
+                                                        }
+                                                        else
+                                                        {
+                                                        echo number_format($val['attributes']['gold_weight'],2).' Gms';
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class='prdPrice fLeft'>
+                                                <div class="detComm">
+                                                    <div class="detLabel fmOpenB fLeft">PRICE</div>
+                                                    <?php
+                                                    if(empty($val['silver_rate']) || $val['silver_rate']=='0.00')
+                                                    {
+                                                    $val['silver_rate'] = silverRate;
+                                                    }
+                                                    if(empty($val['gold_rate']) || $val['gold_rate']=='0.00')
+                                                    {
+                                                    $val['gold_rate'] = goldRate;
+                                                    }
 
-                                                                                                        $pro_metal = strtolower($val['attributes']['metal']);
-                                                                                                        if($pro_metal=='gold')
-                                                                                                        {
-                                                                                                            $metal_rate=$val['gold_rate'];
-                                                                                                        $metal_rate=($metal_rate/10)*($val['attributes']['gold_purity']/995);
-                                                                                                        }
-                                                                                                        else if($pro_metal=='silver')
-                                                                                                        {
-                                                                                                            $metal_rate=$val['silver_rate'];
+                                                    $pro_metal = strtolower($val['attributes']['metal']);
+                                                    if($pro_metal=='gold')
+                                                    {
+                                                    $metal_rate=$val['gold_rate'];
+                                                    $metal_rate=($metal_rate/10)*($val['attributes']['gold_purity']/995);
+                                                    }
+                                                    else if($pro_metal=='silver')
+                                                    {
+                                                    $metal_rate=$val['silver_rate'];
 
-                                                                                                        $metal_rate=($metal_rate/1000)*($val['attributes']['gold_purity']/999);
-                                                                                                        }
+                                                    $metal_rate=($metal_rate/1000)*($val['attributes']['gold_purity']/999);
+                                                    }
 
-?>
-													<div class="detValue fmOpenB fLeft"><span>&#8377;</span><?php
-                                                                                                        $price = ceil($val['attributes']['bprice']);
-                                                                                                        echo $comm->IND_money_format($price);
-                                                                                                        ?></div>
+                                                    ?>
+                                                    <div class="detValue fmOpenB fLeft"><span class="rupeeImg"></span><?php
+                                                        $price = ceil($val['attributes']['bprice']);
+                                                        echo $comm->IND_money_format($price);
+                                                        ?></div>
 
 
-												</div>
-											</div>
-											</a>
-											<div class='prdActions fLeft'>
-<?php
-                                                                                            if(!empty($tempUrl))
-                                                                                            {
-?>
-                                                                                            	<a href="<?php echo DOMAIN .$tempUrl ."/bid-".$val['pid']."/1";?>" class="actionComm fLeft transition100 poR ripplelink"></a>
-												<a href="<?php echo DOMAIN .$tempUrl .'/bid-'.$val['pid'].'/2'?>" class='actionComm fLeft transition100 poR ripplelink'></a>
-												<a href="<?php echo DOMAIN .$tempUrl; ?>'/bid-<?php echo $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
-												<a href="<?php echo DOMAIN .$tempUrl; ?>-grams/bid-<?php echo $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
-<?php
-                                                                                            }
-                                                                                            else
-                                                                                            {
-?>
-                                                                                                <a href="<?php echo DOMAIN . $val['attributes']['type']; ?>/bid-<?php echo $val['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
-												<a href="<?php echo DOMAIN . $val['attributes']['type']; ?>/bid-<?php echo $val['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
-												<a href="<?php echo DOMAIN . $val['attributes']['type']; ?>/bid-<?php echo $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
-												<a href="<?php echo DOMAIN . $val['attributes']['type']; ?>/bid-<?php echo $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
-<?php
-                                                                                            }
-?>
-                                                                                        </div>
-										</div>
-									</div>
-                                <?php $i++;
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class='prdActions fLeft'>
+                                            <?php
+                                            if(!empty($tempUrl))
+                                            {
+                                            ?>
+                                            <a href="<?php echo DOMAIN .$tempUrl ."/bid-".$val['pid']."/1";?>" class="actionComm fLeft transition100 poR ripplelink"></a>
+                                            <a href="<?php echo DOMAIN .$tempUrl .'/bid-'.$val['pid'].'/2'?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                            <a href="<?php echo DOMAIN .$tempUrl; ?>'/bid-<?php echo $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                            <a href="<?php echo DOMAIN .$tempUrl; ?>-grams/bid-<?php echo $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                            <?php
+                                            }
+                                            else
+                                            {
+                                            ?>
+                                            <a href="<?php echo DOMAIN . $val['attributes']['type']; ?>/bid-<?php echo $val['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                            <a href="<?php echo DOMAIN . $val['attributes']['type']; ?>/bid-<?php echo $val['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                            <a href="<?php echo DOMAIN . $val['attributes']['type']; ?>/bid-<?php echo $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                            <a href="<?php echo DOMAIN . $val['attributes']['type']; ?>/bid-<?php echo $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                            <?php
+                                            }
+                                            ?>
+                                        </div>
+                                </div>
+                            </div>
+                            <?php $i++;
                             } ?>
-							<?php include 'pagination.html';?>
+                            <?php include 'pagination.html';?>
                         </div>
                     </div>
                 </div>
@@ -240,7 +240,7 @@
         <?php include 'leftmenu.html'; ?>
     </div>
     <div id='dragTarget' class="drag-target" style="touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); left: 0px;"></div>
-	<script type="text/javascript" src="<?= $jvs['auto']; ?>"></script>
+    <script type="text/javascript" src="<?= $jvs['auto']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['jqrynum']; ?>"></script>
@@ -249,5 +249,8 @@
     <script type="text/javascript" src="<?= $jvs['head']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['comm']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['filter']; ?>"></script>
+
+
+
 </body>
 </html>
