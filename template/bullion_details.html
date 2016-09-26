@@ -69,7 +69,7 @@
                             $metal_rate=($metal_rate/1000)*($prdInfo['attr_details']['gold_purity']/999); 
                             }
                             ?>
-                            <div class="prdShType fLeft fmOpenL"><span>&#8377;</span><?php
+                            <div class="prdShType fLeft fmOpenL"><span class="fLeft rupeeImg"></span><?php
                                 $price = ceil(($prdInfo['attr_details']['gold_weight']*$metal_rate));
                                 echo $comm->IND_money_format($price);    
                                 ?>
@@ -370,10 +370,13 @@
                                     $metal_rate = ($data3[$key]['vendor_rates']['silver_rate']/1000)*($data3[$key]['gold_purity']/999);
                                     }
                                     ?>
-                                    <div class="detValue fmOpenB fLeft"><span>&#8377;</span><?php
+                                    <div class="detValue fmOpenB fLeft"><span class='fLeft rupeeImg'></span>                                       
+                                        <?php
                                         $price = ceil(($data3[$key]['gold_weight']*$metal_rate));
                                         echo $comm->IND_money_format($price);
-                                        ?></div>
+                                        ?>
+                                    
+                                    </div>
 
 
                                 </div>
