@@ -1,6 +1,6 @@
 <?php include 'bhead.html'; ?>
 <body>
-    <div id='baseCont' class="container fmOpenR bgWhite resultsPage">
+    <div id='baseCont' class="container fmOpenR bgWhite resultsPage bullion">
         <div class="wrapper">
             <?php include 'header.html' ?>
             <div class="totalResultsDiv">
@@ -173,7 +173,7 @@ if (count($data)) {
                                                                 $rate = dollarValue;
                                                             }
                                                         ?>
-                                                        <div class="detValue fmOpenB fLeft"><span>&#8377;</span>
+                                                        <div class="detValue fmOpenB fLeft"><span class='rupeeImg'></span>
                                                         <?php
                                                             $price = ceil((($val['pprice'] * $rate)*$val['attributes']['carat']));
                                                             echo $price = $comm->IND_money_format($price);
