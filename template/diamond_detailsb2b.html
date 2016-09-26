@@ -1,6 +1,6 @@
 <?php include 'bhead.html'; ?>
 <body>
-    <div id='baseCont' class="container fmOpenR detailsPage bgWhite">
+    <div id='baseCont' class="container fmOpenR detailsPage bgWhite bullion">
         <div class="wrapper">
             <?php include 'header.html'; ?>
             <div class="forBg bgWhite"></div>
@@ -8,673 +8,677 @@
                 <div class="wrapperMax diamond_mod">
                     <?php
                     if (count($data1) == 0) {
-                        ?>
-                        <div class="imgsCont noImage"></div>
-                        <?php
+                    ?>
+                    <div class="imgsCont noImage"></div>
+                    <?php
                     } else {
-                        ?>
-                        <div id="detailsImgs" class="imgsCont">
+                    ?>
+                    <div id="detailsImgs" class="imgsCont">
                         <?php
                         /*
-                          <div class="leftArrow transition300" onclick="movePrImg(true)"></div>
-                          <div class="rightArrow  transition300" onclick="movePrImg(false)"></div>
-                          <div id='prdImage' class="forImg fLeft imgPreview" style="background: url(<?php echo IMGDOMAIN.$data1[0];?>) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
-                          <div id='gallery1' class="gallery fLeft transition300">
-                          <div class="carousel transition300">
-                          <?php
-                          for($i=0;$i<count($data1);$i++)
-                          {
-                          ?>
-                          <div class="thumbnil transition300" style="background:#fff url(<?php echo IMGDOMAIN.$data1[$i];?>)no-repeat;background-size: contain;background-position: center;">
-                          </div>
-                          <?php
-                          }
-                          ?>
-                          </div>
-                          </div>
-                         */
-                        ?>
-                            <div class="imgsCont noImage"></div>
-                        </div>
+                        <div class="leftArrow transition300" onclick="movePrImg(true)"></div>
+                        <div class="rightArrow  transition300" onclick="movePrImg(false)"></div>
+                        <div id='prdImage' class="forImg fLeft imgPreview" style="background: url(<?php echo IMGDOMAIN.$data1[0];?>) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+                    <div id='gallery1' class="gallery fLeft transition300">
+                        <div class="carousel transition300">
                             <?php
-                        }
-                        ?>
-                    <div class="detCont">
-                        <div class="btnsCont fLeft">
-                            <div class="prdShape fLeft mRight20">
-                                <div class="prdShTitle wAuto fmOpenB">CUST. PRICE</div>
-<?php
-                                $rate = $data['attr_details']['dollar_rate'];
-                                if (empty($data['attr_details']['dollar_rate']) || $data['attr_details']['dollar_rate'] == '0.00' || $data['attr_details']['dollar_rate'] == 0.00)
-                                {
-                                    $rate = dollarValue;
-                                }
-?>
-                                <div class="prdShType wAuto fmOpenL"><span>&#8377;</span>
+                            for($i=0;$i<count($data1);$i++)
+                            {
+                            ?>
+                            <div class="thumbnil transition300" style="background:#fff url(<?php echo IMGDOMAIN.$data1[$i];?>)no-repeat;background-size: contain;background-position: center;">
+                            </div>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                    */
+                    ?>
+                    <div class="imgsCont noImage"></div>
+                </div>
+                <?php
+                }
+                ?>
+                <div class="detCont">
+                    <div class="btnsCont fLeft">
+                        <div class="prdShape fLeft mRight20">
+                            <div class="prdShTitle wAuto fmOpenB">CUST. PRICE</div>
+                            <?php
+                            $rate = $data['attr_details']['dollar_rate'];
+                            if (empty($data['attr_details']['dollar_rate']) || $data['attr_details']['dollar_rate'] == '0.00' || $data['attr_details']['dollar_rate'] == 0.00)
+                            {
+                            $rate = dollarValue;
+                            }
+                            ?>
+                            <div class="prdShType wAuto fmOpenL">
+                                <span class='fLeft rupeeImg'> </span>
                                 <?php
                                 $price = ceil(($data['attr_details']['price'] * $rate) * $data['attr_details']['carat']);
                                 echo $price = $comm->IND_money_format($price);
                                 ?>
-                                </div>
+                               
                             </div>
-                            <div class="prdShape fLeft">
-                                <div class="prdShTitle fLeft fmOpenB">B2B PRICE</div>
-<?php
-                                $rate = $data['attr_details']['dollar_rate'];
-                                if (empty($data['attr_details']['dollar_rate']) || $data['attr_details']['dollar_rate'] == '0.00' || $data['attr_details']['dollar_rate'] == 0.00)
-                                {
-                                    $rate = dollarValue;
-                                }
-?>
-                                <div class="prdShType fLeft fmOpenL"><span>&#8377;</span>
+                        </div>
+                        <div class="prdShape fLeft">
+                            <div class="prdShTitle fLeft fmOpenB">B2B PRICE</div>
+                            <?php
+                            $rate = $data['attr_details']['dollar_rate'];
+                            if (empty($data['attr_details']['dollar_rate']) || $data['attr_details']['dollar_rate'] == '0.00' || $data['attr_details']['dollar_rate'] == 0.00)
+                            {
+                            $rate = dollarValue;
+                            }
+                            ?>
+                            <div class="prdShType fLeft fmOpenL"><span class="fLeft rupeeImg"></span>
                                 <?php
                                 $price = ceil(($data['attr_details']['b2bprice'] * $rate) * $data['attr_details']['carat']);
                                 $price = $comm->IND_money_format($price);
                                 if(empty($price) || $price == 0.00 || $price == '0.00' || $price == 0 || $price == '0')
                                 {
-                                    echo $price = 'N/A';
+                                echo $price = 'N/A';
                                 }
                                 else{echo $price;}
                                 ?>
-                                </div>
-                            </div>
-                            <div class="prdBtns fLeft">
-                                <div class="btnComm fLeft iconCall ripplelink poR" >Contact Dealer</div>
-                                <!-- <div class="btnComm fLeft iconMessage ripplelink poR">Send SMS & E-Mail</div>
-                                <div class="btnComm fLeft iconWishlist ripplelink poR" id="addtowishlist" onclick="">Add To Wishlist</div> -->
                             </div>
                         </div>
-                        <div class="majorInfoBox fLeft">
-                            <div class="infoCommn fLeft fmOpenR ">
-                                <div class="infoLabel fmOpenB font12 fmOpenB">Shape</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['shape']; ?></div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR ">
-                                <div class="infoLabel fmOpenB font12 fmOpenB">Carats</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['carat']; ?></div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR ">
-                                <div class="infoLabel fmOpenB font12 fmOpenB">Colour</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['color']; ?></div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR ">
-                                <div class="infoLabel fmOpenB font12 fmOpenB">Clarity</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['clarity']; ?></div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR ">
-                                <div class="infoLabel fmOpenB font12 fmOpenB">CUT</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo $prdVars['cut']; ?></div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR">
-                                <div class="infoLabel fmOpenB  font12">SYMMETRY</div>
-                                <div class="infoValue c666 font25 fmOpenR"><?php echo $data['attr_details']['symmetry']; ?></div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR">
-                                <div class="infoLabel fmOpenB  font12">POLISH</div>
-                                <div class="infoValue c666 font25 fmOpenR"><?php echo $data['attr_details']['polish']; ?></div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR">
-                                <div class="infoLabel fmOpenB  font12">FLUORESCENCE</div>
-                                <div class="infoValue c666 font25 fmOpenR"><?php echo $data['attr_details']['fluorescence']; ?></div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR ">
-                                <div class="infoLabel fmOpenB font12 fmOpenB">Measurement</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['measurement']; ?></div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR">
-                                <div class="infoLabel fmOpenB  font12">TABLE</div>
-                                <div class="infoValue c666 font25 fmOpenR"><?php echo trim(number_format($data['attr_details']['tab'],1),'0'.'.').'%'; ?></div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR">
-                                <div class="infoLabel fmOpenB  font12">CROWN ANGLE</div>
-                                <div class="infoValue c666 font25 fmOpenR"><?php echo trim(number_format($data['attr_details']['crownangle'],2),'0'.'.'); ?></div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR">
-                                <div class="infoLabel fmOpenB  font12">GIRDLE</div>
-                                <div class="infoValue c666 font25 fmOpenR"><?php echo trim(number_format($data['attr_details']['girdle'],1),'0'.'.'); ?></div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR ">
-                                <div class="infoLabel fmOpenB font12 fmOpenB">Certificate</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['certified']; ?></div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR ">
-                                <div class="infoLabel fmOpenB font12 fmOpenB">Certificate No.</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['cno']; ?></div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR ">
-                                <div class="infoLabel fmOpenB font12 fmOpenB">Barcode</div>
-                                <div class="infoValue c666 fmOpenR font25"><?php echo $data['product_barcode']; ?></div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR">
-                                <div class="infoLabel fmOpenB  font12">LOT NUMBER</div>
-                                <div class="infoValue c666 font25 fmOpenR"><?php echo $data['product_lotno']; ?></div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR">
-                                <div class="infoLabel fmOpenB  font12">LOT Reference</div>
-                                <div class="infoValue c666 font25 fmOpenR"><?php echo $data['product_lotref']; ?></div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR">
-                                <div class="infoLabel fmOpenB  font12">BASE Price </div>
-                                <div class="infoValue c666 font25 fmOpenR"><?php $bprice = ceil((($data['attr_details']['baseprice'] * $data['attr_details']['dollar_rate']) * $data['attr_details']['carat']));
-                                    $bprice = $comm->IND_money_format($bprice);
-                                ?>
-                                    &#8377; <?php echo $bprice; ?></div>
-                            </div>
-                            <div class="infoCommn fLeft fmOpenR">
-                                <div class="infoLabel fmOpenB  font12">% DISCOUNT</div>
-                                <div class="infoValue c666 font25 fmOpenR"><?php echo str_replace('-', '', $data['attr_details']['discount']); ?>%</div>
-                            </div>
-                            <?php
-                            if (!empty($certificate_url)) {
-                                ?>
-                                <div class="infoCommn fLeft fmOpenR cursorPointer">
-                                    <div class="infoLabel fmOpenB  font12">Certificate</div>
-                                    <div class="infoValue c666 font25 fmOpenR" onclick="common.showCertificate('<?php echo DOMAIN . $data['attr_details']['certificate_url']; ?>');">See Certificate</div>
-                                </div>
-    <?php
-}
-?>
+                        <div class="prdBtns fLeft">
+                            <div class="btnComm fLeft iconCall ripplelink poR" >Contact Dealer</div>
+                            <!-- <div class="btnComm fLeft iconMessage ripplelink poR">Send SMS & E-Mail</div>
+                            <div class="btnComm fLeft iconWishlist ripplelink poR" id="addtowishlist" onclick="">Add To Wishlist</div> -->
                         </div>
+                    </div>
+                    <div class="majorInfoBox fLeft">
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Shape</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['shape']; ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Carats</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['carat']; ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Colour</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['color']; ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Clarity</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['clarity']; ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">CUT</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $prdVars['cut']; ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">SYMMETRY</div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo $data['attr_details']['symmetry']; ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">POLISH</div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo $data['attr_details']['polish']; ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">FLUORESCENCE</div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo $data['attr_details']['fluorescence']; ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Measurement</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['measurement']; ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">TABLE</div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo trim(number_format($data['attr_details']['tab'],1),'0'.'.').'%'; ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">CROWN ANGLE</div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo trim(number_format($data['attr_details']['crownangle'],2),'0'.'.'); ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">GIRDLE</div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo trim(number_format($data['attr_details']['girdle'],1),'0'.'.'); ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Certificate</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['certified']; ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Certificate No.</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['cno']; ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Barcode</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data['product_barcode']; ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">LOT NUMBER</div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo $data['product_lotno']; ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">LOT Reference</div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo $data['product_lotref']; ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">BASE Price </div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php $bprice = ceil((($data['attr_details']['baseprice'] * $data['attr_details']['dollar_rate']) * $data['attr_details']['carat']));
+                                $bprice = $comm->IND_money_format($bprice);
+                                ?>
+                                &#8377; <?php echo $bprice; ?></div>
+                        </div>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">% DISCOUNT</div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo str_replace('-', '', $data['attr_details']['discount']); ?>%</div>
+                        </div>
+                        <?php
+                        if (!empty($certificate_url)) {
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR cursorPointer">
+                            <div class="infoLabel fmOpenB  font12">Certificate</div>
+                            <div class="infoValue c666 font25 fmOpenR" onclick="common.showCertificate('<?php echo DOMAIN . $data['attr_details']['certificate_url']; ?>');">See Certificate</div>
+                        </div>
+                        <?php
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
-            <div id='vDetails' class="vendorDetails fLeft transition300 dn vTransit">
-                <div class="wrapperMax ">
-                    <div class="vdLeftCard fLeft">
-                        <div class="orgName fLeft fmOpenR"><?php echo $vndrDtls['OrganisationName']; ?></div>
-                        <div class="orgAdd fLeft fmOpenR">
-                            <?php echo trim($vndrAddr[0]); ?>
-                            <?php
-                            if (!empty($vndrAddr[1])) {
-                                echo trim($vndrAddr[1]) . ', ';
-                            }
-                            if (!empty($vndrAddr[2])) {
-                                echo trim($vndrAddr[2]) . ', ';
-                            }
-                            if (!empty($vndrAddr[3])) {
-                                echo trim($vndrAddr[3]) . ', ';
-                            }
-                            if (!empty($vndrAddr[4])) {
-                                echo trim($vndrAddr[4]) . ', ';
-                            }
-                            if (!empty($vndrDtls['area'])) {
-                                echo trim($vndrDtls['area']) . ', ';
-                            }
-                            if (!empty($vndrDtls['city'])) {
-                                echo trim($vndrDtls['city']) . ', ';
-                            }
-                            if (!empty($vndrDtls['state'])) {
-                                echo trim($vndrDtls['state']) . ',';
-                            }
-                            if (!empty($vndrDtls['postal_code'])) {
-                                echo trim($vndrDtls['postal_code']) . '.';
-                            }
-                            ?>
+        </div>
+        <div id='vDetails' class="vendorDetails fLeft transition300 dn vTransit">
+            <div class="wrapperMax ">
+                <div class="vdLeftCard fLeft">
+                    <div class="orgName fLeft fmOpenR"><?php echo $vndrDtls['OrganisationName']; ?></div>
+                    <div class="orgAdd fLeft fmOpenR">
+                        <?php echo trim($vndrAddr[0]); ?>
+                        <?php
+                        if (!empty($vndrAddr[1])) {
+                        echo trim($vndrAddr[1]) . ', ';
+                        }
+                        if (!empty($vndrAddr[2])) {
+                        echo trim($vndrAddr[2]) . ', ';
+                        }
+                        if (!empty($vndrAddr[3])) {
+                        echo trim($vndrAddr[3]) . ', ';
+                        }
+                        if (!empty($vndrAddr[4])) {
+                        echo trim($vndrAddr[4]) . ', ';
+                        }
+                        if (!empty($vndrDtls['area'])) {
+                        echo trim($vndrDtls['area']) . ', ';
+                        }
+                        if (!empty($vndrDtls['city'])) {
+                        echo trim($vndrDtls['city']) . ', ';
+                        }
+                        if (!empty($vndrDtls['state'])) {
+                        echo trim($vndrDtls['state']) . ',';
+                        }
+                        if (!empty($vndrDtls['postal_code'])) {
+                        echo trim($vndrDtls['postal_code']) . '.';
+                        }
+                        ?>
 
-                        </div>
-                        <div class="orgNo fLeft">
-                            <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Telephone No.</div>
-                            <div class="commtxt tel fmOpenR fLeft"><?php print_r(($vndrDtls['landline'] !== '') ? str_replace('|~|', ', ', $vndrDtls['landline']) . ', ' : '-, ');
+                    </div>
+                    <div class="orgNo fLeft">
+                        <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Telephone No.</div>
+                        <div class="commtxt tel fmOpenR fLeft"><?php print_r(($vndrDtls['landline'] !== '') ? str_replace('|~|', ', ', $vndrDtls['landline']) . ', ' : '-, ');
                             echo ($vndrDtls['telephones']) ? str_replace('~', ', ', $vndrDtls['telephones']) : '-'; ?></div>
+                    </div>
+                    <div class="orgNo fLeft">
+                        <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Email Address</div>
+                        <div class="commtxt email fmOpenR fLeft"><?php echo ($vndrDtls['email']) ? $vndrDtls['email'] : '-'; ?></div>
+                    </div>
+                    <div class="orgNo fLeft">
+                        <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Website</div>
+                        <div class="commtxt email fmOpenR fLeft"><a href="<?php echo ($vndrDtls['website']) ? 'http://' . str_replace('http://', '', $vndrDtls['website']) : ''; ?>"><?php echo ($vndrDtls['website']) ? $vndrDtls['website'] : '-'; ?></a></div>
+                    </div>
+                    <div class="orgNo fLeft">
+                        <div class="commLeft fLeft">
+                            <div class="infoLabel fmOpenB font12 fmOpenB fLeft">VAT Number</div>
+                            <div class="commtxt email fmOpenR fLeft"><?php echo ($vndrDtls['Vat_Number']) ? $vndrDtls['Vat_Number'] : '-'; ?></div>
                         </div>
-                        <div class="orgNo fLeft">
-                            <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Email Address</div>
-                            <div class="commtxt email fmOpenR fLeft"><?php echo ($vndrDtls['email']) ? $vndrDtls['email'] : '-'; ?></div>
-                        </div>
-                        <div class="orgNo fLeft">
-                            <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Website</div>
-                            <div class="commtxt email fmOpenR fLeft"><a href="<?php echo ($vndrDtls['website']) ? 'http://' . str_replace('http://', '', $vndrDtls['website']) : ''; ?>"><?php echo ($vndrDtls['website']) ? $vndrDtls['website'] : '-'; ?></a></div>
-                        </div>
-                        <div class="orgNo fLeft">
-                            <div class="commLeft fLeft">
-                                <div class="infoLabel fmOpenB font12 fmOpenB fLeft">VAT Number</div>
-                                <div class="commtxt email fmOpenR fLeft"><?php echo ($vndrDtls['Vat_Number']) ? $vndrDtls['Vat_Number'] : '-'; ?></div>
-                            </div>
-                            <div class="commRight fLeft">
-                                <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Turnover (cr)</div>
-                                <div class="commtxt email fmOpenR fLeft"><?php echo ($vndrDtls['turnover']) ? $vndrDtls['turnover'] : '-'; ?></div>
-                            </div>
-                        </div>
-
-                        <div class="orgNo fLeft">
-                            <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Bankers</div>
-                            <div class="commtxt bankers fmOpenR fLeft"><?php echo ($vndrDtls['bankers']) ? str_replace('~', ', ', $vndrDtls['bankers']) : '-'; ?></div>
+                        <div class="commRight fLeft">
+                            <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Turnover (cr)</div>
+                            <div class="commtxt email fmOpenR fLeft"><?php echo ($vndrDtls['turnover']) ? $vndrDtls['turnover'] : '-'; ?></div>
                         </div>
                     </div>
-                    <div class="vdCenterCard fLeft">
-                        <div class="cntCard fLeft">
-                            <div class="vTitle fLeft fmOpenR" style="background-color: #5e0037;">Contact Person</div>
-                            <div class="cardCommCont"><div class="cardComm cntName orgName fLeft fmOpenR"><?php echo $vndrDtls['contact_person']; ?></div>
-                                <div class="fmOpenB desig">(<?php echo $vndrDtls['position']; ?>)</div>
-                                <div class="cardComm cntMb fmOpenB fLeft"><?php echo str_replace('~', ', ', $vndrDtls['contact_mobile']); ?></div>
-                                <div class="cardComm cntEmail fmOpenB fLeft"><?php echo str_replace('~', ', ', $vndrDtls['email']); ?></div>
-                            </div>
-                        </div>
-                        <div class="cntCard fLeft">
-                            <div class="vTitle fLeft fmOpenR" style="background-color: #380B34;">Bharat Diamond Bourse Certificate</div>
-                            <div class='cardCommCont'>
-                                <div class="cardComm fLeft fmOpenR"><?php echo ($vndrDtls['diamond_certificate']) ? $vndrDtls['diamond_certificate'] : '-'; ?></div>
-                            </div>
-                        </div>
 
-                        <div class="cntCard fLeft">
-                            <div class="vTitle fLeft fmOpenR" style="background-color: #2A0E34;">GJEPC Membership Certificate</div>
-                            <div class='cardCommCont'>
-                                <div class="cardComm fLeft fmOpenR"><?php echo ($vndrDtls['Membership_Certificate']) ? $vndrDtls['Membership_Certificate'] : '-'; ?></div>
-                            </div>
-                        </div>
-                        <div class="cntCard fLeft">
-                            <div class="vTitle fLeft fmOpenR" style="background-color: #171334;">Membership Of Other Diamond Bourses</div>
-                            <div class='cardCommCont'>
-                                <div class="cardComm fLeft fmOpenR"><?php echo ($vndrDtls['membership_around_world']) ? str_replace('~', ', ', $vndrDtls['membership_around_world']) : '-'; ?></div>
-                            </div>
+                    <div class="orgNo fLeft">
+                        <div class="infoLabel fmOpenB font12 fmOpenB fLeft">Bankers</div>
+                        <div class="commtxt bankers fmOpenR fLeft"><?php echo ($vndrDtls['bankers']) ? str_replace('~', ', ', $vndrDtls['bankers']) : '-'; ?></div>
+                    </div>
+                </div>
+                <div class="vdCenterCard fLeft">
+                    <div class="cntCard fLeft">
+                        <div class="vTitle fLeft fmOpenR" style="background-color: #5e0037;">Contact Person</div>
+                        <div class="cardCommCont"><div class="cardComm cntName orgName fLeft fmOpenR"><?php echo $vndrDtls['contact_person']; ?></div>
+                            <div class="fmOpenB desig">(<?php echo $vndrDtls['position']; ?>)</div>
+                            <div class="cardComm cntMb fmOpenB fLeft"><?php echo str_replace('~', ', ', $vndrDtls['contact_mobile']); ?></div>
+                            <div class="cardComm cntEmail fmOpenB fLeft"><?php echo str_replace('~', ', ', $vndrDtls['email']); ?></div>
                         </div>
                     </div>
-                    <div  class="vdRightCard fLeft">
-                        <div class="cntCard fLeft shadoNone">
-                            <div class="vTitle fLeft fmOpenR" style="background-color: #ebebde;color:#666;">Office Locations</div>
-                            <div class='cardCommCont' style="padding: 10px;"><div id='googleMap' class="mapCont fLeft"></div></div>
+                    <div class="cntCard fLeft">
+                        <div class="vTitle fLeft fmOpenR" style="background-color: #380B34;">Bharat Diamond Bourse Certificate</div>
+                        <div class='cardCommCont'>
+                            <div class="cardComm fLeft fmOpenR"><?php echo ($vndrDtls['diamond_certificate']) ? $vndrDtls['diamond_certificate'] : '-'; ?></div>
                         </div>
+                    </div>
 
-                        <div class="cntCard fLeft shadoNone">
-                            <div class="vTitle fLeft fmOpenR" style="background-color: #ebebde;color:#666;">Gallery</div>
-                            <div class='cardCommCont' style="padding: 10px;">
-                                <div class="gallery fLeft">
-                                    <div class="thumbnil fLeft" style="background:#fff url(<?=DOMAIN;?>tools/img/common/tumb5.jpg)no-repeat;background-size: contain;background-position: center;"></div><div class="thumbnil fLeft" style="background:#fff url(<?=DOMAIN;?>tools/img/common/tumb2.png)no-repeat;background-size: contain;background-position: center;"></div>
-                                    <div class="thumbnil fLeft" style="background:#fff url(<?=DOMAIN;?>tools/img/common/tumb3.jpg)no-repeat;background-size: contain;background-position: center;"></div>
-                                    <div id='moreimg' class="thumbnil fLeft poR" style="background:#8A0044"><span>+5 More</span></div>
-                                </div>
+                    <div class="cntCard fLeft">
+                        <div class="vTitle fLeft fmOpenR" style="background-color: #2A0E34;">GJEPC Membership Certificate</div>
+                        <div class='cardCommCont'>
+                            <div class="cardComm fLeft fmOpenR"><?php echo ($vndrDtls['Membership_Certificate']) ? $vndrDtls['Membership_Certificate'] : '-'; ?></div>
+                        </div>
+                    </div>
+                    <div class="cntCard fLeft">
+                        <div class="vTitle fLeft fmOpenR" style="background-color: #171334;">Membership Of Other Diamond Bourses</div>
+                        <div class='cardCommCont'>
+                            <div class="cardComm fLeft fmOpenR"><?php echo ($vndrDtls['membership_around_world']) ? str_replace('~', ', ', $vndrDtls['membership_around_world']) : '-'; ?></div>
+                        </div>
+                    </div>
+                </div>
+                <div  class="vdRightCard fLeft">
+                    <div class="cntCard fLeft shadoNone">
+                        <div class="vTitle fLeft fmOpenR" style="background-color: #ebebde;color:#666;">Office Locations</div>
+                        <div class='cardCommCont' style="padding: 10px;"><div id='googleMap' class="mapCont fLeft"></div></div>
+                    </div>
+
+                    <div class="cntCard fLeft shadoNone">
+                        <div class="vTitle fLeft fmOpenR" style="background-color: #ebebde;color:#666;">Gallery</div>
+                        <div class='cardCommCont' style="padding: 10px;">
+                            <div class="gallery fLeft">
+                                <div class="thumbnil fLeft" style="background:#fff url(<?=DOMAIN;?>tools/img/common/tumb5.jpg)no-repeat;background-size: contain;background-position: center;"></div><div class="thumbnil fLeft" style="background:#fff url(<?=DOMAIN;?>tools/img/common/tumb2.png)no-repeat;background-size: contain;background-position: center;"></div>
+                                <div class="thumbnil fLeft" style="background:#fff url(<?=DOMAIN;?>tools/img/common/tumb3.jpg)no-repeat;background-size: contain;background-position: center;"></div>
+                                <div id='moreimg' class="thumbnil fLeft poR" style="background:#8A0044"><span>+5 More</span></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class='prdInfo fLeft'>
-            
-            <div class="wrapperMax fmOpenR">
-<?php
-                foreach($des as $key=>$value)
-                {
-                    if($des[$key]['describe_name'] == 'diamond certificate' && !empty($des[$key]['describe_name']))
-                    {
-?>
-                        <div class="prdInfoTitle fLeft"><?php echo 'What is a '.$des[$key]['describe_display_name'].' ?'; ?></div>
-                                <div class="prdInfoDiv fLeft">
-<?php
-                                print_r($des[$key]['describe_text']);
-?>
-                                </div>
-<?php
-                    }
-                }
-?>
-                                
-                                
-            
-            
+    </div>
+    <div class='prdInfo fLeft'>
+
+        <div class="wrapperMax fmOpenR">
+            <?php
+            foreach($des as $key=>$value)
+            {
+            if($des[$key]['describe_name'] == 'diamond certificate' && !empty($des[$key]['describe_name']))
+            {
+            ?>
+            <div class="prdInfoTitle fLeft"><?php echo 'What is a '.$des[$key]['describe_display_name'].' ?'; ?></div>
+            <div class="prdInfoDiv fLeft">
+                <?php
+                print_r($des[$key]['describe_text']);
+                ?>
+            </div>
+            <?php
+            }
+            }
+            ?>
+
+
+
+
             <div class="wrapperMax fmOpenR">
                 <div class="centerDiv">
-<?php
+                    <?php
 
-foreach($des as $key=>$value)
-                {
+                    foreach($des as $key=>$value)
+                    {
                     if($data['attr_details']['shape'] == ucwords(strtolower($key)))
                     {
-?>      
-                      <div class="prdInfoDiv fLeft shapesPage2 ">
-                          <div class="shapesCommH fLeft">
-                              <div class="<?=ucwords(strtolower($key));?> shapeComm"></div>
-                              <div class="texHolder font13 fmOpenR">
-<?php
+                    ?>      
+                    <div class="prdInfoDiv fLeft shapesPage2 ">
+                        <div class="shapesCommH fLeft">
+                            <div class="<?=ucwords(strtolower($key));?> shapeComm"></div>
+                            <div class="texHolder font13 fmOpenR">
+                                <?php
                                 echo $des[$key]['describe_text'];
-?>
-                              </div>
-                          </div>
-                      </div>
-<?php
-                    }
-                }
-?>
-
-                  <div class="prdInfoTitle fLeft fmOpenR">Diamond Anatomy</div>
-                  <div class="fmOpenR tctContents fLeft">
-                      Once cut and polished, all diamonds possess a shared set of characteristics,
-                      often referred to as the anatomy of the diamond. While the individual proportions, angles and placement
-                      of these common characteristics vary for diamonds of different shapes, their definition is the same.
-                  </div>
-                  <div class="prdInfoTitle3 fLeft">Place your cursor over any term to learn more.</div>
-                  <div class="diamondterms fLeft">
-                      <div class="measurement fLeft">
-                          <div class="textDivH fLeft fmOpenB" id="t1">Crown</div>
-                          <div class="textDiv fLeft" id="t2">Table</div>
-                          <div class="textDiv fLeft" id="t3">Star Facets</div>
-                          <div class="textDiv fLeft" id="t4">Bezel Facets</div>
-                          <div class="textDiv fLeft" id="t5">Upper Girdle Facets</div>
-                          <div class="textDivH fLeft fmOpenB" id="t6">Girdle</div>
-                          <div class="textDivH fLeft fmOpenB" id="t7">Pavilion</div>
-                          <div class="textDiv fLeft" id="t8">Lower Girdle Facets</div>
-                          <div class="textDiv fLeft" id="t9">Pavilion Girdle</div>
-                          <div class="textDiv fLeft " id="t10">Culet</div>
-                          <div class="textDivH fLeft fmOpenB" >Key Measurements</div>
-                          <div class="textDiv fLeft" id="t11">Length</div>
-                          <div class="textDiv fLeft" id="t12">Depth</div>
-                          <div class="textDiv fLeft" id="t13">Width</div>
-                          <div class="textDiv fLeft" id="t14">Depth%</div>
-                          <div class="textDiv fLeft" id="t15">L/W Ration</div>
-                          <div class="textDiv fLeft" id="t16">Table%</div>
-                          <div class="textDiv fLeft" id="t17">Girdle Width</div>
-                          <div class="textDiv fLeft" id="t18">Crown Angel</div>
-                          <div class="textDiv fLeft" id="t19">Culet Size</div>
-                          <div class="textDiv fLeft" id="t20">Pavilion Angel</div>
-                      </div>
-                      <div class="diamondPic diamontCat1 fLeft" id="picchange"></div>
-                  </div>
-
-                  <div class="divsecondInfo fLeft">
-                      <div class="textDivLft fLeft  tx_change ">
-                          <div class="textDivH fLeft fmOpenB">Crown</div>
-                          <div class="textDiv fLeft dia-char">The entire portion of the diamond that sits above the girdle. The table as well as the star, bezel , and upper girdle facets are all part of the crown.
-                              usually constitutes the bulk of a diamonds weight.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB ">Table</div>
-                          <div class="textDiv fLeft">The uppermost , flat surface of a diamond which runs parallel to the plane of the girdle.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Star Facets</div>
-                          <div class="textDiv fLeft">The facets that sit adjacent to the table, responsible for directing light that enters the diamond down to the pavilion and lower girdle facets.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Bezel Facets</div>
-                          <div class="textDiv fLeft">The kite shaped facets that sit between the table and girdle, resposible for directing light that enters the diamond down to the pavilion and lower girdle facets.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Upper Girdle Facets</div>
-                          <div class="textDiv fLeft">The lowest facets on the crown, sitting just above the girdle. Responsible for directing light that enters the diamond down to the pavilion and lower girdle facets.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Girdle</div>
-                          <div class="textDiv fLeft">The outer edge of the diamond , where the crown meets the pavilion . the girdle may be faceted or smooth.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Pavilion </div>
-                          <div class="textDiv fLeft">The entire portion of the diamond that sits below the girdle. The lower girdle facets,pavilion facets , and culet are all part of the pavalion.
-                              usually constitutes the bulk of a diamonds weight.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Lower Girdle Facets</div>
-                          <div class="textDiv fLeft">The highest facets on the pavilion , sitting just below the girdle . Responsible fo redirectiong light that enters the diamond back out through the crown.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Pavilion Facets</div>
-                          <div class="textDiv fLeft">The facets that sit adjacent to the culet, responsible for redirecting light that enters the diamond back out through the crown.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Culet</div>
-                          <div class="textDiv fLeft">The culet is the small area at the bottom of the pavilion.The culet can be a point, or a very small facet sitting parallel to the table.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Length</div>
-                          <div class="textDiv fLeft">When viewed from above as a diamond would sit in a ring , length is the diameter measured from the "top" to "bottom".Stated in millimeters . Length is always the first of three numbers shown under "measurements" for each diamond. </div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Depth</div>
-                          <div class="textDiv fLeft">The distance from the table to the culet when the diamond is viewed from the side.State</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Width</div>
-                          <div class="textDiv fLeft">When viewed from above as a diamond would sit in a ring, width is the diameter measured from "side" to "side". Width is always the measure perpendicular to length. Stated in millimeters . Width is always the measure perpendicular to length. Stated in millimeters . Width is always the second of the three numbers shown under "measurements" for each diamond.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Depth %</div>
-                          <div class="textDiv fLeft">Calculated by dividing the dpth by the width. If a diamond is 3mm in depth , and has a midth of 4mm, the depth % is 75. Depth % is a measure of cut . The more shallow the cut of a diamond , teh higher the depth %.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Length / Width Ratio</div>
-                          <div class="textDiv fLeft">Calculated by dividing the length by the width.A perfectly round or square diamond has a L/W ratio of 1.00(since it's length and width are equal). </div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Table %</div>
-                          <div class="textDiv fLeft">Calculated by dividing the width of the table by the width of the diamond. If the table is 3mm wide , and the diamond is 4 mm in width , the table %is 75. The ;arger the table in relation to the diamond , the higher the table %.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Girdle Width</div>
-                          <div class="textDiv fLeft">A measure of the thickness of the diamond's girdle.The measure is taken only at the "valleys" of the girdle, never the peaks. Usually stated in terms of a nine point scale , from the Extremely Thin through Extremely Thick. If the girdle valleys vary in width, two values are given, one of the widest and one for the narrowest points.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Crown Angle</div>
-                          <div class="textDiv fLeft">Refers to the number of degrees between the plane of the table and bezel facets. The angle of the crown facets will determine how much light is reflected into the pavilion at an angle that will allow it to be reflected back up through the crown (where the observer cn perceive it).</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Culet Size</div>
-                          <div class="textDiv fLeft">The culet can vary in size from a single point , to a small facet . Culet size is usually expressed using a seven point scale , from None(a point) to Very Large. If the culet is too large, it might appear as an inclusion when the diamond is viewed from above.</div>
-                      </div>
-                      <div class="textDivLft fLeft dn tx_change">
-                          <div class="textDivH fLeft fmOpenB">Pavilion Angle</div>
-                          <div class="textDiv fLeft">Refers to the number of degrees between the planes of the table , and the pavilion facets. the angle determines how much of the light which has travelled into the lower part of the diamond will be successfully reflected back through the crown (where the observer can perceive it).</div>
-                      </div>
-                  </div>
-                </div>
-                <div class="prdInfoWrap fLeft">
-<?php
-               foreach($des as $key=>$value)
-                {
-                    if($des[$key]['describe_name'] == $data['attr_details']['color'] && !empty($des[$key]['describe_name']))
-                    {
- ?>
-                        <div class="prdInfoCont fLeft">
-                            <div class="prdInfoTitle fLeft"><?php echo 'Colour - '.$data['attr_details']['color'];?></div>
-                            <div class="prdInfoDiv fLeft">
-                            <span class="fmOpenB">
-<?php
-                                echo $des[$data['attr_details']['color']]['describe_display_name'].': ';
-?>
-                            </span>
-<?php
-                                        print_r($des[$data['attr_details']['color']]['describe_text']);
-?>
+                                ?>
                             </div>
                         </div>
-<?php
+                    </div>
+                    <?php
+                    }
+                    }
+                    ?>
+
+                    <div class="prdInfoTitle fLeft fmOpenR">Diamond Anatomy</div>
+                    <div class="fmOpenR tctContents fLeft">
+                        Once cut and polished, all diamonds possess a shared set of characteristics,
+                        often referred to as the anatomy of the diamond. While the individual proportions, angles and placement
+                        of these common characteristics vary for diamonds of different shapes, their definition is the same.
+                    </div>
+                    <div class="prdInfoTitle3 fLeft">Place your cursor over any term to learn more.</div>
+                    <div class="diamondterms fLeft">
+                        <div class="measurement fLeft">
+                            <div class="textDivH fLeft fmOpenB" id="t1">Crown</div>
+                            <div class="textDiv fLeft" id="t2">Table</div>
+                            <div class="textDiv fLeft" id="t3">Star Facets</div>
+                            <div class="textDiv fLeft" id="t4">Bezel Facets</div>
+                            <div class="textDiv fLeft" id="t5">Upper Girdle Facets</div>
+                            <div class="textDivH fLeft fmOpenB" id="t6">Girdle</div>
+                            <div class="textDivH fLeft fmOpenB" id="t7">Pavilion</div>
+                            <div class="textDiv fLeft" id="t8">Lower Girdle Facets</div>
+                            <div class="textDiv fLeft" id="t9">Pavilion Girdle</div>
+                            <div class="textDiv fLeft " id="t10">Culet</div>
+                            <div class="textDivH fLeft fmOpenB" >Key Measurements</div>
+                            <div class="textDiv fLeft" id="t11">Length</div>
+                            <div class="textDiv fLeft" id="t12">Depth</div>
+                            <div class="textDiv fLeft" id="t13">Width</div>
+                            <div class="textDiv fLeft" id="t14">Depth%</div>
+                            <div class="textDiv fLeft" id="t15">L/W Ration</div>
+                            <div class="textDiv fLeft" id="t16">Table%</div>
+                            <div class="textDiv fLeft" id="t17">Girdle Width</div>
+                            <div class="textDiv fLeft" id="t18">Crown Angel</div>
+                            <div class="textDiv fLeft" id="t19">Culet Size</div>
+                            <div class="textDiv fLeft" id="t20">Pavilion Angel</div>
+                        </div>
+                        <div class="diamondPic diamontCat1 fLeft" id="picchange"></div>
+                    </div>
+
+                    <div class="divsecondInfo fLeft">
+                        <div class="textDivLft fLeft  tx_change ">
+                            <div class="textDivH fLeft fmOpenB">Crown</div>
+                            <div class="textDiv fLeft dia-char">The entire portion of the diamond that sits above the girdle. The table as well as the star, bezel , and upper girdle facets are all part of the crown.
+                                usually constitutes the bulk of a diamonds weight.</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft fmOpenB ">Table</div>
+                            <div class="textDiv fLeft">The uppermost , flat surface of a diamond which runs parallel to the plane of the girdle.</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft fmOpenB">Star Facets</div>
+                            <div class="textDiv fLeft">The facets that sit adjacent to the table, responsible for directing light that enters the diamond down to the pavilion and lower girdle facets.</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft fmOpenB">Bezel Facets</div>
+                            <div class="textDiv fLeft">The kite shaped facets that sit between the table and girdle, resposible for directing light that enters the diamond down to the pavilion and lower girdle facets.</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft fmOpenB">Upper Girdle Facets</div>
+                            <div class="textDiv fLeft">The lowest facets on the crown, sitting just above the girdle. Responsible for directing light that enters the diamond down to the pavilion and lower girdle facets.</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft fmOpenB">Girdle</div>
+                            <div class="textDiv fLeft">The outer edge of the diamond , where the crown meets the pavilion . the girdle may be faceted or smooth.</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft fmOpenB">Pavilion </div>
+                            <div class="textDiv fLeft">The entire portion of the diamond that sits below the girdle. The lower girdle facets,pavilion facets , and culet are all part of the pavalion.
+                                usually constitutes the bulk of a diamonds weight.</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft fmOpenB">Lower Girdle Facets</div>
+                            <div class="textDiv fLeft">The highest facets on the pavilion , sitting just below the girdle . Responsible fo redirectiong light that enters the diamond back out through the crown.</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft fmOpenB">Pavilion Facets</div>
+                            <div class="textDiv fLeft">The facets that sit adjacent to the culet, responsible for redirecting light that enters the diamond back out through the crown.</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft fmOpenB">Culet</div>
+                            <div class="textDiv fLeft">The culet is the small area at the bottom of the pavilion.The culet can be a point, or a very small facet sitting parallel to the table.</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft fmOpenB">Length</div>
+                            <div class="textDiv fLeft">When viewed from above as a diamond would sit in a ring , length is the diameter measured from the "top" to "bottom".Stated in millimeters . Length is always the first of three numbers shown under "measurements" for each diamond. </div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft fmOpenB">Depth</div>
+                            <div class="textDiv fLeft">The distance from the table to the culet when the diamond is viewed from the side.State</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft fmOpenB">Width</div>
+                            <div class="textDiv fLeft">When viewed from above as a diamond would sit in a ring, width is the diameter measured from "side" to "side". Width is always the measure perpendicular to length. Stated in millimeters . Width is always the measure perpendicular to length. Stated in millimeters . Width is always the second of the three numbers shown under "measurements" for each diamond.</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft fmOpenB">Depth %</div>
+                            <div class="textDiv fLeft">Calculated by dividing the dpth by the width. If a diamond is 3mm in depth , and has a midth of 4mm, the depth % is 75. Depth % is a measure of cut . The more shallow the cut of a diamond , teh higher the depth %.</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft fmOpenB">Length / Width Ratio</div>
+                            <div class="textDiv fLeft">Calculated by dividing the length by the width.A perfectly round or square diamond has a L/W ratio of 1.00(since it's length and width are equal). </div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft fmOpenB">Table %</div>
+                            <div class="textDiv fLeft">Calculated by dividing the width of the table by the width of the diamond. If the table is 3mm wide , and the diamond is 4 mm in width , the table %is 75. The ;arger the table in relation to the diamond , the higher the table %.</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft fmOpenB">Girdle Width</div>
+                            <div class="textDiv fLeft">A measure of the thickness of the diamond's girdle.The measure is taken only at the "valleys" of the girdle, never the peaks. Usually stated in terms of a nine point scale , from the Extremely Thin through Extremely Thick. If the girdle valleys vary in width, two values are given, one of the widest and one for the narrowest points.</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft fmOpenB">Crown Angle</div>
+                            <div class="textDiv fLeft">Refers to the number of degrees between the plane of the table and bezel facets. The angle of the crown facets will determine how much light is reflected into the pavilion at an angle that will allow it to be reflected back up through the crown (where the observer cn perceive it).</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft fmOpenB">Culet Size</div>
+                            <div class="textDiv fLeft">The culet can vary in size from a single point , to a small facet . Culet size is usually expressed using a seven point scale , from None(a point) to Very Large. If the culet is too large, it might appear as an inclusion when the diamond is viewed from above.</div>
+                        </div>
+                        <div class="textDivLft fLeft dn tx_change">
+                            <div class="textDivH fLeft fmOpenB">Pavilion Angle</div>
+                            <div class="textDiv fLeft">Refers to the number of degrees between the planes of the table , and the pavilion facets. the angle determines how much of the light which has travelled into the lower part of the diamond will be successfully reflected back through the crown (where the observer can perceive it).</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="prdInfoWrap fLeft">
+                    <?php
+                    foreach($des as $key=>$value)
+                    {
+                    if($des[$key]['describe_name'] == $data['attr_details']['color'] && !empty($des[$key]['describe_name']))
+                    {
+                    ?>
+                    <div class="prdInfoCont fLeft">
+                        <div class="prdInfoTitle fLeft"><?php echo 'Colour - '.$data['attr_details']['color'];?></div>
+                        <div class="prdInfoDiv fLeft">
+                            <span class="fmOpenB">
+                                <?php
+                                echo $des[$data['attr_details']['color']]['describe_display_name'].': ';
+                                ?>
+                            </span>
+                            <?php
+                            print_r($des[$data['attr_details']['color']]['describe_text']);
+                            ?>
+                        </div>
+                    </div>
+                    <?php
                     }
                     if($des[$key]['describe_name'] == $data['attr_details']['clarity'] && !empty($des[$key]['describe_name']))
                     {
-?>
-                        <div class="prdInfoCont fLeft">
-                            <div class="prdInfoTitle fLeft"><?php echo 'Clarity - '.$data['attr_details']['clarity'];?></div>
-                            <div class="prdInfoDiv fLeft">
+                    ?>
+                    <div class="prdInfoCont fLeft">
+                        <div class="prdInfoTitle fLeft"><?php echo 'Clarity - '.$data['attr_details']['clarity'];?></div>
+                        <div class="prdInfoDiv fLeft">
                             <span class="fmOpenB">
-<?php 
+                                <?php 
                                 echo $des[$data['attr_details']['clarity']]['describe_display_name'].': ';
-?>
+                                ?>
                             </span>
-<?php 
-                                        print_r($des[$data['attr_details']['clarity']]['describe_text']);
-?>
-                            </div>
+                            <?php 
+                            print_r($des[$data['attr_details']['clarity']]['describe_text']);
+                            ?>
                         </div>
-<?php
+                    </div>
+                    <?php
                     }
                     if($des[$key]['describe_name'] == $prdVars['cut'] && !empty($des[$key]['describe_name']))
                     {
-?>
-                        <div class="prdInfoCont fLeft">
-                            <div class="prdInfoTitle fLeft"><?php echo 'Cut - '.(strstr($des[$prdVars['cut']]['describe_display_name'],' ',true));?></div>
-                            <div class="prdInfoDiv fLeft">
-                                <span class="fmOpenB">
-<?php
-                                            echo $des[$prdVars['cut']]['describe_display_name'].': ';
-?>
-                                    </span>
-<?php
-                                        print_r($des[$prdVars['cut']]['describe_text']);
-?>
-                            </div>
+                    ?>
+                    <div class="prdInfoCont fLeft">
+                        <div class="prdInfoTitle fLeft"><?php echo 'Cut - '.(strstr($des[$prdVars['cut']]['describe_display_name'],' ',true));?></div>
+                        <div class="prdInfoDiv fLeft">
+                            <span class="fmOpenB">
+                                <?php
+                                echo $des[$prdVars['cut']]['describe_display_name'].': ';
+                                ?>
+                            </span>
+                            <?php
+                            print_r($des[$prdVars['cut']]['describe_text']);
+                            ?>
                         </div>
-<?php
-                    }
-                }
-?>
                     </div>
-<?php          
-            if($sugTotal > 0)
-            {
-?>
+                    <?php
+                    }
+                    }
+                    ?>
+                </div>
+                <?php          
+                if($sugTotal > 0)
+                {
+                ?>
                 <div class="prdInfoTitle fLeft">Similar Products</div>
                 <div class='w100 fLeft'>
-<?php
+                    <?php
                     foreach($data3 as $key=>$value)
                     {
-                        if($data3[$key]['sameshape'] == 1 || $data3[$key]['sameclarity'] == 1 || $data3[$key]['samecolor'] == 1 || $data3[$key]['samecut'] == 1)
+                    if($data3[$key]['sameshape'] == 1 || $data3[$key]['sameclarity'] == 1 || $data3[$key]['samecolor'] == 1 || $data3[$key]['samecut'] == 1)
+                    {
+                    ?>
+                    <div class='prdComm fLeft'>
+                        <div class='prdCommDiv fLeft transition100'>
+
+                            <?php
+                            $tempUrl = '';
+                            if(!empty($data3[$key]['shape']))
                             {
-?>
-                                        <div class='prdComm fLeft'>
-                                            <div class='prdCommDiv fLeft transition100'>
-                                                
-<?php
-                                                $tempUrl = '';
-                                                if(!empty($data3[$key]['shape']))
-                                                {
-                                                    if($tempUrl !== ''){
-                                                        $tempUrl .= '-'.$data3[$key]['shape'];
-                                                    }
-                                                    else{
-                                                        $tempUrl .= $data3[$key]['shape'];
-                                                    }
-                                                }
-                                                if(!empty($data3[$key]['color']))
-                                                {
-                                                    if($tempUrl !== '')
-                                                    {
-                                                        $tempUrl .= '-colour-'.$data3[$key]['color']; 
-                                                    }
-                                                    else
-                                                    {
-                                                        $tempUrl .= 'colour-'.$data3[$key]['color'];
-                                                    }
-                                                }
-                                                if(!empty($data3[$key]['clarity']))
-                                                {
-                                                    if($tempUrl !== '')
-                                                    {
-                                                        $tempUrl .= '-clarity-'.$data3[$key]['clarity']; 
-                                                    }
-                                                    else
-                                                    {
-                                                        $tempUrl .= 'clarity-'.$data3[$key]['clarity'];
-                                                    }
-                                                }
-                                                if(!empty($data3[$key]['certified'])){
-                                                    if($tempUrl !== '')
-                                                    {
-                                                        $tempUrl .= '-certified-'.$data3[$key]['certified']; 
-                                                    }
-                                                    else
-                                                    {
-                                                        $tempUrl .= 'certified-'.$data3[$key]['certified'];
-                                                    }
-                                                }
-                                                
-                                                if($tempUrl !== '')
-                                                {
-?>
-                                                    <a href="<?php echo DOMAIN . $tempUrl;?>/did-<?php echo $data3[$key]['pid']; ?>">
-<?php                                                    
-                                                }
-                                                else
-                                                {
-?>
-                                                    <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>">
-<?php
-                                                }
-?>
-                                                <div class='prdShape fLeft'>
-                                                    <div class='prdShTitle fLeft fmOpenB'>SHAPE</div>
-                                                    <div class='prdShType fLeft fmOpenR'><?=$data3[$key]['shape'];?></div>
-                                                    <div class="<?=ucwords(strtolower($data3[$key]['shape']));  ?> fRight"></div>
-                                                </div>
-                                                <div class="prdDetails fLeft">
-                                                    <div class="detComm">
-                                                        <div class="detLabel fmOpenB fLeft">COLOR</div>
-                                                        <div class="detValue fmOpenR fLeft"><?php echo $data3[$key]['color']; ?></div>
-                                                    </div>
-                                                    <div class="detComm">
-                                                        <div class="detLabel fmOpenB fLeft">CARATS</div>
-                                                        <div class="detValue fmOpenR fLeft"><?php echo $data3[$key]['carat']; ?></div>
-                                                    </div>
-                                                    <div class="detComm">
-                                                        <div class="detLabel fmOpenB fLeft">CLARITY</div>
-                                                        <div class="detValue fmOpenR fLeft"><?php echo $data3[$key]['clarity']; ?></div>
-                                                    </div>
-                                                    <div class="detComm">
-                                                        <div class="detLabel fmOpenB fLeft">CERTIFICATE</div>
-                                                        <div class="detValue fmOpenR fLeft"><?php echo $data3[$key]['certified']; ?></div>
-                                                    </div>
-                                                </div>
-                                                    
-                                                <div class='prdPrice fLeft'>
-                                                    <div class="detComm">
-                                                        <div class="detLabel fmOpenB fLeft">BEST PRICE</div>
-<?php
-                                                            if(empty($data3[$key]['vendor_rates']['dollar_rate']) || $data3[$key]['vendor_rates']['dollar_rate'] == '0.00')
-                                                            {
-                                                                $rate = dollarValue;
-                                                            }
-                                                            else
-                                                            {
-                                                                $rate = $data3[$key]['vendor_rates']['dollar_rate'];
-                                                            }
-                                                            
-?>
-                                                        <div class="detValue fmOpenB fLeft"><span>&#8377;</span>
-<?php 
-                                                            $price = ceil($data3[$key]['price']* $rate*$data3[$key]['carat']);
-                                                            echo $price = $comm->IND_money_format($price);
-?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                </a>
-                                                <div class='prdActions fLeft'>
-<?php
-                                                    if(!empty($tempUrl))
-                                                    {
-?>
-                                                        <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $data3[$key]['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                        <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                        <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                        <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
-<?php
-                                                    }
-                                                    else
-                                                    {
-?>
-                                                        <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                        <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                        <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                                        <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
-<?php
-                                                    }
-?>
-                                                </div>
+                            if($tempUrl !== ''){
+                            $tempUrl .= '-'.$data3[$key]['shape'];
+                            }
+                            else{
+                            $tempUrl .= $data3[$key]['shape'];
+                            }
+                            }
+                            if(!empty($data3[$key]['color']))
+                            {
+                            if($tempUrl !== '')
+                            {
+                            $tempUrl .= '-colour-'.$data3[$key]['color']; 
+                            }
+                            else
+                            {
+                            $tempUrl .= 'colour-'.$data3[$key]['color'];
+                            }
+                            }
+                            if(!empty($data3[$key]['clarity']))
+                            {
+                            if($tempUrl !== '')
+                            {
+                            $tempUrl .= '-clarity-'.$data3[$key]['clarity']; 
+                            }
+                            else
+                            {
+                            $tempUrl .= 'clarity-'.$data3[$key]['clarity'];
+                            }
+                            }
+                            if(!empty($data3[$key]['certified'])){
+                            if($tempUrl !== '')
+                            {
+                            $tempUrl .= '-certified-'.$data3[$key]['certified']; 
+                            }
+                            else
+                            {
+                            $tempUrl .= 'certified-'.$data3[$key]['certified'];
+                            }
+                            }
+
+                            if($tempUrl !== '')
+                            {
+                            ?>
+                            <a href="<?php echo DOMAIN . $tempUrl;?>/did-<?php echo $data3[$key]['pid']; ?>">
+                                <?php                                                    
+                                }
+                                else
+                                {
+                                ?>
+                                <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>">
+                                    <?php
+                                    }
+                                    ?>
+                                    <div class='prdShape fLeft'>
+                                        <div class='prdShTitle fLeft fmOpenB'>SHAPE</div>
+                                        <div class='prdShType fLeft fmOpenR'><?=$data3[$key]['shape'];?></div>
+                                        <div class="<?=ucwords(strtolower($data3[$key]['shape']));  ?> fRight"></div>
+                                    </div>
+                                    <div class="prdDetails fLeft">
+                                        <div class="detComm">
+                                            <div class="detLabel fmOpenB fLeft">COLOR</div>
+                                            <div class="detValue fmOpenR fLeft"><?php echo $data3[$key]['color']; ?></div>
+                                        </div>
+                                        <div class="detComm">
+                                            <div class="detLabel fmOpenB fLeft">CARATS</div>
+                                            <div class="detValue fmOpenR fLeft"><?php echo $data3[$key]['carat']; ?></div>
+                                        </div>
+                                        <div class="detComm">
+                                            <div class="detLabel fmOpenB fLeft">CLARITY</div>
+                                            <div class="detValue fmOpenR fLeft"><?php echo $data3[$key]['clarity']; ?></div>
+                                        </div>
+                                        <div class="detComm">
+                                            <div class="detLabel fmOpenB fLeft">CERTIFICATE</div>
+                                            <div class="detValue fmOpenR fLeft"><?php echo $data3[$key]['certified']; ?></div>
+                                        </div>
+                                    </div>
+
+                                    <div class='prdPrice fLeft'>
+                                        <div class="detComm">
+                                            <div class="detLabel fmOpenB fLeft">BEST PRICE</div>
+                                            <?php
+                                            if(empty($data3[$key]['vendor_rates']['dollar_rate']) || $data3[$key]['vendor_rates']['dollar_rate'] == '0.00')
+                                            {
+                                            $rate = dollarValue;
+                                            }
+                                            else
+                                            {
+                                            $rate = $data3[$key]['vendor_rates']['dollar_rate'];
+                                            }
+
+                                            ?>
+                                            <div class="detValue fmOpenB fLeft">
+                                                <span class="rupeeImg"></span>
+                                                <?php 
+                                                $price = ceil($data3[$key]['price']* $rate*$data3[$key]['carat']);
+                                                echo $price = $comm->IND_money_format($price);
+                                                ?>
+                                               
                                             </div>
                                         </div>
-<?php
-                        }
+                                    </div>
+                                </a>
+                                <div class='prdActions fLeft'>
+                                    <?php
+                                    if(!empty($tempUrl))
+                                    {
+                                    ?>
+                                    <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $data3[$key]['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                    <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                    <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                    <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                    <?php
+                                    }
+                                    else
+                                    {
+                                    ?>
+                                    <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                    <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                    <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                    <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                    <?php
+                                    }
+                                    ?>
+                                </div>
+                        </div>
+                    </div>
+                    <?php
                     }
-            }
-?>
-        </div>
+                    }
+                    }
+                    ?>
+                </div>
             </div>
         </div>
         <div class="wrapper fLeft">
             <div class="">
-<?php include 'footer.html'; ?>
+                <?php include 'footer.html'; ?>
             </div>
         </div>
-<?php include 'logo.html'; ?>
-<?php include 'leftmenu.html'; ?>
+        <?php include 'logo.html'; ?>
+        <?php include 'leftmenu.html'; ?>
         <div id='dragTarget' class="drag-target" style="touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); left: 0px;"></div>
         <div id='overlay' class="overlay transit-100Y1 dn"></div>
         <div id='userForm' class="userForm dn">
@@ -702,13 +706,13 @@ foreach($des as $key=>$value)
         <div id='galleryClose' class="galleryClose ripplelink"></div>
         <div class="galleryImg fLeft" style="background: url(<?php echo IMGDOMAIN . $data1[0]; ?>) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
         <div class="imgListCont fLeft">
-<?php
-for ($i = 0; $i < count($data1); $i++) {
-    ?>
-                <div class="imgThumbnil fLeft" style="background: url(<?php echo IMGDOMAIN . $data1[$i]; ?>) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
-    <?php
-}
-?>
+            <?php
+            for ($i = 0; $i < count($data1); $i++) {
+            ?>
+            <div class="imgThumbnil fLeft" style="background: url(<?php echo IMGDOMAIN . $data1[$i]; ?>) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+            <?php
+            }
+            ?>
         </div>
     </div>
 
