@@ -35,6 +35,7 @@
         }
 
     .irs-bar {
+        cursor: pointer;
         position: absolute; display: block;
         left: 0; width: 0;
     }
