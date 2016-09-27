@@ -1,6 +1,6 @@
 <?php include 'bhead.html'; ?>
 <body>
-    <div id='baseCont' class="container fmOpenR bgWhite resultsPage ">
+    <div id='baseCont' class="container fmOpenR bgWhite resultsPage">
         <div class="wrapper">
             <?php include 'header.html'?>
             <div class="totalResultsDiv">
@@ -414,7 +414,6 @@
                         $("#imgLdr").show();
                         $(".prdCommImg").on('load', function () {
                             var imgId = $(this).attr("id");
-                            alert(imgId);
                             $("#imgLdr").hide();
                         });
 
