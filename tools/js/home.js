@@ -121,18 +121,20 @@ if (ele1 !== null)
 //              showLeftMenu(true);  
         //ele.textContent = ev.type +" gesture detected.";
         if (ev.type === 'panright') {
-            console.log(ev.type);
+//            console.log(ev.type);
             showLeftMenu(true);
         } else if (ev.type === 'panleft') {
-                console.log(ev.type);
+//                console.log(ev.type);
             showLeftMenu(false);
         }else if(ev.target){
-            console.log(ev.target);
+//            console.log(ev.target);
             showLeftMenu(true);
-        }else if(ev.type === 'panup'){
-            console.log(ev.type); 
-              showLeftMenu(true);
         }
+//        else if(ev.type === 'panup'){
+//           
+//            console.log(ev.type); 
+//              showLeftMenu(true);
+//        }
     });
 }
 
@@ -140,20 +142,15 @@ var myElement = document.getElementById('leftMenu');
 var mc = new Hammer(leftMenu);
 mc.get('pan').set({ direction: Hammer.DIRECTION_ALL });
 mc.on("panup pandown", function(ev) {
+    if(ev.type === 'panup'){
+//    console.log(ev.type);
   showLeftMenu(true);
+  }else if(ev.type === 'pandown'){
+//      console.log(ev.type);
+  showLeftMenu(true);
+  }
 });
 
 
 
-//  $('.leftMenu').hammer().on('panup', function(){
-//              showLeftMenu(true);
-//    });
-//    $('.leftMenu').hammer().on('pandown', function(){
-//              showLeftMenu(true);
-//    });
-
-//
-//$('.menuList').mouseover(function(){
-//    $('.leftMenu').addClass('leftTransit');
-//});
 
