@@ -428,13 +428,13 @@
                         $memship_Cert = $vfulldtls['memship_Cert'];
                         $vatno = $vfulldtls['vatno'];
                         $landline = $vfulldtls['landline'];
-                        $banker = $vfulldtls['banker'];
-                        $ifsc = $vfulldtls['ifsc'];
+                        //$banker = $vfulldtls['banker'];
+                        //$ifsc = $vfulldtls['ifsc'];
                         $pancard = $vfulldtls['pancard'];
                         $business_type = $vfulldtls['business_type'];
                         $showroom_name = $vfulldtls['showroom_name'];
 
-                        if(!empty($vendor_id) && !empty($orgName) && !empty($address1) && !empty($area) && !empty($postal_code) && !empty($city) && !empty($country) && !empty($state) && !empty($position) && !empty($contact_person) && !empty($contact_mobile) && !empty($email) && !empty($memship_Cert) && !empty($vatno) && !empty($landline) && !empty($banker) && !empty($ifsc) && !empty($pancard) && !empty($business_type) && !empty($showroom_name) && ($params['isC'] == 2 || $params['isC'] == '2' || $completeStat == 2 || $completeStat == '2'))
+                        if(!empty($vendor_id) && !empty($orgName) && !empty($address1) && !empty($area) && !empty($postal_code) && !empty($city) && !empty($country) && !empty($state) && !empty($position) && !empty($contact_person) && !empty($contact_mobile) && !empty($email) && !empty($memship_Cert) && !empty($vatno) && !empty($landline) /* && !empty($banker) && !empty($ifsc)*/ && !empty($pancard) && !empty($business_type) && !empty($showroom_name) && ($params['isC'] == 2 || $params['isC'] == '2' || $completeStat == 2 || $completeStat == '2'))
                         {
                                 $params['isC'] = 2;
                         }
@@ -532,12 +532,12 @@
             if (!empty($detls['bul_mdbw'])) {
                 $vsql .= " bullion_mdbw = '".$detls['bul_mdbw']."',";
             }
-            if (!empty($detls['banker'])) {
+           /* if (!empty($detls['banker'])) {
                 $vsql .= " banker = '".$detls['banker']."',";
             }
             if (!empty($detls['ifsc'])) {
                 $vsql .= " ifsc = '".$detls['ifsc']."',";
-            }
+            }*/
             if (!empty($detls['pan'])) {
                 $vsql .= " pancard = '".$detls['pan']."',";
             }

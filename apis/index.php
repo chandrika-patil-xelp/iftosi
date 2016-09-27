@@ -36,7 +36,7 @@ switch($action)
         break;
 //----------------------------Change Pass--------------------------------
 
-//  localhost/iftosi/apis/index.php?action=changePassUrl&mobile=7309290529&uid=3&email=shubham.bajpai@xelpmoc.in
+//  localhost/iftosi/apis/index.php?action=changePassUrl&mobile=7309290529&uid=3&email=shubham.bajgetPrdByCatidpai@xelpmoc.in
 
     case 'changePassUrl':
         $mobile=(!empty($params['mobile'])) ? trim($params['mobile']) : '';
@@ -720,8 +720,8 @@ switch($action)
 //  localhost/iftosi/apis/index.php?action=bulkInsertProducts&vid=2
         case 'bulkInsertProducts':
             include APICLUDE.'class.vendor.php';
-            require APICLUDE . 'PHPExcelReader/excel_reader2.php';
-            require APICLUDE . 'PHPExcelReader/SpreadsheetReader.php';
+            require APICLUDE.'PHPExcelReader/excel_reader2.php';
+            require APICLUDE.'PHPExcelReader/SpreadsheetReader.php';
             $file=(!empty($_FILES['up_file'])) ? $_FILES['up_file'] : '';
             $vid=(!empty($params['vid'])) ? trim($params['vid']) : '';
             $alloweExt=array('xlsx','xls','csv');
@@ -743,6 +743,8 @@ switch($action)
             {
                 $err=array('Code'=>1,'Msg' => 'File Type not Valid');
                 $result=array('result'=>$arr,'error'=>$err);
+                
+                
             }
             else
             {
@@ -1374,7 +1376,7 @@ switch($action)
             include APICLUDE.'class.product.php';
             $catid	=(!empty($params['catid'])) ? trim($params['catid']) : '';
             $uid	=(!empty($params['uid'])) ? trim($params['uid']) : '';
-            if(empty($catid) && empty($uid))
+			if(empty($catid) && empty($uid))
             {
 				$arr=array();
 				$err=array('code'=> 1,'Msg'=> 'Invalid parameter');
@@ -1383,7 +1385,7 @@ switch($action)
 				break;
             }
             $obj=new product($db['iftosi']);
-            $result=$obj->getPrdByCatid($params);
+		    $result=$obj->getPrdByCatid($params);
             $res=$result;
 			//print_r($res);die;
             break;

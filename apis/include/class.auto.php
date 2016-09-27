@@ -354,7 +354,7 @@ class auto extends DB
               AND
                       active_flag = 1
               AND
-                      MATCH(business_type) AGAINST ('".$searchIn."' IN BOOLEAN MODE)
+                      FIND_IN_SET ('".$searchIn."',business_type)
               ORDER BY
                       exact DESC,
                       startwith DESC,
@@ -367,19 +367,22 @@ class auto extends DB
            $sql.=" LIMIT " . $start . ",$limit";
        }
 
-       $res = $this->query($sql);
-       if ($this->numRows($res) > 0) {
-
-           $limit = $limit - $this->numRows($res);
-
-           while ($row = $this->fetchData($res)) {
+        $res = $this->query($sql);
+        $numRows = $this->numRows($res);
+        if($numRows > 0) 
+        {
+            $limit = $limit - $this->numRows($res);
+            while($row = $this->fetchData($res)) 
+            {
                $arr[] = $row;
-           }
+            }
            $err = array('Code' => 0, 'Msg' => 'Values are fetched');
-       } else {
+       } 
+       else 
+        {
            $arr = "No records matched";
            $err = array('Code' => 1, 'Msg' => 'Search Query Failed');
-       }
+        }
 
 
 
@@ -403,29 +406,31 @@ class auto extends DB
                         score DESC";
         $page = $params['page'];
         $limit = $params['limit'];
-        if (!empty($page)) {
+        if (!empty($page)) 
+        {
             $start = ($page * $limit) - $limit;
             $sql1.=" LIMIT " . $start . ",$limit";
         }
         $res1 = $this->query($sql1);
-        if ($this->numRows($res1) > 0) {
+        if ($this->numRows($res1) > 0) 
+        {
             while($row1 = $this->fetchData($res1))
             {
                 $arr1[] = $row1;
             }
             $err = array('Code' => 0, 'Msg' => 'Values are fetched');
-        } else {
-            $arr = "No records matched";
+        } 
+        else 
+        {
+            $arr1 = "No records matched";
             $err = array('Code' => 1, 'Msg' => 'Search Query Failed');
         }
-
         if(is_array($arr) && is_array($arr1))
             $arr2 = array_merge($arr,$arr1);
         else if(is_array($arr))
             $arr2 = $arr;
         else
             $arr2 = $arr1;
-
         $result = array('results' => $arr2, 'error' => $err);
         return $result;
     }

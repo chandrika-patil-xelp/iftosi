@@ -33,7 +33,7 @@ function changeGemstoneType(obj,id)
                 if(id!=1) {
                     $('#gemsTypeCont_'+id).parent().addClass('dn');
                 }
-                $('.gemstoneProp_'+id+' input').removeAttr('checked');
+                //$('.gemstoneProp_'+id+' input').removeAttr('checked');
 	}
         $('.gemstoneProp').addClass('dn');
         $('#gemsDiv select').each(function () {
@@ -246,7 +246,7 @@ function validateJForm()
 				var gemweight=$('#gemweight').val().trim();
 				var num_gemstones = $('#num_gemstones').val().trim();
 				var purity = $('#goldpurity').val().trim();
-			  var goldweight=$('#netweight').val().trim();
+			        var goldweight=$('#netweight').val().trim();
 				var barcode=$('#barcode').val().trim();
 				var prdprice=$('#prdprice').val().trim();
 				var othercert=$('#other_cerificate').val().trim();
@@ -268,7 +268,7 @@ function validateJForm()
 				var isBugget = $('input[name="bugget"]:checked').val();
 				var polki_price_per_carat = $('#polki_price_per_carat').val().trim();
 				var polki_value = $('#polki_value').val().trim();
-        var puritypatt = /(^|[^-\d])(14|18|22|24|995|999)\b/;
+                                var puritypatt = /(^|[^-\d])(14|18|22|24|995|999)\b/;
 				var subcat = '';
 				var isValid = true;
 				var str = '';
@@ -412,7 +412,7 @@ function validateJForm()
 	            {
 	                    gemstone_type = other_gem_type;
 	            }
-							var gemcolour = $("input[name='gemstone_color_"+i+"']:checked").val();
+		var gemcolour = $("input[name='gemstone_color_"+i+"']:checked").val();
 	            if(isValid && (gemstone_type !== undefined && gemstone_type !== null && gemstone_type !== ''))
 	            {
                   vgemstone_type.push(gemstone_type);
@@ -605,12 +605,12 @@ function validateJForm()
 							values[16] = "price|@|"+encodeURIComponent(prdprice);
 							values[17] = "isPlain|@|"+encodeURIComponent(isPlain);
 							values[18] = "combination|@|"+encodeURIComponent(combination);
-					    values[19] = "price_per_carat|@|"+encodeURIComponent(price_per_carat);
+					                values[19] = "price_per_carat|@|"+encodeURIComponent(price_per_carat);
 							values[20] = "othermaterial|@|"+encodeURIComponent(othermaterial);
 							values[21] = "labour_charge|@|"+encodeURIComponent(labour_charge);
 							values[22] = "grossweight|@|"+encodeURIComponent(grossweight);
 							values[23] = "gprice_per_carat|@|"+encodeURIComponent(gprice_per_carat);
-					    values[24] = "gemstonevalue|@|"+encodeURIComponent(gemstonevalue);
+					                values[24] = "gemstonevalue|@|"+encodeURIComponent(gemstonevalue);
 							values[25] = "diamondsvalue|@|"+encodeURIComponent(diamondsvalue);
 							values[26] = "other_certificate|@|"+encodeURIComponent(other_certificate);
 							values[27] = "gold_value|@|"+encodeURIComponent(gold_value);
@@ -725,9 +725,19 @@ function calculateB2BPrice()
 {
    var baseprice=$('#baseprice').val().trim();
    var discount=$('#discountb2b').val().trim();
-
+   var b2cdiscount=parseInt($('#discount').val().trim());
+   var b2bdiscount=parseInt($('#discountb2b').val().trim());
+   //alert(b2cdiscount + "" + b2bdiscount);
+   /*if(b2bdiscount<(b2cdiscount+5))  
+   {
+        common.toast(0,'B2C discount always less atleast by 5 to B2B Discount');
+        $('#prdb2bprice').val('');
+        $('#discountb2b').val('');
+        $('#discount').val('');
+			   
+   }*/
    if(discount == null || discount == '' || discount == 'undefined' || discount == undefined)
-	 {
+   {
       $('#prdb2bprice').val(baseprice);
    }
    else
@@ -909,6 +919,14 @@ function validateNum()
           $('#discountb2b').focus();
           isValid = false;
       }
+      if((parseInt(discountb2b) < (parseInt(discount)+5)))
+      {
+          //var temp=parseInt(discount)+5;
+          //alert(temp);
+          str ='% Back To Vendor  always be greater atleast by 5% To Customer ';
+          $('#discountb2b').focus();
+          isValid = false;
+      }
       if(isValid && (prdprice == '' || isNaN(prdprice)))
       {
           str ='Price field is Required';
@@ -954,6 +972,7 @@ function validateNum()
 	        str ='Design field is Empty';
 	        isValid = false;
 	    }
+            
 	    if(isValid && design === 'Other')
 	    {
 	        if(isValid && (otherdesign == undefined || otherdesign == 'undefined' || otherdesign == null || otherdesign == 'null' || otherdesign == '' ))
@@ -1750,6 +1769,7 @@ function calculateJPrice()
 												$('#gemstone_type option').addClass('dn');
 												$('.certUrl').addClass('dn');
 												changeGemstoneType('SWAROVSKI ZIRCONIA',1);
+                                                                                                $('.gemstoneProp_1').removeClass('dn');
 												$('.rateValue').text('Gold Value*');
 												break;
 								case 'SILVER & SWAROVSKI ZIRCONIA':
@@ -1769,6 +1789,7 @@ function calculateJPrice()
 												$('#gemstone_type option').addClass('dn');
 												$('.certUrl').addClass('dn');
 												changeGemstoneType('SWAROVSKI ZIRCONIA',1);
+                                                                                                $('.gemstoneProp_1').removeClass('dn');
 												$('.rateValue').text('Silver Value*');
 												break;
 								case 'GOLD & CZ':
@@ -1787,7 +1808,8 @@ function calculateJPrice()
 												$('#gemsTypeCont').removeClass('dn');
 												$('.certUrl').addClass('dn');
 												changeGemstoneType('CZ',1);
-												$('.rateValue').text('Gold Value*');
+                                                                                                $('.gemstoneProp_1').removeClass('dn');
+                                                                                                $('.rateValue').text('Gold Value*');
 												break;
 								case 'SILVER & CZ':
 												$('.noneDiv').removeClass('dn');
@@ -1806,6 +1828,7 @@ function calculateJPrice()
 												$('.certUrl').addClass('dn');
 												$('#gemstone_type option').addClass('dn');
 												changeGemstoneType('Cz',1);
+                                                                                                $('.gemstoneProp_1').removeClass('dn');
 												$('.rateValue').text('Silver Value*');
 												break;
 								case 'PLAIN GOLD':

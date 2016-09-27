@@ -491,7 +491,7 @@ function getResultsData(data,sortby,showtree)
 //                                                	html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
 //							html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
 //							html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
-//							html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
+//							html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'"   class="actionComm fLeft transition100 poR ripplelink"></a>';
 //                                                }
 //                                                else
 //                                                {
@@ -499,7 +499,7 @@ function getResultsData(data,sortby,showtree)
 //                                                    	html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
 //							html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
 //							html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
-//							html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
+//							html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'"   class="actionComm fLeft transition100 poR ripplelink"></a>';
 //                                                }
 //
 //						html += '</div>';
@@ -1231,14 +1231,14 @@ function getResultsData(data,sortby,showtree)
                                                             html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
                                                             html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
                                                             html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
-                                                            html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                                                            html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'"   class="actionComm fLeft transition100 poR ripplelink"></a>';
                                                         }
                                                         else
                                                         {
                                                             html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
                                                             html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
                                                             html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
-                                                            html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                                                            html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'" class=  "actionComm fLeft transition100 poR ripplelink"></a>';
                                                         }
                                                 html += '</div>';
 					html += '</div>';
@@ -1275,6 +1275,7 @@ function getResultsData(data,sortby,showtree)
 	}
 
 	var treedata = data.results.treedata;
+        console.log(treedata);
 	treedata = '';
 	if(treedata)
 	{
@@ -1360,6 +1361,7 @@ function getResultsData(data,sortby,showtree)
             var id = $(this).parent().attr('id');
             $(this).parent().addClass('active');
             $(this).parent().children('ul').slideToggle('fast');
+            
             lOpen = id;
         });
         $('.tree ul:first > li').eq(0).each(function() {

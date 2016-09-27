@@ -236,9 +236,11 @@ function Common() {
 
     this.checkMobile = function (id) {
         var num = $('#' + id).val();
+		var mobreg=/^[789]\d{9}$/;
         var len = num.length;
-        if ((num.charAt(0) == '9') && (len == 10) || (num.charAt(0) == '8') && (len == 10) || (num.charAt(0) == '7') && (len == 10)) {
-
+       // if ((num.charAt(0) == '9') && (len == 10) || (num.charAt(0) == '8') && (len == 10) || (num.charAt(0) == '7') && (len == 10)) {
+           if((mobreg.test(num)==true) && (len == 10)) 
+           {
             var conMobile = $('#conMobile').val();
             var altmbNo1_Mobile = $('#altmbNo1_Mobile').val();
             var altmbNo2_Mobile = $('#altmbNo2_Mobile').val();

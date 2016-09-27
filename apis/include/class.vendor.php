@@ -1472,10 +1472,10 @@ class vendor extends DB
 
     public function bulkInsertProducts($params)
     {
-        $vid=$params['vid'];
+       
+        $vid= $params['vid'];
         $data=$params['data'];
         $type=$params['type'];
-
         $defaultColNames = array
                                 (
                                     "Stock #",
@@ -1878,9 +1878,8 @@ class vendor extends DB
                                     'Collection Name',
                                     'Purity(in KT)',
                                     'Net Weight (in Grams)',
-									                  'Making Charge'
+                                    'Making Charge'
                                 );
-
         if($type=='csv')
         {
             $rdv = explode("\n", $data);
@@ -1894,7 +1893,7 @@ class vendor extends DB
             $colName = $data[0];
             $len = count($rdv);
         }
-
+        //echo "<pre>";print_r($colName);die;
         $validFormat=TRUE;
         if(count($colName) == count($defaultColNames))
         {
@@ -2012,7 +2011,7 @@ class vendor extends DB
                                       }
                                       $value[11].= '|!|'.$rdv[$j][11];
                                   }
-                                  if(!empty($rdv[$j][12] || $rdv[$j][13]))
+                                  if(!empty($rdv[$j][12]) || !empty($rdv[$j][13]))
                                   {
                                       $value[12].= '|!|'.$rdv[$j][12].'-'.$rdv[$j][13];
                                   }
@@ -2379,6 +2378,7 @@ class vendor extends DB
 
     public function uploadBullionProducts($params)
     {
+        
         $vid=$params['vid'];
         $city=$params['city'];
         $data=$params['data'];
@@ -2396,6 +2396,7 @@ class vendor extends DB
                                     'Design Number'
                                 );
 
+        
         if($type=='csv')
         {
             $rdv = explode("\n", $data);
@@ -2408,7 +2409,6 @@ class vendor extends DB
             $colName=$data[0];
             $len = count($rdv);
         }
-
         $validFormat=TRUE;
         if(count($colName) == count($defaultColNames))
         {
@@ -2424,8 +2424,6 @@ class vendor extends DB
         {
             $validFormat = FALSE;
         }
-
-
         $i = $totlIns = 0;
         if($validFormat)
         {
@@ -2448,7 +2446,7 @@ class vendor extends DB
                 if ($i != 0 && $isBlank == false)
                 {
                     $ts = date('Y-m-d H:i');
-
+               
                     $query = "
                                 INSERT
                                 INTO
@@ -2464,7 +2462,8 @@ class vendor extends DB
                                         )";
 
                     $res = $this->query($query);
-                    if ($res)
+                   
+                   if ($res)
                     {
                         $pro_id = mysql_insert_id();
 
@@ -2501,7 +2500,7 @@ class vendor extends DB
 
                         $complete_flag = 1;
 
-                        if(empty($value['0']) || empty($value['1']) || empty($value['3'] || empty($value['5'])))
+                        if(empty($value['0']) || empty($value['1']) || empty($value['3']) || empty($value['5']))
                         {
                             $complete_flag = 0;
                         }
@@ -2528,7 +2527,6 @@ class vendor extends DB
                                                 '" . $ts . "'
                                             )";
                         $res = $this->query($sql);
-
                         $sql = "
                                     INSERT
                                     INTO
@@ -2546,7 +2544,6 @@ class vendor extends DB
                                             )";
 
                         $res = $this->query($sql);
-
                         $sql = "
                                     INSERT
                                     INTO
@@ -2568,7 +2565,6 @@ class vendor extends DB
                                             )";
 
                         $res = $this->query($sql);
-
                         if($value['4'] == 'Other' && !empty($value['5']))
                         {
                             $value['4'] = $value['5'];
@@ -2583,11 +2579,13 @@ class vendor extends DB
                                             metal           =   '".$value[1]."',
                                             gold_purity     =   '".$value[3]."',
                                             gold_weight     =   '".$value[5]."',
-                                            bullion_design  =   '".$value[8]."',
+                                            bullion_design  =   '".$value[6]."',
                                             shape           =   '".$shape."',
                                             complete_flag   =   '".$complete_flag."'";
+                        
                         $res = $this->query($sql);
                         $totlIns++;
+                        
                     }
                 }
                 else
@@ -2631,7 +2629,7 @@ class vendor extends DB
             }
         }
         else
-        {
+        {   
             $arr = array();
             $err = array
                         (
@@ -2714,6 +2712,7 @@ class vendor extends DB
             $colName=$data[0];
             $len = count($rdv);
         }
+       
         $validFormat=TRUE;
         if (count($colName) == count($defaultColNames))
         {
@@ -2788,6 +2787,7 @@ class vendor extends DB
                     {
                         $pro_id = mysql_insert_id();
 
+                        
                         $sql = "
                                     INSERT
                                     INTO
@@ -2809,7 +2809,7 @@ class vendor extends DB
                                                      1,
                                                 '" . $ts . "'
                                             )";
-
+                
                         $res = $this->query($sql);
                         $sql = "
                                     INSERT
@@ -2836,7 +2836,6 @@ class vendor extends DB
                                             )";
 
                         $res = $this->query($sql);
-
                         $sql = "    INSERT
                                     INTO
                                             `tbl_product_master`
@@ -2857,7 +2856,6 @@ class vendor extends DB
                                             )";
 
                         $res = $this->query($sql);
-
                         if(empty($value[2]) || empty($value[3]) || empty($value[4]) || empty($value[5]) || empty($value[6]) || empty($value[7]) || empty($value[8]) || empty($value[9]) || empty($value[10]) || empty($value[11]) || empty($value[14]) || empty($value[15]) || empty($value[16]) || empty($value[17]) || empty($value[18]) || empty($value[23]) || empty($value[24]) || empty($value[28]))
                         {
                             $complete_flag = 0;

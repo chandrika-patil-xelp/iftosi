@@ -4,6 +4,7 @@ var username = customStorage.readFromStorage('username');
 var is_vendor = customStorage.readFromStorage('is_vendor');
 var submiter2 = true;
 var submiter3 = true;
+var busiTypeSplt=0;
 if(is_vendor == 1 || is_vendor === '1')
 {
     $('#profileTab').removeClass('dn');
@@ -114,7 +115,7 @@ $(document).ready(function ()
         }
     });
     $('.vTabs').eq(1).click();
-    var busiTypeSplt = busiType.split(',');
+     busiTypeSplt = busiType.split(',');
 
     for(var i = 0; i< busiTypeSplt.length; i++)
     {
@@ -129,7 +130,7 @@ $(document).ready(function ()
         }
         if(busiTypeSplt[i] == 3)
         {
-    		    $('#bullTab').removeClass('dn');
+            $('#bullTab').removeClass('dn');
             $('#goldRateSpan').append(goldRate).removeClass('dn');
             $('#silverRateSpan').append(silverRate).removeClass('dn');
             $('#platinumRate').append(platinumRate).removeClass('dn');
@@ -141,6 +142,11 @@ $(document).ready(function ()
             $('#dollarRateSpan').addClass('fRight');
             $('#dollarRateSpan').attr('style','border-right:0px');
         }
+         if((busiTypeSplt.length == 1 || busiTypeSplt.length == 2 ) && (busiTypeSplt[i] === 2))
+         {
+            alert(here);
+            $('#dollarRateSpan').html('').addClass('dn');
+         }
         if(busiTypeSplt.length == 1 && busiTypeSplt[i] === 3)
         {
             $('#goldRateSpan').append(goldRate).removeClass('dn');
@@ -1191,7 +1197,7 @@ $("#upSubmit").on('click',(function(e)
             cache: false,
             processData:false,
             success: function(result)
-            {
+            {   
                 $('#upSubmit').text('Upload');
                 var obj = jQuery.parseJSON(result);
                 $("#up_file").val('');
@@ -1233,6 +1239,7 @@ function ValidateFile()
 {
     var allowedFiles = ["csv","xls","xlsx"];
     var fileUpload = document.getElementById("up_file").value;
+    //alert(fileUpload);
     var fileExt = fileUpload.split('.').pop();
     if (allowedFiles.indexOf(fileExt)!=-1)
     {
@@ -1274,6 +1281,11 @@ function showVendorProfile()
     window.location.href=DOMAIN+'index.php?case=vendor_Form&uid='+uid;
 }
 $('#rate_m').click(function(){
+     
+     if((busiTypeSplt.length == 1 || busiTypeSplt.length == 2 ) && (busiTypeSplt[0] == 2))
+         {
+            $('#dollarRateSpan').parent().addClass('dn');
+         }
   $('.rateDiv').slideToggle(300);
   $('.contentCont').toggleClass('pad55');
 });

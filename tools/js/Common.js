@@ -185,16 +185,21 @@ function Common() {
 
     this.doLogout = function () {
         customStorage.removeAll();
+       
 		if(pageName !== undefined && pageName !== null && pageName !== '' && typeof pageName !== 'undefined')
 		{
-			if(pageName == 'wishlist')
+			/*if(pageName == 'wishlist')
 			{
 				window.location.href = DOMAIN;
 			}
 			else
 			{
 				window.location.href = window.location;
-			}
+                                 //alert("here");
+                                
+			}*/
+                        window.location.href = DOMAIN;
+                        
 		}
 		else
 		{
@@ -369,6 +374,10 @@ function Common() {
                                         $('#overlay,#userForm').addClass('dn');
                                         submiter1 = true;
                                     }, 1010);
+                                }
+                                else
+                                {
+                                    window.location.assign(DOMAIN);
                                 }
                             }
                         }

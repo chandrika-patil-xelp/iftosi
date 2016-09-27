@@ -9,7 +9,7 @@ if (vid !== uid || uid == '') {
 }
 $(document).ready(function ()
 {
-    if(tagCloud1 !== undefined && tagCloud1 !== null)
+   /* if(tagCloud1 !== undefined && tagCloud1 !== null)
     {
         var allBankNames = tagCloud1.split(',');
         var strBankName = '';
@@ -19,6 +19,7 @@ $(document).ready(function ()
             if(val !== '')
             {
                 var valz = val.split(" ").join("_");
+	            var valz1 = val.split(" ");
                 strBankName += "<div id='acc_name_" +valz+ "' class='tagcloud txtOver indNm fLeft'>" + valz + "</div>";
                 tagArray.push("acc_name_"+valz);
             }
@@ -27,7 +28,7 @@ $(document).ready(function ()
         $('#bankNames').removeClass('dn');
         bindTags();
     }
-
+*/
 
     var pay = parseInt($('#payammo').val());
     $('#payingamt').html('&#8377 '+pay);
@@ -142,24 +143,24 @@ function validateForm() {
     var wbst = $('#wbst').val().trim();
     var pancard = $('#pan').val().trim();
     var vatno = $('#vat').val().trim();
-    var banker = '';
-    var totalBanker = $('.tagcloud').length;
-    var ifscs = $('#ifsc').val().split(',');
+   // var banker = '';
+   // var totalBanker = $('.tagcloud').length;
+   // var ifscs = $('#ifsc').val().split(',');
     var str = "V02554544";
     var patt1 = /^(C|V|c|v){1}([0-3]){2}([0-9]){2}/g;
     var result = str.match(patt1);
     var panPat = /^([A-Z]|[a-z]){5}([0-9]){4}([A-Z]|[a-z]){1}?$/;
     var code = /([C,c,P,p,H,h,F,f,A,a,T,t,B,b,L,l,J,j,G,g,K,k])/;
     var code_chk = pancard.substring(3, 4);
-    var ifscPattern    = /^[A-Z|a-z]{4}[0][\d]{6}$/;
+   // var ifscPattern    = /^[A-Z|a-z]{4}[0]([A-Z]|[a-z]|[0-9]){6}$/;
     var str = '';
-    var duplicateIfscs = find_duplicates(ifscs);
+    //var duplicateIfscs = find_duplicates(ifscs);
 	  var isValid = true;
 
-    $('.indNm').each( function()
+    /*$('.indNm').each( function()
     {
        banker += $(this).text()+',';
-    });
+    });*/
 
     if (orgname == '')
     {
@@ -253,9 +254,9 @@ function validateForm() {
 		isValid = false;
     }
 
-	banker = banker.trim();
+	//banker = banker.trim();
 
-  if(isValid && (banker == undefined || banker == 'undefiend' || banker == null || banker == 'null' || banker == '' || banker == ' '))
+  /*if(isValid && (banker == undefined || banker == 'undefiend' || banker == null || banker == 'null' || banker == '' || banker == ' '))
 	{
         str = 'Banker is empty';
         $('#banker').focus();
@@ -302,7 +303,7 @@ function validateForm() {
               }
           });
       }
-  }
+  }*/
   if (isValid && str == '' && !$("#forDiamond").hasClass("comSelected") && !$("#forJewellery").hasClass("comSelected") && !$("#forBullion").hasClass("comSelected"))
 	{
         str = 'Select business type';
@@ -610,7 +611,7 @@ function submitForm() {
     {
         customStorage.removeFromStorage('isComp');
     }
-    var val = new Array("orgname", "fulladd", "add1", "pincode", "area", "city", "state", "vat", "pan", "tovr", "wbst", "banker","ifsc");
+    var val = new Array("orgname", "fulladd", "add1", "pincode", "area", "city", "state", "vat", "pan", "tovr", "wbst");
     var data = new Object;
     var res = formatData(val);
     var payamt = $('#payammo').val();
@@ -632,7 +633,6 @@ function submitForm() {
     res['lat'] = lat;
     res['uid'] = uid;
     data['result'] = res;
-
     var area  = res.area;
     var city  = res.city;
     var state = res.state;
@@ -773,6 +773,11 @@ function submitStep3Form() {
                 var bsType = parseInt(busiType.charAt(0));
                 bsType = bsType - 1;
                 var tmstmp = new Date().getTime();
+              /*  if(bsType>0)
+                {
+                     alert("here"); 
+                    $('#dollarRateSpan').html('').addClass('dn');
+                }*/
                 $.ajax({url: common.APIWebPath() + "index.php?action=viewAll&uid="+res['uid']+"&timestamp="+tmstmp,success: function (result)
                 {
 
@@ -942,7 +947,7 @@ pincode1 = $('#pincode').val();
         }
     });
 
-    $('#banker').bind('keyup focus', function(event)
+    /*$('#banker').bind('keyup focus', function(event)
     {
         if ($(this).attr('id') == 'banker')
         {
@@ -950,7 +955,7 @@ pincode1 = $('#pincode').val();
             var params = 'action=bankSuggest';
             new Autosuggest($(this).val(), '#banker', '#bankerSuggestDiv', DOMAIN + "apis/index.php", params, true, '', '', event);
         }
-    });
+    });*/
 
     $('body').bind('click',function() {
         $('#'+ msuggest).addClass('dn');
@@ -970,8 +975,8 @@ function arrangeData(data, id, divHolder, nextxt)
                 suggest += "<li id='suggest" + i + "' class='autoSuggestRow w100 transition300 txtCaCase' onclick='setCitySuggestValue(\"" + vl.n + "\",\"city\");'>&nbsp;&nbsp;" + vl.n + "</li>";
             if (id == '#state')
                 suggest += "<li id='suggest" + i + "' class='autoSuggestRow w100 transition300 txtCaCase' onclick='setStateSuggestValue(\"" + vl.n + "\",\"state\")'>&nbsp;&nbsp;" + vl.n + "</li>";
-            if (id == '#banker')
-                suggest += "<li id='suggest" + i + "' class='autoSuggestRow w100 transition300 txtCaCase' onclick='setBankSuggestValue(\"" + vl.n + "\",\"banker\")' onkeyup='setBankSuggestValue(\"" + vl.n + "\",\"banker\")'>&nbsp;&nbsp;" + vl.n + "</li>";
+            //if (id == '#banker')
+                //suggest += "<li id='suggest" + i + "' class='autoSuggestRow w100 transition300 txtCaCase' onclick='setBankSuggestValue(\"" + vl.n + "\",\"banker\")' onkeyup='setBankSuggestValue(\"" + vl.n + "\",\"banker\")'>&nbsp;&nbsp;" + vl.n + "</li>";
         });
         suggest += "</ul>";
         return suggest;
@@ -1029,7 +1034,7 @@ function onlyAlphabets(evt, t) {
     return false;
 }
 
-function setBankSuggestValue(showVal,id)
+/*function setBankSuggestValue(showVal,id)
 {
     if(showVal !== undefined && showVal !== 'undefined' && showVal !== null && showVal !== 'null')
     {
@@ -1040,7 +1045,7 @@ function setBankSuggestValue(showVal,id)
     {
         $('#bankerSuggestDiv').addClass('dn');
     }, 50);
-}
+}*/
 
 
 function addAttrValues(obj)

@@ -21,8 +21,10 @@
                                                 {
                                                     $typeClass = '';
                                                     $typeId = $val['catname'];
+                                                    $polkiClass = '';
                                                     $expd = explode('/', $val['catname']);
                                                     $typeId = $expd[0];
+                                                    $polkiClass = $expd[0]; 
                                                     if($expd[0] == 'Ring' || $expd[0] == 'Earring' || $expd[0] == 'Pendant' || $expd[0] == 'Necklace' || $expd[0] == 'Bangle')
                                                     {
                                                       $typeClass = ucwords(strtolower($expd[0].'s'));
@@ -40,6 +42,11 @@
                                                     {
                                                           $typeClass .=' shapeSelected';
                                                     }
+                                                    else if($attr['shape'] == 'Polki/Jadau' && $typeId == 'Polki')
+                                                    {
+                                                          $typeClass .=' shapeSelected';
+                                                    }
+                                                    
                                                     echo "<li><div id='" . $typeId . "' class='jshapeComm transition300 ripplelink " . $typeClass . " '>" . $val['catname'] . "</div></li>";
                                                 }
                                             }
@@ -375,12 +382,15 @@
                                                 $attr['color'] = $attr['clarity'] = $attr['dwt'] = $attr['nofd'] = '';
                                             }
 
-                                            if (empty($attr['gemstone_type'][$curIndex])) {
-                                                $attr['gemstone_color'][$curIndex] = $attr['gemwt'] = $attr['num_gemstones'] = '';
-                                            }
+                                            if (empty($attr['gemstone_type'][$curIndex])) 
+                                                {
+                                                        $attr['gemstone_color'][$curIndex] = $attr['gemwt'] = $attr['num_gemstones'] = '';
+                                                }
 
-                                            foreach ($shapeAttrs['attributes'] as $key => $value) {
-                                                if (strtolower($value['attribute_name']) == 'shape') {
+                                            foreach ($shapeAttrs['attributes'] as $key => $value) 
+                                            {
+                                                if (strtolower($value['attribute_name']) == 'shape') 
+                                                {
 
                                                     ?>
                                                     <div class='shapesCont'>
@@ -554,7 +564,8 @@
                                 <?php
                                 $attr['gemstone_type'] = explode('|!|', $attr['gemstone_type']);
                                 $attr['gemstone_color'] = explode('|!|', $attr['gemstone_color']);
-                                for ($curIndex = 0; $curIndex < count($attr['gemstone_type']); $curIndex++) {
+                                for ($curIndex = 0; $curIndex < count($attr['gemstone_type']); $curIndex++) 
+                                {
                                     $curDiv = $curIndex + 1;
                                     ?>
                                     <div id="gemsDiv">
@@ -588,17 +599,18 @@
                                                 <div class='radioCont fLeft'>
                                                     <?php
                                                     $gemvalues = explode(',', strtolower($catres[3]['attr_values']));
-                                                    foreach ($gemvalues as $key => $values) {
+                                                    foreach ($gemvalues as $key => $values) 
+                                                    {
                                                         ?>
 
                                                         <div class="checkDiv fLeft">
-                                                            <input type="radio" name='gemstone_color_<?php echo $curDiv; ?>' class="filled-in" value="<?= $gemvalues[$key]; ?>" <?php echo ($gemvalues[$key] == $attr['gemstone_color'][$curIndex]) ? 'checked' : ''; ?> id="<?= $gemvalues[$key] . '_' . $curDiv; ?>">
+                                                            <input type="radio" name='gemstone_color_<?php echo $curDiv; ?>' class="filled-in" value="<?= $gemvalues[$key]; ?>" <?=(strtolower($attr['gemstone_color'][$curIndex]) == $gemvalues[$key]) ? 'checked' :'' ; ?> id="<?= $gemvalues[$key] . '_' . $curDiv; ?>">
                                                             <label for="<?= $gemvalues[$key] . '_' . $curDiv; ?>"><?= ucwords($gemvalues[$key]); ?></label>
-                                                        </div>
+														</div>
                                                         <?php
                                                     }
                                                     ?>
-                                                </div>
+												</div>
                                             </div>
                                             <?php
                                         }

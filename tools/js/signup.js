@@ -61,8 +61,11 @@ $('#pr_mobile').focus(function (){
 
     $('#signupCancel').click(function () {
         $("input").val('');
+        var a = document.referrer;
         $("#isVendor").removeAttr('checked');
-        setTimeout(function () {window.location.assign(DOMAIN); },20);
+        //alert(a);
+        window.location=a;
+        //setTimeout(function () {window.location.assign(DOMAIN); },20);
     });
     $('#signupSubmit').bind('click', function () {
         

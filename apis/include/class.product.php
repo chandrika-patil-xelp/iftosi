@@ -913,7 +913,6 @@
         {
       			$page   = ($params['page'] ? $params['page'] : 1);
       			$limit  = ($params['limit'] ? $params['limit'] : 15);
-
       			if($params['uid'])
       			{
       				$page   = ($params['page'] ? $params['page'] : 1);
@@ -931,8 +930,7 @@
       						ORDER BY
       							date_time DESC ";
       				$res = $this->query($sql);
-
-      				if($res)
+                                if($res)
       				{
         					$row = $this->fetchData($res);
         					$pid = $row['pid'];
@@ -1135,7 +1133,7 @@
                               tbl_category_master
                     WHERE
                               catid=\"".$params['catid']."\"";
-      			$res = $this->query($sql);
+                        $res = $this->query($sql);
       			if($res)
       			{
         				$row = $this->fetchData($res);
@@ -1153,8 +1151,8 @@
       				  foreach($expd as $key => $val)
       				  {
       					    $exd = explode('_',$val);
-                    $ids[] = $exd[0];
-                }
+                                            $ids[] = $exd[0];
+                                  }
         				$ilist = implode(',',$ids);
         				$where = " WHERE category_id in (".$ilist.") ";
       			}
@@ -1182,8 +1180,8 @@
       			$sql = "SELECT
       						          *,
                             product_id as pid,
-      						          price,
-                            b2bprice,
+      						        price,
+                                                        b2bprice,
                             (SELECT complete_flag FROM tbl_product_search WHERE product_id = pid) AS complete_status
       					    FROM
       						          tbl_product_category_mapping
@@ -1439,7 +1437,7 @@
         					$res = $this->query($sql);
         					if($res)
         					{
-                      $resrow = $this->fetchData($resrow);
+                                   $resrow = $this->fetchData($resrow);
         						  $total = $resrow['cnt'];
         					}
 
@@ -1571,25 +1569,37 @@
                               $patsql.=" ORDER BY field(product_id,".$pid."), date_time DESC ";
                       break;
                   }
+                    
+                    $patres=$this->query($patsql);
+                    $numpatres=$this->numRows($patres);
+                    if($numpatres < $total)
+                    {
+                        $total = $numpatres;
+                    }
+                    if($numpatres>0)
+                    {
+                          $total = $numpatres;
+                    }
 
         					if (!empty($page))
         					{
         						$start = ($page * $limit) - $limit;
         						$patsql.=" LIMIT " . $start . ",$limit";
         					}
-
-        					$patres=$this->query($patsql);
-
+                            $patres=$this->query($patsql);
+                            $numpatres=$this->numRows($patres);
+                                                
         					while($row2=$this->fetchData($patres))
         					{
           						$prodid[] = $row2['product_id'];
           						$pid = $row2['product_id'];
           						unset($row2['product_id']);
           						$attr[$pid]['attributes']=$row2;
-                  }
+                                                }
         					if(!empty($prodid))
         					{
         						  $pid = $pids = implode(',',$prodid);
+                                                          
         					}
         					else
         					{
@@ -1637,7 +1647,7 @@
             							$arr1[$pid]['dollar_rate']=$dollarRow['dollar_rate'];
             							$arr1[$pid]['gold_rate']=$dollarRow['gold_rate'];
             							$arr1[$pid]['silver_rate']=$dollarRow['silver_rate'];
-                          $arr1[$pid]['platinum_rate']=$dollarRow['platinum_rate'];
+                                        $arr1[$pid]['platinum_rate']=$dollarRow['platinum_rate'];
           						}
           						$arr1[$pid]['attributes'] = $attr[$pid]['attributes'];
           						$arr1[$pid]['images'] = $pimg[$row1['pid']]['images'];
@@ -1707,24 +1717,24 @@
           						$i=0;
           						while($row = $this->fetchData($res))
           						{
-            							switch ($row['attr_type_flag'])
+                                                            	switch ($row['attr_type_flag'])
             							{
               								case 6: //$pids
               									$qry = "SELECT
                         												MIN(".$row['attr_name'].") AS minval,
                         												MAX(".$row['attr_name'].") AS maxval
                   											FROM
-              												          tbl_product_search
-              											    WHERE
-              												          product_id IN(".$allpids.")
-                                        AND
-                                                active_flag=1";
+              												                tbl_product_search
+              											        WHERE
+              												                product_id IN(".$allpids.")
+                                                                                                        AND
+                                                                                                                        active_flag=1";
               									$res1 = $this->query($qry);
               									if($res1)
               									{
                 										$row1 = $this->fetchData($res1);
-                										$data[$i]['range']['id'] 		= $row['attr_id'];
-                										$data[$i]['range']['name'] 		= $row['attr_name'];
+                										$data[$i]['range']['id'] 	= $row['attr_id'];
+                										$data[$i]['range']['name'] 	= $row['attr_name'];
                 										$data[$i]['range']['dname'] 	= $row['attr_display_name'];
                 										$data[$i]['range']['value'] 	= $row1['minval'].';'.$row1['maxval'];
                 										$data[$i]['range']['ovalue'] 	= $row1['minval'].';'.$row1['maxval'];
@@ -1734,13 +1744,13 @@
 
               								case 7:
                   									$qry = "SELECT
-                  												          group_concat(DISTINCT ".$row['attr_name'].") as name
+                  												           group_concat(DISTINCT ".$row['attr_name'].") as name
                   											    FROM
-                  												          tbl_product_search
+                  												           tbl_product_search
                   											    WHERE
-                  												          product_id IN(".$allpids.")
-                                            AND
-                                                    active_flag=1";
+                  												           product_id IN(".$allpids.")
+                                                                                                            AND
+                                                                                                                           active_flag=1";
                   									$res1 = $this->query($qry);
                   									if($res1)
                   									{
@@ -1750,7 +1760,7 @@
                     										$expd1 = explode(',',$row1['name']);
                     										foreach($expd1 as $key=>$val)
                     										{
-                    											  $arr[array_search($val,$expd)] = $val;
+                    									            $arr[array_search($val,$expd)] = $val;
                     										}
                     										ksort($arr);
                     										$arr = array_values($arr);

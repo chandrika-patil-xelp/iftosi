@@ -61,7 +61,7 @@ class sendingMail extends DB
                       $str .= '<div style="font-size: 1.4em; color:#8A0044; line-height: 30px;"><a style="color:#8A0044;"href="http://iftosi.com/FP-345678">IftoSi</a></div>';
                       $str .= '</div>';
                       $str .= '<div style="padding: 25px 0 0 0; line-height: 22px; border-top: 1px solid #e6e6e6;">For any assistance</div>';
-                      $str .= '<div style=" padding: 0 0 25px 0;  line-height: 30px;">Call 022 - 32623263 </div>';
+                      $str .= '<div style=" padding: 0 0 25px 0;  line-height: 30px;">Call 91-22-41222241(42) </div>';
                       $str .= '<div style=" padding: 0 0 25px 0;  line-height: 30px;">Email info@iftosi.com</div>';
                       $str .= '<div style="color:#666; font-size: 0.8em;">- The IftoSi.com Team</div>';
                       $str .= '</div>';

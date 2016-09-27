@@ -17,7 +17,7 @@ switch ($action) {
                 $sortby = $_GET['sortby'];
                 $url = APIDOMAIN . 'index.php?action=getPrdByCatid&catid=' . $catid . '&page=' . $pgno . '&sortby=' . $sortby;
                 $res = $comm->executeCurl($url, 1);
-                echo $res;
+                //echo $res;
                 break;
 
             case 'auto':
@@ -63,9 +63,11 @@ switch ($action) {
                 }
 
                 $url = APIDOMAIN . 'index.php?action=getPrdByCatid&catid=' . $catid . '&page=' . $pgno . '&sortby=' . $sortby . '&slist=' . urlencode($slist) . '&clist=' . urlencode($clist) . '&tlist=' . urlencode($tlist) . '&ilist=' . urlencode($ilist) . '&jlist=' . urlencode($jlist) . '&ctid=' . $ctid . '&uid=' . $uid . '&b2bsort=' . $b2bsort;
+                //$url = urlencode($url);
                 $res = $comm->executeCurl($url);
 
-                if (!empty($jlist)) {
+                if (!empty($jlist)) 
+                {
                     $url = APIDOMAIN . 'index.php?action=getSubCat';
                     $res1 = $comm->executeCurl($url);
                     $headcat = $res1['results'];
@@ -537,7 +539,7 @@ switch ($action) {
                 $data = $res['results']['products'];
                 $total = $res['results']['total'];
                 $catname = $res['results']['catname'];
-
+                
 
                 $url = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=' . $catid;
                 $res = $comm->executeCurl($url);
