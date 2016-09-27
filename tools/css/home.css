@@ -1740,3 +1740,13 @@ education
 #pr_citySuggestDiv{top:40px!important}
 
 .borderColor{border-color:#380B34;}
+.copyright{    
+    text-align: center;
+    width: 100%;
+    color: #fff;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+.mTop14{margin-top: 14px!important}
+
+
