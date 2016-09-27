@@ -492,7 +492,7 @@
                                 ?>
 
                                 <div class="prdCommImg fLeft" id="<?=$data3[$key]['pid'];?>">
-                                    <div class="imgLoader" id="imgLdr"></div>
+                                   
                                     <?php
                                     if($imgCount > 0)
                                     {
@@ -659,11 +659,11 @@
 
 <script>
 
-//                $("#imgLdr").show();
-//        $(".prdCommImg").on('load', function () {
-//            var imgId = $(this).attr("id");
-//            $("#imgLdr").hide();
-//        });
+        $("#imgLdr").show();
+        $(".prdCommImg").on('load', function () {
+            var imgId = $(this).attr("id");
+            $("#imgLdr").hide();
+        });
 
 </script>
 </body>
