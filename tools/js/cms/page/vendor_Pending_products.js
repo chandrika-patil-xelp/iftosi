@@ -938,7 +938,7 @@ function closeConfirmDelete()
     setTimeout(function ()
     {
         $('#overlay,#confirmDelete').addClass('dn');
-    }, 1010);
+    }, 10);
 }
 
 function showConfirmDelete(proId, ele)
@@ -960,6 +960,9 @@ function deleteProduct()
     catAct = $('.wishTabComm').closest('.sel').attr('id');
     $.ajax({url: common.APIWebPath() + "index.php?action=vDeletePrd&vid=" + uid + "&prdid=" + proId, success: function (result)
         {
+             $('#overlay').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
+             $('#confirmDelete').velocity({scale: 0}, {delay: 80, duration: 100, ease: 'swing'});
+             $('#overlay,#confirmDelete').addClass('dn');
             var obj = jQuery.parseJSON(result);
             if (obj['error']['Code'] == 0)
             {
@@ -1006,7 +1009,7 @@ function deleteProduct()
             }
         }
     });
-    closeConfirmDelete();
+//    closeConfirmDelete();
 }
 
 function inStock(proId, ele)
