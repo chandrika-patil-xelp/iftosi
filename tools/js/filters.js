@@ -4,8 +4,7 @@ $(document).ready(function() {
 		var id = $(this).attr('id');
 		var min_price = $('#'+id+'Min').val() * 1;
 		var max_price = $('#'+id+'Max').val() * 1;
-
-		if((max_price - min_price) > 100)
+                if((max_price - min_price) > 100)
 			var step = '';
 		else
 			var step = 0.01;
