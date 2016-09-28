@@ -214,9 +214,11 @@ function Common() {
         $('#overlay1').velocity({opacity: 0}, {delay: 300,duration: 300, ease: 'swing'});
         setTimeout(function () {
             $('#overlay1,#loginDiv').addClass('dn');
-            $("#loginDiv,#overlay1").remove();
+            $("#loginDiv,#overlay1").removeClass('dn');
         }, 1010);
+        window.location.href = DOMAIN;
     }
+    
     this.showLoginForm = function (vd) {
         var str = '<div id="overlay1" class="overlay transition300" style="opacity: 0;"></div>';
         str += '<div id="loginDiv" class="loginDiv transition300" style="opacity:0">';
