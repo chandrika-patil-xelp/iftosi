@@ -1221,7 +1221,7 @@ function getResultsData(data,sortby,showtree)
                                                                 }
                                                                 metal_price = Math.ceil(metal_price);
                                                                 var tmp_metalprce = common.IND_money_format(metal_price)
-                                                                    html += '<div class="detValue fmOpenB fLeft"><span class="fLeft rupeeImg fghfh"></span>'+ tmp_metalprce +'</div>';
+                                                                    html += '<div class="detValue fmOpenB fLeft"><span class="fLeft rupeeImg mTop4"></span>'+ tmp_metalprce +'</div>';
 								html += '</div>';
 							html += '</div>';
 						html += '</a>';
