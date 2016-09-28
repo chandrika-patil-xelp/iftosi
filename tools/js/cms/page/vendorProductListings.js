@@ -878,7 +878,7 @@ function closeConfirmDelete()
 	setTimeout(function () {
 		$('#overlay,#confirmDelete').addClass('dn');
     //window.location.reload();
-	}, 1010);
+	}, 10);
 
 }
 
@@ -898,7 +898,12 @@ function deleteProduct() {
 	var proId = productDelId;
 	var ele = productDelEle;
     $.ajax({url: common.APIWebPath() + "index.php?action=vDeletePrd&vid=" + uid + "&prdid=" + proId, success: function (result) {
-        var obj = jQuery.parseJSON(result);
+        
+             $('#overlay').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
+             $('#confirmDelete').velocity({scale: 0}, {delay: 80, duration: 100, ease: 'swing'});
+             $('#overlay,#confirmDelete').addClass('dn');
+            
+            var obj = jQuery.parseJSON(result);
         if(obj['error']['Code']==0) {
             $(ele).parent().parent().parent().remove();
             if(catid==10000) {
