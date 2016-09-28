@@ -645,7 +645,7 @@ $('#overlay,#upCancel').bind('click', function ()
         {
             revertSelect();
         }
-        closeAllForms();
+//        closeAllForms();
     }
 });
 
@@ -653,7 +653,7 @@ function closeAllForms()
 {
     $('#uploadDiv,#dollarRateDiv,#goldRateDiv,#silverRateDiv,#goldSilverRateDiv,#platinumRateDiv').velocity({scale: 0}, {delay: 0, ease: 'swing'});
     $('#overlay').velocity({opacity: 0}, {delay: 100, ease: 'swing'});
-
+    
     setTimeout(function ()
     {
         $('#overlay,#uploadDiv,#dollarRateDiv,#goldRateDiv,#silverRateDiv,#goldSilverRateDiv,#platinumRateDiv').addClass('dn');
@@ -666,6 +666,8 @@ $(document).ready(function()
 {
     $('.cancelBtn').click( function ()
     {
+        $('#overlay').velocity({opacity: 0}, {delay: 0, duration: 300, ease: 'swing'});
+        $('#overlay').addClass('dn');
         $('.shapeSelected').removeClass('shapeSelected');
     });
     var tmstmp = new Date().getTime();
