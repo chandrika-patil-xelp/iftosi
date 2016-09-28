@@ -549,8 +549,11 @@ $(document).ready(function ()
     });
 });
 
-function changeHIdVal()
+function changeHIdVal(e)
 {
+     if(e.keyCode == 13) {
+        $('#ur_cityid').val('1');
+    }
     if($('#ur_city').val() == '')
     {
         $('#ur_cityid').val('');
