@@ -22,7 +22,7 @@
                                 <label for="pr_mobile" class="inp-label transition100">MOBILE</label>
                                 <div id="pr_mobile_inpText" class="inpText fRight transition300">enter<br>mobile number</div>
                             </div>
-                            <div class="cancelLgBtn fLeft fmOpenR ripplelink poR" id='cancelBtn' onclick="window.location.assign(DOMAIN)"> CANCEL</div>
+                            <div class="cancelLgBtn fLeft fmOpenR ripplelink poR" id='cancelBtn' onclick="closeOtpForm();"> CANCEL</div>
                             <div class="loginBtn fLeft fmOpenR ripplelink poR" id='submitBtn'>RETRIEVE</div>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                 var pr_mobile = $('#pr_mobile').val();
                 if(pr_mobile == undefined || pr_mobile == 'undefined' || pr_mobile == null || pr_mobile == 'null' || pr_mobile == '' || isNaN(pr_mobile) == true )
                 {
-                    customStorage.toast(0,'Please enter valid mobile number');
+                    customStorage.toast(0,'Please enter mobile number');
                     return false;
                 }
                 customStorage.addToStorage('mobile', pr_mobile);
