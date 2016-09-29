@@ -645,7 +645,7 @@ $('#overlay,#upCancel').bind('click', function ()
         {
             revertSelect();
         }
-//        closeAllForms();
+     closeAllForms();
     }
 });
 
