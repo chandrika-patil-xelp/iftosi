@@ -1361,7 +1361,7 @@ function getResultsData(data,sortby,showtree)
             var id = $(this).parent().attr('id');
             $(this).parent().addClass('active');
             $(this).parent().children('ul').slideToggle('fast');
-            
+
             lOpen = id;
         });
         $('.tree ul:first > li').eq(0).each(function() {

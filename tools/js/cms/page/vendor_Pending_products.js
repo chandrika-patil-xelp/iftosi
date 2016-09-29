@@ -177,6 +177,7 @@ function pagination(data, pgno)
     var html = '';
     var tc = data.results.total_products;
     var lastpg = Math.ceil(tc / 50);
+    $('#total_pageno').val(lastpg);
     var adjacents = 2;
     if (lastpg > 1)
     {
