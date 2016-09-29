@@ -286,7 +286,7 @@ function generateEnqList(obj,pgno)
                     }
                 }
         str += '</div>';
-                str += '<div class="price fLeft bNone fmOpenB">&#8377;' + price + '</div>';
+                str += '<div class="price fLeft bNone fmOpenB"><span class="fLeft rupeeImg"></span>' + price + '</div>';
         str += '</li>';
         return str;
     }
