@@ -680,16 +680,19 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 
 .rateDiv { height: 45px;padding: 7px 0;font-size: 13px;width:100%;position:absolute;left:0;right:0;margin:auto;top:100%;background-color:#2A0E34;display:none}
 .rateDiv .rtCont{display:inline-block;position: relative;}
-/*.rateDiv .rupeeImg{background-size: auto 15px;
+.rateDiv .rupeeImg{background-size: auto 15px;
     width: 15px;
     height: 100%;
     background-position: left 4px;
-    position: absolute;
-    left: 83px;
-    top: 1px;}*/
+   position: absolute;
+    left: 85px;
+    top: 1px;}
+.rateDiv .goldL{left:77px;}
+.rateDiv .silverL{left:81px;}
+.rateDiv .platinumL{left:103px;}
 
 .spTitle{color: rgba(255,255,255,0.6);padding: 0;height: 25px;display: block;float: left;margin: 0 10px 0 0px;line-height: 25px;}
-.spValue{background: rgba(255,255,255,1) url(../img/common/edit.svg)no-repeat;background-position: 95% center;background-size: auto 90%;font-family: openB;padding: 0 30px 0 10px;border-radius: 15px;color: #4d4d4d;height: 25px;display: block;float: left;cursor: pointer;margin: 0 10px 0 0px;line-height: 25px;}
+.spValue{background: rgba(255,255,255,1) url(../img/common/edit.svg)no-repeat;background-position: 95% center;background-size: auto 90%;font-family: openB;padding: 0 30px 0 17px;border-radius: 15px;color: #4d4d4d;height: 25px;display: block;float: left;cursor: pointer;margin: 0 10px 0 0px;line-height: 25px;}
 
 .textOverflow{overflow: hidden;white-space:nowrap; text-overflow: ellipsis;}
 
