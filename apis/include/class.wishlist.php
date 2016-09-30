@@ -75,7 +75,7 @@ class wishlist extends DB
        $dt     = json_decode($params['dt'],1);
        $detls  = $dt['result'];
        $sql="INSERT INTO tbl_wishlist(uid,pid,vid,wf,date_time) VALUES(\"".$detls['uid']."\",\"".$detls['pid']."\",\"".$detls['vid']."\",1,now())";
-	   $sql .= " ON DUPLICATE KEY UPDATE wf=1;";
+       $sql .= " ON DUPLICATE KEY UPDATE wf=1;";
        $res=$this->query($sql);
        if($res)
        {
@@ -288,9 +288,32 @@ class wishlist extends DB
 			return $results;
 		}
 
-		$sql = "SELECT * FROM tbl_wishlist WHERE uid='$uid' AND wf <> 2";
+		/*$sql = "SELECT * FROM tbl_wishlist WHERE uid='$uid' AND wf <> 2";
 
 		if(!empty($prdid))
+		{
+			$sql .= " AND pid='$prdid'";
+		}
+
+		if(!empty($vid))
+		{
+			$sql .= " AND vid='$vid'";
+		}*/
+         $sql=  "SELECT * FROM tbl_wishlist
+                WHERE
+                      pid 
+                IN 
+                      (SELECT product_id FROM tbl_product_search 
+                WHERE 
+                       active_flag = 1 
+                AND 
+                       complete_flag = 1)
+                AND 
+                       uid='$uid' 
+                AND 
+                        wf <> 2"; 
+                
+                if(!empty($prdid))
 		{
 			$sql .= " AND pid='$prdid'";
 		}

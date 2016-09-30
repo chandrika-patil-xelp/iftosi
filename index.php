@@ -121,7 +121,6 @@ switch ($action) {
                 $userid = (!empty($_GET['userid'])) ? trim($_GET['userid']) : '';
                 $vid = (!empty($_GET['vid'])) ? trim(urldecode($_GET['vid'])) : '';
                 $prdid = (!empty($_GET['prdid'])) ? trim(urldecode($_GET['prdid'])) : '';
-
                 $dt = array('result' => array('uid' => $userid, 'pid' => $prdid, 'vid' => $vid));
                 $dt = json_encode($dt);
                 $userUrl = APIDOMAIN . 'index.php?action=addtowsh&dt=' . $dt;

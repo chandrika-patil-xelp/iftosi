@@ -964,7 +964,7 @@ function closeAllForms() {
 function getWishList()
 {
     var userid = customStorage.readFromStorage('userid');
-    if (vendor_id !== '' && pid !== '' && userid !== '' && userid !== undefined && userid !== null)
+    if (/*vendor_id !== '' &&*/ pid !== '' && userid !== '' && userid !== undefined && userid !== null)
     {
         var tmstmp = new Date().getTime();
         var params = 'action=ajx&case=checkWish&userid=' + userid + '&vid=' + vendor_id + '&prdid=' + pid + '&timestamp=' + tmstmp;

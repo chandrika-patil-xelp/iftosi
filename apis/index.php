@@ -289,7 +289,6 @@ switch($action)
             $dt=(!empty($params['dt'])) ?  trim(urldecode($params['dt'])) : '';
             if(empty($dt))
             {
-                //echo "here";
                 $arr = array();
                 $err = array('Code' => 1, 'Msg' => 'Some parameters missing');
                 $result = array('results'=>$arr,'error'=>$err);
@@ -1715,8 +1714,8 @@ echo '</pre>';
             $res=$result;
             break;
 
-		case 'checkWish':
-			include APICLUDE.'class.wishlist.php';
+        case 'checkWish':
+	    include APICLUDE.'class.wishlist.php';
             $uid=(!empty($params['uid']))? trim($params['uid']):'';
             $vid=(!empty($params['vid']))? trim($params['vid']):'';
             $pid=(!empty($params['prdid']))? trim($params['prdid']):'';
