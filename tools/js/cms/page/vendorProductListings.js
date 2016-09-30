@@ -719,6 +719,7 @@ function loadBullionsCallback(res,pgno) {
         loadBullion = false;
     }
 }
+
 function generatBullionsList(obj) {
     var barcode = obj['barcode'];
     var cl='';
