@@ -323,15 +323,13 @@ class attribute extends DB
             {
                 while($row1=$this->fetchData($res))
                 {
-                    // echo "<pre>";print_R($attributeMap);die;
-                    //echo "<pre>";print_r($row1);
-                    $attrs['atrribute_id']			    = $row1['attr_id'];
-                    $attrs['attribute_name']		    = $row1['attr_name'];
-                    $attrs['attribute_disp_name']	  = $row1['attr_display_name'];
-                    $attrs['attribute_unit']		    = $attributeMap[$row1['attr_id']]['attr_unit'];
-					          $attrs['attribtue_unit_pos']	  = $attributeMap[$row1['attr_id']]['attr_unit_pos'];
-                    $attrs['attribute_values']		  = $attributeMap[$row1['attr_id']]['attr_values'];
-                    $attrs['attribute_range']		    = $attributeMap[$row1['attr_id']]['attr_range'];
+                    $attrs['atrribute_id']          = $row1['attr_id'];
+                    $attrs['attribute_name']        = $row1['attr_name'];
+                    $attrs['attribute_disp_name']   = $row1['attr_display_name'];
+                    $attrs['attribute_unit']        = $attributeMap[$row1['attr_id']]['attr_unit'];
+                    $attrs['attribtue_unit_pos']    = $attributeMap[$row1['attr_id']]['attr_unit_pos'];
+                    $attrs['attribute_values']      = $attributeMap[$row1['attr_id']]['attr_values'];
+                    $attrs['attribute_range']       = $attributeMap[$row1['attr_id']]['attr_range'];
                     $attrs['attribute_display_type']= $attributeMap[$row1['attr_id']]['display_type'];
 
                     if($row1['attr_type_flag'] == 6)
@@ -350,45 +348,49 @@ class attribute extends DB
 
                         if($row1['attr_name'] == 'price')
                         {
-
-                            //print_r($params);die;
                             if($params['case'] == 'b2bproducts')
                             {
-
-                                $qryrng = "SELECT MIN(".$row1['attr_name']."*IF(carat,carat,1)*IF(dollarval,dollarval,,".dollarValue.")) AS minval, MAX(".$row1['attr_name']."*IF(carat,carat,1)*IF(dollarval,dollarval,".dollarValue.")) AS maxval FROM (
-                                              SELECT
-                                              	product_id AS pid,
-                                              	".$row1['attr_name'].",
-                                              	carat,
-                                              	(SELECT vendor_id FROM `tbl_vendor_product_mapping` WHERE active_flag=1 AND product_id = pid LIMIT 1) AS vid,
-                                              	(SELECT dollar_rate FROM tbl_vendor_master WHERE vendor_id = vid) AS dollarval
-                                              FROM
-                                                  tbl_product_search
-                                              WHERE
-                                                  product_id IN(".$prids.")
-                                              AND
-                                                  active_flag=1
-                                          ) t";
+                                $qryrng = " SELECT 
+                                                    MIN(".$row1['attr_name']."*IF(carat,carat,1)*IF(dollarval,dollarval,".dollarValue.")) AS minval,
+                                                    MAX(".$row1['attr_name']."*IF(carat,carat,1)*IF(dollarval,dollarval,".dollarValue.")) AS maxval 
+                                            FROM  
+                                                    (
+                                                        SELECT
+                                                                product_id AS pid,
+                                                                ".$row1['attr_name'].",
+                                                                carat,
+                                                                (SELECT vendor_id FROM `tbl_vendor_product_mapping` WHERE active_flag=1 AND product_id = pid LIMIT 1) AS vid,
+                                                                (SELECT dollar_rate FROM tbl_vendor_master WHERE vendor_id = vid) AS dollarval
+                                                        FROM
+                                                                tbl_product_search
+                                                        WHERE
+                                                                product_id IN(".$prids.")
+                                                        AND
+                                                                active_flag=1
+                                                    ) t";
                             }
                             else
                             {
-
-                            $qryrng = "SELECT MIN(".$row1['attr_name']."*IF(carat,carat,1)*IF(dollarval,dollarval,".dollarValue.")) AS minval, MAX(".$row1['attr_name']."*IF(carat,carat,1)*IF(dollarval,dollarval,".dollarValue.")) AS maxval FROM (
-                                          SELECT
-                                          	product_id AS pid,
-                                          	".$row1['attr_name'].",
-                                          	carat,
-                                          	(SELECT vendor_id FROM `tbl_vendor_product_mapping` WHERE active_flag=1 AND product_id = pid LIMIT 1) AS vid,
-                                          	(SELECT dollar_rate FROM tbl_vendor_master WHERE vendor_id = vid) AS dollarval
-                                          FROM
-                                              tbl_product_search
-                                          WHERE
-                                              product_id IN(".$prids.")
-                                          AND
-                                              active_flag=1
-                                      ) t";
+                                $qryrng = "
+                                            SELECT 
+                                                    MIN(".$row1['attr_name']."*IF(carat,carat,1)*IF(dollarval,dollarval,".dollarValue.")) AS minval, 
+                                                    MAX(".$row1['attr_name']."*IF(carat,carat,1)*IF(dollarval,dollarval,".dollarValue.")) AS maxval 
+                                            FROM 
+                                                    (
+                                                        SELECT
+                                                                    product_id AS pid,
+                                                                    ".$row1['attr_name'].",
+                                                                    carat,
+                                                                    (SELECT vendor_id FROM `tbl_vendor_product_mapping` WHERE active_flag=1 AND product_id = pid LIMIT 1) AS vid,
+                                                                    (SELECT dollar_rate FROM tbl_vendor_master WHERE vendor_id = vid) AS dollarval
+                                                        FROM
+                                                                    tbl_product_search
+                                                        WHERE
+                                                                    product_id IN(".$prids.")
+                                                        AND
+                                                                    active_flag=1
+                                                    ) t";
                             }
-
                         }
                         else
                         {
@@ -404,9 +406,10 @@ class attribute extends DB
                                         ";
                         }
                         $resrng = $this->query($qryrng);
-
+                        
                         if($resrng)
                         {
+                           
                             $rowrng = $this->fetchData($resrng);
                             if($priceminval && $pricemaxval && $row1['attr_name'] == 'price' && $params['catid'] == '10001')
                             {
@@ -418,7 +421,7 @@ class attribute extends DB
                               $maxvl = round($rowrng['maxval'],2);
                               $minvl = round($rowrng['minval'],2);
                             }
-                            if($caratminval && $caratmaxval && $row1['attr_name'] == 'carat')
+                            if($caratmaxval && $row1['attr_name'] == 'carat' && $params['catid'] == '10000')
                             {
                                 $maxvl = $rowrng['maxval'];
                                 $minvl = $rowrng['minval'];
@@ -426,9 +429,9 @@ class attribute extends DB
                             $attrs['attribute_range'] = $minvl.'-'.$maxvl;
                         }
                     }
-
-                    $attribute[]					= $attrs;
-                    $flag							= $row1['attr_type_flag'];       // FOR GIVING THE NAME OF TYPE FILTER
+                  
+                    $attribute[] = $attrs;
+                    $flag	 = $row1['attr_type_flag'];       // FOR GIVING THE NAME OF TYPE FILTER
                  /*   switch($flag)
                     {
                         case 1:

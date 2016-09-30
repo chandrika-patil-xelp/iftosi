@@ -69,6 +69,12 @@
                     customStorage.toast(0,'Please enter mobile number');
                     return false;
                 }
+                if(pr_mobile.length !=10)
+                {
+                     customStorage.toast(0,'Please enter Valid mobile number');
+                    return false;
+                }
+                    
                 customStorage.addToStorage('mobile', pr_mobile);
                 if(pr_mobile !== undefined || pr_mobile !== 'undefined')
                 {
