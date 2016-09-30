@@ -10,23 +10,23 @@
                 <input type="hidden" id="pgno" value="1" />
                 <input type="hidden" id="total_pageno" value="<?php echo $lastpg; ?>" />
             </div>
-<?php
-        if($page !== 'product_list' && $page !== 'thumbnail' && $page !== 'vendorList' && $page !== 'customerDtls')
-        {
-?>
+            <?php
+            if($page !== 'product_list' && $page !== 'thumbnail' && $page !== 'vendorList' && $page !== 'customerDtls')
+            {
+            ?>
             <div class="fRight cFF fmOpenR font14 rateDiv ">
                 <center>
-                    <div class="rtCont "><span class="spTitle">Dollar Rate:</span><span class="spValue" id="dollarRateSpan">&#8377;</span></div>
-                    <div class="rtCont "><span class="spTitle">Gold Rate:</span><span class="spValue" id="goldRateSpan">&#8377;</span></div>
-                    <div class="rtCont "><span class="spTitle">Silver Rate:</span><span class="spValue" id="silverRateSpan">&#8377;</span></div>
-                    <div class="rtCont "><span class="spTitle">Platinum Rate:</span><span class="spValue" id="platinumRateSpan">&#8377;</span></div>
+                    <div class="rtCont "><span class="spTitle">Dollar Rate:</span><span class="rupeeImg"></span><span class="spValue" id="dollarRateSpan"></span></div>
+                    <div class="rtCont "><span class="spTitle">Gold Rate:</span><span class="rupeeImg goldL"></span><span class="spValue" id="goldRateSpan"></span></div>
+                    <div class="rtCont "><span class="spTitle">Silver Rate:</span><span class="rupeeImg silverL"></span><span class="spValue" id="silverRateSpan"></span></div>
+                    <div class="rtCont "><span class="spTitle">Platinum Rate:</span><span class="rupeeImg platinumL"></span><span class="spValue" id="platinumRateSpan"></span></div>
                 </center>
-<!--                    <span id="" class="dn">Gold Rate : &#8377; </span>
-                    <span id="" class="dn">Silver Rate : &#8377; </span>-->
-                </div>
-<?php
-        }
-?>
+                <!--                    <span id="" class="dn">Gold Rate : &#8377; </span>
+                                    <span id="" class="dn">Silver Rate : &#8377; </span>-->
+            </div>
+            <?php
+            }
+            ?>
 
         </div>
     </div>
@@ -38,14 +38,14 @@
                     <div id="vendorlist" class="fLeft vTabs transition300">Vendor List</div>
                     <div id="productstab" class="fLeft vTabs transition300">Product Images</div>
                     <div id="customerList" class="fLeft vTabs transition300">Customer List</div>
-<?php
-                        if($page == 'vendorList' || $page == 'customerDtls')
-                        {
-?>
-                         <input type="text" onkeyup="searchVendor(this.value);" autocomplete="false" class="serchBtn prdSeachTxt fRight fmOpenR" placeholder="Search User by Name/Email/Mobile"  id="searchVendor">
-<?php
-                        }
-?>
+                    <?php
+                    if($page == 'vendorList' || $page == 'customerDtls')
+                    {
+                    ?>
+                    <input type="text" onkeyup="searchVendor(this.value);" autocomplete="false" class="serchBtn prdSeachTxt fRight fmOpenR" placeholder="Search User by Name/Email/Mobile"  id="searchVendor">
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@
                     <!-- <div id='dashTab'  class="fLeft vTabs  transition300">Dashboard</div> -->
                     <div id='prdTab' class="fLeft vTabs">
                         <div class="dropdownBox fLeft">
-                            <div id='productsTab'  class="dropInput fmOpenR" onclick="window.location.assign(DOMAIN+'index.php?case=vendor_landing&catid='+getcatid());">Products</div>
+                            <div id='productsTab'  class="dropInput fmOpenR" onclick="window.location.assign(DOMAIN + 'index.php?case=vendor_landing&catid=' + getcatid());">Products</div>
                             <ul id='productsTabList' class="dropList fmOpenR">
                                 <li class="transition100 dn" id="dmdTab"><a href="<?php echo DOMAIN; ?>index.php?case=vendor_landing&catid=10000">Diamonds</a></li>
                                 <li class="transition100 dn" id="jewTab"><a href="<?php echo DOMAIN; ?>index.php?case=vendor_landing&catid=10001">Jewellery</a></li>
@@ -68,26 +68,26 @@
                     </div>
                     <div id='enqTab' class="fLeft vTabs transition300"><a href="<?php echo DOMAIN; ?>index.php?case=vendor_enquiries">Enquiries</a></div>
                     <div id='profileTab' class="fLeft vTabs transition300" onclick="return showVendorProfile();">Profile</div>
-<?php
+                    <?php
                     if($_GET['catid'] == '10000')
                     {
-?>
-                        <div class="fLeft vTabs"><a href="<?php echo DOMAIN;?>index.php?case=b2bproducts&catid=10000" target="_blank">B2B Prices</a></div>
-<?php
+                    ?>
+                    <div class="fLeft vTabs"><a href="<?php echo DOMAIN;?>index.php?case=b2bproducts&catid=10000" target="_blank">B2B Prices</a></div>
+                    <?php
                     }
-?>
-                        <div class="fLeft vTabs" id="pendingPrd"><a href="<?php echo DOMAIN;?>index.php?case=pending&catid=10000&vid=<?=$_GET['vid'];?>">Pending Products</a></div>
-                        <div class="fLeft vTabs " id="rate_m">Rate Manager</div>
-                   <!-- <div id='setTab' class="fLeft vTabs transition300">Settings</div>-->
+                    ?>
+                    <div class="fLeft vTabs" id="pendingPrd"><a href="<?php echo DOMAIN;?>index.php?case=pending&catid=10000&vid=<?=$_GET['vid'];?>">Pending Products</a></div>
+                    <div class="fLeft vTabs " id="rate_m">Rate Manager</div>
+                    <!-- <div id='setTab' class="fLeft vTabs transition300">Settings</div>-->
                 </div>
-<!--                <div class="fRight cFF fmOpenR font14 rateDiv" style="width:auto">
-                    <div class="rtCont fLeft"><span class="spTitle">Dollar Rate:</span><span class="spValue" id="dollarRateSpan">&#8377;</span></div>
-                    <div class="rtCont fLeft"><span class="spTitle">Gold Rate:</span><span class="spValue" id="goldRateSpan">&#8377;</span></div>
-                    <div class="rtCont fLeft"><span class="spTitle">Silver Rate:</span><span class="spValue" id="silverRateSpan">&#8377;</span></div>
-
-                    <span id="" class="dn">Gold Rate : &#8377; </span>
-                    <span id="" class="dn">Silver Rate : &#8377; </span>
-                </div>-->
+                <!--                <div class="fRight cFF fmOpenR font14 rateDiv" style="width:auto">
+                                    <div class="rtCont fLeft"><span class="spTitle">Dollar Rate:</span><span class="spValue" id="dollarRateSpan">&#8377;</span></div>
+                                    <div class="rtCont fLeft"><span class="spTitle">Gold Rate:</span><span class="spValue" id="goldRateSpan">&#8377;</span></div>
+                                    <div class="rtCont fLeft"><span class="spTitle">Silver Rate:</span><span class="spValue" id="silverRateSpan">&#8377;</span></div>
+                
+                                    <span id="" class="dn">Gold Rate : &#8377; </span>
+                                    <span id="" class="dn">Silver Rate : &#8377; </span>
+                                </div>-->
             </div>
         </div>
     </div>
