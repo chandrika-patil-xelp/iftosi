@@ -61,11 +61,11 @@ switch ($action) {
                     $url = APIDOMAIN . 'index.php?action=removeFromWishlist&uid=' . $uid . '&pid=' . $pid;
                     $res = $comm->executeCurl($url);
                 }
-
+            
+            
                 $url = APIDOMAIN . 'index.php?action=getPrdByCatid&catid=' . $catid . '&page=' . $pgno . '&sortby=' . $sortby . '&slist=' . urlencode($slist) . '&clist=' . urlencode($clist) . '&tlist=' . urlencode($tlist) . '&ilist=' . urlencode($ilist) . '&jlist=' . urlencode($jlist) . '&ctid=' . $ctid . '&uid=' . $uid . '&b2bsort=' . $b2bsort;
-                //$url = urlencode($url);
                 $res = $comm->executeCurl($url);
-
+            
                 if (!empty($jlist)) 
                 {
                     $url = APIDOMAIN . 'index.php?action=getSubCat';
