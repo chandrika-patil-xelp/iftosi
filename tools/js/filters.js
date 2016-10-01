@@ -3,7 +3,6 @@ $(document).ready(function() {
                 var id = $(this).attr('id');
                 var min_price = $('#'+id+'Min').val() * 1;
 		var max_price = $('#'+id+'Max').val() * 1;
-                alert(min_price + "" +max_price);
                 if((max_price - min_price) > 100)
 			var step = '';
 		else
