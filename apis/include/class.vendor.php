@@ -4009,10 +4009,9 @@ class vendor extends DB
             return $propValArr[$val];
         }
 
-     /*   public function sendRateMail($params)
+        public function sendRateMail($params)
         {
             global $comm;
-
             $sql = "SELECT
                             orgName,
                             contact_person,
@@ -4031,12 +4030,9 @@ class vendor extends DB
                     $vDet['C_person'] = $row['contact_person'];
                     $vDet['cur_rate'] = $row[$params['rate']];
                 }
+
+                $msg = $this->sendRateMailTemplate($vDet,$message,$params['type'],$params);
                 $subject = $params['type'].' Rate for IFtoSI';
-                $message = 'Dear ' . $vDet['org_name'] . ',';
-                $message .= "\r\n";
-                $message .= "Your ". strtolower($params['type'])." rate has changed from Previous rate : ". $params['prevRate']. " to Current rate : ". $vDet['cur_rate'];
-                $message .= "\r\n \r\n";
-                $message .= "Team IFtoSI";
                 $headers = "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                 $headers .= 'From: <info@iftosi.com>' . "\r\n";
@@ -4049,121 +4045,65 @@ class vendor extends DB
                 {
                     return 0;
                 }
+
             }
             else
             {
                 return 0;
             }
-
-    }*/
-
- public function sendRateMail($params)
-        {
-            global $comm;
-
-            $sql = "SELECT
-                            orgName,
-                            contact_person,
-                            ".$params['rate']."
-                    FROM
-                            tbl_vendor_master
-                    WHERE
-                            vendor_id = ".$params['vid'];
-            $res = $this->query($sql);
-            $chkV = $this->numRows($res);
-            if($chkV == 1)
-            {
-                while($row = $this->fetchData($res))
-                {
-                    $vDet['org_name'] = $row['orgName'];
-                    $vDet['C_person'] = $row['contact_person'];
-                    $vDet['cur_rate'] = $row[$params['rate']];
-                }
-                $subject = $params['type'].' Rate for IFtoSI';
-                $message = 'Dear ' . $vDet['org_name'] . ',';
-                $message .= "\r\n";
-                $message .= "Your ". strtolower($params['type'])." rate has changed from Previous rate : ". $params['prevRate']. " to Current rate : ". $vDet['cur_rate'];
-               
-            }
-            else
-            {
-                return 0;
-            }
-            
-            sendRateMailTemplate($vDet,$message,$subject,$params);                                      
     }
-        
-        public function sendRateMailTemplate($vDet,$subject,$params)
+
+        public function sendRateMailTemplate($vDet,$subject,$type,$params)
         {
-             global $comm;
+           $message  ='<html>
+                            <head>
+                                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+                                <meta name="viewport" content="width=device-width, user-scalable=no" >
+                                <title>IFtoSI E-mail</title>
+                            </head>
+                            <body style="margin:0; padding: 0; background-color: #171334;">
+                              <center>
+                                <div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; letter-spacing: -0.02em; color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;">
+                                    <a><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="'.DOMAIN.'tools/img/iftosi.png" style="width:100%;"></div></a>
+                                    <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
+                                        <div  style="font-size: 20px;letter-spacing: -0.03em;    padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">change in price</div>
+                                        <a><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase">';
 
-            $sql = "SELECT
-                            orgName,
-                            contact_person,
-                            ".$params['rate']."
-                    FROM
-                            tbl_vendor_master
-                    WHERE
-                            vendor_id = ".$params['vid'];
-            $res = $this->query($sql);
-            $chkV = $this->numRows($res);
-           
- $message  ='<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="viewport" content="width=device-width, user-scalable=no" >
-        <title>IFtoSI E-mail</title>
-    </head>
-    <body style="margin:0; padding: 0; background-color: #171334;">
-    <center>
-        <div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; letter-spacing: -0.02em; color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;">
-            <a><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="tools/img/iftosi.png" style="width:100%;"></div></a>
-            <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
-                <div  style="font-size: 20px;letter-spacing: -0.03em;    padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">change in price</div>
-                <a><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase"><img src="tools/img/common/01.png" style="width:70%;"></div></a>
-                <div style="font-size: 18px;letter-spacing: -0.03em;    padding: 15px 10px 10px 10px; color:#8A0044;">Dear "<?php echo  $vDet["C_person"]; ?>",</div>
-                <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 18px; color: #333;padding: 0px 15px 40px 15px;">Your <?php echo  strtolower($params["type"]); ?>rate has changed from</div>
-                <center style="padding: 0px 30px 20px 30px;">
-                    <div style="width: 41%;display: inline-block;    border-right: 1px solid #f0f0f0;">
-                        <div style="font-size: 18px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">previous rate</div>
-                        <span style="font-size: 20px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="tools/img/common/rupee.svg" align="middle" style="width:25px;vertical-align:bottom;height:25px;"><?php echo  $params["prevRate"]; ?></span>
-                    </div>
-                     <div style="width: 41%;display: inline-block;">
-                        <div style="font-size: 18px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">current rate</div>
-                        <span style="font-size: 20px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="tools/img/common/rupee.svg" align="middle" style="width: 25px;vertical-align:bottom;height:25px;"><?php echo  $params["prevRate"]; ?></span>
-                    </div>
-                </center>
-                <center style="padding-top: 50px;">
-                    <img src="tools/img/common/diamond.jpg" width="50">
-                    <img src="tools/img/common/jewellery.jpg" width="50">
-                    <img src="tools/img/common/bullions.jpg" width="50">
-                </center>
-                <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:022-32623263" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
-            </div>
-            <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
-        </div>
-    </center>
-</body>
-</html>';
-                $message .= "\r\n \r\n";
-                $message .= "Team IFtoSI";
-                $headers = "MIME-Version: 1.0" . "\r\n";
-                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                $headers .= 'From: <info@iftosi.com>' . "\r\n";
+                                        if($type !== 'dollar')
+                                        {
+                                            $message.='<img src="'.DOMAIN.'tools/img/common/01.png" style="width:70%;"></div></a>'; // for silver,gold,platinum
+                                        }
+                                        else
+                                        {
+                                            $message.='<img src="'.DOMAIN.'tools/img/common/01.png" style="width:70%;"></div></a>'; // for diamond
+                                        }
 
-                if(!empty($params['to']))
-                {
-                    mail($params['to'], $subject, $message, $headers);
-                    return 1;
-                }
-                else
-                {
-                    return 0;
-                }
-
-
+                                        $message.='<div style="font-size: 18px;letter-spacing: -0.03em;    padding: 15px 10px 10px 10px; color:#8A0044;">Dear '.$vDet["C_person"].',</div>
+                                        <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 18px; color: #333;padding: 0px 15px 40px 15px;">Your '.strtolower($params["type"]).' rate has changed from</div>
+                                        <center style="padding: 0px 30px 20px 30px;">
+                                            <div style="width: 41%;display: inline-block;    border-right: 1px solid #f0f0f0;">
+                                                <div style="font-size: 18px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">previous rate</div>
+                                                <span style="font-size: 20px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/rupee.svg" align="middle" style="width:25px;vertical-align:bottom;height:25px;">'.$params["prevRate"].'</span>
+                                            </div>
+                                             <div style="width: 41%;display: inline-block;">
+                                                <div style="font-size: 18px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">current rate</div>
+                                                <span style="font-size: 20px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/rupee.svg" align="middle" style="width: 25px;vertical-align:bottom;height:25px;">'.$vDet['cur_rate'].'</span>
+                                            </div>
+                                        </center>
+                                        <center style="padding-top: 50px;">
+                                            <img src="'.DOMAIN.'tools/img/common/diamond.jpg" width="50">
+                                            <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
+                                            <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
+                                        </center>
+                                        <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:022-32623263" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
+                                    </div>
+                                    <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
+                                </div>
+                            </center>
+                        </body>
+                  </html>';
+          return $message;
         }
-        
         
         
     public function validateJewelFields($params)
