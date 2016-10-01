@@ -1375,16 +1375,17 @@ switch($action)
             include APICLUDE.'class.product.php';
             $catid	=(!empty($params['catid'])) ? trim($params['catid']) : '';
             $uid	=(!empty($params['uid'])) ? trim($params['uid']) : '';
-			if(empty($catid) && empty($uid))
-            {
-				$arr=array();
+         		if(empty($catid) && empty($uid))
+            {                   
+                            	$arr=array();
 				$err=array('code'=> 1,'Msg'=> 'Invalid parameter');
 				$result=array('results'=> $arr,'error'=>$err);
 				$res=$result;
 				break;
             }
-            $obj=new product($db['iftosi']);
-		    $result=$obj->getPrdByCatid($params);
+    
+                    $obj=new product($db['iftosi']);
+            	    $result=$obj->getPrdByCatid($params);
             $res=$result;
             break;
 

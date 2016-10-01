@@ -275,7 +275,6 @@ class vendor extends DB
         $limit  = ($params['limit'] ? $params['limit'] : 15);
         $catid = ($params['catid'] ? $params['catid'] : 10000);
         $total_pages = $chkcnt = $total_products = 0;
-
         $sql1="SELECT
                       silver_rate,
                       gold_rate,
@@ -4036,6 +4035,7 @@ class vendor extends DB
                 $headers = "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                 $headers .= 'From: <info@iftosi.com>' . "\r\n";
+                print_r($message);die;
                 if(!empty($params['to']))
                 {
                     mail($params['to'], $subject, $message, $headers);

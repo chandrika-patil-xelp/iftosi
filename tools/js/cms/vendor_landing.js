@@ -144,7 +144,6 @@ $(document).ready(function ()
         }
          if((busiTypeSplt.length == 1 || busiTypeSplt.length == 2 ) && (busiTypeSplt[i] === 2))
          {
-            alert(here);
             $('#dollarRateSpan').html('').addClass('dn');
          }
         if(busiTypeSplt.length == 1 && busiTypeSplt[i] === 3)

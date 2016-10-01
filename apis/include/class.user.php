@@ -1139,12 +1139,9 @@
                     $message .= "For any assistance, Call: 022-32623263. Email: info@iftosi.com";
                     $message .= "<br/><br/>";
                     $message .= "Team IFtoSI";
-
                     $headers  = "Content-type:text/html;charset=UTF-8" . "<br/><br/>";
-
                     $headers .= 'From: info@iftosi.com' . "<br/><br/>";
-
-                    $mail = mail($row['email'], $subject, $message, $headers);
+                     $mail = mail($row['email'], $subject, $message, $headers);
                     if ($mail)
                     {
                         $smsText .= "IFtoSI Password Change Request";

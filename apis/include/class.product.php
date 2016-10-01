@@ -1202,7 +1202,7 @@
       				{
         					$sarr = explode('|@|',$params['slist']);
         					$extn = " AND shape in ('".implode("','",$sarr)."') ";
-                  $extnhv = '';
+                                                $extnhv = '';
       				}
 
       				if(!empty($params['tlist']))
@@ -1216,16 +1216,17 @@
           						if($expd[0] == 'priceRange' && $params['catid'] == 10000)
           						{
               							$expCarat = explode('|~|',$sarr[0]);
-                            $exd1 = explode(';',$expCarat[1]);
-                            if($params['b2bsort'])
-                                $extnhv = " HAVING b2b_dollar_price between ".$exd[0]." AND ".$exd[1]." ";
-                            else
-                                $extnhv = " HAVING dollar_price between ".$exd[0]." AND ".$exd[1]."";
+                                                                $exd1 = explode(';',$expCarat[1]);
+                                                                    
+                                                                    if($params['b2bsort'])
+                                                                       $extnhv = " HAVING b2b_dollar_price between ".$exd[0]." AND ".$exd[1]." ";
+                                                                    else
+                                                                       $extnhv = " HAVING dollar_price between ".$exd[0]." AND ".$exd[1]."";
           						}
-                      else
-                          $extn .= " AND ".str_replace('Range','',$expd[0])." between ".$exd[0]." AND ".$exd[1]." ";
+                                                        else
+                                                                 $extn .= " AND ".str_replace('Range','',$expd[0])." between ".$exd[0]." AND ".$exd[1]." ";
         					}
-      				}
+      				}   
 
       				if(!empty($params['clist']))
       				{
@@ -1252,8 +1253,8 @@
                             $otherGem .= " match(gemstone_type) against('".$gig."*' in boolean mode) ";
                       }
                       $inarr = array();
-          						foreach($exd as $ky => $vl)
-          						{
+                      foreach($exd as $ky => $vl)
+                      {
                           if(!empty($combField))
                           {
                              $vl = $combField.$vl;
@@ -1269,8 +1270,8 @@
                              $inarr[] = $ex[count($ex)-1];
                           }
                           unset($ex[count($ex)-1]);
-          				  			$field = implode('_',$ex);
-          						}
+          		  $field = implode('_',$ex);
+          	      }
                       if($field == 'combination')
                           $extn .= " AND (".$otherGem." OR ".$field." in ('".implode("','",$inarr)."')) ";
                       else
