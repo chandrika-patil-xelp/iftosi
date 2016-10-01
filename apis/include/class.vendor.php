@@ -4031,7 +4031,7 @@ class vendor extends DB
                     $vDet['cur_rate'] = $row[$params['rate']];
                 }
 
-                $msg = $this->sendRateMailTemplate($vDet,$message,$params['type'],$params);
+                $message = $this->sendRateMailTemplate($vDet,$message,$params['type'],$params);
                 $subject = $params['type'].' Rate for IFtoSI';
                 $headers = "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
