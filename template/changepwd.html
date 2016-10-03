@@ -10,174 +10,162 @@
                 </div>
             </div>
             <form id="changePwd" name="changePwd" action="<?php echo DOMAIN.'Change-Password'; ?>" method="post">
-                
-            <div class='signupDiv' style="height:300px;">
-                <div class="wrapperMax">
-                    
-                    
-                    <div class="signupCont">
-                        <div class="signupCl1 fLeft fmOpenL">
-                            <div class="head1">Change Password?</div>
-                        </div>
-                        <div class="signupCl2 fRight">
-                            <input type="hidden" id="pr_keys" value="<?=$urlkey;?>">
-                            <div class="inputCont fLeft fmOpenR">
-                                <input type="password" id="pr_npass" name="pr_npass" autocomplete="off" class="txtInput cOrange fmOpenR font14 passwordIcon" >
-                                <label for="pr_npass" class="inp-label transition100">New Password</label>
-                                <div id="pr_pass_inpText" class="inpText fRight transition300">enter your<br>new password</div>
-                            </div>  
-                            <div class="inputCont fLeft fmOpenR">
-                                <input type="password" id="pr_rpass" name="pr_rpass" autocomplete="off" class="txtInput cOrange fmOpenR font14 passwordIcon" onKeyPress="common.eSubmit(event, 'submitBtn');">
-                                <label for="pr_rpass" class="inp-label transition100">Repeat New Password</label>
-                                <div id="pr_pass_inpText" class="inpText fRight transition300">Retype your<br>new password</div>
-                            </div>  
-                            <div class="cancelLgBtn fLeft fmOpenR ripplelink poR" id='cancelBtn'> CANCEL</div>
-                            <div class="loginBtn fLeft fmOpenR ripplelink poR" id='submitBtn'>CHANGE</div>
+
+                <div class='signupDiv' style="height:300px;">
+                    <div class="wrapperMax">
+                        <div class="signupCont">
+                            <div class="signupCl1 fLeft fmOpenL">
+                                <div class="head1">Change Password?</div>
+                            </div>
+                            <div class="signupCl2 fRight">
+                                <input type="hidden" id="pr_keys" value="<?=$urlkey;?>">
+                                <div class="inputCont fLeft fmOpenR">
+                                    <input type="password" id="pr_npass" name="pr_npass" autocomplete="off" class="txtInput cOrange fmOpenR font14 passwordIcon" >
+                                    <label for="pr_npass" class="inp-label transition100">New Password</label>
+                                    <div id="pr_pass_inpText" class="inpText fRight transition300">enter your<br>new password</div>
+                                </div>  
+                                <div class="inputCont fLeft fmOpenR">
+                                    <input type="password" id="pr_rpass" name="pr_rpass" autocomplete="off" class="txtInput cOrange fmOpenR font14 passwordIcon" onKeyPress="common.eSubmit(event, 'submitBtn');">
+                                    <label for="pr_rpass" class="inp-label transition100">Repeat New Password</label>
+                                    <div id="pr_pass_inpText" class="inpText fRight transition300">Retype your<br>new password</div>
+                                </div>  
+                                <div class="cancelLgBtn fLeft fmOpenR ripplelink poR" id='cancelBtn'> CANCEL</div>
+                                <div class="loginBtn fLeft fmOpenR ripplelink poR" id='submitBtn'>CHANGE</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-                </form>
+            </form>
         </div>
         <?php include 'logo.html'?>
     </div>
-     <?php include 'footer.html'; ?>
+    <?php include 'footer.html'; ?>
     <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
     <script type="text/javascript" src="<?= $jvs['ripple']; ?>"></script>
     <script type="text/javascript" src="<?=$jvs['signup'];?>"></script>
     <script type="text/javascript" src="<?=$jvs['comm'];?>"></script>
     <script type="text/javascript" src="<?= $jvs['head']; ?>"></script>
-    
+
     <script>
-    var uid = customStorage.readFromStorage('userid');
-    var key=$('#pr_keys').val();
-    
-    if (uid !== undefined || uid !== 'undefined' || uid !== '' || uid !== null || uid !== 'null' ||  uid !== '')
-    {
-        if(key == undefined || key == 'undefined' || key == null || key == 'null' || key == '')
-        {
-            
-            window.location.assign(DOMAIN);
-        }
-    }
-    $('#submitBtn').click(function ()
-    {
-        var npass=$('#pr_npass').val();
-        var rpass=$('#pr_rpass').val();
-        
-        
-        if(npass=='' || rpass=='')
-        {
-            customStorage.toast(0,'All Fileds are Empty');
-        }
-        else if(npass.length < 6 || npass.length == 0)
-        {
-            customStorage.toast(0,'New password length is less than 6 characters');
-            $('pr_npass').focus();
-            return false;
-        }
-        else if(rpass.length < 6 || rpass.length == 0)
-        {
-            customStorage.toast(0,'Confirm password length is less than 6 characters');
-            $('pr_rpass').focus();
-            return false;
-        }
-        else if(npass==rpass)
-        {
-            if(key !== undefined || key !== 'undefined' || key !== null || key !== 'null' || key !== '')
-            {
-                $.ajax({url: APIDOMAIN + "index.php?action=getUserDet&key="+key, success: function (result)
-                {
-                    var obj = jQuery.parseJSON(result);
-                    var errCode = obj.error.code;
-                    var errMsg = obj.error.msg;
-                    if(errCode == 0)
-                    {
-                            customStorage.addToStorage('userid',obj.results[0].user_id);
-                            customStorage.addToStorage('mobile',obj.results[0].logmobile);
-                            customStorage.addToStorage('username',obj.results[0].user_name);
-                            customStorage.addToStorage('l',obj.results[0].logmobile);
-                            customStorage.addToStorage('email',obj.results[0].email);
-                            customStorage.addToStorage('is_vendor',obj.results[0].is_vendor);
-                            customStorage.addToStorage('isLoggedIn',true);
-                            var userid = customStorage.readFromStorage('userid');
-                            if(obj.results[0].is_vendor == 1)
-                            {
-                                if(obj.results[1] !== undefined)
-                                {
-                                    customStorage.addToStorage('email',obj.results[1].email);
-                                    customStorage.addToStorage('isComp',obj.results[1].is_complete);
-                                    customStorage.addToStorage('busiType',obj.results[1].business_type);
-                                }
-                            }
-                            $.ajax({url: APIDOMAIN + "index.php?action=changepwd&npass="+rpass+"&rpass="+rpass+"&ukey="+key+"&uid="+uid, success: function (result)
-                            {
-                                var obj = jQuery.parseJSON(result);
-                                var errCode = obj['error']['Code'];
-                                var errMsg = obj['error']['Msg'];
-                                if(errCode==0)
-                                {
-                                        var busiType = customStorage.readFromStorage('busiType');
-                                        var redirUrl='';
-                                        customStorage.toast(1,errMsg);
-                                        var is_vendor = customStorage.readFromStorage('is_vendor');
-                                        if(is_vendor==2)
+                                            var uid = customStorage.readFromStorage('userid');
+                                    var key = $('#pr_keys').val();
+
+                                    if (uid !== undefined || uid !== 'undefined' || uid !== '' || uid !== null || uid !== 'null' || uid !== '')
+                                    {
+                                        if (key == undefined || key == 'undefined' || key == null || key == 'null' || key == '')
                                         {
-                                            redirUrl = DOMAIN + 'index.php?case=product_list';
+
+                                            window.location.assign(DOMAIN);
                                         }
-                                        else if(is_vendor==1)
+                                    }
+                                    $('#submitBtn').click(function ()
+                                    {
+                                        var npass = $('#pr_npass').val();
+                                        var rpass = $('#pr_rpass').val();
+
+
+                                        if (npass == '' || rpass == '')
                                         {
-                                            var isComp = customStorage.readFromStorage('isComp');
-                                            if (isComp === '2')
+                                            customStorage.toast(0, 'All Fileds are Empty');
+                                        } else if (npass.length < 6 || npass.length == 0)
+                                        {
+                                            customStorage.toast(0, 'New password length is less than 6 characters');
+                                            $('pr_npass').focus();
+                                            return false;
+                                        } else if (rpass.length < 6 || rpass.length == 0)
+                                        {
+                                            customStorage.toast(0, 'Confirm password length is less than 6 characters');
+                                            $('pr_rpass').focus();
+                                            return false;
+                                        } else if (npass == rpass)
+                                        {
+                                            if (key !== undefined || key !== 'undefined' || key !== null || key !== 'null' || key !== '')
                                             {
-                                                var catid = parseInt(busiType.charAt(0)) - 1;
-                                                redirUrl = DOMAIN + 'index.php?case=vendor_landing&catid=1000' + catid;
-                                            }
-                                            else
+                                                $.ajax({url: APIDOMAIN + "index.php?action=getUserDet&key=" + key, success: function (result)
+                                                    {
+                                                        var obj = jQuery.parseJSON(result);
+                                                        var errCode = obj.error.code;
+                                                        var errMsg = obj.error.msg;
+                                                        if (errCode == 0)
+                                                        {
+                                                            customStorage.addToStorage('userid', obj.results[0].user_id);
+                                                            customStorage.addToStorage('mobile', obj.results[0].logmobile);
+                                                            customStorage.addToStorage('username', obj.results[0].user_name);
+                                                            customStorage.addToStorage('l', obj.results[0].logmobile);
+                                                            customStorage.addToStorage('email', obj.results[0].email);
+                                                            customStorage.addToStorage('is_vendor', obj.results[0].is_vendor);
+                                                            customStorage.addToStorage('isLoggedIn', true);
+                                                            var userid = customStorage.readFromStorage('userid');
+                                                            if (obj.results[0].is_vendor == 1)
+                                                            {
+                                                                if (obj.results[1] !== undefined)
+                                                                {
+                                                                    customStorage.addToStorage('email', obj.results[1].email);
+                                                                    customStorage.addToStorage('isComp', obj.results[1].is_complete);
+                                                                    customStorage.addToStorage('busiType', obj.results[1].business_type);
+                                                                }
+                                                            }
+                                                            $.ajax({url: APIDOMAIN + "index.php?action=changepwd&npass=" + rpass + "&rpass=" + rpass + "&ukey=" + key + "&uid=" + uid, success: function (result)
+                                                                {
+                                                                    var obj = jQuery.parseJSON(result);
+                                                                    var errCode = obj['error']['Code'];
+                                                                    var errMsg = obj['error']['Msg'];
+                                                                    if (errCode == 0)
+                                                                    {
+                                                                        var busiType = customStorage.readFromStorage('busiType');
+                                                                        var redirUrl = '';
+                                                                        customStorage.toast(1, errMsg);
+                                                                        var is_vendor = customStorage.readFromStorage('is_vendor');
+                                                                        if (is_vendor == 2)
+                                                                        {
+                                                                            redirUrl = DOMAIN + 'index.php?case=product_list';
+                                                                        } else if (is_vendor == 1)
+                                                                        {
+                                                                            var isComp = customStorage.readFromStorage('isComp');
+                                                                            if (isComp === '2')
+                                                                            {
+                                                                                var catid = parseInt(busiType.charAt(0)) - 1;
+                                                                                redirUrl = DOMAIN + 'index.php?case=vendor_landing&catid=1000' + catid;
+                                                                            } else
+                                                                            {
+                                                                                redirUrl = DOMAIN + 'index.php?case=vendor_Form&uid=' + userid;
+                                                                            }
+                                                                        } else
+                                                                        {
+                                                                            redirUrl = DOMAIN;
+                                                                        }
+                                                                    } else
+                                                                    {
+                                                                        customStorage.toast(0, 'User password is not changed');
+                                                                        redirUrl = DOMAIN;
+                                                                    }
+                                                                    setTimeout(function ()
+                                                                    {
+                                                                        window.location.href = redirUrl
+                                                                    }, 10);
+                                                                }});
+                                                        } else
+                                                        {
+                                                            customStorage.toast(0, 'Invalid link has been clicked. Click on forgot password for resending the email');
+                                                            setTimeout(function ()
+                                                            {
+                                                                window.location.assign(DOMAIN);
+                                                            }, 3000);
+                                                            return false;
+                                                        }
+                                                    }});
+                                            } else
                                             {
-                                                redirUrl = DOMAIN + 'index.php?case=vendor_Form&uid=' + userid;
+                                                customStorage.toast(0, 'Key undefined');
                                             }
-                                        }
-                                        else
+                                        } else
                                         {
-                                            redirUrl = DOMAIN;
+                                            customStorage.toast(0, 'Password not matching');
                                         }
-                                }
-                                else
-                                {
-                                    customStorage.toast(0,'User password is not changed');
-                                    redirUrl = DOMAIN;
-                                }
-                               setTimeout(function ()
-                               { 
-                                   window.location.href = redirUrl
-                               },10);
-                            }});
-                    }
-                    else
-                    {
-                        customStorage.toast(0,'Invalid link has been clicked. Click on forgot password for resending the email');
-                        setTimeout(function()
-                        {
-                            window.location.assign(DOMAIN);
-                        },3000);
-                        return false;
-                    }
-                }});
-        }
-        else
-        {
-            customStorage.toast(0,'Key undefined');
-        }
-    }
-    else
-    {
-        customStorage.toast(0,'Password not matching');
-    }
-    });
-    
-        $('#cancelBtn').click(function (){
-            window.location.href=DOMAIN;
-        });
+                                    });
+
+                                    $('#cancelBtn').click(function () {
+                                        window.location.href = DOMAIN;
+                                    });
     </script>
 </body>
