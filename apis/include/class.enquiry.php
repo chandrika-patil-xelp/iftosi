@@ -210,7 +210,7 @@ class enquiry extends DB
                                 $msg .= $msgng[$i].' : '.$p[$i].",\r\n";
                             }
                             $tempParams = array('useremail'=>$udetail['uemail'],'mobile'=>$getRow['logmobile'],'email'=>$getRow['email'],'username'=>$getRow['user_name'],'pdet'=>urlencode($msg));
-                            $sendMail = $this->sendEnqMailSMS($tempParams);
+                            $sendMail = $this->sendEnqMailSMS($tempParams,$catid);
                             $fil = $sendMail['error']['code'];
                             if($fil == 0)
                             {
@@ -230,7 +230,7 @@ class enquiry extends DB
         return $result;
     }
     
-        public function sendEnqMailSMS($params)
+        public function sendEnqMailSMS($params,$catid)
         {
                 $msg = urldecode($params['pdet']);
                 $msg = rtrim($msg, ",\r\n");
@@ -246,6 +246,7 @@ class enquiry extends DB
                 $headers .= 'From: <info@iftosi.com>' . "\r\n";
 
                 $subject .= 'Recent enquiry to IFtoSI';
+                $message .$this->sendEnqMailSMSsendEnqMailSMSTemplate($params,$msg,$catid);
                 $message .= 'Hello '.$params['username'].', '.$params['useremail'].' has shown interest in';
                 $message .= "\r\n";
                 $message .= $msg;
@@ -292,6 +293,192 @@ class enquiry extends DB
             return $result;
         }
     
+        
+        
+        public function sendEnqMailSMSTemplate($params,$msg,$catid)
+        {
+       $message='<html>
+                <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+                <meta name="viewport" content="width=device-width, user-scalable=no" >
+                <title>recent enquiry</title>
+                </head>
+                <body style="margin:0; padding: 0; background-color: #171334;">
+                <center>
+                <div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; letter-spacing: -0.02em; color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;">
+                <a><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="../tools/img/iftosi.png" style="width:100%;"></div></a>
+                <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
+                <div  style="font-size: 20px;letter-spacing: -0.03em;    padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">recent enquiry</div>
+                <a><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;padding-top: 15px;"><img src="../tools/img/common/Enquiry.png" style="width:70%;"></div></a>
+                 <div style="font-size: 18px;letter-spacing: -0.03em;    padding: 15px 10px 10px 10px; color:#8A0044;">Hello '.$params['user_name'].',</div>
+                <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 18px; color: #333;padding: 0px 15px 20px 15px;">'.$params['email'].' has shown interest in following product</div>
+                if($catid==1000)
+                {
+                <center style="padding: 0px 30px 20px 30px;">
+                <div style="width: 60%;display: inline-block;border-right: 1px solid #f0f0f0;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">productId&nbsp</div>
+                <span style="padding-right: 20px;">:</span>
+                </div>
+                <div style="width: 60%;display: inline-block;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;"> "shape&nbsp;</div>
+                <span style="padding-right: 20px;">:</span>
+                <div style="width: 35%; display: inline-block;text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['shape'].'</div>
+                </div>
+                <div style="width: 60%;display: inline-block;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">certificate&nbsp;</div>
+                <span style="padding-right: 20px;">:</span>
+                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 18px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Certificate'].'</div>
+                </div>
+                <div style="width: 60%;display: inline-block;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">barcode&nbsp;</div>
+                <span style="padding-right: 20px;">:</span>
+                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Barcode'].'</div>
+                </div>
+                <div style="width: 60%;display: inline-block;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">cut&nbsp;</div>
+                <span style="padding-right: 20px;">:</span>
+                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Cut'].'</div>
+                </div>
+                <div style="width: 60%;display: inline-block;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">carat&nbsp;</div>
+                <span style="padding-right: 20px;">:</span>
+                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Carat'].'</div>
+                </div>
+                <div style="width: 60%;display: inline-block;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">clarity&nbsp;</div>
+                <span style="padding-right: 20px;">:</span>
+                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Clarity'].'</div>
+                </div>
+                <div style="width: 60%;display: inline-block;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">color&nbsp;</div>
+                <span style="padding-right: 20px;">:</span>
+                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Colour'].'</div>
+                </div>
+                <div style="width: 60%;display: inline-block;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Price&nbsp;</div>
+                <span style="padding-right: 20px;">:</span>
+                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp'.$msg['Price'].'</div>
+                </div>
+                <!--<div style="width: 100%;text-align: left;display: inline-block;">
+                <div style="width: 50%;display: inline-block;padding: 0 85px;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">price&nbsp;:<span style="padding:0px 6px;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;45.78</span></div>
+                </div>-->
+                </center>
+                }
+                else if($catid==1001)
+                {
+                <center style="padding: 0px 30px 20px 30px;">
+                <div style="width: 60%;display: inline-block;border-right: 1px solid #f0f0f0;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">productId&nbsp;</div>
+                <span style="padding-right: 20px;">:</span>
+                <div style="width: 35%;    display: inline-block; text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Product Id'].'</div>                   
+                </div>
+                <div style="width: 60%;display: inline-block;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Type&nbsp;</div>
+                <span style="padding-right: 20px;">:</span>
+                <div style="width: 35%; display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Jewellery Type'].'</div>
+                </div>
+                <div style="width: 60%;display: inline-block;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Metal&nbsp;</div>
+                <span style="padding-right: 20px;">:</span>
+                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 18px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Metal'].'</div>
+                </div>
+                <div style="width: 60%;display: inline-block;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">barcode&nbsp;</div>
+                <span style="padding-right: 20px;">:</span>
+                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Barcode'].'</div>
+                </div>
+                <div style="width: 60%;display: inline-block;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Gold Weight&nbsp;</div>
+                <span style="padding-right: 20px;">:</span>
+                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Gold Weight'].'</div>
+                </div>
+                <div style="width: 60%;display: inline-block;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">carat&nbsp;</div>
+                <span style="padding-right: 20px;">:</span>
+                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['type'].'</div>
+                </div>
+                <div style="width: 60%;display: inline-block;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Certificate&nbsp;</div>
+                <span style="padding-right: 20px;">:</span>
+                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['certified'].'</div>
+                </div>
+                <div style="width: 60%;display: inline-block;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Price&nbsp;</div>
+                <span style="padding-right: 20px;">:</span>
+                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Price'].'</div>
+                </div>
+                <!--<div style="width: 100%;text-align: left;display: inline-block;">
+                <div style="width: 50%;display: inline-block;padding: 0 85px;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">price&nbsp;:<span style="padding:0px 6px;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;45.78</span></div>
+                </div>-->
+                </center>
+                }
+                
+                else
+                {
+                <center style="padding: 0px 30px 20px 30px;">
+                <div style="width: 60%;display: inline-block;border-right: 1px solid #f0f0f0;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">productId&nbsp;</div>
+                <span style="padding-right: 20px;">:</span>
+                <div style="width: 35%;    display: inline-block; text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Product Id'].'</div>                   
+                </div>
+                <div style="width: 60%;display: inline-block;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Type&nbsp;</div>
+                <span style="padding-right: 20px;">:</span>
+                <div style="width: 35%; display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Type'].'</div>
+                </div>
+                <div style="width: 60%;display: inline-block;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Metal&nbsp;</div>
+                <span style="padding-right: 20px;">:</span>
+                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 18px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Metal'].'</div>
+                </div>
+                <div style="width: 60%;display: inline-block;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">barcode&nbsp;</div>
+                <span style="padding-right: 20px;">:</span>
+                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['gold_purity'].'</div>
+                </div>
+                <div style="width: 60%;display: inline-block;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Barcode&nbsp;</div>
+                <span style="padding-right: 20px;">:</span>
+                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Barcode'].'</div>
+                </div>
+                <div style="width: 60%;display: inline-block;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Purity&nbsp;</div>
+                <span style="padding-right: 20px;">:</span>
+                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Purity'].'</div>
+                </div>
+                <div style="width: 60%;display: inline-block;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Gold Weight&nbsp;</div>
+                <span style="padding-right: 20px;">:</span>
+                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Gold Weight'].'</div>
+                </div>
+                <div style="width: 60%;display: inline-block;">
+                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">color&nbsp;</div>
+                <span style="padding-right: 20px;">:</span>
+                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Price'].'</div>
+                </div>
+               <!--<div style="width: 100%;text-align: left;display: inline-block;">
+                <div style="width: 50%;display: inline-block;padding: 0 85px;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">price&nbsp;:<span style="padding:0px 6px;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;45.78</span></div>
+                </div>-->
+                </center>
+                 }
+                
+
+
+                <div class="">The buyer should contact you shortly.</div>
+                <center style="padding-top: 50px;">
+                <img src="../tools/img/common/diamond.jpg" width="50">
+                <img src="../tools/img/common/jewellery.jpg" width="50">
+                <img src="../tools/img/common/bullions.jpg" width="50">
+                </center>
+                <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:022-32623263" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
+                </div>
+                <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
+                </div>
+                </center>
+                </body>
+                </html>';
+       return $message;
+}
     # view log by vendor for his product being viewed
     
     public function viewLog1($params)

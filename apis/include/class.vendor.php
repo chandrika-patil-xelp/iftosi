@@ -41,7 +41,6 @@ class vendor extends DB
         else {
             $err = array('Code' => 1, 'Msg' => 'Something went wrong');
         }
-        //  echo "<pre>";print_r($arr);die;
         $result = array('results' => $results, 'error' => $err);
         return $result;
     }
@@ -271,6 +270,7 @@ class vendor extends DB
 
     public function getVProductsByBcode($params)
     {
+        
         $page   = ($params['page'] ? $params['page'] : 1);
         $limit  = ($params['limit'] ? $params['limit'] : 15);
         $catid = ($params['catid'] ? $params['catid'] : 10000);
@@ -1892,7 +1892,6 @@ class vendor extends DB
             $colName = $data[0];
             $len = count($rdv);
         }
-        //echo "<pre>";print_r($colName);die;
         $validFormat=TRUE;
         if(count($colName) == count($defaultColNames))
         {
@@ -3435,10 +3434,7 @@ class vendor extends DB
 						}
 						$attrids 	= implode(',',$attrid);
 					}
-
-					//echo "<pre>";print_r($attrmap);die;
-
-					$sql="
+                                            $sql="
 						SELECT
 							attr_id,
 							attr_name,
@@ -4035,7 +4031,6 @@ class vendor extends DB
                 $headers = "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                 $headers .= 'From: <info@iftosi.com>' . "\r\n";
-                print_r($message);die;
                 if(!empty($params['to']))
                 {
                     mail($params['to'], $subject, $message, $headers);

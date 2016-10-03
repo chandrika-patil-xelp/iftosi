@@ -148,7 +148,6 @@ function loadPDiamondCallback(res, pgno)
 
         $('.pNext').bind('click', function ()
         {
-            alert("dcgbgfbd");
             var curpgno = parseInt($('#pgno').val());
             var pgval = curpgno + 1;
             if (curpgno < parseInt($('#total_pageno').val()))

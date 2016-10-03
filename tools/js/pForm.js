@@ -913,7 +913,7 @@ function validateNum()
           $('#discountb2b').focus();
           isValid = false;
       }
-      if(isValid && (discountb2b < discount))
+      if(isValid && (parseInt(discountb2b) < parseInt(discount)))
       {
           str ='% Back To Vendor cannot be less than discount being provided to % Back To Customer';
           $('#discountb2b').focus();
@@ -921,8 +921,6 @@ function validateNum()
       }
       if((parseInt(discountb2b) < (parseInt(discount)+5)))
       {
-          //var temp=parseInt(discount)+5;
-          //alert(temp);
           str ='% Back To Vendor  always be greater atleast by 5% To Customer ';
           $('#discountb2b').focus();
           isValid = false;
