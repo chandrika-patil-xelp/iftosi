@@ -1620,7 +1620,7 @@
             }
             if(!empty($params['email']))
             {
-                print_r($message);
+                //print_r($message);
                 mail($params['email'], $subject, $message, $headers);
             }
             $smsText = urlencode($smsText);
@@ -1710,7 +1710,7 @@ public function sendDeactMailSms($params)
             }
             if(!empty($params['email']))
             {
-                print_r($message);
+                //print_r($message);
                 mail(urldecode($params['email']), $subject, $message, $headers);
             }
             $smsText = urlencode($smsText);
