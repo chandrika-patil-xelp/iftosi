@@ -4070,7 +4070,7 @@ class vendor extends DB
                                         }
                                         else
                                         {
-                                            $message.='<img src="'.DOMAIN.'tools/img/common/01.png" style="width:70%;"></div></a>'; // for diamond
+                                            $message.='<img src="'.DOMAIN.'tools/img/common/02.png" style="width:70%;"></div></a>'; // for diamond
                                         }
 
                                         $message.='<div style="font-size: 18px;letter-spacing: -0.03em;    padding: 15px 10px 10px 10px; color:#8A0044;">Dear '.$vDet["C_person"].',</div>
@@ -4078,11 +4078,11 @@ class vendor extends DB
                                         <center style="padding: 0px 30px 20px 30px;">
                                             <div style="width: 41%;display: inline-block;    border-right: 1px solid #f0f0f0;">
                                                 <div style="font-size: 18px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">previous rate</div>
-                                                <span style="font-size: 20px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/rupee.svg" align="middle" style="width:25px;vertical-align:bottom;height:25px;">'.$params["prevRate"].'</span>
+                                                <span style="font-size: 20px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/01.png" align="middle" style="width:25px;vertical-align:bottom;height:25px;">'.$params["prevRate"].'</span>
                                             </div>
                                              <div style="width: 41%;display: inline-block;">
                                                 <div style="font-size: 18px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">current rate</div>
-                                                <span style="font-size: 20px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/rupee.svg" align="middle" style="width: 25px;vertical-align:bottom;height:25px;">'.$vDet['cur_rate'].'</span>
+                                                <span style="font-size: 20px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/01.png" align="middle" style="width: 25px;vertical-align:bottom;height:25px;">'.$vDet['cur_rate'].'</span>
                                             </div>
                                         </center>
                                         <center style="padding-top: 50px;">

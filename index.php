@@ -109,7 +109,7 @@ switch ($action) {
                 break;
 
             case 'updateStatus':
-
+            
                 $vid = (!empty($_GET['userid'])) ? trim($_GET['userid']) : '';
                 $af = (!empty($_GET['af'])) ? trim($_GET['af']) : 0;
                 $userUrl = APIDOMAIN . 'index.php?action=actUser&userid=' . $vid . '&af=' . $af;

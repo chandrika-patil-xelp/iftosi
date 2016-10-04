@@ -198,7 +198,6 @@ switch($action)
         $email  = (!empty($params['email'])) ? trim($params['email']) : '';
         $mobile  = (!empty($params['mobile'])) ? trim($params['mobile']) : '';
         $isV  = (!empty($params['isVendor'])) ? trim($params['isVendor']) : '';
-
         $obj= new user($db['iftosi']);
         $result = $obj->sendVActivateMailSMS($params);
         $res = $result;

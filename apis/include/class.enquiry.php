@@ -247,16 +247,7 @@ class enquiry extends DB
 
                 $subject .= 'Recent enquiry to IFtoSI';
                 $message .$this->sendEnqMailSMSsendEnqMailSMSTemplate($params,$msg,$catid);
-                $message .= 'Hello '.$params['username'].', '.$params['useremail'].' has shown interest in';
-                $message .= "\r\n";
-                $message .= $msg;
-                $message .= "\r\n";
-                $message .= 'The buyer should contact you shortly.';
-                $message .= "\r\n";
-                $message .= "For any assistance, call: 022-32623263. Email: info@iftosi.com";
-                $message .= "\r\n";
-                $message .= "Team IFtoSI";
-                
+               
                 $smsText .= "Recent enquiry to IFtoSI";
                 $smsText .= "\r\n\r\n";
                 $smsText .= "Hello ".$params['username'].", ".$params['useremail']." has shown interest in";

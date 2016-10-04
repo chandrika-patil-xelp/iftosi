@@ -686,7 +686,7 @@ mc.on("panleft panright tap press", function (ev) {
     } else if (ev.type == 'panleft') {
         showLeftMenu(false);
     }else if(ev.type === 'panup'){
-        alert("jnvkij");
+       
     }
 });
 

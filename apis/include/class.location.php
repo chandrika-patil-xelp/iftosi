@@ -15,8 +15,6 @@ class location extends DB
                 FROM
                             tbl_area_master
                 WHERE
-                            area=\"".$params['fulladd']."\"
-                AND
                             area=\"".$params['area']."\"
                 AND
                             city=\"".$params['city']."\" 

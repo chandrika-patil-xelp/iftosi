@@ -86,6 +86,21 @@
                 window.location.href = DOMAIN;
             }
         });
+        
+        
+        function showLeftMenu(flag) {
+    if (flag) {
+        $('#leftMenu').removeClass('leftTransit');
+        $('body').addClass('pFixed');
+        $('#dragTarget').css({width: '50%', left: '250px'});
+
+    } else {
+        $('#leftMenu').addClass('leftTransit');
+        $('body').removeClass('pFixed');
+        $('#dragTarget').css({width: '20px', left: '0px'});
+    }
+}
+        
     </script>
     <?php include 'footer.html'; ?>
     <script type="text/javascript" src="<?= $jvs['velocity']; ?>"></script>
