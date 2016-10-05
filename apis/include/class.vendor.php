@@ -3889,7 +3889,7 @@ class vendor extends DB
             return $result;
         }
 
-        public function Vpactive($params)
+        /*public function Vpactive($params)
         {
 
             $vprds="SELECT
@@ -3990,8 +3990,193 @@ class vendor extends DB
             }
             $result=array('result'=>$arr,'error'=>$err);
             return $result;
-        }
+        }*/
 
+        public function Vpactive($params)
+        {
+
+            $vprds="SELECT
+                            product_id
+                    FROM
+                            tbl_vendor_product_mapping
+                    WHERE
+                            vendor_id=".$params['vid'];
+            $vprdsres=$this->query($vprds);
+            $cntvpres=$this->numRows($vprdsres);
+
+            if($cntvpres>0)
+            {
+                while($chkrow=$this->fetchData($chkactres))
+                {
+                    $pid[] = $chkrow['product_id'];
+                }
+                $prid=implode(',',$pid);
+
+                $sql1 = "UPDATE
+                                  tbl_vendor_product_mapping
+                         SET
+                                  active_flag=".$params['af']."
+                         WHERE
+                                  product_id IN(".$prid.")
+                         AND
+                                  vendor_id=".$params['vid']."
+                         AND
+                                  active_flag NOT IN(2,3)";
+                $res = $this->query($sql1);
+
+                $sql2 = "UPDATE
+                                  tbl_product_search
+                         SET
+                                  active_flag=".$params['af']."
+                         WHERE
+                                  product_id IN(".$prid.")
+                         AND
+                                  active_flag NOT IN(2,3)";
+                $res1 = $this->query($sql2);
+                $sql3 = "UPDATE
+                                  tbl_product_master
+                         SET
+                                  active_flag=".$params['af']."
+                         WHERE
+                                  product_id IN(".$prid.")
+                         AND
+                                  active_flag NOT IN(2,3)";
+                $res2 = $this->query($sql3);
+
+                $sql4 = "UPDATE
+                                  tbl_productid_generator
+                         SET
+                                  active_flag=".$params['af']."
+                         WHERE
+                                  product_id IN(".$prid.")
+                         AND
+                                  active_flag NOT IN(2,3)";
+                $res3 = $this->query($sql4);
+
+                $sql5 = "UPDATE
+                                  tbl_product_category_mapping
+                         SET
+                                  display_flag=".$params['af']."
+                         WHERE
+                                  product_id IN(".$prid.")
+                         AND
+                                  display_flag NOT IN(2,3)";
+                $res4 = $this->query($sql5);
+
+                $sql6 = "UPDATE
+                                  tbl_designer_product_mapping
+                         SET
+                                  active_flag=".$params['af']."
+                         WHERE
+                                  product_id IN(".$prid.")
+                         AND
+                                  active_flag NOT IN(2,3)";
+                $res5 = $this->query($sql6);
+
+                $sql7 = "UPDATE
+                                  tbl_product_enquiry
+                         SET
+                                  active_flag=".$params['af']."
+                         WHERE
+                                  product_id IN(".$prid.")
+                         AND
+                                  active_flag NOT IN(2,3)";
+                $res6 = $this->query($sql7);
+                
+                $sql8=  "SELECT
+                                user_name ,
+                                email,
+                                logmobile
+                        FROM
+                                tbl_registration 
+                        WHERE 
+                                user_id=".$params['vid']." ";
+                $res8    =  $this->query($sql8);   
+                $rowData = $this->fetchData($res8);
+               
+                if($params['af']==0)
+                {
+                    $subject .= 'Vendor profile deactivation in IFtoSI';
+                    $message .=$this->sendDeactivateMailByAdmin($rowData);
+                    $headers .= "MIME-Version: 1.0" . "\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                    $headers .= 'From: <info@iftosi.com>' . "\r\n";
+
+                    $smsText .= "Vendor profile deactivation in IFtoSI";
+                    $smsText .= "\r\n\r\n";
+                    $smsText .= "Dear ".urldecode($rowData[user_name]).", Your Profile has been deactivated.For more information contact admin.";
+                    $smsText .= "\r\n\r\n";
+                    $smsText .= "For any assistance, call: 91-22-41222241(42). Email: info@iftosi.com";
+                    $smsText .= "\r\n\r\n";
+                    $smsText .= "Team IFtoSI";
+                    mail(urldecode($rowData['email']), $subject, $message, $headers);
+                    $smsText = urlencode($smsText);
+                    $sendSMS = str_replace('_MOBILE', urldecode($rowData['logmobile']), SMSAPI);
+                    $sendSMS = str_replace('_MESSAGE', $smsText, $sendSMS);
+                    $res = $comm->executeCurl($sendSMS, true);
+                    if($res)
+                    {
+                    $arr = array('success');
+                    $err = array('code'=>0,'msg'=>'SMS & EMAIL sent to the user');
+                    }
+                    else
+                    {
+                    $arr = array('failure');
+                    $err = array('code'=>0,'msg'=>'SMS & EMAIL is not sent to the user');
+                    }
+                }
+            
+                $arr=array();
+                $err=array('code'=>0,'msg'=>'Product status changed too');
+            }
+            else
+            {
+                $arr=array();
+                $err=array('code'=>0,'msg'=>'Product status changed too');
+            }
+            $result=array('result'=>$arr,'error'=>$err);
+            return $result;
+        }
+        
+        public function sendDeactivateMailByAdmin($params)
+        {
+            $message='<html>
+                        <head>
+                            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+                            <meta name="viewport" content="width=device-width, user-scalable=no" >
+                            <title>deactivate</title>
+                        </head>
+                        <body style="margin:0; padding: 0; background-color: #171334;">
+                            <center>
+                                <div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;">
+                                <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="'.DOMAIN.'tools/img/iftosi.png" style="width:100%;"></div></a>
+                                <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
+                                <div  style="font-size: 20px; padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">vendor profile deactivation</div>
+                                <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;padding: 20px 0 20px 0;"><img src="'.DOMAIN.'tools/img/common/Deactivation.png" style="width:50px;"></div></a>
+                                <center style="padding: 0px 50px 0px 50px;line-height: 30px;    font-size: 23px;    padding-top: 30px;    font-weight: 100;    color: #333;">
+                                    <div style="font-size: 20px; padding: 50px 10px 7px 10px;color:#333;">Dear '.$params['user_name'].'</div>
+                                    Your Profile has been deactivated.For more information contact admin.
+                            </center>
+                            <center style="padding-top: 50px;">
+                                <img src="'.DOMAIN.'tools/img/common/diamond.jpg" width="50">
+                                <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
+                                <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
+                            </center>
+                            <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241(42)" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; ">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
+                            </div>
+                            <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
+                            </div>
+                            </center>
+                            </body>
+                            </html>';
+            return $message;
+
+
+        }
+        
+        
+        
+        
         private function getAbbrValue($val)
         {
             $propValArr=array(''=>'','GD/DIA'=>'GOLD & DIAMONDS','PT/DIA'=>'PLATINUM & DIAMONDS','SL/DIA'=>'SILVER & DIAMONDS','GD/DIA/CS'=>'GOLD, DIAMONDS & GEMSTONES','PT/DIA/CS'=>'PLATINUM, DIAMONDS & GEMSTONES','SL/DIA/CS'=>'SILVER, DIAMONDS & GEMSTONES','GD/CS'=>'GOLD & GEMSTONES','SL/CS'=>'SILVER & GEMSTONES','GD/SWCZ'=>'GOLD & SWAROVSKI ZIRCONIA','SL/SWCZ'=>'SILVER & SWAROVSKI ZIRCONIA','PLAIN GD'=>'GOLD & CZ','SL/CZ'=>'SILVER & CZ','PLAIN GD'=>'PLAIN GOLD','PLAIN PT'=>'PLAIN PLATINUM','PLAIN SL'=>'PLAIN SILVER','GD/POL'=>'GOLD & POLKI');
@@ -4025,7 +4210,6 @@ class vendor extends DB
                     $vDet['C_person'] = $row['contact_person'];
                     $vDet['cur_rate'] = $row[$params['rate']];
                 }
-
                 $message = $this->sendRateMailTemplate($vDet,$message,$params['type'],$params);
                 $subject = $params['type'].' Rate for IFtoSI';
                 $headers = "MIME-Version: 1.0" . "\r\n";
@@ -4059,13 +4243,15 @@ class vendor extends DB
                             <body style="margin:0; padding: 0; background-color: #171334;">
                               <center>
                                 <div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; letter-spacing: -0.02em; color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;">
-                                    <a><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="'.DOMAIN.'tools/img/iftosi.png" style="width:100%;"></div></a>
+                                    <a href="'.DOMAIN.'">
+                                    <div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="'.DOMAIN.'tools/img/iftosi.png" style="width:100%;"></div>
+                                    </a>
                                     <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
                                         <div  style="font-size: 20px;letter-spacing: -0.03em;    padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">change in price</div>
                                         <a><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase">';
-
-                                        if($type !== 'dollar')
+                                        if($type !== 'Dollar')
                                         {
+                                         
                                             $message.='<img src="'.DOMAIN.'tools/img/common/01.png" style="width:70%;"></div></a>'; // for silver,gold,platinum
                                         }
                                         else
@@ -4075,22 +4261,39 @@ class vendor extends DB
 
                                         $message.='<div style="font-size: 18px;letter-spacing: -0.03em;    padding: 15px 10px 10px 10px; color:#8A0044;">Dear '.$vDet["C_person"].',</div>
                                         <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 18px; color: #333;padding: 0px 15px 40px 15px;">Your '.strtolower($params["type"]).' rate has changed from</div>
-                                        <center style="padding: 0px 30px 20px 30px;">
-                                            <div style="width: 41%;display: inline-block;    border-right: 1px solid #f0f0f0;">
+                                        <center style="padding: 0px 30px 20px 30px;">';
+                                            
+                                        if($type !== 'Dollar')
+                                        {
+                                              $message.=  '<div style="width: 41%;display: inline-block; border-right: 1px solid #f0f0f0;">
                                                 <div style="font-size: 18px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">previous rate</div>
-                                                <span style="font-size: 20px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/01.png" align="middle" style="width:25px;vertical-align:bottom;height:25px;">'.$params["prevRate"].'</span>
+                                                <span style="font-size: 20px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/Rupee25.png" align="middle" style="width:25px;vertical-align:bottom;height:25px;">'.$params["prevRate"].'</span>
                                             </div>
                                              <div style="width: 41%;display: inline-block;">
                                                 <div style="font-size: 18px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">current rate</div>
-                                                <span style="font-size: 20px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/01.png" align="middle" style="width: 25px;vertical-align:bottom;height:25px;">'.$vDet['cur_rate'].'</span>
+                                                <span style="font-size: 20px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/Rupee25.png" align="middle" style="width: 25px;vertical-align:bottom;height:25px;">'.$vDet['cur_rate'].'</span>
                                             </div>
-                                        </center>
-                                        <center style="padding-top: 50px;">
+                                            </center>';
+                                            }
+                                        else
+                                        {
+                                              $message.=  '<div style="width: 41%;display: inline-block;    border-right: 1px solid #f0f0f0;">
+                                                <div style="font-size: 18px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">previous rate</div>
+                                                <span style="font-size: 20px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/dollar.png" align="middle" style="width:25px;vertical-align:bottom;height:25px;">'.$params["prevRate"].'</span>
+                                            </div>
+                                             <div style="width: 41%;display: inline-block;">
+                                                <div style="font-size: 18px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">current rate</div>
+                                                <span style="font-size: 20px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/dollar.png" align="middle" style="width: 25px;vertical-align:bottom;height:25px;">'.$vDet['cur_rate'].'</span>
+                                            </div>
+                                            </center>';
+                                            }
+                                        
+                                            $message.='<center style="padding-top: 50px;">
                                             <img src="'.DOMAIN.'tools/img/common/diamond.jpg" width="50">
                                             <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
                                             <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
                                         </center>
-                                        <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:022-32623263" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
+                                        <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241(42)" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
                                     </div>
                                     <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
                                 </div>

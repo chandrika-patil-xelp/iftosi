@@ -2,31 +2,31 @@
 include APICLUDE.'common/db.class.php';
 class enquiry extends DB
 {
-        function __construct($db) 
+        function __construct($db)
         {
             parent::DB($db);
         }
 
-        
+
         ## For fetching user details of customer
-        
-        /* 
+
+        /*
          * Fetch Details of user from tbl_registration
          * fetch details of clicked Product according to product_id passed while clicking
-         * 
+         *
          * Fill details using two arrays. 1-- udetail  2-- prod
-         * 
+         *
          *  */
 
     public function filLog($params)
-    {  
+    {
         $uid=$params['uid'];
-        $udsql="SELECT 
+        $udsql="SELECT
                                 logmobile,
                                 user_name,
                                 is_vendor,
                                 email
-                FROM 
+                FROM
                                 tbl_registration
                 WHERE
                                 user_id=".$uid."";
@@ -34,15 +34,15 @@ class enquiry extends DB
         $chkres=$this->numRows($udres);
         if($chkres == 1)
         {
-            while($row1=$this->fetchData($udres)) 
+            while($row1=$this->fetchData($udres))
             {
                 $udetail['umobile']=$row1['logmobile'];
                 $udetail['uname']=$row1['user_name'];
                 $udetail['uemail']=$row1['email'];
                 $isV['isV']       = $row1['is_vendor'];
             }
-            
-            $chksql="SELECT user_id FROM tbl_product_enquiry where user_id=".$uid." AND product_id=".$params['pid']." and vendor_id=".$params['pid'].""; 
+
+            $chksql="SELECT user_id FROM tbl_product_enquiry where user_id=".$uid." AND product_id=".$params['pid']." and vendor_id=".$params['pid']."";
             $chkres=$this->query($chksql);
             $numchk=$this->numRows($chkres);
                 if($numchk == 0)
@@ -54,9 +54,8 @@ class enquiry extends DB
                     }
                     else
                     {
-
                         $isql=" INSERT
-                                INTO 
+                                INTO
                                             tbl_product_enquiry
                                            (user_id,
                                            user_name,
@@ -70,7 +69,7 @@ class enquiry extends DB
                                 VALUES
                                         (".$uid.",
                                         \"".$udetail['uname']."\",
-                                        \"".$udetail['umobile']."\",    
+                                        \"".$udetail['umobile']."\",
                                         \"".$udetail['uemail']."\",
                                         \"".$params['pid']."\",
                                         \"".$params['vid']."\",
@@ -79,42 +78,38 @@ class enquiry extends DB
                                             now())";
                         $ires=$this->query($isql);
                         
+                        
                         if($ires)
                         {
-                            
                             global $comm;
-                            
-                            $getvdet = "SELECT 
+
+                            $getvdet = "SELECT
                                                 logmobile,
                                                 email,
-                                                user_name 
+                                                user_name
                                         FROM
-                                                tbl_registration 
-                                        WHERE 
-                                                user_id =".$params['vid'];
+                                                tbl_registration
+                                        WHERE
+                                                user_id =".$params['vid']." ";
                             $getvres = $this->query($getvdet);
                             $getRow = $this->fetchData($getvres);
-                            
-                            $catidSql = "  SELECT 
-                                                category_id
-                                        FROM
-                                                tbl_product_category_mapping as pc,
-                                                tbl_category_master as cm
-                                        WHERE
-                                                pc.category_id = cm.catid
-                                        AND
-                                                product_id ='".$params['pid']."'
-                                        AND
-                                                cm.p_catid = 0
-                                        AND 
-                                                display_flag=1";
+
+                            $catidSql = "   SELECT 
+                                                    (SELECT GROUP_CONCAT(category_id) FROM tbl_product_category_mapping WHERE product_id=".$params['pid'].") AS cids, 
+                                                    (SELECT GROUP_CONCAT(catid) FROM tbl_category_master WHERE p_catid=0 AND catid IN(cids)) AS category_id 
+                                            FROM 
+                                                    tbl_product_category_mapping 
+                                            WHERE 
+                                                    product_id =".$params['pid']."
+                                            AND 
+                                                    display_flag=1";
                             $catidRes = $this->query($catidSql);
                             $catidRow = $this->fetchData($catidRes);
                             $catid = $catidRow['category_id'];
-
+                            
                             $pidDetSql = "  SELECT
                                                     *
-                                            FROM 
+                                            FROM
                                                     tbl_product_search as a,
                                                     tbl_product_master as b
                                             WHERE
@@ -123,7 +118,6 @@ class enquiry extends DB
                                                     a.product_id = b.product_id
                                             AND
                                                     a.active_flag=1";
-
                             $pidDetRes = $this->query($pidDetSql);
 
                             if($pidDetRes)
@@ -144,13 +138,13 @@ class enquiry extends DB
                                     $pdet['color'] = $row['color'];
                                     $pdet['price'] = $row['price'];
                                 }
-                                $vSql = "   SELECT 
+                                $vSql = "   SELECT
                                                     gold_rate,
                                                     dollar_rate,
-                                                    silver_rate 
-                                            FROM 
+                                                    silver_rate
+                                            FROM
                                                     tbl_vendor_master
-                                            WHERE 
+                                            WHERE
                                                     vendor_id =".$params['vid'];
                                 $vRes = $this->query($vSql);
                                 $vRow = $this->fetchData($vRes);
@@ -158,8 +152,6 @@ class enquiry extends DB
                                 $pdet['silverRate'] = $vRow['silver_rate'];
                                 $pdet['dollarRate'] = $vRow['dollar_rate'];
                             }
-                            
-                            
                             if($catid == "10000")
                             {
 
@@ -167,12 +159,12 @@ class enquiry extends DB
                                 $p[1] = $pdet['shape'];
                                 $p[2] = $pdet['certified'];
                                 $p[3] = $pdet['barcode'];
-                                $p[4] = $pdet['cut']; 
-                                $p[5] = $pdet['carat']; 
-                                $p[6] = $pdet['clarity']; 
+                                $p[4] = $pdet['cut'];
+                                $p[5] = $pdet['carat'];
+                                $p[6] = $pdet['clarity'];
                                 $p[7] = $pdet['color'];
                                 $p[8] = $this->IND_money_format(round($pdet['carat']*$pdet['price']*$pdet['dollarRate']));
-                                $msgng = array(0=>'Product Id',1=>'Shape',2=>'Certificate',3=>'Barcode',4=>'Cut',5=>'Carat',6=>'Clarity',7=>'Colour',8=>'Price'); 
+                                $msgng = array(0=>'Product Id',1=>'Shape',2=>'Certificate',3=>'Barcode',4=>'Cut',5=>'Carat',6=>'Clarity',7=>'Colour',8=>'Price');
                             }
                             if($catid == "10001")
                             {
@@ -180,11 +172,11 @@ class enquiry extends DB
                                 $p[1]  = $pdet['shape'];
                                 $p[2]  = $pdet['metal'];
                                 $p[3]  = $pdet['barcode'];
-                                $p[4]  = $pdet['gold_purity']; 
-                                $p[5]  = $pdet['gold_weight']; 
-                                $p[6]  = $pdet['certified']; 
+                                $p[4]  = $pdet['gold_purity'];
+                                $p[5]  = $pdet['gold_weight'];
+                                $p[6]  = $pdet['certified'];
                                 $p[7]  = $this->IND_money_format(round($pdet['price']));
-                                $msgng = array(0=>'Product Id',1=>'Jewellery Type',2=>'Metal',3=>'Barcode',4=>'Purity',5=>'Gold Weight',6=>'Certificate',7=>'Price'); 
+                                $msgng = array(0=>'Product Id',1=>'Type',2=>'Metal',3=>'Barcode',4=>'Purity',5=>'Gold Weight',6=>'Certificate',7=>'Price');
                             }
                             if($catid == "10002")
                             {
@@ -192,8 +184,8 @@ class enquiry extends DB
                                 $p[1]  = $pdet['type'];
                                 $p[2]  = $pdet['metal'];
                                 $p[3]  = $pdet['barcode'];
-                                $p[4]  = $pdet['gold_purity']; 
-                                $p[5]  = $pdet['gold_weight']; 
+                                $p[4]  = $pdet['gold_purity'];
+                                $p[5]  = $pdet['gold_weight'];
                                 if($pdet['metal'] == 'Gold')
                                 {
                                     $p[6]= $this->IND_money_format(round($pdet['gold_weight']*(($pdet['goldRate']/10)*($pdet['gold_purity']/995))));
@@ -229,12 +221,13 @@ class enquiry extends DB
         $result=array('results'=>$arr,'error'=>$err);
         return $result;
     }
-    
+
         public function sendEnqMailSMS($params,$catid)
         {
                 $msg = urldecode($params['pdet']);
+
                 $msg = rtrim($msg, ",\r\n");
-                
+
                 global $comm;
                 $smsText = '';
                 $subject = '';
@@ -244,10 +237,9 @@ class enquiry extends DB
                 $headers .= "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                 $headers .= 'From: <info@iftosi.com>' . "\r\n";
-
                 $subject .= 'Recent enquiry to IFtoSI';
-                $message .$this->sendEnqMailSMSsendEnqMailSMSTemplate($params,$msg,$catid);
-               
+                $message  = $this->sendEnqMailSMSTemplate($params,$msg,$catid);
+
                 $smsText .= "Recent enquiry to IFtoSI";
                 $smsText .= "\r\n\r\n";
                 $smsText .= "Hello ".$params['username'].", ".$params['useremail']." has shown interest in";
@@ -256,7 +248,7 @@ class enquiry extends DB
                 $smsText .= "\r\n\r\n";
                 $smsText .= "The buyer should contact you shortly.";
                 $smsText .= "\r\n\r\n";
-                $smsText .= "For any assistance, call: 022-32623263. Email: info@iftosi.com";
+                $smsText .= "For any assistance, call: 91-22-41222241(42). Email: info@iftosi.com";
                 $smsText .= "\r\n\r\n";
                 $smsText .= "Team IFtoSI";
 
@@ -264,7 +256,7 @@ class enquiry extends DB
             {
                     mail($params['email'], $subject, $message, $headers);
             }
-            
+
             $smsText = urlencode($smsText);
             $sendSMS = str_replace('_MOBILE', $params['mobile'], SMSAPI);
             $sendSMS = str_replace('_MESSAGE', $smsText, $sendSMS);
@@ -283,225 +275,98 @@ class enquiry extends DB
             $result = array('result'=>$arr,'error'=>$err);
             return $result;
         }
-    
-        
-        
+
+
+
         public function sendEnqMailSMSTemplate($params,$msg,$catid)
         {
-       $message='<html>
-                <head>
-                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-                <meta name="viewport" content="width=device-width, user-scalable=no" >
-                <title>recent enquiry</title>
-                </head>
-                <body style="margin:0; padding: 0; background-color: #171334;">
-                <center>
-                <div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; letter-spacing: -0.02em; color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;">
-                <a><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="../tools/img/iftosi.png" style="width:100%;"></div></a>
-                <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
-                <div  style="font-size: 20px;letter-spacing: -0.03em;    padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">recent enquiry</div>
-                <a><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;padding-top: 15px;"><img src="../tools/img/common/Enquiry.png" style="width:70%;"></div></a>
-                 <div style="font-size: 18px;letter-spacing: -0.03em;    padding: 15px 10px 10px 10px; color:#8A0044;">Hello '.$params['user_name'].',</div>
-                <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 18px; color: #333;padding: 0px 15px 20px 15px;">'.$params['email'].' has shown interest in following product</div>
-                if($catid==1000)
-                {
-                <center style="padding: 0px 30px 20px 30px;">
-                <div style="width: 60%;display: inline-block;border-right: 1px solid #f0f0f0;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">productId&nbsp</div>
-                <span style="padding-right: 20px;">:</span>
-                </div>
-                <div style="width: 60%;display: inline-block;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;"> "shape&nbsp;</div>
-                <span style="padding-right: 20px;">:</span>
-                <div style="width: 35%; display: inline-block;text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['shape'].'</div>
-                </div>
-                <div style="width: 60%;display: inline-block;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">certificate&nbsp;</div>
-                <span style="padding-right: 20px;">:</span>
-                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 18px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Certificate'].'</div>
-                </div>
-                <div style="width: 60%;display: inline-block;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">barcode&nbsp;</div>
-                <span style="padding-right: 20px;">:</span>
-                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Barcode'].'</div>
-                </div>
-                <div style="width: 60%;display: inline-block;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">cut&nbsp;</div>
-                <span style="padding-right: 20px;">:</span>
-                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Cut'].'</div>
-                </div>
-                <div style="width: 60%;display: inline-block;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">carat&nbsp;</div>
-                <span style="padding-right: 20px;">:</span>
-                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Carat'].'</div>
-                </div>
-                <div style="width: 60%;display: inline-block;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">clarity&nbsp;</div>
-                <span style="padding-right: 20px;">:</span>
-                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Clarity'].'</div>
-                </div>
-                <div style="width: 60%;display: inline-block;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">color&nbsp;</div>
-                <span style="padding-right: 20px;">:</span>
-                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Colour'].'</div>
-                </div>
-                <div style="width: 60%;display: inline-block;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Price&nbsp;</div>
-                <span style="padding-right: 20px;">:</span>
-                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp'.$msg['Price'].'</div>
-                </div>
-                <!--<div style="width: 100%;text-align: left;display: inline-block;">
-                <div style="width: 50%;display: inline-block;padding: 0 85px;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">price&nbsp;:<span style="padding:0px 6px;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;45.78</span></div>
-                </div>-->
-                </center>
+           $arr=explode(",",$msg);
+           $len=sizeof($arr);
+           $message='<html>
+                    <head>
+                        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+                        <meta name="viewport" content="width=device-width, user-scalable=no" >
+                            <title>
+                                recent enquiry
+                            </title>
+                        </head>
+                        <body style="margin:0; padding: 0; background-color: #171334;">
+                            <center>
+                                <div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; letter-spacing: -0.02em; color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;">
+                                <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="'.DOMAIN.'tools/img/iftosi.png" style="width:100%;"></div></a>
+                                <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
+                                <div  style="font-size: 20px;letter-spacing: -0.03em;    padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">recent enquiry</div>
+                                <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;padding-top: 15px;"><img src="'.DOMAIN.'tools/img/common/Enquiry.png" style="width:70%;"></div></a>
+                                <div style="font-size: 18px;letter-spacing: -0.03em;    padding: 15px 10px 10px 10px; color:#8A0044;">Hello '.$params['username'].',</div>
+                                <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 18px; color: #333;padding: 0px 15px 20px 15px;">'.$params['email'].' has shown interest in following product</div>';
+           
+            for($i=1;$i<($len);$i++)
+            {
+                $tempArr=explode(":",$arr[$i]);
+                if(!empty($tempArr[1]) && $tempArr[1] !== " ")
+                {   
+                    $message .='<div style="width: 60%;display: inline-block;border-right: 1px solid #f0f0f0;">
+                              <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">'.$tempArr[0].'&nbsp;</div>
+                              <span style="padding-right: 20px;">:</span>';
+                                if(stristr($tempArr[0],'Price'))
+                                {
+                                   
+                                    $message .='<img src="'.DOMAIN.'tools/img/common/Rupee15.png" style="width:15px;vertical-align:initial;height:15px;">';
+                                }
+                             $message .= '<div style="width: 35%;    display: inline-block; text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$tempArr[1].'</div>
+                              </div>' ;
                 }
-                else if($catid==1001)
-                {
-                <center style="padding: 0px 30px 20px 30px;">
-                <div style="width: 60%;display: inline-block;border-right: 1px solid #f0f0f0;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">productId&nbsp;</div>
-                <span style="padding-right: 20px;">:</span>
-                <div style="width: 35%;    display: inline-block; text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Product Id'].'</div>                   
-                </div>
-                <div style="width: 60%;display: inline-block;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Type&nbsp;</div>
-                <span style="padding-right: 20px;">:</span>
-                <div style="width: 35%; display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Jewellery Type'].'</div>
-                </div>
-                <div style="width: 60%;display: inline-block;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Metal&nbsp;</div>
-                <span style="padding-right: 20px;">:</span>
-                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 18px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Metal'].'</div>
-                </div>
-                <div style="width: 60%;display: inline-block;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">barcode&nbsp;</div>
-                <span style="padding-right: 20px;">:</span>
-                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Barcode'].'</div>
-                </div>
-                <div style="width: 60%;display: inline-block;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Gold Weight&nbsp;</div>
-                <span style="padding-right: 20px;">:</span>
-                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Gold Weight'].'</div>
-                </div>
-                <div style="width: 60%;display: inline-block;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">carat&nbsp;</div>
-                <span style="padding-right: 20px;">:</span>
-                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['type'].'</div>
-                </div>
-                <div style="width: 60%;display: inline-block;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Certificate&nbsp;</div>
-                <span style="padding-right: 20px;">:</span>
-                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['certified'].'</div>
-                </div>
-                <div style="width: 60%;display: inline-block;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Price&nbsp;</div>
-                <span style="padding-right: 20px;">:</span>
-                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Price'].'</div>
-                </div>
-                <!--<div style="width: 100%;text-align: left;display: inline-block;">
-                <div style="width: 50%;display: inline-block;padding: 0 85px;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">price&nbsp;:<span style="padding:0px 6px;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;45.78</span></div>
-                </div>-->
-                </center>
-                }
-                
-                else
-                {
-                <center style="padding: 0px 30px 20px 30px;">
-                <div style="width: 60%;display: inline-block;border-right: 1px solid #f0f0f0;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">productId&nbsp;</div>
-                <span style="padding-right: 20px;">:</span>
-                <div style="width: 35%;    display: inline-block; text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Product Id'].'</div>                   
-                </div>
-                <div style="width: 60%;display: inline-block;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Type&nbsp;</div>
-                <span style="padding-right: 20px;">:</span>
-                <div style="width: 35%; display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Type'].'</div>
-                </div>
-                <div style="width: 60%;display: inline-block;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Metal&nbsp;</div>
-                <span style="padding-right: 20px;">:</span>
-                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 18px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Metal'].'</div>
-                </div>
-                <div style="width: 60%;display: inline-block;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">barcode&nbsp;</div>
-                <span style="padding-right: 20px;">:</span>
-                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['gold_purity'].'</div>
-                </div>
-                <div style="width: 60%;display: inline-block;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Barcode&nbsp;</div>
-                <span style="padding-right: 20px;">:</span>
-                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Barcode'].'</div>
-                </div>
-                <div style="width: 60%;display: inline-block;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Purity&nbsp;</div>
-                <span style="padding-right: 20px;">:</span>
-                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Purity'].'</div>
-                </div>
-                <div style="width: 60%;display: inline-block;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Gold Weight&nbsp;</div>
-                <span style="padding-right: 20px;">:</span>
-                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Gold Weight'].'</div>
-                </div>
-                <div style="width: 60%;display: inline-block;">
-                <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">color&nbsp;</div>
-                <span style="padding-right: 20px;">:</span>
-                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$msg['Price'].'</div>
-                </div>
-               <!--<div style="width: 100%;text-align: left;display: inline-block;">
-                <div style="width: 50%;display: inline-block;padding: 0 85px;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">price&nbsp;:<span style="padding:0px 6px;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;45.78</span></div>
-                </div>-->
-                </center>
-                 }
-                
+            }
 
-
-                <div class="">The buyer should contact you shortly.</div>
-                <center style="padding-top: 50px;">
-                <img src="../tools/img/common/diamond.jpg" width="50">
-                <img src="../tools/img/common/jewellery.jpg" width="50">
-                <img src="../tools/img/common/bullions.jpg" width="50">
-                </center>
-                <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:022-32623263" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
-                </div>
-                <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
-                </div>
-                </center>
-                </body>
-                </html>';
+        $message .='<div class="">The buyer should contact you shortly.</div>';
+        $message .='<center style="padding-top: 50px;">';
+        $message .='<img src="'.DOMAIN.'tools/img/common/diamond.jpg" width="50">';
+        $message .='<img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">';
+        $message .='<img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">';
+        $message.='</center>';
+        $message.='<div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241(42)" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>';
+        $message.='</div>';
+        $message.='<div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>';
+        $message.='</div>';
+        $message.='</center>';
+        $message.='</body>';
+        $message.='</html>';
+              
+                 
        return $message;
 }
     # view log by vendor for his product being viewed
-    
+
     public function viewLog1($params)
     {
         $page   = ($params['page'] ? $params['page'] : 1);
         $limit  = ($params['limit'] ? $params['limit'] : 15);
-        
-        $sqlVd="  SELECT 
+
+        $sqlVd="  SELECT
                             silver_rate,
                             gold_rate,
                             dollar_rate
-                FROM 
+                FROM
                             tbl_vendor_master
-                WHERE 
+                WHERE
                             vendor_id='".$params['vid']."'";
-        
+
         $resVd=$this->query($sqlVd);
-        
+
         if ($resVd)
         {
             $rates = $this->fetchData($resVd);
-            
+
             if(!empty($rates['dollar_rate']) && $rates['dollar_rate'] !== '0.00')
             {
                 $dollarValue = $rates['dollar_rate'];
             }
-            else 
+            else
             {
                 $dollarValue=dollarValue;
             }
-            
-            if(!empty($rates['gold_rate']) && $rates['gold_rate'] !== '0.00') 
+
+            if(!empty($rates['gold_rate']) && $rates['gold_rate'] !== '0.00')
             {
                 $goldRate = $rates['gold_rate'];
             }
@@ -509,8 +374,8 @@ class enquiry extends DB
             {
                 $goldRate=goldRate;
             }
-            
-            if(!empty($rates['silver_rate']) && $rates['silver_rate'] !== '0.00') 
+
+            if(!empty($rates['silver_rate']) && $rates['silver_rate'] !== '0.00')
             {
                 $silverRate = $rates['silver_rate'];
             }
@@ -520,7 +385,7 @@ class enquiry extends DB
             }
         }
         # check the products under the requested vendor
-        
+
         $viewEnq=" SELECT
                                    user_id,
                                    user_name,
@@ -536,7 +401,7 @@ class enquiry extends DB
                                    tbl_product_enquiry
                     WHERE
                                    active_flag = 1
-                    AND                
+                    AND
                                    vendor_id=".$params['vid']."
                     AND
                                    user_id NOT IN(".$params['vid'].")
@@ -544,32 +409,32 @@ class enquiry extends DB
                                    date_time
                     DESC
                 ";
-        
+
         if (!empty($page))
         {
             $start = ($page * $limit) - $limit;
             $viewEnq.=" LIMIT " . $start . ",$limit";
         }
-        
+
         $resEnq=$this->query($viewEnq);
         $totalEnqs=$this->numRows($resEnq);
         $total_pages = ceil($totalEnqs/$limit);
-        
+
         if($totalEnqs > 0)
-        {   
+        {
             $arr = array();
             $i = 0;
             while($rowEnq=$this->fetchData($resEnq))
-            {   
+            {
                 $prid[$i] = $rowEnq['product_id'];
                 $sqlMaster='SELECT
                                 barcode,
                                 product_name
                         FROM
                                 tbl_product_master
-                        WHERE 
-                                active_flag = 1 
-                        AND 
+                        WHERE
+                                active_flag = 1
+                        AND
                                 product_id='.$prid[$i];
                 $resMaster=$this->query($sqlMaster);
                 if($this->numRows($resMaster) > 0)
@@ -577,12 +442,12 @@ class enquiry extends DB
                     while($rowMaster = $this->fetchData($resMaster))
                     {
                         $pid = $rowEnq['product_id'];
-                        $arr[$i]['enquiry'] = $rowEnq; 
-                        
+                        $arr[$i]['enquiry'] = $rowEnq;
+
                     }
                 }
 
-                $sqlSearch='    SELECT 
+                $sqlSearch='    SELECT
                                         ps.product_id,
                                         ps.gold_purity as purity,
                                         ps.certified,
@@ -602,7 +467,7 @@ class enquiry extends DB
                                        ps.product_id = pm.product_id
                                 AND
                                         ps.active_flag = 1
-                                AND 
+                                AND
                                         ps.product_id='.$prid[$i];
                 $resSearch=$this->query($sqlSearch);
                 if($this->numRows($resSearch) > 0)
@@ -628,9 +493,9 @@ class enquiry extends DB
                                     a.product_id = ".$prid[$i]."
                         AND
                                     a.display_flag=1
-                        ORDER BY    
+                        ORDER BY
                                     a.date_time DESC";
-                
+
                 $resCat=$this->query($PcatSql);
                 if($this->numRows($resCat) > 0)
                 {
@@ -639,7 +504,7 @@ class enquiry extends DB
                            $cat['mcatid'] = $rowCat['catid'];
                             $cat['cat_name'] = $rowCat['cat_name'];
                             $arr[$i]['category'] = $cat;
-                            
+
                            if($arr[$i]['category']['mcatid'] == 10001)
                             {
 
@@ -686,36 +551,36 @@ class enquiry extends DB
         $len = strlen($money);
         $m = '';
         $money = strrev($money);
-        
+
         for($i=0;$i<$len;$i++)
         {
             if(( $i==3 || ($i>3 && ($i-1)%2==0) )&& $i != $len)
             {
                 $m .=',';
-                
+
             }
             $m .=$money[$i];
-            
+
         }
 
         return strrev($m);
     }
-    
+
     public function viewLog($params)
     {
-        
-        $vendorSql  = " SELECT 
+
+        $vendorSql  = " SELECT
                                     dollar_rate,
                                     silver_rate,
-                                    gold_rate 
+                                    gold_rate
                         FROM
                                     tbl_vendor_master
                         WHERE
                                     vendor_id =".$params['vid']."
-                        AND 
+                        AND
                                     active_flag= 1";
         $vendorRes = $this->query($vendorSql);
-        
+
         if($vendorRes)
         {
             $vrow = $this->fetchData($vendorRes);
@@ -733,36 +598,36 @@ class enquiry extends DB
                 }
             $arr['vendor_rates'] = $vrow;
         }
-        
-            
+
+
         $Enqsql = " SELECT
-                                * 
+                                *
                     FROM
                                 tbl_product_enquiry
                     WHERE
                                 vendor_id =".$params['vid']."
-                    AND 
+                    AND
                                 user_id NOT IN(".$params['vid'].")
                     AND
                                 active_flag = 1
-                    ORDER BY 
+                    ORDER BY
                                 date_time DESC";
         $EnqRes = $this->query($Enqsql);
         $EnqCount = $this->numRows($EnqRes);
-        
+
         $page   = ($params['page'] ? $params['page'] : 1);
         $limit  = ($params['limit'] ? $params['limit'] : 15);
-        
+
         if (!empty($page))
         {
             $start = ($page * $limit) - $limit;
             $Enqsql.=" LIMIT " . $start . ",$limit";
         }
-        
+
         $EnqRes = $this->query($Enqsql);
         $total_pages = ceil($EnqCount/$limit);
         if($EnqCount > 0 )
-        {   
+        {
             $i=0;
             while($EnqRow = $this->fetchData($EnqRes))
             {
@@ -771,7 +636,7 @@ class enquiry extends DB
                 $i++;
             }
             $pid = implode(',',$pid);
-            
+
             $PcatSql = "SELECT
                                     b.cat_name,
                                     b.catid,
@@ -787,11 +652,11 @@ class enquiry extends DB
                                     a.product_id IN (".$pid.")
                         AND
                                     a.display_flag=1
-                        ORDER BY    
+                        ORDER BY
                                     a.date_time DESC";
-            
+
             $PcatRes = $this->query($PcatSql);
-            
+
             if($PcatRes)
             {
                 $j =0;
@@ -822,15 +687,15 @@ class enquiry extends DB
                                     tbl_product_category_mapping as pc
                             WHERE
                                     pm.product_id = ps.product_id
-                            AND 
+                            AND
                                     pc.product_id = ps.product_id
-                            AND 
+                            AND
                                     pm.product_id
-                            IN 
+                            IN
                                     (".$pid.")
-                            AND 
+                            AND
                                     pc.category_id
-                            IN 
+                            IN
                                     (10000,10001,10002)
                             AND
                                     ps.active_flag = 1
@@ -877,12 +742,12 @@ class enquiry extends DB
                             else if($ar['metal'] == 'Silver')
                             {
                                 $ar['price'] = $this->IND_money_format(ceil(($arr['vendor_rates']['silver_rate']/1000)*($ar['purity']/999)*($ar['weight'])));
-                            
+
                             }
                             $ar['type'] = $prdRow['type'];
                             $ar['barcode'] = $prdRow['barcode'];
                         }
-                        
+
                         $arr[$k]['search']= $ar;
                         $k++;
                     }
@@ -899,5 +764,5 @@ class enquiry extends DB
         $result = array('results'=>$arr,'error'=>$err,'total_enqs'=>$EnqCount,'total_pages'=>$total_pages);
         return $result;
     }
-    
+
 }

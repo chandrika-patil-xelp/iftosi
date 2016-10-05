@@ -1217,7 +1217,7 @@
           						{
               							$expCarat = explode('|~|',$sarr[0]);
                                                                 $exd1 = explode(';',$expCarat[1]);
-                                                                    
+
                                                                     if($params['b2bsort'])
                                                                        $extnhv = " HAVING b2b_dollar_price between ".$exd[0]." AND ".$exd[1]." ";
                                                                     else
@@ -1226,7 +1226,7 @@
                                                         else
                                                                  $extn .= " AND ".str_replace('Range','',$expd[0])." between ".$exd[0]." AND ".$exd[1]." ";
         					}
-      				}   
+      				}
 
       				if(!empty($params['clist']))
       				{
@@ -1570,7 +1570,7 @@
                               $patsql.=" ORDER BY field(product_id,".$pid."), date_time DESC ";
                       break;
                   }
-                    
+
                     $patres=$this->query($patsql);
                     $numpatres=$this->numRows($patres);
                     if($numpatres < $total)
@@ -1589,7 +1589,7 @@
         					}
                             $patres=$this->query($patsql);
                             $numpatres=$this->numRows($patres);
-                                                
+
         					while($row2=$this->fetchData($patres))
         					{
           						$prodid[] = $row2['product_id'];
@@ -1600,7 +1600,7 @@
         					if(!empty($prodid))
         					{
         						  $pid = $pids = implode(',',$prodid);
-                                                          
+
         					}
         					else
         					{
@@ -2994,7 +2994,7 @@
 			$smsText .= "Email: ";
 			$smsText .= $vndrEmail;
 			$smsText .= "\r\n\r\n";
-			$smsText .= "For any assistance, call: 022-32623263. Email: info@iftosi.com";
+			$smsText .= "For any assistance, call: 91-22-41222241(42). Email: info@iftosi.com";
 
 			$smsText = urlencode($smsText);
 			$sendSMS = str_replace('_MOBILE', $usrMobile, SMSAPI);

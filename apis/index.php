@@ -482,6 +482,7 @@ switch($action)
             # IP address is optionall
 //  localhost/iftosi/apis/index.php?action=filLog&uid=7&pid=7&vid=6&ipaddress=192.168.1.1&dflag=1
         case 'filLog':
+           
             include APICLUDE.'class.enquiry.php';
             $uid=(!empty($params['uid'])) ? trim($params['uid']) : '';
             $pid=(!empty($params['pid'])) ? trim($params['pid']) : '';
@@ -493,9 +494,10 @@ switch($action)
                 $result = array('results' => $arr, 'error' => $err);
                 $res=$result;
                 break;
-            }
+            } 
             $obj= new enquiry($db['iftosi']);
             $result= $obj->filLog($params);
+            
             $res = $result;
             break;
 
