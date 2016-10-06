@@ -1397,7 +1397,7 @@
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                 $headers .= 'From: <info@iftosi.com>' . "\r\n";
                 $tempParams = array('username'=>$params['username'],'email'=>$params['email'],'mobile'=>$params['mobile']);
-                $message = $this->sendWelcomeMailSMSTemplate($tempParams);
+                $message = $this->sendWelcomeMailSMSTemplate($tempParams); 
                 $smsText .= "Welcome To IFtoSI";
                 $smsText .= "\r\n\r\n";
                 $smsText .= "Thank you ".$params['username'];
@@ -1496,43 +1496,184 @@
               </body>
               </html>';*/
 
-        $message='<html>
-                  <head>
-                  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-                  <meta name="viewport" content="width=device-width, user-scalable=no" >
-                  <title>vendorwelcome</title>
-                  </head>
-                  <body style="margin:0; padding: 0; background-color: #171334;">
-                  <center>
-                  <div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px;color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;">
-                  <a  href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="'.DOMAIN.'tools/img/iftosi.png" style="width:100%;"></div></a>
-                  <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
-                  <div  style="font-size: 20px;  padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">welcome to IFtoSI</div>
-                  <a  href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;"><img src="'.DOMAIN.'tools/img/waiting.png" style="width:50px;"></div></a>
-                  <div style="font-size: 20px;padding: 0px 10px 5px 10px; color:#333;">Thank You '.$tempParams['username'].'</div>
-                  <div style="font-size: 14px; color: #8a0044; font-weight: bold; padding-bottom: 30px;">+91-'.$tempParams['mobile'].' | '.$tempParams['email'].'</div>
-                  <center>
-                  <span style="color:#fff; font-size: 25px; display: inline-block; width:auto;padding: 10px 20px;font-weight: light;background: #5E0037;border-radius: 3px;">Sit back and relax!</span>
-                  </center>
-                  <div style="padding: 30px 40px 0px 40px;line-height: 22px;font-size: 16px;">Your application is in process, we will notify you once your account is activated.</div>
-                  <center style="padding-top: 50px;">
-                  <img src="'.DOMAIN.'tools/img/common/diamond.jpg" width="50">
-                  <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
-                  <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
-                  </center>
-                  <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:022-32623263" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
-                  </div>
-                  <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
-                  </div>
-                  </center>
-                  </body>
-                  </html>';
-    return $message;
-         }
+       $sql=  " SELECT 
+                            business_type
+                    FROM 
+                            tbl_vendor_master  
+                    WHERE  
+                            vendor_id=(
+                    SELECT 
+                            user_id 
+                    FROM 
+                            tbl_registration 
+                    WHERE 
+                            logmobile= ".$tempParams['mobile'].")";
+                        $res = $this->query($sql);
+                        $row = $this->fetchData($res);
+                        $arr = explode(",",$row[business_type]);
+                        $len = sizeof($arr);
+                       
+           
+   
+           
+           
+           /* $message='<html>
+              <head>
+              <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+              <meta name="viewport" content="width=device-width, user-scalable=no" >
+              <title>vendorwelcome</title>
+              </head>
+              <body style="margin:0; padding: 0; background-color: #171334;">
+              <center>
+              <div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; letter-spacing: -0.02em; color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;">
+              <a  href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="'.DOMAIN.'tools/img/iftosi.png" style="width:100%;"></div></a>
+              <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
+              <div  style="font-size: 20px;letter-spacing: -0.03em;    padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">welcome to IFtoSI</div>
+              <a  href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase"><img src="'.DOMAIN.'tools/img/common/waiting.png" style="width:70%;"></div></a>
+              <div style="font-size: 20px;letter-spacing: -0.03em;padding: 0px 10px 5px 10px; color:#333;">Thank You '.$tempParams['username'].'</div>
+              <!--<div style="font-size: 20px;letter-spacing: -0.03em;padding: 0px 10px 5px 10px; color:#333;"></div>-->
+              <div style="font-size: 14px; color: #8a0044; font-weight: bold; padding-bottom: 30px;">  +91-'.$tempParams['mobile'].' | '.$tempParams['email'].'</div>
+              <center>
+              <span style="color:#fff; font-size: 25px; display: inline-block; width:auto;padding: 10px 20px;font-weight: light;background: #5E0037;letter-spacing: -0.03em;border-radius: 3px;">Sit back and relax!</span>
+              </center>
+              <div style="padding: 30px 40px 0px 40px;line-height: 22px;font-size: 16px;">Your application is in process, we will notify you once your account is activated.</div>
+              <center style="padding-top: 50px;">
+              <img src="'.DOMAIN.'tools/img/common/diamond.jpg" width="50">
+              <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
+              <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
+              </center>
+              <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241(42)" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
+              </div>
+              <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
+              </div>
+              </center>
+              </body>
+              </html>';*/
+             
+       /* $message='<html>
+                    <head>
+                        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+                        <meta name="viewport" content="width=device-width, user-scalable=no" >
+                        <title>vendorwelcome</title>
+                    </head>
+                    <body style="margin:0; padding: 0; background-color: #171334;">
+                    <center>
+                        <div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px;color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;">
+                        <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="'.DOMAIN.'tools/img/iftosi.png" style="width:100%;"></div></a>
+                        <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
+                        <div  style="font-size: 20px;  padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">welcome to IFtoSI</div>
+                        <a  href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;"><img src="'.DOMAIN.'tools/img/waiting.png" style="width:50px;"></div></a>
+                        <div style="font-size: 20px;padding: 0px 10px 5px 10px; color:#333;">Thank You '.$tempParams['username'].'</div>
+                        <div style="font-size: 14px; color: #8a0044; font-weight: bold; padding-bottom: 30px;">+91-'.$tempParams['mobile'].' | '.$tempParams['email'].'</div>
+                        <center>
+                            <span style="color:#fff; font-size: 25px; display: inline-block; width:auto;padding: 10px 20px;font-weight: light;background: #5E0037;border-radius: 3px;">Sit back and relax!</span>
+                        </center>
+                        <div style="padding: 30px 40px 0px 40px;line-height: 22px;font-size: 16px;">Your application is in process, we will notify you once your account is activated.</div>
+                        <center style="padding-top: 50px;">
+                        <img src="'.DOMAIN.'tools/img/common/diamond.jpg" width="50">
+                        <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
+                        <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
+                        </center>
+                        <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241(42)" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
+                        </div>
+                        <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
+                        </div>
+                        </center>
+                        </body>
+                        </html>';*/
+             
+        $message=' <html>
+                        <head>
+                            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+                            <meta name="viewport" content="width=device-width, user-scalable=no" >
+                            <title>vendorwelcome</title>
+                        </head>
+                        <body style="margin:0; padding: 0; background-color: #171334;">
+                            <center>
+                                <div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px;color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;">
+                                <a><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="'.DOMAIN.'tools/img/iftosi.png" style="width:100%;"></div></a>
+                                <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
+                                <div  style="font-size: 20px;  padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">welcome to IFtoSI</div>
+                                <a><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;"><img src="'.DOMAIN.'tools/img/waiting.png" style="width:50px;"></div></a>
+                                <div style="font-size: 20px;padding: 0px 10px 5px 10px; color:#333;">Thank You '.$tempParams['username'].'</div>
+                                <div style="font-size: 14px; color: #8a0044; font-weight: bold; padding-bottom: 30px;"> +91-'.$tempParams['mobile'].' | '.$tempParams['email'].'</div>
+                                <center>
+                                    <span style="color:#fff; font-size: 25px; display: inline-block; width:auto;padding: 10px 20px;font-weight: light;background: #5E0037;border-radius: 3px;">Sit back and relax!</span>
+                                </center>
+                                <center style="padding: 30px 0px 0px 0px;">';
+                                if($len==3)
+                                {
+                                 $message .='<div style="width: 100%;display: inline-block;    padding-bottom: 5px;">
+                                <div style="width: 35%;text-align: left;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Amount Payable&nbsp;</div>
+                                <span style="padding-right: 20px;">:</span>
+                                <div style="width: 35%;    display: inline-block; text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/Rupee15.png" align="middle" style="width:11px;vertical-align:initial;height:11px;">55000</div>                   
+                                </div>';
+                                }
+                                else{
+                                    if($arr[0]==1)
+                                    {
+                                        $message .='<div style="width: 100%;display: inline-block;    padding-bottom: 5px;">
+                                                        <div style="width: 35%;text-align: left;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Amount Payable&nbsp;</div>
+                                                        <span style="padding-right: 20px;">:</span>
+                                                        <div style="width: 35%;    display: inline-block; text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/Rupee15.png" align="middle" style="width:11px;vertical-align:initial;height:11px;">30000</div>                   
+                                                   </div>';
+                                    }
+                                    
+                                    else if($arr[0]==2)
+                                    {
+                                        $message .='<div style="width: 100%;display: inline-block;    padding-bottom: 5px;">
+                                                        <div style="width: 35%;text-align: left;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Amount Payable&nbsp;</div>
+                                                        <span style="padding-right: 20px;">:</span>
+                                                        <div style="width: 35%;    display: inline-block; text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/Rupee15.png" align="middle" style="width:11px;vertical-align:initial;height:11px;">25000</div>                   
+                                                   </div>';
+                                    }
+                                }
+                                $message .='<div style="width: 100%;display: inline-block;    padding-bottom: 5px;">
+                                <div style="width: 35%;text-align: left;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Account Holder Name&nbsp;</div>
+                                <span style="padding-right: 20px;">:</span>
+                                <div style="width: 35%; display: inline-block;    text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;IFtoSI JEWELS PVT. LTD.</div>
+                                </div>
+                                <div style="width: 100%;display: inline-block;    padding-bottom: 5px;">
+                                <div style="width: 35%;text-align: left;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">IFSC CODE&nbsp;</div>
+                                <span style="padding-right: 20px;">:</span>
+                                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;HDFC0000019</div>
+                                </div>
+                                <div style="width: 100%;display: inline-block;    padding-bottom: 5px;">
+                                <div style="width: 35%;text-align: left;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Branch&nbsp;</div>
+                                <span style="padding-right: 20px;">:</span>
+                                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;Juhu Versova Link Road &nbsp;Branch,</div>
+                                </div>
+                                <div style="width: 100%;display: inline-block;    padding-bottom: 5px;">
+                                <div style="width: 35%;text-align: left;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Bank Name&nbsp;</div>
+                                <span style="padding-right: 20px;">:</span>
+                                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;HDFC Bank</div>
+                                </div>
+                                <div style="width: 100%;display: inline-block;    padding-bottom: 5px;">
+                                <div style="width: 35%;text-align: left;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Account Number&nbsp;</div>
+                                <span style="padding-right: 20px;">:</span>
+                                <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;50200015934307</div>
+                                </div>
+                                </center>
+                                <div style="padding: 20px 40px 0px 40px;line-height: 22px;font-size: 16px;">Your application is in process, we will notify you once your account is activated.</div>
+                                <center style="padding-top: 50px;">
+                                <img src="'.DOMAIN.'tools/img/common/diamond.jpg" width="50">
+                                <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
+                                <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
+                                </center>
+                                <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:022-32623263" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
+                                </div>
+                                <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
+                                </div>
+                            </center>
+                        </body>
+                    </html>';
+                                
+              return $message;
+          }
 
-          public function sendWelcomeMailSMSTemplateToUser($tempParams)
+              public function sendWelcomeMailSMSTemplateToUser($tempParams)
         {
-             /* $message='<html>
+             $message='<html>
                        <head>
                        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
                        <meta name="viewport" content="width=device-width, user-scalable=no" >
@@ -1556,15 +1697,15 @@
                        <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
                        <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
                        </center>
-                       <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:022-32623263" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
+                       <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241(42)" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
                        </div>
                        <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
                        </div>
                        </center>
                        </body>
-                       </html>';*/
-
-        $message='<html>
+                       </html>';
+              
+      /*  $message='<html>
                   <head>
                   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
                   <meta name="viewport" content="width=device-width, user-scalable=no" >
@@ -1581,17 +1722,22 @@
                   <img src="'.DOMAIN.'tools/img/common/diamond.jpg" width="50">
                   <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
                   <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
-                  </center>
-                  <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:022-32623263" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
+                  </center>';
+        
+        $message.='<div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241(42)" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
                   </div>
                   <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
                   </div>
                   </center>
                   </body>
                   </html>';
-              return $message;
+        print_r($message);die;*/
+            
+             return $message;
           }
-
+          
+          
+          
          public function sendVActivateMailSMS($params)
         {
             global $comm;
@@ -1607,7 +1753,7 @@
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                 $headers .= 'From: <info@iftosi.com>' . "\r\n";
                 $tempParams = array('mobile'=>$params['mobile'],'email'=>$params['email'],'username'=>$params['username']);
-                $message .= $this->sendVActivateMailSMSTemplate($tempParams);
+                $message .= $this-> sendVActivateMailSMSTemplate($tempParams); 
                 $smsText .= "Vendor profile activated in IFtoSI";
                 $smsText .= "\r\n\r\n";
                 $smsText .= "Congratulations, ".ucwords(strtolower($params['username']))."! Your account has been verified.";
@@ -1620,8 +1766,7 @@
             }
             if(!empty($params['email']))
             {
-                //print_r($message);
-                mail($params['email'], $subject, $message, $headers);
+                    mail($params['email'], $subject, $message, $headers);
             }
             $smsText = urlencode($smsText);
             $sendSMS = str_replace('_MOBILE', $params['mobile'], SMSAPI);
@@ -1642,7 +1787,44 @@
         }
 
          public function sendVActivateMailSMSTemplate($params)
-         {
+        {
+                /*$message=
+                           '<html>
+                            <head>
+                            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+                            <meta name="viewport" content="width=device-width, user-scalable=no" >
+                            <title>vendorwelcome</title>
+                            </head>
+                            <body style="margin:0; padding: 0; background-color: #171334;">
+                            <center>
+                            <div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; letter-spacing: -0.02em; color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;">
+                            <a  href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="'.DOMAIN.'tools/img/iftosi.png" style="width:100%;"></div></a>
+                            <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
+                            <div  style="font-size: 20px;letter-spacing: -0.03em;    padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">welcome to IFtoSI</div>
+                            <a  href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase"><img src=""'.DOMAIN.'tools/img/common/verified.png" style="width:70%;"></div></a>
+                            <div style="font-size: 20px;letter-spacing: -0.03em;padding: 0px 10px 5px 10px; color:#333;">Congratulations '.$params['username'].'!</div>
+                            <div style="font-size: 20px;letter-spacing: -0.03em;padding: 0px 10px 5px 10px; color:#333;"></div>
+                            <div style="font-size: 14px; color: #8a0044; font-weight: bold; padding-bottom: 30px;"> +91-'.$params['mobile'].' | '.$params['email'].'</div>
+                            <center>
+                            <span style="color:#8a0044; font-size: 25px; display: inline-block; width:auto;padding: 10px 20px;font-weight: light;border: 2px dotted #8a0044;letter-spacing: -0.03em;border-radius: 3px;">Verified Partner!</span>
+                            </center>           
+                            <div style="    padding: 30px 30px 30px 30px;line-height: 22px;font-size: 16px;">Get new buyers. Increase your reach to a wider range of customers. Quickly log on to '.DOMAIN.' to upload your products.</div>
+                            <center>
+                            <a href="'.DOMAIN.'Vendor-Sign-Up"><span style="color:#fff; font-size: 13px; font-weight:bold; text-transform: uppercase;display: inline-block; width:auto;padding: 10px 20px;font-weight: light;background: #4db800;letter-spacing: -0.03em;border-radius: 3px;">Click here to login</span></a>
+                            </center>
+                            <center style="padding-top: 50px;">
+                            <img src="'.DOMAIN.'tools/img/common/diamond.jpg" width="50">
+                            <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
+                            <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
+                            </center>
+                            <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241(42)" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
+                            </div>
+                            <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
+                            </div>
+                            </center>
+                            </body> 
+                            </html>';*/
+             
              $message='<html>
                        <head>
                        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -1652,16 +1834,16 @@
                        <body style="margin:0; padding: 0; background-color: #171334;">
                        <center>
                        <div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px;color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;">
-                       <a><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="'.DOMAIN.'tools/img/iftosi.png" style="width:100%;"></div></a>
+                       <a  href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="'.DOMAIN.'tools/img/iftosi.png" style="width:100%;"></div></a>
                        <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
                        <div  style="font-size: 20px;padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">welcome to IFtoSI</div>
-                       <a><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;"><img src="'.DOMAIN.'tools/img/verified.png" style="width:50px;"></div></a>
+                       <a  href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;"><img src="'.DOMAIN.'tools/img/verified.png" style="width:50px;"></div></a>
                        <div style="font-size: 20px;padding: 0px 10px 5px 10px; color:#333;">Congratulations '.$params['username'].'!</div>
                        <div style="font-size: 20px;padding: 0px 10px 5px 10px; color:#333;"></div>
                        <div style="font-size: 14px; color: #8a0044; font-weight: bold; padding-bottom: 30px;"> +91-'.$params['mobile'].' | '.$params['email'].'</div>
                        <center>
                        <span style="color:#8a0044; font-size: 25px; display: inline-block; width:auto;padding: 10px 20px;font-weight: light;border: 2px dotted #8a0044;border-radius: 3px;">Verified Partner!</span>
-                       </center>
+                       </center>           
                        <div style="padding: 30px 30px 30px 30px;line-height: 22px;font-size: 16px;">Get new buyers. Increase your reach to a wider range of customers. Quickly log on to '.DOMAIN.' to upload your products.</div>
                        <center>
                        <a href="'.DOMAIN.'Vendor-Sign-Up"><span style="color:#fff; font-size: 13px; font-weight:bold; text-transform: uppercase;display: inline-block; width:auto;padding: 10px 20px;font-weight: light;background: #4db800;border-radius: 3px;">Click here to login</span></a>
@@ -1671,68 +1853,48 @@
                         <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
                         <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
                        </center>
-                       <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:022-32623263" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
+                       <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241(42)" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
                        </div>
                        <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
                        </div>
-                       </center>
+                       </center> 
                        </body>
                        </html>';
+             
                 return $message;
         }
 
-
-public function sendDeactMailSms($params)
+ public function sendDeactMailSmsTemplate()
         {
-            global $comm;
-            $smsText = '';
-            $subject = '';
-            $message = '';
-            $headers = '';
-
-            if($params['isVendor'] == 1)
-            {
-                $subject .= 'Vendor profile deactivation in IFtoSI';
-                $message .=$this->sendDeactMailSmsTemplate();
-                $headers .= "MIME-Version: 1.0" . "\r\n";
-                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                $headers .= 'From: <info@iftosi.com>' . "\r\n";
-
-                $smsText .= "Vendor profile deactivation in IFtoSI";
-                $smsText .= "\r\n\r\n";
-                $smsText .= "Dear ".urldecode($params['username']).", your account has been deactivated since your one year subscription is over.";
-                $smsText .= "\r\n\r\n";
-                $smsText .= "Kindly re-subscribe for the new packeage you want to continue with. It was really a good experience for us to be connected with you";
-                $smsText .= "\r\n\r\n";
-                $smsText .= "For any assistance, call: 91-22-41222241(42). Email: info@iftosi.com";
-                $smsText .= "\r\n\r\n";
-                $smsText .= "Team IFtoSI";
-            }
-            if(!empty($params['email']))
-            {
-                //print_r($message);
-                mail(urldecode($params['email']), $subject, $message, $headers);
-            }
-            $smsText = urlencode($smsText);
-            $sendSMS = str_replace('_MOBILE', urldecode($params['mobile']), SMSAPI);
-            $sendSMS = str_replace('_MESSAGE', $smsText, $sendSMS);
-            $res = $comm->executeCurl($sendSMS, true);
-            if($res)
-            {
-                $arr = array('success');
-                $err = array('code'=>0,'msg'=>'SMS & EMAIL sent to the user');
-            }
-            else
-            {
-                $arr = array('failure');
-                $err = array('code'=>0,'msg'=>'SMS & EMAIL is not sent to the user');
-            }
-            $result = array('result'=>$arr,'error'=>$err);
-            return $result;
-        }
-
-        public function sendDeactMailSmsTemplate()
-        {
+          /*$message='<html>
+                   <head>
+                   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+                   <meta name="viewport" content="width=device-width, user-scalable=no" >
+                   <title>deactivate</title>
+                   </head>
+                   <body style="margin:0; padding: 0; background-color: #171334;">
+                   <center>
+                   <div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; letter-spacing: -0.02em; color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;">
+                   <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src=""'.DOMAIN.'tools/img/iftosi.png" style="width:100%;"></div></a>
+                   <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
+                   <div  style="font-size: 20px;letter-spacing: -0.03em;    padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">vendor profile deactivation</div>
+                   <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;padding-top: 15px;"><img src=""'.DOMAIN.'tools/img/common/Deactivation.png" style="width:70%;"></div></a>
+                   <center style="padding: 0px 50px 0px 50px;line-height: 30px;    font-size: 23px;    padding-top: 30px;    font-weight: 100;    color: #333;">
+                   Kindly re-subscribe for the new packeage you want to continue with. It was really a good experience for us to be connected with you.
+                   </center>
+                   <center style="padding-top: 50px;">
+                   <img src="'.DOMAIN.'tools/img/common/diamond.jpg" width="50">
+                   <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
+                   <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
+                   </center>
+                   <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241(42)" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
+                   </div>
+                   <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
+                   </div>
+                   </center>
+                   </body>
+                   </html>';*/
+            
             $message='<html>
                       <head>
                       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -1754,7 +1916,7 @@ public function sendDeactMailSms($params)
                       <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
                       <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
                       </center>
-                      <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:022-32623263" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; ">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
+                      <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241(42)" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; ">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
                       </div>
                       <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
                       </div>

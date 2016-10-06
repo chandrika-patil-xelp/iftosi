@@ -3556,7 +3556,7 @@ class vendor extends DB
         $prevrow = $this->fetchData($prevres);
 
         if(floatval($params['dolRate']) !== floatval($prevrow['dollar_rate']))
-        {
+        {   
             $sql="UPDATE tbl_vendor_master SET dollar_rate=".$params['dolRate']." WHERE vendor_id=".$params['vid'];
             $res=$this->query($sql);
             if ($res)
@@ -4267,11 +4267,11 @@ class vendor extends DB
                                         {
                                               $message.=  '<div style="width: 41%;display: inline-block; border-right: 1px solid #f0f0f0;">
                                                 <div style="font-size: 18px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">previous rate</div>
-                                                <span style="font-size: 20px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/Rupee25.png" align="middle" style="width:25px;vertical-align:bottom;height:25px;">'.$params["prevRate"].'</span>
+                                                <span style="font-size: 20px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/Rupee15.png" align="middle" style="width:25px;vertical-align:bottom;height:25px;">'.$params["prevRate"].'</span>
                                             </div>
                                              <div style="width: 41%;display: inline-block;">
                                                 <div style="font-size: 18px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">current rate</div>
-                                                <span style="font-size: 20px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/Rupee25.png" align="middle" style="width: 25px;vertical-align:bottom;height:25px;">'.$vDet['cur_rate'].'</span>
+                                                <span style="font-size: 20px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/Rupee15.png" align="middle" style="width: 25px;vertical-align:bottom;height:25px;">'.$vDet['cur_rate'].'</span>
                                             </div>
                                             </center>';
                                             }
