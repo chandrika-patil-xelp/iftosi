@@ -298,7 +298,7 @@ class enquiry extends DB
                                 <div  style="font-size: 20px;letter-spacing: -0.03em;    padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">recent enquiry</div>
                                 <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;padding-top: 15px;"><img src="'.DOMAIN.'tools/img/common/Enquiry.png" style="width:70%;"></div></a>
                                 <div style="font-size: 18px;letter-spacing: -0.03em;    padding: 15px 10px 10px 10px; color:#8A0044;">Hello '.$params['username'].',</div>
-                                <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 18px; color: #333;padding: 0px 15px 20px 15px;">'.$params['email'].' has shown interest in following product</div>';
+                                <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 18px; color: #333;padding: 0px 15px 20px 15px;">'.$params['useremail'].' has shown interest in following product</div>';
            
             for($i=1;$i<($len);$i++)
             {
