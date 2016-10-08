@@ -1194,8 +1194,8 @@
                               <div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="'.DOMAIN.'tools/img/iftosi.png" style="width:100%;"></div>
                           </a>
                           <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
-                <div  style="font-size: 20px;letter-spacing: -0.03em;    padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">Password change request</div>
-                <a  href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;padding-top: 15px;"><img src="'.DOMAIN.'tools/img/common/ChangePassword.png" style="width:70%;"></div></a>
+                          <div  style="font-size: 20px;letter-spacing: -0.03em;    padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">Password change request</div>
+                          <a  href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;padding-top: 15px;"><img src="'.DOMAIN.'tools/img/common/ChangePassword.png" style="width:70%;"></div></a>
                 <div style="font-size: 20px;letter-spacing: -0.03em;    padding: 10px 15px 10px 15px; color:#8A0044;">Dear '.$uname.',</div>
                 <div style="    font-family: Open Sans, Roboto, Helvetica, Arial;    font-size: 18px;    color: #333;    padding: 30px 15px 10px 15px;">The link to change your password is as follows</div>
                 <center style="padding: 0px 30px 20px 30px;font-size: 18px;">
@@ -1215,7 +1215,7 @@
                 </html>';
         return $message;
         }
-        public function changePwd($params)
+       /* public function changePwd($params)
         {
             $vsql = "   SELECT
                                 *
@@ -1266,6 +1266,61 @@
                 $arr = array();
                 $err = array('Code' => 1, 'Msg' => 'Old Password Not Matching');
             }
+            $result = array('results' => $arr, 'error' => $err);
+            return $result;
+        }*/
+        
+         public function changePwd($params)
+        {
+           /* $vsql = "   SELECT
+                                *
+                        FROM
+                                tbl_registration
+                        WHERE
+                                user_id=".$params['uid'];
+
+            $vres = $this->query($vsql);
+            $row = $this->fetchData($vres);
+            $cnt1 = $this->numRows($vres);*/
+
+           // if ($cnt1 > 0)
+            //{
+                $vsql1 = "  UPDATE
+                                    tbl_registration
+                            SET
+                                    password=MD5('".$params['rpass']."'),
+                                    pass_flag=0
+                            WHERE
+                                    user_id=". $params['uid'];
+
+                $vsql2 = "  UPDATE
+                                    tbl_url_master
+                            SET
+                                    active_flag= 2
+                            WHERE
+                                    user_id='" . $params['uid'] . "'
+                            AND
+                                    urlkey = \"".$params['ukey']."\"
+                                        ";
+
+                $vres1 = $this->query($vsql1);
+                $vres2 = $this->query($vsql2);
+                if ($vres1)
+                {
+                    $arr = array();
+                    $err = array('Code' => 0, 'Msg' => 'Password Successfully Changed');
+                }
+                else
+                {
+                    $arr = array();
+                    $err = array('Code' => 1, 'Msg' => 'Password failed to change');
+                }
+           // }
+           /* else
+            {
+                $arr = array();
+                $err = array('Code' => 1, 'Msg' => 'Old Password Not Matching');
+            }*/
             $result = array('results' => $arr, 'error' => $err);
             return $result;
         }
