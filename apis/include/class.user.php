@@ -1236,7 +1236,7 @@
                                     password=MD5('".$params['rpass']."'),
                                     pass_flag=0
                             WHERE
-                                    user_id=". $params['uid'];
+                                    user_id=". $params['uid'] ;
 
                 $vsql2 = "  UPDATE
                                     tbl_url_master
