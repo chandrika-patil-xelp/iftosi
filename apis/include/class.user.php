@@ -1224,7 +1224,7 @@
                         WHERE
                                 user_id=".$params['uid'];
 
-            $vres = $this->query($vsql,1);die;
+            $vres = $this->query($vsql);
             $row = $this->fetchData($vres);
             $cnt1 = $this->numRows($vres);
 
@@ -1248,7 +1248,7 @@
                                     urlkey = \"".$params['ukey']."\"
                                         ";
 
-                $vres1 = $this->query($vsql1);
+                $vres1 = $this->query($vsql1,1);die;
                 $vres2 = $this->query($vsql2);
                 if ($vres1)
                 {
