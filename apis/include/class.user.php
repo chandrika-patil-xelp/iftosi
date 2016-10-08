@@ -1215,7 +1215,7 @@
                 </html>';
         return $message;
         }
-       /* public function changePwd($params)
+        public function changePwd($params)
         {
             $vsql = "   SELECT
                                 *
@@ -1224,7 +1224,7 @@
                         WHERE
                                 user_id=".$params['uid'];
 
-            $vres = $this->query($vsql);
+            $vres = $this->query($vsql,1);die;
             $row = $this->fetchData($vres);
             $cnt1 = $this->numRows($vres);
 
@@ -1266,61 +1266,6 @@
                 $arr = array();
                 $err = array('Code' => 1, 'Msg' => 'Old Password Not Matching');
             }
-            $result = array('results' => $arr, 'error' => $err);
-            return $result;
-        }*/
-        
-         public function changePwd($params)
-        {
-           /* $vsql = "   SELECT
-                                *
-                        FROM
-                                tbl_registration
-                        WHERE
-                                user_id=".$params['uid'];
-
-            $vres = $this->query($vsql);
-            $row = $this->fetchData($vres);
-            $cnt1 = $this->numRows($vres);*/
-
-           // if ($cnt1 > 0)
-            //{
-                $vsql1 = "  UPDATE
-                                    tbl_registration
-                            SET
-                                    password=MD5('".$params['rpass']."'),
-                                    pass_flag=0
-                            WHERE
-                                    user_id=". $params['uid'];
-
-                $vsql2 = "  UPDATE
-                                    tbl_url_master
-                            SET
-                                    active_flag= 2
-                            WHERE
-                                    user_id='" . $params['uid'] . "'
-                            AND
-                                    urlkey = \"".$params['ukey']."\"
-                                        ";
-
-                $vres1 = $this->query($vsql1);
-                $vres2 = $this->query($vsql2);
-                if ($vres1)
-                {
-                    $arr = array();
-                    $err = array('Code' => 0, 'Msg' => 'Password Successfully Changed');
-                }
-                else
-                {
-                    $arr = array();
-                    $err = array('Code' => 1, 'Msg' => 'Password failed to change');
-                }
-           // }
-           /* else
-            {
-                $arr = array();
-                $err = array('Code' => 1, 'Msg' => 'Old Password Not Matching');
-            }*/
             $result = array('results' => $arr, 'error' => $err);
             return $result;
         }
