@@ -14,6 +14,13 @@ switch($action)
            $result = $obj->sitemapper($params);
            $res = $result;
          break;
+
+     case 'generalMap':
+            include APICLUDE.'class.siteMap.php';
+            $obj = new site($db['iftosi']);
+            $result = $obj->generalMap($params);
+            $res = $result;
+          break;
 //----------------------------Check Owner--------------------------------
 
 //  localhost/iftosi/apis/index.php?action=getOwnerCheck&uid=3&pid=2
@@ -482,7 +489,7 @@ switch($action)
             # IP address is optionall
 //  localhost/iftosi/apis/index.php?action=filLog&uid=7&pid=7&vid=6&ipaddress=192.168.1.1&dflag=1
         case 'filLog':
-           
+
             include APICLUDE.'class.enquiry.php';
             $uid=(!empty($params['uid'])) ? trim($params['uid']) : '';
             $pid=(!empty($params['pid'])) ? trim($params['pid']) : '';
@@ -494,10 +501,10 @@ switch($action)
                 $result = array('results' => $arr, 'error' => $err);
                 $res=$result;
                 break;
-            } 
+            }
             $obj= new enquiry($db['iftosi']);
             $result= $obj->filLog($params);
-            
+
             $res = $result;
             break;
 
@@ -743,8 +750,8 @@ switch($action)
             {
                 $err=array('Code'=>1,'Msg' => 'File Type not Valid');
                 $result=array('result'=>$arr,'error'=>$err);
-                
-                
+
+
             }
             else
             {
@@ -1377,14 +1384,14 @@ switch($action)
             $catid	=(!empty($params['catid'])) ? trim($params['catid']) : '';
             $uid	=(!empty($params['uid'])) ? trim($params['uid']) : '';
          		if(empty($catid) && empty($uid))
-            {                   
+            {
                             	$arr=array();
 				$err=array('code'=> 1,'Msg'=> 'Invalid parameter');
 				$result=array('results'=> $arr,'error'=>$err);
 				$res=$result;
 				break;
             }
-    
+
                     $obj=new product($db['iftosi']);
             	    $result=$obj->getPrdByCatid($params);
             $res=$result;
