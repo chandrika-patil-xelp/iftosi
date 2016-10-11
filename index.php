@@ -749,6 +749,12 @@ switch ($action) {
                       {
                           $meta_title .= $prdDet['attr_details']['shape'].' Shaped ';
                       }
+
+                      if(!empty($meta_title))
+                      {
+                         $meta_title = $meta_title.' Diamond with';
+                      }
+
                       if(!empty($prdDet['attr_details']['cut']))
                       {
                           $meta_title .= $prdDet['attr_details']['cut'].' Cut, ';
@@ -763,7 +769,7 @@ switch ($action) {
                       }
                       if(!empty($prdDet['attr_details']['color']))
                       {
-                          $meta_title .= $prdDet['attr_details']['color'].' Colour, ';
+                          $meta_title .= 'and '.$prdDet['attr_details']['color'].' Colour';
                       }
                       // if(!empty($prdDet['attr_details']['polish']))
                       // {
@@ -773,10 +779,7 @@ switch ($action) {
                       // {
                       //     $meta_title .= 'With '.$prdDet['attr_details']['symmetry'].' Symmetry ';
                       // }
-                      if(!empty($meta_title))
-                      {
-                         $meta_title = $meta_title.' Diamond';
-                      }
+
                 }
                 $vndrInfo = $prdInfo['vendor_details'];
                 foreach ($vndrInfo as $key => $value)
