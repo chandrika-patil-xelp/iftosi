@@ -928,7 +928,7 @@ switch ($action) {
                 {
                     $prdId = explode(' ', $prdId);
                     $prdList = $prdId = $pid = $prdId[1];
-                  echo  $prdInfoUrl = APIDOMAIN . 'index.php?action=getPrdById&prdid=' . $prdId;die;
+                    $prdInfoUrl = APIDOMAIN . 'index.php?action=getPrdById&prdid=' . $prdId;
                     $prdInfo = $comm->executeCurl($prdInfoUrl);
                     if (!empty($prdInfo) && !empty($prdInfo['results']) && !empty($prdInfo['error']) && empty($prdInfo['error']['errCode']))
                     {
