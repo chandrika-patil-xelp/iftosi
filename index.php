@@ -752,7 +752,7 @@ switch ($action) {
 
                       if(!empty($meta_title))
                       {
-                         $meta_title = $meta_title.' Diamond with';
+                         $meta_title = $meta_title.' Diamond With ';
                       }
 
                       if(!empty($prdDet['attr_details']['cut']))
@@ -765,7 +765,7 @@ switch ($action) {
                       }
                       if(!empty($prdDet['attr_details']['clarity']))
                       {
-                          $meta_title .= $prdDet['attr_details']['clarity'].' Clarity, ';
+                          $meta_title .= $prdDet['attr_details']['clarity'].' Clarity ';
                       }
                       if(!empty($prdDet['attr_details']['color']))
                       {
