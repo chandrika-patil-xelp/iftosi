@@ -57,7 +57,8 @@ switch ($action) {
                 $pid = $_GET['pid'];
                 $b2bsort = $_GET['b2bsort'];
 
-                if ($sortby) {
+                //if ($sortby) {
+                  if($pid)  {
                     $url = APIDOMAIN . 'index.php?action=removeFromWishlist&uid=' . $uid . '&pid=' . $pid;
                     $res = $comm->executeCurl($url);
                 }
