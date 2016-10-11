@@ -741,38 +741,38 @@ switch ($action) {
                 $meta_title = '';
                 if(!empty($prdDet['attr_details']))
                 {
-                      if(!empty($prdDet['attr_details']['carat']))
+                      if(!empty($prdDet['attr_details']['certified']))
                       {
-                          $meta_title .= $prdDet['attr_details']['carat'].' Carat, ';
+                          $meta_title .= $prdDet['attr_details']['certified'].' Certified ';
                       }
                       if(!empty($prdDet['attr_details']['shape']))
                       {
-                          $meta_title .= $prdDet['attr_details']['shape'].' Shaped, ';
-                      }
-                      if(!empty($prdDet['attr_details']['color']))
-                      {
-                          $meta_title .= $prdDet['attr_details']['color'].' Colour, ';
-                      }
-                      if(!empty($prdDet['attr_details']['clarity']))
-                      {
-                          $meta_title .= $prdDet['attr_details']['clarity'].' Clarity, ';
+                          $meta_title .= $prdDet['attr_details']['shape'].' Shaped ';
                       }
                       if(!empty($prdDet['attr_details']['cut']))
                       {
                           $meta_title .= $prdDet['attr_details']['cut'].' Cut, ';
                       }
-                      if(!empty($prdDet['attr_details']['certified']))
+                      if(!empty($prdDet['attr_details']['carat']))
                       {
-                          $meta_title .= $prdDet['attr_details']['certified'].' Certified, ';
+                          $meta_title .= $prdDet['attr_details']['carat'].' Carat, ';
                       }
-                      if(!empty($prdDet['attr_details']['polish']))
+                      if(!empty($prdDet['attr_details']['clarity']))
                       {
-                          $meta_title .= 'Having '.$prdDet['attr_details']['polish'].' Polish ';
+                          $meta_title .= $prdDet['attr_details']['clarity'].' Clarity, ';
                       }
-                      if(!empty($prdDet['attr_details']['polish']))
+                      if(!empty($prdDet['attr_details']['color']))
                       {
-                          $meta_title .= 'With '.$prdDet['attr_details']['symmetry'].' Symmetry ';
+                          $meta_title .= $prdDet['attr_details']['color'].' Colour, ';
                       }
+                      // if(!empty($prdDet['attr_details']['polish']))
+                      // {
+                      //     $meta_title .= 'Having '.$prdDet['attr_details']['polish'].' Polish ';
+                      // }
+                      // if(!empty($prdDet['attr_details']['polish']))
+                      // {
+                      //     $meta_title .= 'With '.$prdDet['attr_details']['symmetry'].' Symmetry ';
+                      // }
                       if(!empty($meta_title))
                       {
                          $meta_title = $meta_title.' Diamond';
