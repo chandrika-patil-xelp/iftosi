@@ -56,17 +56,17 @@ switch ($action) {
                 $uid = $_GET['uid'];
                 $pid = $_GET['pid'];
                 $b2bsort = $_GET['b2bsort'];
-                
+
                 if ($sortby) {
                     $url = APIDOMAIN . 'index.php?action=removeFromWishlist&uid=' . $uid . '&pid=' . $pid;
                     $res = $comm->executeCurl($url);
                 }
-            
-            
+
+
                  $url = APIDOMAIN . 'index.php?action=getPrdByCatid&catid=' . $catid . '&page=' . $pgno . '&sortby=' . $sortby . '&slist=' . urlencode($slist) . '&clist=' . urlencode($clist) . '&tlist=' . urlencode($tlist) . '&ilist=' . urlencode($ilist) . '&jlist=' . urlencode($jlist) . '&ctid=' . $ctid . '&uid=' . $uid . '&b2bsort=' . $b2bsort;
                 $res = $comm->executeCurl($url);
-            
-                if (!empty($jlist)) 
+
+                if (!empty($jlist))
                 {
                     $url = APIDOMAIN . 'index.php?action=getSubCat';
                     $res1 = $comm->executeCurl($url);
@@ -109,7 +109,7 @@ switch ($action) {
                 break;
 
             case 'updateStatus':
-            
+
                 $vid = (!empty($_GET['userid'])) ? trim($_GET['userid']) : '';
                 $af = (!empty($_GET['af'])) ? trim($_GET['af']) : 0;
                 $userUrl = APIDOMAIN . 'index.php?action=actUser&userid=' . $vid . '&af=' . $af;
@@ -486,7 +486,7 @@ switch ($action) {
 
                 $url = APIDOMAIN . 'index.php?action=getPrdByCatid&uid=' . $uid . '&page=' . $pgno . '&catid=' . $firstid;
                 $res = $comm->executeCurl($url);
-                
+
                 $data = $res['results']['products'];
                 $vrate = $data['vdetail'];
                 $total = $res['results']['total'];
@@ -539,7 +539,7 @@ switch ($action) {
                 $data = $res['results']['products'];
                 $total = $res['results']['total'];
                 $catname = $res['results']['catname'];
-                
+
 
                 $url = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=' . $catid;
                 $res = $comm->executeCurl($url);
@@ -628,6 +628,46 @@ switch ($action) {
                 $url = APIDOMAIN . 'index.php?action=getPrdById&prdid=' . $pid;
                 $res = $comm->executeCurl($url);
                 $prdVars = $data = $prdInfo = $res['results'][$pid];
+                $meta_title = '';
+                if(!empty($prdDet['attr_details']))
+                {
+                      if(!empty($prdDet['attr_details']['carat']))
+                      {
+                          $meta_title .= $prdDet['attr_details']['carat'].' Carat, ';
+                      }
+                      if(!empty($prdDet['attr_details']['shape']))
+                      {
+                          $meta_title .= $prdDet['attr_details']['shape'].' Shaped, ';
+                      }
+                      if(!empty($prdDet['attr_details']['color']))
+                      {
+                          $meta_title .= $prdDet['attr_details']['color'].' Colour, ';
+                      }
+                      if(!empty($prdDet['attr_details']['clarity']))
+                      {
+                          $meta_title .= $prdDet['attr_details']['clarity'].' Clarity, ';
+                      }
+                      if(!empty($prdDet['attr_details']['cut']))
+                      {
+                          $meta_title .= $prdDet['attr_details']['cut'].' Cut, ';
+                      }
+                      if(!empty($prdDet['attr_details']['certified']))
+                      {
+                          $meta_title .= $prdDet['attr_details']['certified'].' Certified, ';
+                      }
+                      if(!empty($prdDet['attr_details']['polish']))
+                      {
+                          $meta_title .= 'Having '.$prdDet['attr_details']['polish'].' Polish ';
+                      }
+                      if(!empty($prdDet['attr_details']['polish']))
+                      {
+                          $meta_title .= 'With '.$prdDet['attr_details']['symmetry'].' Symmetry ';
+                      }
+                      if(!empty($meta_title))
+                      {
+                         $meta_title = $meta_title.' Diamond';
+                      }
+                }
 
                 $vndrInfo = $prdInfo['vendor_details'];
 
@@ -697,11 +737,50 @@ switch ($action) {
                 $uid = $_GET['userid'];
                 $url = APIDOMAIN . 'index.php?action=getPrdById&prdid=' . $pid;
                 $res = $comm->executeCurl($url);
-                $prdVars = $data = $prdInfo = $res['results'][$pid];
-
+                $prdVars = $data = $prdInfo = $prdDet = $res['results'][$pid];
+                $meta_title = '';
+                if(!empty($prdDet['attr_details']))
+                {
+                      if(!empty($prdDet['attr_details']['carat']))
+                      {
+                          $meta_title .= $prdDet['attr_details']['carat'].' Carat, ';
+                      }
+                      if(!empty($prdDet['attr_details']['shape']))
+                      {
+                          $meta_title .= $prdDet['attr_details']['shape'].' Shaped, ';
+                      }
+                      if(!empty($prdDet['attr_details']['color']))
+                      {
+                          $meta_title .= $prdDet['attr_details']['color'].' Colour, ';
+                      }
+                      if(!empty($prdDet['attr_details']['clarity']))
+                      {
+                          $meta_title .= $prdDet['attr_details']['clarity'].' Clarity, ';
+                      }
+                      if(!empty($prdDet['attr_details']['cut']))
+                      {
+                          $meta_title .= $prdDet['attr_details']['cut'].' Cut, ';
+                      }
+                      if(!empty($prdDet['attr_details']['certified']))
+                      {
+                          $meta_title .= $prdDet['attr_details']['certified'].' Certified, ';
+                      }
+                      if(!empty($prdDet['attr_details']['polish']))
+                      {
+                          $meta_title .= 'Having '.$prdDet['attr_details']['polish'].' Polish ';
+                      }
+                      if(!empty($prdDet['attr_details']['polish']))
+                      {
+                          $meta_title .= 'With '.$prdDet['attr_details']['symmetry'].' Symmetry ';
+                      }
+                      if(!empty($meta_title))
+                      {
+                         $meta_title = $meta_title.' Diamond';
+                      }
+                }
                 $vndrInfo = $prdInfo['vendor_details'];
-
-                foreach ($vndrInfo as $key => $value) {
+                foreach ($vndrInfo as $key => $value)
+                {
                     $vndrId = $key;
                     $vndrDtls = $value;
                 }
@@ -778,9 +857,30 @@ switch ($action) {
                     $prdInfoUrl = APIDOMAIN . 'index.php?action=getPrdById&prdid=' . $prdId;
                     $prdInfo = $comm->executeCurl($prdInfoUrl);
                     if (!empty($prdInfo) && !empty($prdInfo['results']) && !empty($prdInfo['error']) && empty($prdInfo['error']['errCode'])) {
-                        $prdVars = $prdInfo = $prdInfo['results'][$prdId];
+                        $prdVars = $prdInfo = $prdDet = $prdInfo['results'][$prdId];
+                        if(!empty($prdDet['attr_details']))
+                        {
+                              if(!empty($prdDet['attr_details']['gold_weight']))
+                              {
+                                  $meta_title .= intval($prdDet['attr_details']['gold_weight']).' Gram ';
+                              }
+                              if(!empty($prdDet['attr_details']['metal']))
+                              {
+                                  $meta_title .= $prdDet['attr_details']['metal'].' ';
+                              }
+                              if(!empty($prdDet['attr_details']['type']))
+                              {
+                                  $meta_title .= $prdDet['attr_details']['type'].' ';
+                              }
+                              if(!empty($prdDet['attr_details']['bullion_design']))
+                              {
+                                  $meta_title .= ' with '.$prdDet['attr_details']['bullion_design'].' Design';
+                              }
+                        }
+
                         $vndrInfo = $prdInfo['vendor_details'];
-                        foreach ($vndrInfo as $key => $value) {
+                        foreach ($vndrInfo as $key => $value)
+                        {
                             $vndrId = $key;
                             $vndrDtls = $value;
                         }
@@ -828,12 +928,12 @@ switch ($action) {
                 {
                     $prdId = explode(' ', $prdId);
                     $prdList = $prdId = $pid = $prdId[1];
-                    $prdInfoUrl = APIDOMAIN . 'index.php?action=getPrdById&prdid=' . $prdId;
+                  echo  $prdInfoUrl = APIDOMAIN . 'index.php?action=getPrdById&prdid=' . $prdId;die;
                     $prdInfo = $comm->executeCurl($prdInfoUrl);
                     if (!empty($prdInfo) && !empty($prdInfo['results']) && !empty($prdInfo['error']) && empty($prdInfo['error']['errCode']))
                     {
                         $prdDet = $prdInfo = $prdInfo['results'][$prdId];
-                        $vndrInfo = $prdInfo['vendor_details'];
+                        $vndrInfo = $prdInfo['vendor_product_details'];
                         foreach ($vndrInfo as $key => $value)
                         {
                             $vndrId = $key;
