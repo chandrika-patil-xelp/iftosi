@@ -165,6 +165,7 @@ function ifUndefined(val1, val2) {
  */
 function addEventListeners(target, types, handler) {
     each(splitStr(types), function(type) {
+        if(target)
         target.addEventListener(type, handler, false);
     });
 }
@@ -320,8 +321,11 @@ function uniqueId() {
  * @returns {DocumentView|Window}
  */
 function getWindowForElement(element) {
+    if(element)
+    {
     var doc = element.ownerDocument;
     return (doc.defaultView || doc.parentWindow);
+    }
 }
 
 var MOBILE_REGEX = /mobile|tablet|ip(ad|hone|od)|android/i;

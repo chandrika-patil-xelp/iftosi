@@ -1394,7 +1394,9 @@ switch($action)
 
                     $obj=new product($db['iftosi']);
             	    $result=$obj->getPrdByCatid($params);
-            $res=$result;
+                    $res=$result;
+                   
+           
             break;
 
 //  localhost/iftosi/apis/index.php?action=getPrdById&prdid=2&catid=3&page=1&limit=1
@@ -2049,6 +2051,21 @@ echo '</pre>';
           $result= $obj->customerList($params);
           $res=$result;
           break;
+//http://localhost/iftosi/apis/index.php?action=getVendorList     
+    case 'getVendorList':
+         include APICLUDE.'class.vendor.php';
+          $obj = new vendor($db['iftosi']);
+          $result= $obj->getVendorList($params);
+          $res=$result;
+          break;
+//http://localhost/iftosi/apis/index.php?action=showVendorProductList&vid=274
+       case 'showVendorProductList':
+         include APICLUDE.'class.vendor.php';
+          $obj = new vendor($db['iftosi']);
+          $result= $obj->showVendorProductList($params);
+          $res=$result;
+          break;
+      
 
 //---------------------------------------------------------------------------
     default :

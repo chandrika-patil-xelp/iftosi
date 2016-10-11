@@ -155,6 +155,7 @@ class site extends DB
 
         $urls = APIDOMAIN."index.php?action=getSubCat";
         $res1  = $comm->executeCurl($urls);
+        $res2   = $this->subUrls($res1);
 
         //echo "<pre>";print_r($res1);die;
 
@@ -196,10 +197,18 @@ class site extends DB
                       31=>'Contact-Us',
                       32=>'Sign-Up',
                       33=>'Vendor-Sign-Up',
-                      34=>'Terms-Of-Listing'
+                      34=>'Terms-Of-Listing',
+                      35=>'jewelley/ct-10001',
+                      36=>'diamonds/ct-10000',
+                      37=>'bullion/ct-10002',
+                      38=>'bullion/coins/ct-10037',
+                      39=>'bullion/bars/ct-10002'
                   );
+            $resultArr = array_merge($arr,$res2);
+                
+            //echo "<pre>";print_r($resultArr);die;
 
-            foreach($arr as $ky=>$vl)
+            foreach($resultArr as $ky=>$vl)
             {
               $data .= '<url>';
               $data .= '<loc>';
@@ -208,13 +217,41 @@ class site extends DB
               $data .= '<changefreq>weekly</changefreq>';
               $data .= '<priority>1.0</priority>';
               $data .= '</url>';
+              $data .= "\n";
+              
             }
         $data .= '</urlset>';
-        echo "<pre>";print_r($data);die;
         $filename = WEBROOT."generalUrl.xml";
         $myfile = fopen($filename, "w") or die("Unable to open file");
         fwrite($myfile, $data);
         fclose($myfile);
         echo "Success";
     }
+
+    public function subUrls($res)
+    {
+        $jewel = $res['results']['root'][1]['cat_name'];
+        $i = 0;
+        foreach($res['results']['root'][1]['subcat'] as $key => $val)
+        { 
+          $dname = preg_replace('/[^a-zA-Z0-9]+/', ' ', $val['cat_name']);
+          $dname = ereg_replace("[ \t\n\r]+", " ", $dname);
+          $dname = strtolower(str_replace(" ", "-", $dname));
+          $link[$i] = strtolower($jewel).'/'.$dname.'/ct-'.$val['catid'];
+          $i++;
+          foreach($val['subcat'] as $ky => $vl)
+          {
+            $cname = preg_replace('/[^a-zA-Z0-9]+/', ' ', $vl['cat_name']);
+            $cname = ereg_replace("[ \t\n\r]+", " ", $cname);
+            $cname = strtolower(str_replace(" ", "-", $cname));
+            $link[$i] = strtolower($jewel).'/'.$dname.'/'.$cname.'/ct-'.$vl['catid'];
+            $i++;
+          }
+        }
+        return $link;
+       
+        
+    }
+    
+    
 }

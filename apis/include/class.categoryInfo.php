@@ -12,7 +12,7 @@ class categoryInfo extends DB
 	{
 		if($catid)
 		{
-			$sql = "SELECT p_catid, catid, cat_name FROM tbl_category_master where p_catid=".$catid." order by catid ASC";
+			$sql = "SELECT p_catid, catid, cat_name FROM tbl_category_master where p_catid=".$catid."  order by catid ASC";
 		}
 		else
 		{

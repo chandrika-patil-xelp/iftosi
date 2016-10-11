@@ -910,7 +910,7 @@
         }
 
         public function getPrdByCatid($params)
-        {
+        {               
       			$page   = ($params['page'] ? $params['page'] : 1);
       			$limit  = ($params['limit'] ? $params['limit'] : 15);
       			if($params['uid'])
@@ -1781,6 +1781,7 @@
         					$tmp_arr1 = (!empty($arr1)) ? (array_values($arr1)) : null;
         					$arr1 = array('filters'=>$data,'products'=>$tmp_arr1,'total'=>$total,'getdata'=>$params,'catname'=>$catname);
         					$err = array('errCode'=>0,'errMsg'=>'Details fetched successfully');
+                                              
         				}
         				else
         				{
@@ -1814,8 +1815,8 @@
                                     						carat,
                                     						color,
                                     						certified,
-                                                other_certificate,
-                                                certificate_url,
+                                                                                other_certificate,
+                                                                                certificate_url,
                                     						metal,
                                     						shape,
                                     						clarity,
@@ -1842,7 +1843,7 @@
                                     						p_discb2b as discountb2b,
                                     						b2b_price as b2bprice,
                                     						type,
-                                                combination,
+                                                                                combination,
                                     						bullion_design,
                                     						tabl as tab,
                                     						num_gemstones,
@@ -3034,6 +3035,10 @@
 			return $results;
 		}
 
+                
+                
+                
+                
 		public function uploadCertificate($params)
 		{
 			$files = (!empty($params['file'])) ? $params['file'] : '';

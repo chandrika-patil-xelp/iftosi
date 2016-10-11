@@ -66,6 +66,7 @@ switch ($action) {
 
                  $url = APIDOMAIN . 'index.php?action=getPrdByCatid&catid=' . $catid . '&page=' . $pgno . '&sortby=' . $sortby . '&slist=' . urlencode($slist) . '&clist=' . urlencode($clist) . '&tlist=' . urlencode($tlist) . '&ilist=' . urlencode($ilist) . '&jlist=' . urlencode($jlist) . '&ctid=' . $ctid . '&uid=' . $uid . '&b2bsort=' . $b2bsort;
                 $res = $comm->executeCurl($url);
+                
 
                 if (!empty($jlist))
                 {
@@ -508,7 +509,7 @@ switch ($action) {
                 $pgno = ($_GET['pgno'] ? $_GET['pgno'] : 1);
                 $catid = $_GET['catid'];
                 $url = APIDOMAIN . 'index.php?action=getPrdByCatid&catid=' . $catid . '&page=' . $pgno . '&slist=' . $slist;
-                $res = $comm->executeCurl($url);
+                $res = $comm->executeCurl($url);                
                 $data = $res['results']['products'];
                 $total = $res['results']['total'];
                 $catname = $res['results']['catname'];
@@ -564,11 +565,14 @@ switch ($action) {
                 $catid = $_GET['catid'];
                 $url = APIDOMAIN . 'index.php?action=getPrdByCatid&catid=' . $catid . '&page=' . $pgno;
                 $res = $comm->executeCurl($url);
+               
+              
+              
                 $data = $res['results']['products'];
                 $total = $res['results']['total'];
                 $catname = $res['results']['catname'];
 
-                $url = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=' . $catid;
+                 $url = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=' . $catid;
                 $res = $comm->executeCurl($url);
                 $fil = $res['results']['attributes'];
 

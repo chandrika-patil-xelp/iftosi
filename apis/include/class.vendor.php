@@ -204,7 +204,8 @@ class vendor extends DB
             $i=-1;
             $vpmap=array();
             while($row1=$this->fetchData($vres))
-            {   $i++;
+            {   
+                $i++;
                 $vpmap['product_id'][$i]=$row1['product_id'];
                 $vpmap['vendor_price'][$i]=$row1['vendor_price'];
                 $vpmap['vendor_quantity'][$i]=$row1['vendor_quantity'];
@@ -270,7 +271,6 @@ class vendor extends DB
 
     public function getVProductsByBcode($params)
     {
-        
         $page   = ($params['page'] ? $params['page'] : 1);
         $limit  = ($params['limit'] ? $params['limit'] : 15);
         $catid = ($params['catid'] ? $params['catid'] : 10000);
@@ -4399,6 +4399,162 @@ class vendor extends DB
         }
         return $c;
     }
-}
+    
+    
+     public function getVendorList()
+    {
+          $sql = "SELECT
+                            orgName,
+                            fulladdress,
+                            city,
+                            country,
+                            state,
+                            telephones,
+                            officecity,
+                            contact_person,
+                            contact_mobile,
+                            memship_Cert,
+                            showroom_name,
+                            no_showrooms
+                           
+                    FROM
+                            tbl_vendor_master
+                    WHERE
+                            active_flag=1
+                    AND  
+                            is_complete=2 ";
+           
+           $res = $this->query($sql);
+           $row = $this->numRows($res);
+           $data= $this->fetchData($res);
+           
+            if($row>0)
+            {    
+                $arr = array('Success:');
+                $err = array('code'=>0,'msg'=>'Details Fetched Successfully !');
+            }
+            else 
+            {
+                $arr = array('Error:');
+                $err = array('code'=>0,'msg'=>'Vendor Not Found !');
+            }
+        
+            $result=array('result'=>$arr,'error'=>$err);
+            return $result;    
+            
+        }
+
+        public function showVendorProductList($params)
+        {
+             $uid = (!empty($params['uid'])) ? trim(urldecode($params['uid'])) : '';
+             $vid = (!empty($params['vid'])) ? trim(urldecode($params['vid'])) : '';
+            /* $sql1= "SELECT
+                                        user_name
+                                FROM 
+                                        tbl_registration
+                                WHERE 
+                                        is_active=1
+                                AND
+                                        " . $params['uid'] . "
+                                IN     
+                                        (select user_id from tbl_registration where is_active=1)";
+                        
+                        $res1 = $this->query($sql1);
+                        $row1 = $this->numRows($res1);
+                    
+                        if(!empty($vid) && !empty($uid))
+                        {
+                            $sql2= "  SELECT
+                                        * 
+                                FROM 
+                                        tbl_product_search
+                                WHERE 
+                                        active_flag=1
+                                AND
+                                        product_id 
+                                IN
+                                        (select product_id from tbl_vendor_product_mapping where vendor_id= " . $params['vid'] . " )";
+                        
+                             $res2 = $this->query($sql2);
+                             $row2 = $this->numRows($res2);
+                             
+                              if($row>0)
+                            {
+                                $arr = array('Success:');
+                                $err = array('code'=>0,'msg'=>'Vendor Product Details Fetched !');
+                            }
+                            else
+                            {
+                                $arr = array('Error:');
+                                $err = array('code'=>0,'msg'=>'No result found !');
+                            }
+                            
+                        }
+                        
+                       
+                        
+           
+                   if(!empty($uid) && $row1>0 )
+                    {
+                      $sql= " SELECT
+                                        * 
+                                FROM 
+                                        tbl_product_search
+                                WHERE 
+                                        active_flag=1
+                                AND
+                                        complete_flag=1";
+                       $res = $this->query($sql);
+                       $row = $this->numRows($res);
+                       $data= $this->fetchData($res);
+              
+                            if($row>0)
+                            {
+                                $arr = array('Success:');
+                                $err = array('code'=>0,'msg'=>'Vendor Product Details Fetched !');
+                            }
+                            else
+                            {
+                                $arr = array('Error:');
+                                $err = array('code'=>0,'msg'=>'No result found !');
+                            }
+                    }
+                  
+                     else
+                    {
+                        $arr = array('Error:');
+                        $err = array('code'=>0,'msg'=>'User yet not registered !');
+                    }
+        
+                      $result=array('result'=>$arr,'error'=>$err);
+                      return $result; 
+                    
+             * 
+             * 
+             */
+                
+             $sql= "SELECT
+                                        user_name
+                                FROM 
+                                        tbl_registration
+                                WHERE 
+                                        is_active=1
+                                AND
+                                        is_vendor=1
+                                AND
+                                       user_id= " . $params['vid'] . "";
+                               
+                        $res = $this->query($sql,1);die;
+                        $row = $this->numRows($res);
+             
+        }
+         
+         
+        
+        
+    }
+
+
+
 
 ?>

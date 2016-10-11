@@ -1248,7 +1248,7 @@
                                     urlkey = \"".$params['ukey']."\"
                                         ";
 
-                $vres1 = $this->query($vsql1,1);die;
+                $vres1 = $this->query($vsql1);
                 $vres2 = $this->query($vsql2);
                 if ($vres1)
                 {
