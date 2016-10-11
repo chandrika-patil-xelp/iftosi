@@ -22,7 +22,8 @@ $(document).ready(function() {
 	});
 
 	$(".wisgDel").bind('click',function(e){
-		e.stopImmediatePropagation();
+            
+                e.stopImmediatePropagation();
 		var catid 	= $('#catid').val();
 		var pgno 	= $('#pgno').val()*1;
 		var uid 	= $('#uid').val();
