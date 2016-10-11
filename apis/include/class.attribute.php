@@ -412,7 +412,7 @@ class attribute extends DB
                            
                             $rowrng = $this->fetchData($resrng);
                             if($priceminval && $pricemaxval && $row1['attr_name'] == 'price' && $params['catid'] == '10001')
-                            {
+                            {   
                                 $maxvl = $pricemaxval;
                                 $minvl = $priceminval;
                             }
@@ -426,7 +426,13 @@ class attribute extends DB
                                 $maxvl = $rowrng['maxval'];
                                 $minvl = $rowrng['minval'];
                             }
-                            $attrs['attribute_range'] = $minvl.'-'.$maxvl;
+                            if($priceminval && $pricemaxval && $row1['attr_name'] == 'price' && $params['catid'] == '10003' || $params['catid'] == '10004'|| $params['catid'] == '10005' || $params['catid'] == '10006' || $params['catid'] == '10007'  || $params['catid'] == '100040' || $params['catid'] == '100041' || $params['catid'] == '100042')
+                            {
+                                $maxvl = $pricemaxval;
+                                $minvl = $priceminval;
+                            }
+                                
+                                $attrs['attribute_range'] = $minvl.'-'.$maxvl;
                         }
                     }
                   
