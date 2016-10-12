@@ -165,6 +165,8 @@
                                 var val = 0;
                                 var moveCount = 0;
                                 var ele = document.getElementById('touch');
+                                if(ele)
+                                {
                                 var mc = new Hammer(ele);
                             
                                 mc.on("panend", function (ev) {
@@ -175,6 +177,7 @@
                                            movePrImg(true);
                                     }
                                 });
+                                }  
 
                                 function movePrImg(flag) {
                                     var totalThumbs = $(".carousel  li").length;
