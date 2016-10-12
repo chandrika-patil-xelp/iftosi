@@ -552,10 +552,21 @@ switch ($action) {
                 $adjacents = 2;
                 //echo "<pre>";print_r($total);die;
                 //include 'template/results.html';
-                if ($totalCnt > 0) {
+                if ($totalCnt > 0)
+                {
                     include 'template/results.html';
-                } else {
-                    include 'template/comingsoon.html';
+                }
+                else
+                {
+                    if(empty($slist))
+                    {
+                        include 'template/comingsoon.html';
+                    }
+                    else
+                    {
+                        include 'template/results.html';
+                    }
+
                 }
                 break;
 
@@ -618,11 +629,14 @@ switch ($action) {
                 $lastpg = ceil($total / 15);
                 $adjacents = 2;
                 //include 'template/bullion_results.html';
-                if ($totalCnt > 0) {
+                // if ($totalCnt > 0)
+                // {
                     include 'template/bullion_results.html';
-                } else {
+                /*}
+                else
+                {
                     include 'template/comingsoon.html';
-                }
+                }*/
                 break;
 
 
@@ -636,42 +650,45 @@ switch ($action) {
                 $meta_title = '';
                 if(!empty($prdDet['attr_details']))
                 {
-                      if(!empty($prdDet['attr_details']['carat']))
+                      if(!empty($prdDet['attr_details']['certified']))
                       {
-                          $meta_title .= $prdDet['attr_details']['carat'].' Carat, ';
+                          $meta_title .= $prdDet['attr_details']['certified'].' Certified ';
                       }
                       if(!empty($prdDet['attr_details']['shape']))
                       {
-                          $meta_title .= $prdDet['attr_details']['shape'].' Shaped, ';
+                          $meta_title .= $prdDet['attr_details']['shape'].' Shaped ';
                       }
-                      if(!empty($prdDet['attr_details']['color']))
+
+                      if(!empty($meta_title))
                       {
-                          $meta_title .= $prdDet['attr_details']['color'].' Colour, ';
+                         $meta_title = $meta_title.' Diamond With ';
                       }
-                      if(!empty($prdDet['attr_details']['clarity']))
-                      {
-                          $meta_title .= $prdDet['attr_details']['clarity'].' Clarity, ';
-                      }
+
                       if(!empty($prdDet['attr_details']['cut']))
                       {
                           $meta_title .= $prdDet['attr_details']['cut'].' Cut, ';
                       }
-                      if(!empty($prdDet['attr_details']['certified']))
+                      if(!empty($prdDet['attr_details']['carat']))
                       {
-                          $meta_title .= $prdDet['attr_details']['certified'].' Certified, ';
+                          $meta_title .= intval($prdDet['attr_details']['carat']).' Carat, ';
                       }
-                      if(!empty($prdDet['attr_details']['polish']))
+                      if(!empty($prdDet['attr_details']['clarity']))
                       {
-                          $meta_title .= 'Having '.$prdDet['attr_details']['polish'].' Polish ';
+                          $meta_title .= $prdDet['attr_details']['clarity'].' Clarity ';
                       }
-                      if(!empty($prdDet['attr_details']['polish']))
+                      if(!empty($prdDet['attr_details']['color']))
                       {
-                          $meta_title .= 'With '.$prdDet['attr_details']['symmetry'].' Symmetry ';
+                          $meta_title .= 'and '.$prdDet['attr_details']['color'].' Colour';
                       }
-                      if(!empty($meta_title))
-                      {
-                         $meta_title = $meta_title.' Diamond';
-                      }
+                      // if(!empty($prdDet['attr_details']['polish']))
+                      // {
+                      //     $meta_title .= 'Having '.$prdDet['attr_details']['polish'].' Polish ';
+                      // }
+                      // if(!empty($prdDet['attr_details']['polish']))
+                      // {
+                      //     $meta_title .= 'With '.$prdDet['attr_details']['symmetry'].' Symmetry ';
+                      // }
+
                 }
 
                 $vndrInfo = $prdInfo['vendor_details'];
@@ -766,7 +783,7 @@ switch ($action) {
                       }
                       if(!empty($prdDet['attr_details']['carat']))
                       {
-                          $meta_title .= $prdDet['attr_details']['carat'].' Carat, ';
+                          $meta_title .= intval($prdDet['attr_details']['carat']).' Carat, ';
                       }
                       if(!empty($prdDet['attr_details']['clarity']))
                       {
@@ -945,8 +962,8 @@ switch ($action) {
                         foreach ($vndrInfo as $key => $value)
                         {
                             $vndrId = $key;
-                            $vndrDtls = $value;
                         }
+                        $vndrDtls = $prdInfo['vendor_details'][$vndrId];
                         $vndrDtls['fulladdress'] = explode(",", $vndrDtls['fulladdress']);
                         foreach ($vndrDtls['fulladdress'] as $key => $value)
                         {
