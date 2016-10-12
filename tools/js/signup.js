@@ -100,7 +100,13 @@ $('#pr_mobile').focus(function (){
             var uType = $('#isVendor').val();
 
                     setTimeout(function () {
-                            if(pr_name.length==0 || isNaN(pr_name)!==true || (n.test(pr_name)== false)) {
+                           if(pr_name.length==0 ||pr_name == '' )
+                            {
+                            customStorage.toast(0,'Please Enter the Name');
+                                    $('#pr_name').focus();
+                                    return false;
+                            }
+                            else if(pr_name.length==0 || isNaN(pr_name)!==true || (n.test(pr_name)== false)) {
                                     customStorage.toast(0,'Invalid format for Name');
                                     $('#pr_name').focus();
                                     return false;
@@ -113,6 +119,12 @@ $('#pr_mobile').focus(function (){
                             else if(cityid == '') {
                                     customStorage.toast(0,'Choose the city from the list');
                                     $('#pr_cityid').focus();
+                                    return false;
+                            }
+                            else if(pr_mobile=='' || pr_mobile.length==0)
+                            {
+                                 customStorage.toast(0,'Please Enter the Mobile no.');
+                                    $('#pr_name').focus();
                                     return false;
                             }
                             else if(pr_mobile=='' || pr_mobile.length!=10 || isNaN(pr_mobile)) {

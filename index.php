@@ -384,6 +384,8 @@ switch ($action) {
                 break;
             case 'privacy':
                 $page = 'privacy';
+                $meta_description="Policy discloses IFtoSI’s information practices including the type of information being collected, method, use and sharing of such information.";
+                $meta_keywords ="privacy policy, information practices, method of information collection, information sharing, IFtoSI.";
                 include 'template/privacy.html';
                 break;
 
@@ -533,6 +535,9 @@ switch ($action) {
 
             case 'diamonds':
                 $page = 'diamonds';
+                $meta_description="Buy 100% certified diamond jewellery online from your favorite jeweller. Compare product prices among best of merchants, book online and collect from store.";
+                $meta_keywords ="buy diamond jewellery online, online diamond jewellery, diamond jewellery online, diamond jewellery designs, diamond jewellery price, diamond jewellery india, online diamond jewellery shopping, online jewellery shopping store, gold jewellery, online jewellery india.";
+              
                 $slist = $_GET['slist'];
                 $pgno = ($_GET['pgno'] ? $_GET['pgno'] : 1);
                 $catid = $_GET['catid'];
@@ -572,8 +577,57 @@ switch ($action) {
 
             case 'jewellery':
                 $page = 'jewellery';
+                $meta_description="Buy jewellery conveniently from most famous jewellery retailers in India. Comprehensive range of selections in rings, earrings, pendants, necklace and bangles.";
+                $meta_keywords ="jewellery online India, diamond jewellery, gold jewellery, fine jewellery, solitaire rings, online jewellery, gold jewellery online, online diamond buying, jewellery online shop, best way to buy jewellery, solitaire pendant, diamond necklace, gold bangles.";
+              
                 $pgno = (!empty($_GET['pgno']) ? $_GET['pgno'] : 1);
                 $catid = $_GET['catid'];
+                
+                if($catid==10003)
+                {
+                    $meta_description="IFtoSI brings to you an unmatched collection of diamond, gold & silver rings. The collection includes some of the best designs and combinations available with most renowned merchants in India.";
+                    $meta_keywords ="gold rings, diamond rings, silver rings, office wear, daily wear, party wear, gemstone, cocktail, white gold, only diamonds, best gold ring design, popular diamond ring design, platinum design, polki design, rings for man, best diamond ring online.";
+                }
+                else if($catid==10004)
+                {
+                    $meta_description="IFtoSI brings together the best collection of diamond and gold earrings available in India. Choose from the widest range from retailers in different cities, compare prices and book online.";
+                    $meta_keywords ="designer earring, daily wear earring, office purpose earring, earrings design, earrings for party wear, earrings from trusted sellers, branded gold earrings, diamond earrings from trusted dealers, best earring design in India, gold earrings at best prices.";
+                }
+                else if($catid==10005)
+                {
+                    $meta_description="Order gold and diamond pendants online from the most trusted retialers in India. Best prices and quality guaranteed as you get to compare products from different sellers in India.";
+                    $meta_keywords ="pendants for women, online order pendants, buy pendants online, diamond pendants, gold pendants, best pendants in India, party wear pendants, daily wear pendant designs, office wear pendants, formal pendant designs, simple pendant designs, pendants with gorgeous design, fashion pendants, pendants with discounts, pendant set online.";
+                }
+                else if($catid==10006)
+                {
+                    $meta_description="Choose gold and diamond necklace sets online from the most trusted dealers in India. Exquite designs that give gorgeous looks. Satisfaction guaranteed as you get to compare necklaces from multiple sellers in India.";
+                    $meta_keywords ="latest necklace design, gold necklace from trusted sellers, diamond necklace with international certification, fashion necklaces, best necklace design in India, order necklace sets online, best collection of necklace online, trusted necklace seller, casual wear necklace, party wear necklace.";
+                }
+                else if($catid==10007)
+                {
+                    $meta_description="Unmatched collection Bangles and Bracelets online at best prices in India. Diamond and gold bangles, bracelets with fancy and classy design to complement your personality.";
+                    $meta_keywords ="bangles online shopping, online buy bangles, bangles for women, bangles online, bangles design, gold bangles, bangle bracelets, bangles, designer bangles, fancy bangles online, bangles set, ladies bangles, bangles jewellery, traditional bangles, gold bracelet for men, best bracelet design.";
+                }
+                else if($catid==100040)
+                {
+                    $meta_description="Buy nosepins from India's best seller. Book online from a wide selection that comes with latest designs. Talk to the seller directly and pick up from his store.";
+                    $meta_keywords ="gold & diamond nosepins, precious nosepins, nosepins online, designer nose pins online, diamond nosepins, gold nose pins, designer nose pins, buy nose pins online, best nose pin design, silver nose pins online india, silver nose pins, nose pins silver, silver nose pins online india.";
+                }
+                else if($catid==100041)
+                {
+                    $meta_description="All types of mangalsutras are available with IFtoSI. Top mangalsutra sellers in India showcase their products in the platform. Choose the one you like, contact the dealer and collect after paying the agreed amount.";
+                    $meta_keywords ="mangalsutra chain online india, diamond mangalsutras, mangalsutra in diamond, gold mangalsutra in India, best mangalsutra design in india, best place to buy mangalsutra in india, order mangalsutra online, see the best collection of mangalsutra, mangalsutra, mangalsutra online, online mangalsutra, buy mangalsutra online, artificial mangalsutra, mangalsutra designs, traditional mangalsutra, gold mangalsutra designs.";
+                }
+                else if($catid==100042)
+                {
+                    $meta_description="Buy polki jewellery in India directly from dealers. Polki from your favorite sellers are listed in iftosi.com Place order online and pay after see and confirm the product.";
+                    $meta_keywords ="polki jewellery online india, polki sets online, traditional jewellery online, polki earring, polki set, polki pendant, doamond polki design, polki design in gold, best silver polki design, jadau jewellery in india, polki nosepin, jadau mangalsutra, jadau sets, kundan sets, traditional polki jewellery online purchase.";
+                }
+                else
+                {
+                    $meta_description="Buy jewellery conveniently from most famous jewellery retailers in India. Comprehensive range of selections in rings, earrings, pendants, necklace and bangles.";
+                    $meta_keywords ="jewellery online India, diamond jewellery, gold jewellery, fine jewellery, solitaire rings, online jewellery, gold jewellery online, online diamond buying, jewellery online shop, best way to buy jewellery, solitaire pendant, diamond necklace, gold bangles.";
+                }
                 $url = APIDOMAIN . 'index.php?action=getPrdByCatid&catid=' . $catid . '&page=' . $pgno;
                 $res = $comm->executeCurl($url);
                
@@ -583,7 +637,7 @@ switch ($action) {
                 $total = $res['results']['total'];
                 $catname = $res['results']['catname'];
 
-                 $url = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=' . $catid;
+                $url = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=' . $catid;
                 $res = $comm->executeCurl($url);
                 $fil = $res['results']['attributes'];
 
@@ -611,6 +665,9 @@ switch ($action) {
                 break;
             case 'bullion':
                 $page = 'bullion';
+                $meta_description="IFtoSI brings together the bullion dealers and famous jewellery retailers in India. Book your bullion online from your favorite merchant and collect from store after you satisfied about the purity and design.";
+                $meta_keywords ="buy bullion online india, gold bullion online, gold bullion online india, buy gold coin online, book gold biscuit online, gold bar, bullion bar, bullion trading online, trusted bullion seller, best pricing for bullion, book gold bullion online, how to buy bullion online.";
+              
                 $pgno = ($_GET['pgno'] ? $_GET['pgno'] : 1);
                 $catid = $_GET['catid'];
                 $url = APIDOMAIN . 'index.php?action=getPrdByCatid&catid=' . $catid . '&page=' . $pgno;
@@ -1296,10 +1353,16 @@ switch ($action) {
 
             case 'about_us':
                 $page = 'about-us';
+                $meta_description="IFtoSI is an online marketplace for diamond, jewellery & bullion purchases. We bring together best of sellers to present you with wide selection at best prices.";
+                $meta_keywords ="About us, online jewellery marketplace, online jewellery seller, about IFtoSI, what is IFtoSI.";
+                
                 include 'template/about_us.html';
                 break;
             case 'contact_us':
                 $page = 'contact-Us';
+                $meta_description="Click the link above to contact IFtoSI - The best platform to buy diamond, fine jewellery and bullion. We bring to you best sellers with wide selection at best prices..";
+                $meta_keywords ="Contact IFtoSI, Call IFtoSI, email IFtoSI.";
+                
                 include 'template/contactUs.html';
                 break;
 
@@ -1315,11 +1378,17 @@ switch ($action) {
 
             case 'terms_conditions':
                 $page = 'terms-and-conditions';
+                $meta_description="Terms of Service constitute a contract between IFtoSI and you as a registered user on the Website. If you do not agree to these Terms you must not register yourself.";
+                $meta_keywords ="terms of service, IFtoSI, terms & conditions.";
+
                 include 'template/terms_conditions.html';
                 break;
 
             case 'terms_of_listing':
                 $page = 'terms_of_listing';
+                $meta_description="IFtoSI enables sellers of diamonds, jewellery, and bullion to list and market their goods, and connect with prospective buyers thereby connecting Merchants and Customers.";
+                $meta_keywords ="seller agreement, marketplace regulations, marketplace rules, IFtoSI agreement with sellers.";
+
                 include 'template/terms_of_listing.html';
                 break;
 
@@ -1331,6 +1400,9 @@ switch ($action) {
 
             case 'faq':
                 $page = 'faq';
+                 $meta_description="Here we have listed answers to all questions about jewellery online purchase from IFtoSI. Questions range from credibility of sellers to payment method to home delivery.";
+                 $meta_keywords ="FAQ, FAQs, online jewellery purchase, IFtoSI, answers to jewellery procedures.";
+                
                 include 'template/faq.html';
                 break;
 
@@ -1380,6 +1452,9 @@ switch ($action) {
 
             default:
                 $page = 'index';
+                $meta_description="Your favourite jeweller now has a new address, IFtoSI. We bring together best of India's jewellery & diamond merchants on one platform. Book Online & pay Offline.";
+                $meta_keywords ="jewellery, fine jewellery, bullion, fashion jewellery, diamond jewellery, gold jewellery, indian jewellery, designer jewellery, online jewellery shopping, online jewellery shopping india, jewellery buying websites, best jewellery shop";
+                
 
                 $url = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=10000';
                 $res = $comm->executeCurl($url);
