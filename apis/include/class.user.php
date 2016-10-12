@@ -1015,6 +1015,7 @@
                                     user_name,
                                     logmobile,
                                     email
+                                    
                    FROM
                                     tbl_registration
                    WHERE

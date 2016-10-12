@@ -128,10 +128,9 @@ function Common() {
                 {
                     var tmstmp = new Date().getTime();
                     $.ajax({url: DOMAIN + "apis/index.php?action=viewAll&uid=" + uid+"&timestamp="+tmstmp, success: function (result)
-                        {
+                        {   
                             var obj = jQuery.parseJSON(result);
                             var isactive = obj.results[1].active_flag;
-
                             if (isactive == 1 || isactive == '1')
                             {
                                 var catid1=customStorage.readFromStorage('busiType').charAt(0);

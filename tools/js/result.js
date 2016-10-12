@@ -115,6 +115,15 @@ $(document).ready(function() {
         toValue: totalCnt,
         delimiter: ',',
         onStart: function() {
+            var val=$('#resultCount').text();
+            if(val < 2)
+            { 
+                $('#totalResultsDiv').children().html('<span class="resultCount">'+val+'</span> item in your wishlist');
+            }
+            else
+            {
+               $('#resultCount').text(val); 
+            }
             isStop = true;
         }
     });
