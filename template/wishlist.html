@@ -7,7 +7,9 @@
             <div id="dragTarget" class="drag-target" style="touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); left: 250px; -webkit-user-select: none; width: 50%;"></div>
             <div class="totalResultsDiv">
                 <div class="wrapperMax fmOpenL">
-                   <span id="resultCount"><?php echo count($data);?></span> items in your wishlist
+                   <span id="resultCount"><?php echo count($data);?></span> <?php if(count($data)>1) { echo "items";} else{
+                   echo "item";} ?> in your wishlist
+                   
                 </div>
             </div>
             <div class="listCont">

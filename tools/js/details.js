@@ -168,7 +168,18 @@ $(document).ready(function () {
             {
                 if ($(this).hasClass('iconCall'))
                 {
-                    $('.lgTitle').html('Submit details to get Vendor Details');
+                    if( pageName == 'diamond_details')
+                    {
+                       $('.lgTitle').html('Submit details to get Merchant');
+                    }
+                    else if( pageName = 'jewellery_details')
+                    {
+                        $('.lgTitle').html('Submit details to get  Jewellers');
+                    }
+                    else
+                    {
+                         $('.lgTitle').html('Submit details to get Vendor');
+                    }
                 } else if ($(this).hasClass('iconMessage'))
                 {
                     $('.lgTitle').html('Submit details to get SMS & EMAIL');
