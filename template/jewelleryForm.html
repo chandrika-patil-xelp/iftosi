@@ -401,13 +401,13 @@
                                                                     $filval = explode(",", $value['attribute_values']);
                                                                     foreach ($filval as $ky => $vl)
                                                                     {
-                                                                      if($attr['diamond_shape'][$curIndex] == 'Bugget' && $attr['isBugget'] == 'True')
+                                                                      if($attr['diamond_shape'][$curIndex] == 'Baguette' && $attr['isBugget'] == 'True')
                                                                       {
                                                                     ?>
                                                                           <div id="<?php echo $vl; ?>_<?php echo $curDiv; ?>" class="shapeComm transition300 ripplelink <?php echo $vl; ?> <?php echo (strtolower($vl) == 'emerald') ? 'shapeSelected' : ''; ?>" onclick="checkDiamondShape(this,<?php echo $curDiv; ?>);">
                                                                     <?php
                                                                        }
-                                                                      else if($attr['diamond_shape'][$curIndex] !== 'Bugget')
+                                                                      else if($attr['diamond_shape'][$curIndex] !== 'Baguette')
                                                                       {
                                                                     ?>
                                                                           <div id="<?php echo $vl; ?>_<?php echo $curDiv; ?>" class="shapeComm transition300 ripplelink <?php echo $vl; ?> <?php echo (strtolower($attr['diamond_shape'][$curIndex]) == strtolower($vl)) ? 'shapeSelected' : ''; ?>" onclick="checkDiamondShape(this,<?php echo $curDiv; ?>);">

@@ -256,13 +256,25 @@ $(document).ready(function () {
         var ur_cityid = $('#ur_cityid').val();
         var ur_email = $('#ur_email').val();
         var n = /^[A-Za-z\+*?\s]+$/;
-
-        if (ur_mobile == '' || ur_mobile.length != 10 || isNaN(ur_mobile))
+         if(ur_mobile == '')
+         {
+            customStorage.toast(0, 'Please Enter Mobile no');
+            $('#ur_mobile').focus();
+            return false;
+         }
+        else if (ur_mobile.length != 10 || isNaN(ur_mobile))
         {
             customStorage.toast(0, 'Invalid Format for Mobile');
             $('#ur_mobile').focus();
             return false;
-        } else if (ur_name.length == 0 || isNaN(ur_name) !== true  || (n.test(ur_name) === false))
+        }
+        else if(ur_name.length == 0)
+        {
+            customStorage.toast(0, 'Please Enter the name');
+            $('#ur_mobile').focus();
+            return false;
+        }
+        else if (isNaN(ur_name) !== true  || (n.test(ur_name) === false))
         {
             customStorage.toast(0, 'Invalid Format for Name');
             $('#ur_name').focus();

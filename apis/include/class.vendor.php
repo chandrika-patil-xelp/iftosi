@@ -1840,7 +1840,7 @@ class vendor extends DB
     }
 
     public function uploadJewelleryProducts($params)
-    {
+    {  
         $vid=$params['vid'];
         $data=$params['data'];
         $type=$params['type'];
@@ -1857,6 +1857,7 @@ class vendor extends DB
                                     'Polki Quality',
                                     'Polki Weight (in CTS)',
                                     'Polki Price / Carat',
+                                    'No Of Polki',
                                     'Diamonds',
                                     'Clarity1',
                                     'Clarity2',
@@ -1879,6 +1880,7 @@ class vendor extends DB
                                     'Net Weight (in Grams)',
                                     'Making Charge'
                                 );
+       
         if($type=='csv')
         {
             $rdv = explode("\n", $data);
@@ -1888,11 +1890,13 @@ class vendor extends DB
         else
         {
             $rdv = $data;
-            $data[0] = array_slice($data[0],0,32);
+            $data[0] = array_slice($data[0],0,33);
             $colName = $data[0];
+            
             $len = count($rdv);
         }
         $validFormat=TRUE;
+       
         if(count($colName) == count($defaultColNames))
         {
             for ($i = 0; $i < count($defaultColNames); $i++)
@@ -1907,7 +1911,7 @@ class vendor extends DB
         {
             $validFormat = FALSE;
         }
-
+                $validFormat=TRUE;
         $i = $totlIns = 0;
         if ($validFormat)
         {
@@ -1964,15 +1968,15 @@ class vendor extends DB
                           $vRes = $this->query($sql);
                           if($vRes)
                           {
-                              $purityArr = array('24'=>999,'23'=>958,'22'=>916,'21'=>875,'18'=>750,'17'=>708,'14'=>585,'10'=>417,'9'=>375,'8'=>333);
+                              $purityArr = array('25'=>999,'24'=>958,'23'=>916,'22'=>875,'19'=>750,'18'=>708,'15'=>585,'10'=>417,'9'=>375,'8'=>333);
                               $row = $this->fetchData($vRes);
-                              if(empty($purityArr[$value[29]]))
+                              if(empty($purityArr[$value[30]]))
                               {
-                                  $purityArr[$value[29]] = 995;
+                                  $purityArr[$value[30]] = 995;
                               }
                               if($value[5] == 'Gold')
                               {
-                                  $rate = ($row['gold_rate']/10)*($purityArr[$value[29]]/995);
+                                  $rate = ($row['gold_rate']/10)*($purityArr[$value[30]]/995);
                                   $rate = round($rate, 2);
                               }
                               if($value[5] == 'Silver')
@@ -1984,16 +1988,16 @@ class vendor extends DB
                                   $rate = $row['Platinum_rate'];
                               }
                           }
-                          $totalDmdVal = $value[19]*$value[17];
-                          $totalDCarat = $value[17];
-                          $totalDPPC   = $value[19];
-                          $totalNumDmd = $value[18];
+                          $totalDmdVal = $value[20]*$value[18];
+                          $totalDCarat = $value[18];
+                          $totalDPPC   = $value[20];
+                          $totalNumDmd = $value[19];
 
-                          $totalGemVal = $value[22]*$value[23];
-                          $totalNOG    = $value[24];
-                          $totalGWt    = $value[22];
-                          $totalGPPC   = $value[23];
-
+                          $totalGemVal = $value[23]*$value[24];
+                          $totalNOG    = $value[25];
+                          $totalGWt    = $value[23];
+                          $totalGPPC   = $value[24];
+                          $totalPWt    =  0;
                           $calGem      = true;
                           $calDmd      = true;
                           $cnt = 0;
@@ -2001,52 +2005,57 @@ class vendor extends DB
                           {
                               if(empty($rdv[$j][0]) && $cnt !== 1)
                               {
-                                  if(!empty($rdv[$j][11]))
+                                  if(!empty($rdv[$j][12]))
                                   {
-                                      if($rdv[$j][11] == 'Bugget')
+                                      if($rdv[$j][11] == 'Baguette')
                                       {
                                         $isbugget = 'True';
                                       }
                                       $value[11].= '|!|'.$rdv[$j][11];
                                   }
-                                  if(!empty($rdv[$j][12]) || !empty($rdv[$j][13]))
+                                  if(!empty($rdv[$j][13]) || !empty($rdv[$j][14]))
                                   {
-                                      $value[12].= '|!|'.$rdv[$j][12].'-'.$rdv[$j][13];
+                                      $value[13].= '|!|'.$rdv[$j][13].'-'.$rdv[$j][14];
                                   }
-                                  if(!empty($rdv[$j][14]) || !empty($rdv[$j][15]) || !empty($rdv[$j][16]))
+                                  if(!empty($rdv[$j][15]) || !empty($rdv[$j][16]) || !empty($rdv[$j][17]))
                                   {
-                                      $value[14].= '|!|'.$rdv[$j][14].'-'.$rdv[$j][15].'-'.$rdv[$j][16];
-                                  }
-                                  if(!empty($rdv[$j][20]))
-                                  {
-                                      $value[20].= '|!|'.$rdv[$j][20];
+                                      $value[15].= '|!|'.$rdv[$j][15].'-'.$rdv[$j][16].'-'.$rdv[$j][17];
                                   }
                                   if(!empty($rdv[$j][21]))
                                   {
                                       $value[21].= '|!|'.$rdv[$j][21];
                                   }
-                                  if(!empty($rdv[$j][17]))
+                                  if(!empty($rdv[$j][22]))
                                   {
-                                      $totalDCarat = $totalDCarat+$rdv[$j][17];
-                                      $totalNumDmd = $totalNumDmd+$rdv[$j][17];
+                                      $value[22].= '|!|'.$rdv[$j][22];
                                   }
-                                  if(!empty($rdv[$j][17]) && !empty($rdv[$j][19]))
+                                  if(!empty($rdv[$j][18]))
+                                  {
+                                      $totalDCarat = $totalDCarat+$rdv[$j][18];
+                                      $totalNumDmd = $totalNumDmd+$rdv[$j][18];
+                                  }
+                                  if(!empty($rdv[$j][18]) && !empty($rdv[$j][20]))
                                   {
                                       $calDmd = false;
                                       $totalDmdVal = $totalDmdVal + ($rdv[$j][17]*$rdv[$j][19]);
                                   }
-                                  if(!empty($rdv[$j][22]) && !empty($rdv[$j][23]))
+                                  if(!empty($rdv[$j][23]) && !empty($rdv[$j][24]))
                                   {
                                       $calGem = false;
-                                      $totalGemVal = $totalGemVal + ($rdv[$j][22]*$rdv[$j][23]);
+                                      $totalGemVal = $totalGemVal + ($rdv[$j][23]*$rdv[$j][24]);
                                   }
-                                  if(!empty($rdv[$j][22]))
+                                  if(!empty($rdv[$j][23]))
                                   {
-                                      $totalGWt = $totalGWt + $rdv[$j][22];
+                                      $totalGWt = $totalGWt + $rdv[$j][23];
                                   }
-                                  if(!empty($rdv[$j][24]))
+                                  if(!empty($rdv[$j][25]))
                                   {
-                                      $totalNOG = $totalNOG + $rdv[$j][24];
+                                      $totalNOG = $totalNOG + $rdv[$j][25];
+                                  }
+                                   if(!empty($rdv[$j][9]) && !empty($rdv[$j][10]))
+                                  {
+                                      
+                                      $totalPWt = $totalPWt + ($rdv[$j][10]*$rdv[$j][9]);
                                   }
                               }
                               else
@@ -2127,7 +2136,7 @@ class vendor extends DB
                                                    ".$total_price.",
                                                    ".$total_price.",
                                                   '" . $value[1]  . "',
-                                                  '" . $value[28] . "',
+                                                  '" . $value[29] . "',
                                                   '" . $ts . "'
                                               )";
 
@@ -2144,18 +2153,18 @@ class vendor extends DB
                               $value[26] = floatval($value[31])/floatval($value[30]);
                           }
 
-                          $value[12] = $value[12].'-'.$value[13];
-                          $value[14] = $value[14].'-'.$value[15].'-'.$value[16];
+                          $value[13] = $value[13].'-'.$value[14];
+                          $value[15] = $value[15].'-'.$value[16].'-'.$value[17];
 
-                          if($value[11] == 'Bugget')
+                          if($value[12] == 'Baguette')
                           {
                               $isbugget = 'True';
                           }
 
-                          $value[11] = rtrim($value[11],',');
-                          $value[12] = str_replace(',-','',rtrim($value[12],','));
-                          $value[14] = str_replace(',-','',rtrim($value[14],','));
-                          $value[20] = rtrim($value[20],',');
+                          $value[12] = rtrim($value[12],',');
+                          $value[13] = str_replace(',-','',rtrim($value[13],','));
+                          $value[15] = str_replace(',-','',rtrim($value[15],','));
+                          $value[21] = rtrim($value[21],',');
                           if(empty($value[9]))
                           {
                               $value[9] = 0.00;
@@ -2168,21 +2177,17 @@ class vendor extends DB
                           {
                               $polkiValue = 0.00;
                           }
-                          if(empty($value[17]))
-                          {
-                              $value[17] = 0.00;
-                          }
                           if(empty($value[18]))
                           {
-                              $value[18] = 0;
+                              $value[18] = 0.00;
                           }
                           if(empty($value[19]))
                           {
-                              $value[19] = 0.00;
+                              $value[19] = 0;
                           }
-                          if(empty($value[22]))
+                          if(empty($value[20]))
                           {
-                              $value[22] = 0.00;
+                              $value[20] = 0.00;
                           }
                           if(empty($value[23]))
                           {
@@ -2190,11 +2195,15 @@ class vendor extends DB
                           }
                           if(empty($value[24]))
                           {
-                              $value[24] = 0;
+                              $value[24] = 0.00;
                           }
                           if(empty($value[25]))
                           {
                               $value[25] = 0;
+                          }
+                          if(empty($value[26]))
+                          {
+                              $value[26] = 0;
                           }
                           // if(!empty($value[0]) && $value[0] == 'Bangle/Bracelet')
                           // {
@@ -2217,24 +2226,25 @@ class vendor extends DB
                                               polki_weight          =   ".$value[9].",
                                               polki_price_per_carat =   '".$value[10]."',
                                               polki_value           =   '".$polkiValue."',
-                                              diamond_shape         =   '".$value[11]."',
-                                              clarity               =   '".$value[12]."',
-                                              color                 =   '".$value[14]."',
+                                              polkino               =   '".$value[11]."',
+                                              diamond_shape         =   '".$value[12]."',
+                                              clarity               =   '".$value[13]."',
+                                              color                 =   '".$value[15]."',
                                               dwt                   =   '".$totalDCarat."',
                                               nofd                  =   '".$totalNumDmd."',
                                               price_per_carat       =   '".$totalDPPC."',
                                               diamondsvalue         =   '".round($totalDmdVal,2)."',
-                                              gemstone_type         =   '".$value[20]."',
-                                              gemstone_color        =   '".$value[21]."',
+                                              gemstone_type         =   '".$value[21]."',
+                                              gemstone_color        =   '".$value[22]."',
                                               gemwt                 =   '".$totalGWt."',
                                               gemstonevalue         =   '".round($totalGemVal,2)."',
                                               gprice_per_carat      =   '".$totalGPPC."',
                                               num_gemstones         =   '".$totalNOG."',
-                                              othermaterial         =   '".$value[25]."',
-                                              labour_charge         =   '".$value[26]."',
-                                              gold_purity           =   '".$value[29]."',
-                                              gold_weight           =   '".$value[30]."',
-                                              gold_value            =   '".round($value[30]*$rate,2)."',
+                                              othermaterial         =   '".$value[26]."',
+                                              labour_charge         =   '".$value[27]."',
+                                              gold_purity           =   '".$value[30]."',
+                                              gold_weight           =   '".$value[31]."',
+                                              gold_value            =   '".round($value[31]*$rate,2)."',
                                               grossweight           =    ".$total_weight.",
                                               price                 =    ".$total_price.",
                                               isBugget              =    '".$isbugget."',
@@ -2307,7 +2317,7 @@ class vendor extends DB
     public function calculatePrice($params,$rate,$totalDmdVal,$totalGemVal)
     {
         $price = 0;
-        if(!empty($params[17]) && !empty($params[19]))
+        if(!empty($params[18]) && !empty($params[20]))
         {
             if(!empty($totalDmdVal))
             {
@@ -2315,10 +2325,24 @@ class vendor extends DB
             }
             else
             {
-                $price = $price + ((floatval($params[17])/5)*$params[19]);
+                $price = $price + ((floatval($params[18])/5)*$params[20]);
             }
         }
-        if(!empty($params[22]) && !empty($params[23]))
+        
+        
+        if(!empty($params[9]) && !empty($params[10]))
+        {
+            if(!empty($totalPWt))
+            {
+                $price = $price + $totalPWt;
+            }
+            else
+            {
+                $price = $price + ((floatval($params[9]))*$params[10]);
+            }
+        }
+        
+        if(!empty($params[23]) && !empty($params[24]))
         {
           if(!empty($totalGemVal))
           {
@@ -2326,50 +2350,51 @@ class vendor extends DB
           }
           else
           {
-              $price = $price + ((floatval($params[22])/5)*$params[23]);
+              $price = $price + ((floatval($params[23])/5)*$params[24]);
           }
         }
-        if(!empty($params[30]))
+        if(!empty($params[31]))
         {
-            $price = $price + floatval($params[30])*floatval($rate);
+            $price = $price + floatval($params[31])*floatval($rate);
         }
 
-        if(!empty($params[31]) && empty($params[26]))
+        if(!empty($params[32]) && empty($params[27]))
         {
-            $price  = $price + floatval($params[31]);
+            $price  = $price + floatval($params[32]);
         }
         else
         {
-            if(!empty($params[30]))
+            if(!empty($params[31]))
             {
-                $price  = $price + (floatval($params[26])*floatval($params[30]));
+                $price  = $price + (floatval($params[27])*floatval($params[31]));
             }
             else
             {
-                $price  = $price + floatval($params[26]);
+                $price  = $price + floatval($params[27]);
             }
         }
+        
         return $price;
     }
 
     public function calculateWeight($params,$rate)
     {
         $weight = 0;
-        if(!empty($params[17]))
+        if(!empty($params[18]))
         {
-            $weight = $weight + (floatval($params[17])/5);
+            $weight = $weight + (floatval($params[18])/5);
         }
-        if(!empty($params[22]))
+        if(!empty($params[23]))
         {
-            $weight = $weight + (floatval($params[22])/5);
+            $weight = $weight + (floatval($params[23])/5);
         }
-        if(!empty($params[25]))
+        if(!empty($params[26]))
         {
-            $weight = $weight + floatval($params[25]);
+            $weight = $weight + floatval($params[26]);
         }
-        if(!empty($params[30]))
+        if(!empty($params[31]))
         {
-            $weight = $weight + floatval($params[30]);
+            $weight = $weight + floatval($params[31]);
         }
         return $weight;
     }

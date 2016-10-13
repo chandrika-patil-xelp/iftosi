@@ -747,7 +747,7 @@ switch($action)
 
             }
             else if (!in_array($fileExt, $alloweExt))
-            {
+            {   
                 $err=array('Code'=>1,'Msg' => 'File Type not Valid');
                 $result=array('result'=>$arr,'error'=>$err);
 
@@ -791,7 +791,7 @@ switch($action)
                 }
                 else if($params['catid']==10001)
                 {
-                    $params['data'][0] = array_slice($params['data'][0],0,32);
+                    $params['data'][0] = array_slice($params['data'][0],0,33);
                     $result = $obj->uploadJewelleryProducts($params);
                 }
                 else if($params['catid']==10002)
