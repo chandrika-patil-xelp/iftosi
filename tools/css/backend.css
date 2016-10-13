@@ -681,12 +681,12 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 .rateDiv { height: 45px;padding: 7px 0;font-size: 13px;width:100%;position:absolute;left:0;right:0;margin:auto;top:100%;background-color:#2A0E34;display:none}
 .rateDiv .rtCont{display:inline-block;position: relative;}
 .rateDiv .rupeeImg{background-size: auto 15px;
-    width: 15px;
-    height: 100%;
-    background-position: left 4px;
-   position: absolute;
-    left: 85px;
-    top: 1px;}
+                   width: 15px;
+                   height: 100%;
+                   background-position: left 4px;
+                   position: absolute;
+                   left: 85px;
+                   top: 1px;}
 .rateDiv .goldL{left:77px;}
 .rateDiv .silverL{left:81px;}
 .rateDiv .platinumL{left:103px;}
@@ -860,7 +860,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
     -webkit-transition: 300ms ease-in-out;
     -o-transition: 300ms ease-in-out;
 }
-@media only screen and (min-width: 320px) and (max-width: 1024px){
+@media only screen and (min-width: 320px) and (max-width: 720px){
     body{overflow: hidden;}
     .moverlay{display: block;width:100%;height: 100%;min-height: 100%;background: #171334 url(../img/common/background.jpg)no-repeat;background-size:cover;position:fixed;top:0;left:0;z-index:100;}
     .pageLinks,.mainContainer {display: none;}
@@ -871,50 +871,61 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
     .ttl2{font-size: 22px;}
     .clogo {width: 80px;height: 80px;background: #8A0044 url(../img/common/logo.svg)no-repeat;background-size: auto 60%;background-position: center;position: fixed;left: 0;right: 0;margin: auto;top: 20px;z-index: 100;border-radius: 5px;font-size: 22px;color: #FFF;}
     .clogo span {display: block;width: 100%;height: 30px;line-height: 35px;text-align: center;position: absolute;bottom: -30px;}
-}
-@media only screen and (max-width: 1279px) and (min-width: 1025px){
 
+}
+@media only screen and (max-width: 1279px) and (min-width: 721px){
+    .prdul .date{padding: 0px 5px;}
+    .prdul .barcode{padding: 0px 10px;}
+    .addPrdBtn{    padding: 0 15px;}
+    .vTabs{width: 107px;}
+    .formTitle{font-size: 15px;}
+    .prdSeachTxt{padding: 0 10px;font-size: 12px;    width: 139px;}
+    .rateDiv{font-size: 11px;}
+    .rateDiv .rupeeImg{left:74px;}
+    .rateDiv .goldL{left: 67px;}
+    .rateDiv .silverL{left: 70px;}
+    .rateDiv .platinumL{left: 91px;}
     /*header*/
     .vndLogo {position: relative;left: 10px;}
     .vndInfo {position: relative;right: 10px}
 
     .dmyCnt{display:none;}
-  .tltpBtn{width:40px;height:40px;position:absolute;top:0;right:0;background:url(../img/common/more.svg)no-repeat;background-position:center;background-size:auto 90%;padding:0px !important;cursor:pointer;overflow: visible !important;display:block;}
-  .tltpbox{width:250px;height:40px;position:absolute;background-color:#fff;z-index:15;display:block;padding:0px !important;opacity:0;transform:translateX(0px);right:0px;box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;}
-  .tltpBtn:hover .tltpbox{opacity:1;transform:translateX(-5px);}
-  .txtSelect {width: 100px;position: absolute;left: 15px}
-  .prdListHeader div {padding: 0 10px;}
-  .acct:hover{overflow: visible !important;}
-  .date { width: 11%;}
-  .barcode {width: 13%;}
-  .diamondPrds .shape {width: 10%;}
-  .carats {width: 8%;}
-  .diamondPrds .color {width: 9%;}
-  .clarity {width: 9%;}
-  .diamondPrds .cert {width: 9%;}
-  .diamondPrds .price {width: 12%;}
-  .diamondPrds .price {width: 12%;}
-  .diamondPrds .acct {width: 7%;}
-  .spValue{margin: 0 8px 0 0px;}
-  .name {width: 18%;}
-  .email {width: 27%;}
-  .type {width: 18%;}
-  .price {width: 13%;}
-  /*jwl*/
-  .metal {width: 12%;}
-  .catg {width: 10%;}
-  .degno { width: 17%;}
-  .jewelleryPrds .subType {width: 16%;}
-  .jewelleryPrds .price {width: 14%;}
-  .jewelleryPrds .acct {width: 7%;}
-  /*bullion*/
-  .weight {width: 14%;}
-  .bullionPrds .purity { width: 14%;}
-  .bullionPrds .btype {width: 15%;}
-  .bullionPrds .acct {width: 7%;}
-  /*add diamond*/
-  .mtxtInput {width: 75px;padding: 0 10px;}
-  .mInputDiv span {padding: 0 10px;}
+    .tltpBtn{width:40px;height:40px;position:absolute;top:0;right:0;background:url(../img/common/more.svg)no-repeat;background-position:center;background-size:auto 90%;padding:0px !important;cursor:pointer;overflow: visible !important;display:block;}
+    .tltpbox{width:250px;height:40px;position:absolute;background-color:#fff;z-index:15;display:block;padding:0px !important;opacity:0;transform:translateX(0px);right:0px;box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;}
+    .tltpBtn:hover .tltpbox{opacity:1;transform:translateX(-5px);}
+    .txtSelect {width: 100px;position: absolute;left: 15px}
+    .prdListHeader div {padding: 0 10px;}
+    .acct:hover{overflow: visible !important;}
+    .date { width: 11%;}
+    .barcode {width: 13%;}
+    .diamondPrds .shape {width: 10%;}
+    .carats {width: 8%;}
+    .diamondPrds .color {width: 9%;}
+    .clarity {width: 9%;}
+    .diamondPrds .cert {width: 9%;}
+    .diamondPrds .price {width: 12%;}
+    .diamondPrds .price {width: 12%;}
+    .diamondPrds .acct {width: 7%;}
+    .spValue{margin: 0 2px 0 0px;    padding: 0px 24px 0 17px;}
+    .name {width: 18%;}
+    .email {width: 27%;}
+    .type {width: 18%;}
+    .price {width: 13%;}
+    /*jwl*/
+    .metal {width: 12%;}
+    .catg {width: 10%;}
+    .degno { width: 17%;}
+    .jewelleryPrds .subType {width: 16%;}
+    .jewelleryPrds .price {width: 14%;}
+    .jewelleryPrds .acct {width: 7%;}
+    /*bullion*/
+    .weight {width: 14%;}
+    .bullionPrds .purity { width: 14%;}
+    .bullionPrds .btype {width: 15%;}
+    .bullionPrds .acct {width: 7%;}
+    /*add diamond*/
+    .mtxtInput {width: 75px;padding: 0 10px;}
+    .mInputDiv span {padding: 0 10px;}
 }
 
 
@@ -939,13 +950,13 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
     height: 100%;
     background-position: left 11px;
     width: auto;
-   
+
     padding-left: 16px;
-   }
-   .detValue span{color: #8A0042;
-    font-size: 22px;
-    margin-right: 2px;
-    margin-top: 4px;
-    width: 20px;
-    height: 25px;
-    float: left;margin-left: -7px;}
+}
+.detValue span{color: #8A0042;
+               font-size: 22px;
+               margin-right: 2px;
+               margin-top: 4px;
+               width: 20px;
+               height: 25px;
+               float: left;margin-left: -7px;}
