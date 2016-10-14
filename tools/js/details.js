@@ -2,6 +2,7 @@ var isOpen = false;
 var lastSc = 0;
 var pw = $(window).width();
 var ph = $(window).height();
+var imgArr2 = new Array();
 var isMobile = false;
 var input_selector = 'input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=number], input[type=search], textarea, input[type=radio]';
 if (pw < 768) {
@@ -17,6 +18,9 @@ var isContact = false;
 var isPidInWishlist = false;
 var submiter = true;
 var funcObj = '';
+var slideIndex = 1;
+var imageVal=0;
+var imgData=new Array();
 $(document).ready(function () {
     setTimeout(function () {
         var samt = 100;
@@ -43,14 +47,13 @@ $(document).ready(function () {
 
     $('#galleryClose').click(function () {
         $('#imgGallery').addClass('dn');
-    });
+});
 
     $('#prdImage').click(function () {
         $('#imgGallery').removeClass('dn');
-    });
+});
 
-
-    $(input_selector).bind('focus', function () {
+$(input_selector).bind('focus', function () {
         if ($('#ur_citySuggestDiv').hasClass("dn")) {
             return false;
         } else {
@@ -75,12 +78,10 @@ $(document).ready(function () {
     });
 
     $('.iconWishlist').click(function () {
-
-       
-        var isVendor = customStorage.readFromStorage('is_vendor');
+var isVendor = customStorage.readFromStorage('is_vendor');
         var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
 
-        if (isVendor != "" && (isVendor == '-1' || isVendor == -1))
+if (isVendor != "" && (isVendor == '-1' || isVendor == -1))
         {
             isVendor = 0;
         }
@@ -96,12 +97,16 @@ $(document).ready(function () {
             {
                 isWishList = true;
                 common.showLoginForm(1);
-            } else
+            } 
+            else
             {
                 isWishList = true;
                 showVendorDetails(this);
             }
-        } else
+        } 
+        
+
+        else
         {
             
              $('#baseCont').addClass("pFixed");
@@ -113,14 +118,12 @@ $(document).ready(function () {
              {
              customStorage.toast(0, 'This feature is not available for vendors');
              }*/
+           }
+});
 
-        }
-    });
-
-    $('#overlay').velocity({opacity: 0}, {delay: 0, duration: 0});
+$('#overlay').velocity({opacity: 0}, {delay: 0, duration: 0});
     $('#userForm').velocity({scale: 0}, {delay: 0, duration: 0});
-
-    $('.iconCall,.iconMessage').click(function () {
+$('.iconCall,.iconMessage').click(function () {
         $('#ur_citySuggestDiv').addClass("dn");
         $('#baseCont').addClass("pFixed");
         $('#ur_mobile,#ur_name,#ur_city,#ur_email').val("");
@@ -435,16 +438,54 @@ function showImages(data)
                     if (val.vid == vid)
                     {
                         imgArr[k] = vl.image;
+                        imgArr2[k] = vl.image;
                     }
                 } else
                 {
                     imgArr[k] = vl.image;
+                    imgArr2[k] = vl.image;
                 }
                 k++;
             });
 
             var imgHtml = getDtlsImageData(imgArr);
             $('#detailsImgs').html(imgHtml);
+            $('.leftArrow').bind("click", function()
+			{
+          //  alert(imgArr2[imgVal++]);
+
+          /*if( imageVal<=0)
+          {
+            imageVal=imgArr2.length;
+
+          }
+          if((imageVal+1)==(imgArr2.length))
+          {
+            imageVal=imgArr2.length-1;
+          }
+*/        if(imageVal>0)
+          {
+              $('.imgPreview').css({"background":'url(\''+IMGDOMAIN + imgArr2[--imageVal] +'\') 50% 50% / cover no-repeat scroll padding-box border-box rgb(255, 255, 255)'});
+          }
+  //imageVal-=1;
+            //alert(imageVal);
+			});
+
+			$('.rightArrow').bind("click", function()
+			{
+
+        /*if((imageVal+1)>=imgArr2.length )
+        {
+          imageVal=-1;
+        }*/
+          if(imageVal<(imgArr2.length-1))
+          {
+                $('.imgPreview').css({"background":'url(\''+IMGDOMAIN + imgArr2[++imageVal] +'\') 50% 50% / cover no-repeat scroll padding-box border-box rgb(255, 255, 255)'});
+           }
+                            ////imageVal+=1;
+            //alert(imageVal);
+
+  });
             imgArr = new Array();
             k = 0;
         });
@@ -657,6 +698,7 @@ function getDtlsImageData(imgData)
 {
     var imgLen = 0;
     var tmpHtml = "<div class='for-1 noImage'></div>";
+    imgArr=imgData;
     if (imgData !== undefined && imgData !== null && imgData !== '')
     {
         if (imgData.length > 0)
