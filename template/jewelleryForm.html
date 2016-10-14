@@ -14,7 +14,7 @@
                                 <center>
                                     <div class="prImageStrip">
                                         <ul class="carousel transition300">
-<?php
+<?php                                   //echo '<pre>';print_r($attr);die;
                                             foreach ($cat['subcat'] as $ky => $val)
                                             {
                                                 if (strtolower($val) !== '')
@@ -76,8 +76,7 @@
                             ?> " id="<?= strtolower($values['catname']); ?>Type">
                                 <div  class="titleDiv txtCap fLeft"><?= ucwords(strtolower($values['catname'])); ?> Type*</div>
                                 <div class='radioCont fLeft'>
-<?php
-                                    foreach ($values['subcats'] as $ky => $val)
+<?php                               foreach ($values['subcats'] as $ky => $val)
                                     {
 ?>
                                         <div class="checkDiv fLeft">
@@ -253,9 +252,19 @@
                                 $attr['nofd'] = '';
                             }
 ?>
-                            <div class="vCommTitle fLeft fmOpenL polkiProp dn" style="font-size:25px">Please fill the Polki details</div>
+                            <div class="vCommTitle fLeft fmOpenL polkiProp  <?php echo (
+                                    (!empty($attr['polki_color']) && $attr['polki_color'] !='') 
+                                    || (!empty($attr['polki_quality']) && $attr['polki_quality'] !='' )
+                                    || (!empty($attr['polki_weight']) && strval($attr['polki_weight']) !== '0.000' && $attr['polki_weight'] != 0.000 ) 
+                                    || (!empty($attr['polki_price_per_carat']) && strval($attr['polki_price_per_carat']) !== '0.00' && $attr['polki_price_per_carat'] !== 0.000 && strval($attr['polki_price_per_carat']) !== '0.000000000'  && $attr['polki_price_per_carat'] != 0.000000000 )
+                                    ||(!empty($attr['polkino']) && $attr['polkino'] !=0) ) ? '':'dn';?>" style="font-size:25px">Please fill the Polki details</div>
 
-                            <div class="PolkiShapeCont polkiProp dn">
+                            <div class="PolkiShapeCont polkiProp <?php echo (
+                                    (!empty($attr['polki_color']) && $attr['polki_color'] !='') 
+                                    || (!empty($attr['polki_quality']) && $attr['polki_quality'] !='' )
+                                    || (!empty($attr['polki_weight']) && strval($attr['polki_weight']) !== '0.000' && $attr['polki_weight'] != 0.000 ) 
+                                    || (!empty($attr['polki_price_per_carat']) && strval($attr['polki_price_per_carat']) !== '0.00' && $attr['polki_price_per_carat'] !== 0.000 && strval($attr['polki_price_per_carat']) !== '0.000000000'  && $attr['polki_price_per_carat'] != 0.000000000 )
+                                    ||(!empty($attr['polkino']) && $attr['polkino'] !=0) ) ? '':'dn';?> ">
                               <div class="divCon fLeft dAuto polkiProp">
                                   <div  class="titleDiv txtCap fLeft">Polki Color*</div>
                                   <div class='radioCont fLeft'>
@@ -314,26 +323,26 @@
                                   <div  class="titleDiv txtCap fLeft">Polki Quality*</div>
                                   <div class='radioCont fLeft'>
                                       <div class="checkDiv fLeft">
-                                          <input type="radio" name='polki_clarity' class="filled-in" value="IF" <?= ($attr['polki_clarity'] == 'IF') ? 'checked' : ''; ?> id="polki_clarity_IF">
+                                          <input type="radio" name='polki_clarity' class="filled-in" value="IF" <?= ($attr['polki_quality'] == 'IF') ? 'checked' : ''; ?> id="polki_clarity_IF">
                                           <label for="polki_clarity_IF">IF</label>
                                       </div>
                                       <div class="checkDiv fLeft">
-                                          <input type="radio" name='polki_clarity' class="filled-in" value="VVS" <?= ($attr['polki_clarity'] == 'VVS') ? 'checked' : ''; ?> id="polki_clarity_VVS">
+                                          <input type="radio" name='polki_clarity' class="filled-in" value="VVS" <?= ($attr['polki_quality'] == 'VVS') ? 'checked' : ''; ?> id="polki_clarity_VVS">
                                           <label for="polki_clarity_VVS">VVS</label>
                                       </div>
 
                                       <div class="checkDiv fLeft">
-                                          <input type="radio" name='polki_clarity' class="filled-in" value="VS" <?= ($attr['polki_clarity'] == 'VS') ? 'checked' : ''; ?> id="polki_clarity_VS">
+                                          <input type="radio" name='polki_clarity' class="filled-in" value="VS" <?= ($attr['polki_quality'] == 'VS') ? 'checked' : ''; ?> id="polki_clarity_VS">
                                           <label for="polki_clarity_VS">VS</label>
                                       </div>
 
                                       <div class="checkDiv fLeft">
-                                          <input type="radio" name='polki_clarity' class="filled-in" value="SI" <?= ($attr['polki_clarity'] == 'SI') ? 'checked' : ''; ?> id="polki_clarity_SI">
+                                          <input type="radio" name='polki_clarity' class="filled-in" value="SI" <?= ($attr['polki_quality'] == 'SI') ? 'checked' : ''; ?> id="polki_clarity_SI">
                                           <label for="polki_clarity_SI">SI</label>
                                       </div>
 
                                       <div class="checkDiv fLeft">
-                                          <input type="radio" name='polki_clarity' class="filled-in" value="I" <?= ($attr['polki_clarity'] == 'I') ? 'checked' : ''; ?> id="polki_clarity_I">
+                                          <input type="radio" name='polki_clarity' class="filled-in" value="I" <?= ($attr['polki_quality'] == 'I') ? 'checked' : ''; ?> id="polki_clarity_I">
                                           <label for="polki_clarity_I">I</label>
                                       </div>
                                   </div>
