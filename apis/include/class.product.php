@@ -1848,6 +1848,12 @@
                                     						tabl as tab,
                                     						num_gemstones,
                                     						certificate_url,
+                                                                                polki_color,
+                                                                                polki_quality,
+                                                                                polki_weight,
+                                                                                polkino,
+                                                                                polki_price_per_carat,
+                                                                                polki_value,
                                                 is_plain_jewellery,
                                                 price_per_carat,
                                                 othermaterial,
@@ -1881,7 +1887,7 @@
                         $shapers = explode('|!|',$row2['diamond_shape']);
                         if($shapers[0] == 'Emerald' && $row2['isBugget'] == 'True')
                         {
-                            $shapers[0] = 'Bugget';
+                            $shapers[0] = 'Baguette';
                         }
                         $row2['diamond_shape'] = implode('|!|',$shapers);
                         $details=$row2;
