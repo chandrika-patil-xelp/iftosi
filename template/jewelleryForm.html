@@ -63,6 +63,11 @@
                             $attrShp = explode('/',$attr['shape']);
                             $attr['shape'] = $attrShp[0];
                         }
+                         if($attr['shape'] == 'Polki/Jadau')
+                        {
+                            $attrShp = explode('/',$attr['shape']);
+                            $attr['shape'] = $attrShp[0];
+                        }
                         foreach ($cat['subcat'] as $key => $values)
                         {
                             $expd = explode('/', $values['catname']);
