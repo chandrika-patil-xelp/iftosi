@@ -124,7 +124,7 @@ $('#pr_mobile').focus(function (){
                             else if(pr_mobile=='' || pr_mobile.length==0)
                             {
                                  customStorage.toast(0,'Please Enter the Mobile no.');
-                                    $('#pr_name').focus();
+                                    $('#pr_mobile').focus();
                                     return false;
                             }
                             else if(pr_mobile=='' || pr_mobile.length!=10 || isNaN(pr_mobile)) {
