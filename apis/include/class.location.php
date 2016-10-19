@@ -379,7 +379,7 @@ class location extends DB
     
     public function cityName($params)
     {
-        $sql="SELECT DISTINCT(cityname) as n FROM tbl_city_master WHERE cityname LIKE '".$params['name']."%'";
+        $sql="SELECT DISTINCT(cityname) as n FROM tbl_city_master WHERE cityname LIKE '".$params['name']."%' LIMIT 4";
         $res=$this->query($sql);
         
         if($res)
