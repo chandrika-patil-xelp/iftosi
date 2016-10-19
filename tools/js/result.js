@@ -1752,7 +1752,15 @@ function getResultsData(data,sortby,showtree)
 		delimiter: ',',
 		onStart: function() {
 			isStop = true;
-		}
+                    if(data.results.total == 1)
+                    {       
+                            $('#itemid').text( "item");
+                    }
+                    else
+                    {
+                         $('#itemid').text( "items");
+                    }
+                }
 	});
 }
 
