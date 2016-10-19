@@ -224,6 +224,29 @@ function uploadCertificate(tmp_pid)
 	}
 }
 
+function isconform()
+{
+    var ids = document.getElementById("conform");
+    
+       if(ids.checked==true)
+       {
+            $("#diamondweight").prop('disabled',false);
+            $("#no_diamonds").prop('disabled',false);
+            $("#price_per_carat").prop('disabled',false);
+            $("#diamondsvalue").prop('disabled',false);
+           
+        }
+        else
+        {
+            
+            $("#diamondweight").prop('disabled',true);
+            $("#no_diamonds").prop('disabled',true);
+            $("#price_per_carat").prop('disabled',true);
+            $("#diamondsvalue").prop('disabled',true);
+        }
+   
+}
+
 function validateJForm()
 {
     if(submiter !== true)
@@ -268,10 +291,18 @@ function validateJForm()
 				var isBugget = $('input[name="bugget"]:checked').val();
 				var polki_price_per_carat = $('#polki_price_per_carat').val().trim();
 				var polki_value = $('#polki_value').val().trim();
+                                /* new added @15/10/16*/
+                                var baguette_color = $('input[name=baguette_color]:checked').val();
+				var baguette_quality = $('input[name=baguette_clarity]:checked').val();
+				var baguette_weight = $('#baguette_weight').val().trim();
+				var baguetteno = $('#baguetteno').val().trim();
+				var baguette_price_per_carat = $('#baguette_price_per_carat').val().trim();
+				var baguette_value = $('#baguette_value').val().trim();
                                 var puritypatt = /(^|[^-\d])(14|18|22|24|995|999)\b/;
 				var subcat = '';
 				var isValid = true;
 				var str = '';
+                                
 				shape.each(function()
 				{
 						if($(this).hasClass('shapeSelected'))
@@ -576,9 +607,9 @@ function validateJForm()
 									polki_color   				=  $('input[name="polki_color"]:checked').val();
 									polki_quality 				=  $('input[name="polki_quality"]:checked').val();
 									polki_weight  				=  $('#polki_weight').val();
-									polkino  							=  $('#polkino').val();
-									polki_price_per_carat =  $('#polki_price_per_carat').val();
-									polki_value						=  $('#polki_value').val();
+									polkino  			        =  $('#polkino').val();
+									polki_price_per_carat                   =  $('#polki_price_per_carat').val();
+									polki_value			        =  $('#polki_value').val();
 							}
 					    diamondShapeVal=diamondShapeVal.join('|!|');
 					    vcolor=vcolor.join('|!|');
@@ -623,6 +654,12 @@ function validateJForm()
 							values[34] = "gold_type|@|"+encodeURIComponent(gold_type);
 							values[35] = "product_brand|@|"+encodeURIComponent(product_brand);
 							values[36] = "isBugget|@|"+encodeURIComponent(isBugget);
+                                                        values[37] = "baguette_color|@|"+encodeURIComponent(baguette_color);
+							values[38] = "baguette_quality|@|"+encodeURIComponent(baguette_quality);
+							values[39] = "baguette_weight|@|"+encodeURIComponent(baguette_weight);
+							values[40] = "baguetteno|@|"+encodeURIComponent(baguetteno);
+							values[41] = "baguette_price_per_carat|@|"+encodeURIComponent(baguette_price_per_carat);
+							values[42] = "baguette_value|@|"+encodeURIComponent(baguette_value);
 							dt = values.join('|~|');
 							params += "&dt="+dt;
 
@@ -1204,13 +1241,17 @@ function addShapeType()
 
 function checkDiamondShape(evt,id)
 {
-		if($(evt).hasClass('shapeSelected'))
+    $('.jw4').removeClass('dn');
+    
+    if($(evt).hasClass('shapeSelected'))
     {
         $(evt).toggleClass('shapeSelected');
+        
         if(id!=1)
 				{
             $('#diamondShapeCont_'+id).parent().addClass('dn');
         }
+         $('.jw4').addClass('dn');
         $('.diamondProp_'+id).addClass('dn');
         $('.diamondProp_'+id+' input').removeAttr('checked');
         if(!$(evt).hasClass('shapeSelected') && id==1)
@@ -1560,6 +1601,7 @@ function calculateJPrice()
 		var labourValue = 0;
 		var netValue = 0;
 		var totalPrice = 0;
+                var baguette_value=0;
     if($('input[name=Plain]:checked').val() == 'Plain')
     {
 				$.ajax({url: APIDOMAIN + 'index.php?action=getGoldRate&vid='+uid,success: function(data)
@@ -1592,10 +1634,16 @@ function calculateJPrice()
 					      }
 						});
     }
-		if($('#Polki').hasClass('shapeSelected') == true && $('#polkivalue').val() !== null && $('#polkivalue').val() !== '' && $('#polkivalue').val() !== undefined)
+		if($('#Polki').hasClass('shapeSelected') == true && $('#polki_value').val() !== null && $('#polki_value').val() !== '' && $('#polki_value').val() !== undefined)
 		{
-					polkiValue = parseFloat($('#polkivalue').val());
+					polkiValue = parseFloat($('#polki_value').val());
 					totalPrice = totalPrice + polkiValue;
+                                        
+		}
+                if( $('#baguette_value').val() !== null && $('#baguette_value').val() !== '' && $('#baguette_value').val() !== undefined)
+		{ 
+					baguette_value = parseFloat($('#baguette_value').val());
+					totalPrice = totalPrice + baguette_value;
 		}
 		if($('#diamondsvalue').val() !== undefined && $('#diamondsvalue').val() !== null && $('#diamondsvalue').val() !== '' && $('.shapeComm').hasClass('shapeSelected') == true)
 		{
@@ -1645,6 +1693,8 @@ function calculateJPrice()
 												$('#gemstone_type option').removeClass('dn');
 												$('.rateValue').text('Gold Value*');
 												$('.certUrl').removeClass('dn');
+                                                                                             //   $('.BaguetteProp ').addClass('dn');
+                                                                                                $('.jw4 ').removeClass('dn');
 												break;
 								case 'PLATINUM & DIAMONDS':
 												$('.noneDiv').addClass('dn');
@@ -1660,6 +1710,8 @@ function calculateJPrice()
 												$('#gemstone_type option').removeClass('dn');
 												$('.certUrl').removeClass('dn');
 												$('.rateValue').text('Platinum Value*');
+                                                                                              //  $('.BaguetteProp ').addClass('dn');
+                                                                                                $('.jw4 ').removeClass('dn');
 												break;
 								case 'SILVER & DIAMONDS':
 												$('.noneDiv').addClass('dn');
@@ -1675,7 +1727,9 @@ function calculateJPrice()
 												$('#gemstone_type option').removeClass('dn');
 												$('.certUrl').removeClass('dn');
 												$('.rateValue').text('Silver Value*');
-												break;
+												//$('.BaguetteProp ').addClass('dn');
+                                                                                                $('.jw4 ').removeClass('dn');
+                                                                                             break;
 								case 'GOLD, DIAMONDS & GEMSTONES':
 												$('.noneDiv').addClass('dn');
 												$("input[name='metal']").attr('disabled',true);
@@ -1690,6 +1744,8 @@ function calculateJPrice()
 												$('.certUrl').removeClass('dn');
 												$('#typeChoice').removeClass('dn');
 												$('.rateValue').text('Gold Value*');
+                                                                                               // $('.BaguetteProp ').addClass('dn');
+                                                                                                $('.jw4 ').removeClass('dn');
 												break;
 								case 'PLATINUM, DIAMONDS & GEMSTONES':
 												$('.noneDiv').addClass('dn');
@@ -1704,6 +1760,8 @@ function calculateJPrice()
 												$('.certUrl').removeClass('dn');
 												$('#typeChoice').removeClass('dn');
 												$('.rateValue').text('Platinum Value*');
+                                                                                               // $('.BaguetteProp ').addClass('dn');
+                                                                                                $('.jw4 ').removeClass('dn');
 												break;
 								case 'SILVER, DIAMONDS & GEMSTONES':
 												$('.noneDiv').addClass('dn');
@@ -1718,6 +1776,8 @@ function calculateJPrice()
 												$('#typeChoice').removeClass('dn');
 												$('.certUrl').removeClass('dn');
 												$('.rateValue').text('Silver Value*');
+                                                                                               // $('.BaguetteProp ').addClass('dn');
+                                                                                                $('.jw4 ').removeClass('dn');
 												break;
 								case 'GOLD & GEMSTONES':
 												$('.noneDiv').addClass('dn');
@@ -1734,6 +1794,8 @@ function calculateJPrice()
 												$('#gemsTypeCont').removeClass('dn');
 												$('#gemstone_type option').removeClass('dn');
 												$('.rateValue').text('Gold Value*');
+                                                                                                $('.BaguetteProp ').addClass('dn');
+                                                                                                $('.jw4 ').addClass('dn');
 												break;
 								case 'SILVER & GEMSTONES':
 												$('.noneDiv').removeClass('dn');
@@ -1750,6 +1812,8 @@ function calculateJPrice()
 												$('#gemsTypeCont').removeClass('dn');
 												$('#gemstone_type option').removeClass('dn');
 												$('.rateValue').text('Silver Value*');
+                                                                                                $('.BaguetteProp ').addClass('dn');
+                                                                                                $('.jw4 ').addClass('dn');
 												break;
 								case 'GOLD & SWAROVSKI ZIRCONIA':
 												$('.noneDiv').addClass('dn');
@@ -1769,6 +1833,8 @@ function calculateJPrice()
 												changeGemstoneType('SWAROVSKI ZIRCONIA',1);
                                                                                                 $('.gemstoneProp_1').removeClass('dn');
 												$('.rateValue').text('Gold Value*');
+                                                                                                $('.BaguetteProp ').addClass('dn');
+                                                                                                $('.jw4 ').addClass('dn');
 												break;
 								case 'SILVER & SWAROVSKI ZIRCONIA':
 												$('.noneDiv').removeClass('dn');
@@ -1789,6 +1855,8 @@ function calculateJPrice()
 												changeGemstoneType('SWAROVSKI ZIRCONIA',1);
                                                                                                 $('.gemstoneProp_1').removeClass('dn');
 												$('.rateValue').text('Silver Value*');
+                                                                                                $('.BaguetteProp ').addClass('dn');
+                                                                                                $('.jw4 ').addClass('dn');
 												break;
 								case 'GOLD & CZ':
 												$('.noneDiv').addClass('dn');
@@ -1808,6 +1876,8 @@ function calculateJPrice()
 												changeGemstoneType('CZ',1);
                                                                                                 $('.gemstoneProp_1').removeClass('dn');
                                                                                                 $('.rateValue').text('Gold Value*');
+                                                                                                $('.BaguetteProp ').addClass('dn');
+                                                                                                $('.jw4 ').addClass('dn');
 												break;
 								case 'SILVER & CZ':
 												$('.noneDiv').removeClass('dn');
@@ -1828,6 +1898,8 @@ function calculateJPrice()
 												changeGemstoneType('Cz',1);
                                                                                                 $('.gemstoneProp_1').removeClass('dn');
 												$('.rateValue').text('Silver Value*');
+                                                                                                $('.BaguetteProp ').addClass('dn');
+                                                                                                $('.jw4 ').addClass('dn');
 												break;
 								case 'PLAIN GOLD':
 												$('.noneDiv').addClass('dn');
@@ -1844,6 +1916,8 @@ function calculateJPrice()
 												$('#diamondShapeCont').addClass('dn');
 												$('.certUrl').addClass('dn');
 												$('.rateValue').text('Gold Value*');
+                                                                                                $('.BaguetteProp ').addClass('dn');
+                                                                                                $('.jw4 ').addClass('dn');
 												break;
 								case 'PLAIN PLATINUM':
 												$('.noneDiv').removeClass('dn');
@@ -1862,6 +1936,8 @@ function calculateJPrice()
 												$('#diamondShapeCont').addClass('dn');
 												$('.certUrl').addClass('dn');
 												$('.rateValue').text('Platinum Value*');
+                                                                                                $('.BaguetteProp ').addClass('dn');
+                                                                                                $('.jw4 ').addClass('dn');
 												break;
 								case 'PLAIN SILVER':
 												$('.noneDiv').removeClass('dn');
@@ -1879,6 +1955,8 @@ function calculateJPrice()
 												$('#gemsTypeCont').addClass('dn');
 												$('.certUrl').addClass('dn');
 												$('.rateValue').text('Silver Value*');
+                                                                                                $('.BaguetteProp ').addClass('dn');
+                                                                                                $('.jw4 ').addClass('dn');
 												break;
 								case 'GOLD & POLKI':
 												$('.noneDiv').removeClass('dn');
@@ -1897,6 +1975,8 @@ function calculateJPrice()
 												$('#gemstone_type option').removeClass('dn');
 												$('.certUrl').addClass('dn');
 												$('.rateValue').text('Gold Value*');
+                                                                                                $('.BaguetteProp ').addClass('dn');
+                                                                                                $('.jw4 ').addClass('dn');
 												break;
 								default:
 												break;
@@ -1908,6 +1988,12 @@ function calculateJPrice()
             var no_diamonds             =   parseFloat($('#no_diamonds').val());
             var price_per_carat         =   parseFloat($('#price_per_carat').val());
             var diamondsvalue           =   0;
+            
+            var baguette_weight         =   parseFloat($('#baguette_weight').val());
+            var baguetteno              =   parseFloat($('#baguetteno').val());
+            var baguette_price_per_carat   =   parseFloat($('#baguette_price_per_carat').val());
+            var baguette_value          =   0;
+            
             var gemweight               =   parseFloat($('#gemweight').val());
             var num_gemstones           =   parseFloat($('#num_gemstones').val());
             var gprice_per_carat        =   parseFloat($('#gprice_per_carat').val());
@@ -1915,38 +2001,48 @@ function calculateJPrice()
             var labour_charge           =   parseFloat($('#labour_charge').val());
             var other_material          =   parseFloat($('#othermaterial').val());
             var total_weight            =   0;
-						var gross_weight						=   0;
-						var polkiweight						  =   parseFloat($('#polkiweight').val());
-						var polki_price_per_carat		=   parseFloat($('#polki_price_per_carat').val());
-						var polkivalue							=		0;
+            var gross_weight		=   0;
+            var polkiweight             =   parseFloat($('#polki_weight').val());
+	    var polki_price_per_carat	=   parseFloat($('#polki_price_per_carat').val());
+	    var polkivalue	        =		0;
             var netweight               =   parseFloat($('#netweight').val());
+           // alert(baguette_weight +" "+baguetteno+" "+baguette_price_per_carat);
 
 						var purityArr = {'24':999,'23':958,'22':916,'21':875,'18':750,'17':708,'14':585,'10':417,'9':375,'8':333};
 
 						if(polkiweight !== undefined && polkiweight !== null && polkiweight !== 0 && polki_price_per_carat !== undefined && polki_price_per_carat !== null && polki_price_per_carat !== 0 && isNaN(polki_price_per_carat) == false)
-						{
+						{                 
 								polkivalue 	 = parseFloat(polkiweight * polki_price_per_carat);
 								total_weight = total_weight + parseFloat(polkiweight/5);
-								$('#polkivalue').val(polkivalue.toFixed(3));
+                                                                $('#polki_value').val(polkivalue.toFixed(3));
 						}
+                                                
+                                                if(baguette_weight !== undefined && baguette_weight !== null && baguette_weight !== 0 && baguette_price_per_carat !== undefined && baguette_price_per_carat !== null && baguette_price_per_carat !== 0 && isNaN(baguette_price_per_carat) == false)
+						{
+								baguette_value 	 = parseFloat(baguette_weight * baguette_price_per_carat);
+								total_weight = total_weight + parseFloat(baguette_weight/5);
+                                                               $('#baguette_value').val(baguette_value.toFixed(3));
+						}
+                                                
+                                                
 						if(diamondweight !== undefined && diamondweight !== null && diamondweight !== 0 && price_per_carat !== undefined && price_per_carat !== null && price_per_carat !== 0 && isNaN(price_per_carat) == false)
-            {
-                diamondsvalue = parseFloat(diamondweight * price_per_carat);
-                total_weight = total_weight + parseFloat(diamondweight/5);
+                                                {
+                                                                diamondsvalue = parseFloat(diamondweight * price_per_carat);
+                                                                total_weight = total_weight + parseFloat(diamondweight/5);
 								$('#diamondsvalue').val(diamondsvalue.toFixed(2));
-            }
-            if(gemweight !== undefined && gemweight !== null && gemweight !== '' && isNaN(gemweight) == false && gprice_per_carat !== undefined && gprice_per_carat !== null && gprice_per_carat !== 0 &&  isNaN(gprice_per_carat) == false)
-            {
-                gemstonevalue = parseFloat(gemweight * gprice_per_carat);
-                total_weight = total_weight + parseFloat(gemweight/5);
+                                                }
+                                                if(gemweight !== undefined && gemweight !== null && gemweight !== '' && isNaN(gemweight) == false && gprice_per_carat !== undefined && gprice_per_carat !== null && gprice_per_carat !== 0 &&  isNaN(gprice_per_carat) == false)
+                                                {
+                                                                gemstonevalue = parseFloat(gemweight * gprice_per_carat);
+                                                                total_weight = total_weight + parseFloat(gemweight/5);
 								$('#gemstonevalue').val(gemstonevalue.toFixed(2));
-            }
-            if(other_material !== undefined && other_material !== null && other_material !== '' && isNaN(other_material) == false)
-            {
-                total_weight = total_weight + parseFloat(other_material);
-            }
-            if(netweight !== 0 && netweight !== undefined && netweight !== null && isNaN(netweight) == false)
-            {
+                                                }
+                                                if(other_material !== undefined && other_material !== null && other_material !== '' && isNaN(other_material) == false)
+                                                {
+                                                                total_weight = total_weight + parseFloat(other_material);
+                                                }
+                                                if(netweight !== 0 && netweight !== undefined && netweight !== null && isNaN(netweight) == false)
+                                                {
 								var metaltype = $('input[name="metal"]:checked').val();
 								if(metaltype == 'Gold')
 								{
@@ -2094,16 +2190,18 @@ function calculateJPrice()
 				{
 						if($(this).val() == 'True')
 						{
-								$('#diamondShapeCont_1  .shapeComm').removeClass('shapeSelected');
-								$('#diamondShapeCont_1  #Emerald_1').addClass('shapeSelected');
-								$('#not_bugget').attr('checked',false);
-								$('.diamondProp').removeClass('dn');
+                                                    $('.BaguetteProp').removeClass('dn');
+								//$('#diamondShapeCont_1  .shapeComm').removeClass('shapeSelected');
+								//$('#diamondShapeCont_1  #Emerald_1').addClass('shapeSelected');
+								//$('#not_bugget').attr('checked',false);
+								//$('.diamondProp').removeClass('dn');
 						}
 						else
 						{
-								$('#diamondShapeCont_1  .shapeComm').removeClass('shapeSelected');
-								$('.diamondProp').addClass('dn');
-								$('#not_bugget').attr('checked',true);
+                                                    $('.BaguetteProp').addClass('dn');
+								//$('#diamondShapeCont_1  .shapeComm').removeClass('shapeSelected');
+								//$('.diamondProp').addClass('dn');
+								//$('#not_bugget').attr('checked',true);
 						}
 				});
 		}

@@ -4569,7 +4569,7 @@ class vendor extends DB
                                 AND
                                        user_id= " . $params['vid'] . "";
                                
-                        $res = $this->query($sql,1);die;
+                        $res = $this->query($sql);
                         $row = $this->numRows($res);
              
         }

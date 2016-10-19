@@ -438,6 +438,28 @@
                           {
                               $detls['polki_value'] = 0;
                           }
+
+                          /* added new */
+                           if(empty($detls['baguette_weight']))
+                          {
+                              $detls['baguette_weight'] = 0;
+                          }
+                          if(empty($detls['baguetteno']))
+                          {
+                              $detls['baguetteno'] = 0;
+                          }
+                          if(empty($detls['baguette_price_per_carat']))
+                          {
+                              $detls['baguette_price_per_carat'] = 0;
+                          }
+                          if(empty($detls['baguette_value']))
+                          {
+                              $detls['baguette_value'] = 0;
+                          }
+                          /////////////////************************///////////////////
+
+
+
                           if(empty($detls['cr_height']))
                           {
                               $detls['cr_height'] = 0;
@@ -488,6 +510,15 @@
                                                  bullion_design,
                                                  rating,
                                                  budget,
+
+
+                                        baguette_color,
+                                        baguette_quality,
+                                        baguette_weight,
+                                        baguette_no,
+                                        baguette_price_per_carat,
+                                        baguette_value,
+
                                                  b2b_price,
                                                  isBugget,
                                                  price_per_carat,
@@ -548,6 +579,14 @@
                                               \"".$detls['design']."\",
                                               \"".$detls['rating']."\",
                                               \"".$detls['price']."\",
+
+                                    \"".$detls['baguette_color']."\",
+                                    \"".$detls['baguette_quality']."\",
+                                    \"".$detls['baguette_weight']."\",
+                                    \"".$detls['baguetteno']."\",
+                                    \"".$detls['baguette_price_per_carat']."\",
+                                    \"".$detls['baguette_value']."\",
+
                                               \"".$detls['priceb2b']."\",
                                               \"".$detls['isBugget']."\",
                                               \"".$detls['price_per_carat']."\",
@@ -607,6 +646,14 @@
                                                 bullion_design          = \"".$detls['design']."\",
                                                 rating                  = \"".$detls['rating']."\",
                                                 budget                  = \"".$detls['price']."\",
+
+                                        baguette_color                  = \"".$detls['baguette_color']."\",
+                                        baguette_quality                = \"".$detls['baguette_quality']."\",
+                                        baguette_weight                 = \"".$detls['baguette_weight']."\",
+                                        baguette_no                     = \"".$detls['baguette_no']."\",
+                                        baguette_price_per_carat        = \"".$detls['baguette_price_per_carat']."\",
+                                        baguette_value                  = \"".$detls['baguette_value']."\",
+
                                                 b2b_price               = \"".$detls['priceb2b']."\",
                                                 isBugget                = \"".$detls['isBugget']."\",
                                                 price_per_carat         = \"".$detls['price_per_carat']."\",
@@ -767,9 +814,10 @@
 		}
 
 		public function imageDisplay($params)
-		{
+		{//print_r($params);die;
 			$af = (!empty($params['af'])) ? trim(urldecode($params['af'])) : 1;
-
+                        $vid = (!empty($params['vid'])) ? trim(urldecode($params['vid'])) : '';
+                        $status = $params['status'];
 			$arr = array();
 			$pid = $params['pid'];
                         $prdSql = " SELECT
@@ -780,26 +828,40 @@
                                             product_id = ".$pid."";
                         $prdRes = $this->query($prdSql);
                         $Vcnt = $this->numRows($prdRes);
-
-//                        $extn = " AND active_flag in (".$af.") ";
-                        if($Vcnt)
+                          $extn = " AND active_flag in (".$af.") ";
+                        if($Vcnt>0)
                         {
                             $row = $this->fetchData($prdRes);
-                            if($row['vendor_id'] == $params['vid'])
-                            {
+                            if($row['vendor_id'] == $vid)
+                            {    
                                 $extn = " AND active_flag not in (2) ";
                             }
                         }
-                               $extn = " AND active_flag not in (2) ";
-                        $sql = "SELECT product_image FROM tbl_product_image_mapping WHERE product_id = ".$pid." ".$extn." ORDER BY image_sequence ASC";
+                     
+
+
+                        $sql = "SELECT product_image,active_flag FROM tbl_product_image_mapping WHERE product_id = ".$pid." ".$extn." ORDER BY image_sequence ASC";
                         $res = $this->query($sql);
                         if($res)
-                        {
-                                while($row = $this->fetchData($res))
-                                {
-                                        $arr[] = $row['product_image'];
+                        {       if($status==2)
+                                {  
+                                    while($row = $this->fetchData($res))
+                                    {
+                                        
+                                        
+                                           $temp['status'] = $row['active_flag'];
+                                           $temp['product_image']=$row['product_image'];
+                                           $arr[] = $temp;
+                                    }
                                 }
-
+                                else 
+                                {
+                                    while($row = $this->fetchData($res))
+                                    {
+                                        $arr[] = $row['product_image'];
+                                    }
+     
+                                }
                         }
 
 			if(!empty($arr))
@@ -910,7 +972,7 @@
         }
 
         public function getPrdByCatid($params)
-        {               
+        {
       			$page   = ($params['page'] ? $params['page'] : 1);
       			$limit  = ($params['limit'] ? $params['limit'] : 15);
       			if($params['uid'])
@@ -1781,7 +1843,7 @@
         					$tmp_arr1 = (!empty($arr1)) ? (array_values($arr1)) : null;
         					$arr1 = array('filters'=>$data,'products'=>$tmp_arr1,'total'=>$total,'getdata'=>$params,'catname'=>$catname);
         					$err = array('errCode'=>0,'errMsg'=>'Details fetched successfully');
-                                              
+
         				}
         				else
         				{
@@ -1854,6 +1916,16 @@
                                                                                 polkino,
                                                                                 polki_price_per_carat,
                                                                                 polki_value,
+
+                                baguette_color,
+                                baguette_quality,
+                                baguette_weight,
+                                baguette_no,
+                                baguette_price_per_carat,
+                                baguette_value,
+
+
+
                                                 is_plain_jewellery,
                                                 price_per_carat,
                                                 othermaterial,
@@ -3041,10 +3113,10 @@
 			return $results;
 		}
 
-                
-                
-                
-                
+
+
+
+
 		public function uploadCertificate($params)
 		{
 			$files = (!empty($params['file'])) ? $params['file'] : '';
@@ -3248,7 +3320,7 @@
 						{
 							if(!empty($vids[$row['product_id']]))
 							{
-								$pvid = $vids[$row['product_id']];
+								 $pvid = $vids[$row['product_id']];
 							}
 							else
 							{

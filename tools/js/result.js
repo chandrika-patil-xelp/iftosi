@@ -236,8 +236,11 @@ $(document).ready(function() {
 				}
 			}
 			else
-			{
-				FR(1);
+			{       
+				if($('#sortbyvl').val())
+                                FR($('#sortbyvl').val());
+                            else
+                                FR(1);
 			}
 		}
 	});
@@ -262,8 +265,11 @@ $(document).ready(function() {
 				}
 			}
 			else
-			{
-				FR(1);
+			{      
+				if($('#sortbyvl').val())
+                                FR($('#sortbyvl').val());
+                            else
+                                FR(1);
 			}
 		}
 	});
@@ -1673,7 +1679,10 @@ function getResultsData(data,sortby,showtree)
 			}
 			else
 			{
-				FR(1);
+				if($('#sortbyvl').val())
+                                  FR($('#sortbyvl').val());
+                                else
+                                  FR(1);
 			}
 		}
 	});
@@ -1699,7 +1708,10 @@ function getResultsData(data,sortby,showtree)
 			}
 			else
 			{
-				FR(1);
+				if($('#sortbyvl').val())
+                                  FR($('#sortbyvl').val());
+                                else
+                                  FR(1);
 			}
 		}
 	});

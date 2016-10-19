@@ -211,8 +211,9 @@ switch ($action) {
             case 'getImages':
                 $prdIds = (!empty($params['prdIds']) && !stristr($params['prdIds'], 'undefined') && !stristr($params['prdIds'], 'null')) ? trim(urldecode($params['prdIds'])) : '';
                 if (!empty($prdIds)) {
-                    $url = APIDOMAIN . "index.php?action=getPrdImgsByIds&prdIds=" . urlencode($prdIds);
-                    $res = $comm->executeCurl($url);
+                    //echo'<pre>';print_r($params);
+                   $url = APIDOMAIN . "index.php?action=getPrdImgsByIds&prdIds=" . urlencode($prdIds);
+                   $res = $comm->executeCurl($url);
                 } else {
                     $res = array('results' => array(), 'error' => array('code' => 0, 'msg' => 'No Product IDs found'));
                 }
@@ -1013,8 +1014,9 @@ switch ($action) {
                     $prdInfoUrl = APIDOMAIN . 'index.php?action=getPrdById&prdid=' . $prdId;
                     $prdInfo = $comm->executeCurl($prdInfoUrl);
                     if (!empty($prdInfo) && !empty($prdInfo['results']) && !empty($prdInfo['error']) && empty($prdInfo['error']['errCode']))
-                    {
+                    {   //echo "<pre>";print_r( $prdInfo);die;
                         $prdDet = $prdInfo = $prdInfo['results'][$prdId];
+                        
                         $vndrInfo = $prdInfo['vendor_product_details'];
                         foreach ($vndrInfo as $key => $value)
                         {
@@ -1022,6 +1024,7 @@ switch ($action) {
                         }
                         $vndrDtls = $prdInfo['vendor_details'][$vndrId];
                         $vndrDtls['fulladdress'] = explode(",", $vndrDtls['fulladdress']);
+                        
                         foreach ($vndrDtls['fulladdress'] as $key => $value)
                         {
                             $vndrDtls['fulladdress'][$key] = trim($value);
@@ -1029,7 +1032,8 @@ switch ($action) {
                         $vndrDtls['fulladdress'] = implode(', ', $vndrDtls['fulladdress']);
                         $vndrAddr = explode(',', $vndrDtls['fulladdress']);
                     }
-                    //echo "<pre>";print_r($prdDet['attr_details']);die;
+                   //echo "<pre>";print_r( $prdInfo['vendor_details'][$vndrId][vid]);die;
+                   //$vid='';
                     if(!empty($prdDet['attr_details']))
                     {
                           if(!empty($prdDet['attr_details']['gold_purity']))
@@ -1056,10 +1060,10 @@ switch ($action) {
                     }
 
                 }
-                $url1 = APIDOMAIN . 'index.php?action=imagedisplay&pid=' . $pid;
+                $url1 = APIDOMAIN . 'index.php?action=imagedisplay&pid='.$pid.'&vid='.urlencode($prdInfo['vendor_details'][$vndrId][vid]).'&status=2';
                 $res1 = $comm->executeCurl($url1);
                 $data1 = $res1['results'];
-
+               
                 $gemsUrl = APIDOMAIN . 'index.php?action=getGemstoneTypes';
                 $gemsRes = $comm->executeCurl($gemsUrl);
                 $gemsAttrs = $gemsRes['results'];
@@ -1187,7 +1191,6 @@ switch ($action) {
 
                 if (!empty($catid) && !empty($dt) && !empty($vid)) {
                     $url = APIDOMAIN . 'index.php?action=addNewproduct&category_id=' . $catid . '&dt=' . $dt . '&vid=' . $vid;
-                    $res = $comm->executeCurl($url);
                     $data = $res['results'][$dt];
                 }
                 if (!empty($catid) && !empty($pid)) {

@@ -124,12 +124,13 @@ switch($action)
 			$res= $result;
 		break;
 
-		case 'imagedisplay':
+		case 'imagedisplay': 
 			include APICLUDE.'class.product.php';
 			$obj	= new product($db['iftosi']);
-			$result	= $obj->imageDisplay($params);
+		        $result	= $obj->imageDisplay($params);
 			$res= $result;
-		break;
+                       
+                break;
 
         case 'checkUser':
             include APICLUDE.'class.user.php';
@@ -2009,6 +2010,7 @@ echo '</pre>';
 			include APICLUDE . 'class.product.php';
 			$obj = new product($db['iftosi']);
 			$res = $obj->getPrdImgsByIds($params);
+                        
 		break;
 
 		case "sendMail":

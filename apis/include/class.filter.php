@@ -30,7 +30,7 @@ class filter extends DB
             $sql.=" LIMIT " . $start . ",$limit";
         }
       
-      $res = $this->query($sql,1);
+      $res = $this->query($sql);
         
         $chkres=$this->numRows($res);
         if($chkres)

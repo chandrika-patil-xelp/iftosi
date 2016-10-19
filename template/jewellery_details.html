@@ -612,16 +612,26 @@
 </div>
 <div id='imgGallery' class="imgGallery dn">
     <div id='galleryClose' class="galleryClose ripplelink"></div>
-    <div class="galleryImg fLeft" style="background: url('<?php echo IMGDOMAIN.$data1[0];?>') 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+    <div class="galleryImg fLeft" style="background: url('<?php echo IMGDOMAIN.$data1[0][product_image];?>') 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
     <div class="imgListCont fLeft">
         <?php
         for($i=0;$i<count($data1);$i++)
         {
+             if($data1[$i]['status'] == 1)
+             {
         ?>
-        <div  id="imgThumb_<?php echo $i ;?>" class="imgThumbnil fLeft" style="background: url('<?php echo IMGDOMAIN.$data1[$i];?>') 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
-        <?php
+        <div  id="imgThumb_<?php echo $i ;?>" class="imgThumbnil nullify fLeft" style="background: url('<?php echo IMGDOMAIN.$data1[$i][product_image];?>') 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+              <?php
+              }
+              else 
+              {
+                  
+              ?>
+        <div  id="imgThumb_<?php echo $i ;?>" class="imgThumbnil remImgs fLeft remImg" style="background: url('<?php echo IMGDOMAIN.$data1[$i][product_image];?>') 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+              <?php      
+               }
         }
-        ?>
+               ?>
     </div>
 </div>
 

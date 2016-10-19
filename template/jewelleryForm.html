@@ -234,7 +234,7 @@
                                       </div>
                                   </div>
                             </div>
-                            <div class="divCon  fLeft jw3 dn" id='typeChoice'>
+                            <div class="divCon  fLeft jw3  " id='typeChoice'>
                                 <div  class="titleDiv txtCap fLeft">Has Baguette / Choki ?*</div>
                                 <div class='radioCont fLeft'>
                                     <div class="checkDiv fLeft">
@@ -247,7 +247,115 @@
                                     </div>
                                 </div>
                           </div>
-<?php
+    
+                           
+                            <div class="vCommTitle fLeft fmOpenL BaguetteProp   <?php echo ($attr['isBugget'] == 'True' ? '' : 'dn'); ?> " style="font-size:25px">Please fill the Baguette details</div>
+                            <div class="PolkiShapeCont BaguetteProp <?php echo (($attr['isBugget'] == 'True') ? '' : 'dn');?>">
+                              <div class="divCon fLeft dAuto BaguetteProp">
+                                  
+                                  <div  class="titleDiv txtCap fLeft">Baguette Color*</div>
+                                  <div class='radioCont fLeft'>
+                                      <div class="checkDiv fLeft">
+                                          <input type="radio" name='baguette_color' class="filled-in" value="D"  id="baguette_color_D" <?php echo ($attr['baguette_color'] == 'D' ? 'checked' : '');?>>
+                                          <label for="baguette_color_D">D</label>
+                                      </div>
+                                      <div class="checkDiv fLeft">
+                                          <input type="radio" name='baguette_color' class="filled-in" value="E"  id="baguette_color_E" <?php echo ($attr['baguette_color'] == 'E' ? 'checked' : '');?>>
+                                          <label for="baguette_color_E">E</label>
+                                      </div>
+                                      <div class="checkDiv fLeft">
+                                          <input type="radio" name='baguette_color' class="filled-in" value="F"  id="baguette_color_F" <?php echo ($attr['baguette_color'] == 'F' ? 'checked' : '');?>>
+                                          <label for="baguette_color_F">F</label>
+                                      </div>
+                                      <div class="checkDiv fLeft">
+                                          <input type="radio" name='baguette_color' class="filled-in" value="G"  id="baguette_color_G" <?php echo ($attr['baguette_color'] == 'G' ? 'checked' : '');?> >
+                                          <label for="baguette_color_G">G</label>
+                                      </div>
+                                      <div class="checkDiv fLeft">
+                                          <input type="radio" name='baguette_color' class="filled-in" value="H"  id="baguette_color_H" <?php echo ($attr['baguette_color'] == 'H' ? 'checked' : '');?>>
+                                          <label for="baguette_color_H">H</label>
+                                      </div>
+                                      <div class="checkDiv fLeft">
+                                          <input type="radio" name='baguette_color' class="filled-in" value="I"  id="baguette_color_I" <?php echo ($attr['baguette_color'] == 'I' ? 'checked' : '');?>>
+                                          <label for="baguette_color_I">I</label>
+                                      </div>
+                                      <div class="checkDiv fLeft">
+                                          <input type="radio" name='baguette_color' class="filled-in" value="J"  id="baguette_color_J" <?php echo ($attr['baguette_color'] == 'J' ? 'checked' : '');?>>
+                                          <label for="baguette_color_J">J</label>
+                                      </div>
+                                      <div class="checkDiv fLeft">
+                                          <input type="radio" name='baguette_color' class="filled-in" value="K"  id="baguette_color_K" <?php echo ($attr['baguette_color'] == 'K' ? 'checked' : '');?>>
+                                          <label for="baguette_color_K">K</label>
+                                      </div>
+                                      <div class="checkDiv fLeft">
+                                          <input type="radio" name='baguette_color' class="filled-in" value="L"  id="baguette_color_L" <?php echo ($attr['baguette_color'] == 'L' ? 'checked' : '');?>>
+                                          <label for="baguette_color_L">L</label>
+                                      </div>
+                                      <div class="checkDiv fLeft">
+                                          <input type="radio" name='baguette_color' class="filled-in" value="M"  id="baguette_color_M" <?php echo ($attr['baguette_color'] == 'M' ? 'checked' : '');?>>
+                                          <label for="baguette_color_M">M</label>
+                                      </div>
+                                      <div class="checkDiv fLeft">
+                                          <input type="radio" name='baguette_color' class="filled-in" value="N"  id="baguette_color_N" <?php echo ($attr['baguette_color'] == 'N' ? 'checked' : '');?>>
+                                          <label for="baguette_color_N">N</label>
+                                      </div>
+                                      <div class="checkDiv fLeft">
+                                          <input type="radio" name='baguette_color' class="filled-in" value="O"  id="baguette_color_O" <?php echo ($attr['baguette_color'] == 'O' ? 'checked' : '');?>>
+                                          <label for="baguette_color_O">O</label>
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <div class="divCon  fLeft jw3 BaguetteProp">
+                                  <div  class="titleDiv txtCap fLeft">Baguette Quality*</div>
+                                  <div class='radioCont fLeft'>
+                                      <div class="checkDiv fLeft">
+                                          <input type="radio" name='baguette_clarity' class="filled-in" value="IF"  id="baguette_clarity_IF" <?php echo ($attr['baguette_quality'] == 'IF' ? 'checked' : '');?>>
+                                          <label for="baguette_clarity_IF">IF</label>
+                                      </div>
+                                      <div class="checkDiv fLeft">
+                                          <input type="radio" name='baguette_clarity' class="filled-in" value="VVS" id="baguette_clarity_VVS" <?php echo ($attr['baguette_quality'] == 'VVS' ? 'checked' : '');?>>
+                                          <label for="baguette_clarity_VVS">VVS</label>
+                                      </div>
+
+                                      <div class="checkDiv fLeft">
+                                          <input type="radio" name='baguette_clarity' class="filled-in" value="VS"  id="baguette_clarity_VS" <?php echo ($attr['baguette_quality'] == 'VS' ? 'checked' : '');?>>
+                                          <label for="baguette_clarity_VS">VS</label>
+                                      </div>
+
+                                      <div class="checkDiv fLeft">
+                                          <input type="radio" name='baguette_clarity' class="filled-in" value="SI"  id="baguette_clarity_SI" <?php echo ($attr['baguette_quality'] == 'SI' ? 'checked' : '');?>>
+                                          <label for="baguette_clarity_SI">SI</label>
+                                      </div>
+
+                                      <div class="checkDiv fLeft">
+                                          <input type="radio" name='baguette_clarity' class="filled-in" value="I"  id="baguette_clarity_I" <?php echo ($attr['baguette_quality'] == 'I' ? 'checked' : '');?>>
+                                          <label for="baguette_clarity_I">I</label>
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <div class="divCon2 fLeft BaguetteProp">
+                                  <div  class="titleDiv txtCap fLeft">Baguette Weight (in CTS)*</div>
+                                  <input name="baguette_weight" id="baguette_weight" type="text" autocomplete="false" value="<?= $attr['baguette_weight']; ?>"  placeholder=" eg. 1.25" maxlength="8" onkeypress="return common.isDecimalNumber(event, this.value);" value="" class="txtInput fLeft fmOpenR font14 c666 weightCal">
+                              </div>
+
+                              <div class="divCon2 fLeft BaguetteProp">
+                                  <div  class="titleDiv txtCap fLeft">No. Of Baguette*</div>
+                                  <input name="baguetteno" id="baguetteno" type="text" placeholder=" eg. 10" autocomplete="false" value="<?= $attr['baguette_no']; ?>" onkeypress="common.isNumberKey(event);" class="txtInput fLeft fmOpenR font14 c666 weightCal">
+                              </div>
+
+                              <div class="divCon2 fLeft BaguetteProp">
+                                  <div  class="titleDiv txtCap fLeft">Baguette Price / Carat*</div>
+                                  <input name="baguette_price_per_carat" id="baguette_price_per_carat" type="text" autocomplete="false" placeholder=" eg. 1.25" maxlength="8" onkeypress="return common.isDecimalNumber(event, this.value);" value="<?= $attr['baguette_price_per_carat']; ?>" class="weightCal txtInput fLeft fmOpenR font14 c666">
+                              </div>
+
+                              <div class="divCon2 fLeft BaguetteProp">
+                                  <div  class="titleDiv txtCap fLeft">Value Of Baguette*</div>
+                                  <input name="baguette_value" id="baguette_value" type="text" placeholder=" eg. 10" autocomplete="false" value="<?= $attr['baguette_value']; ?>" onkeypress="common.isNumberKey(event);" class="txtInput fLeft fmOpenR font14 c666">
+                              </div>                          
+                              </div>
+    <?php
                             if (empty($attr['dwt']) || $attr['dwt'] == '0')
                             {
                                 $attr['dwt'] = '';
@@ -258,15 +366,15 @@
                             }
 ?>
                             <div class="vCommTitle fLeft fmOpenL polkiProp  <?php echo (
-                                    (!empty($attr['polki_color']) && $attr['polki_color'] !='') 
-                                    || (!empty($attr['polki_quality']) && $attr['polki_quality'] !='' )
+                                    (!empty($attr['polki_color']) && $attr['polki_color'] !='' && $attr['polki_color'] !='undefined') 
+                                    || (!empty($attr['polki_quality']) && $attr['polki_quality'] !='undefined' )
                                     || (!empty($attr['polki_weight']) && strval($attr['polki_weight']) !== '0.000' && $attr['polki_weight'] != 0.000 ) 
                                     || (!empty($attr['polki_price_per_carat']) && strval($attr['polki_price_per_carat']) !== '0.00' && $attr['polki_price_per_carat'] !== 0.000 && strval($attr['polki_price_per_carat']) !== '0.000000000'  && $attr['polki_price_per_carat'] != 0.000000000 )
                                     ||(!empty($attr['polkino']) && $attr['polkino'] !=0) ) ? '':'dn';?>" style="font-size:25px">Please fill the Polki details</div>
 
                             <div class="PolkiShapeCont polkiProp <?php echo (
-                                    (!empty($attr['polki_color']) && $attr['polki_color'] !='') 
-                                    || (!empty($attr['polki_quality']) && $attr['polki_quality'] !='' )
+                                    (!empty($attr['polki_color']) && $attr['polki_color'] !='undefined') 
+                                    || (!empty($attr['polki_quality']) && $attr['polki_quality'] !='undefined' )
                                     || (!empty($attr['polki_weight']) && strval($attr['polki_weight']) !== '0.000' && $attr['polki_weight'] != 0.000 ) 
                                     || (!empty($attr['polki_price_per_carat']) && strval($attr['polki_price_per_carat']) !== '0.00' && $attr['polki_price_per_carat'] !== 0.000 && strval($attr['polki_price_per_carat']) !== '0.000000000'  && $attr['polki_price_per_carat'] != 0.000000000 )
                                     ||(!empty($attr['polkino']) && $attr['polkino'] !=0) ) ? '':'dn';?> ">
@@ -539,24 +647,36 @@
                             }
 ?> <!--<div onclick="addShapeType()" id="addDiamondType" class="submitBtn fmOpenR ripplelink poR fRight">Add Diamond Type</div><div class="clearFill"></div>-->
 
-                            <div class="divCon2 fLeft <?php echo ($attr['diamond_shape'][0]) ? '' : 'dn'; ?> diamondProp">
+                    
+                        <div class="divCon  fLeft jw4 dn" id='typeChoice'>
+                                <div  class="titleDiv txtCap fLeft">have you added total diamonds(if yes please click to enable diamond field)?*</div>
+                                <div class='radioCont fLeft'>
+                                    <div class="checkDiv fLeft">
+                                        <input type="checkbox" name='conform' class="filled-in" value="conform"  id="conform" onclick="isconform();">
+                                        <label for="conform">YES</label>
+                                    </div>
+                                </div>
+                        </div>
+
+
+                            <div class="divCon2 fLeft <?php echo ($attr['diamond_shape'][0]) ? '' : 'dn'; ?> diamondProp" disabled>
                                 <div  class="titleDiv txtCap fLeft">Diamond Weight (in CTS)*</div>
-                                <input name="diamonds_weight" id="diamondweight" type="text" autocomplete="false" placeholder=" eg. 1.25" maxlength="8" onkeypress="return common.isDecimalNumber(event, this.value);" value="<?= round($attr['dwt'],3); ?>" class="txtInput fLeft fmOpenR font14 c666 weightCal">
+                                <input name="diamonds_weight" id="diamondweight" type="text" autocomplete="false" placeholder=" eg. 1.25" maxlength="8" onkeypress="return common.isDecimalNumber(event, this.value);" value="<?= round($attr['dwt'],3); ?>" class="txtInput fLeft fmOpenR font14 c666 weightCal" disabled>
                             </div>
 
-                            <div class="divCon2 fLeft <?php echo ($attr['diamond_shape'][0]) ? '' : 'dn'; ?> diamondProp">
+                            <div class="divCon2 fLeft <?php echo ($attr['diamond_shape'][0]) ? '' : 'dn'; ?> diamondProp" disabled>
                                 <div  class="titleDiv txtCap fLeft">No. Of Diamonds*</div>
-                                <input name="no_diamonds" id="no_diamonds" type="text" placeholder=" eg. 10" autocomplete="false" value="<?= $attr['nofd']; ?>" onkeypress="common.isNumberKey(event);" class="txtInput fLeft fmOpenR font14 c666 weightCal">
+                                <input name="no_diamonds" id="no_diamonds" type="text" placeholder=" eg. 10" autocomplete="false" value="<?= $attr['nofd']; ?>" onkeypress="common.isNumberKey(event);" class="txtInput fLeft fmOpenR font14 c666 weightCal" disabled>
                             </div>
 
-                            <div class="divCon2 fLeft <?php echo ($attr['diamond_shape'][0]) ? '' : 'dn'; ?>  diamondProp">
+                            <div class="divCon2 fLeft <?php echo ($attr['diamond_shape'][0]) ? '' : 'dn'; ?>  diamondProp" disabled>
                                 <div  class="titleDiv txtCap fLeft">Diamond Price / Carat*</div>
-                                <input name="price_per_carat" id="price_per_carat" type="text" autocomplete="false" placeholder=" eg. 1.25" maxlength="8" onkeypress="return common.isDecimalNumber(event, this.value);" value="<?= round($attr['price_per_carat'],3); ?>" class="weightCal txtInput fLeft fmOpenR font14 c666">
+                                <input name="price_per_carat" id="price_per_carat" type="text" autocomplete="false" placeholder=" eg. 1.25" maxlength="8" onkeypress="return common.isDecimalNumber(event, this.value);" value="<?= round($attr['price_per_carat'],3); ?>" class="weightCal txtInput fLeft fmOpenR font14 c666" disabled>
                             </div>
 
-                            <div class="divCon2 fLeft <?php echo ($attr['diamond_shape'][0]) ? '' : 'dn'; ?>  diamondProp">
+                            <div class="divCon2 fLeft <?php echo ($attr['diamond_shape'][0]) ? '' : 'dn'; ?>  diamondProp" disabled>
                                 <div  class="titleDiv txtCap fLeft">Value Of Diamonds*</div>
-                                <input name="diamondsvalue" id="diamondsvalue" type="text" placeholder=" eg. 10" autocomplete="false" value="<?= round($attr['diamondsvalue'],3); ?>" onkeypress="common.isNumberKey(event);" class="txtInput fLeft fmOpenR font14 c666">
+                                <input name="diamondsvalue" id="diamondsvalue" type="text" placeholder=" eg. 10" autocomplete="false" value="<?= round($attr['diamondsvalue'],3); ?>" onkeypress="common.isNumberKey(event);" class="txtInput fLeft fmOpenR font14 c666" disabled>
                             </div>
 
                             <?php
