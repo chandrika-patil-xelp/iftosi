@@ -46,7 +46,6 @@
 <url><loc>http://www.iftosi.com/jewellery/ring/only-diamonds/ct-10012</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/ring/gemstone/ct-10013</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/ring/cocktail/ct-10014</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-<url><loc>http://www.iftosi.com/jewellery/ring/white-gold/ct-10015</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/ring/men-s/ct-10016</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/earring/ct-10004</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/earring/office-wear/ct-10017</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
@@ -54,14 +53,11 @@
 <url><loc>http://www.iftosi.com/jewellery/earring/party-wear/ct-10019</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/earring/only-diamonds/ct-10020</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/earring/gemstone/ct-10021</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-<url><loc>http://www.iftosi.com/jewellery/earring/white-gold/ct-10022</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/pendant/ct-10005</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-<url><loc>http://www.iftosi.com/jewellery/pendant/office-wear/ct-10023</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/pendant/daily-wear/ct-10024</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/pendant/party-wear/ct-10025</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/pendant/only-diamonds/ct-10026</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/pendant/gemstone/ct-10027</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-<url><loc>http://www.iftosi.com/jewellery/pendant/white-gold/ct-10028</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/pendant/men-s/ct-10039</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/necklace/ct-10006</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/necklace/casual-wear/ct-10029</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
@@ -72,11 +68,12 @@
 <url><loc>http://www.iftosi.com/jewellery/bangle-bracelet/party-wear/ct-10033</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/bangle-bracelet/only-diamonds/ct-10034</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/bangle-bracelet/gemstones/ct-10035</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-<url><loc>http://www.iftosi.com/jewellery/bangle-bracelet/white-gold/ct-10036</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/nosepin/ct-10040</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/nosepin/with-diamonds/ct-10043</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+<url><loc>http://www.iftosi.com/jewellery/nosepin/without-diamonds/ct-10044</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/mangalsutra/ct-10041</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/mangalsutra/plain-gold/ct-10045</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+<url><loc>http://www.iftosi.com/jewellery/mangalsutra/gold-diamonds/ct-10046</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/mangalsutra/gold-cz/ct-10047</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/polki-jadau/ct-10042</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/polki-jadau/ring/ct-10048</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
@@ -84,5 +81,7 @@
 <url><loc>http://www.iftosi.com/jewellery/polki-jadau/necklace/ct-10050</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/polki-jadau/bangle-bracelet/ct-10051</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/polki-jadau/nosepin/ct-10052</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+<url><loc>http://www.iftosi.com/jewellery/polki-jadau/pendant/ct-10053</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
 <url><loc>http://www.iftosi.com/jewellery/polki-jadau/mangalsutra/ct-10054</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+
 </urlset>
