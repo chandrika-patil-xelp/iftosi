@@ -274,7 +274,7 @@ $('.iconCall,.iconMessage').click(function () {
         else if(ur_name.length == 0)
         {
             customStorage.toast(0, 'Please Enter the name');
-            $('#ur_mobile').focus();
+            $('#ur_name').focus();
             return false;
         }
         else if (isNaN(ur_name) !== true  || (n.test(ur_name) === false))
