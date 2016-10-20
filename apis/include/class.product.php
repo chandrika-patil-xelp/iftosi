@@ -16,6 +16,7 @@
                         WHERE
                                 vendor_id = ".$params['vid'];
             $vendres = $this->query($vendSql);
+           // echo'<pre>';print_r($params);die;
             if($vendres)
             {
                 $vendrow = $this->fetchData($vendres);
