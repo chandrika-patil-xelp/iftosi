@@ -1091,6 +1091,8 @@ switch($action)
             $result= $obj->getSubCat($catid);
             $res['results'] = $result;
             break;
+        
+        
 
 // localhost/iftosi/apis/index.php?action=getCatName&catid=1
         case 'getCatName':
