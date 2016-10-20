@@ -205,7 +205,7 @@ class site extends DB
                       39=>'bullion/bars/ct-10002'
                   );
             $resultArr = array_merge($arr,$res2);
-                
+
             //echo "<pre>";print_r($resultArr);die;
 
             foreach($resultArr as $ky=>$vl)
@@ -218,9 +218,13 @@ class site extends DB
               $data .= '<priority>1.0</priority>';
               $data .= '</url>';
               $data .= "\n";
-              
+
             }
         $data .= '</urlset>';
+        if(!file_exists(WEBROOT.'/generalUrl.xml'))
+        {
+            @mkdir(WEBROOT.'/generalUrl.xml', 0777, true);
+        }
         $filename = WEBROOT."generalUrl.xml";
         $myfile = fopen($filename, "w") or die("Unable to open file");
         fwrite($myfile, $data);
@@ -233,7 +237,7 @@ class site extends DB
         $jewel = $res['results']['root'][1]['cat_name'];
         $i = 0;
         foreach($res['results']['root'][1]['subcat'] as $key => $val)
-        { 
+        {
           $dname = preg_replace('/[^a-zA-Z0-9]+/', ' ', $val['cat_name']);
           $dname = ereg_replace("[ \t\n\r]+", " ", $dname);
           $dname = strtolower(str_replace(" ", "-", $dname));
@@ -249,9 +253,9 @@ class site extends DB
           }
         }
         return $link;
-       
-        
+
+
     }
-    
-    
+
+
 }
