@@ -381,16 +381,19 @@ function validateJForm()
 
 				if(isValid && (metal === undefined || metal === null || metal === ''))
 				{
-						str = 'Please select metal type';
+						str = 'Please select metal';
                                                 submiter = false;
                                                 isValid = false;
                                 }
-                                if(isValid && (gold_type === undefined || gold_type === null || gold_type === ''))
-				{
-						str = 'Please select metal type';
-                                                submiter = false;
-                                                isValid = false;
-                                }
+                                if(combination === 'GOLD & DIAMONDS' || combination === 'GOLD, DIAMONDS & GEMSTONES' || combination === 'GOLD & GEMSTONES'  || combination === 'GOLD & SWAROVSKIS ZIRCONIA')
+                                {
+                                        if(isValid && (gold_type === undefined || gold_type === null || gold_type === ''))
+                                        {
+                                                        str = 'Please select metal type';
+                                                        submiter = false;
+                                                        isValid = false;
+                                        }
+                                }        
                                 if(isValid && (isBugget === 'True'))
 				{
                                     if(isValid && (baguette_color === undefined || baguette_color === null || baguette_color === ''))
