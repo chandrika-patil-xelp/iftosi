@@ -283,7 +283,7 @@ function Common() {
         var pr_mobile = $('#pr_mobile').val();
         var pr_pass = $('#pr_pass').val();
         if (pr_mobile == '') {
-            customStorage.toast(0, 'Mobile Number Should Not Be Empty');
+            customStorage.toast(0, 'Mobile/Email Should Not Be Empty');
             $('#pr_mobile').focus();
             return;
         } else if (pr_pass == '') {
@@ -665,3 +665,14 @@ function showProductList()
   $('#mMenuBtn').click(function(){
             $('.menuList').scrollTop(0);
     });
+function changeHIdVal(e)
+{ 
+    if(e.keyCode == 13) 
+    {    
+        $('#ur_cityid').val('1');
+    }
+    /*if($('#ur_city').val() == '')
+    {
+        $('#ur_cityid').val('');
+    }*/
+}
