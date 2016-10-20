@@ -221,10 +221,6 @@ class site extends DB
 
             }
         $data .= '</urlset>';
-        if(!file_exists(WEBROOT.'/generalUrl.xml'))
-        {
-            @mkdir(WEBROOT.'/generalUrl.xml', 0777, true);
-        }
         $filename = WEBROOT."generalUrl.xml";
         $myfile = fopen($filename, "w") or die("Unable to open file");
         fwrite($myfile, $data);
