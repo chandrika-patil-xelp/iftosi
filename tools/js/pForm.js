@@ -255,7 +255,8 @@ function validateJForm()
 				var shape=$('.jshapeComm');
 				var isPlain =  $('input[name=Plain]:checked').val();
 				var certificate =  $('input[name=Certficate]:checked').val();
-				var other_certificate =  $('#other_cerificate').val();
+				//var uploadCertificate=$('#filePath').val();
+                                var other_certificate =  $('#other_cerificate').val();
 				var product_brand =  $('#product_brand').val();
 				var metal = $("input[name='metal']:checked").val();
 				var diamondShape = $('.shapeComm');
@@ -302,6 +303,8 @@ function validateJForm()
 				var subcat = '';
 				var isValid = true;
 				var str = '';
+                               
+                                
                                 
 				shape.each(function()
 				{
@@ -337,27 +340,36 @@ function validateJForm()
 				{
 						str ='Please select sub category';
 						submiter = false;
-				  	isValid = false;
+				  	        isValid = false;
 				}
-
+                                
+                                if(isValid && (combination === undefined || combination === null || combination === ''))
+				{
+						str = 'Please select combination';
+                                                submiter = false;
+                                                isValid = false;
+				}
+                                
 				if(isValid && (certificate === undefined || certificate === null || certificate === ''))
 				{
 						str ='Please select certificate';
-            submiter = false;
-            isValid = false;
+                                                submiter = false;
+                                                isValid = false;
 				}
 				else if (isValid)
 				{
-						if(isValid && certificate.toLowerCase() === 'other')
-						{
-								if(isValid && (othercert === undefined || othercert === null || othercert === ''))
-								{
-										isValid = false;
-                    submiter = false;
-                    str = 'Please enter certificate';
-								}
-						}
-						var tmp_certificate_url = $('#filePath').html();
+                                if(isValid && certificate.toLowerCase() === 'other')
+                                {
+                                                if(isValid && (othercert === undefined || othercert === null || othercert === ''))
+                                                {
+                                                                isValid = false;
+                                                                submiter = false;
+                                                                str = 'Please enter certificate';
+                                                }
+
+                                               
+                                }
+                                              var tmp_certificate_url = $('#filePath').html();
 						// if(isValid && (tmp_certificate_url == undefined || tmp_certificate_url == null || tmp_certificate_url == '') && (certificate !== undefined && certificate !== null && certificate !== 'undefined' && certificate !== 'null' && certificate !== 'BIS' && certificate !== 'NONE'))
 						// {
 						// 		str ='Please upload product certificate';
@@ -370,45 +382,86 @@ function validateJForm()
 				if(isValid && (metal === undefined || metal === null || metal === ''))
 				{
 						str = 'Please select metal type';
-            submiter = false;
-            isValid = false;
-				}
-				if(isValid && (combination === undefined || combination === null || combination === ''))
+                                                submiter = false;
+                                                isValid = false;
+                                }
+                                if(isValid && (gold_type === undefined || gold_type === null || gold_type === ''))
 				{
-						str = 'Please select combination';
-            submiter = false;
-            isValid = false;
-				}
+						str = 'Please select metal type';
+                                                submiter = false;
+                                                isValid = false;
+                                }
+                                if(isValid && (isBugget === 'True'))
+				{
+                                    if(isValid && (baguette_color === undefined || baguette_color === null || baguette_color === ''))
+				    {
+						str = 'Please select baguette color';
+                                                submiter = false;
+                                                isValid = false;
+                                    }
+                                    
+                                    if(isValid && (baguette_quality === undefined || baguette_quality === null || baguette_quality === ''))
+				    {
+						str = 'Please select baguette quality';
+                                                submiter = false;
+                                                isValid = false;
+                                    }
+                                
+                                    if(isValid && (baguette_weight === undefined || baguette_weight === null || baguette_weight === '' || isNaN(purity)))
+                                     {
+                                                     str = 'Please enter baguette weight';
+                                                     submiter = false;
+                                                     isValid = false;
+                                                     $('#baguette_weight').focus();
+                                     }
+
+                                    if(isValid && (baguetteno === undefined || baguetteno === null || baguetteno === '' || isNaN(purity)))
+                                    {
+                                                     str = 'Please enter baguette no';
+                                                     submiter = false;
+                                                     isValid = false;
+                                                     $('#baguetteno').focus();
+                                    }
+
+                                     if(isValid && (baguette_price_per_carat === undefined || baguette_price_per_carat === null || baguette_price_per_carat === '' || isNaN(purity)))
+                                     {
+                                                     str = 'Please enter baguette price per carat';
+                                                     submiter = false;
+                                                     isValid = false;
+                                                     $('#baguette_price_per_carat').focus();
+                                     }
+                                }
+				
 
 	      var vclarity = new Array();
 	      var vcolor   =   new Array();
 				if(isValid && diamondShape.hasClass('shapeSelected'))
 				{
-            var DivLen = ($('#diamondShapeCont #diamondShapeDiv').length)+1;
-            for(var i=1; i<DivLen; i++)
+                                    var DivLen = ($('#diamondShapeCont #diamondShapeDiv').length)+1;
+                                    for(var i=1; i<DivLen; i++)
 						{
-	                if($('#diamondShapeCont_'+i+' .shapeComm').hasClass('shapeSelected'))
+	                                                if($('#diamondShapeCont_'+i+' .shapeComm').hasClass('shapeSelected'))
 									{
 											var values1 = '';
 											var values2 = '';
 											var color =  colorGathering(i,values1);
 											var clarity = clarityGathering(i,values2);
 											vcolor.push(color);
-	                    vclarity.push(clarity);
+	                                                                                vclarity.push(clarity);
 
 											if(color === undefined || color === null || color === '')
-	                    {
-                          str = 'Please select diamond color';
-                          submiter = false;
-                          isValid = false;
-	                    }
+                                                                                        {
+                                                                                                    str = 'Please select diamond color';
+                                                                                                    submiter = false;
+                                                                                                    isValid = false;
+                                                                                        }
 
 	                    if(isValid && (clarity === undefined || clarity === null || clarity === ''))
 	                    {
-                          str = 'Please enter diamond quality';
-                          submiter = false;
-                          isValid = false;
-	                    }
+                                        str = 'Please enter diamond quality';
+                                        submiter = false;
+                                        isValid = false;
+                            }
 	                }
 							}
 							if(isValid && (dweight === undefined || dweight === null || dweight === ''))
@@ -489,7 +542,8 @@ function validateJForm()
 					}
 	        if(isValid && !purity.match(puritypatt))
 	        {
-	            common.toast(0,'Please choose the purity among 14 / 18 / 22 / 24');
+                    str ='Please choose the purity among 14 / 18 / 22 / 24';
+	           // common.toast(0,'Please choose the purity among 14 / 18 / 22 / 24');
 	            submiter = false;
 	            isValid = false;
 	            $('#goldpurity').focus();
