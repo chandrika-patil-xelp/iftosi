@@ -526,7 +526,7 @@
                                                                       if($attr['diamond_shape'][$curIndex] == 'Baguette' && $attr['isBugget'] == 'True')
                                                                       {
                                                                     ?>
-                                                                          <div id="<?php echo $vl; ?>_<?php echo $curDiv; ?>" class="shapeComm transition300 ripplelink <?php echo $vl; ?> <?php echo (strtolower($vl) == 'emerald') ? 'shapeSelected' : ''; ?>" onclick="checkDiamondShape(this,<?php echo $curDiv; ?>);">
+                                                                          <div id="<?php echo $vl; ?>_<?php echo $curDiv; ?>" class="shapeComm transition300 ripplelink <?php echo $vl; ?> <?php echo (strtolower($vl) == 'emerald') ? '' : ''; ?>" onclick="checkDiamondShape(this,<?php echo $curDiv; ?>);">
                                                                     <?php
                                                                        }
                                                                       else if($attr['diamond_shape'][$curIndex] !== 'Baguette')
@@ -649,7 +649,7 @@
 
                     
                         <div class="divCon  fLeft jw4 dn" id='typeChoice'>
-                                <div  class="titleDiv txtCap fLeft">have you added total diamonds(if yes please click to enable diamond field)?*</div>
+                                <div  class="titleDiv txtCap fLeft">have you added total diamonds(if yes please click on yes to fill  diamond details.)?*</div>
                                 <div class='radioCont fLeft'>
                                     <div class="checkDiv fLeft">
                                         <input type="checkbox" name='conform' class="filled-in" value="conform"  id="conform" onclick="isconform();">
