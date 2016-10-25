@@ -6,7 +6,7 @@
             <div class="forBg bgWhite"></div>
             <div class='prdMainDetails'>
                 <div class="wrapperMax">
-                    <?php
+                    <?php  
                     if(count($data1) == 0)
                     {
                     ?>
@@ -115,7 +115,7 @@
                         </div>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB font12 fmOpenB">DIAMOND WEIGHT</div>
-                            <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['dwt']=='')?'N/A': $prdInfo['attr_details']['dwt']; ?> CTS</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo ($prdInfo['attr_details']['dwt']=='')?'N/A':(($prdInfo['attr_details']['dwt'])+($prdInfo['attr_details']['baguette_weight'])); ?> CTS</div>
                         </div>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB font12 fmOpenB">DIAMOND QUALITY</div>
@@ -595,7 +595,7 @@
             <div id="ur_name_inpText" class="inpText fRight transition300">enter<br>your name</div>
         </div>
         <div class="inputCont fLeft fmOpenR asStngClss">
-            <input type="text" id="ur_city" name="ur_name" autocomplete="false"  class="txtInput cOrange fmOpenR font14 areaIcon " onkeyup="setCityId(event);">
+            <input type="text" id="ur_city" name="ur_name" autocomplete="false"  class="txtInput cOrange fmOpenR font14 areaIcon " onkeyup="common.changeHIdVal(event);">
             <label for="ur_city" class="inp-label transition100">CITY</label>
             <div id="ur_city_inpText" class="inpText fRight transition300">select<br>your city</div>
             <input type="hidden" id="ur_cityid" name="ur_cityid">

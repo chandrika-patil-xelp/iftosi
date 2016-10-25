@@ -1891,7 +1891,7 @@
                                     						nofd,
                                     						gemwt,
                                     						gold_purity,
-                                    						dwt,
+                                    						(dwt-baguette_weight) AS dwt,
                                     						fluo as fluorescence,
                                     						measurement,
                                     						td as tab,

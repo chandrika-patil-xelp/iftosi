@@ -263,6 +263,16 @@ function generateDiamondList(obj) {
     {
         b2b_price = "&#36;"+b2b_price;
     }
+    
+    var cust_price = obj['price'];
+    if(cust_price == 'null' || cust_price == undefined || cust_price == null || cust_price == '' || cust_price == '' || cust_price == '0.00')
+    {
+        cust_price = 'N-A';
+    }
+    else
+    {
+        cust_price = "&#36;"+cust_price;
+    }
 
     var date = obj['update_time'].split(' ');
     str += '<li>';
@@ -327,7 +337,7 @@ function generateDiamondList(obj) {
     str += '<div class="color fLeft">' + obj['color'] + '</div>';
     str += '<div class="clarity fLeft">' + obj['clarity'] + '</div>';
     str += '<div class="cert fLeft">' + obj['cert'] + '</div>';
-    str += '<div class="price fLeft fmOpenB"><span class="fRight rupeeImg">' + obj['price']+ '</span></div>';
+    str += '<div class="price fLeft fmOpenB"><span class="fRight rueeImg">' + cust_price+ '</span></div>';
     str += '<div class="price fLeft fmOpenB"><span class="fRight rueeImg">' + b2b_price + '</span></div>';
     str += '<div class="acct fLeft poR">';
     if(obj['active_flag'] == 1 || obj['active_flag'] == 0){

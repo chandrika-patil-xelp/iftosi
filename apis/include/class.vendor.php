@@ -2679,7 +2679,7 @@ class vendor extends DB
                                     'Stock #',
                                     'Availability',
                                     'Shape',
-                                    'Weight',
+                                    'Weight(in CTS)',
                                     'Color',
                                     'Clarity',
                                     'Cut Grade',
@@ -2690,7 +2690,7 @@ class vendor extends DB
                                     'Lab',
                                     'Report #',
                                     'Treatment',
-                                    'IFtoSI Price',
+                                    'IFtoSI Price(in $)',
                                     'IFtoSI B2B Discount',
                                     'IFtoSI B2C Discount',
                                     'Fancy Color',
@@ -4469,114 +4469,191 @@ class vendor extends DB
             
         }
 
-        public function showVendorProductList($params)
+        public function showVendorList($params)
         {
              $uid = (!empty($params['uid'])) ? trim(urldecode($params['uid'])) : '';
-             $vid = (!empty($params['vid'])) ? trim(urldecode($params['vid'])) : '';
-            /* $sql1= "SELECT
-                                        user_name
-                                FROM 
-                                        tbl_registration
-                                WHERE 
-                                        is_active=1
-                                AND
-                                        " . $params['uid'] . "
-                                IN     
-                                        (select user_id from tbl_registration where is_active=1)";
-                        
-                        $res1 = $this->query($sql1);
-                        $row1 = $this->numRows($res1);
-                    
-                        if(!empty($vid) && !empty($uid))
-                        {
-                            $sql2= "  SELECT
-                                        * 
-                                FROM 
-                                        tbl_product_search
-                                WHERE 
-                                        active_flag=1
-                                AND
-                                        product_id 
-                                IN
-                                        (select product_id from tbl_vendor_product_mapping where vendor_id= " . $params['vid'] . " )";
-                        
-                             $res2 = $this->query($sql2);
-                             $row2 = $this->numRows($res2);
-                             
-                              if($row>0)
-                            {
-                                $arr = array('Success:');
-                                $err = array('code'=>0,'msg'=>'Vendor Product Details Fetched !');
-                            }
-                            else
-                            {
-                                $arr = array('Error:');
-                                $err = array('code'=>0,'msg'=>'No result found !');
-                            }
-                            
-                        }
-                        
-                       
-                        
            
-                   if(!empty($uid) && $row1>0 )
-                    {
-                      $sql= " SELECT
-                                        * 
-                                FROM 
-                                        tbl_product_search
-                                WHERE 
-                                        active_flag=1
-                                AND
-                                        complete_flag=1";
-                       $res = $this->query($sql);
-                       $row = $this->numRows($res);
-                       $data= $this->fetchData($res);
-              
-                            if($row>0)
-                            {
-                                $arr = array('Success:');
-                                $err = array('code'=>0,'msg'=>'Vendor Product Details Fetched !');
-                            }
-                            else
-                            {
-                                $arr = array('Error:');
-                                $err = array('code'=>0,'msg'=>'No result found !');
-                            }
-                    }
-                  
-                     else
-                    {
-                        $arr = array('Error:');
-                        $err = array('code'=>0,'msg'=>'User yet not registered !');
-                    }
-        
-                      $result=array('result'=>$arr,'error'=>$err);
-                      return $result; 
-                    
-             * 
-             * 
-             */
-                
-             $sql= "SELECT
-                                        user_name
+           if($uid)
+           {
+                    $sql= "SELECT
+                                        user_name,
+                                        logmobile,
+                                        email,
+                                        city
                                 FROM 
                                         tbl_registration
                                 WHERE 
                                         is_active=1
                                 AND
-                                        is_vendor=1
-                                AND
-                                       user_id= " . $params['vid'] . "";
+                                       user_id= " . $params['uid'] . "";
                                
                         $res = $this->query($sql);
                         $row = $this->numRows($res);
-             
-        }
+                            if($row>0)
+                            {
+                                $arr = array('Error:');
+                                $err = array('code'=>0,'msg'=>'User Details Fetched Sucessfully !');
+                            }
+                            else
+                            {
+                                $arr = array('Error:');
+                                $err = array('code'=>0,'msg'=>'Error in fetching user details !');
+                            }
+            }
+            else
+            {
+                
+                $arr = array('Error:');
+                $err = array('code'=>0,'msg'=>'User Not Found !');
+            }
          
+            $result=array('result'=>$arr,'error'=>$err);
+            return $result;  
+            
+        } 
+        
+         public function showVendorProductList($params)
+        {
+             $vid = (!empty($params['vid'])) ? trim(urldecode($params['vid'])) : '';
+           
+           if($vid)
+           {
+                    $sql= "select
+                                                                                product_id,
+                                    						diamond_shape,
+                                    						carat,
+                                    						color,
+                                    						certified,
+                                                                                other_certificate,
+                                                                                certificate_url,
+                                    						metal,
+                                    						shape,
+                                    						clarity,
+                                    						price,
+                                    						polish,
+                                    						symmetry,
+                                    						cno,
+                                    						cut,
+                                    						nofd,
+                                    						gemwt,
+                                    						gold_purity,
+                                    						(dwt-baguette_weight) AS dwt,
+                                    						fluo as fluorescence,
+                                    						measurement,
+                                    						td as tab,
+                                    						gold_weight,
+                                    						gemstone_color,
+                                    						gemstone_type,
+                                    						quality,
+                                    						cr_ang as crownangle,
+                                    						girdle,
+                                    						base as baseprice,
+                                    						p_disc as discount,
+                                    						p_discb2b as discountb2b,
+                                    						b2b_price as b2bprice,
+                                    						type,
+                                                                                combination,
+                                    						bullion_design,
+                                    						tabl as tab,
+                                    						num_gemstones,
+                                    						certificate_url,
+                                                                                polki_color,
+                                                                                polki_quality,
+                                                                                polki_weight,
+                                                                                polkino,
+                                                                                polki_price_per_carat,
+                                                                                polki_value,
+
+                                baguette_color,
+                                baguette_quality,
+                                baguette_weight,
+                                baguette_no,
+                                baguette_price_per_carat,
+                                baguette_value,
+
+
+
+                                                is_plain_jewellery,
+                                                price_per_carat,
+                                                othermaterial,
+                                                labour_charge,
+                                                grossweight,
+                                                gprice_per_carat,
+                                                diamondsvalue,
+                                                gold_value,
+                                                gold_type,
+                                                gemstonevalue,
+                                                isBugget
+                                                
+                            from 
+                                    tbl_product_search 
+                            where 
+                                    active_flag = 1
+                            AND
+                                    product_id 
+                            IN         
+                                (SELECT
+                                            product_id
+                                from 
+                                            tbl_vendor_product_mapping
+                                where
+                                            active_flag=1
+                                AND
+                                            vendor_id= " . $params['vid'] . ") ";
+                               
+                        $res = $this->query($sql);
+                        $row = $this->numRows($res);
+                        
+                        if($row>0)
+                        {
+                                    $sql1 ="     select 
+                                                             product_image
+                                                 from            
+                                                             tbl_product_image_mapping
+                                                 where 
+                                                             active_flag=1
+                                                 AND
+                                                             product_id 
+                                                 IN         
+                                                             (SELECT
+                                                                         product_id
+                                                             from 
+                                                                         tbl_vendor_product_mapping
+                                                             where
+                                                                         active_flag=1
+                                                             AND
+                                                                         vendor_id= " . $params['vid'] . ") ";
+                        $res1 = $this->query($sql1);
+                        $row1 = $this->numRows($res1);
+
+                            if($row1>0)
+                            {
+                                $arr = array('Error:');
+                                $err = array('code'=>0,'msg'=>'product Image Fetched Sucessfully !');
+                            }
+                            else
+                            {
+                                $arr = array('Error:');
+                                $err = array('code'=>0,'msg'=>'Error in fetching product Image !');
+                            }
+                        }
+                        else 
+                        {
+                                $arr = array('Error:');
+                                $err = array('code'=>0,'msg'=>'Error in fetching vendor details !');
+                        }
+            }
+            else
+            {
+                
+                $arr = array('Error:');
+                $err = array('code'=>0,'msg'=>'vendor Not Found !');
+            }
          
-        
-        
+            $result=array('result'=>$arr,'error'=>$err);
+            return $result;  
+            
+        } 
     }
 
 

@@ -492,6 +492,7 @@
                                 $attr['diamond_shape'] = explode('|!|', $attr['diamond_shape']);
                                 $attr['color'] = explode('|!|', $attr['color']);
                                 $attr['clarity'] = explode('|!|', $attr['clarity']);
+                               // echo'<pre>';print_r($attr['color']);die;
                                 for ($curIndex = 0; $curIndex < count($attr['diamond_shape']); $curIndex++)
                                 {
 
@@ -556,7 +557,7 @@
 
                                          ?>
                                         <div class="divCon fLeft dAuto dmdColor <?php echo ($attr['diamond_shape'][$curIndex]) ? '' : 'dn'; ?> diamondProp diamondProp_<?php echo $curDiv; ?>">
-                                            <div  class="titleDiv txtCap fLeft">Diamond Color*</div>
+                                          <div  class="titleDiv txtCap fLeft">Diamond Color*</div>
                                             <div class='radioCont fLeft'>
                                                 <div class="checkDiv fLeft">
                                                     <input type="checkbox" name='color_<?php echo $curDiv; ?>' onclick="checks(this,'color_<?php echo $curDiv; ?>','arrColor')" class="filled-in" value="D" <?= ($arr1['color'][0] == 'D' || $arr1['color'][1] == 'D' || $arr1['color'][2] == 'D') ? 'checked' : ''; ?> id="color_D_<?php echo $curDiv; ?>">
@@ -636,8 +637,8 @@
                                         </div>
                                     </div>
                             <?php } ?>
-                            </div>
-<?php
+                            </div>  
+<?php                   
                             if (!empty($attr['diamond_shape'][0]))
                             {
 ?>

@@ -2062,8 +2062,15 @@ echo '</pre>';
           $result= $obj->getVendorList($params);
           $res=$result;
           break;
-//http://localhost/iftosi/apis/index.php?action=showVendorProductList&vid=274
-       case 'showVendorProductList':
+//http://localhost/iftosi/apis/index.php?action=showVendorList&uid=274
+    case 'showVendorList':
+         include APICLUDE.'class.vendor.php';
+          $obj = new vendor($db['iftosi']);
+          $result= $obj->showVendorList($params);
+          $res=$result;
+          break;
+//http://localhost/iftosi/apis/index.php?action=showVendorProductList&vid=274  
+    case 'showVendorProductList':
          include APICLUDE.'class.vendor.php';
           $obj = new vendor($db['iftosi']);
           $result= $obj->showVendorProductList($params);
