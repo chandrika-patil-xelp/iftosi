@@ -973,7 +973,7 @@
         }
 
         public function getPrdByCatid($params)
-        {
+        {              
       			$page   = ($params['page'] ? $params['page'] : 1);
       			$limit  = ($params['limit'] ? $params['limit'] : 15);
       			if($params['uid'])
@@ -1225,10 +1225,10 @@
       			}
 
       			$sql = "SELECT
-                            product_id AS pid,
-                            (SELECT complete_flag FROM tbl_product_search WHERE product_id = pid) AS complete_status
-      					    FROM
-      						          tbl_product_category_mapping
+                                            product_id AS pid,
+                                            (SELECT complete_flag FROM tbl_product_search WHERE product_id = pid) AS complete_status
+      		                FROM
+      				            tbl_product_category_mapping
       					            ".$where."
                     AND
                             display_flag=1
@@ -1363,26 +1363,26 @@
       				$allpids = $pid = implode(',',$pid);
       				$city_area = $params['ctid'];
       				if(!empty($city_area))
-      				{
-        					$city_area = explode('_', $city_area);
-        					if($city_area[1] == 'area')
-        					{
-          						$tbl_name = 'tbl_area_master';
-          						$colmn_nm = 'city AS cityname, latitude AS lat, longitude AS lng';
-          						$whr_cond = 'id';
-        					}
-                  else if($city_area[1] == 'vendor')
-        					{
-          						$tbl_name = 'tbl_vendor_master';
-          						$colmn_nm = 'orgName';
-          						$whr_cond = 'vendor_id';
-        					}
-        					else
-        					{
-          						$tbl_name = 'tbl_city_master';
-          						$colmn_nm = 'cityname';
-          						$whr_cond = 'cityid';
-        					}
+                                {
+                                                            $city_area = explode('_', $city_area);
+                                                            if($city_area[1] == 'area')
+                                                            {
+                                                                    $tbl_name = 'tbl_area_master';
+                                                                    $colmn_nm = 'city AS cityname, latitude AS lat, longitude AS lng';
+                                                                    $whr_cond = 'id';
+                                                            }
+                                            else if($city_area[1] == 'vendor')
+                                            {
+                                                                    $tbl_name = 'tbl_vendor_master';
+                                                                    $colmn_nm = 'orgName';
+                                                                    $whr_cond = 'vendor_id';
+                                            }
+                                            else
+                                            {
+                                                                    $tbl_name = 'tbl_city_master';
+                                                                    $colmn_nm = 'cityname';
+                                                                    $whr_cond = 'cityid';
+                                            }
       				}
 
       				if($params['ctid'])
@@ -3038,7 +3038,7 @@
 			$emailContent .= "<br/>";
 			$emailContent .= "IFtoSI Team";
 			$emailContent .= "<br/>";
-			$emailContent .= "For any assistance, call…………. Email: info@iftosi.com";
+			$emailContent .= "For any assistance,call: 91-22-41222241(42). Email: info@iftosi.com";
 
 			$mailHeaders = "Content-type:text/html;charset=UTF-8" . "\r\n";
 			$mailHeaders .= "From: info@iftosi.com \r\n";
@@ -3266,8 +3266,7 @@
 		public function getPrdImgsByIds($params)
 		{
 			$prdIds= (!empty($params['prdIds']) && !stristr($params['prdIds'], 'undefined') && !stristr($params['prdIds'], 'null')) ? trim(urldecode($params['prdIds'])) : '';
-
-			if(empty($prdIds))
+                        if(empty($prdIds))
 			{
 				$resp = array();
 				$error = array('code' => 0, 'msg' => 'No Product IDs found');
