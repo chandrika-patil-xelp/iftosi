@@ -3151,12 +3151,12 @@
                                 <body style="margin:0; padding: 0; background-color: #171334;">
                                 <center>
                                     <div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;">
-                                        <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="'.DOMAIN.'tools/img/common/iftosi.png" style="width:100%;"></div></a>
+                                        <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="'.DOMAIN.'tools/img/iftosi.png" style="width:100%;"></div></a>
                                         <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
                                             <div  style="font-size: 20px;  padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">Product enquiry</div>
                                             <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;padding: 20px 0 20px 0;"><img src="'.DOMAIN.'tools/img/common/Enquiry.png" style="width:50px;"></div></a>
-                                            <div style="font-size: 18px; padding: 15px 10px 10px 10px; color:#8A0044;">Hello Chandrika,</div>
-                                            <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 18px; color: #333;padding: 0px 15px 20px 15px;">Hello '.$prdName.' ,Thank you for showing interest in the product you have enquired.The contact details of the vendor are</div>
+                                            <div style="font-size: 18px; padding: 15px 10px 10px 10px; color:#8A0044;">Hello '.$usrName.',</div>
+                                            <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 18px; color: #333;padding: 0px 15px 20px 15px;">Thank you for showing interest in the product you have enquired.The contact details of the vendor are</div>
                                                             <center style="padding: 0px 30px 20px 30px;">
                                                 <div style="width: 60%;display: inline-block;border-right: 1px solid #f0f0f0;">
                                                     <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Name&nbsp;</div>
@@ -3216,7 +3216,7 @@
                                 </center>
                             </body>
                             </html>';
-			$mailHeaders = "Content-type:text/html;charset=UTF-8" . "\r\n";
+                        $mailHeaders = "Content-type:text/html;charset=UTF-8" . "\r\n";
 			$mailHeaders .= "From: info@iftosi.com \r\n";
 
 			$smsText = "Dear $usrName, Thank you for showing interest in the product you have enquired. The contact details of the vendor are:";
