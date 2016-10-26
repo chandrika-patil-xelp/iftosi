@@ -1419,6 +1419,23 @@ switch($action)
             $result=$obj->getPrdById($params);
             $res= $result;
             break;
+            
+            case 'getPrdMoreInfo':
+            include APICLUDE.'class.product.php';
+            $prdid=(!empty($params['prdid'])) ? trim($params['prdid']):'';
+            $catid=(!empty($params['prdid'])) ? trim($params['catid']):'';
+            if(empty($prdid) && empty($catid))
+            {
+            $arr=array();
+            $err=array('code'=> 1,'Msg'=> 'Invalid parameters');
+            $result=array('results'=> $arr,'error'=>$err);
+            $res=$result;
+            break;
+            }
+            $obj=new product($db['iftosi']);
+            $result=$obj->getPrdMoreInfo($params);
+            $res= $result;
+            break;
 
 //  localhost/iftosi/apis/index.php?action=getList&page=1&limit=1
         case 'getList':
@@ -1908,7 +1925,7 @@ echo '</pre>';
             break;
 
 		case 'sendDetailsToUser':
-			include_once APICLUDE . 'class.product.php';
+                        include_once APICLUDE . 'class.product.php';
 			$obj = new product($db['iftosi']);
 			$res = $obj->sendDetailsToUser($params);
 		break;

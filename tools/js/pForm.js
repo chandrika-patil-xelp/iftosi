@@ -234,6 +234,7 @@ function isconform()
             $("#no_diamonds").prop('disabled',false);
             $("#price_per_carat").prop('disabled',false);
             $("#diamondsvalue").prop('disabled',false);
+            $('.inDiamondAddMore').addClass('dn');
            
         }
         else
@@ -243,6 +244,7 @@ function isconform()
             $("#no_diamonds").prop('disabled',true);
             $("#price_per_carat").prop('disabled',true);
             $("#diamondsvalue").prop('disabled',true);
+            $('.inDiamondAddMore').removeClass('dn');
         }
    
 }
@@ -303,6 +305,8 @@ function validateJForm()
 				var subcat = '';
 				var isValid = true;
 				var str = '';
+                               
+                               
                                
                                 
                                 
@@ -482,7 +486,17 @@ function validateJForm()
 									isValid = false;
 									$('#no_diamonds').focus();
 							}
-
+                                                    
+                                                    
+                                                if(baguette_weight !== undefined && baguette_weight !== null && baguette_weight !== 0.000 && baguette_weight !== '' && isNaN(baguette_weight) == false && dweight !== undefined && dweight !== null && dweight !== 0.000 && isNaN(dweight) == false)
+						{  
+                                                    var temp=(parseFloat(dweight))+(parseFloat(baguette_weight));
+                                                  //alert(parseFloat(diamondweight)+" "+ dweight +" "+parseFloat(baguette_weight));
+                                                    //$('#diamondweight').val((temp));
+                                                    dweight  = temp;
+                                                    
+                                                    
+                                                }
 					}
 					else
 					{
@@ -1255,7 +1269,7 @@ function addShapeType()
                         str +='<center>';
                         var shapeTypesArr=JSON.parse(shapeTypes);
                         for(var i=0; i<shapeTypesArr.length; i++)
-												{
+			{
                             str +='<div class="shapeComm transition300 ripplelink '+shapeTypesArr[i]+' " id="'+shapeTypesArr[i]+'_'+DivLen+'" onclick="checkDiamondShape(this,'+DivLen+');"> </div>';
                         }
                         str +='</center></div></div></div></div>';
@@ -1301,30 +1315,30 @@ function checkDiamondShape(evt,id)
     $('.jw4').removeClass('dn');
     
     if($(evt).hasClass('shapeSelected'))
-    {
+    {  
         $(evt).toggleClass('shapeSelected');
         
         if(id!=1)
-				{
+	{
             $('#diamondShapeCont_'+id).parent().addClass('dn');
         }
-         $('.jw4').addClass('dn');
+        $('.jw4').addClass('dn');
         $('.diamondProp_'+id).addClass('dn');
         $('.diamondProp_'+id+' input').removeAttr('checked');
         if(!$(evt).hasClass('shapeSelected') && id==1)
         {
             $('.inDiamondAddMore').remove();
-				}
+        }
     }
-		else
-		{
+    else
+    {
         $(evt).removeClass('shapeSelected');
         var uthis = $(evt);
         var wholeDiv='#diamondShapeCont_'+id+' .shapeComm';
         $(wholeDiv).each(function ()
 				{
             if($(wholeDiv).hasClass('shapeSelected') && $(wholeDiv).attr('id') != uthis.attr('id'))
-						{
+						{        
 							$(wholeDiv).removeClass('shapeSelected');
 						}
 						else
@@ -1335,25 +1349,25 @@ function checkDiamondShape(evt,id)
         $(evt).toggleClass('shapeSelected');
         if($(evt).hasClass('shapeSelected'))
         {
-
-						$('.inDiamondAddMore').remove();
+             
+	    $('.inDiamondAddMore').remove();
             $('#diamondShapeCont').append('<div onclick="addShapeType()" id="addDiamondType" class="submitBtn fmOpenR ripplelink poR fRight addMore inDiamondAddMore">Add Diamond Type</div><div style="clear: both;"></div>');
             $('.diamondProp_'+id).removeClass('dn');
         }
         else
         {
-						$('.diamondProp_'+id).addClass('dn');
+	    $('.diamondProp_'+id).addClass('dn');
         }
     }
 
     if($('#diamondShapeCont_1 .shapeComm').hasClass('shapeSelected'))
-		{
-				$('.diamondProp').removeClass('dn');
+    {
+	    $('.diamondProp').removeClass('dn');
     }
-		else
-		{
-				$('.diamondProp').addClass('dn');
-		}
+    else
+    {
+            $('.diamondProp').addClass('dn');
+    }
 }
 
 
@@ -1366,7 +1380,7 @@ function addGemsType()
         str +='<option value="">Select Gemstone Type</option>';
         var gemsTypesArr=JSON.parse(gemsTypes);
         for(var i=0; i<gemsTypesArr.length; i++)
-				{
+	{
             str +='<option value="'+gemsTypesArr[i].c+'">'+gemsTypesArr[i].n+'</option>';
         }
         str +='<option value="other">Others</option>';
@@ -1455,7 +1469,7 @@ $(document).ready(function()
 
     $(document).bind('focus blur click',function()
     {
-        	var weight = valueOnChange();
+        	                        var weight = valueOnChange();
 					$('#grossweight').val(parseFloat(weight));
 					var price = calculateJPrice();
 					$('#prdprice').val(price);
@@ -2088,6 +2102,8 @@ function calculateJPrice()
                                                                 total_weight = total_weight + parseFloat(diamondweight/5);
 								$('#diamondsvalue').val(diamondsvalue.toFixed(2));
                                                 }
+                                                 
+                                                
                                                 if(gemweight !== undefined && gemweight !== null && gemweight !== '' && isNaN(gemweight) == false && gprice_per_carat !== undefined && gprice_per_carat !== null && gprice_per_carat !== 0 &&  isNaN(gprice_per_carat) == false)
                                                 {
                                                                 gemstonevalue = parseFloat(gemweight * gprice_per_carat);

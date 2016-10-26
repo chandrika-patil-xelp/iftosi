@@ -6,7 +6,7 @@
             <div class="forBg bgWhite"></div>
             <div class='prdMainDetails'>
                 <div class="wrapperMax diamond_mod">
-                    <?php
+                    <?php   //echo'<pre>';print_r($data['attr_details']['girdle']);die;
                     if (count($data1) == 0) {
                     ?>
                     <div class="imgsCont noImage"></div>
@@ -86,75 +86,208 @@
                             <div class="btnComm fLeft iconWishlist ripplelink poR" id="addtowishlist" onclick="">Add To Wishlist</div> -->
                         </div>
                     </div>
+                    
+                     <?php
+                        if (!empty($data['attr_details']['shape'])) {
+                        ?>
                     <div class="majorInfoBox fLeft">
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB font12 fmOpenB">Shape</div>
                             <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['shape']; ?></div>
                         </div>
+                        <?php
+                        }
+                        ?>
+                        
+                        
+                     <?php
+                        if (!empty($data['attr_details']['carat'])) {
+                        ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB font12 fmOpenB">Carats</div>
                             <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['carat']; ?></div>
                         </div>
+                        <?php
+                        }
+                        ?>
+                        
+                     <?php
+                        if (!empty($data['attr_details']['color'])) {
+                        ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB font12 fmOpenB">Colour</div>
                             <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['color']; ?></div>
                         </div>
+                         <?php
+                        }
+                        ?>
+                        
+                     <?php
+                        if (!empty($data['attr_details']['clarity'])) {
+                        ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB font12 fmOpenB">Clarity</div>
                             <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['clarity']; ?></div>
                         </div>
+                         <?php
+                        }
+                        ?>
+                        
+                        
+                     <?php
+                        if (!empty($prdVars['cut'])) {
+                        ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB font12 fmOpenB">CUT</div>
                             <div class="infoValue c666 fmOpenR font25"><?php echo $prdVars['cut']; ?></div>
                         </div>
+                         <?php
+                        }
+                        ?>
+                        
+                        
+                     <?php
+                        if (!empty($data['attr_details']['symmetry'])) {
+                        ?>
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  font12">SYMMETRY</div>
                             <div class="infoValue c666 font25 fmOpenR"><?php echo $data['attr_details']['symmetry']; ?></div>
                         </div>
+                        <?php
+                        }
+                        ?>
+                        
+                        
+                        
+                     <?php
+                        if (!empty($data['attr_details']['polish'])) {
+                        ?>
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  font12">POLISH</div>
                             <div class="infoValue c666 font25 fmOpenR"><?php echo $data['attr_details']['polish']; ?></div>
                         </div>
+                         <?php
+                        }
+                        ?>
+                        
+                        
+                     <?php
+                        if (!empty($data['attr_details']['fluorescence'])) {
+                        ?>
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  font12">FLUORESCENCE</div>
                             <div class="infoValue c666 font25 fmOpenR"><?php echo $data['attr_details']['fluorescence']; ?></div>
                         </div>
+                         <?php
+                        }
+                        ?>
+                        
+                     <?php
+                        if (!empty($data['attr_details']['measurement'])) {
+                        ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB font12 fmOpenB">Measurement</div>
                             <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['measurement']; ?></div>
                         </div>
+                         <?php
+                        }
+                        ?>
+                        
+                     <?php
+                        if (!empty($data['attr_details']['tab'])) {
+                        ?>
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  font12">TABLE</div>
                             <div class="infoValue c666 font25 fmOpenR"><?php echo trim(number_format($data['attr_details']['tab'],1),'0'.'.').'%'; ?></div>
                         </div>
+                        <?php
+                        }
+                        ?>
+                        
+                     <?php
+                        if (!empty($data['attr_details']['crownangle'])) {
+                        ?>
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  font12">CROWN ANGLE</div>
                             <div class="infoValue c666 font25 fmOpenR"><?php echo trim(number_format($data['attr_details']['crownangle'],2),'0'.'.'); ?></div>
                         </div>
+                        <?php
+                        }
+                        ?>
+                        
+                        
+                     <?php
+                        if (!empty($data['attr_details']['girdle'])) {
+                        ?>
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  font12">GIRDLE</div>
-                            <div class="infoValue c666 font25 fmOpenR"><?php echo trim(number_format($data['attr_details']['girdle'],1),'0'.'.'); ?></div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo $data['attr_details']['girdle']; ?></div>
                         </div>
+                        <?php
+                        }
+                        ?>
+                        
+                        
+                     <?php
+                        if (!empty($data['attr_details']['certified'])) {
+                        ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB font12 fmOpenB">Certificate</div>
                             <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['certified']; ?></div>
                         </div>
+                         <?php
+                        }
+                        ?>
+                        
+                        
+                     <?php
+                        if (!empty($data['attr_details']['cno'])) {
+                        ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB font12 fmOpenB">Certificate No.</div>
                             <div class="infoValue c666 fmOpenR font25"><?php echo $data['attr_details']['cno']; ?></div>
                         </div>
+                         <?php
+                        }
+                        ?>
+                        
+                        
+                     <?php
+                        if (!empty($data['product_barcode'])) {
+                        ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB font12 fmOpenB">Barcode</div>
                             <div class="infoValue c666 fmOpenR font25"><?php echo $data['product_barcode']; ?></div>
                         </div>
+                        <?php
+                        }
+                        ?>
+                        
+                        
+                     <?php
+                        if (!empty($data['product_lotno'])) {
+                        ?>
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  font12">LOT NUMBER</div>
                             <div class="infoValue c666 font25 fmOpenR"><?php echo $data['product_lotno']; ?></div>
                         </div>
+                         <?php
+                        }
+                        ?>
+                        
+                        
+                     <?php
+                        if (!empty( $data['product_lotref'])) {
+                        ?>
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  font12">LOT Reference</div>
                             <div class="infoValue c666 font25 fmOpenR"><?php echo $data['product_lotref']; ?></div>
                         </div>
+                         <?php
+                        }
+                        ?>
+                        
+                     
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  font12">BASE Price </div>
                             <div class="infoValue c666 font25 fmOpenR"><?php $bprice = ceil((($data['attr_details']['baseprice'] * $data['attr_details']['dollar_rate']) * $data['attr_details']['carat']));
@@ -162,10 +295,22 @@
                                 ?>
                                 &#8377; <?php echo $bprice; ?></div>
                         </div>
+                        
+                        
+                        
+                     <?php
+                        if (!empty($data['attr_details']['discount'])) {
+                        ?>
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  font12">% DISCOUNT</div>
                             <div class="infoValue c666 font25 fmOpenR"><?php echo str_replace('-', '', $data['attr_details']['discount']); ?>%</div>
                         </div>
+                         <?php
+                        }
+                        ?>
+                        
+                        
+                        
                         <?php
                         if (!empty($certificate_url)) {
                         ?>
@@ -176,6 +321,593 @@
                         <?php
                         }
                         ?>
+                        
+                         <?php   
+                        if (!empty($data4[availability])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">Availability</div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo $data4['availability']; ?></div>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[fluorescence_intensity])) { 
+                        ?>
+                         <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Fluorescence Intensity</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['fluorescence_intensity']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[fluorescence_color])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Fluorescence Color</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['fluorescence_color']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        <?php   
+                        if (!empty($data4[treatment])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Treatment</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['treatment']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        
+                        
+                         <?php   
+                        if (!empty($data4[rapnet_price])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">Rapnet Price</div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo $data4['rapnet_price']; ?></div>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[rapnet_discount_percent])) { 
+                        ?>
+                         <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Rapnet Discount Percent</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['rapnet_discount_percent']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[cash_price])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Cash Price</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['cash_price']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        <?php   
+                        if (!empty($data4[cash_price_discount_percent])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Cash Price Discount Percent</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['cash_price_discount_percent']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        
+                        
+                         <?php   
+                        if (!empty($data4[fancy_color])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">Fancy Color</div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo $data4['fancy_color']; ?></div>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[fancy_color_intensity])) { 
+                        ?>
+                         <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Fancy Color Intensity</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['fancy_color_intensity']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[fancy_color_overtone])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Fancy Color Overtone</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['fancy_color_overtone']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        <?php   
+                        if (!empty($data4[depth_percent])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Depth Percent</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['depth_percent']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        
+                        
+                        <?php   
+                        if (!empty($data4[girdle_thin])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">Girdle Thin</div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo $data4['girdle_thin']; ?></div>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[girdle_thick])) { 
+                        ?>
+                         <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Girdle Thick</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['girdle_thick']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[girdle_percent])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Girdle Percent</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['girdle_percent']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        <?php   
+                        if (!empty($data4[girdle_condition])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Girdle Condition</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['girdle_condition']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        
+                        
+                        <?php   
+                        if (!empty($data4[culet_size])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">Culet Size</div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo $data4['culet_size']; ?></div>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[culet_condition])) { 
+                        ?>
+                         <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Culet Condition</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['culet_condition']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[laser_inscription])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Laser Inscription</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['laser_inscription']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        <?php   
+                        if (!empty($data4[certified])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Certified</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['certified']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        
+                        
+                          <?php   
+                        if (!empty($data4[country])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">Country</div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo $data4['country']; ?></div>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[state])) { 
+                        ?>
+                         <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">State</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['state']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[city])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">City</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['city']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        <?php   
+                        if (!empty($data4[matched_pair])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Matched Pair</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['matched_pair']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        
+                        
+                        
+                         <?php   
+                        if (!empty($data4[pair_stock])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">pair Stock</div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo $data4['pair_stock']; ?></div>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[allow_raplink_feed])) { 
+                        ?>
+                         <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Allow Raplink Feed</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['allow_raplink_feed']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[parcel_stones])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Parcel Stones</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['parcel_stones']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        <?php   
+                        if (!empty($data4[matched_pair])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Matched Pair</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['matched_pair']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        
+                        
+                        <?php   
+                        if (!empty($data4[report_filename])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">Report Filename</div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo $data4['report_filename']; ?></div>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[sarine_loupe])) { 
+                        ?>
+                         <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Sarine Loupe</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['sarine_loupe']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[trade_show])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Trade Show</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['trade_show']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        <?php   
+                        if (!empty($data4[key_to_symbols])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Key To Symbols</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['key_to_symbols']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        
+                        
+                         <?php   
+                        if (!empty($data4[shade])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">Shade</div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo $data4['shade']; ?></div>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[star_length])) { 
+                        ?>
+                         <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Star Length</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['star_length']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[center_inclusion])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Center Inclusion</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['center_inclusion']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        <?php   
+                        if (!empty($data4[black_inclusion])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Black Inclusion</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['black_inclusion']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        
+                        
+                        
+                        <?php   
+                        if (!empty($data4[milky])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">Milky</div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo $data4['milky']; ?></div>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[member_comment])) { 
+                        ?>
+                         <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Member Comment</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['member_comment']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[report_date])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Report Date</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['report_date']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        <?php   
+                        if (!empty($data4[report_type])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Report Type</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['report_type']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        
+                        
+                        
+                         
+                        <?php   
+                        if (!empty($data4[lab_location])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">Lab Location</div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo $data4['lab_location']; ?></div>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[brand])) { 
+                        ?>
+                         <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Brand</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['brand']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[product_details])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Product Details</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['product_details']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        <?php   
+                        if (!empty($data4[quantity])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Quantity</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['quantity']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        
+                        
+                         <?php   
+                        if (!empty($data4[metal_color])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">Metal Color</div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo $data4['metal_color']; ?></div>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[net_weight])) { 
+                        ?>
+                         <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Net Weight</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['net_weight']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[metal_amount])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Metal Amount</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['metal_amount']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        <?php   
+                        if (!empty($data4[color_stone_value])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Color Stone Value</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['color_stone_value']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        
+                        
+                        
+                        <?php   
+                        if (!empty($data4[diamonds])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">Diamonds</div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo $data4['diamonds']; ?></div>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[no_of_diamonds])) { 
+                        ?>
+                         <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">No Of Diamonds</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['no_of_diamonds']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[value_of_diamonds])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Value Of Diamonds</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['value_of_diamonds']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        <?php   
+                        if (!empty($data4[labour_charge])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Labour Charge</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['labour_charge']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                        
+                        
+                        
+                        
+                        <?php   
+                        if (!empty($data4[other])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR">
+                            <div class="infoLabel fmOpenB  font12">Other</div>
+                            <div class="infoValue c666 font25 fmOpenR"><?php echo $data4['other']; ?></div>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[hallmark])) { 
+                        ?>
+                         <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Hallmark</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['hallmark']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                         <?php   
+                        if (!empty($data4[collection_name])) { 
+                        ?>
+                        <div class="infoCommn fLeft fmOpenR ">
+                            <div class="infoLabel fmOpenB font12 fmOpenB">Collection Name</div>
+                            <div class="infoValue c666 fmOpenR font25"><?php echo $data4['collection_name']; ?></div>
+                        </div>
+                         <?php
+                        }
+                        ?>
+                       
+                        
+                        
                     </div>
                 </div>
             </div>

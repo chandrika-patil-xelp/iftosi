@@ -1944,6 +1944,7 @@
                         product_id=".$params['prdid']."
                     AND
                         active_flag <> 2";
+            
 
             $res = $this->query($sql);
             $res2 = $this->query($sql2);
@@ -2118,6 +2119,106 @@
             return $result;
         }
 
+        
+        public function getPrdMoreInfo($params)
+        {
+                    $pid   = ($params['prdid'] ? $params['prdid'] : 1);
+                    
+                    if($pid)
+                    {
+                        $sql="SELECT 
+                                                      product_id,
+                                                      availability,
+                                                      fluorescence_intensity,
+                                                      fluorescence_color,
+                                                      treatment,
+                                                      rapnet_price,                 
+                                                      rapnet_discount_percent,            
+                                                      cash_price,                   
+                                                      cash_price_discount_percent,  
+                                                      fancy_color,                 
+                                                      fancy_color_intensity,  
+                                                      fancy_color_overtone,
+                                                      depth_percent,                
+                                                      girdle_thin,                  
+                                                      girdle_thick,                 
+                                                      girdle_percent,
+                                                      girdle_condition,             
+                                                      culet_size,                   
+                                                      culet_condition,              
+                                                      laser_inscription,            
+                                                      certified,                    
+                                                      country,                      
+                                                      state,                        
+                                                      city,                         
+                                                      matched_pair,                 
+                                                      pair_stock,                   
+                                                      allow_raplink_feed,           
+                                                      parcel_stones,                
+                                                      report_filename,              
+                                                      diamond_image,                
+                                                      sarine_loupe,                 
+                                                      trade_show,                   
+                                                      key_to_symbols,               
+                                                      shade,                        
+                                                      star_length,                  
+                                                      center_inclusion,             
+                                                      black_inclusion,              
+                                                      milky,                        
+                                                      member_comment,               
+                                                      report_date,                  
+                                                      report_type,                  
+                                                      lab_location,                 
+                                                      brand,                        
+                                                      product_details,              
+                                                      quantity,                     
+                                                      metal_color,                  
+                                                      net_weight,                   
+                                                      metal_amount,                 
+                                                      color_stone_value,            
+                                                      diamonds,                     
+                                                      no_of_diamonds,               
+                                                      value_of_diamonds,            
+                                                      labour_charge,                
+                                                      other,                        
+                                                      hallmark ,                    
+                                                      collection_name 
+                                    FROM
+                                                      tbl_product_more_info
+                                    WHERE
+                                                     product_id =".$params['prdid']." 
+                                                      ";
+                        
+                                $res=$this->query($sql);
+                                $row = $this->fetchData($res);
+                                                    if($row>0)
+                                                    {
+                                                         $arr = $row;
+                                                         $err = array('errCode' => 0, 'errMsg' => 'Details fetched successfully');
+                                                    }
+                                                    else
+                                                    {
+                                                         $arr=array();
+                                                         $err=array('Code'=>0,'Msg'=>'No Details Found');            
+                                                    }
+
+                                                    
+                }
+                    
+                    
+                else
+                {
+                    $arr=array();
+                    $err=array('Code'=>0,'Msg'=>'Error in fetching the data');
+                }
+                    
+                $result = array('results' => $arr, 'error' => $err);
+                return $result;
+                
+                
+                }
+        
+        
         public function getList($params)
         {
             $total_products = 0;
@@ -2889,7 +2990,7 @@
 			$uid = (!empty($params['uid'])) ? trim(urldecode($params['uid'])) : '';
 
 			if(empty($usrEmail) || empty($usrMobile) || empty($usrName) || empty($prdid))
-			{
+			{    
 				$resp = array();
 				$error = array('Code' => 1, 'Msg' => 'Some parameters are missing');
 				$results = array('results' => $resp, 'error' => $error);
@@ -2960,8 +3061,10 @@
 
 				$prdName = $value['product_display_name'];
 			}
-
-			$emailContent = "Hello $usrName, Thank you for showing interest in";
+                            
+                       // $emailContent=$this->sendEnqMailToUser($value);
+                      
+			/*$emailContent = "Hello $usrName, Thank you for showing interest in";
 			$emailContent .= "<br/><br/>";
 			if(!empty($prdName))
 			{
@@ -3038,8 +3141,81 @@
 			$emailContent .= "<br/>";
 			$emailContent .= "IFtoSI Team";
 			$emailContent .= "<br/>";
-			$emailContent .= "For any assistance,call: 91-22-41222241(42). Email: info@iftosi.com";
-
+			$emailContent .= "For any assistance,call: 91-22-41222241(42). Email: info@iftosi.com";*/
+                        $emailContent ='<html>
+                                <head>
+                                    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+                                    <meta name="viewport" content="width=device-width, user-scalable=no" >
+                                    <title>recent enquiry</title>
+                                </head>
+                                <body style="margin:0; padding: 0; background-color: #171334;">
+                                <center>
+                                    <div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;">
+                                        <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="'.DOMAIN.'tools/img/common/iftosi.png" style="width:100%;"></div></a>
+                                        <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
+                                            <div  style="font-size: 20px;  padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">Product enquiry</div>
+                                            <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;padding: 20px 0 20px 0;"><img src="'.DOMAIN.'tools/img/common/Enquiry.png" style="width:50px;"></div></a>
+                                            <div style="font-size: 18px; padding: 15px 10px 10px 10px; color:#8A0044;">Hello Chandrika,</div>
+                                            <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 18px; color: #333;padding: 0px 15px 20px 15px;">Hello '.$prdName.' ,Thank you for showing interest in the product you have enquired.The contact details of the vendor are</div>
+                                                            <center style="padding: 0px 30px 20px 30px;">
+                                                <div style="width: 60%;display: inline-block;border-right: 1px solid #f0f0f0;">
+                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Name&nbsp;</div>
+                                                    <span style="padding-right: 20px;">:</span>
+                                                    <div style="width: 35%;    display: inline-block; text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$vndrName.'</div>                   
+                                                </div>
+                                                <div style="width: 60%;display: inline-block;">
+                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Address&nbsp;</div>
+                                                    <span style="padding-right: 20px;">:</span>
+                                                    <div style="width: 35%; display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$address.'</div>
+                                                </div>
+                                                <div style="width: 60%;display: inline-block;">
+                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Area&nbsp;</div>
+                                                    <span style="padding-right: 20px;">:</span>
+                                                    <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 18px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$area.'</div>
+                                                </div>
+                                                <div style="width: 60%;display: inline-block;">
+                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">City&nbsp;</div>
+                                                    <span style="padding-right: 20px;">:</span>
+                                                    <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$city.'</div>
+                                                </div>
+                                                <div style="width: 60%;display: inline-block;">
+                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">State&nbsp;</div>
+                                                    <span style="padding-right: 20px;">:</span>
+                                                    <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$state.'</div>
+                                                </div>
+                                                <div style="width: 60%;display: inline-block;">
+                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Pincode&nbsp;</div>
+                                                    <span style="padding-right: 20px;">:</span>
+                                                    <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$pincode.'</div>
+                                                </div>
+                                                <div style="width: 60%;display: inline-block;">
+                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Landline&nbsp;</div>
+                                                    <span style="padding-right: 20px;">:</span>
+                                                    <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$vndrLL.'</div>
+                                                </div>
+                                                <div style="width: 60%;display: inline-block;">
+                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Mobile&nbsp;</div>
+                                                    <span style="padding-right: 20px;">:</span>
+                                                    <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$vndrMobile.'</div>
+                                                </div>
+                                                <div style="width: 60%;display: inline-block;">
+                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Email&nbsp;</div>
+                                                    <span style="padding-right: 20px;">:</span>
+                                                    <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$vndrEmail.'</div>
+                                                </div>
+                                            </center>
+                                            <center style="padding-top: 50px;">
+                                                <img src="'.DOMAIN.'tools/img/common/diamond.jpg" width="50">
+                                                <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
+                                                <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
+                                            </center>
+                                            <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:022-32623263" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
+                                        </div>
+                                        <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
+                                    </div>
+                                </center>
+                            </body>
+                            </html>';
 			$mailHeaders = "Content-type:text/html;charset=UTF-8" . "\r\n";
 			$mailHeaders .= "From: info@iftosi.com \r\n";
 
@@ -3115,8 +3291,85 @@
 		}
 
 
-
-
+                /*public function sendEnqMailToUser($params)
+                {
+                    $message='<html>
+                                <head>
+                                    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+                                    <meta name="viewport" content="width=device-width, user-scalable=no" >
+                                    <title>recent enquiry</title>
+                                </head>
+                                <body style="margin:0; padding: 0; background-color: #171334;">
+                                <center>
+                                    <div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;">
+                                        <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="'.DOMAIN.'tools/img/common/iftosi.png" style="width:100%;"></div></a>
+                                        <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
+                                            <div  style="font-size: 20px;  padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">Product enquiry</div>
+                                            <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;padding: 20px 0 20px 0;"><img src="'.DOMAIN.'tools/img/common/Enquiry.png" style="width:50px;"></div></a>
+                                            <div style="font-size: 18px; padding: 15px 10px 10px 10px; color:#8A0044;">Hello Chandrika,</div>
+                                            <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 18px; color: #333;padding: 0px 15px 20px 15px;">Thank you for showing interest in the product you have enquired.The contact details of the vendor are</div>
+                                                            <center style="padding: 0px 30px 20px 30px;">
+                                                <div style="width: 60%;display: inline-block;border-right: 1px solid #f0f0f0;">
+                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Name&nbsp;</div>
+                                                    <span style="padding-right: 20px;">:</span>
+                                                    <div style="width: 35%;    display: inline-block; text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$params['OrganisationName'].'</div>                   
+                                                </div>
+                                                <div style="width: 60%;display: inline-block;">
+                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Address&nbsp;</div>
+                                                    <span style="padding-right: 20px;">:</span>
+                                                    <div style="width: 35%; display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$params['fulladdress'].'</div>
+                                                </div>
+                                                <div style="width: 60%;display: inline-block;">
+                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Area&nbsp;</div>
+                                                    <span style="padding-right: 20px;">:</span>
+                                                    <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 18px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$params['area'].'</div>
+                                                </div>
+                                                <div style="width: 60%;display: inline-block;">
+                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">City&nbsp;</div>
+                                                    <span style="padding-right: 20px;">:</span>
+                                                    <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$params['city'].'</div>
+                                                </div>
+                                                <div style="width: 60%;display: inline-block;">
+                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">State&nbsp;</div>
+                                                    <span style="padding-right: 20px;">:</span>
+                                                    <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$params['state'].'</div>
+                                                </div>
+                                                <div style="width: 60%;display: inline-block;">
+                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Pincode&nbsp;</div>
+                                                    <span style="padding-right: 20px;">:</span>
+                                                    <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$params['postal_code'].'</div>
+                                                </div>
+                                                <div style="width: 60%;display: inline-block;">
+                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Landline&nbsp;</div>
+                                                    <span style="padding-right: 20px;">:</span>
+                                                    <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$params['telephones'].'</div>
+                                                </div>
+                                                <div style="width: 60%;display: inline-block;">
+                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Mobile&nbsp;</div>
+                                                    <span style="padding-right: 20px;">:</span>
+                                                    <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$params['contact_mobile'].'</div>
+                                                </div>
+                                                <div style="width: 60%;display: inline-block;">
+                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Email&nbsp;</div>
+                                                    <span style="padding-right: 20px;">:</span>
+                                                    <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$params['email'].'</div>
+                                                </div>
+                                            </center>
+                                            <center style="padding-top: 50px;">
+                                                <img src="'.DOMAIN.'tools/img/common/diamond.jpg" width="50">
+                                                <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
+                                                <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
+                                            </center>
+                                            <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:022-32623263" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
+                                        </div>
+                                        <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
+                                    </div>
+                                </center>
+                            </body>
+                            </html>';
+                    return $message;
+                }
+*/
 
 		public function uploadCertificate($params)
 		{

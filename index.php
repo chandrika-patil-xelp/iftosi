@@ -64,7 +64,7 @@ switch ($action) {
                 }
 
 
-                 $url = APIDOMAIN . 'index.php?action=getPrdByCatid&catid=' . $catid . '&page=' . $pgno . '&sortby=' . $sortby . '&slist=' . urlencode($slist) . '&clist=' . urlencode($clist) . '&tlist=' . urlencode($tlist) . '&ilist=' . urlencode($ilist) . '&jlist=' . urlencode($jlist) . '&ctid=' . $ctid . '&uid=' . $uid . '&b2bsort=' . $b2bsort;
+                $url = APIDOMAIN . 'index.php?action=getPrdByCatid&catid=' . $catid . '&page=' . $pgno . '&sortby=' . $sortby . '&slist=' . urlencode($slist) . '&clist=' . urlencode($clist) . '&tlist=' . urlencode($tlist) . '&ilist=' . urlencode($ilist) . '&jlist=' . urlencode($jlist) . '&ctid=' . $ctid . '&uid=' . $uid . '&b2bsort=' . $b2bsort;
                 $res = $comm->executeCurl($url);
                 
 
@@ -181,7 +181,7 @@ switch ($action) {
                 $uid = (!empty($params['uid']) && $params['uid'] !== 'null' && $params['uid'] !== 'undefined') ? trim(urldecode($params['uid'])) : '';
 
                 if (!empty($usrName) && !empty($usrMobile) && !empty($usrEmail) && !empty($prdid)) {
-                    $apiUrl = APIDOMAIN . 'index.php?action=sendDetailsToUser';
+                     $apiUrl = APIDOMAIN . 'index.php?action=sendDetailsToUser';
                     $params = array('usrName' => $usrName, 'usrMobile' => $usrMobile, 'usrEmail' => $usrEmail, 'prdid' => $prdid, 'vid' => $vid, 'uid' => $uid);
                     $resp = $comm->executeCurl($apiUrl, false, false, $params);
                     if (empty($resp)) {
@@ -805,6 +805,12 @@ switch ($action) {
                 $desres = $comm->executeCurl($desurl);
                 $des = $desres['results'];
                 $totalDes = $res3['total'];
+                
+                $url4 = APIDOMAIN . "index.php?action=getPrdMoreInfo&prdid=".$pid."";
+                $res4 = $comm->executeCurl($url4);
+                $data4 = $res4['results'];
+                
+                
                 //echo "<pre>";print_r($des); die;
                 include 'template/diamond_detailsb2b.html';
                 break;

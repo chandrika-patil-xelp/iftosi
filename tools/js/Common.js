@@ -53,6 +53,11 @@ function Common() {
             $('#tf_email').focus();
         }
     }
+    
+    function changeHIdVal(event)
+    {
+        
+    }
     this.checkLogin = function () {
         var isLoggedIn = customStorage.readFromStorage('isLoggedIn');
         var mob = customStorage.readFromStorage('tf_mobile');
