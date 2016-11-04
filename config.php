@@ -97,13 +97,13 @@ if(stristr($_SERVER['HTTP_HOST'], 'demo.iftosi.com'))
 }
 else if(stristr($_SERVER['HTTP_HOST'],'iftosi.com') && stristr(REQURI, 'beta'))
 {
-	$db['iftosi'] = array('localhost','iftosi','iftosi@live','db_iftosi_beta');
+	$db['iftosi'] = array('localhost','root','developer@iftosi','db_iftosi_beta');
 }
 else if(stristr($_SERVER['HTTP_HOST'],'iftosi.com'))
 {
 	//$db['iftosi'] = array('54.213.106.43','nafexdb','nafexdb','db_iftosi');
 	//$db['iftosi'] = array('10.123.0.91','xelpmoc_iftosi','iftosi','xelpmoc_iftosi');
-	$db['iftosi'] = array('localhost','iftosi','iftosi@live','db_iftosi');
+	$db['iftosi'] = array('localhost','root','developer@iftosi','db_iftosi');
 }
 else if(stristr($_SERVER['HTTP_HOST'], '52.77.214.223'))
 {
