@@ -7,7 +7,7 @@ class vendor extends DB
         parent::DB($db);
     }
     public function vendorList($params)
-    {
+    {  
         $page   = ($params['pgno'] ? $params['pgno'] : 1);
         $limit  = ($params['limit'] ? $params['limit'] : 50);
 
@@ -4607,7 +4607,8 @@ class vendor extends DB
                         if($row>0)
                         {
                                     $sql1 ="     select 
-                                                             product_image
+                                                             product_image,
+                                                             image_sequence
                                                  from            
                                                              tbl_product_image_mapping
                                                  where 

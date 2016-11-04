@@ -57,7 +57,6 @@ $(document).ready(function() {
         var val = $(this).val();
         var text = $(this).text();
         $('#drpinp').text(text);
-
 		var sortby = $(this).attr('id');
 		var catid = $("#catid").val();
 		$('#sortbyvl').val(sortby);
@@ -93,7 +92,8 @@ $(document).ready(function() {
 		$('#slist').val('');
 	}
 
-    $('.shapeComm').bind('click', function() {
+    $('.shapeComm').bind('click', function() 
+    {
         $(this).toggleClass('shapeSelected');
 		var cnt = getRandomInt(-500,500);
         totalCnt = (totalCnt*1)+cnt;

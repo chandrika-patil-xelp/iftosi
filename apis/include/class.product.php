@@ -973,7 +973,7 @@
         }
 
         public function getPrdByCatid($params)
-        {              
+        {            
       			$page   = ($params['page'] ? $params['page'] : 1);
       			$limit  = ($params['limit'] ? $params['limit'] : 15);
       			if($params['uid'])
@@ -1946,7 +1946,7 @@
                         active_flag <> 2";
             
 
-            $res = $this->query($sql);
+            $res =  $this->query($sql);
             $res2 = $this->query($sql2);
 
 
@@ -1967,7 +1967,8 @@
                         $details=$row2;
                     }
                 }
-                $pid=implode(',',$prid);
+               $pid=implode(',',$prid);
+               
 
                 $sql3="SELECT
 							product_id,
@@ -1988,7 +1989,7 @@
 							vendor_id ASC";
 
                 $res3=$this->query($sql3);
-
+                                                                        
                 while($row3=$this->fetchData($res3))
                 {
                     $vid[]=$row3['vendor_id'];
@@ -2415,7 +2416,7 @@
                                 product_id ASC";
 
              if(!empty($page))
-            {
+            {   
                 $start = ($page * $limit) - $limit;
                 $sql.=" LIMIT " . $start . ",$limit";
             }
@@ -2423,10 +2424,9 @@
             $cnt_res2 = $this->numRows($chkres);
 
 
-
-
             if($cnt_res2>0)
-            {   $j=0;
+            {   
+                $j=0;
                 while($row2=$this->fetchData($chkres))
                 {
                     $arr1['product_id'][$j]= $row2['product_id'];
@@ -2454,7 +2454,7 @@
                                 email,
                                 memship_Cert as Membership_Certificate,
                                 bdbc as diamond_certificate,
-                                other_bdbc as other_Certificate,
+                                bdbc as other_Certificate,
                                 vatno as Vat_Number,
                                 landline,
                                 mdbw as membership_around_world,
@@ -2506,7 +2506,7 @@
                 {
                     while($row3=$this->fetchData($chkres))
                     {
-
+                       
                         $arr4= $row3;
                     }
 
@@ -2545,7 +2545,8 @@
                                                 attr_display_name
                                    FROM
                                                 tbl_attribute_master
-                                   WHERE attr_id IN(".$aid.") ORDER BY field(attr_id,".$aid.")";
+                                   WHERE 
+                                                attr_id IN(".$aid.") ORDER BY field(attr_id,".$aid.")";
 
                             $res2=$this->query($sql2);
                             $j=0;
@@ -2564,7 +2565,8 @@
                             $finalres=$this->query($prdattrs);
 
                             if($finalres)
-                            {$i=0;
+                            {
+                                $i=0;
                                 while($rows=$this->fetchData($finalres))
                                 {
                                     $arr['attributes']=$aname;
@@ -2880,7 +2882,8 @@
 
             $cnt_res1 = $this->numRows($chkres);
             if($cnt_res1>0)
-            {   $i=0;
+            {   
+                $i=0;
                 while($row1=$this->fetchData($chkres))
                 {
                     $arr1[$i]= $row1['product_id'];
@@ -3216,6 +3219,77 @@
                                 </center>
                             </body>
                             </html>';
+                        
+                        
+                        /*pending */
+                       /* $emailContent ='<html>
+                                        <head>
+                                            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+                                            <meta name="viewport" content="width=device-width, user-scalable=no" >
+                                            <title>recent enquiry</title>
+                                        </head>
+                                        <body style="margin:0; padding: 0; background-color: #171334;">
+                                        <center style="box-sizing: border-box;">
+                                            <div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;">
+                                                <a><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="../tools/img/iftosi.png" style="width:100%;"></div></a>
+                                                <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
+                                                    <div  style="font-size: 20px;  padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">Product enquiry</div>
+                                                    <a><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;padding: 20px 0 20px 0;"><img src="../tools/img/common/Enquiry.png" style="width:50px;"></div></a>
+                                                    <div style="font-size: 14px; padding: 15px 10px 10px 10px; color:#8A0044;">Hello Chandrika,</div>
+                                                    <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 14px; color: #333;padding: 0px 15px 20px 15px;">Thank you for showing interest in the product you have enquired.The contact details of the vendor are</div>
+                                                    <center style="padding: 0px 30px 20px 30px;box-sizing:border-box;line-height:19px;">
+                                                        <div style="width: 100%;display: inline-block;">
+                                                            <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Name<span style="padding-left: 20px;">:</span></div>
+                                                            <div style="width: 50%;display: inline-block; text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">chandrika Apparao Patil</div>                   
+                                                        </div>
+                                                        <div style="width: 100%;display: inline-block;">
+                                                            <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Address<span style="padding-left:20px;">:</span></div>
+                                                            <div style="width: 50%;display:inline-block;text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">#657 6th block, 17th main kormangalaclub kormangala-560095</div>
+                                                        </div>
+                                                        <div style="width: 100%;display: inline-block;">
+                                                            <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Area<span style="padding-left:20px;">:</span></div>
+                                                            <div style="width: 50%;display: inline-block;text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">Bangalore</div>
+                                                        </div>
+                                                        <div style="width: 100%;display: inline-block;">
+                                                            <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">City<span style="padding-left:20px;">:</span></div>
+                                                            <div style="width: 50%;    display: inline-block;    text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">Bangalore</div>
+                                                        </div>
+                                                        <div style="width: 100%;display: inline-block;">
+                                                            <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">State<span style="padding-left: 20px;">:</span></div>
+                                                            <div style="width: 50%;    display: inline-block;    text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">Karnataka</div>
+                                                        </div>
+                                                        <div style="width: 100%;display: inline-block;">
+                                                            <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Pincode <span style="padding-left: 20px;">:</span></div>
+                                                            <div style="width: 50%;    display: inline-block;    text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">560095</div>
+                                                        </div>
+                                                        <div style="width: 100%;display: inline-block;">
+                                                            <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Landline<span style="padding-left: 20px;">:</span></div>
+                                                            <div style="width: 50%;    display: inline-block;    text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">Kormangala club</div>
+                                                        </div>
+                                                        <div style="width: 100%;display: inline-block;">
+                                                            <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Mobile<span style="padding-left: 20px;">:</span></div>
+                                                            <div style="width: 50%;display: inline-block;    text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">8123128747</div>
+                                                        </div>
+                                                        <div style="width: 100%;display: inline-block;">
+                                                            <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Email<span style="padding-left: 20px;">:</span></div>
+                                                            <div style="width: 50%;display: inline-block;text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">chandrikapatil401@gmail.com</div>
+                                                        </div>
+                                                    </center>
+                                                    <div class="">The buyer should contact you shortly.</div>
+                                                    <center style="padding-top:40px;">
+                                                        <img src="../tools/img/common/diamond.jpg" width="50">
+                                                        <img src="../tools/img/common/jewellery.jpg" width="50">
+                                                        <img src="../tools/img/common/bullions.jpg" width="50">
+                                                    </center>
+                                                    <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 40px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:022-32623263" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
+                                                </div>
+                                                <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
+                                            </div>
+                                        </center>
+                                        </body>
+                                        </html>';*/
+
+                        
                         $mailHeaders = "Content-type:text/html;charset=UTF-8" . "\r\n";
 			$mailHeaders .= "From: info@iftosi.com \r\n";
 

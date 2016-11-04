@@ -31,6 +31,7 @@
                 success: function(res) {
                     var expObj = eval('('+res+')');
                     var expiry = expObj.results.expiry;
+                    
                     if(expiry !== null && expiry !== undefined && expiry !== 'undefined' && expiry !== 'null' && expiry !== '')
                     {
                         $('#vndExpDate'+uid).text(expiry);
@@ -109,13 +110,20 @@ function loadProductsCallback(res,pgno) {
     }
 }
         function generateVendorsList(obj) {
+            
             var str = '<div class="listComm fLeft fmOpenR">';
             str += '<div class="fLeft vndName">';
             str += '   <div class="nameLocatCont fLeft txtOver hedofc" id="cn_14267019859310">'+obj['orgName']+' -'+obj['city']+'</div>';
             str += '    <div class="mobileEmailCont fLeft cBlue txtOver">';
-            str += '        <div class="fLeft">';
+            str += '        <div class="fLeft font12">';
             str += '            <div class="mbIcon fLeft" id="mo_14267019859310">'+obj['contact_mobile']+'</div>';
-            str += '            <div class="emIcon fLeft txtOver" id="em_14267019859310">'+obj['email']+'</div>';
+            str += '            <div class="emIcon fLeft txtOver" id="em_14267019859310" txtOver>'+obj['email']+'</div>';
+                                
+            str += '        </div>';
+            str += '        <div class="fLeft font12">';
+            str += '            <div class="pnIcon fLeft" id="mo_14267019859310">'+obj['pancard']+'</div>';
+            str += '            <div class="vatIcon fLeft txtOver" id="em_14267019859310">'+obj['vatno']+'</div>';
+                  
             str += '        </div>';
             str += '    </div>';
             str += '</div>';
@@ -124,6 +132,12 @@ function loadProductsCallback(res,pgno) {
             var package=new Array();
             var business_type = obj['business_type'].split(',');
             var expiry = obj.expiry_show;
+            if(expiry !='Not Available')
+            {
+                var sbstr= expiry.substring(expiry.indexOf(" "),expiry.indexOf(" ")+4);
+                var expiry = expiry.replace(expiry.substring(expiry.indexOf(" "),expiry.indexOf(",")),sbstr);
+            }
+            
             for(var j = 0; j < business_type.length; j++) {
                 if(business_type[j] == 1)
                 {
