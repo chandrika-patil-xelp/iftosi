@@ -667,8 +667,8 @@ a{cursor:pointer;}
 .iconMessage{background: #380B34 url(../img/common/2.svg)no-repeat;background-size: auto 90%;background-position:left center;padding: 0 15px 0 30px;}
 .majorInfoBox{width:100%;height:auto;margin-top: 45px;color: #4d4d4d;}
 .infoCommn {width: 25%;text-align: left;padding-left:0px;height: 40px;margin-bottom: 15px;}
-.infoLabel {width: 100%;line-height: 15px;height: 15px;text-transform: uppercase;color:#8A0044}
-.infoValue {width: 100%;line-height: 25px;height: 25px;font-size: 18px;}
+.infoLabel {width: 100%;line-height: 15px;height: 15px;text-transform: uppercase;color:#8A0044;font-size: 10px;}
+.infoValue {width: 100%;line-height: 25px;height: 25px;font-size: 14px;}
 
 .prdInfoWrap{width:34%;}
 .prdInfoCont{width:34%;padding: 0 20px;}

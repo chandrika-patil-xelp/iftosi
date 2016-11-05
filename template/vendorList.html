@@ -9,15 +9,17 @@
             <div class="fLeft headAmount">Amount</div>
             <div class="fLeft headExpDate">Expiry Date</div>
             <div class="fLeft headEdit">Activated</div>
+            
+            
         </div>
         <div class="listContainer fLeft fmOpenB font14" id="vendorLists">
-        <?php
+        <?php  //echo'<pre>';print_r($data);die;
         for($i=0; $i<count($data); $i++)
-        {
+        {   
         ?>
             <div class="listComm fLeft fmOpenR ">
                 <div class="fLeft vndName">
-                   <div class="nameLocatCont fLeft txtOver hedofc" id="cn_14267019859310"><?php echo $data[$i]['orgName'];?> - <?php echo $data[$i]['city'];?></div>
+                   <div class="nameLocatCont fLeft txtOver hedofc" id="cn_14267019859310"><?php echo $data[$i]['orgName'];?> - <?php echo $data[$i]['city'];?> </div>
                     <div class="mobileEmailCont fLeft cBlue txtOver">
                         <div class="fLeft">
                             <div class="mbIcon fLeft" id="mo_14267019859310"><?php echo $data[$i]['contact_mobile']?></div>
@@ -58,18 +60,17 @@
                     </div>
                 </div>
             </div>
-        <?php
+        <?php 
         }
         ?>
         </div>
         <div class="listContainer fLeft fmOpenB font14 dn" id="svendorLists"></div>
-    </div>
+        </div>
     
 </div>
 <script type="text/javascript" src="<?=DOMAIN;?>tools/js/adminNav.js?v=<?=VERSION;?>"></script>
 <script type="text/javascript" src="<?=DOMAIN;?>tools/js/Common.js?v=<?=VERSION;?>"></script>
 <script type="text/javascript" src="<?= $jvs['cms_jquery_toast'];?>"></script>
 <script type="text/javascript" src="<?= $jvs['vendorList'];?>"></script>
-
 </body>
 </html>

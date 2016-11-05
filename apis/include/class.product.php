@@ -3145,7 +3145,7 @@
 			$emailContent .= "IFtoSI Team";
 			$emailContent .= "<br/>";
 			$emailContent .= "For any assistance,call: 91-22-41222241(42). Email: info@iftosi.com";*/
-                        $emailContent ='<html>
+                       /* $emailContent ='<html>
                                 <head>
                                     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
                                     <meta name="viewport" content="width=device-width, user-scalable=no" >
@@ -3218,11 +3218,11 @@
                                     </div>
                                 </center>
                             </body>
-                            </html>';
+                            </html>';*/
                         
                         
-                        /*pending */
-                       /* $emailContent ='<html>
+                        
+                       $emailContent ='<html>
                                         <head>
                                             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
                                             <meta name="viewport" content="width=device-width, user-scalable=no" >
@@ -3231,55 +3231,55 @@
                                         <body style="margin:0; padding: 0; background-color: #171334;">
                                         <center style="box-sizing: border-box;">
                                             <div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;">
-                                                <a><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="../tools/img/iftosi.png" style="width:100%;"></div></a>
+                                                <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="'.DOMAIN.'tools/img/iftosi.png" style="width:100%;"></div></a>
                                                 <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
                                                     <div  style="font-size: 20px;  padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">Product enquiry</div>
-                                                    <a><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;padding: 20px 0 20px 0;"><img src="../tools/img/common/Enquiry.png" style="width:50px;"></div></a>
-                                                    <div style="font-size: 14px; padding: 15px 10px 10px 10px; color:#8A0044;">Hello Chandrika,</div>
+                                                    <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;padding: 20px 0 20px 0;"><img src="'.DOMAIN.'tools/img/common/Enquiry.png" style="width:50px;"></div></a>
+                                                    <div style="font-size: 14px; padding: 15px 10px 10px 10px; color:#8A0044;">Hello '.$usrName.',</div>
                                                     <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 14px; color: #333;padding: 0px 15px 20px 15px;">Thank you for showing interest in the product you have enquired.The contact details of the vendor are</div>
                                                     <center style="padding: 0px 30px 20px 30px;box-sizing:border-box;line-height:19px;">
                                                         <div style="width: 100%;display: inline-block;">
                                                             <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Name<span style="padding-left: 20px;">:</span></div>
-                                                            <div style="width: 50%;display: inline-block; text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">chandrika Apparao Patil</div>                   
+                                                            <div style="width: 50%;display: inline-block; text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">'.$vndrName.'</div>                   
                                                         </div>
                                                         <div style="width: 100%;display: inline-block;">
                                                             <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Address<span style="padding-left:20px;">:</span></div>
-                                                            <div style="width: 50%;display:inline-block;text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">#657 6th block, 17th main kormangalaclub kormangala-560095</div>
+                                                            <div style="width: 50%;display:inline-block;text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">'.$address.'</div>
                                                         </div>
                                                         <div style="width: 100%;display: inline-block;">
                                                             <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Area<span style="padding-left:20px;">:</span></div>
-                                                            <div style="width: 50%;display: inline-block;text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">Bangalore</div>
+                                                            <div style="width: 50%;display: inline-block;text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">'.$area.'</div>
                                                         </div>
                                                         <div style="width: 100%;display: inline-block;">
                                                             <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">City<span style="padding-left:20px;">:</span></div>
-                                                            <div style="width: 50%;    display: inline-block;    text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">Bangalore</div>
+                                                            <div style="width: 50%;    display: inline-block;    text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">'.$city.'</div>
                                                         </div>
                                                         <div style="width: 100%;display: inline-block;">
                                                             <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">State<span style="padding-left: 20px;">:</span></div>
-                                                            <div style="width: 50%;    display: inline-block;    text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">Karnataka</div>
+                                                            <div style="width: 50%;    display: inline-block;    text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">'.$state.'</div>
                                                         </div>
                                                         <div style="width: 100%;display: inline-block;">
                                                             <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Pincode <span style="padding-left: 20px;">:</span></div>
-                                                            <div style="width: 50%;    display: inline-block;    text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">560095</div>
+                                                            <div style="width: 50%;    display: inline-block;    text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">'.$pincode.'</div>
                                                         </div>
                                                         <div style="width: 100%;display: inline-block;">
                                                             <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Landline<span style="padding-left: 20px;">:</span></div>
-                                                            <div style="width: 50%;    display: inline-block;    text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">Kormangala club</div>
+                                                            <div style="width: 50%;    display: inline-block;    text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"'.$vndrLL.'</div>
                                                         </div>
                                                         <div style="width: 100%;display: inline-block;">
                                                             <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Mobile<span style="padding-left: 20px;">:</span></div>
-                                                            <div style="width: 50%;display: inline-block;    text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">8123128747</div>
+                                                            <div style="width: 50%;display: inline-block;    text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">'.$vndrMobile.'</div>
                                                         </div>
                                                         <div style="width: 100%;display: inline-block;">
                                                             <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Email<span style="padding-left: 20px;">:</span></div>
-                                                            <div style="width: 50%;display: inline-block;text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">chandrikapatil401@gmail.com</div>
+                                                            <div style="width: 50%;display: inline-block;text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">'.$vndrEmail.'</div>
                                                         </div>
                                                     </center>
                                                     <div class="">The buyer should contact you shortly.</div>
                                                     <center style="padding-top:40px;">
-                                                        <img src="../tools/img/common/diamond.jpg" width="50">
-                                                        <img src="../tools/img/common/jewellery.jpg" width="50">
-                                                        <img src="../tools/img/common/bullions.jpg" width="50">
+                                                        <img src="'.DOMAIN.'tools/img/common/diamond.jpg" width="50">
+                                                        <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
+                                                        <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
                                                     </center>
                                                     <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 40px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:022-32623263" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
                                                 </div>
@@ -3287,9 +3287,9 @@
                                             </div>
                                         </center>
                                         </body>
-                                        </html>';*/
+                                        </html>';
 
-                        
+                       
                         $mailHeaders = "Content-type:text/html;charset=UTF-8" . "\r\n";
 			$mailHeaders .= "From: info@iftosi.com \r\n";
 
@@ -3466,12 +3466,12 @@
 				return $results;
 			}
 
-      if(!is_writeable(WEBROOT))
+                        if(!is_writeable(WEBROOT))
 			{
 				@chmod(WEBROOT, 0777);
 			}
 
-      if(!file_exists(WEBROOT . 'image-upload'))
+                        if(!file_exists(WEBROOT . 'image-upload'))
 			{
 				@mkdir(WEBROOT . 'image-upload', 0777, true);
 			}
@@ -3481,7 +3481,7 @@
 				@chmod(WEBROOT . 'image-upload', 0777);
 			}
 
-      if(!file_exists(WEBROOT . 'image-upload/uploads'))
+                        if(!file_exists(WEBROOT . 'image-upload/uploads'))
 			{
 				@mkdir(WEBROOT . 'image-upload/uploads', 0777, true);
 			}
