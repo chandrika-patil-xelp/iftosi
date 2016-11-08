@@ -14,6 +14,7 @@ function loadEnqs(pgno) {
 }
 function loadEnqCallback(res,pgno)
 {
+    
     var obj = eval('('+res+')');
     if (obj.results !== undefined && obj.results !== 'undefined' && obj.results !== null && obj.results !== 'null' && obj.results !== '')
     {
@@ -22,7 +23,6 @@ function loadEnqCallback(res,pgno)
                 $('#totalEnqs').text(total);
                 
                 var total_pages = obj.total_pages;
-                
                 var str = '';
                 var total = obj.total_enqs;
                 

@@ -1331,7 +1331,7 @@ function checkDiamondShape(evt,id)
         }
     }
     else
-    {
+    {  
         $(evt).removeClass('shapeSelected');
         var uthis = $(evt);
         var wholeDiv='#diamondShapeCont_'+id+' .shapeComm';
