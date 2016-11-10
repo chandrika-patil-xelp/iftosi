@@ -348,8 +348,8 @@ function generateDiamondList(obj)
     str += '<div class="color fLeft">' + obj['color'] + '</div>';
     str += '<div class="clarity fLeft">' + obj['clarity'] + '</div>';
     str += '<div class="cert fLeft">' + obj['cert'] + '</div>';
-    str += '<div class="price fLeft fmOpenB"><span class="fRight rupeeImg">' + obj['price'] + '</span></div>';
-    str += '<div class="price fLeft fmOpenB"><span class="fRight rupeeImg">' + b2b_price + '</span></div>';
+    str += '<div class="price fLeft fmOpenB"><span class="fRight rueeImg">$' + obj['price'] + '</span></div>';
+    str += '<div class="price fLeft fmOpenB"><span class="fRight rueeImg">$' + b2b_price + '</span></div>';
     str += '<div class="acct fLeft poR">';
     if (obj['active_flag'] == 1 || obj['active_flag'] == 0)
     {
