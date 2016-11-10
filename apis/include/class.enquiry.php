@@ -175,7 +175,7 @@ class enquiry extends DB
                                 $p[4]  = $pdet['gold_purity'];
                                 $p[5]  = $pdet['gold_weight'];
                                 $p[6]  = $pdet['certified'];
-                                $p[7]  = $this->IND_money_format(round($pdet['price']));
+                                $p[7]  = round($pdet['price']);
                                 $msgng = array(0=>'Product Id',1=>'Type',2=>'Metal',3=>'Barcode',4=>'Purity',5=>'Gold Weight',6=>'Certificate',7=>'Price');
                             }
                             if($catid == "10002")
@@ -281,25 +281,37 @@ class enquiry extends DB
         {
            $arr=explode(",",$msg);
            $len=sizeof($arr);
-           $message='<html>
-                    <head>
-                        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-                        <meta name="viewport" content="width=device-width, user-scalable=no" >
-                            <title>
-                                recent enquiry
-                            </title>
-                        </head>
-                        <body style="margin:0; padding: 0; background-color: #171334;">
-                            <center>
-                                <div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; letter-spacing: -0.02em; color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;">
-                                <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="'.DOMAIN.'tools/img/iftosi.png" style="width:100%;"></div></a>
-                                <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
-                                <div  style="font-size: 20px;letter-spacing: -0.03em;    padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">recent enquiry</div>
-                                <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;padding-top: 15px;"><img src="'.DOMAIN.'tools/img/common/Enquiry.png" style="width:70%;"></div></a>
-                                <div style="font-size: 18px;letter-spacing: -0.03em;    padding: 15px 10px 10px 10px; color:#8A0044;">Hello '.$params['username'].',</div>
-                                <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 18px; color: #333;padding: 0px 15px 20px 15px;">'.$params['user_name'].'-'.$params['user_mob'].' </div>
-                                <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 18px; color: #333;padding: 0px 15px 20px 15px;">'.$params['useremail'].' has shown interest in following product</div>';
-           
+          $message=' <html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, user-scalable=no" >
+        <title>recent enquiry</title>
+    </head>
+    <body style="margin:0; padding: 0; background-color: #171334;">
+    <center style="box-sizing: border-box;">
+        <div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;">
+            <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><src="'.DOMAIN.'tools/img/iftosi.png" style="width:100%;"></div></a>
+            <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
+                <div  style="font-size: 20px;  padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">Product enquiry</div>
+                <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;padding: 20px 0 20px 0;"><img src="'.DOMAIN.'tools/img/common/Enquiry.png" style="width:50px;"></div></a>
+                <div style="font-size: 14px; padding: 15px 10px 10px 10px; color:#8A0044;">Hello '.ucwords(strtolower($params['username'])).',</div>
+                <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 14px; color: #333;padding: 0px 15px 20px 15px;">Customer with following details</div>
+                <center style="padding: 0px 30px 20px 30px;box-sizing:border-box;line-height:19px;">
+                    <div style="width: 100%;display: inline-block;">
+                        <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Name<span style="padding-left: 20px;">:</span></div>
+                        <div style="width: 50%;display: inline-block; text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;word-wrap: break-word;">'.ucwords(strtolower($params['user_name'])).'</div>                   
+                    </div>
+                    <div style="width: 100%;display: inline-block;">
+                        <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Contact no<span style="padding-left:20px;">:</span></div>
+                        <div style="width: 50%;display:inline-block;text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;word-wrap: break-word;">'.$params['user_mob'].'</div>
+                    </div>
+                    <div style="width: 100%;display: inline-block;">
+                        <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Email<span style="padding-left:20px;">:</span></div>
+                        <div style="width: 50%;display: inline-block;text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;word-wrap: break-word;">'.$params['useremail'].'</div>
+                    </div>
+                </center>
+                <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 14px; color: #333;padding: 0px 15px 20px 15px;">has shown interest in following product</div>';
+             
             for($i=1;$i<($len);$i++)
             {
                 $tempArr=explode(":",$arr[$i]);
@@ -310,10 +322,10 @@ class enquiry extends DB
                               <span style="padding-right: 20px;">:</span>';
                                 if(stristr($tempArr[0],'Price'))
                                 {
-                                   
                                     $message .='<img src="'.DOMAIN.'tools/img/common/Rupee15.png" style="width:15px;vertical-align:initial;height:15px;">';
+                                    $tempArr[1] = $this->IND_money_format($tempArr[1]);
                                 }
-                             $message .= '<div style="width: 35%;    display: inline-block; text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$tempArr[1].'</div>
+                                $message .= '<div style="width: 35%;    display: inline-block; text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$tempArr[1].'</div>
                               </div>' ;
                 }
             }
@@ -330,9 +342,8 @@ class enquiry extends DB
         $message.='</div>';
         $message.='</center>';
         $message.='</body>';
-        $message.='</html>';
-              
-                 
+        $message.='</html>';     
+      
        return $message;
 }
     # view log by vendor for his product being viewed
