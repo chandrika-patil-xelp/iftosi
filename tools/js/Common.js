@@ -220,10 +220,10 @@ function Common() {
             $('#overlay1,#loginDiv').addClass('dn');
             $("#loginDiv,#overlay1").removeClass('dn');
         }, 1010);
-        window.location.href = DOMAIN;
+        //window.location.href = DOMAIN;
        //var a = document.referrer;
-       //var a = window.location;
-        //window.location = a;
+       var a = window.location;
+        window.location = a;
     }
     
     this.showLoginForm = function (vd) {

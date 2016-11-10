@@ -65,8 +65,9 @@ $('#pr_mobile').focus(function (){
         $("#isVendor").removeAttr('checked');
         //alert(a);
        // window.location=a;
-        setTimeout(function () {window.location.assign(DOMAIN); },20);
-        window.location.assign(DOMAIN);
+       var a = document.referrer;
+        setTimeout(function () {window.location.assign(a); },20);
+        window.location.assign(a);
     });
     $('#signupSubmit').bind('click', function () {
         

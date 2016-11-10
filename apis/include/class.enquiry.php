@@ -310,7 +310,7 @@ class enquiry extends DB
                         <div style="width: 50%;display: inline-block;text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;word-wrap: break-word;">'.$params['useremail'].'</div>
                     </div>
                 </center>
-                <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 14px; color: #333;padding: 0px 15px 20px 15px;">has shown interest in following product</div>';
+                <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 14px; color: #333;padding: 0px 15px 20px 15px;">Has shown interest in following product</div>';
              
             for($i=1;$i<($len);$i++)
             {
@@ -323,10 +323,12 @@ class enquiry extends DB
                                 if(stristr($tempArr[0],'Price'))
                                 {
                                     $message .='<img src="'.DOMAIN.'tools/img/common/Rupee15.png" style="width:15px;vertical-align:initial;height:15px;">';
-                                    $tempArr[1] = $this->IND_money_format($tempArr[1]);
+                                    $tempArr[1] = $this->IND_money_format(trim($tempArr[1]));
+                                   
                                 }
                                 $message .= '<div style="width: 35%;    display: inline-block; text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$tempArr[1].'</div>
                               </div>' ;
+                               
                 }
             }
 
