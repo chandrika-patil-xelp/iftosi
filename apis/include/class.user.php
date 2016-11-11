@@ -564,7 +564,7 @@
             $vres = $this->query($vsql);
             $vres2 = $this->query($vsql1);
             if ($vres && $vres2) {
-                $arr = "Vendor table is updated";
+                $arr = "Jeweller/Merchant table is updated";
                 $err = array('code' => 0, 'msg' => 'Update operation is done successfully');
             } else {
                 $arr = array();
@@ -916,7 +916,7 @@
                 $arr['flag']=$flag;
                 $arr['expiry']=$exp;
 
-                $err=array('code'=>0,'msg'=>'vendor profile status retrieved');
+                $err=array('code'=>0,'msg'=>'Jeweller/Merchant profile status retrieved');
             }
             else
             {
@@ -1748,14 +1748,14 @@
             $headers = '';
             if($params['isVendor'] == 1)
             {
-                $subject .= 'Vendor profile activated in IFtoSI';
+                $subject .= 'Jeweller/Merchant profile activated in IFtoSI';
 
                 $headers .= "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                 $headers .= 'From: <info@iftosi.com>' . "\r\n";
                 $tempParams = array('mobile'=>$params['mobile'],'email'=>$params['email'],'username'=>$params['username']);
                 $message .= $this-> sendVActivateMailSMSTemplate($tempParams); 
-                $smsText .= "Vendor profile activated in IFtoSI";
+                $smsText .= "Jeweller/Merchant profile activated in IFtoSI";
                 $smsText .= "\r\n\r\n";
                 $smsText .= "Congratulations, ".ucwords(strtolower($params['username']))."! Your account has been verified.";
                 $smsText .= "\r\n\r\n";
@@ -1907,7 +1907,7 @@
                       <div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;">
                       <a><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="'.DOMAIN.'tools/img/iftosi.png" style="width:100%;"></div></a>
                       <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
-                      <div  style="font-size: 20px; padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">vendor profile deactivation</div>
+                      <div  style="font-size: 20px; padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">Jeweller/Merchant profile deactivation</div>
                       <a><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;padding: 20px 0 20px 0;"><img src="'.DOMAIN.'tools/img/common/Deactivation.png" style="width:50px;"></div></a>
                       <center style="padding: 0px 50px 0px 50px;line-height: 30px;    font-size: 23px;    padding-top: 30px;    font-weight: 100;    color: #333;">
                       Kindly re-subscribe for the new packeage you want to continue with. It was really a good experience for us to be connected with you.
@@ -1950,7 +1950,7 @@
                     $arr = 'no';
                 }
 
-                $err = array('code'=>0,'msg'=>'Vendor status is fetched');
+                $err = array('code'=>0,'msg'=>'Jeweller/Merchant status is fetched');
             }
             else if($resCount == 0)
             {
@@ -1960,7 +1960,7 @@
             else
             {
                 $arr = array();
-                $err = array('code'=>1,'msg'=>'Vendor status not found');
+                $err = array('code'=>1,'msg'=>'Jeweller/Merchant status not found');
             }
             $result = array('result'=>$arr,'error'=>$err);
             return $result;
