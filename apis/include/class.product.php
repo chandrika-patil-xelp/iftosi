@@ -2991,8 +2991,8 @@
 			$prdid = (!empty($params['prdid'])) ? trim(urldecode($params['prdid'])) : '';
 			$vid = (!empty($params['vid'])) ? trim(urldecode($params['vid'])) : '';
 			$uid = (!empty($params['uid'])) ? trim(urldecode($params['uid'])) : '';
-
-			if(empty($usrEmail) || empty($usrMobile) || empty($usrName) || empty($prdid))
+                        
+                        if(empty($usrEmail) || empty($usrMobile) || empty($usrName) || empty($prdid))
 			{    
 				$resp = array();
 				$error = array('Code' => 1, 'Msg' => 'Some parameters are missing');
@@ -3000,7 +3000,8 @@
 				return $results;
 			}
 
-			$tmp_params = array('prdid' => $prdid);
+			
+                        $tmp_params = array('prdid' => $prdid);
 			$prdDetails = $this->getPrdById($tmp_params);
 			$prdRes = $prdDetails['results'][$prdid];
 
@@ -3236,7 +3237,7 @@
                                                     <div  style="font-size: 20px;  padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">Product enquiry</div>
                                                     <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;padding: 20px 0 20px 0;"><img src="'.DOMAIN.'tools/img/common/Enquiry.png" style="width:50px;"></div></a>
                                                     <div style="font-size: 14px; padding: 15px 10px 10px 10px; color:#8A0044;">Hello '.$usrName.',</div>
-                                                    <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 14px; color: #333;padding: 0px 15px 20px 15px;">Thank you for showing interest in the product you have enquired.The contact details of the vendor are</div>
+                                                    <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 14px; color: #333;padding: 0px 15px 20px 15px;">Thank you for showing interest in the product you have enquired.The contact details of the Jeweller/Merchant are</div>
                                                     <center style="padding: 0px 30px 20px 30px;box-sizing:border-box;line-height:19px;">
                                                         <div style="width: 100%;display: inline-block;">
                                                             <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Name<span style="padding-left: 20px;">:</span></div>
@@ -3293,11 +3294,11 @@
                         $mailHeaders = "Content-type:text/html;charset=UTF-8" . "\r\n";
 			$mailHeaders .= "From: info@iftosi.com \r\n";
 
-			$smsText = "Dear $usrName, Thank you for showing interest in the product you have enquired. The contact details of the vendor are:";
+			$smsText = "Dear $usrName, Thank you for showing interest in the product you have enquired. The contact details of the Jeweller/Merchant are:";
 			$smsText .= "\r\n\r\n";
-			$smsText .= "Vendor Details:";
+			$smsText .= "Jeweller/Merchant Details:";
 			$smsText .= "\r\n\r\n";
-			$smsText .= "Vendor Name: ";
+			$smsText .= "Name: ";
 			$smsText .= $vndrName;
 //			$smsText .= "\r\n";
 //			$smsText .= "Address: ";
