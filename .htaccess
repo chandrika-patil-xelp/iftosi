@@ -46,6 +46,7 @@ RewriteRule ^((?i)anatomy)$    index.php?case=diamond_shapes [L]
 
 RewriteRule ^((?i)jewellery-tips)$    index.php?case=jewellery_tips [L]
 
+RewriteRule ^((?i)diamond-guide)$    index.php?case=diamondguide [L]
 RewriteRule ^((?i)cut)$    index.php?case=e_cut [L]
 RewriteRule ^((?i)girdle-size)$    index.php?case=e_cut1 [L]
 RewriteRule ^((?i)culet-size)$    index.php?case=e_cut2 [L]

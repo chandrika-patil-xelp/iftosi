@@ -375,6 +375,11 @@ switch ($action) {
                 $page = 'e_cut5';
                 include 'template/e_cut5.html';
                 break;
+              case 'diamondguide':
+                $page = 'diamondguide';
+                include 'template/diamondguide.html';
+                break;
+            
             case 'e_glossary':
                 $page = 'e_glossary';
                 include 'template/e_glossary.html';
@@ -1367,6 +1372,13 @@ switch ($action) {
                 
                 include 'template/about_us.html';
                 break;
+            
+             case 'ratechange':
+                $page = 'ratechange';
+                include 'template/ratechange.html';
+                break;
+            
+            
             case 'contact_us':
                 $page = 'contact-Us';
                 $meta_description="Click the link above to contact IFtoSI - The best platform to buy diamond, fine jewellery and bullion. We bring to you best sellers with wide selection at best prices..";

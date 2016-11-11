@@ -68,7 +68,7 @@ body{padding:0;margin:0;}
 .emraldImg{background-image: url('../img/emerald-cut-diamonds.gif');background-repeat:no-repeat;background-size: 100% auto;width:30%;height:130px;text-align: center;font-size: 14px;font-family: openB;padding-top: 110px;color:#4d4d4d;}
 
 .paraHead{font-size: 45px;margin-bottom: 5px;}
-.subList{border-bottom:1px solid #e6e6e6; cursor:pointer; height:40px; line-height: 40px; color:#4d4d4d; padding:0 10px;}
+.subList{border-bottom:1px solid #e6e6e6; cursor:pointer; height:40px; line-height: 40px;padding:0 10px;}
 .subList:hover{background: #f0f0f0;color:#8A0044;}
 /*.sideDiv ul li:hover{background: #f0f0f0;color:#8A0044;}*/
 /*.sideDiv ul li:visited{color:#8A0044;}*/
