@@ -5,12 +5,11 @@ case 'wishlist':
 ?>
 <div id='header' class="header transition300">
     <div class="wrapperMax">
-        <div id="mMenuBtn" class="menuBtn fLeft transition300 ripplelink" onclick="showLeftMenu(true)"></div>
+        <div id="mMenuBtn" class="menuBtn fLeft transition300 ripplelink"  onclick="showLeftMenu(true)"></div>
         <!--                <div class="cityName fLeft txtOver">Bangalore</div>-->
         <div class="headRight fRight transition300">
             <div class="compNo fRight fmOpenB">91-22-41222241&nbsp;(42)</div>
             <div class="fRight sortBox dn" id="userMenu">
-
                 <div class="dropdownBox fLeft">
                     <div id="hdrpinp" class="dropInput fmOpenR"></div>
                     <ul id="hdropList" class="fmOpenR">
@@ -21,15 +20,13 @@ case 'wishlist':
                         <li class="transition100" onclick="common.doLogout();">Log Out</li>
                     </ul>
                 </div>
-
             </div>
-
             <div class="signInUpTab fRight fmOpenR"><span onclick="common.showLoginForm();">Sign In</span> / <a href="<?php echo DOMAIN; ?>Sign-Up">Sign Up</a></div>
             <?php
             if($case != 'b2bproducts' && $case != 'b2bdetails')
             { 
             ?>
-                <div id="wishListHdr" class="wishlist fRight fmOpenR" onclick="redirectToWishlist();">Wishlist<span id="wishListCnt"> (0)</span></div>
+            <div id="wishListHdr" class="wishlist fRight fmOpenR" onclick="redirectToWishlist();">Wishlist<span id="wishListCnt"> (0)</span></div>
             <?php
             }
             ?>
@@ -73,6 +70,7 @@ case 'e_cut5':
 case 'e_glossary':
 case 'e_shapes':
 case 'gemstone':
+case 'diamondguide':
 ?>
 <div id='header' class="header transition300">
     <div class="wrapperMax poR bgWhite">
@@ -130,7 +128,7 @@ case 'gemstone':
             <div id='hbgJewel' class="headCat fLeft bgJewellery transition300"><span class="transition300">Jewellery</span><?php include 'jewelleryMenu.html'; ?></div>
             <div id='hbgBull' class="headCat fLeft bgBullion transition300"><span>Bullions</span></div> -->
         </div>
-        
+
         <?php
         }
         ?>
@@ -150,8 +148,6 @@ case 'gemstone':
                     </ul>
                 </div>
             </div>
-
-
             <div class="signInUpTab fRight fmOpenR"><span onclick="common.showLoginForm();">Sign In</span> / <a href="<?php echo DOMAIN; ?>Sign-Up">Sign Up</a></div>
             <!--                    <div class="headDivider fRight"></div>
                                 
@@ -160,7 +156,7 @@ case 'gemstone':
             if($case != 'b2bproducts' && $case != 'b2bdetails')
             { 
             ?>
-                <div id="wishListHdr" class="wishlist fRight fmOpenR" onclick="redirectToWishlist();">Wishlist<span id="wishListCnt" class="dn"> (0)</span></div>
+            <div id="wishListHdr" class="wishlist fRight fmOpenR" onclick="redirectToWishlist();">Wishlist<span id="wishListCnt" class="dn"> (0)</span></div>
             <?php
             }
             ?>
@@ -175,6 +171,20 @@ default:
 break;
 }
 ?>
+<script>
+//      var element = document.getElementById('menuBtn');
+//    var hammertime = Hammer(element).on("drag", function(event) {
+//        alert("hello");
+//    });
+
+//
+//    $(document).bind('click', function (e) {
+//        var $clicked = $(e.target);
+//        if (!$clicked.parents().siblings().hasClass("leftMenu"));  
+//        $(".leftMenu").hide();
+//    });
+
+</script>
 
 
 

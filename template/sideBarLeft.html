@@ -3,8 +3,9 @@
 
 <body>
     <div class="sideDiv">
-        <a href="<?php echo DOMAIN.'';?>" class="sideli <?=($page == 'diamondguide')? 'sideactive' : ''; ?>"><div class="subList transition300 fmOpenR font15">4 C's of diamond</div></a>
-        <a href="<?php echo DOMAIN.'Cut';?>" class="sideli <?=($page == 'e_cut')? 'sideactive' : ''; ?>"><div class="subList transition300 fmOpenR font15">Cut</div></a>
+        <a href="<?php echo DOMAIN.'Education';?>" class="sideli <?=($page == 'education' )? 'sideactive' : ''; ?>"><div class="subList transition300 fmOpenR font15">All About Diamond</div></a>
+        <a href="<?php echo DOMAIN.'Diamond-Guide';?>" class="sideli <?=($page == 'diamondguide')? 'sideactive' : ''; ?>"><div class="subList transition300 fmOpenR font15">4 C's of diamond</div></a>
+        <a href="<?php echo DOMAIN.'Cut';?>" class="sideli <?=($page == 'e_cut')? 'sideactive' : ''; ?>"><div class="subList transition300 fmOpenR font15" id="cut">Cut</div></a>
         <ul class="licontent fmOpenR">
             <li><a href="<?php echo DOMAIN.'Girdle-Size';?>" class="sideli <?=($page == 'e_cut1')? 'sideactive' : ''; ?>">Girdle Size</a></li>
             <li><a href="<?php echo DOMAIN.'Culet-Size';?>" class="sideli <?=($page == 'e_cut2')? 'sideactive' : ''; ?>">Culet Size</a></li>
@@ -17,5 +18,14 @@
         <a href="<?php echo DOMAIN.'Carat-Weight';?>" class="sideli <?=($page == 'e_carat_weight')? 'sideactive' : ''; ?>"><div class="subList transition300 fmOpenR font15 ">Carat weight</div></a>
         <a href="<?php echo DOMAIN.'Shapes';?>" class="sideli <?=($page == 'e_shapes')? 'sideactive' : ''; ?>"><div class="subList transition300 fmOpenR font15 bNone">Shape</div></a>
     </div>
+    <script>
+         $('.subList').click(function() {
+//           var side = $(this).attr("id");
+//           console.log(side);
+//alert($(this).attr('id'));
+           $(this).children().addClass("sideactive");
+        });
+    </script>
 </body>
+
 </html>
