@@ -3145,7 +3145,7 @@
 			$emailContent .= "<br/>";
 			$emailContent .= "IFtoSI Team";
 			$emailContent .= "<br/>";
-			$emailContent .= "For any assistance,call: 91-22-41222241(42). Email: info@iftosi.com";*/
+			$emailContent .= "For any assistance,call: 91-22-41222241/42. Email: info@iftosi.com";*/
                        /* $emailContent ='<html>
                                 <head>
                                     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -3325,7 +3325,7 @@
 			$smsText .= "Email: ";
 			$smsText .= $vndrEmail;
 			$smsText .= "\r\n\r\n";
-			$smsText .= "For any assistance, call: 91-22-41222241(42). Email: info@iftosi.com";
+			$smsText .= "For any assistance, call: 91-22-41222241/42. Email: info@iftosi.com";
 
 			$smsText = urlencode($smsText);
 			$sendSMS = str_replace('_MOBILE', $usrMobile, SMSAPI);

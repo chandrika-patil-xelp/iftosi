@@ -61,7 +61,7 @@ class sendingMail extends DB
                       $str .= '<div style="font-size: 1.4em; color:#8A0044; line-height: 30px;"><a style="color:#8A0044;"href="http://iftosi.com/FP-345678">IftoSi</a></div>';
                       $str .= '</div>';
                       $str .= '<div style="padding: 25px 0 0 0; line-height: 22px; border-top: 1px solid #e6e6e6;">For any assistance</div>';
-                      $str .= '<div style=" padding: 0 0 25px 0;  line-height: 30px;">Call 91-22-41222241(42) </div>';
+                      $str .= '<div style=" padding: 0 0 25px 0;  line-height: 30px;">Call 91-22-41222241/42 </div>';
                       $str .= '<div style=" padding: 0 0 25px 0;  line-height: 30px;">Email info@iftosi.com</div>';
                       $str .= '<div style="color:#666; font-size: 0.8em;">- The IftoSi.com Team</div>';
                       $str .= '</div>';
@@ -124,7 +124,7 @@ class sendingMail extends DB
                      $str .= '</div>';
                      $str .= '</div>';
                      $str .= '<div style="border-top: 1px solid #e6e6e6;padding: 20px 0 10px 0; color:#888; line-height: 22px;">';
-                     $str .= '<div style="font-size:13px;width:250px;text-align: left; vertical-align: middle;padding-bottom:5px; display:inline-block;">For any Assistance call: <a href="tel:+91-22-41222241(42)" style="text-decoration: none; color:#888; font-weight: bold;">+91-22-41222241(42)</a> </div>';
+                     $str .= '<div style="font-size:13px;width:250px;text-align: left; vertical-align: middle;padding-bottom:5px; display:inline-block;">For any Assistance call: <a href="tel:+91-22-41222241/42" style="text-decoration: none; color:#888; font-weight: bold;">+91-22-41222241/42</a> </div>';
                      $str .= '<div style="font-size:13px;width:250px;float:left;text-align: left; vertical-align: middle;padding-bottom:5px;padding-left:10px; display:inline-block;">Email: <a href="#" style="text-decoration: none; color:#888; font-weight: bold;">info@iftosi.com</a> </div>';
                      $str .= '</div>';
                      $str .= '<div style="color:#666; font-size: 0.8em;">- The IftoSi.com Team</div>';
@@ -185,7 +185,7 @@ class sendingMail extends DB
                       $str .= "</div>";
                       $str .= "</div>";
                       $str .= "</center>";
-                      $str .= "<div style='text-decoration:none; height:auto;padding: 20px 15px 40px 15px; color:#333; font-size: 15px;'>For any assistance, <br>Call: <a href='tel:+912232623263' style='text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;'>91-22-41222241(42)</a> | Email: <b>info@iftosi.com</b></div>";
+                      $str .= "<div style='text-decoration:none; height:auto;padding: 20px 15px 40px 15px; color:#333; font-size: 15px;'>For any assistance, <br>Call: <a href='tel:+912232623263' style='text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;'>91-22-41222241/42</a> | Email: <b>info@iftosi.com</b></div>";
                       $str .= "</div>";
                       $str .= "<div style='color:#fff;font-size: 18px; padding: 20px 0'>- Team <b>IF</b>to<b>SI</b>.com</div>";
                       $str .= "</div>";

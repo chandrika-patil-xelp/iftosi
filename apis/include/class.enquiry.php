@@ -163,7 +163,7 @@ class enquiry extends DB
                                 $p[5] = $pdet['carat'];
                                 $p[6] = $pdet['clarity'];
                                 $p[7] = $pdet['color'];
-                                $p[8] = $this->IND_money_format(round($pdet['carat']*$pdet['price']*$pdet['dollarRate']));
+                                $p[8] = $this->IND_money_format(ceil($pdet['carat']*$pdet['price']*$pdet['dollarRate']));
                                 $msgng = array(0=>'Product Id',1=>'Shape',2=>'Certificate',3=>'Barcode',4=>'Cut',5=>'Carat',6=>'Clarity',7=>'Colour',8=>'Price');
                             }
                             if($catid == "10001")
@@ -175,9 +175,9 @@ class enquiry extends DB
                                 $p[4]  = $pdet['gold_purity'];
                                 $p[5]  = $pdet['gold_weight'];
                                 $p[6]  = $pdet['certified'];
-                                $p[7]  = round($pdet['price']);
+                                $p[7]  = ceil($pdet['price']);
                                 $msgng = array(0=>'Product Id',1=>'Type',2=>'Metal',3=>'Barcode',4=>'Purity',5=>'Gold Weight',6=>'Certificate',7=>'Price');
-                            }
+                                }
                             if($catid == "10002")
                             {
                                 $p[0]  = $pdet['pid'];
@@ -188,11 +188,11 @@ class enquiry extends DB
                                 $p[5]  = $pdet['gold_weight'];
                                 if($pdet['metal'] == 'Gold')
                                 {
-                                    $p[6]= $this->IND_money_format(round($pdet['gold_weight']*(($pdet['goldRate']/10)*($pdet['gold_purity']/995))));
+                                    $p[6]= $this->IND_money_format(ceil($pdet['gold_weight']*(($pdet['goldRate']/10)*($pdet['gold_purity']/995))));
                                 }
                                 else if($pdet['metal'] == 'Silver')
                                 {
-                                    $p[6]= $this->IND_money_format(round($pdet['gold_weight']*(($pdet['silverRate']/1000)*($pdet['gold_purity']/999))));
+                                    $p[6]= $this->IND_money_format(ceil($pdet['gold_weight']*(($pdet['silverRate']/1000)*($pdet['gold_purity']/999))));
                                 }
                                 $msgng = array(0=>'Product Id',1=>'Type',2=>'Metal',3=>'Barcode',4=>'Purity',5=>'Gold Weight',6=>'Price');
                             }
@@ -247,7 +247,7 @@ class enquiry extends DB
                 $smsText .= "\r\n\r\n";
                 $smsText .= "The buyer should contact you shortly.";
                 $smsText .= "\r\n\r\n";
-                $smsText .= "For any assistance, call: 91-22-41222241(42). Email: info@iftosi.com";
+                $smsText .= "For any assistance, call: 91-22-41222241/42. Email: info@iftosi.com";
                 $smsText .= "\r\n\r\n";
                 $smsText .= "Team IFtoSI";
 
@@ -338,7 +338,7 @@ class enquiry extends DB
         $message .='<img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">';
         $message .='<img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">';
         $message.='</center>';
-        $message.='<div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241(42)" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>';
+        $message.='<div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241/42" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>';
         $message.='</div>';
         $message.='<div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>';
         $message.='</div>';

@@ -4131,7 +4131,7 @@ class vendor extends DB
                     $smsText .= "\r\n\r\n";
                     $smsText .= "Dear ".urldecode($rowData[user_name]).", Your Profile has been deactivated.For more information contact admin.";
                     $smsText .= "\r\n\r\n";
-                    $smsText .= "For any assistance, call: 91-22-41222241(42). Email: info@iftosi.com";
+                    $smsText .= "For any assistance, call: 91-22-41222241/42. Email: info@iftosi.com";
                     $smsText .= "\r\n\r\n";
                     $smsText .= "Team IFtoSI";
                     mail(urldecode($rowData['email']), $subject, $message, $headers);
@@ -4187,7 +4187,7 @@ class vendor extends DB
                                 <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
                                 <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
                             </center>
-                            <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241(42)" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; ">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
+                            <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241/42" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; ">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
                             </div>
                             <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
                             </div>
@@ -4318,7 +4318,7 @@ class vendor extends DB
                                             <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
                                             <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
                                         </center>
-                                        <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241(42)" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
+                                        <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241/42" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
                                     </div>
                                     <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
                                 </div>
