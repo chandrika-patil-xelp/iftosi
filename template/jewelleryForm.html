@@ -347,12 +347,12 @@
 
                               <div class="divCon2 fLeft BaguetteProp">
                                   <div  class="titleDiv txtCap fLeft">Baguette Price / Carat*</div>
-                                  <input name="baguette_price_per_carat" id="baguette_price_per_carat" type="text" autocomplete="false" placeholder=" eg. 1.25" maxlength="8" onkeypress="return common.isDecimalNumber(event, this.value);" value="<?= $attr['baguette_price_per_carat']; ?>" class="weightCal txtInput fLeft fmOpenR font14 c666">
+                                  <input name="baguette_price_per_carat" id="baguette_price_per_carat" type="text" autocomplete="false" placeholder=" eg. 1.25" maxlength="8" onkeypress="return common.isDecimalNumber(event, this.value);" value="<?= round($attr['baguette_price_per_carat'], 2); ?>" class="weightCal txtInput fLeft fmOpenR font14 c666">
                               </div>
 
                               <div class="divCon2 fLeft BaguetteProp">
                                   <div  class="titleDiv txtCap fLeft">Value Of Baguette*</div>
-                                  <input name="baguette_value" id="baguette_value" type="text" placeholder=" eg. 10" autocomplete="false" value="<?= $attr['baguette_value']; ?>" onkeypress="common.isNumberKey(event);" class="txtInput fLeft fmOpenR font14 c666">
+                                  <input name="baguette_value" id="baguette_value" type="text" placeholder=" eg. 10" autocomplete="false" value="<?= round($attr['baguette_value'],2); ?>" onkeypress="common.isNumberKey(event);" class="txtInput fLeft fmOpenR font14 c666">
                               </div>                          
                               </div>
     <?php
@@ -473,12 +473,12 @@
 
                               <div class="divCon2 fLeft polkiProp">
                                   <div  class="titleDiv txtCap fLeft">Polki Price / Carat*</div>
-                                  <input name="polki_price_per_carat" id="polki_price_per_carat" type="text" autocomplete="false" placeholder=" eg. 1.25" maxlength="8" onkeypress="return common.isDecimalNumber(event, this.value);" value="<?= $attr['polki_price_per_carat']; ?>" class="weightCal txtInput fLeft fmOpenR font14 c666">
+                                  <input name="polki_price_per_carat" id="polki_price_per_carat" type="text" autocomplete="false" placeholder=" eg. 1.25" maxlength="8" onkeypress="return common.isDecimalNumber(event, this.value);" value="<?= round($attr['polki_price_per_carat'], 2); ?>" class="weightCal txtInput fLeft fmOpenR font14 c666">
                               </div>
 
                               <div class="divCon2 fLeft polkiProp">
                                   <div  class="titleDiv txtCap fLeft">Value Of Polki*</div>
-                                  <input name="polki_value" id="polki_value" type="text" placeholder=" eg. 10" autocomplete="false" value="<?= $attr['polki_value']; ?>" onkeypress="common.isNumberKey(event);" class="txtInput fLeft fmOpenR font14 c666">
+                                  <input name="polki_value" id="polki_value" type="text" placeholder=" eg. 10" autocomplete="false" value="<?= round($attr['polki_value'],2); ?>" onkeypress="common.isNumberKey(event);" class="txtInput fLeft fmOpenR font14 c666">
                               </div>
 
                               <div class="submitBtn fmOpenR ripplelink poR fRight addMore inPolkiAddMore" id="addDiamondType" onclick="addShapeType()">Add Diamond Type</div>
