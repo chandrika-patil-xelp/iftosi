@@ -32,6 +32,15 @@
                                         1,
                                         now()
                                     )";
+                                    
+                           $isql.= " ON DUPLICATE KEY UPDATE
+                                        user_id   = VALUES(user_id),
+                                        logmobile = VALUES(logmobile),
+                                        email     = VALUES(email),
+                                        cPass_url = VALUES(cPass_url),
+                                        active_flag =VALUES(active_flag),
+                                       update_date  = now()
+                                ";
                 $res = $this->query($isql);
                 if($res)
                 {
@@ -71,7 +80,7 @@
         
         public function getUserDet($params)
         {
-
+            
             $sql = "SELECT
                             user_id
                     FROM 
