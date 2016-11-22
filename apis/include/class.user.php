@@ -223,7 +223,7 @@
                     {
                         $row = $this->fetchData($vres);
                         $send_otp_params = array('mobile' => $params['mobile']);
-                        $userid = $row['userid'];
+                        $userid = $row['user_id'];
                         $arr = array('Msg' => 'Otp is validated successfully for existing user', 'userid' => $userid);
                         $err = array('Code' => 0, 'Msg' => 'Data matched');
                     }
