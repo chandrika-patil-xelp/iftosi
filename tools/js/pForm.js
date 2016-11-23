@@ -235,6 +235,7 @@ function isconform()
             $("#price_per_carat").prop('disabled',false);
             $("#diamondsvalue").prop('disabled',false);
             $('.inDiamondAddMore').addClass('dn');
+            $('.addMore').addClass('dn');
            
         }
         else
@@ -244,7 +245,14 @@ function isconform()
             $("#no_diamonds").prop('disabled',true);
             $("#price_per_carat").prop('disabled',true);
             $("#diamondsvalue").prop('disabled',true);
+            
             $('.inDiamondAddMore').removeClass('dn');
+            
+            $('.addMore').removeClass('dn');
+          
+           
+                
+            
         }
    
 }
@@ -1316,6 +1324,7 @@ function checkDiamondShape(evt,id)
     
     if($(evt).hasClass('shapeSelected'))
     {  
+       
         $(evt).toggleClass('shapeSelected');
         
         if(id!=1)
@@ -1332,7 +1341,9 @@ function checkDiamondShape(evt,id)
     }
     else
     {  
+         
         $(evt).removeClass('shapeSelected');
+        $('.addMore').addClass('dn');
         var uthis = $(evt);
         var wholeDiv='#diamondShapeCont_'+id+' .shapeComm';
         $(wholeDiv).each(function ()
@@ -1349,7 +1360,7 @@ function checkDiamondShape(evt,id)
         $(evt).toggleClass('shapeSelected');
         if($(evt).hasClass('shapeSelected'))
         {
-             
+            $('.addMore').addClass('dn');
 	    $('.inDiamondAddMore').remove();
             $('#diamondShapeCont').append('<div onclick="addShapeType()" id="addDiamondType" class="submitBtn fmOpenR ripplelink poR fRight addMore inDiamondAddMore">Add Diamond Type</div><div style="clear: both;"></div>');
             $('.diamondProp_'+id).removeClass('dn');
@@ -1361,7 +1372,8 @@ function checkDiamondShape(evt,id)
     }
 
     if($('#diamondShapeCont_1 .shapeComm').hasClass('shapeSelected'))
-    {
+    {   
+            
 	    $('.diamondProp').removeClass('dn');
     }
     else
