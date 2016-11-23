@@ -20,6 +20,7 @@ class enquiry extends DB
 
     public function filLog($params)
     {   
+        
         $uid=$params['uid'];
         $udsql="SELECT
                                 logmobile,
@@ -53,7 +54,8 @@ class enquiry extends DB
                         $err=array('Code'=>0,'Msg'=>'Data Hidden');
                     }
                     else
-                    {
+                    {     
+                        
                         $isql=" INSERT
                                 INTO
                                             tbl_product_enquiry
@@ -163,7 +165,7 @@ class enquiry extends DB
                                 $p[5] = $pdet['carat'];
                                 $p[6] = $pdet['clarity'];
                                 $p[7] = $pdet['color'];
-                                $p[8] = $this->IND_money_format(ceil($pdet['carat']*$pdet['price']*$pdet['dollarRate']));
+                                $p[8] = ceil($pdet['carat']*$pdet['price']*$pdet['dollarRate']);
                                 $msgng = array(0=>'Product Id',1=>'Shape',2=>'Certificate',3=>'Barcode',4=>'Cut',5=>'Carat',6=>'Clarity',7=>'Colour',8=>'Price');
                             }
                             if($catid == "10001")
@@ -177,7 +179,7 @@ class enquiry extends DB
                                 $p[6]  = $pdet['certified'];
                                 $p[7]  = ceil($pdet['price']);
                                 $msgng = array(0=>'Product Id',1=>'Type',2=>'Metal',3=>'Barcode',4=>'Purity',5=>'Gold Weight',6=>'Certificate',7=>'Price');
-                                }
+                            }
                             if($catid == "10002")
                             {
                                 $p[0]  = $pdet['pid'];
@@ -188,11 +190,11 @@ class enquiry extends DB
                                 $p[5]  = $pdet['gold_weight'];
                                 if($pdet['metal'] == 'Gold')
                                 {
-                                    $p[6]= $this->IND_money_format(ceil($pdet['gold_weight']*(($pdet['goldRate']/10)*($pdet['gold_purity']/995))));
+                                    $p[6]= ceil($pdet['gold_weight']*(($pdet['goldRate']/10)*($pdet['gold_purity']/995)));
                                 }
                                 else if($pdet['metal'] == 'Silver')
                                 {
-                                    $p[6]= $this->IND_money_format(ceil($pdet['gold_weight']*(($pdet['silverRate']/1000)*($pdet['gold_purity']/999))));
+                                    $p[6]=ceil($pdet['gold_weight']*(($pdet['silverRate']/1000)*($pdet['gold_purity']/999)));
                                 }
                                 $msgng = array(0=>'Product Id',1=>'Type',2=>'Metal',3=>'Barcode',4=>'Purity',5=>'Gold Weight',6=>'Price');
                             }
@@ -324,6 +326,7 @@ class enquiry extends DB
                                 {
                                     $message .='<img src="'.DOMAIN.'tools/img/common/Rupee15.png" style="width:15px;vertical-align:initial;height:15px;">';
                                     $tempArr[1] = $this->IND_money_format(trim($tempArr[1]));
+                                   
                                    
                                 }
                                 $message .= '<div style="width: 35%;    display: inline-block; text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$tempArr[1].'</div>
