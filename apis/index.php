@@ -109,6 +109,16 @@ switch($action)
       $result	= $obj->vendorList($params);
       $res = $result;
     break;
+    
+     case 'vendorDetails':
+        
+      include APICLUDE.'class.vendor.php';
+      $obj	= new vendor($db['iftosi']);
+      $result	= $obj->vendorDetails($params);
+     
+      $res = $result;
+    break;
+
 
 		case 'imageupdate':
 			include APICLUDE.'class.product.php';
