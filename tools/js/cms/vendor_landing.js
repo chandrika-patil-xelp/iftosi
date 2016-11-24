@@ -1281,6 +1281,17 @@ function showVendorProfile()
 {
     window.location.href=DOMAIN+'index.php?case=vendor_Form&uid='+uid;
 }
+
+
+
+//super Admin Access to vendor profile.
+/*function checkVendorProfile()
+{
+    window.location.href=DOMAIN+'index.php?case=check_Vendor_Form&uid='+uid+'&isAdmin=1';
+}*/
+
+
+
 $('#rate_m').click(function(){
      
      if((busiTypeSplt.length == 1 || busiTypeSplt.length == 2 ) && (busiTypeSplt[0] == 2))
