@@ -44,6 +44,43 @@ class vendor extends DB
         $result = array('results' => $results, 'error' => $err);
         return $result;
     }
+    
+    
+     public function vendorDetails($params)
+    {   
+       
+        $vid   = ($params['vid'] ? $params['vid'] : 0);
+       if(!empty($vid))
+       {
+           $sql = "select * from tbl_vendor_master where vendor_id = $vid";
+           $res = $this->query($sql);
+           $row = $this->numRows($res);
+           $data = $this->fetchData($res);
+           $arr[] = $data;
+            if($row>0)
+            {
+                    $results=array('vendor'=>$arr);
+                    $err = array('Code' => 0, 'Msg' => 'Vendor details fetched successfully!');
+            }
+            else 
+            {
+                    $err = array('Code' => 1, 'Msg' => 'No such vendor');
+
+            }
+            
+            
+        }
+
+        else 
+        {
+                $err = array('Code' => 1, 'Msg' => 'Something went wrong');
+        }
+       
+        $result = array('results' => $results, 'error' => $err);
+        return $result;
+    }
+    
+    
 
     public function getVendorBySearch($params)
     {
@@ -4475,23 +4512,55 @@ class vendor extends DB
            
            if($uid)
            {
-                    $sql= "SELECT
-                                        user_name,
-                                        logmobile,
-                                        email,
-                                        city
-                                FROM 
-                                        tbl_registration
-                                WHERE 
-                                        is_active=1
-                                AND
-                                       user_id= " . $params['uid'] . "";
+                    $sql=" SELECT 
+                                    orgName,
+                                    fulladdress,
+                                    address1,
+                                    area,
+                                    postal_code,
+                                    city,
+                                    country,
+                                    state,
+                                    telephones,
+                                    alt_email,
+                                    officecity,
+                                    officecountry,
+                                    contact_person,
+                                    position,
+                                    contact_mobile,
+                                    alt_cmobile,
+                                    email,
+                                    memship_Cert,
+                                    bdbc,
+                                    other_dbaw,
+                                    vatno,
+                                    website,
+                                    landline,
+                                    mdbw,
+                                    pancard,
+                                    turnover,
+                                    business_type,
+                                    showroom_name,
+                                    pay_amount,
+                                    no_showrooms,
+                                    dollar_rate,
+                                    silver_rate,
+                                    gold_rate,
+                                    platinum_rate
+                            FROM
+                                    tbl_vendor_master
+                            WHERE
+                                    vendor_id=" . $params['uid'] . " 
+                            AND
+                                    active_flag=1
+                            AND
+                                    expire_flag=0";
                                
                         $res = $this->query($sql);
                         $row = $this->numRows($res);
                             if($row>0)
                             {
-                                $arr = array('Error:');
+                                $arr =$row;
                                 $err = array('code'=>0,'msg'=>'User Details Fetched Sucessfully !');
                             }
                             else
