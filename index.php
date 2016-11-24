@@ -1278,6 +1278,19 @@ switch ($action) {
                 //echo "<pre>";print_r($banker);die;
                 include 'template/vendorDetails.html';
                 break;
+            
+            /* case 'check_Vendor_Form':
+                $page = 'vendor-Form';
+                $uid = $_GET['uid'];
+                $isAdmin=$_GET['isAdmin'];
+                $url = APIDOMAIN . 'index.php?action=viewAll&uid=' . $uid.'&isAdmin='. $isAdmin;
+                $res = $comm->executeCurl($url);
+                $data = $res['results'][1];
+                $banker = $data['banker'];
+                //echo "<pre>";print_r($banker);die;
+                include 'template/vendorDetails.html';
+                break;
+            */
 
             case 'vcontact_Form':
                 $page = 'vcontact-Form';
@@ -1362,6 +1375,19 @@ switch ($action) {
                 $lastpg = ceil($total / 15);
                 $adjacents = 2;
                 //echo "<pre>";print_r($data);die;
+                include 'template/vendorList.html';
+                break;
+            
+            
+            case 'vendorDetails':
+                print_r("here");die;
+                $page = 'vendorList';
+                $vid = (!empty($_GET['vid']) ? $_GET['vid'] : 0);
+                $url = APIDOMAIN . 'index.php?action=vendorDetails&vid=' . $vid;
+                $res = $comm->executeCurl($url);
+                $data1 = $res['results']['vendor'];
+                //print_r($data1);die;
+                //echo "<pre>";print_r($data1);die;
                 include 'template/vendorList.html';
                 break;
 
