@@ -62,7 +62,7 @@ a{text-decoration: none;}
 .wrapperMax{width:100%;max-width: 1200px;height:100%;margin: auto;}
 .formContainer{width:100%;height: auto;padding:0px;display: inline-block;}
 .formTitle{width:auto;height: 35px;font-size: 25px;color:#4d4d4d;margin:20px 0;text-align: center;}
-
+.infrIcn{width:30px;height:30px;right:10px;top:0;bottom:0;margin:auto;background:url(../img/25.svg)no-repeat;background-size:auto 35px;background-position:center;position:absolute;cursor:pointer;}
 /*  Background colors  */
 .bgBlack { background: #000 !important; }
 
