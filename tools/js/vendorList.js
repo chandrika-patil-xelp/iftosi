@@ -112,7 +112,8 @@ function loadProductsCallback(res,pgno) {
         function generateVendorsList(obj) {
             
             var str = '<div class="listComm fLeft fmOpenR">';
-            str += '<div class="fLeft vndName">';
+            str += '<div class="fLeft vndName poR">';
+            str +='<div class="infrIcn" onclick="openlogin()"></div>';
             str += '   <div class="nameLocatCont fLeft txtOver hedofc" id="cn_14267019859310">'+obj['orgName']+' -'+obj['city']+'</div>';
             str += '    <div class="mobileEmailCont fLeft cBlue txtOver">';
             str += '        <div class="fLeft font12">';
