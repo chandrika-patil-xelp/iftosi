@@ -2707,6 +2707,7 @@ class vendor extends DB
 
     public function uploadDiamondProducts($params)
     {
+        
         $vid=$params['vid'];
         $data=$params['data'];
         $type=$params['type'];
@@ -2916,14 +2917,15 @@ class vendor extends DB
                                             )";
 
                         $res = $this->query($sql);
-                        if(empty($value[2]) || empty($value[3]) || empty($value[4]) || empty($value[5]) || empty($value[6]) || empty($value[7]) || empty($value[8]) || empty($value[9]) || empty($value[10]) || empty($value[11]) || empty($value[14]) || empty($value[15]) || empty($value[16]) || empty($value[17]) || empty($value[18]) || empty($value[23]) || empty($value[24]) || empty($value[28]))
+                        $complete_flag = 0;
+                      /*  if(empty($value[2]) || empty($value[3]) || empty($value[4]) || empty($value[5]) || empty($value[6]) || empty($value[7]) || empty($value[8]) || empty($value[9]) || empty($value[10]) || empty($value[11]) || empty($value[14]) || empty($value[15]) || empty($value[16]) || empty($value[17]) || empty($value[18]) || empty($value[23]) || empty($value[24]) || empty($value[28]))
                         {
                             $complete_flag = 0;
                         }
                         else
                         {
                             $complete_flag = 1;
-                        }
+                        }*/
 
                         $sql = "    INSERT
                                     INTO
@@ -4582,7 +4584,7 @@ class vendor extends DB
         } 
         
          public function showVendorProductList($params)
-        {
+        {   
              $vid = (!empty($params['vid'])) ? trim(urldecode($params['vid'])) : '';
            
            if($vid)
