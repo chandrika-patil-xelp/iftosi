@@ -66,7 +66,7 @@ switch ($action) {
 
                 $url = APIDOMAIN . 'index.php?action=getPrdByCatid&catid=' . $catid . '&page=' . $pgno . '&sortby=' . $sortby . '&slist=' . urlencode($slist) . '&clist=' . urlencode($clist) . '&tlist=' . urlencode($tlist) . '&ilist=' . urlencode($ilist) . '&jlist=' . urlencode($jlist) . '&ctid=' . $ctid . '&uid=' . $uid . '&b2bsort=' . $b2bsort;
                 $res = $comm->executeCurl($url);
-                
+
 
                 if (!empty($jlist))
                 {
@@ -254,6 +254,7 @@ switch ($action) {
         switch ($case) {
             case 'signup':
                 $page = 'signup';
+                $meta_title = 'Sign Up';
                 //include 'template/signup.html';
 
                 /* if(stristr(DOMAIN, 'demo.iftosi.com') || stristr(DOMAIN, 'localhost') || stristr(DOMAIN, 'live.iftosi.com') || stristr(DOMAIN, 'beta.xelpmoc.in/iftosi') || stristr(REQURI, 'beta'))
@@ -268,47 +269,58 @@ switch ($action) {
 
             case 'vsignup':
                 $page = 'signup';
+                $meta_title = 'Jeweller Sign Up';
                 include 'template/vSignUp.html';
                 break;
             case 'forgot':
                 $page = 'forgot';
+                $meta_title = 'Forgot Password';
                 include 'template/forgotPsw.html';
                 break;
             case 'diamond_shapes':
                 $page = 'diamond_shapes';
+                $meta_title = 'Diamond Shapes';
                 include 'template/diamond.html';
                 break;
 
             case 'jewellery_tips':
                 $page = 'jewellery_tips';
+                $meta_title = 'Jewellery Tips';
                 include 'template/jewellery_tips.html';
                 break;
             case 'education_round':
                 $page = 'education_round';
+                $meta_title = 'Education Round';
                 include 'template/education_round.html';
                 break;
             case 'education_pear':
                 $page = 'education_pear';
+                $meta_title = 'Education Pear';
                 include 'template/education_pear.html';
                 break;
             case 'education_oval':
                 $page = 'education_oval';
+                $meta_title = 'Education Oval';
                 include 'template/education_oval.html';
                 break;
             case 'education_emerald':
                 $page = 'education_emerald';
+                $meta_title = 'Education Emerald';
                 include 'template/education_emerald.html';
                 break;
             case 'education_clarity':
                 $page = 'education_clarity';
+                $meta_title = 'Education Clarity';
                 include 'template/education_clarity.html';
                 break;
             case 'education_asscher':
                 $page = 'education_asscher';
+                $meta_title = 'Education Asscher';
                 include 'template/education_asscher.html';
                 break;
             case 'education_heart':
                 $page = 'education_heart';
+                $meta_title = 'Education Heart';
                 include 'template/education_heart.html';
                 break;
             case 'education_marq':
@@ -317,14 +329,17 @@ switch ($action) {
                 break;
             case 'education_radiant':
                 $page = 'education_radiant';
+                $meta_title = 'Education Radiant';
                 include 'template/education_radiant.html';
                 break;
             case 'e_certification':
                 $page = 'e_certification';
+                $meta_title = 'Education Certification';
                 include 'template/e_certification.html';
                 break;
             case 'e_certification1':
                 $page = 'e_certification1';
+                $meta_title = 'Education Certification';
                 include 'template/e_certification1.html';
                 break;
             case 'e_certification2':
@@ -333,18 +348,22 @@ switch ($action) {
                 break;
             case 'e_carat_weight':
                 $page = 'e_carat_weight';
+                $meta_title = 'Education Carat Weight';
                 include 'template/e_carat_weight.html';
                 break;
             case 'education_cushion':
                 $page = 'education_cushion';
+                $meta_title = 'Education Cushion';
                 include 'template/education_cushion.html';
                 break;
             case 'education_princess':
                 $page = 'education_princess';
+                $meta_title = 'Education Princess';
                 include 'template/education_princess.html';
                 break;
             case 'e_color':
                 $page = 'e_color';
+                $meta_title = 'Education Colour';
                 include 'template/e_color.html';
                 break;
             case 'e_color1':
@@ -353,6 +372,7 @@ switch ($action) {
                 break;
             case 'e_cut':
                 $page = 'e_cut';
+                $meta_title = 'Education Cut';
                 include 'template/e_cut.html';
                 break;
             case 'e_cut1':
@@ -377,26 +397,31 @@ switch ($action) {
                 break;
               case 'diamondguide':
                 $page = 'diamondguide';
+                $meta_title = 'Diamond Guide';
                 include 'template/diamondguide.html';
                 break;
-            
+
             case 'e_glossary':
                 $page = 'e_glossary';
+                $meta_title = 'Education Glossary';
                 include 'template/e_glossary.html';
                 break;
             case 'e_shapes':
                 $page = 'e_shapes';
+                $meta_title = 'Education Shapes';
                 include 'template/e_shapes.html';
                 break;
             case 'privacy':
                 $page = 'privacy';
+                $meta_title = 'Privacy, IFtoSI, best marketplace | diamond, jewellery & bullion';
                 $meta_description="Policy discloses IFtoSI’s information practices including the type of information being collected, method, use and sharing of such information.";
                 $meta_keywords ="privacy policy, information practices, method of information collection, information sharing, IFtoSI.";
                 include 'template/privacy.html';
                 break;
 
             case 'vendor_privacy':
-                $page = 'IFtoSI - Vendor Privacy';
+                $page = 'IFtoSI - Jeweller Privacy';
+                $meta_title = 'Jeweller Privacy';
                 include 'template/vprivacy.html';
                 break;
             case 'customerDtls':
@@ -425,8 +450,10 @@ switch ($action) {
 
             case 'faq_sellers':
                 $page = 'faq_sellers';
+                $meta_title = 'Jeweller FAQs';
                 include 'template/faq_sellers.html';
                 break;
+
             case 'approachOption':
                 $page = 'approachOption';
                 $uid = $_GET['uid'];
@@ -458,11 +485,15 @@ switch ($action) {
                 break;
             case 'login':
                 $page = 'login';
+                $meta_title = 'Login';
                 include 'template/login.html';
                 break;
 
             case 'policy':
                 $page = 'policy';
+                $meta_title = 'Policy, IFtoSI, best marketplace | diamond, jewellery & bullion';
+                $meta_description="Policy discloses IFtoSI’s information practices including the type of information being collected, method, use and sharing of such information.";
+                $meta_keywords ="privacy policy, information practices, method of information collection, information sharing, IFtoSI.";
                 include 'template/privacy.html';
                 break;
 
@@ -482,7 +513,7 @@ switch ($action) {
 
             case 'wishlist':
                 $page = 'wishlist';
-
+                $meta_title = 'Customer Wishlist';
                 $uid = $_GET['uid'];
                 $pgno = ($_GET['pgno'] ? $_GET['pgno'] : 1);
 
@@ -517,7 +548,7 @@ switch ($action) {
                 $pgno = ($_GET['pgno'] ? $_GET['pgno'] : 1);
                 $catid = $_GET['catid'];
                 $url = APIDOMAIN . 'index.php?action=getPrdByCatid&catid=' . $catid . '&page=' . $pgno . '&slist=' . $slist;
-                $res = $comm->executeCurl($url);                
+                $res = $comm->executeCurl($url);
                 $data = $res['results']['products'];
                 $total = $res['results']['total'];
                 $catname = $res['results']['catname'];
@@ -541,9 +572,10 @@ switch ($action) {
 
             case 'diamonds':
                 $page = 'diamonds';
+                $meta_title = 'Buy diamond solitaires at best prices from trusted dealers';
                 $meta_description="Buy 100% certified diamond jewellery online from your favorite jeweller. Compare product prices among best of merchants, book online and collect from store.";
                 $meta_keywords ="buy diamond jewellery online, online diamond jewellery, diamond jewellery online, diamond jewellery designs, diamond jewellery price, diamond jewellery india, online diamond jewellery shopping, online jewellery shopping store, gold jewellery, online jewellery india.";
-              
+
                 $slist = $_GET['slist'];
                 $pgno = ($_GET['pgno'] ? $_GET['pgno'] : 1);
                 $catid = $_GET['catid'];
@@ -583,62 +615,69 @@ switch ($action) {
 
             case 'jewellery':
                 $page = 'jewellery';
+                $meta_title = 'Fine jewellery online from trusted brands at low prices';
                 $meta_description="Buy jewellery conveniently from most famous jewellery retailers in India. Comprehensive range of selections in rings, earrings, pendants, necklace and bangles.";
                 $meta_keywords ="jewellery online India, diamond jewellery, gold jewellery, fine jewellery, solitaire rings, online jewellery, gold jewellery online, online diamond buying, jewellery online shop, best way to buy jewellery, solitaire pendant, diamond necklace, gold bangles.";
-              
+
                 $pgno = (!empty($_GET['pgno']) ? $_GET['pgno'] : 1);
                 $catid = $_GET['catid'];
-                
+
                 if($catid==10003)
                 {
+                    $meta_title = 'Buy gold and diamond rings online at best prices in India';
                     $meta_description="IFtoSI brings to you an unmatched collection of diamond, gold & silver rings. The collection includes some of the best designs and combinations available with most renowned merchants in India.";
                     $meta_keywords ="gold rings, diamond rings, silver rings, office wear, daily wear, party wear, gemstone, cocktail, white gold, only diamonds, best gold ring design, popular diamond ring design, platinum design, polki design, rings for man, best diamond ring online.";
                 }
                 else if($catid==10004)
                 {
+                    $meta_title = 'Best gold and diamond earrings online at best prices in India';
                     $meta_description="IFtoSI brings together the best collection of diamond and gold earrings available in India. Choose from the widest range from retailers in different cities, compare prices and book online.";
                     $meta_keywords ="designer earring, daily wear earring, office purpose earring, earrings design, earrings for party wear, earrings from trusted sellers, branded gold earrings, diamond earrings from trusted dealers, best earring design in India, gold earrings at best prices.";
                 }
                 else if($catid==10005)
                 {
+                    $meta_title='Buy gold and diamond pendants online at best prices from famous sellers in India';
                     $meta_description="Order gold and diamond pendants online from the most trusted retialers in India. Best prices and quality guaranteed as you get to compare products from different sellers in India.";
                     $meta_keywords ="pendants for women, online order pendants, buy pendants online, diamond pendants, gold pendants, best pendants in India, party wear pendants, daily wear pendant designs, office wear pendants, formal pendant designs, simple pendant designs, pendants with gorgeous design, fashion pendants, pendants with discounts, pendant set online.";
                 }
                 else if($catid==10006)
                 {
+                    $meta_title='Best necklace designs in gold and diamond, buy online in India';
                     $meta_description="Choose gold and diamond necklace sets online from the most trusted dealers in India. Exquite designs that give gorgeous looks. Satisfaction guaranteed as you get to compare necklaces from multiple sellers in India.";
                     $meta_keywords ="latest necklace design, gold necklace from trusted sellers, diamond necklace with international certification, fashion necklaces, best necklace design in India, order necklace sets online, best collection of necklace online, trusted necklace seller, casual wear necklace, party wear necklace.";
                 }
                 else if($catid==10007)
                 {
+                    $meta_title='Unique collection of gold and diamond bangles & bracelets online in India';
                     $meta_description="Unmatched collection Bangles and Bracelets online at best prices in India. Diamond and gold bangles, bracelets with fancy and classy design to complement your personality.";
                     $meta_keywords ="bangles online shopping, online buy bangles, bangles for women, bangles online, bangles design, gold bangles, bangle bracelets, bangles, designer bangles, fancy bangles online, bangles set, ladies bangles, bangles jewellery, traditional bangles, gold bracelet for men, best bracelet design.";
                 }
                 else if($catid==100040)
                 {
+                    $meta_title='Buy nosepin online from top sellers in India. Quality and low prices guaranteed.';
                     $meta_description="Buy nosepins from India's best seller. Book online from a wide selection that comes with latest designs. Talk to the seller directly and pick up from his store.";
                     $meta_keywords ="gold & diamond nosepins, precious nosepins, nosepins online, designer nose pins online, diamond nosepins, gold nose pins, designer nose pins, buy nose pins online, best nose pin design, silver nose pins online india, silver nose pins, nose pins silver, silver nose pins online india.";
                 }
                 else if($catid==100041)
                 {
+                    $meta_title='A fantastic collection of adorable diamond and gold mangalsutras';
                     $meta_description="All types of mangalsutras are available with IFtoSI. Top mangalsutra sellers in India showcase their products in the platform. Choose the one you like, contact the dealer and collect after paying the agreed amount.";
                     $meta_keywords ="mangalsutra chain online india, diamond mangalsutras, mangalsutra in diamond, gold mangalsutra in India, best mangalsutra design in india, best place to buy mangalsutra in india, order mangalsutra online, see the best collection of mangalsutra, mangalsutra, mangalsutra online, online mangalsutra, buy mangalsutra online, artificial mangalsutra, mangalsutra designs, traditional mangalsutra, gold mangalsutra designs.";
                 }
                 else if($catid==100042)
                 {
+                    $meta_title='Buy polki jewellery online at best prices from famous sellers in India';
                     $meta_description="Buy polki jewellery in India directly from dealers. Polki from your favorite sellers are listed in iftosi.com Place order online and pay after see and confirm the product.";
                     $meta_keywords ="polki jewellery online india, polki sets online, traditional jewellery online, polki earring, polki set, polki pendant, doamond polki design, polki design in gold, best silver polki design, jadau jewellery in india, polki nosepin, jadau mangalsutra, jadau sets, kundan sets, traditional polki jewellery online purchase.";
                 }
                 else
                 {
+                    $meta_title = 'Fine jewellery online from trusted brands at low prices';
                     $meta_description="Buy jewellery conveniently from most famous jewellery retailers in India. Comprehensive range of selections in rings, earrings, pendants, necklace and bangles.";
                     $meta_keywords ="jewellery online India, diamond jewellery, gold jewellery, fine jewellery, solitaire rings, online jewellery, gold jewellery online, online diamond buying, jewellery online shop, best way to buy jewellery, solitaire pendant, diamond necklace, gold bangles.";
                 }
                 $url = APIDOMAIN . 'index.php?action=getPrdByCatid&catid=' . $catid . '&page=' . $pgno;
                 $res = $comm->executeCurl($url);
-               
-              
-              
                 $data = $res['results']['products'];
                 $total = $res['results']['total'];
                 $catname = $res['results']['catname'];
@@ -671,9 +710,10 @@ switch ($action) {
                 break;
             case 'bullion':
                 $page = 'bullion';
+                $meta_title = 'Buy bullion online in India from the most respected sellers in the country';
                 $meta_description="IFtoSI brings together the bullion dealers and famous jewellery retailers in India. Book your bullion online from your favorite merchant and collect from store after you satisfied about the purity and design.";
                 $meta_keywords ="buy bullion online india, gold bullion online, gold bullion online india, buy gold coin online, book gold biscuit online, gold bar, bullion bar, bullion trading online, trusted bullion seller, best pricing for bullion, book gold bullion online, how to buy bullion online.";
-              
+
                 $pgno = ($_GET['pgno'] ? $_GET['pgno'] : 1);
                 $catid = $_GET['catid'];
                 $url = APIDOMAIN . 'index.php?action=getPrdByCatid&catid=' . $catid . '&page=' . $pgno;
@@ -810,12 +850,12 @@ switch ($action) {
                 $desres = $comm->executeCurl($desurl);
                 $des = $desres['results'];
                 $totalDes = $res3['total'];
-                
+
                 $url4 = APIDOMAIN . "index.php?action=getPrdMoreInfo&prdid=".$pid."";
                 $res4 = $comm->executeCurl($url4);
                 $data4 = $res4['results'];
-                
-                
+
+
                 //echo "<pre>";print_r($des); die;
                 include 'template/diamond_detailsb2b.html';
                 break;
@@ -1027,7 +1067,7 @@ switch ($action) {
                     if (!empty($prdInfo) && !empty($prdInfo['results']) && !empty($prdInfo['error']) && empty($prdInfo['error']['errCode']))
                     {   //echo "<pre>";print_r( $prdInfo);die;
                         $prdDet = $prdInfo = $prdInfo['results'][$prdId];
-                        
+
                         $vndrInfo = $prdInfo['vendor_product_details'];
                         foreach ($vndrInfo as $key => $value)
                         {
@@ -1035,7 +1075,7 @@ switch ($action) {
                         }
                         $vndrDtls = $prdInfo['vendor_details'][$vndrId];
                         $vndrDtls['fulladdress'] = explode(",", $vndrDtls['fulladdress']);
-                        
+
                         foreach ($vndrDtls['fulladdress'] as $key => $value)
                         {
                             $vndrDtls['fulladdress'][$key] = trim($value);
@@ -1074,7 +1114,7 @@ switch ($action) {
                 $url1 = APIDOMAIN . 'index.php?action=imagedisplay&pid='.$pid.'&vid='.urlencode($prdInfo['vendor_details'][$vndrId][vid]).'&status=2';
                 $res1 = $comm->executeCurl($url1);
                 $data1 = $res1['results'];
-               
+
                 $gemsUrl = APIDOMAIN . 'index.php?action=getGemstoneTypes';
                 $gemsRes = $comm->executeCurl($gemsUrl);
                 $gemsAttrs = $gemsRes['results'];
@@ -1278,7 +1318,7 @@ switch ($action) {
                 //echo "<pre>";print_r($banker);die;
                 include 'template/vendorDetails.html';
                 break;
-            
+
             /* case 'check_Vendor_Form':
                 $page = 'vendor-Form';
                 $uid = $_GET['uid'];
@@ -1361,8 +1401,6 @@ switch ($action) {
                 include 'template/pendingProducts.html';
                 break;
 
-
-
             case 'vendorList':
                 $page = 'vendorList';
                 $pgno = (!empty($_GET['pgno']) ? $_GET['pgno'] : 1);
@@ -1377,10 +1415,9 @@ switch ($action) {
                 //echo "<pre>";print_r($data);die;
                 include 'template/vendorList.html';
                 break;
-            
-            
+
+
             case 'vendorDetails':
-                print_r("here");die;
                 $page = 'vendorList';
                 $vid = (!empty($_GET['vid']) ? $_GET['vid'] : 0);
                 $url = APIDOMAIN . 'index.php?action=vendorDetails&vid=' . $vid;
@@ -1393,28 +1430,31 @@ switch ($action) {
 
             case 'about_us':
                 $page = 'about-us';
+                $meta_title = 'The best platform to buy diamond, fine jewellery and bullion.';
                 $meta_description="IFtoSI is an online marketplace for diamond, jewellery & bullion purchases. We bring together best of sellers to present you with wide selection at best prices.";
                 $meta_keywords ="About us, online jewellery marketplace, online jewellery seller, about IFtoSI, what is IFtoSI.";
-                
+
                 include 'template/about_us.html';
                 break;
-            
+
              case 'ratechange':
                 $page = 'ratechange';
                 include 'template/ratechange.html';
                 break;
-            
-            
+
             case 'contact_us':
                 $page = 'contact-Us';
                 $meta_description="Click the link above to contact IFtoSI - The best platform to buy diamond, fine jewellery and bullion. We bring to you best sellers with wide selection at best prices..";
                 $meta_keywords ="Contact IFtoSI, Call IFtoSI, email IFtoSI.";
-                
+
                 include 'template/contactUs.html';
                 break;
 
             case 'team':
                 $page = 'team';
+                $meta_title = 'The best platform to buy diamond, fine jewellery and bullion.';
+                $meta_description="IFtoSI is an online marketplace for diamond, jewellery & bullion purchases. We bring together best of sellers to present you with wide selection at best prices.";
+                $meta_keywords ="About us, online jewellery marketplace, online jewellery seller, about IFtoSI, what is IFtoSI";
                 include 'template/team.html';
                 break;
 
@@ -1425,6 +1465,7 @@ switch ($action) {
 
             case 'terms_conditions':
                 $page = 'terms-and-conditions';
+                $meta_title = 'IFtoSI terms of serve that constitute how you use the services';
                 $meta_description="Terms of Service constitute a contract between IFtoSI and you as a registered user on the Website. If you do not agree to these Terms you must not register yourself.";
                 $meta_keywords ="terms of service, IFtoSI, terms & conditions.";
 
@@ -1433,6 +1474,7 @@ switch ($action) {
 
             case 'terms_of_listing':
                 $page = 'terms_of_listing';
+                $meta_title='IFtoSI terms of serve that constitute how dealers must use the services';
                 $meta_description="IFtoSI enables sellers of diamonds, jewellery, and bullion to list and market their goods, and connect with prospective buyers thereby connecting Merchants and Customers.";
                 $meta_keywords ="seller agreement, marketplace regulations, marketplace rules, IFtoSI agreement with sellers.";
 
@@ -1446,10 +1488,11 @@ switch ($action) {
 
 
             case 'faq':
-                $page = 'faq';
+                  $page = 'faq';
+                  $meta_title = 'Answers to you questions on IFtoSI online jewellery purchase';
                  $meta_description="Here we have listed answers to all questions about jewellery online purchase from IFtoSI. Questions range from credibility of sellers to payment method to home delivery.";
                  $meta_keywords ="FAQ, FAQs, online jewellery purchase, IFtoSI, answers to jewellery procedures.";
-                
+
                 include 'template/faq.html';
                 break;
 
@@ -1499,10 +1542,9 @@ switch ($action) {
 
             default:
                 $page = 'index';
+                $meta_title="Diamond Jewellery & Bullion Online at India's Best Marketplace";
                 $meta_description="Your favourite jeweller now has a new address, IFtoSI. We bring together best of India's jewellery & diamond merchants on one platform. Book Online & pay Offline.";
                 $meta_keywords ="jewellery, fine jewellery, bullion, fashion jewellery, diamond jewellery, gold jewellery, indian jewellery, designer jewellery, online jewellery shopping, online jewellery shopping india, jewellery buying websites, best jewellery shop";
-                
-
                 $url = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=10000';
                 $res = $comm->executeCurl($url);
                 $fil = $res['results']['attributes'];
