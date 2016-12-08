@@ -1444,6 +1444,7 @@ switch ($action) {
 
             case 'contact_us':
                 $page = 'contact-Us';
+                $meta_title='Contact IFtoSI, marketplace for diamond, jewellery & bullion';
                 $meta_description="Click the link above to contact IFtoSI - The best platform to buy diamond, fine jewellery and bullion. We bring to you best sellers with wide selection at best prices..";
                 $meta_keywords ="Contact IFtoSI, Call IFtoSI, email IFtoSI.";
 
