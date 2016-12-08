@@ -11,6 +11,7 @@
             </div>
             <form id="changePwd" name="changePwd" action="<?php echo DOMAIN.'Change-Password'; ?>" method="post">
 
+                
                 <div class='signupDiv' style="height:300px;">
                     <div class="wrapperMax">
                         <div class="signupCont">
@@ -105,6 +106,7 @@
                                                                     customStorage.addToStorage('busiType', obj.results[1].business_type);
                                                                 }
                                                             }
+                                                            var uid = customStorage.readFromStorage('userid');
                                                             $.ajax({url: APIDOMAIN + "index.php?action=changepwd&npass=" + rpass + "&rpass=" + rpass + "&ukey=" + key + "&uid=" + uid, success: function (result)
                                                                 {
                                                                     var obj = jQuery.parseJSON(result);
