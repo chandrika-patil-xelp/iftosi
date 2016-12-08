@@ -22,7 +22,7 @@ $(document).ready(function() {
 	});
 
 	$(".wisgDel").bind('click',function(e){
-            
+
                 e.stopImmediatePropagation();
 		var catid 	= $('#catid').val();
 		var pgno 	= $('#pgno').val()*1;
@@ -92,7 +92,7 @@ $(document).ready(function() {
 		$('#slist').val('');
 	}
 
-    $('.shapeComm').bind('click', function() 
+    $('.shapeComm').bind('click', function()
     {
         $(this).toggleClass('shapeSelected');
 		var cnt = getRandomInt(-500,500);
@@ -117,12 +117,12 @@ $(document).ready(function() {
         onStart: function() {
             var val=$('#resultCount').text();
             if(val < 2)
-            { 
+            {
                 $('#totalResultsDiv').children().html('<span class="resultCount">'+val+'</span> item in your wishlist');
             }
             else
             {
-               $('#resultCount').text(val); 
+               $('#resultCount').text(val);
             }
             isStop = true;
         }
@@ -236,7 +236,7 @@ $(document).ready(function() {
 				}
 			}
 			else
-			{       
+			{
 				if($('#sortbyvl').val())
                                 FR($('#sortbyvl').val());
                             else
@@ -265,7 +265,7 @@ $(document).ready(function() {
 				}
 			}
 			else
-			{      
+			{
 				if($('#sortbyvl').val())
                                 FR($('#sortbyvl').val());
                             else
@@ -496,7 +496,7 @@ function getResultsData(data,sortby,showtree)
 						html += '</a>';
 
                         html += '<div class="prdActions fLeft wAuto">';
-                            html += '<a href="'+DOMAIN+'index.php?case=b2bdetails&productid='+vl.pid+'&popup=1">';
+                            html += '<a href="'+DOMAIN+'index.php?case=b2bdetails&productid='+vl.pid+'&popup=1" rel="nofollow">';
                                 html += '<div class="wConBtn fLeft">Contact Dealer</div>';
                             html += '</a>';
                         html += '</div>';
@@ -611,17 +611,17 @@ function getResultsData(data,sortby,showtree)
                 html += '</a>';
                 html += '<div class="prdActions fLeft">';
                 if(tempUrl !== '') {
-                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
-                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
-                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
-                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink" rel="nofollow"></a>';
+                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink" rel="nofollow"></a>';
+                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink" rel="nofollow"></a>';
+                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink" rel="nofollow"></a>';
                 }
                 else {
                     html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'">';
-                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
-                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
-                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
-                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink" rel="nofollow"></a>';
+                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink" rel="nofollow"></a>';
+                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink" rel="nofollow"></a>';
+                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink" rel="nofollow"></a>';
                 }
 
                 html += '</div>';
@@ -726,7 +726,7 @@ function getResultsData(data,sortby,showtree)
 								html += '<div class="prdDetails fLeft">';
 									html += '<div class="detComm">';
 										html += '<div class="detLabel fmOpenB fLeft">DESIGN NO.</div>';
-										html += '<div class="detValue fmOpenR fLeft">'+vl.pcode+'</div>';
+										html += '<div class="detValue fmOpenR fLeft txtOver">'+vl.pcode+'</div>';
 									html += '</div>';
 								html += '</div>';
 								html += '<div class="prdPrice fLeft">';
@@ -739,17 +739,17 @@ function getResultsData(data,sortby,showtree)
 							html += '<div class="prdActions fLeft">';
                                                         if(tempUrl !== '' )
                                                         {
-                                                            html += '<a href="'+DOMAIN+tempUrl+'/jid-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
-                                                            html += '<a href="'+DOMAIN+tempUrl+'/jid-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
-                                                            html += '<a href="'+DOMAIN+tempUrl+'/jid-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
-                                                            html += '<a href="'+DOMAIN+tempUrl+'/jid-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                                                            html += '<a href="'+DOMAIN+tempUrl+'/jid-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink" rel="nofollow"></a>';
+                                                            html += '<a href="'+DOMAIN+tempUrl+'/jid-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink" rel="nofollow"></a>';
+                                                            html += '<a href="'+DOMAIN+tempUrl+'/jid-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink" rel="nofollow"></a>';
+                                                            html += '<a href="'+DOMAIN+tempUrl+'/jid-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink" rel="nofollow"></a>';
                                                         }
                                                         else
                                                         {
-                                                            html += '<a href="'+DOMAIN+cert+'/jid-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
-                                                            html += '<a href="'+DOMAIN+cert+'/jid-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
-                                                            html += '<a href="'+DOMAIN+cert+'/jid-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
-                                                            html += '<a href="'+DOMAIN+cert+'/jid-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink"></a>';
+                                                            html += '<a href="'+DOMAIN+cert+'/jid-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink" rel="nofollow"></a>';
+                                                            html += '<a href="'+DOMAIN+cert+'/jid-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink" rel="nofollow"></a>';
+                                                            html += '<a href="'+DOMAIN+cert+'/jid-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink" rel="nofollow"></a>';
+                                                            html += '<a href="'+DOMAIN+cert+'/jid-'+vl.pid+'" class="actionComm fLeft transition100 poR ripplelink" rel="nofollow"></a>';
                                                         }
                                                         html += '</div>';
 						html += '</div>';
@@ -848,11 +848,11 @@ function getResultsData(data,sortby,showtree)
                                                 html += '<div class="prdActions fLeft">';
                                                 if(tempUrl !== '')
                                                 {
-                                                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/1">';
+                                                    html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/1" rel="nofollow">';
                                                 }
                                                 else
                                                 {
-                                                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'">';
+                                                    html += '<a href="'+DOMAIN+shape+'/did-'+vl.pid+'" rel="nofollow">';
                                                 }
                                                 html += '<div class="wConBtn fLeft">Contact Dealer</div>';
                                             html += '</a>';
@@ -967,11 +967,11 @@ function getResultsData(data,sortby,showtree)
 							html += '<div class="prdActions fLeft">';
                                                         if(tempUrl !== '')
                                                 {
-                                                    html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'/1">';
+                                                    html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'/1" rel="nofollow">';
                                                 }
                                                 else
                                                 {
-                                                    html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'">';
+                                                    html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'" rel="nofollow">';
                                                 }
                                                         	html += '<div class="wConBtn fLeft">Contact Dealer</div>';
                                                             html += '</a>';
@@ -1056,7 +1056,7 @@ function getResultsData(data,sortby,showtree)
 							html += '<div class="prdDetails fLeft">';
 								html += '<div class="detComm">';
 									html += '<div class="detLabel fmOpenB fLeft">DESIGN NO.</div>';
-									html += '<div class="detValue fmOpenR fLeft">'+vl.pcode+'</div>';
+									html += '<div class="detValue fmOpenR fLeft txtOver">'+vl.pcode+'</div>';
 								html += '</div>';
 							html += '</div>';
 							html += '<div class="prdPrice fLeft">';
@@ -1070,11 +1070,11 @@ function getResultsData(data,sortby,showtree)
 							html += '<div class="prdActions fLeft">';
                                                         if(tempUrl !== '')
                                                             {
-                                                                html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/1">';
+                                                                html += '<a href="'+DOMAIN+tempUrl+'/did-'+vl.pid+'/1" rel="nofollow">';
                                                             }
                                                             else
                                                             {
-                                                                html += '<a href="'+DOMAIN+cert+'/did-'+vl.pid+'">';
+                                                                html += '<a href="'+DOMAIN+cert+'/did-'+vl.pid+'" rel="nofollow">';
                                                             }
                                                         html += '<div class="wConBtn fLeft">Contact Dealer</div>';
                                                         html += '</a>';
@@ -1244,17 +1244,17 @@ function getResultsData(data,sortby,showtree)
 						html += '<div class="prdActions fLeft">';
                                                     if(tempUrl !== '' )
                                                         {
-                                                            html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
-                                                            html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
-                                                            html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
-                                                            html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'"   class="actionComm fLeft transition100 poR ripplelink"></a>';
+                                                            html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink" rel="nofollow"></a>';
+                                                            html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink" rel="nofollow"></a>';
+                                                            html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink" rel="nofollow"></a>';
+                                                            html += '<a href="'+DOMAIN+tempUrl+'/bid-'+vl.pid+'"   class="actionComm fLeft transition100 poR ripplelink" rel="nofollow"></a>';
                                                         }
                                                         else
                                                         {
-                                                            html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink"></a>';
-                                                            html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink"></a>';
-                                                            html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink"></a>';
-                                                            html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'" class=  "actionComm fLeft transition100 poR ripplelink"></a>';
+                                                            html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'/1" class="actionComm fLeft transition100 poR ripplelink" rel="nofollow"></a>';
+                                                            html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'/2" class="actionComm fLeft transition100 poR ripplelink" rel="nofollow"></a>';
+                                                            html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'/3" class="actionComm fLeft transition100 poR ripplelink" rel="nofollow"></a>';
+                                                            html += '<a href="'+DOMAIN+type+'/bid-'+vl.pid+'" class=  "actionComm fLeft transition100 poR ripplelink" rel="nofollow"></a>';
                                                         }
                                                 html += '</div>';
 					html += '</div>';
@@ -1753,7 +1753,7 @@ function getResultsData(data,sortby,showtree)
 		onStart: function() {
 			isStop = true;
                     if(data.results.total == 1)
-                    {       
+                    {
                             $('#itemid').text( "item");
                     }
                     else
