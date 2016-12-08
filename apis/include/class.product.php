@@ -977,7 +977,7 @@
       			$page   = ($params['page'] ? $params['page'] : 1);
       			$limit  = ($params['limit'] ? $params['limit'] : 15);
       			if($params['uid'])
-      			{ 
+      			{        
       				$page   = ($params['page'] ? $params['page'] : 1);
       				$limit  = ($params['limit'] ? $params['limit'] : 16);
 
