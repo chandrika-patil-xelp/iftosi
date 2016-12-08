@@ -6,8 +6,8 @@
             <div class="forBg bgWhite"></div>
             <div class='prdMainDetails'>
                 <div class="wrapperMax diamond_mod">
-                    <?php    
-                    if (count($data1) == 0) { 
+                    <?php
+                    if (count($data1) == 0) {
                     ?>
                     <div class="imgsCont noImage"></div>
                     <?php
@@ -296,7 +296,7 @@
                     {
                     if($data['attr_details']['shape'] == ucwords(strtolower($key)))
                     {
-                    ?>      
+                    ?>
                     <div class="prdInfoDiv fLeft shapesPage2 ">
                         <div class="shapesCommH fLeft">
                             <div class="<?=ucwords(strtolower($key));?> shapeComm"></div>
@@ -460,11 +460,11 @@
                         <div class="prdInfoTitle fLeft"><?php echo 'Clarity - '.$data['attr_details']['clarity'];?></div>
                         <div class="prdInfoDiv fLeft">
                             <span class="fmOpenB">
-                                <?php 
+                                <?php
                                 echo $des[$data['attr_details']['clarity']]['describe_display_name'].': ';
                                 ?>
                             </span>
-                            <?php 
+                            <?php
                             print_r($des[$data['attr_details']['clarity']]['describe_text']);
                             ?>
                         </div>
@@ -492,7 +492,7 @@
                     }
                     ?>
                 </div>
-                <?php          
+                <?php
                 if($sugTotal > 0)
                 {
                 $i=0;
@@ -527,7 +527,7 @@
                             {
                             if($tempUrl !== '')
                             {
-                            $tempUrl .= '-colour-'.$data3[$key]['color']; 
+                            $tempUrl .= '-colour-'.$data3[$key]['color'];
                             }
                             else
                             {
@@ -538,7 +538,7 @@
                             {
                             if($tempUrl !== '')
                             {
-                            $tempUrl .= '-clarity-'.$data3[$key]['clarity']; 
+                            $tempUrl .= '-clarity-'.$data3[$key]['clarity'];
                             }
                             else
                             {
@@ -548,7 +548,7 @@
                             if(!empty($data3[$key]['certified'])){
                             if($tempUrl !== '')
                             {
-                            $tempUrl .= '-certified-'.$data3[$key]['certified']; 
+                            $tempUrl .= '-certified-'.$data3[$key]['certified'];
                             }
                             else
                             {
@@ -560,7 +560,7 @@
                             {
                             ?>
                             <a href="<?php echo DOMAIN . $tempUrl;?>/did-<?php echo $data3[$key]['pid']; ?>">
-                                <?php                                                    
+                                <?php
                                 }
                                 else
                                 {
@@ -608,7 +608,7 @@
 
                                             ?>
                                             <div class="detValue fmOpenB fLeft"><span class='rupeeImg'></span>
-                                                <?php 
+                                                <?php
                                                 $price = ceil($data3[$key]['price']* $rate*$data3[$key]['carat']);
                                                 echo $price = $comm->IND_money_format($price);
                                                 ?>
@@ -621,19 +621,19 @@
                                     if(!empty($tempUrl))
                                     {
                                     ?>
-                                    <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $data3[$key]['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                    <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                    <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                    <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                    <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $data3[$key]['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
+                                    <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
+                                    <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
+                                    <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
                                     <?php
                                     }
                                     else
                                     {
                                     ?>
-                                    <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                    <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                    <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                    <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                    <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
+                                    <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
+                                    <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
+                                    <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
                                     <?php
                                     }
                                     ?>

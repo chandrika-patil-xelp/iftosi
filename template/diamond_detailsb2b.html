@@ -56,7 +56,7 @@
                                 $price = ceil(($data['attr_details']['price'] * $rate) * $data['attr_details']['carat']);
                                 echo $price = $comm->IND_money_format($price);
                                 ?>
-                               
+
                             </div>
                         </div>
                         <div class="prdShape fLeft">
@@ -86,7 +86,7 @@
                             <div class="btnComm fLeft iconWishlist ripplelink poR" id="addtowishlist" onclick="">Add To Wishlist</div> -->
                         </div>
                     </div>
-                    
+
                      <?php
                         if (!empty($data['attr_details']['shape'])) {
                         ?>
@@ -98,8 +98,8 @@
                         <?php
                         }
                         ?>
-                        
-                        
+
+
                      <?php
                         if (!empty($data['attr_details']['carat'])) {
                         ?>
@@ -110,7 +110,7 @@
                         <?php
                         }
                         ?>
-                        
+
                      <?php
                         if (!empty($data['attr_details']['color'])) {
                         ?>
@@ -121,7 +121,7 @@
                          <?php
                         }
                         ?>
-                        
+
                      <?php
                         if (!empty($data['attr_details']['clarity'])) {
                         ?>
@@ -132,8 +132,8 @@
                          <?php
                         }
                         ?>
-                        
-                        
+
+
                      <?php
                         if (!empty($prdVars['cut'])) {
                         ?>
@@ -144,8 +144,8 @@
                          <?php
                         }
                         ?>
-                        
-                        
+
+
                      <?php
                         if (!empty($data['attr_details']['symmetry'])) {
                         ?>
@@ -156,9 +156,9 @@
                         <?php
                         }
                         ?>
-                        
-                        
-                        
+
+
+
                      <?php
                         if (!empty($data['attr_details']['polish'])) {
                         ?>
@@ -169,8 +169,8 @@
                          <?php
                         }
                         ?>
-                        
-                        
+
+
                      <?php
                         if (!empty($data['attr_details']['fluorescence'])) {
                         ?>
@@ -181,7 +181,7 @@
                          <?php
                         }
                         ?>
-                        
+
                      <?php
                         if (!empty($data['attr_details']['measurement'])) {
                         ?>
@@ -192,7 +192,7 @@
                          <?php
                         }
                         ?>
-                        
+
                      <?php
                         if (!empty($data['attr_details']['tab'])) {
                         ?>
@@ -203,7 +203,7 @@
                         <?php
                         }
                         ?>
-                        
+
                      <?php
                         if (!empty($data['attr_details']['crownangle'])) {
                         ?>
@@ -214,8 +214,8 @@
                         <?php
                         }
                         ?>
-                        
-                        
+
+
                      <?php
                         if (!empty($data['attr_details']['girdle'])) {
                         ?>
@@ -226,8 +226,8 @@
                         <?php
                         }
                         ?>
-                        
-                        
+
+
                      <?php
                         if (!empty($data['attr_details']['certified'])) {
                         ?>
@@ -238,8 +238,8 @@
                          <?php
                         }
                         ?>
-                        
-                        
+
+
                      <?php
                         if (!empty($data['attr_details']['cno'])) {
                         ?>
@@ -250,8 +250,8 @@
                          <?php
                         }
                         ?>
-                        
-                        
+
+
                      <?php
                         if (!empty($data['product_barcode'])) {
                         ?>
@@ -262,8 +262,8 @@
                         <?php
                         }
                         ?>
-                        
-                        
+
+
                      <?php
                         if (!empty($data['product_lotno'])) {
                         ?>
@@ -274,8 +274,8 @@
                          <?php
                         }
                         ?>
-                        
-                        
+
+
                      <?php
                         if (!empty( $data['product_lotref'])) {
                         ?>
@@ -286,8 +286,8 @@
                          <?php
                         }
                         ?>
-                        
-                     
+
+
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  ">BASE Price </div>
                             <div class="infoValue c666  fmOpenR"><?php $bprice = ceil((($data['attr_details']['baseprice'] * $data['attr_details']['dollar_rate']) * $data['attr_details']['carat']));
@@ -295,9 +295,9 @@
                                 ?>
                                 &#8377; <?php echo $bprice; ?></div>
                         </div>
-                        
-                        
-                        
+
+
+
                      <?php
                         if (!empty($data['attr_details']['discount'])) {
                         ?>
@@ -308,9 +308,9 @@
                          <?php
                         }
                         ?>
-                        
-                        
-                        
+
+
+
                         <?php
                         if (!empty($certificate_url)) {
                         ?>
@@ -321,9 +321,9 @@
                         <?php
                         }
                         ?>
-                        
-                         <?php   
-                        if (!empty($data4[availability])) { 
+
+                         <?php
+                        if (!empty($data4[availability])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  ">Availability</div>
@@ -332,8 +332,8 @@
                         <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[fluorescence_intensity])) { 
+                         <?php
+                        if (!empty($data4[fluorescence_intensity])) {
                         ?>
                          <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Fluorescence Intensity</div>
@@ -342,8 +342,8 @@
                          <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[fluorescence_color])) { 
+                         <?php
+                        if (!empty($data4[fluorescence_color])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Fluorescence Color</div>
@@ -352,8 +352,8 @@
                          <?php
                         }
                         ?>
-                        <?php   
-                        if (!empty($data4[treatment])) { 
+                        <?php
+                        if (!empty($data4[treatment])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Treatment</div>
@@ -362,10 +362,10 @@
                          <?php
                         }
                         ?>
-                        
-                        
-                         <?php   
-                        if (!empty($data4[rapnet_price])) { 
+
+
+                         <?php
+                        if (!empty($data4[rapnet_price])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  ">Rapnet Price</div>
@@ -374,8 +374,8 @@
                         <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[rapnet_discount_percent])) { 
+                         <?php
+                        if (!empty($data4[rapnet_discount_percent])) {
                         ?>
                          <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Rapnet Discount Percent</div>
@@ -384,8 +384,8 @@
                          <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[cash_price])) { 
+                         <?php
+                        if (!empty($data4[cash_price])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Cash Price</div>
@@ -394,8 +394,8 @@
                          <?php
                         }
                         ?>
-                        <?php   
-                        if (!empty($data4[cash_price_discount_percent])) { 
+                        <?php
+                        if (!empty($data4[cash_price_discount_percent])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Cash Price Discount Percent</div>
@@ -404,10 +404,10 @@
                          <?php
                         }
                         ?>
-                        
-                        
-                         <?php   
-                        if (!empty($data4[fancy_color])) { 
+
+
+                         <?php
+                        if (!empty($data4[fancy_color])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  ">Fancy Color</div>
@@ -416,8 +416,8 @@
                         <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[fancy_color_intensity])) { 
+                         <?php
+                        if (!empty($data4[fancy_color_intensity])) {
                         ?>
                          <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Fancy Color Intensity</div>
@@ -426,8 +426,8 @@
                          <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[fancy_color_overtone])) { 
+                         <?php
+                        if (!empty($data4[fancy_color_overtone])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Fancy Color Overtone</div>
@@ -436,8 +436,8 @@
                          <?php
                         }
                         ?>
-                        <?php   
-                        if (!empty($data4[depth_percent])) { 
+                        <?php
+                        if (!empty($data4[depth_percent])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Depth Percent</div>
@@ -446,10 +446,10 @@
                          <?php
                         }
                         ?>
-                        
-                        
-                        <?php   
-                        if (!empty($data4[girdle_thin])) { 
+
+
+                        <?php
+                        if (!empty($data4[girdle_thin])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  ">Girdle Thin</div>
@@ -458,8 +458,8 @@
                         <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[girdle_thick])) { 
+                         <?php
+                        if (!empty($data4[girdle_thick])) {
                         ?>
                          <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Girdle Thick</div>
@@ -468,8 +468,8 @@
                          <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[girdle_percent])) { 
+                         <?php
+                        if (!empty($data4[girdle_percent])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Girdle Percent</div>
@@ -478,8 +478,8 @@
                          <?php
                         }
                         ?>
-                        <?php   
-                        if (!empty($data4[girdle_condition])) { 
+                        <?php
+                        if (!empty($data4[girdle_condition])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Girdle Condition</div>
@@ -488,10 +488,10 @@
                          <?php
                         }
                         ?>
-                        
-                        
-                        <?php   
-                        if (!empty($data4[culet_size])) { 
+
+
+                        <?php
+                        if (!empty($data4[culet_size])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  ">Culet Size</div>
@@ -500,8 +500,8 @@
                         <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[culet_condition])) { 
+                         <?php
+                        if (!empty($data4[culet_condition])) {
                         ?>
                          <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Culet Condition</div>
@@ -510,8 +510,8 @@
                          <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[laser_inscription])) { 
+                         <?php
+                        if (!empty($data4[laser_inscription])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Laser Inscription</div>
@@ -520,8 +520,8 @@
                          <?php
                         }
                         ?>
-                        <?php   
-                        if (!empty($data4[certified])) { 
+                        <?php
+                        if (!empty($data4[certified])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Certified</div>
@@ -530,10 +530,10 @@
                          <?php
                         }
                         ?>
-                        
-                        
-                          <?php   
-                        if (!empty($data4[country])) { 
+
+
+                          <?php
+                        if (!empty($data4[country])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  ">Country</div>
@@ -542,8 +542,8 @@
                         <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[state])) { 
+                         <?php
+                        if (!empty($data4[state])) {
                         ?>
                          <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">State</div>
@@ -552,8 +552,8 @@
                          <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[city])) { 
+                         <?php
+                        if (!empty($data4[city])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">City</div>
@@ -562,8 +562,8 @@
                          <?php
                         }
                         ?>
-                        <?php   
-                        if (!empty($data4[matched_pair])) { 
+                        <?php
+                        if (!empty($data4[matched_pair])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Matched Pair</div>
@@ -572,11 +572,11 @@
                          <?php
                         }
                         ?>
-                        
-                        
-                        
-                         <?php   
-                        if (!empty($data4[pair_stock])) { 
+
+
+
+                         <?php
+                        if (!empty($data4[pair_stock])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  ">pair Stock</div>
@@ -585,8 +585,8 @@
                         <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[allow_raplink_feed])) { 
+                         <?php
+                        if (!empty($data4[allow_raplink_feed])) {
                         ?>
                          <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Allow Raplink Feed</div>
@@ -595,8 +595,8 @@
                          <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[parcel_stones])) { 
+                         <?php
+                        if (!empty($data4[parcel_stones])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Parcel Stones</div>
@@ -605,9 +605,9 @@
                          <?php
                         }
                         ?>
-                        
-                        <?php   
-                        if (!empty($data4[report_filename])) { 
+
+                        <?php
+                        if (!empty($data4[report_filename])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  ">Report Filename</div>
@@ -616,8 +616,8 @@
                         <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[sarine_loupe])) { 
+                         <?php
+                        if (!empty($data4[sarine_loupe])) {
                         ?>
                          <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Sarine Loupe</div>
@@ -626,8 +626,8 @@
                          <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[trade_show])) { 
+                         <?php
+                        if (!empty($data4[trade_show])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Trade Show</div>
@@ -636,8 +636,8 @@
                          <?php
                         }
                         ?>
-                        <?php   
-                        if (!empty($data4[key_to_symbols])) { 
+                        <?php
+                        if (!empty($data4[key_to_symbols])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Key To Symbols</div>
@@ -646,10 +646,10 @@
                          <?php
                         }
                         ?>
-                        
-                        
-                         <?php   
-                        if (!empty($data4[shade])) { 
+
+
+                         <?php
+                        if (!empty($data4[shade])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  ">Shade</div>
@@ -658,8 +658,8 @@
                         <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[star_length])) { 
+                         <?php
+                        if (!empty($data4[star_length])) {
                         ?>
                          <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Star Length</div>
@@ -668,8 +668,8 @@
                          <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[center_inclusion])) { 
+                         <?php
+                        if (!empty($data4[center_inclusion])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Center Inclusion</div>
@@ -678,8 +678,8 @@
                          <?php
                         }
                         ?>
-                        <?php   
-                        if (!empty($data4[black_inclusion])) { 
+                        <?php
+                        if (!empty($data4[black_inclusion])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Black Inclusion</div>
@@ -688,11 +688,11 @@
                          <?php
                         }
                         ?>
-                        
-                        
-                        
-                        <?php   
-                        if (!empty($data4[milky])) { 
+
+
+
+                        <?php
+                        if (!empty($data4[milky])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  ">Milky</div>
@@ -701,8 +701,8 @@
                         <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[member_comment])) { 
+                         <?php
+                        if (!empty($data4[member_comment])) {
                         ?>
                          <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Member Comment</div>
@@ -711,8 +711,8 @@
                          <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[report_date])) { 
+                         <?php
+                        if (!empty($data4[report_date])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Report Date</div>
@@ -721,8 +721,8 @@
                          <?php
                         }
                         ?>
-                        <?php   
-                        if (!empty($data4[report_type])) { 
+                        <?php
+                        if (!empty($data4[report_type])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Report Type</div>
@@ -731,12 +731,12 @@
                          <?php
                         }
                         ?>
-                        
-                        
-                        
-                         
-                        <?php   
-                        if (!empty($data4[lab_location])) { 
+
+
+
+
+                        <?php
+                        if (!empty($data4[lab_location])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  ">Lab Location</div>
@@ -745,8 +745,8 @@
                         <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[brand])) { 
+                         <?php
+                        if (!empty($data4[brand])) {
                         ?>
                          <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Brand</div>
@@ -755,8 +755,8 @@
                          <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[product_details])) { 
+                         <?php
+                        if (!empty($data4[product_details])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Product Details</div>
@@ -765,8 +765,8 @@
                          <?php
                         }
                         ?>
-                        <?php   
-                        if (!empty($data4[quantity])) { 
+                        <?php
+                        if (!empty($data4[quantity])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Quantity</div>
@@ -775,10 +775,10 @@
                          <?php
                         }
                         ?>
-                        
-                        
-                         <?php   
-                        if (!empty($data4[metal_color])) { 
+
+
+                         <?php
+                        if (!empty($data4[metal_color])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  ">Metal Color</div>
@@ -787,8 +787,8 @@
                         <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[net_weight])) { 
+                         <?php
+                        if (!empty($data4[net_weight])) {
                         ?>
                          <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Net Weight</div>
@@ -797,8 +797,8 @@
                          <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[metal_amount])) { 
+                         <?php
+                        if (!empty($data4[metal_amount])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Metal Amount</div>
@@ -807,8 +807,8 @@
                          <?php
                         }
                         ?>
-                        <?php   
-                        if (!empty($data4[color_stone_value])) { 
+                        <?php
+                        if (!empty($data4[color_stone_value])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Color Stone Value</div>
@@ -817,11 +817,11 @@
                          <?php
                         }
                         ?>
-                        
-                        
-                        
-                        <?php   
-                        if (!empty($data4[diamonds])) { 
+
+
+
+                        <?php
+                        if (!empty($data4[diamonds])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  ">Diamonds</div>
@@ -830,8 +830,8 @@
                         <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[no_of_diamonds])) { 
+                         <?php
+                        if (!empty($data4[no_of_diamonds])) {
                         ?>
                          <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">No Of Diamonds</div>
@@ -840,8 +840,8 @@
                          <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[value_of_diamonds])) { 
+                         <?php
+                        if (!empty($data4[value_of_diamonds])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Value Of Diamonds</div>
@@ -850,8 +850,8 @@
                          <?php
                         }
                         ?>
-                        <?php   
-                        if (!empty($data4[labour_charge])) { 
+                        <?php
+                        if (!empty($data4[labour_charge])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Labour Charge</div>
@@ -860,12 +860,12 @@
                          <?php
                         }
                         ?>
-                        
-                        
-                        
-                        
-                        <?php   
-                        if (!empty($data4[other])) { 
+
+
+
+
+                        <?php
+                        if (!empty($data4[other])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR">
                             <div class="infoLabel fmOpenB  ">Other</div>
@@ -874,8 +874,8 @@
                         <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[hallmark])) { 
+                         <?php
+                        if (!empty($data4[hallmark])) {
                         ?>
                          <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Hallmark</div>
@@ -884,8 +884,8 @@
                          <?php
                         }
                         ?>
-                         <?php   
-                        if (!empty($data4[collection_name])) { 
+                         <?php
+                        if (!empty($data4[collection_name])) {
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB  fmOpenB">Collection Name</div>
@@ -894,9 +894,9 @@
                          <?php
                         }
                         ?>
-                       
-                        
-                        
+
+
+
                     </div>
                 </div>
             </div>
@@ -1044,7 +1044,7 @@
                     {
                     if($data['attr_details']['shape'] == ucwords(strtolower($key)))
                     {
-                    ?>      
+                    ?>
                     <div class="prdInfoDiv fLeft shapesPage2 ">
                         <div class="shapesCommH fLeft">
                             <div class="<?=ucwords(strtolower($key));?> shapeComm"></div>
@@ -1208,11 +1208,11 @@
                         <div class="prdInfoTitle fLeft"><?php echo 'Clarity - '.$data['attr_details']['clarity'];?></div>
                         <div class="prdInfoDiv fLeft">
                             <span class="fmOpenB">
-                                <?php 
+                                <?php
                                 echo $des[$data['attr_details']['clarity']]['describe_display_name'].': ';
                                 ?>
                             </span>
-                            <?php 
+                            <?php
                             print_r($des[$data['attr_details']['clarity']]['describe_text']);
                             ?>
                         </div>
@@ -1240,7 +1240,7 @@
                     }
                     ?>
                 </div>
-                <?php          
+                <?php
                 if($sugTotal > 0)
                 {
                 ?>
@@ -1270,7 +1270,7 @@
                             {
                             if($tempUrl !== '')
                             {
-                            $tempUrl .= '-colour-'.$data3[$key]['color']; 
+                            $tempUrl .= '-colour-'.$data3[$key]['color'];
                             }
                             else
                             {
@@ -1281,7 +1281,7 @@
                             {
                             if($tempUrl !== '')
                             {
-                            $tempUrl .= '-clarity-'.$data3[$key]['clarity']; 
+                            $tempUrl .= '-clarity-'.$data3[$key]['clarity'];
                             }
                             else
                             {
@@ -1291,7 +1291,7 @@
                             if(!empty($data3[$key]['certified'])){
                             if($tempUrl !== '')
                             {
-                            $tempUrl .= '-certified-'.$data3[$key]['certified']; 
+                            $tempUrl .= '-certified-'.$data3[$key]['certified'];
                             }
                             else
                             {
@@ -1303,7 +1303,7 @@
                             {
                             ?>
                             <a href="<?php echo DOMAIN . $tempUrl;?>/did-<?php echo $data3[$key]['pid']; ?>">
-                                <?php                                                    
+                                <?php
                                 }
                                 else
                                 {
@@ -1352,11 +1352,11 @@
                                             ?>
                                             <div class="detValue fmOpenB fLeft">
                                                 <span class="rupeeImg"></span>
-                                                <?php 
+                                                <?php
                                                 $price = ceil($data3[$key]['price']* $rate*$data3[$key]['carat']);
                                                 echo $price = $comm->IND_money_format($price);
                                                 ?>
-                                               
+
                                             </div>
                                         </div>
                                     </div>
@@ -1366,19 +1366,19 @@
                                     if(!empty($tempUrl))
                                     {
                                     ?>
-                                    <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $data3[$key]['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                    <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                    <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                    <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                    <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $data3[$key]['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
+                                    <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
+                                    <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
+                                    <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
                                     <?php
                                     }
                                     else
                                     {
                                     ?>
-                                    <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                    <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                    <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                    <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                    <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
+                                    <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
+                                    <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
+                                    <a href="<?php echo DOMAIN . $data3[$key]['shape']; ?>/did-<?php echo $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
                                     <?php
                                     }
                                     ?>

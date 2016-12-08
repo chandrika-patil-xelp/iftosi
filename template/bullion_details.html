@@ -11,11 +11,11 @@
                     {
                     ?>
                     <div class="imgsCont noImage"></div>
-                    <?php                    
+                    <?php
                     }
                     else
                     {
-                    ?>                    
+                    ?>
                     <div id="detailsImgs" class="imgsCont">
                         <?php
                         /*
@@ -32,7 +32,7 @@
                             </div>
                             <?php
                             }
-                            ?>                                
+                            ?>
                         </div>
                     </div>
                     */
@@ -41,7 +41,7 @@
                 </div>
                 <?php
                 }
-                ?>                    
+                ?>
                 <div class="detCont">
                     <div class="btnsCont fLeft">
                         <div class="prdShape fLeft">
@@ -49,9 +49,9 @@
                             <?php
                             if(empty($prdInfo['attr_details']['silver_rate']) || $prdInfo['attr_details']['silver_rate'] == "0.00")
                             {
-                            $prdInfo['attr_details']['silver_rate'] = silverRate; 
+                            $prdInfo['attr_details']['silver_rate'] = silverRate;
                             }
-                            if(empty($prdInfo['attr_details']['gold_rate']) || $prdInfo['attr_details']['gold_rate']== "0.00") 
+                            if(empty($prdInfo['attr_details']['gold_rate']) || $prdInfo['attr_details']['gold_rate']== "0.00")
                             {
                             $prdInfo['attr_details']['gold_rate'] = goldRate;
                             }
@@ -64,14 +64,14 @@
                             $metal_rate=($metal_rate/10)*($prdInfo['attr_details']['gold_purity']/995);
                             }
                             else if($pro_metal=='silver')
-                            { 
+                            {
                             $metal_rate=$prdInfo['attr_details']['silver_rate'];
-                            $metal_rate=($metal_rate/1000)*($prdInfo['attr_details']['gold_purity']/999); 
+                            $metal_rate=($metal_rate/1000)*($prdInfo['attr_details']['gold_purity']/999);
                             }
                             ?>
                             <div class="prdShType fLeft fmOpenL"><span class="fLeft rupeeImg"></span><?php
                                 $price = ceil(($prdInfo['attr_details']['gold_weight']*$metal_rate));
-                                echo $comm->IND_money_format($price);    
+                                echo $comm->IND_money_format($price);
                                 ?>
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                             <div class="infoValue c666 fmOpenR font25"><?php echo $prdInfo['attr_details']['bullion_design']; ?></div>
                         </div>
                         <?php
-                        }   
+                        }
                         if(!empty($prdInfo['product_barcode']))
                         {
                         ?>
@@ -112,7 +112,7 @@
                             <div class="infoValue c666 fmOpenR font25"><?php echo $prdInfo['product_barcode']; ?></div>
                         </div>
                         <?php
-                        }   
+                        }
                         ?>
                         <div class="infoCommn fLeft fmOpenR ">
                             <div class="infoLabel fmOpenB font12 fmOpenB">GOLD WEIGHT</div>
@@ -128,7 +128,7 @@
                             }
                             else
                             {
-                            $gweights = number_format($prdInfo['attr_details']['gold_weight'],0).' GMS'; 
+                            $gweights = number_format($prdInfo['attr_details']['gold_weight'],0).' GMS';
                             }
                             ?>
                             <div class="infoValue c666 fmOpenR font25"><?php echo $gweights; ?></div>
@@ -142,10 +142,10 @@
                 <div class="vdLeftCard fLeft">
                     <div class="orgName fLeft fmOpenR"><?php echo $vndrDtls['OrganisationName']; ?></div>
                     <div class="orgAdd fLeft fmOpenR">
-                        <?php echo trim($vndrAddr[0].', ',','); 
+                        <?php echo trim($vndrAddr[0].', ',',');
                         if(!empty($vndrAddr[1]))
                         {
-                        echo trim($vndrAddr[1].', ','-,'); 
+                        echo trim($vndrAddr[1].', ','-,');
                         }
                         if(!empty($vndrAddr[2]))
                         {
@@ -153,7 +153,7 @@
                         }
                         if(!empty($vndrAddr[3]))
                         {
-                        echo trim($vndrAddr[3].', ','-,'); 
+                        echo trim($vndrAddr[3].', ','-,');
                         }
                         if(!empty($vndrAddr[4]))
                         {
@@ -352,7 +352,7 @@
                             <div class='prdPrice fLeft'>
                                 <div class="detComm">
                                     <div class="detLabel fmOpenB fLeft">PRICE</div>
-                                    <?php 
+                                    <?php
                                     if($data3[$key]['metal'] == 'Gold')
                                     {
                                     if(empty($data3[$key]['vendor_rates']['gold_rate']))
@@ -365,17 +365,17 @@
                                     {
                                     if(empty($data3[$key]['vendor_rates']['silver_rate']))
                                     {
-                                    $data3[$key]['vendor_rates'] = silverRate; 
+                                    $data3[$key]['vendor_rates'] = silverRate;
                                     }
                                     $metal_rate = ($data3[$key]['vendor_rates']['silver_rate']/1000)*($data3[$key]['gold_purity']/999);
                                     }
                                     ?>
-                                    <div class="detValue fmOpenB fLeft"><span class='fLeft rupeeImg'></span>                                       
+                                    <div class="detValue fmOpenB fLeft"><span class='fLeft rupeeImg'></span>
                                         <?php
                                         $price = ceil(($data3[$key]['gold_weight']*$metal_rate));
                                         echo $comm->IND_money_format($price);
                                         ?>
-                                    
+
                                     </div>
 
 
@@ -383,10 +383,10 @@
                             </div>
                         </a>
                         <div class='prdActions fLeft'>
-                            <a href="<?php echo DOMAIN . strtolower($data3[$key]['metal']) . '-' . strtolower($data3[$key]['type']) . '-' . $data3[$key]['gold_purity']. '-' . round($data3[$key]['gold_weight']); ?>-grams/bid-<?php echo $data3[$key]['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
-                            <a href="<?php echo DOMAIN . strtolower($data3[$key]['metal']) . '-' . strtolower($data3[$key]['type']) . '-' . $data3[$key]['gold_purity']. '-' . round($data3[$key]['gold_weight']); ?>-grams/bid-<?php echo $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
-                            <a href="<?php echo DOMAIN . strtolower($data3[$key]['metal']) . '-' . strtolower($data3[$key]['type']) . '-' . $data3[$key]['gold_purity']. '-' . round($data3[$key]['gold_weight']); ?>-grams/bid-<?php echo $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
-                            <a href="<?php echo DOMAIN . strtolower($data3[$key]['metal']) . '-' . strtolower($data3[$key]['type']) . '-' . $data3[$key]['gold_purity']. '-' . round($data3[$key]['gold_weight']); ?>-grams/bid-<?php echo $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+                            <a href="<?php echo DOMAIN . strtolower($data3[$key]['metal']) . '-' . strtolower($data3[$key]['type']) . '-' . $data3[$key]['gold_purity']. '-' . round($data3[$key]['gold_weight']); ?>-grams/bid-<?php echo $data3[$key]['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
+                            <a href="<?php echo DOMAIN . strtolower($data3[$key]['metal']) . '-' . strtolower($data3[$key]['type']) . '-' . $data3[$key]['gold_purity']. '-' . round($data3[$key]['gold_weight']); ?>-grams/bid-<?php echo $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
+                            <a href="<?php echo DOMAIN . strtolower($data3[$key]['metal']) . '-' . strtolower($data3[$key]['type']) . '-' . $data3[$key]['gold_purity']. '-' . round($data3[$key]['gold_weight']); ?>-grams/bid-<?php echo $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
+                            <a href="<?php echo DOMAIN . strtolower($data3[$key]['metal']) . '-' . strtolower($data3[$key]['type']) . '-' . $data3[$key]['gold_purity']. '-' . round($data3[$key]['gold_weight']); ?>-grams/bid-<?php echo $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
                         </div>
                     </div>
                 </div>
@@ -413,12 +413,12 @@
                 <input type="text" id="ur_mobile" name="ur_mobile" autocomplete="off" maxlength="10" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeypress="return common.isNumberKey(event);" onkeyup="isValidMKey(event, this.id);" >
                 <label for="ur_mobile" class="inp-label transition100">MOBILE</label>
                 <div id="ur_mobile_inpText" class="inpText fRight transition300">enter<br>mobile number</div>
-            </div> 
+            </div>
             <div class="inputCont fLeft fmOpenR">
                 <input type="text" id="ur_name" name="ur_name" autocomplete="false"  class="txtInput cOrange fmOpenR font14 nameIcon">
                 <label for="ur_name" class="inp-label transition100">NAME</label>
                 <div id="ur_name_inpText" class="inpText fRight transition300">enter<br>your name</div>
-            </div> 
+            </div>
             <div class="inputCont fLeft fmOpenR asStngClss">
                 <input type="text" id="ur_city" name="ur_city" autocomplete="false"  class="txtInput cOrange fmOpenR font14 areaIcon " onkeyup="changeHIdVal();">
                 <label for="ur_city" class="inp-label transition100">CITY</label>
@@ -431,7 +431,7 @@
                 <input type="text" id="ur_email" name="ur_email" autocomplete="false" class="txtInput cOrange fmOpenR font14 emailIcon">
                 <label for="ur_email" class="inp-label transition100">EMAIL</label>
                 <div id="ur_email_inpText" class="inpText fRight transition300">enter<br>your email</div>
-            </div> 
+            </div>
             <div class="cancelLgBtn fLeft fmOpenR" id='userCancel'> CANCEL</div>
             <div class="loginBtn fLeft fmOpenR" id='userSubmit'  onclick="showVendorDetails()">SUBMIT</div>
         </div>
@@ -442,8 +442,8 @@
         <?php include 'footer.html'; ?>
     </div>
 </div>
-<?php include 'logo.html'; ?>    
-<?php include 'leftmenu.html'; ?>    
+<?php include 'logo.html'; ?>
+<?php include 'leftmenu.html'; ?>
 <div id='imgGallery' class="imgGallery dn">
     <div id='galleryClose' class="galleryClose ripplelink"></div>
     <div class="galleryImg fLeft" style="background: url(<?php echo DOMAIN; ?>image-upload/<?=$data1[0];?>) 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
@@ -476,7 +476,7 @@
         <input type="text" id="pr_otp" name="pr_otp" autocomplete="off" maxlength="6" class="txtInput cOrange fmOpenR font14 mobileIcon" onkeypress="return common.isNumberKey(event);" style="padding-right: 80px">
         <span onclick="otpGo();" class="resendOTP">RESEND</span>
         <label for="pr_otp" class="inp-label transition100">OTP</label>
-    </div>  
+    </div>
     <div class="cancelLgBtn fLeft fmOpenR" id="otpCancel" onclick="closeOtpForm();">CANCEL</div>
     <div class="loginBtn fLeft fmOpenR" id="otpSubmit" onclick="otpCheck();">Submit</div>
 </div>
