@@ -171,7 +171,7 @@
 
                                             <div id="<?=$data[$key]['pid'];?>_imgs" class="prdCommImg fLeft">
                                                 <div class="imgLoader" id="imgLdr"></div>
-                                                <?php 
+                                                <?php
                                                 $imgCount = count($data[$key]['images']);
                                                 if($imgCount > 0)
                                                 {
@@ -330,7 +330,7 @@
                                             <div class="prdDetails fLeft">
                                                 <div class="detComm">
                                                     <div class="detLabel fmOpenB fLeft">DESIGN NO.</div>
-                                                    <div class="detValue fmOpenR fLeft"><?php echo $val['pcode'];?></div>
+                                                    <div class="detValue fmOpenR fLeft txtOver"><?php echo $val['pcode'];?></div>
                                                 </div>
                                             </div>
                                             <div class='prdPrice fLeft'>
@@ -350,19 +350,19 @@
                                             if(!empty($tempUrl))
                                             {
                                             ?>
-                                            <a href="<?php echo DOMAIN.$tempUrl . '/jid-' . $val['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                            <a href="<?php echo DOMAIN.$tempUrl . '/jid-' . $val['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                            <a href="<?php echo DOMAIN.$tempUrl . '/jid-' . $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                            <a href="<?php echo DOMAIN.$tempUrl . '/jid-' . $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                            <a href="<?php echo DOMAIN.$tempUrl . '/jid-' . $val['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
+                                            <a href="<?php echo DOMAIN.$tempUrl . '/jid-' . $val['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
+                                            <a href="<?php echo DOMAIN.$tempUrl . '/jid-' . $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
+                                            <a href="<?php echo DOMAIN.$tempUrl . '/jid-' . $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
                                             <?php
                                             }
                                             else
                                             {
                                             ?>
-                                            <a href="<?php echo DOMAIN.$val['attributes']['certified'] . '/jid-' . $val['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                            <a href="<?php echo DOMAIN.$val['attributes']['certified'] . '/jid-' . $val['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                            <a href="<?php echo DOMAIN.$val['attributes']['certified'] . '/jid-' . $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink'></a>
-                                            <a href="<?php echo DOMAIN.$val['attributes']['certified'] . '/jid-' . $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink'></a>
+                                            <a href="<?php echo DOMAIN.$val['attributes']['certified'] . '/jid-' . $val['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
+                                            <a href="<?php echo DOMAIN.$val['attributes']['certified'] . '/jid-' . $val['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
+                                            <a href="<?php echo DOMAIN.$val['attributes']['certified'] . '/jid-' . $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
+                                            <a href="<?php echo DOMAIN.$val['attributes']['certified'] . '/jid-' . $val['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
                                             <?php
                                             }
                                             ?>
