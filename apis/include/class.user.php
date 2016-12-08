@@ -1134,6 +1134,7 @@
             {
                     $subject  = "IFtoSI Password Change Request";
                     $message=$this->forgotPwdTemplate($uname,$urlkey);
+                    //print_r($message);die;
                     $headers  = "Content-type:text/html;charset=UTF-8" . "<br/><br/>";
                     $headers .= 'From: info@iftosi.com' . "<br/><br/>";
                     $mail = mail($row['email'], $subject, $message, $headers);
