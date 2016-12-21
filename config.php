@@ -19,7 +19,7 @@ if(stristr($_SERVER['HTTP_HOST'],'demo.iftosi.com'))
 	define('IMGDOMAIN','http://'.$_SERVER['HTTP_HOST'].'/image-upload/');
 	define('IMGUPLOAD','http://'.$_SERVER['HTTP_HOST'].'/upload-image/');
 	define('IMGPATH','image-upload/');
-	define('MINIFIED','');
+	define('MINIFIED','.min');
 }
 else if(stristr($_SERVER['HTTP_HOST'],'iftosi.com') && stristr(REQURI, 'beta'))
 {
@@ -32,7 +32,7 @@ else if(stristr($_SERVER['HTTP_HOST'],'iftosi.com') && stristr(REQURI, 'beta'))
 	define('IMGDOMAIN','http://'.$_SERVER['HTTP_HOST'].'/beta/image-upload/');
 	define('IMGUPLOAD','http://'.$_SERVER['HTTP_HOST'].'/beta/upload-image/');
 	define('IMGPATH','image-upload/');
-	define('MINIFIED','');
+	define('MINIFIED','.min');
 }
 else if(stristr($_SERVER['HTTP_HOST'],'iftosi.com'))
 {
