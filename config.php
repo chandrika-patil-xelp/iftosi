@@ -171,7 +171,7 @@ $jvs['signup'] 		= DOMAIN.'tools/js/signup'.MINIFIED.'.js?v='.VERSION;
 $jvs['filter'] 		= DOMAIN.'tools/js/filters'.MINIFIED.'.js?v='.VERSION;
 $jvs['dmap'] 		= DOMAIN.'tools/js/detailsMap'.MINIFIED.'.js?v='.VERSION;
 $jvs['vendorDetails'] 	= DOMAIN.'tools/js/cms/page/vendorDetails'.MINIFIED.'.js?v='.VERSION;
-$jvs['vendorLanding'] 	= DOMAIN.'tools/js/cms/vendor_landing'.MINIFIED.'.js?v='.VERSION;
+$jvs['vendorLanding'] 	= DOMAIN.'tools/js/cms/vendor_landing.js?v='.VERSION;
 $jvs['pForm']    	= DOMAIN.'tools/js/pForm'.MINIFIED.'.js?v='.VERSION;
 $jvs['cmsCommon'] 	= DOMAIN.'tools/js/cms/Common'.MINIFIED.'.js?v='.VERSION;
 $jvs['vendor_Product'] 	= DOMAIN.'tools/js/cms/page/vendorProductListings'.MINIFIED.'.js?v='.VERSION;
