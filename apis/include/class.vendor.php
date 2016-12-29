@@ -2185,10 +2185,10 @@ class vendor extends DB
                               $polkiValue = floatval($value[9])*floatval($value[10]);
                           }
 
-                          if($value[5] == 'Gold' && empty($value[26]) && !empty($value[31]))
-                          {
-                              $value[26] = floatval($value[31])/floatval($value[30]);
-                          }
+//                          if($value[5] == 'Gold' && empty($value[26]) && !empty($value[31]))
+//                          {
+//                              $value[26] = floatval($value[31])/floatval($value[30]);
+//                          }
 
                           $value[13] = $value[13].'-'.$value[14];
                           $value[15] = $value[15].'-'.$value[16].'-'.$value[17];
@@ -4166,7 +4166,7 @@ class vendor extends DB
                     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                     $headers .= 'From: <info@iftosi.com>' . "\r\n";
 
-                    $smsText .= "Vendor profile deactivation in IFtoSI";
+                    $smsText .= "Jeweller profile deactivation in IFtoSI";
                     $smsText .= "\r\n\r\n";
                     $smsText .= "Dear ".urldecode($rowData[user_name]).", Your Profile has been deactivated.For more information contact admin.";
                     $smsText .= "\r\n\r\n";
@@ -4215,7 +4215,7 @@ class vendor extends DB
                                 <div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;">
                                 <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="'.DOMAIN.'tools/img/iftosi.png" style="width:100%;"></div></a>
                                 <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
-                                <div  style="font-size: 20px; padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">vendor profile deactivation</div>
+                                <div  style="font-size: 20px; padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">Jeweller profile deactivation</div>
                                 <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;padding: 20px 0 20px 0;"><img src="'.DOMAIN.'tools/img/common/Deactivation.png" style="width:50px;"></div></a>
                                 <center style="padding: 0px 50px 0px 50px;line-height: 30px;    font-size: 23px;    padding-top: 30px;    font-weight: 100;    color: #333;">
                                     <div style="font-size: 20px; padding: 50px 10px 7px 10px;color:#333;">Dear '.$params['user_name'].'</div>
