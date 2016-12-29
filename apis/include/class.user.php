@@ -1208,13 +1208,14 @@
                 <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
                 <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
                 </center>
-                <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241/42" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
+                <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241/42" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;">91-22-41222241 (42)</a> | Email: <b>info@iftosi.com</b></div>
                 </div>
                 <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
                 </div>
                 </center>
                 </body>
                 </html>';
+        
         return $message;
         }
         public function changePwd($params)
@@ -1588,7 +1589,7 @@
                         <head>
                             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
                             <meta name="viewport" content="width=device-width, user-scalable=no" >
-                            <title>vendorwelcome</title>
+                            <title>jeweller welcome</title>
                         </head>
                         <body style="margin:0; padding: 0; background-color: #171334;">
                             <center>
@@ -1662,7 +1663,7 @@
                                 <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
                                 <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
                                 </center>
-                                <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:022-32623263" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
+                                <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:022-32623263" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none;">91-22-41222241 (42)</a> | Email: <b>info@iftosi.com</b></div>
                                 </div>
                                 <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
                                 </div>
@@ -1699,7 +1700,7 @@
                        <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
                        <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
                        </center>
-                       <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241/42" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
+                       <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241/42" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;">91-22-41222241 (42)</a> | Email: <b>info@iftosi.com</b></div>
                        </div>
                        <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
                        </div>
@@ -1831,7 +1832,7 @@
                        <head>
                        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
                        <meta name="viewport" content="width=device-width, user-scalable=no" >
-                       <title>vendorActivate</title>
+                       <title>jeweller Activate</title>
                        </head>
                        <body style="margin:0; padding: 0; background-color: #171334;">
                        <center>
@@ -1855,7 +1856,7 @@
                         <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
                         <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
                        </center>
-                       <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241/42" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
+                       <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241/42" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none;">91-22-41222241 (42)</a> | Email: <b>info@iftosi.com</b></div>
                        </div>
                        <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
                        </div>
@@ -1918,7 +1919,7 @@
                       <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
                       <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
                       </center>
-                      <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241/42" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; ">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
+                      <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241/42" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; ">91-22-41222241 (42)</a> | Email: <b>info@iftosi.com</b></div>
                       </div>
                       <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
                       </div>

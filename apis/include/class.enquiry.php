@@ -341,7 +341,7 @@ class enquiry extends DB
         $message .='<img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">';
         $message .='<img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">';
         $message.='</center>';
-        $message.='<div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241/42" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>';
+        $message.='<div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241/42" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none; letter-spacing: 0.02em;">91-22-41222241 (42)</a> | Email: <b>info@iftosi.com</b></div>';
         $message.='</div>';
         $message.='<div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>';
         $message.='</div>';

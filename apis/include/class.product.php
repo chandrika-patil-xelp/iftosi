@@ -3282,7 +3282,7 @@
                                                         <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
                                                         <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
                                                     </center>
-                                                    <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 40px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:022-32623263" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
+                                                    <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 40px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:022-32623263" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none;">91-22-41222241 (42)</a> | Email: <b>info@iftosi.com</b></div>
                                                 </div>
                                                 <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
                                             </div>
