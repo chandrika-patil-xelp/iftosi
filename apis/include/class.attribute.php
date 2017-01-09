@@ -243,6 +243,7 @@ class attribute extends DB
             if(count($allId))
                 $allpids = implode(',',$allId);
         }
+        
 
         if($allpids)
         {
@@ -259,6 +260,7 @@ class attribute extends DB
                 $row = $this->fetchData($res);
                 $priceminval = floor($row['minval']);
                 $pricemaxval = ceil($row['maxval']);
+               
             }
 
             $sql = "SELECT
@@ -306,6 +308,7 @@ class attribute extends DB
         				$i++;
             }
             $atribs=implode(',',$attrid);
+            
             $attrsql="SELECT
                                 attr_id,
                                 attr_name,
@@ -331,7 +334,7 @@ class attribute extends DB
                     $attrs['attribute_values']      = $attributeMap[$row1['attr_id']]['attr_values'];
                     $attrs['attribute_range']       = $attributeMap[$row1['attr_id']]['attr_range'];
                     $attrs['attribute_display_type']= $attributeMap[$row1['attr_id']]['display_type'];
-
+                    
                     if($row1['attr_type_flag'] == 6)
                     {
                         $qryid="SELECT group_concat(product_id) as prids
@@ -411,21 +414,24 @@ class attribute extends DB
                         {
                            
                             $rowrng = $this->fetchData($resrng);
-                            if($priceminval && $pricemaxval && $row1['attr_name'] == 'price')
+                           
+                            
+                            if($pricemaxval && $row1['attr_name'] == 'price')
                             {   
                                 $maxvl = $pricemaxval;
                                 $minvl = $priceminval;
                             }
-                            if($priceminval && $pricemaxval && $row1['attr_name'] == 'price' && $params['catid'] == '10000')
+                            if($pricemaxval && $row1['attr_name'] == 'price' && $params['catid'] == '10000')
                             {
                               $maxvl = round($rowrng['maxval'],2);
                               $minvl = round($rowrng['minval'],2);
                             }
-                            if($caratmaxval && $row1['attr_name'] == 'carat' && $params['catid'] == '10000')
+                            if($row1['attr_name'] == 'carat' && $params['catid'] == '10000')
                             {
                                 $maxvl = $rowrng['maxval'];
                                 $minvl = $rowrng['minval'];
                             }
+                          
                           /*  if($priceminval && $pricemaxval && $row1['attr_name'] == 'price' && $params['catid'] == '10003' || $params['catid'] == '10004'|| $params['catid'] == '10005' || $params['catid'] == '10006' || $params['catid'] == '10007'  || $params['catid'] == '100040' || $params['catid'] == '100041' || $params['catid'] == '100042')
                             {
                                 $maxvl = $pricemaxval;
@@ -433,6 +439,7 @@ class attribute extends DB
                             }*/
                                 
                                 $attrs['attribute_range'] = $minvl.'-'.$maxvl;
+                                
                         }
                     }
                   
