@@ -740,9 +740,12 @@
         $res = $this->query($sql);
         $cnt = $this->numRows($res);
         $flag = true;
-        if ($cnt) {
-            while ($row = $this->fetchData($res)) {
-                if (strtolower($row['product_image']) == strtolower($img)) {
+        if($cnt)
+        {
+            while ($row = $this->fetchData($res))
+            {
+                if (strtolower($row['product_image']) == strtolower($img))
+                {
                     $err = array('errCode' => 1, 'errMsg' => 'No results updated');
                     $flag = false;
                 }
@@ -834,34 +837,34 @@
                         {
                             $row = $this->fetchData($prdRes);
                             if($row['vendor_id'] == $vid)
-                            {    
+                            {
                                 $extn = " AND active_flag not in (2) ";
                             }
                         }
-                     
+
 
 
                         $sql = "SELECT product_image,active_flag FROM tbl_product_image_mapping WHERE product_id = ".$pid." ".$extn." ORDER BY image_sequence ASC";
                         $res = $this->query($sql);
                         if($res)
                         {       if($status==2)
-                                {  
+                                {
                                     while($row = $this->fetchData($res))
                                     {
-                                        
-                                        
+
+
                                            $temp['status'] = $row['active_flag'];
                                            $temp['product_image']=$row['product_image'];
                                            $arr[] = $temp;
                                     }
                                 }
-                                else 
+                                else
                                 {
                                     while($row = $this->fetchData($res))
                                     {
                                         $arr[] = $row['product_image'];
                                     }
-     
+
                                 }
                         }
 
@@ -973,11 +976,11 @@
         }
 
         public function getPrdByCatid($params)
-        {           
+        {
       			$page   = ($params['page'] ? $params['page'] : 1);
       			$limit  = ($params['limit'] ? $params['limit'] : 15);
       			if($params['uid'])
-      			{        
+      			{
       				$page   = ($params['page'] ? $params['page'] : 1);
       				$limit  = ($params['limit'] ? $params['limit'] : 16);
 
@@ -1944,11 +1947,10 @@
                         product_id=".$params['prdid']."
                     AND
                         active_flag <> 2";
-            
+
 
             $res =  $this->query($sql);
             $res2 = $this->query($sql2);
-
 
             if ($res)
             {
@@ -1968,7 +1970,7 @@
                     }
                 }
                $pid=implode(',',$prid);
-               
+
 
                 $sql3="SELECT
 							product_id,
@@ -1989,7 +1991,7 @@
 							vendor_id ASC";
 
                 $res3=$this->query($sql3);
-                                                                        
+
                 while($row3=$this->fetchData($res3))
                 {
                     $vid[]=$row3['vendor_id'];
@@ -2120,76 +2122,76 @@
             return $result;
         }
 
-        
+
         public function getPrdMoreInfo($params)
         {
                     $pid   = ($params['prdid'] ? $params['prdid'] : 1);
-                    
+
                     if($pid)
                     {
-                        $sql="SELECT 
+                        $sql="SELECT
                                                       product_id,
                                                       availability,
                                                       fluorescence_intensity,
                                                       fluorescence_color,
                                                       treatment,
-                                                      rapnet_price,                 
-                                                      rapnet_discount_percent,            
-                                                      cash_price,                   
-                                                      cash_price_discount_percent,  
-                                                      fancy_color,                 
-                                                      fancy_color_intensity,  
+                                                      rapnet_price,
+                                                      rapnet_discount_percent,
+                                                      cash_price,
+                                                      cash_price_discount_percent,
+                                                      fancy_color,
+                                                      fancy_color_intensity,
                                                       fancy_color_overtone,
-                                                      depth_percent,                
-                                                      girdle_thin,                  
-                                                      girdle_thick,                 
+                                                      depth_percent,
+                                                      girdle_thin,
+                                                      girdle_thick,
                                                       girdle_percent,
-                                                      girdle_condition,             
-                                                      culet_size,                   
-                                                      culet_condition,              
-                                                      laser_inscription,            
-                                                      certified,                    
-                                                      country,                      
-                                                      state,                        
-                                                      city,                         
-                                                      matched_pair,                 
-                                                      pair_stock,                   
-                                                      allow_raplink_feed,           
-                                                      parcel_stones,                
-                                                      report_filename,              
-                                                      diamond_image,                
-                                                      sarine_loupe,                 
-                                                      trade_show,                   
-                                                      key_to_symbols,               
-                                                      shade,                        
-                                                      star_length,                  
-                                                      center_inclusion,             
-                                                      black_inclusion,              
-                                                      milky,                        
-                                                      member_comment,               
-                                                      report_date,                  
-                                                      report_type,                  
-                                                      lab_location,                 
-                                                      brand,                        
-                                                      product_details,              
-                                                      quantity,                     
-                                                      metal_color,                  
-                                                      net_weight,                   
-                                                      metal_amount,                 
-                                                      color_stone_value,            
-                                                      diamonds,                     
-                                                      no_of_diamonds,               
-                                                      value_of_diamonds,            
-                                                      labour_charge,                
-                                                      other,                        
-                                                      hallmark ,                    
-                                                      collection_name 
+                                                      girdle_condition,
+                                                      culet_size,
+                                                      culet_condition,
+                                                      laser_inscription,
+                                                      certified,
+                                                      country,
+                                                      state,
+                                                      city,
+                                                      matched_pair,
+                                                      pair_stock,
+                                                      allow_raplink_feed,
+                                                      parcel_stones,
+                                                      report_filename,
+                                                      diamond_image,
+                                                      sarine_loupe,
+                                                      trade_show,
+                                                      key_to_symbols,
+                                                      shade,
+                                                      star_length,
+                                                      center_inclusion,
+                                                      black_inclusion,
+                                                      milky,
+                                                      member_comment,
+                                                      report_date,
+                                                      report_type,
+                                                      lab_location,
+                                                      brand,
+                                                      product_details,
+                                                      quantity,
+                                                      metal_color,
+                                                      net_weight,
+                                                      metal_amount,
+                                                      color_stone_value,
+                                                      diamonds,
+                                                      no_of_diamonds,
+                                                      value_of_diamonds,
+                                                      labour_charge,
+                                                      other,
+                                                      hallmark ,
+                                                      collection_name
                                     FROM
                                                       tbl_product_more_info
                                     WHERE
-                                                     product_id =".$params['prdid']." 
+                                                     product_id =".$params['prdid']."
                                                       ";
-                        
+
                                 $res=$this->query($sql);
                                 $row = $this->fetchData($res);
                                                     if($row>0)
@@ -2200,26 +2202,26 @@
                                                     else
                                                     {
                                                          $arr=array();
-                                                         $err=array('Code'=>0,'Msg'=>'No Details Found');            
+                                                         $err=array('Code'=>0,'Msg'=>'No Details Found');
                                                     }
 
-                                                    
+
                 }
-                    
-                    
+
+
                 else
                 {
                     $arr=array();
                     $err=array('Code'=>0,'Msg'=>'Error in fetching the data');
                 }
-                    
+
                 $result = array('results' => $arr, 'error' => $err);
                 return $result;
-                
-                
+
+
                 }
-        
-        
+
+
         public function getList($params)
         {
             $total_products = 0;
@@ -2416,7 +2418,7 @@
                                 product_id ASC";
 
              if(!empty($page))
-            {   
+            {
                 $start = ($page * $limit) - $limit;
                 $sql.=" LIMIT " . $start . ",$limit";
             }
@@ -2425,7 +2427,7 @@
 
 
             if($cnt_res2>0)
-            {   
+            {
                 $j=0;
                 while($row2=$this->fetchData($chkres))
                 {
@@ -2506,7 +2508,7 @@
                 {
                     while($row3=$this->fetchData($chkres))
                     {
-                       
+
                         $arr4= $row3;
                     }
 
@@ -2545,7 +2547,7 @@
                                                 attr_display_name
                                    FROM
                                                 tbl_attribute_master
-                                   WHERE 
+                                   WHERE
                                                 attr_id IN(".$aid.") ORDER BY field(attr_id,".$aid.")";
 
                             $res2=$this->query($sql2);
@@ -2882,7 +2884,7 @@
 
             $cnt_res1 = $this->numRows($chkres);
             if($cnt_res1>0)
-            {   
+            {
                 $i=0;
                 while($row1=$this->fetchData($chkres))
                 {
@@ -2991,16 +2993,16 @@
 			$prdid = (!empty($params['prdid'])) ? trim(urldecode($params['prdid'])) : '';
 			$vid = (!empty($params['vid'])) ? trim(urldecode($params['vid'])) : '';
 			$uid = (!empty($params['uid'])) ? trim(urldecode($params['uid'])) : '';
-                        
+
                         if(empty($usrEmail) || empty($usrMobile) || empty($usrName) || empty($prdid))
-			{    
+			{
 				$resp = array();
 				$error = array('Code' => 1, 'Msg' => 'Some parameters are missing');
 				$results = array('results' => $resp, 'error' => $error);
 				return $results;
 			}
 
-			
+
                         $tmp_params = array('prdid' => $prdid);
 			$prdDetails = $this->getPrdById($tmp_params);
 			$prdRes = $prdDetails['results'][$prdid];
@@ -3065,9 +3067,9 @@
 
 				$prdName = $value['product_display_name'];
 			}
-                            
+
                        // $emailContent=$this->sendEnqMailToUser($value);
-                      
+
 			/*$emailContent = "Hello $usrName, Thank you for showing interest in";
 			$emailContent .= "<br/><br/>";
 			if(!empty($prdName))
@@ -3165,7 +3167,7 @@
                                                 <div style="width: 60%;display: inline-block;border-right: 1px solid #f0f0f0;">
                                                     <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Name&nbsp;</div>
                                                     <span style="padding-right: 20px;">:</span>
-                                                    <div style="width: 35%;    display: inline-block; text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$vndrName.'</div>                   
+                                                    <div style="width: 35%;    display: inline-block; text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$vndrName.'</div>
                                                 </div>
                                                 <div style="width: 60%;display: inline-block;">
                                                     <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Address&nbsp;</div>
@@ -3220,9 +3222,9 @@
                                 </center>
                             </body>
                             </html>';*/
-                        
-                        
-                        
+
+
+
                        $emailContent ='<html>
                                         <head>
                                             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -3241,7 +3243,7 @@
                                                     <center style="padding: 0px 30px 20px 30px;box-sizing:border-box;line-height:19px;">
                                                         <div style="width: 100%;display: inline-block;">
                                                             <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Name<span style="padding-left: 20px;">:</span></div>
-                                                            <div style="width: 50%;display: inline-block; text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">'.$vndrName.'</div>                   
+                                                            <div style="width: 50%;display: inline-block; text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">'.$vndrName.'</div>
                                                         </div>
                                                         <div style="width: 100%;display: inline-block;">
                                                             <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Address<span style="padding-left:20px;">:</span></div>
@@ -3276,7 +3278,7 @@
                                                             <div style="width: 50%;display: inline-block;text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">'.$vndrEmail.'</div>
                                                         </div>
                                                     </center>
-                                                    <div class="">The buyer should contact you shortly.</div>
+
                                                     <center style="padding-top:40px;">
                                                         <img src="'.DOMAIN.'tools/img/common/diamond.jpg" width="50">
                                                         <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
@@ -3290,8 +3292,9 @@
                                         </body>
                                         </html>';
 
-                       
+
                         $mailHeaders = "Content-type:text/html;charset=UTF-8" . "\r\n";
+
 			$mailHeaders .= "From: info@iftosi.com \r\n";
 
 			$smsText = "Dear $usrName, Thank you for showing interest in the product you have enquired. The contact details of the Jeweller/Merchant are:";
@@ -3387,7 +3390,7 @@
                                                 <div style="width: 60%;display: inline-block;border-right: 1px solid #f0f0f0;">
                                                     <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Name&nbsp;</div>
                                                     <span style="padding-right: 20px;">:</span>
-                                                    <div style="width: 35%;    display: inline-block; text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$params['OrganisationName'].'</div>                   
+                                                    <div style="width: 35%;    display: inline-block; text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$params['OrganisationName'].'</div>
                                                 </div>
                                                 <div style="width: 60%;display: inline-block;">
                                                     <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Address&nbsp;</div>
