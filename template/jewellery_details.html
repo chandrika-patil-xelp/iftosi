@@ -288,11 +288,32 @@
             if($des[$key]['describe_name'] == "jewellery cert" && !empty($des[$key]['describe_name']))
             {
             ?>
-            <div class="prdInfoTitle fLeft"><?php echo 'What is a '.$des[$key]['describe_display_name'].' ?'; ?></div>
-            <div class="prdInfoDiv fLeft">
+            <div class="fLeft col100 bNone bBtm">
+                <div class="fLeft col50">
+                    <div class="prdInfoTitle fLeft"><?php echo 'What is a '.$des[$key]['describe_display_name'].' ?'; ?></div>
+                    <div class="prdInfoDiv fLeft">
+                        <?php
+                        print_r($des[$key]['describe_text']);
+                        ?>
+                    </div>
+                </div>
                 <?php
-                print_r($des[$key]['describe_text']);
+                }
+                }
+                foreach($des as $key=>$value)
+                {
+                if($des[$key]['describe_name'] == 'hallmark' && !empty($des[$key]['describe_name']))
+                {
+
                 ?>
+                <div class="col50 fRight">
+                    <div class="prdInfoTitle fLeft"><?php echo 'What is a '.$des[$key]['describe_display_name'].' ?'; ?></div>
+                    <div class="prdInfoDiv fLeft">
+                        <?php
+                        print_r($des[$key]['describe_text']);
+                        ?>
+                    </div>
+                </div>
             </div>
             <?php
             }
@@ -302,104 +323,118 @@
             if($des[$key]['describe_name'] == 'hallmark' && !empty($des[$key]['describe_name']))
             {
 
-            ?>
-            <div class="prdInfoTitle fLeft"><?php echo 'What is a '.$des[$key]['describe_display_name'].' ?'; ?></div>
-            <div class="prdInfoDiv fLeft">
-                <?php
-                print_r($des[$key]['describe_text']);
-                ?>
+            <div class="col100 fLeft bNone">
+                <div class="fLeft col50">
+                    <div class="brilliance"></div>
+                    <div class="prdInfoTitle fLeft">Pure Brilliance With Authentication</div>
+                    <ul class="fLeft prdInfoDiv dummy">
+                        <li class="font13"><span>Every Swarovski Zirconia is marked with a microscopic “SWAROVSKI ZIRCONIA” laser engraving to ensure Swarovski authenticity.</span> </li>
+                        <li class="font13"><span>The engraving guarantees that these specific Zirconia stones are cut in accordance with the cutting parameters that GIA has confirmed as ideal for diamonds.</span> </li>
+                        <li class="font13"><span>The laser engraving is invisible to the naked eye and does not interfere with the brilliance of the stone in any way.</span> </li>
+                        <li class="font13"><span>Every single Pure Brilliance Cut Zirconia – even a 0.7 mm – will carry this exclusive quality mark.</span> </li>
+                    </ul>
+                </div>
+                <div class="fRight col50">
+                    <div class="prdInfoTitle fLeft">What makes SWAROVSKI ZIRCONIA unique</div>
+                    <ul class="fLeft prdInfoDiv dummy">
+                        <li class="font13"><span>Innovative cut, studied to reach the same level of brilliance as real diamonds.</span> </li>
+                        <li class="font13"><span>Result: the most perfect simulated diamond in the world</span> </li>
+                    </ul>
+                    <div class="fLeft diamonds"></div>
+                </div>
             </div>
             <?php
             }
             }
-
             ?>
-            <div class="fLeft">
-                <div class="prdInfoTitle ">Jewellery Care Tips</div>
-                <div class='subNumber font12 fmOpenB marT5'>1.</div>
-                <div class="padL20 font13">
-                    <p class="marT5 lineHeight24">
-                        Jewellery care begins with the buying process itself. Don’t settle for an average quality make at an apparent bargain. Purchasing good quality and certified jewellery reduces its chances of wear and tear beforehand.
-                    </p>
+            <div class="fLeft col100">
+                <div class="fLeft col50">
+                    <div class="prdInfoTitle ">Jewellery Care Tips</div>
+                    <div class='subNumber font12 fmOpenB marT5'>1.</div>
+                    <div class="padL20 font13">
+                        <p class="marT5 lineHeight24">
+                            Jewellery care begins with the buying process itself. Don’t settle for an average quality make at an apparent bargain. Purchasing good quality and certified jewellery reduces its chances of wear and tear beforehand.
+                        </p>
+                    </div>
+                    <div class='subNumber font12 fmOpenB '>2.</div>
+                    <div class="padL20 font13">
+                        <p>
+                            While dressing-up jewellery should always be worn last and taken off first.
+                        </p>
+                    </div>
+                    <div class='subNumber font12 fmOpenB '>3.</div>
+                    <div class="padL20 font13">
+                        <p>
+                            Get into the habit of removing your jewellery before showering or bathing.
+                        </p>
+                    </div>
+                    <div class='subNumber font12 fmOpenB '>4.</div>
+                    <div class="padL20 font13 ">
+                        <p>
+                            Avoid wearing jewellery when cleaning, gardening or performing sports activities.
+                        </p>
+                    </div>
+                    <div class='subNumber font12 fmOpenB marT5'>5.</div>
+                    <div class="padL20 font13 lineHeight24">
+                        <p>
+                            Protect your jewellery from impact against hard and abrasive surfaces. Extreme temperatures, perfumes, cosmetics and household chemicals can damage jewellery.
+                        </p>
+                    </div>
+                    <div class='subNumber font12 fmOpenB marT5'>6.</div>
+                    <div class="padL20 font13 lineHeight24">
+                        <p>
+                            When not in use, always keep the jewellery back into its original case or store each piece of jewellery separately in a compartmentalized jewellery box to prevent scratches or entanglement.
+                        </p>
+                    </div>
+                    <div class='subNumber font12 fmOpenB marT5'>7.</div>
+                    <div class="padL20 font13 lineHeight24">
+                        <p>
+                            If the jewellery gets wet due to sweat or perfumes - just wipe gently with a soft muslin cloth. When cleaning, remember plain lukewarm water is safe to clean all jewellery.
+                        </p>
+                    </div>
+                    <div class='subNumber font12 fmOpenB marT5'>8.</div>
+                    <div class="padL20 font13 lineHeight24">
+                        <p>
+                            Examine your jewels regularly to ensure that the settings and clasps are up-to-the-mark, especially when it comes to studded jewellery.
+                        </p>
+                    </div>
                 </div>
-                <div class='subNumber font12 fmOpenB '>2.</div>
-                <div class="padL20 font13">
-                    <p>
-                        While dressing-up jewellery should always be worn last and taken off first.
+                <div class="fRight col50">
+                    <div class="prdInfoTitle ">Cleaning Your Jewellery</div>
+                    <p class="font13 margnTop0 lineHeight24">
+                        If you want to enjoy the pleasures of your bejeweled treasures for a long time, regular cleaning is important. Besides occasional-wear jewellery, even the daily wear jewellery needs a cleaning round since it is exposed to sweat, oil etc and can suffer discoloration.
                     </p>
-                </div>
-                <div class='subNumber font12 fmOpenB '>3.</div>
-                <div class="padL20 font13">
-                    <p>
-                        Get into the habit of removing your jewellery before showering or bathing.
-                    </p>
-                </div>
-                <div class='subNumber font12 fmOpenB '>4.</div>
-                <div class="padL20 font13 ">
-                    <p>
-                        Avoid wearing jewellery when cleaning, gardening or performing sports activities.
-                    </p>
-                </div>
-                <div class='subNumber font12 fmOpenB marT5'>5.</div>
-                <div class="padL20 font13 lineHeight24">
-                    <p>
-                        Protect your jewellery from impact against hard and abrasive surfaces. Extreme temperatures, perfumes, cosmetics and household chemicals can damage jewellery.
-                    </p>
-                </div>
-                <div class='subNumber font12 fmOpenB marT5'>6.</div>
-                <div class="padL20 font13 lineHeight24">
-                    <p>
-                        When not in use, always keep the jewellery back into its original case or store each piece of jewellery separately in a compartmentalized jewellery box to prevent scratches or entanglement.
-                    </p>
-                </div>
-                <div class='subNumber font12 fmOpenB marT5'>7.</div>
-                <div class="padL20 font13 lineHeight24">
-                    <p>
-                        If the jewellery gets wet due to sweat or perfumes - just wipe gently with a soft muslin cloth. When cleaning, remember plain lukewarm water is safe to clean all jewellery.
-                    </p>
-                </div>
-                <div class='subNumber font12 fmOpenB marT5'>8.</div>
-                <div class="padL20 font13 lineHeight24">
-                    <p>
-                        Examine your jewels regularly to ensure that the settings and clasps are up-to-the-mark, especially when it comes to studded jewellery.
-                    </p>
-                </div>
-            </div>
-            <div class="fLeft">
-                <div class="prdInfoTitle ">Cleaning Your Jewellery</div>
-                <p class="font13 margnTop0 lineHeight24">
-                    If you want to enjoy the pleasures of your bejeweled treasures for a long time, regular cleaning is important. Besides occasional-wear jewellery, even the daily wear jewellery needs a cleaning round since it is exposed to sweat, oil etc and can suffer discoloration.
-                </p>
-                <p class="font13">Here are some jewellery cleaning tips:</p>
-                <div class='subNumber font12 fmOpenB marT5'>1.</div>
-                <div class="padL20 font13 lineHeight24">
-                    <p>
-                        Always use warm and not hot water to clean jewellery, as hot water can discolor your jewellery. Use a couple drops of mild liquid detergent, such as baby shampoo and rinse thoroughly with clean water.
-                    </p>
-                </div>
-                <div class='subNumber font12 fmOpenB  marT5'>2.</div>
-                <div class="padL20 font13 lineHeight24">
-                    <p>
-                        When using toothbrush to clean jewellery, ensure that the bristles are soft, as hard bristles can loosen the stones from their settings.
-                    </p>
-                </div>
-                <div class='subNumber font12 fmOpenB marT5'>3.</div>
-                <div class="padL20 font13 lineHeight24">
-                    <p>
-                        Dry it completely and lightly buff with a soft chamois cloth. Avoid tissue or paper towels because the fibers in it can cause scratches. Also use a lengthwise motion when washing or drying the jewellery, as a circular motion often causes scratching.
-                    </p>
-                </div>
-                <div class='subNumber font12 fmOpenB marT5'>4.</div>
-                <div class="padL20 font13 lineHeight24">
-                    <p>
-                        Instead of ammonia or detergent, you can use any special jewellery cleaning liquid available at jewellers. Read labels carefully before buying.
-                    </p>
-                </div>
-                <div class='subNumber font12 fmOpenB marT5'>5.</div>
-                <div class="padL20 font13 lineHeight24">
-                    <p>
-                        Diamonds have an affinity for grease and should be cleaned monthly to keep the fire at its brightest. Every year or so, give your diamond jewellery for professional cleaning. Jewellers use ultra sonic or steam cleaning and will also check the setting, so that the stone does not fall out.
-                    </p>
+                    <p class="font13">Here are some jewellery cleaning tips:</p>
+                    <div class='subNumber font12 fmOpenB marT5'>1.</div>
+                    <div class="padL20 font13 lineHeight24">
+                        <p>
+                            Always use warm and not hot water to clean jewellery, as hot water can discolor your jewellery. Use a couple drops of mild liquid detergent, such as baby shampoo and rinse thoroughly with clean water.
+                        </p>
+                    </div>
+                    <div class='subNumber font12 fmOpenB  marT5'>2.</div>
+                    <div class="padL20 font13 lineHeight24">
+                        <p>
+                            When using toothbrush to clean jewellery, ensure that the bristles are soft, as hard bristles can loosen the stones from their settings.
+                        </p>
+                    </div>
+                    <div class='subNumber font12 fmOpenB marT5'>3.</div>
+                    <div class="padL20 font13 lineHeight24">
+                        <p>
+                            Dry it completely and lightly buff with a soft chamois cloth. Avoid tissue or paper towels because the fibers in it can cause scratches. Also use a lengthwise motion when washing or drying the jewellery, as a circular motion often causes scratching.
+                        </p>
+                    </div>
+                    <div class='subNumber font12 fmOpenB marT5'>4.</div>
+                    <div class="padL20 font13 lineHeight24">
+                        <p>
+                            Instead of ammonia or detergent, you can use any special jewellery cleaning liquid available at jewellers. Read labels carefully before buying.
+                        </p>
+                    </div>
+                    <div class='subNumber font12 fmOpenB marT5'>5.</div>
+                    <div class="padL20 font13 lineHeight24">
+                        <p>
+                            Diamonds have an affinity for grease and should be cleaned monthly to keep the fire at its brightest. Every year or so, give your diamond jewellery for professional cleaning. Jewellers use ultra sonic or steam cleaning and will also check the setting, so that the stone does not fall out.
+                        </p>
+                    </div>
                 </div>
             </div>
             <?php
@@ -498,7 +533,7 @@
                                     {
                                     ?>
                                     <div class="for-1 noImage"></div>
-<!--                                    <div class="imgLoader" id="imgLdr"></div>-->
+                                    <!--                                    <div class="imgLoader" id="imgLdr"></div>-->
                                     <?php
                                     }
                                     else
@@ -572,6 +607,9 @@
             ?>
         </div>
     </div>
+    <div class="fLeft addGem">
+        <div class="wrapperMax"></div>
+    </div>
 
     <div class="wrapper fLeft">
         <div class="">
@@ -617,21 +655,21 @@
         <?php
         for($i=0;$i<count($data1);$i++)
         {
-             if($data1[$i]['status'] == 1)
-             {
+        if($data1[$i]['status'] == 1)
+        {
         ?>
         <div  id="imgThumb_<?php echo $i ;?>" class="imgThumbnil nullify fLeft" style="background: url('<?php echo IMGDOMAIN.$data1[$i][product_image];?>') 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
-              <?php
-              }
-              else
-              {
-
-              ?>
-        <div  id="imgThumb_<?php echo $i ;?>" class="imgThumbnil remImgs fLeft remImg" style="background: url('<?php echo IMGDOMAIN.$data1[$i][product_image];?>') 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
-              <?php
-               }
+        <?php
         }
-               ?>
+        else
+        {
+
+        ?>
+        <div  id="imgThumb_<?php echo $i ;?>" class="imgThumbnil remImgs fLeft remImg" style="background: url('<?php echo IMGDOMAIN.$data1[$i][product_image];?>') 50% 50% / contain no-repeat scroll padding-box border-box rgb(255, 255, 255);"></div>
+        <?php
+        }
+        }
+        ?>
     </div>
 </div>
 
