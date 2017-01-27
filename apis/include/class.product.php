@@ -781,6 +781,72 @@
         return $result;
     }
 
+    
+    
+    // random select data for swarovski
+    
+    function getswarovskiData()
+    {
+        $a = mt_rand(1,8);
+        $b = mt_rand(1,8);
+        if($a == $b)
+        {
+            if($a!=8)
+            {
+                $a++;
+            }
+            else
+            {
+                $a--;
+            }
+        }
+        
+        $a1 = mt_rand(9,13);
+        $b1 = mt_rand(9,13);
+        if($a1 == $b1)
+        {
+            if($a1!=13)
+            {
+                $a1++;
+            }
+            else
+            {
+                $a1--;
+            }
+        }
+        
+        $sql ="select * from tbl_swarovski_details_master where type_flag=1 and data_id in ($a,$b) limit 2";
+        $res = $this->query($sql);
+        $arr = array();
+        while ($row = $this->fetchData($res)) 
+        {
+            $arr[] = $row; 
+        }
+        
+        $sql1 ="select  data from tbl_swarovski_details_master where type_flag=2 and data_id in ($a1,$b1) limit 2";
+        $res1 = $this->query($sql1);
+        $arr1 = array();
+        while ($row1 = $this->fetchData($res1)) 
+        {
+            $arr1[] = $row1; 
+        }
+        if($res && $res1)
+        {
+            $err = array('errCode' => 0, 'errMsg' => 'result fetch successfully');
+            
+        }
+        else
+        {
+             $err = array('errCode' => 1, 'errMsg' => 'No results found');
+        }
+        
+        $result = array('results' => $arr,'results1' => $arr1,'error' => $err);
+        return $result;
+                
+    }
+    
+    
+    
     public function imageRemove($params)
 		{
 			$pid = $params['pid'];

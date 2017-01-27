@@ -18,10 +18,33 @@
                     </div>
                 </div>
             </div>
+            <?php   
+            
+                if($_GET["case"] == swarovski || $_GET["case"] == 'swarovski' || $_GET["case"] == "swarovski")
+                {
+                   
+            ?>
+            
+            <script>
+                setTimeout(function()
+                {
+                    $("#combination_GOLD_00_SWAROVSKI_ZIRCONIA").prop("checked", true);
+                    $("#combination_SILVER_00_SWAROVSKI_ZIRCONIA").prop("checked", true);
+                },0);
+                
+            </script>
+               
+            <?php
+            
+                }
+            ?>
+            
+            ?>
             <?php
 
             if(count($showcat['subcat']) && ($showcat['catid'] == $_GET['catid']))
-            {
+            { 
+               
             ?>
             <div class='jShapesCont resultsPage showHide fmOpenL'>
                 <div class="allShapes resultsPage">

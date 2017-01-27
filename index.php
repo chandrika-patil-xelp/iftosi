@@ -708,6 +708,38 @@ switch ($action) {
                   include 'template/comingsoon.html';
                   } */
                 break;
+                
+            case 'swarovski':
+                $page = 'jewellery';
+                $pgno = (!empty($_GET['pgno']) ? $_GET['pgno'] : 1);
+                $catid = '10001';
+                $meta_title = 'Fine jewellery online from trusted brands at low prices';
+                $meta_description="Buy jewellery conveniently from most famous jewellery retailers in India. Comprehensive range of selections in rings, earrings, pendants, necklace and bangles.";
+                $meta_keywords ="jewellery online India, diamond jewellery, gold jewellery, fine jewellery, solitaire rings, online jewellery, gold jewellery online, online diamond buying, jewellery online shop, best way to buy jewellery, solitaire pendant, diamond necklace, gold bangles.";
+                $url = APIDOMAIN . 'index.php?action=getPrdByCatid&catid=' . $catid . '&clist=combination_44|~|combination_GOLD_00_SWAROVSKI_ZIRCONIA|@|combination_SILVER_00_SWAROVSKI_ZIRCONIA&page=' . $pgno;
+                $res = $comm->executeCurl($url);
+                $data = $res['results']['products'];
+                $total = $res['results']['total'];
+                $catname = $res['results']['catname'];
+
+                $url = APIDOMAIN . 'index.php?action=fetch_category_mapping&catid=' . $catid;
+                $res = $comm->executeCurl($url);
+                $fil = $res['results']['attributes'];
+
+                $totalCnt = $total;
+                $lastpg = ceil($total / 15);
+                $adjacents = 2;
+                for ($i = 0; $i < count($data); $i++) {
+                    $pid = $data[$i]['pid']; //die;
+                    $url1 = APIDOMAIN . 'index.php?action=imagedisplay&pid=' . $pid;
+                    $res1 = $comm->executeCurl($url1);
+                    $data1 = $res1['results'];
+                    $datacnt = $res1['count'];
+                    //echo '<pre>';print_r($data1);
+                }
+                include 'template/jewellery_results.html';
+                break; 
+                
             case 'bullion':
                 $page = 'bullion';
                 $meta_title = 'Buy bullion online in India from the most respected sellers in the country';
@@ -1056,6 +1088,12 @@ switch ($action) {
             case 'jewellery_details':
                 $page = 'jewellery_details';
                 $prdInfo = array();
+                
+                $url = APIDOMAIN . 'index.php?action=getswarovskiData';
+                $res = $comm->executeCurl($url);
+                $sav1 = $res['results'];
+                $sav2 = $res['results1'];
+               
                 $prdName = (!empty($_GET['productname'])) ? $_GET['productname'] : '';
                 $prdId = $orgPrdId = (!empty($_GET['productid'])) ? $_GET['productid'] : '';
                 if (!empty($prdId))
@@ -1199,6 +1237,8 @@ switch ($action) {
                   {
                   include 'template/comingsoon.html';
                   } */
+                
+                
                 break;
 
             case 'diamond_Form':

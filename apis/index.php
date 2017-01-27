@@ -81,6 +81,15 @@ switch($action)
         $res = $result;
         break;
 
+        // swarovski data
+        case 'getswarovskiData':
+			include APICLUDE.'class.product.php';
+			$obj	= new product($db['iftosi']);
+			$result	= $obj->getswarovskiData();
+			$res= $result;
+		break;
+        
+        
     case 'makeDate':
         $params['strdt'] = urlencode('1990-10-10 10:10:10');
 

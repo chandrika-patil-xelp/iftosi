@@ -350,7 +350,23 @@
             <div class="fLeft col100">
                 <div class="fLeft col50">
                     <div class="prdInfoTitle ">Jewellery Care Tips</div>
-                    <div class='subNumber font12 fmOpenB marT5'>1.</div>
+                    
+                    <?php foreach($sav1 as $key=>$value) 
+                    {?>
+                        
+                        <div class='subNumber font12 fmOpenB marT5'>.<?php echo $key+1 ?></div>
+                    <div class="padL20 font13">
+                        <p class="marT5 lineHeight24">
+                           <?php echo $value['data'] ?>
+                        </p>
+                    </div>
+                        
+                       <?php
+                    }
+                        ?>
+                    
+                    
+<!--                    <div class='subNumber font12 fmOpenB marT5'>1.</div>
                     <div class="padL20 font13">
                         <p class="marT5 lineHeight24">
                             Jewellery care begins with the buying process itself. Don’t settle for an average quality make at an apparent bargain. Purchasing good quality and certified jewellery reduces its chances of wear and tear beforehand.
@@ -397,7 +413,7 @@
                         <p>
                             Examine your jewels regularly to ensure that the settings and clasps are up-to-the-mark, especially when it comes to studded jewellery.
                         </p>
-                    </div>
+                    </div>-->
                 </div>
                 <div class="fRight col50">
                     <div class="prdInfoTitle ">Cleaning Your Jewellery</div>
@@ -405,7 +421,21 @@
                         If you want to enjoy the pleasures of your bejeweled treasures for a long time, regular cleaning is important. Besides occasional-wear jewellery, even the daily wear jewellery needs a cleaning round since it is exposed to sweat, oil etc and can suffer discoloration.
                     </p>
                     <p class="font13">Here are some jewellery cleaning tips:</p>
-                    <div class='subNumber font12 fmOpenB marT5'>1.</div>
+                    <?php foreach($sav2 as $key=>$value) 
+                    {?>
+                        
+                        <div class='subNumber font12 fmOpenB marT5'>.<?php echo $key+1 ?></div>
+                    <div class="padL20 font13 lineHeight24">
+                        <p>
+                           <?php echo $value['data'] ?>
+                        </p>
+                    </div>
+                        
+                       <?php
+                    }
+                        ?>
+                    
+<!--                    <div class='subNumber font12 fmOpenB marT5'>1.</div>
                     <div class="padL20 font13 lineHeight24">
                         <p>
                             Always use warm and not hot water to clean jewellery, as hot water can discolor your jewellery. Use a couple drops of mild liquid detergent, such as baby shampoo and rinse thoroughly with clean water.
@@ -434,7 +464,7 @@
                         <p>
                             Diamonds have an affinity for grease and should be cleaned monthly to keep the fire at its brightest. Every year or so, give your diamond jewellery for professional cleaning. Jewellers use ultra sonic or steam cleaning and will also check the setting, so that the stone does not fall out.
                         </p>
-                    </div>
+                    </div>-->
                 </div>
             </div>
             <?php
