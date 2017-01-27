@@ -815,7 +815,7 @@
             }
         }
         
-        $sql ="select * from tbl_swarovski_details_master where type_flag=1 and data_id in ($a,$b) limit 2";
+        $sql ="select * from tbl_tipdetails_master where type_flag=1 and data_id in ($a,$b) limit 2";
         $res = $this->query($sql);
         $arr = array();
         while ($row = $this->fetchData($res)) 
@@ -823,7 +823,7 @@
             $arr[] = $row; 
         }
         
-        $sql1 ="select  data from tbl_swarovski_details_master where type_flag=2 and data_id in ($a1,$b1) limit 2";
+        $sql1 ="select  data from tbl_tipdetails_master where type_flag=2 and data_id in ($a1,$b1) limit 2";
         $res1 = $this->query($sql1);
         $arr1 = array();
         while ($row1 = $this->fetchData($res1)) 
