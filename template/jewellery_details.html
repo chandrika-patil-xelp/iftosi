@@ -292,9 +292,9 @@
                 <div class="fLeft col50">
                     <div class="prdInfoTitle fLeft"><?php echo 'What is a '.$des[$key]['describe_display_name'].' ?'; ?></div>
                     <div class="prdInfoDiv fLeft">
-                        <?php
-                        print_r($des[$key]['describe_text']);
-                        ?>
+<?php
+                      print_r($des[$key]['describe_text']);
+?>
                     </div>
                 </div>
                 <?php
@@ -318,9 +318,7 @@
             <?php
             }
             }
-            foreach($des as $key=>$value)
-            {
-            if($des[$key]['describe_name'] == 'hallmark' && !empty($des[$key]['describe_name']))
+            if(stristr($prdInfo['attr_details']['gemstone_type'],'SWAROVSKI ZIRCONIA'))
             {
             ?>
             <div class="col100 fLeft bNone">
@@ -345,27 +343,26 @@
             </div>
             <?php
             }
-            }
             ?>
             <div class="fLeft col100">
                 <div class="fLeft col50">
                     <div class="prdInfoTitle ">Jewellery Care Tips</div>
-                    
-                    <?php foreach($sav1 as $key=>$value) 
+
+                    <?php foreach($sav1 as $key=>$value)
                     {?>
-                        
-                        <div class='subNumber font12 fmOpenB marT5'>.<?php echo $key+1 ?></div>
+
+                        <div class='subNumber font12 fmOpenB marT5'><?php echo $key+1 ?>.</div>
                     <div class="padL20 font13">
                         <p class="marT5 lineHeight24">
                            <?php echo $value['data'] ?>
                         </p>
                     </div>
-                        
+
                        <?php
                     }
                         ?>
-                    
-                    
+
+
 <!--                    <div class='subNumber font12 fmOpenB marT5'>1.</div>
                     <div class="padL20 font13">
                         <p class="marT5 lineHeight24">
@@ -421,20 +418,20 @@
                         If you want to enjoy the pleasures of your bejeweled treasures for a long time, regular cleaning is important. Besides occasional-wear jewellery, even the daily wear jewellery needs a cleaning round since it is exposed to sweat, oil etc and can suffer discoloration.
                     </p>
                     <p class="font13">Here are some jewellery cleaning tips:</p>
-                    <?php foreach($sav2 as $key=>$value) 
+                    <?php foreach($sav2 as $key=>$value)
                     {?>
-                        
-                        <div class='subNumber font12 fmOpenB marT5'>.<?php echo $key+1 ?></div>
+
+                        <div class='subNumber font12 fmOpenB marT5'><?php echo $key+1 ?>.</div>
                     <div class="padL20 font13 lineHeight24">
                         <p>
                            <?php echo $value['data'] ?>
                         </p>
                     </div>
-                        
+
                        <?php
                     }
                         ?>
-                    
+
 <!--                    <div class='subNumber font12 fmOpenB marT5'>1.</div>
                     <div class="padL20 font13 lineHeight24">
                         <p>
@@ -597,48 +594,45 @@
                                 </div>
                             </a>
                             <div class='prdActions fLeft'>
-                                <?php
+<?php
                                 if(!empty($tempURL))
                                 {
-                                ?>
+?>
                                 <a href="<?php echo DOMAIN.$tempURL . '/jid-'  . $data3[$key]['pid'];?>/1" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
                                 <a href="<?php echo DOMAIN.$tempURL . '/jid-' . $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
                                 <a href="<?php echo DOMAIN.$tempURL . '/jid-' . $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
                                 <a href="<?php echo DOMAIN.$tempURL . '/jid-' . $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
-                                <?php
+<?php
                                 }
                                 else
                                 {
-                                ?>
+?>
                                 <a href="<?php echo DOMAIN.$value['certified'] . '/jid-' . $data3[$key]['pid'];?>/1" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
                                 <a href="<?php echo DOMAIN.$value['certified'] . '/jid-' . $data3[$key]['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
                                 <a href="<?php echo DOMAIN.$value['certified'] . '/jid-' . $data3[$key]['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
                                 <a href="<?php echo DOMAIN.$value['certified'] . '/jid-' . $data3[$key]['pid']; ?>" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
-                                <?php
+<?php
                                 }
-                                ?>
+?>
                             </div>
                     </div>
                 </div>
-                <?php
+<?php
                 }
                 $i++;
                 if($i == $max)
                 {
-                ?>
+?>
             </div>
-            <?php
+<?php
             }
 
             }
-            ?>
-            <?php
+?>
+<?php
             }
-            ?>
+?>
         </div>
-    </div>
-    <a href="<?=DOMAIN;?>swarovski"><div class="fLeft addGem">
-        <div class="wrapperMax"></div>
     </div>
 
     <div class="wrapper fLeft">

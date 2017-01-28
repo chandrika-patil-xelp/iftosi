@@ -18,31 +18,33 @@
                     </div>
                 </div>
             </div>
-
-
-            <?php
-            if (count($fil)) {
-                foreach ($fil as $key => $val) {
-                    if ($val['attribute_name'] == 'shape' && !empty($val['attribute_values'])) {
-                        ?>
+<?php
+            if(count($fil))
+            {
+                foreach ($fil as $key => $val)
+                {
+                    if ($val['attribute_name'] == 'shape' && !empty($val['attribute_values']))
+                    {
+?>
                         <div class='shapesCont resultsPage showHide'>
                             <div class="wrapperMax">
                                 <div class="allShapes resultsPage">
                                     <center>
-            <?php
+<?php
             $filval = explode(",", $val['attribute_values']);
-            foreach ($filval as $ky => $vl) {
-                ?>
+            foreach ($filval as $ky => $vl)
+            {
+?>
                                             <div id="<?php echo $vl; ?>" class="shapeComm transition300 ripplelink <?php echo $vl; ?>">
                                             </div>
-                                            <?php
-                                        }
-                                        ?>
+<?php
+            }
+?>
                                     </center>
                                 </div>
                             </div>
                         </div>
-            <?php
+<?php
             unset($fil[$key]);
         }
     }
@@ -80,8 +82,7 @@
 <?php                       }
 if (count($data)) {
     foreach ($data as $key => $val) {
-        ?>
-
+?>
                                         <div class='prdComm fLeft'>
                                             <div class='prdCommDiv fLeft transition100'>
 <?php
@@ -127,7 +128,6 @@ if (count($data)) {
                                                         $tempUrl .= 'certified-'.$val['attributes']['certifed'];
                                                     }
                                                 }
-
                                                 if($tempUrl !== '')
                                                 {
 ?>
@@ -167,17 +167,17 @@ if (count($data)) {
                                                 <div class='prdPrice fLeft'>
                                                     <div class="detComm">
                                                         <div class="detLabel fmOpenB fLeft">BEST PRICE</div>
-                                                        <?php
+<?php
                                                             $rate = $val['dollar_rate'];
                                                             if( empty($val['dollar_rate']) || $val['dollar_rate'] == '0.00' || $val['dollar_rate'] == 0.00){
                                                                 $rate = dollarValue;
                                                             }
-                                                        ?>
+?>
                                                         <div class="detValue fmOpenB fLeft"><span class='rupeeImg'></span>
-                                                        <?php
+<?php
                                                             $price = ceil((($val['pprice'] * $rate)*$val['attributes']['carat']));
                                                             echo $price = $comm->IND_money_format($price);
-                                                        ?>
+?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -187,7 +187,6 @@ if (count($data)) {
                                                     if(!empty($tempUrl))
                                                     {
 ?>
-
                                                         <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $val['pid']; ?>/1" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
                                                         <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $val['pid']; ?>/2" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
                                                         <a href="<?php echo DOMAIN . $tempUrl; ?>/did-<?php echo $val['pid']; ?>/3" class='actionComm fLeft transition100 poR ripplelink' rel="nofollow"></a>
@@ -207,7 +206,7 @@ if (count($data)) {
                                                 </div>
                                             </div>
                                         </div>
-        <?php
+<?php
     }
 }
 ?>
@@ -215,7 +214,6 @@ if (count($data)) {
                         </div>
                     </div>
                 </div>
-                 <a href="<?=DOMAIN;?>swarovski"><div class="fLeft addGem">
                     <div class="wrapperMax"></div>
                 </div>
             </div>
