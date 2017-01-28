@@ -1138,14 +1138,9 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
     .teamTabs{display: block;}
 
     .media{width:100%!important;}
-    .brilliance{width: 100%;
-    height: 140px;
-    background: url(../img/Dimension.jpg)no-repeat;
-    background-size: auto 100%;
-    background-position: left;
-    margin-bottom: 20px;}
+    .brilliance{width: 100%;height: 140px;background-size: auto 100%;background-position: left;margin-bottom: 20px;}
     .diamonds{height: 150px;}
-    .addGem{height:100px!important;background-size:auto 100%!important;}
+    
     
     /*Header*/
     .header {height: 60px!important;padding: 0 15px!important;}
@@ -1395,6 +1390,9 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 
 @media only screen and (min-width: 960px) and (max-width: 1024px){
     
+   
+    
+    
     /*Header*/
     .thumbnil.borderColor{border-color:#380B34;}
     .header {padding-right: 15px;}
@@ -1446,6 +1444,9 @@ li div {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 
 
 @media only screen and (min-width: 768px) and (max-width: 959px){
+    
+    
+    
     /*Header*/
     .header{padding: 0 15px;}
     .faqs{padding: 20px 20px;}
@@ -1760,7 +1761,7 @@ education
 .mTop14{margin-top: 14px!important;}
 .mTop4{margin-top: 4px!important;}
 
-.addGem{width:100%;height: 311px;border-top: 1px solid #d4d4c8;background:#ffffff url("../img/footer_banner.jpg")no-repeat;background-size: auto 140%;background-position:center;margin-top:50px;}
+.addGem{width:100%;height:auto;padding-bottom: 25%;border-top: 1px solid #d4d4c8;background:#ffffff url("../img/gem_foo.jpg")no-repeat;background-size:cover;background-position:center;margin-top:50px;}
 .media{width:49%;}
 .col100{width:100%;height:auto;border-top:1px solid #d4d4c8;padding: 30px 0px;}
 .brilliance{width:100%;height: 282px;background: url("../img/Dimension.jpg")no-repeat;background-size:auto 100%;background-position:left;    margin-bottom: 20px;}
