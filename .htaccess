@@ -56,9 +56,7 @@ RewriteRule ^((?i)heart-and-arrows)$    index.php?case=e_cut5 [L]
 RewriteRule ^((?i)color)$    index.php?case=e_color [L]
 RewriteRule ^((?i)fluorescence)$    index.php?case=e_color1 [L]
 RewriteRule ^((?i)clarity)$    index.php?case=education_clarity [L]
-RewriteRule ^((?i)certification-and-grading)$    index.php?case=e_certification [L]
-RewriteRule ^((?i)how-gia-grades-a-diamond)$    index.php?case=e_certification1 [L]
-RewriteRule ^((?i)gia-vs-egl)$    index.php?case=e_certification2 [L]
+RewriteRule ^((?i)diamond-shapes)$    index.php?case=diamond_shapes [L]
 
 ###################### LOGIN RELATED ##########################
 RewriteRule ^((?i)sign-up)$    index.php?case=signup [L]
@@ -74,8 +72,7 @@ RewriteRule ^([^/.]*)$	index.php?case=$1 [L]
 RewriteRule ^(upload-image)/(pid-[^/.]*)$	index.php?case=upload&pid=$2 [L]
 
 RewriteRule ^((?i)wishlist)/([^/.]*)$	index.php?case=wishlist&uid=$2 [L]
-RewriteRule ^((?i)swarovski)/([^/.]*)$	index.php?case=swarovski&catid=$2 [L]
-
+RewriteRule ^((?i)swarovski)/([^/.]*)$	index.php?case=$1&catid=$2 [L]
 RewriteRule ^([^/.]*)/(ct-[^/.]*)$	index.php?case=$1&catid=$2 [L,QSA]
 RewriteRule ^([^/.]*)/(ct-[^/.]*)/(page-[^/.]*)$	index.php?case=$1&catid=$2&pgno=$3 [L,QSA]
 RewriteRule ^([^/.]*)/([^/.]*)/(ct-[^/.]*)$	index.php?case=$1&catid=$3 [L]

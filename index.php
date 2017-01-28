@@ -708,7 +708,7 @@ switch ($action) {
                   include 'template/comingsoon.html';
                   } */
                 break;
-                
+
             case 'swarovski':
                 $page = 'jewellery';
                 $pgno = (!empty($_GET['pgno']) ? $_GET['pgno'] : 1);
@@ -716,7 +716,7 @@ switch ($action) {
                 $meta_title = 'Fine jewellery online from trusted brands at low prices';
                 $meta_description="Buy jewellery conveniently from most famous jewellery retailers in India. Comprehensive range of selections in rings, earrings, pendants, necklace and bangles.";
                 $meta_keywords ="jewellery online India, diamond jewellery, gold jewellery, fine jewellery, solitaire rings, online jewellery, gold jewellery online, online diamond buying, jewellery online shop, best way to buy jewellery, solitaire pendant, diamond necklace, gold bangles.";
-                $url = APIDOMAIN . 'index.php?action=getPrdByCatid&catid=' . $catid . '&clist=combination_44|~|combination_GOLD_00_SWAROVSKI_ZIRCONIA|@|combination_SILVER_00_SWAROVSKI_ZIRCONIA&page=' . $pgno;
+                $url = APIDOMAIN . 'index.php?action=getPrdByCatid&catid=10001&slist=&clist=combination_44|~|combination_GOLD_00_SWAROVSKI_ZIRCONIA|@|combination_SILVER_00_SWAROVSKI_ZIRCONIA&tlist=&ilist=&jlist=&ctid=&pgno=1&uid=';
                 $res = $comm->executeCurl($url);
                 $data = $res['results']['products'];
                 $total = $res['results']['total'];
@@ -738,8 +738,8 @@ switch ($action) {
                     //echo '<pre>';print_r($data1);
                 }
                 include 'template/jewellery_results.html';
-                break; 
-                
+                break;
+
             case 'bullion':
                 $page = 'bullion';
                 $meta_title = 'Buy bullion online in India from the most respected sellers in the country';
@@ -1088,12 +1088,12 @@ switch ($action) {
             case 'jewellery_details':
                 $page = 'jewellery_details';
                 $prdInfo = array();
-                
+
                 $url = APIDOMAIN . 'index.php?action=getswarovskiData';
                 $res = $comm->executeCurl($url);
                 $sav1 = $res['results'];
                 $sav2 = $res['results1'];
-               
+
                 $prdName = (!empty($_GET['productname'])) ? $_GET['productname'] : '';
                 $prdId = $orgPrdId = (!empty($_GET['productid'])) ? $_GET['productid'] : '';
                 if (!empty($prdId))
@@ -1102,8 +1102,9 @@ switch ($action) {
                     $prdList = $prdId = $pid = $prdId[1];
                     $prdInfoUrl = APIDOMAIN . 'index.php?action=getPrdById&prdid=' . $prdId;
                     $prdInfo = $comm->executeCurl($prdInfoUrl);
+                    // echo "<pre>";print_r( $prdInfo);die;
                     if (!empty($prdInfo) && !empty($prdInfo['results']) && !empty($prdInfo['error']) && empty($prdInfo['error']['errCode']))
-                    {   //echo "<pre>";print_r( $prdInfo);die;
+                    {
                         $prdDet = $prdInfo = $prdInfo['results'][$prdId];
 
                         $vndrInfo = $prdInfo['vendor_product_details'];
@@ -1237,8 +1238,8 @@ switch ($action) {
                   {
                   include 'template/comingsoon.html';
                   } */
-                
-                
+
+
                 break;
 
             case 'diamond_Form':
