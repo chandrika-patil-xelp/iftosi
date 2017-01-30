@@ -67,7 +67,7 @@ a{text-decoration: none;}
 .transition300 {transition: 300ms ease-in-out;-moz-transition: 300ms ease-in-out;-ms-transition: 300ms ease-in-out;-webkit-transition: 300ms ease-in-out;-o-transition: 300ms ease-in-out;}
 .transition3000 {transition: 200ms ease-in-out;-moz-transition: 200ms ease-in-out;-ms-transition: 200ms ease-in-out;-webkit-transition: 200ms ease-in-out;-o-transition: 200ms ease-in-out;}
 
-.container{width:100%;height:auto;background: #ebebde;padding-bottom: 0px}
+.container{width:100%;height:auto;background: #ebebde;padding-bottom: 0px;border-bottom: 1px solid #d4d4c8;}
 .wrapper{width:100%;height:auto;}
 .wrapperMax{width:100%;max-width: 1200px;height:100%;margin: auto;}
 
@@ -201,7 +201,7 @@ a{text-decoration: none;}
 .prllx li{width: 200px;display: inline-block !important;position: relative!important;margin: 0 30px;}
 
 /*Shapes Cont*/
-.shapesCont{width:100%;height:auto;background: #FFF;padding: 40px 0;position: relative;z-index: 0;}
+.shapesCont{width:100%;height:auto;background:#FFF;padding: 70px 0;position: relative;z-index: 0;border-bottom:1px solid #d4d4c8;}
 .resultsPage .shapesCont{padding: 10px 0;background: transparent;}
 .shapesTitle{width:100%;height:auto;line-height: 40px;padding: 10px 0;color:#4d4d4d;font-size: 40px;text-align: center;margin-bottom: 20px;}
 .allShapes{width:100%;height:auto;}
@@ -345,7 +345,7 @@ a{text-decoration: none;}
 
 
 /*All Results*/
-.allResults{width:100%;height: auto;background: #fff;}
+.allResults{width:100%;height: auto;background: #fff;border-bottom: 1px solid  #d4d4c8;}
 .filterTitleDiv{width:100%;height:60px;border-bottom: 1px solid #d4d4d4;margin-bottom: 20px;}
 .fTitle {width: 25%;height: 40px;line-height: 40px;padding-left: 40px;color: #4d4d4d;font-size: 16px;margin: 10px 0;background: url(../img/common/filter.svg)no-repeat;background-size: auto 100%;background-position: left top;}
 .rCount{width:auto;font-size: 25px;line-height: 40px;margin: 10px 0 10px 1%;text-transform: lowercase;color: #8A0044;text-transform: lowercase;letter-spacing: -0.03em;}
@@ -673,6 +673,7 @@ a{cursor:pointer;}
 .prdInfoWrap{width:34%;}
 .prdInfoCont{width:34%;padding: 0 20px;}
 .prdInfoWrap .prdInfoCont{width:100%;}
+.jwdet .prdInfo{padding-bottom:35px;border-bottom:1px solid #d4d4c8;}
 .prdInfo{width:100%;height: auto;margin-top: 0;}
 .prdInfoTitle{width:100%;height: 40px;line-height: 40px;border-bottom: 1px solid #d4d4c8;font-size: 20px;margin-bottom:10px;color:#8A0044;}
 .prdInfoDiv{width: 100%;height: auto;line-height:24px;padding: 0;color: #4d4d4d;font-size: 13px;text-align: left;margin-bottom: 20px;}
@@ -1761,7 +1762,7 @@ education
 .mTop14{margin-top: 14px!important;}
 .mTop4{margin-top: 4px!important;}
 
-.addGem{width:100%;height:auto;padding-bottom: 25%;border-top: 1px solid #d4d4c8;background:#ffffff url("../img/gem_foo.jpg")no-repeat;background-size:cover;background-position:center;margin-top:50px;}
+.addGem{width:100%;height:auto;padding-bottom: 25%;background:#ffffff url("../img/gem_foo.jpg")no-repeat;background-size:cover;background-position:center;margin-top:50px;}
 .media{width:49%;}
 .col100{width:100%;height:auto;border-top:1px solid #d4d4c8;padding: 30px 0px;}
 .brilliance{width:100%;height: 282px;background: url("../img/Dimension.jpg")no-repeat;background-size:auto 100%;background-position:left;    margin-bottom: 20px;}
@@ -1770,3 +1771,5 @@ education
 .dummy{margin:0px;}
 .diamonds{width: 100%;height:350px;background: url("../img/Diamond_s.jpg")no-repeat;background-size: auto 100%;background-position: center;}
 .bBtm{border-bottom: 1px solid #d4d4c8!important;}
+
+
