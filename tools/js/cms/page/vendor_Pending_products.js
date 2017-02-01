@@ -63,7 +63,8 @@ function loadDiamonds(pgno)
 {
     if (!pgno)
         pgno = 1;
-    $.ajax({url: APIDOMAIN + "index.php?action=getVPendingProducts&vid=" + uid + "&page=" + pgno + "&limit=50&catid=" + catid, success: function (result)
+     var tmstmp = new Date().getTime();
+    $.ajax({url: APIDOMAIN + "index.php?action=getVPendingProducts&vid=" + uid + "&page=" + pgno + "&limit=50&catid=" + catid +"&timestamp=" + tmstmp, success: function (result)
         {
             loadPDiamondCallback(result, pgno);
         }
