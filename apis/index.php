@@ -577,6 +577,7 @@ switch($action)
                 $res=$result;
                 break;
             }
+            
             $obj=new vendor($db['iftosi']);
             $result=$obj->getVProductsByCatid($params);
             $res=$result;

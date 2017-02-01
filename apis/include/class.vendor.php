@@ -2462,6 +2462,7 @@ class vendor extends DB
             $rdv = explode("\n", $data);
             $colName = explode(",", $rdv[0]);
             $len = count($rdv) - 1;
+            
         }
         else
         {
@@ -2487,6 +2488,7 @@ class vendor extends DB
         $i = $totlIns = 0;
         if($validFormat)
         {
+            
             while ($i < $len)
             {
                 if($type=='csv')
@@ -2558,12 +2560,12 @@ class vendor extends DB
                             $catNo = '10038';
                         }
 
-                        $complete_flag = 1;
+                       // $complete_flag = 0;
 
-                        if(empty($value['0']) || empty($value['1']) || empty($value['3']) || empty($value['5']))
-                        {
-                            $complete_flag = 0;
-                        }
+//                        if(empty($value['0']) || empty($value['1']) || empty($value['3']) || empty($value['5']))
+//                        {
+//                            $complete_flag = 0;
+//                        }
 
 
                         $sql = "
@@ -2641,7 +2643,7 @@ class vendor extends DB
                                             gold_weight     =   '".$value[5]."',
                                             bullion_design  =   '".$value[6]."',
                                             shape           =   '".$shape."',
-                                            complete_flag   =   '".$complete_flag."'";
+                                            complete_flag   =   0  ";
                         
                         $res = $this->query($sql);
                         $totlIns++;

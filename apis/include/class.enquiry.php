@@ -46,6 +46,7 @@ class enquiry extends DB
             $chksql="SELECT user_id FROM tbl_product_enquiry where user_id=".$uid." AND product_id=".$params['pid']." and vendor_id=".$params['pid']."";
             $chkres=$this->query($chksql);
             $numchk=$this->numRows($chkres);
+            
                 if($numchk == 0)
                 {
                     if($isV['isV'] == 2)
@@ -77,7 +78,9 @@ class enquiry extends DB
                                         \"".$params['vid']."\",
                                             1,
                                             'customer',
-                                            now())";
+                                            now())
+                                ON DUPLICATE 
+                                             KEY UPDATE updatedby=now()";
                         $ires=$this->query($isql);
                         
                         
@@ -226,10 +229,10 @@ class enquiry extends DB
 
         public function sendEnqMailSMS($params,$catid)
         {
+            
                 $msg = urldecode($params['pdet']);
 
                 $msg = rtrim($msg, ",\r\n");
-
                 global $comm;
                 $smsText = '';
                 $subject = '';
@@ -247,12 +250,12 @@ class enquiry extends DB
                 $smsText .= "\r\n";
                 $smsText .= $msg;
                 $smsText .= "\r\n\r\n";
-                $smsText .= "The buyer should contact you shortly.";
+                //$smsText .= "The buyer should contact you shortly.";
                 $smsText .= "\r\n\r\n";
                 $smsText .= "For any assistance, call: 91-22-41222241/42. Email: info@iftosi.com";
                 $smsText .= "\r\n\r\n";
                 $smsText .= "Team IFtoSI";
-
+               
             if(!empty($params['email']))
             {
                     mail($params['email'], $subject, $message, $headers);
@@ -335,7 +338,7 @@ class enquiry extends DB
                 }
             }
 
-        $message .='<div class="">The buyer should contact you shortly.</div>';
+        //$message .='<div class="">The buyer should contact you shortly.</div>';
         $message .='<center style="padding-top: 50px;">';
         $message .='<img src="'.DOMAIN.'tools/img/common/diamond.jpg" width="50">';
         $message .='<img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">';
@@ -348,7 +351,6 @@ class enquiry extends DB
         $message.='</center>';
         $message.='</body>';
         $message.='</html>';     
-      
        return $message;
 }
     # view log by vendor for his product being viewed

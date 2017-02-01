@@ -2007,6 +2007,7 @@
                                                 gold_type,
                                                 gemstonevalue,
                                                 isBugget
+                                               
                     FROM
                         tbl_product_search
                     WHERE
@@ -3052,6 +3053,7 @@
 
 		public function sendDetailsToUser($params)
 		{
+                    
 			global $comm;
 			$usrEmail = (!empty($params['usrEmail'])) ? trim(urldecode($params['usrEmail'])) : '';
 			$usrMobile = (!empty($params['usrMobile'])) ? trim(urldecode($params['usrMobile'])) : '';
@@ -3068,15 +3070,15 @@
 				return $results;
 			}
 
-
                         $tmp_params = array('prdid' => $prdid);
 			$prdDetails = $this->getPrdById($tmp_params);
 			$prdRes = $prdDetails['results'][$prdid];
-
-			$vndrId = '';
-			foreach($prdRes as $key => $value)
+                        $prdId = $prdRes['attr_details']['product_id'];
+                        $vndrId = '';
+                        
+                        foreach($prdRes as $key => $value)
 			{
-				if(is_array($value) && $key == 'vendor_details')
+                            	if(is_array($value) && $key == 'vendor_details')
 				{
 					foreach($value as $ky => $vl)
 					{
@@ -3093,9 +3095,12 @@
 						$vndrMobile = $vl['contact_mobile'];
 						$vndrEmail = $vl['email'];
 						$vndrWebsite = $vl['website'];
+                                                $category = $vl['Cat'];
+                                                
+                                               
 					}
 				}
-
+                                                                       
 				if(is_array($value) && $key == 'vendor_product_details')
 				{
 					foreach($value as $ky => $vl)
@@ -3134,162 +3139,19 @@
 				$prdName = $value['product_display_name'];
 			}
 
-                       // $emailContent=$this->sendEnqMailToUser($value);
-
-			/*$emailContent = "Hello $usrName, Thank you for showing interest in";
-			$emailContent .= "<br/><br/>";
-			if(!empty($prdName))
-			{
-				$emailContent .= "the $prdName you have enquired, The contact details of the vendor are";
-			}
-			else
-			{
-				$emailContent .= " the product you have enquired. The contact details of the vendor are";
-			}
-			$emailContent .= "<br/><br/>";
-
-			$emailContent .= "<table border='2'>";
-				$emailContent .= "<tr>";
-					$emailContent .= "<th>";
-						$emailContent .= "Vendor Name";
-					$emailContent .= "</th>";
-					$emailContent .= "<th>";
-						$emailContent .= "Address";
-					$emailContent .= "</th>";
-					$emailContent .= "<th>";
-						$emailContent .= "Area";
-					$emailContent .= "</th>";
-					$emailContent .= "<th>";
-						$emailContent .= "City";
-					$emailContent .= "</th>";
-					$emailContent .= "<th>";
-						$emailContent .= "State";
-					$emailContent .= "</th>";
-					$emailContent .= "<th>";
-						$emailContent .= "Pincode";
-					$emailContent .= "</th>";
-					$emailContent .= "<th>";
-						$emailContent .= "Landline";
-					$emailContent .= "</th>";
-					$emailContent .= "<th>";
-						$emailContent .= "Mobile";
-					$emailContent .= "</th>";
-					$emailContent .= "<th>";
-						$emailContent .= "Vendor Email";
-					$emailContent .= "</th>";
-				$emailContent .= "</tr>";
-				$emailContent .= "<td>";
-					$emailContent .= $vndrName;
-				$emailContent .= "</td>";
-				$emailContent .= "<td>";
-					$emailContent .= $address;
-				$emailContent .= "</td>";
-				$emailContent .= "<td>";
-					$emailContent .= $area;
-				$emailContent .= "</td>";
-				$emailContent .= "<td>";
-					$emailContent .= $city;
-				$emailContent .= "</td>";
-				$emailContent .= "<td>";
-					$emailContent .= $state;
-				$emailContent .= "</td>";
-				$emailContent .= "<td>";
-					$emailContent .= $pincode;
-				$emailContent .= "</td>";
-				$emailContent .= "<td>";
-					$emailContent .= $vndrLL;
-				$emailContent .= "</td>";
-				$emailContent .= "<td>";
-					$emailContent .= $vndrMobile;
-				$emailContent .= "</td>";
-				$emailContent .= "<td>";
-					$emailContent .= $vndrEmail;
-				$emailContent .= "</td>";
-			$emailContent .= "</table>";
-
-			$emailContent .= "<br/><br/>";
-
-			$emailContent .= "Regards,";
-			$emailContent .= "<br/>";
-			$emailContent .= "IFtoSI Team";
-			$emailContent .= "<br/>";
-			$emailContent .= "For any assistance,call: 91-22-41222241/42. Email: info@iftosi.com";*/
-                       /* $emailContent ='<html>
-                                <head>
-                                    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-                                    <meta name="viewport" content="width=device-width, user-scalable=no" >
-                                    <title>recent enquiry</title>
-                                </head>
-                                <body style="margin:0; padding: 0; background-color: #171334;">
-                                <center>
-                                    <div style="text-align: center; height: auto; font-size: 1em; margin:0; max-width: 500px; color:#666;-webkit-font-smoothing: antialiased;font-family: Open Sans, Roboto, Helvetica, Arial;">
-                                        <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:15px 0 15px 0; text-align: center;color: #d00000; text-transform: uppercase"><img src="'.DOMAIN.'tools/img/iftosi.png" style="width:100%;"></div></a>
-                                        <div style="height: auto; border-radius: 0px;box-shadow: 0 0 30px 5px rgba(0,0,0,0.4);background: #fff;">
-                                            <div  style="font-size: 20px;  padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">Product enquiry</div>
-                                            <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;padding: 20px 0 20px 0;"><img src="'.DOMAIN.'tools/img/common/Enquiry.png" style="width:50px;"></div></a>
-                                            <div style="font-size: 18px; padding: 15px 10px 10px 10px; color:#8A0044;">Hello '.$usrName.',</div>
-                                            <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 18px; color: #333;padding: 0px 15px 20px 15px;">Thank you for showing interest in the product you have enquired.The contact details of the vendor are</div>
-                                                            <center style="padding: 0px 30px 20px 30px;">
-                                                <div style="width: 60%;display: inline-block;border-right: 1px solid #f0f0f0;">
-                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Name&nbsp;</div>
-                                                    <span style="padding-right: 20px;">:</span>
-                                                    <div style="width: 35%;    display: inline-block; text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$vndrName.'</div>
-                                                </div>
-                                                <div style="width: 60%;display: inline-block;">
-                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Address&nbsp;</div>
-                                                    <span style="padding-right: 20px;">:</span>
-                                                    <div style="width: 35%; display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$address.'</div>
-                                                </div>
-                                                <div style="width: 60%;display: inline-block;">
-                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Area&nbsp;</div>
-                                                    <span style="padding-right: 20px;">:</span>
-                                                    <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 18px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$area.'</div>
-                                                </div>
-                                                <div style="width: 60%;display: inline-block;">
-                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">City&nbsp;</div>
-                                                    <span style="padding-right: 20px;">:</span>
-                                                    <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$city.'</div>
-                                                </div>
-                                                <div style="width: 60%;display: inline-block;">
-                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">State&nbsp;</div>
-                                                    <span style="padding-right: 20px;">:</span>
-                                                    <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$state.'</div>
-                                                </div>
-                                                <div style="width: 60%;display: inline-block;">
-                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Pincode&nbsp;</div>
-                                                    <span style="padding-right: 20px;">:</span>
-                                                    <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$pincode.'</div>
-                                                </div>
-                                                <div style="width: 60%;display: inline-block;">
-                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Landline&nbsp;</div>
-                                                    <span style="padding-right: 20px;">:</span>
-                                                    <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$vndrLL.'</div>
-                                                </div>
-                                                <div style="width: 60%;display: inline-block;">
-                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Mobile&nbsp;</div>
-                                                    <span style="padding-right: 20px;">:</span>
-                                                    <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$vndrMobile.'</div>
-                                                </div>
-                                                <div style="width: 60%;display: inline-block;">
-                                                    <div style="width: 35%;text-align: left;display: inline-block;font-size: 16px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Email&nbsp;</div>
-                                                    <span style="padding-right: 20px;">:</span>
-                                                    <div style="width: 35%;    display: inline-block;    text-align: left;font-size: 16px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;">&nbsp;'.$vndrEmail.'</div>
-                                                </div>
-                                            </center>
-                                            <center style="padding-top: 50px;">
-                                                <img src="'.DOMAIN.'tools/img/common/diamond.jpg" width="50">
-                                                <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
-                                                <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
-                                            </center>
-                                            <div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:022-32623263" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
-                                        </div>
-                                        <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
-                                    </div>
-                                </center>
-                            </body>
-                            </html>';*/
-
-
+                            $sqlcat = "SELECT category_id FROM tbl_product_category_mapping WHERE product_id=".$prdId." LIMIT 1" ;
+                            $rescat = $this->query($sqlcat);
+                            $rowcat = $this->fetchData($rescat); 
+                            $catName = $rowcat['category_id'];
+                            
+                            if($catName ==1000 || $catName ==10002 ||$catName ==10037 || $catName ==10038)
+                            {
+                                $name = 'Merchant';
+                            }
+                            else
+                            {
+                                $name = 'Jeweller';
+                            }
 
                        $emailContent ='<html>
                                         <head>
@@ -3305,7 +3167,7 @@
                                                     <div  style="font-size: 20px;  padding: 40px 10px 5px 10px; color:#333;text-transform: capitalize;">Product enquiry</div>
                                                     <a href="'.DOMAIN.'"><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase;padding: 20px 0 20px 0;"><img src="'.DOMAIN.'tools/img/common/Enquiry.png" style="width:50px;"></div></a>
                                                     <div style="font-size: 14px; padding: 15px 10px 10px 10px; color:#8A0044;">Hello '.$usrName.',</div>
-                                                    <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 14px; color: #333;padding: 0px 15px 20px 15px;">Thank you for showing interest in the product you have enquired.The contact details of the Jeweller/Merchant are</div>
+                                                    <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 14px; color: #333;padding: 0px 15px 20px 15px;">Thank you for showing interest in the product you have enquired.The contact details of the '.$name.' are</div>
                                                     <center style="padding: 0px 30px 20px 30px;box-sizing:border-box;line-height:19px;">
                                                         <div style="width: 100%;display: inline-block;">
                                                             <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Name<span style="padding-left: 20px;">:</span></div>
@@ -3357,21 +3219,16 @@
                                         </center>
                                         </body>
                                         </html>';
-
+                                                                       
 
                         $mailHeaders = "Content-type:text/html;charset=UTF-8" . "\r\n";
 
 			$mailHeaders .= "From: info@iftosi.com \r\n";
 
-			$smsText = "Dear $usrName, Thank you for showing interest in the product you have enquired. The contact details of the Jeweller/Merchant are:";
-			$smsText .= "\r\n\r\n";
-			$smsText .= "Jeweller/Merchant Details:";
+			$smsText = "Dear $usrName, Thank you for showing interest in the product you have enquired. The contact details of the ".$name." are:";
 			$smsText .= "\r\n\r\n";
 			$smsText .= "Name: ";
 			$smsText .= $vndrName;
-//			$smsText .= "\r\n";
-//			$smsText .= "Address: ";
-//			$smsText .= $address;
 			$smsText .= "\r\n";
 			$smsText .= "Area: ";
 			$smsText .= $area;
@@ -3379,12 +3236,6 @@
 			$smsText .= "City: ";
 			$smsText .= $city;
 			$smsText .= "\r\n";
-//			$smsText .= "State: ";
-//			$smsText .= $state;
-//			$smsText .= "\r\n";
-//			$smsText .= "Pincode: ";
-//			$smsText .= $pincode;
-//			$smsText .= "\r\n";
 			$smsText .= "Landline: ";
 			$smsText .= $vndrLL;
 			$smsText .= "\r\n";
@@ -3395,31 +3246,13 @@
 			$smsText .= $vndrEmail;
 			$smsText .= "\r\n\r\n";
 			$smsText .= "For any assistance, call: 91-22-41222241/42. Email: info@iftosi.com";
-
+                                                              
 			$smsText = urlencode($smsText);
 			$sendSMS = str_replace('_MOBILE', $usrMobile, SMSAPI);
 			$sendSMS = str_replace('_MESSAGE', $smsText, $sendSMS);
 			$res = $comm->executeCurl($sendSMS, true);
-            /*if (!empty($res))
-            {
-				if(stristr($res, 'messageid'))
-				{
-					$result = array('result'=>'','code'=>1);
-					return $result;
-				}
-				else
-				{
-					$result = array('result'=>'','code'=>0);
-					return $result;
-				}
-            }
-            else
-            {
-                $result = array('result'=>'','code'=>0);
-                return $result;
-            }*/
-
-			if(mail($usrEmail, 'Product Details', $emailContent, $mailHeaders) && stristr($res, 'gid'))
+                                                                        
+             		if(mail($usrEmail, 'Product Details', $emailContent, $mailHeaders) && stristr($res, 'gid'))
 			{
 				$resp = $prdRes;
 				$error = array('Code' => 0, 'Msg' => 'SMS / Email sent');
