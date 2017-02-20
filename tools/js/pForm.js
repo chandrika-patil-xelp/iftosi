@@ -235,7 +235,7 @@ function isconform()
             $("#price_per_carat").prop('disabled',false);
             $("#diamondsvalue").prop('disabled',false);
             $('.inDiamondAddMore').addClass('dn');
-            $('.addMore').addClass('dn');
+            $('#addDiamondType').addClass('dn');
            
         }
         else
@@ -248,7 +248,7 @@ function isconform()
             
             $('.inDiamondAddMore').removeClass('dn');
             
-            $('.addMore').removeClass('dn');
+            $('#addDiamondType').removeClass('dn');
           
            
                 
