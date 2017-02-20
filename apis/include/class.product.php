@@ -3225,7 +3225,7 @@
 
 			$mailHeaders .= "From: info@iftosi.com \r\n";
 
-			$smsText = "Dear $usrName, Thank you for showing interest in the product you have enquired. The contact details of the ".$name." are:";
+			$smsText = "Hello $usrName, Thank you for showing interest in the product you have enquired. The contact details of the ".$name." are:";
 			$smsText .= "\r\n\r\n";
 			$smsText .= "Name: ";
 			$smsText .= $vndrName;
