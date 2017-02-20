@@ -303,14 +303,6 @@ class enquiry extends DB
                 <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 14px; color: #333;padding: 0px 15px 20px 15px;">Customer with following details</div>
                 <center style="padding: 0px 30px 20px 30px;box-sizing:border-box;line-height:19px;">
                     <div style="width: 100%;display: inline-block;">
-                        <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Name<span style="padding-left: 20px;">:</span></div>
-                        <div style="width: 50%;display: inline-block; text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;word-wrap: break-word;">'.ucwords(strtolower($params['user_name'])).'</div>                   
-                    </div>
-                    <div style="width: 100%;display: inline-block;">
-                        <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Contact no<span style="padding-left:20px;">:</span></div>
-                        <div style="width: 50%;display:inline-block;text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;word-wrap: break-word;">'.$params['user_mob'].'</div>
-                    </div>
-                    <div style="width: 100%;display: inline-block;">
                         <div style="width: 30%;vertical-align: top;text-align: right;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Email<span style="padding-left:20px;">:</span></div>
                         <div style="width: 50%;display: inline-block;text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;word-wrap: break-word;">'.$params['useremail'].'</div>
                     </div>

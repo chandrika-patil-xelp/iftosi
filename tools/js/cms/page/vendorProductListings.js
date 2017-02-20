@@ -58,7 +58,8 @@ $(window).scroll(function () {
 function loadDiamonds(pgno) {
 	if(!pgno)
 		pgno = 1;
-	$.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + pgno + "&limit=50&catid="+catid, success: function (result) {
+            var tmstmp = new Date().getTime();
+	$.ajax({url: common.APIWebPath() + "index.php?action=getVproducts&vid=" + uid + "&page=" + pgno + "&limit=50&catid="+catid+"&timestamp="+tmstmp, success: function (result) {
 
 		loadDiamondCallback(result,pgno);
 	}});
