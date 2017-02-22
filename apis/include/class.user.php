@@ -667,7 +667,8 @@
                                 $updtSql = "UPDATE tbl_vendor_master set active_flag = 0,expire_flag = 1 WHERE vendor_id =".$arr['uid'];
                                 $udtres = $this->query($updtSql);
                                 $Tparams = array('username'=>  urlencode($arr['username']),'email'=>urlencode($arr['email']),'mobile'=>$arr['mobile'],'isVendor'=>$arr['utype']);
-                                $this->sendDeactMailSms($Tparams);
+                                //$this->sendDeactMailSms($Tparams);
+                                $this->sendDeactMailSmsTemplate();
 
                                 if($udtres)
                                 {
@@ -749,7 +750,9 @@
                                     $updtSql = "UPDATE tbl_vendor_master SET active_flag = 0,expire_flag = 1 WHERE vendor_id =".$arr['uid'];
                                     $udtres = $this->query($updtSql);
                                     $Tparams = array('username'=>urlencode($arr['username']),'email'=>urlencode($arr['email']),'mobile'=>$arr['mobile'],'isVendor'=>$arr['utype']);
-                                    $this->sendDeactMailSms($Tparams);
+                                    //$this->sendDeactMailSms($Tparams);
+                                    $this->sendDeactMailSmsTemplate();
+                                    
                                     if($udtres)
                                     {
                                         $sql="  SELECT
