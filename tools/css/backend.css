@@ -562,7 +562,7 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 
 
 /*Vendor Landing Products*/
-.forPrds{width:100%;height: auto;}
+.forPrds{width:100%;height: auto;min-width: 1200px;}
 .forPrds .prdSearchDiv{}
 .m0{margin: 0!important;}
 .addPrdBtn{width:auto;background: #8A0044 url(../img/common/tickCircle.svg)no-repeat;background-position: 150% center;background-size: auto 80%;margin-left: 10px;color: #fff;height: 35px;line-height: 35px;font-size: 13px;padding: 0 30px;border-radius: 5px;cursor: pointer;}
@@ -644,7 +644,7 @@ a.ui-datepicker-next.ui-corner-all{width: 15%;height: 30px;line-height: 30px;tex
 .accepted{width:15%;}
 .pending{width:15%;}
 .rejected{width:15%;}
-.acct2{width:19%;border: none!important;}
+.acct2{width:16%;border: none!important;}
 .viewDetBtn {width: auto;height: 36px!important;cursor: pointer;line-height: 36px;margin: 7px;border: none!important;background: #8A0044 url(../img/common/info.svg)no-repeat;background-size: auto 23px;background-position: 95% 8px;color: #fff;border-radius: 5px;padding: 0 30px 0 25px!important;}
 
 /*Thumbnail Page*/
@@ -902,7 +902,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
     .prdListHeader div {padding: 0 10px;}
     .acct:hover{overflow: visible !important;}
     .date { width: 11%;}
-    .barcode {width: 13%;}
+    .barcode {width: 11%;}
     .diamondPrds .shape {width: 10%;}
     .carats {width: 8%;}
     .diamondPrds .color {width: 9%;}
@@ -949,7 +949,7 @@ h1,h2,h3,h4,h5{font-family: openB;color: #4d4d4d;margin: 10px 0;}
 .cDtls{width:100%;height:auto;margin-bottom: 5px;}
 .cList{width:100%;height:60px;background-color:#fff;}
 .cList div{font-size:14px !important;line-height:60px !important}
-.rupeeImg{ 
+.rupeeImg{
     background: url(../img/common/rupee.svg)no-repeat;
     background-size: auto 45%;
     height: 100%;
