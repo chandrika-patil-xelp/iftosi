@@ -148,7 +148,17 @@
                         ?>
                         <div class="infoCommn fLeft fmOpenR cursorPointer">
                             <div class="infoLabel fmOpenB  font12">Certificate</div>
-                            <div class="infoValue c666 font25 fmOpenR" onclick="common.showCertificate('<?php echo DOMAIN . $data['attr_details']['certificate_url']; ?>');">See Certificate</div>
+                            <?php
+                              if(stristr($data['attr_details']['certificate_url'], 'http://') || stristr($data['attr_details']['certificate_url'], 'https://') || stristr($data['attr_details']['certificate_url'], 'www.'))
+                              {
+                                $path = $data['attr_details']['certificate_url'];
+                              }
+                              else
+                              {
+                                $path = DOMAIN . $data['attr_details']['certificate_url'];
+                              }
+                            ?>
+                            <div class="infoValue c666 font25 fmOpenR" onclick="common.showCertificate('<?php echo $path; ?>');">View Certificate</div>
                         </div>
                         <?php
                         }
@@ -654,7 +664,7 @@
                 ?>
             </div>
         </div>
-      
+
         <?php include 'logo.html'; ?>
         <?php include 'leftmenu.html'; ?>
         <div id='dragTarget' class="drag-target" style="touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); left: 0px;"></div>

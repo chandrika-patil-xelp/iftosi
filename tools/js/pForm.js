@@ -23,7 +23,7 @@ function changeGemstoneType(obj,id)
 		$('.gemstoneProp_'+id).removeClass('dn');
 
                 $('#addGemsType').remove();
-                $('#gemsTypeCont').append('<div onclick="addGemsType()" id="addGemsType" class="submitBtn fmOpenR ripplelink poR fRight addMore">Add Gemstone Type</div><div style="clear: both;"></div>');
+                $('#gemsTypeCont').append('<div onclick="addGemsType()" id="addGemsType" class="submitBtn fmOpenR ripplelink poR fRight addMoreGem">Add Gemstone Type</div><div style="clear: both;"></div>');
 	}
 	else
 	{
@@ -227,7 +227,7 @@ function uploadCertificate(tmp_pid)
 function isconform()
 {
     var ids = document.getElementById("conform");
-    
+
        if(ids.checked==true)
        {
             $("#diamondweight").prop('disabled',false);
@@ -236,25 +236,25 @@ function isconform()
             $("#diamondsvalue").prop('disabled',false);
             $('.inDiamondAddMore').addClass('dn');
             $('#addDiamondType').addClass('dn');
-           
+
         }
         else
         {
-            
+
             $("#diamondweight").prop('disabled',true);
             $("#no_diamonds").prop('disabled',true);
             $("#price_per_carat").prop('disabled',true);
             $("#diamondsvalue").prop('disabled',true);
-            
+
             $('.inDiamondAddMore').removeClass('dn');
-            
+
             $('#addDiamondType').removeClass('dn');
-          
-           
-                
-            
+
+
+
+
         }
-   
+
 }
 
 function validateJForm()
@@ -313,11 +313,11 @@ function validateJForm()
 				var subcat = '';
 				var isValid = true;
 				var str = '';
-                               
-                               
-                               
-                                
-                                
+
+
+
+
+
 				shape.each(function()
 				{
 						if($(this).hasClass('shapeSelected'))
@@ -354,14 +354,14 @@ function validateJForm()
 						submiter = false;
 				  	        isValid = false;
 				}
-                                
+
                                 if(isValid && (combination === undefined || combination === null || combination === ''))
 				{
 						str = 'Please select combination';
                                                 submiter = false;
                                                 isValid = false;
 				}
-                                
+
 				if(isValid && (certificate === undefined || certificate === null || certificate === ''))
 				{
 						str ='Please select certificate';
@@ -379,7 +379,7 @@ function validateJForm()
                                                                 str = 'Please enter certificate';
                                                 }
 
-                                               
+
                                 }
                                               var tmp_certificate_url = $('#filePath').html();
 						// if(isValid && (tmp_certificate_url == undefined || tmp_certificate_url == null || tmp_certificate_url == '') && (certificate !== undefined && certificate !== null && certificate !== 'undefined' && certificate !== 'null' && certificate !== 'BIS' && certificate !== 'NONE'))
@@ -405,7 +405,7 @@ function validateJForm()
                                                         submiter = false;
                                                         isValid = false;
                                         }
-                                }        
+                                }
                                 if(isValid && (isBugget === 'True'))
 				{
                                     if(isValid && (baguette_color === undefined || baguette_color === null || baguette_color === ''))
@@ -414,14 +414,14 @@ function validateJForm()
                                                 submiter = false;
                                                 isValid = false;
                                     }
-                                    
+
                                     if(isValid && (baguette_quality === undefined || baguette_quality === null || baguette_quality === ''))
 				    {
 						str = 'Please select baguette quality';
                                                 submiter = false;
                                                 isValid = false;
                                     }
-                                
+
                                     if(isValid && (baguette_weight === undefined || baguette_weight === null || baguette_weight === '' || isNaN(purity)))
                                      {
                                                      str = 'Please enter baguette weight';
@@ -446,7 +446,7 @@ function validateJForm()
                                                      $('#baguette_price_per_carat').focus();
                                      }
                                 }
-				
+
 
 	      var vclarity = new Array();
 	      var vcolor   =   new Array();
@@ -494,16 +494,16 @@ function validateJForm()
 									isValid = false;
 									$('#no_diamonds').focus();
 							}
-                                                    
-                                                    
+
+
                                                 if(baguette_weight !== undefined && baguette_weight !== null && baguette_weight !== 0.000 && baguette_weight !== '' && isNaN(baguette_weight) == false && dweight !== undefined && dweight !== null && dweight !== 0.000 && isNaN(dweight) == false)
-						{  
+						{
                                                     var temp=(parseFloat(dweight))+(parseFloat(baguette_weight));
                                                   //alert(parseFloat(diamondweight)+" "+ dweight +" "+parseFloat(baguette_weight));
                                                     //$('#diamondweight').val((temp));
                                                     dweight  = temp;
-                                                    
-                                                    
+
+
                                                 }
 					}
 					else
@@ -844,13 +844,13 @@ function calculateB2BPrice()
    var b2cdiscount=parseInt($('#discount').val().trim());
    var b2bdiscount=parseInt($('#discountb2b').val().trim());
    //alert(b2cdiscount + "" + b2bdiscount);
-   /*if(b2bdiscount<(b2cdiscount+5))  
+   /*if(b2bdiscount<(b2cdiscount+5))
    {
         common.toast(0,'B2C discount always less atleast by 5 to B2B Discount');
         $('#prdb2bprice').val('');
         $('#discountb2b').val('');
         $('#discount').val('');
-			   
+
    }*/
    if(discount == null || discount == '' || discount == 'undefined' || discount == undefined)
    {
@@ -1086,7 +1086,7 @@ function validateNum()
 	        str ='Design field is Empty';
 	        isValid = false;
 	    }
-            
+
 	    if(isValid && design === 'Other')
 	    {
 	        if(isValid && (otherdesign == undefined || otherdesign == 'undefined' || otherdesign == null || otherdesign == 'null' || otherdesign == '' ))
@@ -1277,11 +1277,10 @@ function addShapeType()
                         str +='<center>';
                         var shapeTypesArr=JSON.parse(shapeTypes);
                         for(var i=0; i<shapeTypesArr.length; i++)
-			{
+												{
                             str +='<div class="shapeComm transition300 ripplelink '+shapeTypesArr[i]+' " id="'+shapeTypesArr[i]+'_'+DivLen+'" onclick="checkDiamondShape(this,'+DivLen+');"> </div>';
                         }
                         str +='</center></div></div></div></div>';
-
                 str +='<div class="divCon fLeft dAuto diamondProp dn diamondProp_'+DivLen+'"><div class="titleDiv txtCap fLeft">Diamond Color *</div>';
                 str +='<div class="radioCont fLeft dmdColor'+DivLen+'"> ';
                     str +='<div class="checkDiv fLeft"><input name="color_'+DivLen+'" class="filled-in" value="D" id="color_D_'+DivLen+'" type="checkbox"><label for="color_D_'+DivLen+'"> D</label></div>';
@@ -1314,21 +1313,20 @@ function addShapeType()
 		{
 				checks($(this),'clarity_'+DivLen,"arrClarity");
 		});
-		$('.addMore').remove();
+		$('#addDiamondType').remove();
 		cntDiv++;
 }
 
 function checkDiamondShape(evt,id)
 {
     $('.jw4').removeClass('dn');
-    
     if($(evt).hasClass('shapeSelected'))
-    {  
-       
+    {
+
         $(evt).toggleClass('shapeSelected');
-        
+
         if(id!=1)
-	{
+				{
             $('#diamondShapeCont_'+id).parent().addClass('dn');
         }
         $('.jw4').addClass('dn');
@@ -1340,16 +1338,16 @@ function checkDiamondShape(evt,id)
         }
     }
     else
-    {  
-         
+    {
+
         $(evt).removeClass('shapeSelected');
-        $('.addMore').addClass('dn');
+        $('#addDiamondType').addClass('dn');
         var uthis = $(evt);
         var wholeDiv='#diamondShapeCont_'+id+' .shapeComm';
         $(wholeDiv).each(function ()
 				{
             if($(wholeDiv).hasClass('shapeSelected') && $(wholeDiv).attr('id') != uthis.attr('id'))
-						{        
+						{
 							$(wholeDiv).removeClass('shapeSelected');
 						}
 						else
@@ -1360,7 +1358,7 @@ function checkDiamondShape(evt,id)
         $(evt).toggleClass('shapeSelected');
         if($(evt).hasClass('shapeSelected'))
         {
-            $('.addMore').addClass('dn');
+            $('#addDiamondType').addClass('dn');
 	    $('.inDiamondAddMore').remove();
             $('#diamondShapeCont').append('<div onclick="addShapeType()" id="addDiamondType" class="submitBtn fmOpenR ripplelink poR fRight addMore inDiamondAddMore">Add Diamond Type</div><div style="clear: both;"></div>');
             $('.diamondProp_'+id).removeClass('dn');
@@ -1372,8 +1370,8 @@ function checkDiamondShape(evt,id)
     }
 
     if($('#diamondShapeCont_1 .shapeComm').hasClass('shapeSelected'))
-    {   
-            
+    {
+
 	    $('.diamondProp').removeClass('dn');
     }
     else
@@ -1385,33 +1383,44 @@ function checkDiamondShape(evt,id)
 
 function addGemsType()
 {
-    var DivLen = ($('#gemsTypeCont #gemsDiv').length)+1;
-    var str ='<div id="gemsDiv"><div id="gemsTypeCont_'+DivLen+'"><div class="divCon fLeft">';
-        str +='<div class="titleDiv txtCap fLeft">Gemstone Type</div>';
-        str +='<select class="txtInput fLeft fmOpenR font14 c666" onchange="changeGemstoneType(this,'+DivLen+');" id="gemstone_type">';
-        str +='<option value="">Select Gemstone Type</option>';
-        var gemsTypesArr=JSON.parse(gemsTypes);
-        for(var i=0; i<gemsTypesArr.length; i++)
-	{
-            str +='<option value="'+gemsTypesArr[i].c+'">'+gemsTypesArr[i].n+'</option>';
-        }
-        str +='<option value="other">Others</option>';
-        str +='</select>';
-		    str +='</div>';
-		    str +='<div class="divCon fLeft dn otherGemstoneProp_'+DivLen+'">';
-		    str +='<div class="titleDiv txtCap fLeft">Other Gemstone Type</div>';
-		    str +='<input type="text" class="txtInput fLeft fmOpenR font14 c666" value="" placeholder=" eg. ABC" autocomplete="false" id="other_gem_type" name="other_gem_type"></div>';
-		    str +='<div class="divCon fLeft jw3 dn gemstoneProp_'+DivLen+'">';
-		    str +='<div class="titleDiv txtCap fLeft">Gemstone Colour *</div>';
-		    str +='<div class="radioCont fLeft">';
-				var gemsValuesArr=JSON.parse(gemsValues);
-        for(var i=0; i<gemsValuesArr.length; i++)
-				{
-            str +='<div class="checkDiv fLeft"><input type="radio" id="'+gemsValuesArr[i]+'_'+DivLen+'" value="'+gemsValuesArr[i]+'" class="filled-in" name="gemstone_color_'+DivLen+'"><label for="'+gemsValuesArr[i]+'_'+DivLen+'" class=" txtCap">'+gemsValuesArr[i]+'</label></div>';
-        }
-    str +='</div></div></div>';
-    $('#addGemsType').remove();
-    $('#gemsTypeCont').append(str);
+		if($('#gemsTypeCont #gemsDiv').length >= 1 && !$('#gemsTypeCont').hasClass('dn'))
+		{
+			var DivLen = ($('#gemsTypeCont #gemsDiv').length)+1;
+			var str ='<div id="gemsDiv"><div id="gemsTypeCont_'+DivLen+'"><div class="divCon fLeft">';
+					str +='<div class="titleDiv txtCap fLeft">Gemstone Type</div>';
+					str +='<select class="txtInput fLeft fmOpenR font14 c666" onchange="changeGemstoneType(this,'+DivLen+');" id="gemstone_type">';
+					str +='<option value="">Select Gemstone Type</option>';
+					var gemsTypesArr=JSON.parse(gemsTypes);
+					for(var i=0; i<gemsTypesArr.length; i++)
+					{
+							str +='<option value="'+gemsTypesArr[i].c+'">'+gemsTypesArr[i].n+'</option>';
+					}
+					str +='<option value="other">Others</option>';
+					str +='</select>';
+					str +='</div>';
+					str +='<div class="divCon fLeft otherGemstoneProp_'+DivLen+'">';
+					str +='<div class="titleDiv txtCap fLeft">Other Gemstone Type</div>';
+					str +='<input type="text" class="txtInput fLeft fmOpenR font14 c666" value="" placeholder=" eg. ABC" autocomplete="false" id="other_gem_type" name="other_gem_type"></div>';
+					str +='<div class="divCon fLeft jw3 gemstoneProp_'+DivLen+'">';
+					str +='<div class="titleDiv txtCap fLeft">Gemstone Colour *</div>';
+					str +='<div class="radioCont fLeft">';
+					var gemsValuesArr=JSON.parse(gemsValues);
+					for(var i=0; i<gemsValuesArr.length; i++)
+					{
+							str +='<div class="checkDiv fLeft"><input type="radio" id="'+gemsValuesArr[i]+'_'+DivLen+'" value="'+gemsValuesArr[i]+'" class="filled-in" name="gemstone_color_'+DivLen+'"><label for="'+gemsValuesArr[i]+'_'+DivLen+'" class=" txtCap">'+gemsValuesArr[i]+'</label></div>';
+					}
+			str +='</div></div></div>';
+			$('#addGemsType').remove();
+			$('#gemsTypeCont').append(str);
+		}
+		else
+		{
+				console.log('Here for 1st tym');
+				$('#gemsTypeCont').removeClass('dn');
+				$('#gemsTypeCont_1').removeClass('dn');
+				$('.gemstoneProp').removeClass('dn');
+
+		}
 }
 
 function checks(obj,name,type)
@@ -1721,10 +1730,10 @@ function calculateJPrice()
 		{
 					polkiValue = parseFloat($('#polki_value').val());
 					totalPrice = totalPrice + polkiValue;
-                                        
+
 		}
                 if( $('#baguette_value').val() !== null && $('#baguette_value').val() !== '' && $('#baguette_value').val() !== undefined)
-		{ 
+		{
 					baguette_value = parseFloat($('#baguette_value').val());
 					totalPrice = totalPrice + baguette_value;
 		}
@@ -1741,7 +1750,7 @@ function calculateJPrice()
 		if($('#labour_charge').val() !== undefined && $('#labour_charge').val() !== null && $('#labour_charge').val() !== '')
 		{
 				labourValue = parseFloat($('#labour_charge').val());
-        if(parseFloat($('#netweight').val()) !== null || parseFloat($('#netweight').val()) !== 0 || parseFloat($('#netweight').val()) !== '' && ($('input[type="metal"]:checked').val() == 'Gold'))
+        if(parseFloat($('#netweight').val()) !== null && parseFloat($('#netweight').val()) !== 0 && parseFloat($('#netweight').val()) !== '' && ($('input[type="metal"]:checked').val() == 'Gold'))
         {
             totalPrice = totalPrice + (labourValue*parseFloat($('#netweight').val()));
         }
@@ -2071,12 +2080,12 @@ function calculateJPrice()
             var no_diamonds             =   parseFloat($('#no_diamonds').val());
             var price_per_carat         =   parseFloat($('#price_per_carat').val());
             var diamondsvalue           =   0;
-            
+
             var baguette_weight         =   parseFloat($('#baguette_weight').val());
             var baguetteno              =   parseFloat($('#baguetteno').val());
             var baguette_price_per_carat   =   parseFloat($('#baguette_price_per_carat').val());
             var baguette_value          =   0;
-            
+
             var gemweight               =   parseFloat($('#gemweight').val());
             var num_gemstones           =   parseFloat($('#num_gemstones').val());
             var gprice_per_carat        =   parseFloat($('#gprice_per_carat').val());
@@ -2094,28 +2103,28 @@ function calculateJPrice()
 						var purityArr = {'24':999,'23':958,'22':916,'21':875,'18':750,'17':708,'14':585,'10':417,'9':375,'8':333};
 
 						if(polkiweight !== undefined && polkiweight !== null && polkiweight !== 0 && polki_price_per_carat !== undefined && polki_price_per_carat !== null && polki_price_per_carat !== 0 && isNaN(polki_price_per_carat) == false)
-						{                 
+						{
 								polkivalue 	 = parseFloat(polkiweight * polki_price_per_carat);
 								total_weight = total_weight + parseFloat(polkiweight/5);
                                                                 $('#polki_value').val(polkivalue.toFixed(3));
 						}
-                                                
+
                                                 if(baguette_weight !== undefined && baguette_weight !== null && baguette_weight !== 0 && baguette_price_per_carat !== undefined && baguette_price_per_carat !== null && baguette_price_per_carat !== 0 && isNaN(baguette_price_per_carat) == false)
 						{
 								baguette_value 	 = parseFloat(baguette_weight * baguette_price_per_carat);
 								total_weight = total_weight + parseFloat(baguette_weight/5);
                                                                $('#baguette_value').val(baguette_value.toFixed(3));
 						}
-                                                
-                                                
+
+
 						if(diamondweight !== undefined && diamondweight !== null && diamondweight !== 0 && price_per_carat !== undefined && price_per_carat !== null && price_per_carat !== 0 && isNaN(price_per_carat) == false)
                                                 {
                                                                 diamondsvalue = parseFloat(diamondweight * price_per_carat);
                                                                 total_weight = total_weight + parseFloat(diamondweight/5);
 								$('#diamondsvalue').val(diamondsvalue.toFixed(2));
                                                 }
-                                                 
-                                                
+
+
                                                 if(gemweight !== undefined && gemweight !== null && gemweight !== '' && isNaN(gemweight) == false && gprice_per_carat !== undefined && gprice_per_carat !== null && gprice_per_carat !== 0 &&  isNaN(gprice_per_carat) == false)
                                                 {
                                                                 gemstonevalue = parseFloat(gemweight * gprice_per_carat);

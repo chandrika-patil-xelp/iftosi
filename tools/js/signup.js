@@ -27,7 +27,7 @@ var validMob = true;
         {
             $(this).siblings('label, i').removeClass('labelActive');
             $(this).removeClass('brOrange brGreen');//.addClass('brRed');
-        } else 
+        } else
         {
             $(this).removeClass(' ').addClass('brGreen');
         }
@@ -70,14 +70,14 @@ $('#pr_mobile').focus(function (){
         window.location.assign(a);
     });
     $('#signupSubmit').bind('click', function () {
-        
-        
+
+
             if(!$('#pr_citySuggestDiv').hasClass('dn'))
             {
                 $('#pr_citySuggestDiv').addClass('dn');
             }
-            
-            
+
+
             var pr_name = $('#pr_name').val();
             var pr_mobile = $('#pr_mobile').val();
             var pr_email = $('#pr_email').val();
@@ -228,20 +228,11 @@ function requestOTP()
 }
 function otpCheck()
 {
-   //var mobile = customStorage.readFromStorage('mobile');
-   //checkOtp();
-   //return false;
-
     var otpProvided =  $('#pr_otp').val();
-//    if(otpProvided == undefined || otpProvided == 'undefined' || otpProvided == null || otpProvided == 'null' || otpProvided == '' || isNaN(otpProvided))
-//    {
-//        customStorage.toast(0,'Please enter the correct OTP or click on resend button');
-//    }
-
     var mobile = customStorage.readFromStorage('mobile');
-	var isValid= '';
-
-    $.ajax({url: DOMAIN + "apis/index.php?action=validOTP&mobile="+mobile+"&vc="+otpProvided, success: function(result)
+    var tmstmp = new Date().getTime();
+	  var isValid= '';
+    $.ajax({url: DOMAIN + "apis/index.php?action=validOTP&mobile="+mobile+"&vc="+otpProvided+'&tm='+tmstmp, success: function(result)
        {
                 var obj = jQuery.parseJSON(result);
                 var errCode = obj.error.Code;

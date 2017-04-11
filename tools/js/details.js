@@ -34,12 +34,12 @@ $(document).ready(function () {
      var img=$(this).css("background-image");
      $("#prdImage").css({'background':"url("+img+") 50% 50% / cover no-repeat scroll padding-box border-box rgb(255, 255, 255);"});
      });
-     
+
      $('.imgThumbnil').click(function(){
      var img=$(this).css('background-image');
      $('.galleryImg').css({'background':"url("+img+") 50% 50% / cover no-repeat scroll padding-box border-box rgb(255, 255, 255);"});
      });
-     
+
      $('.imgPreview').click(function(){
      var img=$(this).css('background-image');
      $('.galleryImg').css({'background':"url("+img+") 50% 50% / cover no-repeat scroll padding-box border-box rgb(255, 255, 255);"});
@@ -97,18 +97,18 @@ if (isVendor != "" && (isVendor == '-1' || isVendor == -1))
             {
                 isWishList = true;
                 common.showLoginForm(1);
-            } 
+            }
             else
             {
                 isWishList = true;
                 showVendorDetails(this);
             }
-        } 
-        
+        }
+
 
         else
         {
-            
+
              $('#baseCont').addClass("pFixed");
             if (isVendor == 2 || isVendor == '2')
             {
@@ -129,7 +129,7 @@ $('.iconCall,.iconMessage').click(function () {
         $('#ur_mobile,#ur_name,#ur_city,#ur_email').val("");
         $('#ur_mobile,#ur_name,#ur_city,#ur_email').blur();
         $('label').removeClass('labelActive');
-        
+
 
         $(input_selector).bind('focus', function () {
             $(this).siblings('label, i').addClass('labelActive');
@@ -538,7 +538,7 @@ function showImages(data)
         });
 
         $('#detailsImgs .rightArrow').click(function () {
-//                    alert("gvyhfdgs");                   
+//                    alert("gvyhfdgs");
         });
 
         $('.imgThumbnil').click(function () {
@@ -797,7 +797,7 @@ mc.on("panleft panright tap press", function (ev) {
     } else if (ev.type == 'panleft') {
         showLeftMenu(false);
     }else if(ev.type === 'panup'){
-       
+
     }
 });
 
@@ -865,7 +865,7 @@ function showVendorDetails(obj)
 
     } else
     {
-       
+
         if (isWishList === true)
         {
             var tmstmp = new Date().getTime();
@@ -884,7 +884,7 @@ function showVendorDetails(obj)
             });
 
         } else if (isMail == true)
-        {         
+        {
             $('#overlay,#userForm').removeClass('dn');
             setTimeout(function () {
                 $('#baseCont').addClass("pFixed");
@@ -895,7 +895,7 @@ function showVendorDetails(obj)
              addToEnquiry();*/
         } else if ((isMail == false) && (isWishList == false))
         {
-            
+
             var tmstmp = new Date().getTime();
             $('#baseCont').removeClass("pFixed");
             $.ajax({url: DOMAIN + "apis/index.php?action=getOwnerCheck&uid=" + uid + "&pid=" + pid + "&tmstmp=" + tmstmp, success: function (result)
@@ -957,7 +957,7 @@ function initMap(lat, lng, contentString) {
      map: map,
      title: 'Hello World!'
      });
-     
+
      google.maps.event.addListener(marker, 'click', function() {
      infowindow.setContent(contentString);
      infowindow.open(map, marker);
@@ -1446,4 +1446,3 @@ $(document).ready(function () {
             $('.menuList').scrollTop(0);
             $('html,body').scrollTop(0);
         });
-     

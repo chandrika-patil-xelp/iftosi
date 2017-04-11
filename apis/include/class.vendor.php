@@ -7,7 +7,7 @@ class vendor extends DB
         parent::DB($db);
     }
     public function vendorList($params)
-    {  
+    {
         $page   = ($params['pgno'] ? $params['pgno'] : 1);
         $limit  = ($params['limit'] ? $params['limit'] : 50);
 
@@ -44,11 +44,11 @@ class vendor extends DB
         $result = array('results' => $results, 'error' => $err);
         return $result;
     }
-    
-    
+
+
      public function vendorDetails($params)
-    {   
-       
+    {
+
         $vid   = ($params['vid'] ? $params['vid'] : 0);
        if(!empty($vid))
        {
@@ -62,25 +62,25 @@ class vendor extends DB
                     $results=array('vendor'=>$arr);
                     $err = array('Code' => 0, 'Msg' => 'Vendor details fetched successfully!');
             }
-            else 
+            else
             {
                     $err = array('Code' => 1, 'Msg' => 'No such vendor');
 
             }
-            
-            
+
+
         }
 
-        else 
+        else
         {
                 $err = array('Code' => 1, 'Msg' => 'Something went wrong');
         }
-       
+
         $result = array('results' => $results, 'error' => $err);
         return $result;
     }
-    
-    
+
+
 
     public function getVendorBySearch($params)
     {
@@ -241,7 +241,7 @@ class vendor extends DB
             $i=-1;
             $vpmap=array();
             while($row1=$this->fetchData($vres))
-            {   
+            {
                 $i++;
                 $vpmap['product_id'][$i]=$row1['product_id'];
                 $vpmap['vendor_price'][$i]=$row1['vendor_price'];
@@ -1508,7 +1508,7 @@ class vendor extends DB
 
     public function bulkInsertProducts($params)
     {
-       
+
         $vid= $params['vid'];
         $data=$params['data'];
         $type=$params['type'];
@@ -1877,7 +1877,7 @@ class vendor extends DB
     }
 
     public function uploadJewelleryProducts($params)
-    {  
+    {
         $vid=$params['vid'];
         $data=$params['data'];
         $type=$params['type'];
@@ -1917,7 +1917,7 @@ class vendor extends DB
                                     'Net Weight (in Grams)',
                                     'Making Charge'
                                 );
-       
+
         if($type=='csv')
         {
             $rdv = explode("\n", $data);
@@ -1929,11 +1929,11 @@ class vendor extends DB
             $rdv = $data;
             $data[0] = array_slice($data[0],0,33);
             $colName = $data[0];
-            
+
             $len = count($rdv);
         }
         $validFormat=TRUE;
-       
+
         if(count($colName) == count($defaultColNames))
         {
             for ($i = 0; $i < count($defaultColNames); $i++)
@@ -2091,7 +2091,7 @@ class vendor extends DB
                                   }
                                    if(!empty($rdv[$j][9]) && !empty($rdv[$j][10]))
                                   {
-                                      
+
                                       $totalPWt = $totalPWt + ($rdv[$j][10]*$rdv[$j][9]);
                                   }
                               }
@@ -2365,8 +2365,8 @@ class vendor extends DB
                 $price = $price + ((floatval($params[18])/5)*$params[20]);
             }
         }
-        
-        
+
+
         if(!empty($params[9]) && !empty($params[10]))
         {
             if(!empty($totalPWt))
@@ -2378,7 +2378,7 @@ class vendor extends DB
                 $price = $price + ((floatval($params[9]))*$params[10]);
             }
         }
-        
+
         if(!empty($params[23]) && !empty($params[24]))
         {
           if(!empty($totalGemVal))
@@ -2410,7 +2410,7 @@ class vendor extends DB
                 $price  = $price + floatval($params[27]);
             }
         }
-        
+
         return $price;
     }
 
@@ -2438,7 +2438,7 @@ class vendor extends DB
 
     public function uploadBullionProducts($params)
     {
-        
+
         $vid=$params['vid'];
         $city=$params['city'];
         $data=$params['data'];
@@ -2456,13 +2456,13 @@ class vendor extends DB
                                     'Design Number'
                                 );
 
-        
+
         if($type=='csv')
         {
             $rdv = explode("\n", $data);
             $colName = explode(",", $rdv[0]);
             $len = count($rdv) - 1;
-            
+
         }
         else
         {
@@ -2488,7 +2488,7 @@ class vendor extends DB
         $i = $totlIns = 0;
         if($validFormat)
         {
-            
+
             while ($i < $len)
             {
                 if($type=='csv')
@@ -2508,7 +2508,7 @@ class vendor extends DB
                 if ($i != 0 && $isBlank == false)
                 {
                     $ts = date('Y-m-d H:i');
-               
+
                     $query = "
                                 INSERT
                                 INTO
@@ -2524,7 +2524,7 @@ class vendor extends DB
                                         )";
 
                     $res = $this->query($query);
-                   
+
                    if ($res)
                     {
                         $pro_id = mysql_insert_id();
@@ -2644,10 +2644,10 @@ class vendor extends DB
                                             bullion_design  =   '".$value[6]."',
                                             shape           =   '".$shape."',
                                             complete_flag   =   0  ";
-                        
+
                         $res = $this->query($sql);
                         $totlIns++;
-                        
+
                     }
                 }
                 else
@@ -2691,7 +2691,7 @@ class vendor extends DB
             }
         }
         else
-        {   
+        {
             $arr = array();
             $err = array
                         (
@@ -2709,11 +2709,10 @@ class vendor extends DB
 
     public function uploadDiamondProducts($params)
     {
-        
+
         $vid=$params['vid'];
         $data=$params['data'];
         $type=$params['type'];
-
         $defaultColNames = array
                                 (
                                     'Stock #',
@@ -2760,7 +2759,8 @@ class vendor extends DB
                                     'Member Comment',
                                     'Report Issue Date',
                                     'Report Type',
-                                    'Lab Location'
+                                    'Lab Location',
+                                    'Certificate Url'
                                 );
 
         if($type=='csv')
@@ -2775,7 +2775,7 @@ class vendor extends DB
             $colName=$data[0];
             $len = count($rdv);
         }
-       
+
         $validFormat=TRUE;
         if (count($colName) == count($defaultColNames))
         {
@@ -2783,7 +2783,6 @@ class vendor extends DB
             {
                 if (strtoupper(trim($defaultColNames[$i])) != strtoupper(trim($colName[$i])))
                 {
-
                     $validFormat = FALSE;
                 }
             }
@@ -2849,8 +2848,6 @@ class vendor extends DB
                     if ($res)
                     {
                         $pro_id = mysql_insert_id();
-
-                        
                         $sql = "
                                     INSERT
                                     INTO
@@ -2872,7 +2869,7 @@ class vendor extends DB
                                                      1,
                                                 '" . $ts . "'
                                             )";
-                
+
                         $res = $this->query($sql);
                         $sql = "
                                     INSERT
@@ -2937,6 +2934,7 @@ class vendor extends DB
                                             shape         = '".$value[2]."',
                                             carat         = '".$value[3]."',
                                             certified     = '".$value[11]."',
+                                            certificate_url= '".$value[45]."',
                                             cno           = '".$value[12]."',
                                             color         = '".$value[4]."',
                                             clarity       = '".$value[5]."',
@@ -3622,7 +3620,7 @@ class vendor extends DB
         $prevrow = $this->fetchData($prevres);
 
         if(floatval($params['dolRate']) !== floatval($prevrow['dollar_rate']))
-        {   
+        {
             $sql="UPDATE tbl_vendor_master SET dollar_rate=".$params['dolRate']." WHERE vendor_id=".$params['vid'];
             $res=$this->query($sql);
             if ($res)
@@ -4148,18 +4146,18 @@ class vendor extends DB
                          AND
                                   active_flag NOT IN(2,3)";
                 $res6 = $this->query($sql7);
-                
+
                 $sql8=  "SELECT
                                 user_name ,
                                 email,
                                 logmobile
                         FROM
-                                tbl_registration 
-                        WHERE 
+                                tbl_registration
+                        WHERE
                                 user_id=".$params['vid']." ";
-                $res8    =  $this->query($sql8);   
+                $res8    =  $this->query($sql8);
                 $rowData = $this->fetchData($res8);
-               
+
                 if($params['af']==0)
                 {
                     $subject .= 'Vendor profile deactivation in IFtoSI';
@@ -4191,7 +4189,7 @@ class vendor extends DB
                     $err = array('code'=>0,'msg'=>'SMS & EMAIL is not sent to the user');
                     }
                 }
-            
+
                 $arr=array();
                 $err=array('code'=>0,'msg'=>'Product status changed too');
             }
@@ -4203,7 +4201,7 @@ class vendor extends DB
             $result=array('result'=>$arr,'error'=>$err);
             return $result;
         }
-        
+
         public function sendDeactivateMailByAdmin($params)
         {
             $message='<html>
@@ -4239,10 +4237,10 @@ class vendor extends DB
 
 
         }
-        
-        
-        
-        
+
+
+
+
         private function getAbbrValue($val)
         {
             $propValArr=array(''=>'','GD/DIA'=>'GOLD & DIAMONDS','PT/DIA'=>'PLATINUM & DIAMONDS','SL/DIA'=>'SILVER & DIAMONDS','GD/DIA/CS'=>'GOLD, DIAMONDS & GEMSTONES','PT/DIA/CS'=>'PLATINUM, DIAMONDS & GEMSTONES','SL/DIA/CS'=>'SILVER, DIAMONDS & GEMSTONES','GD/CS'=>'GOLD & GEMSTONES','SL/CS'=>'SILVER & GEMSTONES','GD/SWCZ'=>'GOLD & SWAROVSKI ZIRCONIA','SL/SWCZ'=>'SILVER & SWAROVSKI ZIRCONIA','PLAIN GD'=>'GOLD & CZ','SL/CZ'=>'SILVER & CZ','PLAIN GD'=>'PLAIN GOLD','PLAIN PT'=>'PLAIN PLATINUM','PLAIN SL'=>'PLAIN SILVER','GD/POL'=>'GOLD & POLKI');
@@ -4317,7 +4315,7 @@ class vendor extends DB
                                         <a><div style="vertical-align: top; height: auto; display: inline-block; padding:20px 0 20px 0;text-align: center;color: #d00000; text-transform: uppercase">';
                                         if($type !== 'Dollar')
                                         {
-                                         
+
                                             $message.='<img src="'.DOMAIN.'tools/img/common/01.png" style="width:70%;"></div></a>'; // for silver,gold,platinum
                                         }
                                         else
@@ -4328,7 +4326,7 @@ class vendor extends DB
                                         $message.='<div style="font-size: 18px;letter-spacing: -0.03em;    padding: 15px 10px 10px 10px; color:#8A0044;">Dear '.$vDet["C_person"].',</div>
                                         <div style="font-family: Open Sans, Roboto, Helvetica, Arial;font-size: 18px; color: #333;padding: 0px 15px 40px 15px;">Your '.strtolower($params["type"]).' rate has changed from</div>
                                         <center style="padding: 0px 30px 20px 30px;">';
-                                            
+
                                         if($type !== 'Dollar')
                                         {
                                               $message.=  '<div style="width: 41%;display: inline-block; border-right: 1px solid #f0f0f0;">
@@ -4353,7 +4351,7 @@ class vendor extends DB
                                             </div>
                                             </center>';
                                             }
-                                        
+
                                             $message.='<center style="padding-top: 50px;">
                                             <img src="'.DOMAIN.'tools/img/common/diamond.jpg" width="50">
                                             <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
@@ -4368,8 +4366,8 @@ class vendor extends DB
                   </html>';
           return $message;
         }
-        
-        
+
+
     public function validateJewelFields($params)
     {
         $c = 1;
@@ -4465,8 +4463,8 @@ class vendor extends DB
         }
         return $c;
     }
-    
-    
+
+
      public function getVendorList()
     {
           $sql = "SELECT
@@ -4482,41 +4480,41 @@ class vendor extends DB
                             memship_Cert,
                             showroom_name,
                             no_showrooms
-                           
+
                     FROM
                             tbl_vendor_master
                     WHERE
                             active_flag=1
-                    AND  
+                    AND
                             is_complete=2 ";
-           
+
            $res = $this->query($sql);
            $row = $this->numRows($res);
            $data= $this->fetchData($res);
-           
+
             if($row>0)
-            {    
+            {
                 $arr = array('Success:');
                 $err = array('code'=>0,'msg'=>'Details Fetched Successfully !');
             }
-            else 
+            else
             {
                 $arr = array('Error:');
                 $err = array('code'=>0,'msg'=>'Vendor Not Found !');
             }
-        
+
             $result=array('result'=>$arr,'error'=>$err);
-            return $result;    
-            
+            return $result;
+
         }
 
         public function showVendorList($params)
         {
              $uid = (!empty($params['uid'])) ? trim(urldecode($params['uid'])) : '';
-           
+
            if($uid)
            {
-                    $sql=" SELECT 
+                    $sql=" SELECT
                                     orgName,
                                     fulladdress,
                                     address1,
@@ -4554,12 +4552,12 @@ class vendor extends DB
                             FROM
                                     tbl_vendor_master
                             WHERE
-                                    vendor_id=" . $params['uid'] . " 
+                                    vendor_id=" . $params['uid'] . "
                             AND
                                     active_flag=1
                             AND
                                     expire_flag=0";
-                               
+
                         $res = $this->query($sql);
                         $row = $this->numRows($res);
                             if($row>0)
@@ -4575,20 +4573,20 @@ class vendor extends DB
             }
             else
             {
-                
+
                 $arr = array('Error:');
                 $err = array('code'=>0,'msg'=>'User Not Found !');
             }
-         
+
             $result=array('result'=>$arr,'error'=>$err);
-            return $result;  
-            
-        } 
-        
+            return $result;
+
+        }
+
          public function showVendorProductList($params)
-        {   
+        {
              $vid = (!empty($params['vid'])) ? trim(urldecode($params['vid'])) : '';
-           
+
            if($vid)
            {
                     $sql= "select
@@ -4657,41 +4655,41 @@ class vendor extends DB
                                                 gold_type,
                                                 gemstonevalue,
                                                 isBugget
-                                                
-                            from 
-                                    tbl_product_search 
-                            where 
+
+                            from
+                                    tbl_product_search
+                            where
                                     active_flag = 1
                             AND
-                                    product_id 
-                            IN         
+                                    product_id
+                            IN
                                 (SELECT
                                             product_id
-                                from 
+                                from
                                             tbl_vendor_product_mapping
                                 where
                                             active_flag=1
                                 AND
                                             vendor_id= " . $params['vid'] . ") ";
-                               
+
                         $res = $this->query($sql);
                         $row = $this->numRows($res);
-                        
+
                         if($row>0)
                         {
-                                    $sql1 ="     select 
+                                    $sql1 ="     select
                                                              product_image,
                                                              image_sequence
-                                                 from            
+                                                 from
                                                              tbl_product_image_mapping
-                                                 where 
+                                                 where
                                                              active_flag=1
                                                  AND
-                                                             product_id 
-                                                 IN         
+                                                             product_id
+                                                 IN
                                                              (SELECT
                                                                          product_id
-                                                             from 
+                                                             from
                                                                          tbl_vendor_product_mapping
                                                              where
                                                                          active_flag=1
@@ -4711,7 +4709,7 @@ class vendor extends DB
                                 $err = array('code'=>0,'msg'=>'Error in fetching product Image !');
                             }
                         }
-                        else 
+                        else
                         {
                                 $arr = array('Error:');
                                 $err = array('code'=>0,'msg'=>'Error in fetching vendor details !');
@@ -4719,15 +4717,15 @@ class vendor extends DB
             }
             else
             {
-                
+
                 $arr = array('Error:');
                 $err = array('code'=>0,'msg'=>'vendor Not Found !');
             }
-         
+
             $result=array('result'=>$arr,'error'=>$err);
-            return $result;  
-            
-        } 
+            return $result;
+
+        }
     }
 
 

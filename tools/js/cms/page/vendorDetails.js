@@ -770,19 +770,22 @@ function submitStep3Form() {
                 common.toast(1, errMsg);
                 var isComp = 2;
                 customStorage.addToStorage('isComp', isComp);
+
                 var bsType = parseInt(busiType.charAt(0));
                 bsType = bsType - 1;
                 var tmstmp = new Date().getTime();
               /*  if(bsType>0)
                 {
-                     alert("here"); 
+                     alert("here");
                     $('#dollarRateSpan').html('').addClass('dn');
                 }*/
+                customStorage.addToStorage('username', $('#cperson').val());
+                console.log(customStorage.readFromStorage('username'));
                 $.ajax({url: common.APIWebPath() + "index.php?action=viewAll&uid="+res['uid']+"&timestamp="+tmstmp,success: function (result)
                 {
-
                     var obj = jQuery.parseJSON(result);
                     var isactive = obj.results[1]['active_flag'];
+
                     if(isactive == 1 || isactive == '1')
                     {
                         setTimeout(function() {
@@ -811,7 +814,9 @@ function submitStep3Form() {
                 common.toast(0, errMsg);
             }
         }});
+
     submiter = true;
+
 }
 
 function formatData(val) {
