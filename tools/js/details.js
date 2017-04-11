@@ -436,7 +436,7 @@ function showImages(data)
                 if (vl.active_flag === '0' || vl.active_flag === 0 )
                 {
                     if (val.vid == vid)
-                    {   
+                    {
                         imgArr[k] = vl.image;
                         imgArr2[k] = vl.image;
                     }
@@ -452,7 +452,7 @@ function showImages(data)
             $('#detailsImgs').html(imgHtml);
              $('#thumbnil_'+0).addClass("borderColor");
               $('#imgThumb_'+0).addClass("borderColor");
-            
+
             $('.leftArrow').bind("click", function()
             {
           //  alert(imgArr2[imgVal++]);
@@ -469,7 +469,7 @@ function showImages(data)
 */        if(imageVal>0)
           {
               $('.imgPreview').css({"background":'url(\''+IMGDOMAIN + imgArr2[--imageVal] +'\') 50% 50% / cover no-repeat scroll padding-box border-box rgb(255, 255, 255)'});
-          
+
                             var i=0;
                             for(i=0;i<imgArr2.length;i++)
                             { // alert();
@@ -477,7 +477,7 @@ function showImages(data)
                                  {
                                     $('#thumbnil_'+i).addClass("borderColor");
                                      $('#imgThumb_'+i).addClass("borderColor");
-                                    
+
                                  }
                                 else
                                 {
@@ -514,9 +514,9 @@ function showImages(data)
                                     $('#imgThumb_'+i).removeClass("borderColor");
                                 }
                             }
-                            
+
                             }
-                            
+
                             ////imageVal+=1;
             //alert(imageVal);
 
@@ -534,7 +534,7 @@ function showImages(data)
             var id=this.getAttribute('id');
             var temp= id.split("_");
             imageVal=temp[1];
-            
+
         });
 
         $('#detailsImgs .rightArrow').click(function () {
@@ -550,7 +550,7 @@ function showImages(data)
         });
 
         $('.imgPreview').click(function () {
-            
+
             var imgvl = $(this).css('background-image');
             $('.galleryImg').css({'background-image': imgvl});
         });
@@ -758,11 +758,11 @@ function getDtlsImageData(imgData)
             }
             tmpHtml += '</div>';
             tmpHtml += '</div>';
-            
-           
+
+
         }
     }
-   
+
     return tmpHtml;
 }
 
@@ -1332,6 +1332,8 @@ function otpCheck()
                                     setTimeout(function () {
                                         $('#vDetails').removeClass('vTransit');
                                         $('#vDetails').removeClass('dn');
+                                        $('#baseCont').removeClass('pFixed');
+                                        baseCont
                                         $('body').animate({scrollTop: pos}, 150);
                                         if ($("head").html().indexOf('http://maps.google.com/maps/api/js') === -1)
                                         {
