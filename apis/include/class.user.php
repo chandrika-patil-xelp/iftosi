@@ -272,7 +272,7 @@
                 $isValidate = false;
             }
         }
-        if ($isValidate)
+        if($isValidate)
         {
             $rno = rand(100000, 999999);
             $sql = "INSERT
@@ -445,7 +445,7 @@
                     }
                 }
             $vsql1='UPDATE tbl_registration SET ';
-            $vsql1 .= " city = \"".$vfulldtls['city']."\"";
+            $vsql1 .= " city = \"".$vfulldtls['city']."\", user_name=\"".$detls['cperson']."\" ";
             //$vsql1 .= " email = \"".$vfulldtls['email']."\"";
 
             $vsql='UPDATE tbl_vendor_master SET ';
@@ -1018,7 +1018,7 @@
                                     user_name,
                                     logmobile,
                                     email
-                                    
+
                    FROM
                                     tbl_registration
                    WHERE
@@ -1218,7 +1218,7 @@
                 </center>
                 </body>
                 </html>';
-        
+
         return $message;
         }
         public function changePwd($params)
@@ -1403,7 +1403,7 @@
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                 $headers .= 'From: <info@iftosi.com>' . "\r\n";
                 $tempParams = array('username'=>$params['username'],'email'=>$params['email'],'mobile'=>$params['mobile']);
-                $message = $this->sendWelcomeMailSMSTemplate($tempParams); 
+                $message = $this->sendWelcomeMailSMSTemplate($tempParams);
                 $smsText .= "Welcome To IFtoSI";
                 $smsText .= "\r\n\r\n";
                 $smsText .= "Thank you ".$params['username'];
@@ -1502,27 +1502,27 @@
               </body>
               </html>';*/
 
-       $sql=  " SELECT 
+       $sql=  " SELECT
                             business_type
-                    FROM 
-                            tbl_vendor_master  
-                    WHERE  
+                    FROM
+                            tbl_vendor_master
+                    WHERE
                             vendor_id=(
-                    SELECT 
-                            user_id 
-                    FROM 
-                            tbl_registration 
-                    WHERE 
+                    SELECT
+                            user_id
+                    FROM
+                            tbl_registration
+                    WHERE
                             logmobile= ".$tempParams['mobile'].")";
                         $res = $this->query($sql);
                         $row = $this->fetchData($res);
                         $arr = explode(",",$row[business_type]);
                         $len = sizeof($arr);
-                       
-           
-   
-           
-           
+
+
+
+
+
            /* $message='<html>
               <head>
               <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -1555,7 +1555,7 @@
               </center>
               </body>
               </html>';*/
-             
+
        /* $message='<html>
                     <head>
                         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -1587,7 +1587,7 @@
                         </center>
                         </body>
                         </html>';*/
-             
+
         $message=' <html>
                         <head>
                             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -1612,7 +1612,7 @@
                                  $message .='<div style="width: 100%;display: inline-block;    padding-bottom: 5px;">
                                 <div style="width: 35%;text-align: left;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Amount Payable&nbsp;</div>
                                 <span style="padding-right: 20px;">:</span>
-                                <div style="width: 35%;    display: inline-block; text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/Rupee15.png" align="middle" style="width:11px;vertical-align:initial;height:11px;">55000</div>                   
+                                <div style="width: 35%;    display: inline-block; text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/Rupee15.png" align="middle" style="width:11px;vertical-align:initial;height:11px;">55000</div>
                                 </div>';
                                 }
                                 else{
@@ -1621,16 +1621,16 @@
                                         $message .='<div style="width: 100%;display: inline-block;    padding-bottom: 5px;">
                                                         <div style="width: 35%;text-align: left;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Amount Payable&nbsp;</div>
                                                         <span style="padding-right: 20px;">:</span>
-                                                        <div style="width: 35%;    display: inline-block; text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/Rupee15.png" align="middle" style="width:11px;vertical-align:initial;height:11px;">30000</div>                   
+                                                        <div style="width: 35%;    display: inline-block; text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/Rupee15.png" align="middle" style="width:11px;vertical-align:initial;height:11px;">30000</div>
                                                    </div>';
                                     }
-                                    
+
                                     else if($arr[0]==2)
                                     {
                                         $message .='<div style="width: 100%;display: inline-block;    padding-bottom: 5px;">
                                                         <div style="width: 35%;text-align: left;display: inline-block;font-size: 14px;text-transform: capitalize;color: #666;padding-bottom:5PX;font-family: Open Sans, Roboto, Helvetica, Arial;">Amount Payable&nbsp;</div>
                                                         <span style="padding-right: 20px;">:</span>
-                                                        <div style="width: 35%;    display: inline-block; text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/Rupee15.png" align="middle" style="width:11px;vertical-align:initial;height:11px;">25000</div>                   
+                                                        <div style="width: 35%;    display: inline-block; text-align: left;font-size: 14px;text-transform: capitalize;padding-bottom:5PX;color: #8A0044;font-weight: bold;"><img src="'.DOMAIN.'tools/img/common/Rupee15.png" align="middle" style="width:11px;vertical-align:initial;height:11px;">25000</div>
                                                    </div>';
                                     }
                                 }
@@ -1673,7 +1673,7 @@
                             </center>
                         </body>
                     </html>';
-                                
+
               return $message;
           }
 
@@ -1710,7 +1710,7 @@
                        </center>
                        </body>
                        </html>';
-              
+
       /*  $message='<html>
                   <head>
                   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -1729,7 +1729,7 @@
                   <img src="'.DOMAIN.'tools/img/common/jewellery.jpg" width="50">
                   <img src="'.DOMAIN.'tools/img/common/bullions.jpg" width="50">
                   </center>';
-        
+
         $message.='<div style="height:auto;line-height: 22px; color:#333; font-size: 13px;padding: 25px 15px 40px 15px;">For any assistance, <br>Call: <a href="tel:91-22-41222241/42" style="text-transform: uppercase; width:auto;display: inline-block; font-weight: bold; color:#333; text-decoration: none;">91-22-41222241 (42)</a> | Email: <b>neeraj@iftosi.com</b></div>
                   </div>
                   <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
@@ -1738,12 +1738,12 @@
                   </body>
                   </html>';
         print_r($message);die;*/
-            
+
              return $message;
           }
-          
-          
-          
+
+
+
          public function sendVActivateMailSMS($params)
         {
             global $comm;
@@ -1759,7 +1759,7 @@
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                 $headers .= 'From: <info@iftosi.com>' . "\r\n";
                 $tempParams = array('mobile'=>$params['mobile'],'email'=>$params['email'],'username'=>$params['username']);
-                $message .= $this-> sendVActivateMailSMSTemplate($tempParams); 
+                $message .= $this-> sendVActivateMailSMSTemplate($tempParams);
                 $smsText .= "Jeweller/Merchant profile activated in IFtoSI";
                 $smsText .= "\r\n\r\n";
                 $smsText .= "Congratulations, ".ucwords(strtolower($params['username']))."! Your account has been verified.";
@@ -1813,7 +1813,7 @@
                             <div style="font-size: 14px; color: #8a0044; font-weight: bold; padding-bottom: 30px;"> +91-'.$params['mobile'].' | '.$params['email'].'</div>
                             <center>
                             <span style="color:#8a0044; font-size: 25px; display: inline-block; width:auto;padding: 10px 20px;font-weight: light;border: 2px dotted #8a0044;letter-spacing: -0.03em;border-radius: 3px;">Verified Partner!</span>
-                            </center>           
+                            </center>
                             <div style="    padding: 30px 30px 30px 30px;line-height: 22px;font-size: 16px;">Get new buyers. Increase your reach to a wider range of customers. Quickly log on to '.DOMAIN.' to upload your products.</div>
                             <center>
                             <a href="'.DOMAIN.'Vendor-Sign-Up"><span style="color:#fff; font-size: 13px; font-weight:bold; text-transform: uppercase;display: inline-block; width:auto;padding: 10px 20px;font-weight: light;background: #4db800;letter-spacing: -0.03em;border-radius: 3px;">Click here to login</span></a>
@@ -1828,9 +1828,9 @@
                             <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
                             </div>
                             </center>
-                            </body> 
+                            </body>
                             </html>';*/
-             
+
              $message='<html>
                        <head>
                        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -1849,7 +1849,7 @@
                        <div style="font-size: 14px; color: #8a0044; font-weight: bold; padding-bottom: 30px;"> +91-'.$params['mobile'].' | '.$params['email'].'</div>
                        <center>
                        <span style="color:#8a0044; font-size: 25px; display: inline-block; width:auto;padding: 10px 20px;font-weight: light;border: 2px dotted #8a0044;border-radius: 3px;">Verified Partner!</span>
-                       </center>           
+                       </center>
                        <div style="padding: 30px 30px 30px 30px;line-height: 22px;font-size: 16px;">Get new buyers. Increase your reach to a wider range of customers. Quickly log on to '.DOMAIN.' to upload your products.</div>
                        <center>
                        <a href="'.DOMAIN.'Vendor-Sign-Up"><span style="color:#fff; font-size: 13px; font-weight:bold; text-transform: uppercase;display: inline-block; width:auto;padding: 10px 20px;font-weight: light;background: #4db800;border-radius: 3px;">Click here to login</span></a>
@@ -1863,10 +1863,10 @@
                        </div>
                        <div style="color:#fff;font-size:15px;padding: 20px 0">Team <b>IF</b>to<b>SI</b>.com</div>
                        </div>
-                       </center> 
+                       </center>
                        </body>
                        </html>';
-             
+
                 return $message;
         }
 
@@ -1900,7 +1900,7 @@
                    </center>
                    </body>
                    </html>';*/
-            
+
             $message='<html>
                       <head>
                       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
